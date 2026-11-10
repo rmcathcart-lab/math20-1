@@ -351,7 +351,7 @@
   R.part = function (prompt, keyTex, o) {
     o = o || {};
     var p = B.math(prompt, R.check(keyTex, o), keyTex, o.sol, o.hints || [], o.text, { keys: o.vars && o.vars.length ? 'p23var' : 'p23rad', vars: o.vars, rel: false, before: o.before, after: o.after, placeholder: o.vars && o.vars.length ? 'e.g. 3x sqrt(2x) + 5' : 'e.g. 5sqrt(2) + 3' });
-    if (o.unit) p.answer = t(keyTex + '\\text{ ' + o.unit + '}');
+    if (o.unit || o.after) p.answer = t(keyTex) + ' ' + (o.unit || o.after);
     var kv = R.envs(o.vars || [], o).map(function (e) { return ex.value(ex.parse(keyTex).ast, e); });
     p.bad = (o.cands || []).map(function (c) { return c.tex; }).concat(o.bad || []).filter(function (b) { var pb = ex.parse(b); if (!pb.ok) return true; var bv = R.envs(o.vars || [], o).map(function (e) { return ex.value(pb.ast, e); }); return !bv.every(function (x, i) { return ex.eq(x, kv[i], 1e-8); }); });
     p.good = o.good;
@@ -375,7 +375,7 @@
     o = o || {};
     var fields = specs.map(function (s) { return { label: s.label, name: s.name || String(s.label || '').replace(/<[^>]+>|\\\(|\\\)/g, ''), mode: 'math', keys: s.keys || (s.vars && s.vars.length ? 'p23var' : 'p23rad'), vars: s.vars, before: s.before, after: s.after, none: s.none, placeholder: s.check && s.none ? 'e.g. x >= 0, or none' : 'e.g. 5sqrt(2) + 3' }; });
     var checks = specs.map(function (s) { return s.check || R.check(s.key, s); });
-    var p = B.fields(prompt, fields, checks, specs.map(function (s) { return s.key; }), specs.map(function (s) { return (s.label ? s.label + ' ' : '') + t((s.before || '') + (s.ansTex || s.key) + (s.after || '')); }).join('<br>'), o.sol, o.hints || [], o.text);
+    var p = B.fields(prompt, fields, checks, specs.map(function (s) { return s.key; }), specs.map(function (s) { return (s.label ? s.label + ' ' : '') + (s.before || '') + t(s.ansTex || s.key) + (s.after ? ' ' + s.after : ''); }).join('<br>'), o.sol, o.hints || [], o.text);
     p.bad = o.bad; p.good = o.good;
     return p;
   };
@@ -409,13 +409,13 @@
   /* a triangle with three side labels (base, left, right) */
   R.triFig = function (base, left, right, o) {
     o = o || {};
-    var A = [40, 130], Bp = [250, 130], C = [o.apex || 110, 24];
+    var dx = o.right ? 110 : 0, A = [40 + dx, 130], Bp = [250 + dx, 130], C = [(o.apex || 110) + dx, 24];
     var s = '<polygon points="' + [A, Bp, C].map(function (p) { return p.join(','); }).join(' ') + '" fill="#f6f4ef" stroke="#2b3340" stroke-width="2"/>';
     if (o.right) s += '<polyline points="' + (C[0]) + ',' + (A[1] - 12) + ' ' + (C[0] + 12) + ',' + (A[1] - 12) + ' ' + (C[0] + 12) + ',' + A[1] + '" fill="none" stroke="#2b3340" stroke-width="1.4"/>';
     s += '<text x="' + ((A[0] + Bp[0]) / 2) + '" y="' + (A[1] + 22) + '" font-size="15" text-anchor="middle" fill="#1c2230">' + esc(base) + '</text>';
     s += '<text x="' + ((A[0] + C[0]) / 2 - 8) + '" y="' + ((A[1] + C[1]) / 2) + '" font-size="15" text-anchor="end" fill="#1c2230">' + esc(left) + '</text>';
     s += '<text x="' + ((Bp[0] + C[0]) / 2 + 10) + '" y="' + ((Bp[1] + C[1]) / 2) + '" font-size="15" fill="#1c2230">' + esc(right) + '</text>';
-    return '<svg class="fig-svg" viewBox="0 0 330 160" style="max-width:330px" role="img" aria-label="' + esc(o.aria || 'triangle') + '">' + s + '</svg>';
+    return '<svg class="fig-svg" viewBox="0 0 ' + (330 + dx) + ' 160" style="max-width:' + (330 + dx) + 'px" role="img" aria-label="' + esc(o.aria || 'triangle') + '">' + s + '</svg>';
   };
 
   /* ============================== Lesson 3 helpers ============================== */
@@ -528,7 +528,7 @@
     var sol = [[0, 1], [1, 2], [0, 2]].map(function (s) { return lenLine(names[s[0]], names[s[1]], pts[s[0]], pts[s[1]]); }).join('<br>') + '<br>' + t('P=' + sides.map(function (x, i) { return R.termTex(T(1, 2, x), i === 0); }).join('') + '=' + key) + '&nbsp;units';
     var legs = [[0, 1], [1, 2], [0, 2]].reduce(function (s, sd) { return s + Math.abs(pts[sd[1]][0] - pts[sd[0]][0]) + Math.abs(pts[sd[1]][1] - pts[sd[0]][1]); }, 0);
     var sq = sides.reduce(function (s, x) { return s + x; }, 0);
-    return R.part(prompt, key, { sol: sol, text: o.text || 'perimeter of a triangle on a grid', after: '\\text{ units}',
+    return R.part(prompt, key, { sol: sol, text: o.text || 'perimeter of a triangle on a grid', after: 'units',
       hints: ['Each side is the hypotenuse of a right triangle: length ' + t('=\\sqrt{(\\text{run})^{2}+(\\text{rise})^{2}}') + '.', 'Simplify each length, then add the like radicals.'],
       cands: [{ tex: String(legs), code: 'u2l3-len-legs', hint: 'You added the runs and rises. Each side is a hypotenuse: ' + t('\\sqrt{(\\text{run})^{2}+(\\text{rise})^{2}}') + '.' },
         { tex: String(sq), code: 'u2l3-len-noroot', hint: 'Those are the squares of the lengths. Take the square root of each, simplify, then add.' }] });
@@ -703,7 +703,7 @@
       { id: '10a', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { var ab = r.sample([2, 3, 4, 5, 6, 7, 8, 9, 10], 2); return { m: r.pick([2, 3, 5, 6, 7]), a: Math.max(ab[0], ab[1]), b: Math.min(ab[0], ab[1]) }; }, function (o) { return o.a * o.a * o.m <= 400 && !(o.m === 3 && o.a === 10 && o.b === 4); });
         var AB = o.a * o.a * o.m, AC = o.b * o.b * o.m, k = o.a - o.b, key = (k === 1 ? '' : k) + rt(2, o.m);
-        return R.part('Point ' + t('C') + ' lies on segment ' + t('AB') + '. If ' + t('AB=' + rt(2, AB)) + ' and ' + t('AC=' + rt(2, AC)) + ', determine ' + t('CB') + ' in simplest form.', key, { before: 'CB=', text: 'missing part of a segment',
+        return R.part('Point ' + t('C') + ' lies on segment ' + t('AB') + '. If ' + t('AB=' + rt(2, AB)) + ' and ' + t('AC=' + rt(2, AC)) + ', determine ' + t('CB') + ' in simplest form.', key, { before: t('CB='), text: 'missing part of a segment',
           sol: t('CB=AB-AC=' + rt(2, AB) + '-' + rt(2, AC) + '=' + o.a + rt(2, o.m) + '-' + o.b + rt(2, o.m) + '=' + key),
           hints: ['The two parts add to the whole: ' + t('AC+CB=AB') + ', so ' + t('CB=AB-AC') + '.', 'Simplify both radicals before subtracting.'],
           cands: [{ tex: rt(2, AB - AC), code: 'u2l3-add-rad', hint: 'Don’t subtract the radicands. Simplify each radical, then subtract like radicals.' }, { tex: (o.a + o.b) + rt(2, o.m), code: 'u2l3-coef-sum', hint: t('CB') + ' is the <b>difference</b> ' + t('AB-AC') + '.' }] });
@@ -715,7 +715,7 @@
         var ptex = Pp + rt(2, o.p) + '+' + Pq + rt(2, o.q), ltex = o.L1 + rt(2, o.p) + '+' + rt(2, Lq);
         var key = R.tex([T(o.w1, 2, o.p), T(o.w2, 2, o.q)]);
         var half = R.tex([T(o.L1 + o.w1, 2, o.p), T(o.g + o.w2, 2, o.q)]);
-        return R.part('A rectangle has perimeter ' + t(ptex) + ' m and length ' + t(ltex) + ' m. Determine its width in simplest form.', key, { before: 'w=', unit: 'm', after: '\\text{ m}', text: 'rectangle width from the perimeter',
+        return R.part('A rectangle has perimeter ' + t(ptex) + ' m and length ' + t(ltex) + ' m. Determine its width in simplest form.', key, { before: t('w='), unit: 'm', after: 'm', text: 'rectangle width from the perimeter',
           sol: 'Length ' + t('+') + ' width ' + t('=\\frac{1}{2}\\left(' + ptex + '\\right)=' + half) + '. Length ' + t('=' + o.L1 + rt(2, o.p) + '+' + o.g + rt(2, o.q)) + '.<br>Width ' + t('=' + half + '-\\left(' + o.L1 + rt(2, o.p) + '+' + o.g + rt(2, o.q) + '\\right)=' + key) + ' m',
           hints: ['The perimeter is ' + t('2(l+w)') + ', so half of it is ' + t('l+w') + '.', 'Simplify the length, then subtract it in brackets: ' + t('w=(l+w)-l') + '.'],
           cands: [{ tex: R.tex([T(Pp - o.L1, 2, o.p), T(Pq - o.g, 2, o.q)]), code: 'u2l3-width-half', hint: 'The perimeter counts the length and the width twice. Halve it first: ' + t('l+w=\\frac{P}{2}') + '.' },
@@ -727,8 +727,8 @@
         var A = o.a * o.a * o.m, Bv = o.b * o.b * o.m, x = (o.a + o.b) / o.k, ent = x * x * o.m;
         var lhs = o.k + 'x-' + rt(2, Bv) + '=' + rt(2, A);
         return R.fieldsPart('If ' + t(lhs) + ', determine ' + t('x') + ' as a mixed radical in simplest form and as an entire radical.', [
-          { label: 'Mixed radical:', name: 'Mixed radical', key: (x === 1 ? '' : x) + rt(2, o.m), before: 'x=', check: K.radical({ k: [x, 1], n: 2, m: o.m }, 'mixed', { diag: function (v) { if (Math.abs(v - (o.a + o.b) * Math.sqrt(o.m)) < 1e-9 && o.k > 1) return { code: 'u2l3-solve-step', hint: 'That’s ' + t(o.k + 'x') + '. Divide by ' + t(o.k) + ' to get ' + t('x') + '.' }; if (Math.abs(v - (o.a - o.b) * Math.sqrt(o.m) / o.k) < 1e-9 || Math.abs(v - (o.b - o.a) * Math.sqrt(o.m) / o.k) < 1e-9) return { code: 'u2l3-solve-sign', hint: 'Move ' + t('-' + rt(2, Bv)) + ' to the other side by <b>adding</b> it.' }; return null; } }) },
-          { label: 'Entire radical:', name: 'Entire radical', key: rt(2, ent), before: 'x=', check: K.radical({ k: [x, 1], n: 2, m: o.m }, 'entire') }],
+          { label: 'Mixed radical:', name: 'Mixed radical', key: (x === 1 ? '' : x) + rt(2, o.m), before: t('x='), check: K.radical({ k: [x, 1], n: 2, m: o.m }, 'mixed', { diag: function (v) { if (Math.abs(v - (o.a + o.b) * Math.sqrt(o.m)) < 1e-9 && o.k > 1) return { code: 'u2l3-solve-step', hint: 'That’s ' + t(o.k + 'x') + '. Divide by ' + t(o.k) + ' to get ' + t('x') + '.' }; if (Math.abs(v - (o.a - o.b) * Math.sqrt(o.m) / o.k) < 1e-9 || Math.abs(v - (o.b - o.a) * Math.sqrt(o.m) / o.k) < 1e-9) return { code: 'u2l3-solve-sign', hint: 'Move ' + t('-' + rt(2, Bv)) + ' to the other side by <b>adding</b> it.' }; return null; } }) },
+          { label: 'Entire radical:', name: 'Entire radical', key: rt(2, ent), before: t('x='), check: K.radical({ k: [x, 1], n: 2, m: o.m }, 'entire') }],
           { text: 'solve for x, mixed and entire', sol: t(o.k + 'x=' + rt(2, A) + '+' + rt(2, Bv) + '=' + o.a + rt(2, o.m) + '+' + o.b + rt(2, o.m) + '=' + (o.a + o.b) + rt(2, o.m)) + ', so ' + t('x=' + (x === 1 ? '' : x) + rt(2, o.m)) + '.<br>As an entire radical: ' + t('x=\\sqrt{' + (x * x) + '\\cdot ' + o.m + '}=' + rt(2, ent)) + '.',
             hints: ['Solve like a linear equation: add ' + t(rt(2, Bv)) + ' to both sides, simplify and combine, then divide by ' + t(o.k) + '.', 'For the entire radical, square the coefficient and move it inside: ' + t('a\\sqrt{b}=\\sqrt{a^{2}b}') + '.'],
             bad: [[((o.a + o.b)) + rt(2, o.m), rt(2, ent)]] });
@@ -755,7 +755,7 @@
             hints: ['Subtract consecutive terms, collecting the rational parts and the radical parts separately.', t('t_n=t_1+(n-1)d') + '.'],
             bad: [[dK, txt(o.n)]] });
       } }] },
-    { num: '13', parts: [
+    { num: '13', section: 'Multiple choice and numerical response', parts: [
       { id: '13', level: 'EMG', make: function (r) {
         var o = pickWhere(function () { var fg = r.sample([2, 3, 4, 5], 2); return { m: r.pick([2, 3, 5, 6, 7]), f: fg[0], g: fg[1], q: r.pick([2, 3, 5, 6, 7, 10]) }; }, function (o) { return o.q !== o.m && o.q !== 2 * o.m && o.m * 2 !== o.q && !(o.m === 5 && o.f === 2 && o.g === 3); });
         var A = o.f * o.f * o.m, right = o.g * o.g * o.m, b1 = o.g * o.g * o.q, b2 = A * 2 === right ? A * 3 : A * 2;
@@ -927,7 +927,7 @@
       { id: 'B2', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { var ab = r.sample([2, 3, 4, 5, 6], 2); return { m: r.pick([2, 3, 5, 6, 7]), a: ab[0], b: ab[1] }; }, function (o) { return o.a * o.a * o.m <= 200 && o.b * o.b * o.m <= 200 && !(o.m === 2 && o.a === 5 && o.b === 6); });
         var A = o.a * o.a * o.m, Bv = o.b * o.b * o.m, P = 2 * o.a + o.b;
-        return R.part('An isosceles triangle has two equal sides of length ' + t(rt(2, A)) + ' cm and a base of length ' + t(rt(2, Bv)) + ' cm. Determine its perimeter in simplest form.', P + rt(2, o.m), { unit: 'cm', after: '\\text{ cm}', text: 'isosceles perimeter',
+        return R.part('An isosceles triangle has two equal sides of length ' + t(rt(2, A)) + ' cm and a base of length ' + t(rt(2, Bv)) + ' cm. Determine its perimeter in simplest form.', P + rt(2, o.m), { unit: 'cm', after: 'cm', text: 'isosceles perimeter',
           sol: t('P=2\\left(' + o.a + rt(2, o.m) + '\\right)+' + o.b + rt(2, o.m) + '=' + P + rt(2, o.m)) + ' cm', hints: ['An isosceles triangle has <b>two</b> equal sides plus the base.', 'Simplify each radical first.'],
           cands: [{ tex: (o.a + o.b) + rt(2, o.m), code: 'u2l3-perim-side', hint: 'Count the equal side twice: ' + t('P=2s+b') + '.' }] });
       } }] },
@@ -940,7 +940,7 @@
       { id: 'B4', level: 'ADV', make: function (r) {
         var o = pickWhere(function () { var pq = r.sample([2, 3, 5, 6, 7], 2); return { p: pq[0], q: pq[1], f: r.int(2, 6), w1: r.int(1, 4), w2: r.int(1, 4) }; }, function (o) { return o.f * o.f * o.p <= 200 && !(o.p === 3 && o.f === 5 && o.q === 2); });
         var Lr = o.f * o.f * o.p, Pp = 2 * (o.f + o.w1), Pq = 2 * o.w2, ptex = Pp + rt(2, o.p) + '+' + Pq + rt(2, o.q), half = R.tex([T(o.f + o.w1, 2, o.p), T(o.w2, 2, o.q)]), key = R.tex([T(o.w1, 2, o.p), T(o.w2, 2, o.q)]);
-        return R.part('A rectangle has length ' + t(rt(2, Lr)) + ' m and perimeter ' + t(ptex) + ' m. Determine its width in simplest form.', key, { before: 'w=', unit: 'm', after: '\\text{ m}', text: 'width from perimeter',
+        return R.part('A rectangle has length ' + t(rt(2, Lr)) + ' m and perimeter ' + t(ptex) + ' m. Determine its width in simplest form.', key, { before: t('w='), unit: 'm', after: 'm', text: 'width from perimeter',
           sol: 'Length ' + t('+') + ' width ' + t('=' + half) + '. Width ' + t('=' + half + '-' + o.f + rt(2, o.p) + '=' + key) + ' m',
           hints: ['Half the perimeter is length ' + t('+') + ' width.', 'Simplify the length, then subtract.'],
           cands: [{ tex: R.tex([T(Pp - o.f, 2, o.p), T(Pq, 2, o.q)]), code: 'u2l3-width-half', hint: 'Halve the perimeter first: it holds two lengths and two widths.' }] });

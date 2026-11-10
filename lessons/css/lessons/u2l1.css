@@ -17,8 +17,8 @@
 .u2l1-wname { font: 900 24px var(--round); fill: #1c2230; paint-order: stroke; stroke: rgba(255, 255, 255, .85); stroke-width: 4px; }
 .u2l1-wcorner { font: 800 15px var(--round); fill: #8a5a0d; }
 .u2l1-wcount { font: 900 18px var(--round); fill: #1f5bd6; paint-order: stroke; stroke: #fff; stroke-width: 4px; }
-.u2l1-wnote { position: absolute; left: 10px; bottom: 6px; font-size: 16.5px; background: rgba(255, 255, 255, .95); border: 2px solid #ecd7a8; border-radius: 10px; padding: 1px 10px; }
-.u2l1-wtag { position: absolute; font-size: 19px; background: #fff; border: 2px solid #c9d8f7; border-radius: 10px; padding: 2px 10px; white-space: nowrap; }
+.u2l1-wnote { pointer-events: none; position: absolute; left: 10px; top: 6px; font-size: 16.5px; background: rgba(255, 255, 255, .95); border: 2px solid #ecd7a8; border-radius: 10px; padding: 1px 10px; }
+.u2l1-wtag { pointer-events: none; right: 8px; bottom: 6px; position: absolute; font-size: 19px; background: #fff; border: 2px solid #c9d8f7; border-radius: 10px; padding: 2px 10px; white-space: nowrap; }
 .u2l1-wbtns { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0 2px; }
 .u2l1-wbtns .pill { font-size: 15px; padding: 6px 14px; }
 .wf .u2l1-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
@@ -128,4 +128,6 @@
 .u2l1-dotl { font-size: 18px; background: rgba(255, 255, 255, .92); border-radius: 6px; padding: 0 4px; }
 
 /* ---------------- one screen (warm-up) ---------------- */
-.wf .u2l1-dots { width: 560px; }
+.wf .u2l1-dots { width: 510px; }
+.wf .u2l1-wqs .q-line { margin: 2px 0 1px; }
+.wf .wf-rule { margin-bottom: 6px; }

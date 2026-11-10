@@ -93,7 +93,11 @@
   }
   /* a restriction: an inequality (or x ∈ ℝ); wrongs = [[latex, code, hint]] */
   function ineqP(prompt, keyTex, wrongs, sol, hints, text) {
-    var ck = K.set(keyTex, { wrong: wrongs.map(function (w) { return { is: w[0], code: w[1], hint: w[2] }; }), tag: false });
+    var ck0 = K.set(keyTex, { wrong: wrongs.map(function (w) { return { is: w[0], code: w[1], hint: w[2] }; }), tag: false });
+    var miss = keyTex === 'x\\in\\mathbb{R}' ? ['u2l7-odd', 'The index is <b>odd</b>: the root of any real number (even a negative one) is real, so there is no restriction — write ' + t('x\\in\\mathbb{R}') + '.']
+      : ['value', 'Even index: set the radicand ' + t('\\ge 0') + ' (or ' + t('>0') + ' when the radical is in a denominator) and solve. Dividing by a negative number flips the inequality.'];
+    // K.set's own hints talk about graphs; for a restriction, use one about the radicand instead
+    var ck = function (resp) { var res = ck0(resp); if (res.v === 'wrong' && /^set-/.test(res.code || '')) return wrong(miss[0], miss[1]); return res; };
     var p = P.math(prompt, ck, keyTex, sol, hints, text, { keys: 'u2l7ineq', vars: ['x'], placeholder: 'e.g. x >= -3' });
     p.bad = wrongs.map(function (w) { return w[0]; });
     return p;

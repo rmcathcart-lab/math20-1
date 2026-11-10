@@ -10,7 +10,7 @@
  * in boxes, then a multiple choice of reasons; "give two irrational numbers whose product is rational / irrational"
  * (10b) → two multiple choice parts; "show that …" (Extra C1, C4) → work out the expression in boxes (C1: its value;
  * C4: x² and the value of the expression).
- * Levels: LIM BEG EMG PRG ADV MAS. Mastery: Extra C1–C4. */
+ * Levels: LIM BEG EMG PRG ADV MAS. Mastery: 13 (difference of two squared binomials), Extra C1–C4. */
 (function (root) {
   'use strict';
   var HW = root.HW, K = HW.kit, B = K.P, ex = HW.ex, F = HW.fmt, t = K.t, ok = K.ok, wrong = K.wrong, form = K.form;
@@ -199,12 +199,12 @@
       { id: '2d', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { c: -r.int(2, 6), m: r.pick([2, 3, 5, 6, 7]) }; }, function (z) { return !(z.c === -2 && z.m === 3); }); return powPart(r, o); } },
       { id: '2e', level: 'BEG', make: function (r) { var m = r.pick([2, 3, 5, 6, 7, 9, 10, 11]); return powPart(r, { c: 1, m: m, n: 3 }); } },
       { id: '2f', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { c: r.int(2, 4), m: r.pick([2, 3, 4, 5, 6, 7]), n: 3 }; }, function (z) { return !(z.c === 2 && (z.m === 3 || z.m === 5)); }); return powPart(r, o); } }] },
-    { num: '3', stem: 'Multiply and simplify.', parts: [
+    { num: '3', section: 'Products of three radicals', stem: 'Multiply and simplify.', parts: [
       { id: '3a', level: 'EMG', make: function (r) { var o = pickWhere(function () { var pq = r.sample([2, 3, 5, 7], 2); return { p: pq[0], q: pq[1] }; }, function (z) { return !(z.p * z.q === 6); }); return prodPart(r.shuffle([S(1, o.p), S(1, o.q), S(1, o.p * o.q)])); } },
       { id: '3b', level: 'PRG', make: function (r) { var o = pickWhere(function () { var uvw = r.sample([2, 3, 5, 7], 3); return { u: uvw[0], v: uvw[1], w: uvw[2], a: r.int(2, 4), b: r.int(2, 4) }; }, function (z) { return !(z.u * z.v * z.w === 30 && z.a * z.b === 6); }); return prodPart([S(o.a, o.u * o.v), S(-1, o.v * o.w), S(o.b, o.u * o.w)]); } },
       { id: '3c', level: 'PRG', make: function (r) { var o = pickWhere(function () { var pq = r.sample([2, 3, 5], 2); return { p: pq[0], q: pq[1], a: r.int(2, 4), b: r.int(2, 5), f: r.int(2, 3) }; }, function (z) { return !(z.p === 3 && z.q === 2 && z.a === 2 && z.b === 4); }); return prodPart([S(1, o.p), S(o.a, o.p * o.q), S(o.b, o.f * o.f * o.q)], { hints: ['Multiply all the coefficients, and all the radicands; then simplify.', 'Or simplify ' + t('\\sqrt{' + o.f * o.f * o.q + '}') + ' first to keep the numbers small.'] }); } },
       { id: '3d', level: 'PRG', make: function (r) { var o = pickWhere(function () { var k = r.pick([6, 10, 12, 15]); var pr = { 6: [[4, 6, 9], [2, 12, 9], [3, 8, 9], [4, 3, 18]], 10: [[4, 10, 25], [2, 20, 25], [5, 8, 25]], 12: [[4, 9, 48], [6, 12, 24], [3, 16, 36]], 15: [[9, 15, 25], [3, 25, 45]] }[k]; return { k: k, f: r.pick(pr) }; }, function (z) { return !(z.k === 6 && z.f[0] === 4 && z.f[1] === 6); }); return prodPart(r.shuffle(o.f.map(function (m) { return raw(1, 3, m); })), { hints: ['Multiply the three radicands under one cube root.', 'Is the product a perfect cube?'] }); } }] },
-    { num: '4', stem: 'Write each as a product of two mixed radicals in two different ways.', parts: [
+    { num: '4', section: 'Splitting a product', stem: 'Write each as a product of two mixed radicals in two different ways.', parts: [
       { id: '4a', level: 'PRG', make: function (r) { var o = pickWhere(function () { var pq = r.sample([2, 3, 5, 7], 2); return { C: r.pick([6, 8, 10, 12, 15]), p: pq[0], q: pq[1] }; }, function (z) { return !(z.C === 10 && z.p * z.q === 6) && !(z.C === 6 && z.p * z.q === 15); }); return twoWaysPart(o.C, o.p, o.q); } },
       { id: '4b', level: 'ADV', make: function (r) { var o = pickWhere(function () { var pq = r.sample([2, 3, 5, 7, 11], 2); return { C: r.pick([18, 20, 24, 28, 30, 36]), p: pq[0], q: pq[1] }; }, function (z) { return !(z.C === 24 && z.p * z.q === 15); }); return twoWaysPart(o.C, o.p, o.q); } }] },
     { num: '5', section: 'Multiplying radicals with variables', stem: 'Multiply and simplify. State the restrictions on the variables.', parts: [
@@ -343,13 +343,13 @@
         var o = pickWhere(function () { return { w: r.pick([2, 3, 5, 6, 10]), p: r.pick([2, 3, 5, 6]), q: r.pick([2, 3, 5, 10, 15]), a: r.int(2, 4) }; }, function (z) { return z.p !== z.q && z.p !== z.w && z.q !== z.w && !sqf(z.w * z.p) && !(z.w === 6 && z.p === 3 && z.q === 2); });
         var Lt = [S(o.a, o.p), S(1, o.q)];
         var p = distPart(S(1, o.w), Lt, { text: 'rectangle area' });
-        p.prompt = 'Rectangle:<br>' + R.rectFig(o.a + '√' + o.p + ' + √' + o.q, '√' + o.w, { aria: 'rectangle' }); p.solution = t('A=lw') + ': ' + p.solution + ' m²'; p.answer = t(p.key + '\\text{ m}^{2}');
+        p.prompt = 'Rectangle:<br>' + R.rectFig(o.a + '√' + o.p + ' + √' + o.q, '√' + o.w, { aria: 'rectangle' }); p.solution = t('A=lw') + ': ' + p.solution + ' m²'; p.answer = t(p.key) + ' m²';
         return p;
       } },
       { id: '11b', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { return { m: r.pick([2, 3, 5, 6, 7]), a: r.int(2, 4), b: r.int(1, 3), s: r.int(0, 1) ? 1 : -1 }; }, function (z) { return !(z.m === 2 && z.a === 3 && z.b === 1 && z.s > 0) && !(z.m === 5 && z.a === 2 && z.b === 1); });
         var A = [S(o.a, o.m), N(o.s * o.b)], p = foilPart(A, A, { text: 'square area' });
-        p.prompt = 'Square:<br>' + R.rectFig(o.a + '√' + o.m + (o.s > 0 ? ' + ' : ' − ') + o.b, '', { square: true, aria: 'square' }); p.solution = t('A=s^{2}') + ': ' + p.solution + ' m²'; p.answer = t(p.key + '\\text{ m}^{2}');
+        p.prompt = 'Square:<br>' + R.rectFig(o.a + '√' + o.m + (o.s > 0 ? ' + ' : ' − ') + o.b, '', { square: true, aria: 'square' }); p.solution = t('A=s^{2}') + ': ' + p.solution + ' m²'; p.answer = t(p.key) + ' m²';
         return p;
       } },
       { id: '11c', level: 'ADV', make: function (r) {
@@ -357,7 +357,7 @@
         var base = S(2 * o.a, o.p), H = [S(1, o.q), S(1, o.s)], half = S(o.a, o.p), lines = R.foilLines([half], H), key = R.tex(R.sum(lines.list));
         var fig = R.triFig(2 * o.a + '√' + o.p, '√' + o.q + ' + √' + o.s, '', { right: true, apex: 40, aria: 'right triangle' });
         var full = R.tex(R.sum(R.foilLines([base], H).list));
-        return R.part('Right triangle (the legs are labelled):<br>' + fig, key, { text: 'triangle area', after: '\\text{ m}^{2}',
+        return R.part('Right triangle (the legs are labelled):<br>' + fig, key, { text: 'triangle area', after: 'm²',
           sol: t('A=\\frac{1}{2}bh=\\frac{1}{2}\\left(' + R.termTex(base, true) + '\\right)\\left(' + tx(H) + '\\right)=' + R.termTex(half, true) + '\\left(' + tx(H) + '\\right)=' + lines.raw + (lines.simp !== lines.raw ? '=' + lines.simp : '') + (key !== lines.simp ? '=' + key : '')) + ' m²',
           hints: ['Triangle: ' + t('A=\\frac{1}{2}bh') + ' — the two legs are the base and the height.', 'Halve ' + t(R.termTex(base, true)) + ' first, then distribute.'],
           cands: [{ tex: full, code: 'u2l4-area-half', hint: 'A triangle’s area is ' + t('\\frac{1}{2}bh') + ': don’t forget the ' + t('\\frac{1}{2}') + '.' }] });
@@ -365,20 +365,20 @@
     { num: '12', parts: [
       { id: '12a', level: 'PRG', make: function (r, sh) {
         var A = sh.m - sh.a * sh.a;
-        return R.part('A rectangle measures ' + t('\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)') + ' cm by ' + t('\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)') + ' cm. Determine its area.', String(A), { after: '\\text{ cm}^{2}', text: 'area of a conjugate rectangle',
+        return R.part('A rectangle measures ' + t('\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)') + ' cm by ' + t('\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)') + ' cm. Determine its area.', String(A), { after: 'cm²', text: 'area of a conjugate rectangle',
           sol: t('A=\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)=' + sh.m + '-' + (sh.a * sh.a) + '=' + A) + ' cm² (conjugates).', hints: ['Area = length × width. The sides are conjugates.'],
           cands: [{ tex: '4\\sqrt{' + sh.m + '}', code: 'u2l4-perim-area', hint: 'That is the perimeter. The area is the <b>product</b> of the sides.' }, { tex: String(sh.m + sh.a * sh.a), code: 'u2l4-conj-add', hint: 'Conjugates multiply to a <b>difference</b>: ' + t('a^{2}-b^{2}') + '.' }] });
       } },
       { id: '12b', level: 'ADV', make: function (r, sh) {
         var d2 = 2 * (sh.m + sh.a * sh.a), key = R.tex([T(1, 2, d2)]);
-        return R.part('The rectangle measures ' + t('\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)') + ' cm by ' + t('\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)') + ' cm. Determine the exact length of its diagonal in simplest form.', key, { before: 'd=', after: '\\text{ cm}', text: 'diagonal of a conjugate rectangle',
+        return R.part('The rectangle measures ' + t('\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)') + ' cm by ' + t('\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)') + ' cm. Determine the exact length of its diagonal in simplest form.', key, { before: t('d='), after: 'cm', text: 'diagonal of a conjugate rectangle',
           sol: t('d^{2}=\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)^{2}+\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)^{2}=\\left(' + (sh.m + sh.a * sh.a) + '+' + (2 * sh.a) + '\\sqrt{' + sh.m + '}\\right)+\\left(' + (sh.m + sh.a * sh.a) + '-' + (2 * sh.a) + '\\sqrt{' + sh.m + '}\\right)=' + d2) + '<br>' + t('d=' + R.simpStep(2, d2)) + ' cm',
           hints: ['Pythagorean theorem: ' + t('d^{2}=l^{2}+w^{2}') + '. Square each side (each has a middle term).', 'The radical terms cancel when you add.'],
           cands: [{ tex: String(d2), code: 'u2l4-diag-noroot', hint: 'That is ' + t('d^{2}') + '. Take the square root and simplify.' }, { tex: '2\\sqrt{' + sh.m + '}', code: 'u2l4-diag-sum', hint: 'The diagonal isn’t the sum of the sides: use ' + t('d^{2}=l^{2}+w^{2}') + '.' }] });
       } }],
       shared: function (r) { return pickWhere(function () { return { m: r.pick([3, 5, 6, 7, 8, 10, 11]), a: r.int(1, 3) }; }, function (z) { return z.m > z.a * z.a && !ex.simplest(2 * (z.m + z.a * z.a), 2) && Math.sqrt(2 * (z.m + z.a * z.a)) % 1 !== 0 && !(z.m === 3 && z.a === 1) && z.m !== 8; }); } },
-    { num: '13', parts: [
-      { id: '13', level: 'ADV', make: function (r) {
+    { num: '13', section: 'Putting it together', parts: [
+      { id: '13', level: 'MAS', make: function (r) {
         var o = pickWhere(function () { return { m: r.pick([2, 3, 5, 6, 7]), a: r.int(1, 5) }; }, function (z) { return !(z.m === 3 && z.a === 2); });
         var A = [S(1, o.m), N(o.a)], Bm = [S(1, o.m), N(-o.a)], s1 = R.tex(R.sum(R.foilLines(A, A).list)), s2 = R.tex(R.sum(R.foilLines(Bm, Bm).list)), key = (4 * o.a) + '\\sqrt{' + o.m + '}';
         var q = br(A) + '^{2}-' + br(Bm) + '^{2}';
@@ -386,7 +386,7 @@
           hints: ['Expand each square (each has a middle term), then subtract the second result in brackets.'],
           cands: [{ tex: String(2 * (o.m + o.a * o.a)), code: 'u2l3-brackets', hint: 'Subtract the <b>whole</b> second square: put it in brackets, ' + t('-\\left(' + s2 + '\\right)') + '.' }, { tex: '0', code: 'u2l4-no-middle', hint: 'Each square has a middle term: ' + t('(a+b)^{2}=a^{2}+2ab+b^{2}') + '.' }] });
       } }] },
-    { num: '14', parts: [
+    { num: '14', section: 'Multiple choice and numerical response', parts: [
       { id: '14', level: 'EMG', make: function (r) {
         var vs = r.pick([['a', 'b'], ['x', 'y'], ['m', 'n']]), a = vs[0], b = vs[1], minus = r.int(0, 1) === 1, s = minus ? '-' : '+';
         return R.mcPart(r, 'For ' + t(a + '\\ge 0') + ' and ' + t(b + '\\ge 0') + ', the expression ' + t('\\left(\\sqrt{' + a + '}' + s + '\\sqrt{' + b + '}\\right)^{2}') + ' is equal to', [
@@ -492,15 +492,15 @@
         var o = pickWhere(function () { return { a: r.int(2, 9), m: r.pick([2, 3, 5, 6, 7, 10, 11]) }; }, function (z) { return z.a * z.a > z.m && !(z.a === 5 && z.m === 3); });
         var A = o.a * o.a - o.m, P = 4 * o.a;
         return R.fieldsPart('A rectangle measures ' + t('\\left(' + o.a + '+\\sqrt{' + o.m + '}\\right)') + ' cm by ' + t('\\left(' + o.a + '-\\sqrt{' + o.m + '}\\right)') + ' cm. Determine its area and its perimeter.', [
-          { label: 'Area:', name: 'Area', key: String(A), after: '\\text{ cm}^{2}', cands: [{ tex: String(P), code: 'u2l4-perim-area', hint: 'That is the perimeter. The area is the product of the sides.' }, { tex: String(o.a * o.a + o.m), code: 'u2l4-conj-add', hint: 'Conjugates multiply to a <b>difference</b>.' }] },
-          { label: 'Perimeter:', name: 'Perimeter', key: String(P), after: '\\text{ cm}', cands: [{ tex: String(A), code: 'u2l4-perim-area', hint: 'That is the area. The perimeter adds all four sides.' }, { tex: String(2 * o.a), code: 'u2l3-perim-half', hint: 'Add all four sides: ' + t('2(l+w)') + '.' }] }],
+          { label: 'Area:', name: 'Area', key: String(A), after: 'cm²', cands: [{ tex: String(P), code: 'u2l4-perim-area', hint: 'That is the perimeter. The area is the product of the sides.' }, { tex: String(o.a * o.a + o.m), code: 'u2l4-conj-add', hint: 'Conjugates multiply to a <b>difference</b>.' }] },
+          { label: 'Perimeter:', name: 'Perimeter', key: String(P), after: 'cm', cands: [{ tex: String(A), code: 'u2l4-perim-area', hint: 'That is the area. The perimeter adds all four sides.' }, { tex: String(2 * o.a), code: 'u2l3-perim-half', hint: 'Add all four sides: ' + t('2(l+w)') + '.' }] }],
           { text: 'area and perimeter of a conjugate rectangle', sol: t('A=\\left(' + o.a + '+\\sqrt{' + o.m + '}\\right)\\left(' + o.a + '-\\sqrt{' + o.m + '}\\right)=' + o.a * o.a + '-' + o.m + '=' + A) + ' cm²<br>' + t('P=2\\left(' + o.a + '+\\sqrt{' + o.m + '}+' + o.a + '-\\sqrt{' + o.m + '}\\right)=' + P) + ' cm',
             hints: ['Area: multiply the conjugates. Perimeter: ' + t('2(l+w)') + ' — the radicals cancel.'] });
       } },
       { id: 'B3b', level: 'ADV', make: function (r) {
         var o = pickWhere(function () { return { m: r.pick([2, 3, 5, 6, 7]), f: r.int(2, 4), g: r.int(1, 2) }; }, function (z) { return z.f !== z.g && !(z.m === 2 && z.f === 2 && z.g === 1); });
         var side = o.f + o.g, A = side * side * o.m;
-        return R.part('A square has sides of length ' + t('\\left(\\sqrt{' + o.f * o.f * o.m + '}+\\sqrt{' + o.g * o.g * o.m + '}\\right)') + ' m. Determine its area. (Simplify the side first.)', String(A), { after: '\\text{ m}^{2}', text: 'area after simplifying the side',
+        return R.part('A square has sides of length ' + t('\\left(\\sqrt{' + o.f * o.f * o.m + '}+\\sqrt{' + o.g * o.g * o.m + '}\\right)') + ' m. Determine its area. (Simplify the side first.)', String(A), { after: 'm²', text: 'area after simplifying the side',
           sol: 'Side ' + t('=' + o.f + '\\sqrt{' + o.m + '}+' + (o.g === 1 ? '' : o.g) + '\\sqrt{' + o.m + '}=' + side + '\\sqrt{' + o.m + '}') + '; ' + t('A=\\left(' + side + '\\sqrt{' + o.m + '}\\right)^{2}=' + side * side + '(' + o.m + ')=' + A) + ' m²',
           hints: ['Simplify each radical in the side and combine them.', 'Then square: ' + t('\\left(k\\sqrt{m}\\right)^{2}=k^{2}m') + '.'],
           cands: [{ tex: String(o.f * o.f * o.m + o.g * o.g * o.m), code: 'u2l4-no-middle', hint: t('(a+b)^{2}\\ne a^{2}+b^{2}') + '. Simplify the side to one term first.' }, { tex: String(4 * side) + '\\sqrt{' + o.m + '}', code: 'u2l4-perim-area', hint: 'That is the perimeter. The area is the side squared.' }] });

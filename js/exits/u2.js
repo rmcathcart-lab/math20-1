@@ -687,7 +687,7 @@
       var a = s.a, b = s.b; mult = { 2: 4, 3: 9, 4: 2, 5: 25, 9: 3, 25: 5, 6: 36 }[b]; var cr = Math.round(Math.cbrt(b * mult));
       S = term([a, b], 3, b * b);
       shown = '\\dfrac{' + a + '}{' + cb(b) + '}';
-      sol = t(b + '\\times ' + mult + '=' + (b * mult) + '=' + cr + '^{3}') + ', so multiply by ' + t(cb(mult)) + ': ' + t(shown + '\\cdot\\dfrac{' + cb(mult) + '}{' + cb(mult) + '}=\\dfrac{' + a + cb(mult) + '}{' + cb(b * mult) + '}=\\dfrac{' + a + cb(mult) + '}{' + cr + '}=' + rtex(S)) + '.';
+      sol = t(b + '\\times ' + mult + '=' + (b * mult) + '=' + cr + '^{3}') + ', so multiply by ' + t(cb(mult)) + ': ' + t(shown + '\\cdot\\dfrac{' + cb(mult) + '}{' + cb(mult) + '}=\\dfrac{' + (a === 1 ? '' : a) + cb(mult) + '}{' + cb(b * mult) + '}=\\dfrac{' + (a === 1 ? '' : a) + cb(mult) + '}{' + cr + '}=' + rtex(S)) + '.';
       dl = [[term([a, b], 3, b), 'u2x-cube-sq', 'Multiplying by ' + t(cb(b)) + ' gives ' + t(cb(b * b)) + ' in the denominator, which is not a whole number. Multiply by the cube root that makes the radicand a perfect <b>cube</b>.']];
     } else {
       var s2 = pickWhere(function () { return { p: r.pick([1, 2, 3, 5]), q: r.pick([2, 3, 4, 9, 5]) }; }, function (s) { return s.p !== s.q && ex.gcd(s.p, s.q) === 1 && !(s.p === 3 && s.q === 4) && !(s.p === 2 && s.q === 3); });
@@ -715,7 +715,7 @@
       var A = s2.A, B = s2.B, e2 = s2.e;
       S = add(term([A, e2], 2, e2), term(B));
       shown = '\\dfrac{' + A + cT(B, false, sq(e2)) + '}{' + sq(e2) + '}';
-      sol = t(shown + '\\cdot\\dfrac{' + sq(e2) + '}{' + sq(e2) + '}=\\dfrac{' + A + sq(e2) + cT(B * e2, false) + '}{' + e2 + '}=' + rtex(S)) + '. Every term of the numerator is multiplied by ' + t(sq(e2)) + '.';
+      sol = t(shown + '\\cdot\\dfrac{' + sq(e2) + '}{' + sq(e2) + '}=\\dfrac{' + (A === 1 ? '' : A) + sq(e2) + cT(B * e2, false) + '}{' + e2 + '}=' + rtex(S)) + '. Every term of the numerator is multiplied by ' + t(sq(e2)) + '.';
       dl = [[add(term([A, e2], 2, e2), term([B, e2])), 'u2x-one-term', 'Multiply <b>every</b> term of the numerator by ' + t(sq(e2)) + ': ' + t(cT(B, true, sq(e2)) + '\\cdot' + sq(e2) + '=' + (B * e2)) + '.']];
     }
     return RK.part('Simplify ' + t(shown) + '. Write the answer with a rational denominator, in simplest form.', S, { dl: dl }, sol,

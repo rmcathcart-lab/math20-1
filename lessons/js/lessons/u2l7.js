@@ -59,7 +59,7 @@ const GEO = {
 };
 function mountGeo() {
   const host = document.getElementById('u2l7-geo'); if (!host) return;
-  const W = Math.max(480, Math.min(640, host.clientWidth || 600)), H = 228, NX = 8, NY = 4;
+  const W = Math.max(480, Math.min(640, host.clientWidth || 600)), H = 268, NX = 8, NY = 4;
   const sp = Math.min((W - 40) / NX, (H - 24) / NY), ox = (W - sp * NX) / 2, oy = (H - sp * NY) / 2;
   const B = new Box(host, {}, 'u2l7-geobox', W, H);
   svgEl('rect', { x: 0, y: 0, width: W, height: H, rx: 14, fill: '#f7f4ec' }, B.svg);

@@ -63,13 +63,11 @@ function mountYard() {
   const host = document.getElementById('u2l3-yard'); if (!host) return;
   const svg = svgEl('svg', { viewBox: '0 0 600 400', class: 'u2l3-yardsvg', role: 'img', 'aria-label': 'Square stepping stones laid edge to edge on a lawn, with a measuring tape under the path.' }, host);
   svgEl('rect', { x: 0, y: 0, width: 600, height: 400, rx: 14, fill: '#e9f1df' }, svg);
-  for (let i = 0; i < 26; i++) { const x = (i * 97) % 590 + 5, y = (i * 53) % 300 + 10; svgEl('path', { d: `M${x} ${y + 8} l3 -8 l3 8 M${x + 6} ${y + 8} l3 -6`, stroke: '#b9cfa3', 'stroke-width': 1.6, fill: 'none' }, svg); }
   const G = svgEl('g', {}, svg), BASE = 322;
   let gen = 0, mode = '';
   const stone = (x, side, area, o = {}) => {
     const g = svgEl('g', {}, G);
     svgEl('rect', { x, y: BASE - side, width: side, height: side, rx: 5, fill: o.ghost ? hexA(BR, 0.08) : '#cfc8b8', stroke: o.ghost ? BR : '#8f887a', 'stroke-width': o.ghost ? 3 : 2.2, 'stroke-dasharray': o.ghost ? '9 6' : null }, g);
-    if (!o.ghost) for (let k = 0; k < 3; k++) svgEl('circle', { cx: x + side * (0.22 + 0.27 * k), cy: BASE - side * (0.3 + 0.2 * (k % 2)), r: Math.max(2, side * 0.025), fill: '#bdb5a3' }, g);
     const t = svgEl('text', { x: x + side / 2, y: (o.ty || BASE - side / 2 + 8), 'text-anchor': 'middle', class: 'u2l3-ytxt' + (o.ghost ? ' u2l3-ytxt-g' : '') }, g); t.textContent = area + ' m²';
     return g;
   };

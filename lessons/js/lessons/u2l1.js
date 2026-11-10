@@ -35,6 +35,7 @@ const panel = (stage, x, y, w, hh, title, cls = '') => add(stage, box(h('div', '
 const tn = (v) => { const a = Math.abs(v), s = String(a); return (v < 0 ? '-' : '') + (a >= 1000 ? s.replace(/\B(?=(\d{3})+(?!\d))/g, '\\,') : s); };
 const rt = (n, s) => (n === 2 ? `\\sqrt{${s}}` : `\\sqrt[${n}]{${s}}`);
 const POW = { 2: 'square', 3: 'cube', 4: 'fourth power', 5: 'fifth power' };
+const POWH = { 2: 'square', 3: 'cube', 4: 'fourth-power', 5: 'fifth-power' };
 const POWS = { 2: 'squares', 3: 'cubes', 4: 'fourth powers', 5: 'fifth powers' };
 const ROOTW = { 2: 'square root', 3: 'cube root', 4: 'fourth root', 5: 'fifth root' };
 const GROUP = { 2: 'pair', 3: 'triple' };
@@ -164,11 +165,11 @@ function mountDots() {
       await tween(ctx, 900, (t) => {
         const a = P(a0[0] + (a1[0] - a0[0]) * t, a0[1] + (a1[1] - a0[1]) * t), b = P(b0[0] + (b1[0] - b0[0]) * t, b0[1] + (b1[1] - b0[1]) * t);
         ln.setAttribute('x1', a[0]); ln.setAttribute('y1', a[1]); ln.setAttribute('x2', b[0]); ln.setAttribute('y2', b[1]);
-        num.setAttribute('x', (a[0] + b[0]) / 2 - 16); num.setAttribute('y', (a[1] + b[1]) / 2 - 10);
+        num.setAttribute('x', (a[0] + b[0]) / 2 - 15); num.setAttribute('y', (a[1] + b[1]) / 2 + 24);
       });
       await sleep(ctx, 150);
     }
-    const [tx, ty] = P(8, 1); place(tag, tx - 30, ty + 30, 'sw', 0); await fadeIn(ctx, tag, 400);
+    await fadeIn(ctx, tag, 400);
     st.busy = false;
   };
   document.getElementById('u2l1-wreset').onclick = () => {
@@ -414,8 +415,8 @@ function addMake(stage, svg, W) {
   const s5 = lab(stage, T(cC('5')), 'u2l1-slab', cx + 2.5 * u, base + 6, 's'), l25 = lab(stage, `area ${T('9+16=25')}`, 'u2l1-alab', cx + 2.5 * u, base - 5 * u - 8, 'n'); hide(s5); hide(l25);
   const e1 = lab(stage, T('\\sqrt9+\\sqrt{16}=3+4=7'), 'u2l1-eqbox', 40, 22, 'e'), e2 = lab(stage, T('\\sqrt{9+16}=\\sqrt{25}=5'), 'u2l1-eqbox', W - 40, 22, 'w'); hide(e1); hide(e2);
   e1.style.translate = '0 0'; e2.style.translate = '-100% 0';
-  const ne = lab(stage, T(cX('5\\ne7')), 'u2l1-big', W / 2 + 20, 200, 'c'); hide(ne);
-  const st = stamp(stage, '✗ no splitting over +', { ok: false, x: W - 210, y: 362 }); hide(st);
+  const mx = (bx + 4 * u + W - 330) / 2, ne = lab(stage, T(cX('5\\ne7')), 'u2l1-big', mx, 180, 'c'); hide(ne);
+  const st = stamp(stage, '✗ no splitting over +', { ok: false, x: mx, y: 250 }); hide(st);
   return [
     { cap: `${T('\\sqrt9')} is the side of a square of area 9; ${T('\\sqrt{16}')} is the side of a square of area 16.`,
       run: async (c) => { all.forEach((r) => (r.style.opacity = 1)); ghost.style.opacity = 1; await appear(c, svg, 200); [lA, lB, sA, sB].forEach((e) => (e.style.opacity = 1)); await Promise.all([lA, lB, sA, sB].map((e) => fadeIn(c, e))); } },
@@ -589,8 +590,8 @@ function huntSteps(stage, d, ex, mode) {
   if (mode === 'simplest' && !kb) {
     const ch = chain(stage, 40, 340, W - 80, [startTex]);
     const st = stamp(stage, '✓ simplest form', { ok: true, x: stX, y: stY }); hide(st);
-    steps.push({ cap: `Simplest form? Hunt: does ${T(String(a))} have a perfect-${POW[n]} factor? Test ${T(listTex)}.`, run: async (c) => { await ch.show(c, 0); await row.test(c); } });
-    steps.push({ cap: `None of them divides ${a}. ${T(startTex)} is already in <b>simplest form</b>.`, run: (c) => stampIn(c, st) });
+    steps.push({ cap: `Simplest form? Hunt: does ${T(String(a))} have a perfect-${POWH[n]} factor? Test ${T(listTex)}.`, run: async (c) => { await ch.show(c, 0); await row.test(c); } });
+    steps.push({ cap: `None of them divides ${T(tn(a))}. ${T(startTex)} is already in <b>simplest form</b>.`, run: (c) => stampIn(c, st) });
     return steps;
   }
   const big = kb ** n, rest = a / big, out = sg * kb, fin = co * out;
@@ -604,11 +605,11 @@ function huntSteps(stage, d, ex, mode) {
   const tP = R.num(sg * big, 'pp'), tX = R.op(), tRest = R.num(rest, 'rad');
   const stNo = mode === 'simplest' ? stamp(stage, 'not simplest', { ok: false, x: stX, y: stY }) : null; if (stNo) hide(stNo);
   const st = stamp(stage, '✓ simplest form', { ok: true, x: stX, y: stY }); hide(st);
-  const huntCap = mode === 'simplest' ? `Simplest form? Hunt: does ${T(String(a))} have a perfect-${POW[n]} factor? Test ${T(listTex)}.`
+  const huntCap = mode === 'simplest' ? `Simplest form? Hunt: does ${T(String(a))} have a perfect-${POWH[n]} factor? Test ${T(listTex)}.`
     : `Hunt for perfect ${POWS[n]} that divide ${T(tn(a))}: test ${T(listTex)}.`;
   steps.push({ cap: huntCap, run: async (c) => { await ch.show(c, 0); await row.test(c); } });
   if (mode === 'simplest') steps.push({ cap: `Yes: ${T(cC(big))} divides ${a}. So ${T(startTex)} is <b>not</b> in simplest form yet.`, run: async (c) => { await row.mark(c, kb); stNo.style.opacity = 1; await stampIn(c, stNo); } });
-  const splitCap = (divs.length > 1 ? `${divs.length} of them divide ${a}; use the <b>largest</b>, ${T(cC(tn(big)))}: ` : `${T(cC(tn(big)))} divides ${a}: `) + `${T(`${tn(d.r)}=${bigTex}\\times${restTex}`)}.`;
+  const splitCap = (mode === 'simplest' ? `Split it off: ` : divs.length > 1 ? `${divs.length} of them divide ${T(tn(a))}; use the <b>largest</b>, ${T(cC(tn(big)))}: ` : `${T(cC(tn(big)))} divides ${T(tn(a))}: `) + `${T(`${tn(d.r)}=${bigTex}\\times${restTex}`)}.`;
   steps.push({ cap: splitCap,
     run: async (c) => {
       if (mode !== 'simplest') await row.mark(c, kb); else if (stNo) stNo.style.opacity = 0;
@@ -626,7 +627,7 @@ function huntSteps(stage, d, ex, mode) {
       run: async (c) => { await R.set(c, [tF], [tRest], { at: new Map([[tF, tCo._x]]) }); await ch.show(c, 3); } });
   }
   const finTex = `${cC(tn(fin))}${rt(n, restTex)}`;
-  steps.push({ cap: `${mode === 'simplest' ? 'Hunt again: ' : 'Check: '}${T(String(rest))} has no perfect-${POW[n]} factor, so ${T(finTex)} is in <b>simplest form</b>.`, run: (c) => stampIn(c, st) });
+  steps.push({ cap: `${mode === 'simplest' ? 'Hunt again: ' : 'Check: '}${T(String(rest))} has no perfect-${POWH[n]} factor, so ${T(finTex)} is in <b>simplest form</b>.`, run: (c) => stampIn(c, st) });
   if (d.kai) steps.push({ cap: `Kai’s answer needed a second round. Using the <b>largest</b> perfect square first does it in one step.`, run: (c) => kaiCh.show(c, 0) });
   return steps;
 }
@@ -737,14 +738,14 @@ const copies = {
     const mk = NL.point(end, { color: CO, r: 9 }); mk.style.opacity = 0;
     const vl = lab(stage, `${T(`\\sqrt{${d.N}}\\approx${cC(d.val)}`)}`, 'u2l1-big u2l1-cval', 20 + NL.toPx(end), 120 + NL.ay + 46, 's'); hide(vl);
     const cnt = lab(stage, '', 'u2l1-ccnt', W / 2, 120 + by - 30, 'c'); hide(cnt);
-    const st = stamp(stage, '≈ ' + d.val, { ok: true, x: 160, y: 330 }); hide(st);
+    const st = stamp(stage, '≈ ' + d.val, { ok: true, x: frac ? W - 160 : 160, y: 330 }); hide(st);
     const mult = frac ? `1.732\\div10=${d.val}` : `${d.k}\\times1.732=${d.val}`;
     return [
       { cap: `Simplify first, so the radicand is ${T('3')}: ${T(d.simp)}.`, run: (c) => show(c, top) },
       { cap: frac ? `${T('\\dfrac{\\sqrt3}{10}')} is <b>one tenth</b> of ${T('\\sqrt3')}: cut one ${T('\\sqrt3')} bar into 10 equal pieces.` : `${T(`${d.k}\\sqrt3`)} is ${d.k} copies of ${T('\\sqrt3\\approx1.732')}, laid end to end.`,
         run: async (c) => {
           for (const [i, b] of bars.entries()) { b.style.opacity = 1; if (b.lab) b.lab.style.opacity = 1; await pop(c, b, 220); if (!frac) { cnt.innerHTML = T(`${i + 1}\\times\\sqrt3`); cnt.style.opacity = 1; } }
-          if (frac) { pieces.style.opacity = 1; await appear(c, pieces, 300); one.style.opacity = 1; await appear(c, one, 300); }
+          if (frac) { if (bars[0].lab) bars[0].lab.style.opacity = 0; pieces.style.opacity = 1; await appear(c, pieces, 300); one.style.opacity = 1; await appear(c, one, 300); }
         } },
       { cap: `${T(mult)}, so ${T(`\\sqrt{${d.N}}\\approx${d.val}`)}.` + (d.k === 10 ? ' Multiplying by 10 just moves the decimal point.' : frac ? ' Dividing by 10 moves the decimal point back one place.' : ''),
         run: async (c) => { mk.style.opacity = 1; await pop(c, mk); await show(c, vl); await stampIn(c, st); } }

@@ -585,7 +585,7 @@
     var s = pickWhere(function () { return { b: r.pick([2, 3, 4, 5, 9, 25, 6]), a: r.int(1, 15) }; }, function (s) { return !(s.a === 4 && s.b === 3) && !(s.a === 10 && s.b === 25) && !(s.a === 12 && s.b === 4) && !(s.a === 6 && s.b === 3) && !(s.a === 4 && s.b === 2) && !(s.a === 9 && s.b === 3) && !(s.a === 5 && s.b === 9); });
     var a = s.a, b = s.b, mult = { 2: 4, 3: 9, 4: 2, 5: 25, 9: 3, 25: 5, 6: 36 }[b], cr = Math.round(Math.cbrt(b * mult)), S = term([a, b], 3, b * b), shown = '\\dfrac{' + a + '}{' + cb(b) + '}';
     return RK.part('Rationalize the denominator and simplify ' + t(shown) + '.', S, { dl: [[term([a, b], 3, b), 'u2t-cube-sq', 'Multiplying by ' + t(cb(b)) + ' leaves ' + t(cb(b * b)) + ' in the denominator. Multiply by the cube root that makes a perfect <b>cube</b>.']] },
-      t(b + '\\times ' + mult + '=' + cr + '^{3}') + ': ' + t(shown + '\\cdot\\dfrac{' + cb(mult) + '}{' + cb(mult) + '}=\\dfrac{' + a + cb(mult) + '}{' + cr + '}=' + rtex(S)) + '.',
+      t(b + '\\times ' + mult + '=' + cr + '^{3}') + ': ' + t(shown + '\\cdot\\dfrac{' + cb(mult) + '}{' + cb(mult) + '}=\\dfrac{' + (a === 1 ? '' : a) + cb(mult) + '}{' + cr + '}=' + rtex(S)) + '.',
       ['What times the radicand makes a perfect cube (' + t('8,\\ 27,\\ 64,\\ 125,\\ 216') + ')?', 'Multiply the numerator and the denominator by that cube root.'], 'rationalize a cube-root denominator');
   }
   function q12b(r) {
@@ -596,7 +596,7 @@
     function tm(k, w, first) { var A = k * c; return w === 1 ? cT(A, first, sq(q)) : cT(A, first, sq(w * q)); }
     var shown = '\\dfrac{' + tm(x, u, true) + tm(y, v, false) + '}{' + mixT(c, 2, q) + '}';
     return RK.part('Simplify ' + t(shown) + '.', S, { dl: [[add(term(x, 2, u), term(y * c, 2, v * q)), 'u2t-one-term', 'Divide <b>every</b> term of the numerator by the denominator.']] },
-      'Divide each term of the numerator by ' + t(mixT(c, 2, q)) + ': ' + t(shown + '=' + (c === 1 ? '' : '\\frac{' + (x * c) + '}{' + c + '}') + '\\sqrt{\\frac{' + (u * q) + '}{' + q + '}}' + cT(y, false) + '\\sqrt{\\frac{' + (v * q) + '}{' + q + '}}=' + rtex(S)) + '.',
+      'Divide each term of the numerator by ' + t(mixT(c, 2, q)) + ': ' + t(shown + '=' + (c === 1 ? '' : '\\frac{' + (x * c) + '}{' + c + '}') + '\\sqrt{\\frac{' + (u * q) + '}{' + q + '}}' + cT(y, false, '\\sqrt{\\frac{' + (v * q) + '}{' + q + '}}') + '=' + rtex(S)) + '.',
       ['A one-term denominator divides <b>every</b> term of the numerator: ' + t('\\dfrac{a+b}{c}=\\dfrac{a}{c}+\\dfrac{b}{c}') + '.', 'Divide the coefficients and divide the radicands.'], 'divide each term');
   }
   /* Q13 (L6) — rationalize binomial denominators */
@@ -642,7 +642,7 @@
     if (!den) {
       key = lo + '\\le x\\le ' + hi;
       prompt = 'For what values of ' + t('x') + ' is ' + t('\\sqrt{' + A + '}+\\sqrt{' + B + '}') + ' defined (a real number)? Write the answer as an inequality.';
-      sol = 'Both radicands must be ' + t('\\ge 0') + ': ' + t(A + '\\ge 0\\Rightarrow x\\ge ' + lo) + ' and ' + t(B + '\\ge 0\\Rightarrow x\\le ' + hi) + '. Both are true when ' + t(key) + '.';
+      sol = 'Both radicands must be ' + t('\\ge 0') + ': ' + t(A + '\\ge 0' + (lo === 0 ? '' : '\\Rightarrow x\\ge ' + lo)) + ' and ' + t(B + '\\ge 0\\Rightarrow x\\le ' + hi) + '. Both are true when ' + t(key) + '.';
       wr = [{ is: 'x\\ge ' + lo, code: 'u2t-def-one', hint: 'That makes the first radical defined. The second radicand ' + t(B) + ' must be ' + t('\\ge 0') + ' too.' }, { is: 'x\\le ' + hi, code: 'u2t-def-one', hint: 'That makes the second radical defined. The first radicand ' + t(A) + ' must be ' + t('\\ge 0') + ' too.' },
         { is: lo + '<x<' + hi, code: 'u2t-res-strict', hint: 'Each radicand may be ' + t(0) + ', so both ends are included.' }];
       if (lo !== -hi) wr.push({ is: '-' + hi + '\\le x\\le ' + (-lo), code: 'u2t-res-sign', hint: 'Check the signs of the boundaries.' });
