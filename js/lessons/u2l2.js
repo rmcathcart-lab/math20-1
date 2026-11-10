@@ -135,7 +135,7 @@
     var c = s * s * tt, iV = obj(vs, e.map(function (x) { return 2 * x; })), oV = obj(vs, e), A = vtex([c, 1], iV);
     var sideT = vout([s, 1], oV) + (tt > 1 ? '\\sqrt{' + tt + '}' : ''), perT = vout([4 * s, 1], oV) + (tt > 1 ? '\\sqrt{' + tt + '}' : '');
     var perChk = K.varRadical(perT, 'mixed', { diag: function (rr) { if (rr && rr.n === 2 && rr.rad.m === tt && (rr.k[0] === s || rr.k[0] === 2 * s) && rr.k[1] === 1) return { code: 'u2l2-perimeter', hint: 'A square has <b>four</b> equal sides: ' + t('P=4s') + '.' }; return null; } });
-    return radFields(intro + 'A square has an area of ' + t(A) + ' square units (' + t(vs.join(', ') + '\\ge 0') + '). Determine its side length and perimeter in simplest form.', [
+    return radFields(intro + 'A square has an area of ' + t(A) + ' square units (' + t(vs.join(', ') + '>0') + '). Determine its side length and perimeter in simplest form.', [
       { name: 'Side', label: t('s='), check: K.varRadical(sideT, 'mixed'), key: sideT, keys: 'var' }, { name: 'Perimeter', label: t('P='), check: perChk, key: perT, keys: 'var' }],
       t('s=\\sqrt{' + A + '}=\\sqrt{' + s * s + '\\cdot ' + tt + '\\cdot ' + vtex([1, 1], iV) + '}=' + sideT) + ' (halve each exponent).<br>' + t('P=4\\times ' + sideT + '=' + perT) + '.',
       ['The side is ' + t('\\sqrt{A}') + ': take the largest perfect square out of the number and halve each exponent.', 'The perimeter is ' + t('4s') + '.'], text || 'square side/perimeter ' + A);

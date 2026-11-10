@@ -294,7 +294,7 @@ function ladder(stage, svg, x, y, L, n, v, side) {
   }
   labs.forEach(hide);
   if (side) { const s = lab(stage, side, 'u2l1-lside', x - 30, y + RH / 2, 'w'); hide(s); labs.push(s); }
-  const ball = svgEl('circle', { cx: px(v), cy: y - 120, r: 11, fill: RAD, stroke: '#fff', 'stroke-width': 3 }, svg); ball.style.opacity = 0;
+  const ball = svgEl('circle', { cx: px(v), cy: y - 80, r: 11, fill: RAD, stroke: '#fff', 'stroke-width': 3 }, svg); ball.style.opacity = 0;
   const bl = lab(stage, `<b>${T(tn(v))}</b>`, 'u2l1-lball', px(v), y - 44, 'n'); hide(bl);
   const between = lab(stage, exact ? `on the rung: ${T(`${tn(v)}=${kr}^{${n}}`)}` : `between ${T(cC(String(kf)))} and ${T(cC(String(kf + 1)))}`, 'u2l1-lbetween ' + (exact ? 'u2l1-lon' : ''), exact ? px(v) : (px(kf ** n) + px((kf + 1) ** n)) / 2, y + RH + 40, 's'); hide(between);
   return {
@@ -303,7 +303,7 @@ function ladder(stage, svg, x, y, L, n, v, side) {
     async draw(c) { g.style.opacity = 1; await appear(c, g, 300); for (const l of labs) l.style.opacity = 1; await Promise.all(labs.map((l) => fadeIn(c, l, 260))); },
     async drop(c) {
       ball.style.opacity = 1;
-      await tween(c, 650, (t) => ball.setAttribute('cy', y - 120 + (120 + RH / 2) * t));
+      await tween(c, 650, (t) => ball.setAttribute('cy', y - 80 + (80 + RH / 2) * t));
       bl.style.opacity = 1; await pop(c, bl, 260);
       if (exact) { rungs[kr].setAttribute('stroke', OK); ball.setAttribute('fill', OK); } else { band.style.opacity = 1; await appear(c, band, 260); }
       between.style.opacity = 1; await pop(c, between, 300);
@@ -323,8 +323,8 @@ const ladderDef = {
     if (d.frac) {
       const [p, q] = d.frac, LW = W / 2 - 150, A = ladder(stage, svg, 80, 196, LW, n, p), B = ladder(stage, svg, W / 2 + 70, 196, LW, n, q);
       const rational = A.exact && B.exact;
-      const fl = lab(stage, T(d.dec ? `${d.dec}=\\dfrac{${cR(p)}}{${cR(q)}}` : `\\dfrac{${cR(p)}}{${cR(q)}}`), 'u2l1-lfrac', W / 2, 30, 'c'); hide(fl);
-      const tA = lab(stage, `top: ${T(cR(p))}`, 'u2l1-lside', 80 + LW / 2, 60, 'c'), tB = lab(stage, `bottom: ${T(cR(q))}`, 'u2l1-lside', W / 2 + 70 + LW / 2, 60, 'c'); hide(tA); hide(tB);
+      const fl = lab(stage, T(d.dec ? `${d.dec}=\\dfrac{${cR(p)}}{${cR(q)}}` : `\\dfrac{${cR(p)}}{${cR(q)}}`), 'u2l1-lfrac', W / 2, 52, 'c'); hide(fl);
+      const tA = lab(stage, `top: ${T(cR(p))}`, 'u2l1-lside', 80 + LW / 2, 104, 'c'), tB = lab(stage, `bottom: ${T(cR(q))}`, 'u2l1-lside', W / 2 + 70 + LW / 2, 104, 'c'); hide(tA); hide(tB);
       verdict.innerHTML = rational ? `${T(`${d.lab}=\\dfrac{${A.kr}}{${B.kr}}` + (d.dec ? `=${A.kr / B.kr}` : ''))}` : `neither ${T(String(p))} nor ${T(String(q))} is a perfect square`;
       st.textContent = rational ? '✓ rational' : 'irrational'; st.className = st.className.replace(/bk-(ok|no|mid)/, rational ? 'bk-ok' : 'bk-mid');
       steps.push({ cap: d.dec ? `First write the decimal as a fraction in lowest terms: ${T(`${d.dec}=\\dfrac{${p}}{${q}}`)}. Then check the top and the bottom.` : `A fraction: check the top (${p}) and the bottom (${q}) on the ladder of perfect squares.`,
@@ -615,7 +615,7 @@ function huntSteps(stage, d, ex, mode) {
   steps.push({ cap: `${T(tn(sg * big))} is a perfect ${POW[n]}: ${T(`${rt(n, tn(sg * big))}=${tn(out)}`)}. It <b>escapes</b> the root sign and lands in front` + (hasCo ? `, next to the ${T(tn(co))}.` : '.'),
     run: async (c) => {
       await R.set(c, hasCo ? [tCo, k2, tP] : [tP], [tRest], { arc: [tP], ms: 1000, morph: [[tP, T(tn(out)), 'co', wNum(out, R.fs)]] });
-      await ch.show(c, 2);
+      await ch.show(c, 2); if (!hasCo) await ch.show(c, 3);
     } });
   if (hasCo) {
     const tF = R.num(fin, 'co');

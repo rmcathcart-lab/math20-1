@@ -85,7 +85,8 @@
 .u2l3-bin-h { left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 10px; padding: 6px 12px; font: 700 17px var(--round); color: var(--c); }
 .u2l3-bin-u .katex { font-size: 1.2em; }
 .u2l3-bin-tot { margin-left: auto; font-size: 25px; color: var(--c); }
-.u2l3-tile { display: grid; place-items: center; box-sizing: border-box; border: 2px solid var(--c); background: var(--cs); color: var(--c); border-radius: 8px; font-size: 16.5px; overflow: hidden; }
+.u2l3-tile { display: grid; place-items: center; box-sizing: border-box; border: 2px solid var(--c); background: var(--cs); color: var(--c); border-radius: 8px; font-size: 19px; overflow: hidden; }
+.u2l3-bin .u2l3-tile { font-size: 18px; }
 .u2l3-tile.u2l3-neg-t { border-style: dashed; }
 .u2l3-tile.u2l3-part .katex { font-size: .8em; }
 .u2l3-tile.u2l3-joined { border-radius: 4px; }
@@ -103,7 +104,7 @@
 .u2l3-sqarea { font: 700 22px var(--round); color: var(--ink2); background: rgba(255, 255, 255, .85); border-radius: 8px; padding: 2px 8px; }
 .u2l3-cellt { font: 600 14px var(--round); fill: #6b7280; }
 .u2l3-cellt.u2l3-cellt-b { font-size: 26px; font-weight: 800; fill: #1c2230; }
-.u2l3-cellside { font-size: 16px; }
+.u2l3-cellside { font-size: 18px; background: rgba(251, 250, 246, .85); border-radius: 5px; padding: 0 2px; }
 .u2l3-brl { font-size: 23px; color: #7a1f3d; font-weight: 700; }
 
 /* fractions in front */
@@ -114,6 +115,8 @@
 .u2l3-fans { font-size: 30px; color: #7a1f3d; }
 
 /* missing side */
+.u2l3-rowlab { font-size: 24px; }
+.u2l3-c-x { color: #7a1f3d; }
 .u2l3-striph { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
 
 /* balance */

@@ -174,7 +174,7 @@
     return { prompt: t(C + '\\sqrt{' + m + '}'), input: { type: 'fields', fields: [{ label: 'One way:', name: 'First way', mode: 'math', keys: 'p23rad' }, { label: 'Another way:', name: 'Second way', mode: 'math', keys: 'p23rad' }] },
       check: check, key: [k1, k2], answer: 'For example ' + t(k1) + ' and ' + t(k2) + ' (any two different ways).',
       solution: 'Split the coefficient ' + t(C) + ' and the radicand ' + t(m + '=' + p + '\\times' + q) + ': e.g. ' + ways.slice(0, 4).map(function (w) { return t(w); }).join(', ') + '. Check: the coefficients multiply to ' + t(C) + ' and the radicands to ' + t(m) + '.',
-      hints: ['Write ' + t(m) + ' as a product of two numbers and ' + t(C) + ' as a product of two numbers.', 'Pair them up: ' + t('(a\\sqrt{b})(c\\sqrt{d})=ac\\sqrt{bd}') + '.'], text: 'two ways as a product', bad: [[k1, k1], [C + '\\sqrt{' + m + '}', k2]], good: [[ways[0], ways[ways.length - 1]]] };
+      hints: ['Write ' + t(m) + ' as a product of two numbers and ' + t(C) + ' as a product of two numbers.', 'Pair them up: ' + t('(a\\sqrt{b})(c\\sqrt{d})=ac\\sqrt{bd}') + '.'], text: 'two ways as a product', bad: [[k1, k1], [C + '\\sqrt{' + m + '}', k2]], good: [[ways[0], ways[2]]] };
   }
 
   /* ============================== the assignment ============================== */

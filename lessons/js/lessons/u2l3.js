@@ -156,7 +156,7 @@ function binsDef(title, data, choices) {
         el.innerHTML = `<div class="u2l3-bin-h"><span class="u2l3-bin-u">${b.k === 'num' ? 'numbers' : T(b.t) + ' tiles'}</span><span class="u2l3-bin-tot"></span></div>`;
         hide(el);
         const ts = d.terms.filter((t) => t.k === b.k), P = ts.filter((t) => t.n > 0).reduce((s, t) => s + Math.ceil(t.n), 0), N = ts.filter((t) => t.n < 0).reduce((s, t) => s + Math.ceil(-t.n), 0);
-        let w = b.tw || 60, th = 40, per = 1;
+        let w = (b.tw || 60) * 1.25, th = 50, per = 1;
         for (let it = 0; it < 14; it++) { per = Math.max(1, Math.floor((bw - 10) / (w + 6))); const need = (Math.ceil(P / per) + Math.ceil(N / per)) * (th + 6) + (P && N ? 10 : 0); if (need <= bh - 52) break; w *= 0.9; th *= 0.93; }
         const rowsP = Math.ceil(P / per);
         return { b, el, w, th, per, rowsP, pos: [], neg: [], ip: 0, iN: 0, total: ts.reduce((s, t) => s + t.n, 0) };
@@ -429,7 +429,7 @@ const squareCut = {
   make(stage, k, ex) {
     const d = SQ[k], W = ex.W, H = ex.def.height, two = d.sq.length > 1, m = d.sq[0].m, col = m === 2 ? C2 : C3;
     const svg = mkSvg(stage, W, H), base = H - 104, nT = d.sq.reduce((s, q) => s + q.n, 0), nM = Math.max(...d.sq.map((q) => q.n));
-    const q = Math.min(100, (base - 26) / nM, 560 / nT), X0 = 40 + (580 - nT * q) / 2;
+    const q = Math.min(100, (base - 26) / nM, (two ? 520 : 560) / nT), X0 = 40 + (580 - nT * q) / 2;
     let x = X0;
     const S = d.sq.map((s, si) => {
       const side = s.n * q, y0 = base - side, g = svgEl('g', {}, svg);
@@ -530,7 +530,7 @@ const cubeCut = {
       return { q, g, grid, vol };
     });
     // the small corner cube of the first cube, at the front bottom
-    const q0 = d.cubes[0], [a0, b0] = q0.at, E0 = q0.n, hl = svgEl('g', { opacity: 0 }, svg);
+    const q0 = d.cubes[0], qL = d.cubes[d.cubes.length - 1], [a0, b0] = qL.at, E0 = qL.n, hl = svgEl('g', { opacity: 0 }, svg);
     const xs = a0 + E0 - 1, ys = b0 + E0 - 1;
     poly(hl, [[xs, ys, 1], [xs + 1, ys, 1], [xs + 1, ys + 1, 1], [xs, ys + 1, 1]], mix(col, 0.25), 3);
     poly(hl, [[xs + 1, ys, 0], [xs + 1, ys + 1, 0], [xs + 1, ys + 1, 1], [xs + 1, ys, 1]], mix(col, 0.05), 3);
@@ -713,11 +713,12 @@ const missingSide = {
   ask: (k) => MS[k].ask,
   make(stage, key, ex) {
     const d = MS[key], W = ex.W, H = ex.def.height, BIN = { s2: B.s2, s3: B.s3, s5: B.s5 };
-    const tri = triangleFig(stage, 0, 0, 380, 290, d.len, { base: T(d.labs.base), left: T(d.labs.left), right: T(d.labs.right) });
-    const pn = panel(stage, 400, 14, W - 420, 270, 'Working');
-    const tw = 60, th = 42, SY = H - 112, tiles = [];
-    let x = 20;
-    lab(stage, 20, SY - 10, 'Perimeter tiles', 'u2l3-striph', 'ne', 0);
+    const tri = triangleFig(stage, 0, 0, 360, 290, d.len, { base: T(d.labs.base), left: T(d.labs.left), right: T(d.labs.right) });
+    const pn = panel(stage, 450, 14, W - 470, 270, 'Working');
+    const tw = 60, th = 42, SY = H - 124, tiles = [];
+    let x = 70;
+    lab(stage, 20, SY - 8, 'Perimeter tiles', 'u2l3-striph', 'ne', 0); lab(stage, 22, SY + th / 2, T('P'), 'u2l3-rowlab', 'e', 0);
+    const xRow = lab(stage, 22, SY + 56 + th / 2, T('x'), 'u2l3-rowlab u2l3-c-x', 'e', 0); hide(xRow);
     d.P.forEach((g) => { for (let i = 0; i < g.n; i++) { const e = add(stage, tileEl(BIN[g.k].t, BIN[g.k].c, false, tw, th), x, SY); hide(e); tiles.push({ e, k: g.k, x, gone: false }); x += tw + 6; } x += 14; });
     const take = (parts) => { const out = []; parts.forEach((p) => { let n = p.n; for (const t of tiles) { if (!n) break; if (!t.gone && t.k === p.k) { t.gone = true; out.push(t.e); n--; } } }); return out; };
     const steps = [];
@@ -737,8 +738,9 @@ const missingSide = {
     });
     steps.push({ cap: `What is left is ${T('x')}: ${T(`x=${d.x}`)} ${d.unit}.`,
       run: async (c) => {
-        const left = tiles.filter((t) => !t.gone); let nx = 20;
-        await Promise.all(left.map((t, j) => { const dx = nx - t.x; nx += tw + 6 + (left[j + 1] && left[j + 1].k !== t.k ? 14 : 0); return c.anim(t.e, [{ transform: 'none' }, { transform: `translateX(${dx}px)` }], 600); }));
+        const left = tiles.filter((t) => !t.gone); let nx = 70;
+        await show(c, xRow);
+        await Promise.all(left.map((t, j) => { const dx = nx - t.x; nx += tw + 6 + (left[j + 1] && left[j + 1].k !== t.k ? 14 : 0); return c.anim(t.e, [{ transform: 'none' }, { transform: `translate(${dx}px, 56px)` }], 600, { delay: j * 60 }); }));
         await Promise.all(left.map((t) => pulse(c, t.e, 1.1)));
         tri[d.xs].innerHTML = T(`x=${d.x}`); tri[d.xs].classList.add('u2l3-xon'); await pop(c, tri[d.xs]);
         await show(c, line(pn, T(`${d.lines.length > 1 ? '\\phantom{x}' : 'x'}=\\boldsymbol{${d.x}}\\text{ ${d.unit}}`), 'u2l3-big'));

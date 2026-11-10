@@ -685,7 +685,7 @@ const shapes = {
       svgEl('rect', { x: 50, y: 50, width: 290, height: 290, fill: 'rgba(123,79,196,.10)', stroke: INK, 'stroke-width': 3.5 }, svg);
       absEl(stage, 'u2l2-flab', T(`A=${cR('48x^6')}\\ \\text{cm}^2`), 195, 195, 'c');
       unk = absEl(stage, 'u2l2-flab u2l2-unk', T('s=\\ ?'), 195, 346, 's');
-      L = [`${T('s=\\sqrt{A}=\\sqrt{48x^6}')}`, T('=\\sqrt{16\\cdot3\\cdot x^6}'), T(`=${cC('4x^3')}\\sqrt{${cR('3')}}\\ \\text{cm},\\ \\ x\\ge0`)];
+      L = [`${T('s=\\sqrt{A}=\\sqrt{48x^6}')}`, T('=\\sqrt{16\\cdot3\\cdot x^6}'), T(`=${cC('4x^3')}\\sqrt{${cR('3')}}\\ \\text{cm},\\ \\ x>0`)];
       return mkShapeSteps(Pn, L, unk, '4x^3\\sqrt3', [
         `The side of a square is the <b>square root</b> of its area: ${T('s=\\sqrt{48x^6}')}.`,
         `Split: ${T('48=16\\cdot3')} (16 is a perfect square) and ${T('x^6=(x^3)^2')}.`,

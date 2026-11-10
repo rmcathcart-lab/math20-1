@@ -204,7 +204,7 @@
 .u2l7-ex7 { display: flex; align-items: flex-start; gap: 24px; margin-bottom: 8px; }
 .u2l7-ex7 .q { flex: 1; }
 .u2l7-ex7fig { position: relative; flex: none; width: 340px; height: 150px; }
-.u2l7-ex7fig svg { position: absolute; left: 10px; top: 36px; }
+.u2l7-ex7fig > svg { position: absolute; left: 10px; top: 36px; }
 .u2l7-rl { position: absolute; font-size: 18px; white-space: nowrap; }
 .u2l7-rlL { left: 50px; top: 2px; }
 .u2l7-rlW { left: 218px; top: 72px; }
