@@ -47,7 +47,7 @@
   function choicesNum(arr) { return arr.map(function (x) { return t(F(x)); }); }
   /* a multiple choice with numeric options, shown in increasing order */
   function mcNum(r, prompt, right, wrongs, sol, hints, text, fmt) {
-    fmt = fmt || function (x) { return t(F(x)); };
+    fmt = fmt || function (x) { return t(Math.abs(x * 100 - Math.round(x * 100)) < 1e-6 ? F(cl(x)) : '\\approx ' + fxT(x, 2)); };
     var all = [{ v: right, right: true }].concat(wrongs.map(function (w) { return { v: w[0], why: w[1] }; })), seen = [], opts = [];
     all.forEach(function (o) { var k = String(cl(o.v)); if (seen.indexOf(k) >= 0 || !isFinite(o.v)) return; seen.push(k); opts.push(o); });
     var step = Math.max(1, Math.abs(Math.round(right / 10)) || 1), j = 1;
@@ -105,7 +105,7 @@
       var z = pickWhere(function () { return { S: r.pick([10, 15, 20, 25, 30, 40, 50]), r: r.pick([-0.6, -0.5, -0.4, -0.2, -0.8, -0.25]) }; }, function (z) { return !(z.S === 25 && z.r === -0.6); });
       var t1 = cl(z.S * (1 - z.r));
       return mcNum(r, 'An infinite geometric series has ' + t('S_\\infty=' + z.S) + ' and ' + t('r=' + nT(z.r)) + '. The first term is', t1, [[cl(z.S * (1 + z.r)), t('t_1=S_\\infty(1-r)') + ', and ' + t('1-(' + nT(z.r) + ')=' + nT(1 - z.r)) + '.'], [cl(z.S * z.r), 'Multiply by ' + t('1-r') + ', not by ' + t('r') + '.'], [cl(z.S / (1 - z.r)), 'Multiply by ' + t('1-r') + ' — don’t divide.']],
-        t('t_1=S_\\infty(1-r)=' + z.S + '(' + nT(1 - z.r) + ')=' + nT(t1)) + '.', HG, 'MC: t₁ from S∞', function (x) { return t(nT(x)); });
+        t('t_1=S_\\infty(1-r)=' + z.S + '(' + nT(1 - z.r) + ')=' + nT(t1)) + '.', HG, 'MC: t₁ from S∞');
     } }] },
     { num: '8', parts: [{ id: '8', level: 'EMG', outcome: 'RF9', make: function (r) {
       var z = pickWhere(function () { return { k: r.int(2, 5), d: r.int(2, 9) * r.pick([1, 1, -1]), A: r.int(-10, 20) }; }, function (z) { return !(z.k === 3 && z.d === 7 && z.A === 5); });
@@ -159,7 +159,7 @@
         { id: '14c', level: 'PRG', outcome: 'RF9', make: function (r, z) {
           var n = Math.floor(z.c / z.d) + 1, v = z.c - z.d * n;
           return fieldsP('Determine the first negative term.', [fNum(t('n='), [n, 1], { cands: [[n - 1, 'u1-count', t('t_{' + (n - 1) + '}=' + (z.c - z.d * (n - 1))) + ' is still positive.']] }), fNum(t('t_n='), [v, 1], { cands: [[z.c - z.d * (n - 1), 'sign', 'That term is not negative.']] })],
-            t('t_{' + n + '}=' + v), t(z.c + '-' + z.d + 'n<0\\ \\Rightarrow\\ n>' + nT(K.roundTo(z.c / z.d, 3)) + '\\ldots') + ', so the first negative term is ' + t('t_{' + n + '}=' + z.c + '-' + z.d * n + '=' + v) + '.', ['Solve ' + t(z.c + '-' + z.d + 'n<0') + '; ' + t('n') + ' must be a whole number.'], 'first negative term');
+            t('t_{' + n + '}=' + v), t(z.c + '-' + z.d + 'n<0\\ \\Rightarrow\\ n>' + (Math.abs(z.c / z.d * 1000 - Math.round(z.c / z.d * 1000)) < 1e-6 ? nT(cl(z.c / z.d)) : fxT(z.c / z.d, 2) + '\\ldots')) + ', so the first negative term is ' + t('t_{' + n + '}=' + z.c + '-' + z.d * n + '=' + v) + '.', ['Solve ' + t(z.c + '-' + z.d + 'n<0') + '; ' + t('n') + ' must be a whole number.'], 'first negative term');
         } }] },
     { num: '15', parts: [
       { id: '15a', level: 'EMG', outcome: 'RF9', make: function (r) {
@@ -195,7 +195,7 @@
         } },
         { id: '17b', level: 'PRG', outcome: 'RF9', make: function (r, z) {
           var f = function (n) { return z.P + z.I * n; };
-          return { prompt: 'Write a general term for the value at the end of year ' + t('n') + '.', input: { type: 'math', keys: 'expo', vars: ['n'], before: 'tₙ =' }, check: L.cT(f, { cands: [[function (n) { return z.P + z.I * (n - 1); }, 'u1-time0', 'Check ' + t('n=1') + ': the value at the end of year 1 is ' + t(money(z.P + z.I)) + '.'], [function (n) { return z.P * Math.pow(1 + z.i / 100, n); }, 'u1-arith-geo', 'Simple interest grows by a fixed amount: arithmetic, not geometric.']] }),
+          return { prompt: 'Write a general term for the value at the end of year ' + t('n') + '.', input: { type: 'math', keys: 'poly', vars: ['n'], before: 'tₙ =' }, check: L.cT(f, { cands: [[function (n) { return z.P + z.I * (n - 1); }, 'u1-time0', 'Check ' + t('n=1') + ': the value at the end of year 1 is ' + t(money(z.P + z.I)) + '.'], [function (n) { return z.P * Math.pow(1 + z.i / 100, n); }, 'u1-arith-geo', 'Simple interest grows by a fixed amount: arithmetic, not geometric.']] }),
             key: nT(z.I) + 'n+' + z.P, answer: t('t_n=' + F(z.P) + '+' + nT(z.I) + 'n'), solution: t('t_1=' + nT(z.P + z.I) + ',\\ d=' + nT(z.I)) + ': ' + t('t_n=' + nT(z.P + z.I) + '+(n-1)(' + nT(z.I) + ')=' + F(z.P) + '+' + nT(z.I) + 'n'), hints: ['Arithmetic: ' + t('t_1') + ' is the value at the end of year 1, and ' + t('d') + ' is the yearly interest.'], text: 'general term, simple interest', good: [nT(z.P + z.I) + '+(n-1)(' + nT(z.I) + ')'] };
         } },
         { id: '17c', level: 'ADV', outcome: 'RF9', make: function (r, z) {
@@ -351,8 +351,8 @@
     { num: '5', parts: [{ id: 'e5', level: 'PRG', outcome: 'RF10', make: function (r) {
       var q = r.int(2, 4), up = r.chance(0.5), a = r.int(1, 5), t1 = up ? a : a * Math.pow(q, 4), t5 = up ? a * Math.pow(q, 4) : a, R = up ? String(q) : '\\frac{1}{' + q + '}', iR = up ? '\\frac{1}{' + q + '}' : String(q);
       return mcP(r, 'In a geometric sequence, ' + t('t_1=' + F(t1)) + ' and ' + t('t_5=' + F(t5)) + '. The possible values of ' + t('r') + ' are', t('\\pm' + R),
-        [{ html: t(R) + ' only', why: 'An even power hides the sign: ' + t('(-' + R + ')^{4}') + ' is positive too.' }, { html: t('-' + R) + ' only', why: t('r^{4}') + ' has a positive solution too.' }, { html: t('\\pm' + iR), why: 'Solve ' + t(F(t1) + 'r^{4}=' + F(t5)) + ': ' + t('r^{4}=' + qtex(Q(t5, t1))) + '.' }],
-        t(F(t1) + 'r^{4}=' + F(t5) + '\\ \\Rightarrow\\ r^{4}=' + qtex(Q(t5, t1)) + '\\ \\Rightarrow\\ r=\\pm' + R) + ' (an even power hides the sign).', ['From ' + t('t_1') + ' to ' + t('t_5') + ' is 4 steps.'], 'MC: ± ratio');
+        [{ html: t(R) + ' only', why: 'An even power hides the sign: ' + t('(-' + R + ')^{4}') + ' is positive too.' }, { html: t('-' + R) + ' only', why: t('r^{4}') + ' has a positive solution too.' }, { html: t('\\pm' + iR), why: 'Solve ' + t((t1 === 1 ? '' : F(t1)) + 'r^{4}=' + F(t5)) + ': ' + t('r^{4}=' + qtex(Q(t5, t1))) + '.' }],
+        t((t1 === 1 ? '' : F(t1)) + 'r^{4}=' + F(t5) + '\\ \\Rightarrow\\ r^{4}=' + qtex(Q(t5, t1)) + '\\ \\Rightarrow\\ r=\\pm' + R) + ' (an even power hides the sign).', ['From ' + t('t_1') + ' to ' + t('t_5') + ' is 4 steps.'], 'MC: ± ratio');
     } }] },
     { num: '6', parts: [{ id: 'e6', level: 'ADV', outcome: 'RF10', make: function (r) {
       var z = pickWhere(function () { return { P: r.pick([1200, 1500, 1800, 2400, 900, 2000]), pc: r.pick([20, 25, 30, 35]), T: r.pick([200, 250, 300, 400]) }; }, function (z) {
@@ -409,7 +409,7 @@
         t('S_{' + z.n + '}=\\dfrac{' + z.n + '}{2}\\left[2(' + z.a + ')+' + (z.n - 1) + '(' + z.d + ')\\right]=' + F(S)), HA, 'NR: arithmetic savings');
     } }] },
     { num: '14', parts: [{ id: 'e14', level: 'PRG', outcome: 'RF10', make: function (r) {
-      var z = pickWhere(function () { return { a: r.pick([0.2, 0.3, 0.4, 0.5, 0.6, 0.1]), r: 3, n: r.int(8, 10) }; }, function (z) { var S = z.a * (Math.pow(3, z.n) - 1) / 2; return !(z.a === 0.2 && z.n === 10) && S < 9999.5 && Math.abs(S - Math.round(S) - 0.5) > 0.01; });
+      var z = pickWhere(function () { return { a: r.pick([0.2, 0.3, 0.4, 0.5, 0.6, 0.1]), r: 3, n: r.int(8, 10) }; }, function (z) { var S = z.a * (Math.pow(3, z.n) - 1) / 2; return !(z.a === 0.2 && z.n === 10) && S < 9999.5 && Math.abs(Math.abs(S - Math.floor(S)) - 0.5) > 0.01 && Math.abs(S - Math.round(S)) > 0.01; });
       var S = z.a * (Math.pow(z.r, z.n) - 1) / (z.r - 1);
       return nrP('The sum of the first ' + t(z.n) + ' terms of ' + t(nT(z.a) + '+' + nT(z.a * 3) + '+' + nT(cl(z.a * 9)) + '+\\cdots') + ', to the nearest whole number, is _____.', S, { dp: 0, cands: [[z.a * Math.pow(3, z.n - 1), 'u1l7-gave-term', 'That is ' + t('t_{' + z.n + '}') + '.'], [z.a * (Math.pow(3, z.n - 1) - 1) / 2, 'u1l7-exp-n-1', 'The exponent is ' + t('n') + '.']] },
         t('S_{' + z.n + '}=\\dfrac{' + nT(z.a) + '(3^{' + z.n + '}-1)}{3-1}=' + nT(cl(S)) + '\\approx ' + Math.round(S)), HG, 'NR: geometric sum (whole number)');
@@ -441,7 +441,7 @@
         } },
         { id: 'e17b', level: 'PRG', outcome: 'RF10', make: function (r, z) {
           var g = 1 - z.pc / 100, a1 = cl(z.D * g);
-          return { prompt: 'Let ' + t('t_n') + ' be the amount left after ' + t('n') + ' hours. Write the general term.', input: { type: 'math', keys: 'expo', vars: ['n'], before: 'tₙ =' }, check: L.cT(function (n) { return z.D * Math.pow(g, n); }, { cands: [[function (n) { return z.D * Math.pow(g, n - 1); }, 'u1-r-time0', 'Check ' + t('n=1') + ': after 1 hour there are ' + t(nT(a1)) + ' mg. Use ' + t('t_1=' + nT(a1)) + ', or ' + t(z.D + '(' + nT(g) + ')^{n}') + '.'], [function (n) { return z.D * Math.pow(z.pc / 100, n); }, 'u1l8-ratio', 'The ratio is the part that remains: ' + t(nT(g)) + '.']] }),
+          return { prompt: 'Let ' + t('t_n') + ' be the amount left after ' + t('n') + ' hours. Write the general term.', input: { type: 'math', keys: 'poly', vars: ['n'], before: 'tₙ =' }, check: L.cT(function (n) { return z.D * Math.pow(g, n); }, { cands: [[function (n) { return z.D * Math.pow(g, n - 1); }, 'u1-r-time0', 'Check ' + t('n=1') + ': after 1 hour there are ' + t(nT(a1)) + ' mg. Use ' + t('t_1=' + nT(a1)) + ', or ' + t(z.D + '(' + nT(g) + ')^{n}') + '.'], [function (n) { return z.D * Math.pow(z.pc / 100, n); }, 'u1l8-ratio', 'The ratio is the part that remains: ' + t(nT(g)) + '.']] }),
             key: z.D + '(' + nT(g) + ')^{n}', answer: t('t_n=' + nT(a1) + '(' + nT(g) + ')^{n-1}=' + z.D + '(' + nT(g) + ')^{n}'), solution: t('t_1=' + nT(a1)) + ': ' + t('t_n=' + nT(a1) + '(' + nT(g) + ')^{n-1}') + ', which is the same as ' + t(z.D + '(' + nT(g) + ')^{n}') + '.', hints: [t('t_1') + ' is the amount after 1 hour, not the starting dose.'], text: 'general term, medicine', good: [nT(a1) + '(' + nT(g) + ')^{n-1}'] };
         } },
         { id: 'e17c', level: 'PRG', outcome: 'RF10', make: function (r, z) { var g = 1 - z.pc / 100, x = z.D * Math.pow(g, z.k); return roundP('How much is left after ' + t(z.k) + ' hours?', x, 2, { after: 'mg', cands: [[z.D * Math.pow(g, z.k - 1), 'u1-r-time0', 'That is after ' + t(z.k - 1) + ' hours.'], [z.D * Math.pow(g, z.k + 1), 'u1-r-time0', 'That is after ' + t(z.k + 1) + ' hours.']] }, t(z.D + '(' + nT(g) + ')^{' + z.k + '}\\approx ' + fxT(x, 2)) + ' mg', ['Use your general term with ' + t('n=' + z.k) + '.'], 'medicine after k hours'); } },

@@ -1,4 +1,4 @@
-/* Math 20-1 · Unit 1 Test (RF9, RF10) — Sequences and Series. Also holds the Unit 1 assessment kit HW.u1seq (answer
+/* Math 20-1 · Unit 1 Test (RF9, RF10) — Sequences and Series. Also holds the Unit 1 assessment kit HW.u1kit (answer
  * checkers and question builders) that js/exits/u1.js uses for the exit slips, so load this file before it.
  * Written in test mode from Ryan's Math 20-1 booklet (unit1/u1_l01–u1_l09.tex and u1_ep01–u1_ep09.tex; Lesson 9's
  * assignment and extra practice are the practice tests that set the style and difficulty). One 75-minute class,
@@ -41,9 +41,9 @@
   var HW = root.HW, ex = HW.ex, K = HW.kit, P = K.P, t = K.t, ok = K.ok, wrong = K.wrong, form = K.form, F = HW.fmt;
 
   /* =====================================================================================================
-   * The kit: HW.u1seq (shared with js/exits/u1.js)
+   * The kit: HW.u1kit (shared with js/exits/u1.js)
    * ===================================================================================================== */
-  var S = HW.u1seq = {};
+  var S = HW.u1kit = {};
 
   /* ---- wrong-answer codes, registered for the test (u1t-) and the exit slips (u1x-); value = [label, partial] ---- */
   var CODE = {

@@ -3,7 +3,7 @@
  * u1_ep0N.tex): four short questions, about 5–8 minutes, Beginning → Progressing → Mastery, on that lesson's core
  * skills with new numbers (never the lesson's examples or the assignment's own items). Outcomes as the booklet tags
  * them: Lessons 1–4 RF9, Lessons 5–8 RF10, Lesson 9 (review) per question. Scientific calculator allowed.
- * The generators, checkers and wrong-answer codes are the Unit 1 kit HW.u1seq in js/lessons/u1test.js (so that file
+ * The generators, checkers and wrong-answer codes are the Unit 1 kit HW.u1kit in js/lessons/u1test.js (so that file
  * loads first); here they run with the u1x- codes (labels and partial-credit decisions are registered there).
  *   1  classify (MC) · a term from a formula · is V a term (or none) · the first negative term (position and value)
  *   2  t_k from the first terms · general term in simplest form · number of terms · three expressions → x and d
@@ -17,7 +17,7 @@
  *      thickness after k weeks (RF10) */
 (function (root) {
   'use strict';
-  var HW = root.HW, S = HW.u1seq;
+  var HW = root.HW, S = HW.u1kit;
   if (!S) throw new Error('js/exits/u1.js needs js/lessons/u1test.js (the Unit 1 kit) loaded first');
   var B = S.build, CP = 'u1x-';
   function Q(num, outcome, level, stem, fn) { return { num: String(num), outcome: outcome, stem: stem, parts: [{ id: String(num), outcome: outcome, level: level, make: function (r) { return fn(r, CP); } }] }; }

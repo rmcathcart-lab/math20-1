@@ -131,7 +131,7 @@
     var key = fr ? qKey(ans) : String(cl(v));
     var input = fr || o.math ? { type: 'math', keys: o.keys || 'fraction', before: o.before, after: o.after } : { type: 'number', before: o.before, after: o.after, nr: !!o.nr };
     var check = exact(ans, o); if (o.nr) check = nrWrap(check);
-    return { prompt: prompt, input: input, check: check, key: key, answer: t((o.ansPre || '') + (fr ? qTex(ans) : nT(v)) + (o.unit ? '\\text{ ' + o.unit + '}' : '')),
+    return { prompt: prompt, input: input, check: check, key: key, answer: t((o.ansPre || '') + (fr ? qTex(ans) : nT(v)) + (o.unit ? '\\text{ ' + o.unit + '}' : '') + (o.unitTex || '')),
       solution: o.sol, hints: o.hints || [], text: o.text, bad: badOf(o.cands, ans).concat(o.bad || []), good: o.good };
   }
   /* a part with a rounded number */
@@ -139,7 +139,7 @@
     o = o || {};
     var want = rd(x, dp);
     return { prompt: prompt, input: { type: 'number', before: o.before, after: o.after, nr: !!o.nr }, check: K.approx(x, dp, { diag: cdiag(o.cands, dp), nr: o.nr }), key: want.toFixed(Math.max(dp, 0)),
-      answer: t((o.ansPre || '') + fx(x, dp) + (o.unit ? '\\text{ ' + o.unit + '}' : '')), solution: o.sol, hints: o.hints || [], text: o.text, bad: badOf(o.cands, x, dp).concat(o.bad || []), good: o.good };
+      answer: t((o.ansPre || '') + fx(x, dp) + (o.unit ? '\\text{ ' + o.unit + '}' : '') + (o.unitTex || '')), solution: o.sol, hints: o.hints || [], text: o.text, bad: badOf(o.cands, x, dp).concat(o.bad || []), good: o.good };
   }
   /* several boxes. specs: [{ label (HTML), ans, dp, cands, math, keys, vars, none, check, key, ansTex, after, before }] */
   function fieldsPart(prompt, specs, o) {
@@ -222,7 +222,7 @@
   }
   function gtPart(prompt, fn, keyTex, o) {
     o = o || {};
-    return { prompt: prompt, input: { type: 'math', keys: 'expo', vars: [o.v || 'n'], before: o.before === undefined ? t('t_n=') : o.before, placeholder: o.placeholder }, check: gtCheck(fn, o), key: keyTex,
+    return { prompt: prompt, input: { type: 'math', keys: 'poly', vars: [o.v || 'n'], before: o.before === undefined ? t('t_n=') : o.before, placeholder: o.placeholder }, check: gtCheck(fn, o), key: keyTex,
       answer: t((o.before === undefined ? 't_n=' : '') + keyTex), solution: o.sol, hints: o.hints || [], text: o.text, bad: o.bad, good: o.good };
   }
 

@@ -286,10 +286,12 @@
   S.graph = function (pts, o) {
     o = o || {};
     var ys = pts.map(function (p) { return p[1]; }), lo = o.ymin != null ? o.ymin : Math.min(0, Math.min.apply(null, ys)), hiRaw = Math.max.apply(null, ys.concat([1]));
-    var step = o.step || (hiRaw <= 10 ? 1 : hiRaw <= 20 ? 2 : hiRaw <= 40 ? 4 : hiRaw <= 60 ? 5 : hiRaw <= 100 ? 10 : 20);
+    /* grid lines through every point when possible (so the terms can be read), labels every few lines */
+    var span0 = hiRaw - lo, step = o.step || [20, 10, 5, 4, 3, 2, 1].filter(function (g) { return span0 / g >= 5 && span0 / g <= 30 && ys.every(function (y) { return isInt(y / g); }); })[0] || (span0 <= 30 ? 1 : span0 <= 60 ? 2 : 5);
     var hi = o.ymax || Math.ceil((hiRaw + 0.01) / step) * step; lo = Math.floor(lo / step) * step;
+    var lab = step; while ((hi - lo) / lab > 8) lab += step;
     var nx = o.nmax || Math.max.apply(null, pts.map(function (p) { return p[0]; })) + 1;
-    return HW.graph({ x: [0, nx], y: [lo, hi], grid: 1, gridY: step, labels: 1, labelsX: 1, labelsY: step * (((hi - lo) / step) > 10 ? 2 : 1), unitX: 30, unitY: 190 / (hi - lo), xName: o.xName || 'n', yName: o.yName || 'tₙ',
+    return HW.graph({ x: [0, nx], y: [lo, hi], grid: 1, gridY: step, labels: 1, labelsX: 1, labelsY: lab, unitX: 30, unitY: 190 / (hi - lo), xName: o.xName || 'n', yName: o.yName || 'tₙ',
       points: pts.map(function (p) { return { x: p[0], y: p[1], color: o.color }; }), max: o.max || 260, aria: o.aria || 'graph of a sequence' });
   };
   /* tile pictures: figs = [{ cells: [[x, y], …], label }] */
@@ -310,6 +312,7 @@
     var Wd = x0 - gap + 6, Ht = H + (figs.some(function (f) { return f.label; }) ? 32 : 12);
     return '<svg class="fig-svg" viewBox="0 0 ' + Wd + ' ' + Ht + '" style="max-width:' + Math.min(o.max || 520, Wd * 1.25) + 'px" role="img" aria-label="' + (o.aria || 'tile pattern') + '">' + s + '</svg>';
   };
+  S.ord = function (n) { var m = n % 100, k = n % 10; return n + (m >= 11 && m <= 13 ? 'th' : k === 1 ? 'st' : k === 2 ? 'nd' : k === 3 ? 'rd' : 'th'); };
   S.fig = function (svg) { return '<div class="fig">' + svg + '</div>'; };
 
   /* ---- solving t_n = V for n ---- */
@@ -465,7 +468,7 @@
       { id: '5d', sub: 'd', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { a: r.int(30, 90) / 10, d: -r.pick([75, 125, 150, 175, 225, 25]) / 100 }; }, function (z) { return !(z.a === 4.5 && z.d === -1.25); }); return rulePart('d', S.arith(o.a, o.d, 6), 'add', o.d); } },
       { id: '5e', sub: 'e', level: 'PRG', make: function (r) { var o = pickWhere(function () { var q = r.pick([3, 4, 5]); return { p: r.int(1, q - 1), q: q, m: r.pick([2, 3]) }; }, function (z) { return gcd(z.p, z.q) === 1 && !(z.p === 2 && z.q === 3 && z.m === 3) && z.q % z.m !== 0; }); return rulePart('e', S.geom(o.p / o.q, o.m, 6), 'mul', o.m, 4, true); } },
       { id: '5f', sub: 'f', level: 'EMG', make: function (r) {
-        var o = pickWhere(function () { return { a: r.int(1, 5), b: r.int(1, 6) }; }, function (z) { return !(z.a === 1 && z.b === 1) && !(z.a === 2 && z.b === 3); });
+        var o = pickWhere(function () { return { a: r.int(1, 5), b: r.int(1, 6) }; }, function (z) { return !(z.a === 1 && z.b === 1) && !(z.a === 2 && z.b === 3) && z.b !== 2 * z.a; });
         var s = [o.a, o.b]; for (var i = 2; i < 7; i++) s.push(s[i - 1] + s[i - 2]);
         return S.fieldsPart('(f) ' + t(seqTex(s.slice(0, 5))) + ' &nbsp; Write the next two terms.', [S.fNum(tsub(6), s[5], [[s[4] + (s[4] - s[3]), 'u1l1-shift', 'The differences aren’t constant here. Look at how each term relates to the <b>two</b> terms before it.']]), S.fNum(tsub(7), s[6], [])],
           'Each term is the sum of the two terms before it (like the Fibonacci sequence): ' + t(s[3] + '+' + s[4] + '=' + s[5]) + ', ' + t(s[4] + '+' + s[5] + '=' + s[6]) + '. The rule: <b>add the two previous terms</b>.', ['Neither adding one number nor multiplying by one number works. Try adding two neighbouring terms.'], 'next two: Fibonacci-like');
@@ -525,7 +528,7 @@
     /* ---------------- Q8: two graphs ---------------- */
     { num: '8', shared: function (r) {
         var A = pickWhere(function () { return { t1: r.int(10, 20), d: -r.int(2, 4) }; }, function (z) { return z.t1 + 4 * z.d >= 1 && !(z.t1 === 15 && z.d === -3); });
-        var G = r.pick([[32, 1 / 2], [48, 1 / 2], [81, 1 / 3], [2, 2], [3, 2], [24, 1 / 2]]);
+        var G = r.pick([[32, 1 / 2], [48, 1 / 2], [81, 1 / 3], [2, 2], [3, 2], [64, 1 / 2]]);
         var arithFirst = r.chance(0.5);
         return { A: A, G: { t1: G[0], r: G[1] }, nA: arithFirst ? 'P' : 'Q', nG: arithFirst ? 'Q' : 'P' };
       },
@@ -677,7 +680,7 @@
       { id: 'eA2a', sub: 'a', level: 'BEG', make: function (r) { var o = pickWhere(function () { return { a: -r.int(3, 15), d: r.int(3, 9) }; }, function (z) { return !(z.a === -7 && z.d === 5); }); return next3('a', S.arith(o.a, o.d, 7), 'add', o.d); } },
       { id: 'eA2b', sub: 'b', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { A: r.int(2, 9) * 1000 }; }, function (z) { return z.A !== 1000; }); return next3('b', S.geom(o.A, 0.1, 6), 'mul', 0.1, 3); } },
       { id: 'eA2c', sub: 'c', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { a: r.int(2, 7), q: -r.int(2, 3) }; }, function (z) { return !(z.a === 5 && z.q === -2); }); return next3('c', S.geom(o.a, o.q, 6), 'mul', o.q, 3); } },
-      { id: 'eA2d', sub: 'd', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { a: r.int(1, 5), b: r.int(2, 7) }; }, function (z) { return !(z.a === 2 && z.b === 3) && !(z.a === 1 && z.b === 1); }); var s = [o.a, o.b]; for (var i = 2; i < 8; i++) s.push(s[i - 1] + s[i - 2]); return next3('d', s, 'fib', null, 5); } },
+      { id: 'eA2d', sub: 'd', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { a: r.int(1, 5), b: r.int(2, 7) }; }, function (z) { return !(z.a === 2 && z.b === 3) && !(z.a === 1 && z.b === 1) && z.b !== 2 * z.a; }); var s = [o.a, o.b]; for (var i = 2; i < 8; i++) s.push(s[i - 1] + s[i - 2]); return next3('d', s, 'fib', null, 5); } },
       { id: 'eA2e', sub: 'e', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { a: r.int(8, 20), d: -r.pick([0.5, 1.5, 2.5, 3.5]) }; }, function (z) { return !(z.a === 12 && z.d === -2.5); }); return next3('e', S.arith(o.a, o.d, 6), 'add', o.d, 3); } },
       { id: 'eA2f', sub: 'f', level: 'PRG', make: function (r) { var o = pickWhere(function () { var q = r.pick([2, 3, 4, 5]); return { p: r.int(1, q + 3), q: q, m: r.pick([2, 3]) }; }, function (z) { return gcd(z.p, z.q) === 1 && z.p % z.q !== 0 && !(z.p === 3 && z.q === 4 && z.m === 2) && z.q % z.m !== 0; }); return next3('f', S.geom(o.p / o.q, o.m, 6), 'mul', o.m, 3, true); } }] },
     { num: 'A3', stem: 'Write the first five terms of the sequence with the given general term.', parts: [

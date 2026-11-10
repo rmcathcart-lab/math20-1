@@ -176,7 +176,7 @@
       { id: '14', level: 'EMG', make: function (r) {
         var o = pw(function () { return { t1: r.int(15, 24), d: -r.int(2, 4), N: r.int(15, 25) }; }, function (z) { return z.t1 + 4 * z.d >= 2 && !(z.t1 === 22 && z.d === -3 && z.N === 20); });
         var f = function (k) { return o.t1 + (k - 1) * o.d; };
-        return S.mc(r, 'The graph shows an arithmetic sequence.' + seqGraph(o.t1, o.d) + '<i>(Multiple Choice)</i> If the pattern in the graph continues, the ' + o.N + 'th term of the sequence is', [
+        return S.mc(r, 'The graph shows an arithmetic sequence.' + seqGraph(o.t1, o.d) + '<i>(Multiple Choice)</i> If the pattern in the graph continues, the ' + S.ord(o.N) + ' term of the sequence is', [
           { html: t(f(o.N)), right: true }, { html: t(f(o.N + 1)), why: 'That is ' + t(tsub(o.N + 1)) + ': it uses ' + t(o.N + 'd') + '.' }, { html: t(f(o.N - 1)), why: 'That is ' + t(tsub(o.N - 1)) + '.' }, { html: t(o.N * o.d), why: 'Start from ' + t('t_1=' + o.t1) + '.' }],
           'From the graph: ' + t('t_1=' + o.t1) + ', ' + t('d=' + o.d) + '. ' + t(tsub(o.N) + '=' + o.t1 + '+' + (o.N - 1) + '(' + o.d + ')=' + f(o.N)) + '.', ['Read ' + t('t_1') + ' and ' + t('d') + ' from the graph.'], 'MC t_N from a graph');
       } }] },

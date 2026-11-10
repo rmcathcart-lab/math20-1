@@ -138,7 +138,7 @@
     var key = fr ? qKey(ans) : String(cl(v));
     var input = fr || o.math ? { type: 'math', keys: o.keys || 'fraction', before: o.before, after: o.after } : { type: 'number', before: o.before, after: o.after, nr: !!o.nr };
     var check = exact(ans, o); if (o.nr) check = nrWrap(check);
-    return { prompt: prompt, input: input, check: check, key: key, answer: t((o.ansPre || '') + (fr ? qTex(ans) : nT(v)) + (o.unit ? '\\text{ ' + o.unit + '}' : '')),
+    return { prompt: prompt, input: input, check: check, key: key, answer: t((o.ansPre || '') + (fr ? qTex(ans) : nT(v)) + (o.unit ? '\\text{ ' + o.unit + '}' : '') + (o.unitTex || '')),
       solution: o.sol, hints: o.hints || [], text: o.text, bad: badOf(o.cands, ans).concat(o.bad || []), good: o.good };
   }
   /* a part with a rounded number */
@@ -146,7 +146,7 @@
     o = o || {};
     var want = rd(x, dp);
     return { prompt: prompt, input: { type: 'number', before: o.before, after: o.after, nr: !!o.nr }, check: K.approx(x, dp, { diag: cdiag(o.cands, dp), nr: o.nr }), key: want.toFixed(Math.max(dp, 0)),
-      answer: t((o.ansPre || '') + fx(x, dp) + (o.unit ? '\\text{ ' + o.unit + '}' : '')), solution: o.sol, hints: o.hints || [], text: o.text, bad: badOf(o.cands, x, dp).concat(o.bad || []), good: o.good };
+      answer: t((o.ansPre || '') + fx(x, dp) + (o.unit ? '\\text{ ' + o.unit + '}' : '') + (o.unitTex || '')), solution: o.sol, hints: o.hints || [], text: o.text, bad: badOf(o.cands, x, dp).concat(o.bad || []), good: o.good };
   }
   /* several boxes. specs: [{ label (HTML), ans, dp, cands, math, keys, vars, none, check, key, ansTex, after, before }] */
   function fieldsPart(prompt, specs, o) {
@@ -229,7 +229,7 @@
   }
   function gtPart(prompt, fn, keyTex, o) {
     o = o || {};
-    return { prompt: prompt, input: { type: 'math', keys: 'expo', vars: [o.v || 'n'], before: o.before === undefined ? t('t_n=') : o.before, placeholder: o.placeholder }, check: gtCheck(fn, o), key: keyTex,
+    return { prompt: prompt, input: { type: 'math', keys: 'poly', vars: [o.v || 'n'], before: o.before === undefined ? t('t_n=') : o.before, placeholder: o.placeholder }, check: gtCheck(fn, o), key: keyTex,
       answer: t((o.before === undefined ? 't_n=' : '') + keyTex), solution: o.sol, hints: o.hints || [], text: o.text, bad: o.bad, good: o.good };
   }
 
@@ -471,7 +471,7 @@
           { sol: t(rFromTwo(qi(t3), qi(t5), 3, 5) + '\\Rightarrow r=\\pm ' + o.k) + '<br>' + t('t_1r^{2}=' + nT(t3) + '\\Rightarrow t_1=' + nT(t3) + '\\div ' + o.k * o.k + '=' + o.c) + ' (for both).<br>' + t('r=' + o.k + ':\\ t_6=' + o.c + '(' + o.k + ')^{5}=' + nT(t6)) + '; ' + t('r=-' + o.k + ':\\ t_6=' + o.c + '(-' + o.k + ')^{5}=' + nT(-t6)),
             hints: ['Divide the two terms: ' + t('t_1') + ' cancels and ' + t('r^{2}') + ' is left. An even power has two square roots.'], text: 't1 and two values of t6' });
       } },
-      { id: '10b1', sub: 'b', level: 'EMG', make: function (r) {
+      { id: '10b1', sub: 'b-i', level: 'EMG', make: function (r) {
         var o = q10b(r);
         return mcPart(r, 'In a geometric sequence ' + t('t_2=' + o.c) + ' and ' + t('t_6=' + qTex(o.t6)) + '. Why are there two possible sequences?', [
           { html: t('r^{4}=\\frac{t_6}{t_2}=' + qTex(qd(o.t6, qi(o.c)))) + ' is an <b>even</b> power, so ' + t('r=\\frac{1}{' + o.k + '}') + ' or ' + t('r=-\\frac{1}{' + o.k + '}') + ': both give a valid sequence.', right: true },
@@ -480,7 +480,7 @@
           { html: 'There aren’t two sequences: ' + t('r=\\frac{1}{' + o.k + '}') + ' is the only possibility.', why: 'Check ' + t('r=-\\frac{1}{' + o.k + '}') + ': ' + t('\\left(-\\frac{1}{' + o.k + '}\\right)^{4}') + ' is also ' + t('\\frac{1}{' + Math.pow(o.k, 4) + '}') + '.' }],
           t('\\frac{t_1r^{5}}{t_1r}=r^{4}=' + qTex(qd(o.t6, qi(o.c)))) + '. An even power has two real roots, ' + t('r=\\pm\\frac{1}{' + o.k + '}') + ', and both work.', ['Divide the two terms. What power of ' + t('r') + ' is left?'], 'why two sequences');
         } },
-      { id: '10b2', sub: 'b, terms', level: 'ADV', make: function (r) {
+      { id: '10b2', sub: 'b-ii', level: 'ADV', make: function (r) {
         var o = q10b(r), pos = [qi(o.c * o.k), qi(o.c), Q(o.c, o.k), Q(o.c, o.k * o.k)], neg = [qi(-o.c * o.k), qi(o.c), Q(-o.c, o.k), Q(o.c, o.k * o.k)];
         return fieldsPart('In a geometric sequence ' + t('t_2=' + o.c) + ' and ' + t('t_6=' + qTex(o.t6)) + '. Write the first four terms of each possible sequence (separate them with commas).', [
           listField('With ' + t('r>0') + ':', pos, { name: 'r > 0' }), listField('With ' + t('r<0') + ':', neg, { name: 'r < 0' })],
@@ -608,9 +608,9 @@
   function twoTerms(t1, rr, p, q, text) {
     var tp = gv(t1, rr, p), tq = gv(t1, rr, q), g = q - p, rg = qp(rr, g);
     return fieldsPart(t('t_' + p + '=' + qTex(tp) + ',\\quad t_' + q + '=' + qTex(tq)), [
-      { label: t('r='), name: 'r', ans: rr, math: true, keys: 'expo', vars: ['n'], cands: [[qv(rg), 'u1l5-r-power', 'That is ' + t('r^{' + g + '}') + '. Take the ' + (g === 3 ? 'cube' : g + 'th') + ' root.'], [1 / qv(rr), 'u1l5-r-flip', 'Divide the <b>later</b> term by the earlier one.']] },
-      { label: t('t_1='), name: 't₁', ans: t1, math: true, keys: 'expo', vars: ['n'], cands: [[qv(qd(tp, qp(rr, p))), 'u1l5-t1-power', t('t_' + p + '=t_1r^{' + (p - 1) + '}') + ': divide by ' + t('r^{' + (p - 1) + '}') + '.'], [qv(qm(tp, qp(rr, p - 1))), 'u1l5-t1-mult', 'To go back from ' + t('t_' + p) + ' to ' + t('t_1') + ', <b>divide</b> by ' + t('r^{' + (p - 1) + '}') + '.']] },
-      { label: t('t_n='), name: 'general term', math: true, keys: 'expo', vars: ['n'], check: gtCheck(gtFn(t1, rr), { cands: gtC(t1, rr) }), key: gtKey(t1, rr), ansTex: gtTex(t1, rr) }],
+      { label: t('r='), name: 'r', ans: rr, math: true, keys: 'poly', vars: ['n'], cands: [[qv(rg), 'u1l5-r-power', 'That is ' + t('r^{' + g + '}') + '. Take the ' + (g === 3 ? 'cube' : g + 'th') + ' root.'], [1 / qv(rr), 'u1l5-r-flip', 'Divide the <b>later</b> term by the earlier one.']] },
+      { label: t('t_1='), name: 't₁', ans: t1, math: true, keys: 'poly', vars: ['n'], cands: [[qv(qd(tp, qp(rr, p))), 'u1l5-t1-power', t('t_' + p + '=t_1r^{' + (p - 1) + '}') + ': divide by ' + t('r^{' + (p - 1) + '}') + '.'], [qv(qm(tp, qp(rr, p - 1))), 'u1l5-t1-mult', 'To go back from ' + t('t_' + p) + ' to ' + t('t_1') + ', <b>divide</b> by ' + t('r^{' + (p - 1) + '}') + '.']] },
+      { label: t('t_n='), name: 'general term', math: true, keys: 'poly', vars: ['n'], check: gtCheck(gtFn(t1, rr), { cands: gtC(t1, rr) }), key: gtKey(t1, rr), ansTex: gtTex(t1, rr) }],
       { sol: t(rFromTwo(tp, tq, p, q) + '\\Rightarrow r=' + qTex(rr)) + '<br>' + t('t_1' + rB(rr) + '^{' + (p - 1) + '}=' + qTex(tp) + '\\Rightarrow t_1=' + qTex(t1)) + '<br>' + t('t_n=' + gtTex(t1, rr)),
         hints: ['Write both terms with ' + t('t_1r^{n-1}') + ' and divide: ' + t('t_1') + ' cancels.', 'An odd power has one real root: ' + t('r^{3}=-27\\Rightarrow r=-3') + '.'], text: text });
   }
@@ -715,7 +715,7 @@
       { id: 'e13', level: 'MAS', make: function (r) {
         var o = pickWhere(function () { return { h: r.pick([0.05, 0.08, 0.1, 0.15, 0.2, 0.25]), T: r.pick([[100, '10 cm (100 mm)'], [500, '50 cm (500 mm)'], [1000, '1 m (1000 mm)'], [2000, '2 m (2000 mm)']]) }; }, function (z) { return !(z.h === 0.1 && z.T[0] === 1000); });
         var n = 0; while (o.h * Math.pow(2, n) <= o.T[0]) n++;
-        return numPart('A sheet of paper is ' + o.h + ' mm thick. Each fold in half doubles the thickness. After how many folds would it be thicker than ' + o.T[1] + '? Use a table of values.', n, { after: 'folds', cands: [[n - 1, 'u1l5-table-early', 'After ' + (n - 1) + ' folds it is ' + nT(cl(o.h * Math.pow(2, n - 1))) + ' mm — not thicker than ' + o.T[0] + ' mm yet.'], [n + 1, 'u1l5-table-late', 'Check one fold fewer: is it already thicker?']],
+        return numPart('A sheet of paper is ' + o.h + ' mm thick. Each fold in half doubles the thickness. After how many folds would it be thicker than ' + o.T[1] + '? Use a table of values.', n, { after: 'folds', cands: [[n - 1, 'u1l5-table-early', 'After ' + (n - 1) + ' folds it is ' + t(nT(cl(o.h * Math.pow(2, n - 1)))) + ' mm — not thicker than ' + o.T[0] + ' mm yet.'], [n + 1, 'u1l5-table-late', 'Check one fold fewer: is it already thicker?']],
           sol: 'After ' + t('n') + ' folds the thickness is ' + t(o.h + '(2)^{n}') + ' mm (or ' + t('t_n=' + cl(o.h * 2) + '(2)^{n-1}') + ').<br>' + t(n - 1) + ' folds: ' + t(nT(cl(o.h * Math.pow(2, n - 1)))) + ' mm; ' + t(n) + ' folds: ' + t(nT(cl(o.h * Math.pow(2, n)))) + ' mm. After ' + n + ' folds.', hints: ['Make a table: double the thickness for each fold until it passes the target.'], text: 'paper folding' });
       } }] }
   ];
@@ -727,8 +727,8 @@
   function gtAndTerm(t1, rr, k, text) {
     var v = [1, 2, 3].map(function (n) { return gv(t1, rr, n); }), ans = gv(t1, rr, k);
     return fieldsPart(t(seqTex(v)) + '; ' + t('t_{' + k + '}'), [
-      { label: t('t_n='), name: 'general term', math: true, keys: 'expo', vars: ['n'], check: gtCheck(gtFn(t1, rr), { cands: gtC(t1, rr) }), key: gtKey(t1, rr), ansTex: gtTex(t1, rr) },
-      { label: t('t_{' + k + '}='), name: 't_' + k, ans: ans, math: true, keys: 'expo', vars: ['n'], cands: termC(t1, rr, k) }],
+      { label: t('t_n='), name: 'general term', math: true, keys: 'poly', vars: ['n'], check: gtCheck(gtFn(t1, rr), { cands: gtC(t1, rr) }), key: gtKey(t1, rr), ansTex: gtTex(t1, rr) },
+      { label: t('t_{' + k + '}='), name: 't_' + k, ans: ans, math: true, keys: 'poly', vars: ['n'], cands: termC(t1, rr, k) }],
       { sol: ratioSol(v, rr) + '; ' + t('t_n=' + gtTex(t1, rr)) + '<br>' + t('t_{' + k + '}=' + qTex(t1) + rB(rr) + '^{' + (k - 1) + '}=' + qTex(ans)) + (dec(ans) != null && ans[1] !== 1 ? ' ' + t('(=' + dec(ans) + ')') : ''), hints: HG, text: text });
   }
   function isTerm(r, o, N, pos) {
