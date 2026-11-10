@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Math 20-1 Lessons</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/site.css">
+<style>
+  body { -webkit-user-select: auto; user-select: auto; }
+  .home-top { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+  .home-top .badge { min-width: 58px; font-size: 21px; letter-spacing: -.01em; }
+  .home-top h1 { margin: 0; font: 800 34px/1.1 var(--round); }
+  .unit-h { flex-wrap: wrap; }
+  .unit-h h2 { margin: 0; font: 800 24px/1.2 var(--round); }
+  .unit-h .un { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; background: var(--uct, var(--brand)); color: #fff; font: 800 18px var(--round); align-self: center; }
+  .unit-h .muted { font-size: 15px; }
+  .lcard { border-left: 5px solid var(--uc, var(--brand2)); }
+  .lcard .n { color: var(--ucd, var(--brand2)); }
+  .lcard b { font-size: 18px; line-height: 1.3; }
+  .lcard.soon { opacity: 1; background: #f6f4ef; border-left-color: var(--line); color: var(--muted); }
+  .lcard.soon .n { color: var(--muted); }
+  .lcard .soon-tag { display: inline-block; margin-left: 6px; padding: 0 8px; border-radius: 999px; background: #ebe7de; font-size: 12px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; vertical-align: 1px; }
+  a.lcard:hover { border-color: var(--uc, var(--brand2)); }
+  @media (max-width: 520px) { .home-wrap { padding: 22px 16px 60px; } .home-top h1 { font-size: 27px; } .lessons { grid-template-columns: 1fr; } }
+</style>
+<script src="../js/ns.js"></script>
+<script src="../js/catalog.js"></script>
+</head>
+<body>
+<!-- The lesson list. It's built from the course catalog (../js/catalog.js): a lesson is a link once its id is in
+     HW.TEACHING.lessons there (add it when lessons/uN/lM/index.html exists); until then it shows as "coming soon".
+     Students normally reach a lesson from their assignment (practice site) and the teacher from the Teacher Ledger. -->
+<main class="home-wrap">
+  <div class="home-top"><span class="badge" aria-hidden="true">20-1</span><h1>Math 20-1 Lessons</h1></div>
+  <p class="home-links"><a href="../">Your assignments</a> · <a href="../teacher/">Teacher Ledger</a></p>
+  <div id="units"><p class="muted">Loading…</p></div>
+</main>
+<script>
+  (function () {
+    var HW = window.HW || {}, box = document.getElementById('units');
+    var on = {}; ((HW.TEACHING && HW.TEACHING.lessons) || []).forEach(function (id) { on[id] = 1; });
+    var cls = (/[?&]class=([A-Za-z0-9-]+)/.exec(location.search) || [])[1];
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    var h = '';
+    (HW.CATALOG || []).forEach(function (u) {
+      var open = u.lessons.filter(function (c) { return on[c.id]; }).length;
+      h += '<section class="unit" style="' + (HW.unitStyle ? HW.unitStyle(u.unit) : '') + '"><div class="unit-h"><span class="un">' + u.unit + '</span><h2>' + esc(u.title) + '</h2>' +
+        '<span class="muted">' + esc(u.outcomes) + ' · ' + (open ? open + ' of ' + u.lessons.length + ' lessons ready' : u.lessons.length + ' lessons · coming soon') + '</span></div><div class="lessons">';
+      u.lessons.forEach(function (c) {
+        var m = /^u(\d+)l(\w+)$/.exec(c.id), num = '<span class="n">Lesson ' + u.unit + '.' + esc(c.num) + '</span>';
+        if (on[c.id]) h += '<a class="lcard" href="u' + m[1] + '/l' + m[2] + '/' + (cls ? '?class=' + cls : '') + '">' + num + '<b>' + esc(c.title) + '</b></a>';
+        else h += '<div class="lcard soon" aria-disabled="true">' + num + '<span class="soon-tag">Coming soon</span><b>' + esc(c.title) + '</b></div>';
+      });
+      h += '</div></section>';
+    });
+    box.innerHTML = h || '<p class="muted">No lessons yet.</p>';
+  })();
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
+</script>
+</body>
+</html>
