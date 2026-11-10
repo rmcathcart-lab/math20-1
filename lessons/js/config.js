@@ -3,7 +3,7 @@
  * (ink is only saved on that device). Once it's set, only a device signed in with the teacher key can write; everyone
  * else sees the teacher's notes for their class link (?class=B), view only. */
 export const CONFIG = {
-  inkApi: '', // the new Math 20-1 Teaching Ink web-app URL goes here once it's deployed
+  inkApi: 'https://script.google.com/macros/s/AKfycbz51sriUqUhW9fjckjU0by4DIIe8Y2mnxHHsm17S6HvgvS1XMARsiDnsFgq9A23vZym/exec',
   classes: ['A', 'B', 'C', 'D'],
   classLabel: (c) => (/^[A-D]$/.test(c) ? 'Block ' + c : c)
 };
