@@ -5,7 +5,8 @@
  * each row after it holds one change as JSON — a stroke added, strokes erased, or everything cleared.
  *
  * Setup (once):
- *   1. Make a new Google Sheet ("Math 20-1 Teaching Ink") → Extensions → Apps Script → paste this file.
+ *   1. Make a new Apps Script project (or a Google Sheet → Extensions → Apps Script) and paste this file.
+ *      Standalone, setup() makes the "Math 20-1 Teaching Ink" spreadsheet itself.
  *   2. Run setup() once and allow access. The Execution log shows your teacher key.
  *   3. Deploy → New deployment → Web app: Execute as "Me", Who has access "Anyone". Copy the /exec URL.
  *
@@ -27,7 +28,9 @@ function setup() {
     for (var i = 0; i < 6; i++) key += abc.charAt(Math.floor(Math.random() * abc.length));
     props.setProperty('TEACHER_KEY', key);
   }
-  props.setProperty('SHEET_ID', SpreadsheetApp.getActiveSpreadsheet().getId());
+  var ss = SpreadsheetApp.getActiveSpreadsheet() || SpreadsheetApp.create('Math 20-1 Teaching Ink');   // bound to a sheet, or a standalone project that makes its own
+  props.setProperty('SHEET_ID', ss.getId());
+  Logger.log('Ink spreadsheet: ' + ss.getUrl());
   Logger.log('Your teacher key is: ' + key + '   (change it any time under Project Settings → Script properties)');
 }
 
