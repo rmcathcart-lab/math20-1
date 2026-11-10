@@ -120,7 +120,6 @@
     var cj = conjOf(list), cjT = tx(cj), prod = R.sum(R.foilLines(list, cj).list), pT = R.tex(prod);
     var a2 = R.mul(list[0], list[0]), b2 = R.mul(list[1], list[1]);
     var sum2 = R.tex(R.sum([a2, b2]));
-    var noSq = R.tex(R.sum([T(qv(list[0].c) * qv(list[0].c) * (list[0].n === 1 ? 1 : 1), 1, list[0].m === 1 ? 1 : list[0].m), T(-qv(list[1].c) * (list[1].n === 1 ? qv(list[1].c) : 1), 1, list[1].m)]));
     var specs = [
       { label: 'Conjugate:', name: 'Conjugate', key: cjT, cands: [{ tex: tx(list), code: 'u2l4-conj-same', hint: 'That is the expression itself. Change the sign <b>between</b> the two terms.' }, { tex: tx([{ c: [-list[0].c[0], list[0].c[1]], n: list[0].n, m: list[0].m }, { c: [-list[1].c[0], list[1].c[1]], n: list[1].n, m: list[1].m }]), code: 'u2l4-conj-neg', hint: 'Only the sign <b>between</b> the terms changes; the first term keeps its sign.' }] },
       { label: 'Product:', name: 'Product', key: pT, cands: [{ tex: sum2, code: 'u2l4-conj-add', hint: 'The product of conjugates is a <b>difference</b> of squares: ' + t('a^{2}-b^{2}') + '.' }] }];
@@ -343,7 +342,9 @@
       { id: '11a', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { return { w: r.pick([2, 3, 5, 6, 10]), p: r.pick([2, 3, 5, 6]), q: r.pick([2, 3, 5, 10, 15]), a: r.int(2, 4) }; }, function (z) { return z.p !== z.q && z.p !== z.w && z.q !== z.w && !sqf(z.w * z.p) && !(z.w === 6 && z.p === 3 && z.q === 2); });
         var Lt = [S(o.a, o.p), S(1, o.q)];
-        return distPart(S(1, o.w), Lt, { text: 'rectangle area' }) && (function () { var p = distPart(S(1, o.w), Lt, { text: 'rectangle area' }); var fig = R.rectFig(o.a + '√' + o.p + ' + √' + o.q, '√' + o.w, { aria: 'rectangle' }); p.prompt = 'Rectangle:<br>' + fig; p.solution = t('A=lw=') + p.solution.replace(/^\\\(/, '\\(') + ' m²'; p.answer = t(p.key + '\\text{ m}^{2}'); return p; })();
+        var p = distPart(S(1, o.w), Lt, { text: 'rectangle area' });
+        p.prompt = 'Rectangle:<br>' + R.rectFig(o.a + '√' + o.p + ' + √' + o.q, '√' + o.w, { aria: 'rectangle' }); p.solution = t('A=lw') + ': ' + p.solution + ' m²'; p.answer = t(p.key + '\\text{ m}^{2}');
+        return p;
       } },
       { id: '11b', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { return { m: r.pick([2, 3, 5, 6, 7]), a: r.int(2, 4), b: r.int(1, 3), s: r.int(0, 1) ? 1 : -1 }; }, function (z) { return !(z.m === 2 && z.a === 3 && z.b === 1 && z.s > 0) && !(z.m === 5 && z.a === 2 && z.b === 1); });
@@ -352,7 +353,7 @@
         return p;
       } },
       { id: '11c', level: 'ADV', make: function (r) {
-        var o = pickWhere(function () { return { a: r.int(1, 3), p: r.pick([2, 3, 5, 10, 6]), q: r.pick([3, 6, 15, 10, 5]), s: r.pick([2, 3, 5, 6, 10, 15]) }; }, function (z) { return z.q !== z.s && z.p !== 1 && !sqf(z.p * z.q) && !sqf(z.p * z.s) && (z.a * 2) % 2 === 0 && !(z.p === 10 && z.q === 6 && z.s === 15); });
+        var o = pickWhere(function () { return { a: r.int(1, 3), p: r.pick([2, 3, 5, 10, 6]), q: r.pick([3, 6, 15, 10, 5]), s: r.pick([2, 3, 5, 6, 10, 15]) }; }, function (z) { return z.q !== z.s && z.p !== 1 && !sqf(z.p * z.q) && !sqf(z.p * z.s) && !(z.p === 10 && z.q === 6 && z.s === 15); });
         var base = S(2 * o.a, o.p), H = [S(1, o.q), S(1, o.s)], half = S(o.a, o.p), lines = R.foilLines([half], H), key = R.tex(R.sum(lines.list));
         var fig = R.triFig(2 * o.a + '√' + o.p, '√' + o.q + ' + √' + o.s, '', { right: true, apex: 40, aria: 'right triangle' });
         var full = R.tex(R.sum(R.foilLines([base], H).list));
@@ -366,7 +367,7 @@
         var A = sh.m - sh.a * sh.a;
         return R.part('A rectangle measures ' + t('\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)') + ' cm by ' + t('\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)') + ' cm. Determine its area.', String(A), { after: '\\text{ cm}^{2}', text: 'area of a conjugate rectangle',
           sol: t('A=\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)=' + sh.m + '-' + (sh.a * sh.a) + '=' + A) + ' cm² (conjugates).', hints: ['Area = length × width. The sides are conjugates.'],
-          cands: [{ tex: String(4 * sh.a > 0 ? 0 : 1) + '+4\\sqrt{' + sh.m + '}', code: 'u2l4-perim-area', hint: 'That is the perimeter. The area is the <b>product</b> of the sides.' }, { tex: String(sh.m + sh.a * sh.a), code: 'u2l4-conj-add', hint: 'Conjugates multiply to a <b>difference</b>: ' + t('a^{2}-b^{2}') + '.' }] });
+          cands: [{ tex: '4\\sqrt{' + sh.m + '}', code: 'u2l4-perim-area', hint: 'That is the perimeter. The area is the <b>product</b> of the sides.' }, { tex: String(sh.m + sh.a * sh.a), code: 'u2l4-conj-add', hint: 'Conjugates multiply to a <b>difference</b>: ' + t('a^{2}-b^{2}') + '.' }] });
       } },
       { id: '12b', level: 'ADV', make: function (r, sh) {
         var d2 = 2 * (sh.m + sh.a * sh.a), key = R.tex([T(1, 2, d2)]);
@@ -398,7 +399,7 @@
     { num: '15', parts: [
       { id: '15', level: 'PRG', make: function (r) {
         var z = pairShare(r, { s: [2, 3, 5], xy: [3, 5, 7, 2] }), a = r.int(2, 4), b = r.int(2, 5), p = z.s * z.x, q = z.s * z.y, M = p * q, f = ex.nthFactor(M, 2), sR = M / (f * f);
-        if (!(a === 2 && b === 3 && p === 6 && q === 15) === false) { a = 3; }
+        if (a === 2 && b === 3 && p === 6 && q === 15) a = 4; // not the booklet's own numbers
         return R.mcPart(r, 'In simplest form, ' + t('\\left(' + a + '\\sqrt{' + p + '}\\right)\\left(' + b + '\\sqrt{' + q + '}\\right)') + ' is', [
           { html: t((a * b * f) + '\\sqrt{' + sR + '}'), right: true },
           { html: t((a * b) + '\\sqrt{' + (p + q) + '}'), why: 'That adds the radicands. Multiply them: ' + t('\\sqrt{' + p + '}\\cdot\\sqrt{' + q + '}=\\sqrt{' + M + '}') + '.' },
@@ -515,9 +516,8 @@
       } }] },
     { num: 'B5', parts: [
       { id: 'B5', level: 'PRG', make: function (r) {
-        var o = pickWhere(function () { return { m: r.pick([2, 3, 5, 6, 7]), a: r.int(2, 6), b: r.int(2, 7) }; }, function (z) { var A = z.a * z.b - z.m, Bc = z.a - z.b; return A + Bc > 0 && Bc !== 0 && !(z.m === 2 && z.a === 3 && z.b === 5); });
+        var o = pickWhere(function () { return { m: r.pick([2, 3, 5, 6, 7]), a: r.int(2, 6), b: r.int(2, 7) }; }, function (z) { var A = z.a * z.b - z.m, Bc = z.b - z.a; return A + Bc > 0 && Bc !== 0 && !(z.m === 2 && z.a === 3 && z.b === 5) && !(z.m === 5 && z.a === 4 && z.b === 2); });
         var X = [N(o.a), S(1, o.m)], Y = [N(o.b), S(-1, o.m)], lines = R.foilLines(X, Y), A = o.a * o.b - o.m, Bc = o.b - o.a;
-        A = o.a * o.b - o.m; Bc = -o.a + o.b;
         return R.nrPart('<b>Numerical response.</b> The product ' + t(br(X) + br(Y)) + ' can be written in the form ' + t('a+b\\sqrt{' + o.m + '}') + '. The value of ' + t('a+b') + ' is ____.', A + Bc,
           [[A, 'u2l4-ab-swap', 'That is ' + t('a') + ' only.'], [o.a * o.b + o.m + Bc, 'u2l4-rad-sq', t('\\sqrt{' + o.m + '}\\times(-\\sqrt{' + o.m + '})=-' + o.m) + '.']],
           t(br(X) + br(Y) + '=' + lines.raw + '=' + R.tex(R.sum(lines.list))) + ', so ' + t('a+b=' + (A + Bc)) + '.', H_FOIL, 'NR product');
@@ -531,7 +531,7 @@
       } }] },
     { num: 'C2', parts: [
       { id: 'C2', level: 'MAS', make: function (r) {
-        var o = pickWhere(function () { return { a: r.int(2, 6), c: r.int(2, 30) }; }, function (z) { var k = z.c + z.a * z.a; return Math.sqrt(k) % 1 !== 0 || true; });
+        var o = pickWhere(function () { return { a: r.int(2, 6), c: r.int(2, 30) }; }, function (z) { return !(z.a === 3 && z.c === 7); });
         var k = o.c + o.a * o.a;
         var p = R.nrPart('Determine ' + t('k') + ' if ' + t('\\left(\\sqrt{k}+' + o.a + '\\right)\\left(\\sqrt{k}-' + o.a + '\\right)=' + o.c) + '.', k,
           [[o.c - o.a * o.a, 'u2l4-k-sub', t('k-' + o.a * o.a + '=' + o.c) + ': add ' + t(o.a * o.a) + ' to both sides.'], [Math.sqrt(k), 'u2l4-k-root', 'That is ' + t('\\sqrt{k}') + '; the question asks for ' + t('k') + '.'], [o.c + o.a, 'u2l4-sq-coef', 'Square the ' + t(o.a) + ': the product is ' + t('k-' + o.a * o.a) + '.']],

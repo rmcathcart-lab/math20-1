@@ -80,8 +80,9 @@
   /* multiple choice from LaTeX strings (right first); wrongs = [[latex, why]] */
   function mcT(r, prompt, right, wrongs, sol, hints, text, plain) {
     var w = plain ? function (s) { return s; } : t;
-    var opts = [{ html: w(right), right: true }].concat(wrongs.map(function (x) { return { html: w(x[0]), why: x[1] }; }));
-    var seen = {}; opts.forEach(function (o) { if (seen[o.html]) throw new Error(LID + ': repeated choice ' + o.html); seen[o.html] = 1; });
+    var opts = [{ html: w(right), right: true }], seen = {}; seen[opts[0].html] = 1;
+    wrongs.forEach(function (x) { var h = w(x[0]); if (seen[h] || opts.length >= 4) return; seen[h] = 1; opts.push({ html: h, why: x[1] }); });
+    if (opts.length < 4) throw new Error(LID + ': not enough distinct choices for ' + prompt);
     return P.mc(r, prompt, opts, sol, hints, text);
   }
   function nrP(prompt, ans, cands, sol, hints, text) {
@@ -903,7 +904,7 @@
     { num: '5', parts: [{ id: 'x5', level: 'PRG', make: function (r) {
       var z = gen(function () { var pr = r.pick([[2, 6], [3, 6], [2, 10], [5, 10], [3, 15], [5, 15], [6, 10], [6, 15], [2, 14], [7, 14], [3, 21], [10, 15]]); return { a: r.int(2, 5), c: r.int(2, 5), b: pr[0], d: pr[1] }; }, function (z) { return !(z.a === 4 && z.c === 2 && z.b === 3 && z.d === 6); });
       var bd = z.b * z.d, u = ex.nthFactor(bd, 2), v = bd / (u * u), ac = z.a * z.c;
-      return mcT(r, t(z.a + sq(z.b) + '\\cdot ' + z.c + sq(z.d)) + ' in simplest form is', ac * u + sq(v), [[(z.a + z.c) + sq(bd), 'Multiply the coefficients (don’t add them), then simplify.'], [ac * u * u + sq(v), t(u * u) + ' comes out of the root as ' + t(u) + '.'], [2 * ac * u + sq(v), 'Check: ' + t(ac + sq(bd) + '=' + ac + '(' + u + sq(v) + ')') + '.']],
+      return mcT(r, t(z.a + sq(z.b) + '\\cdot ' + z.c + sq(z.d)) + ' in simplest form is', ac * u + sq(v), [[(z.a + z.c) + sq(bd), 'Multiply the coefficients (don’t add them), then simplify.'], [ac * u * u + sq(v), t(u * u) + ' comes out of the root as ' + t(u) + '.'], [2 * ac * u + sq(v), 'Check: ' + t(ac + sq(bd) + '=' + ac + '(' + u + sq(v) + ')') + '.'], [(z.a + z.c) * u + sq(v), 'Multiply the coefficients: ' + t(z.a + '\\cdot ' + z.c + '=' + ac) + '.'], [ac + sq(v), 'Take ' + t(u) + ' out of the root and multiply it by ' + t(ac) + '.']],
         t('(' + z.a + '\\cdot ' + z.c + ')\\sqrt{' + z.b + '\\cdot ' + z.d + '}=' + ac + sq(bd) + '=' + ac + '(' + u + sq(v) + ')=' + ac * u + sq(v)), ['Coefficients times coefficients, radicands times radicands.'], 'MC: multiplying radicals');
     } }] },
     { num: '6', parts: [{ id: 'x6', level: 'PRG', make: function (r) {
@@ -1037,7 +1038,7 @@
         };
         var k0 = 4 * n;
         return { prompt: 'A student says, “The product of two irrational numbers is always irrational.” Show the student is wrong: give a whole number ' + t('k') + ' (with ' + t('\\sqrt{k}') + ' irrational) so that ' + t('\\sqrt{' + n + '}\\cdot\\sqrt{k}') + ' is rational.', input: { type: 'number', before: t('k=') }, check: ck, key: String(k0), answer: t('k=' + k0) + ' (answers vary)',
-          solution: 'Answers vary: ' + t('\\sqrt{' + n + '}\\cdot\\sqrt{' + k0 + '}=\\sqrt{' + n * k0 + '}=' + 2 * n) + ', which is rational.', hints: ['Make ' + t(n + 'k') + ' a perfect square.'], text: 'counterexample', good: [String(n), String(9 * n)], bad: [String(n * n), '2'] };
+          solution: 'Answers vary: ' + t('\\sqrt{' + n + '}\\cdot\\sqrt{' + k0 + '}=\\sqrt{' + n * k0 + '}=' + 2 * n) + ', which is rational.', hints: ['Make ' + t(n + 'k') + ' a perfect square.'], text: 'counterexample', good: [String(n), String(9 * n)], bad: [String(n * n), '1'] };
       } },
       { id: 'x18c', level: 'EMG', make: function (r) {
         var z = gen(function () { return { a: r.pick([1, 3, 5, 7, 11]), s: r.int(2, 3), tt: r.pick([2, 3, 5]) }; }, function (z) { var b = z.s * z.s * z.tt; return ex.gcd(z.a, b) === 1 && z.a !== z.tt; });

@@ -668,12 +668,12 @@ function gridDef(DATA, mode, title) {
         const rat = stamp(stage, 'rational', { ok: true, x: X + GW - 60, y: Y + GH + 100 }); hide(rat);
         const corners = `${tTex(sim[0])}${tTex(sim[3], false)}`;
         steps.push({
-          cap: `Only the corners are left: ${T(`${corners}=\\boldsymbol{${sumTex(fin)}}`)}. No radical: the product is <b>rational</b>.`,
+          cap: `Only the corners are left: ${T(corners === sumTex(fin) ? `\\boldsymbol{${corners}}` : `${corners}=\\boldsymbol{${sumTex(fin)}}`)}. No radical: the product is <b>rational</b>.`,
           run: async (c) => { await show(c, L1); await pop(c, L2); await stampIn(c, rat); }
         });
         const sq = (t) => pw({ ...t, c: Math.abs(t.c) });
         steps.push({
-          cap: `Shortcut: (first)² − (second)²: ${T(`${sq(a[0])}^2-${sq(a[1])}^2=${tTex(sim[0])}-${tTex({ ...sim[3], c: -sim[3].c })}=${sumTex(fin)}`)}.`,
+          cap: `Shortcut: (first)² − (second)²: ${T(`${sq(a[0])}^2-${sq(a[1])}^2=${corners === sumTex(fin) ? corners : `${corners}=${sumTex(fin)}`}`)}.`,
           run: async (c) => { const s = lab(stage, RX + RW / 2, Y + GH + 40, `Shortcut<br>${T(`${sq(a[0])}^2-${sq(a[1])}^2=${sumTex(fin)}`)}`, 'u2l4-short'); await fadeIn(c, s, 350); }
         });
         return steps;
@@ -723,7 +723,7 @@ const stretchSquash = {
     const corner = rect(svg, X + S - B, Y, B, B, pc);
     const outline = rect(svg, X, Y, S, S, { fill: 'none', stroke: INK, 'stroke-width': 3.5 });
     const sB = lab(stage, X + S / 2, Y + S + 10, T(d.a), 'u2l4-side u2l4-side-b', 's'), sL = lab(stage, X - 10, Y + S / 2, T(d.a), 'u2l4-side u2l4-side-b', 'w');
-    const area = lab(stage, X + S / 2, Y + S / 2 + B / 2, T(`${d.aP}^2=${d.A}`), 'u2l4-mid');
+    const area = lab(stage, X + S / 2, Y + S / 2 + B / 2, T(`${d.aP}^2=${d.A}`), 'u2l4-mid u2l4-arealab');
     const cT = hide(lab(stage, X + S - B / 2, Y - 8, T(cX(d.b)), 'u2l4-side', 'n')), cR2 = hide(lab(stage, X + S + 8, Y + B / 2, T(cX(d.b)), 'u2l4-side', 'e'));
     const pn = panel(stage, W - 330, 40, 310, 300, 'Area');
     const fBot = hide(lab(stage, X + (S + B) / 2, Y + S + 10, T(`${d.a}+${d.b}`), 'u2l4-side u2l4-side-b', 's'));

@@ -83,7 +83,7 @@ function rationalize(num0, den0, first = true) {
 function mountTiles() {
   const host = document.getElementById('u2l6-tiles'); if (!host) return;
   const st = { n: 20, k: 1, t: 0, busy: false };
-  const H = 300;
+  const H = 280;
   host.style.position = 'relative';
   const svg = svgEl('svg', { class: 'u2l6-tsvg', height: H }, host);
   const labs = h('div', 'u2l6-tlabs'); host.appendChild(labs);
@@ -113,7 +113,7 @@ function mountTiles() {
     if (tt < 0.001) {
       lab(x0 + (n + k) * u / 2, yb - m * u, String(n + k), 'n');
       lab(x0, yb - m * u / 2, String(m), 'w');
-      lab(x0 + n * u + k * u / 2, yb, String(k), 's', 'u2l6-ta');
+      lab(x0 + (n + k) * u, yb - m * u / 2, String(k), 'e', 'u2l6-ta');
     } else if (tt > 0.999) {
       lab(x0 + n * u / 2, yb - n * u, String(n), 'n');
       lab(x0, yb - n * u / 2, String(n), 'w');
@@ -194,7 +194,7 @@ const square = {
           cut.style.opacity = 0.25;
         } },
       { cap: `A rectangle ${T(`${d.AT}+${d.BT}`)} long and ${T(`${d.AT}-${d.BT}`)} wide, with the same area: ${T(`(${d.AT}+${d.BT})(${d.AT}-${d.BT})=${res}`)}. <b>No radical!</b>`,
-        run: async (c) => { cut.style.opacity = 0; await show(c, lBot); await show(c, lSide); await pop(c, lArea); await show(c, p4); await show(c, p5); await show(c, p6); } }
+        run: async (c) => { cut.style.opacity = 0; outline.setAttribute('stroke', '#9aa0ab'); outline.setAttribute('stroke-width', 2); outline.setAttribute('stroke-dasharray', '6 6'); outline.style.opacity = 1; await show(c, lBot); await show(c, lSide); await pop(c, lArea); await show(c, p4); await show(c, p5); await show(c, p6); } }
     ];
   }
 };

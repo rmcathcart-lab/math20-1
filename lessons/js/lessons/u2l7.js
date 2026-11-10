@@ -59,7 +59,7 @@ const GEO = {
 };
 function mountGeo() {
   const host = document.getElementById('u2l7-geo'); if (!host) return;
-  const W = Math.max(480, Math.min(640, host.clientWidth || 600)), H = 286, NX = 8, NY = 4;
+  const W = Math.max(480, Math.min(640, host.clientWidth || 600)), H = 258, NX = 8, NY = 4;
   const sp = Math.min((W - 40) / NX, (H - 24) / NY), ox = (W - sp * NX) / 2, oy = (H - sp * NY) / 2;
   const B = new Box(host, {}, 'u2l7-geobox', W, H);
   svgEl('rect', { x: 0, y: 0, width: W, height: H, rx: 14, fill: '#f7f4ec' }, B.svg);
@@ -157,8 +157,7 @@ const WO_NODES = {
 };
 const WO_EDGES = [
   { from: 'q0', to: 'add' }, { from: 'q0', to: 'mul' }, { from: 'q0', to: 'div' }, { from: 'add', to: 'la' },
-  { from: 'mul', to: 'mm', label: 'one term each' }, { from: 'mul', to: 'mb', label: 'brackets' },
-  { from: 'div', to: 'dm', label: '1 term' }, { from: 'div', to: 'db', label: '2 terms' },
+  { from: 'mul', to: 'mm' }, { from: 'mul', to: 'mb' }, { from: 'div', to: 'dm' }, { from: 'div', to: 'db' },
   ...['la', 'mm', 'mb', 'dm', 'db'].map((k) => ({ from: k, to: 'fin', pts: [[WO_NODES[k].x, 311], [WO_NODES[k].x, 357]] }))
 ];
 const whichOp = {
@@ -313,8 +312,9 @@ const inspector = {
         gt.classList.add('u2l7-gfail'); gt.st.textContent = '✗';
         bench.classList.add('u2l7-bad'); bx.innerHTML = T(v.bad);
         await shake(c, gt); await sleep(c, 450);
-        for (const w of v.work || []) await show(c, line(trail, `<span class="u2l7-tg">${v.g + 1}</span>${T(w)}`, 'u2l7-tl u2l7-tlw'));
-        await show(c, line(trail, `<span class="u2l7-tg">${v.g + 1}</span>${T('=' + v.to)}`, 'u2l7-tl'));
+        const room = () => { const ls = trail.querySelectorAll('.u2l7-tl'); if (ls.length >= 5) ls[0].remove(); };
+        for (const w of v.work || []) { room(); await show(c, line(trail, `<span class="u2l7-tg">${v.g + 1}</span>${T(w)}`, 'u2l7-tl u2l7-tlw')); }
+        room(); await show(c, line(trail, `<span class="u2l7-tg">${v.g + 1}</span>${T('=' + v.to)}`, 'u2l7-tl'));
         bench.classList.remove('u2l7-bad');
         await swap(c, bx, T(v.to));
         gt.classList.remove('u2l7-gfail'); gt.classList.add('u2l7-gfix'); gt.st.textContent = '✓';
@@ -329,7 +329,7 @@ const inspector = {
 /* =============================== explainer: spot the error (why it's wrong) =============================== */
 const WW = {
   sum: { label: T('\\sqrt{36+64}'), lines: ['\\sqrt{36+64}=\\sqrt{36}+\\sqrt{64}', '=6+8', '=14'], bad: 0, fix: '\\sqrt{36+64}=\\sqrt{100}=10', rule: '\\sqrt{a+b}\\ne\\sqrt{a}+\\sqrt{b}' },
-  sq: { label: T('(\\sqrt{5}+\\sqrt{3})^2'), lines: ['(\\sqrt{5}+\\sqrt{3})^2=5+3', '=8'], bad: 0, fix: '(\\sqrt{5}+\\sqrt{3})^2=5+2\\sqrt{15}+3=8+2\\sqrt{15}', rule: '(\\sqrt{a}+\\sqrt{b})^2=a+2\\sqrt{ab}+b' },
+  sq: { label: T('(\\sqrt{5}+\\sqrt{3})^2'), lines: ['(\\sqrt{5}+\\sqrt{3})^2=5+3', '=8'], bad: 0, fix: '(\\sqrt{5}+\\sqrt{3})^2=8+2\\sqrt{15}', rule: '(\\sqrt{a}+\\sqrt{b})^2=a+2\\sqrt{ab}+b' },
   un: { label: T('\\sqrt{2}+\\sqrt{3}'), lines: ['\\sqrt{2}+\\sqrt{3}=\\sqrt{5}'], bad: 0, fix: '\\sqrt{2}+\\sqrt{3}\\ \\text{is already simplest}', rule: '\\text{only like radicals combine}' }
 };
 const whyWrong = {
@@ -348,11 +348,11 @@ const whyWrong = {
     const PX = 400, PW = W - PX, B = new Box(stage, { x: PX, y: 0 }, 'u2l7-wwbox', PW, 420);
     const wrongLine = async (c) => { ls[d.bad].classList.add('u2l7-wrong'); await stampOn(c, st); };
     if (k === 'sq') {
-      const s5 = Math.sqrt(5), s3 = Math.sqrt(3), u = 64, X0 = 70, Y0 = 50, A = s5 * u, Bq = s3 * u, S = A + Bq;
+      const s5 = Math.sqrt(5), s3 = Math.sqrt(3), u = 64, X0 = 150, Y0 = 50, A = s5 * u, Bq = s3 * u, S = A + Bq;
       const g = svgEl('g', {}, B.svg); g.style.opacity = 0;
       svgEl('rect', { x: X0, y: Y0, width: S, height: S, fill: '#fff', stroke: '#1c2230', 'stroke-width': 3 }, g);
       const topL = hide(lab(B, X0 + S / 2, Y0 - 18, T('\\sqrt{5}+\\sqrt{3}'), 'u2l7-sidel'));
-      const leftL = hide(lab(B, X0 - 12, Y0 + S / 2, T('\\sqrt{5}+\\sqrt{3}'), 'u2l7-sidel u2l7-vert'));
+      const leftL = hide(lab(B, X0 - 12, Y0 + S / 2, T('\\sqrt{5}+\\sqrt{3}'), 'u2l7-sidel', 'w'));
       const pieces = [
         { x: X0, y: Y0, w: A, h: A, f: '#e9f0fd', t: '5', sq: true }, { x: X0 + A, y: Y0 + A, w: Bq, h: Bq, f: '#e9f0fd', t: '3', sq: true },
         { x: X0 + A, y: Y0, w: Bq, h: A, f: '#fde2df', t: '\\sqrt{15}' }, { x: X0, y: Y0 + A, w: A, h: Bq, f: '#fde2df', t: '\\sqrt{15}' }
@@ -447,7 +447,7 @@ const RS = {
   ii: { label: '(ii)', q: '\\sqrt{10-4x}', lines: ['10-4x\\ge0', '-4x\\ge-10', 'x\\le\\tfrac{5}{2}'], flip: true, iv: [-Infinity, 2.5], open: false, min: -2, max: 6, b: 2.5, bl: '\\tfrac{5}{2}',
     test: { x: 3, t: '10-4(3)=-2', ok: false, msg: `${T('\\sqrt{-2}')} is not a real number` },
     caps: [`<b>Even index:</b> ${T('10-4x\\ge0')}.`, `Subtract 10: ${T('-4x\\ge-10')}. Now divide by ${T('-4')}: dividing by a negative <b>flips</b> the sign! ${T('x\\le\\tfrac{5}{2}')}.`, `Shade ${T('\\tfrac{5}{2}')} and everything to its <b>left</b>.`, `Test: ${T('x=3')} gives ${T('10-12=-2')} under the root. ✗ (Without the flip you would have shaded the wrong side.)`] },
-  iii: { label: '(iii)', q: '\\sqrt[3]{x-9}', lines: ['\\text{odd index (3)}', '\\text{any real } x'], iv: [-Infinity, Infinity], min: 2, max: 14, b: 9, odd: true,
+  iii: { label: '(iii)', q: '\\sqrt[3]{x-9}', lines: ['\\text{odd index (3)}', '\\text{any real } x'], iv: [-Infinity, Infinity], min: -4, max: 12, b: 9, odd: true,
     test: { x: 1, t: '\\sqrt[3]{1-9}=\\sqrt[3]{-8}=-2', ok: true, msg: 'a real number' },
     caps: [`<b>Odd index</b> (a cube root): a negative radicand is fine, because ${T('(-2)^3=-8')}.`, `So there is <b>no restriction</b>: ${T('x')} can be any real number.`, `Shade the whole number line.`, `Test: ${T('x=1')} gives ${T('\\sqrt[3]{-8}=-2')}, a real number. ✓`] },
   iv: { label: '(iv)', q: '\\dfrac{5}{\\sqrt{x-1}}', lines: ['x-1\\ge0\\ \\text{and}\\ \\sqrt{x-1}\\ne0', 'x-1>0', 'x>1'], iv: [1, Infinity], open: true, min: -3, max: 5, b: 1,
@@ -469,7 +469,7 @@ const restrict = {
     const big = line(P, T(d.q), 'u2l7-rsq');
     const ls = d.lines.map((s, i) => hide(line(P, T(s), 'u2l7-rsl' + (i === d.lines.length - 1 ? ' u2l7-rsans' : ''))));
     if (d.flip) ls[2].innerHTML = T('x' + cR('\\le') + '\\tfrac{5}{2}') + ' <span class="u2l7-flip">sign flips</span>';
-    const N = new NumberLine(stage, { x: LW + 20, y: 40, width: W - LW - 24, height: 130, min: d.min, max: d.max, step: 1 });
+    const N = new NumberLine(stage, { x: LW + 20, y: 40, width: W - LW - 24, height: 130, min: d.min, max: d.max, step: 1, labelStep: d.max - d.min > 10 ? 2 : 1 });
     if (d.bl) N.mark(d.b, T(d.bl), { pos: 's', cls: 'u2l7-nlb' });
     const iv = N.interval(d.iv[0], d.iv[1], { color: d.odd ? 'green' : 'teal', openA: d.open, width: 8 }); hide(iv);
     const tp = N.point(d.test.x, { color: d.test.ok ? 'green' : 'red', label: T('x=' + d.test.x), lift: 34 }); hide(tp); hide(tp.label);
@@ -624,7 +624,7 @@ const collect = {
     steps.push({ cap: `Count what is left: ${T(d.sum)}. So the sum is ${T(d.res)}.`, run: async (c) => {
       const left = poss.slice(negs.length); rowLab.forEach((r) => (r.style.opacity = 0));
       await Promise.all(left.map((t, j) => flyTo(c, t, X0 + j * (TW + TG), 316, 520)));
-      res.innerHTML = `${T(d.sum)} &nbsp;⟹&nbsp; ${T('=' + d.res)}`; await show(c, res); await stampOn(c, st);
+      res.innerHTML = `<span>${T(d.sum)} &nbsp;⟹&nbsp; ${T(d.res)}</span>`; await show(c, res); await stampOn(c, st);
     } });
     return steps;
   }

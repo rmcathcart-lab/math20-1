@@ -109,3 +109,4 @@
 .u2l4-short { font-size: 18.5px; text-align: center; background: #fff4dd; border-radius: 12px; padding: 6px 12px; line-height: 1.45; }
 .u2l4-rot { rotate: -90deg; }
 .u2l4-ghostnum { color: #9aa0ab; }
+.u2l4-arealab { background: rgba(255,255,255,.88); border-radius: 8px; padding: 1px 8px; }
