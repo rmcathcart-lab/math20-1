@@ -1,0 +1,138 @@
+/* Math 20-1 · Unit 2 · Lesson 2 — Radicals with Variables and Their Restrictions: styles used only on this page (prefix u2l2-).
+ * Colours (Unit 2): coefficient / what comes out teal #0f7c80, radicand / what stays in purple #7b4fc4, index amber #c27a0e,
+ * allowed green #12805a, not allowed red #c93a33. */
+
+.u2l2 .ex-cap { min-height: 120px; }
+.u2l2 .ex-cap .katex { font-size: 1.04em; }
+.u2l2 .pl .katex { font-size: 1.1em; }
+.u2l2 .ans .katex { font-size: 1.04em; }
+.u2l2 .katex { white-space: nowrap; }
+.u2l2 h2 .katex, .u2l2 h3 .katex { font-size: .95em; }
+.u2l2-cc { color: #0f7c80; }
+.u2l2-cr { color: #7b4fc4; }
+.u2l2-ci { color: #c27a0e; }
+.u2l2-cok { color: #12805a; }
+.u2l2-cno { color: #c93a33; }
+
+/* ---------------- warm-up: The Root Machine ---------------- */
+.u2l2-mach { position: relative; }
+.u2l2-msvg { display: block; }
+.u2l2-mplate { position: absolute; color: #fff; font-size: 26px; pointer-events: none; }
+.u2l2-mscr { position: absolute; font-size: 19px; line-height: 1.25; color: #1d2a12; pointer-events: none; }
+.u2l2-mscr > div { height: 25px; white-space: nowrap; }
+.u2l2-mhint { font-size: 17px; color: #4c5a3d; padding-top: 22px; text-align: center; }
+.u2l2-mout { position: absolute; font-size: 24px; background: #fff; border: 3px solid #12805a; border-radius: 12px; padding: 4px 10px; opacity: 0; white-space: nowrap; }
+.u2l2-mjam { position: absolute; font: 900 46px var(--round); color: #c93a33; background: rgba(255, 255, 255, .92); border: 4px solid #c93a33; border-radius: 12px; padding: 0 16px; transform: rotate(-8deg); pointer-events: none; }
+.u2l2-rack { position: absolute; left: 0; right: 0; display: flex; gap: 8px; flex-wrap: nowrap; }
+.u2l2-ball { width: 52px; height: 52px; border-radius: 50%; border: 3px solid #1c2230; background: #fff4d6; font: 800 19px var(--round); color: #1c2230; padding: 0; cursor: pointer; flex: none; }
+.u2l2-ball.u2l2-bok { background: #cdeedd; border-color: #12805a; color: #0b5a3e; }
+.u2l2-ball.u2l2-bno { background: #fbd9d6; border-color: #c93a33; color: #8f1f1a; }
+.u2l2-fly { position: absolute; display: grid; place-items: center; pointer-events: none; z-index: 3; }
+.u2l2-wbtns { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0 2px; }
+.u2l2-wbtns .pill { font-size: 15px; padding: 6px 14px; }
+.wf .u2l2-wqs .q-line { font-size: 17px; margin: 2px 0 0; gap: 10px; }
+.wf .u2l2-wqs .q-line .pill.small { padding: 2px 10px; }
+.u2l2-wa { margin: 0 0 4px 46px; }
+.wf .u2l2-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
+.wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
+.wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
+.u2l2-social { margin: 10px 0 0; font-size: 18px; background: var(--brand-soft); border-radius: 10px; padding: 8px 14px; }
+
+/* ---------------- static cards ---------------- */
+.u2l2-rules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0 0 16px; }
+.u2l2-rule { border-radius: 12px; padding: 10px 16px; font-size: 19px; border: 2px solid #9fd4ba; background: #eaf6f0; line-height: 1.45; }
+.u2l2-rule .katex { font-size: 1.08em; }
+.u2l2-rule-odd { border-color: #c9b6ec; background: #f3eefb; }
+.u2l2-rule-den { border-color: #eab3ae; background: #fbeeed; }
+.u2l2-ruleh { font: 800 21px var(--round); margin-bottom: 2px; color: #12805a; }
+.u2l2-rule-odd .u2l2-ruleh { color: #7b4fc4; } .u2l2-rule-den .u2l2-ruleh { color: #c93a33; }
+.u2l2-disp { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin: 10px 0 6px; font-size: 24px; }
+.u2l2-key { border-left-width: 7px; }
+.u2l2-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 2px; }
+
+/* ---------------- explainers: shared ---------------- */
+.u2l2-abs { position: absolute; }
+.u2l2-ssvg { pointer-events: none; overflow: visible; }
+.u2l2-panel { background: #fff; border: 2px solid #e4dccd; border-radius: 14px; padding: 8px 14px; box-sizing: border-box; font-size: 19px; }
+.u2l2-ph { font: 800 19px var(--round); color: var(--ink2); margin-bottom: 6px; white-space: nowrap; }
+.u2l2-line { margin: 6px 0; line-height: 1.35; }
+.u2l2-big { font-size: 25px; margin: 10px 0; }
+.u2l2-mid { font-size: 21px; margin: 8px 0; }
+.u2l2-small { font-size: 16px; color: var(--ink2); }
+.u2l2-muted { color: var(--ink2); font-size: .8em; }
+.u2l2-cpanel { background: #fbfaf6; }
+.u2l2-cpanel .u2l2-mid { font-size: 26px; margin: 10px 0; }
+.u2l2-cpanel .u2l2-big { font-size: 30px; margin: 12px 0; }
+.u2l2-cpanel .u2l2-small { font-size: 18px; }
+.u2l2-res { font-size: 28px; background: #fff; border: 2px solid #e4dccd; border-radius: 12px; padding: 4px 18px; white-space: nowrap; }
+.u2l2-verdict { font-size: 24px; background: #eaf6f0; border: 2.5px solid #12805a; border-radius: 999px; padding: 4px 22px; white-space: nowrap; }
+.u2l2-fix { font-size: 22px; background: #fff1ef; border: 2.5px solid #c93a33; border-radius: 12px; padding: 4px 18px; white-space: nowrap; }
+.u2l2-wrong { font-size: 18px; color: var(--ink2); white-space: nowrap; }
+.u2l2-nlab { font-size: 22px; font-weight: 700; white-space: nowrap; }
+
+/* allowed: expression card, solving lines, probe */
+.u2l2-exprc { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+.u2l2-exprbig { font-size: 36px; }
+.u2l2-idx { font-size: 17px; color: var(--ink2); white-space: nowrap; }
+.u2l2-solvep { display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 6px 18px; }
+.u2l2-sline { font-size: 23px; margin: 0; white-space: nowrap; }
+.u2l2-note { font-size: 16px; color: var(--ink2); margin-left: 14px; }
+.u2l2-blab { font-size: 21px; font-weight: 700; }
+.u2l2-pbub { background: #fff; border: 2.5px solid #12805a; border-radius: 10px; padding: 2px 12px 4px; font-size: 24px; text-align: center; white-space: nowrap; line-height: 1.3; }
+.u2l2-pbub.u2l2-pbad { border-color: #c93a33; background: #fff1ef; }
+.u2l2-pbx { font-size: 18px; color: var(--ink2); }
+.u2l2-pbub.u2l2-pdrag, .u2l2-phandle { pointer-events: auto; touch-action: none; cursor: ew-resize; }
+.u2l2-phandle { width: 48px; height: 48px; border-radius: 50%; }
+
+/* flip */
+.u2l2-tgrid { display: grid; border: 2px solid #8d8a82; border-radius: 8px; overflow: hidden; background: #fff; }
+.u2l2-tc { height: 48px; display: grid; place-items: center; font-size: 20px; border-right: 1px solid #d8d3c7; border-bottom: 1px solid #d8d3c7; }
+.u2l2-th { background: #f3efe6; font-weight: 700; }
+.u2l2-tcok { background: #eaf6f0; } .u2l2-tcno { background: #fbeeed; }
+
+/* groups */
+.u2l2-tile { height: 52px; display: grid; place-items: center; font-size: 28px; background: #f3eefb; border: 2.5px solid #7b4fc4; border-radius: 9px; color: #7b4fc4; box-sizing: border-box; }
+.u2l2-tile.u2l2-tout { background: #e3f3f2; border-color: #0f7c80; color: #0f7c80; }
+.u2l2-tile.u2l2-tin { background: #7b4fc4; color: #fff; }
+.u2l2-tile.u2l2-tin .katex { color: #fff; }
+.u2l2-ridx { font-size: 26px; font-weight: 700; }
+.u2l2-ridx2 { opacity: .45; font-size: 22px; }
+.u2l2-explab { font-size: 22px; white-space: nowrap; }
+.u2l2-divl { font-size: 28px; white-space: nowrap; }
+.u2l2-divk { font-size: 17px; color: var(--ink2); white-space: nowrap; }
+
+/* abs */
+.u2l2-atab { display: flex; flex-direction: column; gap: 8px; }
+.u2l2-arow { display: grid; grid-template-columns: 1fr 1fr 1.4fr 1fr; align-items: center; font-size: 22px; background: #fff; border: 2px solid #e4dccd; border-radius: 10px; padding: 6px 14px; }
+
+/* split */
+.u2l2-sexpr { font-size: 36px; white-space: nowrap; }
+.u2l2-scard { background: #fff; border: 2px solid #e4dccd; border-radius: 14px; text-align: center; padding: 6px 10px; box-sizing: border-box; }
+.u2l2-sch { font: 800 16px var(--round); color: var(--ink2); text-transform: uppercase; letter-spacing: .04em; }
+.u2l2-scl { font-size: 26px; margin: 2px 0 4px; }
+.u2l2-scs { font-size: 25px; border-top: 1.5px dashed #d8d0c0; padding-top: 4px; }
+.u2l2-scn { font-size: 16px; color: var(--ink2); margin-top: 2px; }
+.u2l2-tray { border-radius: 12px; box-sizing: border-box; }
+.u2l2-tout2 { background: #e3f3f2; border: 2.5px solid #0f7c80; }
+.u2l2-tin2 { background: #f3eefb; border: 2.5px solid #7b4fc4; }
+.u2l2-trl { position: absolute; left: 8px; top: 50%; translate: 0 -50%; font: 800 14px/1.1 var(--round); text-transform: uppercase; letter-spacing: .04em; }
+.u2l2-tout2 .u2l2-trl { color: #0f7c80; } .u2l2-tin2 .u2l2-trl { color: #7b4fc4; }
+.u2l2-titem { font-size: 30px; white-space: nowrap; }
+.u2l2-none { color: #b8b2a5; }
+
+/* entire */
+.u2l2-tok { font-size: 40px; white-space: nowrap; }
+.u2l2-tsign { font-size: 44px; }
+.u2l2-tprod { color: #7b4fc4; }
+.u2l2-pow { font-size: 22px; background: #fff7e8; border: 2px solid #c27a0e; border-radius: 10px; padding: 2px 10px; white-space: nowrap; }
+.u2l2-lock { font-size: 17px; color: #c93a33; font-weight: 700; text-align: center; line-height: 1.15; white-space: nowrap; }
+
+/* checklist */
+.u2l2-ckrow { background: #fff; border: 2px solid #e4dccd; border-radius: 12px; padding: 6px 16px; box-sizing: border-box; }
+.u2l2-ckt { font-size: 19px; }
+.u2l2-ckn { font-size: 17px; color: var(--ink2); margin-top: 2px; }
+
+/* shapes */
+.u2l2-flab { font-size: 24px; white-space: nowrap; background: rgba(255, 255, 255, .85); border-radius: 6px; padding: 0 6px; }
+.u2l2-unk { color: #c93a33; font-weight: 700; }
+.u2l2-unk.u2l2-known { color: #0f7c80; border: 2px solid #0f7c80; }

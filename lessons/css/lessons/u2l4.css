@@ -1,0 +1,112 @@
+/* Math 20-1 · Unit 2 · Lesson 4 — Multiplying Radicals: styles used only on this page (prefix u2l4-).
+ * Colours: coefficients amber #c27a0e, radicands teal #0f7f80, what comes out of a root burgundy #7a1f3d;
+ * cancelling tiles + green #12805a / − red #c93a33. */
+
+.u2l4 .ex-cap .katex { font-size: 1.04em; }
+.u2l4 .chip .katex { font-size: 1em; }
+.u2l4 .pl .katex { font-size: 1.08em; }
+.u2l4 .ans .katex { font-size: 1.04em; }
+.u2l4 .katex { white-space: nowrap; }
+.u2l4 h2 .katex, .u2l4 h3 .katex { font-size: .95em; }
+.u2l4-co { color: #c27a0e; font-weight: 700; }
+.u2l4-ra { color: #0f7f80; font-weight: 700; }
+
+/* ---------------- warm-up: Stretch and Squash ---------------- */
+.u2l4-patio { width: 100%; max-width: 560px; }
+.u2l4-patiosvg { display: block; width: 100%; height: auto; overflow: visible; }
+.u2l4-tile { transition: transform .9s cubic-bezier(.45,.05,.25,1); }
+.u2l4-tile rect { fill: #e9dcc3; stroke: #a8865a; stroke-width: 1.6; transition: fill .4s, stroke .4s, opacity .4s; }
+.u2l4-tile.moved rect { fill: #cfe9e6; stroke: #0f7f80; }
+.u2l4-tile.left rect { fill: #fbdcd9; stroke: #c93a33; stroke-width: 2.4; stroke-dasharray: 5 4; }
+.u2l4-ptnote { font: 800 19px var(--round); fill: #c93a33; }
+.u2l4-wbtns { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 10px 0 2px; }
+.u2l4-wbtns .pill { font-size: 16px; padding: 6px 14px; }
+.u2l4-wbtns .pill.on { background: var(--brand); color: #fff; border-color: var(--brand); }
+.u2l4-wread { font-size: 19px; margin-left: 8px; color: var(--ink2); }
+.u2l4-wleft { color: #c93a33; font-weight: 700; }
+.wf .u2l4-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
+.wf .u2l4-wqs .q-line .pill.small { padding: 2px 10px; }
+.u2l4-wa { margin: 0 0 6px 40px; }
+.wf .u2l4-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
+.wf .wf-poll { margin-top: 8px; }
+.wf .wf-poll .poll-opts.c4 { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.wf .wf-poll .poll-opts.c4 .opt { padding: 6px 8px; font-size: 16px; }
+.wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
+.u2l4-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
+
+/* ---------------- notes ---------------- */
+.u2l4-key { background: #fff; border: 2.5px solid var(--brand2); border-radius: 14px; padding: 12px 18px; margin: 10px 0 16px; }
+.u2l4-key-h { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .06em; color: var(--brand); margin-bottom: 6px; }
+.u2l4-key-f { display: flex; justify-content: center; align-items: center; gap: 46px; font-size: 25px; text-align: center; flex-wrap: wrap; }
+.u2l4-key-f2 { font-size: 22px; margin-top: 10px; }
+.u2l4-key-w { font-size: 16px; color: var(--ink2); margin-top: 2px; }
+.u2l4-key-l { font-size: 17.5px; color: var(--ink2); text-align: center; margin-top: 8px; }
+.u2l4-ul { margin: 0 0 14px; padding-left: 1.3em; }
+.u2l4-ul li { margin: 4px 0; }
+
+/* ---------------- Example 8 figures ---------------- */
+.u2l4-fig { position: relative; width: 270px; margin: 4px auto 6px; }
+.u2l4-figsvg { display: block; overflow: visible; }
+.u2l4-flab { font-size: 16.5px; }
+
+/* ---------------- explainers (shared) ---------------- */
+.u2l4-svg { overflow: visible; position: absolute; }
+.u2l4-lab { position: absolute; white-space: nowrap; font-size: 20px; line-height: 1.15; }
+.u2l4-lab.u2l4-big { font-size: 28px; }
+.u2l4-lab.u2l4-mid { font-size: 23px; }
+.u2l4-ghost { font-size: 26px; pointer-events: none; z-index: 3; }
+.u2l4-panel { position: absolute; background: #fff; border: 1.5px solid #e4ddcf; border-radius: 12px; padding: 8px 14px; box-sizing: border-box; overflow: hidden; }
+.u2l4-ph { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 4px; }
+.u2l4-line { font-size: 22px; line-height: 1.35; margin: 6px 0; white-space: nowrap; }
+.u2l4-line.u2l4-big { font-size: 26px; }
+.u2l4-line.u2l4-small { font-size: 19px; }
+.u2l4-line.u2l4-key-line { background: #fff4dd; border-radius: 8px; padding: 2px 8px; margin-top: 10px; }
+.u2l4-note { font-size: 17px; color: var(--muted); font-style: italic; }
+
+/* multRule */
+.u2l4-fcard { font-size: 32px; background: #fff; border: 2px solid #e4ddcf; border-radius: 14px; padding: 6px 14px; box-shadow: 0 2px 0 #eee8dc; }
+.u2l4-dot { font-size: 30px; }
+.u2l4-binh { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .07em; }
+.u2l4-binh-co { color: #c27a0e; }
+.u2l4-binh-ra { color: #0f7f80; }
+.u2l4-binv { font-size: 26px; }
+
+/* twoWays */
+.u2l4-road { font: 800 17px var(--round); text-transform: uppercase; letter-spacing: .06em; color: #fff; border-radius: 9px; padding: 4px 12px; }
+.u2l4-road-a { background: #3a4254; }
+.u2l4-road-b { background: var(--brand); }
+.u2l4-both { font-size: 25px; background: #fff4dd; border-radius: 12px; padding: 6px 18px; }
+
+/* squareTiles */
+.u2l4-tl { font-size: 24px; font-weight: 700; }
+.u2l4-tl-s { font-size: 18px; font-weight: 700; }
+.u2l4-side { font-size: 21px; }
+.u2l4-side-b { font-size: 24px; }
+.u2l4-count { font: 800 24px var(--round); color: #c27a0e; }
+
+/* splitBack */
+.u2l4-combo { background: #fff; border: 1.5px solid #e4ddcf; border-radius: 12px; padding: 3px 14px; }
+
+/* varRadicals */
+.u2l4-chip { font-size: 24px; min-width: 40px; text-align: center; background: #eaf6f5; border: 1.5px solid #b6dcd9; border-radius: 9px; padding: 2px 4px; }
+.u2l4-chip-v { background: #f1ecfa; border-color: #cbbbe8; }
+.u2l4-chip-co { background: #fff4dd; border-color: #ecd3a6; }
+.u2l4-chip-out { background: #f7e9ee; border-color: #d9a3b5; }
+.u2l4-idx { font-size: 17px; }
+
+/* distribute */
+.u2l4-paren { font-size: 54px; line-height: 1; color: var(--ink2); font-weight: 300; }
+.u2l4-simp { color: var(--ink); }
+.u2l4-restr { background: #eaf6f5; border-radius: 10px; padding: 3px 12px; }
+
+/* the area model */
+.u2l4-hdr { font-size: 24px; }
+.u2l4-cell { font-size: 23px; }
+.u2l4-cell-raw { font-size: 18px; color: var(--muted); }
+.u2l4-trap { font-size: 19px; text-align: center; line-height: 1.5; color: #c93a33; white-space: nowrap; }
+.u2l4-zero { font-size: 24px; text-align: center; background: #fff; border: 2px solid #e4ddcf; border-radius: 14px; padding: 8px 14px; }
+.u2l4-zero-n { font-size: 30px; font-weight: 700; margin-top: 2px; }
+.u2l4-short { font-size: 18.5px; text-align: center; background: #fff4dd; border-radius: 12px; padding: 6px 12px; line-height: 1.45; }
+.u2l4-rot { rotate: -90deg; }
+.u2l4-ghostnum { color: #9aa0ab; }
+.u2l4-arealab { background: rgba(255,255,255,.88); border-radius: 8px; padding: 1px 8px; }

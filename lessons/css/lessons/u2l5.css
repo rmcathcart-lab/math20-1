@@ -1,0 +1,145 @@
+/* Math 20-1 · Unit 2 · Lesson 5 — Dividing Radicals and Rationalizing Monomial Denominators (prefix u2l5-).
+ * Colours: the form of 1 / multiplier amber #c27a0e; coefficients burgundy (teal token #a33357); radicands blue #1f5bd6;
+ * finished answers green #12805a; mistakes red #c93a33. */
+
+.u2l5 .ex-cap .katex { font-size: 1.04em; }
+.u2l5 .chip .katex { font-size: 1em; }
+.u2l5 .pl .katex { font-size: 1.1em; }
+.u2l5 .ans .katex { font-size: 1.04em; }
+.u2l5 .katex { white-space: nowrap; }
+.u2l5 h2 .katex, .u2l5 h3 .katex { font-size: .95em; }
+.u2l5-am { color: #c27a0e; }
+
+/* ---------------- warm-up: Same Pizza, More Slices ---------------- */
+.u2l5-pizza { width: 100%; max-width: 380px; margin: 0 auto; }
+.u2l5-pzsvg { display: block; width: 100%; height: auto; }
+.u2l5-crust { fill: #e2a95b; stroke: #b07a35; stroke-width: 4; }
+.u2l5-cheese { fill: #f8e08e; }
+.u2l5-sauce { fill: #f0b45a; }
+.u2l5-pep { fill: #b8342b; stroke: #8f241d; stroke-width: 2; }
+.u2l5-cut { stroke: #fff; stroke-width: 3.5; stroke-linecap: round; }
+.u2l5-cutnew { stroke: #7a1f3d; animation: u2l5-cutin .7s ease-out both; }
+@keyframes u2l5-cutin { from { opacity: 0; } 60% { opacity: 1; } to { stroke: #fff; } }
+.u2l5-wctl { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 6px 0 0; flex-wrap: wrap; }
+.u2l5-wctl .pill { font-size: 16px; padding: 6px 14px; }
+.u2l5-wctl .pill:disabled { opacity: .45; }
+.u2l5-wlab { font-size: 19px; text-align: center; margin-top: 8px; min-height: 64px; line-height: 1.5; }
+.u2l5-wnote { display: block; font-size: 17px; color: var(--ink2); }
+.wf .wf-side .q-line { font-size: 17.5px; margin: 4px 0 2px; gap: 10px; }
+.wf .wf-side .bk-ans { font-size: 16px; line-height: 1.38; margin: 2px 0 8px 40px; }
+.wf .wf-poll { margin-top: 8px; }
+.wf .wf-poll .poll-opts.c4 { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.wf .wf-poll .poll-opts.c4 .opt { padding: 6px 8px; display: flex; align-items: center; gap: 8px; }
+.wf .wf-poll .poll-ans { font-size: 16px; line-height: 1.4; }
+.u2l5-traps { display: grid; gap: 3px; margin-top: 6px; font-size: 15px; color: var(--ink2); }
+
+/* ---------------- notes ---------------- */
+.u2l5-key { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 26px; row-gap: 4px; background: #fff; border: 2px solid #e2d5da; border-left: 7px solid #c27a0e; border-radius: 12px; padding: 10px 18px; margin: 0 0 16px; }
+.u2l5-key-h { grid-column: 1 / -1; font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.u2l5-kh2 { text-transform: none; letter-spacing: 0; font-weight: 600; }
+.u2l5-key-f { font-size: 25px; }
+.u2l5-key-eg { font-size: 18px; color: var(--ink2); }
+.u2l5-key2 { grid-template-columns: auto auto; justify-content: start; column-gap: 60px; }
+.u2l5-check { margin: 6px 0 0 6px; padding-left: 26px; font-size: 19px; line-height: 1.5; }
+.u2l5-p8c { margin-top: 14px; }
+
+/* ---------------- explainers: shared pieces ---------------- */
+.u2l5-lab { position: absolute; white-space: nowrap; font-size: 20px; line-height: 1.25; }
+.u2l5-ov { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.u2l5-lines { position: absolute; display: flex; flex-direction: column; gap: 12px; }
+.u2l5-ln { white-space: nowrap; border-radius: 10px; padding: 0 8px; margin-left: -8px; align-self: flex-start; transition: background .3s, box-shadow .3s; }
+.u2l5-big .u2l5-ln { font-size: 26px; }
+.u2l5-big2 .u2l5-ln { font-size: 22px; }
+.u2l5-done { background: #eaf6f0; box-shadow: inset 0 0 0 2.5px #12805a; }
+.u2l5-muted { color: var(--muted); font-size: .85em; }
+.u2l5-side { font-size: 22px; }
+.u2l5-in { font-size: 21px; color: #1c2230; }
+.u2l5-inC { text-align: center; line-height: 1.5; }
+.u2l5-rect { fill: #eef3fd; stroke: #1f5bd6; stroke-width: 3; }
+.u2l5-banner { fill: #fbf0f3; stroke: #a33357; }
+.u2l5-rule { font-size: 28px !important; background: #fdf6ea; box-shadow: inset 0 0 0 2.5px #c27a0e; padding: 6px 14px !important; }
+.u2l5-ptitle { font-size: 19px; color: var(--ink2); background: #f6f5f0; border-radius: 10px; padding: 4px 12px; }
+.u2l5-ptbad { background: #fdf0ef; color: #8f241d; }
+.u2l5-ptok { background: #eaf6f0; color: #0d5e42; }
+.u2l5-plab { font-size: 18px; color: var(--ink2); }
+
+/* divideRule */
+.u2l5-bigfrac { position: absolute; display: grid; place-items: center; font-size: 44px; background: #fff; border: 3px solid #e2d5da; border-radius: 16px; box-sizing: border-box; }
+.u2l5-split { position: absolute; font-size: 26px; text-align: center; }
+.u2l5-card { position: absolute; box-sizing: border-box; border-radius: 12px; border: 2.5px solid; background: #fff; padding: 6px 14px; display: grid; grid-template-columns: 190px 1fr; align-items: center; }
+.u2l5-card-h { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.u2l5-card-h .u2l5-muted { text-transform: none; letter-spacing: 0; font-weight: 600; display: block; }
+.u2l5-card-b { font-size: 27px; }
+.u2l5-cardT { border-color: #a33357; background: #fbf0f3; }
+.u2l5-cardB { border-color: #1f5bd6; background: #f1f5fe; }
+
+/* twoRoutes / twoTermNum lanes */
+.u2l5-head { position: absolute; text-align: center; font-size: 32px; }
+.u2l5-lane { position: absolute; box-sizing: border-box; border-radius: 10px; padding: 6px 14px; font-size: 19px; border-left: 6px solid; background: #f6f5f0; }
+.u2l5-laneT { border-color: #a33357; } .u2l5-laneB { border-color: #1f5bd6; }
+.u2l5-lanel { gap: 14px; }
+.u2l5-lanel .u2l5-ln { font-size: 25px; }
+.u2l5-cfl .u2l5-ln { font-size: 24px; }
+.u2l5-rsl .u2l5-ln { font-size: 24px; }
+.u2l5-dlab { background: rgba(255, 255, 255, .9); border-radius: 8px; padding: 0 6px; }
+
+/* splitBar */
+.u2l5-grp { position: absolute; border-radius: 16px; background: rgba(194, 122, 14, .12); border: 2.5px dashed #c27a0e; box-sizing: border-box; }
+.u2l5-tile { position: absolute; display: grid; place-items: center; box-sizing: border-box; border: 3px solid #c6cad3; border-radius: 12px; background: #fff; font-size: 27px; }
+.u2l5-tileD { border-color: #a33357; background: #fbf0f3; }
+.u2l5-op { font-size: 30px; }
+.u2l5-piece { font-size: 31px; }
+.u2l5-res { font-size: 28px; }
+.u2l5-xt { font-size: 25px; border-radius: 10px; padding: 0 10px; }
+.u2l5-bad { font-size: 26px; background: #fdf0ef; border: 2.5px solid #c93a33; border-radius: 12px; padding: 4px 16px; }
+
+/* simplestStamp */
+.u2l5-rules { position: absolute; display: flex; flex-direction: column; gap: 8px; }
+.u2l5-rule-r { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; font-size: 18px; line-height: 1.3; background: #f6f5f0; border-radius: 10px; padding: 8px 10px; transition: background .3s, box-shadow .3s; }
+.u2l5-rn { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 16px var(--round); }
+.u2l5-rule-r.u2l5-on { background: #fdf0ef; box-shadow: inset 0 0 0 2.5px #c93a33; }
+.u2l5-rule-r.u2l5-okr { background: #eaf6f0; }
+.u2l5-sc { position: absolute; box-sizing: border-box; border: 2.5px solid #d9dce3; border-radius: 14px; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; transition: border-color .3s, box-shadow .3s; }
+.u2l5-sc.u2l5-on { border-color: #7a1f3d; box-shadow: 0 4px 14px rgba(122, 31, 61, .18); }
+.u2l5-sc-e { font-size: 30px; }
+.u2l5-sc-f { font-size: 20px; color: var(--ink2); }
+
+/* formOfOne */
+.u2l5-one { display: inline-block; margin-left: 14px; font-size: 18px; background: #fdf6ea; border: 2px solid #c27a0e; border-radius: 10px; padding: 2px 10px; vertical-align: middle; }
+.u2l5-sq { fill: #e7eefc; stroke: #1f5bd6; stroke-width: 3; }
+.u2l5-sqgrid { stroke: #1f5bd6; stroke-width: 1.6; stroke-dasharray: 5 4; }
+.u2l5-unit { font-size: 18px; color: #1f5bd6; font-weight: 700; }
+.u2l5-eq { font-size: 24px; background: #fff; border: 2.5px solid #1f5bd6; border-radius: 12px; padding: 4px 14px; }
+
+/* twoTermNum: factor check */
+.u2l5-chk { position: absolute; display: flex; flex-direction: column; gap: 14px; }
+.u2l5-chk-r { background: #f6f5f0; border-radius: 12px; padding: 10px 14px; }
+.u2l5-chk-q { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.u2l5-chk-t { display: flex; flex-wrap: wrap; gap: 8px; }
+.u2l5-chip { font-size: 20px; border-radius: 10px; padding: 3px 10px; background: #fff; border: 2px solid; white-space: nowrap; }
+.u2l5-cok { border-color: #12805a; color: #0d5e42; } .u2l5-cno { border-color: #c93a33; color: #8f241d; }
+.u2l5-badln { color: #8f241d; }
+
+/* cubeFill */
+.u2l5-tally { position: absolute; display: flex; flex-direction: column; gap: 8px; }
+.u2l5-tal-h { font-size: 18px; color: var(--ink2); line-height: 1.35; white-space: normal; }
+.u2l5-tal-r { display: flex; align-items: center; gap: 8px; }
+.u2l5-tal-p { width: 40px; font-size: 20px; color: var(--muted); text-align: right; margin-right: 6px; }
+.u2l5-slot { display: grid; place-items: center; width: 46px; height: 46px; box-sizing: border-box; border-radius: 8px; border: 2.5px dashed #b9bdc6; font-size: 21px; background: #fff; }
+.u2l5-slot.u2l5-have { border: 2.5px solid #a33357; background: #f6e3e9; color: #6d1f38; }
+.u2l5-slot.u2l5-add { border: 2.5px solid #c27a0e; background: #fdf0d8; }
+.u2l5-isoO .u2l5-fT { fill: #eab9c8; } .u2l5-isoO .u2l5-fR { fill: #c8738f; } .u2l5-isoO .u2l5-fL { fill: #a9506e; }
+.u2l5-isoM .u2l5-fT { fill: #f3c7c3; } .u2l5-isoM .u2l5-fR { fill: #dc8a83; } .u2l5-isoM .u2l5-fL { fill: #c25e55; }
+.u2l5-isoN .u2l5-fT { fill: #fbe4b8; } .u2l5-isoN .u2l5-fR { fill: #efc46f; } .u2l5-isoN .u2l5-fL { fill: #d9a043; }
+.u2l5-fT, .u2l5-fR, .u2l5-fL { stroke: #5a3a1a; stroke-width: 2; stroke-linejoin: round; }
+.u2l5-isoO .u2l5-fT, .u2l5-isoO .u2l5-fR, .u2l5-isoO .u2l5-fL { stroke: #4d1528; }
+.u2l5-isogrid { stroke: rgba(40, 20, 10, .38); stroke-width: 1.2; }
+
+/* restrictions */
+.u2l5-rexp { position: absolute; font-size: 36px; }
+.u2l5-restr { font-size: 30px; background: #eaf6f0; border: 3px solid #12805a; border-radius: 14px; padding: 4px 22px; }
+.u2l5-nlv { font-size: 22px; }
+
+/* problems */
+.u2l5-pan { font-size: 21px; background: #fff; border: 2.5px solid #c6cad3; border-radius: 10px; padding: 4px 10px; }
+.u2l5-ckbox { position: absolute; box-sizing: border-box; background: #eaf6f0; border: 2.5px solid #12805a; border-radius: 12px; padding: 10px 14px; font-size: 19px; display: grid; gap: 8px; }

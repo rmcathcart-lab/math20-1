@@ -351,7 +351,7 @@
       { id: 'eB5', level: 'EMG', make: function (r) {
         var o = pw(function () { return { t1: r.int(2, 15), d: r.int(3, 9), N: r.int(18, 40) }; }, function (z) { return !(z.t1 === 4 && z.d === 6 && z.N === 25); });
         var v = o.t1 + (o.N - 1) * o.d;
-        return S.mc(r, '<i>(Multiple Choice)</i> The ' + o.N + 'th term of the arithmetic sequence ' + t(arT(o.t1, o.d, 3)) + ' is', [
+        return S.mc(r, '<i>(Multiple Choice)</i> The ' + S.ord(o.N) + ' term of the arithmetic sequence ' + t(arT(o.t1, o.d, 3)) + ' is', [
           { html: t(v), right: true }, { html: t(o.t1 + o.N * o.d), why: 'That uses ' + t(o.N + 'd') + '. From ' + t('t_1') + ' to ' + t(tsub(o.N)) + ' is ' + t(o.N - 1) + ' steps.' },
           { html: t(o.N * o.d), why: 'Start from ' + t('t_1=' + o.t1) + ': ' + t('t_n=t_1+(n-1)d') + '.' }, { html: t(o.t1 + (o.N - 2) * o.d), why: 'That is ' + t(tsub(o.N - 1)) + '.' }],
           t(tsub(o.N) + '=' + o.t1 + '+' + (o.N - 1) + '(' + o.d + ')=' + v) + '.', S.HTERM, 'EP MC t_N');
@@ -401,7 +401,7 @@
         { id: 'eC2c', sub: 'c', level: 'MAS', make: function (r, o) {
           var c0 = c2first(o), L = o.p * o.q, n = Math.floor((o.N - 1 - c0) / L) + 1, last = c0 + (n - 1) * L;
           return S.numPart('How many numbers less than ' + t(F(o.N)) + ' appear in both sequences?', n, [[n - 1, 'u1l2-n-1', 'You found the number of steps: add 1.'], [n + 1, 'u1l2-incl', 'Check the last one: ' + t(c0 + n * L) + ' is not less than ' + t(F(o.N)) + '.']],
-            t(c0 + '+' + L + '(n-1)<' + F(o.N)) + ' &nbsp;⇒&nbsp; ' + t('n-1<' + F(Math.round((o.N - c0) / L * 100) / 100)) + ', so ' + t('n=' + n) + ' (the ' + n + 'th is ' + t(last) + ').', ['The common numbers start at ' + t(c0) + ' with ' + t('d=' + L) + '. Solve ' + t('t_n<' + o.N) + '.'], 'EP stretch: count common terms');
+            t(c0 + '+' + L + '(n-1)<' + F(o.N)) + ' &nbsp;⇒&nbsp; ' + t('n-1<' + F(Math.round((o.N - c0) / L * 100) / 100)) + ', so ' + t('n=' + n) + ' (the ' + S.ord(n) + ' is ' + t(last) + ').', ['The common numbers start at ' + t(c0) + ' with ' + t('d=' + L) + '. Solve ' + t('t_n<' + o.N) + '.'], 'EP stretch: count common terms');
         } }] }
   ];
   function c2first(o) { var start = Math.max(o.a, o.b); for (var x = start; x < start + o.p * o.q + 1; x++) if ((x - o.a) % o.p === 0 && (x - o.b) % o.q === 0) return x; return null; }

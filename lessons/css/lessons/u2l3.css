@@ -1,0 +1,132 @@
+/* Math 20-1 · Unit 2 · Lesson 3 — Adding and Subtracting Radicals: styles used only on this page (prefix u2l3-).
+ * Colours: one per radicand (√2 blue #1f5bd6, √3 teal #0f7f80, √5 purple #7b4fc4, √7 amber #c27a0e), cube roots warmer,
+ * numbers slate #3a4254, negative tiles red #c93a33 (dashed); d in sequences amber as in Unit 1. */
+
+.u2l3 .ex-cap .katex { font-size: 1.04em; }
+.u2l3 .chip .katex { font-size: 1em; }
+.u2l3 .pl .katex { font-size: 1.08em; }
+.u2l3 .ans .katex { font-size: 1.04em; }
+.u2l3 .katex { white-space: nowrap; }
+.u2l3 h2 .katex, .u2l3 h3 .katex { font-size: .95em; }
+.u2l3-c3 { color: #0f7f80; }
+.u2l3-c2 { color: #1f5bd6; }
+.u2l3-neg { color: #c93a33; }
+
+/* ---------------- warm-up: Stepping Stones ---------------- */
+.u2l3-yard { width: 100%; max-width: 600px; aspect-ratio: 3 / 2; }
+.u2l3-yardsvg { display: block; width: 100%; height: 100%; }
+.u2l3-ytxt { font: 800 21px var(--round); fill: #4d473b; }
+.u2l3-ytxt-g { fill: #7a1f3d; }
+.u2l3-ytxt-s { font-size: 18px; fill: #6b6455; }
+.u2l3-ttxt { font: 700 12px var(--round); fill: #5a4410; }
+.u2l3-btxt { font: 800 19px var(--round); }
+.u2l3-wbtns { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 2px; }
+.u2l3-wbtns .pill { font-size: 15px; padding: 6px 12px; }
+.wf .u2l3-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
+.wf .u2l3-wqs .q-line .pill.small { padding: 2px 10px; }
+.u2l3-wa { margin: 0 0 6px 40px; }
+.wf .u2l3-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
+.wf .wf-poll { margin-top: 8px; }
+.wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
+.wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
+.wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
+.u2l3-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
+
+/* ---------------- notes ---------------- */
+.u2l3-key { background: #fff; border: 2.5px solid var(--brand2); border-radius: 14px; padding: 12px 18px; margin: 10px 0 14px; }
+.u2l3-key-h { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .06em; color: var(--brand); margin-bottom: 6px; }
+.u2l3-key-f { text-align: center; font-size: 28px; margin: 4px 0; }
+.u2l3-key-l { font-size: 18px; color: var(--ink2); text-align: center; margin-top: 6px; }
+.u2l3-bigf { text-align: center; font-size: 24px; margin: 8px 0; }
+.u2l3-flips { margin: 6px 0 4px; }
+.u2l3-flips .bk-front, .u2l3-flips .bk-back { font-size: 19px; }
+.u2l3-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 16px; }
+.u2l3-step { background: #fff; border: 2px solid #e4ddcf; border-radius: 12px; padding: 10px 14px; font-size: 18.5px; line-height: 1.4; }
+.u2l3-stn { font: 800 13px var(--round); text-transform: uppercase; letter-spacing: .07em; color: #fff; background: var(--brand2); border-radius: 7px; display: inline-block; padding: 2px 9px; margin-bottom: 5px; }
+.u2l3-pows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 6px 0 14px; }
+.u2l3-pow { background: #f6f5f1; border-radius: 12px; padding: 10px 14px; text-align: center; font-size: 22px; }
+.u2l3-pow-h { font: 800 13px var(--round); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 4px; }
+.u2l3-pow-s { font-size: 16px; color: var(--ink2); margin-top: 3px; }
+
+/* ---------------- examples ---------------- */
+.u2l3-exg { display: grid; grid-template-columns: 350px 1fr; gap: 18px; align-items: start; }
+.u2l3-exg.u2l3-exg7 { grid-template-columns: 1fr 380px; }
+.u2l3-fig { position: relative; }
+#u2l3-ex7fig { width: 380px; height: 300px; }
+.u2l3-ansfig { margin-top: 8px; }
+.u2l3-trilab { white-space: nowrap; font-size: 20px; background: rgba(255, 255, 255, .9); border-radius: 7px; padding: 0 4px; }
+.u2l3-trilab.u2l3-xon { color: #7a1f3d; font-weight: 700; border: 2px solid #a33357; }
+
+/* ---------------- explainers (shared) ---------------- */
+.u2l3-svg { overflow: visible; }
+.u2l3-lab { white-space: nowrap; font-size: 18px; line-height: 1.1; }
+.u2l3-panel { background: #fff; border: 1.5px solid #e4ddcf; border-radius: 12px; padding: 8px 14px; box-sizing: border-box; overflow: hidden; }
+.u2l3-ph { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 4px; }
+.u2l3-line { font-size: 21px; line-height: 1.35; margin: 6px 0; }
+.u2l3-line.u2l3-big { font-size: 25px; }
+.u2l3-line.u2l3-key-line { background: #fff4dd; border-radius: 8px; padding: 3px 8px; margin-top: 10px; font-size: 20px; }
+.u2l3-line.u2l3-bad { color: #c93a33; font-size: 18px; position: relative; }
+.u2l3-line.u2l3-bad .bk-stamp { margin-left: 8px; vertical-align: middle; }
+.u2l3-res { font-size: 27px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1.5px solid #e4ddcf; border-radius: 12px; box-sizing: border-box; }
+.u2l3-res.u2l3-res-s { font-size: 23px; }
+
+/* tile bins */
+.u2l3-trow { display: flex; justify-content: center; align-items: flex-start; gap: 8px; }
+.u2l3 .ex-stage > .u2l3-trow { position: absolute; }
+.u2l3-op { font: 700 30px var(--round); color: var(--ink2); align-self: flex-start; margin-top: 10px; }
+.u2l3-tcard { position: relative; background: #fff; border: 2.5px solid var(--c, #c9c3b5); border-radius: 12px; padding: 4px 14px 2px; text-align: center; transition: border-color .3s, background .3s; }
+.u2l3-tcard.on { background: color-mix(in srgb, var(--c) 7%, #fff); }
+.u2l3-tcard.u2l3-unlike { border-style: dashed; border-color: #c93a33; }
+.u2l3-to { font-size: 27px; line-height: 1.5; }
+.u2l3-ts { font-size: 22px; color: var(--c, #1c2230); min-height: 36px; visibility: hidden; }
+.u2l3-ts.on { visibility: visible; }
+.u2l3-bin { border: 2.5px solid var(--c); background: var(--cs); border-radius: 14px; box-sizing: border-box; }
+.u2l3-bin > * { position: absolute; }
+.u2l3-bin-h { left: 0; right: 0; top: 0; display: flex; align-items: center; gap: 10px; padding: 6px 12px; font: 700 17px var(--round); color: var(--c); }
+.u2l3-bin-u .katex { font-size: 1.2em; }
+.u2l3-bin-tot { margin-left: auto; font-size: 25px; color: var(--c); }
+.u2l3-tile { display: grid; place-items: center; box-sizing: border-box; border: 2px solid var(--c); background: var(--cs); color: var(--c); border-radius: 8px; font-size: 19px; overflow: hidden; }
+.u2l3-bin .u2l3-tile { font-size: 18px; }
+.u2l3-tile.u2l3-neg-t { border-style: dashed; }
+.u2l3-tile.u2l3-part .katex { font-size: .8em; }
+.u2l3-tile.u2l3-joined { border-radius: 4px; }
+.u2l3-rbox { background: #fff; border: 2px solid #12805a; border-radius: 12px; padding: 8px 14px; box-sizing: border-box; }
+.u2l3-rtxt { font-size: 28px; color: #12805a; }
+.u2l3-rsub { font-size: 16px; color: var(--ink2); }
+
+/* legs vs hypotenuse */
+.u2l3-area { font-size: 22px; font-weight: 700; color: var(--ink2); }
+.u2l3-slab { font-size: 21px; background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 4px; }
+.u2l3-wk { font: 800 13px var(--round); text-transform: uppercase; letter-spacing: .05em; color: #fff; background: #c27a0e; border-radius: 6px; padding: 2px 7px; margin-right: 6px; vertical-align: 2px; }
+.u2l3-wk.u2l3-wk2 { background: #7a1f3d; }
+
+/* cut the square / cube */
+.u2l3-sqarea { font: 700 22px var(--round); color: var(--ink2); background: rgba(255, 255, 255, .85); border-radius: 8px; padding: 2px 8px; }
+.u2l3-cellt { font: 600 14px var(--round); fill: #6b7280; }
+.u2l3-cellt.u2l3-cellt-b { font-size: 26px; font-weight: 800; fill: #1c2230; }
+.u2l3-cellside { font-size: 18px; background: rgba(251, 250, 246, .85); border-radius: 5px; padding: 0 2px; }
+.u2l3-brl { font-size: 23px; color: #7a1f3d; font-weight: 700; }
+
+/* fractions in front */
+.u2l3-flab { font-size: 30px; }
+.u2l3-flab.u2l3-tot { font: 800 20px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.u2l3-keep { font: 700 15px var(--round); color: #7a1f3d; }
+.u2l3-dropmask { background: rgba(251, 250, 246, .82); }
+.u2l3-fans { font-size: 30px; color: #7a1f3d; }
+
+/* missing side */
+.u2l3-rowlab { font-size: 24px; }
+.u2l3-c-x { color: #7a1f3d; }
+.u2l3-striph { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+
+/* balance */
+.u2l3-beq { font-size: 34px; }
+.u2l3-bside { font-size: 30px; }
+.u2l3-bside2 { font-size: 24px; color: var(--ink2); }
+.u2l3-ybox { display: grid; place-items: center; box-sizing: border-box; border: 2.5px dashed #7b4fc4; background: #f4effc; color: #5b2fa4; border-radius: 8px; font-size: 20px; white-space: nowrap; }
+.u2l3-ybox.u2l3-yon { border-style: solid; background: #efe6fb; font-weight: 700; z-index: 2; }
+
+/* sequences */
+.u2l3-scard { display: grid; place-items: center; box-sizing: border-box; background: #fff; border: 2px solid #c9c3b5; border-radius: 12px; font-size: 23px; }
+.u2l3-tl { font-size: 18px; color: var(--ink2); }
+.u2l3-hlab { font-size: 19px; font-weight: 700; background: rgba(251, 250, 246, .9); border-radius: 6px; padding: 0 4px; }

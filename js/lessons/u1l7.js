@@ -238,7 +238,7 @@
   /* several boxes: fs = [{label, check, key, mode, keys, none, after, before, name}] */
   function fieldsP(prompt, fs, answer, sol, hints, text, o) {
     o = o || {};
-    var fields = fs.map(function (f) { return { label: f.label, name: f.name || String(f.label || '').replace(/\\\(|\\\)|=/g, ''), mode: f.mode, keys: f.keys, none: f.none, before: f.before, after: f.after, vars: f.vars, placeholder: f.placeholder }; });
+    var fields = fs.map(function (f) { return { label: f.label, name: f.name || (function (l) { l = String(l || '').replace(/\\\(|\\\)|=|\\approx/g, '').trim(); return /[\\_^{]/.test(l) ? t(l) : l; })(f.label), mode: f.mode, keys: f.keys, none: f.none, before: f.before, after: f.after, vars: f.vars, placeholder: f.placeholder }; });
     var p = B.fields(prompt, fields, fs.map(function (f) { return f.check; }), fs.map(function (f) { return f.key; }), answer, sol, hints, text);
     if (o.check) p.check = o.check;
     if (o.bad) p.bad = o.bad;
@@ -249,7 +249,7 @@
   function fNum(label, val, o) { o = o || {}; val = qn(val); var fr = !qint(val) && !terminates(val); return { label: label, check: cE(val, { cands: cleanC(o.cands, val), dp: o.dp }), key: fr ? qkeyFrac(val) : qkey(val), mode: fr || o.math ? 'math' : undefined, keys: fr || o.math ? 'fraction' : undefined, after: o.after, before: o.before, name: o.name }; }
   function fRnd(label, x, dp, o) { o = o || {}; return { label: label, check: cR(x, dp, { cands: cleanC(o.cands, x, dp) }), key: fx(x, dp), after: o.after, before: o.before, name: o.name }; }
   function fS(label, val, o) { o = o || {}; return { label: label, check: cS(val == null ? null : qn(val), { dp: o.dp, cands: val == null ? null : cleanC(o.cands, qn(val)), mention: true }), key: val == null ? 'none' : qkeyFrac(qn(val)), mode: 'math', keys: 'fraction', none: true, name: o.name }; }
-  function fT(label, f, key, o) { o = o || {}; return { label: label, check: cT(f, o), key: key, mode: 'math', keys: 'expo', vars: ['n'], name: o.name || 'general term' }; }
+  function fT(label, f, key, o) { o = o || {}; return { label: label, check: cT(f, o), key: key, mode: 'math', keys: 'poly', vars: ['n'], name: o.name || 'general term' }; }
 
   /* ---- formula LaTeX ---- */
   function sumLine(t1, r, n, o) {
