@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="../../css/lessons/u1l7.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
-<script src="../../../js/calc.js"></script>
+<script src="../../../js/calc84.js"></script>
 <script src="../../js/vendor/qrcode.js"></script>
 </head>
 <body>
@@ -176,6 +176,11 @@
   <div class="parts c2">
     <div class="part"><div class="pl">(a) How many terms of <span class="tex">4+20+100+\cdots</span> add to <span class="tex">15\,624</span>?</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=4,\ r=5</span>: <span class="tex">\dfrac{4(5^n-1)}{5-1}=15\,624</span><br><span class="tex">5^n-1=15\,624\Rightarrow 5^n=15\,625</span><br>Trial: <span class="tex">5^5=3125</span>, <span class="tex">5^6=15\,625</span>, so <span class="tex">\boldsymbol{n=6}</span>.</div></div></div>
     <div class="part"><div class="pl">(b) The series <span class="tex">4-8+16-\cdots</span> has a sum of 684. Determine the last term and the number of terms.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=4,\ r=-2</span>: <span class="tex">\dfrac{-2t_n-4}{-2-1}=684</span><br><span class="tex">-2t_n-4=-2052\Rightarrow t_n=1024</span><br><span class="tex">4(-2)^{n-1}=1024\Rightarrow(-2)^{n-1}=256=(-2)^8</span><br><span class="tex">n-1=8</span>, so <b>9 terms</b>; the last term is <b>1024</b>.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Find <span class="tex">n</span> with a table of values on the TI-84.</b> For (a), <span class="keys"><kbd>Y=</kbd></span> <span class="tex">Y_1=4(5^X-1)\div(5-1)</span> (the sum of <span class="tex">X</span> terms), then <span class="keys"><kbd>2nd</kbd><kbd>TBLSET</kbd></span> TblStart = 1, ΔTbl = 1 and <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>: <span class="tex">15\,624</span> is at <span class="tex">X=6</span>. For (b), a table of the terms <span class="tex">4(-2)^{X-1}</span> finds 1024 at <span class="tex">X=9</span>.</div>
+    <div class="u1l7-pcol"><button class="pill" data-keys="Y= CLEAR 4 ( 5 ^ X − 1 ) ÷ ( 5 − 1 ) TBLSET 1 ENTER 1 ENTER TABLE ► ▼ ▼ ▼ ▼ ▼">Table for (a)</button><button class="pill" data-keys="Y= CLEAR 4 ( (−) 2 ) ^ ( X − 1 ) TBLSET 1 ENTER 1 ENTER TABLE ► ▼ ▼ ▼ ▼ ▼ ▼ ▼ ▼">Table for (b)</button></div>
   </div>
   <div class="space" id="ex4-space"></div>
   <button class="more" data-more="ex4-space">+ More space</button>

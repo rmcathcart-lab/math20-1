@@ -274,7 +274,7 @@
     mw.hidden = E.timing !== 'minutes'; tsel.addEventListener('change', function () { E.timing = tsel.value; mw.hidden = E.timing !== 'minutes'; });
     row.appendChild(ml);
     function check(lbl, key, tip) { var l = el('label', 'tt-inline'), c = el('input'); c.type = 'checkbox'; c.checked = !!E[key]; c.addEventListener('change', function () { E[key] = c.checked; }); l.appendChild(c); l.appendChild(document.createTextNode(' ' + lbl)); if (tip) l.title = tip; return l; }
-    row.appendChild(check('Calculator allowed', 'calc', 'Shows the on-screen TI-30XIIS on the test. Untick for a no-calculator test.'));
+    row.appendChild(check('Calculator allowed', 'calc', 'Shows the on-screen TI-84 Plus CE calculator on the test. Untick for a no-calculator test.'));
     row.appendChild(check('Shuffle question order', 'shuffle', 'Every student gets the questions in a different order (their numbers are always their own).'));
     row.appendChild(check('Show outcome and level on each question', 'levels'));
     p.appendChild(row); body.appendChild(p);

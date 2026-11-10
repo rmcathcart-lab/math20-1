@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="../../css/lessons/u1l6.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
-<script src="../../../js/calc.js"></script>
+<script src="../../../js/calc84.js"></script>
 <script src="../../js/vendor/qrcode.js"></script>
 </head>
 <body>
@@ -238,11 +238,11 @@
 <!-- ================= 6. Finding n ================= -->
 <section class="card" data-ink="s6" data-section="6. Finding the Number of Periods">
   <div class="sec-h"><span class="badge">6</span><h2>Finding the Number of Periods with a Table</h2></div>
-  <div class="def">To find <b>when</b> a growing or decaying quantity passes a target, we need the exponent <span class="tex">n</span>. Logarithms are not part of this course, so use a <b>table of values</b>: evaluate <span class="tex">Pr^{\,n}</span> on your calculator for <span class="tex">n=1,2,3,\dots</span> (a graphing calculator’s table does this for you). Find the <b>first</b> whole number of periods that passes the target, and <b>check the value just before it</b>.</div>
+  <div class="def">To find <b>when</b> a growing or decaying quantity passes a target, we need the exponent <span class="tex">n</span>. Logarithms are not part of this course, so use a <b>table of values</b>: evaluate <span class="tex">Pr^{\,n}</span> on your calculator for <span class="tex">n=1,2,3,\dots</span> (the TI-84’s table, <kbd>2nd</kbd> <kbd>TABLE</kbd>, does this for you). Find the <b>first</b> whole number of periods that passes the target, and <b>check the value just before it</b>.</div>
   <div class="tip calc-tip">
     <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
-    <div><b>Build the table on the TI-30XIIS.</b> Enter the start, then keep multiplying the answer: <span class="keys"><kbd>500</kbd><kbd>ENTER</kbd></span>, then <span class="keys"><kbd>×</kbd><kbd>.7</kbd><kbd>ENTER</kbd></span> again and again. Each <kbd>ENTER</kbd> is one more period (the calculator writes <b>Ans×.7</b> for you). Or jump to one row: <span class="keys"><kbd>500</kbd><kbd>×</kbd><kbd>.7</kbd><kbd>^</kbd><kbd>8</kbd><kbd>ENTER</kbd></span>.</div>
-    <div class="u1l6-pcol"><button class="pill" data-keys="500 = × .7 = × .7 = × .7 =">Show the rows</button><button class="pill" data-keys="500 × .7 ^ 8 =">Show one row</button></div>
+    <div><b>Build the table on the TI-84.</b> <span class="keys"><kbd>Y=</kbd></span> <span class="tex">Y_1=500\times0.7^X</span> (the <span class="keys"><kbd>X,T,θ,n</kbd></span> key types <span class="tex">X</span>, the number of passes), <span class="keys"><kbd>2nd</kbd><kbd>TBLSET</kbd></span> TblStart = 0, ΔTbl = 1, then <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>. Scroll with <span class="keys"><kbd>▼</kbd></span> to the first row below the target, and check the row just before it. Without the table: <span class="keys"><kbd>500</kbd><kbd>ENTER</kbd></span>, then <span class="keys"><kbd>×</kbd><kbd>.7</kbd><kbd>ENTER</kbd></span> and <span class="keys"><kbd>ENTER</kbd></span> again and again (each <span class="keys"><kbd>ENTER</kbd></span> is one more period: the calculator writes <b>Ans*.7</b> for you), or one row at a time: <span class="keys"><kbd>500</kbd><kbd>×</kbd><kbd>.7</kbd><kbd>^</kbd><kbd>8</kbd><kbd>ENTER</kbd></span>.</div>
+    <div class="u1l6-pcol"><button class="pill" data-keys="Y= CLEAR 500 × .7 ^ X TBLSET 0 ENTER 1 ENTER TABLE ► ▼ ▼ ▼ ▼ ▼ ▼ ▼ ▼">Show the table</button><button class="pill" data-keys="500 = × .7 = = =">Show the rows</button><button class="pill" data-keys="500 × .7 ^ 8 =">Show one row</button></div>
   </div>
   <div class="explainer" data-explainer="hunt"></div>
 </section>
@@ -271,8 +271,8 @@
   </div>
   <div class="tip calc-tip">
     <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
-    <div><b>After 6 years is 5 hops of 0.91</b> from year 1: <span class="keys"><kbd>140400</kbd><kbd>×</kbd><kbd>.91</kbd><kbd>^</kbd><kbd>5</kbd><kbd>ENTER</kbd></span> gives <b>87&#8239;614.1…</b></div>
-    <div class="u1l6-pcol"><button class="pill" data-keys="140400 × .91 ^ 5 =">Show me</button></div>
+    <div><b>After 6 years is 5 hops of 0.91</b> from year 1: <span class="keys"><kbd>140400</kbd><kbd>×</kbd><kbd>.91</kbd><kbd>^</kbd><kbd>5</kbd><kbd>ENTER</kbd></span> gives <b>87&#8239;614.1…</b><br>For (c), a table of values: <span class="keys"><kbd>Y=</kbd></span> <span class="tex">Y_1=140\,400\times0.91^{X-1}</span>, TblStart = 1, ΔTbl = 1, <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>: <span class="tex">Y_1</span> first drops below 80&#8239;000 at <span class="tex">X=7</span>.</div>
+    <div class="u1l6-pcol"><button class="pill" data-keys="140400 × .91 ^ 5 =">Show me</button><button class="pill" data-keys="Y= CLEAR 140400 × .91 ^ ( X − 1 ) TBLSET 1 ENTER 1 ENTER TABLE ► ▼ ▼ ▼ ▼ ▼ ▼">Table for (c)</button></div>
   </div>
   <div class="space" id="ex8-space"></div>
   <button class="more" data-more="ex8-space">+ More space</button>

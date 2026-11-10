@@ -1,4 +1,4 @@
-/* ---------- calculator (TI-30XIIS layout) ---------- */
+/* ---------- calculator: styles for the old TI-30XIIS (js/calc.js, no longer loaded). The TI-84 Plus CE one (js/calc84.js) brings its own styles; it still uses .calc, .calc-head, .calc-close, .calc-size and .calc-demo-cap from here. ---------- */
 .calc { position: fixed; right: 24px; bottom: 24px; z-index: 60; width: 312px; background: linear-gradient(180deg, #2e3c4f, #1f2a39); border-radius: 22px 22px 30px 30px; padding: 10px 14px 18px; box-shadow: 0 18px 40px rgba(10, 15, 25, .35), inset 0 1px 0 rgba(255, 255, 255, .08); color: #fff; user-select: none; -webkit-user-select: none; outline: none; }
 .calc-head { display: flex; align-items: center; justify-content: space-between; cursor: move; padding: 0 2px 6px; touch-action: none; }
 .calc-brand { font-size: 12px; font-weight: 800; letter-spacing: .06em; color: #c9d3e0; }

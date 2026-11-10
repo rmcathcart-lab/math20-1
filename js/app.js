@@ -59,7 +59,7 @@
     var right = el('div', 'top-right');
     if (session) {
       var calcB = el('button', 'btn btn-ghost top-calc', (HW.CALC_ICON || '') + '<span>Calculator</span>');
-      calcB.type = 'button'; calcB.title = 'On-screen calculator (TI-30XIIS layout)'; calcB.addEventListener('click', function () { HW.Calc.toggle(); });
+      calcB.type = 'button'; calcB.title = 'On-screen graphing calculator (TI-84 Plus CE style)'; calcB.addEventListener('click', function () { HW.Calc.toggle(); });
       if (HW.Times) {
         var ttB = el('button', 'btn btn-ghost top-times', HW.TIMES_ICON); ttB.type = 'button'; ttB.title = 'Multiplication table'; ttB.setAttribute('aria-label', 'Multiplication table');
         ttB.addEventListener('click', function () { HW.Times.toggle(); });

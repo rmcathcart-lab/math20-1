@@ -59,13 +59,26 @@ to `HW.TEACHING.lessons` in `../js/catalog.js`, which also makes `index.html` li
 - Math always in KaTeX (`tex()` / `<span class="tex">`): never visible "x^2". Numbers ≥ 1000 with a thin space (`fmt()`).
 - Projector-readable (≥ 17 px), fixed 1080 px layout (design for ~1000 px content). Interactive things are `<button>`s or
   have `data-tap` (finger AND Pencil).
-- Calculator: the class scientific calculator is the TI-30XIIS (built into every page; `data-keys` demos; KEYMAP tokens:
-  digits `÷ × + − ^ ( ) = √ ˣ√ x² x⁻¹ π (−) F◂▸D ab/c d/e EE % sin cos tan sin⁻¹ cos⁻¹ tan⁻¹`; use `(−)` for
-  negatives; the emulator is in degree mode and `sin` opens a bracket like the real one, e.g. `8 × tan 40 ) =`). The emulator matches the real
-  calculator (e.g. a negative base with a fractional exponent is a DOMAIN error unless the exponent is 1/odd).
-  It has the real key layout: there is NO x³, |x| or MODE key (cube with `^ 3`; angle mode is the DRG key; FIX is
-  2nd + decimal point; SCI/ENG is 2nd DRG). EE (2nd x⁻¹), F◂▸D (2nd PRB), % (2nd "(") and d/e (2nd Ab/c) are 2nd
-  functions: write them in `<span class="keys">` as `<kbd>2nd</kbd><kbd>EE</kbd>` etc. x! is in the PRB menu.
+- Calculator: the class calculator is the **TI-84 Plus CE** (some students have a Casio fx-9750GIII: same features,
+  different keys). The on-screen one (`../js/calc84.js`, the **Calc** button on every page) has the real key layout and
+  TI order of operations (powers before negation, so `(−) 2 x²` = −4; × ÷ and implied multiplication left to right;
+  `^` left to right), Degree mode by default, Classic display (fractions as `-2/125`), Y=, WINDOW, ZOOM, GRAPH, TRACE,
+  2nd TABLE / TBLSET and 2nd CALC (value, zero, minimum, maximum, intersect). Write keys in `<span class="keys">` with
+  TI-84 names: `<kbd>ENTER</kbd>` (there is no = key), `<kbd>(−)</kbd>` for a negative, 2nd functions as
+  `<kbd>2nd</kbd><kbd>TABLE</kbd>`, menu items as `<kbd>MATH</kbd><kbd>1</kbd>` (►Frac). A fraction answer: type the
+  calculation, ENTER, then `MATH 1 ENTER` (the screen shows `Ans►Frac`). Finding *n* with a "table of values" (keep the
+  booklet's wording): put the formula in Y= with `X,T,θ,n` for *n*, set 2nd TBLSET (TblStart, ΔTbl), then 2nd TABLE.
+- `data-keys` "Show me" demos: tokens separated by spaces; each token is one or more key presses and the caption shows
+  the TI-84 key names (the full list is at the top of `js/calc84.js`; `HW.Calc.plan(spec)` reads it):
+  numbers (`500`, `.7`); `+ − × ÷ ^ ( ) ,` and `=`/`ENTER`; `(−)` `x²` `x⁻¹` `sin cos tan log ln` `X` (the X,T,θ,n key)
+  `STO→`; `CLEAR DEL MODE MATH VARS ALPHA 2nd`; `Y= WINDOW ZOOM TRACE GRAPH`; arrows `▲ ▼ ◄ ►`; 2nd functions
+  `√ π e EE { } Ans ENTRY QUIT INS sin⁻¹ cos⁻¹ tan⁻¹ 10^( e^( TABLE TBLSET CALC FORMAT LIST TEST ANGLE L1…L6`; menu
+  items `►Frac ►Dec ³ ³√( ˣ√ Σ( abs( round( iPart( fPart( int( nPr nCr ! seq( dim( cumSum( sum( prod( ° > ≥ < ≤ ≠
+  Y1…Y6 ZStandard ZDecimal ZSquare ZoomFit ZTrig ZInteger ZBox ZoomIn ZoomOut value zero minimum maximum intersect`;
+  letters `A`–`Z` (ALPHA + key; `X` is the X,T,θ,n key); `k:<key id>` for any key. A digit inside a menu picks that
+  item. Each demo starts on a cleared home screen. Examples: `1250 × ( (−) 1 ÷ 5 ) ^ 7 = ►Frac =`;
+  `Y= CLEAR 500 × .7 ^ X TBLSET 0 ENTER 1 ENTER TABLE ► ▼ ▼`; `sum( seq( 3 × 2 ^ ( N − 1 ) , N , 1 , 10 ) ) =`;
+  `Y= CLEAR X x² − 4 ZStandard zero (−) 1 ENTER 5 ENTER 2 ENTER`. `node tests/calc84_test.js` tests the calculator.
 
 ## Testing (budget: aim for ≤ 3 dump runs and ≤ ~12 images viewed in total)
 1. Teacher mode is automatic in the dump script. Run

@@ -15,7 +15,7 @@ const I = {
   undo: '<path d="M9 14L4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>',
   redo: '<path d="M15 14l5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/>',
   board: '<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21l4-4 4 4"/>',
-  // the same calculator icon as the practice site and test mode (js/calc.js HW.CALC_ICON)
+  // the same calculator icon as the practice site and test mode (js/calc84.js HW.CALC_ICON)
   calc: '<rect x="5" y="2.5" width="14" height="19" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="7.5" y="5" width="9" height="4" rx=".6" fill="currentColor" stroke="none" opacity=".35"/><g fill="currentColor" stroke="none"><circle cx="9" cy="12.5" r="1"/><circle cx="12" cy="12.5" r="1"/><circle cx="15" cy="12.5" r="1"/><circle cx="9" cy="15.5" r="1"/><circle cx="12" cy="15.5" r="1"/><circle cx="15" cy="15.5" r="1"/><circle cx="9" cy="18.5" r="1"/><circle cx="12" cy="18.5" r="1"/><circle cx="15" cy="18.5" r="1"/></g>',
   more: '<circle cx="5" cy="12" r="1.6" fill="currentColor"/><circle cx="12" cy="12" r="1.6" fill="currentColor"/><circle cx="19" cy="12" r="1.6" fill="currentColor"/>'
 };
@@ -50,7 +50,7 @@ export function boot({ key, homeHref = '../../', title = '' }) {
     </div>
     <div class="tb-group tb-right">
       <button class="tbtn wide" data-act="board" title="Blank board (B)">${icon('board')}<span>Board</span></button>
-      <button class="tbtn wide" data-act="calc" title="TI-30XIIS calculator (C)">${icon('calc')}<span>Calc</span></button>
+      <button class="tbtn wide" data-act="calc" title="TI-84 Plus CE graphing calculator (C)">${icon('calc')}<span>Calc</span></button>
       <button class="tbtn" data-act="menu" title="More" aria-label="More">${icon('more')}</button>
     </div>`;
   /* The toolbar and its menu live in a fixed layer (#hud) that stays the same size at the top of the screen while
@@ -498,12 +498,15 @@ function fitLesson() {
   new ResizeObserver(fit).observe(lesson); addEventListener('resize', fit); fit();
 }
 
-/* ---------- calculator ---------- */
+/* ---------- calculator ----------
+ * The practice site's TI-84 Plus CE–style calculator (../js/calc84.js). It scales itself to fit the screen; the Size
+ * button asks for 1×, 1.25× or 1.5× (for the projector), and a short, wide screen gets the side-by-side layout. */
 let C = null, scale = 1;
 const SCALES = [1, 1.25, 1.5];
 function calc() {
   if (C) return C;
   C = window.HW.Calc.get();
+  C.top = 62; // below the toolbar
   const head = C.node.querySelector('.calc-head'), tools = h('div', 'calc-tools');
   const big = h('button', 'calc-size', 'Size'); big.type = 'button'; big.title = 'Make the calculator bigger or smaller';
   big.addEventListener('pointerdown', (e) => e.stopPropagation());
@@ -517,34 +520,34 @@ function calc() {
   return C;
 }
 function place(keep) {
-  const box = C.node; box.style.transform = 'scale(' + scale + ')';
-  const w = box.offsetWidth * scale, ht = box.offsetHeight * scale;
+  const box = C.node;
+  if (C.setZoom) C.setZoom(scale); else box.style.transform = 'scale(' + scale + ')';
+  const w = box.offsetWidth, ht = box.offsetHeight;
   let x = parseFloat(box.style.left), y = parseFloat(box.style.top);
   if (!keep || isNaN(x)) { x = innerWidth - w - 18; y = innerHeight - ht - 18; }
   x = Math.max(4, Math.min(innerWidth - w - 4, x)); y = Math.max(62, Math.min(innerHeight - ht - 4, y));
   box.style.left = x + 'px'; box.style.top = y + 'px'; box.style.right = 'auto'; box.style.bottom = 'auto';
 }
-const KEYMAP = { '÷': 'div', '×': 'mul', '+': 'add', '−': 'sub', '-': 'sub', '^': 'pow', '(': 'lp', ')': 'rp', '=': 'enter', ENTER: 'enter', '√': '2nd sqrt', 'ˣ√': '2nd root', 'x²': 'sq', 'x³': 'pow 3', 'x⁻¹': 'inv', 'π': 'pi', CLEAR: 'clear', '(−)': 'neg', 'F◂▸D': '2nd fd', 'ab/c': 'frac', 'd/e': '2nd mixed', EE: '2nd ee', '%': '2nd pct', DRG: 'drg', sin: 'sin', cos: 'cos', tan: 'tan', 'sin⁻¹': '2nd asin', 'cos⁻¹': '2nd acos', 'tan⁻¹': '2nd atan' };
+/* "Show me" buttons: data-keys="1250 × ( (−) 1 ÷ 5 ) ^ 7 = ►Frac =" presses the keys one at a time and shows the
+ * TI-84 key names underneath. The token list is at the top of js/calc84.js (HW.Calc.plan turns it into key presses). */
 let demoGen = 0;
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 export async function calcDemo(spec) {
   const c = calc(); if (!c.isOpen()) c.show();
-  const g = ++demoGen, toks = spec.trim().split(/\s+/), box = c.node;
+  const g = ++demoGen, box = c.node, plan = window.HW.Calc.plan(spec);
   let cap = box.querySelector('.calc-demo-cap'); if (!cap) { cap = h('div', 'calc-demo-cap'); box.appendChild(cap); }
-  c.calc.press('clear'); c.calc.press('clear'); c.calc.second = false; c.calc.menu = null; c.render(); // twice: the first only dismisses an error
-  const label = (t) => (t === '=' ? 'ENTER' : t === '√' ? '2nd x² (√)' : t === 'ˣ√' ? '2nd ^ (ˣ√)' : t === 'x³' ? '^ 3' : t === 'EE' ? '2nd x⁻¹ (EE)' : t === 'F◂▸D' ? '2nd PRB (F◂▸D)' : t === '%' ? '2nd ( (%)' : t === 'ab/c' ? 'A b/c' : t === 'd/e' ? '2nd A b/c (◂▸d/e)' : /^(sin|cos|tan)⁻¹$/.test(t) ? '2nd ' + t.slice(0, 3).toUpperCase() + ' (' + t + ')' : /^(sin|cos|tan)$/.test(t) ? t.toUpperCase() : t);
-  for (let i = 0; i < toks.length; i++) {
+  c.calc.toHome(true); c.render(); // a clear screen, so the class sees only this demo
+  for (let i = 0; i < plan.length; i++) {
     if (g !== demoGen) return;
-    const t = toks[i];
-    cap.innerHTML = '<span>' + toks.map((x, j) => (j === i ? '<u>' + label(x) + '</u>' : label(x))).join(' ') + '</span>';
-    const acts = (KEYMAP[t] || (/^[0-9.]$/.test(t) ? t : t.split('').join(' '))).split(' ');
-    for (const a of acts) {
+    cap.innerHTML = '<span>' + plan.map((x, j) => (j === i ? '<u>' + esc(x.label) + '</u>' : esc(x.label))).join(' ') + '</span>';
+    for (const a of plan[i].keys) {
       if (g !== demoGen) return;
-      const key = a === '2nd' ? box.querySelector('[data-a="second"]') : box.querySelector('[data-a="' + a + '"]') || box.querySelector('[data-b="' + a + '"]');
+      const key = box.querySelector('[data-k="' + a + '"]');
       if (key) key.classList.add('demo');
-      c.calc.press(a === '2nd' ? 'second' : a); c.render();
-      await new Promise((r) => setTimeout(r, 430));
+      c.calc.press(a); c.render();
+      await wait(400);
       if (key) key.classList.remove('demo');
-      await new Promise((r) => setTimeout(r, 110));
+      await wait(100);
     }
   }
   setTimeout(() => { if (g === demoGen) cap.innerHTML = ''; }, 2600);

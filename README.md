@@ -37,7 +37,7 @@ Homework practice for every Math 20-1 lesson, built from the course booklets. Ev
 - After 3 wrong tries (2 for multiple choice) the answer and worked solution are shown, and the student finishes the question with a new version.
 - Leaving the tab or window while a question is open gives that question new numbers and is logged for the teacher.
 - Division ladders and factor trees are built step by step, and every step is checked.
-- The on-screen calculator follows the TI-30XIIS layout and order of operations.
+- The on-screen calculator is a TI-84 Plus CE–style graphing calculator (`js/calc84.js`): the real key layout and order of operations, fractions (MATH ►Frac), seq( / sum(, Y=, graphs, TRACE, tables and CALC zero / minimum / maximum / intersect. Casio fx-9750GIII users have the same features under different keys.
 
 ## Files
 
@@ -52,7 +52,7 @@ Homework practice for every Math 20-1 lesson, built from the course booklets. Ev
 | `js/kitx.js` | Checkers for radicals (mixed/entire), fractions, repeating decimals, rounding, ordering, tables; part builders `K.P.*` |
 | `js/poly.js` | Exact polynomial algebra (`HW.poly`), the polynomial answer checker `K.poly` / `K.P.poly` (exact equality + expanded/simplified nudges + classic-error diagnoses), the `poly` keypad, algebra tiles (`HW.tiles`) and area models (`HW.areaModel`). Tests: `tests/poly_test.js` |
 | `js/widgets.js`, `js/widgets2.js`, `js/steps.js` | Answer inputs: number, list (chips), math (MathLive, with keypads for radicals, fractions, repeating decimals, variables), multiple choice, select, prime/composite with a proof, pairs, ordering, tables, labelled boxes, division ladder, factor tree |
-| `js/calc.js` | The TI-30XIIS-style calculator |
+| `js/calc84.js` | The TI-84 Plus CE–style graphing calculator (`HW.Calc`; key tokens for lesson demos at the top). `js/calc.js` is the old TI-30XIIS one, kept but not loaded |
 | `js/app.js`, `js/ledger.js` | The student app, and syncing to the teacher's ledger |
 | `js/catalog.js` | Units and lessons (a lesson is open once its lesson file exists), `HW.TEACHING` (lessons with a teaching page), `HW.OUTCOMES` |
 | `js/outcomes.js` | The official Math 20-1 outcome wording (general and specific outcomes), shown when an outcome code is tapped |
@@ -60,7 +60,7 @@ Homework practice for every Math 20-1 lesson, built from the course booklets. Ev
 | `assets/notes/math20-1-unit-N-notes.pdf` | The lessons-only notes booklets behind **Printable Notes** (list each unit's page count in `NOTES_PAGES` in `js/app.js`; the button appears once one is listed) |
 | `teacher/` | The teacher dashboard |
 | `backend/Code.gs` | Google Apps Script backend (paste into the Apps Script project) |
-| `tests/` | `node tests/gen_test.js [runs] [lessonId]` (every generator), `node tests/kitx_test.js` (the shared checkers), `node tests/mathlive_form_test.js` (answer keys typed the way the MathLive keyboard writes them), `node tests/calc_test.js`, `node tests/calendar_test.js`; Playwright: `tests/smoke.py`, `tests/e2e.py` (against `backend/mock_server.js`), `tests/lessons_smoke.py`, `tests/badges_test.py`. This repo serves on **8831** (`python3 -m http.server 8831` from the root) with the mock on **8835** (`bash tests/restart_mock.sh`), so it can run beside the Math 15 servers (8821/8825). Tests that set storage before the page loads use the `m201/` prefix |
+| `tests/` | `node tests/gen_test.js [runs] [lessonId]` (every generator), `node tests/kitx_test.js` (the shared checkers), `node tests/mathlive_form_test.js` (answer keys typed the way the MathLive keyboard writes them), `node tests/calc84_test.js` (the TI-84), `node tests/calc_test.js` (the old TI-30XIIS), `node tests/calendar_test.js`; Playwright: `tests/smoke.py`, `tests/e2e.py` (against `backend/mock_server.js`), `tests/lessons_smoke.py`, `tests/badges_test.py`. This repo serves on **8831** (`python3 -m http.server 8831` from the root) with the mock on **8835** (`bash tests/restart_mock.sh`), so it can run beside the Math 15 servers (8821/8825). Tests that set storage before the page loads use the `m201/` prefix |
 
 ## Adding a lesson
 

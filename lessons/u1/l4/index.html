@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="../../css/lessons/u1l4.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
-<script src="../../../js/calc.js"></script>
+<script src="../../../js/calc84.js"></script>
 <script src="../../js/vendor/qrcode.js"></script>
 </head>
 <body>
@@ -201,7 +201,7 @@
   </div>
   <div class="tip calc-tip">
     <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
-    <div><b>One line on the calculator.</b> Brackets keep the order right: <span class="keys"><kbd>25</kbd><kbd>÷</kbd><kbd>2</kbd><kbd>×</kbd><kbd>(</kbd><kbd>2</kbd><kbd>×</kbd><kbd>7</kbd><kbd>+</kbd><kbd>24</kbd><kbd>×</kbd><kbd>4</kbd><kbd>)</kbd><kbd>=</kbd></span>. For a negative first term use <kbd>(−)</kbd>, not <kbd>−</kbd>.</div>
+    <div><b>One line on the calculator.</b> Brackets keep the order right: <span class="keys"><kbd>25</kbd><kbd>÷</kbd><kbd>2</kbd><kbd>×</kbd><kbd>(</kbd><kbd>2</kbd><kbd>×</kbd><kbd>7</kbd><kbd>+</kbd><kbd>24</kbd><kbd>×</kbd><kbd>4</kbd><kbd>)</kbd><kbd>ENTER</kbd></span>. For a negative first term use <kbd>(−)</kbd>, not <kbd>−</kbd>.</div>
     <div class="u1l4-pcol"><button class="pill" data-keys="25 ÷ 2 × ( 2 × 7 + 24 × 4 ) =">Show (a)</button><button class="pill" data-keys="30 ÷ 2 × ( 2 × (−) 20 + 29 × 2.5 ) =">Show (b)</button></div>
   </div>
   <div class="space" id="ex3-space"></div>
@@ -229,7 +229,7 @@
   <div class="def">Substitute everything you know into a sum formula and solve for the unknown.
     <ul class="u1l4-ul">
       <li>Finding <span class="tex">t_1</span> or <span class="tex">d</span> gives a <b>linear equation</b>.</li>
-      <li>Finding <span class="tex">n</span> gives a <b>quadratic equation</b>. Expand, move every term to one side, divide out any common factor, then factor. <span class="tex">n</span> must be a <b>natural number</b>, so reject a negative or fractional root. You can also make a table of values (with a calculator) of <span class="tex">S_n</span> for <span class="tex">n=1,\ 2,\ 3,\ \dots</span> and look for the sum.</li>
+      <li>Finding <span class="tex">n</span> gives a <b>quadratic equation</b>. Expand, move every term to one side, divide out any common factor, then factor. <span class="tex">n</span> must be a <b>natural number</b>, so reject a negative or fractional root. You can also make a table of values (with a calculator) of <span class="tex">S_n</span> for <span class="tex">n=1,\ 2,\ 3,\ \dots</span> and look for the sum: on the TI-84, type <span class="tex">S_n</span> in <kbd>Y=</kbd> with <kbd>X,T,θ,n</kbd> for <span class="tex">n</span>, then <kbd>2nd</kbd> <kbd>TABLE</kbd>.</li>
     </ul></div>
   <h3 class="sub">Linear or quadratic?</h3>
   <div class="explainer" data-explainer="unknownHunt"></div>
@@ -250,8 +250,8 @@
   </div>
   <div class="tip calc-tip">
     <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
-    <div><b>Check your <span class="tex">n</span>.</b> Put it back into the formula: <span class="keys"><kbd>12</kbd><kbd>÷</kbd><kbd>2</kbd><kbd>×</kbd><kbd>(</kbd><kbd>2</kbd><kbd>×</kbd><kbd>6</kbd><kbd>+</kbd><kbd>11</kbd><kbd>×</kbd><kbd>4</kbd><kbd>)</kbd><kbd>=</kbd></span> should give the sum, 336.</div>
-    <div class="u1l4-pcol"><button class="pill" data-keys="12 ÷ 2 × ( 2 × 6 + 11 × 4 ) =">Show me</button></div>
+    <div><b>Check your <span class="tex">n</span>.</b> Put it back into the formula: <span class="keys"><kbd>12</kbd><kbd>÷</kbd><kbd>2</kbd><kbd>×</kbd><kbd>(</kbd><kbd>2</kbd><kbd>×</kbd><kbd>6</kbd><kbd>+</kbd><kbd>11</kbd><kbd>×</kbd><kbd>4</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> should give the sum, 336.<br><b>Or find <span class="tex">n</span> with a table of values.</b> <span class="keys"><kbd>Y=</kbd></span> <span class="tex">Y_1=X\div2\times(2\times6+(X-1)\times4)</span> (use <span class="keys"><kbd>X,T,θ,n</kbd></span> for <span class="tex">X</span>), then <span class="keys"><kbd>2nd</kbd><kbd>TBLSET</kbd></span> TblStart = 5, ΔTbl = 1 and <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>: <span class="tex">Y_1=336</span> at <span class="tex">X=12</span>.</div>
+    <div class="u1l4-pcol"><button class="pill" data-keys="12 ÷ 2 × ( 2 × 6 + 11 × 4 ) =">Show me</button><button class="pill" data-keys="Y= CLEAR X ÷ 2 × ( 2 × 6 + ( X − 1 ) × 4 ) TBLSET 5 ENTER 1 ENTER TABLE ► ▼ ▼ ▼ ▼ ▼ ▼ ▼">Show the table</button></div>
   </div>
   <div class="space" id="ex5-space"></div>
   <button class="more" data-more="ex5-space">+ More space</button>
@@ -325,7 +325,7 @@
   </div>
   <div class="tip calc-tip">
     <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
-    <div><b>Big partial sums.</b> <span class="keys"><kbd>3</kbd><kbd>×</kbd><kbd>20</kbd><kbd>x²</kbd><kbd>+</kbd><kbd>2</kbd><kbd>×</kbd><kbd>20</kbd><kbd>=</kbd></span> gives <span class="tex">S_{20}</span>; change 20 to 19 for <span class="tex">S_{19}</span>.</div>
+    <div><b>Big partial sums.</b> <span class="keys"><kbd>3</kbd><kbd>×</kbd><kbd>20</kbd><kbd>x²</kbd><kbd>+</kbd><kbd>2</kbd><kbd>×</kbd><kbd>20</kbd><kbd>ENTER</kbd></span> gives <span class="tex">S_{20}</span>; change 20 to 19 for <span class="tex">S_{19}</span>.</div>
     <div class="u1l4-pcol"><button class="pill" data-keys="3 × 20 x² + 2 × 20 =">Show S₂₀</button><button class="pill" data-keys="3 × 19 x² + 2 × 19 =">Show S₁₉</button></div>
   </div>
   <div class="space" id="ex9-space"></div>

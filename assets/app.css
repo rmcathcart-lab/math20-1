@@ -238,7 +238,7 @@ math-field { --contains-highlight-background-color: hsl(212, 40%, 95%); --contai
 .tsplit { display: flex; align-items: center; gap: 6px; font-size: 18px; }
 .tree-help { margin-top: 0; }
 
-/* ---------- calculator (TI-30XIIS layout) ---------- */
+/* ---------- calculator: the old TI-30XIIS (js/calc.js, no longer loaded). js/calc84.js (TI-84 Plus CE) brings its own styles and uses .calc and the phone rule below. ---------- */
 .calc { position: fixed; right: 24px; bottom: 24px; z-index: 60; width: 312px; background: linear-gradient(180deg, #2e3c4f, #1f2a39); border-radius: 22px 22px 30px 30px; padding: 10px 14px 18px; box-shadow: 0 18px 40px rgba(10, 15, 25, .35), inset 0 1px 0 rgba(255, 255, 255, .08); color: #fff; user-select: none; -webkit-user-select: none; outline: none; }
 .calc-head { display: flex; align-items: center; justify-content: space-between; cursor: move; padding: 0 2px 6px; touch-action: none; }
 .calc-brand { font-size: 12px; font-weight: 800; letter-spacing: .06em; color: #c9d3e0; }

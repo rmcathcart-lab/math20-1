@@ -387,9 +387,9 @@ const findSum = {
     const nTag = putC(stage, 'u1l7-tag', T(`n=${d.n}`), R.cx[3], 152, 100); hide(nTag);
     const A1 = put(stage, 'u1l7-alg u1l7-alg-l', '', 16, 214, LW); hide(A1);
     const lines = d.steps.map((s, i) => { const e = put(stage, 'u1l7-alg u1l7-alg-l u1l7-alg-sm', T(s), 16, 296 + i * 46, LW); hide(e); return e; });
-    // a TI-30XIIS style two-line screen
+    // a TI-84 Plus CE style home screen: the entry on the left, the answer on the right
     const CX = LW + 50, CW = W - CX - 14;
-    const calc = put(stage, 'u1l7-calc', `<div class="u1l7-calc-h">TI-30XIIS</div><div class="u1l7-scr"><div class="u1l7-scr1"></div><div class="u1l7-scr2"></div></div><div class="u1l7-calc-note"></div>`, CX, 40, CW, 210);
+    const calc = put(stage, 'u1l7-calc', `<div class="u1l7-calc-h">TI-84 <span>Plus CE</span></div><div class="u1l7-scr"><div class="u1l7-scr1"></div><div class="u1l7-scr2"></div></div><div class="u1l7-calc-note"></div>`, CX, 40, CW, 210);
     const s1 = calc.querySelector('.u1l7-scr1'), s2 = calc.querySelector('.u1l7-scr2'), note = calc.querySelector('.u1l7-calc-note');
     const ansEl = putC(stage, 'u1l7-bigans', '', CX + CW / 2, 290, CW); hide(ansEl);
     const steps = [

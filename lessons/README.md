@@ -9,7 +9,7 @@ Math 20-1 lessons built to be projected from an iPad and written on with an Appl
 - **Ink everywhere.** Every card is a writing surface: the Apple Pencil writes, a finger scrolls, a Pencil tap on a button presses it. Pen (4 colours, 3 sizes, pressure-sensitive), highlighter, stroke eraser, laser pointer (fades), hand (Pencil scrolls). Undo/redo, or a two-finger tap to undo. Ink is saved on the device per lesson; clear it from the ••• menu.
 - **Explainers** step through with Next / Back / Play, at the teacher's pace. Most let you pick the number (including the example's number, to check the work after doing it by hand).
 - **Examples** have dotted work space for each part, an Answer button per part, and "+ More space".
-- **Board** opens a blank grid page; **Calc** opens the TI-30XIIS-style calculator from the Math 20-1 Practice site. "Show me" buttons press the keys on the calculator one at a time.
+- **Board** opens a blank grid page; **Calc** opens the TI-84 Plus CE–style graphing calculator from the Math 20-1 Practice site (`../js/calc84.js`). "Show me" buttons press the keys on the calculator one at a time, with the TI-84 key names underneath.
 
 ## Live notes for students
 
@@ -27,11 +27,11 @@ yet: `inkApi` is empty, so for now ink is saved on each device only.
   the lesson's id is in `HW.TEACHING.lessons` (then it links to `uN/lM/`, keeping `?class=B`).
 - `js/ink.js` — the Pencil ink engine (SVG layer per `[data-ink]` element, strokes stored in a 1000-unit-wide coordinate system so they scale with the page). Uses [perfect-freehand](https://github.com/steveruizok/perfect-freehand) (MIT) for pressure strokes.
 - `js/share.js`, `js/config.js`, `backend/Code.gs` — live sharing (see above).
-- `js/ui.js` — toolbar, menu, board, calculator wiring and key-press demos (`data-keys="91 ÷ 7 ="`).
+- `js/ui.js` — toolbar, menu, board, calculator wiring and key-press demos (`data-keys="91 ÷ 7 ="`; tokens in `LESSON_BRIEF.md` and at the top of `../js/calc84.js`).
 - `js/explain.js` — the step-through explainer framework (`Explainer`), the tap-to-split `FactorTree`, number helpers.
 - `js/blocks.js` — the shared building blocks (graphs, number lines, tables, triangles, flowcharts, polls…; see `BLOCKS.md`, demo page `dev/blocks.html`).
 - `js/lessons/uNlM.js` — each lesson's explainers (none yet).
-- `css/calc.css` — calculator styles for lesson pages; the calculator itself is the practice site's `../js/calc.js` (shared), as is KaTeX (`../assets/katex`).
+- `css/calc.css` — the demo highlight styles; the calculator itself (with its own styles) is the practice site's `../js/calc84.js` (shared), as is KaTeX (`../assets/katex`). `../js/calc.js` (the old TI-30XIIS) is no longer loaded.
 - `uN/lM/index.html` — the lesson pages (none yet; Units 1–2 are being built).
 
 ## Adding a lesson

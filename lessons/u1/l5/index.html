@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="../../css/lessons/u1l5.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
-<script src="../../../js/calc.js"></script>
+<script src="../../../js/calc84.js"></script>
 <script src="../../js/vendor/qrcode.js"></script>
 </head>
 <body>
@@ -118,8 +118,8 @@
   <div class="explainer" data-explainer="notFifteen"></div>
   <div class="tip calc-tip">
     <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
-    <div><b>On the calculator</b>, type <span class="tex">t_1r^{n-1}</span> just as it is written; the calculator does the power first. Put a <b>negative or fraction</b> <span class="tex">r</span> in <b>brackets</b>: <span class="keys"><kbd>1250</kbd><kbd>×</kbd><kbd>(</kbd><kbd>(−)</kbd><kbd>1</kbd><kbd>÷</kbd><kbd>5</kbd><kbd>)</kbd><kbd>^</kbd><kbd>7</kbd><kbd>ENTER</kbd></span>, then <span class="keys"><kbd>2nd</kbd><kbd>PRB</kbd></span> (F◂▸D) turns the decimal into a fraction.</div>
-    <div class="u1l5-pcol"><button class="pill" data-keys="7 × 2 ^ 11 =">Show 7(2)¹¹</button><button class="pill" data-keys="1250 × ( (−) 1 ÷ 5 ) ^ 7 = F◂▸D">Show 1&#8239;250(−⅕)⁷</button></div>
+    <div><b>On the calculator</b>, type <span class="tex">t_1r^{n-1}</span> just as it is written; the calculator does the power first. Put a <b>negative or fraction</b> <span class="tex">r</span> in <b>brackets</b>: <span class="keys"><kbd>1250</kbd><kbd>×</kbd><kbd>(</kbd><kbd>(−)</kbd><kbd>1</kbd><kbd>÷</kbd><kbd>5</kbd><kbd>)</kbd><kbd>^</kbd><kbd>7</kbd><kbd>ENTER</kbd></span>, then <span class="keys"><kbd>MATH</kbd><kbd>1</kbd><kbd>ENTER</kbd></span> (►Frac) turns the decimal into a fraction.</div>
+    <div class="u1l5-pcol"><button class="pill" data-keys="7 × 2 ^ 11 =">Show 7(2)¹¹</button><button class="pill" data-keys="1250 × ( (−) 1 ÷ 5 ) ^ 7 = ►Frac =">Show 1&#8239;250(−⅕)⁷</button></div>
   </div>
 </section>
 
@@ -162,12 +162,12 @@
 <!-- ================= 3. Number of terms ================= -->
 <section class="card" data-ink="s3" data-section="3. Finding the Number of Terms">
   <div class="sec-h"><span class="badge">3</span><h2>Finding the Number of Terms</h2></div>
-  <div class="def">To find the number of terms, set <span class="tex">t_n</span> equal to the <b>last term</b> and solve for <span class="tex">n</span>. <b>Divide</b> both sides by <span class="tex">t_1</span>, then write both sides as <b>powers of the same base</b> and compare exponents. <span class="muted">(A table of values of <span class="tex">t_1r^{n-1}</span> for <span class="tex">n=1,\ 2,\ 3,\ \dots</span> also works.)</span></div>
+  <div class="def">To find the number of terms, set <span class="tex">t_n</span> equal to the <b>last term</b> and solve for <span class="tex">n</span>. <b>Divide</b> both sides by <span class="tex">t_1</span>, then write both sides as <b>powers of the same base</b> and compare exponents. <span class="muted">(A table of values of <span class="tex">t_1r^{n-1}</span> for <span class="tex">n=1,\ 2,\ 3,\ \dots</span> also works: on the TI-84, <kbd>2nd</kbd> <kbd>TABLE</kbd>.)</span></div>
   <div class="explainer" data-explainer="countTerms"></div>
   <div class="tip calc-tip">
     <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
-    <div><b>Check your <span class="tex">n</span>.</b> Put it back into <span class="tex">t_1r^{n-1}</span>: the calculator should give the last term. For Example 4(b), <span class="tex">n=8</span>: <span class="keys"><kbd>1215</kbd><kbd>×</kbd><kbd>(</kbd><kbd>(−)</kbd><kbd>1</kbd><kbd>÷</kbd><kbd>3</kbd><kbd>)</kbd><kbd>^</kbd><kbd>7</kbd><kbd>ENTER</kbd></span> then <span class="keys"><kbd>2nd</kbd><kbd>PRB</kbd></span> shows <span class="tex">-\frac59</span>.</div>
-    <div class="u1l5-pcol"><button class="pill" data-keys="3 × 2 ^ 11 =">Check 4(a)</button><button class="pill" data-keys="1215 × ( (−) 1 ÷ 3 ) ^ 7 = F◂▸D">Check 4(b)</button></div>
+    <div><b>Check your <span class="tex">n</span>.</b> Put it back into <span class="tex">t_1r^{n-1}</span>: the calculator should give the last term. For Example 4(b), <span class="tex">n=8</span>: <span class="keys"><kbd>1215</kbd><kbd>×</kbd><kbd>(</kbd><kbd>(−)</kbd><kbd>1</kbd><kbd>÷</kbd><kbd>3</kbd><kbd>)</kbd><kbd>^</kbd><kbd>7</kbd><kbd>ENTER</kbd></span> then <span class="keys"><kbd>MATH</kbd><kbd>1</kbd><kbd>ENTER</kbd></span> (►Frac) shows <span class="tex">-5/9</span>.<br><b>Or find <span class="tex">n</span> with a table of values.</b> For Example 4(a), <span class="keys"><kbd>Y=</kbd></span> <span class="tex">Y_1=3\times2^{X-1}</span>, <span class="keys"><kbd>2nd</kbd><kbd>TBLSET</kbd></span> TblStart = 5, ΔTbl = 1, then <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>: 6144 is at <span class="tex">X=12</span>.</div>
+    <div class="u1l5-pcol"><button class="pill" data-keys="3 × 2 ^ 11 =">Check 4(a)</button><button class="pill" data-keys="1215 × ( (−) 1 ÷ 3 ) ^ 7 = ►Frac =">Check 4(b)</button><button class="pill" data-keys="Y= CLEAR 3 × 2 ^ ( X − 1 ) TBLSET 5 ENTER 1 ENTER TABLE ► ▼ ▼ ▼ ▼ ▼ ▼ ▼">Table for 4(a)</button></div>
   </div>
 </section>
 
