@@ -44,38 +44,33 @@
 </section>
 
 <!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: Tilted Squares" id="wu" style="--wf-side: 360px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Tilted Squares</h2>
-  <p class="wf-rule">On a dot grid, every corner of a square must sit on a dot. A square can stand <b>upright</b> or be <b>tilted</b>. Tap a square to draw it, then tap <b>Box it</b> to find its area: the box around it minus the four corner triangles.</p></div>
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: Radical Dominoes" id="wu" style="--wf-side: 360px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Radical Dominoes</h2>
+  <p class="wf-rule">Build a chain from <b>START</b> to <b>END</b>. A domino can join only if its left end is <b>equal</b> to the end it touches, once both are simplified. Tap a loose domino to try it. Some dominoes are traps!</p></div>
   <div class="wf-grid"><div class="wf-main">
-    <div class="u2l7-geo" id="u2l7-geo"></div>
-    <div class="u2l7-wbtns">
-      <button type="button" class="pill" data-sq="up3">Upright 3 by 3</button>
-      <button type="button" class="pill" data-sq="t11">Tilt 1, 1</button>
-      <button type="button" class="pill" data-sq="t12">Tilt 1, 2</button>
-      <button type="button" class="pill" data-sq="t22">Tilt 2, 2</button>
-      <button type="button" class="pill u2l7-boxit" id="u2l7-boxit">Box it</button>
-    </div>
-    <p class="u2l7-social">Challenge your neighbour: draw a tilted square with an area of <b>10</b>. What is its side length?</p>
+    <div class="u2l7-dom" id="u2l7-dom"></div>
+    <div class="u2l7-dmsg" id="u2l7-dmsg">The chain ends in <span class="tex">\sqrt{12}</span>. Which domino comes next?</div>
+    <div class="u2l7-wbtns"><button type="button" class="pill" id="u2l7-dreset">Start over</button></div>
+    <p class="u2l7-social">Challenge your neighbour: design a domino that could join after <span class="tex">4\sqrt{5}</span>, with its left end written as an <b>entire radical</b>.</p>
   </div><div class="wf-side">
     <div class="u2l7-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div><b>Upright 3 by 3</b>: area? Side? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l7-wa"><div class="bk-ans">Area <b>9</b>, side <span class="tex">\sqrt{9}=3</span></div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div><b>Tilt 1, 1</b>: box it. Area? Side? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l7-wa"><div class="bk-ans"><span class="tex">4-4\times\tfrac12</span>: area <b>2</b>, side <span class="tex">\sqrt{2}</span></div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div><b>Tilt 1, 2</b>: area? Side? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l7-wa"><div class="bk-ans"><span class="tex">9-4\times1</span>: area <b>5</b>, side <span class="tex">\sqrt{5}</span></div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>START ends in <span class="tex">\sqrt{12}</span>. What must the next domino start with? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u2l7-wa"><div class="bk-ans"><span class="tex">\sqrt{12}=\sqrt{4}\cdot\sqrt{3}=2\sqrt{3}</span></div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Simplify <span class="tex">\sqrt{3}\cdot\sqrt{15}</span>. <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u2l7-wa"><div class="bk-ans"><span class="tex">\sqrt{45}=\sqrt{9}\cdot\sqrt{5}=3\sqrt{5}</span></div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Simplify <span class="tex">\dfrac{10}{\sqrt{5}}</span>. <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u2l7-wa"><div class="bk-ans"><span class="tex">\dfrac{10}{\sqrt{5}}\cdot\dfrac{\sqrt{5}}{\sqrt{5}}=\dfrac{10\sqrt{5}}{5}=2\sqrt{5}</span></div></div></div>
     </div>
     <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> <b>Tilt 2, 2</b> has area 8: side <span class="tex">\sqrt{8}</span>. How many times as long as the <span class="tex">\sqrt{2}</span> side is it? <b>Guess!</b></div></div>
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> The last join is <span class="tex">\sqrt{2}+\sqrt{8}</span>. Which <b>END</b> domino fits? <b>Guess!</b></div></div>
       <div class="poll-opts c2">
-        <div class="opt"><b>A</b> 4 times</div>
-        <div class="opt right"><b>B</b> 2 times</div>
-        <div class="opt"><b>C</b> <span class="tex">\sqrt{6}</span> times</div>
-        <div class="opt"><b>D</b> can’t tell</div>
+        <div class="opt"><b>A</b> <span class="tex">\sqrt{10}</span></div>
+        <div class="opt right"><b>B</b> <span class="tex">\sqrt{18}</span></div>
+        <div class="opt"><b>C</b> <span class="tex">2\sqrt{2}</span></div>
+        <div class="opt"><b>D</b> <span class="tex">4</span></div>
       </div>
       <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>B, 2 times.</b> <span class="tex">\sqrt{8}=\sqrt{4}\cdot\sqrt{2}=2\sqrt{2}</span>. You can <b>see</b> it: the side of tilt 2, 2 runs through a dot halfway, so it is two <span class="tex">\sqrt{2}</span> diagonals end to end: <span class="tex">\sqrt{2}+\sqrt{2}=2\sqrt{2}</span>, not <span class="tex">\sqrt{4}</span>.</div>
+      <div class="poll-ans"><b>B, <span class="tex">\sqrt{18}</span>.</b> <span class="tex">\sqrt{2}+\sqrt{8}=\sqrt{2}+2\sqrt{2}=3\sqrt{2}=\sqrt{18}</span>. <b>A</b> adds under the root (<span class="tex">\sqrt{2+8}</span>), a classic error. <b>D</b> multiplies instead: <span class="tex">\sqrt{2}\cdot\sqrt{8}=4</span>.</div>
     </div>
   </div></div>
 </section>

@@ -8,12 +8,23 @@
 .u2l7-intro, .u2l7-p { font-size: 19px; line-height: 1.45; margin: 4px 0 12px; }
 .u2l7-note { font-size: 17px; color: var(--ink2); margin: -4px 0 12px; }
 
-/* ---------------- warm-up: Tilted Squares ---------------- */
-.u2l7-geo { position: relative; }
-.u2l7-geobox { border-radius: 14px; }
-.u2l7-geoside { font-size: 19px; font-weight: 700; color: #a33357; background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 4px; }
-.u2l7-georead { min-height: 50px; margin: 6px 2px 0; font-size: 17.5px; line-height: 1.35; }
-.u2l7-georead2 { font-size: 16px; color: #8a5a00; }
+/* ---------------- warm-up: Radical Dominoes ---------------- */
+.u2l7-dom { position: relative; background: #f3efe4; border-radius: 14px; }
+.u2l7-dom > * { position: absolute; }
+.u2l7-dslot { box-sizing: border-box; border: 2.5px dashed #cfc5ad; border-radius: 12px; }
+.u2l7-dlink { font: 800 26px var(--round); color: #b3a885; }
+.u2l7-dtray { left: 12px !important; font: 800 14px var(--round); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.u2l7-domino { box-sizing: border-box; display: grid; grid-template-columns: 1fr 1fr; padding: 0; background: #fffdf6; border: 2.5px solid #1c2230; border-radius: 12px; box-shadow: 0 3px 0 #1c2230; font: inherit; color: var(--ink); cursor: pointer; transition: height .3s, background .3s, border-color .3s; }
+.u2l7-dh { display: grid; place-items: center; font-size: 19px; overflow: hidden; }
+.u2l7-dh + .u2l7-dh { border-left: 2px solid #1c2230; }
+.u2l7-dword { font: 800 15px var(--round); letter-spacing: .05em; color: #7a1f3d; }
+.u2l7-domino.u2l7-dstart { background: #fbeff3; }
+.u2l7-domino.u2l7-placed { background: #eef8f3; border-color: #12805a; box-shadow: 0 3px 0 #12805a; cursor: default; z-index: 2; }
+.u2l7-domino.u2l7-dno { background: #fde2df; border-color: #c93a33; }
+.u2l7-ddone .u2l7-dslot { border-color: #12805a; }
+.u2l7-dmsg { min-height: 50px; margin: 6px 2px 0; font-size: 17px; line-height: 1.35; }
+.u2l7-dmsg.u2l7-dbad { color: #c93a33; }
+.u2l7-dmsg.u2l7-dok { color: #12805a; }
 .u2l7-wbtns { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 2px; }
 .u2l7-wbtns .pill { font-size: 15px; padding: 6px 12px; }
 .u2l7-wbtns .pill.u2l7-on { background: #fbeff3; box-shadow: 0 0 0 2px #a33357 inset; }

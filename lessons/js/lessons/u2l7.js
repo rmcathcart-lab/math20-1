@@ -1,5 +1,6 @@
 /* Math 20-1 · Unit 2 · Lesson 7 — Unit 2 Review (no calculator: exact answers).
- * Warm-up (Tilted Squares: squares on a dot grid; box a tilted square to find its area; is √8 twice √2?), and the explainers:
+ * Warm-up (Radical Dominoes: tap loose dominoes to build a chain whose touching ends are equal once simplified; decoys
+ *   for √12 = 4√3 and √2 + √8 = √10; which END domino fits √2 + √8?), and the explainers:
  *   whichOp (choosing the operation: a flowchart lights the path + / × / ÷ → the right method, the work panel does it;
  *     summary-table and Example 3(a), 4(a), 4(b), 5(a), 5(c), 6(a) checks),
  *   inspector (STAR: the simplest-form inspector — an expression on the bench passes the five checks in working order;
@@ -50,58 +51,58 @@ async function swap(c, el, html) {
 const putStamp = (stage, text, x, y, o = {}) => hide(stamp(stage, text, Object.assign({ ok: true, x, y }, o)));
 const stampOn = async (c, st) => { st.style.opacity = 1; await stampIn(c, st); };
 
-/* =============================== warm-up: Tilted Squares =============================== */
-const GEO = {
-  up3: { a: 3, b: 0, box: '3^2=9', tri: null, area: 9, side: '\\sqrt{9}=3' },
-  t11: { a: 1, b: 1, box: '2^2=4', tri: '4\\times\\tfrac12=2', area: 2, side: '\\sqrt{2}' },
-  t12: { a: 1, b: 2, box: '3^2=9', tri: '4\\times1=4', area: 5, side: '\\sqrt{5}' },
-  t22: { a: 2, b: 2, box: '4^2=16', tri: '4\\times2=8', area: 8, side: '\\sqrt{8}=2\\sqrt{2}' }
+/* =============================== warm-up: Radical Dominoes =============================== */
+/* each domino: l = left end (TeX) and its value key, r = right end (TeX); END dominoes have r = null.
+ * the chain's open ends and their simplified forms: √12 = 2√3, √50 = 5√2, √3·√15 = 3√5, 10/√5 = 2√5, √2+√8 = 3√2 */
+const DOMS = {
+  X: { l: '4\\sqrt{3}', k: '4r3', r: '\\sqrt{45}' },
+  C: { l: '3\\sqrt{5}', k: '3r5', r: '\\dfrac{10}{\\sqrt{5}}', kr: '2r5' },
+  E1: { l: '\\sqrt{10}', k: 'r10', r: null },
+  A: { l: '2\\sqrt{3}', k: '2r3', r: '\\sqrt{50}', kr: '5r2' },
+  D: { l: '2\\sqrt{5}', k: '2r5', r: '\\sqrt{2}+\\sqrt{8}', kr: '3r2' },
+  E2: { l: '\\sqrt{18}', k: '3r2', r: null },
+  B: { l: '5\\sqrt{2}', k: '5r2', r: '\\sqrt{3}\\cdot\\sqrt{15}', kr: '3r5' }
 };
-function mountGeo() {
-  const host = document.getElementById('u2l7-geo'); if (!host) return;
-  const W = Math.max(480, Math.min(640, host.clientWidth || 600)), H = 268, NX = 8, NY = 4;
-  const sp = Math.min((W - 40) / NX, (H - 24) / NY), ox = (W - sp * NX) / 2, oy = (H - sp * NY) / 2;
-  const B = new Box(host, {}, 'u2l7-geobox', W, H);
-  svgEl('rect', { x: 0, y: 0, width: W, height: H, rx: 14, fill: '#f7f4ec' }, B.svg);
-  const P = (gx, gy) => [ox + gx * sp, oy + gy * sp];
-  const L = svgEl('g', {}, B.svg);
-  const dots = svgEl('g', {}, B.svg);
-  for (let i = 0; i <= NX; i++) for (let j = 0; j <= NY; j++) { const [x, y] = P(i, j); svgEl('circle', { cx: x, cy: y, r: 5, fill: '#6a7182' }, dots); }
-  const top = svgEl('g', {}, B.svg);
-  const read = h('div', 'u2l7-georead', 'Tap a square to draw it.'); host.appendChild(read);
-  let cur = null;
-  function draw(key, boxed, animate) {
-    L.innerHTML = ''; top.innerHTML = ''; B.html.innerHTML = '';
-    const d = GEO[key], s = d.a + d.b, gx0 = Math.floor((NX - s) / 2), gy0 = Math.floor((NY - s) / 2);
-    const v = [[d.a, 0], [s, d.a], [d.b, s], [0, d.b]].map(([x, y]) => P(gx0 + x, gy0 + y));
-    if (boxed) {
-      const [bx, by] = P(gx0, gy0);
-      svgEl('rect', { x: bx, y: by, width: s * sp, height: s * sp, fill: 'none', stroke: AMB, 'stroke-width': 3, 'stroke-dasharray': '9 7' }, L);
-      if (d.b) {
-        const corners = [[gx0, gy0], [gx0 + s, gy0], [gx0 + s, gy0 + s], [gx0, gy0 + s]].map(([x, y]) => P(x, y));
-        for (let i = 0; i < 4; i++) {
-          const a = v[i], b = v[(i + 3) % 4], cc = corners[i];
-          svgEl('path', { d: `M${a[0]} ${a[1]} L${cc[0]} ${cc[1]} L${b[0]} ${b[1]} Z`, fill: '#c9ccd3', 'fill-opacity': 0.75, stroke: '#9aa0ab', 'stroke-width': 1.5 }, L);
-        }
-      }
+const DEND = { '2r3': ['\\sqrt{12}', '2\\sqrt{3}'], '5r2': ['\\sqrt{50}', '5\\sqrt{2}'], '3r5': ['\\sqrt{3}\\cdot\\sqrt{15}', '\\sqrt{45}=3\\sqrt{5}'],
+  '2r5': ['\\dfrac{10}{\\sqrt{5}}', '\\dfrac{10\\sqrt{5}}{5}=2\\sqrt{5}'], '3r2': ['\\sqrt{2}+\\sqrt{8}', '\\sqrt{2}+2\\sqrt{2}=3\\sqrt{2}'] };
+const DWHY = { 'r10': `${T('\\sqrt{2}+\\sqrt{8}\\ne\\sqrt{2+8}')}: you can’t add under the root!`, '4r3': `${T('\\sqrt{12}=\\sqrt{4}\\cdot\\sqrt{3}=2\\sqrt{3}')}, not ${T('4\\sqrt{3}')} (that is ${T('\\sqrt{48}')}).` };
+function mountDominoes() {
+  const host = document.getElementById('u2l7-dom'), msg = document.getElementById('u2l7-dmsg'); if (!host) return;
+  const W = Math.max(520, Math.min(640, host.clientWidth || 600)), DW = Math.min(184, (W - 40) / 3), DH = 58, GX = (W - 3 * DW) / 4;
+  box(host, W, 352);
+  const half = (tex_, cls = '') => `<span class="u2l7-dh ${cls}">${tex_}</span>`;
+  const slotXY = (i) => [GX + (i % 3) * (DW + GX), 8 + Math.floor(i / 3) * 76];
+  for (let i = 0; i < 6; i++) { const [x, y] = slotXY(i); add(host, box(h('div', 'u2l7-dslot'), DW, DH), x, y); }
+  const lk = h('div', 'u2l7-dlink', '↩'); add(host, lk, W - 26, 40);
+  add(host, h('div', 'u2l7-dtray', 'Loose dominoes'), 0, 160);
+  const start = add(host, box(h('div', 'u2l7-domino u2l7-dstart', half('<b>START</b>', 'u2l7-dword') + half(T('\\sqrt{12}'))), DW, DH), ...slotXY(0));
+  const keys = Object.keys(DOMS), tiles = {};
+  const trayXY = (j) => [GX + (j % 3) * (DW + GX), 186 + Math.floor(j / 3) * 56];
+  keys.forEach((k, j) => {
+    const d = DOMS[k], b = h('button', 'u2l7-domino', half(T(d.l)) + (d.r ? half(T(d.r)) : half('<b>END</b>', 'u2l7-dword')));
+    b.type = 'button'; box(b, DW, DH - 10); b.home = trayXY(j); add(host, b, ...b.home); tiles[k] = b;
+    b.addEventListener('click', () => tryTile(k));
+  });
+  void start;
+  let end = '2r3', n = 1, busy = false;
+  const say = (html, cls = '') => { msg.className = 'u2l7-dmsg ' + cls; msg.innerHTML = html; };
+  async function tryTile(k) {
+    const d = DOMS[k], b = tiles[k], c = liveCtx(); if (busy || b.classList.contains('u2l7-placed') || !end) return;
+    if (d.k !== end) {
+      b.classList.add('u2l7-dno'); await shake(c, b); b.classList.remove('u2l7-dno');
+      say(DWHY[d.k] && ((d.k === 'r10' && end === '3r2') || (d.k === '4r3' && end === '2r3')) ? `No match. ${DWHY[d.k]}` : `No match: the chain ends in ${T(DEND[end][0])}, and that simplifies to ${T(DEND[end][1].split('=').pop())}, not ${T(d.l)}.`, 'u2l7-dbad');
+      return;
     }
-    const poly = svgEl('path', { class: 'bk-stroke', d: 'M' + v.map((p) => p.join(' ')).join(' L') + ' Z', fill: ROSE, 'fill-opacity': 0.2, stroke: ROSE, 'stroke-width': 4, 'stroke-linejoin': 'round' }, top);
-    if (animate) drawIn(poly, 700, liveCtx());
-    if (boxed) {
-      v.forEach((p) => svgEl('circle', { cx: p[0], cy: p[1], r: 6.5, fill: ROSE }, top));
-      if (key === 't22') for (let i = 0; i < 4; i++) { const a = v[i], b = v[(i + 1) % 4]; svgEl('circle', { cx: (a[0] + b[0]) / 2, cy: (a[1] + b[1]) / 2, r: 8, fill: AMB, stroke: '#fff', 'stroke-width': 2 }, top); }
-      const m = [(v[0][0] + v[1][0]) / 2, (v[0][1] + v[1][1]) / 2];
-      lab(B, m[0] + 16, m[1] - 14, T(d.side.split('=')[0]), 'u2l7-geoside', 'ne');
-      read.innerHTML = `<b>Box</b> ${T(d.box)}` + (d.tri ? ` &nbsp;−&nbsp; <b>triangles</b> ${T(d.tri)}` : '') + ` &nbsp;=&nbsp; <b>area ${d.area}</b>. &nbsp; Side ${T(d.side)}` +
-        (key === 't22' ? `<br><span class="u2l7-georead2">Each side runs through a dot halfway: ${T('\\sqrt{2}+\\sqrt{2}=2\\sqrt{2}')}</span>` : '');
-    } else read.innerHTML = `<b>${key === 'up3' ? 'Upright 3 by 3' : 'Tilt ' + d.a + ', ' + d.b}</b>: tap <b>Box it</b> to find its area.`;
+    busy = true; b.classList.add('u2l7-placed'); box(b, DW, DH);
+    const [x, y] = slotXY(n); await flyTo(c, b, x, y, 520);
+    say(`Match! ${T(DEND[end][0] + '=' + DEND[end][1].split('=').pop())}` + (d.r ? ` Now the chain ends in ${T(d.r)}.` : ''), 'u2l7-dok');
+    n++; end = d.kr || null; busy = false;
+    if (!end) { say(`<b>Chain complete!</b> Every join is equal once it is in <b>simplest form</b>.`, 'u2l7-dok'); host.classList.add('u2l7-ddone'); }
   }
-  host.closest('.card').querySelectorAll('[data-sq]').forEach((b) => b.addEventListener('click', () => {
-    cur = b.dataset.sq; draw(cur, false, true);
-    host.closest('.card').querySelectorAll('[data-sq]').forEach((x) => x.classList.toggle('u2l7-on', x === b));
-  }));
-  const bx = document.getElementById('u2l7-boxit');
-  if (bx) bx.addEventListener('click', () => { if (!cur) { read.innerHTML = 'Draw a square first, then <b>Box it</b>.'; return; } draw(cur, true, false); });
+  document.getElementById('u2l7-dreset').addEventListener('click', () => {
+    keys.forEach((k) => { const b = tiles[k]; b.classList.remove('u2l7-placed'); box(b, DW, DH - 10); b.style.left = b.home[0] + 'px'; b.style.top = b.home[1] + 'px'; });
+    end = '2r3'; n = 1; host.classList.remove('u2l7-ddone'); say(`The chain ends in ${T('\\sqrt{12}')}. Which domino comes next?`);
+  });
 }
 
 /* =============================== explainer: choosing the operation =============================== */
@@ -907,6 +908,6 @@ standup('u2l7', {
 });
 
 /* =============================== mount =============================== */
-mountGeo();
+mountDominoes();
 export const explainers = mountExplainers({ whichOp, inspector, whyWrong, order, restrict, varRad, collect, areaModel, rationalize, rectangle, ratIrr });
 export const _test = { WO, INS, WW, OR, RS, VR, CL, AM, RZ, RI };

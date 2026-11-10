@@ -355,7 +355,7 @@
     o.cands = (o.cands || []).filter(function (c) { return c && !sameVal(typeof c[0] === 'number' ? function () { return c[0]; } : texFn(c[0]), kf, vars); });
     var bad = (o.cands || []).filter(function (c) { return c && typeof c[0] === 'string'; }).map(function (c) { return c[0]; }).concat(o.bad || []);
     return { prompt: prompt, input: { type: 'math', keys: KS, vars: vars, before: o.before, after: o.after, placeholder: vars.length ? 'e.g. 2sqrt(3x)/x' : 'e.g. (5sqrt(3)+3)/3' },
-      check: RX(keyTex, o), key: keyTex, answer: t((o.ansPre || '') + keyTex + (o.unit ? '\\text{ ' + o.unit + '}' : '')), solution: o.sol, hints: o.hints || [], text: o.text, bad: bad, good: (o.good || []).filter(Boolean) };
+      check: RX(keyTex, o), key: keyTex, answer: dd(t((o.ansPre || '') + keyTex + (o.unit ? '\\text{ ' + o.unit + '}' : ''))), solution: dd(o.sol), hints: o.hints || [], text: o.text, bad: bad, good: (o.good || []).filter(Boolean) };
   }
   /* sum-of-square-roots answer A (array), prompt = the expression */
   function sP(prompt, A, o) { o = o || {}; var k = sTex(A); o.good = (o.good || []).concat([sAlt(A)]); return radP(prompt, k, o); }
@@ -363,21 +363,24 @@
   /* restriction box + simplified box */
   function restrP(prompt, v, want, keyTex, o) {
     o = o || {};
-    var rk = rKey(want, v), fields = [{ label: 'Restriction:', name: 'Restriction', mode: 'math', keys: KR, vars: [v], wide: true }, { label: 'Simplified:', name: 'Simplified', mode: 'math', keys: KR, vars: [v], wide: true }];
-    var p = B.fields(prompt, fields, [RS(want, { v: v, kind: o.kind, z: o.z, alts: o.alts }), RX(keyTex, { vars: [v], cands: o.cands, radDen: o.radDen, sumRad: o.sumRad })], [rk, keyTex],
+    var rk = rKey(want, v), fields = [{ label: 'Restriction:', name: 'Restriction', mode: 'math', keys: KR, vars: [v], wide: true, placeholder: 'e.g. ' + v + ' > 0' }, { label: 'Simplified:', name: 'Simplified', mode: 'math', keys: KR, vars: [v], wide: true, placeholder: 'e.g. 2sqrt(2' + v + ')/' + v }];
+    var p = FL(prompt, fields, [RS(want, { v: v, kind: o.kind, z: o.z, alts: o.alts }), RX(keyTex, { vars: [v], cands: o.cands, radDen: o.radDen, sumRad: o.sumRad })], [rk, keyTex],
       'Restriction: ' + t(rTex(want, v)) + '<br>Simplified: ' + t(keyTex), o.sol, o.hints || [], o.text);
     p.bad = [[rk, '0'], [o.kind === 'odd' ? v + '>0' : v + '\\geq 0', keyTex]].concat((o.cands || []).filter(function (c) { return typeof c[0] === 'string'; }).map(function (c) { return [rk, c[0]]; }));
     p.good = [[rTex(want, v).replace(/\\ /g, ' '), keyTex]];
     if (want.length === 1 && want[0].op === '>') p.good.push(['0<' + v, keyTex]);
     return p;
   }
+  function dd(s) { return typeof s === 'string' ? s.replace(/\\frac\{/g, '\\dfrac{') : s; }
+  function FL() { var p = B.fields.apply(null, arguments); p.solution = dd(p.solution); p.answer = dd(p.answer); return p; }
   function mcP(r, prompt, opts, sol, hints, text) {
     var seen = {}, out = [];
     opts.forEach(function (op) { var k = op.html.replace(/\s/g, ''); if (seen[k] && !op.right) return; seen[k] = 1; out.push(op); });
-    return B.mc(r, prompt, out, sol, hints || [], text);
+    return B.mc(r, prompt, out, dd(sol), hints || [], text);
   }
   function nrP(prompt, ans, cands, sol, hints, text) {
     var p = B.nr(prompt, ans, function (v) { for (var i = 0; i < (cands || []).length; i++) if (Math.abs(v - cands[i][0]) < 1e-9) return { code: cands[i][1], hint: cands[i][2] }; return null; }, sol, hints, text);
+    p.solution = dd(p.solution);
     p.bad = (cands || []).filter(function (c) { return Math.abs(c[0] - ans) > 1e-9 && String(c[0]).length <= 4 && c[0] >= 0; }).map(function (c) { return String(c[0]); });
     return p;
   }
@@ -498,8 +501,8 @@
       { id: '7a', level: 'EMG', make: function (r, z) { var p = divEach([[z.a * z.c, z.p], [z.b * z.c, z.q]], z.c, z.d, 'consider: divide each term'); p.prompt = 'Simplify it by dividing each term of the numerator by the denominator.'; return p; } },
       { id: '7b', level: 'PRG', make: function (r, z) {
         var N = S([[z.a * z.c, z.p * z.d], [z.b * z.c, z.q * z.d]]), top = sMul(N, S([[1, z.d]])), A = sSc(top, Q(1, z.c * z.d)), nt = sTex(top, { keep: true }), num = raw([[z.a * z.c, z.p * z.d], [z.b * z.c, z.q * z.d]]);
-        var p = B.fields('Now simplify it by rationalizing the denominator first: multiply by ' + t(D(rt(z.d), rt(z.d))) + '. The new denominator is ' + t(z.c + '(' + z.d + ')=' + z.c * z.d) + '. Give the new numerator (radicals in simplest form) and then the final answer. Do you get the same answer as in (a)?',
-          [{ label: 'Numerator:', name: 'Numerator', mode: 'math', keys: KS, wide: true }, { label: 'Final answer:', name: 'Final', mode: 'math', keys: KS, wide: true }],
+        var p = FL('Now simplify it by rationalizing the denominator first: multiply by ' + t(D(rt(z.d), rt(z.d))) + '. The new denominator is ' + t(z.c + '(' + z.d + ')=' + z.c * z.d) + '. Give the new numerator (radicals in simplest form) and then the final answer. Do you get the same answer as in (a)?',
+          [{ label: 'Numerator:', name: 'Numerator', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', wide: true }, { label: 'Final answer:', name: 'Final', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', wide: true }],
           [RX(nt, { cands: [[sTex(sAdd(sMul(S([[z.a * z.c, z.p * z.d]]), S([[1, z.d]])), S([[z.b * z.c, z.q * z.d]]))), LID + '-one-term-mult', 'Multiply <b>both</b> terms of the numerator by ' + t(rt(z.d)) + '.']] }), RX(sTex(A), {})], [nt, sTex(A)],
           'Numerator: ' + t(nt) + '<br>Final: ' + t(sTex(A)) + ' — the same answer as (a).',
           t(D('(' + num + ')' + rt(z.d), z.c + '(' + z.d + ')') + '=' + D(raw([[z.a * z.c, z.p * z.d * z.d], [z.b * z.c, z.q * z.d * z.d]]), z.c * z.d) + '=' + D(nt, z.c * z.d) + '=' + sTex(A)) + '. Yes — the same answer.', ['Multiply each term by ' + t(rt(z.d)) + ' and simplify: ' + t('\\sqrt{' + z.p * z.d + '}\\cdot\\sqrt{' + z.d + '}=\\sqrt{' + z.p * z.d * z.d + '}=' + z.d + '\\sqrt{' + z.p + '}') + '.'], 'consider: rationalize first');
@@ -597,8 +600,8 @@
     { num: '13', stem: '', parts: [
       { id: '13', level: 'PRG', make: function (r) {
         var H = r.pick([3, 4, 5, 8, 9, 10, 12, 15]), s = S([[Q(2 * H, 3), 3]]), P = sSc(s, 3), sT = sTex(s), pT = sTex(P);
-        var p = B.fields('The height of an equilateral triangle is ' + t('\\tfrac{\\sqrt{3}}{2}') + ' times its side length. An equilateral triangle has a height of ' + t(H) + '&nbsp;cm. Determine the exact side length and perimeter.',
-          [{ label: 'Side:', name: 'Side', mode: 'math', keys: KS, after: '\\text{cm}' }, { label: 'Perimeter:', name: 'Perimeter', mode: 'math', keys: KS, after: '\\text{cm}' }],
+        var p = FL('The height of an equilateral triangle is ' + t('\\tfrac{\\sqrt{3}}{2}') + ' times its side length. An equilateral triangle has a height of ' + t(H) + '&nbsp;cm. Determine the exact side length and perimeter.',
+          [{ label: 'Side:', name: 'Side', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', after: '\\text{cm}' }, { label: 'Perimeter:', name: 'Perimeter', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', after: '\\text{cm}' }],
           [RX(sT, { cands: [[sTex(S([[Q(H, 2), 3]])), LID + '-mult-ratio', 'The height is ' + t('\\tfrac{\\sqrt3}{2}') + ' times the side, so <b>divide</b> the height by ' + t('\\tfrac{\\sqrt3}{2}') + '.']] }), RX(pT, { cands: [[sTex(S([[Q(3 * H, 2), 3]])), LID + '-mult-ratio', 'Find the side first (divide by ' + t('\\tfrac{\\sqrt3}{2}') + '), then multiply by 3.']] })], [sT, pT],
           'Side ' + t(sT) + '&nbsp;cm, perimeter ' + t(pT) + '&nbsp;cm', t('\\tfrac{\\sqrt{3}}{2}s=' + H + '\\Rightarrow s=' + D(2 * H, '\\sqrt{3}') + '=' + D(2 * H + '\\sqrt{3}', 3) + '=' + sT) + '&nbsp;cm; ' + t('P=3(' + sT + ')=' + pT) + '&nbsp;cm', ['Solve ' + t('\\tfrac{\\sqrt3}{2}s=' + H) + ' for ' + t('s') + ', then rationalize.'], 'equilateral triangle side and perimeter');
         p.good = [[sAlt(s) || sT, pT]]; return p;
@@ -733,8 +736,8 @@
       { id: 'e7', level: 'PRG', make: function (r) {
         var z = pickWhere(function () { return { c: 2 * r.int(1, 5), p: r.pick([3, 5, 7, 11]) }; }, function (z) { return !(z.c === 4 && z.p === 3); });
         var s = S([[Q(z.c, 2), 2 * z.p]]), sT = sTex(s), area = Q(z.c * z.c * z.p, 2);
-        var p = B.fields('A square has a diagonal of ' + t(z.c + '\\sqrt{' + z.p + '}') + '&nbsp;m. Its side is the diagonal divided by ' + t('\\sqrt{2}') + '. Determine the exact side length and the area.',
-          [{ label: 'Side:', name: 'Side', mode: 'math', keys: KS, after: '\\text{m}' }, { label: 'Area:', name: 'Area', mode: 'math', keys: KS, after: '\\text{m}^2' }],
+        var p = FL('A square has a diagonal of ' + t(z.c + '\\sqrt{' + z.p + '}') + '&nbsp;m. Its side is the diagonal divided by ' + t('\\sqrt{2}') + '. Determine the exact side length and the area.',
+          [{ label: 'Side:', name: 'Side', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', after: '\\text{m}' }, { label: 'Area:', name: 'Area', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', after: '\\text{m}^2' }],
           [RX(sT, { cands: [[sTex(S([[z.c, 2 * z.p]])), LID + '-no-den', t('\\sqrt2\\cdot\\sqrt2=2') + ': divide by it.']] }), RX(qT(area), { cands: [[qT(Q(z.c * z.c * z.p, 1)), LID + '-area-diag', 'That’s the diagonal squared. Square the side.']] })], [sT, qT(area)],
           'Side ' + t(sT) + '&nbsp;m, area ' + t(qT(area)) + '&nbsp;m²', t('s=' + D(z.c + '\\sqrt{' + z.p + '}', '\\sqrt{2}') + '=' + D(z.c + '\\sqrt{' + 2 * z.p + '}', 2) + '=' + sT) + '&nbsp;m; ' + t('A=(' + sT + ')^2=' + qT(area)) + '&nbsp;m²', ['Rationalize ' + t(D(z.c + '\\sqrt{' + z.p + '}', '\\sqrt2')) + '.'], 'square: side and area from the diagonal (extra)');
         return p;
@@ -743,8 +746,8 @@
       { id: 'e8', level: 'PRG', make: function (r) {
         var z = pickWhere(function () { return { k: r.int(2, 4), w: r.pick([2, 3, 5]), L: r.int(2, 12), l: r.pick([2, 3, 5, 7]) }; }, function (z) { return z.w !== z.l && !(z.k === 2 && z.w === 3 && z.L === 12 && z.l === 2); });
         var len = S([[z.L, z.l]]), wid = S([[z.k, z.w]]), A = sMul(len, wid), P = sSc(sAdd(len, wid), 2), aT = sTex(A);
-        var p = B.fields('A rectangular patio has an area of ' + t(aT) + '&nbsp;m² and a width of ' + t(sTex(wid)) + '&nbsp;m. Determine the exact length and perimeter.',
-          [{ label: 'Length:', name: 'Length', mode: 'math', keys: KS, after: '\\text{m}' }, { label: 'Perimeter:', name: 'Perimeter', mode: 'math', keys: KS, after: '\\text{m}' }],
+        var p = FL('A rectangular patio has an area of ' + t(aT) + '&nbsp;m² and a width of ' + t(sTex(wid)) + '&nbsp;m. Determine the exact length and perimeter.',
+          [{ label: 'Length:', name: 'Length', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', after: '\\text{m}' }, { label: 'Perimeter:', name: 'Perimeter', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', after: '\\text{m}' }],
           [RX(sTex(len)), RX(sTex(P), { cands: [[sTex(sAdd(len, wid)), LID + '-half-p', 'The perimeter has two lengths and two widths.']] })], [sTex(len), sTex(P)],
           'Length ' + t(sTex(len)) + '&nbsp;m, perimeter ' + t(sTex(P)) + '&nbsp;m', t('\\ell=' + D(aT, sTex(wid)) + '=' + sTex(len)) + '&nbsp;m; ' + t('P=2(' + sTex(len) + ')+2(' + sTex(wid) + ')=' + sTex(P)) + '&nbsp;m', ['Length = area ÷ width.'], 'patio length and perimeter (extra)');
         p.good = [[sTex(len), sAlt(P)]]; return p;
@@ -783,8 +786,8 @@
       { id: 'e13', level: 'MAS', make: function (r) {
         var z = pickWhere(function () { return { p: r.pick([2, 3, 5]), q: r.pick([2, 3, 5]), k: r.int(1, 3) }; }, function (z) { return z.p !== z.q && !(z.p === 2 && z.q === 3 && z.k === 1); });
         var N = z.p * z.p * z.q, mult = z.p * z.q * z.q, a = z.p * z.q * z.k, res = M(Q(a, z.p * z.q), 3, mult), rT = MT(res);
-        var p = B.fields('Rationalize the denominator of ' + t(D(a, rt(N, 3))) + ' using the smallest possible multiplier. Give the multiplier (the cube root you multiply the top and bottom by) and the result.',
-          [{ label: 'Multiplier:', name: 'Multiplier', mode: 'math', keys: KS, wide: true }, { label: 'Result:', name: 'Result', mode: 'math', keys: KS, wide: true }],
+        var p = FL('Rationalize the denominator of ' + t(D(a, rt(N, 3))) + ' using the smallest possible multiplier. Give the multiplier (the cube root you multiply the top and bottom by) and the result.',
+          [{ label: 'Multiplier:', name: 'Multiplier', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', wide: true }, { label: 'Result:', name: 'Result', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', wide: true }],
           [function (resp) { var c = RX(rt(mult, 3))(resp); if (c.v === 'correct') return c; var rd = K.read(resp); if (!rd.res) { var cube = Math.round(pw(rd.val, 3) * N); if (Math.abs(pw(rd.val, 3) * N - cube) < 1e-6 && isPow(cube, 3) && cube > 1) return wrong(LID + '-not-smallest', 'That works, but it isn’t the smallest multiplier. Factor ' + t(N + '=' + z.p + '^2\\cdot ' + z.q) + ': you need one more ' + t(z.p) + ' and two more ' + t(z.q) + '’s.'); } return c; }, RX(rT)],
           [rt(mult, 3), rT], 'Multiplier ' + t(rt(mult, 3)) + ', result ' + t(rT),
           t(N + '=' + z.p + '^2\\cdot ' + z.q) + ': multiply by ' + t('\\sqrt[3]{' + z.p + '\\cdot ' + z.q + '^2}=' + rt(mult, 3)) + ' to get ' + t(rt(N * mult, 3) + '=' + z.p * z.q) + ': ' + t(D(a + rt(mult, 3), z.p * z.q) + '=' + rT), ['Write ' + t(N) + ' as a product of primes. What is missing for a perfect cube?'], 'smallest cube-root multiplier');

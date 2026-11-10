@@ -354,7 +354,7 @@
     o.cands = (o.cands || []).filter(function (c) { return c && !sameVal(typeof c[0] === 'number' ? function () { return c[0]; } : texFn(c[0]), kf, vars); });
     var bad = (o.cands || []).filter(function (c) { return c && typeof c[0] === 'string'; }).map(function (c) { return c[0]; }).concat(o.bad || []);
     return { prompt: prompt, input: { type: 'math', keys: KS, vars: vars, before: o.before, after: o.after, placeholder: vars.length ? 'e.g. 2sqrt(3x)/x' : 'e.g. (5sqrt(3)+3)/3' },
-      check: RX(keyTex, o), key: keyTex, answer: t((o.ansPre || '') + keyTex + (o.unit ? '\\text{ ' + o.unit + '}' : '')), solution: o.sol, hints: o.hints || [], text: o.text, bad: bad, good: (o.good || []).filter(Boolean) };
+      check: RX(keyTex, o), key: keyTex, answer: dd(t((o.ansPre || '') + keyTex + (o.unit ? '\\text{ ' + o.unit + '}' : ''))), solution: dd(o.sol), hints: o.hints || [], text: o.text, bad: bad, good: (o.good || []).filter(Boolean) };
   }
   /* sum-of-square-roots answer A (array), prompt = the expression */
   function sP(prompt, A, o) { o = o || {}; var k = sTex(A); o.good = (o.good || []).concat([sAlt(A)]); return radP(prompt, k, o); }
@@ -362,21 +362,24 @@
   /* restriction box + simplified box */
   function restrP(prompt, v, want, keyTex, o) {
     o = o || {};
-    var rk = rKey(want, v), fields = [{ label: 'Restriction:', name: 'Restriction', mode: 'math', keys: KR, vars: [v], wide: true }, { label: 'Simplified:', name: 'Simplified', mode: 'math', keys: KR, vars: [v], wide: true }];
-    var p = B.fields(prompt, fields, [RS(want, { v: v, kind: o.kind, z: o.z, alts: o.alts }), RX(keyTex, { vars: [v], cands: o.cands, radDen: o.radDen, sumRad: o.sumRad })], [rk, keyTex],
+    var rk = rKey(want, v), fields = [{ label: 'Restriction:', name: 'Restriction', mode: 'math', keys: KR, vars: [v], wide: true, placeholder: 'e.g. ' + v + ' > 0' }, { label: 'Simplified:', name: 'Simplified', mode: 'math', keys: KR, vars: [v], wide: true, placeholder: 'e.g. 2sqrt(2' + v + ')/' + v }];
+    var p = FL(prompt, fields, [RS(want, { v: v, kind: o.kind, z: o.z, alts: o.alts }), RX(keyTex, { vars: [v], cands: o.cands, radDen: o.radDen, sumRad: o.sumRad })], [rk, keyTex],
       'Restriction: ' + t(rTex(want, v)) + '<br>Simplified: ' + t(keyTex), o.sol, o.hints || [], o.text);
     p.bad = [[rk, '0'], [o.kind === 'odd' || o.kind === 'bin' ? v + '>0' : v + '\\geq 0', keyTex]].concat((o.cands || []).filter(function (c) { return typeof c[0] === 'string'; }).map(function (c) { return [rk, c[0]]; }));
     p.good = [[rTex(want, v).replace(/\\ /g, ' '), keyTex]];
     if (want.length === 1 && want[0].op === '>') p.good.push(['0<' + v, keyTex]);
     return p;
   }
+  function dd(s) { return typeof s === 'string' ? s.replace(/\\frac\{/g, '\\dfrac{') : s; }
+  function FL() { var p = B.fields.apply(null, arguments); p.solution = dd(p.solution); p.answer = dd(p.answer); return p; }
   function mcP(r, prompt, opts, sol, hints, text) {
     var seen = {}, out = [];
     opts.forEach(function (op) { var k = op.html.replace(/\s/g, ''); if (seen[k] && !op.right) return; seen[k] = 1; out.push(op); });
-    return B.mc(r, prompt, out, sol, hints || [], text);
+    return B.mc(r, prompt, out, dd(sol), hints || [], text);
   }
   function nrP(prompt, ans, cands, sol, hints, text) {
     var p = B.nr(prompt, ans, function (v) { for (var i = 0; i < (cands || []).length; i++) if (Math.abs(v - cands[i][0]) < 1e-9) return { code: cands[i][1], hint: cands[i][2] }; return null; }, sol, hints, text);
+    p.solution = dd(p.solution);
     p.bad = (cands || []).filter(function (c) { return Math.abs(c[0] - ans) > 1e-9 && String(c[0]).length <= 4 && c[0] >= 0; }).map(function (c) { return String(c[0]); });
     return p;
   }
@@ -433,7 +436,7 @@
     if (x.m > 1 && kx > 1) wrongs.push([kx * x.m - b2, LID + '-prod-coef', 'Square the coefficient too: ' + t('(' + kx + '\\sqrt{' + x.m + '})^2=' + kx * kx * x.m) + '.']);
     if (y.m > 1 && ky > 1) wrongs.push([a2 - ky * y.m, LID + '-prod-coef', 'Square the coefficient too: ' + t('(' + ky + '\\sqrt{' + y.m + '})^2=' + ky * ky * y.m) + '.']);
     var diag = function (v) { for (var i = 0; i < wrongs.length; i++) if (Math.abs(v - wrongs[i][0]) < 1e-9 && wrongs[i][0] !== R) return { code: wrongs[i][1], hint: wrongs[i][2] }; if (v === -R) return { code: 'sign', hint: 'Check the sign: ' + t(F(a2) + '-' + F(b2)) + '.' }; return null; };
-    var p = B.fields(t(dT), [{ label: 'Conjugate:', name: 'Conjugate', mode: 'math', keys: KS, wide: true }, { label: 'Product:', name: 'Product' }],
+    var p = FL(t(dT), [{ label: 'Conjugate:', name: 'Conjugate', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', wide: true }, { label: 'Product:', name: 'Product' }],
       [RX(cT2, { cands: [[kT(Ds), LID + '-same', 'That’s the same binomial. Change the sign <b>between</b> the terms.'], [negC, LID + '-neg-conj', 'Keep the first term as it is; change only the sign in front of the second term.'], [kT(sNeg(C)), LID + '-neg-conj', 'Keep the first term as it is; change only the sign in front of the second term.']] }), K.number(R, diag)],
       [cT2, String(R)], 'Conjugate ' + t(cT2) + ', product ' + t(R),
       t('(' + dT + ')(' + cT2 + ')=(' + kT([x]) + ')^2-(' + kT([{ c: [Math.abs(y.c[0]), y.c[1]], m: y.m }]) + ')^2=' + F(a2) + '-' + F(b2) + '=' + R), ['A conjugate has the same two terms with the opposite sign between them.', 'The product is (first term)² − (second term)².'], text);
@@ -551,8 +554,8 @@
       { id: '10', level: 'PRG', make: function (r) {
         var z = pickWhere(function () { return { c: r.int(2, 6), m: nsq(r, 2, 35) }; }, function (z) { return z.c * z.c > z.m && !(z.c === 3 && z.m === 3) && z.c * z.c - z.m <= 30; });
         var A = z.c * z.c - z.m, w = S([[z.c, 1], [-1, z.m]]), wT = kT(w), P = String(4 * z.c);
-        var p = B.fields('A rectangle has an area of ' + t(A) + '&nbsp;m² and a length of ' + t('(' + z.c + '+\\sqrt{' + z.m + '})') + '&nbsp;m. Determine its exact width and show that its perimeter is a whole number.',
-          [{ label: 'Width:', name: 'Width', mode: 'math', keys: KS, after: '\\text{m}' }, { label: 'Perimeter:', name: 'Perimeter', after: 'm' }],
+        var p = FL('A rectangle has an area of ' + t(A) + '&nbsp;m² and a length of ' + t('(' + z.c + '+\\sqrt{' + z.m + '})') + '&nbsp;m. Determine its exact width and show that its perimeter is a whole number.',
+          [{ label: 'Width:', name: 'Width', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', after: '\\text{m}' }, { label: 'Perimeter:', name: 'Perimeter', after: 'm' }],
           [RX(wT, { cands: [[z.c + '+\\sqrt{' + z.m + '}', LID + '-num-sign', 'Multiply by the conjugate ' + t(z.c + '-\\sqrt{' + z.m + '}') + '.']] }), K.number(4 * z.c, function (v) { return v === 2 * z.c ? { code: LID + '-half-p', hint: 'The perimeter has two lengths and two widths.' } : null; })], [wT, P],
           'Width ' + t(wT) + '&nbsp;m, perimeter ' + t(P) + '&nbsp;m', t('w=' + D(A, z.c + '+\\sqrt{' + z.m + '}') + '\\cdot' + D(z.c + '-\\sqrt{' + z.m + '}', z.c + '-\\sqrt{' + z.m + '}') + '=' + D(A + '(' + wT + ')', z.c * z.c + '-' + z.m) + '=' + wT) + '&nbsp;m; ' + t('P=2(' + z.c + '+\\sqrt{' + z.m + '})+2(' + wT + ')=' + P) + '&nbsp;m — the radicals cancel.', ['Width = area ÷ length; multiply by the conjugate.'], 'rectangle width and perimeter');
         return p;
@@ -567,8 +570,8 @@
     { num: '12', stem: '', parts: [
       { id: '12', level: 'ADV', make: function (r) {
         var n = r.int(2, 6), m = n * n + 1, rec = S([[1, m], [-n, 1]]), rT = kT(rec);
-        var p = B.fields('The <b>silver ratio</b> ' + t('1+\\sqrt{2}') + ' has a reciprocal that is 2 less than itself. The number ' + t(n + '+\\sqrt{' + m + '}') + ' behaves the same way. Find its reciprocal with a rational denominator, and how much less than ' + t(n + '+\\sqrt{' + m + '}') + ' the reciprocal is.',
-          [{ label: t('\\dfrac{1}{' + n + '+\\sqrt{' + m + '}}='), name: 'Reciprocal', mode: 'math', keys: KS, wide: true }, { label: 'Less by:', name: 'Difference' }],
+        var p = FL('The <b>silver ratio</b> ' + t('1+\\sqrt{2}') + ' has a reciprocal that is 2 less than itself. The number ' + t(n + '+\\sqrt{' + m + '}') + ' behaves the same way. Find its reciprocal with a rational denominator, and how much less than ' + t(n + '+\\sqrt{' + m + '}') + ' the reciprocal is.',
+          [{ label: t('\\dfrac{1}{' + n + '+\\sqrt{' + m + '}}='), name: 'Reciprocal', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', wide: true }, { label: 'Less by:', name: 'Difference' }],
           [RX(rT, { cands: [[n + '+\\sqrt{' + m + '}', LID + '-num-sign', 'Multiply by the conjugate ' + t(n + '-\\sqrt{' + m + '}') + '.']] }), K.number(2 * n)], [rT, String(2 * n)],
           t(D(1, n + '+\\sqrt{' + m + '}') + '=' + rT) + ', which is ' + t(2 * n) + ' less.', t(D(1, n + '+\\sqrt{' + m + '}') + '\\cdot' + D(n + '-\\sqrt{' + m + '}', n + '-\\sqrt{' + m + '}') + '=' + D(n + '-\\sqrt{' + m + '}', n * n + '-' + m) + '=' + rT) + ', and ' + t('(' + n + '+\\sqrt{' + m + '})-(' + rT + ')=' + 2 * n) + '.', ['The denominator becomes ' + t(n * n + '-' + m + '=-1') + '.'], 'reciprocal like the silver ratio');
         return p;
@@ -678,8 +681,8 @@
       { id: 'e7', level: 'PRG', make: function (r) {
         var z = pickWhere(function () { return { p: nsq(r, 3, 19), q: nsq(r, 2, 15) }; }, function (z) { return z.p > z.q && !(z.p === 6 && z.q === 3) && z.p - z.q <= 12; });
         var A = z.p - z.q, w = S([[1, z.p], [-1, z.q]]), wT = kT(w), P = S([[4, z.p]]);
-        var p = B.fields('A rectangle has an area of ' + t(A) + '&nbsp;m² and a length of ' + t('(\\sqrt{' + z.p + '}+\\sqrt{' + z.q + '})') + '&nbsp;m. Determine its exact width and perimeter.',
-          [{ label: 'Width:', name: 'Width', mode: 'math', keys: KS, after: '\\text{m}' }, { label: 'Perimeter:', name: 'Perimeter', mode: 'math', keys: KS, after: '\\text{m}' }],
+        var p = FL('A rectangle has an area of ' + t(A) + '&nbsp;m² and a length of ' + t('(\\sqrt{' + z.p + '}+\\sqrt{' + z.q + '})') + '&nbsp;m. Determine its exact width and perimeter.',
+          [{ label: 'Width:', name: 'Width', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', after: '\\text{m}' }, { label: 'Perimeter:', name: 'Perimeter', mode: 'math', keys: KS, placeholder: 'e.g. 3sqrt(2)', after: '\\text{m}' }],
           [RX(wT), RX(sTex(P), { cands: [[sTex(S([[2, z.p]])), LID + '-half-p', 'The perimeter has two lengths and two widths.']] })], [wT, sTex(P)],
           'Width ' + t(wT) + '&nbsp;m, perimeter ' + t(sTex(P)) + '&nbsp;m', t('w=' + D(A, '\\sqrt{' + z.p + '}+\\sqrt{' + z.q + '}') + '\\cdot' + D(wT, wT) + '=' + D(A + '(' + wT + ')', z.p + '-' + z.q) + '=' + wT) + '&nbsp;m; ' + t('P=2(\\sqrt{' + z.p + '}+\\sqrt{' + z.q + '})+2(' + wT + ')=' + sTex(P)) + '&nbsp;m', ['Width = area ÷ length; multiply by the conjugate.'], 'rectangle width and perimeter (extra)');
         return p;
