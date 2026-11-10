@@ -100,7 +100,7 @@
   }
   /* a shared-checker math part (K.radical / K.varRadical) with extra recognised wrong answers */
   function varP(prompt, chk, keyTex, vars, sol, hints, text) {
-    var p = P.math(prompt, chk, keyTex, sol, hints, text, { keys: 'u2l7var', vars: vars });
+    var p = P.math(prompt, chk, keyTex, sol, hints, text, { keys: 'u2l7var', vars: vars, placeholder: 'e.g. 3' + vars[0] + ' sqrt(2' + vars[0] + ')' });
     p.bad = chk.cands || []; return p;
   }
   /* ---------------- drawings ---------------- */
@@ -320,7 +320,7 @@
   function radP(prompt, keyTex, opt, sol, hints, text) {
     opt = opt || {};
     var ck = radCheck(keyTex, opt), vs = varsOf(parseT(keyTex)).concat(opt.vars || []).filter(function (v, i, arr) { return arr.indexOf(v) === i; });
-    var p = K.P.math(prompt, ck, keyTex, sol, hints, text, { keys: vs.length ? 'u2l7var' : 'u2l7rad', vars: vs, before: opt.before, after: opt.after });
+    var p = K.P.math(prompt, ck, keyTex, sol, hints, text, { keys: vs.length ? 'u2l7var' : 'u2l7rad', vars: vs, before: opt.before, after: opt.after, placeholder: vs.length ? 'e.g. 3' + vs[0] + ' sqrt(2' + vs[0] + ')' : 'e.g. (3sqrt(5) - 3)/2' });
     p.bad = ck.cands.concat(opt.bad || []); if (opt.good) p.good = opt.good;
     return p;
   }

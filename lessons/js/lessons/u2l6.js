@@ -67,7 +67,7 @@ function rationalize(num0, den0, first = true) {
   const pre = first ? [...num0, ...den0].filter((u) => sqf(u.r)[0] > 1).map(convT) : [];
   const num = first ? num0.map(simp) : num0, den = first ? den0.map(simp) : den0;
   const conj = [den[0], neg(den[1])];
-  const dGrid = den.map((a) => conj.map((b) => mulRaw(a, b)));
+  const dGrid = den.map((a) => conj.map((b) => (first ? simp(mulRaw(a, b)) : mulRaw(a, b))));
   const dVal = sqV(den[0]) - sqV(den[1]);
   const nGrid = num.map((a) => conj.map((b) => mulRaw(a, b)));
   const nRaw = nGrid.flat(), nSimp = nRaw.map(simp), conv = nRaw.filter((u) => sqf(u.r)[0] > 1).map(convT);
@@ -394,7 +394,8 @@ function ratSteps(stage, d, ex) {
   const capR = R.g > 1
     ? `Every term and the ${R.sg < 0 ? '<b>negative</b> ' : ''}denominator share the factor ${T(String(R.g))}: divide them all by ${T(String(div))}: ${T(cG(R.finT))}.${one}`
     : R.sg < 0 ? `The denominator is negative: divide every term by ${T('-1')}: ${T(cG(R.finT))}.${one}`
-      : `No factor other than 1 divides every term, and the denominator is positive: ${T(cG(R.finT))} is done.`;
+      : R.fd === 1 ? `The denominator is 1, so the answer is just the top: ${T(cG(R.finT))}.`
+        : `No factor other than 1 divides every term, and the denominator is positive: ${T(cG(R.finT))} is done.`;
   steps.push({ cap: capR,
     run: async (c) => {
       await setHTML(c, r3, `<span class="u2l6-wh">${red ? 'Reduce' : 'Done'}</span>${T(`\\dfrac{${eT(R.nCol)}}{${R.dVal}}${red ? `\\xrightarrow{\\ \\div ${div < 0 ? `(${div})` : div}\\ }` : '='}${cG(R.finT)}`)}`, 570);
@@ -553,7 +554,7 @@ function restrictAB(stage, W) {
     { cap: `Two radicands, so two restrictions: ${T('a\\ge0')} and ${T('b\\ge0')}. Every allowed pair ${T('(a,\\ b)')} is in the shaded corner.`, run: async (c) => { await appear(c, reg, 500); await show(c, a1); } },
     { cap: `${T('\\sqrt a+\\sqrt b')} is 0 only at ${T('a=b=0')}, the corner point.`, run: async (c) => { await pop(c, o0); o0.style.opacity = 1; await show(c, a2); } },
     { cap: `Multiply by the conjugate ${T(cC('\\sqrt a-\\sqrt b'))}. The top becomes a perfect square: ${T('(\\sqrt a-\\sqrt b)^2=a-2\\sqrt{ab}+b')}.`, run: async (c) => { await show(c, b1); await show(c, b2); } },
-    { cap: `The new denominator ${T('a-b')} is 0 whenever ${T('a=b')}: remove that whole line. Answer: ${T('a\\ge0,\\ b\\ge0,\\ a\\ne b')}.`,
+    { cap: `The new denominator ${T('a-b')} is 0 whenever ${T('a=b')}, so <b>this form</b> also needs ${T('a\\ne b')}: remove that line. The original only needs ${T('a\\ge0,\\ b\\ge0')}, not both 0.`,
       run: async (c) => { await drawIn(diag, 700, c); diag.style.opacity = 1; await show(c, dl); await show(c, b3); } }
   ];
 }
@@ -572,7 +573,7 @@ const CB = {
     cap1: 'Two fractions with binomial denominators: rationalize <b>each one first</b>, each with its own conjugate.' },
   c: { label: '(c)', expr: `${cN('\\dfrac{3}{\\sqrt5}')}-${cD('\\dfrac{2}{\\sqrt5+1}')}`, rad: '\\sqrt5', over: 10,
     p1: ['\\dfrac{3}{\\sqrt5}\\cdot\\dfrac{\\sqrt5}{\\sqrt5}', '=\\dfrac{3\\sqrt5}{5}=\\dfrac{6\\sqrt5}{10}'], p2: [`-\\dfrac{2}{\\sqrt5+1}\\cdot\\dfrac{${cC('\\sqrt5-1')}}{${cC('\\sqrt5-1')}}`, '=-\\dfrac{2(\\sqrt5-1)}{4}=-\\dfrac{\\sqrt5-1}{2}', '=-\\dfrac{5\\sqrt5-5}{10}'],
-    nums: ['+5'], rads: ['+6\\sqrt5', '-5\\sqrt5'], nsum: '5', rsum: '\\sqrt5', ans: '\\dfrac{\\sqrt5+5}{10}',
+    nums: ['+5'], rads: ['+6\\sqrt5', '-5\\sqrt5'], nsum: '5', rsum: '\\sqrt5', ans: '\\dfrac{\\sqrt5+5}{10}', capC: `Collect on top: ${T('6\\sqrt5-5\\sqrt5=\\sqrt5')}, and the ${T('+5')} stays. Keep the denominator ${T('10')}.`,
     cap1: 'A one-term denominator and a two-term one: rationalize each, then use a <b>common denominator</b>.' }
 };
 const combine = {
@@ -602,7 +603,7 @@ const combine = {
       run: async (c) => { for (const e of p2.slice(0, 2)) await show(c, e); } });
     if (d.over) steps.push({ cap: `Common denominator ${T('10')}: ${T('\\tfrac{3\\sqrt5}{5}=\\tfrac{6\\sqrt5}{10}')} and ${T('\\tfrac{\\sqrt5-1}{2}=\\tfrac{5\\sqrt5-5}{10}')}.`, run: (c) => show(c, p2[2]) });
     steps.push({ cap: `Sort the terms${d.over ? ' on top' : ''}: numbers in one bin, ${T(d.rad)}’s in the other. ${T(d.rad)} works like a variable.`, run: async (c) => { for (const e of [...tn, ...tr]) await pop(c, e, 280); } });
-    steps.push({ cap: d.cancel ? `${T('-\\sqrt3+\\sqrt3=0')}: the radicals <b>cancel</b>, and ${T('2+2=4')}.` : `Collect: ${T(d.nums.join('').replace(/^\+/, '') + '=' + d.nsum)} and ${T(d.rads.join('').replace(/^\+/, '') + '=' + d.rsum)}.`,
+    steps.push({ cap: d.capC ? d.capC : d.cancel ? `${T('-\\sqrt3+\\sqrt3=0')}: the radicals <b>cancel</b>, and ${T('2+2=4')}.` : `Collect: ${T(d.nums.join('').replace(/^\+/, '') + '=' + d.nsum)} and ${T(d.rads.join('').replace(/^\+/, '') + '=' + d.rsum)}.`,
       run: async (c) => { if (d.cancel) { tr.forEach((e) => e.classList.add('u2l6-tilex')); await shake(c, bR); } await show(c, sN); await show(c, sR); } });
     steps.push({ cap: d.cancel ? `The answer is ${T(cG('4'))}: a <b>rational</b> number, even though both fractions had radicals.` : `Answer: ${T(cG(d.ans))}.`,
       run: async (c) => { await pop(c, ans); ans.style.opacity = 1; if (st) await stampIn(c, st); } });

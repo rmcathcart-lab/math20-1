@@ -59,7 +59,7 @@ const GEO = {
 };
 function mountGeo() {
   const host = document.getElementById('u2l7-geo'); if (!host) return;
-  const W = Math.max(480, Math.min(640, host.clientWidth || 600)), H = 258, NX = 8, NY = 4;
+  const W = Math.max(480, Math.min(640, host.clientWidth || 600)), H = 228, NX = 8, NY = 4;
   const sp = Math.min((W - 40) / NX, (H - 24) / NY), ox = (W - sp * NX) / 2, oy = (H - sp * NY) / 2;
   const B = new Box(host, {}, 'u2l7-geobox', W, H);
   svgEl('rect', { x: 0, y: 0, width: W, height: H, rx: 14, fill: '#f7f4ec' }, B.svg);
@@ -312,7 +312,7 @@ const inspector = {
         gt.classList.add('u2l7-gfail'); gt.st.textContent = '✗';
         bench.classList.add('u2l7-bad'); bx.innerHTML = T(v.bad);
         await shake(c, gt); await sleep(c, 450);
-        const room = () => { const ls = trail.querySelectorAll('.u2l7-tl'); if (ls.length >= 5) ls[0].remove(); };
+        const room = () => { const ls = trail.querySelectorAll('.u2l7-tl'); if (ls.length >= 4) ls[0].remove(); };
         for (const w of v.work || []) { room(); await show(c, line(trail, `<span class="u2l7-tg">${v.g + 1}</span>${T(w)}`, 'u2l7-tl u2l7-tlw')); }
         room(); await show(c, line(trail, `<span class="u2l7-tg">${v.g + 1}</span>${T('=' + v.to)}`, 'u2l7-tl'));
         bench.classList.remove('u2l7-bad');
@@ -418,7 +418,7 @@ const order = {
   intro: 'Make them all entire radicals, then compare. Press <b>Next</b>.',
   make(stage, k, ex) {
     const d = OR[k], W = ex.W, n = d.items.length, cw = Math.min(176, (W - 20) / n - 14), gap = (W - n * cw) / (n + 1);
-    const pow = d.idx === 2 ? 'squared' : 'cubed';
+    const pow = d.idx === 2 ? 'squared' : 'cubed'; const whole = d.items.find((it) => /^\d+$/.test(it.m));
     const cards = d.items.map((it, i) => {
       const el = div(stage, 'u2l7-ocard', `<div class="u2l7-om">${T(it.m)}</div>`, gap + i * (cw + gap), 6, cw, 146);
       el.e = hide(line(el, it.e ? T('=' + it.e) : '<span class="muted">already entire</span>', 'u2l7-oe'));
@@ -431,7 +431,7 @@ const order = {
     const sorted = d.items.map((it, i) => [it.r, i]).sort((a, b) => a[0] - b[0]).map((p) => p[1]);
     return [
       { cap: `Which is biggest? Mixed radicals are hard to compare by eye${d.idx === 3 ? ', and these are cube roots' : ''}.`, run: async (c) => { for (const cd of cards) await pulse(c, cd, 1.04, 300); } },
-      { cap: `Write each one as an <b>entire radical</b>: the coefficient goes in <b>${pow}</b> (the index is ${d.idx}). A whole number counts too: ${T(d.items.find((it) => /^\d+$/.test(it.m)) ? d.items.find((it) => /^\d+$/.test(it.m)).m + '=' + d.items.find((it) => /^\d+$/.test(it.m)).e : d.items[0].m + '=' + d.items[0].e)}.`, run: async (c) => { for (const cd of cards) await show(c, cd.e); } },
+      { cap: `Write each one as an <b>entire radical</b>: the coefficient goes in <b>${pow}</b> (the index is ${d.idx}). ${whole ? `A whole number counts too: ${T(whole.m + '=' + whole.e)}.` : `For example ${T(d.items[0].m + '=' + d.items[0].e)}.`}`, run: async (c) => { for (const cd of cards) await show(c, cd.e); } },
       { cap: `Multiply out: now every number is ${d.idx === 2 ? 'a square root' : 'a cube root'} of a whole number.`, run: async (c) => { for (const cd of cards) await show(c, cd.r); } },
       { cap: `Same index: the <b>larger radicand</b> is the larger number. Place them on the line.`, run: async (c) => { for (const i of sorted) { pts[i].style.opacity = 1; pts[i].label.style.opacity = 1; await pop(c, pts[i]); } } },
       { cap: `Read them left to right: ${T(d.order)}.`, run: (c) => show(c, ord) }

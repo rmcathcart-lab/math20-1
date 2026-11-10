@@ -34,7 +34,7 @@
     'u2l4-dist-one': 'Multiplied only the first term in the brackets', 'u2l4-foil-miss': 'Left out a product when expanding', 'u2l4-no-middle': 'Squared a binomial without the middle term',
     'u2l4-middle-once': 'Middle term not doubled', 'u2l4-rad-sq': 'Treated (√a)² as a', 'u2l4-conj-same': 'Gave the same expression as its conjugate',
     'u2l4-conj-neg': 'Changed both signs for the conjugate', 'u2l4-conj-add': 'Conjugate product: added the squares', 'u2l4-conj-sq': 'Conjugate product: forgot to square the coefficient',
-    'u2l4-two-same': 'Gave the same product twice', 'u2l4-area-half': 'Triangle area without the ½', 'u2l4-perim-area': 'Gave the perimeter instead of the area',
+    'u2l4-two-same': 'Gave the same product twice', 'u2l4-two-form': 'Not written as a product of two radicals', 'u2l4-area-half': 'Triangle area without the ½', 'u2l4-perim-area': 'Gave the perimeter instead of the area',
     'u2l4-diag-noroot': 'Gave d² instead of d', 'u2l4-diag-sum': 'Added the sides for the diagonal', 'u2l4-ab-swap': 'Gave a or b instead of a + b',
     'u2l4-k-sub': 'Subtracted instead of adding', 'u2l4-k-root': 'Gave √k instead of k', 'u2l4-cube-sq': 'Cubed only part of the binomial'
   };
@@ -372,7 +372,7 @@
       { id: '12b', level: 'ADV', make: function (r, sh) {
         var d2 = 2 * (sh.m + sh.a * sh.a), key = R.tex([T(1, 2, d2)]);
         return R.part('The rectangle measures ' + t('\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)') + ' cm by ' + t('\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)') + ' cm. Determine the exact length of its diagonal in simplest form.', key, { before: 'd=', after: '\\text{ cm}', text: 'diagonal of a conjugate rectangle',
-          sol: t('d^{2}=\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)^{2}+\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)^{2}=\\left(' + (sh.m + sh.a * sh.a) + '+' + (2 * sh.a === 2 ? '' : 2 * sh.a) + '\\sqrt{' + sh.m + '}\\right)+\\left(' + (sh.m + sh.a * sh.a) + '-' + (2 * sh.a === 2 ? '' : 2 * sh.a) + '\\sqrt{' + sh.m + '}\\right)=' + d2) + '<br>' + t('d=' + R.simpStep(2, d2)) + ' cm',
+          sol: t('d^{2}=\\left(\\sqrt{' + sh.m + '}+' + sh.a + '\\right)^{2}+\\left(\\sqrt{' + sh.m + '}-' + sh.a + '\\right)^{2}=\\left(' + (sh.m + sh.a * sh.a) + '+' + (2 * sh.a) + '\\sqrt{' + sh.m + '}\\right)+\\left(' + (sh.m + sh.a * sh.a) + '-' + (2 * sh.a) + '\\sqrt{' + sh.m + '}\\right)=' + d2) + '<br>' + t('d=' + R.simpStep(2, d2)) + ' cm',
           hints: ['Pythagorean theorem: ' + t('d^{2}=l^{2}+w^{2}') + '. Square each side (each has a middle term).', 'The radical terms cancel when you add.'],
           cands: [{ tex: String(d2), code: 'u2l4-diag-noroot', hint: 'That is ' + t('d^{2}') + '. Take the square root and simplify.' }, { tex: '2\\sqrt{' + sh.m + '}', code: 'u2l4-diag-sum', hint: 'The diagonal isn’t the sum of the sides: use ' + t('d^{2}=l^{2}+w^{2}') + '.' }] });
       } }],

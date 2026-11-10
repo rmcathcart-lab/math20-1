@@ -77,7 +77,7 @@
     var c = qmul(a.c, b.c), neg = c[0] < 0, s = neg ? '-' : first ? '' : '+';
     if (a.n === 1 && b.n === 1) return s + coefTex(c, false);
     if (a.n === 1 || b.n === 1) { var u = a.n === 1 ? b : a; return s + coefTex(c, true) + R.rt(u.n, u.m); }
-    if (a.m === b.m && a.n === 2) return s + (Math.abs(c[0]) === 1 && c[1] === 1 ? '' : coefTex(c, false)) + '(' + a.m + ')';
+    if (a.m === b.m && a.n === 2) return s + (Math.abs(c[0]) === 1 && c[1] === 1 ? String(a.m) : coefTex(c, false) + '(' + a.m + ')');
     return s + coefTex(c, true) + R.rt(a.n, a.m * b.m);
   };
   /* simplified term-by-term (no collecting) — the middle line of an expansion */
@@ -350,7 +350,7 @@
   /* a constant answer (sum of radicals) in simplest form */
   R.part = function (prompt, keyTex, o) {
     o = o || {};
-    var p = B.math(prompt, R.check(keyTex, o), keyTex, o.sol, o.hints || [], o.text, { keys: o.vars && o.vars.length ? 'p23var' : 'p23rad', vars: o.vars, rel: false, before: o.before, after: o.after });
+    var p = B.math(prompt, R.check(keyTex, o), keyTex, o.sol, o.hints || [], o.text, { keys: o.vars && o.vars.length ? 'p23var' : 'p23rad', vars: o.vars, rel: false, before: o.before, after: o.after, placeholder: o.vars && o.vars.length ? 'e.g. 3x sqrt(2x) + 5' : 'e.g. 5sqrt(2) + 3' });
     if (o.unit) p.answer = t(keyTex + '\\text{ ' + o.unit + '}');
     var kv = R.envs(o.vars || [], o).map(function (e) { return ex.value(ex.parse(keyTex).ast, e); });
     p.bad = (o.cands || []).map(function (c) { return c.tex; }).concat(o.bad || []).filter(function (b) { var pb = ex.parse(b); if (!pb.ok) return true; var bv = R.envs(o.vars || [], o).map(function (e) { return ex.value(pb.ast, e); }); return !bv.every(function (x, i) { return ex.eq(x, kv[i], 1e-8); }); });
@@ -361,10 +361,11 @@
   R.partR = function (prompt, keyTex, want, o) {
     o = o || {};
     var vars = o.vars || Object.keys(ex.shape(ex.parse(keyTex).ast).vars).sort();
-    var fields = [{ label: o.label || 'Simplified:', name: 'Expression', mode: 'math', keys: 'p23var', vars: vars }, { label: 'Restriction:', name: 'Restriction', mode: 'math', keys: 'p23var', vars: vars, none: true }];
+    var fields = [{ label: o.label || 'Simplified:', name: 'Expression', mode: 'math', keys: 'p23var', vars: vars, placeholder: 'e.g. 3x sqrt(2x)' }, { label: 'Restriction:', name: 'Restriction', mode: 'math', keys: 'p23var', vars: vars, none: true, placeholder: 'e.g. x >= 0, or none' }];
     var p = B.fields(prompt, fields, [R.check(keyTex, Object.assign({}, o, { vars: vars })), R.restrCheck(want, { hint: o.rHint })], [keyTex, R.restrKey(want)],
       'Simplified: ' + t(keyTex) + '<br>Restriction: ' + t(R.restrTex(want)), o.sol, o.hints || [], o.text);
-    p.bad = (o.cands || []).map(function (c) { return [c.tex, R.restrKey(want)]; }).concat([[keyTex, want ? 'none' : 'x\\ge 0']]).concat(o.bad || []);
+    var kv = R.envs(vars, o).map(function (e) { return ex.value(ex.parse(keyTex).ast, e); });
+    p.bad = (o.cands || []).filter(function (c) { var pb = ex.parse(c.tex); return !pb.ok || !R.envs(vars, o).every(function (e, i) { return ex.eq(ex.value(pb.ast, e), kv[i], 1e-8); }); }).map(function (c) { return [c.tex, R.restrKey(want)]; }).concat([[keyTex, want ? 'none' : 'x\\ge 0']]).concat(o.bad || []);
     p.good = [[keyTex, want ? Object.keys(want).sort().map(function (v) { return F(want[v]) + '\\le ' + v; }).join(', ') : 'x\\in\\mathbb{R}']];
     if (want && Object.keys(want).length === 2) { var vv = Object.keys(want).sort(); if (want[vv[0]] === want[vv[1]]) p.good.push([keyTex, vv.join(',') + '\\ge ' + want[vv[0]]]); }
     return p;
@@ -372,7 +373,7 @@
   /* several boxes: specs [{ label, name, key, check | (key + o for R.check), vars }] */
   R.fieldsPart = function (prompt, specs, o) {
     o = o || {};
-    var fields = specs.map(function (s) { return { label: s.label, name: s.name || String(s.label || '').replace(/<[^>]+>|\\\(|\\\)/g, ''), mode: 'math', keys: s.keys || (s.vars && s.vars.length ? 'p23var' : 'p23rad'), vars: s.vars, before: s.before, after: s.after, none: s.none }; });
+    var fields = specs.map(function (s) { return { label: s.label, name: s.name || String(s.label || '').replace(/<[^>]+>|\\\(|\\\)/g, ''), mode: 'math', keys: s.keys || (s.vars && s.vars.length ? 'p23var' : 'p23rad'), vars: s.vars, before: s.before, after: s.after, none: s.none, placeholder: s.check && s.none ? 'e.g. x >= 0, or none' : 'e.g. 5sqrt(2) + 3' }; });
     var checks = specs.map(function (s) { return s.check || R.check(s.key, s); });
     var p = B.fields(prompt, fields, checks, specs.map(function (s) { return s.key; }), specs.map(function (s) { return (s.label ? s.label + ' ' : '') + t((s.before || '') + (s.ansTex || s.key) + (s.after || '')); }).join('<br>'), o.sol, o.hints || [], o.text);
     p.bad = o.bad; p.good = o.good;

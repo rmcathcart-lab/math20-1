@@ -105,15 +105,16 @@
 .u2l1-alab { font-size: 17px; color: var(--ink2); }
 .u2l1-slab { font-size: 24px; font-weight: 700; }
 /* true / false */
-.u2l1-tf { font-size: 21px; }
-.u2l1-tf .bk-ck-c { font-size: 21px; }
+.u2l1-tf { font-size: 22px; }
+.u2l1-tf .bk-ck-c { font-size: 24px; }
+.u2l1-tf .bk-ck-sh, .u2l1-tf .bk-ck-verdict { font-size: 17px; }
 /* tiles */
 .u2l1-tnum { font: 800 18px var(--round); fill: #1f5bd6; opacity: .8; }
 .u2l1-tarea { font-size: 26px; background: rgba(255, 255, 255, .9); border-radius: 10px; padding: 2px 10px; }
 .u2l1-tside { font-size: 24px; background: rgba(255, 255, 255, .92); border-radius: 8px; padding: 0 6px; }
 .u2l1-tone { font-size: 21px; background: rgba(255, 255, 255, .92); border-radius: 8px; padding: 0 5px; }
 /* copies */
-.u2l1-bartxt { font: 700 17px var(--round); fill: #1f5bd6; }
+.u2l1-bartxt { font-size: 18px; pointer-events: none; }
 .u2l1-cval { font-size: 26px; background: #fff; border: 2px solid #f0d49c; border-radius: 10px; padding: 2px 12px; }
 .u2l1-ccnt { font: 700 19px var(--round); color: #1f5bd6; }
 /* order */

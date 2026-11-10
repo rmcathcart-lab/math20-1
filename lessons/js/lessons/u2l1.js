@@ -193,7 +193,7 @@ const RF = {
 const rfChoices = [{ sep: 'Example 1 check:' }, ...'abcdefghi'.split('').map((k) => ({ v: k, label: `(${k}) ${T(RF[k].lab)}` }))];
 const rootFind = {
   title: 'What number, used n times?',
-  height: 400,
+  height: 350,
   choices: rfChoices,
   intro: (k) => `Evaluate ${T(RF[k].lab)} if it is a real number. Press <b>Next</b>.`,
   ask: (k) => `<b>${RF[k].ex}.</b> Evaluate ${T(RF[k].lab)} if possible.`,
@@ -222,15 +222,15 @@ const rootFind = {
       }
       return p;
     }
-    const resY = d.frac ? 300 : 262;
+    const resY = d.frac ? 300 : 258;
     const res = lab(stage, '', 'u2l1-fres', W / 2, resY, 'c'); hide(res);
     const stOk = stamp(stage, '', { ok: true, x: W - 150, y: resY }); hide(stOk);
     const steps = [];
     const prodTex = (v) => Array(n).fill(v < 0 ? `(${fmtV(v)})` : fmtV(v)).join('\\times');
     if (d.frac) {
       const [p, q] = d.frac, a = Math.round(Math.cbrt(p)), b = Math.round(Math.cbrt(q));
-      const R1 = row(30, p), R2 = row(150, q);
-      const t1 = lab(stage, 'top', 'u2l1-ftag', X0 - 12, 30 + BH / 2, 'w'), t2 = lab(stage, 'bottom', 'u2l1-ftag', X0 - 12, 150 + BH / 2, 'w'); hide(t1); hide(t2);
+      const R1 = row(14, p), R2 = row(122, q);
+      const t1 = lab(stage, 'top', 'u2l1-ftag', X0 - 12, 14 + BH / 2, 'w'), t2 = lab(stage, 'bottom', 'u2l1-ftag', X0 - 12, 122 + BH / 2, 'w'); hide(t1); hide(t2);
       res.innerHTML = T(`${d.lab}=\\dfrac{${a}}{${b}}`); stOk.textContent = '✓ rational';
       steps.push({ cap: `A cube root of a fraction: find the cube root of the <b>top</b> and of the <b>bottom</b>.`, run: async (c) => { await showRow(c, R1); await showRow(c, R2); t1.style.opacity = 1; t2.style.opacity = 1; } });
       steps.push({ cap: `Top: ${T(`${prodTex(a)}=${p}`)}, so ${T(`\\sqrt[3]{${p}}=${a}`)}.`, run: (c) => fill(c, R1, a) });
@@ -242,7 +242,7 @@ const rootFind = {
     const even = n % 2 === 0;
     if (d.x < 0 && even) {
       const kk = Math.round(Math.pow(-d.x, 1 / n)), kn = kk ** n;
-      res.innerHTML = `${T(d.lab)} is <b>not a real number</b>`; const stNo = stamp(stage, 'not a real number', { ok: false, x: W / 2, y: resY + 62 }); hide(stNo);
+      res.innerHTML = `${T(d.lab)} is <b>not a real number</b>`; const stNo = stamp(stage, 'not a real number', { ok: false, x: W - 170, y: resY }); hide(stNo);
       const miss = lab(stage, T(cX('\\ne' + tn(d.x))), 'u2l1-fmiss', X0 + n * BW + (n - 1) * OPW + 40, 46 + BH + 34, 'c'); hide(miss);
       steps.push({ cap: `${T(d.lab)} asks: what number, used as a factor <b>${n}</b> times, makes ${T(tn(d.x))}?`, run: (c) => showRow(c, R) });
       steps.push({ cap: `Try ${T(String(kk))}: ${T(`${prodTex(kk)}=${kn}`)}. Positive, not ${T(tn(d.x))}.`, run: async (c) => { await fill(c, R, kk); miss.style.opacity = 1; await pop(c, miss); } });
@@ -281,7 +281,7 @@ const LD = {
 /** a ladder lying on its side: rungs at the perfect n-th powers around v */
 function ladder(stage, svg, x, y, L, n, v, side) {
   const r = Math.pow(v, 1 / n), kr = Math.round(r), exact = Math.abs(kr ** n - v) < 1e-9, kf = exact ? kr : Math.floor(r + 1e-9);
-  const kTop = kf + 1, kLo = Math.max(0, kTop - 4), lo = kLo ** n, hi = kTop ** n, px = (val) => x + (val - lo) / (hi - lo) * L;
+  const kTop = kf + 1, kLo = Math.max(1, kTop - 4), lo = kLo ** n, hi = kTop ** n, px = (val) => x + (val - lo) / (hi - lo) * L;
   const g = svgEl('g', {}, svg); g.style.opacity = 0;
   const RH = 30;
   const band = svgEl('rect', { x: px(kf ** n), y, width: exact ? 0 : px((kf + 1) ** n) - px(kf ** n), height: RH, fill: CO, 'fill-opacity': 0.22 }, g); band.style.opacity = 0;
@@ -403,6 +403,9 @@ function addMake(stage, svg, W) {
   const bx = gx + 3 * u + 10;
   for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) sqB.push(unit(bx + i * u, base - (j + 1) * u, '#5d87e0'));
   [...sqA, ...sqB].forEach((r) => (r.style.opacity = 0));
+  const ghost = svgEl('g', {}, svg); ghost.style.opacity = 0;
+  svgEl('rect', { x: gx - 2, y: base - 3 * u - 2, width: 3 * u + 1, height: 3 * u + 1, fill: 'none', stroke: '#9aa0ab', 'stroke-width': 2, 'stroke-dasharray': '6 5' }, ghost);
+  svgEl('rect', { x: bx - 2, y: base - 4 * u - 2, width: 4 * u + 1, height: 4 * u + 1, fill: 'none', stroke: '#9aa0ab', 'stroke-width': 2, 'stroke-dasharray': '6 5' }, ghost);
   const lA = lab(stage, `area ${T('9')}`, 'u2l1-alab', gx + 1.5 * u, base - 3 * u - 8, 'n'), lB = lab(stage, `area ${T('16')}`, 'u2l1-alab', bx + 2 * u, base - 4 * u - 8, 'n'); hide(lA); hide(lB);
   const sA = lab(stage, T(cC('3')), 'u2l1-slab', gx + 1.5 * u, base + 6, 's'), sB = lab(stage, T(cC('4')), 'u2l1-slab', bx + 2 * u, base + 6, 's'); hide(sA); hide(sB);
   const br = svgEl('path', { class: 'bk-stroke', d: `M${gx} ${base + 40} L${gx} ${base + 50} L${bx + 4 * u} ${base + 50} L${bx + 4 * u} ${base + 40}`, fill: 'none', stroke: CO, 'stroke-width': 3.5 }, svg); br.style.opacity = 0;
@@ -412,10 +415,10 @@ function addMake(stage, svg, W) {
   const e1 = lab(stage, T('\\sqrt9+\\sqrt{16}=3+4=7'), 'u2l1-eqbox', 40, 22, 'e'), e2 = lab(stage, T('\\sqrt{9+16}=\\sqrt{25}=5'), 'u2l1-eqbox', W - 40, 22, 'w'); hide(e1); hide(e2);
   e1.style.translate = '0 0'; e2.style.translate = '-100% 0';
   const ne = lab(stage, T(cX('5\\ne7')), 'u2l1-big', W / 2 + 20, 200, 'c'); hide(ne);
-  const st = stamp(stage, '√(a+b) ≠ √a + √b', { ok: false, x: W - 205, y: 372 }); hide(st);
+  const st = stamp(stage, '✗ no splitting over +', { ok: false, x: W - 210, y: 362 }); hide(st);
   return [
     { cap: `${T('\\sqrt9')} is the side of a square of area 9; ${T('\\sqrt{16}')} is the side of a square of area 16.`,
-      run: async (c) => { all.forEach((r) => (r.style.opacity = 1)); await appear(c, svg, 200); [lA, lB, sA, sB].forEach((e) => (e.style.opacity = 1)); await Promise.all([lA, lB, sA, sB].map((e) => fadeIn(c, e))); } },
+      run: async (c) => { all.forEach((r) => (r.style.opacity = 1)); ghost.style.opacity = 1; await appear(c, svg, 200); [lA, lB, sA, sB].forEach((e) => (e.style.opacity = 1)); await Promise.all([lA, lB, sA, sB].map((e) => fadeIn(c, e))); } },
     { cap: `${T('\\sqrt9+\\sqrt{16}=3+4=7')}: the two sides laid end to end.`, run: async (c) => { br.style.opacity = 1; await drawIn(br, 500, c); await show(c, s7); await show(c, e1); } },
     { cap: `${T('\\sqrt{9+16}=\\sqrt{25}')}: move all 25 unit squares into <b>one</b> square.`,
       run: async (c) => {
@@ -448,7 +451,7 @@ const trueFalse = {
   ask: (k) => `<b>Example 3(${k}).</b> True or false: ${T(TF[k].s)}`,
   make(stage, k, ex) {
     const d = TF[k], W = ex.W, n = d.L.length;
-    const card = add(stage, box(h('div', 'bk-check u2l1-tf'), 600, null), 60, 18);
+    const card = add(stage, box(h('div', 'bk-check u2l1-tf'), 660, null), 50, 14);
     card.innerHTML = `<div class="bk-ck-h">Check</div>`;
     const grid = h('div', 'bk-ck-grid'); card.appendChild(grid);
     grid.innerHTML = '<div class="bk-ck-sh">Left side</div><div></div><div class="bk-ck-sh">Right side</div>';
@@ -461,7 +464,7 @@ const trueFalse = {
     }
     if (!d.ok) card.classList.add('u2l1-tfno');
     const verdict = h('div', 'bk-ck-verdict ' + (d.ok ? 'bk-ok' : 'bk-no'), d.ok ? '✓ Both sides are equal' : '✗ The sides are not equal'); card.appendChild(verdict); hide(verdict);
-    const st = stamp(stage, d.ok ? 'TRUE' : 'FALSE', { ok: d.ok, x: W - 160, y: 150, size: 'lg' }); hide(st);
+    const st = stamp(stage, d.ok ? 'TRUE' : 'FALSE', { ok: d.ok, x: W - 130, y: 150, size: 'lg' }); hide(st);
     return [
       { cap: `Work out the <b>left side</b>.`, run: async (c) => { for (const e of Ls) { if (!e.innerHTML) { e.style.opacity = 1; continue; } await show(c, e); await sleep(c, 120); } } },
       { cap: `Work out the <b>right side</b>.`, run: async (c) => { for (const e of Rs) { if (!e.innerHTML) { e.style.opacity = 1; continue; } await show(c, e); await sleep(c, 120); } } },
@@ -530,7 +533,7 @@ const tilesDef = {
     const Q = tileSquare(stage, svg, x, y, S, k, m);
     const P = panel(stage, x + S + 90, 40, W - (x + S + 90) - 40, 300, 'Working');
     const lines = [`\\text{area}=${cR(v)}`, `${v}=${cC(k * k)}\\times${cR(m)}`, `\\text{${k * k} tiles, each of area }${cR(m)}`, `\\text{tile side}=${cR(`\\sqrt{${m}}`)}`, `\\sqrt{${v}}=${cC(k)}\\sqrt{${cR(m)}}`].map((s) => { const e = h('div', 'u2l1-pline', T(s)); P.appendChild(e); hide(e); return e; });
-    const st = stamp(stage, '✓ ' + `${k}√${m}`, { ok: true, x: W - 150, y: 380 }); hide(st);
+    const st = stamp(stage, '✓ mixed radical', { ok: true, x: W - 150, y: 380 }); hide(st);
     return [
       { cap: `A square with area ${T(cR(v))} has side ${T(`\\sqrt{${v}}`)}.`, run: (c) => show(c, lines[0]) },
       { cap: `${T(`${v}=${cC(k * k)}\\times${cR(m)}`)}: cut the square into ${T(cC(k * k))} small squares, each of area ${T(cR(m))} (a ${k} by ${k} grid).`,
@@ -650,7 +653,7 @@ const simplest = {
 const PR = { a: { n: 2, r: 2700, ex: 'Example 5(a)' }, b: { n: 3, r: 3024, ex: 'Example 5(b)' }, 392: { n: 2, r: 392 }, 648: { n: 3, r: 648 } };
 const primes = {
   title: 'Prime factors: groups escape',
-  height: 410,
+  height: 340,
   minW: 960,
   choices: [{ sep: 'Example 5 check:' }, { v: 'a', label: T('\\sqrt{2\\,700}') }, { v: 'b', label: T('\\sqrt[3]{3\\,024}') }, { sep: 'More:' }, { v: 392, label: T('\\sqrt{392}') }, { v: 648, label: T('\\sqrt[3]{648}') }],
   intro: (k) => `Simplify ${T(rt(PR[k].n, tn(PR[k].r)))} using prime factors. Press <b>Next</b>.`,
@@ -667,9 +670,9 @@ const primes = {
     const inner = []; tiles.forEach((t, q) => { if (q) inner.push(ops[q - 1]); inner.push(t); });
     const factTex = ps.join('\\times');
     const outTex = outs.map((p) => cC(p)).join('\\times'), leftTex = leftV.map((p) => cR(p)).join('\\times');
-    const ch = chain(stage, 30, 300, W - 60, [`${rt(n, tn(d.r))}=${rt(n, factTex)}`, `=${outTex}${rt(n, leftTex)}`, `=${cC(pOut)}${rt(n, cR(pIn))}`]);
+    const ch = chain(stage, 30, 262, W - 60, [`${rt(n, tn(d.r))}=${rt(n, factTex)}`, `=${outTex}${rt(n, leftTex)}`, `=${cC(pOut)}${rt(n, cR(pIn))}`]);
     const brG = svgEl('g', {}, svg); brG.style.opacity = 0; const brL = [];
-    const st = stamp(stage, '✓ simplest form', { ok: true, x: W - 140, y: 380 }); hide(st);
+    const st = stamp(stage, '✓ simplest form', { ok: true, x: W - 160, y: 190 }); hide(st);
     const grpWord = GROUP[n], gw = groups.map((g) => Array(n).fill(g.p).join('\\cdot')).join(',\\ ');
     return [
       { cap: `Prime factors: ${T(`${tn(d.r)}=${factTex}`)}.`, run: async (c) => { const x0 = tR._x; await R.set(c, [], inner, { at: new Map(inner.map((e) => [e, x0])), ms: 800 }); await ch.show(c, 0); } },
@@ -724,7 +727,7 @@ const copies = {
     for (let i = 0; i < nb; i++) {
       const g = svgEl('g', {}, L); g.style.opacity = 0;
       svgEl('rect', { x: NL.toPx(i * S3), y: by, width: S3 * ux, height: bh, rx: 5, fill: '#dfe8fb', stroke: RAD, 'stroke-width': 2.5 }, g);
-      if (S3 * ux >= 46) { const t = svgEl('text', { x: NL.toPx((i + 0.5) * S3), y: by + bh / 2 + 7, 'text-anchor': 'middle', class: 'u2l1-bartxt' }, g); t.textContent = '√3'; }
+      if (S3 * ux >= 46) { const t = lab(stage, T(cR('\\sqrt3')), 'u2l1-bartxt', 20 + NL.toPx((i + 0.5) * S3), 120 + by + bh / 2, 'c'); hide(t); g.lab = t; }
       bars.push(g);
     }
     const pieces = svgEl('g', {}, L); pieces.style.opacity = 0;
@@ -734,13 +737,13 @@ const copies = {
     const mk = NL.point(end, { color: CO, r: 9 }); mk.style.opacity = 0;
     const vl = lab(stage, `${T(`\\sqrt{${d.N}}\\approx${cC(d.val)}`)}`, 'u2l1-big u2l1-cval', 20 + NL.toPx(end), 120 + NL.ay + 46, 's'); hide(vl);
     const cnt = lab(stage, '', 'u2l1-ccnt', W / 2, 120 + by - 30, 'c'); hide(cnt);
-    const st = stamp(stage, '≈ ' + d.val, { ok: true, x: W - 140, y: 340 }); hide(st);
+    const st = stamp(stage, '≈ ' + d.val, { ok: true, x: 160, y: 330 }); hide(st);
     const mult = frac ? `1.732\\div10=${d.val}` : `${d.k}\\times1.732=${d.val}`;
     return [
       { cap: `Simplify first, so the radicand is ${T('3')}: ${T(d.simp)}.`, run: (c) => show(c, top) },
       { cap: frac ? `${T('\\dfrac{\\sqrt3}{10}')} is <b>one tenth</b> of ${T('\\sqrt3')}: cut one ${T('\\sqrt3')} bar into 10 equal pieces.` : `${T(`${d.k}\\sqrt3`)} is ${d.k} copies of ${T('\\sqrt3\\approx1.732')}, laid end to end.`,
         run: async (c) => {
-          for (const [i, b] of bars.entries()) { b.style.opacity = 1; await pop(c, b, 220); if (!frac) { cnt.innerHTML = `${i + 1} × √3`; cnt.style.opacity = 1; } }
+          for (const [i, b] of bars.entries()) { b.style.opacity = 1; if (b.lab) b.lab.style.opacity = 1; await pop(c, b, 220); if (!frac) { cnt.innerHTML = T(`${i + 1}\\times\\sqrt3`); cnt.style.opacity = 1; } }
           if (frac) { pieces.style.opacity = 1; await appear(c, pieces, 300); one.style.opacity = 1; await appear(c, one, 300); }
         } },
       { cap: `${T(mult)}, so ${T(`\\sqrt{${d.N}}\\approx${d.val}`)}.` + (d.k === 10 ? ' Multiplying by 10 just moves the decimal point.' : frac ? ' Dividing by 10 moves the decimal point back one place.' : ''),
@@ -762,7 +765,7 @@ const qT = ([p, q], d = 't') => (q === 1 ? tn(p) : `${p < 0 ? '-' : ''}\\${d}fra
 const giStart = (g) => `${g.co[1] === 1 ? tn(g.co[0]) : `\\dfrac{${g.co[0]}}{${g.co[1]}}`}${rt(g.n, g.b)}`;
 const goIn = {
   title: 'Going back in: mixed → entire',
-  height: 400,
+  height: 330,
   choices: [{ v: 'c5', label: T('5\\sqrt2') }, { v: 'cm2', label: T('-2\\sqrt[3]7') }, { sep: 'Example 7 check:' }, ...'abcdefgh'.split('').map((k) => ({ v: k, label: `(${k})` }))],
   intro: (k) => `Write ${T(giStart(GI[k]))} as an entire radical. Press <b>Next</b>.`,
   ask: (k) => `${GI[k].ex ? `<b>${GI[k].ex}.</b> ` : ''}Write ${T(giStart(GI[k]))} as an entire radical.`,
@@ -784,7 +787,7 @@ const goIn = {
     const pinW = pin[1] === 1 ? wNum(pin[0], R.fs) : fracW;
     const lead = keepOut ? '-' : '';
     const parts = [giStart(g), `=${lead}${rt(n, cC(bPow))}\\times${rt(n, cR(g.b))}`, `=${lead}${rt(n, cC(pin[1] === 1 ? (pin[0] < 0 ? `(${tn(pin[0])})` : tn(pin[0])) : pinT) + '\\times' + cR(g.b))}`, `=${lead}${rt(n, tn(prodV))}`];
-    const ch = chain(stage, 30, 330, W - 60, parts);
+    const ch = chain(stage, 30, 256, W - 60, parts);
     const st = stamp(stage, '✓ entire radical', { ok: true, x: W - 150, y: 60 }); hide(st);
     const steps = [];
     const powCap = keepOut ? `<b>Even index:</b> the minus sign stays <b>outside</b> (a square root is never negative). Write ${T(bT)} as ${T(rt(n, bPow))}.`
@@ -937,7 +940,7 @@ const context = {
     G.point(...A, { label: T('A(-2,\\ 5)'), pos: 'ne', color: INK }); G.point(...B, { label: T('B(4,\\ -1)'), pos: 'se', color: INK });
     const v = G.segment(A, Cc, { color: CO, width: 4, dash: true }), hz = G.segment(Cc, B, { color: CO, width: 4, dash: true }); hide(v); hide(hz);
     const tv = G.label(-2, 2, T(cC('6')), { pos: 'w', cls: 'bk-ptlab' }), th = G.label(1, -1, T(cC('6')), { pos: 's', cls: 'bk-ptlab' }); hide(tv); hide(th);
-    const ln = lines(['\\Delta x=4-(-2)=6', '\\Delta y=-1-5=-6', 'AB=\\sqrt{6^2+(-6)^2}', '=\\sqrt{72}', `=\\sqrt{${cC(36)}\\times${cR(2)}}=${cC(6)}\\sqrt{${cR(2)}}`]);
+    const ln = lines(['\\text{across: }4-(-2)=6', '\\text{down: }-1-5=-6', 'AB=\\sqrt{6^2+(-6)^2}', '=\\sqrt{72}', `=\\sqrt{${cC(36)}\\times${cR(2)}}=${cC(6)}\\sqrt{${cR(2)}}`]);
     return [
       { cap: `Draw the legs: down from ${T('A')} and across to ${T('B')}. Horizontal change ${T('4-(-2)=6')}; vertical change ${T('-1-5=-6')}.`,
         run: async (c) => { v.style.opacity = 1; await G.drawIn(v, 500, c); tv.style.opacity = 1; hz.style.opacity = 1; await G.drawIn(hz, 500, c); th.style.opacity = 1; await show(c, ln[0]); await show(c, ln[1]); } },

@@ -184,7 +184,7 @@ function binsDef(title, data, choices) {
       const rads = [...new Set(d.terms.map((t) => radOf(t.o)).filter(Boolean))].map((r) => T(r));
       steps.push({
         cap: d.c0 || (needS ? `As written, the radicands are ${listAnd(rads)}: they look <b>unlike</b>. Nothing combines yet.`
-          : nb === 1 ? `Same index, same radicand: every term is a ${T(d.bins[0].t)} term. <b>Like radicals.</b>` : `Each kind of term gets its <b>own bin</b>: ${listAnd(d.bins.map((b) => (b.k === 'num' ? 'numbers' : T(b.t))))}.`),
+          : nb === 1 ? `Same index, same radicand: all the terms are ${T(d.bins[0].t)} terms. <b>Like radicals.</b>` : `Each kind of term gets its <b>own bin</b>: ${listAnd(d.bins.map((b) => (b.k === 'num' ? 'numbers' : T(b.t))))}.`),
         run: async (c) => {
           if (needS) { cards.forEach((cd, i) => { if (d.terms[i].s) cd.classList.add('u2l3-unlike'); else paint(i); }); await Promise.all(cards.map((cd) => pulse(c, cd, 1.05))); }
           else { cards.forEach((_, i) => paint(i)); await Promise.all(cards.map((cd) => pulse(c, cd, 1.06))); }
@@ -198,7 +198,7 @@ function binsDef(title, data, choices) {
         });
       });
       steps.push({
-        cap: d.cDrop || (nb === 1 ? `${needS ? 'Now every' : 'Every'} term is a ${T(d.bins[0].t)} term: all the tiles go in <b>one bin</b>.` : `Drop each term’s tiles into its bin.`),
+        cap: d.cDrop || (nb === 1 ? `${needS ? 'Now all' : 'All'} the terms are ${T(d.bins[0].t)} terms: the tiles go in <b>one bin</b>.` : `Drop each term’s tiles into its bin.`),
         run: async (c) => {
           await Promise.all(bins.map((bn) => show(c, bn.el)));
           for (let i = 0; i < d.terms.length; i++) {
@@ -270,7 +270,7 @@ const tm = (o, n, k, sg = 1, extra = {}) => Object.assign({ o, n, k, sg }, extra
 /* ---- section 1: like radicals ---- */
 const LT = {
   x: { label: T('4x+3x'), ask: `Like terms: ${T('4x+3x')}`, bins: [B.x], terms: [tm('4x', 4, 'x'), tm('3x', 3, 'x')], grp: '(4+3)x', ans: '7x',
-    c0: `Two ${T('x')} terms: <b>like terms</b>. Each ${T('x')} is one tile.` },
+    c0: `Two ${T('x')} terms: <b>like terms</b>. Each ${T('x')} is one tile.`, cDrop: `Both are ${T('x')} terms: the tiles go in <b>one bin</b>.` },
   r7: { label: T('4\\sqrt{7}+3\\sqrt{7}'), ask: `Like radicals: ${T('4\\sqrt{7}+3\\sqrt{7}')}`, bins: [B.s7], terms: [tm('4\\sqrt{7}', 4, 's7'), tm('3\\sqrt{7}', 3, 's7')], grp: '(4+3)\\sqrt{7}', ans: '7\\sqrt{7}',
     c0: `Two ${T('\\sqrt{7}')} terms: <b>like radicals</b>. Each ${T('\\sqrt{7}')} is one tile, just like an ${T('x')}.`,
     capAns: `${T('4\\sqrt{7}+3\\sqrt{7}=7\\sqrt{7}')}, exactly like ${T('4x+3x=7x')}. The radical part stays ${T('\\sqrt{7}')}.` },
@@ -366,7 +366,7 @@ const varBins = binsDef('Variable radicands: simplify, combine, restrict', VB, [
 /* =============================== explainer: legs vs hypotenuse =============================== */
 const LH = {
   a916: { label: T('\\sqrt{9}+\\sqrt{16}'), a: 9, b: 16, sa: '3', sb: '4', walk: '3+4=7', hyp: '\\sqrt{25}=5', cmp: '7\\ne5' },
-  a22: { label: T('\\sqrt{2}+\\sqrt{2}'), a: 2, b: 2, sa: '\\sqrt{2}', sb: '\\sqrt{2}', walk: '\\sqrt{2}+\\sqrt{2}=2\\sqrt{2}', hyp: '\\sqrt{4}=2', cmp: '2\\sqrt{2}\\ne2' },
+  a22: { label: T('\\sqrt{2}+\\sqrt{2}'), a: 2, b: 2, sa: '\\sqrt{2}', sb: '\\sqrt{2}', walk: '2\\sqrt{2}', hyp: '\\sqrt{4}=2', cmp: '2\\sqrt{2}\\ne2' },
   a18: { label: T('\\sqrt{1}+\\sqrt{8}'), a: 1, b: 8, sa: '1', sb: '2\\sqrt{2}', walk: '1+2\\sqrt{2}', hyp: '\\sqrt{9}=3', cmp: '1+2\\sqrt{2}\\ne3' }
 };
 const legsVsHyp = {
@@ -632,7 +632,7 @@ const GL = {
     sides: [{ a: 'A', b: 'B', corner: [1, -2] }, { a: 'B', b: 'C', corner: [1, -4] }, { a: 'A', b: 'C', corner: [-3, -4] }], P: '2\\sqrt{5}+2\\sqrt{5}+2\\sqrt{10}=4\\sqrt{5}+2\\sqrt{10}', units: 'units' },
   sq: { label: 'A tilted square', ask: `A square has vertices ${T('P(0,0)')}, ${T('Q(3,1)')}, ${T('R(2,4)')} and ${T('S(-1,3)')}. Determine its perimeter.`, win: { xmin: -2, xmax: 4, ymin: -1, ymax: 5 },
     pts: { P: [0, 0], Q: [3, 1], R: [2, 4], S: [-1, 3] }, pos: { P: 'sw', Q: 'e', R: 'ne', S: 'w' },
-    sides: [{ a: 'P', b: 'Q', corner: [3, 0] }, { a: 'Q', b: 'R', corner: [3, 4] }, { a: 'R', b: 'S', corner: [-1, 4] }, { a: 'S', b: 'P', corner: [-1, 0] }], same: true, P: '4\\sqrt{10}', units: 'units' }
+    sides: [{ a: 'P', b: 'Q', corner: [3, 0] }, { a: 'Q', b: 'R', corner: [3, 4] }, { a: 'R', b: 'S', corner: [-1, 4] }, { a: 'S', b: 'P', corner: [-1, 0] }], same: true, inside: true, P: '4\\sqrt{10}', units: 'units' }
 };
 const gridLengths = {
   title: 'Slanted lengths: the right triangle underneath',
@@ -655,15 +655,15 @@ const gridLengths = {
       const ql = G.label(s.corner[0], (riseEnd[1] + s.corner[1]) / 2, T(String(rise)), { cls: 'bk-ptlab', color: C5, pos: s.corner[0] < cen[0] ? 'w' : 'e' });
       const mx = (A[0] + Bp[0]) / 2, my = (A[1] + Bp[1]) / 2; let nx = -(Bp[1] - A[1]), ny = Bp[0] - A[0]; const nl = Math.hypot(nx, ny); nx /= nl; ny /= nl;
       if ((mx - cen[0]) * nx + (my - cen[1]) * ny < 0) { nx = -nx; ny = -ny; }
-      const sl = G.label(mx - nx * 0.75, my - ny * 0.75, T(L), { cls: 'bk-pill', color: BR });
+      const io = d.inside ? -0.75 : 0.6, sl = G.label(mx + nx * io, my + ny * io, T(L), { cls: 'bk-pill', color: BR });
       [r1, r2, rl, ql, sl].forEach(hide);
       return { s, run, rise, sum, L, r1, r2, rl, ql, sl, nm: s.a + s.b };
     });
     const stepSide = (o) => ({
-      cap: `${T(o.nm)}: run ${o.run}, rise ${o.rise}. ${T(`\\sqrt{${o.run}^2+${o.rise}^2}=\\sqrt{${o.sum}}=${o.L}`)}.`,
+      cap: `${T(o.nm)}: run ${o.run}, rise ${o.rise}. ${T(`\\sqrt{${o.run}^2+${o.rise}^2}=\\sqrt{${o.sum}}${o.L === `\\sqrt{${o.sum}}` ? '' : '=' + o.L}`)}.`,
       run: async (c) => {
         o.r1.style.opacity = 1; await drawIn(o.r1, 450, c); await show(c, o.rl); o.r2.style.opacity = 1; await drawIn(o.r2, 450, c); await show(c, o.ql);
-        await pop(c, o.sl); await show(c, line(pn, T(`${o.nm}=\\sqrt{${o.run * o.run}+${o.rise * o.rise}}=\\sqrt{${o.sum}}=${o.L}`)));
+        await pop(c, o.sl); await show(c, line(pn, T(`${o.nm}=\\sqrt{${o.run * o.run}+${o.rise * o.rise}}=\\sqrt{${o.sum}}${o.L === `\\sqrt{${o.sum}}` ? '' : '=' + o.L}`)));
       }
     });
     const steps = [];
@@ -740,7 +740,7 @@ const missingSide = {
       run: async (c) => {
         const left = tiles.filter((t) => !t.gone); let nx = 70;
         await show(c, xRow);
-        await Promise.all(left.map((t, j) => { const dx = nx - t.x; nx += tw + 6 + (left[j + 1] && left[j + 1].k !== t.k ? 14 : 0); return c.anim(t.e, [{ transform: 'none' }, { transform: `translate(${dx}px, 56px)` }], 600, { delay: j * 60 }); }));
+        await Promise.all(left.map((t, j) => { const dx = nx - t.x; nx += tw + 6 + (left[j + 1] && left[j + 1].k !== t.k ? 14 : 0); return c.anim(t.e, [{ left: t.x + 'px', top: SY + 'px' }, { left: (t.x + dx) + 'px', top: (SY + 56) + 'px' }], 600, { delay: j * 60 }); }));
         await Promise.all(left.map((t) => pulse(c, t.e, 1.1)));
         tri[d.xs].innerHTML = T(`x=${d.x}`); tri[d.xs].classList.add('u2l3-xon'); await pop(c, tri[d.xs]);
         await show(c, line(pn, T(`${d.lines.length > 1 ? '\\phantom{x}' : 'x'}=\\boldsymbol{${d.x}}\\text{ ${d.unit}}`), 'u2l3-big'));
@@ -768,7 +768,7 @@ const balanceY = {
   choices: Object.keys(BY).map((k) => ({ v: k, label: BY[k].label })),
   ask: (k) => BY[k].ask,
   make(stage, key, ex) {
-    const d = BY[key], W = ex.W, H = ex.def.height, svg = mkSvg(stage, W, H), beamY = 262, cxm = W / 2, tw = 54, th = 40;
+    const d = BY[key], W = ex.W, H = ex.def.height, svg = mkSvg(stage, W, H), beamY = 262, cxm = W / 2, tw = 50, th = 40;
     svgEl('polygon', { points: `${cxm},${beamY + 8} ${cxm - 34},${beamY + 70} ${cxm + 34},${beamY + 70}`, fill: '#8a6440' }, svg);
     svgEl('rect', { x: 50, y: beamY, width: W - 100, height: 10, rx: 5, fill: '#5b4632' }, svg);
     const panL = [70, cxm - 30], panR = [cxm + 30, W - 70];
@@ -776,7 +776,7 @@ const balanceY = {
     const eq = lab(stage, cxm, 40, T('='), 'u2l3-beq', 'c');
     const Lh = lab(stage, (panL[0] + panL[1]) / 2, 40, T(d.L), 'u2l3-bside', 'c'), Rh = lab(stage, (panR[0] + panR[1]) / 2, 40, T(d.R), 'u2l3-bside', 'c');
     const Ls = lab(stage, (panL[0] + panL[1]) / 2, 84, T('=' + d.Ls), 'u2l3-bside2', 'c'), Rs = lab(stage, (panR[0] + panR[1]) / 2, 84, T('=' + d.Rs), 'u2l3-bside2', 'c'); hide(Ls); hide(Rs);
-    const per = 6, slot = (p, i, off = 0) => { const j = i + off, r = Math.floor(j / per), cI = j % per, w0 = per * (tw + 6) - 6, x0 = (p[0] + p[1]) / 2 - w0 / 2; return [x0 + cI * (tw + 6), beamY - 16 - th - r * (th + 6)]; };
+    const per = 7, slot = (p, i, off = 0) => { const j = i + off, r = Math.floor(j / per), cI = j % per, w0 = per * (tw + 6) - 6, x0 = (p[0] + p[1]) / 2 - w0 / 2; return [x0 + cI * (tw + 6), beamY - 16 - th - r * (th + 6)]; };
     const yb = add(stage, box(h('div', 'u2l3-ybox', T('y')), tw * 1.6, th), ...slot(panL, 0)); hide(yb);
     const LT2 = [], RT2 = [];
     for (let i = 0; i < d.lk; i++) { const e = add(stage, tileEl(d.u, d.c, false, tw, th), ...slot(panL, i, 2)); hide(e); LT2.push(e); }
