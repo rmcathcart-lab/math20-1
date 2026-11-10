@@ -57,4 +57,4 @@ Add a row here for each box you make (Math 20-1 lesson numbers).
 
 | Lesson | Story |
 |---|---|
-| — | none yet |
+| 1.4 | Gauss's slate: 1 to 100 as 50 pairs of 101; E. T. Bell's 81 297 + … + 100 899 (source: Brian Hayes, "Gauss's Day of Reckoning", American Scientist) |

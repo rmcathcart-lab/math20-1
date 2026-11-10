@@ -752,3 +752,6 @@ a.lp-row:hover { background: #f4f2ec; }
 .ex-ask { flex: 1 0 100%; font-size: 20px; line-height: 1.4; padding: 7px 14px; background: color-mix(in srgb, var(--brand) 7%, #fff); border-left: 4px solid var(--brand); border-radius: 8px; color: var(--ink); }
 .ex-ask[hidden] { display: none; }
 .ex-fl .ex-ask { font-size: 19.5px; }
+
+/* a column of pill buttons (calculator tips) */
+.pill-col { display: flex; flex-direction: column; gap: 8px; flex: none; }

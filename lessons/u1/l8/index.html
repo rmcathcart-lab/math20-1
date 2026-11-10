@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Infinite Geometric Series · Math 20-1 1.8</title>
+<meta name="description" content="Math 20-1 Unit 1 Lesson 8: infinite geometric series. Partial sums that settle on a value (convergent) or run away (divergent), the test −1 &lt; r &lt; 1, the sum to infinity S∞ = t1/(1 − r), finding t1 or r, repeating decimals as fractions, a bouncing ball's total distance and the values of x that make a series with a variable ratio converge. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u1l8.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u1l8">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 1 Sequences and Series · Lesson 8</div>
+  <h1>Infinite Geometric Series</h1>
+  <p class="lede">Adding <b>forever</b> and still getting a number. When the <b class="u1l8-cr">common ratio</b> is small enough, the partial sums <b>settle</b> on one value: the <b class="u1l8-cs">sum to infinity</b> <span class="tex">S_\infty=\dfrac{\textcolor{#0f7c80}{t_1}}{1-\textcolor{#c27a0e}{r}}</span>.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>find <b>partial sums</b> and tell whether an infinite series is <b>convergent</b> or <b>divergent</b></li>
+      <li>decide from <span class="tex">r</span> alone: the series converges only when <span class="tex">-1&lt;r&lt;1</span></li>
+      <li>calculate the sum to infinity <span class="tex">S_\infty=\dfrac{t_1}{1-r}</span>, and work backwards to find <span class="tex">t_1</span> or <span class="tex">r</span></li>
+      <li>write a <b>repeating decimal</b> as a fraction using an infinite geometric series</li>
+      <li>find a total over all time, such as a <b>bouncing ball</b>’s total distance</li>
+      <li>find the values of <span class="tex">x</span> that make a series with a <b>variable ratio</b> converge</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF10</b> Analyze geometric sequences and series to solve problems.<br><span class="muted">Today: infinite geometric series, convergence and the sum to infinity <span class="tex">S_\infty</span>.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Last Piece" id="wu" style="--wf-side: 400px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Last Piece</h2>
+  <p class="wf-rule"><b class="u1l8-fa">Ava</b>, <b class="u1l8-fb">Ben</b> and <b class="u1l8-fc">Cy</b> share a square chocolate bar. Each round, the piece that is left is cut into <b>4 equal pieces</b>: each friend takes one, and the 4th piece is left for the next round.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u1l8-choc" id="u1l8-choc"></div>
+    <div class="u1l8-wbtns">
+      <button type="button" class="pill" id="u1l8-share">Share a round</button>
+      <button type="button" class="pill" id="u1l8-share5">Five more rounds</button>
+      <button type="button" class="pill" id="u1l8-wreset">Start over</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u1l8-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>After round 1, what fraction of the bar does Ava have? How much is left? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l8-wa"><div class="bk-ans">Ava has <span class="tex">\tfrac14</span> of the bar, and <span class="tex">\tfrac14</span> is left.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>After round 2, how much does Ava have now? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l8-wa"><div class="bk-ans">The leftover <span class="tex">\tfrac14</span> is cut in 4, so each new piece is <span class="tex">\tfrac1{16}</span>. Ava: <span class="tex">\tfrac14+\tfrac1{16}=\tfrac5{16}</span>. Left: <span class="tex">\tfrac1{16}</span>.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>How much is left after round 3? After round 10? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l8-wa"><div class="bk-ans">Round 3: <span class="tex">\tfrac1{64}</span>. Each round leaves a quarter of the last leftover, so round 10 leaves <span class="tex">\left(\tfrac14\right)^{10}</span>: about one millionth of the bar.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> They keep sharing <b>forever</b>. In the end, how much of the bar does Ava get? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> <span class="tex">\tfrac14</span></div>
+        <div class="opt"><b>B</b> <span class="tex">\tfrac{5}{16}</span></div>
+        <div class="opt right"><b>C</b> <span class="tex">\tfrac13</span></div>
+        <div class="opt"><b>D</b> infinitely much</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>C, exactly <span class="tex">\tfrac13</span>.</b> Every round is fair, so the three friends always have <b>equal</b> amounts, and the leftover shrinks to nothing. The whole bar ends up split three ways:<br><span class="tex">\tfrac14+\tfrac1{16}+\tfrac1{64}+\dots=\tfrac13</span><br><span class="muted">Infinitely many pieces, but a <b>finite</b> total. Today: how to find totals like this.</span></div>
+    </div>
+  </div></div>
+  <p class="u1l8-social">Challenge your neighbour: <b>4 friends</b> share by cutting the leftover into <b>5</b> pieces each round. What does each one get?</p>
+</section>
+
+<!-- ================= 1. Partial sums ================= -->
+<section class="card" data-ink="s1" data-section="1. Partial Sums">
+  <div class="sec-h"><span class="badge">1</span><h2>Partial Sums: Convergent or Divergent</h2></div>
+  <div class="def">An <b>infinite series</b> has no last term: <span class="tex">6+2+\tfrac23+\dots</span> We cannot add infinitely many terms one at a time, but we can add the first <span class="tex">n</span> terms. These sums <span class="tex">S_1,\ S_2,\ S_3,\ \dots</span> are the <b>partial sums</b> of the series.</div>
+  <div class="u1l8-cvrow">
+    <div class="u1l8-cv u1l8-cv-ok"><div class="u1l8-cvh">Convergent</div>The partial sums get closer and closer to one fixed number. That number is the <b>sum to infinity</b>, written <span class="tex">\textcolor{#12805a}{S_\infty}</span>.</div>
+    <div class="u1l8-cv u1l8-cv-no"><div class="u1l8-cvh">Divergent</div>The partial sums do <b>not</b> settle on one number (they grow without limit, or keep jumping). The series has <b>no sum</b>.</div>
+  </div>
+  <h3 class="sub">Fill the square</h3>
+  <p>Shade half of a square, then half of what is left, then half of <b>that</b>… Watch the partial sums on the number line.</p>
+  <div class="explainer" data-explainer="fill"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Two series, two endings</h3></div>
+  <p class="q">Two infinite geometric series are given.&emsp;<b>Series A:</b> <span class="tex">6+2+\tfrac23+\tfrac29+\dots</span>&emsp;<b>Series B:</b> <span class="tex">5+10+20+40+\dots</span></p>
+  <div class="parts c1">
+    <div class="part"><div class="pl">(a) State <span class="tex">r</span> for each series, then complete the table of partial sums (to 4 decimal places where needed).</div>
+      <div class="u1l8-rrow">Series A: <span class="tex">r=</span> <span class="u1l8-blank" data-reveal><span class="tex">\tfrac13</span></span>&emsp;&emsp;Series B: <span class="tex">r=</span> <span class="u1l8-blank" data-reveal><span class="tex">2</span></span></div>
+      <table class="u1l8-tbl">
+        <tr><th><span class="tex">n</span></th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td></tr>
+        <tr><th><span class="tex">S_n</span> for Series A</th><td><span data-reveal>6</span></td><td><span data-reveal>8</span></td><td><span data-reveal>8.6667</span></td><td><span data-reveal>8.8889</span></td><td><span data-reveal>8.9630</span></td><td><span data-reveal>8.9877</span></td></tr>
+        <tr><th><span class="tex">S_n</span> for Series B</th><td><span data-reveal>5</span></td><td><span data-reveal>15</span></td><td><span data-reveal>35</span></td><td><span data-reveal>75</span></td><td><span data-reveal>155</span></td><td><span data-reveal>315</span></td></tr>
+      </table>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">A: <span class="tex">r=\dfrac{2}{6}=\boldsymbol{\tfrac13}</span>. B: <span class="tex">r=\dfrac{10}{5}=\boldsymbol{2}</span>. Each partial sum is the one before plus the next term: <span class="tex">S_3=8+\tfrac23\approx 8.6667</span>, <span class="tex">S_4=S_3+\tfrac29\approx8.8889</span>, …</div></div></div>
+  </div>
+  <div class="parts c2 u1l8-ex1b">
+    <div class="part"><div class="pl">(b) Plot the partial sums of Series A. What value do they approach?</div>
+      <div class="u1l8-ex1g"><div class="u1l8-fig" id="u1l8-ex1fig"></div><div class="work" style="--h:120px"></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">They get closer and closer to <b>9</b> (but never pass it).<div class="u1l8-ansfig" id="u1l8-ex1ans"></div></div></div></div>
+    <div class="part"><div class="pl">(c) Classify each series as convergent or divergent. Give <span class="tex">S_\infty</span> where it exists.</div><div class="work" style="--h:200px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Series A is <b>convergent</b>: the terms shrink so fast that the partial sums level off at 9. <span class="tex">\boldsymbol{S_\infty=9}</span>.<br>Series B is <b>divergent</b>: the partial sums grow without limit. There is <b>no</b> <span class="tex">S_\infty</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s1b" data-section="1. Watching partial sums">
+  <h3 class="sub">Settle down, or run away?</h3>
+  <p>Plot the points <span class="tex">(n,\ S_n)</span>. A convergent series levels off at a line; a divergent one runs off the grid or never settles.</p>
+  <div class="explainer" data-explainer="partials"></div>
+</section>
+
+<!-- ================= 2. Sum to infinity ================= -->
+<section class="card" data-ink="s2" data-section="2. The Sum to Infinity">
+  <div class="sec-h"><span class="badge">2</span><h2>The Sum to Infinity of a Geometric Series</h2></div>
+  <p>Whether a geometric series converges depends on what happens to <span class="tex">r^n</span> as <span class="tex">n</span> gets large:</p>
+  <table class="u1l8-tbl u1l8-rtbl">
+    <tr><th><span class="tex">r</span></th><th><span class="tex">r^5</span></th><th><span class="tex">r^{20}</span></th><th><span class="tex">r^{50}</span></th><th>as <span class="tex">n</span> grows, <span class="tex">r^n</span> …</th></tr>
+    <tr><td><span class="tex">0.5</span></td><td><span class="tex">0.0313</span></td><td><span class="tex">0.0000\dots</span></td><td><span class="tex">0.0000\dots</span></td><td class="u1l8-tl">gets closer and closer to 0</td></tr>
+    <tr><td><span class="tex">-0.5</span></td><td><span class="tex">-0.0313</span></td><td><span class="tex">0.0000\dots</span></td><td><span class="tex">0.0000\dots</span></td><td class="u1l8-tl">gets closer and closer to 0</td></tr>
+    <tr><td><span class="tex">1.5</span></td><td><span class="tex">7.5938</span></td><td><span class="tex">3\,325.26</span></td><td>about 638 million</td><td class="u1l8-tl">grows without limit</td></tr>
+    <tr><td><span class="tex">-1.5</span></td><td><span class="tex">-7.5938</span></td><td><span class="tex">3\,325.26</span></td><td>about 638 million</td><td class="u1l8-tl">grows in size, sign keeps switching</td></tr>
+  </table>
+  <p>Write the Lesson 7 formula as <span class="tex">S_n=\dfrac{t_1(1-r^n)}{1-r}</span> (multiply its top and bottom by <span class="tex">-1</span>). When <span class="tex">-1&lt;r&lt;1</span>, <span class="tex">r^n</span> shrinks to 0, so <span class="tex">S_n</span> gets closer and closer to <span class="tex">\dfrac{t_1(1-0)}{1-r}</span>.</p>
+  <div class="explainer" data-explainer="powers"></div>
+  <div class="def u1l8-key"><div class="u1l8-keyh">Infinite geometric series</div>
+    <div class="u1l8-keyg"><div>If <span class="tex">-1&lt;r&lt;1</span>, the series is <b>convergent</b> and</div><div class="u1l8-keyf"><span class="tex">S_\infty=\dfrac{\textcolor{#0f7c80}{t_1}}{1-\textcolor{#c27a0e}{r}}</span></div></div>
+    <div>If <span class="tex">r\le -1</span> or <span class="tex">r\ge 1</span>, the series is <b>divergent</b> and has no sum to infinity. <span class="muted">(For <span class="tex">r=1</span> the partial sums <span class="tex">t_1,\ 2t_1,\ 3t_1,\ \dots</span> grow; for <span class="tex">r=-1</span> they jump between <span class="tex">t_1</span> and <span class="tex">0</span>.)</span></div></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Check <span class="tex">r</span> first.</b> The formula will happily give a number for <span class="tex">r=2</span> (<span class="tex">\tfrac{5}{1-2}=-5</span>), but that number means nothing: the series diverges. Only use <span class="tex">S_\infty</span> once you know <span class="tex">-1&lt;r&lt;1</span>.</div></div>
+  <h3 class="sub">The gate: is <span class="tex">r</span> between −1 and 1?</h3>
+  <div class="explainer" data-explainer="gate"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Convergent or divergent?</h3></div>
+  <p class="q">Determine <span class="tex">r</span> and decide whether each series is convergent or divergent. Calculate <span class="tex">S_\infty</span> where it exists.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">45+15+5+\dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=\tfrac{15}{45}=\tfrac13</span>: convergent.<br><span class="tex">S_\infty=\dfrac{45}{1-\frac13}=\dfrac{45}{\frac23}=\boldsymbol{67.5}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">20-16+12.8-\dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=\tfrac{-16}{20}=-0.8</span>: convergent.<br><span class="tex">S_\infty=\dfrac{20}{1-(-0.8)}=\dfrac{20}{1.8}\approx\boldsymbol{11.11}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">2+5+12.5+\dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=\tfrac52=2.5\ge1</span>: <b>divergent</b>. No sum to infinity.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">4-4+4-4+\dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=-1</span>: <b>divergent</b>. (Partial sums: <span class="tex">4,\ 0,\ 4,\ 0,\ \dots</span>)</div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\tfrac34+\tfrac12+\tfrac13+\dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=\tfrac12\div\tfrac34=\tfrac23</span>: convergent.<br><span class="tex">S_\infty=\dfrac{\frac34}{\frac13}=\boldsymbol{\dfrac94}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">0.006+0.06+0.6+\dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=10</span>: <b>divergent</b>, even though the first terms are tiny.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>How close is close?</h3></div>
+  <p class="q">Consider the series <span class="tex">40+30+22.5+\dots</span></p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine <span class="tex">S_\infty</span>.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=0.75</span>.&emsp;<span class="tex">S_\infty=\dfrac{40}{1-0.75}=\dfrac{40}{0.25}=\boldsymbol{160}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Determine <span class="tex">S_{10}</span> to the nearest hundredth.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">S_{10}=\dfrac{40(1-0.75^{10})}{1-0.75}=160(1-0.0563\dots)\approx\boldsymbol{150.99}</span></div></div></div>
+  </div>
+  <div class="parts c1">
+    <div class="part"><div class="pl">(c) Using a table of values, determine the smallest number of terms whose sum is within 1 of <span class="tex">S_\infty</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">S_n=160(1-0.75^n)</span>, so <span class="tex">S_\infty-S_n=160(0.75)^n</span>. Table of <span class="tex">160(0.75)^n</span>: <span class="tex">n=17</span> gives <span class="tex">1.20</span>; <span class="tex">n=18</span> gives <span class="tex">0.90</span>.<br>The first <b>18 terms</b> are needed (<span class="tex">S_{18}\approx159.10</span>).</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>On the TI-30XIIS.</b> Brackets around the top and the bottom: <span class="keys"><kbd>4</kbd><kbd>0</kbd><kbd>×</kbd><kbd>(</kbd><kbd>1</kbd><kbd>−</kbd><kbd>.</kbd><kbd>7</kbd><kbd>5</kbd><kbd>^</kbd><kbd>1</kbd><kbd>0</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(</kbd><kbd>1</kbd><kbd>−</kbd><kbd>.</kbd><kbd>7</kbd><kbd>5</kbd><kbd>)</kbd><kbd>ENTER</kbd></span>. This calculator has no table, so for (c) work out the gap <span class="tex">160(0.75)^n</span> for a few values of <span class="tex">n</span>: press <kbd>◄</kbd> to edit the exponent and <kbd>ENTER</kbd> again.</div>
+    <div class="u1l8-pcol"><button class="pill" data-keys="40 × ( 1 − .75 ^ 10 ) ÷ ( 1 − .75 ) =">Show S₁₀</button><button class="pill" data-keys="160 × .75 ^ 17 =">Gap at n = 17</button><button class="pill" data-keys="160 × .75 ^ 18 =">Gap at n = 18</button></div>
+  </div>
+  <div class="explainer" data-explainer="gap"></div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Finding t1 or r ================= -->
+<section class="card" data-ink="s3" data-section="3. Finding t1 or r">
+  <div class="sec-h"><span class="badge">3</span><h2>Finding <span class="tex">t_1</span> or <span class="tex">r</span></h2></div>
+  <div class="def">Substitute what you know into <span class="tex">S_\infty=\dfrac{t_1}{1-r}</span> and solve. Any value of <span class="tex">r</span> you find must satisfy <span class="tex">-1&lt;r&lt;1</span>, or the series has no sum.</div>
+  <div class="explainer" data-explainer="solve"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Working backwards</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">S_\infty=50</span> and <span class="tex">r=0.3</span>. Determine <span class="tex">t_1</span>.</div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">50=\dfrac{t_1}{1-0.3}=\dfrac{t_1}{0.7}</span><br><span class="tex">t_1=50(0.7)=\boldsymbol{35}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">t_1=12</span> and <span class="tex">S_\infty=8</span>. Determine <span class="tex">r</span>.</div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">8=\dfrac{12}{1-r}\ \Rightarrow\ 8(1-r)=12\ \Rightarrow\ 1-r=1.5</span><br><span class="tex">\boldsymbol{r=-0.5}</span> (between <span class="tex">-1</span> and <span class="tex">1</span>, so valid).</div></div></div>
+    <div class="part"><div class="pl">(c) In an infinite geometric series, <span class="tex">t_1=64</span> and <span class="tex">t_3=16</span>. Determine <span class="tex">S_\infty</span> for each possible series.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_3=t_1r^2:\ 64r^2=16\ \Rightarrow\ r^2=\tfrac14\ \Rightarrow\ r=\pm\tfrac12</span><br><span class="tex">r=\tfrac12:\ S_\infty=\dfrac{64}{\frac12}=\boldsymbol{128}</span><br><span class="tex">r=-\tfrac12:\ S_\infty=\dfrac{64}{\frac32}=\boldsymbol{\dfrac{128}{3}}\approx42.67</span></div></div></div>
+    <div class="part"><div class="pl">(d) Is there an infinite geometric series with <span class="tex">t_1=10</span> and <span class="tex">S_\infty=4</span>? Explain.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">4=\dfrac{10}{1-r}\ \Rightarrow\ 1-r=2.5\ \Rightarrow\ r=-1.5</span><br>But <span class="tex">r=-1.5</span> is not between <span class="tex">-1</span> and <span class="tex">1</span>, so the series would diverge. <b>No such series exists.</b></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u1l8"></section>
+
+<!-- ================= 4. Repeating decimals ================= -->
+<section class="card" data-ink="s4" data-section="4. Repeating Decimals">
+  <div class="sec-h"><span class="badge">4</span><h2>Repeating Decimals</h2></div>
+  <div class="def">A repeating decimal is an infinite geometric series. Split it into its <b>repeating blocks</b>: each block is the one before it moved one block-length to the right, so <span class="tex">r=0.1</span> for a 1-digit block, <span class="tex">r=0.01</span> for a 2-digit block, and so on. Then <span class="tex">S_\infty</span> gives the decimal as a fraction. If some digits do not repeat, keep them separate and add them at the end.</div>
+  <div class="explainer" data-explainer="decimal"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Decimals into fractions</h3></div>
+  <p class="q">Write each repeating decimal as an infinite geometric series, then as a fraction in lowest terms.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">0.\overline{4}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">0.4+0.04+0.004+\dots</span><br><span class="tex">t_1=0.4,\ r=0.1</span><br><span class="tex">S_\infty=\dfrac{0.4}{1-0.1}=\dfrac{0.4}{0.9}=\boldsymbol{\dfrac49}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">0.\overline{63}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">0.63+0.0063+0.000063+\dots</span><br><span class="tex">t_1=0.63,\ r=0.01</span><br><span class="tex">S_\infty=\dfrac{0.63}{0.99}=\dfrac{63}{99}=\boldsymbol{\dfrac{7}{11}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">1.2\overline{7}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">1.2+(0.07+0.007+\dots)</span><br><span class="tex">t_1=0.07,\ r=0.1</span><br><span class="tex">S_\infty=\dfrac{0.07}{0.9}=\dfrac{7}{90}</span><br><span class="tex">1.2\overline{7}=\dfrac{108}{90}+\dfrac{7}{90}=\boldsymbol{\dfrac{23}{18}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Applications ================= -->
+<section class="card" data-ink="s5" data-section="5. Applications">
+  <div class="sec-h"><span class="badge">5</span><h2>Applications</h2></div>
+  <div class="def">When a quantity keeps shrinking by the same percent (a bounce height, weekly sales, yearly output), the total over all time is <span class="tex">S_\infty</span>. In a real situation the process eventually stops, so <span class="tex">S_\infty</span> is the <b>largest</b> the total could ever be.</div>
+  <div class="def amber">For a <b>bouncing ball</b>, the ball travels <b>down</b> and <b>up</b>. Add two series: the <b class="u1l8-cdn">drops</b> (starting with the original height) and the <b class="u1l8-cup">rises</b> (starting with the first rebound height).</div>
+  <div class="explainer" data-explainer="bounce"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>The bouncing ball</h3></div>
+  <p class="q">A ball is dropped from a height of 9 m. Each time it bounces, it rises to 60% of the height it fell from. Assume it keeps bouncing forever.</p>
+  <div class="u1l8-ex6">
+    <div class="u1l8-fig" id="u1l8-ex6fig"></div>
+    <div class="parts c1">
+      <div class="part"><div class="pl">(a) Write the series for the distances travelled down, and for the distances travelled up.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b class="u1l8-cdn">Down:</b> <span class="tex">9+5.4+3.24+\dots</span>&emsp;(<span class="tex">t_1=9,\ r=0.6</span>)<br><b class="u1l8-cup">Up:</b> <span class="tex">5.4+3.24+1.944+\dots</span>&emsp;(<span class="tex">t_1=5.4,\ r=0.6</span>)</div></div></div>
+    </div>
+  </div>
+  <div class="parts c1">
+    <div class="part"><div class="pl">(b) Determine the total vertical distance the ball travels.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Down: <span class="tex">S_\infty=\dfrac{9}{1-0.6}=22.5</span> m.&emsp;Up: <span class="tex">S_\infty=\dfrac{5.4}{1-0.6}=13.5</span> m.<br>Total: <span class="tex">22.5+13.5=\boldsymbol{36}</span> m.</div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Don’t forget the trip up.</b> The ball rises to 5.4 m and then falls 5.4 m again: every rebound height is travelled <b>twice</b>. Only the first 9 m is travelled once.</div></div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Downloads that fade</h3></div>
+  <p class="q">A new phone app is downloaded 12&#8239;000 times in its first week. Each week after that, the number of downloads is 85% of the week before.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) How many downloads are there in week 5?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=12\,000,\ r=0.85</span><br><span class="tex">t_5=12\,000(0.85)^4\approx\boldsymbol{6\,264}</span> downloads</div></div></div>
+    <div class="part"><div class="pl">(b) How many downloads are there in the first 10 weeks, to the nearest whole number?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">S_{10}=\dfrac{12\,000(1-0.85^{10})}{1-0.85}\approx\boldsymbol{64\,250}</span> downloads</div></div></div>
+    <div class="part"><div class="pl">(c) If this pattern went on forever, what is the greatest total number of downloads the app could reach?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">S_\infty=\dfrac{12\,000}{1-0.85}=\dfrac{12\,000}{0.15}=\boldsymbol{80\,000}</span> downloads</div></div></div>
+    <div class="part"><div class="pl">(d) Why might the real total differ from (c)?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The 85% pattern is only a model: an update, an ad or the app being removed would change it. Also, downloads come in whole numbers, so the tiny late terms are really 0.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check (a) and (b).</b> <span class="keys"><kbd>1</kbd><kbd>2</kbd><kbd>0</kbd><kbd>0</kbd><kbd>0</kbd><kbd>×</kbd><kbd>.</kbd><kbd>8</kbd><kbd>5</kbd><kbd>^</kbd><kbd>4</kbd><kbd>ENTER</kbd></span> for week 5 (the exponent is <span class="tex">n-1=4</span>), then the sum formula with brackets for <span class="tex">S_{10}</span>.</div>
+    <div class="u1l8-pcol"><button class="pill" data-keys="12000 × .85 ^ 4 =">Show t₅</button><button class="pill" data-keys="12000 × ( 1 − .85 ^ 10 ) ÷ ( 1 − .85 ) =">Show S₁₀</button></div>
+  </div>
+  <div class="explainer" data-explainer="ceiling"></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Variable ratio ================= -->
+<section class="card" data-ink="s6" data-section="6. Series with a Variable Ratio">
+  <div class="sec-h"><span class="badge">6</span><h2>Series with a Variable Ratio</h2></div>
+  <div class="def">When the terms contain a variable, find <span class="tex">r</span> as an expression. The series converges only for the values of the variable that make <span class="tex">-1&lt;r&lt;1</span>: solve this <b>double inequality</b> by doing the same thing to all three parts.</div>
+  <div class="explainer" data-explainer="xrange"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Which values of x work?</h3></div>
+  <p class="q">Consider the infinite geometric series <span class="tex">3+\dfrac{3x}{2}+\dfrac{3x^2}{4}+\dots</span></p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine <span class="tex">r</span> and the values of <span class="tex">x</span> for which the series converges.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=\dfrac{3x}{2}\div3=\dfrac{x}{2}</span><br><span class="tex">-1&lt;\dfrac{x}{2}&lt;1\ \Rightarrow\ \boldsymbol{-2&lt;x&lt;2}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Write an expression for <span class="tex">S_\infty</span> and evaluate it when <span class="tex">x=1</span>.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">S_\infty=\dfrac{3}{1-\frac{x}{2}}=\boldsymbol{\dfrac{6}{2-x}}</span><br><span class="tex">x=1:\ S_\infty=\dfrac61=\boldsymbol{6}</span>&emsp;(series <span class="tex">3+1.5+0.75+\dots</span>)</div></div></div>
+  </div>
+  <div class="parts c1">
+    <div class="part"><div class="pl">(c) Determine the value of <span class="tex">x</span> for which <span class="tex">S_\infty=4</span>.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{6}{2-x}=4\ \Rightarrow\ 2-x=1.5\ \Rightarrow\ \boldsymbol{x=0.5}</span>.&emsp;Check: <span class="tex">-2&lt;0.5&lt;2</span>, so the series converges (<span class="tex">r=0.25</span>).</div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Partial sums tell the story.</b> If <span class="tex">S_1,\ S_2,\ S_3,\ \dots</span> settle on one number, the series is <b>convergent</b> and that number is <span class="tex">S_\infty</span>. If they grow or keep jumping, it is <b>divergent</b>.</div>
+    <div><b>The gate is <span class="tex">-1&lt;r&lt;1</span>.</b> Then <span class="tex">r^n\to0</span> and <span class="tex">S_\infty=\dfrac{t_1}{1-r}</span>. For <span class="tex">r\le-1</span> or <span class="tex">r\ge1</span> there is no sum, whatever the formula says.</div>
+    <div><b>Work backwards</b> by substituting into <span class="tex">S_\infty=\dfrac{t_1}{1-r}</span>. A repeating decimal is a series with <span class="tex">r=0.1</span>, <span class="tex">0.01</span>, …: <span class="tex">0.\overline{63}=\tfrac{0.63}{0.99}=\tfrac7{11}</span>.</div>
+    <div><b>Totals over all time.</b> A bouncing ball goes down <b>and</b> up: add two series. With a variable ratio, solve <span class="tex">-1&lt;r&lt;1</span> for <span class="tex">x</span>, doing the same thing to all three parts.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u1l8">
+    <div><div class="kicker">Your turn</div><b>Assignment 8 — Infinite Geometric Series</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l9/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 9 — Unit 1 Review</b><div class="muted">Arithmetic and geometric sequences and series, all together: which one is it, and which formula fits?</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u1l8.js';
+  boot({ key: 'u1l8', homeHref: '../../', title: '1.8 Infinite Geometric Series' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

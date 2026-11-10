@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arithmetic Sequences · Math 20-1 1.2</title>
+<meta name="description" content="Math 20-1 Unit 1 Lesson 2: arithmetic sequences. Find the common difference d, write the general term t_n = t_1 + (n − 1)d (it takes n − 1 jumps to get from t_1 to t_n), and use it to find a term, the number of terms, the first term or the common difference. Insert arithmetic means, and solve for an unknown when three expressions form an arithmetic sequence. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u1l2.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u1l2">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 1 Sequences and Series · Lesson 2</div>
+  <h1>Arithmetic Sequences</h1>
+  <p class="lede">Sequences that change by the <b>same amount</b> every step. Two numbers, the <b class="u1l2-ct">first term <span class="tex">t_1</span></b> and the <b class="u1l2-cd">common difference <span class="tex">d</span></b>, tell you every term: the 5th, the 30th, even the 500th.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>find the <b class="u1l2-cd">common difference <span class="tex">d</span></b> and decide whether a sequence is arithmetic</li>
+      <li>explain why it takes <span class="tex">n-1</span> jumps to get from <span class="tex">t_1</span> to <span class="tex">t_n</span>, and write the general term <span class="tex">t_n=t_1+(n-1)d</span></li>
+      <li>use the general term to find a term, or to decide which term a number is (or whether it is a term at all)</li>
+      <li>find the number of terms, the first term <span class="tex">t_1</span> or the common difference <span class="tex">d</span></li>
+      <li>insert arithmetic means between two numbers</li>
+      <li>solve for an unknown when three expressions are consecutive terms of an arithmetic sequence</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF9</b> Analyze arithmetic sequences and series to solve problems.<br><span class="muted">Today: arithmetic sequences: the common difference, the general term, and solving for any one of <span class="tex">t_n</span>, <span class="tex">t_1</span>, <span class="tex">n</span> or <span class="tex">d</span>.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: Fence Posts" id="wu" style="--wf-side: 390px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Fence Posts and Clock Chimes</h2>
+  <p class="wf-rule">A fence has a <b>post at both ends</b> and a post every <b>3 m</b>. A rail joins each post to the next one.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u1l2-yard" id="u1l2-yard"></div>
+    <div class="u1l2-wbtns">
+      <button type="button" class="pill" id="u1l2-build">Build the fence</button>
+      <button type="button" class="pill" id="u1l2-ring6">Ring 6 chimes</button>
+      <button type="button" class="pill" id="u1l2-ring12">Ring 12 chimes</button>
+      <button type="button" class="pill" id="u1l2-wreset">Start over</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u1l2-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>The fence is <b>12 m</b> long. How many <b>posts</b> does it need? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l2-wa"><div class="bk-ans"><b>5 posts</b>, not 4. <span class="tex">12\div3=4</span> counts the <b>gaps</b>; the posts are one more: at 0, 3, 6, 9 and 12 m.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>A longer fence has <b>10 posts</b>. How many <b>rails</b>? How long is it? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l2-wa"><div class="bk-ans"><b>9 rails</b> (one fewer than the posts), so it is <span class="tex">9\times3=27</span> m long.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> A clock tower takes <b>5 seconds</b> to ring <b>6 chimes</b> (from the first chime to the last, evenly spaced). How long does it take to ring <b>12 chimes</b>? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> 10 s</div>
+        <div class="opt right"><b>B</b> 11 s</div>
+        <div class="opt"><b>C</b> 12 s</div>
+        <div class="opt"><b>D</b> 14 s</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>B, 11 seconds.</b> 6 chimes have only <b>5 gaps</b>, so each gap is 1 s. 12 chimes have <b>11 gaps</b>: 11 s.<br>
+        <span class="muted"><b>A</b> doubles the time, but doubling the chimes does not double the gaps. Chimes are posts; the seconds are the rails between them. Today: the terms of a sequence are the posts, and the jumps between them are always <b>one fewer</b>.</span></div>
+    </div>
+  </div></div>
+  <p class="u1l2-social">Ask your neighbour: you climb from floor 1 to floor 10. How many flights of stairs is that?</p>
+</section>
+
+<!-- ================= 1. Common difference ================= -->
+<section class="card" data-ink="s1" data-section="1. The Common Difference">
+  <div class="sec-h"><span class="badge">1</span><h2>The Common Difference</h2></div>
+  <div class="def">In an <b>arithmetic sequence</b>, each term after the first is found by <b>adding the same number</b> to the term before it. That number is the <b class="u1l2-cd">common difference, <span class="tex">d</span></b>. To find <span class="tex">d</span>, subtract any term from the term that comes right <b>after</b> it.</div>
+  <div class="u1l2-key"><span class="tex">\textcolor{#c27a0e}{d}=t_2-t_1=t_3-t_2=t_4-t_3=\dots=t_n-t_{n-1}</span></div>
+  <p>If <span class="tex">d&gt;0</span> the terms <b>increase</b>; if <span class="tex">d&lt;0</span> they <b>decrease</b>. The terms may be fractions, decimals or algebraic expressions.</p>
+  <div class="explainer" data-explainer="diffHops"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Check every difference you can.</b> One matching pair is not enough to call a sequence arithmetic: <span class="tex">1,3,5,9</span> starts <span class="tex">+2,+2</span> and then jumps <span class="tex">+4</span>.</div></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Arithmetic or not?</h3></div>
+  <p class="q">Decide whether each sequence is arithmetic. If it is, state <span class="tex">d</span> and the next two terms.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">13,\ 21,\ 29,\ 37,\ \dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Differences: <span class="tex">8,\ 8,\ 8</span>.<br>Arithmetic, <span class="tex">\boldsymbol{d=8}</span>.<br>Next: <span class="tex">\boldsymbol{45,\ 53}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">6,\ 1.5,\ -3,\ -7.5,\ \dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Differences: <span class="tex">-4.5,\ -4.5,\ -4.5</span>.<br>Arithmetic, <span class="tex">\boldsymbol{d=-4.5}</span>.<br>Next: <span class="tex">\boldsymbol{-12,\ -16.5}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\frac{1}{3},\ \frac{5}{6},\ \frac{4}{3},\ \frac{11}{6},\ \dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">In sixths: <span class="tex">\frac{2}{6},\ \frac{5}{6},\ \frac{8}{6},\ \frac{11}{6}</span>.<br>Arithmetic, <span class="tex">\boldsymbol{d=\frac{1}{2}}</span>.<br>Next: <span class="tex">\boldsymbol{\frac{14}{6}=\frac{7}{3},\ \frac{17}{6}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">3,\ 6,\ 12,\ 24,\ \dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Differences: <span class="tex">3,\ 6,\ 12</span> (not equal).<br><b>Not arithmetic.</b></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">4a+b,\ \ 7a-b,\ \ 10a-3b,\ \dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(7a-b)-(4a+b)=3a-2b</span><br><span class="tex">(10a-3b)-(7a-b)=3a-2b</span><br>Arithmetic, <span class="tex">\boldsymbol{d=3a-2b}</span>.<br>Next: <span class="tex">\boldsymbol{13a-5b,\ \ 16a-7b}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">2,\ 5,\ 9,\ 14,\ \dots</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Differences: <span class="tex">3,\ 4,\ 5</span> (not equal).<br><b>Not arithmetic.</b></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. General term ================= -->
+<section class="card" data-ink="s2" data-section="2. The General Term">
+  <div class="sec-h"><span class="badge">2</span><h2>The General Term</h2></div>
+  <div class="def">Build the terms from <span class="tex">t_1</span>. Each step to the right adds one more <span class="tex">d</span>:
+    <div class="u1l2-build"><span class="tex">\textcolor{#0e7c86}{t_1},\quad t_2=\textcolor{#0e7c86}{t_1}+\textcolor{#c27a0e}{d},\quad t_3=\textcolor{#0e7c86}{t_1}+2\textcolor{#c27a0e}{d},\quad t_4=\textcolor{#0e7c86}{t_1}+3\textcolor{#c27a0e}{d},\quad\dots</span></div>
+    The number of <span class="tex">d</span>’s is always <b>one less than the position</b>, because it takes <span class="tex">n-1</span> steps to get from <span class="tex">t_1</span> to <span class="tex">t_n</span>.</div>
+  <h3 class="sub">Why <span class="tex">n-1</span> and not <span class="tex">n</span>?</h3>
+  <p>The terms are the fence posts. The jumps are the rails <b>between</b> them, so there is always one fewer jump than terms.</p>
+  <div class="explainer" data-explainer="jumps"></div>
+  <div class="u1l2-key u1l2-key-big">
+    <div class="u1l2-key-h">General term of an arithmetic sequence</div>
+    <div class="u1l2-key-f"><span class="tex">t_n=\textcolor{#0e7c86}{t_1}+(\textcolor{#1f5bd6}{n}-1)\textcolor{#c27a0e}{d}</span></div>
+    <div class="u1l2-legend"><div><span class="tex">t_n</span> the term in position <span class="tex">n</span></div><div><span class="tex">\textcolor{#0e7c86}{t_1}</span> the first term (also written <span class="tex">a</span>)</div><div><span class="tex">\textcolor{#c27a0e}{d}</span> the common difference</div><div><span class="tex">\textcolor{#1f5bd6}{n}</span> the position, a natural number <span class="tex">1,2,3,\dots</span></div></div>
+  </div>
+  <h3 class="sub">Writing the general term</h3>
+  <p>To write the general term of a given sequence, <b>substitute</b> <span class="tex">t_1</span> and <span class="tex">d</span>, then <b>expand and simplify</b>.</p>
+  <div class="explainer" data-explainer="generalTerm"></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> In <span class="tex">t_n=48-7n</span>, where can you see the common difference? And what is the 48: is it a term of <span class="tex">41,34,27,\dots</span>?</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The <b>number in front of <span class="tex">n</span></b> is <span class="tex">d=-7</span>: each step adds <span class="tex">-7</span>. The 48 is not a term: it is what you would get one step <b>before</b> <span class="tex">t_1</span> (<span class="tex">41+7=48</span>), at the position <span class="tex">n=0</span>, which does not exist.</div></div></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Using the general term</h3></div>
+  <p class="q">Consider the arithmetic sequence <span class="tex">41,\ 34,\ 27,\ 20,\ \dots</span></p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine the general term in simplest form.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=41,\quad d=34-41=-7</span><br><span class="tex">t_n=41+(n-1)(-7)=41-7n+7</span><br><span class="tex">\boldsymbol{t_n=48-7n}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Determine <span class="tex">t_{30}</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_{30}=48-7(30)=48-210=\boldsymbol{-162}</span></div></div></div>
+    <div class="part"><div class="pl">(c) Which term is equal to <span class="tex">-295</span>?</div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">48-7n=-295\ \Rightarrow\ -7n=-343\ \Rightarrow\ n=49</span><br><span class="tex">-295=\boldsymbol{t_{49}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) Is <span class="tex">-300</span> a term of the sequence?</div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">48-7n=-300\ \Rightarrow\ -7n=-348\ \Rightarrow\ n\approx49.7</span><br>Not a natural number, so <b><span class="tex">-300</span> is not a term</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. Is it a term?">
+  <h3 class="sub">Which term is it? Is it a term at all?</h3>
+  <p>Set the general term equal to the number and solve for <span class="tex">n</span>. The number is a term <b>only if</b> <span class="tex">n</span> comes out as a <b>natural number</b> (<span class="tex">1,2,3,\dots</span>).</p>
+  <div class="explainer" data-explainer="isTerm"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Solve for <span class="tex">n</span> in one line.</b> From <span class="tex">48-7n=-295</span>: <span class="tex">n=(-295-48)\div(-7)</span>. Use <span class="keys"><kbd>(−)</kbd></span> for a negative number: <span class="keys"><kbd>(</kbd><kbd>(−)</kbd><kbd>2</kbd><kbd>9</kbd><kbd>5</kbd><kbd>−</kbd><kbd>4</kbd><kbd>8</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(−)</kbd><kbd>7</kbd><kbd>=</kbd></span> gives 49. Do the same for <span class="tex">-300</span> and look at the decimal.</div>
+    <div class="pill-col"><button class="pill" data-keys="( (−) 295 − 48 ) ÷ (−) 7 =">Show (c)</button><button class="pill" data-keys="( (−) 300 − 48 ) ÷ (−) 7 =">Show (d)</button></div>
+  </div>
+</section>
+
+<section class="card" data-ink="s2c" data-section="2. Going both ways">
+  <h3 class="sub">Knowing a term in the middle</h3>
+  <p>If you know <b>any</b> term and <span class="tex">d</span>, you can go both ways: <b>add</b> <span class="tex">d</span> to step right, <b>subtract</b> <span class="tex">d</span> to step left.</p>
+  <div class="explainer" data-explainer="bothWays"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Going both ways</h3></div>
+  <div class="parts c1">
+    <div class="part"><div class="pl">(a) An arithmetic sequence has <span class="tex">t_4=11</span> and <span class="tex">d=-3</span>. Write the first six terms.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Go left by subtracting <span class="tex">d</span> (adding 3): <span class="tex">t_3=14,\ t_2=17,\ t_1=20</span>. Go right by adding <span class="tex">d</span>: <span class="tex">t_5=8,\ t_6=5</span>.<br>The sequence is <span class="tex">\boldsymbol{20,\ 17,\ 14,\ 11,\ 8,\ 5}</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) Fill in the missing terms of the arithmetic sequence with <span class="tex">d=2.5</span>.
+      <table class="u1l2-fill"><tr><td><span data-reveal><span class="tex">-3.5</span></span></td><td><span data-reveal><span class="tex">-1</span></span></td><td><span data-reveal><span class="tex">1.5</span></span></td><td class="u1l2-given"><span class="tex">4</span></td><td><span data-reveal><span class="tex">6.5</span></span></td></tr></table></div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Right: <span class="tex">4+2.5=6.5</span>. Left: <span class="tex">4-2.5=1.5,\ \ 1.5-2.5=-1,\ \ -1-2.5=-3.5</span>.<br><span class="tex">\boldsymbol{-3.5,\ -1,\ 1.5,\ 4,\ 6.5}</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u1l2"></section>
+
+<!-- ================= 3. Number of terms ================= -->
+<section class="card" data-ink="s3" data-section="3. The Number of Terms">
+  <div class="sec-h"><span class="badge">3</span><h2>The Number of Terms</h2></div>
+  <div class="def">A finite sequence ends with a last term, and that last term is <span class="tex">t_n</span>. Substitute <span class="tex">t_1</span>, <span class="tex">d</span> and the last term into <span class="tex">t_n=t_1+(n-1)d</span>, then solve for <span class="tex">n</span>. The answer must be a <b>natural number</b>.</div>
+  <div class="def amber">To count the <b>multiples</b> of a number in an interval, find the <b>smallest</b> and the <b>largest</b> multiple in the interval. They are <span class="tex">t_1</span> and <span class="tex">t_n</span>, and <span class="tex">d</span> is the number itself. “<b>Inclusive</b>” means the endpoints count; “<b>between</b>” means they do not.</div>
+  <div class="explainer" data-explainer="countTerms"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Jumps, then add 1.</b> <span class="tex">n=(t_n-t_1)\div d+1</span>: for <span class="tex">8,2,-4,\dots,-166</span> press <span class="keys"><kbd>(</kbd><kbd>(−)</kbd><kbd>1</kbd><kbd>6</kbd><kbd>6</kbd><kbd>−</kbd><kbd>8</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(−)</kbd><kbd>6</kbd><kbd>+</kbd><kbd>1</kbd><kbd>=</kbd></span>. For multiples of 9, divide the endpoints by 9 to find the first and last multiples inside.</div>
+    <div class="pill-col"><button class="pill" data-keys="( (−) 166 − 8 ) ÷ (−) 6 + 1 =">Terms in (a)</button><button class="pill" data-keys="100 ÷ 9 =">100 ÷ 9</button><button class="pill" data-keys="600 ÷ 9 =">600 ÷ 9</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>How many terms?</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) How many terms are in the sequence <span class="tex">8,\ 2,\ -4,\ \dots,\ -166</span>?</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=8,\ d=-6,\ t_n=-166</span><br><span class="tex">-166=8+(n-1)(-6)</span><br><span class="tex">-174=-6(n-1)\ \Rightarrow\ n-1=29\ \Rightarrow\ n=30</span><br>There are <b>30 terms</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) How many multiples of 9 are there between 100 and 600?</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">100\div9\approx11.1</span>, so the first multiple is <span class="tex">9\times12=108</span>. <span class="tex">600\div9\approx66.7</span>, so the last is <span class="tex">9\times66=594</span>.<br><span class="tex">594=108+(n-1)(9)\ \Rightarrow\ 486=9(n-1)\ \Rightarrow\ n-1=54\ \Rightarrow\ n=55</span><br>There are <b>55 multiples</b> of 9. <span class="muted">(Check: multiples number 12 to 66 is <span class="tex">66-12+1=55</span>.)</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="3. Toothpick squares">
+  <h3 class="sub">A pattern you can count: toothpick squares</h3>
+  <p>Each new square <b>shares a side</b> with the one before it, so it needs fewer new toothpicks than the first one did.</p>
+  <div class="explainer" data-explainer="toothpicks"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Toothpicks</h3></div>
+  <p class="q">Toothpicks are laid out to make a row of squares.</p>
+  <div class="u1l2-tpfig" id="u1l2-tpfig"></div>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Write the number of toothpicks for 1, 2, 3 and 4 squares, and the general term.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">4,\ 7,\ 10,\ 13</span>: arithmetic, <span class="tex">t_1=4,\ d=3</span><br><span class="tex">t_n=4+(n-1)(3)=\boldsymbol{3n+1}</span></div></div></div>
+    <div class="part"><div class="pl">(b) How many toothpicks make a row of 40 squares?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_{40}=3(40)+1=\boldsymbol{121}</span> toothpicks</div></div></div>
+    <div class="part"><div class="pl">(c) There are 200 toothpicks in a box. What is the longest row of squares that can be made, and how many toothpicks are left over?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3n+1=200\ \Rightarrow\ n=66.\overline{3}</span>. Round down: <b>66 squares</b>.<br><span class="tex">t_{66}=3(66)+1=199</span>, so <b>1 toothpick</b> is left over.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Finding t1 or d ================= -->
+<section class="card" data-ink="s4" data-section="4. Finding t1 or d">
+  <div class="sec-h"><span class="badge">4</span><h2>Finding <span class="tex">t_1</span> or <span class="tex">d</span></h2></div>
+  <div class="def">The formula <span class="tex">t_n=\textcolor{#0e7c86}{t_1}+(\textcolor{#1f5bd6}{n}-1)\textcolor{#c27a0e}{d}</span> links <b>four</b> quantities: <span class="tex">t_n</span>, <span class="tex">t_1</span>, <span class="tex">n</span> and <span class="tex">d</span>. If you know any three of them, substitute and solve for the fourth.</div>
+  <p>In pictures: between two known terms there are a known number of equal jumps. Share the gap equally to find <span class="tex">d</span>, or walk the jumps back to find <span class="tex">t_1</span>.</p>
+  <div class="explainer" data-explainer="findPart"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Three known, find the fourth</h3></div>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) An arithmetic sequence has <span class="tex">d=6</span> and <span class="tex">t_{15}=71</span>. Determine <span class="tex">t_1</span>.</div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">71=t_1+(15-1)(6)</span><br><span class="tex">71=t_1+84</span><br><span class="tex">\boldsymbol{t_1=-13}</span></div></div></div>
+    <div class="part"><div class="pl">(b) An arithmetic sequence has <span class="tex">t_1=4</span> and <span class="tex">t_{13}=-38</span>. Determine <span class="tex">d</span> and the general term.</div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-38=4+(13-1)d</span><br><span class="tex">-42=12d\ \Rightarrow\ \boldsymbol{d=-3.5}</span><br><span class="tex">t_n=4+(n-1)(-3.5)=\boldsymbol{7.5-3.5n}</span></div></div></div>
+    <div class="part"><div class="pl">(c) An arithmetic sequence has 16 terms. The first term is 12 and the last term is 87. Determine <span class="tex">d</span>.</div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_{16}=87</span>:<br><span class="tex">87=12+15d\ \Rightarrow\ 75=15d\ \Rightarrow\ \boldsymbol{d=5}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Arithmetic means ================= -->
+<section class="card" data-ink="s5" data-section="5. Arithmetic Means">
+  <div class="sec-h"><span class="badge">5</span><h2>Arithmetic Means</h2></div>
+  <div class="def">The terms between two non-consecutive terms of an arithmetic sequence are called <b>arithmetic means</b>. In <span class="tex">4,\ \mathbf{10},\ \mathbf{16},\ 22</span>, the arithmetic means between 4 and 22 are 10 and 16.</div>
+  <p>To insert <span class="tex">k</span> arithmetic means between two numbers, use the two numbers as <span class="tex">t_1</span> and the last term. The sequence then has <span class="tex">k+2</span> terms. Find <span class="tex">d</span>, then build the means. <b>One</b> arithmetic mean between two numbers is simply their <b>average</b>.</p>
+  <div class="explainer" data-explainer="means"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Inserting means</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Insert four arithmetic means between 7 and <span class="tex">-18</span>.</div><div class="work" style="--h:180px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">4 means + 2 ends = 6 terms: <span class="tex">t_1=7,\ t_6=-18</span><br><span class="tex">-18=7+5d\ \Rightarrow\ d=-5</span><br><span class="tex">7,\ \mathbf{2},\ \mathbf{-3},\ \mathbf{-8},\ \mathbf{-13},\ -18</span><br>The means are <b><span class="tex">2,\ -3,\ -8,\ -13</span></b>.</div></div></div>
+    <div class="part"><div class="pl">(b) Insert one arithmetic mean between <span class="tex">-9</span> and 26.</div><div class="work" style="--h:180px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">3 terms: <span class="tex">t_1=-9,\ t_3=26</span><br><span class="tex">26=-9+2d\ \Rightarrow\ d=17.5</span><br>Mean: <span class="tex">-9+17.5=\boldsymbol{8.5}</span><br><span class="muted">(Same as the average: <span class="tex">\frac{-9+26}{2}=8.5</span>.)</span></div></div></div>
+  </div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> Why is one arithmetic mean always the average of the two numbers?</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">With one mean there are two <b>equal</b> jumps, so the mean sits exactly <b>halfway</b> between the two numbers. Halfway between two numbers is their average.</div></div></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Unknown terms ================= -->
+<section class="card" data-ink="s6" data-section="6. Unknown Terms">
+  <div class="sec-h"><span class="badge">6</span><h2>Unknown Terms in an Arithmetic Sequence</h2></div>
+  <div class="def">If three expressions are consecutive terms of an arithmetic sequence, the two differences are equal:</div>
+  <div class="u1l2-key"><span class="tex">t_2-t_1=t_3-t_2</span> <span class="u1l2-keyor">or, the same thing,</span> <span class="tex">t_2=\dfrac{t_1+t_3}{2}</span> <span class="u1l2-keyor">(the middle term is the mean of its neighbours)</span></div>
+  <p>Set the differences equal, solve for the variable, then substitute to find the terms.</p>
+  <div class="explainer" data-explainer="unknown"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Three expressions</h3></div>
+  <p class="q">The expressions <span class="tex">x-4</span>, <span class="tex">2x+1</span> and <span class="tex">5x-2</span> are consecutive terms of an arithmetic sequence.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine the value of <span class="tex">x</span>.</div><div class="work" style="--h:180px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(2x+1)-(x-4)=(5x-2)-(2x+1)</span><br><span class="tex">x+5=3x-3</span><br><span class="tex">8=2x\ \Rightarrow\ \boldsymbol{x=4}</span></div></div></div>
+    <div class="part"><div class="pl">(b) State the three terms, the general term and <span class="tex">t_{20}</span>.</div><div class="work" style="--h:180px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Terms: <span class="tex">4-4=0,\ \ 2(4)+1=9,\ \ 5(4)-2=18</span><br><span class="tex">t_1=0,\ d=9:\ \ t_n=0+(n-1)(9)=\boldsymbol{9n-9}</span><br><span class="tex">t_{20}=9(20)-9=\boldsymbol{171}</span></div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Common difference.</b> <span class="tex">d=t_2-t_1</span>, the same for <b>every</b> pair of neighbours. Check them all; one matching pair is not enough.</div>
+    <div><b>General term.</b> <span class="tex">t_n=\textcolor{#0e7c86}{t_1}+(n-1)\textcolor{#c27a0e}{d}</span>: from <span class="tex">t_1</span> to <span class="tex">t_n</span> is <span class="tex">n-1</span> jumps (posts and rails). Expand and simplify, e.g. <span class="tex">48-7n</span>.</div>
+    <div><b>Know three, find the fourth.</b> Substitute and solve for <span class="tex">t_n</span>, <span class="tex">t_1</span>, <span class="tex">n</span> or <span class="tex">d</span>. A position <span class="tex">n</span> must be a natural number, or the number is not a term.</div>
+    <div><b>Means and unknowns.</b> <span class="tex">k</span> means make <span class="tex">k+2</span> terms and <span class="tex">k+1</span> jumps. For three expressions in a row, set the two differences equal.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u1l2">
+    <div><div class="kicker">Your turn</div><b>Assignment 2 — Arithmetic Sequences</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l3/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 3 — Arithmetic Sequences in Context</b><div class="muted">Real situations that grow or shrink by the same amount each step, and sequences given by two known terms.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u1l2.js';
+  boot({ key: 'u1l2', homeHref: '../../', title: '1.2 Arithmetic Sequences' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

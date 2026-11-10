@@ -1,0 +1,118 @@
+/* Math 20-1 · Unit 1 · Lesson 3 — Arithmetic Sequences in Context: styles used only on this page (prefix u1l3-).
+ * Colours: d amber #c27a0e, t1 teal #0e7c7b, known terms burgundy #7a1f3d, b purple #7b4fc4. */
+
+.u1l3 .ex-cap .katex { font-size: 1.04em; }
+.u1l3 .chip .katex { font-size: 1em; }
+.u1l3 .pl .katex { font-size: 1.08em; }
+.u1l3 .ans .katex { font-size: 1.04em; }
+.u1l3 .katex { white-space: nowrap; }
+.u1l3 h2 .katex, .u1l3 h3 .katex { font-size: .95em; }
+.u1l3-cd { color: #c27a0e; }
+.u1l3-ct { color: #0e7c7b; }
+
+/* ---------------- key idea inside a .def ---------------- */
+.u1l3-key { display: flex; align-items: center; justify-content: center; gap: 22px; flex-wrap: wrap; margin: 10px 0 10px; padding: 10px 16px; background: #fff; border-radius: 12px; border: 2px solid #e7c9d3; font-size: 24px; }
+.u1l3-keyw { font-size: 18px; color: var(--ink2); }
+.u1l3-keyw0 { font-size: 21px; color: var(--ink); font-weight: 600; }
+.u1l3-twobox { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 6px 0 14px; }
+.u1l3-tbox { background: #fff; border-radius: 12px; padding: 10px 16px; font-size: 19px; line-height: 1.4; border-left: 6px solid #0e7c7b; }
+.u1l3-tb-b { border-left-color: #c27a0e; }
+.u1l3-tbt { font-weight: 600; margin-bottom: 2px; }
+
+/* ---------------- warm-up: Kangaroo Tracks ---------------- */
+.u1l3-beach { position: relative; width: 100%; height: 262px; }
+.u1l3-bsvg { display: block; }
+.u1l3-tape { font: 700 14px var(--round, system-ui); fill: #4a3a08; }
+.u1l3-ptag { position: absolute; font: 800 15px var(--round, system-ui); color: #6b5232; background: rgba(255, 255, 255, .8); border-radius: 6px; padding: 0 5px; pointer-events: none; }
+.u1l3-ptag-on { background: #7a1f3d; color: #fff; }
+.u1l3-pm { position: absolute; font: 700 14px var(--round, system-ui); color: #6b5232; pointer-events: none; }
+.u1l3-hopn { position: absolute; font: 800 17px var(--round, system-ui); color: #c27a0e; background: #fff; border: 2px solid #c27a0e; border-radius: 50%; width: 26px; height: 26px; display: grid; place-items: center; box-sizing: border-box; pointer-events: none; }
+.u1l3-wbtns { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0 2px; }
+.u1l3-wbtns .pill { font-size: 15px; padding: 6px 14px; }
+.wf .u1l3-wqs .q-line { font-size: 17.5px; margin: 4px 0 2px; gap: 10px; }
+.wf .u1l3-wqs .q-line .pill.small { padding: 2px 10px; }
+.u1l3-wa { margin: 0 0 6px 40px; }
+.wf .u1l3-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
+.wf .wf-poll { margin-top: 8px; }
+.wf .wf-poll .poll-opts.u1l3-p4 { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.wf .wf-poll .poll-opts.u1l3-p4 .opt { padding: 6px 8px; }
+.wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
+.wf .wf-poll:not(.revealed) .poll-ans { display: none; }
+.u1l3-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
+
+/* ---------------- explainer pieces ---------------- */
+.u1l3-ov { position: absolute; pointer-events: none; overflow: visible; }
+.u1l3-slab { font-size: 18px; }
+.u1l3-tile { display: grid; place-items: center; background: #fff; border: 2px dashed #c9c3b5; border-radius: 10px; font-size: 21px; color: #9aa0ab; font-weight: 700; box-sizing: border-box; overflow: hidden; white-space: nowrap; }
+.u1l3-tile.u1l3-known { border: 3px solid #7a1f3d; color: #7a1f3d; background: #f7e9ee; }
+.u1l3-tile.u1l3-fill { border: 2px solid #c27a0e; color: #1c2230; background: #fff4dd; }
+.u1l3-tile.u1l3-first { border: 3px solid #0e7c7b; color: #0e7c7b; background: #e2f3f2; }
+.u1l3-tpos { position: absolute; font-size: 16px; color: #3a4254; white-space: nowrap; }
+.u1l3-tpos-k { color: #7a1f3d; font-weight: 700; }
+.u1l3-jn { font: 800 16px var(--round, system-ui); color: #6b7280; white-space: nowrap; }
+.u1l3-jn.u1l3-jd { color: #c27a0e; }
+.u1l3-jn.u1l3-jt { color: #0e7c7b; }
+.u1l3-brl { font-size: 18px; color: #7a1f3d; background: rgba(255, 255, 255, .9); border-radius: 8px; padding: 0 6px; }
+.u1l3-glab { font-size: 16px; }
+.u1l3-glab-d { color: #c27a0e; }
+.u1l3-panel { background: #fff; border: 1px solid #e4e1d8; border-radius: 12px; padding: 10px 14px; box-sizing: border-box; overflow: hidden; }
+.u1l3-ph { font: 800 14px var(--round, system-ui); text-transform: uppercase; letter-spacing: .06em; color: #8a8f99; margin-bottom: 6px; }
+.u1l3-line { font-size: 18px; line-height: 1.35; margin: 6px 0; }
+.u1l3-line.u1l3-big { font-size: 19.5px; }
+.u1l3-line.u1l3-ans { font-weight: 700; color: #7a1f3d; }
+.u1l3-line.u1l3-soft { color: #6b7280; }
+.u1l3-line.u1l3-ok { color: #12805a; font-weight: 700; }
+.u1l3-hpanel { display: grid; grid-template-columns: 1fr 1fr; column-gap: 22px; align-content: start; padding: 6px 14px; }
+.u1l3-hpanel .u1l3-line { margin: 3px 0; font-size: 17.5px; }
+
+/* bar model (system) */
+.u1l3-blk { display: grid; place-items: center; border-radius: 6px; font-size: 19px; color: #fff; box-sizing: border-box; overflow: hidden; }
+.u1l3-blk-t { background: #0e7c7b; }
+.u1l3-blk-d { background: #c27a0e; }
+.u1l3-blk .katex { color: #fff; }
+.u1l3-blk .katex [style*="color"] { color: #fff !important; }
+.u1l3-blab, .u1l3-beq { font-size: 22px; font-weight: 700; }
+.u1l3-alg { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.u1l3-aline { font-size: 21px; line-height: 1.5; }
+
+/* amphitheatre */
+.u1l3-row { transition: stroke .2s; }
+.u1l3-rowtag { font: 700 15px var(--round, system-ui); background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 4px; }
+.u1l3-stage { font: 700 15px var(--round, system-ui); color: #6b5536; }
+
+/* bars */
+.u1l3-bars .bk-lab { font-size: 16px; }
+.u1l3-tick { font-size: 14.5px; color: #6b7280; }
+.u1l3-nlab { font-size: 16px; color: #3a4254; }
+.u1l3-ghostl { color: #7b4fc4; font-style: italic; }
+.u1l3-yr { font-size: 14px; }
+.u1l3-yr-k { color: #7a1f3d; font-weight: 800; }
+.u1l3-yr-ok { color: #12805a; font-weight: 800; }
+.u1l3-bars .u1l3-tpos { font-size: 15px; }
+.u1l3-vlab { font-size: 15.5px; font-weight: 700; background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 4px; }
+.u1l3-vlab-k { color: #7a1f3d; }
+.u1l3-vlab-t { color: #0e7c7b; }
+.u1l3-vlab-b { color: #7b4fc4; }
+.u1l3-vlab-ok { color: #12805a; }
+.u1l3-vlab-x { color: #c93a33; }
+.u1l3-lvl { font-size: 16px; font-weight: 700; background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 4px; }
+.u1l3-mk { font-size: 16px; background: #fff; border: 2px solid #3a4254; border-radius: 8px; padding: 0 6px; }
+.u1l3-nax { font-size: 18px; }
+.u1l3-rtag { display: flex; align-items: center; font-size: 16px; line-height: 1.2; padding: 0 8px; border-radius: 8px; box-sizing: border-box; font-weight: 600; }
+.u1l3-rtag-0 { color: #6b7280; font-size: 15px; width: 150px; }
+.u1l3-rtag.u1l3-ra { background: #e2f3f2; }
+.u1l3-rtag.u1l3-rb { background: #fff4dd; }
+.u1l3-cell { position: absolute; font-size: 16px; border-radius: 6px; padding: 1px 3px; white-space: nowrap; }
+.u1l3-cell.u1l3-cell-t { background: #0e7c7b; color: #fff; }
+.u1l3-cell.u1l3-cell-t .katex { color: #fff; }
+.u1l3-cell.u1l3-cell-k { background: #c27a0e; color: #fff; font-weight: 700; }
+
+/* balloon */
+.u1l3-alt { font-size: 15px; color: #3a4254; }
+.u1l3-rd { position: absolute; font-size: 16px; font-weight: 700; background: rgba(255, 255, 255, .92); border: 2px solid #e2574c; border-radius: 8px; padding: 1px 7px; white-space: nowrap; }
+.u1l3-rtg { font-size: 17px; font-weight: 700; background: rgba(255, 255, 255, .85); border-radius: 6px; padding: 0 3px; }
+
+/* ---------------- examples ---------------- */
+.u1l3-exg { display: grid; grid-template-columns: 340px 1fr; gap: 18px; align-items: start; }
+.u1l3-fig { background: #fff; border-radius: 12px; padding: 4px; }
+.u1l3-ansfig { margin-top: 8px; }

@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arithmetic Sequences in Context · Math 20-1 1.3</title>
+<meta name="description" content="Math 20-1 Unit 1 Lesson 3: finding d and t1 from two terms that are not consecutive (count the jumps, split the gap, or solve a system), arithmetic growth and decay word problems (simple interest, a fee plus a rate, straight-line depreciation, temperature and altitude), choosing what t1 stands for, “first passes” inequalities, and the link to linear functions: the slope is d and the domain is the natural numbers. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u1l3.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u1l3">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 1 Sequences and Series · Lesson 3</div>
+  <h1>Arithmetic Sequences in Context</h1>
+  <p class="lede">Rebuilding a whole sequence from just <b>two of its terms</b>, then putting arithmetic sequences to work: money that <b>grows</b> by the same amount, values that <b>decay</b> by the same amount, and the straight line hiding behind every arithmetic sequence.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>find <b class="u1l3-cd"><span class="tex">d</span></b> and <b class="u1l3-ct"><span class="tex">t_1</span></b> from two terms that are not consecutive, by <b>counting the jumps</b> or by solving a <b>system</b></li>
+      <li>model <b>arithmetic growth</b> (simple interest, a fee plus a rate) and <b>arithmetic decay</b> (depreciation, cooling) with a general term</li>
+      <li>decide what <span class="tex">t_1</span> stands for (<b>at the start</b> or <b>after one period</b>) and match the position to the time asked for</li>
+      <li>solve “when does it first pass…” questions with an inequality, round to the right natural number and check both sides</li>
+      <li>see an arithmetic sequence as a <b>linear function</b>: slope <span class="tex">d</span>, domain the natural numbers</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF9</b> Analyze arithmetic sequences and series to solve problems.<br><span class="muted">Today: two known terms, growth and decay in context, and the link between arithmetic sequences and linear functions.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: Kangaroo Tracks" id="wu" style="--wf-side: 360px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Kangaroo Tracks</h2>
+  <p class="wf-rule">A kangaroo hopped along the beach, every hop <b>exactly the same length</b>. A wave washed most of its footprints away. Only print <b>#3</b> (at the <b>10 m</b> mark) and print <b>#8</b> (at the <b>30 m</b> mark) are left.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u1l3-beach" id="u1l3-beach"></div>
+    <div class="u1l3-wbtns">
+      <button type="button" class="pill" id="u1l3-wjumps">Count the hops</button>
+      <button type="button" class="pill" id="u1l3-wprints">Bring the prints back</button>
+      <button type="button" class="pill" id="u1l3-wreset">Start over</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u1l3-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How many <b>hops</b> are there from print #3 to print #8? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l3-wa"><div class="bk-ans"><b>5 hops</b> (<span class="tex">8-3</span>). Count the <b>gaps</b>, not the prints: 6 prints, but only 5 hops.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How long is <b>one hop</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l3-wa"><div class="bk-ans"><span class="tex">30-10=20</span> m over 5 hops: <span class="tex">20\div5=</span> <b>4 m</b> per hop.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Where is print <b>#10</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l3-wa"><div class="bk-ans">Two more hops after #8: <span class="tex">30+2(4)=</span> <b>38 m</b>.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Where is print <b>#1</b>? <b>Guess first.</b></div></div>
+      <div class="poll-opts u1l3-p4">
+        <div class="opt"><b>A</b> 0 m</div>
+        <div class="opt right"><b>B</b> 2 m</div>
+        <div class="opt"><b>C</b> 4 m</div>
+        <div class="opt"><b>D</b> 6 m</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>B, 2 m.</b> Print #1 is <b>2 hops</b> before print #3: <span class="tex">10-2(4)=2</span>. Prints: 2, 6, <b>10</b>, 14, 18, 22, 26, <b>30</b> m…<br>
+        <span class="muted"><b>A</b>: the first print doesn’t have to sit on the 0 line. The kangaroo was <b>standing</b> at <span class="tex">-2</span> m, one hop <b>before</b> print #1. “One step before the first term” comes back today.</span></div>
+    </div>
+  </div></div>
+  <p class="u1l3-social">Challenge your neighbour: where is print <b>#20</b>? Can you write a rule for print <b>#<span class="tex">n</span></b>?</p>
+</section>
+
+<!-- ================= 1. Two terms ================= -->
+<section class="card" data-ink="s1" data-section="1. Two Terms That Are Not Consecutive">
+  <div class="sec-h"><span class="badge">1</span><h2>Two Terms That Are Not Consecutive</h2></div>
+  <div class="def">If two terms <span class="tex">t_p</span> and <span class="tex">t_q</span> are known (with <span class="tex">p&lt;q</span>), you can still find <span class="tex">\textcolor{#c27a0e}{d}</span>. Going from position <span class="tex">p</span> to position <span class="tex">q</span> takes <span class="tex">q-p</span> steps, and each step adds <span class="tex">\textcolor{#c27a0e}{d}</span>:
+    <div class="u1l3-key"><span class="tex">\textcolor{#c27a0e}{d}=\dfrac{t_q-t_p}{q-p}</span><span class="u1l3-keyw">(change in the terms <span class="tex">\div</span> change in the positions)</span></div>
+    Then substitute either known term into <span class="tex">t_n=\textcolor{#0e7c7b}{t_1}+(n-1)\textcolor{#c27a0e}{d}</span> to find <span class="tex">\textcolor{#0e7c7b}{t_1}</span>.</div>
+  <h3 class="sub">Split the gap into equal jumps</h3>
+  <p>Two tiles are known. Count the <b>jumps</b> between them, share the change equally, then turn the tiles into points.</p>
+  <div class="explainer" data-explainer="gapSplit"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Count jumps, not terms.</b> From <span class="tex">t_4</span> to <span class="tex">t_{11}</span> there are 8 terms but only <span class="tex">11-4=7</span> jumps. Dividing by 8 is the most common slip.</div></div>
+  <h3 class="sub">A second method: a system of equations</h3>
+  <div class="def">Write both known terms with the general term formula. This gives a <b>system of two linear equations</b> in <span class="tex">\textcolor{#0e7c7b}{t_1}</span> and <span class="tex">\textcolor{#c27a0e}{d}</span>. Subtract one equation from the other to eliminate <span class="tex">\textcolor{#0e7c7b}{t_1}</span>.</div>
+  <div class="explainer" data-explainer="system"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Two ways to find <span class="tex">d</span> and <span class="tex">t_1</span></h3></div>
+  <p class="q">An arithmetic sequence has <span class="tex">t_4=19</span> and <span class="tex">t_{11}=54</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine <span class="tex">d</span> by counting steps.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">From <span class="tex">t_4</span> to <span class="tex">t_{11}</span> is <span class="tex">11-4=7</span> steps.<br><span class="tex">d=\dfrac{54-19}{7}=\dfrac{35}{7}=\boldsymbol{5}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Determine <span class="tex">t_1</span> and the general term.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">19=t_1+3(5)\ \Rightarrow\ t_1=\boldsymbol{4}</span><br><span class="tex">t_n=4+(n-1)(5)=\boldsymbol{5n-1}</span></div></div></div>
+  </div>
+  <div class="parts c1">
+    <div class="part"><div class="pl">(c) Solve the problem again using a system of equations.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_4:\ \ t_1+3d=19\qquad t_{11}:\ \ t_1+10d=54</span><br>Subtract: <span class="tex">7d=35\ \Rightarrow\ d=\boldsymbol{5}</span>. Then <span class="tex">t_1+3(5)=19\ \Rightarrow\ t_1=\boldsymbol{4}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>A negative, non-integer difference</h3></div>
+  <p class="q">An arithmetic sequence has <span class="tex">t_6=-8</span> and <span class="tex">t_{20}=-43</span>. Determine <span class="tex">d</span>, <span class="tex">t_1</span>, the general term and <span class="tex">t_{50}</span>.</p>
+  <div class="parts c1">
+    <div class="part"><div class="pl">Show your work.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">d=\dfrac{-43-(-8)}{20-6}=\dfrac{-35}{14}=\boldsymbol{-2.5}</span><br><span class="tex">-8=t_1+5(-2.5)\ \Rightarrow\ t_1=\boldsymbol{4.5}</span><br><span class="tex">t_n=4.5+(n-1)(-2.5)=\boldsymbol{7-2.5n}\qquad t_{50}=7-2.5(50)=\boldsymbol{-118}</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Negative terms on the TI-30XIIS.</b> Use the <kbd>(−)</kbd> key for a negative number and brackets around the top and the bottom: <span class="keys"><kbd>(</kbd><kbd>(−)</kbd><kbd>4</kbd><kbd>3</kbd><kbd>−</kbd><kbd>(−)</kbd><kbd>8</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(</kbd><kbd>2</kbd><kbd>0</kbd><kbd>−</kbd><kbd>6</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives −2.5.</div>
+    <button class="pill" data-keys="CLEAR ( (−) 43 − (−) 8 ) ÷ ( 20 − 6 ) =">Show me</button>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s1b" data-section="1. Two terms in a story">
+  <h3 class="sub">Two terms in a story: rows of seats</h3>
+  <p>In context, the positions are often <b>row numbers</b>, <b>years</b> or <b>hours</b>. The same jump counting works, and “how many rows?” is “which position?”.</p>
+  <div class="explainer" data-explainer="amphi"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>The amphitheatre</h3></div>
+  <p class="q">Each row of an outdoor amphitheatre has the same number of extra seats as the row in front of it. Row 6 has 64 seats and row 16 has 94 seats.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) How many seats are in row 1?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">d=\dfrac{94-64}{16-6}=3</span><br><span class="tex">64=t_1+5(3)\ \Rightarrow\ t_1=\boldsymbol{49}</span> seats</div></div></div>
+    <div class="part"><div class="pl">(b) The back row has 133 seats. How many rows are there?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">133=49+3(n-1)</span><br><span class="tex">84=3(n-1)\ \Rightarrow\ n=\boldsymbol{29}</span> rows</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u1l3"></section>
+
+<!-- ================= 2. Arithmetic growth ================= -->
+<section class="card" data-ink="s2" data-section="2. Arithmetic Growth">
+  <div class="sec-h"><span class="badge">2</span><h2>Arithmetic Growth</h2></div>
+  <div class="def">A quantity shows <b>arithmetic growth</b> when it increases by the <b>same amount</b> every period: a fixed raise each year, a fixed deposit each week, a set fee plus an hourly rate, and <b>simple interest</b>. With simple interest, interest is paid only on the original amount invested (the <b>principal</b>), so the interest is the same every year:
+    <div class="u1l3-key"><span class="u1l3-keyw u1l3-keyw0">interest per year <span class="tex">=</span> principal <span class="tex">\times</span> annual rate</span></div></div>
+  <p>Before writing a sequence, decide what <span class="tex">\textcolor{#0e7c7b}{t_1}</span> stands for:</p>
+  <div class="u1l3-twobox">
+    <div class="u1l3-tbox u1l3-tb-a"><div class="u1l3-tbt"><span class="tex">\textcolor{#0e7c7b}{t_1}</span> = value <b>at the start</b> (time 0)</div><div>The value after <span class="tex">k</span> periods is <span class="tex">t_{k+1}</span>.</div></div>
+    <div class="u1l3-tbox u1l3-tb-b"><div class="u1l3-tbt"><span class="tex">\textcolor{#0e7c7b}{t_1}</span> = value <b>after the first period</b></div><div>The value after <span class="tex">k</span> periods is <span class="tex">t_k</span>.</div></div>
+  </div>
+  <div class="explainer" data-explainer="startOrAfter"></div>
+  <h3 class="sub">“When does it first pass…?”</h3>
+  <p>“When does it first pass…” leads to an <b>inequality</b>. Solve it, <b>round to the natural number that fits the question</b> (not the usual rounding rule), and <b>check the terms on both sides</b>.</p>
+  <div class="explainer" data-explainer="firstPass"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Solve the inequality in one line.</b> For <span class="tex">90n+2400&gt;4000</span>: <span class="keys"><kbd>(</kbd><kbd>4</kbd><kbd>0</kbd><kbd>0</kbd><kbd>0</kbd><kbd>−</kbd><kbd>2</kbd><kbd>4</kbd><kbd>0</kbd><kbd>0</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>9</kbd><kbd>0</kbd><kbd>ENTER</kbd></span> gives 17.77777778, so <span class="tex">n&gt;17.8</span>.</div>
+    <button class="pill" data-keys="CLEAR ( 4000 − 2400 ) ÷ 90 =">Show me</button>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Simple interest</h3></div>
+  <p class="q">Marco invests $2400 at 3.75% simple interest per year.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) How much interest does he earn each year? Write the values at the end of years 1, 2 and 3.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2400\times0.0375=\boldsymbol{\$90}</span> per year<br><b>$2490, $2580, $2670</b></div></div></div>
+    <div class="part"><div class="pl">(b) Let <span class="tex">t_1</span> be the value at the end of year 1. Write the general term and find the value after 15 years.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_n=2490+90(n-1)=\boldsymbol{90n+2400}</span><br>After 15 years: <span class="tex">t_{15}=90(15)+2400=\boldsymbol{\$3750}</span></div></div></div>
+    <div class="part"><div class="pl">(c) Redo (b) with <span class="tex">t_1=2400</span>, the value when he invests.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2400,\ 2490,\ 2580,\ \dots</span>: after 15 years is <span class="tex">t_{16}</span>.<br><span class="tex">t_{16}=2400+15(90)=\boldsymbol{\$3750}</span> (same answer, different position)</div></div></div>
+    <div class="part"><div class="pl">(d) After how many full years is the value first more than $4000?</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">90n+2400&gt;4000\ \Rightarrow\ n&gt;17.8</span><br>After <b>18 years</b> ($4020; after 17 years it is $3930).</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. A fee plus a rate">
+  <h3 class="sub">A fixed fee plus a rate</h3>
+  <p>When each job costs the same amount more than the last, <span class="tex">\textcolor{#c27a0e}{d}</span> is the <b>rate</b>. The fixed fee is what is left when you take one rate off <span class="tex">\textcolor{#0e7c7b}{t_1}</span>: the cost of a “0-hour job”.</p>
+  <div class="explainer" data-explainer="feeRate"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>The landscaping company</h3></div>
+  <p class="q">A landscaping company charges a fixed equipment fee plus an hourly rate. A 1-hour job costs $115, a 2-hour job costs $160 and a 3-hour job costs $205.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) State <span class="tex">t_1</span> and <span class="tex">d</span>. What does <span class="tex">d</span> represent?</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=\boldsymbol{115}</span>, <span class="tex">d=\boldsymbol{45}</span><br><span class="tex">d</span> is the hourly rate, <b>$45 per hour</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) Determine the fixed fee and the general term.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Fee <span class="tex">=115-45=\boldsymbol{\$70}</span><br><span class="tex">t_n=115+45(n-1)=\boldsymbol{45n+70}</span></div></div></div>
+    <div class="part"><div class="pl">(c) What does an 8-hour job cost?</div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_8=45(8)+70=\boldsymbol{\$430}</span></div></div></div>
+    <div class="part"><div class="pl">(d) A customer has $600. What is the longest job, in whole hours, they can pay for?</div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">45n+70\le600\ \Rightarrow\ n\le11.8</span><br><b>11 hours</b> ($565; 12 hours would be $610).</div></div></div>
+  </div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> In (d), <span class="tex">n\le11.8</span> rounds to 12 by the usual rule. Why is the answer 11?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">12 hours costs <span class="tex">45(12)+70=\$610</span>, more than the $600 they have. “At most $600” means round <b>down</b>; “first more than” means round <b>up</b>. The question decides, not the decimal.</div></div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Arithmetic decay ================= -->
+<section class="card" data-ink="s3" data-section="3. Arithmetic Decay">
+  <div class="sec-h"><span class="badge">3</span><h2>Arithmetic Decay</h2></div>
+  <div class="def">A quantity shows <b>arithmetic decay</b> when it <b>decreases</b> by the same amount every period, so <span class="tex">\textcolor{#c27a0e}{d}</span> is <b>negative</b>. Examples: equipment losing the same dollar value each year (<b>straight-line depreciation</b>), air temperature falling as altitude increases, and a candle burning down. The same care applies: state what <span class="tex">\textcolor{#0e7c7b}{t_1}</span> means, and match the position to the time asked for.</div>
+  <h3 class="sub">Years are positions too</h3>
+  <p>When <span class="tex">t_1</span> is a year, every other year has a position: count from <span class="tex">t_1</span>.</p>
+  <div class="explainer" data-explainer="truck"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>The food truck</h3></div>
+  <p class="q">A food truck was bought new in 2018. It loses the same amount of value every year. In 2021 it was worth $96&#8239;800, and in 2026 it was worth $63&#8239;800. Let <span class="tex">t_1</span> be its value in 2018.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine the annual depreciation.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">2021 is <span class="tex">t_4</span> and 2026 is <span class="tex">t_9</span>.<br><span class="tex">d=\dfrac{63\,800-96\,800}{9-4}=-6600</span><br>It loses <b>$6600 per year</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) Determine the purchase price.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">96\,800=t_1+3(-6600)</span><br><span class="tex">t_1=96\,800+19\,800=\boldsymbol{\$116\,600}</span></div></div></div>
+  </div>
+  <div class="parts c1">
+    <div class="part"><div class="pl">(c) In what year will it first be worth less than $15&#8239;000?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_n=116\,600-6600(n-1)=123\,200-6600n&lt;15\,000\ \Rightarrow\ n&gt;16.4</span>, so <span class="tex">n=17</span>.<br><span class="tex">t_{17}</span> is the year <span class="tex">2018+16=</span> <b>2034</b>: worth $11&#8239;000. (In 2033, <span class="tex">t_{16}=\$17\,600</span>.)</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="3. Up, up and cooler">
+  <h3 class="sub">Up, up and cooler: readings every 100 m</h3>
+  <p>The positions don’t have to be times. Here they are <b>readings</b>, one every 100 m, starting with reading 1 <b>at the ground</b>.</p>
+  <div class="explainer" data-explainer="balloon"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>The weather balloon</h3></div>
+  <p class="q">A weather balloon is launched from a station where the air temperature is 21&nbsp;°C. It records the temperature every 100 m as it rises. The temperature drops 0.65&nbsp;°C for every 100 m. Let <span class="tex">t_1=21</span>, the reading at the ground.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Write the first three readings and the general term.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">21,\ 20.35,\ 19.7,\ \dots</span><br><span class="tex">t_n=21-0.65(n-1)=\boldsymbol{21.65-0.65n}</span></div></div></div>
+    <div class="part"><div class="pl">(b) What is the temperature 2500 m above the station?</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">2500 m is 25 steps of 100 m, so <span class="tex">n=26</span>.<br><span class="tex">t_{26}=21.65-0.65(26)=\boldsymbol{4.75}</span>&nbsp;°C</div></div></div>
+  </div>
+  <div class="parts c1">
+    <div class="part"><div class="pl">(c) At what height is the first reading below <span class="tex">-10</span>&nbsp;°C?</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">21.65-0.65n&lt;-10\ \Rightarrow\ n&gt;48.7</span>, so <span class="tex">n=49</span>: <span class="tex">t_{49}=-10.2</span>&nbsp;°C.<br>Reading 49 is <span class="tex">48\times100=</span> <b>4800 m</b> above the station.</div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Linear functions ================= -->
+<section class="card" data-ink="s4" data-section="4. Arithmetic Sequences and Linear Functions">
+  <div class="sec-h"><span class="badge">4</span><h2>Arithmetic Sequences and Linear Functions</h2></div>
+  <div class="def">Plot the points <span class="tex">(n,\,t_n)</span> of an arithmetic sequence and they lie on a line: each step right by 1 goes up (or down) by <span class="tex">\textcolor{#c27a0e}{d}</span>, so the <b>slope is <span class="tex">\textcolor{#c27a0e}{d}</span></b>. Expanding the general term shows the same thing:
+    <div class="u1l3-key"><span class="tex">t_n=\textcolor{#0e7c7b}{t_1}+(n-1)\textcolor{#c27a0e}{d}=\textcolor{#c27a0e}{d}\,n+(\textcolor{#0e7c7b}{t_1}-\textcolor{#c27a0e}{d})</span><span class="u1l3-keyw">the form <span class="tex">t_n=\textcolor{#c27a0e}{m}n+\textcolor{#7b4fc4}{b}</span> with <span class="tex">\textcolor{#c27a0e}{m=d}</span> and <span class="tex">\textcolor{#7b4fc4}{b=t_1-d}</span></span></div>
+    The value <span class="tex">\textcolor{#7b4fc4}{b}</span> is where the line crosses the vertical axis, <b>one step before <span class="tex">t_1</span></b>. It is <b>not a term</b>: the domain is the natural numbers, so there is no point at <span class="tex">n=0</span> and the points are <b>not joined</b>. Going the other way, any linear function <span class="tex">y=mx+b</span> with its domain restricted to the natural numbers gives an arithmetic sequence with <span class="tex">d=m</span>.</div>
+  <div class="explainer" data-explainer="linear"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b><span class="tex">b</span> is not <span class="tex">t_1</span>.</b> In <span class="tex">t_n=4n+5</span>, the first term is <span class="tex">t_1=4(1)+5=9</span>, not 5. The 5 is the height of the line at <span class="tex">n=0</span>, where there is no term.</div></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Reading a sequence off its graph</h3></div>
+  <div class="u1l3-exg">
+    <div class="u1l3-fig" id="u1l3-ex8fig"></div>
+    <div>
+      <p class="q">The graph shows the first four terms of an arithmetic sequence.</p>
+      <div class="parts c1">
+        <div class="part"><div class="pl">(a) State <span class="tex">t_1</span> and <span class="tex">d</span>, and write the general term in the form <span class="tex">t_n=mn+b</span>.</div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=\boldsymbol{9}</span>, <span class="tex">d=13-9=\boldsymbol{4}</span><br><span class="tex">t_n=9+4(n-1)=\boldsymbol{4n+5}</span></div></div></div>
+        <div class="part"><div class="pl">(b) What do the slope and the vertical intercept of the line through the points represent? Determine <span class="tex">t_{25}</span>.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Slope <span class="tex">4=d</span>. Intercept <span class="tex">5=t_1-d</span> (not a term, since <span class="tex">n=0</span> is not in the domain).<br><span class="tex">t_{25}=4(25)+5=\boldsymbol{105}</span><div class="u1l3-ansfig" id="u1l3-ex8ans"></div></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="parts c1">
+    <div class="part"><div class="pl">(c) The function <span class="tex">f(x)=30-2x</span> has its domain restricted to the natural numbers. List the first four values of the range and show that they form an arithmetic sequence.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">f(1)=28,\ f(2)=26,\ f(3)=24,\ f(4)=22</span>. Each value is 2 less than the one before: <b>arithmetic</b>, <span class="tex">d=\boldsymbol{-2}</span> (the slope).</div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Two terms are enough.</b> <span class="tex">d=\dfrac{t_q-t_p}{q-p}</span>: the change in the terms over the number of <b>jumps</b>. Then substitute a known term to get <span class="tex">t_1</span> (or solve the system and subtract).</div>
+    <div><b>Decide what <span class="tex">t_1</span> means.</b> At the start (time 0): after <span class="tex">k</span> periods is <span class="tex">t_{k+1}</span>. After the first period: after <span class="tex">k</span> periods is <span class="tex">t_k</span>.</div>
+    <div><b>Growth and decay.</b> The same change every period: <span class="tex">d&gt;0</span> grows (simple interest, fee plus rate), <span class="tex">d&lt;0</span> decays (depreciation, cooling). “First passes” → inequality → round to fit the question → check both sides.</div>
+    <div><b>It’s a line, in dots.</b> <span class="tex">t_n=dn+(t_1-d)</span>: slope <span class="tex">d</span>, intercept <span class="tex">t_1-d</span> (not a term). The domain is <span class="tex">n=1,2,3,\dots</span>, so the points are not joined.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u1l3">
+    <div><div class="kicker">Your turn</div><b>Assignment 3 — Arithmetic Sequences in Context</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l4/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 4 — Arithmetic Series</b><div class="muted">Add the terms up: Gauss’s trick of pairing the first and last terms gives <span class="tex">S_n</span> without adding them one by one.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u1l3.js';
+  boot({ key: 'u1l3', homeHref: '../../', title: '1.3 Sequences in Context' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

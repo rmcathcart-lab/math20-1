@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unit 1 Review · Math 20-1 1.9</title>
+<meta name="description" content="Math 20-1 Unit 1 Lesson 9: Unit 1 review of sequences and series. Every formula on one page, and how to choose between them from the context: add or multiply (arithmetic or geometric), one value or a total (t_n, S_n or S∞). Working with terms, finding n, growth and decay, and the bouncing ball. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u1l9.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u1l9">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 1 Sequences and Series · Lesson 9</div>
+  <h1>Unit 1 Review</h1>
+  <p class="lede">Every formula of the unit on one page, and how to <b>choose</b> between them. Two questions decide almost everything: do you <b class="u1l9-ca">add</b> or <b class="u1l9-cg">multiply</b>? Do you want <b>one value</b>, a <b>total</b>, or a total that goes on <b>forever</b>?</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>tell an <b class="u1l9-ca">arithmetic</b> situation (a fixed <b>amount</b> each step) from a <b class="u1l9-cg">geometric</b> one (a fixed <b>percent</b> or <b>multiple</b>)</li>
+      <li>decide whether a question wants one term <span class="tex">t_n</span>, a sum <span class="tex">S_n</span> or a sum to infinity <span class="tex">S_\infty</span></li>
+      <li>find <span class="tex">d</span> or <span class="tex">r</span>, <span class="tex">t_1</span> and the general term from two terms, three terms in a row, or a formula for <span class="tex">S_n</span></li>
+      <li>find the number of terms <span class="tex">n</span>, by algebra or with a table of values</li>
+      <li>solve problems in context: growth and decay, and the bouncing ball</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF9</b> Analyze arithmetic sequences and series to solve problems.<br><b>RF10</b> Analyze geometric sequences and series to solve problems.<br><span class="muted">Today: choosing arithmetic or geometric, and sequence, series or sum to infinity, from the context; mixed practice in the style of the unit test.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: Two Beanstalks" id="wu" style="--wf-side: 340px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Two Beanstalks</h2>
+  <p class="wf-rule">Jack plants two beans. On <b>day 1</b> the <b class="u1l9-ca">Steady</b> beanstalk is <b>30 cm</b> tall and it grows <b>12 cm every day</b>. The <b class="u1l9-cg">Magic</b> beanstalk is only <b>1 cm</b> tall, but its height <b>doubles</b> every day.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u1l9-garden" id="u1l9-garden"></div>
+    <div class="u1l9-wbtns">
+      <button type="button" class="pill" id="u1l9-day">Next day</button>
+      <button type="button" class="pill" id="u1l9-dayback">Back a day</button>
+      <button type="button" class="pill" id="u1l9-wreset">Start over</button>
+    </div>
+    <p class="u1l9-social">Challenge your neighbour: if Steady grew <b>20 cm</b> a day instead, would Magic still catch up? On which day?</p>
+  </div><div class="wf-side">
+    <div class="u1l9-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How tall is <b class="u1l9-ca">Steady</b> on <b>day 4</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l9-wa"><div class="bk-ans"><b>66 cm</b>: <span class="tex">30+12+12+12=66</span></div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How tall is <b class="u1l9-cg">Magic</b> on <b>day 6</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l9-wa"><div class="bk-ans"><b>32 cm</b>: <span class="tex">1,\,2,\,4,\,8,\,16,\,32</span></div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Which one is <b>arithmetic</b>? Which is <b>geometric</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l9-wa"><div class="bk-ans"><b class="u1l9-ca">Steady</b> adds: arithmetic, <span class="tex">d=12</span>. <b class="u1l9-cg">Magic</b> multiplies: geometric, <span class="tex">r=2</span>.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> On which day does <b class="u1l9-cg">Magic</b> first pass <b class="u1l9-ca">Steady</b>? <b>Guess!</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> Day 5</div>
+        <div class="opt right"><b>B</b> Day 8</div>
+        <div class="opt"><b>C</b> Day 12</div>
+        <div class="opt"><b>D</b> Never!</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>B, day 8.</b> Day 7: Steady <span class="tex">102</span>, Magic <span class="tex">64</span>. Day 8: Steady <span class="tex">114</span>, Magic <span class="tex">128</span>. Adding the same amount can never keep up with doubling.<br>
+        <span class="muted"><b>A</b>: on day 5 Magic is only 16 cm (Steady is 78 cm): it looks hopeless right up until it isn’t.</span></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ================= 1. Unit summary ================= -->
+<section class="card" data-ink="s1" data-section="1. Unit Summary">
+  <div class="sec-h"><span class="badge">1</span><h2>Unit Summary</h2></div>
+  <table class="u1l9-sumtab">
+    <thead><tr><th></th><th class="u1l9-tha">Arithmetic</th><th class="u1l9-thg">Geometric</th></tr></thead>
+    <tbody>
+      <tr><th>Pattern</th><td><b>add</b> the same number: <span class="tex">d=t_2-t_1</span></td><td><b>multiply</b> by the same number: <span class="tex">r=\dfrac{t_2}{t_1}</span></td></tr>
+      <tr><th>General term</th><td><span class="tex">t_n=t_1+(n-1)d</span></td><td><span class="tex">t_n=t_1r^{\,n-1}</span></td></tr>
+      <tr><th>Graph of <span class="tex">(n,\,t_n)</span></th><td>points on a line; slope <span class="tex">=d</span> (linear)</td><td>points on a curve (non-linear, exponential)</td></tr>
+      <tr><th>Sum of <span class="tex">n</span> terms</th><td><span class="tex">S_n=\dfrac{n}{2}\left[2t_1+(n-1)d\right]=\dfrac{n}{2}(t_1+t_n)</span></td><td><span class="tex">S_n=\dfrac{t_1(r^n-1)}{r-1}=\dfrac{rt_n-t_1}{r-1},\ \ r\ne1</span></td></tr>
+      <tr><th>Sum to infinity</th><td>does not exist (unless every term is 0)</td><td><span class="tex">S_\infty=\dfrac{t_1}{1-r}</span> only if <span class="tex">-1&lt;r&lt;1</span> (convergent); otherwise divergent</td></tr>
+      <tr><th>Three terms <span class="tex">a,\,b,\,c</span> in a row</th><td><span class="tex">b-a=c-b</span></td><td><span class="tex">\dfrac{b}{a}=\dfrac{c}{b}</span>, so <span class="tex">b^2=ac</span></td></tr>
+      <tr><th><span class="tex">k</span> means between two terms</th><td><span class="tex">k+1</span> steps of <span class="tex">d</span></td><td><span class="tex">k+1</span> steps of <span class="tex">r</span> (even number of steps: <span class="tex">r</span> can be <span class="tex">\pm</span>)</td></tr>
+      <tr><th>Growth / decay</th><td>a fixed <b>amount</b> each time (simple interest, fixed drop)</td><td>a fixed <b>percent</b> each time: <span class="tex">r=1+\text{rate}</span> or <span class="tex">r=1-\text{rate}</span></td></tr>
+    </tbody>
+  </table>
+  <h3 class="sub">Side by side</h3>
+  <p>Same start, two rules. Watch the <b>terms</b>, the <b>dots</b> <span class="tex">(n,\,t_n)</span> and the running <b>sums</b>.</p>
+  <div class="explainer" data-explainer="sideBySide"></div>
+</section>
+
+<section class="card" data-ink="s1b" data-section="How to choose">
+  <h3 class="sub">How to choose</h3>
+  <ol class="u1l9-choose">
+    <li><b>Add or multiply?</b> A fixed amount each step is <b class="u1l9-ca">arithmetic</b>. A fixed percent or a fixed multiple (doubling, halving, “rises to 70%”) is <b class="u1l9-cg">geometric</b>.</li>
+    <li><b>One value or a total?</b> One value (“in year 8”, “row 20”, “height of the 5th bounce”) uses <span class="tex">t_n</span>. A total (“altogether”, “in the first 10 weeks”, “total distance”) uses <span class="tex">S_n</span>. A total that goes on forever uses <span class="tex">S_\infty</span>.</li>
+    <li><b>Count the terms carefully.</b> If <span class="tex">t_1</span> is the starting value (time 0), the value after <span class="tex">n</span> years is <span class="tex">t_{n+1}=t_1r^{n}</span>. If <span class="tex">t_1</span> is the value after year 1, the value after <span class="tex">n</span> years is <span class="tex">t_n</span>. To count terms from first to last: <span class="tex">n=\dfrac{t_n-t_1}{d}+1</span>.</li>
+    <li><b>Finding <span class="tex">n</span>.</b> From <span class="tex">t_n</span> (arithmetic): a linear equation. From <span class="tex">S_n</span> (arithmetic): a quadratic; factor it, or use a table of values. Geometric: use a table of values (trial).</li>
+    <li><b>Given a formula for <span class="tex">S_n</span>:</b> <span class="tex">t_1=S_1</span> and <span class="tex">t_n=S_n-S_{n-1}</span>.</li>
+    <li><b>Bouncing ball:</b> add the series of drops and the series of rises (the rises start with the first rebound).</li>
+  </ol>
+</section>
+
+<!-- ================= 2. Choosing the formula ================= -->
+<section class="card" data-ink="s2" data-section="2. Choosing the Formula">
+  <div class="sec-h"><span class="badge">2</span><h2>Choosing the Formula</h2></div>
+  <div class="def">Read the story for two clues. <b>Clue 1:</b> is the same <b>amount</b> added each time (<b class="u1l9-ca">arithmetic</b>), or the same <b>percent or multiple</b> (<b class="u1l9-cg">geometric</b>)? <b>Clue 2:</b> does it ask for <b>one value</b> (<span class="tex">t_n</span>), a <b>total</b> (<span class="tex">S_n</span>), or a total <b>forever</b> (<span class="tex">S_\infty</span>)? The two answers point to exactly one formula.</div>
+  <div class="explainer u1l9-ask2" data-explainer="whichFormula"></div>
+</section>
+
+<section class="card" data-ink="s2b" data-section="Where does the count start?">
+  <h3 class="sub">Where does the count start?</h3>
+  <p>Growth and decay questions hide a counting trap. If <span class="tex">t_1</span> is the value at <b>time 0</b>, then “after 6 years” is <b>7 terms</b> in: <span class="tex">t_7</span>.</p>
+  <div class="explainer" data-explainer="countTerms"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Arithmetic or geometric? Term or sum?</h3></div>
+  <p class="q">For each situation, decide whether it is arithmetic or geometric, and whether it asks for a term or a sum. Then answer it.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) A theatre has 24 seats in the first row, and each row has 3 more seats than the row in front of it. How many seats are in the first 20 rows?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b class="u1l9-ca">Arithmetic</b> (<span class="tex">d=3</span>), a <b>sum</b>.<br><span class="tex">S_{20}=\dfrac{20}{2}\left[2(24)+19(3)\right]=10(105)=\boldsymbol{1050}</span> seats</div></div></div>
+    <div class="part"><div class="pl">(b) A car bought for $32&#8239;000 loses 15% of its value each year. What is it worth 6 years after it was bought?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b class="u1l9-cg">Geometric</b> (<span class="tex">r=0.85</span>), a <b>term</b>. <span class="tex">t_1=32\,000</span> is the value at time 0, so after 6 years we want <span class="tex">t_7</span>.<br><span class="tex">t_7=32\,000(0.85)^6\approx\boldsymbol{\$12\,068.78}</span></div></div></div>
+    <div class="part"><div class="pl">(c) A message is sent to 3 people in round 1. In each round after that, everyone who just got it sends it to 3 new people. How many people get the message in the first 8 rounds?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b class="u1l9-cg">Geometric</b> (<span class="tex">t_1=3</span>, <span class="tex">r=3</span>), a <b>sum</b>.<br><span class="tex">S_8=\dfrac{3(3^8-1)}{3-1}=\dfrac{3(6560)}{2}=\boldsymbol{9840}</span> people</div></div></div>
+    <div class="part"><div class="pl">(d) A pendulum’s first swing is 50 cm long and each swing after that is 90% as long as the one before. What total distance does it travel if it swings forever?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b class="u1l9-cg">Geometric</b> (<span class="tex">r=0.9</span>), an <b>infinite sum</b>.<br><span class="tex">S_\infty=\dfrac{50}{1-0.9}=\boldsymbol{500}</span> cm</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Powers on the TI-30XIIS.</b> Use the <kbd>^</kbd> key, and put brackets around <span class="tex">3^8-1</span>: <span class="keys"><kbd>3</kbd><kbd>×</kbd><kbd>(</kbd><kbd>3</kbd><kbd>^</kbd><kbd>8</kbd><kbd>−</kbd><kbd>1</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>2</kbd><kbd>ENTER</kbd></span>.
+      <div class="u1l9-ckpills"><button class="chip" type="button" data-keys="32000 × 0.85 ^ 6 =">(b) 32 000(0.85)⁶</button><button class="chip" type="button" data-keys="3 × ( 3 ^ 8 − 1 ) ÷ 2 =">(c) 3(3⁸ − 1) ÷ 2</button><button class="chip" type="button" data-keys="50 ÷ ( 1 − 0.9 ) =">(d) 50 ÷ (1 − 0.9)</button></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Working with terms ================= -->
+<section class="card" data-ink="s3" data-section="3. Working with Terms">
+  <div class="sec-h"><span class="badge">3</span><h2>Working with Terms</h2></div>
+  <div class="def">Two terms that are not next to each other? <b>Count the jumps</b> between them. In an arithmetic sequence the gap is (number of jumps) <span class="tex">\times\,d</span>; in a geometric one the later term is the earlier term <span class="tex">\times\,r^{\text{jumps}}</span>. Then step back to <span class="tex">t_1</span>.</div>
+  <div class="explainer" data-explainer="twoTerms"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Two arithmetic terms</h3></div>
+  <p class="q">In an arithmetic sequence, <span class="tex">t_5=17</span> and <span class="tex">t_{12}=45</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine <span class="tex">d</span>, <span class="tex">t_1</span> and the general term.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">From <span class="tex">t_5</span> to <span class="tex">t_{12}</span> is 7 steps: <span class="tex">7d=45-17=28\Rightarrow \boldsymbol{d=4}</span>.<br><span class="tex">t_1=17-4(4)=\boldsymbol{1}</span>.<br><span class="tex">t_n=1+(n-1)(4)=\boldsymbol{4n-3}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Determine <span class="tex">S_{30}</span>. Is 205 a term of the sequence?</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">S_{30}=\dfrac{30}{2}\left[2(1)+29(4)\right]=15(118)=\boldsymbol{1770}</span><br><span class="tex">4n-3=205\Rightarrow n=52</span>. <b>Yes</b>, <span class="tex">205=t_{52}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Two geometric terms</h3></div>
+  <p class="q">In a geometric sequence, <span class="tex">t_2=-12</span> and <span class="tex">t_5=324</span>. Determine <span class="tex">r</span>, <span class="tex">t_1</span>, the general term and <span class="tex">S_8</span>.</p>
+  <div class="parts c1">
+    <div class="part"><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">From <span class="tex">t_2</span> to <span class="tex">t_5</span> is 3 steps: <span class="tex">-12r^3=324\Rightarrow r^3=-27\Rightarrow \boldsymbol{r=-3}</span>.<br><span class="tex">t_1=-12\div(-3)=\boldsymbol{4}</span>, so <span class="tex">\boldsymbol{t_n=4(-3)^{n-1}}</span>.<br><span class="tex">S_8=\dfrac{4\left[(-3)^8-1\right]}{-3-1}=\dfrac{4(6560)}{-4}=\boldsymbol{-6560}</span></div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Brackets on a negative ratio.</b> <span class="tex">(-3)^8=6561</span>, but <span class="tex">-3^8=-6561</span>. On the calculator use <kbd>(−)</kbd> inside brackets: <span class="keys"><kbd>(</kbd><kbd>(−)</kbd><kbd>3</kbd><kbd>)</kbd><kbd>^</kbd><kbd>8</kbd></span>.</div><button class="pill" type="button" data-keys="( (−) 3 ) ^ 8 =">Show me</button></div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="Three terms in a row">
+  <h3 class="sub">Three terms in a row</h3>
+  <p>For <span class="tex">a,\ b,\ c</span> in a row: <b class="u1l9-ca">arithmetic</b> means the two <b>differences</b> match, <span class="tex">b-a=c-b</span>. <b class="u1l9-cg">Geometric</b> means the two <b>ratios</b> match, <span class="tex">\dfrac{b}{a}=\dfrac{c}{b}</span>, so <span class="tex">b^2=ac</span>.</p>
+  <div class="explainer" data-explainer="threeTerms"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Expressions as terms</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine <span class="tex">k</span> so that <span class="tex">k+4</span>, <span class="tex">3k</span> and <span class="tex">4k+2</span> are consecutive terms of an arithmetic sequence. State the terms.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3k-(k+4)=(4k+2)-3k</span><br><span class="tex">2k-4=k+2\Rightarrow \boldsymbol{k=6}</span><br>Terms: <span class="tex">\boldsymbol{10,\ 18,\ 26}</span> (<span class="tex">d=8</span>)</div></div></div>
+    <div class="part"><div class="pl">(b) Determine <span class="tex">x</span> so that <span class="tex">x-2</span>, <span class="tex">x+2</span> and <span class="tex">x+10</span> are consecutive terms of a geometric sequence. State the terms and <span class="tex">r</span>.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x+2)^2=(x-2)(x+10)</span><br><span class="tex">x^2+4x+4=x^2+8x-20\Rightarrow 24=4x\Rightarrow \boldsymbol{x=6}</span><br>Terms: <span class="tex">\boldsymbol{4,\ 8,\ 16}</span> (<span class="tex">r=2</span>)</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3c" data-section="Terms from a sum formula">
+  <h3 class="sub">Terms from a formula for <span class="tex">S_n</span></h3>
+  <p><span class="tex">S_n</span> is a running total, so each new total is the old total <b>plus one more term</b>: <span class="tex">t_1=S_1</span> and <span class="tex">t_n=S_n-S_{n-1}</span>.</p>
+  <div class="explainer" data-explainer="sumToTerm"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>From <span class="tex">S_n</span> back to the terms</h3></div>
+  <p class="q">The sum of the first <span class="tex">n</span> terms of a sequence is <span class="tex">S_n=2n^2+3n</span>. Determine <span class="tex">t_1</span>, <span class="tex">t_2</span> and <span class="tex">t_{10}</span>, and identify the sequence.</p>
+  <div class="parts c1">
+    <div class="part"><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=S_1=\boldsymbol{5}</span>. &nbsp; <span class="tex">t_2=S_2-S_1=14-5=\boldsymbol{9}</span>. &nbsp; <span class="tex">t_{10}=S_{10}-S_9=230-189=\boldsymbol{41}</span>.<br><span class="tex">t_2-t_1=4</span> and <span class="tex">t_{10}=5+9(4)=41</span>: <b>arithmetic</b> with <span class="tex">d=4</span>, <span class="tex">\boldsymbol{t_n=4n+1}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u1l9"></section>
+
+<!-- ================= 4. Finding n ================= -->
+<section class="card" data-ink="s4" data-section="4. Finding the Number of Terms">
+  <div class="sec-h"><span class="badge">4</span><h2>Finding the Number of Terms</h2></div>
+  <div class="def">Set the formula equal to the value you know and solve for <span class="tex">n</span>. Arithmetic <span class="tex">t_n</span>: a linear equation. Arithmetic <span class="tex">S_n</span>: a <b>quadratic</b> (factor it; <span class="tex">n</span> cannot be negative). Geometric: <span class="tex">n</span> is an exponent, so make a <b>table</b> of values and find where it reaches the target.</div>
+  <div class="explainer" data-explainer="findN"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>How many terms?</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) How many terms of <span class="tex">3+5+7+\dots</span> add to 255?</div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{n}{2}\left[2(3)+(n-1)(2)\right]=255</span><br><span class="tex">\dfrac{n}{2}(2n+4)=255\Rightarrow n(n+2)=255</span><br><span class="tex">n^2+2n-255=0\Rightarrow(n+17)(n-15)=0</span><br><span class="tex">\boldsymbol{n=15}</span> (<span class="tex">n</span> cannot be negative)</div></div></div>
+    <div class="part"><div class="pl">(b) How many terms of <span class="tex">5+10+20+\dots</span> add to 5115?</div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{5(2^n-1)}{2-1}=5115\Rightarrow 2^n-1=1023</span><br><span class="tex">2^n=1024</span>. Table of <span class="tex">2^n</span>: <span class="tex">2^{10}=1024</span>.<br><span class="tex">\boldsymbol{n=10}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>A growing town</h3></div>
+  <p class="q">A town has a population of 8400 and is growing by 3.5% per year.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Predict the population 5 years from now.</div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=1.035</span>, and 8400 is the population at time 0.<br><span class="tex">8400(1.035)^5\approx\boldsymbol{9977}</span> people</div></div></div>
+    <div class="part"><div class="pl">(b) After how many full years will the population first be over 12&#8239;000?</div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Table of <span class="tex">8400(1.035)^n</span>: <span class="tex">n=10</span> gives about <span class="tex">11\,849</span>; <span class="tex">n=11</span> gives about <span class="tex">12\,264</span>.<br><b>After 11 years.</b></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>A table by trial.</b> Type <span class="keys"><kbd>8</kbd><kbd>4</kbd><kbd>0</kbd><kbd>0</kbd><kbd>×</kbd><kbd>1</kbd><kbd>.</kbd><kbd>0</kbd><kbd>3</kbd><kbd>5</kbd><kbd>^</kbd><kbd>5</kbd><kbd>ENTER</kbd></span>, then press <kbd>▲</kbd>, change the exponent and press <kbd>ENTER</kbd> again for each row.
+      <div class="u1l9-ckpills"><button class="chip" type="button" data-keys="8400 × 1.035 ^ 5 =">(a) n = 5</button><button class="chip" type="button" data-keys="8400 × 1.035 ^ 10 =">(b) n = 10</button><button class="chip" type="button" data-keys="8400 × 1.035 ^ 11 =">(b) n = 11</button></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Series in context ================= -->
+<section class="card" data-ink="s5" data-section="5. Series in Context">
+  <div class="sec-h"><span class="badge">5</span><h2>Series in Context: the Bouncing Ball</h2></div>
+  <div class="def">A bouncing ball travels <b>down</b> and <b>up</b>. The drops make one geometric series (starting with the first drop); the rises make another (starting with the <b>first rebound</b>). Count each list carefully, add each series, then add the two totals.</div>
+  <div class="explainer" data-explainer="bounce"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The bouncing ball</h3></div>
+  <p class="q">A ball is dropped from a height of 15 m. After each bounce it rises to 70% of the height it fell from.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) How high, to the nearest hundredth of a metre, does it rise after the 4th bounce?</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Rises: <span class="tex">10.5,\ 7.35,\ \dots</span>, so <span class="tex">t_n=15(0.7)^n</span>.<br><span class="tex">15(0.7)^4\approx\boldsymbol{3.60}</span> m</div></div></div>
+    <div class="part"><div class="pl">(b) What total vertical distance has it travelled when it hits the ground for the 5th time?</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">5 drops and 4 rises.<br>Down: <span class="tex">S_5=\dfrac{15(1-0.7^5)}{0.3}\approx41.5965</span><br>Up: <span class="tex">S_4=\dfrac{10.5(1-0.7^4)}{0.3}\approx26.5965</span><br>Total <span class="tex">\approx\boldsymbol{68.19}</span> m</div></div></div>
+    <div class="part u1l9-span2"><div class="pl">(c) What total vertical distance does it travel if it bounces forever?</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Down: <span class="tex">\dfrac{15}{0.3}=50</span> m. &nbsp; Up: <span class="tex">\dfrac{10.5}{0.3}=35</span> m. &nbsp; Total: <span class="tex">\boldsymbol{85}</span> m.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Keep the decimals until the end.</b> Round only the final total, not <span class="tex">S_5</span> and <span class="tex">S_4</span> on the way.
+      <div class="u1l9-ckpills"><button class="chip" type="button" data-keys="15 × 0.7 ^ 4 =">(a) 15(0.7)⁴</button><button class="chip" type="button" data-keys="15 × ( 1 − 0.7 ^ 5 ) ÷ 0.3 =">(b) down S₅</button><button class="chip" type="button" data-keys="10.5 × ( 1 − 0.7 ^ 4 ) ÷ 0.3 =">(b) up S₄</button></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Add or multiply?</b> A fixed <b>amount</b> each step is arithmetic (<span class="tex">d</span>). A fixed <b>percent</b> or <b>multiple</b> is geometric (<span class="tex">r</span>; growth <span class="tex">1+\text{rate}</span>, decay <span class="tex">1-\text{rate}</span>).</div>
+    <div><b>One value, a total, or forever?</b> One value: <span class="tex">t_n</span>. A total: <span class="tex">S_n</span>. Forever: <span class="tex">S_\infty=\tfrac{t_1}{1-r}</span>, geometric only, and only if <span class="tex">-1&lt;r&lt;1</span>.</div>
+    <div><b>Count the jumps.</b> From <span class="tex">t_p</span> to <span class="tex">t_q</span> is <span class="tex">q-p</span> jumps. Time 0 is <span class="tex">t_1</span>, so “after <span class="tex">n</span> years” is <span class="tex">t_{n+1}</span>. <span class="tex">k</span> means make <span class="tex">k+1</span> jumps.</div>
+    <div><b>Working backwards.</b> <span class="tex">t_n=S_n-S_{n-1}</span>. Finding <span class="tex">n</span>: linear, quadratic (factor), or a table for a geometric exponent. A ball: drops series + rises series.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u1l9">
+    <div><div class="kicker">Your turn</div><b>Assignment 9 — Unit 1 Review</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <div class="u1l9-review">
+    <div class="u1l9-review-h"><span class="kicker">Up next</span><b>Unit 1 test.</b> <span class="muted">Shaky on an idea today? Go back to its lesson.</span></div>
+    <div class="u1l9-review-grid">
+      <a href="../l1/"><span class="rn">1.1</span>Patterns, sequences and the general term <small>Summary table, Example 5</small></a>
+      <a href="../l2/"><span class="rn">1.2</span>Arithmetic sequences <small>Examples 2, 4(a)</small></a>
+      <a href="../l3/"><span class="rn">1.3</span>Arithmetic sequences in context <small>Examples 1(a), 2</small></a>
+      <a href="../l4/"><span class="rn">1.4</span>Arithmetic series <small>Examples 1(a), 5, 6(a)</small></a>
+      <a href="../l5/"><span class="rn">1.5</span>Geometric sequences <small>Examples 3, 4(b)</small></a>
+      <a href="../l6/"><span class="rn">1.6</span>Geometric growth and decay <small>Examples 1(b), 7</small></a>
+      <a href="../l7/"><span class="rn">1.7</span>Geometric series <small>Examples 1(c), 3, 6(b), 8(b)</small></a>
+      <a href="../l8/"><span class="rn">1.8</span>Infinite geometric series <small>Examples 1(d), 8(c)</small></a>
+      <div class="test"><span class="rn">Test</span>Unit 1 test: RF9, RF10 <small>calculator allowed · every idea from today’s review</small></div>
+    </div>
+  </div>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u1l9.js';
+  boot({ key: 'u1l9', homeHref: '../../', title: '1.9 Unit 1 Review' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

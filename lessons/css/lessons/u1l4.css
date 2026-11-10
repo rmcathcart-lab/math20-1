@@ -1,0 +1,142 @@
+/* Math 20-1 · Unit 1 · Lesson 4 — Arithmetic Series: styles used only on this page (prefix u1l4-).
+ * Colours: t_1 teal #0f7f80, d amber #c27a0e, t_n blue #1f5bd6, S_n burgundy #7a1f3d, n purple #7b4fc4; mistakes red. */
+
+.u1l4 .ex-cap .katex { font-size: 1.04em; }
+.u1l4 .chip .katex { font-size: 1em; }
+.u1l4 .pl .katex { font-size: 1.08em; }
+.u1l4 .ans .katex { font-size: 1.04em; }
+.u1l4 .katex { white-space: nowrap; }
+.u1l4 h2 .katex, .u1l4 h3 .katex { font-size: .95em; }
+
+/* ---------------- warm-up: The Chiming Clock ---------------- */
+.u1l4-clockrow { display: grid; grid-template-columns: 390px 1fr; gap: 14px; align-items: center; }
+.u1l4-clock { width: 390px; height: 390px; }
+.u1l4-clocksvg { display: block; width: 100%; height: 100%; }
+.u1l4-hr { cursor: pointer; }
+.u1l4-hr-bg { fill: #fff; stroke: #dcc5a3; stroke-width: 2; transition: fill .2s; }
+.u1l4-hr:hover .u1l4-hr-bg { fill: #fff4dd; }
+.u1l4-hr.on .u1l4-hr-bg { fill: #f2c94c; stroke: #7a4a26; }
+.u1l4-hr-t { font: 800 26px Georgia, "Times New Roman", serif; fill: #3d2817; pointer-events: none; }
+.u1l4-pair-t { font: 800 16px var(--round); }
+.u1l4-tally { background: #fffaf1; border: 2px solid #dcc5a3; border-radius: 14px; padding: 10px 12px; text-align: center; height: 300px; box-sizing: border-box; overflow: hidden; }
+.u1l4-tl-h { font: 800 13px var(--round); text-transform: uppercase; letter-spacing: .06em; color: #8a6440; }
+.u1l4-tl-now { font: 800 54px var(--round); color: #b07a12; line-height: 1.05; height: 60px; }
+.u1l4-tl-tot { font: 800 40px var(--round); color: var(--brand); line-height: 1.1; height: 46px; margin-bottom: 6px; }
+.u1l4-tl-log { font-size: 16px; line-height: 1.45; color: var(--ink2); height: 90px; overflow: hidden; }
+.u1l4-wbtns { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0 2px; }
+.u1l4-wbtns .pill { font-size: 15px; padding: 6px 14px; }
+.wf .u1l4-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
+.wf .u1l4-wqs .q-line .pill.small { padding: 2px 10px; }
+.u1l4-wa { margin: 0 0 6px 40px; }
+.wf .u1l4-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
+.wf .wf-poll { margin-top: 8px; }
+.wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
+.wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
+.wf .wf-poll .poll-opts.c4 { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.wf .wf-poll .poll-opts.c4 .opt { padding: 6px 8px; }
+.wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
+.u1l4-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
+
+/* ---------------- notes ---------------- */
+.u1l4-defrow { display: grid; grid-template-columns: 1fr 330px; gap: 18px; align-items: center; margin-bottom: 12px; }
+.u1l4-defrow .def { margin: 0; }
+.u1l4-vs { background: #f6f5f1; border-radius: 14px; padding: 12px 14px; display: grid; gap: 10px; }
+.u1l4-vs-r { display: grid; grid-template-columns: 92px 1fr; align-items: center; font-size: 22px; }
+.u1l4-vs-t { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .05em; color: #fff; background: #3a4254; border-radius: 8px; padding: 3px 8px; text-align: center; margin-right: 10px; }
+.u1l4-vs-t.u1l4-vs-s { background: var(--brand); }
+.u1l4-bigf { text-align: center; font-size: 26px; margin: 8px 0; }
+.u1l4-key { background: #fff; border: 2.5px solid var(--brand2); border-radius: 14px; padding: 12px 18px 12px; margin: 10px 0 14px; }
+.u1l4-key-h { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .06em; color: var(--brand); margin-bottom: 6px; }
+.u1l4-key-f { display: flex; justify-content: center; align-items: center; gap: 30px; font-size: 26px; text-align: center; }
+.u1l4-key-or { font: 700 18px var(--round); color: var(--muted); }
+.u1l4-key-w { font-size: 16px; color: var(--ink2); margin-top: 2px; }
+.u1l4-key-l { font-size: 16.5px; color: var(--ink2); text-align: center; margin-top: 8px; line-height: 1.5; }
+.u1l4-key-s { padding: 14px 18px; }
+.u1l4-ul { margin: 6px 0 0; padding-left: 1.3em; }
+.u1l4-ul li { margin: 4px 0; }
+.u1l4-pcol { display: flex; flex-direction: column; gap: 8px; flex: 0 0 auto; }
+.u1l4-flips { margin: 6px 0 18px; }
+.u1l4-flips .bk-front, .u1l4-flips .bk-back { font-size: 18px; }
+
+/* ---------------- examples ---------------- */
+.u1l4-ex1b { grid-template-columns: 1.35fr 1fr; }
+.u1l4-pst { border-collapse: collapse; margin: 10px 0 6px; font-size: 20px; }
+.u1l4-pst th, .u1l4-pst td { border: 1.5px solid #9aa0ab; padding: 6px 4px; min-width: 54px; text-align: center; }
+.u1l4-pst th { background: #f6f5f1; min-width: 46px; }
+
+/* ---------------- explainers (shared) ---------------- */
+.u1l4-svg { overflow: visible; }
+.u1l4-lab { white-space: nowrap; font-size: 18px; line-height: 1.1; }
+.u1l4-panel { background: #fff; border: 1.5px solid #e4ddcf; border-radius: 12px; padding: 8px 14px; box-sizing: border-box; overflow: hidden; }
+.u1l4-ph { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin-bottom: 4px; }
+.u1l4-line { font-size: 21px; line-height: 1.35; margin: 5px 0; }
+.u1l4-line.u1l4-big { font-size: 25px; }
+.u1l4-line.u1l4-small { font-size: 18.5px; }
+.u1l4-line.u1l4-key-line { background: #fff4dd; border-radius: 8px; padding: 2px 8px; margin-top: 10px; font-size: 19px; }
+.u1l4-line.u1l4-boxed { border: 2.5px solid var(--brand2); border-radius: 10px; padding: 4px 8px; display: inline-block; }
+.u1l4-line.u1l4-formline { margin-top: 14px; font-size: 22px; color: var(--ink2); }
+.u1l4-line.u1l4-tnline { color: #1f5bd6; }
+
+/* partial sums */
+.u1l4-seqtag { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .05em; color: #fff; background: #3a4254; border-radius: 8px; padding: 4px 10px; }
+.u1l4-seqtag.u1l4-seqtag-s { background: var(--brand); }
+.u1l4-seqline { font-size: 30px; white-space: nowrap; }
+.u1l4-ptab { display: grid; border-top: 1.5px solid #9aa0ab; border-left: 1.5px solid #9aa0ab; background: #fff; font-size: 20px; }
+.u1l4-ptab > div { border-right: 1.5px solid #9aa0ab; border-bottom: 1.5px solid #9aa0ab; height: 44px; display: grid; place-items: center; box-sizing: border-box; }
+.u1l4-ptab > .u1l4-pth { background: #f6f5f1; }
+.u1l4-ptop { font-size: 17px; font-weight: 700; }
+.u1l4-t4tag { font-size: 19px; background: #fff4dd; border: 2px solid #e8a01e; border-radius: 8px; padding: 1px 6px; }
+
+/* Gauss rows */
+.u1l4-glab { font-size: 24px; }
+.u1l4-gbox { display: grid; place-items: center; box-sizing: border-box; background: #fff; border: 2px solid #c9c3b5; border-radius: 10px; font-size: 23px; }
+.u1l4-gbox.u1l4-gt1 { border-color: #0f7f80; background: #e6f4f3; }
+.u1l4-gbox.u1l4-gtn { border-color: #1f5bd6; background: #eaf0fc; }
+.u1l4-gbox.u1l4-gsum { border-color: var(--brand2); background: #f9eef2; font-weight: 700; }
+.u1l4-gbox.u1l4-gdots { border: none; background: transparent; }
+.u1l4-gplus { font: 700 22px var(--round); color: var(--ink2); }
+.u1l4-gbar { background: #1c2230; border-radius: 2px; }
+.u1l4-dtag { font-size: 17px; background: #fff; border: 1.5px solid #e8a01e; border-radius: 7px; padding: 0 5px; }
+.u1l4-ncol { font: 700 17px var(--round); color: #7b4fc4; }
+.u1l4-gout .u1l4-line { font-size: 23px; margin: 3px 0; }
+.u1l4-gout .u1l4-line.u1l4-big { font-size: 25px; }
+.u1l4-gform { background: #fff; border: 2.5px solid var(--brand2); border-radius: 12px; padding: 8px 14px; font-size: 22px; text-align: center; line-height: 1.5; }
+
+/* staircase / two formulas */
+.u1l4-sval { font-size: 16px; }
+.u1l4-sdim { font-size: 19px; background: rgba(255, 255, 255, .92); border-radius: 6px; padding: 0 4px; }
+.u1l4-sout .u1l4-line { font-size: 25px; margin: 8px 0; }
+
+/* unknown hunt */
+.u1l4-tiles { display: flex; gap: 12px; align-items: center; }
+.u1l4-tile { display: flex; align-items: center; gap: 8px; background: #fff; border: 2.5px solid #9aa0ab; border-radius: 12px; padding: 6px 14px; font-size: 23px; }
+.u1l4-tile.u1l4-tile-q { border-color: #c93a33; border-style: dashed; background: #fdf1ef; }
+.u1l4-tk { font: 800 12px var(--round); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+.u1l4-fbox { display: grid; place-items: center; background: #fff; border: 1.5px solid #e4ddcf; border-radius: 14px; font-size: 32px; box-sizing: border-box; transition: box-shadow .3s; }
+.u1l4-fbox.u1l4-fbox-on { box-shadow: 0 0 0 4px rgba(232, 160, 30, .45); }
+.u1l4-ulines .u1l4-line { font-size: 24px; margin: 6px 0; }
+.u1l4-ulines .u1l4-line.u1l4-small { font-size: 20px; }
+.u1l4-stamp.bk-lg { font-size: 26px; }
+
+/* finding n */
+.u1l4-rej { margin-left: 10px; vertical-align: middle; }
+
+/* cans and runner */
+.u1l4-canl { font-size: 16px; background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 4px; }
+.u1l4-rown { font: 700 13px var(--round); color: #7b4fc4; }
+.u1l4-wk { font: 700 15px var(--round); color: var(--ink2); }
+.u1l4-wkh { font: 700 13px var(--round); color: var(--muted); }
+.u1l4-wv { font-size: 15px; }
+.u1l4-rpanel .u1l4-line { font-size: 23px; margin: 4px 0; }
+.u1l4-hoptag { font-size: 14px; }
+.u1l4-tlab { font-size: 18px; font-weight: 700; }
+
+/* ---------------- Math History: Gauss's slate ---------------- */
+.u1l4-chalk { font: 600 13px Georgia, "Times New Roman", serif; fill: #e9e4d6; transition: fill .2s; }
+.u1l4-chalk.on { fill: #f2c94c; font-weight: 800; }
+.u1l4-hline { stroke: #f2c94c; stroke-width: 1.6; }
+.u1l4-hline-new { stroke-width: 3; }
+.u1l4-hcap { font: 600 16px Georgia, "Times New Roman", serif; fill: #7a4a26; }
+.u1l4-hbig { font: 700 52px Georgia, "Times New Roman", serif; fill: #4a2c14; }
+.u1l4-hpair { font: 700 22px Georgia, "Times New Roman", serif; fill: #b07a12; }
+.u1l4-hfin { font: 800 25px Georgia, "Times New Roman", serif; fill: #b07a12; transition: opacity .4s; }

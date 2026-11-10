@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geometric Series · Math 20-1 1.7</title>
+<meta name="description" content="Math 20-1 Unit 1 Lesson 7: geometric series. Derive the sum formula by multiplying by r and subtracting (the terms cancel), use both forms (with n or with the last term) and the r = 1 case, find n, the first term or the common ratio, get terms from a sum formula with t_n = S_n − S_(n−1), and solve bouncing-ball and phone-tree problems. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u1l7.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u1l7">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 1 Sequences and Series · Lesson 7</div>
+  <h1>Geometric Series</h1>
+  <p class="lede">Adding up the terms of a geometric sequence <b>without adding them one by one</b>. Multiply the whole sum by <b class="u1l7-cr">r</b>, subtract, and almost everything <b>cancels</b>.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>explain where the sum formula comes from: write <span class="tex">S_n</span> and <span class="tex">rS_n</span>, subtract, and watch the terms cancel</li>
+      <li>find a sum with <span class="tex">S_n=\dfrac{t_1(r^n-1)}{r-1}</span> when I know <span class="tex">n</span>, or <span class="tex">S_n=\dfrac{rt_n-t_1}{r-1}</span> when I know the last term (and <span class="tex">S_n=nt_1</span> when <span class="tex">r=1</span>)</li>
+      <li>work backwards to find the number of terms <span class="tex">n</span>, the first term <span class="tex">t_1</span> or the common ratio <span class="tex">r</span></li>
+      <li>find terms from a sum formula with <span class="tex">t_n=S_n-S_{n-1}</span></li>
+      <li>solve problems such as a bouncing ball (falls <b>and</b> rises) and a phone tree</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF10</b> Analyze geometric sequences and series to solve problems.<br><span class="muted">Today: the sum of a geometric series, where its formula comes from, and using it forwards and backwards.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Penny Jar" id="wu" style="--wf-side: 330px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Penny Jar</h2>
+  <p class="wf-rule">Day 1 you drop <b>1¢</b> in a jar. Every day after, you drop in <b>double</b> what you dropped the day before: 1¢, 2¢, 4¢, 8¢, … Tap <b>Next day</b> to fill the calendar.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u1l7-cal" id="u1l7-cal"></div>
+    <div class="u1l7-jarrow">
+      <div class="u1l7-jar" id="u1l7-jar"><svg viewBox="0 0 40 48" aria-hidden="true"><path d="M10 4h20v5l4 5v28a4 4 0 0 1-4 4H10a4 4 0 0 1-4-4V14l4-5z" fill="#fdf3dc" stroke="#7a5a12" stroke-width="2.2" stroke-linejoin="round"/><path d="M8 26h24" stroke="#c9a24a" stroke-width="2"/><circle cx="16" cy="36" r="4" fill="#d9a43a" stroke="#7a5a12" stroke-width="1.4"/><circle cx="24" cy="38" r="4" fill="#e3b552" stroke="#7a5a12" stroke-width="1.4"/></svg></div>
+      <div class="u1l7-jartxt"><div class="u1l7-jarh">In the jar</div><div class="u1l7-jarv" id="u1l7-jarv">0¢</div></div>
+      <div class="u1l7-wbtns">
+        <button type="button" class="pill" id="u1l7-next">Next day</button>
+        <button type="button" class="pill" id="u1l7-d30">Day 30</button>
+        <button type="button" class="pill" id="u1l7-wreset">Start over</button>
+      </div>
+    </div>
+    <div class="poll wf-poll">
+    <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> $1&nbsp;000&nbsp;000 today, or the jar after <b>30 days</b>? About how much is in the jar then? <b>Guess first.</b></div></div>
+    <div class="poll-opts c4">
+      <div class="opt"><b>A</b> $100&nbsp;000</div>
+      <div class="opt"><b>B</b> $1 million</div>
+      <div class="opt right"><b>C</b> $10 million</div>
+      <div class="opt"><b>D</b> $1 billion</div>
+    </div>
+    <button class="pill" type="button" data-poll-reveal>Reveal</button>
+    <div class="poll-ans"><b>C.</b> By the pattern, the jar is 1¢ less than day 31’s drop, <span class="tex">2^{30}</span>¢: <span class="tex">2^{30}-1=1\,073\,741\,823</span>¢ <b>≈ $10.7 million</b>. Take the jar! Today: <b>why</b> that pattern works.</div>
+  </div>
+  
+  </div><div class="wf-side">
+    <div class="u1l7-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How many cents go in on <b>day 6</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l7-wa"><div class="bk-ans"><b>32¢</b>: 1, 2, 4, 8, 16, 32. Each day doubles.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How much is in the jar after <b>5 days</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l7-wa"><div class="bk-ans"><span class="tex">1+2+4+8+16=</span> <b>31¢</b>.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Compare the jar after 5 days with what goes in on day 6. Try 3 days and 4 days too. Pattern? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l7-wa"><div class="bk-ans">The jar is always <b>1¢ less</b> than the next day’s drop: 7 vs 8, 15 vs 16, 31 vs 32.</div></div></div>
+    </div>
+</div></div>
+</section>
+
+<!-- ================= 1. The sum of a geometric series ================= -->
+<section class="card" data-ink="s1" data-section="1. The Sum of a Geometric Series">
+  <div class="sec-h"><span class="badge">1</span><h2>The Sum of a Geometric Series</h2></div>
+  <div class="def">A <b>geometric series</b> is the sum of the terms of a geometric sequence: <span class="tex">2,\ 6,\ 18,\ 54</span> is a <b>sequence</b>; <span class="tex">2+6+18+54</span> is a <b>series</b>. <span class="tex">S_n</span> is the sum of the first <span class="tex">n</span> terms.</div>
+  <p>To find a formula, write <span class="tex">S_n</span>, <b>multiply every term by <span class="tex">r</span></b>, and <b>subtract</b>. Almost every term cancels.</p>
+  <div class="explainer" data-explainer="shift"></div>
+  <p class="u1l7-after">So <span class="tex">S_n(r-1)=t_1(r^n-1)</span>. Dividing by <span class="tex">r-1</span> gives the formula. Since <span class="tex">t_1r^n=r(t_1r^{n-1})=rt_n</span>, there is a second form that uses the <b>last term</b> instead of <span class="tex">n</span>.</p>
+  <div class="u1l7-key">
+    <div class="u1l7-key-h">Sum of a geometric series <span class="tex">(r\ne 1)</span></div>
+    <div class="u1l7-key-forms">
+      <div class="u1l7-form"><div class="u1l7-fbig"><span class="tex">S_n=\dfrac{t_1(r^n-1)}{r-1}</span></div><div>Use when you know <b><span class="tex">n</span></b>.</div></div>
+      <div class="u1l7-or">or</div>
+      <div class="u1l7-form"><div class="u1l7-fbig"><span class="tex">S_n=\dfrac{rt_n-t_1}{r-1}</span></div><div>Use when you know the <b>last term <span class="tex">t_n</span></b>.</div></div>
+    </div>
+    <div class="u1l7-key-r1">If <span class="tex">r=1</span>, every term equals <span class="tex">t_1</span>, so <span class="tex">S_n=nt_1</span>.</div>
+  </div>
+  <h3 class="sub">The second form: one hop past the end</h3>
+  <p>The term that survived the cancelling, <span class="tex">t_1r^n</span>, is just <b>one more hop</b> after the last term: <span class="tex">rt_n</span>. You never need to know <span class="tex">n</span>.</p>
+  <div class="explainer" data-explainer="ghost"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Three ways to one sum</h3></div>
+  <p class="q">For the series <span class="tex">5+10+20+40+80</span>, find the sum by adding, by the first formula, and by the second formula.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">By adding</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">5+10+20+40+80=\boldsymbol{155}</span></div></div></div>
+    <div class="part"><div class="pl">By the first formula</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=5,\ r=2,\ n=5</span><br><span class="tex">S_5=\dfrac{5(2^5-1)}{2-1}=5(31)=\boldsymbol{155}</span></div></div></div>
+    <div class="part"><div class="pl">By the second formula</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_n=80</span><br><span class="tex">S_5=\dfrac{2(80)-5}{2-1}=\boldsymbol{155}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Finding the sum ================= -->
+<section class="card" data-ink="s2" data-section="2. Finding the Sum">
+  <div class="sec-h"><span class="badge">2</span><h2>Finding the Sum</h2></div>
+  <div class="def">Find <span class="tex">\textcolor{#0f7a80}{t_1}</span> and <span class="tex">\textcolor{#c27a0e}{r}</span> (divide any term by the one before it), then decide which form fits. When <span class="tex">r</span> is negative, put it in <b>brackets</b>: <span class="tex">(-3)^8</span>, not <span class="tex">-3^8</span>. Give <b>exact answers</b> (fractions) unless a rounding is asked for.</div>
+  <h3 class="sub">Which formula?</h3>
+  <div class="explainer" data-explainer="whichOne"></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span>Why can’t you use <span class="tex">\dfrac{t_1(r^n-1)}{r-1}</span> when <span class="tex">r=1</span>? Does the sum still exist?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The denominator <span class="tex">r-1</span> would be <span class="tex">0</span> (and the top is <span class="tex">0</span> too): you can’t divide by zero. But the sum exists: every term is <span class="tex">t_1</span>, so <span class="tex">S_n=nt_1</span>.</div></div></div>
+  <h3 class="sub">Substitute, then evaluate carefully</h3>
+  <div class="explainer" data-explainer="findSum"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Brackets on a negative <span class="tex">r</span>.</b> <span class="tex">(-3)^8=6561</span> (eight negatives multiply to a positive), but <span class="tex">-3^8=-6561</span> (the power happens first, then the minus).</div></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>On the calculator,</b> type the brackets too. Use the <b>negative key</b> <kbd>(−)</kbd> for <span class="tex">-3</span>: <span class="keys"><kbd>(</kbd><kbd>(−)</kbd><kbd>3</kbd><kbd>)</kbd><kbd>^</kbd><kbd>8</kbd></span>. For a whole sum, put the top and the bottom each in brackets.</div>
+    <div class="u1l7-pcol"><button class="pill" data-keys="( (−) 3 ) ^ 8 =">Show (−3)⁸</button><button class="pill" data-keys="(−) 3 ^ 8 =">Show −3⁸</button><button class="pill" data-keys="7 × ( 3 ^ 12 − 1 ) ÷ ( 3 − 1 ) =">Show Ex 2(a)</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>The sum when you know <span class="tex">n</span></h3></div>
+  <p class="q">Determine each sum.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) The first 12 terms of <span class="tex">7+21+63+\cdots</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=7,\ r=3</span><br><span class="tex">S_{12}=\dfrac{7(3^{12}-1)}{3-1}</span><br><span class="tex">=\dfrac{7(531\,440)}{2}=\boldsymbol{1\,860\,040}</span></div></div></div>
+    <div class="part"><div class="pl">(b) The first 8 terms of <span class="tex">2-6+18-\cdots</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=2,\ r=-3</span><br><span class="tex">S_8=\dfrac{2\left((-3)^8-1\right)}{-3-1}</span><br><span class="tex">=\dfrac{2(6560)}{-4}=\boldsymbol{-3280}</span></div></div></div>
+    <div class="part"><div class="pl">(c) The first 7 terms of <span class="tex">128+32+8+\cdots</span> (exact)</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=128,\ r=\tfrac{1}{4}</span><br><span class="tex">S_7=\dfrac{128\left(\left(\frac{1}{4}\right)^7-1\right)}{\frac{1}{4}-1}=\boldsymbol{\dfrac{5461}{32}}</span><br><span class="tex">(=170.656\,25)</span></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>The sum when you know the last term</h3></div>
+  <p class="q">Determine each sum.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">3+12+48+\cdots+12\,288</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=3,\ r=4,\ t_n=12\,288</span><br><span class="tex">S_n=\dfrac{rt_n-t_1}{r-1}=\dfrac{4(12\,288)-3}{4-1}=\dfrac{49\,149}{3}=\boldsymbol{16\,383}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">1458-486+162-\cdots+2</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=1458,\ r=-\tfrac{1}{3},\ t_n=2</span><br><span class="tex">S_n=\dfrac{-\frac{1}{3}(2)-1458}{-\frac{1}{3}-1}=\dfrac{-\frac{4376}{3}}{-\frac{4}{3}}=\boldsymbol{1094}</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u1l7"></section>
+
+<!-- ================= 3. Finding n, t1 or r ================= -->
+<section class="card" data-ink="s3" data-section="3. Finding n, t1 or r">
+  <div class="sec-h"><span class="badge">3</span><h2>Finding <span class="tex">n</span>, <span class="tex">t_1</span> or <span class="tex">r</span></h2></div>
+  <p>Substitute what you know into a formula and <b>solve for the unknown</b>.</p>
+  <div class="u1l7-three">
+    <div class="u1l7-tri u1l7-tn"><div class="u1l7-trh">Finding <span class="tex">n</span></div>Isolate the power (<span class="tex">3^n=729</span>) and find the exponent by trial, with a table of values. Or find the last term with the second formula, then its position with <span class="tex">t_n=t_1r^{n-1}</span>.</div>
+    <div class="u1l7-tri u1l7-tt"><div class="u1l7-trh">Finding <span class="tex">t_1</span></div>Use a known term and <span class="tex">r</span> <span class="tex">\left(t_1=\dfrac{t_k}{r^{k-1}}\right)</span>, or solve the sum formula for <span class="tex">t_1</span>.</div>
+    <div class="u1l7-tri u1l7-tr"><div class="u1l7-trh">Finding <span class="tex">r</span></div>When <span class="tex">n=3</span>, <span class="tex">S_3=t_1+t_1r+t_1r^2</span> gives a quadratic equation to factor (there may be <b>two</b> values of <span class="tex">r</span>). For larger <span class="tex">n</span>, try values of <span class="tex">r</span> in a table.</div>
+  </div>
+  <h3 class="sub">Finding <span class="tex">n</span>: climb the powers</h3>
+  <div class="explainer" data-explainer="findN"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>How many terms?</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) How many terms of <span class="tex">4+20+100+\cdots</span> add to <span class="tex">15\,624</span>?</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=4,\ r=5</span>: <span class="tex">\dfrac{4(5^n-1)}{5-1}=15\,624</span><br><span class="tex">5^n-1=15\,624\Rightarrow 5^n=15\,625</span><br>Trial: <span class="tex">5^5=3125</span>, <span class="tex">5^6=15\,625</span>, so <span class="tex">\boldsymbol{n=6}</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) The series <span class="tex">4-8+16-\cdots</span> has a sum of 684. Determine the last term and the number of terms.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=4,\ r=-2</span>: <span class="tex">\dfrac{-2t_n-4}{-2-1}=684</span><br><span class="tex">-2t_n-4=-2052\Rightarrow t_n=1024</span><br><span class="tex">4(-2)^{n-1}=1024\Rightarrow(-2)^{n-1}=256=(-2)^8</span><br><span class="tex">n-1=8</span>, so <b>9 terms</b>; the last term is <b>1024</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="3. Finding t1 or r">
+  <h3 class="sub">Finding <span class="tex">t_1</span> or <span class="tex">r</span></h3>
+  <p>Hop <b>backwards</b> from a known term to reach <span class="tex">t_1</span>; for <span class="tex">r</span>, build an equation (or a table) and solve it.</p>
+  <div class="explainer" data-explainer="findR"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Finding <span class="tex">t_1</span> and <span class="tex">r</span></h3></div>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) In a geometric sequence, <span class="tex">t_4=540</span> and <span class="tex">r=3</span>. Determine <span class="tex">S_8</span>.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1(3)^3=540\Rightarrow t_1=20</span><br><span class="tex">S_8=\dfrac{20(3^8-1)}{3-1}</span><br><span class="tex">=10(6560)=\boldsymbol{65\,600}</span></div></div></div>
+    <div class="part"><div class="pl">(b) A geometric series has <span class="tex">t_1=6</span> and <span class="tex">S_3=126</span>. Determine all possible values of <span class="tex">r</span>.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">6+6r+6r^2=126</span><br><span class="tex">r^2+r+1=21</span><br><span class="tex">r^2+r-20=0</span><br><span class="tex">(r+5)(r-4)=0</span><br><span class="tex">\boldsymbol{r=4}</span> or <span class="tex">\boldsymbol{r=-5}</span><br>Check: <span class="tex">6+24+96=126</span>; <span class="tex">6-30+150=126</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) A geometric series has <span class="tex">t_1=4</span> and <span class="tex">S_6=1456</span>. Use a table to find <span class="tex">r</span> <span class="tex">(r&gt;0)</span>, then find <span class="tex">t_3</span>.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">Y_1=\dfrac{4(X^6-1)}{X-1}</span><br><span class="tex">X=2</span>: 252; <span class="tex">X=3</span>: 1456<br><span class="tex">r=3</span>, so <span class="tex">t_3=4(3)^2=\boldsymbol{36}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Terms from a sum formula ================= -->
+<section class="card" data-ink="s4" data-section="4. Terms from a Sum Formula">
+  <div class="sec-h"><span class="badge">4</span><h2>Terms from a Sum Formula</h2></div>
+  <p><span class="tex">S_n</span> is the sum of the first <span class="tex">n</span> terms, and <span class="tex">S_{n-1}</span> is the sum of the first <span class="tex">n-1</span> terms. Their difference is the <span class="tex">n</span>th term.</p>
+  <div class="u1l7-key u1l7-key-sm"><div class="u1l7-fbig"><span class="tex">t_n=S_n-S_{n-1}</span> <span class="u1l7-and">and</span> <span class="tex">t_1=S_1</span></div></div>
+  <div class="explainer" data-explainer="stairs"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Terms from <span class="tex">S_n</span></h3></div>
+  <p class="q">The sum of the first <span class="tex">n</span> terms of a series is <span class="tex">S_n=2(5^n-1)</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine the first four terms.</div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">S_1=8,\ S_2=48,\ S_3=248,\ S_4=1248</span><br><span class="tex">t_1=8,\ t_2=48-8=40,\ t_3=248-48=200,</span><br><span class="tex">t_4=1248-248=1000</span><br>The series is <span class="tex">\boldsymbol{8+40+200+1000+\cdots}</span> <span class="tex">(r=5)</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) Determine <span class="tex">t_7</span> without finding the general term.</div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_7=S_7-S_6=2(5^7-1)-2(5^6-1)</span><br><span class="tex">=156\,248-31\,248=\boldsymbol{125\,000}</span><br>(Check: <span class="tex">8(5)^6=125\,000</span>.)</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 5. In context ================= -->
+<section class="card" data-ink="s5" data-section="5. Geometric Series in Context">
+  <div class="sec-h"><span class="badge">5</span><h2>Geometric Series in Context</h2></div>
+  <p>A dropped ball travels <b class="u1l7-cdown">down</b> and <b class="u1l7-cup">up</b>. When it hits the ground for the <span class="tex">k</span>th time, it has fallen <span class="tex">k</span> times (the drop plus <span class="tex">k-1</span> falls after bounces) and risen <span class="tex">k-1</span> times. Find the two sums separately and add them.</p>
+  <div class="u1l7-key u1l7-key-sm u1l7-key-ball">Total distance at the <span class="tex">k</span>th hit <span class="tex">=</span> (sum of <span class="tex">k</span> <b class="u1l7-cdown">falls</b>, starting with the drop height) <span class="tex">+</span> (sum of <span class="tex">k-1</span> <b class="u1l7-cup">rises</b>, starting with the first bounce height)</div>
+  <div class="explainer" data-explainer="ball"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>A fraction ratio on the calculator:</b> bracket it, <span class="keys"><kbd>27</kbd><kbd>×</kbd><kbd>(</kbd><kbd>2</kbd><kbd>÷</kbd><kbd>3</kbd><kbd>)</kbd><kbd>^</kbd><kbd>5</kbd></span>, or the power goes on the 3 only.</div>
+    <button class="pill" data-keys="27 × ( 2 ÷ 3 ) ^ 5 =">Show me</button>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>A bouncing ball</h3></div>
+  <p class="q">A ball is dropped from a height of 27 m. Each bounce reaches <span class="tex">\tfrac{2}{3}</span> of the height before.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) How high is the 5th bounce, to the nearest centimetre?</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">27\left(\tfrac{2}{3}\right)^5=\dfrac{32}{9}\approx\boldsymbol{3.56}</span> m</div></div></div>
+    <div class="part"><div class="pl">(b) Determine the total vertical distance the ball has travelled when it hits the ground for the 6th time, to the nearest centimetre.</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Falls (6 terms): <span class="tex">27+18+12+\cdots</span><br><span class="tex">\dfrac{27\left(\left(\frac{2}{3}\right)^6-1\right)}{\frac{2}{3}-1}=\dfrac{665}{9}\approx 73.89</span><br>Rises (5 terms): <span class="tex">18+12+8+\cdots</span><br><span class="tex">\dfrac{18\left(\left(\frac{2}{3}\right)^5-1\right)}{\frac{2}{3}-1}=\dfrac{422}{9}\approx 46.89</span><br>Total <span class="tex">=\dfrac{1087}{9}\approx\boldsymbol{120.78}</span> m</div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s5b" data-section="5. A phone tree">
+  <h3 class="sub">A phone tree</h3>
+  <p>Each level calls <span class="tex">r</span> times as many people as the level before, so the levels form a geometric sequence, and the <b>total called</b> is a geometric series.</p>
+  <div class="explainer" data-explainer="phone"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>A phone tree</h3></div>
+  <p class="q">A club uses a phone tree for news. The president calls 5 members (level 1). Each of them calls 5 new members (level 2), and so on.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) How many members are called in the first 4 levels?</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">5+25+125+625</span>:<br><span class="tex">S_4=\dfrac{5(5^4-1)}{5-1}=\boldsymbol{780}</span> members</div></div></div>
+    <div class="part"><div class="pl">(b) How many levels are needed to reach at least <span class="tex">12\,000</span> members?</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Table of <span class="tex">\dfrac{5(5^n-1)}{4}</span>: <span class="tex">S_5=3905</span>, <span class="tex">S_6=19\,530</span>.<br><b>6 levels</b> are needed.</div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Shift and subtract.</b> Write <span class="tex">S_n</span> and <span class="tex">rS_n</span>, one place apart. The matching terms cancel, leaving <span class="tex">rS_n-S_n=t_1r^n-t_1</span>.</div>
+    <div><b>Two forms</b> (<span class="tex">r\ne1</span>): <span class="tex">S_n=\dfrac{t_1(r^n-1)}{r-1}</span> when you know <span class="tex">n</span>; <span class="tex">S_n=\dfrac{rt_n-t_1}{r-1}</span> when you know the last term. If <span class="tex">r=1</span>, <span class="tex">S_n=nt_1</span>.</div>
+    <div><b>Work backwards.</b> Isolate the power to find <span class="tex">n</span>; hop back from a known term for <span class="tex">t_1</span>; a quadratic (or a table) for <span class="tex">r</span>. Brackets on a negative <span class="tex">r</span>.</div>
+    <div><b>Terms from sums:</b> <span class="tex">t_n=S_n-S_{n-1}</span>, <span class="tex">t_1=S_1</span>. <b>Bouncing ball:</b> at the <span class="tex">k</span>th hit, <span class="tex">k</span> falls plus <span class="tex">k-1</span> rises.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u1l7">
+    <div><div class="kicker">Your turn</div><b>Assignment 7 — Geometric Series</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l8/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 8 — Infinite Geometric Series</b><div class="muted">What happens to <span class="tex">S_n</span> when <span class="tex">r</span> is between <span class="tex">-1</span> and <span class="tex">1</span> and the series never ends?</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u1l7.js';
+  boot({ key: 'u1l7', homeHref: '../../', title: '1.7 Geometric Series' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

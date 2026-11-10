@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geometric Sequences · Math 20-1 1.5</title>
+<meta name="description" content="Math 20-1 Unit 1 Lesson 5: geometric sequences. Divide to find the common ratio r, build the general term t_n = t_1 r^(n−1) (and why 5(3)^(n−1) is not 15^(n−1)), see the terms as bars that multiply by r beside the curving dot plot, find the number of terms, find t_1 and r from two terms (odd power: one r, even power: ±r), insert geometric means, and use b² = ac for expressions. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u1l5.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u1l5">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 1 Sequences and Series · Lesson 5</div>
+  <h1>Geometric Sequences</h1>
+  <p class="lede">Last lesson every step <b>added</b> the same amount. Today every step <b>multiplies</b> by the same number, the <b class="u1l5-cr">common ratio <span class="tex">r</span></b>. Repeated multiplying is a power, so the general term has an exponent: <span class="tex">t_n=\textcolor{#a33357}{t_1}\textcolor{#c27a0e}{r}^{\,n-1}</span>.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>tell a <b>geometric</b> sequence from an arithmetic one and find <span class="tex">r=\tfrac{t_n}{t_{n-1}}</span></li>
+      <li>write the general term <span class="tex">t_n=t_1r^{n-1}</span> and use it to find any term (and explain why <span class="tex">5(3)^{n-1}\ne15^{n-1}</span>)</li>
+      <li>describe the <b>curved</b> graph of a geometric sequence (growing, shrinking toward 0, or flipping sides)</li>
+      <li>find the <b>number of terms</b> by writing both sides as powers of the same base</li>
+      <li>find <span class="tex">r</span> and <span class="tex">t_1</span> from <b>two terms</b> (an odd power gives one <span class="tex">r</span>, an even power gives <span class="tex">\pm r</span>) and insert <b>geometric means</b></li>
+      <li>use <span class="tex">b^2=ac</span> when expressions are consecutive terms</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF10</b> Analyze geometric sequences and series to solve problems.<br><span class="muted">Today: geometric sequences, their general term <span class="tex">t_n=t_1r^{n-1}</span> and their graphs.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Triangle Cutter" style="--wf-side: 400px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Triangle Cutter</h2>
+  <p class="wf-rule">Start with one shaded triangle, <b>64 cm</b> on each side. Each <b>cut</b>: join the midpoints of every shaded triangle and cut out the middle one. <span class="muted">Press <b>Cut</b>.</span></p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u1l5-tri" id="u1l5-tri"></div>
+    <div class="u1l5-wctl no-ink">
+      <button type="button" class="pill" id="u1l5-cut">Cut</button>
+      <button type="button" class="pill" id="u1l5-wreset">Start over</button>
+      <span class="u1l5-wlab" id="u1l5-wlab"></span>
+    </div>
+    <div class="bk-wq u1l5-yourturn"><div class="q-line"><div class="q-num">?</div><div><b>Challenge your neighbour:</b> at which stage is a side only <b>0.5 cm</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+    <div class="bk-ans"><b>Stage 8</b>: <span class="tex">64\left(\tfrac12\right)^{7}=0.5</span>. One sequence grows (<span class="tex">\times3</span>) while the other shrinks (<span class="tex">\times\tfrac12</span>).</div></div>
+  </div><div class="wf-side">
+    <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How many shaded triangles at <b>stage 3</b>? At <b>stage 4</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+      <div class="bk-ans"><b>9</b>, then <b>27</b>. Each cut turns every shaded triangle into 3: <span class="tex">1,\ 3,\ 9,\ 27</span>.</div></div>
+    <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How long is a side of one small triangle at <b>stage 4</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+      <div class="bk-ans"><b>8 cm.</b> Each cut halves the side: <span class="tex">64,\ 32,\ 16,\ 8</span>.</div></div>
+    <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Is <span class="tex">1,\ 3,\ 9,\ 27,\ \dots</span> made by <b>adding</b> the same amount or <b>multiplying</b> by the same amount? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+      <div class="bk-ans"><b>Multiplying by 3.</b> The jumps <span class="tex">+2,\ +6,\ +18</span> are not equal.</div></div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> How many shaded triangles at <b>stage 8</b>? <b>Guess first.</b></div></div>
+      <div class="poll-opts c4">
+        <div class="opt"><b>A</b> 24</div>
+        <div class="opt"><b>B</b> 729</div>
+        <div class="opt right"><b>C</b> 2&#8239;187</div>
+        <div class="opt"><b>D</b> 6&#8239;561</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>C, 2&#8239;187.</b> Stage 8 comes after only <b>7</b> cuts: <span class="tex">1\times3^{7}=2\,187</span>. The power is one less than the stage number.
+        <div class="u1l5-traps"><span><b>A (24)?</b> That is <span class="tex">3\times8</span>: adding, not multiplying.</span><span><b>B (729)?</b> <span class="tex">3^6</span>: one cut short.</span><span><b>D (6&#8239;561)?</b> <span class="tex">3^8</span>: one cut too many.</span></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ================= 1. The common ratio ================= -->
+<section class="card" data-ink="s1" data-section="1. The Common Ratio">
+  <div class="sec-h"><span class="badge">1</span><h2>The Common Ratio</h2></div>
+  <div class="def">In a <b>geometric sequence</b> each term is the previous term multiplied by the same non-zero number, the <b class="u1l5-cr">common ratio <span class="tex">r</span></b>. Find <span class="tex">r</span> by <b>dividing</b> any term by the term before it.</div>
+  <div class="u1l5-key"><div class="u1l5-key-h">Common ratio</div><div class="u1l5-key-f"><span class="tex">r=\dfrac{t_n}{t_{n-1}}\quad(n\ge2)</span></div><div class="u1l5-key-eg">e.g. <span class="tex">r=\dfrac{t_2}{t_1}=\dfrac{t_3}{t_2}</span></div></div>
+  <p>At least <b>three terms</b> are needed to decide the type of sequence: two terms such as <span class="tex">4,\ 8,\ \dots</span> fit an arithmetic sequence (<span class="tex">d=4</span>) <b>and</b> a geometric sequence (<span class="tex">r=2</span>). A <b>negative</b> <span class="tex">r</span> makes the signs alternate.</p>
+  <div class="explainer" data-explainer="ratioHops"></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> Why must the common ratio be <b>non-zero</b>? What would happen to the sequence if <span class="tex">r=0</span>?</div><div class="work" style="--h:80px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Every term after <span class="tex">t_1</span> would be 0 (<span class="tex">5,\ 0,\ 0,\ 0,\ \dots</span>), and you could not divide by the 0 terms to check the ratio.</div></div></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Arithmetic or geometric?</h3></div>
+  <p class="q">State whether each sequence is arithmetic or geometric, give <span class="tex">d</span> or <span class="tex">r</span>, and write the next two terms.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">5,\ 20,\ 80,\ \dots</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Geometric, <span class="tex">r=\frac{20}{5}=4</span><br><span class="tex">320,\ 1\,280</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">405,\ 135,\ 45,\ \dots</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Geometric, <span class="tex">r=\frac{135}{405}=\frac13</span><br><span class="tex">15,\ 5</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">-2,\ 6,\ -18,\ \dots</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Geometric, <span class="tex">r=\frac{6}{-2}=-3</span><br><span class="tex">54,\ -162</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">2,\ 2\sqrt2,\ 4,\ \dots</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Geometric, <span class="tex">r=\sqrt2</span><br><span class="tex">4\sqrt2,\ 8</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">3a,\ 6a^2,\ 12a^3,\ \dots</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Geometric, <span class="tex">r=\frac{6a^2}{3a}=2a</span><br><span class="tex">24a^4,\ 48a^5</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">50,\ 45,\ 40,\ \dots</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Arithmetic, <span class="tex">d=-5</span><br><span class="tex">35,\ 30</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. The general term ================= -->
+<section class="card" data-ink="s2" data-section="2. The General Term">
+  <div class="sec-h"><span class="badge">2</span><h2>The General Term</h2></div>
+  <p>Starting from <span class="tex">t_1</span>, each step multiplies by <span class="tex">r</span> once more:</p>
+  <div class="u1l5-chain"><span class="tex">\textcolor{#a33357}{t_1},\qquad t_2=t_1\textcolor{#c27a0e}{r},\qquad t_3=t_1\textcolor{#c27a0e}{r^2},\qquad t_4=t_1\textcolor{#c27a0e}{r^3},\qquad\dots</span></div>
+  <p>The exponent on <span class="tex">r</span> is always <b>one less than the position</b>.</p>
+  <div class="u1l5-key"><div class="u1l5-key-h">General term of a geometric sequence</div><div class="u1l5-key-f"><span class="tex">t_n=\textcolor{#a33357}{t_1}\,\textcolor{#c27a0e}{r}^{\,n-1}</span></div><div class="u1l5-key-eg"><span class="tex">t_n</span> = the term in position <span class="tex">n</span>, &nbsp;<span class="tex u1l5-ct">t_1</span> = first term, &nbsp;<span class="tex">r</span> = common ratio, &nbsp;<span class="tex">n</span> = position (a natural number)</div></div>
+  <div class="explainer" data-explainer="buildPower"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Leave it as <span class="tex">t_1r^{n-1}</span>.</b> Do not multiply <span class="tex">t_1</span> by <span class="tex">r</span> first: <span class="tex">5(3)^{n-1}</span> is <b>not</b> <span class="tex">15^{n-1}</span>, because the exponent applies only to the 3. When <span class="tex">t_1</span> is a power of <span class="tex">r</span>, the exponent laws combine them into a single power.</div></div>
+  <div class="explainer" data-explainer="notFifteen"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>On the calculator</b>, type <span class="tex">t_1r^{n-1}</span> just as it is written; the calculator does the power first. Put a <b>negative or fraction</b> <span class="tex">r</span> in <b>brackets</b>: <span class="keys"><kbd>1250</kbd><kbd>×</kbd><kbd>(</kbd><kbd>(−)</kbd><kbd>1</kbd><kbd>÷</kbd><kbd>5</kbd><kbd>)</kbd><kbd>^</kbd><kbd>7</kbd><kbd>ENTER</kbd></span>, then <span class="keys"><kbd>2nd</kbd><kbd>PRB</kbd></span> (F◂▸D) turns the decimal into a fraction.</div>
+    <div class="u1l5-pcol"><button class="pill" data-keys="7 × 2 ^ 11 =">Show 7(2)¹¹</button><button class="pill" data-keys="1250 × ( (−) 1 ÷ 5 ) ^ 7 = F◂▸D">Show 1&#8239;250(−⅕)⁷</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>The general term, then one term</h3></div>
+  <p class="q">Write the general term of each sequence, then determine the indicated term.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">7,\ 14,\ 28,\ \dots</span>; &nbsp;<span class="tex">t_{12}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_n=7(2)^{n-1}</span><br><span class="tex">t_{12}=7(2)^{11}=7(2\,048)=\boldsymbol{14\,336}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">1\,250,\ -250,\ 50,\ \dots</span>; &nbsp;<span class="tex">t_8</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=-\frac15</span>, &nbsp;<span class="tex">t_n=1\,250\left(-\frac15\right)^{n-1}</span><br><span class="tex">t_8=1\,250\left(-\frac15\right)^{7}=-\frac{1\,250}{78\,125}=\boldsymbol{-\frac{2}{125}}</span> &nbsp;<span class="muted">(<span class="tex">-0.016</span>)</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\frac29,\ \frac23,\ 2,\ \dots</span>; &nbsp;<span class="tex">t_9</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=3</span>, &nbsp;<span class="tex">t_n=\frac29(3)^{n-1}</span><br><span class="tex">t_9=\frac29(3)^8=\frac29(6\,561)=\boldsymbol{1\,458}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">4,\ 8,\ 16,\ \dots</span>; write <span class="tex">t_n</span> as a single power of 2.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_n=4(2)^{n-1}=2^2\cdot2^{n-1}=\boldsymbol{2^{n+1}}</span><br><span class="muted">Check: <span class="tex">n=1</span> gives <span class="tex">2^2=4</span> ✓</span></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. The Graph">
+  <h3 class="sub">The graph of a geometric sequence</h3>
+  <p>A geometric sequence is a function of <span class="tex">n</span> with an <b>exponent</b>: its graph is <b>non-linear</b>. When <span class="tex">r&gt;1</span> the points curve up steeply; when <span class="tex">0&lt;r&lt;1</span> they curve down towards zero; when <span class="tex">r&lt;0</span> they jump from one side of the <span class="tex">n</span>-axis to the other. The points <span class="tex">(n,\ t_n)</span> are separate dots: never join them.</p>
+  <div class="explainer" data-explainer="barsDots"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Plot the terms</h3></div>
+  <p class="q">Plot the first terms of each sequence and describe the graph.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">t_n=64(0.5)^{n-1}</span>, &nbsp;<span class="tex">n=1</span> to 6</div>
+      <div class="u1l5-fig" id="u1l5-ex3a"></div>
+      <div class="work" style="--h:60px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">64,\ 32,\ 16,\ 8,\ 4,\ 2</span>. The points curve down and level off towards 0: <b>non-linear</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">t_n=(-2)^{n-1}</span>, &nbsp;<span class="tex">n=1</span> to 5</div>
+      <div class="u1l5-fig" id="u1l5-ex3b"></div>
+      <div class="work" style="--h:60px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">1,\ -2,\ 4,\ -8,\ 16</span>. The points alternate above and below the <span class="tex">n</span>-axis and move further away: <b>non-linear</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Number of terms ================= -->
+<section class="card" data-ink="s3" data-section="3. Finding the Number of Terms">
+  <div class="sec-h"><span class="badge">3</span><h2>Finding the Number of Terms</h2></div>
+  <div class="def">To find the number of terms, set <span class="tex">t_n</span> equal to the <b>last term</b> and solve for <span class="tex">n</span>. <b>Divide</b> both sides by <span class="tex">t_1</span>, then write both sides as <b>powers of the same base</b> and compare exponents. <span class="muted">(A table of values of <span class="tex">t_1r^{n-1}</span> for <span class="tex">n=1,\ 2,\ 3,\ \dots</span> also works.)</span></div>
+  <div class="explainer" data-explainer="countTerms"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check your <span class="tex">n</span>.</b> Put it back into <span class="tex">t_1r^{n-1}</span>: the calculator should give the last term. For Example 4(b), <span class="tex">n=8</span>: <span class="keys"><kbd>1215</kbd><kbd>×</kbd><kbd>(</kbd><kbd>(−)</kbd><kbd>1</kbd><kbd>÷</kbd><kbd>3</kbd><kbd>)</kbd><kbd>^</kbd><kbd>7</kbd><kbd>ENTER</kbd></span> then <span class="keys"><kbd>2nd</kbd><kbd>PRB</kbd></span> shows <span class="tex">-\frac59</span>.</div>
+    <div class="u1l5-pcol"><button class="pill" data-keys="3 × 2 ^ 11 =">Check 4(a)</button><button class="pill" data-keys="1215 × ( (−) 1 ÷ 3 ) ^ 7 = F◂▸D">Check 4(b)</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>How many terms?</h3></div>
+  <p class="q">Determine the number of terms in each sequence.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">3,\ 6,\ 12,\ \dots,\ 6\,144</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=3</span>, <span class="tex">r=2</span><br><span class="tex">3(2)^{n-1}=6\,144</span><br><span class="tex">2^{n-1}=2\,048=2^{11}</span><br><span class="tex">n-1=11\Rightarrow n=12</span>: <b>12 terms</b></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">1\,215,\ -405,\ 135,\ \dots,\ -\frac59</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=1\,215</span>, <span class="tex">r=-\frac13</span><br><span class="tex">1\,215\left(-\frac13\right)^{n-1}=-\frac59</span><br><span class="tex">\left(-\frac13\right)^{n-1}=-\frac{5}{9\cdot1\,215}=-\frac{1}{2\,187}=\left(-\frac13\right)^{7}</span><br><span class="tex">n-1=7\Rightarrow n=8</span>: <b>8 terms</b></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u1l5"></section>
+
+<!-- ================= 4. Two terms known ================= -->
+<section class="card" data-ink="s4" data-section="4. Two Terms Known">
+  <div class="sec-h"><span class="badge">4</span><h2>Two Terms Known: Finding <span class="tex">t_1</span> and <span class="tex">r</span></h2></div>
+  <div class="def">If two terms are known, write each with the general term and <b>divide</b> the equations: <span class="tex">t_1</span> cancels and a power of <span class="tex">r</span> is left. Then substitute <span class="tex">r</span> back to find <span class="tex">t_1</span>.</div>
+  <div class="u1l5-twobox">
+    <div class="u1l5-tbox u1l5-tb-odd"><div class="u1l5-tbig"><span class="tex">r^3=-8</span></div><div>An <b>odd</b> power has <b>one</b> real root: <span class="tex">r=-2</span>.</div></div>
+    <div class="u1l5-tbox u1l5-tb-even"><div class="u1l5-tbig"><span class="tex">r^2=9</span></div><div>An <b>even</b> power has <b>two</b>: <span class="tex">r=\pm3</span>. Both values give a valid sequence, so there are <b>two answers</b>.</div></div>
+  </div>
+  <div class="explainer" data-explainer="oddEven"></div>
+  <div class="explainer" data-explainer="twoTerms"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>An odd power</h3></div>
+  <div class="parts c1">
+    <div class="part"><div class="pl">In a geometric sequence, <span class="tex">t_3=12</span> and <span class="tex">t_6=-96</span>. Determine <span class="tex">r</span>, <span class="tex">t_1</span> and the general term.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1r^5=-96</span> and <span class="tex">t_1r^2=12</span>. Divide: <span class="tex">\dfrac{t_1r^5}{t_1r^2}=\dfrac{-96}{12}\Rightarrow r^3=-8\Rightarrow \boldsymbol{r=-2}</span><br><span class="tex">t_1(-2)^2=12\Rightarrow 4t_1=12\Rightarrow \boldsymbol{t_1=3}</span><br><span class="tex">\boldsymbol{t_n=3(-2)^{n-1}}</span> <span class="muted">(the sequence is <span class="tex">3,\ -6,\ 12,\ -24,\ 48,\ -96,\ \dots</span>)</span></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>An even power: two sequences</h3></div>
+  <div class="parts c1">
+    <div class="part"><div class="pl">In a geometric sequence, <span class="tex">t_2=12</span> and <span class="tex">t_4=108</span>. Explain why there are two possible sequences, and determine <span class="tex">t_1</span> and <span class="tex">t_5</span> for each.</div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{t_1r^3}{t_1r}=\dfrac{108}{12}\Rightarrow r^2=9\Rightarrow r=3</span> or <span class="tex">r=-3</span>. Both values work, so there are <b>two sequences</b>.<br><span class="tex">r=3</span>: &nbsp;<span class="tex">t_1=12\div3=\boldsymbol{4}</span>, sequence <span class="tex">4,\ 12,\ 36,\ 108,\ \dots</span>, &nbsp;<span class="tex">t_5=4(3)^4=\boldsymbol{324}</span><br><span class="tex">r=-3</span>: &nbsp;<span class="tex">t_1=12\div(-3)=\boldsymbol{-4}</span>, sequence <span class="tex">-4,\ 12,\ -36,\ 108,\ \dots</span>, &nbsp;<span class="tex">t_5=-4(-3)^4=\boldsymbol{-324}</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Brackets matter for an even power.</b> <span class="tex">-4(-3)^4</span> needs <span class="keys"><kbd>(−)</kbd><kbd>4</kbd><kbd>×</kbd><kbd>(</kbd><kbd>(−)</kbd><kbd>3</kbd><kbd>)</kbd><kbd>^</kbd><kbd>4</kbd><kbd>ENTER</kbd></span> = <b>−324</b>. Without the brackets the calculator works out <span class="tex">-(3^4)</span> and the sign comes out wrong.</div>
+    <div class="u1l5-pcol"><button class="pill" data-keys="(−) 4 × ( (−) 3 ) ^ 4 =">With brackets</button><button class="pill" data-keys="(−) 4 × (−) 3 ^ 4 =">Without</button></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Geometric means ================= -->
+<section class="card" data-ink="s5" data-section="5. Geometric Means">
+  <div class="sec-h"><span class="badge">5</span><h2>Geometric Means</h2></div>
+  <div class="def">The terms between two non-consecutive terms of a geometric sequence are called <b>geometric means</b>. To insert <span class="tex">k</span> means between two numbers, treat the numbers as <span class="tex">t_1</span> and the last term of a sequence of <span class="tex">k+2</span> terms, find <span class="tex">r</span>, then multiply.</div>
+  <div class="explainer" data-explainer="means"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Insert the means</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Insert three geometric means between 5 and 405.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">5 terms: <span class="tex">t_1=5</span>, <span class="tex">t_5=405</span><br><span class="tex">5r^4=405\Rightarrow r^4=81\Rightarrow r=\pm3</span><br><span class="tex">r=3</span>: &nbsp;<span class="tex">5,\ \underline{15},\ \underline{45},\ \underline{135},\ 405</span><br><span class="tex">r=-3</span>: &nbsp;<span class="tex">5,\ \underline{-15},\ \underline{45},\ \underline{-135},\ 405</span></div></div></div>
+    <div class="part"><div class="pl">(b) Insert two geometric means between 4 and <span class="tex">-500</span>.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">4 terms: <span class="tex">t_1=4</span>, <span class="tex">t_4=-500</span><br><span class="tex">4r^3=-500\Rightarrow r^3=-125\Rightarrow r=-5</span><br><span class="tex">4,\ \underline{-20},\ \underline{100},\ -500</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Expressions ================= -->
+<section class="card" data-ink="s6" data-section="6. Expressions in a Geometric Sequence">
+  <div class="sec-h"><span class="badge">6</span><h2>Expressions in a Geometric Sequence</h2></div>
+  <p>If <span class="tex">a</span>, <span class="tex">b</span>, <span class="tex">c</span> are consecutive terms of a geometric sequence, the ratios are equal:</p>
+  <div class="u1l5-key"><div class="u1l5-key-f"><span class="tex">\dfrac{b}{a}=\dfrac{c}{b}</span> <span class="u1l5-key-w">which cross-multiplies to</span> <span class="tex">b^2=ac</span></div></div>
+  <p>Set up this equation with the expressions, solve, and check that <b>no term is zero</b>.</p>
+  <div class="explainer" data-explainer="bSquared"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Find <span class="tex">x</span></h3></div>
+  <p class="q">Each set of expressions gives three consecutive terms of a geometric sequence. Determine <span class="tex">x</span>, the terms, and <span class="tex">r</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">x+1,\ \ x+4,\ \ x+10</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x+4)^2=(x+1)(x+10)</span><br><span class="tex">x^2+8x+16=x^2+11x+10</span><br><span class="tex">6=3x\Rightarrow \boldsymbol{x=2}</span><br>Terms <span class="tex">3,\ 6,\ 12</span>; &nbsp;<span class="tex">r=2</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x,\ \ x+4,\ \ 9x</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x+4)^2=x(9x)</span><br><span class="tex">x^2+8x+16=9x^2\Rightarrow 8x^2-8x-16=0</span><br><span class="tex">x^2-x-2=0\Rightarrow(x-2)(x+1)=0</span><br><span class="tex">x=2</span>: &nbsp;<span class="tex">2,\ 6,\ 18</span>, &nbsp;<span class="tex">r=3</span><br><span class="tex">x=-1</span>: &nbsp;<span class="tex">-1,\ 3,\ -9</span>, &nbsp;<span class="tex">r=-3</span></div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Divide to find <span class="tex">r</span>.</b> <span class="tex">r=\dfrac{t_n}{t_{n-1}}</span>, the same for every pair. Check with three terms; a negative <span class="tex">r</span> makes the signs alternate.</div>
+    <div><b>General term <span class="tex">t_n=t_1r^{n-1}</span>.</b> The exponent is one less than the position. Leave it as <span class="tex">t_1r^{n-1}</span>: <span class="tex">5(3)^{n-1}\ne15^{n-1}</span>. The graph is curved dots: never a line.</div>
+    <div><b>Number of terms.</b> Set <span class="tex">t_1r^{n-1}</span> equal to the last term, divide by <span class="tex">t_1</span>, write both sides as powers of the same base, and compare exponents.</div>
+    <div><b>Two terms, means, expressions.</b> Divide the two terms to get a power of <span class="tex">r</span>: odd power → one <span class="tex">r</span>, even power → <span class="tex">\pm r</span>. <span class="tex">k</span> means make <span class="tex">k+2</span> terms. For <span class="tex">a,\ b,\ c</span>: <span class="tex">b^2=ac</span>.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u1l5">
+    <div><div class="kicker">Your turn</div><b>Assignment 5 — Geometric Sequences</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l6/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 6 — Geometric Growth and Decay</b><div class="muted">Repeated percent increases and decreases: growth and decay factors, half-life and compound interest, all with <span class="tex">t_n=t_1r^{n-1}</span>.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u1l5.js';
+  boot({ key: 'u1l5', homeHref: '../../', title: '1.5 Geometric Sequences' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>
