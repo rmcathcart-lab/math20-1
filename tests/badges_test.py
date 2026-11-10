@@ -1,4 +1,5 @@
-"""Outcome badges (js/badges.js): one design per Math 20-1 outcome, every symbol inside the face (the running stitch at
+"""The retired outcome badges (js/badges.js, no longer loaded by the site: the coins in js/coins.js replaced them; this test
+loads badges.js into the page itself): one design per Math 20-1 outcome, every symbol inside the face (the running stitch at
 radius 29.5), different shapes for outcomes taught in the same unit, and the viewer (the badge on a sash, with the seven
 levels) opens and closes. Writes a contact sheet of every badge and a screenshot of the sash to OUT (default /tmp/badges).
 Needs the static server on 8831: python3 tests/badges_test.py"""
@@ -33,7 +34,8 @@ async def main():
         b = await p.chromium.launch(); pg = await b.new_page(viewport={'width': 1100, 'height': 900}); errs = []
         pg.on('pageerror', lambda e: errs.append(str(e)))
         await pg.route('**/cdn.jsdelivr.net/**', lambda r: r.abort())
-        await pg.goto(BASE); await pg.wait_for_function('window.HW && HW.Badges && HW.CATALOG')
+        await pg.goto(BASE); await pg.wait_for_function('window.HW && HW.Coins && HW.CATALOG')
+        await pg.add_script_tag(url=BASE + 'js/badges.js'); await pg.wait_for_function('!!(HW.Badges && HW.Badges.svg)')
         r = await pg.evaluate(CHECK)
         print('designs:', len(r['far']), '| missing:', r['missing'], '| not an outcome:', r['extra'])
         print('same twill colour:', r['sameColour'], '| same shape in a unit:', r['sameShape'])

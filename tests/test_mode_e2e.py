@@ -11,7 +11,7 @@ SHOTS = '/tmp/'
 
 async def student(b, name, pin, errs, medal_pops=False):
     ctx = await b.new_context(viewport={'width': 1280, 'height': 860})
-    if not medal_pops:   # "New medal!" pop-ups would cover the page these tests click on (tests/medals_home_test.py covers them)
+    if not medal_pops:   # "New coin!" pop-ups would cover the page these tests click on (tests/coins_home_test.py covers them)
         await ctx.add_init_script("addEventListener('DOMContentLoaded', () => { if (window.HW && HW.Medals) HW.Medals.open = function () {}; })")
     await ctx.route('**/fonts.googleapis.com/**', lambda r: r.abort())
     await ctx.route('**/script.google.com/**', lambda r: r.abort())

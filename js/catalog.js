@@ -120,7 +120,7 @@
     EXT: 'Extension (not part of a unit level)',
     REV: 'Review of earlier courses (not part of a unit level)'
   };
-  /* outcomes that never count toward a level, a badge or a unit grade: extension topics, and review of earlier courses
+  /* outcomes that never count toward a level, a coin or a unit grade: extension topics, and review of earlier courses
      (tag a question outcome: 'REV' or 'EXT') */
   root.HW.NO_LEVEL = { EXT: 1, REV: 1 };
 })(window);

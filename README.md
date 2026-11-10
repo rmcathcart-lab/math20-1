@@ -4,7 +4,7 @@ Everything for Mr. Cathcart's Math 20-1, in one site: https://rmcathcart-lab.git
 
 It is the Math 10C site's engine (https://github.com/rmcathcart-lab/math10c), by way of its twin the Math 15 site
 (https://github.com/rmcathcart-lab/math15), with the Math 20-1 course: its own catalog (`js/catalog.js`, 8 units,
-70 lessons, from the course plan), burgundy accent colour, embroidered outcome badges (`js/badges.js`, one per outcome)
+70 lessons, from the course plan), burgundy accent colour, bimetallic 3D outcome coins (`js/coins.js`, one per outcome; see Outcome coins below)
 and its own Apps Script backends. Math 20-1 uses the Program of Studies outcome codes AN1–AN6, T1–T3 and RF1–RF11
 (official wording in `js/outcomes.js`).
 
@@ -56,11 +56,39 @@ Homework practice for every Math 20-1 lesson, built from the course booklets. Ev
 | `js/app.js`, `js/ledger.js` | The student app, and syncing to the teacher's ledger |
 | `js/catalog.js` | Units and lessons (a lesson is open once its lesson file exists), `HW.TEACHING` (lessons with a teaching page), `HW.OUTCOMES` |
 | `js/outcomes.js` | The official Math 20-1 outcome wording (general and specific outcomes), shown when an outcome code is tapped |
-| `js/badges.js` | The embroidered outcome badges: one design per outcome (shape, twill colour, stitched symbol), seven thread levels |
+| `js/coins.js`, `js/vendor/three/` | The outcome coins (`HW.Coins`, also `HW.Medals`/`HW.Badges`): one bimetallic coin per outcome (outline, enamel colour, struck symbol), seven mints; three.js r170 is vendored and loaded only when a coin is first shown. `js/badges.js` is the retired embroidered badges, kept but not loaded |
 | `assets/notes/math20-1-unit-N-notes.pdf` | The lessons-only notes booklets behind **Printable Notes** (list each unit's page count in `NOTES_PAGES` in `js/app.js`; the button appears once one is listed) |
 | `teacher/` | The teacher dashboard |
 | `backend/Code.gs` | Google Apps Script backend (paste into the Apps Script project) |
-| `tests/` | `node tests/gen_test.js [runs] [lessonId]` (every generator), `node tests/kitx_test.js` (the shared checkers), `node tests/mathlive_form_test.js` (answer keys typed the way the MathLive keyboard writes them), `node tests/calc84_test.js` (the TI-84), `node tests/calc_test.js` (the old TI-30XIIS), `node tests/calendar_test.js`; Playwright: `tests/smoke.py`, `tests/e2e.py` (against `backend/mock_server.js`), `tests/lessons_smoke.py`, `tests/badges_test.py`. This repo serves on **8831** (`python3 -m http.server 8831` from the root) with the mock on **8835** (`bash tests/restart_mock.sh`), so it can run beside the Math 15 servers (8821/8825). Tests that set storage before the page loads use the `m201/` prefix |
+| `tests/` | `node tests/gen_test.js [runs] [lessonId]` (every generator), `node tests/kitx_test.js` (the shared checkers), `node tests/mathlive_form_test.js` (answer keys typed the way the MathLive keyboard writes them), `node tests/calc84_test.js` (the TI-84), `node tests/calc_test.js` (the old TI-30XIIS), `node tests/calendar_test.js`; Playwright: `tests/smoke.py`, `tests/e2e.py` (against `backend/mock_server.js`), `tests/lessons_smoke.py`, `tests/coins_fit.py` (every coin's art fits; `--sheet <0-6>` draws a contact sheet), `tests/coins_home_test.py` (coins on the home page, in practice mode). This repo serves on **8831** (`python3 -m http.server 8831` from the root) with the mock on **8835** (`bash tests/restart_mock.sh`), so it can run beside the Math 15 servers (8821/8825). Tests that set storage before the page loads use the `m201/` prefix |
+
+## Outcome coins
+
+Beside "Hi, <name>" on the home page each outcome the class has reached shows as a small spinning coin, at the student's
+best level: the hardest question right on the first try in practice, or their level on a released test or exit slip.
+When a unit starts, its outcomes appear as Blanks. A coin that is new or higher since the device last showed it opens big
+once ("New coin!" / "New coins!"). Tapping a coin opens the viewer: the coin big in a burgundy velvet case (drag or flick
+to spin; it turns slowly by itself so the milled edge and the two metals show), its metal and level, the outcome, and the
+seven levels, with every level reached lit (tap one to see it big).
+
+Every coin is thick, with a milled edge, a raised rim and a fine bead ring, an outer ring and an inner core in two
+different metals, and a thin band of the outcome's enamel colour where they meet. The obverse has the outcome's symbol and
+code struck on the core, "MATH 20-1 · code" around the ring and one raised pip per level along the bottom. The reverse is
+engraved: MATH 20-1, the outcome's short label, and the Math 20-1 mint mark (three peaks drawn as absolute-value graphs, a
+rising sun and a sine-wave river).
+
+| Level | Coin |
+|---|---|
+| NM | **Blank**: the unstruck planchet (dull steel ring, dull brass core, no design), shown faintly on the home page |
+| LIM | **Nickel**: nickel ring, brass core |
+| BEG | **Bronze**: bronze ring, nickel core |
+| EMG | **Sterling**: sterling silver ring, copper core |
+| PRG | **Gold**: gold ring, rose-gold core |
+| ADV | **Two-Tone**: polished platinum ring, gold core |
+| MAS | **Proof**: mirror gold with frosted relief, the symbol in frosted platinum on burgundy enamel over guilloché, glints |
+
+Each outcome's outline, enamel colour and symbol are in `DESIGNS` at the top of `js/coins.js` (outcomes in the same unit
+get different outlines and colours; `tests/coins_fit.py` checks that and that all the art fits).
 
 ## Adding a lesson
 
