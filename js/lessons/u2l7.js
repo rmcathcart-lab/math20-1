@@ -312,7 +312,7 @@
       if (extra.length) return wrong('var', 'Your answer has a variable ' + t(extra[0]) + ' that isn’t in the question.');
       var sh = ex.shape(r.ast);
       if (sameVal(r.ast, tp)) { var f = formIssue(r.ast); return f ? form(f.code, f.hint) : ok(); }
-      if (!tv.length && sh.decimals && !sh.roots && isFinite(r.val) && Math.abs(r.val - V) < 0.01 * Math.max(1, Math.abs(V))) return form('decimal', 'That’s a decimal approximation. Give the <b>exact</b> answer (use the radical keys) — no calculator in this unit.');
+      if (!tv.length && sh.decimals && !sh.roots && isFinite(r.val) && Math.abs(r.val - V) < 0.01 * Math.max(1, Math.abs(V))) return form('decimal', 'That’s a decimal approximation. Give the <b>exact</b> answer (use the radical keys) — a calculator only gives a decimal.');
       for (var i = 0; i < cands.length; i++) if (sameVal(r.ast, cands[i].ast)) return wrong(cands[i].code, cands[i].hint);
       if ((tv.length || V !== 0) && sameVal(r.ast, negT)) return wrong('sign', 'Check the sign of your answer.');
       return wrong('value', opt.miss || null);
@@ -1060,7 +1060,7 @@
 
   /* every part is outcome AN2 */
   QUESTIONS.concat(EXTRA).forEach(function (q) { q.parts.forEach(function (p) { p.outcome = 'AN2'; }); });
-  HW.defineLesson({ id: LID, unit: 2, num: '7', title: 'Unit 2 Review', outcome: 'AN2', calc: false,
+  HW.defineLesson({ id: LID, unit: 2, num: '7', title: 'Unit 2 Review', outcome: 'AN2', calc: true,
     blurb: 'Every Unit 2 skill mixed together, written like the unit test: mixed and entire radicals, ordering, restrictions, variable radicals, adding, multiplying and dividing radicals, rationalizing monomial and binomial denominators, and rational versus irrational numbers. No calculator.',
     questions: QUESTIONS, extra: EXTRA });
 })(window);

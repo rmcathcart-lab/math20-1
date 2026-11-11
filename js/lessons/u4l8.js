@@ -612,5 +612,5 @@
     });
     return out;
   }
-  HW.defineLesson({ id: LID, unit: 4, num: '8', title: 'Unit 4 Review', outcome: 'RF1', calc: false, questions: splitNum(QUESTIONS), extra: splitNum(EXTRA) });
+  HW.defineLesson({ id: LID, unit: 4, num: '8', title: 'Unit 4 Review', outcome: 'RF1', calc: true, questions: splitNum(QUESTIONS), extra: splitNum(EXTRA) });
 })(window);

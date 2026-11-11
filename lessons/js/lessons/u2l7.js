@@ -876,7 +876,7 @@ const gcd = (a, b) => (b ? gcd(b, a % b) : Math.abs(a));
 const co = (k, rad) => (k === 1 ? rad : k === -1 ? '-' + rad : k === 0 ? '0' : k + rad);
 const sg = (k) => (k < 0 ? '-' : '+');
 standup('u2l7', {
-  intro: 'At your whiteboard: decide the operation first, then finish in simplest form. No calculators!',
+  intro: 'At your whiteboard: decide the operation first, then finish in simplest form. Exact answers!',
   levels: {
     BEG: (r) => { // simplify, then combine like radicals
       const m = r.pick(NONSQ), k = r.int(2, 6); let j = r.int(2, 6); while (j === k) j = r.int(2, 6);

@@ -1463,17 +1463,10 @@
     }
   };
 
-  /* ---------- the window ---------- */
-  var UI = null;
-  function build() {
-    var c = new Calc(), doc = document;
-    if (!doc.getElementById('c84-css')) { var st = doc.createElement('style'); st.id = 'c84-css'; st.textContent = CSS; doc.head.appendChild(st); }
+  /* ---------- the TI-84 skin: its screen and keys (the shell below holds the head bar, help, dragging and size) ---------- */
+  function tiSkin(doc, shell) {
+    var c = new Calc();
     var el = function (t, cl, h) { var e = doc.createElement(t); if (cl) e.className = cl; if (h != null) e.innerHTML = h; return e; };
-    var box = el('div', 'calc c84 hidden'); box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Graphing calculator (TI-84 Plus CE style)'); box.tabIndex = -1;
-    var inner = el('div', 'c84-in');
-    var head = el('div', 'calc-head', '<span class="c84-brand">TI-84 <b>Plus CE</b><em>style</em></span><span class="c84-sp"></span>');
-    var helpB = el('button', 'c84-hbtn', '?'); helpB.type = 'button'; helpB.title = 'How to use this calculator'; head.appendChild(helpB);
-    var close = el('button', 'calc-close', '×'); close.type = 'button'; close.title = 'Close calculator'; head.appendChild(close);
     var bodyEl = el('div', 'c84-body'), bez = el('div', 'c84-bez'), screen = el('div', 'calc-screen c84-scr');
     var txt = el('div', 'c84-txt'), gw = el('div', 'c84-gw'), cv = el('canvas'), gt = el('div', 'c84-gt');
     cv.width = GW * 3; cv.height = GH * 3; gw.appendChild(cv); gw.appendChild(gt);
@@ -1482,7 +1475,7 @@
     var flash = function (b) { b.classList.add('down'); setTimeout(function () { b.classList.remove('down'); }, 90); };
     function wire(b, id) {
       b.type = 'button'; b.dataset.a = id; b.dataset.k = id; if (KEY[id] && KEY[id].s2 && !/^na:/.test(KEY[id].s2)) b.dataset.b = KEY[id].s2;
-      b.addEventListener('pointerdown', function (e) { e.preventDefault(); try { box.focus({ preventScroll: true }); } catch (er) { /* ignore */ } c.press(id); render(); flash(b); });
+      b.addEventListener('pointerdown', function (e) { e.preventDefault(); shell.focus(); c.press(id); render(); flash(b); });
       b.addEventListener('click', function (e) { e.preventDefault(); });
       return b;
     }
@@ -1500,23 +1493,6 @@
       }
     });
     bodyEl.appendChild(bez); bodyEl.appendChild(pad);
-    var help = el('div', 'c84-help', '<h4>The on-screen TI-84 Plus CE</h4><ul>' +
-      '<li>Type a calculation and press <kbd>enter</kbd>. Use <kbd>(−)</kbd> for a negative number and <kbd>−</kbd> to subtract. <kbd class="b">2nd</kbd> then a key gives the blue word above it; <kbd>alpha</kbd> gives the green letter.</li>' +
-      '<li><kbd>math</kbd> <kbd>1</kbd> ►Frac turns the answer into a fraction. <kbd class="b">2nd</kbd> <kbd>x²</kbd> is √(. <kbd>mode</kbd> sets DEGREE or RADIAN and the decimals.</li>' +
-      '<li>Graphs: type functions in <kbd>y=</kbd> with <kbd>X,T,θ,n</kbd> for X, then <kbd>graph</kbd> (<kbd>zoom</kbd> <kbd>6</kbd> is ZStandard). <kbd>trace</kbd> moves along a graph. <kbd class="b">2nd</kbd> <kbd>trace</kbd> (CALC) finds a zero, minimum, maximum or intersection.</li>' +
-      '<li>Tables: <kbd class="b">2nd</kbd> <kbd>window</kbd> (TBLSET) sets the start and the step, <kbd class="b">2nd</kbd> <kbd>graph</kbd> (TABLE) shows it.</li>' +
-      '<li>Series: <kbd class="b">2nd</kbd> <kbd>stat</kbd> (LIST) has seq( under OPS and sum( under MATH, e.g. sum(seq(3*2^(N−1),N,1,10)).</li>' +
-      '<li>Keyboard: digits, + − * / ^ ( ) , Enter, Backspace, arrows; x for X, other letters for A–Z, Esc = clear.</li></ul>' +
-      '<div class="casio"><b>Casio fx-9750GIII?</b> It has all of these features too, under different keys (MENU → Run-Matrix, Graph, Table).</div>');
-    help.hidden = true;
-    inner.appendChild(head); inner.appendChild(bodyEl); inner.appendChild(help); box.appendChild(inner);
-    doc.body.appendChild(box);
-    helpB.addEventListener('click', function () { help.hidden = !help.hidden; helpB.classList.toggle('on', !help.hidden); });
-    helpB.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
-    help.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
-    help.addEventListener('click', function () { help.hidden = true; helpB.classList.remove('on'); });
-
-    var lastScr = '';
     function render() {
       var gr = c.on && c.scr === 'graph';
       txt.innerHTML = c.html();
@@ -1525,19 +1501,10 @@
       var hs = txt.querySelector('.c84-hist');
       if (hs) { var s2 = hs.querySelector('.sel'); if (s2) { if (s2.offsetTop < hs.scrollTop) hs.scrollTop = s2.offsetTop; else if (s2.offsetTop + s2.offsetHeight > hs.scrollTop + hs.clientHeight) hs.scrollTop = s2.offsetTop + s2.offsetHeight - hs.clientHeight; } else hs.scrollTop = hs.scrollHeight; }
       var tx = txt.querySelector('.c84-tx'); if (tx && c.scr === 'yeq') { var cur = tx.querySelector('.c84-cur, .cur'); if (cur && cur.offsetTop + 22 > tx.clientHeight) tx.scrollTop = cur.offsetTop - tx.clientHeight + 26; }
-      lastScr = c.scr;
     }
-    close.addEventListener('click', function () { api.hide(); });
-    close.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
-    // drag by the head
-    var drag = null;
-    head.addEventListener('pointerdown', function (e) { if (e.target.closest('button')) return; var r = box.getBoundingClientRect(); drag = { dx: e.clientX - r.left, dy: e.clientY - r.top }; try { head.setPointerCapture(e.pointerId); } catch (er) { /* ignore */ } });
-    head.addEventListener('pointermove', function (e) { if (!drag) return; var x = Math.max(0, Math.min(innerWidth - box.offsetWidth, e.clientX - drag.dx)), y = Math.max(0, Math.min(innerHeight - 40, e.clientY - drag.dy)); box.style.left = x + 'px'; box.style.top = y + 'px'; box.style.right = 'auto'; box.style.bottom = 'auto'; });
-    head.addEventListener('pointerup', function () { drag = null; });
     // the physical keyboard while the calculator has focus
     var KB = { Enter: 'enter', '=': 'enter', Escape: 'clear', ArrowLeft: 'left', ArrowRight: 'right', ArrowUp: 'up', ArrowDown: 'down', Delete: 'del', Insert: 'ins', '+': 'add', '*': 'mul', '/': 'div', '^': 'pow', '(': 'lp', ')': 'rp', ',': 'comma', '{': 'lb', '}': 'rb', '!': null };
-    box.addEventListener('keydown', function (e) {
-      if (e.ctrlKey || e.metaKey || e.altKey) return;
+    function keydown(e) {
       var k = e.key, a = null;
       if (/^[0-9.]$/.test(k)) a = k;
       else if (k === '-') { // the keyboard's minus is a negative sign where a number has to start
@@ -1549,13 +1516,106 @@
       else if (k === 'x' || k === 'X') a = 'xt';
       else if (/^[a-zA-Z]$/.test(k)) a = k.toUpperCase();
       else if (KB[k]) a = KB[k];
-      if (!a) return;
-      e.preventDefault(); e.stopPropagation();
+      if (!a) return false;
       c.second = false; if (!c.alock) c.alpha = false;
-      c.press(a);
-      render();
+      c.press(a); render(); return true;
+    }
+    var help = '<h4>The on-screen TI-84 Plus CE</h4><ul>' +
+      '<li>Type a calculation and press <kbd>enter</kbd>. Use <kbd>(−)</kbd> for a negative number and <kbd>−</kbd> to subtract. <kbd class="b">2nd</kbd> then a key gives the blue word above it; <kbd>alpha</kbd> gives the green letter.</li>' +
+      '<li><kbd>math</kbd> <kbd>1</kbd> ►Frac turns the answer into a fraction. <kbd class="b">2nd</kbd> <kbd>x²</kbd> is √(. <kbd>mode</kbd> sets DEGREE or RADIAN and the decimals.</li>' +
+      '<li>Graphs: type functions in <kbd>y=</kbd> with <kbd>X,T,θ,n</kbd> for X, then <kbd>graph</kbd> (<kbd>zoom</kbd> <kbd>6</kbd> is ZStandard). <kbd>trace</kbd> moves along a graph. <kbd class="b">2nd</kbd> <kbd>trace</kbd> (CALC) finds a zero, minimum, maximum or intersection.</li>' +
+      '<li>Tables: <kbd class="b">2nd</kbd> <kbd>window</kbd> (TBLSET) sets the start and the step, <kbd class="b">2nd</kbd> <kbd>graph</kbd> (TABLE) shows it.</li>' +
+      '<li>Series: <kbd class="b">2nd</kbd> <kbd>stat</kbd> (LIST) has seq( under OPS and sum( under MATH, e.g. sum(seq(3*2^(N−1),N,1,10)).</li>' +
+      '<li>Keyboard: digits, + − * / ^ ( ) , Enter, Backspace, arrows; x for X, other letters for A–Z, Esc = clear.</li></ul>';
+    return {
+      calc: c, body: bodyEl, render: render, keydown: keydown, help: help, cls: 'm-ti',
+      brand: '<span class="c84-brand">TI-84 <b>Plus CE</b></span>', label: 'Graphing calculator (TI-84 Plus CE style)',
+      press: function (seq) { (Array.isArray(seq) ? seq : String(seq).split(/\s+/)).forEach(function (a) { if (a) c.press(a); }); render(); var h = c.hist[c.hist.length - 1]; return { l1: toksText(c.line.t), l2: h ? h.out : '', text: c.text() }; }
+    };
+  }
+
+  /* ---------- the floating window: one shell for every model (head bar with the TI-84 | Casio switch, help, close,
+   * dragging, size). Switching model swaps the skin inside it, so the position, size and open state stay. ---------- */
+  var SHELL_CSS = [
+    '.c84 .c84-sw{display:inline-flex;background:rgba(255,255,255,.1);border-radius:13px;padding:2px;gap:0;flex:0 0 auto}',
+    '.c84 .c84-sw button{border:none;background:none;color:#cfd5de;height:22px;padding:0 8px;border-radius:11px;cursor:pointer;font:700 11.5px/22px system-ui,-apple-system,Arial,sans-serif;white-space:nowrap}',
+    '.c84 .c84-sw button.on{background:#e9edf3;color:#1b2027}.c84 .c84-sw button:not(.on):hover{background:rgba(255,255,255,.16)}',
+    '.c84 .c84-sw.busy button:not(.on){opacity:.55}',
+    '.c84-help .models{background:#eef2f7;border-radius:8px;padding:6px 8px;margin-top:6px}',
+    '.c84-msg{position:absolute;left:50%;top:44px;transform:translateX(-50%);background:#1c2230;color:#fff;font:600 12.5px/1.3 system-ui,Arial,sans-serif;padding:6px 10px;border-radius:10px;z-index:3;white-space:nowrap}'
+  ].join('\n');
+  var MODELS = {}, MODEL_ORDER = ['ti84', 'fx'], PREF = 'calc:model', UI = null, wanted = 'ti84', loadQ = [], loading = null, fxSrc = null;
+  function readPref() { try { var m = root.localStorage && root.localStorage.getItem(PREF); return m === 'fx' ? 'fx' : 'ti84'; } catch (e) { return 'ti84'; } }
+  function savePref(m) { try { if (root.localStorage) root.localStorage.setItem(PREF, m); } catch (e) { /* ignore */ } }
+  function activeId() { return MODELS[wanted] ? wanted : 'ti84'; }
+  /* the Casio is js/calcfx.js, beside this file: loaded at once when it is the remembered choice, otherwise on the switch */
+  try { var cs = root.document && root.document.currentScript; if (cs && cs.src) fxSrc = cs.src.replace(/calc84\.js(\?[^#]*)?(#.*)?$/, 'calcfx.js$1'); } catch (e) { fxSrc = null; }
+  function loadModel(id, cb) {
+    if (MODELS[id]) { if (cb) cb(true); return; }
+    if (id !== 'fx' || !fxSrc || !root.document || !root.document.head) { if (cb) cb(false); return; }
+    if (cb) loadQ.push(cb);
+    if (loading) return;
+    loading = root.document.createElement('script'); loading.src = fxSrc;
+    loading.onerror = function () { loading = null; var q = loadQ; loadQ = []; q.forEach(function (f) { f(false); }); };
+    root.document.head.appendChild(loading);
+  }
+  function register(id, m) {
+    MODELS[id] = m;
+    var q = loadQ; loadQ = []; q.forEach(function (f) { f(true); });
+    if (UI && wanted === id) UI.mount(id);
+  }
+  function setModel(id, quiet) {
+    id = id === 'fx' ? 'fx' : 'ti84';
+    wanted = id; savePref(id);
+    if (MODELS[id]) { if (UI) UI.mount(id); return true; }
+    if (UI) UI.busy(true);
+    loadModel(id, function (ok) {
+      if (UI) UI.busy(false);
+      if (ok) { if (UI && wanted === id) UI.mount(id); return; }
+      wanted = 'ti84'; savePref('ti84'); if (UI) { UI.mount('ti84'); if (!quiet) UI.msg('The Casio calculator could not be loaded (are you offline?).'); }
     });
-    box.addEventListener('pointerdown', function () { try { box.focus({ preventScroll: true }); } catch (e) { /* ignore */ } });
+    return false;
+  }
+
+  function buildShell() {
+    var doc = document;
+    if (!doc.getElementById('c84-css')) { var st = doc.createElement('style'); st.id = 'c84-css'; st.textContent = CSS + '\n' + SHELL_CSS; doc.head.appendChild(st); }
+    var el = function (t, cl, h) { var e = doc.createElement(t); if (cl) e.className = cl; if (h != null) e.innerHTML = h; return e; };
+    var box = el('div', 'calc c84 hidden'); box.setAttribute('role', 'dialog'); box.tabIndex = -1;
+    var inner = el('div', 'c84-in');
+    var head = el('div', 'calc-head'), brand = el('span', 'c84-bw'), sp = el('span', 'c84-sp');
+    var sw = el('span', 'c84-sw'); sw.setAttribute('role', 'group'); sw.setAttribute('aria-label', 'Calculator model');
+    [['ti84', 'TI-84', 'TI-84 Plus CE'], ['fx', 'Casio', 'Casio fx-9750GIII']].forEach(function (m) {
+      var b = el('button', '', m[1]); b.type = 'button'; b.dataset.m = m[0]; b.title = 'Use the ' + m[2] + '-style calculator (remembered on this device)';
+      b.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+      b.addEventListener('click', function () { setModel(m[0]); });
+      sw.appendChild(b);
+    });
+    var helpB = el('button', 'c84-hbtn', '?'); helpB.type = 'button'; helpB.title = 'How to use this calculator';
+    var close = el('button', 'calc-close', '×'); close.type = 'button'; close.title = 'Close calculator';
+    head.appendChild(brand); head.appendChild(sp); head.appendChild(sw); head.appendChild(helpB); head.appendChild(close);
+    var holder = el('div', 'c84-skin'), help = el('div', 'c84-help');
+    help.hidden = true;
+    inner.appendChild(head); inner.appendChild(holder); inner.appendChild(help); box.appendChild(inner);
+    doc.body.appendChild(box);
+    helpB.addEventListener('click', function () { help.hidden = !help.hidden; helpB.classList.toggle('on', !help.hidden); });
+    helpB.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+    help.addEventListener('pointerdown', function (e) { e.stopPropagation(); if (e.target.closest('button')) return; });
+    help.addEventListener('click', function (e) { var b = e.target.closest('button[data-m]'); if (b) { setModel(b.dataset.m); return; } help.hidden = true; helpB.classList.remove('on'); });
+    close.addEventListener('click', function () { api.hide(); });
+    close.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+    // drag by the head
+    var drag = null;
+    head.addEventListener('pointerdown', function (e) { if (e.target.closest('button')) return; var r = box.getBoundingClientRect(); drag = { dx: e.clientX - r.left, dy: e.clientY - r.top }; try { head.setPointerCapture(e.pointerId); } catch (er) { /* ignore */ } });
+    head.addEventListener('pointermove', function (e) { if (!drag) return; var x = Math.max(0, Math.min(innerWidth - box.offsetWidth, e.clientX - drag.dx)), y = Math.max(0, Math.min(innerHeight - 40, e.clientY - drag.dy)); box.style.left = x + 'px'; box.style.top = y + 'px'; box.style.right = 'auto'; box.style.bottom = 'auto'; });
+    head.addEventListener('pointerup', function () { drag = null; });
+    // the physical keyboard while the calculator has focus (each skin maps the keys)
+    box.addEventListener('keydown', function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey || !skin) return;
+      if (e.target && e.target.closest && e.target.closest('input, textarea')) return;
+      if (skin.keydown(e)) { e.preventDefault(); e.stopPropagation(); }
+    });
+    box.addEventListener('pointerdown', function () { api.focus(); });
 
     /* size: scaled to fit the screen (and the lesson page's Size button); a wide layout when the screen is short */
     function measure() { inner.style.transform = 'none'; return { w: inner.offsetWidth, h: inner.offsetHeight }; }
@@ -1574,16 +1634,37 @@
       if (box.style.left) { var x = Math.max(4, Math.min(innerWidth - m.w * s - 4, parseFloat(box.style.left) || 0)), y = Math.max(top, Math.min(innerHeight - m.h * s - 4, parseFloat(box.style.top) || 0)); box.style.left = x + 'px'; box.style.top = y + 'px'; }
     }
     addEventListener('resize', function () { if (api.isOpen()) fit(); });
-    render();
+
+    var skins = {}, skin = null, mounted = null, msgT = null;
     var api = {
-      calc: c, node: box, render: render, fit: fit, zoom: 1, top: 8, scale: 1,
+      node: box, zoom: 1, top: 8, scale: 1, model: '',
+      render: function () { if (skin) skin.render(); },
+      fit: fit,
+      focus: function () { try { box.focus({ preventScroll: true }); } catch (e) { /* ignore */ } },
       setZoom: function (z) { api.zoom = z || 1; fit(); },
-      show: function () { box.classList.remove('hidden'); doc.body.classList.add('calc-open'); fit(); render(); try { box.focus({ preventScroll: true }); } catch (e) { /* ignore */ } if (api.onToggle) api.onToggle(true); },
-      hide: function () { box.classList.add('hidden'); doc.body.classList.remove('calc-open'); if (api.onToggle) api.onToggle(false); },
+      show: function () { box.classList.remove('hidden'); doc.body.classList.add('calc-open'); fit(); api.render(); api.focus(); if (skin && skin.shown) skin.shown(true); if (api.onToggle) api.onToggle(true); },
+      hide: function () { box.classList.add('hidden'); doc.body.classList.remove('calc-open'); if (skin && skin.shown) skin.shown(false); if (api.onToggle) api.onToggle(false); },
       toggle: function () { if (box.classList.contains('hidden')) api.show(); else api.hide(); },
       isOpen: function () { return !box.classList.contains('hidden'); },
-      press: function (seq) { (Array.isArray(seq) ? seq : String(seq).split(/\s+/)).forEach(function (a) { if (a) c.press(a); }); render(); var h = c.hist[c.hist.length - 1]; return { l1: toksText(c.line.t), l2: h ? h.out : '', text: c.text() }; }
+      press: function (seq) { return skin.press(seq); },
+      mount: function (id) {
+        var M = MODELS[id]; if (!M || mounted === id) { syncSw(); return; }
+        var open = api.isOpen();
+        if (skin) { if (skin.shown) skin.shown(false); if (skin.body.parentNode) holder.removeChild(skin.body); box.classList.remove(skin.cls); }
+        skin = skins[id] || (skins[id] = M.skin(doc, api));
+        mounted = id; api.model = M.name;
+        holder.appendChild(skin.body); box.classList.add(skin.cls);
+        brand.innerHTML = skin.brand; box.setAttribute('aria-label', skin.label);
+        help.innerHTML = skin.help + '<div class="models"><b>TI-84 or Casio?</b> Use the switch at the top (<button type="button" class="c84-hbtn' + (id === 'ti84' ? ' on' : '') + '" data-m="ti84">TI-84</button> <button type="button" class="c84-hbtn' + (id === 'fx' ? ' on' : '') + '" data-m="fx">Casio</button>) to get the calculator you have. This device remembers your choice, on every page. The key-press demos on the lesson pages show the keys for the calculator you pick.</div>';
+        syncSw();
+        if (open) { fit(); skin.render(); if (skin.shown) skin.shown(true); } else skin.render();
+      },
+      busy: function (b) { sw.classList.toggle('busy', !!b); },
+      msg: function (t) { var m = box.querySelector('.c84-msg'); if (!m) { m = el('div', 'c84-msg'); inner.appendChild(m); } m.textContent = t; clearTimeout(msgT); msgT = setTimeout(function () { if (m.parentNode) m.parentNode.removeChild(m); }, 3200); }
     };
+    function syncSw() { Array.prototype.forEach.call(sw.querySelectorAll('button'), function (b) { var on = b.dataset.m === (MODELS[wanted] ? wanted : mounted); b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); }); }
+    Object.defineProperty(api, 'calc', { get: function () { return skin && skin.calc; }, enumerable: true });
+    api.mount(activeId());
     return api;
   }
 
@@ -1625,5 +1706,27 @@
     });
   }
 
-  HW.Calc = { engine: Calc, get: function () { if (!UI) UI = build(); return UI; }, toggle: function () { HW.Calc.get().toggle(); }, plan: plan, fmtNum: fmtNum, fracOf: fracOf, model: 'TI-84 Plus CE' };
+  /* ======================= the models and the public façade ======================= */
+  MODELS.ti84 = { id: 'ti84', name: 'TI-84 Plus CE', engine: Calc, plan: plan, skin: tiSkin };
+  wanted = readPref(); if (wanted === 'fx') loadModel('fx');
+  /* the TI-84's maths for js/calcfx.js (the Casio reuses the parser's numbers, the evaluator, the formats and the graph solver) */
+  HW.Calc84 = {
+    Calc: Calc, V: V, fromQ: fromQ, ZERO: ZERO, E: E, OP: OP, chk: chk, scalar: scalar, intv: intv, isInt: isInt, r14: r14, gcd: gcd, exactRoot: exactRoot,
+    fracOf: fracOf, fmtNum: fmtNum, fmtFit: fmtFit, sci: sci, crossings: crossings, bisect: bisect, nice: nice,
+    T: T, tokFor: tokFor, toksText: toksText, KEY: KEY, ALPHA_KEY: ALPHA_KEY, MENUS: MENUS, itemNum: itemNum, DEMO: DEMO, plan: plan, esc: esc,
+    register: register, models: MODELS
+  };
+  HW.Calc = {
+    get: function () { if (!UI) UI = buildShell(); return UI; },
+    toggle: function () { HW.Calc.get().toggle(); },
+    /* data-keys demo tokens (TI-84 names) → the current model's key presses and captions */
+    plan: function (spec) { return MODELS[activeId()].plan(spec); },
+    fmtNum: fmtNum, fracOf: fracOf,
+    /* 'ti84' or 'fx' (the Casio): remembered on this device, used on every page; the open calculator swaps in place */
+    setModel: setModel,
+    modelId: function () { return activeId(); },
+    models: function () { return MODEL_ORDER.map(function (id) { return { id: id, name: id === 'ti84' ? 'TI-84 Plus CE' : 'Casio fx-9750GIII', loaded: !!MODELS[id], on: activeId() === id }; }); }
+  };
+  Object.defineProperty(HW.Calc, 'engine', { get: function () { return MODELS[activeId()].engine; }, enumerable: true });
+  Object.defineProperty(HW.Calc, 'model', { get: function () { return MODELS[activeId()].name; }, enumerable: true });
 })(window);

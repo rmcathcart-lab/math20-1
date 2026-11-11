@@ -249,7 +249,7 @@
         return fi ? form(fi.code, fi.hint) : ok();
       }
       if (!vars.length) { var mv = ex.mixedValue(a.ast); if (mv != null && ex.eq(mv, T({}))) return form('mixed-num', 'Right value! Write it as an improper fraction, not a mixed number.'); }
-      if (!vars.length && ex.shape(a.ast).decimals && Math.abs(a.val - T({})) < 0.01 * Math.max(1, Math.abs(T({})))) return form('decimal-rounded', 'That decimal is close but not exact. Give the exact answer (no calculator in this unit).');
+      if (!vars.length && ex.shape(a.ast).decimals && Math.abs(a.val - T({})) < 0.01 * Math.max(1, Math.abs(T({})))) return form('decimal-rounded', 'That decimal is close but not exact. Give the exact answer (a calculator only gives a decimal).');
       for (var i = 0; i < cands.length; i++) if (sameVal(S0, cands[i].f, vars)) return wrong(cands[i].code, cands[i].hint);
       if (sameVal(S0, function (e) { return -T(e); }, vars)) return wrong('sign', 'Check the sign of your answer.');
       if (!vars.length && T({}) !== 0 && ex.eq(a.val, 1 / T({}))) return wrong('flip', 'Your answer is upside down — check which part goes on top.');
@@ -805,5 +805,5 @@
       { id: 'e14b', level: 'ADV', make: function (r) { var z = pickWhere(function () { return { a: r.pick([5, 7, 11, 13]), b: r.pick([6, 10, 14, 15]) }; }, function (z) { return gcd(z.a, z.b) === 1 && !(z.a === 11 && z.b === 6); }); var p = sqFrac(z.a, z.b, 1, 'ADV', 'use √(x/y) = √(xy)/y'); p.prompt = 'Use it to write ' + p.prompt + ' in simplest form.'; return p; } }] }
   ];
 
-  HW.defineLesson({ id: LID, unit: 2, num: 5, title: 'Dividing Radicals and Rationalizing Monomial Denominators', outcome: 'AN2', calc: false, questions: QUESTIONS, extra: EXTRA });
+  HW.defineLesson({ id: LID, unit: 2, num: 5, title: 'Dividing Radicals and Rationalizing Monomial Denominators', outcome: 'AN2', calc: true, questions: QUESTIONS, extra: EXTRA });
 })(window);

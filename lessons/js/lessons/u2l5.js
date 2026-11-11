@@ -723,7 +723,7 @@ const problems = {
  * ==================================================================================================== */
 const coefT = (v) => (v === 1 ? '' : v === -1 ? '-' : String(v));
 standup('u2l5', {
-  intro: 'At your whiteboard: exact answers, simplest form, no calculator.',
+  intro: 'At your whiteboard: exact answers, simplest form.',
   levels: {
     BEG: (R) => { // divide radicals
       const b = R.pick([2, 3, 5, 6, 7]), q = R.pick([4, 5, 7, 8, 9, 10, 12, 18, 20, 25]), kk = R.pick([1, 2, 3, 4]), t = R.pick([1, 2, 3, 5]) * R.sign(), m = kk * t;

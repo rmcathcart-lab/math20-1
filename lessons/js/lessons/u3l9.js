@@ -380,7 +380,7 @@ const exactTable = {
   height: 430,
   minW: 960,
   choices: [{ v: 'build', label: 'Build the table' }, { v: 'ex4b', label: 'Example 4(b) check' }],
-  intro: 'No calculator: two triangles hold every exact value. Press <b>Next</b>.',
+  intro: 'Two triangles hold every exact value. Press <b>Next</b>.',
   make(stage, k, ex) {
     const W = ex.W, TX = 372, TW = W - TX - 2, XT = xTable(stage, TX, 6, TW);
     // left: the two triangles
@@ -1038,7 +1038,7 @@ function staticFigs() {
 const SPEC = [[30, '\\frac{1}{2}', '\\frac{\\sqrt3}{2}', '\\frac{\\sqrt3}{3}'], [45, '\\frac{\\sqrt2}{2}', '\\frac{\\sqrt2}{2}', '1'], [60, '\\frac{\\sqrt3}{2}', '\\frac{1}{2}', '\\sqrt3']];
 const neg = (s) => (s.startsWith('-') ? s.slice(1) : '-' + s);
 standup('u3l9', {
-  intro: 'At your whiteboard: sketch it first, then answer. Calculator in Degree mode (exact values: no calculator).',
+  intro: 'At your whiteboard: sketch it first, then answer. Calculator in Degree mode; exact values stay exact.',
   levels: {
     BEG: (r) => {
       if (r.chance(0.5)) {

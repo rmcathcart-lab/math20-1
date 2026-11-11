@@ -59,6 +59,8 @@ to `HW.TEACHING.lessons` in `../js/catalog.js`, which also makes `index.html` li
 - Math always in KaTeX (`tex()` / `<span class="tex">`): never visible "x^2". Numbers ≥ 1000 with a thin space (`fmt()`).
 - Projector-readable (≥ 17 px), fixed 1080 px layout (design for ~1000 px content). Interactive things are `<button>`s or
   have `data-tap` (finger AND Pencil).
+- Ryan lets Math 20-1 students use their calculators for almost everything: no "no calculator" lessons; where the skill is
+  exactness, ask for exact answers (a calculator only gives decimals).
 - Calculator: the class calculator is the **TI-84 Plus CE** (some students have a Casio fx-9750GIII: same features,
   different keys). The on-screen one (`../js/calc84.js`, the **Calc** button on every page) has the real key layout and
   TI order of operations (powers before negation, so `(−) 2 x²` = −4; × ÷ and implied multiplication left to right;

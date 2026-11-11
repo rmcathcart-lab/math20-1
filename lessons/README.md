@@ -21,10 +21,37 @@ yet: `inkApi` is empty, so for now ink is saved on each device only.
 - The lesson is laid out 1080 px wide and scaled to fit the screen, so ink lines up with the content on every device.
 - Testing locally: `node backend/mock_server.js 8790` (teacher key TEST01) and in the browser console `localStorage.setItem('ink:api', JSON.stringify('http://localhost:8790/'))`.
 
+## The lessons home (iPad home-screen app)
+
+`index.html` is the lessons home, https://rmcathcart-lab.github.io/math20-1/lessons/ — open it in Safari on the iPad, then
+Share → **Add to Home Screen** ("20-1 Lessons"). Each course has its own app and icon.
+
+- **What it shows:** a **Continue** button for the last lesson opened on this device, the course intro lesson (if the
+  course has one), then every unit with its switched-on lessons (`HW.TEACHING.lessons` in `../js/catalog.js`) as big
+  rows, a Units bar to jump to a unit, and units with no lessons yet listed at the end as coming soon. Quiet links: the
+  practice site, and the Teacher Ledger on the teacher's device only.
+- **Teacher only** (the device is signed in with the teacher key, `ink:teacher`, or to the ledger, `hw:tkey`): "Open
+  lessons for Block A / B / C / D / No class" — the lesson links carry `?class=B` so the notes go to that class. It
+  remembers the last class picked here or opened on a lesson page. Students never see it.
+- **Fast:** inline CSS and script; the only scripts are `../js/catalog.js` (and `../js/ns.js`, the storage namespace,
+  where the repo has one). No ledger, backend, MathLive or calculator.
+- **Last lesson:** `boot()` in `js/ui.js` records it (`lessons:last`, and `lessons:class` for the teacher) — nothing to add
+  to a lesson page. The toolbar's home button goes to this page for the teacher and inside the home-screen app (students
+  in Safari still go to their assignments).
+- **Web app:** `manifest.webmanifest` (`start_url` and `scope` = this folder, standalone), the `apple-mobile-web-app-*`
+  metas here and on every lesson page. Lessons opened from the home stay inside the app; the practice site and ledger
+  open in Safari.
+- **Offline / instant:** `sw.js` serves the home, the catalog and the icons from the device first and refreshes them in
+  the background (the home reloads itself, or shows "Lessons updated · tap to refresh", when a lesson is switched on).
+  Lesson pages stay network first.
+- **Icon:** `assets/icon.svg` (a board on an easel in the course colour, the course mark, an amber pen stroke and a
+  pencil — different from the practice site's plain mark and the ledger's dark one), `icon-180/192/512.png`,
+  `favicon.svg`, `favicon-32.png`; rebuild them with `python3 lessons/dev/make_icons.py`.
+- Checked by `tests/lessons_smoke.py` (every switched-on lesson listed once, no broken links, no heavy scripts).
+
 ## Code map
 
-- `index.html` — the lesson list, built from `../js/catalog.js`: every unit and lesson, greyed out as "coming soon" until
-  the lesson's id is in `HW.TEACHING.lessons` (then it links to `uN/lM/`, keeping `?class=B`).
+- `index.html` — the lessons home (see above).
 - `js/ink.js` — the Pencil ink engine (SVG layer per `[data-ink]` element, strokes stored in a 1000-unit-wide coordinate system so they scale with the page). Uses [perfect-freehand](https://github.com/steveruizok/perfect-freehand) (MIT) for pressure strokes.
 - `js/share.js`, `js/config.js`, `backend/Code.gs` — live sharing (see above).
 - `js/ui.js` — toolbar, menu, board, calculator wiring and key-press demos (`data-keys="91 ÷ 7 ="`; tokens in `LESSON_BRIEF.md` and at the top of `../js/calc84.js`).
@@ -43,5 +70,5 @@ See `LESSON_BRIEF.md` for the full checklist (and `BLOCKS.md`, `SCREEN_FIT.md`, 
    The hero kicker reads `Math 20-1 · Unit N <Unit Title> · Lesson M`.
 2. Write `js/lessons/uNlM.js` with explainer definitions (`{ title, height, choices, intro, make(stage, value, ex) → steps }`) and mount them on `[data-explainer]` elements.
 3. Call `boot({ key: 'uNlM', homeHref: '../../', title: 'N.M Short Title' })`.
-4. Switch it on: add the id to `HW.TEACHING.lessons` in the root `js/catalog.js`. That one line makes the lesson list
-   (`index.html`) link it, and the practice site and Teacher Ledger link to it.
+4. Switch it on: add the id to `HW.TEACHING.lessons` in the root `js/catalog.js`. That one line puts it on the lessons
+   home (`index.html`), and the practice site and Teacher Ledger link to it.

@@ -820,5 +820,5 @@
   ];
   function F(n) { return HW.fmt(n); }
 
-  HW.defineLesson({ id: LID, unit: 4, num: '5', title: 'Solving Quadratic Equations by Factoring', outcome: 'RF5', calc: false, questions: QUESTIONS, extra: EXTRA });
+  HW.defineLesson({ id: LID, unit: 4, num: '5', title: 'Solving Quadratic Equations by Factoring', outcome: 'RF5', calc: true, questions: QUESTIONS, extra: EXTRA });
 })(window);

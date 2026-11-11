@@ -895,7 +895,7 @@ function trig(fn, a) { // exact value of fn(a) for a multiple of 30 or 45 (not t
 }
 const ANG = [30, 45, 60, 120, 135, 150, 210, 225, 240, 300, 315, 330];
 standup('u3l4', {
-  intro: 'At your whiteboard, no calculator: quadrant, reference angle, the table, the sign. Exact answers only!',
+  intro: 'At your whiteboard: quadrant, reference angle, the table, the sign. Exact answers only!',
   levels: {
     BEG: (r) => {
       const fn = r.pick(['sin', 'cos', 'tan']), a = r.pick(ANG.filter((x) => x > 90)), q = quadOf(a), ref = refOf(a), s = SIGN(fn, q);

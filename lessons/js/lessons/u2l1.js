@@ -963,7 +963,7 @@ function mountFigures() {
 const SQF = [2, 3, 5, 6, 7, 10, 11, 13, 14, 15];
 const CBF = [2, 3, 4, 5, 6, 7, 9, 10];
 standup('u2l1', {
-  intro: 'Whiteboards: hunt for the largest perfect power, let it escape, then check simplest form. No calculators.',
+  intro: 'Whiteboards: hunt for the largest perfect power, let it escape, then check simplest form.',
   levels: {
     BEG: (r) => { const k = r.int(2, 10), m = r.pick(SQF), N = k * k * m; return { text: 'Write as a mixed radical in simplest form.', q: `\\sqrt{${tn(N)}}`, a: [`\\sqrt{${k * k}\\times${m}}`, `=\\sqrt{${k * k}}\\times\\sqrt{${m}}`, `=${k}\\sqrt{${m}}`] }; },
     PRG: (r) => {

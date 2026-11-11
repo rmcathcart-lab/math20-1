@@ -422,7 +422,7 @@
           ['Substitute into your simplified side length from (a).', 'Check: the side squared should equal the area.'], 'side at x=' + k); } }] }
   ];
 
-  HW.defineLesson({ id: LID, unit: 2, num: '2', title: 'Radicals with Variables and Their Restrictions', outcome: 'AN2', calc: false,
+  HW.defineLesson({ id: LID, unit: 2, num: '2', title: 'Radicals with Variables and Their Restrictions', outcome: 'AN2', calc: true,
     blurb: 'Restrictions on the variable (even index: radicand ≥ 0; odd index: none), then simplifying and converting radicals with variables.',
     questions: QUESTIONS, extra: EXTRA });
 })(window);

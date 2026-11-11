@@ -873,5 +873,5 @@
   HW.addCodes({ 'u4l1-perim-eq': 'Didn’t set up the perimeter equation', 'u4l1-gave-n': 'Gave the other factor’s number instead of k', 'u4l1-minus-bracket': 'Minus sign not applied to the whole bracket' });
   HW.addPartial({ 'u4l1-gave-n': 'b', 'u4l1-minus-bracket': 's' });
 
-  HW.defineLesson({ id: 'u4l1', unit: 4, num: '1', title: 'Factoring Review: Common Factors and x² + bx + c', outcome: 'RF1', calc: false, questions: QUESTIONS, extra: EXTRA });
+  HW.defineLesson({ id: 'u4l1', unit: 4, num: '1', title: 'Factoring Review: Common Factors and x² + bx + c', outcome: 'RF1', calc: true, questions: QUESTIONS, extra: EXTRA });
 })(typeof window !== 'undefined' ? window : globalThis);

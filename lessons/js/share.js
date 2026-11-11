@@ -5,21 +5,132 @@
  *   teacher — this device signed in with the teacher key. With ?class=B in the URL every stroke is sent to the
  *             backend (and kept in a queue on the device until it's saved, so nothing is lost offline).
  *   viewer  — everyone else. With ?class=B they see the teacher's notes for that class, updated every few seconds.
+ *
+ * Which block (teacher only — students load nothing extra)
+ *   ready() loads the Teaching Hub's shared teaching/js/courses.js and reads Ryan's schedule (the copy cached on this
+ *   device, refreshed in the background). The chips then show only the blocks this course is taught in this semester,
+ *   and the block is picked from the clock: a block of this course counts as on from the end of the period before it
+ *   (or LEAD minutes before its bell, whichever is later) until its bell at the end. A block chosen in the menu wins
+ *   until the period that's on when it's chosen ends (outside class times: until this course's next class starts, or
+ *   the end of the day). Outside this course's classes, with no choice made: "Not live" — no ink goes to any class.
+ *   A course that isn't on the schedule (or no schedule yet) works as before: the ?class in the URL decides.
+ *   If courses.js can't load (offline, hub down), the menu shows the A–D chips and the URL decides, as before.
  */
 import * as Ink from './ink.js';
 import { CONFIG } from './config.js';
 
 const lsGet = (k) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } };
 const lsSet = (k, v) => { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* ignore */ } };
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const cleanCls = (v) => String(v || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 16);
 
 export function setup(lesson) {
   const api = String(lsGet('ink:api') || CONFIG.inkApi || '').trim();
   const q = new URLSearchParams(location.search);
-  const cls = String(q.get('class') || q.get('c') || '').toUpperCase().replace(/[^A-Z0-9-]/g, '').slice(0, 16);
+  const cls = cleanCls(q.get('class') || q.get('c'));
   const key = lsGet('ink:teacher');
   const role = !api ? 'local' : key ? 'teacher' : 'viewer';
   return { api, cls, key, role, lesson, inkKey: role === 'teacher' && cls ? lesson + ':' + cls : lesson, readonly: role === 'viewer', label: cls ? CONFIG.classLabel(cls) : '' };
 }
+
+/* ---------------- which block: the Teaching Hub's schedule ---------------- */
+const COURSE = CONFIG.course || ((location.pathname.match(/\/([^/]+)\/lessons\//) || [])[1] || '');
+const PICK = 'ink:pick:' + COURSE;          // { cls, until }: a block chosen in the menu, and when that choice runs out
+const LEAD = 10;                             // minutes before the bell that a block counts as on
+const COURSES_JS = new URL('../../../teaching/js/courses.js', import.meta.url).href; // <site>/teaching/js/courses.js
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+function loadTeach(ms = 4000) {
+  const ok = () => window.TEACH && typeof window.TEACH.periods === 'function' && typeof window.TEACH.data === 'function';
+  if (ok()) return Promise.resolve(window.TEACH);
+  return new Promise((res, rej) => {
+    const s = document.createElement('script'); s.src = COURSES_JS; s.async = true;
+    const t = setTimeout(() => rej(new Error('timeout')), ms);
+    s.onload = () => { clearTimeout(t); ok() ? res(window.TEACH) : rej(new Error('no schedule')); };
+    s.onerror = () => { clearTimeout(t); rej(new Error('network')); };
+    document.head.appendChild(s);
+  });
+}
+const at = (date, hm) => { const d = date.split('-').map(Number), t = String(hm).split(':').map(Number); return new Date(d[0], d[1] - 1, d[2], t[0], t[1] || 0).getTime(); };
+
+/* today's periods and this course's classes, at a moment */
+function plan(T, now) {
+  const data = T.data(), d = new Date(now), today = T.key(d);
+  const sem = T.currentSemester(data, today);
+  const mine = T.classesIn(sem).filter((x) => x.c === COURSE);                       // the chips
+  const own = new Set(T.classesIn(T.semesterOn(today, data)).filter((x) => x.c === COURSE).map((x) => x.block)); // taught today
+  let prev = -Infinity;
+  const ws = T.periods(today, data).map((p) => {
+    const s = at(today, p.start), e = at(today, p.end), w = { block: p.block, start: s, from: Math.max(prev, s - LEAD * 60000), to: e, own: own.has(p.block) };
+    prev = Math.max(prev, e); return w;
+  });
+  const w = ws.find((x) => x.from <= now && now < x.to) || null;
+  const next = ws.find((x) => x.own && x.from > now) || null;
+  const midnight = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1).getTime();
+  return { T, sem, mine, own, now: w, next, auto: w && w.own ? w : null, until: w ? w.to : next ? next.from : midnight, midnight, name: (T.course(COURSE) || {}).name || COURSE };
+}
+function decide(P, urlCls) {
+  const ov = lsGet(PICK), now = Date.now();
+  if (ov && typeof ov.cls === 'string' && ov.until > now) return { cls: cleanCls(ov.cls), mode: ov.cls ? 'manual' : 'off', until: ov.until };
+  if (ov) lsSet(PICK, null);
+  if (P.auto) return { cls: P.auto.block, mode: 'auto', until: P.auto.to };
+  if (!P.mine.length && !P.own.size) return { cls: urlCls, mode: 'free' };     // not on the schedule: as before
+  return { cls: '', mode: 'notlive' };
+}
+function apply(st, P, d) {
+  st.sched = P; st.mode = d.mode; st.until = d.until || 0;
+  st.cls = d.cls; st.label = d.cls ? CONFIG.classLabel(d.cls) : ''; st.inkKey = d.cls ? st.lesson + ':' + d.cls : st.lesson;
+  const u = new URL(location.href), had = cleanCls(u.searchParams.get('class') || u.searchParams.get('c'));
+  if (had !== d.cls || u.searchParams.has('c')) {
+    u.searchParams.delete('c'); if (d.cls) u.searchParams.set('class', d.cls); else u.searchParams.delete('class');
+    try { history.replaceState(history.state, '', u.toString()); } catch (e) { /* ignore */ }
+  }
+}
+
+/* Teacher only: work out the block before the ink starts (Ink.init and start() wait for this). Students: null. */
+export function ready(st) {
+  if (st.role !== 'teacher') return null;
+  st.urlCls = st.cls; st.sched = undefined;
+  css();
+  return loadTeach().then(async (T) => {
+    const none = T.dataAge() === Infinity, fresh = T.BACKEND && T.dataAge() > 60000 ? T.refresh().catch(() => {}) : null;
+    if (fresh && none) await Promise.race([fresh, sleep(3000)]);   // nothing cached yet: give the hub a moment
+    const P = plan(T, Date.now()); apply(st, P, decide(P, st.urlCls));
+    if (fresh) fresh.then(() => recheck(st));
+  }).catch(() => { st.sched = null; st.mode = 'fallback'; });
+}
+
+/* while the page is open: when a block of this course starts, move to it (unless a block was chosen in the menu) */
+let penDown = false, pendingQ = () => 0, switching = false;
+function recheck(st) {
+  if (!st.sched || switching) return;
+  const P = plan(st.sched.T, Date.now()), d = decide(P, st.urlCls);
+  st.sched = P;
+  if (d.mode === 'auto' && d.cls !== st.cls) switchTo(st, d.cls);
+}
+function switchTo(st, cls) {
+  // never the same switch twice in a minute (a guard against reload loops)
+  try { const g = JSON.parse(sessionStorage.getItem('ink:switch') || 'null'); if (g && g.cls === cls && g.from === st.cls && Math.abs(Date.now() - g.at) < 60000) return; } catch (e) { /* ignore */ }
+  switching = true;
+  let tries = 0;
+  const go = () => {
+    if ((penDown || pendingQ()) && tries++ < 15) { setTimeout(go, 2000); return; } // let the stroke finish and the queue go
+    try { sessionStorage.setItem('ink:switch', JSON.stringify({ cls, from: st.cls, at: Date.now() })); } catch (e) { /* ignore */ }
+    Ink.toast(CONFIG.classLabel(cls) + ' is on — switching to it');
+    const u = new URL(location.href); u.searchParams.delete('c'); u.searchParams.set('class', cls);
+    setTimeout(() => { Ink.flush(); location.replace(u.toString()); }, 900);
+  };
+  go();
+}
+function watch(st) {
+  if (!st.sched) return;
+  document.addEventListener('pointerdown', () => { penDown = true; }, true);
+  const up = () => { penDown = false; }; document.addEventListener('pointerup', up, true); document.addEventListener('pointercancel', up, true);
+  setInterval(() => { if (!document.hidden) recheck(st); }, 20000);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) recheck(st); });
+  addEventListener('focus', () => recheck(st));
+}
+function fmt(T, ms) { const d = new Date(ms); return T.time(d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0')); }
 
 /* ---------------- network ---------------- */
 async function get(st, params) {
@@ -41,14 +152,23 @@ const parse = (j) => { try { return JSON.parse(j); } catch (e) { return null; } 
 let badge = null;
 function status(st, state, text) {
   if (!badge) return;
-  badge.className = 'share-badge ' + state; badge.innerHTML = '<i></i><span>' + text + '</span>';
-  badge.title = { live: 'Notes are shared live', saving: 'Saving your notes…', offline: 'Can’t reach the server — will keep trying', off: '', badkey: 'The teacher key was not accepted' }[state] || '';
+  const tag = st.role === 'teacher' && st.cls ? (st.mode === 'auto' ? 'Auto' : st.mode === 'manual' ? 'Manual' : '') : '';
+  badge.className = 'share-badge ' + state; badge.innerHTML = '<i></i><span>' + text + '</span>' + (tag ? '<em>' + tag + '</em>' : '');
+  let title = { live: 'Notes are shared live', saving: 'Saving your notes…', offline: 'Can’t reach the server — will keep trying', off: 'Your notes aren’t going to any class — tap to pick one', notlive: 'No class of this course is on now, so your notes aren’t going to any class — tap to pick one', badkey: 'The teacher key was not accepted' }[state] || '';
+  if (tag && st.sched) title += st.mode === 'auto' ? ' · ' + st.label + ' is on now (until ' + fmt(st.sched.T, st.until) + ')' : ' · you picked ' + st.label + ' (until ' + (st.until >= st.sched.midnight ? 'the end of the day' : fmt(st.sched.T, st.until)) + ')';
+  badge.title = title;
 }
+const openMenu = (e) => { e.stopPropagation(); const b = document.querySelector('[data-act=menu]'); if (b) b.click(); };
 
 export function start(st, badgeEl) {
   badge = badgeEl;
   if (st.role === 'local') { badge.remove(); return; }
-  if (st.role === 'teacher') return st.cls ? teacher(st) : status(st, 'off', 'Not shared');
+  if (st.role === 'teacher') {
+    watch(st);
+    if (st.cls) return teacher(st);
+    badge.onclick = openMenu;
+    return st.mode === 'notlive' ? status(st, 'notlive', 'Not live') : status(st, 'off', 'Not shared');
+  }
   if (!st.cls) { status(st, 'off', 'View only'); return; }
   viewer(st);
 }
@@ -58,16 +178,17 @@ function teacher(st) {
   const qKey = 'inkq:' + st.lesson + ':' + st.cls;
   let queue = lsGet(qKey) || [], busy = false, timer = 0, fails = 0, dirty = false;
   const saveQ = () => lsSet(qKey, queue.length ? queue : null);
+  pendingQ = () => { if (queue.length && !busy) { fails = 0; flush(); } return queue.length; };
   Ink.onOp((op) => {
     dirty = true;
     if (op.a === 'reset') queue = [];
     if (op.p) { let j = JSON.stringify(op); while (j.length > 45000 && op.p.length > 4) { op.p = op.p.filter((_, i) => i % 2 === 0 || i === op.p.length - 1); j = JSON.stringify(op); } }
     queue.push(op); saveQ(); kick(600);
   });
-  const kick = (ms) => { clearTimeout(timer); timer = setTimeout(flush, ms); if (queue.length) status(st, fails ? 'offline' : 'saving', st.label + ' · Saving'); };
+  const kick = (ms) => { clearTimeout(timer); timer = setTimeout(flush, ms); if (queue.length) status(st, fails ? 'offline' : 'saving', 'Saving · ' + st.label); };
   async function flush() {
     if (busy) return kick(400);
-    if (!queue.length) { status(st, 'live', st.label + ' · Live'); return; }
+    if (!queue.length) { status(st, 'live', 'Live · ' + st.label); return; }
     busy = true;
     let n = 0, size = 0; while (n < queue.length && size < 250000) { size += JSON.stringify(queue[n]).length; n++; }
     try {
@@ -76,22 +197,22 @@ function teacher(st) {
     } catch (e) {
       fails++;
       if (e.message === 'badkey') { busy = false; status(st, 'badkey', 'Teacher key not accepted'); return; }
-      status(st, 'offline', st.label + ' · Offline');
+      status(st, 'offline', 'Offline · ' + st.label);
     }
     busy = false;
-    if (queue.length) kick(fails ? Math.min(30000, 1500 * Math.pow(2, fails)) : 50); else status(st, 'live', st.label + ' · Live');
+    if (queue.length) kick(fails ? Math.min(30000, 1500 * Math.pow(2, fails)) : 50); else status(st, 'live', 'Live · ' + st.label);
   }
-  badge.onclick = () => { if (queue.length) { fails = 0; flush(); } };
+  badge.onclick = (e) => { if (queue.length) { fails = 0; flush(); } else openMenu(e); };
   addEventListener('online', () => { fails = 0; flush(); });
   // On opening: send anything left from last time, then load the saved notes from the server (the server copy wins).
   (async () => {
-    status(st, 'saving', st.label + ' · Loading');
+    status(st, 'saving', 'Loading · ' + st.label);
     if (queue.length) { await flush(); if (queue.length) return; }
     dirty = false;
     const ops = [];
-    try { await fetchAll(st, '', 1, (r) => r.ops.forEach((j) => ops.push(j))); } catch (e) { status(st, 'offline', st.label + ' · Offline'); return; }
+    try { await fetchAll(st, '', 1, (r) => r.ops.forEach((j) => ops.push(j))); } catch (e) { status(st, 'offline', 'Offline · ' + st.label); return; }
     if (!dirty && !queue.length) { Ink.wipe(); ops.forEach((j) => { const op = parse(j); if (op) Ink.applyOp(op); }); }
-    status(st, 'live', st.label + ' · Live');
+    status(st, 'live', 'Live · ' + st.label);
   })();
 }
 
@@ -123,6 +244,36 @@ function viewer(st) {
 }
 
 /* ---------------- menu section ---------------- */
+let showAll = false;
+/* the hub's class label under "Block B", when it says more than the course and the block */
+function subLabel(P, x) {
+  const l = String(x.label || '').trim(); if (!l) return '';
+  const rest = l.replace(P.name, '').replace(new RegExp('block\\s*' + x.block + '\\b', 'i'), '').replace(/[\s\-–—·:,()]+/g, '');
+  return rest ? l : '';
+}
+function chipsHTML(st) {
+  const P = st.sched, sched = P && !showAll; // with a schedule: only this course's blocks this semester
+  const list = sched ? P.mine.map((x) => ({ c: x.block, sub: subLabel(P, x), title: x.label })) : CONFIG.classes.map((c) => ({ c }));
+  if (st.cls && !list.some((x) => x.c === st.cls)) list.push({ c: st.cls });
+  const now = P && P.auto ? P.auto.block : '';
+  const chips = list.map((x) => `<button class="chip${x.c === st.cls ? ' on' : ''}${x.c === now ? ' now' : ''}" data-cls="${esc(x.c)}"${x.title ? ` title="${esc(x.title)}"` : ''}>${esc(CONFIG.classLabel(x.c))}${x.sub ? `<small>${esc(x.sub)}</small>` : ''}</button>`).join('');
+  const more = sched && list.length < CONFIG.classes.length ? '<button class="mp-more" data-m="allblocks" type="button">Show all blocks</button>' : '';
+  return chips + `<button class="chip${st.cls ? '' : ' on'}" data-cls="">Off</button>` + more;
+}
+function liveHTML(st) {
+  const P = st.sched; if (P === undefined) return '';
+  if (P === null) return '<div class="mp-live">Couldn’t load your schedule from the Teaching Hub, so every block is shown. Pick the class you’re teaching.</div>';
+  const T = P.T, till = (ms) => (ms >= P.midnight ? 'the end of the day' : fmt(T, ms)), name = esc(P.name);
+  const back = '<button class="mp-more" data-m="auto" type="button">Back to automatic</button>';
+  const nxt = P.next ? ` Next: <b>${esc(CONFIG.classLabel(P.next.block))}</b> at ${fmt(T, P.next.start)}.` : '';
+  if (st.mode === 'auto' && P.auto && P.auto.block === st.cls) return `<div class="mp-live auto"><b>Live · ${esc(st.label)}</b> — picked for you: ${esc(st.label)} is on until ${fmt(T, P.auto.to)}.</div>`;
+  if (st.mode === 'auto') return `<div class="mp-live">${esc(st.label)}’s class is over, but your notes still go to it.${nxt} Pick another block, or Off.</div>`;
+  if (st.mode === 'manual') return `<div class="mp-live manual"><b>Live · ${esc(st.label)}</b> — your choice${st.until > Date.now() ? ' until ' + till(st.until) + ', then the block is picked from your schedule again' : ''}. ${back}</div>`;
+  if (st.mode === 'off') return `<div class="mp-live">Not shared until ${till(st.until)}. ${back}</div>`;
+  if (st.mode === 'notlive') return `<div class="mp-live notlive"><b>Not live</b> — no ${name} class on right now, so your notes aren’t going to any class.${nxt} Pick a block to share with it.</div>`;
+  if (!P.sem) return '<div class="mp-live">No schedule from the Teaching Hub on this device yet, so the block isn’t picked for you.</div>';
+  return `<div class="mp-live">${name} isn’t on this semester’s schedule in the Teaching Hub, so the block isn’t picked for you.</div>`;
+}
 export function menuSection(st) {
   if (st.role === 'local') return { html: '', wire() {} };
   if (st.role === 'viewer') {
@@ -139,14 +290,25 @@ export function menuSection(st) {
       }
     };
   }
-  const chips = [...new Set(CONFIG.classes.concat(st.cls ? [st.cls] : []))].map((c) => `<button class="chip${c === st.cls ? ' on' : ''}" data-cls="${c}">${CONFIG.classLabel(c)}</button>`).join('');
+  if (st.sched) st.sched = plan(st.sched.T, Date.now()); // the clock has moved on since the page opened
+  const go = (cls) => { const u = new URL(location.href); u.searchParams.delete('c'); if (cls) u.searchParams.set('class', cls); else u.searchParams.delete('class'); location.href = u.toString(); };
   return {
-    html: `<div class="mp-h">Share live with a class</div>
-      <div class="mp-classes">${chips}<button class="chip${st.cls ? '' : ' on'}" data-cls="">Off</button></div>
-      ${st.cls ? `<div class="mp-link">Student link: <b>${studentLink(st)}</b></div><button class="mp-item" data-m="qr">Show the class link as a QR code</button>` : '<div class="mp-tip">Pick a class: your notes go to that class’s link, live. Each class keeps its own notes.</div>'}
+    html: `<div class="mp-h">Share live with a class</div>${liveHTML(st)}
+      <div class="mp-classes">${chipsHTML(st)}</div>
+      ${st.cls ? `<div class="mp-link">Student link: <b>${esc(studentLink(st))}</b></div><button class="mp-item" data-m="qr">Show the class link as a QR code</button>` : st.mode === 'notlive' ? '' : '<div class="mp-tip">Pick a class: your notes go to that class’s link, live. Each class keeps its own notes.</div>'}
       <button class="mp-item" data-m="signout">Sign out of teacher mode</button><div class="mp-sep"></div>`,
     wire(menu, close) {
-      menu.querySelectorAll('[data-cls]').forEach((b) => (b.onclick = () => { const u = new URL(location.href); if (b.dataset.cls) u.searchParams.set('class', b.dataset.cls); else u.searchParams.delete('class'); location.href = u.toString(); }));
+      const wireChips = () => {
+        menu.querySelectorAll('[data-cls]').forEach((b) => (b.onclick = () => {
+          const P = st.sched;
+          if (P) lsSet(PICK, { cls: b.dataset.cls, until: P.until }); // lasts until this period ends (see plan())
+          go(b.dataset.cls);
+        }));
+        const all = menu.querySelector('[data-m=allblocks]');
+        if (all) all.onclick = (e) => { e.stopPropagation(); showAll = true; menu.querySelector('.mp-classes').innerHTML = chipsHTML(st); wireChips(); };
+      };
+      wireChips();
+      const auto = menu.querySelector('[data-m=auto]'); if (auto) auto.onclick = () => { lsSet(PICK, null); const P = st.sched; go(P && P.auto ? P.auto.block : ''); };
       const qr = menu.querySelector('[data-m=qr]'); if (qr) qr.onclick = () => { close(); showQR(st); };
       menu.querySelector('[data-m=signout]').onclick = () => { lsSet('ink:teacher', null); location.reload(); };
     }
@@ -160,4 +322,22 @@ function showQR(st) {
   box.innerHTML = `<div class="qr-card"><div class="kicker">${st.label} · today’s notes</div><div class="qr-img">${svg}</div><div class="qr-url">${url.replace(/^https?:\/\//, '')}</div><button class="pill dark">Close</button></div>`;
   box.onclick = (e) => { if (e.target === box || e.target.tagName === 'BUTTON') box.remove(); };
   document.body.appendChild(box);
+}
+
+/* styles for the block picker (teacher only, so students load nothing extra) */
+function css() {
+  if (document.getElementById('share-css')) return;
+  const s = document.createElement('style'); s.id = 'share-css';
+  s.textContent = `.mp-live { margin: 2px 10px 6px; padding: 8px 11px; border-radius: 12px; background: #f4f2ec; font-size: 14.5px; line-height: 1.38; color: var(--ink2); }
+.mp-live b { color: var(--ink); }
+.mp-live.auto, .mp-live.manual { background: #e3f4ea; }
+.mp-live.notlive { background: var(--amber-soft); }
+.mp-more { border: none; background: none; color: var(--muted); font: 600 14px var(--font); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; padding: 4px 6px; }
+.mp-live .mp-more { padding: 0 2px; color: var(--ink); }
+.mp-classes .chip small { display: block; font-size: 11.5px; font-weight: 600; opacity: .75; margin-top: -1px; }
+.mp-classes .chip.now:not(.on) { border-color: var(--ok); box-shadow: inset 0 0 0 1px var(--ok); }
+.share-badge em { font-style: normal; font-size: 10.5px; letter-spacing: .05em; text-transform: uppercase; padding: 1px 6px; border-radius: 8px; background: rgba(255,255,255,.75); }
+.share-badge.notlive { background: var(--amber-soft); color: var(--amber); cursor: pointer; }
+.share-badge.off, .share-badge.live { cursor: pointer; }`;
+  document.head.appendChild(s);
 }

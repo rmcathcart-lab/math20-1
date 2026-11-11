@@ -1,48 +1,49 @@
 /* Math 20-1 · Unit 4 Test (RF1, RF5, AN3) — Factoring, Quadratic Equations and Radical Equations: the GCF, grouping,
- * x² + bx + c, ax² + bx + c by decomposition, rational coefficients, perfect squares, substitution (quadratic form, a
- * repeated binomial, two binomials), differences of squares (also of binomials), solving by factoring, equations from their
- * roots, problems leading to a quadratic, restrictions, radical equations, extraneous roots, equations that lead to
- * quadratics and squaring twice. Written from Ryan's Unit 4 booklet (m201book/unit4: Lessons 1–8, their assignments and
- * extra practice; Lesson 8's assignment and EP08 are the practice tests that set the style and difficulty). There is no
- * older test for this course. One 75-minute class, NO calculator; three outcomes, each with Beginning, Progressing and
- * Mastery boxes; 22 questions / 36 parts:
- *   RF1 (factoring, L1–L4)       Beginning 4 questions / 7 parts, Progressing 3 / 7, Mastery 3 / 3
- *   RF5 (quadratic equations, L5) Beginning 2 / 3,                Progressing 2 / 3, Mastery 2 / 3
- *   AN3 (radical equations, L6–L7) Beginning 2 / 4,               Progressing 2 / 4, Mastery 2 / 2
+ * x² + bx + c, ax² + bx + c by decomposition, perfect squares, substitution (quadratic form, a repeated binomial, two
+ * binomials), differences of squares (also of binomials), solving by factoring, equations from their roots, problems
+ * leading to a quadratic, restrictions, radical equations, extraneous roots, equations that lead to quadratics and
+ * squaring twice. Written from Ryan's Unit 4 booklet (m201book/unit4: Lessons 1–8, their assignments and extra practice;
+ * Lesson 8's assignment and EP08 are the practice tests that set the style and difficulty). There is no older test for
+ * this course. One class (about 75 minutes by tests/short_report.js), calculator allowed (answers stay exact: factored
+ * forms, exact roots); three outcomes, each with Beginning, Progressing and Mastery boxes; 17 questions / 26 parts:
+ *   RF1 (factoring, L1–L4)         Beginning 3 questions / 6 parts, Progressing 2 / 4, Mastery 2 / 2
+ *   RF5 (quadratic equations, L5)  Beginning 1 / 2,                 Progressing 2 / 3, Mastery 2 / 2
+ *   AN3 (radical equations, L6–L7) Beginning 1 / 2,                 Progressing 2 / 3, Mastery 2 / 2
+ * (Cut from 22 questions / 36 parts on 2026-11-10: the full test ran long. Dropped the MC "which cannot be factored",
+ * the second monic / fractional-coefficient / single-substitution factoring parts, the integer-roots equation, a second
+ * restriction and radical-equation part, every-k-that-factors, and the two-part k-and-other-root, now one part.)
  *
  * How each box is pitched:
  *   Beginning  — each lesson's core skill as first taught: a GCF (a negative one when the first term is negative) and
  *                x² + bx + c (L1 Ex 1, Ex 4, #1, #4); decomposition and a perfect-square trinomial (L2 Ex 2, Ex 8, #1, #11);
- *                x⁴ + bx² + c (or x⁶, (xy)²) with no further factoring, and A² − B² (L3 Ex 1, L4 Ex 1, #1); recognising the
- *                expression that does not factor (MC: recognition, L4 #14, L8 #4g); the zero product property and
- *                a² x² − b² = 0 / ax² = bx / the zeros of y = x² + bx + c (L5 Ex 1–2, #1–3); an equation from two integer
- *                roots (L5 Ex 5a, #7a); restrictions of one radical (with the sign reversal) and of two radicals (L6 Ex 1,
- *                #1); √(ax + b) = c and k√(ax + b) + d = e (L6 Ex 2, #2–3).
- *   Progressing — the typical assignment question: factor fully with a GCF or a negative leading coefficient (monic and by
- *                decomposition, also with two variables) and with a fractional common factor (L1 #6, L2 #6–9); a quartic
- *                that finishes with differences of squares and a(mx + h)² + b(mx + h) + c (L3 #2–3, #6); grouping (two
- *                variables, rearranging, or a cubic that ends in a difference of squares) and (x + h)² − k², k² − (x + h)²
- *                or x⁴ − n⁴ (L1 #3, L4 Ex 9b, #6–7); solving after moving terms, clearing fractions or expanding first
- *                (L5 Ex 3–4, #4); an equation from a fractional or double root (L5 Ex 5, #7); a radical on each side (often
- *                extraneous) and an isolated radical that may equal a negative (L6 Ex 3–4, #4–5); the restrictions of
- *                √A = B and solving √(px + q) = x + c with an extraneous root (L7 Ex 2–4, #2, #4).
+ *                x⁴ + bx² + c (or x⁶, (xy)²) with no further factoring, and A² − B² (L3 Ex 1, L4 Ex 1, #1); the zero
+ *                product property and a² x² − b² = 0 / ax² = bx / the zeros of y = x² + bx + c (L5 Ex 1–2, #1–3); the
+ *                restriction of one radical (with the sign reversal) or of two radicals, and k√(ax + b) + d = e
+ *                (L6 Ex 1–2, #1–3).
+ *   Progressing — the typical assignment question: factor fully by decomposition with a GCF or a negative leading
+ *                coefficient (or two variables), and grouping (two variables, rearranging, or a cubic that ends in a
+ *                difference of squares) (L1 #3, L2 #6–8); a quartic that finishes with differences of squares, and
+ *                (x + h)² − k², k² − (x + h)² or x⁴ − n⁴ (L3 #2–3, L4 Ex 9b, #6–7); solving after moving terms, clearing
+ *                fractions or expanding first (L5 Ex 3–4, #4), and an equation from fractional or double roots (L5 Ex 5,
+ *                #7); a radical on each side, often extraneous (L6 Ex 5, #5); the restrictions of √A = B and solving
+ *                √(px + q) = x + c with an extraneous root (L7 Ex 2–4, #2, #4).
  *   Mastery    — the hardest assignment / extra-practice items: two repeated binomials aA² + bAB + cB², or a binomial
  *                substitution that leaves a common factor (L3 Ex 7b, #8, EP03 C2, L8 #24); a²(f(x))² − b²(g(x))² that
- *                simplifies to a common factor or a negative (L4 Ex 7, #7f/h, #13, EP04 B5); every integer k for which
- *                x² + kx + c or ax² + kx + c factors (L1 Ex 6b, #9, EP02 C1, L8 Ex 3c); a frame / path / rectangle problem
- *                with an inadmissible root (L5 Ex 7, EP05 B3, L8 Ex 6, EP08 #13); one root of ax² + kx + c = 0 given: k and
- *                the other root (working backwards, EP05 C1); two radicals squared twice, with an extraneous root (L7 Ex 7,
- *                #9, EP07 B2, L8 Ex 9, EP08 C4); a radical equation from words (a number and its square root, or a
- *                rectangle's diagonal) solved and checked (L7 Ex 8, #10–11, EP07 B3–B4).
- * Coverage: L1 Q1, Q9, Q11, Q18 · L2 Q2, Q9, Q18 · L3 Q3, Q10, Q16 · L4 Q3, Q4, Q11, Q17 · L5 Q5, Q6, Q12, Q13, Q19,
- *           Q20 · L6 Q7, Q8, Q14 · L7 Q15, Q21, Q22 · L8 (review) numbers and styles throughout (Q9, Q12, Q15, Q21).
- * Short version (def.short): Q2, Q5, Q8 (Beginning: RF1 2, RF5 2, AN3 2 parts), Q10, Q12, Q15 (Progressing: 2 each),
- * Q17, Q20, Q21 (Mastery: RF1 1, RF5 2, AN3 1) — about half the working time; every outcome keeps all three boxes.
+ *                simplifies to a common factor or a negative (L4 Ex 7, #7f/h, #13, EP04 B5); a frame / path / rectangle
+ *                problem with an inadmissible root (L5 Ex 7, EP05 B3, L8 Ex 6, EP08 #13); one root of ax² + kx + c = 0
+ *                given: k, then the other root (working backwards, EP05 C1); two radicals squared twice, with an
+ *                extraneous root (L7 Ex 7, #9, EP07 B2, L8 Ex 9, EP08 C4); a radical equation from words (a number and
+ *                its square root, or a rectangle's diagonal) solved and checked (L7 Ex 8, #10–11, EP07 B3–B4).
+ * Coverage: L1 Q1, Q6 · L2 Q2, Q6 · L3 Q3, Q7, Q12 · L4 Q3, Q7, Q13 · L5 Q4, Q8, Q9, Q14, Q15 · L6 Q5, Q10 ·
+ *           L7 Q11, Q16, Q17 · L8 (review) numbers and styles throughout (Q6, Q8, Q11, Q16).
+ * Short version (def.short): Q2, Q4b, Q5b (Beginning: RF1 2, RF5 1, AN3 1 part), Q7, Q8, Q11 (Progressing: 2 each),
+ * Q13, Q15, Q16 (Mastery: 1 each) — 9 questions / 13 parts, about half the working time (~39 of ~75 min by
+ * tests/short_report.js); every outcome keeps all three boxes.
  * Not used: numerical-response boxes ("record a, b, c and d") — the online version asks for the factored form or the value
- * itself; calculator items (the pendulum, decimal approximations, graphing-calculator intersect); "explain" items — their
- * checkable step is asked instead (the factored form, the root, the restriction); trigonometric quadratic forms.
+ * itself; graphing-calculator intersect items and "explain" items — their checkable step is asked instead (the factored
+ * form, the root, the restriction); trigonometric quadratic forms.
  *
- * Answers are typed (one MC, Q4). Factored answers: K.factored (js/factor.js) — equal and factored completely, any order
+ * Answers are typed. Factored answers: K.factored (js/factor.js) — equal and factored completely, any order
  * and arrangement of signs and constants ((8 − x)(x + 6) = −(x − 8)(x + 6), ½(x − 4)(x + 2) = (½x − 2)(x + 2)); equal but
  * not factored completely (or a common factor left in a bracket) is a format nudge. Roots: a list "x = a, x = b" (± allowed;
  * any order; fractions or decimals), or "no solution". Restrictions: K.set (an inequality, an interval or set notation).
@@ -1221,37 +1222,31 @@
     { num: '1', outcome: 'RF1', lesson: 'L1', stem: 'Factor.', parts: [Pt('1a', 'RF1', 'BEG', mk(B.gcf)), Pt('1b', 'RF1', 'BEG', mk(B.monic))] },
     { num: '2', outcome: 'RF1', lesson: 'L2', stem: 'Factor.', parts: [Pt('2a', 'RF1', 'BEG', mk(B.decomp)), Pt('2b', 'RF1', 'BEG', mk(B.pst))] },
     { num: '3', outcome: 'RF1', lesson: 'L3, L4', stem: 'Factor.', parts: [Pt('3a', 'RF1', 'BEG', mk(B.subQuartic, { mode: 'simple' })), Pt('3b', 'RF1', 'BEG', mk(B.dos))] },
-    { num: '4', outcome: 'RF1', lesson: 'L4', stem: 'Factoring.', parts: [Pt('4', 'RF1', 'BEG', mk(B.nfMC))] },
-    { num: '5', outcome: 'RF5', lesson: 'L5', stem: 'Solve.', parts: [Pt('5a', 'RF5', 'BEG', mk(B.zp)), Pt('5b', 'RF5', 'BEG', mk(B.solveSimple))] },
-    { num: '6', outcome: 'RF5', lesson: 'L5', stem: 'An equation from its roots.', parts: [Pt('6', 'RF5', 'BEG', mk(B.eqFromRoots, { mode: 'int' }))] },
-    { num: '7', outcome: 'AN3', lesson: 'L6', stem: 'Restrictions on the variable.', parts: [Pt('7a', 'AN3', 'BEG', mk(B.restr, { mode: 'one' })), Pt('7b', 'AN3', 'BEG', mk(B.restr, { mode: 'two' }))] },
-    { num: '8', outcome: 'AN3', lesson: 'L6', stem: 'Radical equations.', parts: [Pt('8a', 'AN3', 'BEG', mk(B.radSolve1, { basic: true })), Pt('8b', 'AN3', 'BEG', mk(B.radSolve1))] },
+    { num: '4', outcome: 'RF5', lesson: 'L5', stem: 'Solve.', parts: [Pt('4a', 'RF5', 'BEG', mk(B.zp)), Pt('4b', 'RF5', 'BEG', mk(B.solveSimple))] },
+    { num: '5', outcome: 'AN3', lesson: 'L6', stem: 'Radicals.', parts: [Pt('5a', 'AN3', 'BEG', function (r) { return B.restr(r, CP, { mode: r.chance(0.6) ? 'one' : 'two' }); }), Pt('5b', 'AN3', 'BEG', mk(B.radSolve1))] },
     // ---------------- Progressing ----------------
-    { num: '9', outcome: 'RF1', lesson: 'L1, L2', stem: 'Factor fully.', parts: [Pt('9a', 'RF1', 'PRG', mk(B.monic, { mode: 'full' })), Pt('9b', 'RF1', 'PRG', mk(B.decomp, { mode: 'full' })), Pt('9c', 'RF1', 'PRG', mk(B.ratcoef))] },
-    { num: '10', outcome: 'RF1', lesson: 'L3', stem: 'Factoring by substitution.', parts: [Pt('10a', 'RF1', 'PRG', mk(B.subQuartic, { mode: 'full' })), Pt('10b', 'RF1', 'PRG', mk(B.subBin, { mode: 'gen' }))] },
-    { num: '11', outcome: 'RF1', lesson: 'L1, L4', stem: 'Factor fully.', parts: [Pt('11a', 'RF1', 'PRG', mk(B.grouping, { dos: 0.4 })), Pt('11b', 'RF1', 'PRG', function (r) { return r.chance(0.5) ? B.dosBin(r, CP, { mode: 'simple' }) : B.dos(r, CP, { mode: 'quartic' }); })] },
-    { num: '12', outcome: 'RF5', lesson: 'L5', stem: 'Solve by factoring.', parts: [Pt('12a', 'RF5', 'PRG', mk(B.solveStd, { mode: 'rearr' })), Pt('12b', 'RF5', 'PRG', mk(B.solveStd, { mode: 'expand' }))] },
-    { num: '13', outcome: 'RF5', lesson: 'L5', stem: 'An equation from its roots.', parts: [Pt('13', 'RF5', 'PRG', mk(B.eqFromRoots, { mode: 'frac' }))] },
-    { num: '14', outcome: 'AN3', lesson: 'L6', stem: 'Radical equations. Identify any extraneous root.', parts: [Pt('14a', 'AN3', 'PRG', mk(B.radBoth)), Pt('14b', 'AN3', 'PRG', mk(B.radSolve1, { none: 0.5 }))] },
-    { num: '15', outcome: 'AN3', lesson: 'L7', stem: 'Radical equations that lead to quadratics.', parts: [Pt('15a', 'AN3', 'PRG', mk(B.restr, { mode: 'eq' })), Pt('15b', 'AN3', 'PRG', mk(B.radQuad, { mode: 'basic' }))] },
+    { num: '6', outcome: 'RF1', lesson: 'L1, L2', stem: 'Factor fully.', parts: [Pt('6a', 'RF1', 'PRG', function (r) { return B.decomp(r, CP, { mode: r.chance(0.75) ? 'full' : 'two' }); }), Pt('6b', 'RF1', 'PRG', mk(B.grouping, { dos: 0.4 }))] },
+    { num: '7', outcome: 'RF1', lesson: 'L3, L4', stem: 'Factor fully.', parts: [Pt('7a', 'RF1', 'PRG', mk(B.subQuartic, { mode: 'full' })), Pt('7b', 'RF1', 'PRG', function (r) { return r.chance(0.5) ? B.dosBin(r, CP, { mode: 'simple' }) : B.dos(r, CP, { mode: 'quartic' }); })] },
+    { num: '8', outcome: 'RF5', lesson: 'L5', stem: 'Solve by factoring.', parts: [Pt('8a', 'RF5', 'PRG', mk(B.solveStd, { mode: 'rearr' })), Pt('8b', 'RF5', 'PRG', mk(B.solveStd, { mode: 'expand' }))] },
+    { num: '9', outcome: 'RF5', lesson: 'L5', stem: 'An equation from its roots.', parts: [Pt('9', 'RF5', 'PRG', mk(B.eqFromRoots, { mode: 'frac' }))] },
+    { num: '10', outcome: 'AN3', lesson: 'L6', stem: 'A radical on each side. Identify any extraneous root.', parts: [Pt('10', 'AN3', 'PRG', mk(B.radBoth))] },
+    { num: '11', outcome: 'AN3', lesson: 'L7', stem: 'Radical equations that lead to quadratics.', parts: [Pt('11a', 'AN3', 'PRG', mk(B.restr, { mode: 'eq' })), Pt('11b', 'AN3', 'PRG', mk(B.radQuad, { mode: 'basic' }))] },
     // ---------------- Mastery ----------------
-    { num: '16', outcome: 'RF1', lesson: 'L3', stem: 'Factoring by substitution.', parts: [Pt('16', 'RF1', 'MAS', function (r) { return r.chance(0.55) ? B.subTwo(r, CP) : B.subBin(r, CP, { mode: 'common' }); })] },
-    { num: '17', outcome: 'RF1', lesson: 'L4', stem: 'A difference of squares.', parts: [Pt('17', 'RF1', 'MAS', mk(B.dosBin, { mode: 'two' }))] },
-    { num: '18', outcome: 'RF1', lesson: 'L1, L2', stem: 'When does a trinomial factor?', parts: [Pt('18', 'RF1', 'MAS', function (r) { return r.chance(0.5) ? B.allB(r, CP, { kind: r.pick(['b', 'neg']) }) : B.allK(r, CP); })] },
-    { num: '19', outcome: 'RF5', lesson: 'L5', stem: 'A problem that leads to a quadratic equation.', parts: [Pt('19', 'RF5', 'MAS', mk(B.wordFrame))] },
-    { num: '20', outcome: 'RF5', lesson: 'L5', shared: function (r) { return B.rootKShared(r); }, stem: function (s) { return B.rootKStem(s); },
-      parts: [Pt('20a', 'RF5', 'MAS', function (r, s) { return B.rootKa(r, CP, s); }), Pt('20b', 'RF5', 'MAS', function (r, s) { return B.rootKb(r, CP, s); })] },
-    { num: '21', outcome: 'AN3', lesson: 'L7', stem: 'Two radicals.', parts: [Pt('21', 'AN3', 'MAS', mk(B.radTwice))] },
-    { num: '22', outcome: 'AN3', lesson: 'L7', stem: 'A radical equation from a problem.', parts: [Pt('22', 'AN3', 'MAS', mk(B.radWord))] }
+    { num: '12', outcome: 'RF1', lesson: 'L3', stem: 'Factoring by substitution.', parts: [Pt('12', 'RF1', 'MAS', function (r) { return r.chance(0.55) ? B.subTwo(r, CP) : B.subBin(r, CP, { mode: 'common' }); })] },
+    { num: '13', outcome: 'RF1', lesson: 'L4', stem: 'A difference of squares.', parts: [Pt('13', 'RF1', 'MAS', mk(B.dosBin, { mode: 'two' }))] },
+    { num: '14', outcome: 'RF5', lesson: 'L5', stem: 'A problem that leads to a quadratic equation.', parts: [Pt('14', 'RF5', 'MAS', mk(B.wordFrame))] },
+    { num: '15', outcome: 'RF5', lesson: 'L5', stem: 'Working backwards.', parts: [Pt('15', 'RF5', 'MAS', mk(B.rootKOne))] },
+    { num: '16', outcome: 'AN3', lesson: 'L7', stem: 'Two radicals.', parts: [Pt('16', 'AN3', 'MAS', mk(B.radTwice))] },
+    { num: '17', outcome: 'AN3', lesson: 'L7', stem: 'A radical equation from a problem.', parts: [Pt('17', 'AN3', 'MAS', mk(B.radWord))] }
   ];
 
   HW.defineTest({
-    id: 'u4test', unit: 4, title: 'Unit 4 Test', outcome: 'RF1', calc: false,
-    blurb: 'The Unit 4 outcomes-based test on RF1 (factoring: common factors, grouping, trinomials, perfect squares, substitution, differences of squares), RF5 (solving quadratic equations by factoring) and AN3 (radical equations, restrictions and extraneous roots) — in Beginning, Progressing and Mastery boxes. No calculator.',
-    // Short version (~half the time): decomposition and a perfect square, the zero product property, two radical equations at
-    // Beginning; substitution, solving after rearranging / expanding, a radical equation that leads to a quadratic at
-    // Progressing; a difference of squares of binomials, k and the other root, squaring twice at Mastery.
-    short: ['2', '5', '8', '10', '12', '15', '17', '20', '21'],
+    id: 'u4test', unit: 4, title: 'Unit 4 Test', outcome: 'RF1', calc: true,
+    blurb: 'The Unit 4 outcomes-based test on RF1 (factoring: common factors, grouping, trinomials, perfect squares, substitution, differences of squares), RF5 (solving quadratic equations by factoring) and AN3 (radical equations, restrictions and extraneous roots) — in Beginning, Progressing and Mastery boxes. Calculator allowed; answers exact.',
+    // Short version (~half the time): decomposition and a perfect square, solving a simple quadratic, a radical equation
+    // at Beginning; a quartic and a difference of squares, solving after rearranging / expanding, a radical
+    // equation that leads to a quadratic at Progressing; a difference of squares of binomials, the other root, squaring twice at Mastery.
+    short: ['2', '4b', '5b', '7', '8', '11', '13', '15', '16'],
     questions: QUESTIONS
   });
 })(window);
