@@ -758,7 +758,7 @@
   ];
 
   HW.defineTest({
-    id: 'u2test', unit: 2, title: 'Unit 2 Test', outcome: 'AN2', calc: false,
+    id: 'u2test', unit: 2, title: 'Unit 2 Test', outcome: 'AN2', calc: true,
     blurb: 'The Unit 2 outcomes-based test on AN2 (radical expressions): evaluating roots, mixed and entire radicals, comparing radicals, restrictions on variables, adding, subtracting, multiplying and dividing radicals, and rationalizing monomial and binomial denominators — in Beginning, Progressing and Mastery boxes. No calculator.',
     // Short version (~half the time): mixed radicals, restrictions, multiplying and rationalizing at Beginning; ordering, adding,
     // multiplying binomials and conjugates at Progressing; solving for x and the rectangle from its area at Mastery.

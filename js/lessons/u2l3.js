@@ -1011,5 +1011,5 @@
       } }] }
   ];
 
-  HW.defineLesson({ id: 'u2l3', unit: 2, num: '3', title: 'Adding and Subtracting Radicals', outcome: 'AN2', calc: false, questions: QUESTIONS, extra: EXTRA });
+  HW.defineLesson({ id: 'u2l3', unit: 2, num: '3', title: 'Adding and Subtracting Radicals', outcome: 'AN2', calc: true, questions: QUESTIONS, extra: EXTRA });
 })(window);

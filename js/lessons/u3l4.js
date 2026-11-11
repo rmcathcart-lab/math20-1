@@ -345,7 +345,7 @@
       { id: '5b', level: 'PRG', make: function (r) { return tfDouble(r); } },
       { id: '5c', level: 'EMG', make: function (r) { return tfRef(r, 'tan'); } },
       { id: '5d', level: 'EMG', make: function (r) { return tfRef(r, 'same'); } }] },
-    { num: '6', section: 'Solving equations exactly', stem: 'Solve for ' + t('\\theta') + ', ' + t('0^\\circ\\le\\theta<360^\\circ') + ', without a calculator.',
+    { num: '6', section: 'Solving equations exactly', stem: 'Solve for ' + t('\\theta') + ', ' + t('0^\\circ\\le\\theta<360^\\circ') + ', using exact values.',
       shared: function (r) { var f = r.shuffle(['sin', 'cos']), qa = r.shuffle([['sin', 0], ['sin', 1], ['sin', -1], ['cos', 0], ['cos', 1], ['cos', -1], ['tan', 0]]); return { f: f, qa: qa }; }, parts: [
       { id: '6a', level: 'EMG', make: function (r, sh) { var v = specialVal(r, sh.f[0], 1); return solveEx(t(fnT(sh.f[0]) + '=' + v.tex), sh.f[0], v.spec); } },
       { id: '6b', level: 'PRG', make: function (r, sh) { var fn = r.pick(['sin', 'cos']), v = specialVal(r, fn, -1); return solveEx(t(fnT(fn) + '=' + v.tex), fn, v.spec); } },
@@ -355,14 +355,14 @@
       { id: '6f', level: 'PRG', make: function (r) { var s = r.chance(0.7) ? -1 : 1, v = specialVal(r, 'tan', s, { refs: [30, 60] }); return solveEx(t(fnT('tan') + '=' + v.tex), 'tan', v.spec); } },
       { id: '6g', level: 'EMG', make: function (r, sh) { var z = sh.qa[1]; return solveEx(t(fnT(z[0]) + '=' + z[1]), z[0], U.spec(z[1])); } },
       { id: '6h', level: 'PRG', make: function (r) { var v = r.pick(['tan', 'xy']); return solveEx(v === 'tan' ? t('\\tan\\theta') + ' is undefined' : 'the ratio ' + t('\\frac{y}{x}') + ' for the terminal arm of ' + t('\\theta') + ' is undefined', 'tan', 'undef', { hints: [t('\\tan\\theta=\\frac{y}{x}') + ' is undefined when the denominator ' + t('x') + ' is ' + t('0') + '.', 'Where on the axes is ' + t('x=0') + '?'] }); } }] },
-    { num: '7', stem: 'Solve for ' + t('\\theta') + ', ' + t('0^\\circ\\le\\theta<360^\\circ') + ', without a calculator.', parts: [
+    { num: '7', stem: 'Solve for ' + t('\\theta') + ', ' + t('0^\\circ\\le\\theta<360^\\circ') + ', using exact values.', parts: [
       { id: '7a', level: 'PRG', make: function (r) { return isoPart(isoForm(r, r.pick(['sin', 'cos']), 'half', AV_ISO)); } },
       { id: '7b', level: 'PRG', make: function (r) { return isoPart(isoForm(r, r.pick(['sin', 'cos']), 'root2', AV_ISO)); } },
       { id: '7c', level: 'PRG', make: function (r) { return isoPart(isoForm(r, 'tan', r.pick(['tan3', 'tanr3', 'tanroot']), AV_ISO)); } },
       { id: '7d', level: 'PRG', make: function (r) { return isoPart(isoForm(r, r.pick(['sin', 'cos']), 'lead', AV_ISO)); } }] },
-    { num: '8', stem: 'Solve for ' + t('\\theta') + ', ' + t('0^\\circ\\le\\theta<360^\\circ') + ', without a calculator.', shared: function (r) { return r.shuffle(FN); }, parts: [0, 1, 2].map(function (i) {
+    { num: '8', stem: 'Solve for ' + t('\\theta') + ', ' + t('0^\\circ\\le\\theta<360^\\circ') + ', using exact values.', shared: function (r) { return r.shuffle(FN); }, parts: [0, 1, 2].map(function (i) {
       return { id: '8' + 'abc'[i], level: 'ADV', make: function (r, sh) { return sqPart(sqForm(r, sh[i], AV_SQ)); } }; }) },
-    { num: '9', section: 'Restricted intervals', stem: 'Solve each equation in the given interval, without a calculator.', parts: [0, 1, 2].map(function (i) {
+    { num: '9', section: 'Restricted intervals', stem: 'Solve each equation in the given interval, using exact values.', parts: [0, 1, 2].map(function (i) {
       return { id: '9' + 'abc'[i], level: 'ADV', make: function (r) {
         var o = pickWhere(function () { var fn = r.pick(FN); return { fn: fn, v: specialVal(r, fn, r.chance(0.5) ? 1 : -1, { unratP: 0 }), I: r.pick(IVS), form: i === 2 && fn !== 'tan' && r.chance(0.7) }; },
           function (o) { var s = U.solveExact(o.fn, o.v.spec).sols.filter(o.I.has); return s.length === 1 && !(o.fn === 'cos' && o.v.tex === '-\\frac{\\sqrt{3}}{2}' && o.I.tex.indexOf('180') === 0) && !(o.fn === 'tan' && o.v.tex === '\\sqrt{3}' && o.I.tex.indexOf('90') === 0); });
@@ -485,12 +485,12 @@
 
   /* ============================== the extra practice ============================== */
   var EXTRA = [
-    { num: 'A1', section: 'A. Skills', stem: 'Determine the exact value, without a calculator.', shared: function (r) {
+    { num: 'A1', section: 'A. Skills', stem: 'Determine the exact value.', shared: function (r) {
         return { sp: comboShared(7, SPX, FN, AV_EX.concat(['sin330', 'cos315', 'tan120', 'sin135', 'tan240', 'cos210', 'tan300']))(r), qa: comboShared(3, QA, FN, ['cos180', 'sin90', 'cos270'])(r) }; },
       parts: 'abcdefghij'.split('').map(function (l, i) {
         var qi = { 3: 0, 7: 1, 9: 2 }[i], si = [0, 1, 2, null, 3, 4, 5, null, 6, null][i];
         return { id: 'A1' + l, level: 'EMG', make: function (r, sh) { return qi != null ? evPart(sh.qa[qi].fn, sh.qa[qi].a) : evPart(sh.sp[si].fn, sh.sp[si].a); } }; }) },
-    { num: 'A2', stem: 'Solve for ' + t('\\theta') + ', ' + t('0^\\circ\\le\\theta<360^\\circ') + ', without a calculator.', shared: function (r) { return { qa: r.shuffle([['sin', 0], ['sin', 1], ['sin', -1], ['cos', 0], ['cos', 1], ['cos', -1], ['tan', 0]]), f: r.shuffle(FN) }; }, parts: [
+    { num: 'A2', stem: 'Solve for ' + t('\\theta') + ', ' + t('0^\\circ\\le\\theta<360^\\circ') + ', using exact values.', shared: function (r) { return { qa: r.shuffle([['sin', 0], ['sin', 1], ['sin', -1], ['cos', 0], ['cos', 1], ['cos', -1], ['tan', 0]]), f: r.shuffle(FN) }; }, parts: [
       { id: 'A2a', level: 'EMG', make: function (r, sh) { var v = specialVal(r, sh.f[0], 1); return solveEx(t(fnT(sh.f[0]) + '=' + v.tex), sh.f[0], v.spec); } },
       { id: 'A2b', level: 'EMG', make: function (r, sh) { var v = specialVal(r, sh.f[1], 1); return solveEx(t(fnT(sh.f[1]) + '=' + v.tex), sh.f[1], v.spec); } },
       { id: 'A2c', level: 'EMG', make: function (r, sh) { var v = specialVal(r, sh.f[2], 1); return solveEx(t(fnT(sh.f[2]) + '=' + v.tex), sh.f[2], v.spec); } },
@@ -504,9 +504,9 @@
       { id: 'B1b', level: 'PRG', make: function (r) { return exprPart(EXPR.axis(r)); } },
       { id: 'B1c', level: 'PRG', make: function (r) { return exprPart(EXPR.kprod(r)); } },
       { id: 'B1d', level: 'PRG', make: function (r) { return exprPart(EXPR.ratio(r)); } }] },
-    { num: 'B2', stem: 'Solve for ' + t('\\theta') + ', ' + t('0^\\circ\\le\\theta<360^\\circ') + ', without a calculator.', shared: function (r) { return r.shuffle(FN); }, parts: [0, 1].map(function (i) {
+    { num: 'B2', stem: 'Solve for ' + t('\\theta') + ', ' + t('0^\\circ\\le\\theta<360^\\circ') + ', using exact values.', shared: function (r) { return r.shuffle(FN); }, parts: [0, 1].map(function (i) {
       return { id: 'B2' + 'ab'[i], level: 'ADV', make: function (r, sh) { return sqPart(sqForm(r, sh[i], AV_SQ)); } }; }) },
-    { num: 'B3', stem: 'Solve in the given interval, without a calculator.', parts: [0, 1].map(function (i) {
+    { num: 'B3', stem: 'Solve in the given interval, using exact values.', parts: [0, 1].map(function (i) {
       return { id: 'B3' + 'ab'[i], level: 'ADV', make: function (r) {
         var o = pickWhere(function () { var fn = r.pick(FN), kind = fn === 'tan' ? 'tanroot' : r.pick(['half', 'root2', 'lead']); return { f: isoForm(r, fn, kind, AV_ISO.concat(['2\\cos\\theta=-1', '\\tan\\theta+1=0'])), I: r.pick(IVS) }; },
           function (o) { return U.solveExact(o.f.fn, o.f.spec).sols.filter(o.I.has).length === 1; });
@@ -571,5 +571,5 @@
     'mc-u3l4-why-sum': 'Said sin + cos = 1 (MC)', 'mc-u3l4-why-special': 'Said it holds only for special angles (MC)', 'mc-u3l4-why-xy': 'Said x + y = r (MC)' });
   HW.addPartial({ 'u3l4-ref': 'b', 'u3l4-swap': 'b', 'u3l4-tan-flip': 'b', 'u3l4-sign': 'b', 'u3l4-xy': 'b', 'u3l4-cast': 'b', 'u3l4-neg-square': 'b', 'u3l4-pm': 'b', 'u3l4-ref-only': 'b', 'u3l4-quad': 'b', 'u3l4-cw': 'b', 'u3l4-rot-end': 'n', 'u3l4-r-noroot': 's', 'u3l4-no-square': 's' });
 
-  HW.defineLesson({ id: LID, unit: 3, num: '4', title: 'Exact Values from Special Triangles', outcome: 'T2', calc: false, questions: QUESTIONS, extra: EXTRA });
+  HW.defineLesson({ id: LID, unit: 3, num: '4', title: 'Exact Values from Special Triangles', outcome: 'T2', calc: true, questions: QUESTIONS, extra: EXTRA });
 })(window);

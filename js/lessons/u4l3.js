@@ -762,5 +762,5 @@
     });
     return out;
   }
-  HW.defineLesson({ id: 'u4l3', unit: 4, num: '3', title: 'Factoring by Substitution: a(f(x))² + b(f(x)) + c', outcome: 'RF1', calc: false, questions: splitQs(QUESTIONS), extra: EXTRA });
+  HW.defineLesson({ id: 'u4l3', unit: 4, num: '3', title: 'Factoring by Substitution: a(f(x))² + b(f(x)) + c', outcome: 'RF1', calc: true, questions: splitQs(QUESTIONS), extra: EXTRA });
 })(window);

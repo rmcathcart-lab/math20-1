@@ -795,5 +795,5 @@
     });
     return out;
   }
-  HW.defineLesson({ id: LID, unit: 4, num: '7', title: 'Radical Equations That Lead to Quadratics', outcome: 'AN3', calc: false, questions: splitNum(QUESTIONS), extra: splitNum(EXTRA) });
+  HW.defineLesson({ id: LID, unit: 4, num: '7', title: 'Radical Equations That Lead to Quadratics', outcome: 'AN3', calc: true, questions: splitNum(QUESTIONS), extra: splitNum(EXTRA) });
 })(window);

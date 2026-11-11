@@ -2,7 +2,7 @@
  * class. There were no older Math 20-1 exit slips, so each slip is written from Ryan's booklet (m201book/unit3/u3_l0N.tex
  * and u3_ep0N.tex): four short questions, about 5–8 minutes, Beginning → Progressing → Mastery, on that lesson's core
  * skills with new numbers (the lesson's examples and the assignment's own items are left out of the pools where they
- * could come up). Calculator allowed in Degree mode, except Lesson 4 (exact values: no calculator). Outcomes as the brief
+ * could come up). Calculator allowed (Degree mode) on every slip; exact-value parts still ask for exact answers. Outcomes as the brief
  * sets them: Lesson 1 T1, Lessons 2–3 T2, Lesson 4 per question (exact angle T1, exact values T2), Lessons 5–8 T3,
  * Lesson 9 (review) per question.
  * The generators, checkers, figures and wrong-answer codes are the Unit 3 kit HW.u3tkit in js/lessons/u3test.js (so that
@@ -13,7 +13,7 @@
  *        (k, y) or (x, k) with a given r and quadrant: k and θ (MAS, EP02 C2)
  *   3.3  the quadrant from two signs (BEG, MC) · the other two exact ratios from one (PRG) · a·trig θ + b = c to the
  *        tenth, "no solution" possible (PRG) · A + B from cos A = cos α and sin B = sin β (MAS, L3 #17)
- *   3.4  (no calculator) an exact value, sometimes quadrantal or undefined (BEG, T2) · θ exactly from a point with radical
+ *   3.4  an exact value, sometimes quadrantal or undefined (BEG, T2) · θ exactly from a point with radical
  *        coordinates (PRG, T1) · an equation solved exactly (PRG, T2) · a squared equation: four solutions (MAS, T2, L4 #8)
  *   3.5  a side by the sine law, full pair given (BEG) · a side when the third angle comes first (PRG) · a one-triangle
  *        SSA angle (PRG) · a height from two angles of elevation (MAS, L5 NR, EP05 B2)
@@ -47,8 +47,8 @@
     questions: [Q(1, 'T2', 'BEG', 'Which quadrant?', B.quadSigns), Q(2, 'T2', 'PRG', 'The other ratios.', B.otherRatios),
       Q(3, 'T2', 'PRG', 'Solve.', function (r, cp) { return B.solveLinear(r, cp, { none: true }); }), Q(4, 'T2', 'MAS', 'Two other angles.', B.sumOther)] });
 
-  HW.defineExit({ lesson: 'u3l4', calc: false, outcome: 'T2',
-    blurb: 'Exact values from the special triangles (no calculator): an exact value, an exact angle from a point, an equation solved exactly, and a squared equation with four solutions.',
+  HW.defineExit({ lesson: 'u3l4', calc: true, outcome: 'T2',
+    blurb: 'Exact values from the special triangles: an exact value, an exact angle from a point, an equation solved exactly, and a squared equation with four solutions.',
     questions: [Q(1, 'T2', 'BEG', 'An exact value.', B.exactVal, { mix: true }), Q(2, 'T1', 'PRG', 'An exact angle.', B.exactAngle),
       Q(3, 'T2', 'PRG', 'Solve exactly.', B.solveExact), Q(4, 'T2', 'MAS', 'A squared equation.', B.solveExact, { sq: true })] });
 

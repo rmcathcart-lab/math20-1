@@ -2,40 +2,40 @@
  * figures and question builders) that js/exits/u3.js uses for the exit slips, so load this file before it.
  * Written in test mode from Ryan's Math 20-1 booklet (m201book/unit3/u3_l01–u3_l09.tex and u3_ep01–u3_ep09.tex; Lesson 9's
  * assignment and EP09 are the practice tests that set the style and difficulty). There is no older test for this course.
- * One 75-minute class, calculator allowed (Degree mode); the exact-value parts say "exact value" / "exactly". Outcomes as
- * the booklet's lessons use them: T1 (angles in standard position: L1 and the exact angle work of L4), T2 (the ratios
- * from 0° to 360°: L2, L3 and the exact values of L4), T3 (the sine law, the cosine law and the ambiguous case: L5–L8).
- * 22 questions / 38 parts: Beginning 6 questions / 15 parts (T1 4, T2 6, T3 5), Progressing 9 / 15 (T1 3, T2 7, T3 5),
- * Mastery 7 / 8 (T1 2, T2 3, T3 3).
+ * One 75-minute class, calculator allowed (Degree mode) throughout; the exact-value parts ask for exact answers ("exact
+ * value" / "exactly"), which a calculator's decimals don't give. Outcomes as the booklet's lessons use them: T1 (angles in
+ * standard position: L1 and the exact angle work of L4), T2 (the ratios from 0° to 360°: L2, L3 and the exact values of
+ * L4), T3 (the sine law, the cosine law and the ambiguous case: L5–L8).
+ * 19 questions / 27 parts (~76 min by tests/short_report.js): Beginning 6 questions / 10 parts (T1 2, T2 5, T3 3),
+ * Progressing 8 / 12 (T1 2, T2 5, T3 5), Mastery 5 / 5 (T1 1, T2 2, T3 2).
  * Every part is a generator (new numbers for each student; the booklet's own numbers are avoided where they could come
  * up), with the key built from the generated values, a worked solution in the booklet's method, hints, and `bad`
  * answers with u3t- codes (labels and partial-credit decisions in the kit below).
  *
  * How each box is pitched:
  *   Beginning  — each lesson's core skill as first taught: the reference angle of an angle and the angle from its
- *                reference angle and quadrant, a clockwise / more-than-one-turn rotation, which angle shares a reference
- *                angle (MC: recognition) (L1); r and one exact ratio from a point (L2); the quadrant from two signs (MC)
- *                and the other angle with the same sine / cosine / tangent (L3); two exact values, one of them possibly
- *                quadrantal or undefined (L4); a side by the sine law with a full pair given, a side by the cosine law
- *                (SAS) and the area ½ab sin C, on figures drawn to scale (L5, L6, L8); the number of triangles from SSA
- *                information, twice (L7).
- *   Progressing — the typical assignment question: the three other angles with the same reference angle and the angle
- *                through a reflected point (L1); an exact angle from a point with radical coordinates (L4); the exact
- *                sin, cos and tan of a point in Quadrants II–IV and θ to the tenth (L2); the other two exact ratios from
- *                one ratio and a sign condition (L3); sin/cos/tan θ = a and a·trig θ + b = c (possibly in a smaller
- *                interval or with no solution), to the tenth (L3); an equation and an expression solved exactly (L4);
- *                one-triangle SSA: an angle by the sine law, then the third side (L5); the largest angle from three
- *                sides (often obtuse) (L6); every possible angle in a two-triangle SSA case (L7); the distance after two
- *                legs on bearings (L8).
+ *                reference angle and quadrant (L1); r and one exact ratio from a point (L2); the other angle with the
+ *                same sine / cosine / tangent (L3); two exact values, one possibly quadrantal or undefined (L4); a side by
+ *                the sine law with a full pair given and a side by the cosine law (SAS), on figures drawn to scale
+ *                (L5, L6); the number of triangles from SSA information (L7).
+ *   Progressing — the typical assignment question: the three other angles with the same reference angle (L1) and an
+ *                exact angle from a point with radical coordinates (L4); the exact sin, cos and tan of a point in
+ *                Quadrants II–IV and θ to the tenth (L2); the other two exact ratios from one ratio and a sign condition
+ *                (L3); a·trig θ + b = c to the tenth (possibly in a smaller interval or with no solution) and an
+ *                equation solved exactly (L3, L4); one-triangle SSA: an angle by the sine law, then the third side (L5);
+ *                the largest angle from three sides, often obtuse (L6); every possible angle in an SSA case (L7); the
+ *                distance after two legs on bearings (L8).
  *   Mastery    — the hardest assignment / extra-practice items: two angles with the same reference angle from their sum
- *                or difference (L1 EP C2); the rotation between two points with radical coordinates (L4 #12, EP C1);
- *                (k, y) with a given r and quadrant: k and θ (L2 EP C2); a squared equation solved exactly (L4 #8) and the
- *                other ratios from a radical ratio (L3 #7); both triangles of an ambiguous case: the two lengths of the
- *                third side (L7 #8, L9 #13); a height from two angles of elevation (two-triangle problem, L5 NR, L8 #7);
- *                a quadrilateral split by a diagonal (cosine law, then sine law) (L8 #8, L9 #15).
- * Coverage: L1 Q1, Q7a–b, Q16 · L2 Q2, Q9, Q18 · L3 Q3, Q10, Q11, Q19b · L4 Q4, Q7c, Q8, Q17, Q19a · L5 Q5a, Q12, Q21 ·
- *           L6 Q5b, Q13, Q22 · L7 Q6, Q14, Q20 · L8 Q5c, Q15, Q21, Q22 · L9 (review) the test is written in its style (Q1, Q4, Q9,
- *           Q11, Q13, Q15 and Q22 follow its practice-test items).
+ *                or difference (L1 EP C2); (k, y) with a given r and quadrant: k and θ (L2 EP C2); a squared equation
+ *                solved exactly, four solutions (L4 #8); both triangles of an ambiguous case: the two lengths of the
+ *                third side (L7 #8, L9 #13); a quadrilateral split by a diagonal (cosine law, then sine law) (L8 #8, L9 #15).
+ * Cut from the first draft (Ryan, too long): the clockwise rotation and the same-reference-angle MC (L1), the reflected
+ * point, the quadrant-from-signs MC, the solve-to-the-tenth part (kept as a·trig θ + b = c), the exact expression, the
+ * area ½ab sin C, a second "how many triangles", the rotation between two points, the radical given ratio and the two
+ * angles of elevation. Their builders stay in the kit (the exit slips use most of them).
+ * Coverage: L1 Q1, Q7a, Q15 · L2 Q2, Q8, Q16 · L3 Q3, Q9, Q10a · L4 Q4, Q7b, Q10b, Q17 · L5 Q5a, Q11 · L6 Q5b, Q12, Q19 ·
+ *           L7 Q6, Q13, Q18 · L8 Q14, Q19 · L9 (review) the test is written in its style (Q1, Q4, Q8, Q10, Q11, Q14 and
+ *           Q19 follow its practice-test items).
  * Short version (def.short): about half the working time, every outcome keeps its Beginning / Progressing / Mastery boxes
  * (see the defineTest call; checked with node tests/short_report.js).
  * Answers: angles in degrees (the ° is optional); "all solutions" as a list of angles in any order, or "no solution";
@@ -604,7 +604,7 @@
     if (oth) alts.push({ v: place(oth, s.q), code: cp + 'ex-ang-ref', hint: 'Check the reference angle: ' + t('\\tan\\theta_R=\\frac{|y|}{|x|}=' + stex(qratio(qty(Math.abs(pt[1].c), pt[1].m), qty(Math.abs(pt[0].c), pt[0].m)))) + ', and ' + t('\\tan ' + dg(s.rf) + '=' + stex(qratio(qty(Math.abs(pt[1].c), pt[1].m), qty(Math.abs(pt[0].c), pt[0].m)))) + '.' });
     [1, 2, 3, 4].forEach(function (k) { if (k !== s.q && k !== 1) alts.push({ v: place(s.rf, k), code: cp + 'place', hint: 'The point ' + t(ptTex(pt)) + ' is in Quadrant ' + ROM[s.q] + ' (look at the signs of ' + t('x') + ' and ' + t('y') + ').' }); });
     var tn = qratio(pt[1], pt[0]);
-    return degPart('The point ' + t(ptTex(pt)) + ' is on the terminal arm of an angle ' + t('\\theta') + ' in standard position. Without a calculator, determine ' + t('\\theta') + ' exactly, ' + t('0^\\circ\\le\\theta<360^\\circ') + '.', a, alts,
+    return degPart('The point ' + t(ptTex(pt)) + ' is on the terminal arm of an angle ' + t('\\theta') + ' in standard position. Determine ' + t('\\theta') + ' exactly, ' + t('0^\\circ\\le\\theta<360^\\circ') + '.', a, alts,
       'Quadrant ' + ROM[s.q] + ' (' + t('x' + (pt[0].c > 0 ? '>' : '<') + '0') + ', ' + t('y' + (pt[1].c > 0 ? '>' : '<') + '0') + '). ' + t('\\tan\\theta=\\frac{y}{x}=' + rawFrac(pt[1], pt[0]) + '=' + stex(tn)) + ', and ' + t('\\tan ' + dg(s.rf) + '=' + stex(spec(Math.abs(tn.p), tn.q, tn.m))) + ', so ' + t('\\theta_R=' + dg(s.rf)) + '. ' + t('\\theta=' + placeTex(s.q, s.rf) + (s.q === 1 ? '' : '=' + dg(a))) + '.',
       ['Find the quadrant from the signs, then ' + t('\\tan\\theta_R=\\frac{|y|}{|x|}') + '.', 'Special values: ' + t('\\tan 30^\\circ=\\frac{\\sqrt{3}}{3}') + ', ' + t('\\tan 45^\\circ=1') + ', ' + t('\\tan 60^\\circ=\\sqrt{3}') + '.'], 'exact angle from a point');
   };
@@ -619,7 +619,7 @@
     var alts = [{ v: 360 - d, code: cp + 'rot-dir', hint: 'That is the clockwise rotation. Counterclockwise from ' + t('P') + ' to ' + t('Q') + ': ' + t(dg(s.a2) + '-' + dg(s.a1)) + (s.a2 < s.a1 ? ' (add ' + t('360^\\circ') + ' if it is negative)' : '') + '.' },
       { v: s.a2, code: cp + 'rot-one', hint: t(dg(s.a2)) + ' is the angle of ' + t('Q') + ' alone. Find the angle of ' + t('P') + ' too, and subtract.' }, { v: s.a1, code: cp + 'rot-one', hint: 'That is the angle of ' + t('P') + '. Find the angle of ' + t('Q') + ' too, and subtract.' }];
     function line(nm, p, a) { var tn = qratio(p[1], p[0]); return t(nm) + ': Quadrant ' + ROM[quad(a)] + ', ' + t('\\tan\\theta=' + stex(tn)) + ', ' + t('\\theta_R=' + dg(refOf(a))) + ', angle ' + t(dg(a)) + '.'; }
-    return degPart('A point moves counterclockwise around a circle centred at the origin, from ' + t('P' + ptTex(P1)) + ' to ' + t('Q' + ptTex(P2)) + '. Without a calculator, determine the angle through which it rotates.', d, alts,
+    return degPart('A point moves counterclockwise around a circle centred at the origin, from ' + t('P' + ptTex(P1)) + ' to ' + t('Q' + ptTex(P2)) + '. Determine exactly the angle through which it rotates.', d, alts,
       line('P', P1, s.a1) + ' ' + line('Q', P2, s.a2) + ' Rotation: ' + t(dg(s.a2) + '-' + dg(s.a1) + (s.a2 < s.a1 ? '+' + dg(360) : '') + '=' + dg(d)) + ' (the circle has radius ' + t(R) + ').',
       ['Find the angle in standard position of each point (quadrant, then ' + t('\\tan\\theta_R=\\frac{|y|}{|x|}') + ').', 'Counterclockwise from ' + t('P') + ' to ' + t('Q') + ': subtract (add ' + t('360^\\circ') + ' if the result is negative).'], 'rotation between two points');
   };
@@ -824,7 +824,7 @@
       ['Each angle has the same reference angle as the given one, in the other quadrant where that ratio has the same sign (CAST).'], 'other angles with the same ratio');
   };
 
-  /* ---------- T2 · Lesson 4 (exact values, no calculator) ---------- */
+  /* ---------- T2 · Lesson 4 (exact values) ---------- */
   var SPECIAL = [30, 45, 60, 120, 135, 150, 210, 225, 240, 300, 315, 330];
   B.exactVal = function (r, cp, s0, o) {
     o = o || {};
@@ -837,7 +837,7 @@
     var sol;
     if (quadral) { var Pt = { 0: [1, 0], 90: [0, 1], 180: [-1, 0], 270: [0, -1], 360: [1, 0] }[a]; sol = 'At ' + t(dg(a)) + ' use the point ' + t('(' + Pt[0] + ',\\ ' + Pt[1] + ')') + ' with ' + t('r=1') + ': ' + t('\\' + fn + ' ' + dg(a) + '=' + (fn === 'sin' ? '\\frac{y}{r}' : fn === 'cos' ? '\\frac{x}{r}' : '\\frac{y}{x}') + (want === 'undef' ? '=\\frac{' + Pt[1] + '}{0}' : '=' + stex(want))) + (want === 'undef' ? ', which is <b>undefined</b>.' : '.'); }
     else { var q = quad(a), rf2 = refOf(a), s0 = sgn(fn, q); sol = (q === 1 ? '' : 'Quadrant ' + ROM[q] + ', ' + t(refTex(a)) + '; ' + fn + ' is ' + (s0 > 0 ? 'positive' : 'negative') + ' there. ') + t('\\' + fn + ' ' + dg(a) + '=' + (q === 1 ? '' : (s0 < 0 ? '-' : '') + '\\' + fn + ' ' + dg(rf2) + '=') + stex(want)) + '.'; }
-    return exactPart((o.noPre ? '' : 'Without a calculator, determine the exact value of ') + t('\\' + fn + ' ' + dg(a)) + (o.noPre ? '' : '.'), want, cp, { altSpecs: alts, undef: true, signHint: 'Check the sign with CAST for the quadrant of ' + t(dg(a)) + '.' }, sol + (quadral ? '' : sketchFor(a, dgs(refOf(a)))),
+    return exactPart((o.noPre ? '' : 'Determine the exact value of ') + t('\\' + fn + ' ' + dg(a)) + (o.noPre ? '' : '.'), want, cp, { altSpecs: alts, undef: true, signHint: 'Check the sign with CAST for the quadrant of ' + t(dg(a)) + '.' }, sol + (quadral ? '' : sketchFor(a, dgs(refOf(a)))),
       ['Quadrant and reference angle first; the special triangles give ' + t('\\theta_R') + '’s value; CAST gives the sign.', 'Special triangles: 1, 1, ' + t('\\sqrt{2}') + ' and 1, ' + t('\\sqrt{3}') + ', 2.'], 'exact value');
   };
   function evT(fn, a) { return '\\' + fn + ' ' + dg(a); }
@@ -855,7 +855,7 @@
     }, function (s) { return Math.abs(sval(s.val)) <= 12 && s.val.p !== 0 && !(s.tex === '\\cos 60^\\circ+\\sin 30^\\circ'); });
     var alts = [];
     if (s.kind === 'prod' || s.kind === 'sum') alts.push({ s: sneg(s.val), code: cp + 'sign', hint: 'Check the sign of each value with CAST.' });
-    return exactPart('Without a calculator, determine the exact value of ' + t(s.tex) + '.', s.val, cp, { altSpecs: alts.filter(function (a) { return sval(a.s) !== sval(s.val); }) },
+    return exactPart('Determine the exact value of ' + t(s.tex) + '.', s.val, cp, { altSpecs: alts.filter(function (a) { return sval(a.s) !== sval(s.val); }) },
       t(evT(s.f1, s.a1) + '=' + stex(s.v1)) + ' and ' + t(evT(s.f2, s.a2) + '=' + stex(s.v2)) + '. So ' + t(s.tex + '=' + s.steps + '=' + stex(s.val)) + '.',
       ['Find each exact value first (quadrant, reference angle, CAST sign).', 'Substitute with brackets, then simplify.'], 'exact expression');
   };
@@ -874,7 +874,7 @@
       quads = [1, 2, 3, 4]; sols = quads.map(function (q) { return place(rf, q); });
       lines.push(t('\\' + fn + '^{2}\\theta=\\frac{' + C + '}{' + A + '}=' + stex(sq2)) + ', so ' + t('\\' + fn + '\\theta=\\pm' + stex(vs)) + ' (both signs!). ' + t('\\' + fn + ' ' + dg(rf) + '=' + stex(vs)) + ', so ' + t('\\theta_R=' + dg(rf)) + ' in all four quadrants: ' + t(listTex(sols, 0, true)) + '.');
       var half = quadsFor(fn, 1).map(function (q) { return place(rf, q); });
-      return listPart('Without a calculator, solve ' + t(eq) + ' for ' + t('0^\\circ\\le\\theta<360^\\circ') + '.', sols, cp, { exact: true, fn: fn, ref: rf, quads: quads, altSets: [{ sols: half, code: cp + 'sq-pm', hint: 'Taking the square root gives <b>two</b> values: ' + t('\\' + fn + '\\theta=\\pm' + stex(vs)) + '. Solve both.' }, { sols: quadsFor(fn, -1).map(function (q) { return place(rf, q); }), code: cp + 'sq-pm', hint: t('\\' + fn + '\\theta=\\pm' + stex(vs)) + ': solve both signs.' }], missingHint: t('\\' + fn + '\\theta=\\pm' + stex(vs)) + ' — with both signs there are four solutions.' },
+      return listPart('Solve ' + t(eq) + ' exactly for ' + t('0^\\circ\\le\\theta<360^\\circ') + '.', sols, cp, { exact: true, fn: fn, ref: rf, quads: quads, altSets: [{ sols: half, code: cp + 'sq-pm', hint: 'Taking the square root gives <b>two</b> values: ' + t('\\' + fn + '\\theta=\\pm' + stex(vs)) + '. Solve both.' }, { sols: quadsFor(fn, -1).map(function (q) { return place(rf, q); }), code: cp + 'sq-pm', hint: t('\\' + fn + '\\theta=\\pm' + stex(vs)) + ': solve both signs.' }], missingHint: t('\\' + fn + '\\theta=\\pm' + stex(vs)) + ' — with both signs there are four solutions.' },
         lines.join('<br>'), ['Isolate ' + t('\\' + fn + '^{2}\\theta') + ', then take the square root: ' + t('\\pm') + '!', 'Each sign gives two angles with the same reference angle.'], 'squared trig equation (exact)');
     }
     // k·fn θ + c = 0 forms
@@ -897,7 +897,7 @@
     lines.push(t('\\theta=' + sols.map(function (x) { return dg(x); }).join('\\text{ or }')) + '.');
     var altSets = [{ sols: quadsFor(fn, -sg0).map(function (q) { return place(rf, q); }), code: cp + 'quad', hint: 'Check the sign of ' + t('\\' + fn + '\\theta') + ' after isolating it: it is ' + (sg0 > 0 ? 'positive' : 'negative') + ', so Quadrants ' + quadsTex(quads) + '.' }];
     if (rf !== 45) altSets.push({ sols: quads.map(function (q) { return place(rf === 30 ? 60 : 30, q); }), code: cp + 'ex-ref', hint: 'Check the reference angle: ' + t('\\' + fn + ' ' + dg(rf) + '=' + stex(vs)) + '.' });
-    return listPart('Without a calculator, solve ' + t(eq) + ' for ' + t('0^\\circ\\le\\theta<360^\\circ') + '.', sols, cp, { exact: true, fn: fn, ref: rf, quads: quads, altSets: altSets }, lines.join('<br>'),
+    return listPart('Solve ' + t(eq) + ' exactly for ' + t('0^\\circ\\le\\theta<360^\\circ') + '.', sols, cp, { exact: true, fn: fn, ref: rf, quads: quads, altSets: altSets }, lines.join('<br>'),
       ['Isolate the ratio (rationalize if needed) and compare with the special values.', 'The sign and CAST give the two quadrants; place ' + t('\\theta_R') + ' in each.'], 'solve exactly');
   };
 
@@ -1203,41 +1203,37 @@
 
   var QUESTIONS = [
     /* ---------------- Beginning ---------------- */
-    { num: '1', outcome: 'T1', lesson: 'L1', stem: 'Angles in standard position.', parts: [pt('1a', 'T1', 'BEG', B.refAngle), pt('1b', 'T1', 'BEG', B.fromRef), pt('1c', 'T1', 'BEG', B.coterminal), pt('1d', 'T1', 'BEG', B.sameRefMC)] },
+    { num: '1', outcome: 'T1', lesson: 'L1', stem: 'Angles in standard position.', parts: [pt('1a', 'T1', 'BEG', B.refAngle), pt('1b', 'T1', 'BEG', B.fromRef)] },
     { num: '2', outcome: 'T2', lesson: 'L2', shared: ptShared1, stem: ptStem, parts: [pt('2a', 'T2', 'BEG', B.rDist), pt('2b', 'T2', 'BEG', B.oneRatio)] },
-    { num: '3', outcome: 'T2', lesson: 'L3', stem: 'Signs of the ratios (CAST).', parts: [pt('3a', 'T2', 'BEG', B.quadSigns), pt('3b', 'T2', 'BEG', B.otherAngle)] },
+    one(3, 'T2', 'BEG', 'L3', 'The CAST rule.', B.otherAngle),
     { num: '4', outcome: 'T2', lesson: 'L4', stem: 'Exact values.', parts: [pt('4a', 'T2', 'BEG', B.exactVal), pt('4b', 'T2', 'BEG', B.exactVal, { mix: true, quadP: 0.5 })] },
-    { num: '5', outcome: 'T3', lesson: 'L5, L6, L8', stem: 'Each triangle is drawn to scale.', parts: [pt('5a', 'T3', 'BEG', B.sineSide), pt('5b', 'T3', 'BEG', B.cosSide), pt('5c', 'T3', 'BEG', B.area)] },
-    { num: '6', outcome: 'T3', lesson: 'L7', stem: 'The ambiguous case.', parts: [pt('6a', 'T3', 'BEG', B.countTri), pt('6b', 'T3', 'BEG', B.countTri)] },
+    { num: '5', outcome: 'T3', lesson: 'L5, L6', stem: 'Each triangle is drawn to scale.', parts: [pt('5a', 'T3', 'BEG', B.sineSide), pt('5b', 'T3', 'BEG', B.cosSide)] },
+    one(6, 'T3', 'BEG', 'L7', 'The ambiguous case.', B.countTri),
     /* ---------------- Progressing ---------------- */
-    { num: '7', outcome: 'T1', lesson: 'L1, L4', stem: 'Reference angles and exact angles.', parts: [pt('7a', 'T1', 'PRG', B.sameRef), pt('7b', 'T1', 'PRG', B.reflect), pt('7c', 'T1', 'PRG', B.exactAngle)] },
-    { num: '8', outcome: 'T2', lesson: 'L4', stem: 'No calculator for this question.', parts: [pt('8a', 'T2', 'PRG', B.solveExact), pt('8b', 'T2', 'PRG', B.exactExpr)] },
-    { num: '9', outcome: 'T2', lesson: 'L2', shared: ptShared2, stem: ptStem, parts: [pt('9a', 'T2', 'PRG', B.ratios), pt('9b', 'T2', 'PRG', B.thetaPt)] },
-    one(10, 'T2', 'PRG', 'L3', 'The other two ratios.', B.otherRatios),
-    { num: '11', outcome: 'T2', lesson: 'L3', stem: 'Solving equations (calculator, Degree mode).', parts: [pt('11a', 'T2', 'PRG', B.solveCalc), pt('11b', 'T2', 'PRG', B.solveLinear, { interval: true })] },
-    { num: '12', outcome: 'T3', lesson: 'L5', shared: function (r) { return B.ssaOneShared(r); }, stem: function (s) { return ssaStem(s) + ssaFig(s); }, parts: [pt('12a', 'T3', 'PRG', function (r, cp, s) { return B.ssaAngle(r, cp, s, { stem: false }); }), pt('12b', 'T3', 'PRG', B.ssaSide)] },
-    one(13, 'T3', 'PRG', 'L6', 'The cosine law.', B.cosAngle, { largest: true }),
-    one(14, 'T3', 'PRG', 'L7', 'The ambiguous case.', function (r, cp) { return B.ambAngles(r, cp, B.ambShared(r, { mix: true })); }),
-    one(15, 'T3', 'PRG', 'L8', 'Bearings.', B.bearing),
+    { num: '7', outcome: 'T1', lesson: 'L1, L4', stem: 'Reference angles and exact angles.', parts: [pt('7a', 'T1', 'PRG', B.sameRef), pt('7b', 'T1', 'PRG', B.exactAngle)] },
+    { num: '8', outcome: 'T2', lesson: 'L2', shared: ptShared2, stem: ptStem, parts: [pt('8a', 'T2', 'PRG', B.ratios), pt('8b', 'T2', 'PRG', B.thetaPt)] },
+    one(9, 'T2', 'PRG', 'L3', 'The other two ratios.', B.otherRatios),
+    { num: '10', outcome: 'T2', lesson: 'L3, L4', stem: 'Solving equations.', parts: [pt('10a', 'T2', 'PRG', B.solveLinear, { interval: true }), pt('10b', 'T2', 'PRG', B.solveExact)] },
+    { num: '11', outcome: 'T3', lesson: 'L5', shared: function (r) { return B.ssaOneShared(r); }, stem: function (s) { return ssaStem(s) + ssaFig(s); }, parts: [pt('11a', 'T3', 'PRG', function (r, cp, s) { return B.ssaAngle(r, cp, s, { stem: false }); }), pt('11b', 'T3', 'PRG', B.ssaSide)] },
+    one(12, 'T3', 'PRG', 'L6', 'The cosine law.', B.cosAngle, { largest: true }),
+    one(13, 'T3', 'PRG', 'L7', 'The ambiguous case.', function (r, cp) { return B.ambAngles(r, cp, B.ambShared(r, { mix: true })); }),
+    one(14, 'T3', 'PRG', 'L8', 'Bearings.', B.bearing),
     /* ---------------- Mastery ---------------- */
-    one(16, 'T1', 'MAS', 'L1', 'Two angles with the same reference angle.', B.sumAB),
-    one(17, 'T1', 'MAS', 'L4', 'A rotation (no calculator).', B.rotate),
-    one(18, 'T2', 'MAS', 'L2', 'A missing coordinate.', B.kFind),
-    { num: '19', outcome: 'T2', lesson: 'L4, L3', stem: 'Exact answers.', parts: [pt('19a', 'T2', 'MAS', B.solveExact, { sq: true }), pt('19b', 'T2', 'MAS', B.otherRatios, { rad: true })] },
-    one(20, 'T3', 'MAS', 'L7', 'Both triangles.', function (r, cp) { return B.ambSides(r, cp, B.ambShared(r)); }),
-    one(21, 'T3', 'MAS', 'L5, L8', 'Two angles of elevation.', B.twoElev),
-    one(22, 'T3', 'MAS', 'L6, L8', 'Two triangles.', B.quadDiag)
+    one(15, 'T1', 'MAS', 'L1', 'Two angles with the same reference angle.', B.sumAB),
+    one(16, 'T2', 'MAS', 'L2', 'A missing coordinate.', B.kFind),
+    one(17, 'T2', 'MAS', 'L4', 'A squared equation.', B.solveExact, { sq: true }),
+    one(18, 'T3', 'MAS', 'L7', 'Both triangles.', function (r, cp) { return B.ambSides(r, cp, B.ambShared(r)); }),
+    one(19, 'T3', 'MAS', 'L6, L8', 'Two triangles.', B.quadDiag)
   ];
 
   HW.defineTest({
     id: 'u3test', unit: 3, title: 'Unit 3 Test', calc: true,
-    blurb: 'The Unit 3 outcomes-based test on T1 (angles in standard position), T2 (the trigonometric ratios from 0° to 360°) and T3 (the sine law, the cosine law and the ambiguous case): reference angles, ratios from a point, CAST, exact values, solving equations, oblique triangles, bearings and two-triangle problems — in Beginning, Progressing and Mastery boxes. Calculator allowed (Degree mode); exact-value parts are done without it.',
-    // Short version (about half the time): every outcome keeps its three boxes. Beginning: a reference angle and an angle
-    // from its reference angle (T1), r and a ratio from a point, two exact values (T2), a sine-law and a cosine-law side
-    // (T3); Progressing: the three other angles and the reflected point (T1), the three ratios and θ from a point, an
-    // equation to the tenth (T2), the one-triangle SSA angle and side (T3); Mastery: A and B from their sum (T1), k and θ
-    // (T2), both triangles of an ambiguous case (T3).
-    short: ['1ab', '2', '4', '5ab', '7ab', '9', '11a', '12', '16', '18', '20'],
+    blurb: 'The Unit 3 outcomes-based test on T1 (angles in standard position), T2 (the trigonometric ratios from 0° to 360°) and T3 (the sine law, the cosine law and the ambiguous case): reference angles, ratios from a point, CAST, exact values, solving equations, oblique triangles, bearings and two-triangle problems — in Beginning, Progressing and Mastery boxes. Calculator allowed (Degree mode); exact-value parts ask for exact answers.',
+    // Short version (about half the time): every outcome keeps its three boxes. Beginning: a reference angle (T1), r and a
+    // ratio from a point (T2), a sine-law and a cosine-law side (T3); Progressing: the three other angles (T1), the three
+    // ratios and θ from a point (T2), the one-triangle SSA angle and side (T3); Mastery: A and B from their sum (T1), k and
+    // θ (T2), both triangles of an ambiguous case (T3).
+    short: ['1a', '2', '5', '7a', '8', '11', '15', '16', '18'],
     questions: QUESTIONS
   });
 })(window);

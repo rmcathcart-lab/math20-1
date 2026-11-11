@@ -797,7 +797,7 @@
       } }] }
   ];
 
-  HW.defineLesson({ id: LID, unit: 2, num: '1', title: 'Mixed and Entire Radicals', outcome: 'AN2', calc: false,
+  HW.defineLesson({ id: LID, unit: 2, num: '1', title: 'Mixed and Entire Radicals', outcome: 'AN2', calc: true,
     blurb: 'Evaluating roots exactly, simplest mixed form and entire radicals of any index, and comparing radicals without a calculator.',
     questions: QUESTIONS, extra: EXTRA });
 })(window);

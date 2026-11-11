@@ -559,5 +559,5 @@
       } }] }
   ];
 
-  HW.defineLesson({ id: 'u2l4', unit: 2, num: '4', title: 'Multiplying Radicals', outcome: 'AN2', calc: false, questions: QUESTIONS, extra: EXTRA });
+  HW.defineLesson({ id: 'u2l4', unit: 2, num: '4', title: 'Multiplying Radicals', outcome: 'AN2', calc: true, questions: QUESTIONS, extra: EXTRA });
 })(window);

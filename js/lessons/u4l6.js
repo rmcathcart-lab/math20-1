@@ -612,5 +612,5 @@
       } }] }
   ];
 
-  HW.defineLesson({ id: LID, unit: 4, num: '6', title: 'Solving Radical Equations and Checking for Extraneous Roots', outcome: 'AN3', calc: false, questions: QUESTIONS, extra: EXTRA });
+  HW.defineLesson({ id: LID, unit: 4, num: '6', title: 'Solving Radical Equations and Checking for Extraneous Roots', outcome: 'AN3', calc: true, questions: QUESTIONS, extra: EXTRA });
 })(window);

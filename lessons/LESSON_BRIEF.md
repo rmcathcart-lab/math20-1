@@ -59,8 +59,12 @@ to `HW.TEACHING.lessons` in `../js/catalog.js`, which also makes `index.html` li
 - Math always in KaTeX (`tex()` / `<span class="tex">`): never visible "x^2". Numbers ≥ 1000 with a thin space (`fmt()`).
 - Projector-readable (≥ 17 px), fixed 1080 px layout (design for ~1000 px content). Interactive things are `<button>`s or
   have `data-tap` (finger AND Pencil).
-- Calculator: the class calculator is the **TI-84 Plus CE** (some students have a Casio fx-9750GIII: same features,
-  different keys). The on-screen one (`../js/calc84.js`, the **Calc** button on every page) has the real key layout and
+- Ryan lets Math 20-1 students use their calculators for almost everything: no "no calculator" lessons; where the skill is
+  exactness, ask for exact answers (a calculator only gives decimals).
+- Calculator: the class calculator is the **TI-84 Plus CE** (some students have a Casio fx-9750GIII). The on-screen one
+  (the **Calc** button on every page) has a **TI-84 | Casio** switch in its head bar: `../js/calc84.js` is the TI-84,
+  `../js/calcfx.js` the Casio fx-9750GIII (natural display, MENU 1 Run-Matrix / 3 Graph / 5 Table, SHIFT MENU SET UP,
+  G-Solv). The choice is remembered on the device. The TI-84 has the real key layout and
   TI order of operations (powers before negation, so `(−) 2 x²` = −4; × ÷ and implied multiplication left to right;
   `^` left to right), Degree mode by default, Classic display (fractions as `-2/125`), Y=, WINDOW, ZOOM, GRAPH, TRACE,
   2nd TABLE / TBLSET and 2nd CALC (value, zero, minimum, maximum, intersect). Write keys in `<span class="keys">` with
@@ -78,7 +82,15 @@ to `HW.TEACHING.lessons` in `../js/catalog.js`, which also makes `index.html` li
   letters `A`–`Z` (ALPHA + key; `X` is the X,T,θ,n key); `k:<key id>` for any key. A digit inside a menu picks that
   item. Each demo starts on a cleared home screen. Examples: `1250 × ( (−) 1 ÷ 5 ) ^ 7 = ►Frac =`;
   `Y= CLEAR 500 × .7 ^ X TBLSET 0 ENTER 1 ENTER TABLE ► ▼ ▼`; `sum( seq( 3 × 2 ^ ( N − 1 ) , N , 1 , 10 ) ) =`;
-  `Y= CLEAR X x² − 4 ZStandard zero (−) 1 ENTER 5 ENTER 2 ENTER`. `node tests/calc84_test.js` tests the calculator.
+  `Y= CLEAR X x² − 4 ZStandard zero (−) 1 ENTER 5 ENTER 2 ENTER`.
+  **Demos work on both models:** keep writing the tokens with TI-84 names. When the Casio is chosen, `HW.Calc.plan`
+  turns them into Casio keys and captions (ENTER → EXE, `sin 30 )` → `sin 30`, Ans → SHIFT (−), STO→ → →, a power's
+  `►` out of the exponent box, √ … ) → SHIFT x² … ►, MODE → SHIFT MENU (SET UP), Y= → MENU 3 (or MENU 5 for a table),
+  TBLSET → F5 (SET) Start/End/Step, TABLE → F6, ZStandard → SHIFT F3 F3 (STANDRD), zero/minimum/maximum/intersect/value →
+  SHIFT F5 (G-SOLV) ROOT/MIN/MAX/INTSECT/Y-CAL with ► to the same point, and S⇔D where the Casio would show a fraction
+  or surd and the TI-84 a decimal). The relational tokens `> ≥ < ≤ ≠` (2nd TEST) have no Casio translation: avoid them.
+  `node tests/calc84_test.js` tests the TI-84; `node tests/calcfx_test.js` tests the Casio and runs **every** `data-keys`
+  demo under `lessons/` on both, failing if the Casio doesn't end on the same number: run it after adding demos.
 
 ## Testing (budget: aim for ≤ 3 dump runs and ≤ ~12 images viewed in total)
 1. Teacher mode is automatic in the dump script. Run

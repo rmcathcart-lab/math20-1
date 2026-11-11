@@ -260,7 +260,7 @@
     timer.addEventListener('click', function () { var hide = ls('hw:tm:hidetimer') === '1'; ls('hw:tm:hidetimer', hide ? '0' : '1'); drawTimer(); });
     if (limitMs()) right.appendChild(timer);
     if (T.def.calc && HW.Times) { var ttB = button('btn-ghost tm-times', HW.TIMES_ICON, function () { HW.Times.toggle(); }); ttB.title = 'Multiplication table'; ttB.setAttribute('aria-label', 'Multiplication table'); right.appendChild(ttB); }
-    if (T.def.calc && HW.Calc) { var calcB = button('btn-ghost tm-calc', (HW.CALC_ICON || '') + '<span>Calculator</span>', function () { HW.Calc.toggle(); }); calcB.title = 'On-screen graphing calculator (TI-84 Plus CE style)'; right.appendChild(calcB); }
+    if (T.def.calc && HW.Calc) { var calcB = button('btn-ghost tm-calc', (HW.CALC_ICON || '') + '<span>Calculator</span>', function () { HW.Calc.toggle(); }); calcB.title = 'On-screen graphing calculator (TI-84 or Casio fx-9750GIII style)'; right.appendChild(calcB); }
     right.appendChild(button('btn-primary tm-submit', 'Submit', confirmSubmit));
     head.appendChild(right); o.appendChild(head);
     o.appendChild(el('div', 'tm-warn', '⚠ Stay on this page. <b>Leaving this window, switching tabs or leaving full screen submits your ' + (T.def.kind === 'exit' ? 'exit slip' : 'test') + ' as it is.</b>'));

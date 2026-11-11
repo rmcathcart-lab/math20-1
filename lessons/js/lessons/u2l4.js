@@ -864,7 +864,7 @@ const areaFigs = {
  * BEG: multiply two mixed radicals and simplify. PRG: (p + q√r)(s + t√r) → a + b√r. MAS: a binomial with two radicals
  * squared, or multiplied by its conjugate. */
 standup('u2l4', {
-  intro: 'At your whiteboard: coefficients together, radicands together, then simplify. No calculator!',
+  intro: 'At your whiteboard: coefficients together, radicands together, then simplify. Exact answers!',
   levels: {
     BEG: (r) => {
       const pairs = [[6, 10], [3, 15], [2, 14], [6, 15], [10, 14], [5, 15], [2, 18], [3, 21], [7, 14], [6, 21], [10, 15], [2, 22]];

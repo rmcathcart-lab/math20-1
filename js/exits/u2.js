@@ -376,7 +376,7 @@
     return P.order(r, 'Without a calculator, arrange the numbers from <b>' + first + '</b> to <b>' + last + '</b>.', its, { first: first, last: last }, sol,
       ['Write each number as an entire radical: ' + (cube ? t('a\\sqrt[3]{b}=\\sqrt[3]{a^{3}b}') + ' (a negative in front goes inside).' : t('a\\sqrt{b}=\\sqrt{a^{2}b}') + ', and a whole number ' + t('n=\\sqrt{n^{2}}') + '.'), 'Then compare the radicands: the larger radicand is the larger number.'], 'order radicals without a calculator');
   }
-  HW.defineExit({ lesson: 'u2l1', calc: false, outcome: 'AN2',
+  HW.defineExit({ lesson: 'u2l1', calc: true, outcome: 'AN2',
     blurb: 'Mixed and entire radicals: a square root and a cube (or fourth) root in simplest mixed form, a mixed radical as an entire radical, and ordering radicals without a calculator.',
     questions: [Q(1, 'BEG', 'Simplest form.', l1q1), Q(2, 'PRG', 'An entire radical.', l1q2), Q(3, 'PRG', 'A cube or fourth root.', l1q3), Q(4, 'MAS', 'Ordering radicals.', l1q4)] });
 
@@ -481,7 +481,7 @@
     pt.bad = kind === 'den' ? [String(c / a)] : kind === 'max' ? [String(ans + 1)] : [String(ans - 1)];
     return pt;
   }
-  HW.defineExit({ lesson: 'u2l2', calc: false, outcome: 'AN2',
+  HW.defineExit({ lesson: 'u2l2', calc: true, outcome: 'AN2',
     blurb: 'Radicals with variables: the restriction on the variable, a variable radical in simplest form, a mixed radical with variables as an entire radical, and the largest or smallest integer a restriction allows.',
     questions: [Q(1, 'BEG', 'The restriction.', l2q1), Q(2, 'PRG', 'Simplest form.', l2q2), Q(3, 'PRG', 'An entire radical.', l2q3), Q(4, 'MAS', 'Integer values.', l2q4)] });
 
@@ -562,7 +562,7 @@
     }
     return RK.part(prompt, S, { dl: dl }, sol, hints, tri ? 'missing side from a perimeter' : 'width from a perimeter');
   }
-  HW.defineExit({ lesson: 'u2l3', calc: false, outcome: 'AN2',
+  HW.defineExit({ lesson: 'u2l3', calc: true, outcome: 'AN2',
     blurb: 'Adding and subtracting radicals: like radicals, simplifying first so like radicals appear, cube (or fourth) roots, and a missing side from a perimeter.',
     questions: [Q(1, 'BEG', 'Like radicals.', l3q1), Q(2, 'PRG', 'Simplify first.', l3q2), Q(3, 'PRG', 'Cube roots.', l3q3), Q(4, 'MAS', 'A missing side.', l3q4)] });
 
@@ -638,7 +638,7 @@
       t('d^{2}=' + pa(Lt) + '^{2}+' + pa(Wt) + '^{2}=' + pa((m + k * k) + '+' + (2 * k) + sq(m)) + '+' + pa((m + k * k) + '-' + (2 * k) + sq(m)) + '=' + D2) + ', so ' + t('d=' + sq(D2) + (RK.tex(S) === sq(D2) ? '' : '=' + rtex(S))) + ' cm. (The middle terms cancel.)',
       ['Pythagorean theorem: ' + t('d^{2}=\\ell^{2}+w^{2}') + '.', 'Square each binomial (three terms each), add, then take the square root and simplify.'], 'diagonal of a rectangle with radical sides');
   }
-  HW.defineExit({ lesson: 'u2l4', calc: false, outcome: 'AN2',
+  HW.defineExit({ lesson: 'u2l4', calc: true, outcome: 'AN2',
     blurb: 'Multiplying radicals: two mixed radicals, two binomials (FOIL), the square of a binomial, and the diagonal of a rectangle with conjugate sides.',
     questions: [Q(1, 'BEG', 'Multiply.', l4q1), Q(2, 'PRG', 'Two binomials.', l4q2), Q(3, 'PRG', 'A square.', l4q3), Q(4, 'MAS', 'The diagonal.', l4q4)] });
 
@@ -721,7 +721,7 @@
     return RK.part('Simplify ' + t(shown) + '. Write the answer with a rational denominator, in simplest form.', S, { dl: dl }, sol,
       ['Simplify the radicals first, then multiply the numerator and the denominator by the radical in the denominator.', 'Multiply (or divide) <b>every</b> term of the numerator, then reduce only by a factor of every term.'], 'two-term numerator over a radical');
   }
-  HW.defineExit({ lesson: 'u2l5', calc: false, outcome: 'AN2',
+  HW.defineExit({ lesson: 'u2l5', calc: true, outcome: 'AN2',
     blurb: 'Dividing radicals and rationalizing one-term denominators: a quotient of radicals, a square-root and a cube-root denominator, and a two-term numerator over a radical.',
     questions: [Q(1, 'BEG', 'Divide.', l5q1), Q(2, 'PRG', 'Rationalize.', l5q2), Q(3, 'PRG', 'A cube root below.', l5q3), Q(4, 'MAS', 'Two terms on top.', l5q4)] });
 
@@ -793,7 +793,7 @@
       { dl: [[s.plus ? term([k, a]) : 0, 'u2x-frac-add', 'Fractions are not added by adding the denominators. Rationalize each fraction (or use the common denominator ' + t('(' + a + '-' + sq(b) + ')(' + a + '+' + sq(b) + ')=' + D) + ').']] },
       sol, ['Rationalize each fraction with the conjugate of its denominator — both denominators become ' + t(D) + '.', 'Then collect like terms.'], 'sum or difference with conjugate denominators');
   }
-  HW.defineExit({ lesson: 'u2l6', calc: false, outcome: 'AN2',
+  HW.defineExit({ lesson: 'u2l6', calc: true, outcome: 'AN2',
     blurb: 'Conjugates: the product of a binomial and its conjugate, rationalizing a binomial denominator, a binomial over a binomial, and a sum or difference of two fractions with conjugate denominators.',
     questions: [Q(1, 'BEG', 'The conjugate.', l6q1), Q(2, 'PRG', 'Rationalize.', l6q2), Q(3, 'PRG', 'A binomial over a binomial.', l6q3), Q(4, 'MAS', 'Two fractions.', l6q4)] });
 
@@ -856,7 +856,7 @@
     }
     return RK.part('Rationalize the denominator and simplify ' + t(shown) + '.', S, { dl: dl }, sol, HCONJ.concat(['Expand the numerator fully, then reduce and keep the denominator positive.']), 'rationalize: binomial over binomial');
   }
-  HW.defineExit({ lesson: 'u2l7', calc: false, outcome: 'AN2',
+  HW.defineExit({ lesson: 'u2l7', calc: true, outcome: 'AN2',
     blurb: 'Unit 2 review: a radical in simplest form, adding radicals with a variable, multiplying binomials with two radicals, and rationalizing a binomial denominator.',
     questions: [Q(1, 'BEG', 'Simplest form.', l7q1), Q(2, 'PRG', 'Add and subtract.', l7q2), Q(3, 'PRG', 'Multiply.', l7q3), Q(4, 'MAS', 'Rationalize.', l7q4)] });
 })(window);

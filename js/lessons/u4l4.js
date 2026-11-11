@@ -588,5 +588,5 @@
     });
     return out;
   }
-  HW.defineLesson({ id: 'u4l4', unit: 4, num: '4', title: 'Differences of Squares, Including a²(f(x))² − b²(g(y))²', outcome: 'RF1', calc: false, questions: splitQs(QUESTIONS), extra: EXTRA });
+  HW.defineLesson({ id: 'u4l4', unit: 4, num: '4', title: 'Differences of Squares, Including a²(f(x))² − b²(g(y))²', outcome: 'RF1', calc: true, questions: splitQs(QUESTIONS), extra: EXTRA });
 })(window);

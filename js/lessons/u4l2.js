@@ -437,5 +437,5 @@
       } }] }
   ];
 
-  HW.defineLesson({ id: 'u4l2', unit: 4, num: '2', title: 'Factoring ax² + bx + c', outcome: 'RF1', calc: false, questions: QUESTIONS, extra: EXTRA });
+  HW.defineLesson({ id: 'u4l2', unit: 4, num: '2', title: 'Factoring ax² + bx + c', outcome: 'RF1', calc: true, questions: QUESTIONS, extra: EXTRA });
 })(typeof window !== 'undefined' ? window : globalThis);
