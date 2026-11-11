@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Angles in Standard Position and Reference Angles · Math 20-1 3.1</title>
+<meta name="description" content="Math 20-1 Unit 3 Lesson 1: angles in standard position (vertex, initial arm, terminal arm, rotation angle), quadrants and quadrantal angles, clockwise rotations and rotations past 360°, reference angles in each quadrant, working back from a reference angle, the four angles with one reference angle, and reflecting P(a, b) in the axes. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u3l1.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u3l1">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 3 Trigonometry · Lesson 1</div>
+  <h1>Angles in Standard Position and Reference Angles</h1>
+  <p class="lede">Every angle in this unit starts in the same place: its vertex at the <b>origin</b> and its first arm on the <b>positive <span class="tex">x</span>-axis</b>. We turn a second arm, the <b class="u3l1-ac">terminal arm</b>, name the quadrant it stops in, and find its <b class="u3l1-rc">reference angle</b>: how far the arm is from the <span class="tex">x</span>-axis.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>sketch an angle in <b>standard position</b> and name its vertex, initial arm and terminal arm</li>
+      <li>state the <b>quadrant</b> an angle terminates in, or recognise a <b>quadrantal angle</b> (on an axis)</li>
+      <li>find the angle from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span> with the same terminal arm as a clockwise rotation or a rotation past <span class="tex">360^\circ</span></li>
+      <li>determine the <b class="u3l1-rc">reference angle</b> <span class="tex">\theta_R</span> in any quadrant, and work back from <span class="tex">\theta_R</span> to <span class="tex">\theta</span></li>
+      <li>find the <b>four angles</b> from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span> that share one reference angle</li>
+      <li>use reflections of <span class="tex">P(a,\ b)</span> in the axes to find related rotation angles</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>T1</b> Demonstrate an understanding of angles in standard position [0° to 360°].<br><span class="muted">Today: standard position, quadrants and quadrantal angles, reference angles and the four angles that share one.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Ferris Wheel" id="wu" style="--wf-side: 450px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Ferris Wheel</h2>
+  <p class="wf-rule">A Ferris wheel has a radius of <b>20 m</b>. Your seat starts <b>level with the hub</b>, on the right, and the wheel turns <b>counterclockwise</b>.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u3l1-wheel" id="u3l1-wheel"></div>
+    <div class="u3l1-wbtns">
+      <button type="button" class="pill" id="u3l1-wback">◂ Back 15°</button>
+      <button type="button" class="pill" id="u3l1-wfwd">Turn 15° ▸</button>
+      <button type="button" class="pill" id="u3l1-wreset">Back to the start</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u3l1-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Where is your seat after the wheel turns <span class="tex">90^\circ</span>? After <span class="tex">180^\circ</span>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l1-wa"><div class="bk-ans"><span class="tex">90^\circ</span>: at the <b>top</b>, 20 m above the hub. <span class="tex">180^\circ</span>: level with the hub again, on the <b>left</b>.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>After <span class="tex">30^\circ</span> your seat is <b>10 m above</b> the hub. Find another turn, less than <span class="tex">180^\circ</span>, that puts you 10 m above the hub. <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l1-wa"><div class="bk-ans"><b><span class="tex">150^\circ</span></b>: <span class="tex">30^\circ</span> short of <span class="tex">180^\circ</span>, the mirror image of <span class="tex">30^\circ</span> on the other side.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> In one full turn (<span class="tex">0^\circ</span> to <span class="tex">360^\circ</span>), how many times is your seat <b>exactly 10 m</b> from hub height, above <b>or</b> below? <b>Guess first.</b></div></div>
+      <div class="poll-opts c4">
+        <div class="opt"><b>A</b> 1</div>
+        <div class="opt"><b>B</b> 2</div>
+        <div class="opt"><b>C</b> 3</div>
+        <div class="opt right"><b>D</b> 4</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>D, four times:</b> <span class="tex">30^\circ</span>, <span class="tex">150^\circ</span>, <span class="tex">210^\circ</span> and <span class="tex">330^\circ</span>. Each one is <b><span class="tex">30^\circ</span> away from the horizontal line</b> through the hub. That <span class="tex">30^\circ</span> is the <b class="u3l1-rc">reference angle</b>: today’s big idea.<br>
+        <span class="muted"><b>B</b> forgets the bottom half: <span class="tex">210^\circ=180^\circ+30^\circ</span> and <span class="tex">330^\circ=360^\circ-30^\circ</span> are 10 m <em>below</em> the hub.</span></div>
+    </div>
+  </div></div>
+  <p class="u3l1-social">Challenge your neighbour: pick a turn, like <span class="tex">70^\circ</span>. Your neighbour names the three other turns that put the seat just as far from hub height.</p>
+</section>
+
+<!-- ================= 1. Standard position ================= -->
+<section class="card" data-ink="s1" data-section="1. Angles in Standard Position">
+  <div class="sec-h"><span class="badge">1</span><h2>Angles in Standard Position</h2></div>
+  <div class="def">An angle is in <b>standard position</b> when its <b>vertex</b> is at the origin and its <b>initial arm</b> lies along the positive <span class="tex">x</span>-axis. The angle is made by rotating a second arm, the <b class="u3l1-ac">terminal arm</b>, away from the initial arm. The amount of turning is the <b class="u3l1-ac">rotation angle</b>, <span class="tex">\textcolor{#7a1f3d}{\theta}</span>.</div>
+  <div class="u3l1-two">
+    <ul class="u3l1-bul">
+      <li>A <b>counterclockwise</b> rotation gives a <b>positive</b> angle. One full turn is <span class="tex">360^\circ</span>.</li>
+      <li>A clockwise rotation gives a negative angle, and a rotation of more than <span class="tex">360^\circ</span> goes past a full turn. Either way the terminal arm lands on the same arm as some angle from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span>. In this course, <span class="tex">0^\circ\le\theta\le360^\circ</span>.</li>
+    </ul>
+    <div class="u3l1-fig" data-fig="std"></div>
+  </div>
+  <div class="explainer" data-explainer="standard"></div>
+</section>
+
+<!-- ================= 2. Quadrants ================= -->
+<section class="card" data-ink="s2" data-section="2. Quadrants and Quadrantal Angles">
+  <div class="sec-h"><span class="badge">2</span><h2>Quadrants and Quadrantal Angles</h2></div>
+  <div class="def">The axes split the plane into four <b>quadrants</b>, numbered counterclockwise from the positive <span class="tex">x</span>-axis. An angle whose terminal arm lies <em>on an axis</em> (<span class="tex">0^\circ</span>, <span class="tex">90^\circ</span>, <span class="tex">180^\circ</span>, <span class="tex">270^\circ</span>, <span class="tex">360^\circ</span>) is a <b>quadrantal angle</b>; it is not in any quadrant.</div>
+  <div class="u3l1-two">
+    <div>
+      <div class="def amber u3l1-qkey">
+        <div>Quadrant 1: <span class="tex">0^\circ&lt;\theta&lt;90^\circ</span></div><div>Quadrant 2: <span class="tex">90^\circ&lt;\theta&lt;180^\circ</span></div>
+        <div>Quadrant 3: <span class="tex">180^\circ&lt;\theta&lt;270^\circ</span></div><div>Quadrant 4: <span class="tex">270^\circ&lt;\theta&lt;360^\circ</span></div>
+      </div>
+      <p>To sketch an angle, start on the positive <span class="tex">x</span>-axis, turn counterclockwise, and stop in the right quadrant: halfway through a quadrant is <span class="tex">45^\circ</span> past the axis.</p>
+    </div>
+    <div class="u3l1-fig" data-fig="quads"></div>
+  </div>
+  <div class="explainer" data-explainer="quadrants"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Sketch it and name where it lands</h3></div>
+  <p class="q">Sketch each angle in standard position and state where its terminal arm lies.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">160^\circ</span></div><div class="u3l1-sk" data-sk="m" data-ang="160"></div><div class="work" style="--h:40px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Quadrant 2</b> (between <span class="tex">90^\circ</span> and <span class="tex">180^\circ</span>)</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">245^\circ</span></div><div class="u3l1-sk" data-sk="m" data-ang="245"></div><div class="work" style="--h:40px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Quadrant 3</b> (between <span class="tex">180^\circ</span> and <span class="tex">270^\circ</span>)</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">335^\circ</span></div><div class="u3l1-sk" data-sk="m" data-ang="335"></div><div class="work" style="--h:40px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Quadrant 4</b> (between <span class="tex">270^\circ</span> and <span class="tex">360^\circ</span>)</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">90^\circ</span></div><div class="u3l1-sk" data-sk="m" data-ang="90"></div><div class="work" style="--h:40px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">On the positive <span class="tex">y</span>-axis: <b>quadrantal</b></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Clockwise, and past a full turn</h3></div>
+  <p class="q">Sketch each rotation. Then state the angle from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span> that has the same terminal arm.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) a clockwise rotation of <span class="tex">135^\circ</span> (that is, <span class="tex">-135^\circ</span>)</div><div class="u3l1-sk" data-sk="l" data-ang="-135"></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Turning <span class="tex">135^\circ</span> clockwise stops in quadrant 3, which is the same arm as <span class="tex">360^\circ-135^\circ=\boldsymbol{225^\circ}</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) a counterclockwise rotation of <span class="tex">420^\circ</span></div><div class="u3l1-sk" data-sk="l" data-ang="420"></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">One full turn is <span class="tex">360^\circ</span>; the extra <span class="tex">420^\circ-360^\circ=60^\circ</span> stops in quadrant 1. Same arm as <span class="tex">\boldsymbol{60^\circ}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. A Point on the Terminal Arm">
+  <h3 class="sub">A point on the terminal arm</h3>
+  <p>If a point <span class="tex">P(x,\ y)</span> lies on the terminal arm, the terminal arm runs from the origin through <span class="tex">P</span>. The <b>signs</b> of <span class="tex">x</span> and <span class="tex">y</span> tell you the quadrant: right of the <span class="tex">y</span>-axis <span class="tex">x&gt;0</span>, left <span class="tex">x&lt;0</span>; above the <span class="tex">x</span>-axis <span class="tex">y&gt;0</span>, below <span class="tex">y&lt;0</span>.</p>
+  <div class="explainer" data-explainer="points"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Points on the terminal arm</h3></div>
+  <p class="q">Each point lies on the terminal arm of an angle <span class="tex">\theta</span> in standard position. Plot the point, draw <span class="tex">\theta</span>, and state its quadrant.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">A(-6,\ 2)</span></div><div class="u3l1-gridf" data-grid="-6,2" data-th="161.6" data-name="A"></div><div class="work" style="--h:30px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x&lt;0</span>, <span class="tex">y&gt;0</span>: <b>quadrant 2</b></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">B(1,\ -3)</span></div><div class="u3l1-gridf" data-grid="1,-3" data-th="288.4" data-name="B"></div><div class="work" style="--h:30px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x&gt;0</span>, <span class="tex">y&lt;0</span>: <b>quadrant 4</b></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">C(-2,\ -5)</span></div><div class="u3l1-gridf" data-grid="-2,-5" data-th="248.2" data-name="C"></div><div class="work" style="--h:30px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x&lt;0</span>, <span class="tex">y&lt;0</span>: <b>quadrant 3</b></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Reference angles ================= -->
+<section class="card" data-ink="s3" data-section="3. Reference Angles">
+  <div class="sec-h"><span class="badge">3</span><h2>Reference Angles</h2></div>
+  <div class="def">The <b class="u3l1-rc">reference angle</b>, <span class="tex">\textcolor{#c27a0e}{\theta_R}</span>, is the acute angle between the terminal arm and the <b><span class="tex">x</span>-axis</b>. It is always positive and between <span class="tex">0^\circ</span> and <span class="tex">90^\circ</span>, and it is always measured to the <span class="tex">x</span>-axis, <em>never</em> to the <span class="tex">y</span>-axis. In each quadrant, look at how far the terminal arm is from the nearest part of the <span class="tex">x</span>-axis (<span class="tex">0^\circ</span>, <span class="tex">180^\circ</span> or <span class="tex">360^\circ</span>).</div>
+  <div class="def amber">
+    <div class="u3l1-refk">
+      <div><div data-fig="ref" data-ang="40"></div><div class="u3l1-refc">Quadrant 1<br><span class="tex">\theta_R=\theta</span></div></div>
+      <div><div data-fig="ref" data-ang="140"></div><div class="u3l1-refc">Quadrant 2<br><span class="tex">\theta_R=180^\circ-\theta</span></div></div>
+      <div><div data-fig="ref" data-ang="220"></div><div class="u3l1-refc">Quadrant 3<br><span class="tex">\theta_R=\theta-180^\circ</span></div></div>
+      <div><div data-fig="ref" data-ang="320"></div><div class="u3l1-refc">Quadrant 4<br><span class="tex">\theta_R=360^\circ-\theta</span></div></div>
+    </div>
+    <div class="u3l1-qnote">For a quadrantal angle, the arm is on an axis: <span class="tex">\theta_R=0^\circ</span> for <span class="tex">0^\circ</span>, <span class="tex">180^\circ</span>, <span class="tex">360^\circ</span> (on the <span class="tex">x</span>-axis) and <span class="tex">\theta_R=90^\circ</span> for <span class="tex">90^\circ</span>, <span class="tex">270^\circ</span>.</div>
+  </div>
+  <div class="explainer" data-explainer="sweep"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>To the <span class="tex">x</span>-axis, every time.</b> Sketch first, then measure the gap between the terminal arm and the <b>nearest part of the <span class="tex">x</span>-axis</b>. If your answer is more than <span class="tex">90^\circ</span> or negative, something went wrong.</div></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Find the reference angle</h3></div>
+  <p class="q">Sketch each angle and its reference angle. Determine <span class="tex">\theta_R</span>.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">205^\circ</span></div><div class="u3l1-sk" data-sk="m" data-ang="205" data-ref="180,205"></div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Q3: <span class="tex">\theta_R=205^\circ-180^\circ=\boldsymbol{25^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">118^\circ</span></div><div class="u3l1-sk" data-sk="m" data-ang="118" data-ref="118,180"></div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Q2: <span class="tex">\theta_R=180^\circ-118^\circ=\boldsymbol{62^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">289^\circ</span></div><div class="u3l1-sk" data-sk="m" data-ang="289" data-ref="289,360"></div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Q4: <span class="tex">\theta_R=360^\circ-289^\circ=\boldsymbol{71^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">47^\circ</span></div><div class="u3l1-sk" data-sk="m" data-ang="47" data-ref="0,47"></div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Q1: <span class="tex">\theta_R=\theta=\boldsymbol{47^\circ}</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="3. Working Backwards">
+  <h3 class="sub">Working backwards: from <span class="tex">\theta_R</span> to <span class="tex">\theta</span></h3>
+  <p>Knowing the reference angle <b>and</b> where the terminal arm lies fixes the rotation angle. Find where that quadrant meets the <span class="tex">x</span>-axis (<span class="tex">0^\circ</span>, <span class="tex">180^\circ</span> or <span class="tex">360^\circ</span>), turn <span class="tex">\theta_R</span> from there into the quadrant, then read <span class="tex">\theta</span> from the positive <span class="tex">x</span>-axis.</p>
+  <div class="explainer" data-explainer="backwards"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Work backwards</h3></div>
+  <p class="q">Determine the rotation angle <span class="tex">\theta</span>, <span class="tex">0^\circ\le\theta\le360^\circ</span>, from the reference angle and where the terminal arm lies.</p>
+  <div class="part u3l1-solo">
+    <table class="u3l1-tbl">
+      <tr><th>Reference angle</th><th>Terminal arm</th><th>Sketch</th><th>Rotation angle <span class="tex">\theta</span></th></tr>
+      <tr><td><span class="tex">35^\circ</span></td><td>quadrant 3</td><td><div class="u3l1-sk" data-sk="s" data-ang="215"></div></td><td><span data-reveal><span class="tex">180^\circ+35^\circ=215^\circ</span></span></td></tr>
+      <tr><td><span class="tex">72^\circ</span></td><td>quadrant 2</td><td><div class="u3l1-sk" data-sk="s" data-ang="108"></div></td><td><span data-reveal><span class="tex">180^\circ-72^\circ=108^\circ</span></span></td></tr>
+      <tr><td><span class="tex">16^\circ</span></td><td>quadrant 4</td><td><div class="u3l1-sk" data-sk="s" data-ang="344"></div></td><td><span data-reveal><span class="tex">360^\circ-16^\circ=344^\circ</span></span></td></tr>
+      <tr><td><span class="tex">50^\circ</span></td><td>quadrant 1</td><td><div class="u3l1-sk" data-sk="s" data-ang="50"></div></td><td><span data-reveal><span class="tex">50^\circ</span></span></td></tr>
+      <tr><td><span class="tex">0^\circ</span></td><td>negative <span class="tex">x</span>-axis</td><td><div class="u3l1-sk" data-sk="s" data-ang="180"></div></td><td><span data-reveal><span class="tex">180^\circ</span></span></td></tr>
+      <tr><td><span class="tex">90^\circ</span></td><td>negative <span class="tex">y</span>-axis</td><td><div class="u3l1-sk" data-sk="s" data-ang="270"></div></td><td><span data-reveal><span class="tex">270^\circ</span></span></td></tr>
+    </table>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Q1: <span class="tex">\theta=\theta_R</span> · Q2: <span class="tex">180^\circ-\theta_R</span> · Q3: <span class="tex">180^\circ+\theta_R</span> · Q4: <span class="tex">360^\circ-\theta_R</span>. On an axis, read the angle straight off the sketch.</div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u3l1"></section>
+
+<!-- ================= 4. Four angles ================= -->
+<section class="card" data-ink="s4" data-section="4. Four Angles with the Same Reference Angle">
+  <div class="sec-h"><span class="badge">4</span><h2>Four Angles with the Same Reference Angle</h2></div>
+  <div class="def">Turning the same acute angle away from the <span class="tex">x</span>-axis in each quadrant gives four angles with one reference angle. Rearranging the formulas from Section 3:</div>
+  <div class="def amber u3l1-center">For a reference angle <span class="tex">\textcolor{#c27a0e}{\theta_R}</span>, the angles from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span> are<br>
+    <span class="u3l1-four"><span class="tex">\theta_R</span> (Q1) &nbsp;·&nbsp; <span class="tex">180^\circ-\theta_R</span> (Q2) &nbsp;·&nbsp; <span class="tex">180^\circ+\theta_R</span> (Q3) &nbsp;·&nbsp; <span class="tex">360^\circ-\theta_R</span> (Q4)</span></div>
+  <div class="explainer" data-explainer="four"></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> Every reference angle between <span class="tex">0^\circ</span> and <span class="tex">90^\circ</span> gives exactly four angles. What happens when <span class="tex">\theta_R=0^\circ</span> or <span class="tex">\theta_R=90^\circ</span>?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The copies land <b>on the axes</b> and overlap. <span class="tex">\theta_R=0^\circ</span>: the arm is on the <span class="tex">x</span>-axis, so <span class="tex">0^\circ</span>, <span class="tex">180^\circ</span>, <span class="tex">360^\circ</span>. <span class="tex">\theta_R=90^\circ</span>: on the <span class="tex">y</span>-axis, so <span class="tex">90^\circ</span> and <span class="tex">270^\circ</span>.</div></div></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>The other three angles</h3></div>
+  <p class="q">Determine the three other angles from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span> that have the same reference angle as the given angle.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">128^\circ</span></div><div class="work" style="--h:180px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Q2, so <span class="tex">\theta_R=180^\circ-128^\circ=52^\circ</span>.<br>Q1: <span class="tex">\boldsymbol{52^\circ}</span> &nbsp; Q3: <span class="tex">180^\circ+52^\circ=\boldsymbol{232^\circ}</span><br>Q4: <span class="tex">360^\circ-52^\circ=\boldsymbol{308^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">341^\circ</span></div><div class="work" style="--h:180px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Q4, so <span class="tex">\theta_R=360^\circ-341^\circ=19^\circ</span>.<br>Q1: <span class="tex">\boldsymbol{19^\circ}</span> &nbsp; Q2: <span class="tex">180^\circ-19^\circ=\boldsymbol{161^\circ}</span><br>Q3: <span class="tex">180^\circ+19^\circ=\boldsymbol{199^\circ}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Reflections ================= -->
+<section class="card" data-ink="s5" data-section="5. Reflecting a Point in the Axes">
+  <div class="sec-h"><span class="badge">5</span><h2>Reflecting a Point in the Axes</h2></div>
+  <div class="def">Reflecting the terminal arm in an axis keeps the reference angle and moves the arm to another quadrant. If <span class="tex">P(a,\ b)</span> with <span class="tex">a,\ b&gt;0</span> is on the terminal arm of <span class="tex">\theta</span> in quadrant 1:</div>
+  <div class="def amber">
+    <table class="u3l1-rtbl">
+      <tr><td>reflect in the <span class="tex">y</span>-axis:</td><td><span class="tex">(-a,\ b)</span></td><td>on the arm of <span class="tex">180^\circ-\theta</span> (Q2)</td></tr>
+      <tr><td>reflect in both axes (through the origin):</td><td><span class="tex">(-a,\ -b)</span></td><td>on the arm of <span class="tex">180^\circ+\theta</span> (Q3)</td></tr>
+      <tr><td>reflect in the <span class="tex">x</span>-axis:</td><td><span class="tex">(a,\ -b)</span></td><td>on the arm of <span class="tex">360^\circ-\theta</span> (Q4)</td></tr>
+    </table>
+  </div>
+  <div class="explainer" data-explainer="reflect"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Reflect P(3, 5)</h3></div>
+  <p class="q">The point <span class="tex">P(3,\ 5)</span> is on the terminal arm of an angle of <span class="tex">59^\circ</span> (to the nearest degree).</p>
+  <div class="part u3l1-solo"><div class="u3l1-ex7">
+    <div class="u3l1-ex7l"><div class="pl">(a) Plot <span class="tex">Q</span>, the reflection of <span class="tex">P</span> in the <span class="tex">y</span>-axis; <span class="tex">R</span>, the reflection of <span class="tex">P</span> in both axes; and <span class="tex">S</span>, the reflection of <span class="tex">P</span> in the <span class="tex">x</span>-axis. State their coordinates.</div><div class="work" style="--h:120px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{Q(-3,\ 5)}</span>, &nbsp; <span class="tex">\boldsymbol{R(-3,\ -5)}</span>, &nbsp; <span class="tex">\boldsymbol{S(3,\ -5)}</span></div></div></div>
+    <div data-fig="ex7" class="u3l1-g7"></div>
+  </div></div>
+  <div class="part"><div class="pl">(b) State the rotation angle whose terminal arm passes through each of <span class="tex">Q</span>, <span class="tex">R</span> and <span class="tex">S</span>.</div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">All have <span class="tex">\theta_R=59^\circ</span>.<br><span class="tex">Q</span> (Q2): <span class="tex">180^\circ-59^\circ=\boldsymbol{121^\circ}</span> &nbsp; <span class="tex">R</span> (Q3): <span class="tex">180^\circ+59^\circ=\boldsymbol{239^\circ}</span> &nbsp; <span class="tex">S</span> (Q4): <span class="tex">360^\circ-59^\circ=\boldsymbol{301^\circ}</span></div></div></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Common mistakes ================= -->
+<section class="card" data-ink="s6" data-section="6. Common Mistakes with Reference Angles">
+  <div class="sec-h"><span class="badge">6</span><h2>Common Mistakes with Reference Angles</h2></div>
+  <div class="def">Most wrong reference angles come from measuring to the <span class="tex">y</span>-axis, or from using the formula for the wrong quadrant. A quick sketch prevents both: the answer must be the gap between the arm and the <span class="tex">x</span>-axis, and it must be between <span class="tex">0^\circ</span> and <span class="tex">90^\circ</span>.</div>
+  <div class="explainer" data-explainer="mistakes"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Who is correct?</h3></div>
+  <p class="q">Three students found the reference angle for <span class="tex">251^\circ</span>. Ana said <span class="tex">19^\circ</span>, Ben said <span class="tex">109^\circ</span> and Cole said <span class="tex">71^\circ</span>. Who is correct? Explain each mistake with a sketch.</p>
+  <div class="part u3l1-solo"><div class="u3l1-ex8">
+    <div class="u3l1-sk" data-sk="l" data-ang="251" data-ref="180,251" data-ya="251,270"></div>
+    <div class="u3l1-ex8r"><div class="work" style="--h:170px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">251^\circ</span> is in quadrant 3, so <span class="tex">\theta_R=251^\circ-180^\circ=71^\circ</span>. <b>Cole</b> is correct.<br>Ana measured to the negative <span class="tex">y</span>-axis: <span class="tex">270^\circ-251^\circ=19^\circ</span> (dotted arc).<br>Ben used the quadrant 4 formula: <span class="tex">360^\circ-251^\circ=109^\circ</span>, which is not even acute.</div></div></div>
+  </div></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Standard position.</b> Vertex at the origin, initial arm on the positive <span class="tex">x</span>-axis. Counterclockwise is positive. A clockwise turn or a turn past <span class="tex">360^\circ</span> lands on the arm of an angle from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span>: <span class="tex">-135^\circ\to225^\circ</span>, <span class="tex">420^\circ\to60^\circ</span>.</div>
+    <div><b>Quadrants.</b> Q1 <span class="tex">0^\circ</span>–<span class="tex">90^\circ</span>, Q2 <span class="tex">90^\circ</span>–<span class="tex">180^\circ</span>, Q3 <span class="tex">180^\circ</span>–<span class="tex">270^\circ</span>, Q4 <span class="tex">270^\circ</span>–<span class="tex">360^\circ</span>. On an axis: <b>quadrantal</b>. For a point, the signs of <span class="tex">x</span> and <span class="tex">y</span> name the quadrant.</div>
+    <div><b class="u3l1-rc">Reference angle</b> <span class="tex">\theta_R</span>: the acute angle to the <b><span class="tex">x</span>-axis</b>. Q1 <span class="tex">\theta</span> · Q2 <span class="tex">180^\circ-\theta</span> · Q3 <span class="tex">\theta-180^\circ</span> · Q4 <span class="tex">360^\circ-\theta</span>. Never to the <span class="tex">y</span>-axis, never over <span class="tex">90^\circ</span>.</div>
+    <div><b>One <span class="tex">\theta_R</span>, four angles:</b> <span class="tex">\theta_R</span>, <span class="tex">180^\circ-\theta_R</span>, <span class="tex">180^\circ+\theta_R</span>, <span class="tex">360^\circ-\theta_R</span>. Reflecting <span class="tex">P(a,\ b)</span> in the <span class="tex">y</span>-axis, both axes or the <span class="tex">x</span>-axis gives those Q2, Q3, Q4 angles.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u3l1">
+    <div><div class="kicker">Your turn</div><b>Assignment 1 — Angles in Standard Position and Reference Angles</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l2/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 2 — Trigonometric Ratios from a Point on the Terminal Arm</b><div class="muted">Put a point <span class="tex">P(x,\ y)</span> on the terminal arm and find <span class="tex">r</span>, <span class="tex">\sin\theta</span>, <span class="tex">\cos\theta</span> and <span class="tex">\tan\theta</span>.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u3l1.js';
+  boot({ key: 'u3l1', homeHref: '../../', title: '3.1 Standard Position' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

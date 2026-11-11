@@ -1,0 +1,111 @@
+/* Math 20-1 · Unit 3 · Lesson 1 — Angles in Standard Position and Reference Angles: styles used only on this page (prefix u3l1-).
+ * Colours (kept through Unit 3): terminal arm / θ #7a1f3d (course accent), reference angle θR amber #c27a0e,
+ * "same arm as" blue #1f5bd6, mistakes red. */
+
+.u3l1 .ex-cap .katex { font-size: 1.04em; }
+.u3l1 .chip .katex { font-size: 1em; }
+.u3l1 .pl .katex { font-size: 1.05em; }
+.u3l1 .ans .katex { font-size: 1.04em; }
+.u3l1 .katex { white-space: nowrap; }
+.u3l1 h2 .katex, .u3l1 h3 .katex { font-size: .95em; }
+.u3l1-ac { color: #7a1f3d; }
+.u3l1-rc { color: #c27a0e; }
+.u3l1-bl { color: #1f5bd6; font-size: 16px; font-weight: 700; }
+.u3l1-center { text-align: center; }
+
+/* ---------------- warm-up: The Ferris Wheel ---------------- */
+.u3l1-wheel { position: relative; width: 480px; height: 360px; }
+.u3l1-wsvg { display: block; }
+.u3l1-wheel > div { position: absolute; }
+.u3l1-winfo { left: 10px; top: 8px; font-size: 17px; background: rgba(255, 255, 255, .95); border: 2px solid #c9d9e3; border-radius: 10px; padding: 3px 12px; }
+.u3l1-hublab { font: 700 14px var(--round); color: #3a4254; background: rgba(234, 243, 251, .9); padding: 0 4px; border-radius: 4px; }
+.u3l1-startlab { font: 700 13px var(--round); color: #7a1f3d; }
+.u3l1-blab { font: 800 17px var(--round); color: #1f5bd6; background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 5px; }
+.u3l1-wbtns { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0 2px; }
+.u3l1-wbtns .pill { font-size: 15px; padding: 6px 14px; }
+.u3l1-wbtns .pill:disabled { opacity: .4; }
+.wf .u3l1-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
+.wf .u3l1-wqs .q-line .pill.small { padding: 2px 10px; }
+.u3l1-wa { margin: 0 0 6px 40px; }
+.wf .u3l1-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
+.wf .wf-poll { margin-top: 8px; }
+.wf .wf-poll .q-line { font-size: 17px; }
+.wf .wf-poll .poll-opts.c4 { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.wf .wf-poll .poll-opts.c4 .opt { padding: 5px 10px; }
+.wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
+.u3l1-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
+
+/* ---------------- notes ---------------- */
+.u3l1-two { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: center; margin: 0 0 14px; }
+.u3l1-bul { font-size: 19.5px; line-height: 1.45; margin: 0; padding-left: 1.3em; }
+.u3l1-bul li { margin: 0 0 8px; }
+.u3l1-fig { display: flex; justify-content: center; }
+.u3l1-qkey { display: grid; grid-template-columns: auto auto; gap: 6px 22px; font-size: 18.5px; }
+.u3l1-qkey > div { white-space: nowrap; }
+.u3l1-refk { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; justify-items: center; }
+.u3l1-refc { text-align: center; font-size: 18px; line-height: 1.35; margin-top: -4px; }
+.u3l1-qnote { font-size: 18px; margin-top: 10px; }
+.u3l1-four { display: inline-block; font-size: 22px; margin-top: 6px; }
+.u3l1-rtbl { border-collapse: collapse; font-size: 19px; }
+.u3l1-rtbl td { padding: 4px 14px 4px 0; }
+.u3l1-tbl { border-collapse: collapse; margin: 2px auto 10px; font-size: 19px; }
+.u3l1-tbl th, .u3l1-tbl td { border: 2px solid #c9c3b4; padding: 4px 14px; text-align: center; }
+.u3l1-tbl th { background: #f3f0e8; font-weight: 700; }
+.u3l1-tbl td:last-child { min-width: 250px; }
+.u3l1-solo { margin: 0 0 12px; }
+.u3l1-ex7 { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: start; }
+.u3l1-ex8 { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 18px; align-items: start; }
+
+/* sketches: blank axes for the class; the arm and angles appear with the answer */
+.u3l1-sk { display: flex; justify-content: center; margin: 2px 0; }
+.u3l1-gridf { display: flex; justify-content: center; margin: 2px 0; }
+.u3l1-sol { opacity: 0; transition: opacity .3s; }
+.part.shown .u3l1-sol { opacity: 1; }
+.u3l1-tbl .u3l1-sk { margin: 0; }
+
+/* ---------------- dials (on cards and in explainers) ---------------- */
+.u3l1-dial { position: relative; }
+.ex-stage > .u3l1-dial { position: absolute; }
+.u3l1-dial > svg { display: block; overflow: visible; }
+.u3l1-dhtml { position: absolute; left: 0; top: 0; right: 0; bottom: 0; pointer-events: none; }
+.u3l1-lab { position: absolute; white-space: nowrap; font-size: 19px; line-height: 1.15; color: var(--ink); }
+.u3l1-lab.u3l1-sm { font-size: 16px; }
+.u3l1-lab.u3l1-big { font-size: 23px; }
+.u3l1-halo { background: rgba(251, 250, 246, .9); border-radius: 6px; padding: 0 4px; }
+.u3l1-axl { font-size: 19px; }
+.u3l1-word { font: 700 16px var(--round); color: var(--ink2); }
+.u3l1-word.u3l1-ac { color: #7a1f3d; }
+.u3l1-qlab { font-size: 18px; color: #7a1f3d; }
+.u3l1-tag { font-size: 17px; background: rgba(251, 250, 246, .92); border-radius: 6px; padding: 0 3px; }
+.u3l1-gray { color: #7d8594; font-size: 18px; }
+.u3l1-hit { cursor: grab; touch-action: none; }
+.u3l1-reflab { font-size: 21px; }
+
+/* ---------------- explainer pieces ---------------- */
+.u3l1-panel { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; }
+.u3l1-ph { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 4px; }
+.u3l1-line { font-size: 19px; line-height: 1.38; margin: 4px 0 10px; }
+.u3l1-line-sm { font-size: 17.5px; }
+.u3l1-line-big { font-size: 22px; }
+.u3l1-line-key { background: #fff4dd; border-radius: 8px; padding: 4px 8px; }
+.u3l1-ro { background: #fff; border: 2px solid #e8bccb; border-radius: 10px; padding: 1px 12px; font-size: 23px; z-index: 2; }
+.u3l1-ro-sm { font-size: 19px; padding: 0 8px; }
+.u3l1-ptitle { font: 800 19px var(--round); color: var(--ink); }
+.u3l1-ptitle .katex { font-size: 1.02em; }
+.u3l1-ptext { font-size: 17.5px; line-height: 1.35; }
+.u3l1-qchip { font-size: 20px; margin: 2px 0 10px; min-height: 30px; }
+.u3l1-row { display: flex; gap: 14px; align-items: center; font-size: 20px; padding: 5px 10px; border-radius: 9px; margin: 3px 0; transition: background .2s, box-shadow .2s; }
+.u3l1-row.on { background: #fff4dd; box-shadow: inset 5px 0 0 #c27a0e; }
+.u3l1-rq { font: 800 17px var(--round); color: var(--muted); min-width: 30px; }
+.u3l1-row.on .u3l1-rq { color: #c27a0e; }
+.u3l1-calc { font-size: 25px; margin: 14px 4px 8px; min-height: 40px; }
+.u3l1-res { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 12px; font-size: 18px; }
+.u3l1-stick { font-size: 24px; font-weight: 700; color: #7a1f3d; background: rgba(255, 255, 255, .9); border: 2px solid #e8bccb; border-radius: 10px; padding: 0 8px; }
+.u3l1-tb { font-size: 19px; }
+.u3l1-tr { display: grid; grid-template-columns: 90px 1fr 1.6fr; gap: 8px; align-items: center; padding: 6px 10px; border-bottom: 1.5px solid #e4ded2; border-radius: 6px; min-height: 40px; transition: background .2s; }
+.u3l1-th { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.u3l1-tr.on { background: #fff4dd; }
+.u3l1-cards { display: flex; flex-direction: column; gap: 10px; }
+.u3l1-card { position: relative; background: #fff; border: 2px solid #e4ded2; border-radius: 12px; padding: 8px 80px 8px 14px; font-size: 18.5px; line-height: 1.35; }
+.u3l1-who { font: 800 18px var(--round); color: var(--ink); }
+.u3l1-card .bk-stamp.u3l1-stp { position: absolute; right: 14px; top: 50%; translate: 0 -50%; }

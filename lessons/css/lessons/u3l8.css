@@ -1,0 +1,93 @@
+/* Math 20-1 · Unit 3 · Lesson 8 — Choosing the Sine Law or the Cosine Law: styles used only on this page (prefix u3l8-).
+ * Colours: full pair amber #c27a0e, angle inside the triangle rose #a33357, leg 1 / known blue #1f5bd6, leg 2 green #12805a,
+ * back bearing purple #7b4fc4, unknown red #c93a33. */
+
+.u3l8 .ex-cap .katex { font-size: 1.04em; }
+.u3l8 .chip .katex { font-size: 1em; }
+.u3l8 .pl .katex { font-size: 1.06em; }
+.u3l8 .ans .katex { font-size: 1.03em; }
+.u3l8 .katex { white-space: nowrap; }
+.u3l8 h2 .katex, .u3l8 h3 .katex { font-size: .95em; }
+.u3l8-center { text-align: center; }
+.u3l8-bigf { font-size: 1.25em; }
+
+/* ---------------- warm-up: The Treasure Map ---------------- */
+.u3l8-map { position: relative; width: 560px; height: 360px; }
+.u3l8-wbtns { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 0; }
+.u3l8-wbtns .pill { font-size: 15px; padding: 6px 14px; }
+.u3l8-wbtns .pill:disabled { opacity: .4; }
+.u3l8-mapn { font: 800 18px var(--round); color: #6b5330; }
+.u3l8-mapl { font: 700 17px var(--round); color: #5a3d1e; background: rgba(242, 226, 187, .85); border-radius: 6px; padding: 0 5px; }
+.u3l8-mapq { font-size: 26px; font-weight: 800; color: #c93a33; background: rgba(242, 226, 187, .9); border-radius: 8px; padding: 0 8px; }
+.u3l8-mapinfo { font-size: 17px; background: rgba(255, 255, 255, .92); border: 2px solid #c9b07a; border-radius: 10px; padding: 3px 12px; }
+.wf .u3l8-wqs .q-line { font-size: 17px; margin: 2px 0 2px; gap: 10px; }
+.wf .u3l8-wqs .q-line .pill.small { padding: 2px 10px; }
+.u3l8-wa { margin: 0 0 4px 40px; }
+.wf .u3l8-wqs .bk-ans { font-size: 16px; line-height: 1.34; margin-top: 2px; }
+.wf .wf-poll { margin-top: 8px; }
+.wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
+.wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
+.wf .wf-poll .poll-ans { font-size: 16px; line-height: 1.36; }
+.wf .wf-poll:not(.revealed) .poll-ans { display: none; }
+.u3l8-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
+
+/* ---------------- notes ---------------- */
+.u3l8-keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 14px 0 14px; }
+.u3l8-key { background: #fff; border-radius: 12px; padding: 10px 14px; font-size: 18px; line-height: 1.42; border-top: 6px solid; }
+.u3l8-kred { border-color: #c93a33; } .u3l8-kgreen { border-color: #12805a; } .u3l8-kamber { border-color: #c27a0e; } .u3l8-kblue { border-color: #1f5bd6; }
+.u3l8-kh { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: 4px; }
+.u3l8-defrow { display: grid; grid-template-columns: 1fr 260px; gap: 18px; align-items: center; margin-bottom: 4px; }
+.u3l8-defrow .def { margin-bottom: 10px; }
+.u3l8-figcol { display: flex; flex-direction: column; align-items: center; }
+.u3l8-figcap { font-size: 17px; text-align: center; }
+.u3l8-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u3l8-pcol .pill { white-space: nowrap; }
+.u3l8-solo { margin: 0 0 12px; }
+.u3l8-exrow { display: grid; grid-template-columns: auto 1fr; gap: 22px; align-items: start; margin-bottom: 12px; }
+.u3l8-exfig { background: #fbfaf6; border: 1px solid var(--line2); border-radius: 12px; }
+
+/* ---------------- figures and explainer pieces ---------------- */
+.u3l8-lab { font-size: 19px; }
+.u3l8-lsm { font-size: 17px; }
+.u3l8-big { font-size: 22px; }
+.u3l8-vname { font: 800 20px var(--round); color: var(--ink); }
+.u3l8-nlab { font: 800 16px var(--round); color: #7d838f; }
+.u3l8-cnum { font: 700 22px var(--round); color: var(--ink); }
+.u3l8-rosel { font: 800 21px var(--round); color: var(--ink); }
+.u3l8-rosen { font-size: 17px; color: #7d838f; }
+.u3l8-lpair { font-weight: 800; background: #fff4dd; border-radius: 7px; padding: 0 5px; box-shadow: 0 0 0 2px rgba(194, 122, 14, .45); }
+.u3l8-halo { background: rgba(255, 255, 255, .9); border-radius: 7px; padding: 0 5px; }
+.u3l8-dot { transform-box: fill-box; transform-origin: center; }
+.u3l8-legend { display: flex; gap: 8px; flex-wrap: wrap; width: 320px; }
+.u3l8-key.u3l8-kk, .u3l8-key.u3l8-kp, .u3l8-key.u3l8-ku { border: 0; }
+.u3l8-legend .u3l8-key { padding: 2px 10px; border-radius: 8px; font: 700 16.5px var(--round); background: #fff; border: 2.5px solid; border-top-width: 2.5px; }
+.u3l8-legend .u3l8-kk { color: #1f5bd6; border-color: #1f5bd6; } .u3l8-legend .u3l8-kp { color: #a86a0a; border-color: #c27a0e; background: #fff4dd; } .u3l8-legend .u3l8-ku { color: #c93a33; border-color: #c93a33; }
+.u3l8-panel { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; overflow: hidden; }
+.u3l8-ph { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 6px; }
+.u3l8-ph .katex { text-transform: none; font-size: 1.1em; }
+.u3l8-line { font-size: 18.5px; line-height: 1.32; margin: 3px 0 7px; }
+.u3l8-line-sm { font-size: 17px; }
+.u3l8-line-ans { background: #e8f5ef; border-radius: 8px; padding: 3px 8px; }
+.u3l8-warn { background: #fdecea; border-radius: 8px; padding: 6px 10px; }
+.u3l8-lk { display: inline-block; min-width: 74px; font: 700 15px var(--round); color: var(--muted); margin-right: 6px; }
+.u3l8-read { font-size: 22px; background: #fff4dd; border-radius: 10px; padding: 4px 12px; margin: 2px 0 8px; display: inline-block; }
+.u3l8-rule { border-collapse: collapse; margin: 2px 0 10px; font-size: 18px; }
+.u3l8-rule th, .u3l8-rule td { border: 2px solid #ddd6c8; padding: 4px 14px; text-align: center; }
+.u3l8-rule th { background: #f3f0e8; font: 700 15px var(--round); text-transform: uppercase; letter-spacing: .03em; color: var(--ink2); }
+.u3l8-rule tr.on td { background: #fff4dd; box-shadow: inset 0 0 0 2px #c27a0e; }
+
+/* ---------------- Build a route ---------------- */
+.u3l8-bintro { margin-bottom: 8px; }
+.u3l8-build { display: grid; grid-template-columns: 520px 1fr; gap: 16px; align-items: start; }
+.u3l8-bfig { width: 520px; height: 430px; background: #fbfaf6; border: 1px solid var(--line2); border-radius: 14px; overflow: hidden; }
+.u3l8-bside { display: flex; flex-direction: column; gap: 10px; }
+.u3l8-bctl { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 8px 12px 10px; }
+.u3l8-brow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin: 4px 0 8px; }
+.u3l8-bk { flex: 1 0 100%; font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .04em; }
+.u3l8-c1 { color: #1f5bd6; } .u3l8-c2 { color: #12805a; }
+.u3l8-bb { width: 40px; height: 38px; border-radius: 10px; border: 2px solid #c9c3b4; background: #f6f5f0; font: 800 22px var(--round); color: var(--ink); cursor: pointer; }
+.u3l8-bb:active { background: #fff4dd; }
+.u3l8-bv { display: inline-block; min-width: 74px; text-align: center; font-size: 19px; }
+.u3l8-bv + .u3l8-bb + .u3l8-bb { margin-left: 10px; }
+.u3l8-bout { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 8px 12px; min-height: 236px; }
+.u3l8-bout .u3l8-line { font-size: 17.5px; margin: 2px 0 6px; }

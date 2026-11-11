@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Choosing the Sine Law or the Cosine Law · Math 20-1 3.8</title>
+<meta name="description" content="Math 20-1 Unit 3 Lesson 8: choosing primary ratios, the sine law or the cosine law from what is known; bearings (three-digit and N/S…E/W forms, back bearings) and the angle inside a triangle from two bearings; two-triangle problems (elevation from two points, a quadrilateral split by a diagonal); triangles in circles; area = ½ab sin C. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u3l8.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u3l8">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 3 Trigonometry · Lesson 8</div>
+  <h1>Choosing the Sine Law or the Cosine Law</h1>
+  <p class="lede">We now have three tools for triangles: <b>primary ratios</b>, the <b>sine law</b> and the <b>cosine law</b>. Today we decide which one fits by looking at what is <b>known</b>, then use them together: in <b>bearings</b> problems, with <b>two triangles</b>, in <b>circles</b>, and to find <b>areas</b>.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>choose primary ratios, the sine law or the cosine law from the known parts, and spot a triangle that <b>can’t</b> be solved (AAA)</li>
+      <li>write a direction as a three-digit <b>bearing</b> or in <b>N/S…E/W</b> form, and find a <b>back bearing</b></li>
+      <li>work out the <b>angle inside a triangle</b> from two bearings, using a new north line at the turn</li>
+      <li>solve a problem with <b>two triangles</b> by solving the neighbouring triangle first</li>
+      <li>use circle facts (equal radii, central and inscribed angles, tangent ⟂ radius) to set up triangles</li>
+      <li>find the area of a triangle with <span class="tex">\text{Area}=\tfrac12ab\sin C</span></li>
+    </ul>
+  </div>
+  <div class="outcome"><b>T3</b> Solve problems, using the cosine law and sine law, including the ambiguous case.<br><span class="muted">Today: choosing a method, bearings, two-triangle problems, triangles in circles and the area of a triangle. Calculator in <b>Degree</b> mode.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Treasure Map" id="wu" style="--wf-side: 400px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Treasure Map</h2>
+  <p class="wf-rule">“From the palm tree, walk <b>10 paces</b> on a bearing of <b>060°</b>, then <b>10 paces</b> on a bearing of <b>180°</b>. Dig.” A <b>bearing</b> is an angle measured <b>clockwise from north</b>.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u3l8-map" id="u3l8-map"></div>
+    <div class="u3l8-wbtns">
+      <button type="button" class="pill" id="u3l8-m1">Walk leg 1</button>
+      <button type="button" class="pill" id="u3l8-m2">Walk leg 2</button>
+      <button type="button" class="pill" id="u3l8-m3">Line back to the tree</button>
+      <button type="button" class="pill" id="u3l8-m0">Start over</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u3l8-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Which direction is a bearing of <span class="tex">090^\circ</span>? Of <span class="tex">270^\circ</span>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l8-wa"><div class="bk-ans"><b>East</b> and <b>west.</b> A quarter turn clockwise from north is east; three quarters is west.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>To walk straight back along leg 1, what bearing do you need? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l8-wa"><div class="bk-ans"><span class="tex">240^\circ</span>. Turning around adds half a turn: <span class="tex">060^\circ+180^\circ=240^\circ</span>.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> How far is the treasure from the palm tree? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> 5 paces</div>
+        <div class="opt right"><b>B</b> 10 paces</div>
+        <div class="opt"><b>C</b> about 14 paces</div>
+        <div class="opt"><b>D</b> 20 paces</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>B, 10 paces.</b> At the turn, the way back to the tree is <span class="tex">240^\circ</span> and the new path is <span class="tex">180^\circ</span>: the angle between them is <span class="tex">60^\circ</span>. Two sides of 10 with <span class="tex">60^\circ</span> between them: the other two angles share <span class="tex">120^\circ</span> equally, so all three are <span class="tex">60^\circ</span>. It’s <b>equilateral</b>!<br>
+        <span class="muted">Today: when the angle isn’t a nice <span class="tex">60^\circ</span>, the cosine law finds the distance.</span></div>
+    </div>
+  </div></div>
+  <p class="u3l8-social">Challenge your neighbour: keep leg 1 the same. What bearing for leg 2 (still 10 paces) would leave the treasure <b>due east</b> of the tree?</p>
+</section>
+
+<!-- ================= 1. Choosing a method ================= -->
+<section class="card" data-ink="s1" data-section="1. Choosing a Method">
+  <div class="sec-h"><span class="badge">1</span><h2>Choosing a Method</h2></div>
+  <div class="def">Before solving, look at what is known in the triangle that contains the unknown. A <b>full pair</b> is an angle together with the side <b>opposite</b> it.</div>
+  <div class="explainer" data-explainer="chooser"></div>
+  <div class="u3l8-keys">
+    <div class="u3l8-key u3l8-kred"><div class="u3l8-kh">Only angles (AAA)</div>The shape is known but not the size: <b>no side</b> can be found.</div>
+    <div class="u3l8-key u3l8-kgreen"><div class="u3l8-kh">Cosine law, then sine law</div>Once the cosine law gives one missing part, a full pair is known, so the (easier) sine law usually finishes the triangle.</div>
+    <div class="u3l8-key u3l8-kamber"><div class="u3l8-kh">Finding an angle?</div>The cosine law is safer: it is <b>never ambiguous</b>, and a <b>negative cosine</b> shows an obtuse angle.</div>
+  </div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> For SAS, why can’t we start with the sine law?</div><div class="work" style="--h:70px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">No angle is known <b>together with</b> its opposite side, so every sine-law ratio has an unknown in it. The cosine law uses the angle <b>between</b> the two sides.</div></div></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Which method?</h3></div>
+  <p class="q">For each, name the most appropriate method and justify the choice. Do not solve.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\triangle ABC</span>: <span class="tex">\angle C=90^\circ</span>, <span class="tex">\angle A=34^\circ</span>, <span class="tex">c=12</span>; find <span class="tex">b</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Right triangle: <b>primary ratios</b> (<span class="tex">b=12\cos34^\circ</span>).</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\triangle DEF</span>: <span class="tex">d=7</span>, <span class="tex">e=9</span>, <span class="tex">\angle F=52^\circ</span>; find <span class="tex">f</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">SAS (the angle between the sides): <b>cosine law</b>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\triangle GHJ</span>: <span class="tex">\angle G=41^\circ</span>, <span class="tex">g=10</span>, <span class="tex">h=13</span>; find <span class="tex">\angle H</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Full pair <span class="tex">\angle G</span>, <span class="tex">g</span>: <b>sine law</b>. SSA, so check for two answers.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\triangle KLM</span>: <span class="tex">k=5</span>, <span class="tex">l=8</span>, <span class="tex">m=11</span>; find the largest angle</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">SSS: <b>cosine law</b> for <span class="tex">\angle M</span> (opposite the longest side).</div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\triangle PQR</span>: <span class="tex">\angle P=50^\circ</span>, <span class="tex">\angle Q=60^\circ</span>, <span class="tex">\angle R=70^\circ</span>; find <span class="tex">p</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">AAA: <b>cannot be solved</b> (any size has these angles).</div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\triangle STU</span>: <span class="tex">\angle S=35^\circ</span>, <span class="tex">\angle T=105^\circ</span>, <span class="tex">s=8</span>; find <span class="tex">u</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\angle U=40^\circ</span>, then full pair <span class="tex">\angle S</span>, <span class="tex">s</span>: <b>sine law</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s1b" data-section="1. Clock Hands">
+  <h3 class="sub">Clock hands make a triangle</h3>
+  <p>The two hands of a clock and the line joining their tips form a triangle. The 12 hour marks are <span class="tex">360^\circ\div12=30^\circ</span> apart. The minute hand moves <span class="tex">6^\circ</span> each minute, and the hour hand moves <span class="tex">0.5^\circ</span> each minute (halfway between marks at the half hour).</p>
+  <div class="explainer" data-explainer="clock"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>The hands of a clock</h3></div>
+  <p class="q">The minute hand of a clock is 9 cm long and the hour hand is 6 cm long.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Find the angle between the hands at 4:00, and the distance between their tips to the nearest tenth.</div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">At 4:00 the hands are 4 marks apart: <span class="tex">4\times30^\circ=120^\circ</span>. SAS, so the cosine law:<br><span class="tex">d^2=9^2+6^2-2(9)(6)\cos120^\circ=81+36+54=171</span>, <span class="tex">d\approx\boldsymbol{13.1}</span> <b>cm</b></div></div></div>
+    <div class="part"><div class="pl">(b) Repeat for 2:30.</div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Minute hand at 6 (<span class="tex">180^\circ</span> from 12). Hour hand halfway between 2 and 3: <span class="tex">2.5\times30^\circ=75^\circ</span> from 12. Angle <span class="tex">=180^\circ-75^\circ=105^\circ</span>.<br><span class="tex">d^2=81+36-108\cos105^\circ\approx144.95</span>, <span class="tex">d\approx\boldsymbol{12.0}</span> <b>cm</b></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>The cosine law in one line</b> (Degree mode). The <span class="keys"><kbd>√</kbd></span> and <span class="keys"><kbd>cos</kbd></span> keys each open a bracket, so close both: <span class="keys"><kbd>2nd</kbd><kbd>√</kbd><kbd>9</kbd><kbd>x²</kbd><kbd>+</kbd><kbd>6</kbd><kbd>x²</kbd><kbd>−</kbd><kbd>2</kbd><kbd>×</kbd><kbd>9</kbd><kbd>×</kbd><kbd>6</kbd><kbd>cos</kbd><kbd>120</kbd><kbd>)</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>13.0766…</b> Not in Degree mode? <span class="keys"><kbd>MODE</kbd></span>, choose <b>DEGREE</b> on the angle row.</div>
+    <div class="u3l8-pcol"><button class="pill" data-keys="√ 9 x² + 6 x² − 2 × 9 × 6 cos 120 ) ) =">Show (a)</button><button class="pill" data-keys="√ 9 x² + 6 x² − 2 × 9 × 6 cos 105 ) ) =">Show (b)</button></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Bearings ================= -->
+<section class="card" data-ink="s2" data-section="2. Bearings and Directions">
+  <div class="sec-h"><span class="badge">2</span><h2>Bearings and Directions</h2></div>
+  <div class="u3l8-defrow">
+    <div>
+      <div class="def">A <b>bearing</b> gives a direction as an angle measured <b>clockwise from north</b>, written with three digits: east is <span class="tex">090^\circ</span>, south is <span class="tex">180^\circ</span>, west is <span class="tex">270^\circ</span>. The bearing of <span class="tex">B</span> from <span class="tex">A</span> is measured <b>at</b> <span class="tex">A</span>.</div>
+      <div class="def amber">A direction can also be written from north or south toward east or west: <b><span class="tex">\text{S}\,40^\circ\,\text{E}</span></b> means “face south, turn <span class="tex">40^\circ</span> toward east” (the same as <span class="tex">140^\circ</span>).</div>
+      <div class="def gray">The <b>back bearing</b> (the bearing of <span class="tex">A</span> from <span class="tex">B</span>) differs by <span class="tex">180^\circ</span>: if <span class="tex">B</span> is on a bearing of <span class="tex">065^\circ</span> from <span class="tex">A</span>, then <span class="tex">A</span> is on a bearing of <span class="tex">245^\circ</span> from <span class="tex">B</span>. North lines at different points are <b>parallel</b>, so alternate and co-interior angles give the angles inside a triangle.</div>
+    </div>
+    <div class="u3l8-figcol"><div id="u3l8-fig140"></div><div class="muted u3l8-figcap">bearing <span class="tex">140^\circ=\text{S}\,40^\circ\,\text{E}</span></div></div>
+  </div>
+  <div class="explainer" data-explainer="bearingForms"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Write each direction the other way</h3></div>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">065^\circ=</span> <span data-reveal><span class="tex">\text{N}\,65^\circ\,\text{E}</span></span></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\text{N}\,65^\circ\,\text{E}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">250^\circ=</span> <span data-reveal><span class="tex">\text{S}\,70^\circ\,\text{W}</span></span></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\text{S}\,70^\circ\,\text{W}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">310^\circ=</span> <span data-reveal><span class="tex">\text{N}\,50^\circ\,\text{W}</span></span></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\text{N}\,50^\circ\,\text{W}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">165^\circ=</span> <span data-reveal><span class="tex">\text{S}\,15^\circ\,\text{E}</span></span></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\text{S}\,15^\circ\,\text{E}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\text{S}\,15^\circ\,\text{W}=</span> <span data-reveal><span class="tex">195^\circ</span></span></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">195^\circ</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\text{N}\,20^\circ\,\text{W}=</span> <span data-reveal><span class="tex">340^\circ</span></span></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">340^\circ</span></div></div></div>
+    <div class="part"><div class="pl">(g) <span class="tex">\text{S}\,62^\circ\,\text{E}=</span> <span data-reveal><span class="tex">118^\circ</span></span></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">118^\circ</span></div></div></div>
+    <div class="part"><div class="pl">(h) <span class="tex">B</span> is on a bearing of <span class="tex">300^\circ</span> from <span class="tex">A</span>. The bearing of <span class="tex">A</span> from <span class="tex">B</span> is <span data-reveal><span class="tex">120^\circ</span></span>.</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">300^\circ-180^\circ=120^\circ</span></div></div></div>
+  </div>
+  <div class="part u3l8-solo"><div class="pl">How to do each kind</div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">South-based: bearing <span class="tex">=180^\circ\pm</span> angle; north-based west: <span class="tex">360^\circ-</span> angle. Back bearing: <span class="tex">300^\circ-180^\circ=120^\circ</span>.</div></div></div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. From Bearings to a Triangle">
+  <h3 class="sub">From bearings to the angle inside a triangle</h3>
+  <p>Draw a <b>north line at every point</b> where a direction is measured. Two paths from the <b>same point</b>: the angle between them is the <b>difference</b> of the bearings. A path that <b>turns</b>: at the turn, the back bearing points back along the first leg, and the angle inside the triangle is between the back bearing and the new bearing.</p>
+  <div class="explainer" data-explainer="route"></div>
+</section>
+
+<section class="card" data-ink="s2c" data-section="2. Build a Route">
+  <h3 class="sub">Build a route</h3>
+  <p class="u3l8-bintro">Change the bearings and distances: the triangle, the angles and the working update. Predict the angle inside the triangle <b>before</b> you look.</p>
+  <div class="u3l8-build no-ink" id="u3l8-build">
+    <div class="u3l8-bfig"></div>
+    <div class="u3l8-bside">
+      <div class="u3l8-bctl">
+        <div class="u3l8-brow"><span class="u3l8-bk u3l8-c1">Leg 1 · P to Q</span>
+          <button type="button" class="u3l8-bb" data-k="b1" data-d="-1">−</button><b class="u3l8-bv" data-v="b1"></b><button type="button" class="u3l8-bb" data-k="b1" data-d="1">+</button>
+          <button type="button" class="u3l8-bb" data-k="d1" data-d="-1">−</button><b class="u3l8-bv" data-v="d1"></b><button type="button" class="u3l8-bb" data-k="d1" data-d="1">+</button></div>
+        <div class="u3l8-brow"><span class="u3l8-bk u3l8-c2">Leg 2 · Q to R</span>
+          <button type="button" class="u3l8-bb" data-k="b2" data-d="-1">−</button><b class="u3l8-bv" data-v="b2"></b><button type="button" class="u3l8-bb" data-k="b2" data-d="1">+</button>
+          <button type="button" class="u3l8-bb" data-k="d2" data-d="-1">−</button><b class="u3l8-bv" data-v="d2"></b><button type="button" class="u3l8-bb" data-k="d2" data-d="1">+</button></div>
+        <button type="button" class="pill small" data-reset>Back to Example 5</button>
+      </div>
+      <div class="u3l8-bout"></div>
+    </div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Two aircraft</h3></div>
+  <p class="q">Two aircraft leave an airport at the same time. One flies on a bearing of <span class="tex">050^\circ</span> at 540 km/h; the other flies on a bearing of <span class="tex">165^\circ</span> at 480 km/h. How far apart are they after 15 minutes, to the nearest kilometre?</p>
+  <div class="part u3l8-solo"><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">In 15 min <span class="tex">=0.25</span> h: <span class="tex">540(0.25)=135</span> km and <span class="tex">480(0.25)=120</span> km.<br>Angle between the paths at the airport: <span class="tex">165^\circ-50^\circ=115^\circ</span>. SAS, so the cosine law:<br><span class="tex">d^2=135^2+120^2-2(135)(120)\cos115^\circ\approx46\,317.8</span>, <span class="tex">d\approx\boldsymbol{215}</span> <b>km</b></div></div></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Same pattern, bigger numbers:</b> <span class="keys"><kbd>2nd</kbd><kbd>√</kbd><kbd>135</kbd><kbd>x²</kbd><kbd>+</kbd><kbd>120</kbd><kbd>x²</kbd><kbd>−</kbd><kbd>2</kbd><kbd>×</kbd><kbd>135</kbd><kbd>×</kbd><kbd>120</kbd><kbd>cos</kbd><kbd>115</kbd><kbd>)</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>215.2157…</b></div>
+    <div class="u3l8-pcol"><button class="pill" data-keys="√ 135 x² + 120 x² − 2 × 135 × 120 cos 115 ) ) =">Show me</button></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Sailing home</h3></div>
+  <p class="q">A ship sails 18 km from port <span class="tex">P</span> on a bearing of <span class="tex">060^\circ</span> to <span class="tex">Q</span>, then 25 km on a bearing of <span class="tex">170^\circ</span> to <span class="tex">R</span>. Sketch the route. Find the distance and the bearing the ship must sail to return directly from <span class="tex">R</span> to <span class="tex">P</span> (nearest tenth of a km and nearest degree).</p>
+  <div class="part u3l8-solo"><div class="work" style="--h:380px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">At <span class="tex">Q</span>: the bearing back to <span class="tex">P</span> is <span class="tex">060^\circ+180^\circ=240^\circ</span>; the ship leaves on <span class="tex">170^\circ</span>. <span class="tex">\angle PQR=240^\circ-170^\circ=70^\circ</span>.<br>
+    SAS: <span class="tex">PR^2=18^2+25^2-2(18)(25)\cos70^\circ\approx641.2</span>, <span class="tex">PR\approx25.3</span> km<br>
+    Now a full pair is known: <span class="tex">\dfrac{\sin\angle QPR}{25}=\dfrac{\sin70^\circ}{25.32}\Rightarrow\sin\angle QPR\approx0.9278</span>, <span class="tex">\angle QPR\approx68.1^\circ</span><br>
+    (acute, since <span class="tex">QR=25</span> is shorter than <span class="tex">PR</span>, so it is opposite a smaller angle than <span class="tex">70^\circ</span>).<br>
+    Bearing of <span class="tex">R</span> from <span class="tex">P</span>: <span class="tex">060^\circ+68.1^\circ\approx128^\circ</span>. Return bearing from <span class="tex">R</span>: <span class="tex">128^\circ+180^\circ=308^\circ</span>.<br>
+    The ship sails about <b>25.3 km</b> on a bearing of <b><span class="tex">308^\circ</span></b> (<span class="tex">\text{N}\,52^\circ\,\text{W}</span>).</div></div></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Keep the unrounded side with Ans.</b> First the cosine law for <span class="tex">PR</span>, then <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd><kbd>25</kbd><kbd>sin</kbd><kbd>70</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>2nd</kbd><kbd>Ans</kbd><kbd>)</kbd><kbd>ENTER</kbd></span>: <b>Ans</b> is the 25.3215… just found, so nothing is rounded too early. It gives <b>68.08…°</b></div>
+    <div class="u3l8-pcol"><button class="pill" data-keys="√ 18 x² + 25 x² − 2 × 18 × 25 cos 70 ) ) = sin⁻¹ 25 sin 70 ) ÷ Ans ) =">Show me</button></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u3l8"></section>
+
+<!-- ================= 3. Two triangles ================= -->
+<section class="card" data-ink="s3" data-section="3. Problems with Two Triangles">
+  <div class="sec-h"><span class="badge">3</span><h2>Problems with Two Triangles</h2></div>
+  <div class="def">When the unknown is in a triangle that does not have enough information, <b>solve a neighbouring triangle first</b> to get a shared side or angle. Mark every known value on the sketch and look for <b>supplementary angles</b> along straight lines (<span class="tex">180^\circ</span>) and <b>right angles</b>.</div>
+  <div class="explainer" data-explainer="mast"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>The radio mast</h3></div>
+  <div class="u3l8-exrow">
+    <div class="u3l8-exfig" id="u3l8-figmast"></div>
+    <div>
+      <p class="q">From point <span class="tex">A</span> on level ground, the angle of elevation to the top <span class="tex">T</span> of a radio mast is <span class="tex">28^\circ</span>. After walking 40 m straight toward the mast to point <span class="tex">B</span>, the angle of elevation is <span class="tex">47^\circ</span>. Find the height of the mast, to the nearest tenth of a metre.</p>
+    </div>
+  </div>
+  <div class="part u3l8-solo"><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">In <span class="tex">\triangle ABT</span>: <span class="tex">\angle ABT=180^\circ-47^\circ=133^\circ</span>, <span class="tex">\angle ATB=180^\circ-28^\circ-133^\circ=19^\circ</span>.<br>
+    Full pair (<span class="tex">19^\circ</span>, 40 m): <span class="tex">BT=\dfrac{40\sin28^\circ}{\sin19^\circ}\approx57.68</span> m<br>
+    Right <span class="tex">\triangle BFT</span>: <span class="tex">TF=BT\sin47^\circ\approx42.2</span> m<br>The mast is about <b>42.2 m</b> tall.</div></div></div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="3. A Quadrilateral and a Diagonal">
+  <h3 class="sub">A quadrilateral split by a diagonal</h3>
+  <p>A diagonal cuts a quadrilateral into two triangles that <b>share</b> the diagonal. Solve the triangle with enough information, then carry the shared side into the other one.</p>
+  <div class="explainer" data-explainer="plot"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>The garden plot</h3></div>
+  <div class="u3l8-exrow">
+    <div class="u3l8-exfig" id="u3l8-figplot"></div>
+    <div>
+      <p class="q">A garden plot <span class="tex">ABCD</span> is split by the diagonal path <span class="tex">AC</span>. <span class="tex">AB=7.0</span> m, <span class="tex">BC=9.5</span> m, <span class="tex">\angle ABC=112^\circ</span>, <span class="tex">CD=6.0</span> m and <span class="tex">\angle ADC=80^\circ</span>. Find the length of <span class="tex">AC</span>, the length of <span class="tex">AD</span> and the perimeter of the plot, to the nearest tenth of a metre.</p>
+    </div>
+  </div>
+  <div class="part u3l8-solo"><div class="work" style="--h:280px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\triangle ABC</span> (SAS): <span class="tex">AC^2=7^2+9.5^2-2(7)(9.5)\cos112^\circ\approx189.07</span>, <span class="tex">AC\approx\boldsymbol{13.8}</span> <b>m</b><br>
+    <span class="tex">\triangle ACD</span>: full pair (<span class="tex">\angle D=80^\circ</span>, <span class="tex">AC</span>), so the sine law:<br>
+    <span class="tex">\sin\angle CAD=\dfrac{6.0\sin80^\circ}{13.75}\approx0.4297</span>, <span class="tex">\angle CAD\approx25.4^\circ</span> (only acute: <span class="tex">CD&lt;AC</span>)<br>
+    <span class="tex">\angle ACD=180^\circ-80^\circ-25.4^\circ\approx74.6^\circ</span><br>
+    <span class="tex">AD=\dfrac{13.75\sin74.6^\circ}{\sin80^\circ}\approx\boldsymbol{13.5}</span> <b>m</b><br>
+    Perimeter <span class="tex">\approx7.0+9.5+6.0+13.46\approx\boldsymbol{36.0}</span> <b>m</b></div></div></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Circles ================= -->
+<section class="card" data-ink="s4" data-section="4. Triangles in Circles">
+  <div class="sec-h"><span class="badge">4</span><h2>Triangles in Circles</h2></div>
+  <div class="def">Radii of the same circle are equal, so a chord and two radii form an <b>isosceles</b> triangle. Useful facts from earlier courses:</div>
+  <div class="u3l8-keys">
+    <div class="u3l8-key u3l8-kblue"><div class="u3l8-kh">Chord</div>The perpendicular from the centre to a chord <b>bisects</b> the chord.</div>
+    <div class="u3l8-key u3l8-kamber"><div class="u3l8-kh">Inscribed angle</div>The <b>central angle</b> is <b>twice</b> the <b>inscribed angle</b> on the same arc. Inscribed angles on the same arc are <b>equal</b>. (An angle inscribed in a semicircle is <span class="tex">90^\circ</span>.)</div>
+    <div class="u3l8-key u3l8-kred"><div class="u3l8-kh">Tangent</div>A <b>tangent</b> is <b>perpendicular</b> to the radius at the point of tangency.</div>
+  </div>
+  <div class="explainer" data-explainer="circle"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>A chord and two tangents</h3></div>
+  <div class="u3l8-exrow">
+    <div class="u3l8-exfig" id="u3l8-figcirc"></div>
+    <div>
+      <p class="q">A circle with centre <span class="tex">O</span> has radius 6.5 cm. Chord <span class="tex">AB</span> is 10.0 cm long, and <span class="tex">C</span> is a point on the major arc. The tangents at <span class="tex">A</span> and <span class="tex">B</span> meet at <span class="tex">T</span>. Round angles to the nearest degree and lengths to the nearest tenth.</p>
+      <div class="parts c2">
+        <div class="part"><div class="pl">(a) Find <span class="tex">\angle AOB</span>.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">SSS: <span class="tex">\cos\angle AOB=\dfrac{6.5^2+6.5^2-10^2}{2(6.5)(6.5)}\approx-0.1834</span>, <span class="tex">\angle AOB\approx100.6^\circ\approx\boldsymbol{101^\circ}</span></div></div></div>
+        <div class="part"><div class="pl">(b) Find <span class="tex">\angle ACB</span>.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Inscribed angle on the same arc: <span class="tex">\angle ACB=\tfrac12(100.6^\circ)\approx\boldsymbol{50^\circ}</span></div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(c) Find the distance from <span class="tex">O</span> to the chord.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The perpendicular bisects <span class="tex">AB</span>: half-chord 5.0. <span class="tex">d=\sqrt{6.5^2-5^2}\approx\boldsymbol{4.2}</span> <b>cm</b></div></div></div>
+    <div class="part"><div class="pl">(d) Find <span class="tex">\angle ATB</span> and the length <span class="tex">TA</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\angle OAT=\angle OBT=90^\circ</span> (tangent <span class="tex">\perp</span> radius). In quadrilateral <span class="tex">OATB</span>:<br><span class="tex">\angle ATB=360^\circ-90^\circ-90^\circ-100.6^\circ\approx\boldsymbol{79^\circ}</span><br>Right <span class="tex">\triangle OAT</span> with <span class="tex">\angle AOT=\tfrac12(100.6^\circ)=50.3^\circ</span>: <span class="tex">TA=6.5\tan50.3^\circ\approx\boldsymbol{7.8}</span> <b>cm</b></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>An angle from SSS in one line.</b> Bracket the whole top and the whole bottom: <span class="keys"><kbd>2nd</kbd><kbd>cos⁻¹</kbd><kbd>(</kbd><kbd>6.5</kbd><kbd>x²</kbd><kbd>+</kbd><kbd>6.5</kbd><kbd>x²</kbd><kbd>−</kbd><kbd>10</kbd><kbd>x²</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(</kbd><kbd>2</kbd><kbd>×</kbd><kbd>6.5</kbd><kbd>×</kbd><kbd>6.5</kbd><kbd>)</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>100.569…°</b></div>
+    <div class="u3l8-pcol"><button class="pill" data-keys="cos⁻¹ ( 6.5 x² + 6.5 x² − 10 x² ) ÷ ( 2 × 6.5 × 6.5 ) ) =">Show me</button></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Area ================= -->
+<section class="card" data-ink="s5" data-section="5. Area and Perimeter of a Triangle">
+  <div class="sec-h"><span class="badge">5</span><h2>Area and Perimeter of a Triangle</h2></div>
+  <div class="def">In <span class="tex">\triangle ABC</span>, the height from <span class="tex">B</span> to side <span class="tex">b</span> is <span class="tex">a\sin C</span>, so <span class="tex">\text{Area}=\tfrac12(\text{base})(\text{height})=\tfrac12ab\sin C</span>. This uses two sides and the angle <b>between</b> them (SAS); for SSS, find an angle with the cosine law first.</div>
+  <div class="def amber u3l8-center"><span class="tex u3l8-bigf">\text{Area}=\tfrac12ab\sin C=\tfrac12bc\sin A=\tfrac12ac\sin B</span> &nbsp; <span class="muted">(two sides and the contained angle)</span></div>
+  <div class="explainer" data-explainer="area"></div>
+</section>
+
+<section class="card example" data-ink="ex9" data-section="Example 9">
+  <div class="ex-head"><span class="ex-tag">Example 9</span><h3>Areas and perimeters</h3></div>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) A triangular lot has two sides of 42 m and 55 m with an angle of <span class="tex">74^\circ</span> between them. Find its area (nearest square metre) and its perimeter (nearest tenth of a metre).</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Area <span class="tex">=\tfrac12(42)(55)\sin74^\circ\approx\boldsymbol{1\,110}</span> <b>m²</b><br>Third side (SAS): <span class="tex">c^2=42^2+55^2-2(42)(55)\cos74^\circ\approx3\,515.6</span>, <span class="tex">c\approx59.29</span> m<br>Perimeter <span class="tex">\approx42+55+59.29\approx\boldsymbol{156.3}</span> <b>m</b></div></div></div>
+    <div class="part"><div class="pl">(b) Find the area of a triangle with sides 7 cm, 9 cm and 12 cm, to the nearest tenth.</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Angle <span class="tex">\theta</span> opposite 12 (SSS): <span class="tex">\cos\theta=\dfrac{7^2+9^2-12^2}{2(7)(9)}=\dfrac{-14}{126}</span>, <span class="tex">\theta\approx96.4^\circ</span><br>Area <span class="tex">=\tfrac12(7)(9)\sin96.4^\circ\approx\boldsymbol{31.3}</span> <b>cm²</b></div></div></div>
+    <div class="part"><div class="pl">(c) Find the area of the garden plot in Example 7, to the nearest tenth.</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\triangle ABC</span>: <span class="tex">\tfrac12(7)(9.5)\sin112^\circ\approx30.83</span>;<br><span class="tex">\triangle ACD</span>: <span class="tex">\tfrac12(13.75)(6.0)\sin74.6^\circ\approx39.76</span><br>Total <span class="tex">\approx\boldsymbol{70.6}</span> <b>m²</b></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>SSS area in two lines (b).</b> The angle first, then use it straight from <b>Ans</b>: <span class="keys"><kbd>2nd</kbd><kbd>cos⁻¹</kbd><kbd>(</kbd><kbd>7</kbd><kbd>x²</kbd><kbd>+</kbd><kbd>9</kbd><kbd>x²</kbd><kbd>−</kbd><kbd>12</kbd><kbd>x²</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(</kbd><kbd>2</kbd><kbd>×</kbd><kbd>7</kbd><kbd>×</kbd><kbd>9</kbd><kbd>)</kbd><kbd>)</kbd><kbd>ENTER</kbd></span>, then <span class="keys"><kbd>.5</kbd><kbd>×</kbd><kbd>7</kbd><kbd>×</kbd><kbd>9</kbd><kbd>sin</kbd><kbd>2nd</kbd><kbd>Ans</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>31.30…</b></div>
+    <div class="u3l8-pcol"><button class="pill" data-keys="cos⁻¹ ( 7 x² + 9 x² − 12 x² ) ÷ ( 2 × 7 × 9 ) ) = .5 × 7 × 9 sin Ans ) =">Show me</button></div>
+  </div>
+  <div class="space" id="ex9-space"></div>
+  <button class="more" data-more="ex9-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Choose the tool.</b> Right triangle: primary ratios. A <b>full pair</b> (angle + opposite side): sine law (check the ambiguous case for an angle). SAS or SSS: cosine law. AAA: no size, can’t be solved.</div>
+    <div><b>Bearings.</b> Clockwise from north, three digits: <span class="tex">140^\circ=\text{S}\,40^\circ\,\text{E}</span>. Back bearing: <span class="tex">\pm180^\circ</span>. Draw a north line at <b>every</b> point; at a turn, the inside angle is between the back bearing and the new bearing.</div>
+    <div><b>Two triangles.</b> Solve the triangle with enough information first; carry the <b>shared</b> side or angle across. Look for <span class="tex">180^\circ</span> on straight lines and right angles. Keep unrounded values (Ans).</div>
+    <div><b>Circles and area.</b> Radii are equal (isosceles); central <span class="tex">=2\times</span> inscribed; tangent <span class="tex">\perp</span> radius. <span class="tex">\text{Area}=\tfrac12ab\sin C</span> with the angle <b>between</b> the sides.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u3l8">
+    <div><div class="kicker">Your turn</div><b>Assignment 8 — Choosing the Sine Law or the Cosine Law</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l9/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 9 — Unit 3 Review</b><div class="muted">Every tool in the unit together: angles in standard position, ratios, the CAST rule, exact values and the laws.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u3l8.js';
+  boot({ key: 'u3l8', homeHref: '../../', title: '3.8 Choosing a Law' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

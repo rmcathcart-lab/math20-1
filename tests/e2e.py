@@ -121,12 +121,12 @@ async def main():
             print('leave: new numbers' if (await page.evaluate("HW.App.cur().inst && HW.App.cur().inst.prompt")) != before else 'leave: same numbers (the question may have no random numbers)', '| notice:', (notice or '')[:80])
             await page.evaluate("location.hash = '#/'"); await page.wait_for_selector('.unit')
         # calculator: order of operations, and trig in degree mode (sin opens a bracket like the real one)
-        await page.click('.top-calc'); await page.wait_for_selector('.calc:not(.hidden)')
-        async def keys(ks):
-            for k in ks: await page.click('.ck[data-a="%s"]' % k)
-            return (await page.inner_text('.calc-l1')) + ' = ' + (await page.inner_text('.calc-l2'))
-        print('calc:', await keys(['7', '6', '5', '0', 'div', '2', 'enter']))
-        r = await keys(['clear', 'clear', 'sin', '3', '0', 'rp', 'enter']); print('calc:', r); assert r.strip().endswith('0.5'), r
+        await page.click('.top-calc'); await page.wait_for_selector('.c84-k')
+        async def keys(ks):  # TI-84 key ids (js/calc84.js); the answer is the newest history line
+            for k in ks: await page.click('.c84-k[data-k="%s"]' % k)
+            return await page.evaluate("(function(){ var c = HW.Calc.get().calc, h = c.hist[c.hist.length - 1]; return h ? h.out : ''; })()")
+        r = await keys(['7', '6', '5', '0', 'div', '2', 'enter']); print('calc: 7650 ÷ 2 =', r); assert r.strip() == '3825', r
+        r = await keys(['clear', 'sin', '3', '0', 'rp', 'enter']); print('calc: sin(30) =', r); assert r.strip() == '.5', r
         await page.screenshot(path=OUT + '/e2e_calc.png')
         await page.click('.calc-close')
         await page.evaluate("HW.Ledger.flush()"); await page.wait_for_timeout(800)

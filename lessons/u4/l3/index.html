@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Factoring by Substitution · Math 20-1 4.3</title>
+<meta name="description" content="Math 20-1 Unit 4 Lesson 3: factoring by substitution. Trinomials in quadratic form such as x^4 − 7x^2 + 12 and x^6 + 2x^3 − 8, finishing with a difference of squares, leading coefficient not 1 (decomposition), substituting for a binomial and simplifying each factor, perfect squares, and other repeated expressions (sin x, two binomials). No calculator. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u4l3.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u4l3">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 4 Factoring and Equations · Lesson 3</div>
+  <h1>Factoring by Substitution: <span class="tex">a(f(x))^2+b(f(x))+c</span></h1>
+  <p class="lede">Some big expressions are an ordinary trinomial in disguise. Spot the <b>repeated part</b>, wrap it in a box called <span class="tex">\textcolor{#c27a0e}{A}</span>, factor the simple trinomial in <span class="tex">\textcolor{#c27a0e}{A}</span>, then <b>unwrap</b> the box and simplify. No calculator today.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>recognize a trinomial in <b>quadratic form</b>, such as <span class="tex">x^4-7x^2+12=(x^2)^2-7(x^2)+12</span></li>
+      <li>factor by <b>substitution</b>: let <span class="tex">\textcolor{#c27a0e}{A}=f(x)</span>, factor, then replace <span class="tex">\textcolor{#c27a0e}{A}</span> with <span class="tex">f(x)</span></li>
+      <li><b>factor fully</b>: take out the GCF first, and finish with a <b>difference of squares</b> when a factor allows it</li>
+      <li>factor quadratic-form trinomials with a leading coefficient that is not 1 by <b>decomposition</b></li>
+      <li>substitute for a <b>binomial</b>, put it back <b>in brackets</b> and simplify each factor</li>
+      <li>use the same idea for other repeated expressions, like <span class="tex">\sin x</span> or two binomials <span class="tex">A</span> and <span class="tex">B</span></li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF1</b> Factor polynomial expressions of the form ax² + bx + c, a²x² − b²y², a(f(x))² + b(f(x)) + c and a²(f(x))² − b²(g(y))² (a, b and c rational).<br><span class="muted">Today: a(f(x))² + b(f(x)) + c, factoring by substitution.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Mystery Gift" id="wu" style="--wf-side: 400px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Mystery Gift</h2>
+  <p class="wf-rule">Every gift <span class="u4l3-gi" aria-label="gift"></span> on a line holds the <b>same</b> thing. Work out what could be inside. Then the teacher unwraps one.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u4l3-gift" id="u4l3-gift"></div>
+    <div class="u4l3-wbtns">
+      <button type="button" class="pill" id="u4l3-unwrap">Unwrap the gift</button>
+      <span class="u4l3-trylab">Try <span class="tex">x=</span></span>
+      <span class="u4l3-tries" id="u4l3-tries"></span>
+    </div>
+  </div><div class="wf-side">
+    <div class="u4l3-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div><span class="u4l3-gi"></span> <span class="tex">\times</span> <span class="u4l3-gi"></span> <span class="tex">=49</span>. What could be in the gift? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u4l3-wa"><div class="bk-ans"><b>7</b>, or <b>−7</b>: <span class="tex">(-7)(-7)=49</span> too.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div><span class="u4l3-gi"></span><sup class="u4l3-sq">2</sup><span class="tex">{}-5\times{}</span><span class="u4l3-gi"></span><span class="tex">{}+4=0</span>. Find <b>two</b> numbers that could be in the gift. <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u4l3-wa"><div class="bk-ans"><b>1 and 4.</b> <span class="tex">1-5+4=0</span> and <span class="tex">16-20+4=0</span>. (Two numbers with product 4 and sum 5!)</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>This gift holds <span class="tex">x+3</span>, and the gift equals 10. What is <span class="tex">x</span>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u4l3-wa"><div class="bk-ans"><span class="tex">x+3=10</span>, so <span class="tex">x=7</span>.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Now the gift holds <span class="tex">x^2</span>, so the line in Q2 is <span class="tex">x^4-5x^2+4=0</span>. How many values of <span class="tex">x</span> work? <b>Guess first.</b></div></div>
+      <div class="poll-opts">
+        <div class="opt"><b>A</b> 1</div>
+        <div class="opt"><b>B</b> 2</div>
+        <div class="opt"><b>C</b> 3</div>
+        <div class="opt right"><b>D</b> 4</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>D, four.</b> The gift is 1 or 4, so <span class="tex">x^2=1</span> or <span class="tex">x^2=4</span>: <span class="tex">x=\pm1</span> or <span class="tex">x=\pm2</span>. Treating <span class="tex">x^2</span> as one “box” turned a degree-4 puzzle into an easy trinomial. That is today’s lesson: <span class="tex">x^4-5x^2+4=(x^2-1)(x^2-4)</span>.</div>
+    </div>
+  </div></div>
+  <p class="u4l3-social">Challenge your neighbour: put <span class="tex">x+1</span> in the gift instead. Which values of <span class="tex">x</span> make the Q2 line true now?</p>
+</section>
+
+<!-- ================= 1. Quadratic form ================= -->
+<section class="card" data-ink="s1" data-section="1. Trinomials in Quadratic Form">
+  <div class="sec-h"><span class="badge">1</span><h2>Trinomials in Quadratic Form</h2></div>
+  <p>In <span class="tex">x^2+bx+c</span> the powers of <span class="tex">x</span> are 2, 1 and 0. Many other trinomials have the same shape: the variable part of the first term is the <b>square</b> of the variable part of the middle term, and the last term is a constant. Such an expression is in <b>quadratic form</b>:</p>
+  <div class="u4l3-disp"><span class="tex">x^4-7x^2+12=(\textcolor{#c27a0e}{x^2})^2-7(\textcolor{#c27a0e}{x^2})+12</span><span class="tex">x^6+2x^3-8=(\textcolor{#c27a0e}{x^3})^2+2(\textcolor{#c27a0e}{x^3})-8</span></div>
+  <p>Replace the repeated expression with a single letter, factor the simpler trinomial, then put the expression back. This is <b>factoring by substitution</b>.</p>
+  <div class="explainer" data-explainer="spot"></div>
+</section>
+
+<section class="card" data-ink="s1b" data-section="1. The Substitution Box">
+  <div class="def amber"><b>Factoring <span class="tex">a(f(x))^2+b(f(x))+c</span> by substitution</b>
+    <ol class="u4l3-steps">
+      <li>Find the repeated expression <span class="tex">f(x)</span> and write the trinomial as <span class="tex">a(\ \cdot\ )^2+b(\ \cdot\ )+c</span>.</li>
+      <li>Let <span class="tex">\textcolor{#c27a0e}{A}=f(x)</span>.</li>
+      <li>Factor <span class="tex">a\textcolor{#c27a0e}{A}^2+b\textcolor{#c27a0e}{A}+c</span>.</li>
+      <li>Replace <span class="tex">\textcolor{#c27a0e}{A}</span> with <span class="tex">f(x)</span>.</li>
+      <li>Simplify inside each bracket and factor each factor fully.</li>
+    </ol></div>
+  <div class="explainer" data-explainer="boxIt"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Wrap, factor, unwrap</h3></div>
+  <p class="q">Factor.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">x^4+9x^2+14</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">A=x^2</span>: <span class="tex">A^2+9A+14</span><br><span class="tex">=(A+2)(A+7)</span><br><span class="tex">=\boldsymbol{(x^2+2)(x^2+7)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y^4-3y^2-28</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">A=y^2</span>: <span class="tex">A^2-3A-28</span><br><span class="tex">=(A-7)(A+4)</span><br><span class="tex">=\boldsymbol{(y^2-7)(y^2+4)}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">x^6+4x^3-21</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">A=x^3</span>: <span class="tex">A^2+4A-21</span><br><span class="tex">=(A+7)(A-3)</span><br><span class="tex">=\boldsymbol{(x^3+7)(x^3-3)}</span></div></div></div>
+  </div>
+  <div class="tip"><div class="tip-ic">★</div><div><b>Shortcut.</b> With practice the letter <span class="tex">A</span> can be skipped: think “two numbers with product 14 and sum 9” and write the <span class="tex">x^2</span> factors directly.</div></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> Why can’t <span class="tex">x^4+5x-6</span> be factored with <span class="tex">A=x^2</span>?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The middle term has <span class="tex">x</span>, not <span class="tex">x^2</span>. With <span class="tex">A=x^2</span> it would be <span class="tex">A^2+5x-6</span>: the box does not appear twice, so it is <b>not</b> in quadratic form.</div></div></div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Difference of squares ================= -->
+<section class="card" data-ink="s2" data-section="2. Finishing with a Difference of Squares">
+  <div class="sec-h"><span class="badge">2</span><h2>Finishing with a Difference of Squares</h2></div>
+  <p>After substituting back, a factor such as <span class="tex">x^2-9</span> can often be factored again. Recall the <b>difference of squares</b> pattern from Math 10C (Lesson 4 develops it fully):</p>
+  <div class="def amber u4l3-center"><span class="tex u4l3-bigf">A^2-B^2=(A-B)(A+B)</span><div class="u4l3-legend">e.g. <span class="tex">x^2-9=(x-3)(x+3)</span>, &nbsp; <span class="tex">4x^2-1=(2x-1)(2x+1)</span></div>
+    <div class="u4l3-legend">A <b>sum</b> of squares such as <span class="tex">x^2+9</span> does <b>not</b> factor. Neither does <span class="tex">x^2-7</span> over the integers (7 is not a perfect square).</div></div>
+  <div class="explainer" data-explainer="dos"></div>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. Factor Fully">
+  <div class="def"><b>To factor fully:</b> take out the <b>GCF first</b>, and <b>check every factor</b> at the end. Keep splitting until no factor can be split again: a factor tree for an expression.</div>
+  <div class="explainer" data-explainer="tree"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Factor fully</h3></div>
+  <p class="q">Factor fully.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">x^4-13x^2+36</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=(x^2-4)(x^2-9)</span><br>Both factors are differences of squares:<br><span class="tex">=\boldsymbol{(x-2)(x+2)(x-3)(x+3)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">m^4-5m^2-36</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=(m^2-9)(m^2+4)</span><br><span class="tex">=\boldsymbol{(m-3)(m+3)(m^2+4)}</span><br>(<span class="tex">m^2+4</span> is a sum: it does not factor.)</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">3y^5-54y^3+243y</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">GCF: <span class="tex">3y(y^4-18y^2+81)</span><br><span class="tex">=3y(y^2-9)(y^2-9)=3y(y^2-9)^2</span><br><span class="tex">=3y\big[(y-3)(y+3)\big]^2</span><br><span class="tex">=\boldsymbol{3y(y-3)^2(y+3)^2}</span></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Leading coefficient not 1 ================= -->
+<section class="card" data-ink="s3" data-section="3. Leading Coefficient Not 1">
+  <div class="sec-h"><span class="badge">3</span><h2>Leading Coefficient Not 1: Decomposition</h2></div>
+  <div class="def">When <span class="tex">a\ne1</span>, factor <span class="tex">a\textcolor{#c27a0e}{A}^2+b\textcolor{#c27a0e}{A}+c</span> by <b>decomposition</b> (Lesson 2): find two numbers with <b>product <span class="tex">ac</span></b> and <b>sum <span class="tex">b</span></b>, split the middle term, and group. You can also split the middle term without writing <span class="tex">A</span> at all.</div>
+  <div class="explainer" data-explainer="decomp"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Two ways to the same answer</h3></div>
+  <p class="q">Factor <span class="tex">3x^4-10x^2-8</span> fully two ways.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Substitute <span class="tex">A=x^2</span> first.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3A^2-10A-8</span>: product <span class="tex">-24</span>, sum <span class="tex">-10</span>: <span class="tex">-12</span> and <span class="tex">2</span>.<br><span class="tex">3A^2-12A+2A-8=3A(A-4)+2(A-4)</span><br><span class="tex">=(3A+2)(A-4)=(3x^2+2)(x^2-4)</span><br><span class="tex">=\boldsymbol{(3x^2+2)(x-2)(x+2)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Split <span class="tex">-10x^2</span> directly.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3x^4-12x^2+2x^2-8</span><br><span class="tex">=3x^2(x^2-4)+2(x^2-4)</span><br><span class="tex">=(x^2-4)(3x^2+2)</span><br><span class="tex">=\boldsymbol{(x-2)(x+2)(3x^2+2)}</span> &nbsp; (same answer)</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="3. Product and Sum Hunt">
+  <h3 class="sub">Hunting for the pair</h3>
+  <p>List the factor pairs of <span class="tex">ac</span> in order and stop when the sum is <span class="tex">b</span>. The signs tell you where to look: a <b>positive</b> product means both numbers have the sign of <span class="tex">b</span>; a <b>negative</b> product means one of each.</p>
+  <div class="explainer" data-explainer="acHunt"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Leading coefficient not 1</h3></div>
+  <p class="q">Factor fully.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">9x^4-37x^2+4</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A=x^2</span>: <span class="tex">9A^2-37A+4</span><br>product 36, sum <span class="tex">-37</span>: <span class="tex">-36</span>, <span class="tex">-1</span><br><span class="tex">=9A(A-4)-1(A-4)</span><br><span class="tex">=(9x^2-1)(x^2-4)</span><br><span class="tex">=\boldsymbol{(3x-1)(3x+1)(x-2)(x+2)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">6a^2b^2-5ab-6</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A=ab</span>: <span class="tex">6A^2-5A-6</span><br>product <span class="tex">-36</span>, sum <span class="tex">-5</span>: <span class="tex">-9</span>, <span class="tex">4</span><br><span class="tex">=3A(2A-3)+2(2A-3)</span><br><span class="tex">=(3A+2)(2A-3)</span><br><span class="tex">=\boldsymbol{(3ab+2)(2ab-3)}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">2p^6+5p^3-12</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A=p^3</span>: <span class="tex">2A^2+5A-12</span><br>product <span class="tex">-24</span>, sum 5: <span class="tex">8</span>, <span class="tex">-3</span><br><span class="tex">=2A(A+4)-3(A+4)</span><br><span class="tex">=(2A-3)(A+4)</span><br><span class="tex">=\boldsymbol{(2p^3-3)(p^3+4)}</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u4l3"></section>
+
+<!-- ================= 4. Substituting for a binomial ================= -->
+<section class="card" data-ink="s4" data-section="4. Substituting for a Binomial">
+  <div class="sec-h"><span class="badge">4</span><h2>Substituting for a Binomial</h2></div>
+  <div class="def">The repeated expression can be a <b>binomial</b>, as in <span class="tex">(\textcolor{#c27a0e}{x+2})^2-3(\textcolor{#c27a0e}{x+2})-10</span>. Let <span class="tex">\textcolor{#c27a0e}{A}=x+2</span>, factor, then replace <span class="tex">\textcolor{#c27a0e}{A}</span> with <span class="tex">(x+2)</span> <b>in brackets</b>, simplify each factor and take out any common factor.</div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Brackets when you unwrap.</b> <span class="tex">2A-1</span> with <span class="tex">A=3x-1</span> is <span class="tex">2(3x-1)-1=6x-3</span>, not <span class="tex">2\cdot3x-1-1</span>. The whole box gets multiplied.</div></div>
+  <div class="explainer" data-explainer="boxBin"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>A binomial in the box</h3></div>
+  <p class="q">Factor fully.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">(x+2)^2-3(x+2)-10</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">A=x+2</span>: <span class="tex">A^2-3A-10=(A-5)(A+2)</span><br><span class="tex">=\big[(x+2)-5\big]\big[(x+2)+2\big]</span><br><span class="tex">=\boldsymbol{(x-3)(x+4)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2(3x-1)^2+5(3x-1)-3</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">A=3x-1</span>: <span class="tex">2A^2+5A-3=(2A-1)(A+3)</span><br><span class="tex">=\big[2(3x-1)-1\big]\big[(3x-1)+3\big]</span><br><span class="tex">=(6x-3)(3x+2)</span><br><span class="tex">=\boldsymbol{3(2x-1)(3x+2)}</span> &nbsp; (common factor 3)</div></div></div>
+  </div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> In (b), why do we look for a common factor <b>after</b> unwrapping, when we already took out the GCF at the start?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The common factor 3 was hidden inside the box: it only appears once <span class="tex">2(3x-1)-1</span> is simplified to <span class="tex">6x-3</span>. Always check each simplified factor.</div></div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s4b" data-section="4. Or Expand First?">
+  <h3 class="sub">Or expand first?</h3>
+  <p>You could instead <b>expand first</b> and factor the result. It gives the same answer but takes longer, and the expanded trinomial usually has bigger numbers.</p>
+  <div class="explainer" data-explainer="race"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Substitute or expand?</h3></div>
+  <p class="q">Factor <span class="tex">4(x-1)^2-4(x-1)-3</span> two ways.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) By substitution.</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A=x-1</span>: <span class="tex">4A^2-4A-3</span><br>product <span class="tex">-12</span>, sum <span class="tex">-4</span>: <span class="tex">-6</span>, <span class="tex">2</span><br><span class="tex">=2A(2A-3)+1(2A-3)=(2A+1)(2A-3)</span><br><span class="tex">=\big[2(x-1)+1\big]\big[2(x-1)-3\big]</span><br><span class="tex">=\boldsymbol{(2x-1)(2x-5)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) By expanding first.</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">4(x^2-2x+1)-4x+4-3</span><br><span class="tex">=4x^2-8x+4-4x+4-3=4x^2-12x+5</span><br>product 20, sum <span class="tex">-12</span>: <span class="tex">-10</span>, <span class="tex">-2</span><br><span class="tex">=2x(2x-5)-1(2x-5)=\boldsymbol{(2x-1)(2x-5)}</span><br>Same answer, more steps.</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s4c" data-section="4. Perfect Squares">
+  <h3 class="sub">Perfect squares in quadratic form</h3>
+  <p>A trinomial in quadratic form can be a <b>perfect square</b>: <span class="tex">A^2+2kA+k^2=(A+k)^2</span> and <span class="tex">A^2-2kA+k^2=(A-k)^2</span>. The first and last terms are squares and the middle term is twice their product. Its area picture is a <b>square</b>.</p>
+  <div class="explainer" data-explainer="perfectSq"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Perfect squares</h3></div>
+  <p class="q">A trinomial in quadratic form can be a <b>perfect square</b>. Factor fully.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">(2x+1)^2-6(2x+1)+9</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A=2x+1</span>: <span class="tex">A^2-6A+9=(A-3)^2</span><br><span class="tex">=(2x+1-3)^2=(2x-2)^2</span><br><span class="tex">=\big[2(x-1)\big]^2=\boldsymbol{4(x-1)^2}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x^4+10x^2+25</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A=x^2</span>: <span class="tex">A^2+10A+25=(A+5)^2</span><br><span class="tex">=\boldsymbol{(x^2+5)^2}</span><br>(<span class="tex">x^2+5</span> does not factor.)</div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Other repeated expressions ================= -->
+<section class="card" data-ink="s5" data-section="5. Other Repeated Expressions">
+  <div class="sec-h"><span class="badge">5</span><h2>Other Repeated Expressions</h2></div>
+  <div class="def">Any expression can play the role of <span class="tex">\textcolor{#c27a0e}{A}</span>. In trigonometry, <span class="tex">\sin^2x</span> means <span class="tex">(\sin x)^2</span>, so <span class="tex">2\sin^2x+\sin x-1</span> is a trinomial in <span class="tex">\sin x</span>. An expression can also contain <b>two</b> repeated binomials, like <span class="tex">a\textcolor{#c27a0e}{A}^2+b\textcolor{#c27a0e}{A}\textcolor{#1f5bd6}{B}+c\textcolor{#1f5bd6}{B}^2</span>: factor it as you would <span class="tex">6x^2+xy-2y^2</span>, then substitute both back.</div>
+  <div class="explainer" data-explainer="twoBox"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Any expression can be the box</h3></div>
+  <p class="q">Factor fully.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">2\sin^2x+\sin x-1</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">A=\sin x</span>: <span class="tex">2A^2+A-1</span><br>product <span class="tex">-2</span>, sum 1: <span class="tex">2</span>, <span class="tex">-1</span><br><span class="tex">=2A(A+1)-1(A+1)=(2A-1)(A+1)</span><br><span class="tex">=\boldsymbol{(2\sin x-1)(\sin x+1)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2(x+2)^2-3(x+2)(2x-1)-2(2x-1)^2</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A=x+2</span>, <span class="tex">B=2x-1</span>: <span class="tex">2A^2-3AB-2B^2</span><br><span class="tex">=2A^2-4AB+AB-2B^2=(A-2B)(2A+B)</span><br><span class="tex">=\big[(x+2)-2(2x-1)\big]\big[2(x+2)+(2x-1)\big]</span><br><span class="tex">=(x+2-4x+2)(2x+4+2x-1)</span><br><span class="tex">=(-3x+4)(4x+3)=\boldsymbol{-(3x-4)(4x+3)}</span></div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Quadratic form.</b> The first term’s variable part is the <b>square</b> of the middle term’s, and the last term is a constant: <span class="tex">x^4-7x^2+12=(x^2)^2-7(x^2)+12</span>.</div>
+    <div><b>Wrap, factor, unwrap.</b> Let <span class="tex">A=f(x)</span>, factor <span class="tex">aA^2+bA+c</span> (decomposition when <span class="tex">a\ne1</span>), then put <span class="tex">f(x)</span> back <b>in brackets</b> and simplify each factor.</div>
+    <div><b>Factor fully.</b> GCF first. Then check every factor: <span class="tex">x^2-9=(x-3)(x+3)</span>, but a sum like <span class="tex">x^2+9</span> and <span class="tex">x^2-7</span> do not factor. A common factor can appear after simplifying.</div>
+    <div><b>Any repeated chunk.</b> <span class="tex">x^2</span>, <span class="tex">x^3</span>, <span class="tex">ab</span>, <span class="tex">x+2</span>, <span class="tex">\sin x</span>, or two chunks <span class="tex">A</span> and <span class="tex">B</span>. Substituting is faster than expanding first.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u4l3">
+    <div><div class="kicker">Your turn</div><b>Assignment 3 — Factoring by Substitution</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l4/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 4 — Differences of Squares, Including <span class="tex">a^2(f(x))^2-b^2(g(y))^2</span></b><div class="muted">The <span class="tex">A^2-B^2</span> pattern in full, with boxes for <span class="tex">A</span> and <span class="tex">B</span>.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u4l3.js';
+  boot({ key: 'u4l3', homeHref: '../../', title: '4.3 Factoring by Substitution' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

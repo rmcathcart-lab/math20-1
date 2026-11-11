@@ -1,0 +1,132 @@
+/* Math 20-1 · Unit 3 · Lesson 2 — Trigonometric Ratios from a Point on the Terminal Arm: styles used only on this page
+ * (prefix u3l2-). Colours: terminal arm / θ burgundy #7a1f3d, reference angle θ_R amber #c27a0e, x blue, y red, r rose. */
+
+.u3l2 .ex-cap .katex { font-size: 1.04em; }
+.u3l2 .pl .katex { font-size: 1.06em; }
+.u3l2 .ans .katex { font-size: 1.04em; }
+.u3l2 .katex { white-space: nowrap; }
+.u3l2 h2 .katex, .u3l2 h3 .katex { font-size: .95em; }
+.u3l2-arm { color: #7a1f3d; }
+.u3l2-ref { color: #c27a0e; }
+.u3l2-red { color: #c93a33; }
+.u3l2-p { font-size: 20px; line-height: 1.5; margin: 0 0 12px; }
+.u3l2-center { text-align: center; }
+.u3l2-bigf { font-size: 1.25em; }
+.u3l2-legend { font-size: 17px; color: var(--ink2); margin-top: 4px; }
+.u3l2-three { display: flex; justify-content: space-around; align-items: center; gap: 18px; font-size: 23px; padding: 14px 18px; }
+.u3l2-split { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 22px; align-items: center; margin-bottom: 8px; }
+.u3l2-split-r { align-items: start; }
+.u3l2-split-l { grid-template-columns: auto minmax(0, 1fr); align-items: start; }
+.u3l2-fig { position: relative; }
+.u3l2-solo { margin: 0 0 6px; }
+.u3l2-sk { margin: 6px auto 0; }
+.u3l2-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u3l2-pcol .pill { white-space: nowrap; }
+.u3l2-steps { font-size: 19px; line-height: 1.45; }
+.u3l2-steps > div { margin: 4px 0; }
+.u3l2-sn { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 15px var(--round); margin-right: 8px; vertical-align: 2px; }
+.u3l2-tbl { border-collapse: collapse; margin: 6px 0 4px; font-size: 18px; }
+.u3l2-tbl th, .u3l2-tbl td { border: 2px solid #c9c3b4; padding: 6px 12px; text-align: center; min-width: 70px; }
+.u3l2-tbl th { background: #f3f0e8; font-weight: 700; }
+.u3l2-qtbl td { min-width: 82px; }
+.u3l2-rtbl { width: 100%; margin-bottom: 14px; }
+.u3l2-rtbl td { width: 22%; }
+.u3l2-thn { font-size: 14px; font-weight: 600; color: var(--muted); }
+.u3l2-tapnote { font-size: 15px; margin: 4px 0 0; }
+
+/* ---------------- warm-up: the tower crane ---------------- */
+.u3l2-crane { position: relative; width: 560px; height: 360px; }
+.u3l2-cranesvg { display: block; }
+.u3l2-ctext { font: 700 14px var(--round); fill: #6d6250; }
+.u3l2-cdist { font: 800 19px var(--round); fill: #a33357; paint-order: stroke; stroke: #fff; stroke-width: 4px; }
+.u3l2-cinfo { left: 10px; top: 8px; font-size: 17px; background: rgba(255, 255, 255, .94); border: 2px solid #d3c7ae; border-radius: 10px; padding: 3px 12px; }
+.u3l2-wbtns { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 2px; }
+.u3l2-wbtns .pill { font-size: 15px; padding: 6px 13px; }
+.u3l2-wbtns .pill:disabled { opacity: .4; }
+.wf .u3l2-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
+.wf .u3l2-wqs .q-line .pill.small { padding: 2px 10px; }
+.u3l2-wa { margin: 0 0 6px 40px; }
+.wf .u3l2-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
+.u3l2 .wf .wf-poll { margin-top: 8px; }
+.u3l2 .wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
+.u3l2 .wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
+.u3l2 .wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
+.u3l2-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
+
+/* ---------------- explainer pieces ---------------- */
+.u3l2-panel { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; }
+.u3l2-ph { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 6px; }
+.u3l2-line { font-size: 20px; line-height: 1.35; margin: 4px 0 10px; }
+.u3l2-line-sm { font-size: 17.5px; }
+.u3l2-line-big .katex { font-size: 1.08em; }
+.u3l2-line-key { background: #fff4dd; border-radius: 8px; padding: 4px 8px; }
+.u3l2-line-ans { background: #e8f5ef; border-radius: 8px; padding: 4px 8px; }
+.u3l2-lab { font-size: 19px; font-weight: 700; }
+.u3l2-lx, .u3l2-ly, .u3l2-lr { background: rgba(255, 255, 255, .85); border-radius: 6px; padding: 0 4px; }
+.u3l2-lth .katex, .u3l2-lthr .katex { font-size: 1em; }
+.u3l2-lthr { background: rgba(255, 255, 255, .8); border-radius: 6px; padding: 0 3px; }
+.u3l2-handle { cursor: grab; touch-action: none; }
+.u3l2-live { font-size: 21px; background: rgba(255, 255, 255, .94); border: 2px solid #7a1f3d; border-radius: 10px; padding: 2px 10px; }
+.u3l2-ghost4 { pointer-events: none; }
+
+/* ratios */
+.u3l2-soh { font-size: 22px; }
+.u3l2-sohr { margin: 6px 0 12px; padding: 4px 8px; border-radius: 8px; }
+.u3l2-sohr.u3l2-neg { background: #fdecea; }
+.u3l2-sgcol { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 8px 10px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; }
+.u3l2-sgh { font: 800 19px var(--round); color: var(--ink2); margin-bottom: 4px; }
+.u3l2-sghost { position: relative; width: 220px; height: 220px; }
+.u3l2-sgt { font-size: 19px; margin-top: 8px; text-align: center; width: 100%; }
+.u3l2-sgr { margin: 5px auto; padding: 2px 12px; border-radius: 8px; width: 120px; }
+.u3l2-sgneg { background: #fdecea; }
+.u3l2-sgm { color: #c93a33; font-size: 1.15em; }
+.u3l2-sgp { color: #12805a; font-size: 1.15em; }
+
+/* quadrantal and sweep tables */
+.u3l2-xt { width: 100%; font-size: 18px; }
+.u3l2-xt th, .u3l2-xt td { padding: 6px 4px; min-width: 0; }
+.u3l2-xt td.u3l2-cur { background: #fdf3df; }
+.u3l2-hid { opacity: 0; }
+.u3l2-und { color: #c93a33; font-weight: 700; font-size: 16px; }
+.u3l2-nt { width: 100%; font-size: 19px; }
+.u3l2-nt th, .u3l2-nt td { padding: 7px 6px; min-width: 0; }
+.u3l2-sread { font-size: 22px; margin: 6px 0 30px; }
+.u3l2-bar { display: flex; align-items: center; gap: 10px; margin: 0 0 30px; }
+.u3l2-bl { width: 72px; font-size: 20px; }
+.u3l2-btrack { position: relative; height: 40px; background: #f3f0e8; border-radius: 8px; flex: none; }
+.u3l2-bzero { position: absolute; left: 50%; top: -4px; bottom: -4px; width: 2px; background: #6b7280; }
+.u3l2-bfill { position: absolute; top: 4px; bottom: 4px; border-radius: 5px; }
+.u3l2-boff { position: absolute; top: 5px; font: 900 22px var(--round); color: #7b4fc4; }
+.u3l2-bv { width: 80px; font: 700 19px ui-monospace, "SF Mono", Menlo, Consolas, monospace; text-align: right; }
+.u3l2-bscale { font-size: 15px; color: var(--muted); }
+
+/* slide: the ratio meter */
+.u3l2-meter { display: flex; flex-direction: column; }
+.u3l2-mtop { display: flex; justify-content: space-around; font-size: 22px; padding: 4px 0 10px; border-bottom: 2px dashed #e4ded2; margin-bottom: 8px; min-height: 40px; }
+.u3l2-mrows { transition: opacity .15s; }
+.u3l2-dim .u3l2-mrows, .u3l2-dim .u3l2-mtop { opacity: .3; }
+.u3l2-mrow { display: flex; justify-content: space-between; align-items: center; font-size: 22px; margin: 6px 0; padding: 4px 10px; border-radius: 10px; min-height: 66px; }
+.u3l2-mrow.u3l2-mneg { background: #fdecea; }
+.u3l2-mv { font-weight: 700; min-width: 120px; text-align: right; }
+.u3l2-mnote { font-size: 18px; color: var(--ink2); margin-top: 8px; background: #fff4dd; border-radius: 8px; padding: 4px 10px; }
+.u3l2-stick { width: 104px; font: 700 14px var(--round); line-height: 1.25; background: rgba(255, 255, 255, .93); border: 2px solid #7a1f3d; border-radius: 10px; padding: 3px 6px; text-align: center; }
+.u3l2-sq { font: 800 13px var(--round); color: #7a1f3d; letter-spacing: .05em; }
+.u3l2-gname { font-size: 18px; color: #9aa0ab; font-weight: 700; }
+.u3l2-e5t { width: 100%; font-size: 17px; }
+.u3l2-e5t th, .u3l2-e5t td { padding: 5px 3px; min-width: 0; }
+.u3l2-e5t th { width: 78px; }
+
+/* refSign */
+.u3l2-gq1 { font-size: 17px; }
+
+/* findAngle */
+.u3l2-scr { background: #cfdccc; border: 3px solid #2e3c4f; border-radius: 8px; padding: 6px 10px; font: 700 19px ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: #1c2230; min-height: 76px; margin-bottom: 12px; }
+.u3l2-scrrow { display: flex; flex-direction: column; margin: 0 0 4px; }
+.u3l2-scr2 { text-align: right; }
+.u3l2-place { display: grid; gap: 6px; margin-bottom: 12px; }
+.u3l2-pr { font-size: 19px; padding: 4px 10px; border-radius: 8px; background: #f6f3ec; border: 2px solid transparent; }
+.u3l2-pr b { display: inline-block; width: 34px; font-family: var(--round); }
+.u3l2-pr.on { background: #fff4dd; border-color: #c27a0e; }
+.u3l2-halflab { font: 700 15px var(--round); color: #c93a33; text-align: center; background: rgba(255, 255, 255, .85); border-radius: 8px; padding: 2px 6px; }
+.u3l2-wlab { font-size: 18px; color: #c93a33; font-weight: 700; }
+.u3l2-nocaps { text-transform: none; }

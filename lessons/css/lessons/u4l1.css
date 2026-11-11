@@ -1,0 +1,145 @@
+/* Math 20-1 · Unit 4 · Lesson 1 — Factoring Review: styles used only on this page (prefix u4l1-).
+ * Colours (Unit 4 tiles): x² tile blue #1f5bd6, x-tiles and b green #12805a, unit tiles and c amber #c27a0e, negative tiles red
+ * #c93a33; GCF rose #a33357; a common bracket purple #7b4fc4. */
+
+.u4l1 .ex-cap .katex { font-size: 1.04em; }
+.u4l1 .chip .katex { font-size: 1em; }
+.u4l1 .pl .katex { font-size: 1.1em; }
+.u4l1 .ans .katex { font-size: 1.04em; }
+.u4l1 .katex { white-space: nowrap; }
+.u4l1 h1 .katex, .u4l1 h2 .katex, .u4l1 h3 .katex { font-size: .95em; }
+.u4l1 .bk-stamp .katex { text-transform: none; }
+.u4l1-cg { color: #a33357; } .u4l1-cp { color: #7b4fc4; } .u4l1-cc { color: #c27a0e; } .u4l1-cb { color: #12805a; }
+.u4l1-center { text-align: center; }
+.u4l1-big { font-size: 22px; white-space: nowrap; }
+.u4l1-chk { font-size: 18px; color: var(--ink2); }
+.u4l1-legend { font-size: 17px; color: var(--ink2); margin-top: 8px; }
+.u4l1-solo { margin: 0 0 12px; }
+.u4l1-tilenote { font-size: 19px; line-height: 1.5; }
+.u4l1-sw { display: inline-block; vertical-align: -3px; border: 2px solid; border-radius: 3px; }
+.u4l1-sw-x2 { width: 20px; height: 20px; background: #cfdcfb; border-color: #1f5bd6; }
+.u4l1-sw-x { width: 8px; height: 20px; background: #c9ecd9; border-color: #12805a; }
+.u4l1-sw-u { width: 8px; height: 8px; vertical-align: 0; background: #ffe1a6; border-color: #c27a0e; }
+.u4l1-sw-n { width: 8px; height: 20px; background: #f9cfcb; border-color: #c93a33; }
+
+.u4l1-checklist { background: #fff; border: 3px solid #a33357; border-radius: 14px; padding: 10px 18px 12px; margin: 0 0 14px; }
+.u4l1-clh { font: 800 16px var(--round); text-transform: uppercase; letter-spacing: .05em; color: #a33357; margin-bottom: 6px; }
+.u4l1-cli { display: flex; align-items: baseline; gap: 12px; font-size: 19px; line-height: 1.45; margin: 3px 0; }
+.u4l1-cln { flex: none; width: 28px; height: 28px; border-radius: 50%; background: #a33357; color: #fff; display: inline-grid; place-items: center; font: 800 16px var(--round); }
+
+/* ---------------- warm-up: The Mind-Reading Trick ---------------- */
+.u4l1-wpick { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 2px 0 8px; }
+.u4l1-wpl { font-size: 17px; margin-right: 4px; }
+.u4l1-wn { min-width: 36px; font-size: 17px; padding: 3px 8px; }
+.u4l1-wn.on { background: var(--brand); color: #fff; border-color: var(--brand); }
+.u4l1-wcalc { font-size: 19px; min-height: 34px; }
+.u4l1-wrect { color: #7a1f3d; }
+.u4l1-dots { position: relative; width: 530px; height: 290px; background: #fbfaf6; border: 2px solid #ece6d8; border-radius: 12px; overflow: hidden; }
+.u4l1-dot { position: absolute; left: 0; top: 0; width: 13px; height: 13px; border-radius: 50%; transition: transform .8s cubic-bezier(.3, .7, .3, 1); }
+.u4l1-noanim .u4l1-dot { transition: none; }
+.u4l1-d-sq { background: #1f5bd6; } .u4l1-d-st { background: #12805a; } .u4l1-d-u { background: #e8a01e; }
+.u4l1-wlab { position: absolute; font-size: 17px; white-space: nowrap; }
+.u4l1-wl-top { translate: -50% 0; } .u4l1-wl-left { translate: -100% -50%; }
+.u4l1-wtag { position: absolute; left: 10px; top: 6px; font-size: 15.5px; color: var(--ink2); transition: opacity .3s; }
+.u4l1-sorted .u4l1-wtag { opacity: 0; }
+.u4l1-wbtns { display: flex; gap: 10px; margin: 8px 0 2px; }
+.u4l1-wbtns .pill { font-size: 15px; padding: 6px 14px; }
+.u4l1-wbtns .pill:disabled { opacity: .4; }
+.wf .u4l1-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
+.wf .u4l1-wqs .q-line .pill.small { padding: 2px 10px; }
+.u4l1-wa { margin: 0 0 6px 40px; }
+.wf .u4l1-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
+.wf .wf-poll { margin-top: 8px; }
+.wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
+.wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
+.wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
+.u4l1-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
+
+/* ---------------- explainer pieces ---------------- */
+.u4l1-ov { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+.u4l1-panel { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; }
+.u4l1-ph { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 6px; }
+.u4l1-line { font-size: 19px; line-height: 1.35; margin: 4px 0 8px; }
+.u4l1-line-key { background: #fff4dd; border-radius: 8px; padding: 4px 8px; }
+.u4l1-wl { font-size: 21px; margin: 6px 0 10px; white-space: nowrap; }
+.u4l1-ok { color: #0d6b4b; }
+.u4l1-wl.u4l1-wl-sm { font-size: 17.5px; }
+.u4l1-yes { color: #12805a; font-weight: 800; } .u4l1-no { color: #c93a33; font-weight: 800; }
+.u4l1-muted { font-size: 17px; color: var(--ink2); }
+.u4l1-fbig { font-size: 30px; white-space: nowrap; }
+.u4l1-fsub { font-size: 18px; color: var(--ink2); margin-top: 6px; white-space: nowrap; }
+.u4l1-fpanel { border-color: #7a1f3d; border-width: 3px; }
+
+/* gcf: factor chips */
+.u4l1-row { position: absolute; }
+.u4l1-rl { text-align: right; font-size: 22px; white-space: nowrap; }
+.u4l1-fc { display: grid; place-items: center; background: #fff; border: 2px solid #c9c3b4; border-radius: 10px; font-size: 21px; box-sizing: border-box; transition: background .3s, border-color .3s, opacity .3s; }
+.u4l1-fc.u4l1-fc-on { background: #f7e3ea; border-color: #a33357; color: #7a1f3d; box-shadow: 0 0 0 3px rgba(163, 51, 87, .18); }
+.u4l1-fc.u4l1-fc-dim { opacity: .32; }
+.u4l1-frac { font-size: 20px; white-space: nowrap; }
+
+/* binomial: the bracket as a parcel */
+.u4l1-bslot { display: flex; align-items: center; justify-content: center; font-size: 28px; box-sizing: border-box; white-space: nowrap; }
+.u4l1-bun { background: #efe8fb; border: 3px solid #7b4fc4; border-radius: 14px; color: #4b2a8a; }
+.u4l1-bun-opp { background: #fff1dc; border-color: #e8a01e; color: #8a5a0d; }
+.u4l1-br { color: var(--ink); }
+.u4l1-paren { font-size: 24px; }
+.u4l1-flipped { color: #c93a33; }
+.u4l1-ghost1 { position: absolute; inset: 6px; display: grid; place-items: center; border: 2px dashed #c27a0e; border-radius: 10px; color: #c27a0e; font-size: 26px; }
+.u4l1-bnote { text-align: center; }
+.u4l1-bnote .u4l1-line { font-size: 20px; }
+
+/* grouping cards */
+.u4l1-card { display: grid; place-items: center; background: #fff; border: 2.5px solid #9aa0ab; border-radius: 12px; font-size: 26px; box-sizing: border-box; }
+.u4l1-pair { position: absolute; font-size: 26px; white-space: nowrap; background: #fff; border: 2px solid #e4ded2; border-radius: 12px; padding: 4px 14px; }
+.u4l1-pair-bad { border-color: #e8a01e; background: #fff7ea; }
+.u4l1-pair-none { font-size: 18px; color: #c93a33; border-color: #f0b9b4; background: #fff4f2; }
+.u4l1-gres { font-size: 30px; }
+
+/* algebra tiles */
+.u4l1-t { display: flex; align-items: center; justify-content: center; border: 2px solid; border-radius: 4px; box-sizing: border-box; font-size: 19px; overflow: hidden; }
+.u4l1-t-x2 { background: #cfdcfb; border-color: #1f5bd6; color: #173f97; font-size: 24px; }
+.u4l1-t-x { background: #c9ecd9; border-color: #12805a; color: #0b5a3e; font-size: 15px; }
+.u4l1-t-u { background: #ffe1a6; border-color: #c27a0e; }
+.u4l1-t.u4l1-neg { background: #f9cfcb; border-color: #c93a33; color: #8f1f1a; }
+.u4l1-t.u4l1-zp { box-shadow: 0 0 0 3px rgba(123, 79, 196, .55); }
+.u4l1-slab { position: absolute; font-size: 22px; white-space: nowrap; }
+.u4l1-rframe { border: 3px solid #7a1f3d; border-radius: 6px; box-sizing: border-box; pointer-events: none; }
+.u4l1-slot { border: 2px dashed #9aa0ab; border-radius: 4px; box-sizing: border-box; }
+.u4l1-slot.u4l1-gap { border-color: #c93a33; background: rgba(201, 58, 51, .12); }
+.u4l1-qbox { display: grid; place-items: center; border: 2.5px dashed #12805a; border-radius: 10px; font-size: 22px; color: #0b5a3e; background: #f0faf5; box-sizing: border-box; }
+.u4l1-tlist .u4l1-line { font-size: 18px; margin: 3px 0 6px; }
+
+/* product–sum table, signs and the expansion box */
+.u4l1-gtr { display: flex; }
+.u4l1-gtc { display: flex; align-items: center; justify-content: center; border: 1.5px solid #d8d2c4; margin: 0 -1.5px -1.5px 0; background: #fff; font-size: 19px; box-sizing: border-box; white-space: nowrap; }
+.u4l1-gth .u4l1-gtc { background: #f3f0e8; font-weight: 700; font-size: 17px; }
+.u4l1-gtr-x .u4l1-gtc { color: var(--muted); }
+.u4l1-gtr-ok .u4l1-gtc { background: #e3f5ec; border-color: #12805a; font-weight: 700; }
+.u4l1-rule { font-size: 17.5px; line-height: 1.3; padding: 4px 8px; border-radius: 8px; margin: 2px 0 4px; color: var(--muted); }
+.u4l1-rule.u4l1-rule-on { background: #fff4dd; color: var(--ink); box-shadow: 0 0 0 2px #e8a01e; }
+.u4l1-xh { display: grid; place-items: center; font-size: 21px; font-weight: 700; color: #7a1f3d; }
+.u4l1-xc { display: grid; place-items: center; font-size: 21px; background: #fff; border: 2px solid #c9c3b4; box-sizing: border-box; margin: 0 -2px -2px 0; }
+.u4l1-xc.u4l1-xc-mid { background: #e9f6ef; }
+.u4l1-xc.u4l1-xc-c { background: #fff3da; }
+
+/* working panels, flip card, tables */
+.u4l1-work { overflow: hidden; }
+.u4l1-flip { display: grid; place-items: center; background: #fff; border: 3px solid #7b4fc4; border-radius: 14px; font-size: 26px; box-sizing: border-box; white-space: nowrap; }
+.u4l1-flip.u4l1-flip-b { background: #efe8fb; }
+
+/* is it a factor? */
+.u4l1-fcard { display: grid; place-items: center; background: #fff; border: 3px solid #9aa0ab; border-radius: 14px; font-size: 26px; box-sizing: border-box; transition: background .3s, border-color .3s; }
+.u4l1-cand { border-color: #7a1f3d; background: #f7e3ea; z-index: 3; }
+.u4l1-fcard.u4l1-fcard-hit { border-color: #12805a; background: #e3f5ec; box-shadow: 0 0 0 4px rgba(18, 128, 90, .25); }
+.u4l1-fcard.u4l1-fcard-near { border-color: #e8a01e; background: #fff7ea; }
+.u4l1-fsubl { text-align: center; font-size: 20px; color: #0d6b4b; }
+
+/* patio */
+.u4l1-preg { display: grid; place-items: center; border: 2px solid; box-sizing: border-box; }
+.u4l1-p-x2 { background: rgba(31, 91, 214, .16); border-color: #1f5bd6; }
+.u4l1-p-x { background: rgba(18, 128, 90, .16); border-color: #12805a; }
+.u4l1-p-u { background: rgba(232, 160, 30, .22); border-color: #c27a0e; }
+.u4l1-plab { font-size: 22px; background: rgba(255, 255, 255, .85); border-radius: 8px; padding: 0 6px; }
+.u4l1-pgrid line { stroke: rgba(28, 34, 48, .22); stroke-width: 1; }
+.u4l1-ptot { position: absolute; font-size: 19px; white-space: nowrap; color: #7a1f3d; font-weight: 700; }

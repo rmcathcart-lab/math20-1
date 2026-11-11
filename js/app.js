@@ -51,6 +51,7 @@
   }
 
   /* ---------------- top bar ---------------- */
+  var topNoCalc = false; // a no-calculator lesson (calc: false) hides the Calculator button
   function drawTop(crumb) {
     top.innerHTML = '';
     var brand = el('a', 'brand', '<span class="brand-mark" aria-hidden="true">20-1</span><span class="brand-name">' + esc(cfg.siteName || 'Math 20-1 Practice') + '</span>'); brand.href = '#/';
@@ -65,7 +66,7 @@
         ttB.addEventListener('click', function () { HW.Times.toggle(); });
         right.appendChild(ttB);
       }
-      right.appendChild(calcB);
+      if (!topNoCalc) right.appendChild(calcB);
       if (L.enabled) { var dot = el('span', 'sync-dot' + (L.ok === false ? ' bad' : L.ok ? ' good' : ''), ''); dot.title = L.ok === false ? 'Can’t reach your teacher’s ledger right now — your work is saved on this device and will be sent later.' : 'Your work is being saved for your teacher.'; right.appendChild(dot); }
       var who = el('button', 'btn btn-ghost who', esc(session.name) + (session.klass ? ' <span class="muted">· ' + esc(session.klass) + '</span>' : '')); who.type = 'button'; who.title = 'Sign out';
       who.addEventListener('click', function () { if (confirm('Sign out of ' + session.name + '?')) signOut(); });
@@ -204,7 +205,7 @@
       leaveLesson(); document.body.className = 'drills';
       var dd = h[1] && HW.Drills.list.filter(function (x) { return x.id === h[1]; })[0];
       var cr = dd ? '<a href="#/">Home</a><span class="sep">/</span><a href="#/drills">Skill Drills</a><span class="sep">/</span>' + esc(dd.title) : '<a href="#/">Home</a><span class="sep">/</span>Skill Drills';
-      drawTop(cr); top.dataset.crumb = cr; window.scrollTo(0, 0);
+      topNoCalc = false; drawTop(cr); top.dataset.crumb = cr; window.scrollTo(0, 0);
       L.push({ t: 'event', type: 'drills-open', drill: h[1] || '' });
       return HW.Drills.render(view, h[1]);
     }
@@ -276,7 +277,7 @@
   }
   function renderHome() {
     leaveLesson(); document.body.className = 'home';
-    drawTop(); top.dataset.crumb = '';
+    topNoCalc = false; drawTop(); top.dataset.crumb = '';
     view.innerHTML = '';
     var head = el('div', 'home-head'), hl = el('div', 'hh-text');
     var nm = el('div', 'hh-name'); nm.appendChild(el('h1', '', 'Hi, ' + esc(session.name.split(' ')[0]) + '.'));
@@ -600,7 +601,7 @@
   }
   /* Printable Notes: one row per unit with its lessons-only booklet (assets/notes/math20-1-unit-N-notes.pdf).
      Print opens the browser's print dialog for the PDF (a new tab on iPad/iPhone, where printing a frame doesn't work). */
-  var NOTES_PAGES = { 1: 23, 2: 18 }; // unit → pages, for the units that have a notes booklet in assets/notes
+  var NOTES_PAGES = { 1: 29, 2: 24, 3: 32, 4: 29 }; // unit → pages, for the units that have a notes booklet in assets/notes
   function notesUrl(u) { return 'assets/notes/math20-1-unit-' + u + '-notes.pdf'; }
   function printPdf(url) {
     var ios = /iP(ad|hone|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -693,6 +694,8 @@
     cur.item = id; cur.practice = false; l.cur = id;
     if (r.s === 'new') { r.s = 'open'; r.at = Date.now(); L.push({ t: 'event', type: 'open', lesson: lesson.id, item: id }); }
     touch(lesson.id);
+    topNoCalc = lesson.calc === false;
+    if (topNoCalc && HW.Calc && HW.Calc.get && document.querySelector('.calc-head')) { try { var cu = HW.Calc.get(); if (cu.isOpen && cu.isOpen()) cu.hide(); } catch (e) {} }
     drawTop('<a href="#/">Assignments</a><span class="sep">/</span>Unit ' + lesson.unit + ' · Assignment ' + esc(lesson.num));
     if (fresh || !document.querySelector('.lesson-wrap')) buildLessonFrame(lesson);
     drawNav(); drawHeaderBar();

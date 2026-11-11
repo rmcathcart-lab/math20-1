@@ -1612,10 +1612,14 @@
   [1, 2, 3, 4, 5, 6].forEach(function (k) { DEMO['L' + k] = [['2nd', String(k)], '2nd L' + k]; DEMO['Y' + k] = [['vars', 'right', '1', String(k)], 'VARS ► 1 ' + k + ' (Y' + k + ')']; });
   /* data-keys="…" → [{ tok, label, keys: [key ids] }] */
   function plan(spec) {
+    var prev = '';
     return String(spec).trim().split(/\s+/).filter(Boolean).map(function (t) {
+      var after = prev; prev = t;
       if (DEMO[t]) return { tok: t, label: DEMO[t][1], keys: DEMO[t][0].slice() };
       if (/^k:/.test(t)) return { tok: t, label: t.slice(2), keys: [t.slice(2)] };
       if (/^[0-9.]+$/.test(t)) return { tok: t, label: t, keys: t.split('') };
+      // after STO→ the calculator is already in ALPHA, so the letter is one key press
+      if (/^[A-Zθ]$/.test(t) && ALPHA_KEY[t] && (after === 'STO→' || after === '→')) return { tok: t, label: t, keys: [ALPHA_KEY[t]] };
       if (/^[A-Zθ]$/.test(t) && ALPHA_KEY[t]) return { tok: t, label: 'ALPHA ' + t, keys: ['alpha', ALPHA_KEY[t]] };
       return { tok: t, label: t, keys: t.split('').filter(function (ch) { return KEY[ch]; }) };
     });

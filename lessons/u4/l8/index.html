@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unit 4 Review · Math 20-1 4.8</title>
+<meta name="description" content="Math 20-1 Unit 4 Lesson 8: Unit 4 review of factoring, quadratic equations and radical equations (no calculator). Every factoring method and the factoring checklist on one page, solving by factoring and the zero product property, roots, zeros and x-intercepts, the steps for radical equations and extraneous roots, common errors, and mixed review examples. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u4l8.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u4l8">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 4 Factoring and Equations · Lesson 8</div>
+  <h1>Unit 4 Review</h1>
+  <p class="lede">Every factoring method, solving by factoring and solving radical equations on one page, then mixed examples that combine them. One question runs the whole unit: <b>what kind of expression is this?</b> The <b class="u4l8-cg">factoring checklist</b> sorts it, the <b class="u4l8-cz">zero product property</b> turns factors into roots, and every root of a radical equation gets <b class="u4l8-cx">checked</b>. No calculator: exact answers.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li><b>factor fully</b> with the checklist: GCF first, then grouping, <span class="tex">x^2+bx+c</span>, decomposition, perfect squares, differences of squares and substitution</li>
+      <li>decide whether a binomial is a factor, and find <span class="tex">k</span> so that a trinomial factors or is a perfect square</li>
+      <li>solve a quadratic equation by factoring and the zero product property, and connect roots, zeros and <span class="tex">x</span>-intercepts</li>
+      <li>write a quadratic equation from its roots, and solve word problems, rejecting inadmissible roots</li>
+      <li>solve radical equations: restrictions, isolate, square (twice if needed), solve, verify, and reject extraneous roots</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF1</b> Factor polynomial expressions of the form <span class="tex">ax^2+bx+c</span>, <span class="tex">a^2x^2-b^2y^2</span>, <span class="tex">a(f(x))^2+b(f(x))+c</span> and <span class="tex">a^2(f(x))^2-b^2(g(y))^2</span> (<span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> rational).<br><b>RF5</b> Solve problems that involve quadratic equations.<br><b>AN3</b> Solve problems that involve radical equations (limited to square roots).<br><span class="muted">Today: the whole unit on one page, the factoring checklist, common errors, and mixed practice in the style of the unit test (no calculator).</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Mystery Box" id="wu" style="--wf-side: 400px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Mystery Box</h2>
+  <p class="wf-rule">A shipping box has whole-number edges (in cm), all different. The label only gives a formula for its volume: <span class="tex u4l8-wlab">V=x^3+6x^2+8x</span></p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u4l8-box" id="u4l8-box"></div>
+    <div class="u4l8-wbtns">
+      <button type="button" class="pill" id="u4l8-xdn">◂ smaller <span class="tex">x</span></button>
+      <button type="button" class="pill" id="u4l8-xup">bigger <span class="tex">x</span> ▸</button>
+      <button type="button" class="pill" id="u4l8-edges">Show the edges</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u4l8-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>For <span class="tex">x=1</span>, what volume does the label give? Which three different whole numbers multiply to it? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u4l8-wa"><div class="bk-ans"><span class="tex">1+6+8=15</span> cm³, and <span class="tex">15=1\times3\times5</span>.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>For <span class="tex">x=2</span>: the volume, and the three edges? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u4l8-wa"><div class="bk-ans"><span class="tex">8+24+16=48</span> cm³, and <span class="tex">48=2\times4\times6</span>. A pattern: <span class="tex">x</span>, then 2 more, then 4 more.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Which three edges give <span class="tex">x^3+6x^2+8x</span> for <b>every</b> <span class="tex">x</span>? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> <span class="tex">x,\ x+6,\ x+8</span></div>
+        <div class="opt right"><b>B</b> <span class="tex">x,\ x+2,\ x+4</span></div>
+        <div class="opt"><b>C</b> <span class="tex">x^2,\ 6x,\ 8x</span></div>
+        <div class="opt"><b>D</b> <span class="tex">x+1,\ x+3,\ x+5</span></div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal id="u4l8-wreveal">Reveal</button>
+      <div class="poll-ans"><b>B.</b> Every term has an <span class="tex">x</span>: take out the <b>GCF</b>, <span class="tex">x(x^2+6x+8)</span>. Then two numbers with <b>product 8</b> and <b>sum 6</b>: 2 and 4. So <span class="tex">V=x(x+2)(x+4)</span>. Check <span class="tex">x=10</span>: <span class="tex">10\times12\times14=1\,680</span> and <span class="tex">1\,000+600+80=1\,680</span> ✓.<br>
+        <span class="muted"><b>A</b> just reads off the coefficients. <b>C</b> uses the terms as edges, but the volume is their <em>sum</em>, not their product. <b>D</b> would give a constant term of 15.</span></div>
+    </div>
+  </div></div>
+  <p class="u4l8-social">Challenge your neighbour: make your own mystery box. Pick edges like <span class="tex">x</span>, <span class="tex">x+1</span>, <span class="tex">x+5</span>, expand the volume, and see if they can unpack it.</p>
+</section>
+
+<!-- ================= 1. Unit summary ================= -->
+<section class="card" data-ink="s1" data-section="1. Unit Summary">
+  <div class="sec-h"><span class="badge">1</span><h2>Unit Summary</h2></div>
+  <h3 class="sub">Factoring methods <span class="muted u4l8-subnote">tap a grey box to check yourself</span></h3>
+  <table class="u4l8-mtab">
+    <tr><th>Method</th><th>When to use it</th><th>Example</th></tr>
+    <tr><th>Greatest common factor (GCF)</th><td><b>Always first.</b> Take out a negative GCF if the leading term is negative. A binomial can be the common factor.</td>
+      <td><span class="tex">-6x^2+18x=</span> <span data-reveal><span class="tex">-6x(x-3)</span></span><br><span class="tex">5a(a-2)+3(a-2)=</span> <span data-reveal><span class="tex">(a-2)(5a+3)</span></span></td></tr>
+    <tr><th>Grouping</th><td><b>Four terms:</b> group in pairs, factor each pair, take out the common binomial.</td>
+      <td><span class="tex">x^3-4x^2+3x-12=</span> <span data-reveal><span class="tex">x^2(x-4)+3(x-4)</span></span><br><span class="tex">=</span> <span data-reveal><span class="tex">(x-4)(x^2+3)</span></span></td></tr>
+    <tr><th><span class="tex">x^2+bx+c</span></th><td>Two numbers with <b>product <span class="tex">c</span></b> and <b>sum <span class="tex">b</span></b>. Works with two variables.</td>
+      <td><span class="tex">x^2-3xy-28y^2=</span> <span data-reveal><span class="tex">(x-7y)(x+4y)</span></span></td></tr>
+    <tr><th><span class="tex">ax^2+bx+c</span> (decomposition)</th><td>Two numbers with <b>product <span class="tex">ac</span></b> and <b>sum <span class="tex">b</span></b>; split the middle term and group. Factor out a fraction for rational coefficients.</td>
+      <td><span class="tex">6x^2+7x-3</span>: <span class="tex">ac=</span> <span data-reveal><span class="tex">-18</span></span>, <span data-reveal><span class="tex">9+(-2)</span></span> <span class="tex">=7</span><br><span class="tex">=</span> <span data-reveal><span class="tex">3x(2x+3)-(2x+3)=(2x+3)(3x-1)</span></span></td></tr>
+    <tr><th>Perfect square trinomial</th><td>First and last terms are squares and the middle term is <span class="tex">2AB</span>.</td>
+      <td><span class="tex">9x^2-30x+25=</span> <span data-reveal><span class="tex">(3x-5)^2</span></span></td></tr>
+    <tr><th>Difference of squares</th><td><span class="tex">A^2-B^2=(A-B)(A+B)</span>. A <b>sum</b> of squares does not factor.</td>
+      <td><span class="tex">x^4-81=</span> <span data-reveal><span class="tex">(x^2-9)(x^2+9)</span></span><br><span class="tex">=</span> <span data-reveal><span class="tex">(x-3)(x+3)(x^2+9)</span></span></td></tr>
+    <tr><th>Substitution</th><td>A repeated expression <span class="tex">f(x)</span> or <span class="tex">x^2</span>: let <span class="tex">A=f(x)</span>, factor, substitute back, simplify each factor.</td>
+      <td><span class="tex">(x+1)^2-5(x+1)+6=</span> <span data-reveal><span class="tex">(A-2)(A-3)</span></span><br><span class="tex">=</span> <span data-reveal><span class="tex">(x-1)(x-2)</span></span></td></tr>
+  </table>
+  <div class="def u4l8-checklist"><div class="u4l8-clh">Factoring checklist</div>
+    <div class="u4l8-cl4">
+      <div><b>1</b><span><b>GCF first.</b></span></div>
+      <div><b>2</b><span><b>Count the terms:</b> two → difference of squares; three → <span class="tex">x^2+bx+c</span>, decomposition, perfect square, or substitution; four → grouping.</span></div>
+      <div><b>3</b><span><b>Check every factor</b> and factor again if you can (<b>factor fully</b>).</span></div>
+      <div><b>4</b><span><b>Check by expanding.</b></span></div>
+    </div>
+    <p class="u4l8-clnote">A binomial is a factor of a polynomial if it appears in the fully factored form, or is a product of factors that do.</p>
+  </div>
+</section>
+
+<section class="card" data-ink="s1b" data-section="The factoring machine">
+  <h3 class="sub">The factoring machine <span class="muted u4l8-subnote">the checklist as a sorting machine: guess each gate before you press Next</span></h3>
+  <div class="explainer" data-explainer="machine"></div>
+</section>
+
+<section class="card" data-ink="s1c" data-section="Solving by factoring">
+  <h3 class="sub">Solving by factoring</h3>
+  <div class="u4l8-sgrid">
+    <div class="def"><b>Steps.</b> Move every term to one side <span class="tex">(ax^2+bx+c=0)</span>, divide out a common factor, factor, and use the <b class="u4l8-cz">zero product property</b>: if <span class="tex">AB=0</span> then <span class="tex">A=0</span> or <span class="tex">B=0</span>. <b>Never divide both sides by an expression containing the variable</b> (a root is lost).</div>
+    <div class="def amber"><b>Same numbers, three names.</b> The <b>roots</b> of <span class="tex">ax^2+bx+c=0</span>, the <b>zeros</b> of <span class="tex">y=ax^2+bx+c</span> and the <b><span class="tex">x</span>-intercepts</b> of its graph. Roots <span class="tex">r_1</span> and <span class="tex">r_2</span> give the equation <span class="tex">(x-r_1)(x-r_2)=0</span>; a root <span class="tex">\frac{p}{q}</span> gives the factor <span class="tex">(qx-p)</span>. In a word problem, reject roots that are <b>inadmissible</b> (a negative length or time).</div>
+  </div>
+  <div class="explainer" data-explainer="solveRecap"></div>
+</section>
+
+<section class="card" data-ink="s1d" data-section="Radical equations">
+  <h3 class="sub">Radical equations</h3>
+  <div class="u4l8-steps6">
+    <div><b>1</b>State the <b>restrictions</b>: each radicand <span class="tex">\ge0</span>, and the side opposite an isolated radical <span class="tex">\ge0</span>.</div>
+    <div><b>2</b><b>Isolate</b> a radical.</div>
+    <div><b>3</b><b>Square</b> both sides (square a binomial side as <span class="tex">(a-b)^2=a^2-2ab+b^2</span>).</div>
+    <div><b>4</b>If a radical remains, isolate it and <b>square again</b>.</div>
+    <div><b>5</b><b>Solve</b> (often a quadratic by factoring).</div>
+    <div><b>6</b><b>Verify</b> every root in the <b>original</b> equation.</div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div>Squaring can create an <b class="u4l8-cx">extraneous root</b> because <span class="tex">a^2=b^2</span> does not mean <span class="tex">a=b</span> (for example <span class="tex">3^2=(-3)^2</span>).</div></div>
+  <div class="explainer" data-explainer="radRecap"></div>
+</section>
+
+<section class="card" data-ink="s1e" data-section="Common errors">
+  <h3 class="sub">Common errors <span class="muted u4l8-subnote">tap a card to see the fix</span></h3>
+  <div class="bk-flips u4l8-flips" style="--bk-cols:5">
+    <div class="bk-flip"><div class="bk-front"><span class="tex">(x-2)^2\ne x^2+4</span></div><div class="bk-back"><span class="tex">(x-2)^2=x^2-4x+4</span></div></div>
+    <div class="bk-flip"><div class="bk-front"><span class="tex">(2x-4)(x+2)</span> is not fully factored</div><div class="bk-back"><span class="tex">2(x-2)(x+2)</span></div></div>
+    <div class="bk-flip"><div class="bk-front"><span class="tex">x^2+9</span> does not factor</div><div class="bk-back">a <b>sum</b> of squares: no two numbers have product 9 and sum 0</div></div>
+    <div class="bk-flip"><div class="bk-front">Dividing <span class="tex">x^2=5x</span> by <span class="tex">x</span> loses the root <span class="tex">x=0</span></div><div class="bk-back"><span class="tex">x(x-5)=0</span>: <span class="tex">x=0</span> or <span class="tex">x=5</span></div></div>
+    <div class="bk-flip"><div class="bk-front">A root of the squared equation is not automatically a root of the radical equation</div><div class="bk-back"><b>Verify</b> every root in the original</div></div>
+  </div>
+  <div class="explainer" data-explainer="errors"></div>
+</section>
+
+<!-- ================= 2. Factoring ================= -->
+<section class="card" data-ink="s2" data-section="2. Factoring">
+  <div class="sec-h"><span class="badge">2</span><h2>Factoring</h2></div>
+  <div class="def"><b>Factor fully:</b> keep going until no factor can be factored again. A bracket can be the thing that repeats: <b>box it</b>, call it <span class="tex">\textcolor{#c27a0e}{A}</span> (and <span class="tex">\textcolor{#1f5bd6}{B}</span>), factor, then <b>unwrap in brackets</b> and simplify each factor. Simplifying can uncover a new GCF.</div>
+  <div class="explainer" data-explainer="subDos"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Factor fully</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">4x^3-8x^2-60x</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">GCF: <span class="tex">=4x(x^2-2x-15)</span><br><span class="tex">=\boldsymbol{4x(x-5)(x+3)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">10x^2-11xy-6y^2</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">ac=-60</span>; <span class="tex">-15+4=-11</span><br><span class="tex">=10x^2-15xy+4xy-6y^2</span><br><span class="tex">=5x(2x-3y)+2y(2x-3y)=\boldsymbol{(2x-3y)(5x+2y)}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">x^3+2x^2-9x-18</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=x^2(x+2)-9(x+2)</span><br><span class="tex">=(x+2)(x^2-9)</span><br><span class="tex">=\boldsymbol{(x+2)(x-3)(x+3)}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\frac{1}{3}x^2-2x-9</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\frac{1}{3}(x^2-6x-27)</span><br><span class="tex">=\boldsymbol{\frac{1}{3}(x-9)(x+3)}</span></div></div></div>
+  </div>
+  <p class="muted u4l8-seeabove">Check each part with the factoring machine above (Example 1 chips).</p>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Substitution and differences of squares</h3></div>
+  <p class="q">Factor fully.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">3(x-1)^2+4(x-1)-4</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">A=x-1</span>: <span class="tex">3A^2+4A-4=(3A-2)(A+2)</span><br><span class="tex">=[3(x-1)-2][(x-1)+2]</span><br><span class="tex">=\boldsymbol{(3x-5)(x+1)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">9x^4-37x^2+4</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">A=x^2</span>: <span class="tex">9A^2-37A+4=(9A-1)(A-4)</span><br><span class="tex">=(9x^2-1)(x^2-4)</span><br><span class="tex">=\boldsymbol{(3x-1)(3x+1)(x-2)(x+2)}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">16x^4-81y^4</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=(4x^2-9y^2)(4x^2+9y^2)</span><br><span class="tex">=\boldsymbol{(2x-3y)(2x+3y)(4x^2+9y^2)}</span><br>(The sum of squares does not factor.)</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">25(x+1)^2-4(x-2)^2</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=[5(x+1)-2(x-2)][5(x+1)+2(x-2)]</span><br><span class="tex">=(3x+9)(7x+1)</span><br><span class="tex">=\boldsymbol{3(x+3)(7x+1)}</span></div></div></div>
+  </div>
+  <div class="part u4l8-half"><div class="pl">(e) <span class="tex">\dfrac{x^2}{9}-\dfrac{y^2}{4}</span></div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\boldsymbol{\left(\dfrac{x}{3}-\dfrac{y}{2}\right)\left(\dfrac{x}{3}+\dfrac{y}{2}\right)}</span></div></div></div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. Is It a Factor? Finding k">
+  <h3 class="sub">Is it a factor? Finding <span class="tex">k</span></h3>
+  <p>To test a binomial, <b>factor fully</b> and look for it among the factors. To find <span class="tex">k</span> so that <span class="tex">x^2+kx+c</span> factors, list <b>every</b> factor pair of <span class="tex">c</span>: each pair’s sum is a possible <span class="tex">k</span>. For a perfect square, the middle term must be <span class="tex">\pm2AB</span>.</p>
+  <div class="explainer" data-explainer="kHunt"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Factors and missing coefficients</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Is <span class="tex">x+4</span> a factor of <span class="tex">2x^2+5x-12</span>?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">ac=-24</span>; <span class="tex">8+(-3)=5</span>:<br><span class="tex">2x^2+8x-3x-12=2x(x+4)-3(x+4)=(x+4)(2x-3)</span>. <b>Yes.</b></div></div></div>
+    <div class="part"><div class="pl">(b) Is <span class="tex">3x+2</span> a factor of <span class="tex">6x^3+x^2-2x</span>?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=x(6x^2+x-2)=x(3x+2)(2x-1)</span>. <b>Yes.</b></div></div></div>
+    <div class="part"><div class="pl">(c) Find every integer <span class="tex">k</span> so that <span class="tex">x^2+kx-12</span> can be factored over the integers.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Pairs with product <span class="tex">-12</span>: <span class="tex">1,-12</span>; <span class="tex">-1,12</span>; <span class="tex">2,-6</span>; <span class="tex">-2,6</span>; <span class="tex">3,-4</span>; <span class="tex">-3,4</span>.<br><span class="tex">\boldsymbol{k=\pm11,\ \pm4,\ \pm1}</span></div></div></div>
+    <div class="part"><div class="pl">(d) Find <span class="tex">k</span> so that <span class="tex">9x^2+kx+49</span> is a perfect square trinomial.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">9x^2=(3x)^2</span>, <span class="tex">49=7^2</span>, so <span class="tex">(3x\pm7)^2=9x^2\pm42x+49</span>.<br><span class="tex">\boldsymbol{k=42}</span> or <span class="tex">\boldsymbol{k=-42}</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Solving quadratic equations ================= -->
+<section class="card" data-ink="s3" data-section="3. Solving Quadratic Equations">
+  <div class="sec-h"><span class="badge">3</span><h2>Solving Quadratic Equations</h2></div>
+  <div class="def">Get <b>0 on one side</b> first: <span class="tex">(x-4)(x+1)=6</span> does not say either factor is 6. Then factor and set each factor equal to 0. Check the solving pipeline above (Example 4 chips). On a graph, the roots are where the parabola crosses the <span class="tex">x</span>-axis; a double root is where it just <b>touches</b>.</div>
+  <div class="explainer" data-explainer="rootsGraph"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Solve by factoring</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">6x^2=7x+3</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">6x^2-7x-3=0</span>; <span class="tex">ac=-18</span>, <span class="tex">-9+2=-7</span><br><span class="tex">3x(2x-3)+(2x-3)=0</span><br><span class="tex">(2x-3)(3x+1)=0</span>, <span class="tex">\boldsymbol{x=\frac{3}{2}}</span> or <span class="tex">\boldsymbol{x=-\frac{1}{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">(x-4)(x+1)=6</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Expand first: <span class="tex">x^2-3x-4=6</span><br><span class="tex">x^2-3x-10=0</span><br><span class="tex">(x-5)(x+2)=0</span>, <span class="tex">\boldsymbol{x=5}</span> or <span class="tex">\boldsymbol{x=-2}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">3x^2-48=0</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3(x^2-16)=0\Rightarrow3(x-4)(x+4)=0</span><br><span class="tex">\boldsymbol{x=4}</span> or <span class="tex">\boldsymbol{x=-4}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">4x^2+20x+25=0</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(2x+5)^2=0</span><br><span class="tex">\boldsymbol{x=-\frac{5}{2}}</span> (a double root)</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u4l8"></section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Zeros, intercepts and equations from roots</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine the zeros of <span class="tex">y=2x^2-x-6</span> and the <span class="tex">x</span>-intercepts of its graph.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x^2-x-6=0</span>: <span class="tex">ac=-12</span>, <span class="tex">-4+3=-1</span>,<br><span class="tex">2x(x-2)+3(x-2)=(x-2)(2x+3)=0</span><br>Zeros: <span class="tex">\boldsymbol{2}</span> and <span class="tex">\boldsymbol{-\frac{3}{2}}</span>. <span class="tex">x</span>-intercepts: <span class="tex">\boldsymbol{(2,\,0)}</span> and <span class="tex">\boldsymbol{\left(-\frac{3}{2},\,0\right)}</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) Write a quadratic equation with integer coefficients whose roots are <span class="tex">\frac{2}{3}</span> and <span class="tex">-5</span>.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Factors <span class="tex">(3x-2)</span> and <span class="tex">(x+5)</span>:<br><span class="tex">(3x-2)(x+5)=0</span>, so <span class="tex">\boldsymbol{3x^2+13x-10=0}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="3. Word Problems">
+  <h3 class="sub">Word problems: draw it, write it, reject what can’t happen</h3>
+  <p>Let the unknown be a length, write the area (or product) as an equation, get 0 on one side and factor. A <b>negative length or time</b> is a real root of the equation but <b class="u4l8-cx">inadmissible</b> in the problem. Check the answer in the story, not just in the equation.</p>
+  <div class="explainer" data-explainer="frame"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>The picture frame</h3></div>
+  <p class="q">A 20 cm by 30 cm photo is surrounded by a frame of uniform width <span class="tex">x</span> cm. The photo and frame together cover <span class="tex">1\,064</span> cm². Determine the width of the frame.</p>
+  <div class="part u4l8-solo"><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(20+2x)(30+2x)=1\,064</span><br><span class="tex">600+100x+4x^2=1\,064\Rightarrow4x^2+100x-464=0\Rightarrow4(x^2+25x-116)=0\Rightarrow4(x+29)(x-4)=0</span><br><span class="tex">x=4</span> or <span class="tex">x=-29</span> (a width cannot be negative: inadmissible).<br>The frame is <b>4 cm</b> wide. (Check: <span class="tex">28\times38=1\,064</span> ✓)</div></div></div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Radical equations ================= -->
+<section class="card" data-ink="s4" data-section="4. Radical Equations">
+  <div class="sec-h"><span class="badge">4</span><h2>Radical Equations</h2></div>
+  <div class="def">Each side of a radical equation is a graph: the <b>roots</b> are the <span class="tex">x</span>-values where the two graphs <b>meet</b>. Squaring both sides also lets in the meeting points of the other side with the <b>mirror image</b> of the radical (the “<span class="tex">-\sqrt{\ }</span>” half), and those are the <b class="u4l8-cx">extraneous roots</b>. Check the radical-equation steps above (Example 7 chips).</div>
+  <div class="explainer" data-explainer="radGraph"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Solve and verify</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">3\sqrt{2x-1}-2=7</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Restriction: <span class="tex">x\ge\frac{1}{2}</span><br><span class="tex">3\sqrt{2x-1}=9\Rightarrow\sqrt{2x-1}=3</span><br><span class="tex">2x-1=9\Rightarrow\boldsymbol{x=5}</span><br>Verify: <span class="tex">3\sqrt{9}-2=7</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\sqrt{x+8}+4=x</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sqrt{x+8}=x-4</span> (restrictions: <span class="tex">x\ge4</span>)<br><span class="tex">x+8=x^2-8x+16</span><br><span class="tex">0=x^2-9x+8=(x-1)(x-8)</span><br><span class="tex">x=8</span>: <span class="tex">\sqrt{16}+4=8</span> ✓<br><span class="tex">x=1</span>: <span class="tex">\sqrt{9}+4=7\ne1</span> (extraneous)<br>Root: <span class="tex">\boldsymbol{x=8}</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s4b" data-section="4. Two Radicals: Square Twice">
+  <h3 class="sub">Two radicals: isolate one, square, isolate the other, square again</h3>
+  <p>With two radicals, move one to the other side first. Squaring <span class="tex">1+\sqrt{x+4}</span> is squaring a <b>binomial</b>: <span class="tex">(a+b)^2=a^2+2ab+b^2</span> leaves a middle term <span class="tex">2\sqrt{x+4}</span> with a radical still in it, so isolate that and square again.</p>
+  <div class="explainer" data-explainer="twoRad"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Two radicals</h3></div>
+  <p class="q">Consider the equation <span class="tex">\sqrt{2x+1}-\sqrt{x+4}=1</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) State the restrictions on <span class="tex">x</span>.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x+1\ge0\Rightarrow x\ge-\frac{1}{2}</span>, and <span class="tex">x+4\ge0\Rightarrow x\ge-4</span>. Together: <span class="tex">\boldsymbol{x\ge-\frac{1}{2}}</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) Explain why an extraneous root may appear when this equation is solved algebraically.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Solving requires squaring both sides. If two quantities have equal squares, they are not necessarily equal (<span class="tex">a^2=b^2</span> also when <span class="tex">a=-b</span>), so the squared equation can have a root that the original equation does not.</div></div></div>
+  </div>
+  <div class="part"><div class="pl">(c) Solve the equation and verify.</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sqrt{2x+1}=1+\sqrt{x+4}</span><br><span class="tex">2x+1=1+2\sqrt{x+4}+x+4\;\Rightarrow\;x-4=2\sqrt{x+4}</span><br><span class="tex">x^2-8x+16=4x+16\;\Rightarrow\;x^2-12x=0\;\Rightarrow\;x(x-12)=0</span><br><span class="tex">x=12</span>: <span class="tex">\sqrt{25}-\sqrt{16}=1</span> ✓ &nbsp;&nbsp; <span class="tex">x=0</span>: <span class="tex">\sqrt{1}-\sqrt{4}=-1\ne1</span> (extraneous)<br>The root is <span class="tex">\boldsymbol{x=12}</span>.</div></div></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Factoring checklist.</b> GCF first (negative if the leading term is). Count the terms: 2 → difference of squares (a sum doesn’t factor); 3 → product–sum, decomposition, perfect square or substitution; 4 → grouping. Factor again, then expand to check.</div>
+    <div><b>Solving by factoring.</b> 0 on one side, divide out a number GCF (never <span class="tex">x</span>), factor, zero product property. Roots = zeros = <span class="tex">x</span>-intercepts. Root <span class="tex">\frac{p}{q}</span> → factor <span class="tex">(qx-p)</span>.</div>
+    <div><b>Word problems.</b> Sketch, let <span class="tex">x</span> be the unknown, write the equation, solve, and reject an <b>inadmissible</b> root (negative length or time). Check in the story.</div>
+    <div><b>Radical equations.</b> Restrictions, isolate, square (a binomial side as <span class="tex">(a\pm b)^2</span>), square again if a radical remains, solve, <b>verify every root</b>: squaring can add an extraneous root.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u4l8">
+    <div><div class="kicker">Your turn</div><b>Assignment 8 — Unit 4 Review</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <div class="u4l8-review">
+    <div class="u4l8-review-h"><span class="kicker">Up next</span><b>Unit 4 test.</b> <span class="muted">Shaky on an idea today? Go back to its lesson.</span></div>
+    <div class="u4l8-review-grid">
+      <a href="../l1/"><span class="rn">4.1</span>Common factors and <span class="tex">x^2+bx+c</span> <small>Example 1(a), (c)</small></a>
+      <a href="../l2/"><span class="rn">4.2</span>Factoring <span class="tex">ax^2+bx+c</span> <small>Examples 1(b), (d), 3(a)</small></a>
+      <a href="../l3/"><span class="rn">4.3</span>Factoring by substitution <small>Example 2(a), (b)</small></a>
+      <a href="../l4/"><span class="rn">4.4</span>Differences of squares <small>Example 2(c)–(e)</small></a>
+      <a href="../l5/"><span class="rn">4.5</span>Solving quadratic equations by factoring <small>Examples 4, 5, 6</small></a>
+      <a href="../l6/"><span class="rn">4.6</span>Radical equations and extraneous roots <small>Example 7(a)</small></a>
+      <a href="../l7/"><span class="rn">4.7</span>Radical equations that lead to quadratics <small>Examples 7(b), 8</small></a>
+      <div class="test"><span class="rn">Test</span>Unit 4 test: RF1, RF5, AN3 <small>no calculator · exact answers · every idea from today’s review</small></div>
+    </div>
+  </div>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u4l8.js';
+  boot({ key: 'u4l8', homeHref: '../../', title: '4.8 Unit 4 Review' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

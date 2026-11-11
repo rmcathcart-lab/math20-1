@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Exact Values from Special Triangles · Math 20-1 3.4</title>
+<meta name="description" content="Math 20-1 Unit 3 Lesson 4: the 45-45-90 and 30-60-90 triangles cut from a square and an equilateral triangle, the table of exact values and its patterns, exact values in any quadrant with reference angles and CAST, exact expressions, solving trigonometric equations exactly, and exact angles from a point on the terminal arm. No calculator. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u3l4.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u3l4">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 3 Trigonometry · Lesson 4</div>
+  <h1>Exact Values from Special Triangles</h1>
+  <p class="lede">Most trig ratios are long decimals, but <b>30°</b>, <b>45°</b> and <b>60°</b> have <b>exact values</b>. They come from two triangles you can cut from a <b>square</b> and an <b>equilateral triangle</b>. With reference angles and CAST they give exact answers in every quadrant. <b>No calculator today.</b></p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>build the <b class="u3l4-c45">45-45-90</b> triangle <span class="tex">(1,\ 1,\ \sqrt{2})</span> and the <b class="u3l4-c30">30-60-90</b> triangle <span class="tex">(1,\ \sqrt{3},\ 2)</span> from memory</li>
+      <li>write the table of exact values for <span class="tex">0^\circ,\ 30^\circ,\ 45^\circ,\ 60^\circ,\ 90^\circ</span> in rationalized form</li>
+      <li>find the exact value of a ratio of any angle from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span> with the <b class="u3l4-cref">reference angle</b> and CAST</li>
+      <li>evaluate exact expressions such as <span class="tex">\sin^2 60^\circ+\cos 180^\circ</span></li>
+      <li>solve equations such as <span class="tex">2\sin\theta+1=0</span> exactly, without a calculator</li>
+      <li>find an exact angle from a point on the terminal arm or from a ratio and a quadrant</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>T1</b> Demonstrate an understanding of angles in standard position [0° to 360°].<br><b>T2</b> Solve problems, using the three primary trigonometric ratios for angles from 0° to 360° in standard position.<br><span class="muted">Today: exact values of the ratios of 30°, 45°, 60° and the quadrantal angles, in any quadrant, and exact solutions of equations.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: Which Wrench Fits?" id="wu" style="--wf-side: 400px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Which Wrench Fits?</h2>
+  <p class="wf-rule">A <b>hexagon</b> nut has six equal sides of <b>2 cm</b>. A wrench grips it on two <b>opposite flat sides</b>.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u3l4-nut" id="u3l4-nut"></div>
+    <div class="u3l4-wbtns">
+      <button type="button" class="pill" data-nut="tri">6 triangles</button>
+      <button type="button" class="pill" data-nut="corner">Corner to corner</button>
+      <button type="button" class="pill" data-nut="wrench">Wrench</button>
+      <button type="button" class="pill" data-nut="half">Cut a triangle in half</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u3l4-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Join the centre to every corner. How many triangles do you get, and what kind are they? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l4-wa"><div class="bk-ans"><b>6 equilateral triangles</b>, every side 2 cm (360° ÷ 6 = 60° at the centre).</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How far is it from a <b>corner</b> to the <b>opposite corner</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l4-wa"><div class="bk-ans"><b>4 cm</b>: two triangle sides in a straight line.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> What size of wrench fits? (The distance <b>flat to flat</b>.) <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> 3 cm</div>
+        <div class="opt right"><b>B</b> about 3.5 cm</div>
+        <div class="opt"><b>C</b> 4 cm</div>
+        <div class="opt"><b>D</b> 5 cm</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>B.</b> Flat to flat is <b>two triangle heights</b>. Cut one triangle in half: hypotenuse 2, bottom 1, so <span class="tex">h=\sqrt{2^2-1^2}=\sqrt{3}</span>. The wrench is <span class="tex">2\sqrt{3}\approx3.46</span> cm.<br>
+        <span class="muted"><b>C</b> is corner to corner: that wrench is too big and would slip. Today’s lesson starts with exactly that half triangle: <span class="tex">1,\ \sqrt{3},\ 2</span>.</span></div>
+    </div>
+  </div></div>
+  <p class="u3l4-social">Challenge your neighbour: a nut measures <b>6 cm flat to flat</b>. How long is each side? (Exact answer!)</p>
+</section>
+
+<!-- ================= 1. The two special triangles ================= -->
+<section class="card" data-ink="s1" data-section="1. The Two Special Triangles">
+  <div class="sec-h"><span class="badge">1</span><h2>The Two Special Triangles</h2></div>
+  <p>Most ratios are irrational decimals, but the angles <span class="tex">30^\circ</span>, <span class="tex">45^\circ</span> and <span class="tex">60^\circ</span> have <b>exact values</b> that come from two triangles.</p>
+  <div class="u3l4-two">
+    <div class="u3l4-way u3l4-way45"><div class="u3l4-wayh">Cut a square</div>Cut a square with side 1 along a <b>diagonal</b>: each half is a right isosceles triangle with angles <span class="tex">45^\circ,\ 45^\circ,\ 90^\circ</span>.</div>
+    <div class="u3l4-way u3l4-way30"><div class="u3l4-wayh">Cut an equilateral triangle</div>Cut an equilateral triangle with side 2 by an <b>altitude</b>: each half has angles <span class="tex">30^\circ,\ 60^\circ,\ 90^\circ</span>, hypotenuse 2 and shortest side 1.</div>
+  </div>
+  <div class="def">No calculator in this lesson: every answer is <b>exact</b>. Write a radical denominator in rationalized form, as in Unit 2: <span class="tex">\dfrac{1}{\sqrt{2}}=\dfrac{\sqrt{2}}{2}</span> and <span class="tex">\dfrac{1}{\sqrt{3}}=\dfrac{\sqrt{3}}{3}</span>.</div>
+  <div class="explainer" data-explainer="cut"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Build the special triangles</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) The square has side 1. Find the diagonal <span class="tex">d</span>, then the ratios of <span class="tex">45^\circ</span>.</div>
+      <div class="u3l4-fig" id="u3l4-f1a"></div>
+      <div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">d^2=1^2+1^2=2</span>, so <span class="tex">d=\sqrt{2}</span>.<br><span class="tex">\sin 45^\circ=\dfrac{1}{\sqrt{2}}=\dfrac{\sqrt{2}}{2},\quad \cos 45^\circ=\dfrac{1}{\sqrt{2}}=\dfrac{\sqrt{2}}{2}</span><br><span class="tex">\tan 45^\circ=\dfrac{1}{1}=1</span></div></div></div>
+    <div class="part"><div class="pl">(b) The equilateral triangle has side 2. Find the altitude <span class="tex">h</span>, then the ratios of <span class="tex">30^\circ</span> and <span class="tex">60^\circ</span>.</div>
+      <div class="u3l4-fig" id="u3l4-f1b"></div>
+      <div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">h^2=2^2-1^2=3</span>, so <span class="tex">h=\sqrt{3}</span>. Sides: <span class="tex">1</span> (opposite <span class="tex">30^\circ</span>), <span class="tex">\sqrt{3}</span> (opposite <span class="tex">60^\circ</span>), <span class="tex">2</span>.<br><span class="tex">\sin 30^\circ=\dfrac{1}{2},\ \cos 30^\circ=\dfrac{\sqrt{3}}{2},\ \tan 30^\circ=\dfrac{1}{\sqrt{3}}=\dfrac{\sqrt{3}}{3}</span><br><span class="tex">\sin 60^\circ=\dfrac{\sqrt{3}}{2},\ \cos 60^\circ=\dfrac{1}{2},\ \tan 60^\circ=\dfrac{\sqrt{3}}{1}=\sqrt{3}</span></div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Which side is which?</b> The hypotenuse is always the longest side: <span class="tex">\sqrt{2}</span> in the first triangle, <span class="tex">2</span> in the second. In the 30-60-90 triangle the <b>shortest side (1) is opposite the smallest angle (<span class="tex">30^\circ</span>)</b>, and <span class="tex">\sqrt{3}</span> is opposite <span class="tex">60^\circ</span>.</div></div>
+  <div class="explainer" data-explainer="read"></div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. The table ================= -->
+<section class="card" data-ink="s2" data-section="2. The Table of Exact Values">
+  <div class="sec-h"><span class="badge">2</span><h2>The Table of Exact Values</h2></div>
+  <p>For <span class="tex">0^\circ</span> and <span class="tex">90^\circ</span> use the points <span class="tex">(1,\ 0)</span> and <span class="tex">(0,\ 1)</span> with <span class="tex">r=1</span> (Lesson 2). The values for <span class="tex">0^\circ</span> to <span class="tex">90^\circ</span> go in one table that you should know <b>from memory</b>.</p>
+  <div class="def"><b>Patterns to help you remember:</b>
+    <ul class="u3l4-ul">
+      <li>The sines from <span class="tex">0^\circ</span> to <span class="tex">90^\circ</span> are <span class="tex">\dfrac{\sqrt{0}}{2},\ \dfrac{\sqrt{1}}{2},\ \dfrac{\sqrt{2}}{2},\ \dfrac{\sqrt{3}}{2},\ \dfrac{\sqrt{4}}{2}</span>: they increase from 0 to 1.</li>
+      <li>The cosines are the same list in reverse: they decrease from 1 to 0.</li>
+      <li><span class="tex">\tan\theta=\dfrac{\sin\theta}{\cos\theta}</span> (since <span class="tex">\dfrac{y/r}{x/r}=\dfrac{y}{x}</span>), and <span class="tex">\tan 90^\circ</span> is undefined because <span class="tex">\cos 90^\circ=0</span>.</li>
+    </ul>
+  </div>
+  <p>Where the values come from: shrink each triangle so its hypotenuse is 1, and its corner lands on a circle of radius 1 at the point <span class="tex">(\cos\theta,\ \sin\theta)</span>.</p>
+  <div class="explainer" data-explainer="unit"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>The table of exact values</h3></div>
+  <p class="q">Complete the table of exact values. Write each value in rationalized form.</p>
+  <div class="part u3l4-solo">
+    <table class="u3l4-tbl">
+      <tr><th><span class="tex">\theta</span></th><th><span class="tex">0^\circ</span></th><th><span class="tex">30^\circ</span></th><th><span class="tex">45^\circ</span></th><th><span class="tex">60^\circ</span></th><th><span class="tex">90^\circ</span></th></tr>
+      <tr><th><span class="tex">\sin\theta</span></th><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal><span class="tex">\dfrac{1}{2}</span></span></td><td><span data-reveal><span class="tex">\dfrac{\sqrt{2}}{2}</span></span></td><td><span data-reveal><span class="tex">\dfrac{\sqrt{3}}{2}</span></span></td><td><span data-reveal><span class="tex">1</span></span></td></tr>
+      <tr><th><span class="tex">\cos\theta</span></th><td><span data-reveal><span class="tex">1</span></span></td><td><span data-reveal><span class="tex">\dfrac{\sqrt{3}}{2}</span></span></td><td><span data-reveal><span class="tex">\dfrac{\sqrt{2}}{2}</span></span></td><td><span data-reveal><span class="tex">\dfrac{1}{2}</span></span></td><td><span data-reveal><span class="tex">0</span></span></td></tr>
+      <tr><th><span class="tex">\tan\theta</span></th><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal><span class="tex">\dfrac{\sqrt{3}}{3}</span></span></td><td><span data-reveal><span class="tex">1</span></span></td><td><span data-reveal><span class="tex">\sqrt{3}</span></span></td><td><span data-reveal><span class="u3l4-und">undefined</span></span></td></tr>
+    </table>
+    <div class="work" style="--h:90px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Sines <span class="tex">0,\ \tfrac12,\ \tfrac{\sqrt2}{2},\ \tfrac{\sqrt3}{2},\ 1</span>; cosines the same list backwards; tangents <span class="tex">0,\ \tfrac{\sqrt3}{3},\ 1,\ \sqrt3</span>, undefined. (Tap a cell to check one value at a time.)</div></div>
+  </div>
+  <div class="explainer" data-explainer="patterns"></div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Any quadrant ================= -->
+<section class="card" data-ink="s3" data-section="3. Exact Values in Any Quadrant">
+  <div class="sec-h"><span class="badge">3</span><h2>Exact Values in Any Quadrant</h2></div>
+  <div class="def amber"><b>Exact value of a ratio of <span class="tex">\theta</span>:</b> (1) find the quadrant and the <b class="u3l4-cref">reference angle</b> <span class="tex">\theta_R</span>; (2) if <span class="tex">\theta_R</span> is <span class="tex">30^\circ</span>, <span class="tex">45^\circ</span> or <span class="tex">60^\circ</span>, take the value from the table; (3) attach the <b>sign</b> from CAST. For a <b>quadrantal angle</b> use <span class="tex">x</span>, <span class="tex">y</span> and <span class="tex">r=1</span> directly.</div>
+  <div class="explainer" data-explainer="flip"></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> Which two angles from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span> have the same sine as <span class="tex">45^\circ</span>? Why?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">45^\circ</span> and <span class="tex">135^\circ</span>. The 45° triangle flipped into Quadrant II has the <b>same height</b> <span class="tex">y</span>, and sine is positive there (the S in CAST).</div></div></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Exact values in any quadrant</h3></div>
+  <p class="q">Determine the exact value.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\sin 240^\circ</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant III, <span class="tex">\theta_R=60^\circ</span>, sin negative.<br><span class="tex">\sin 240^\circ=-\sin 60^\circ=\boldsymbol{-\dfrac{\sqrt{3}}{2}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\cos 135^\circ</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant II, <span class="tex">\theta_R=45^\circ</span>, cos negative.<br><span class="tex">\cos 135^\circ=-\cos 45^\circ=\boldsymbol{-\dfrac{\sqrt{2}}{2}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\tan 330^\circ</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant IV, <span class="tex">\theta_R=30^\circ</span>, tan negative.<br><span class="tex">\tan 330^\circ=-\tan 30^\circ=\boldsymbol{-\dfrac{\sqrt{3}}{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\cos 225^\circ</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant III, <span class="tex">\theta_R=45^\circ</span>, cos negative.<br><span class="tex">\cos 225^\circ=\boldsymbol{-\dfrac{\sqrt{2}}{2}}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\sin 180^\circ</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Point <span class="tex">(-1,\ 0)</span>, <span class="tex">r=1</span>.<br><span class="tex">\sin 180^\circ=\dfrac{0}{1}=\boldsymbol{0}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\tan 270^\circ</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Point <span class="tex">(0,\ -1)</span>: <span class="tex">\tan 270^\circ=\dfrac{-1}{0}</span>, which is <b>undefined</b>.</div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>The reference angle goes to the <u>x</u>-axis</b>, never the <span class="tex">y</span>-axis: <span class="tex">\theta_R=180^\circ-\theta</span> (II), <span class="tex">\theta-180^\circ</span> (III), <span class="tex">360^\circ-\theta</span> (IV). Find the size from the table first, then put the sign in front.</div></div>
+  <div class="explainer" data-explainer="anyq"></div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Exact expressions ================= -->
+<section class="card" data-ink="s4" data-section="4. Exact Expressions">
+  <div class="sec-h"><span class="badge">4</span><h2>Exact Expressions</h2></div>
+  <div class="def">Replace each ratio by its exact value <b>in brackets</b>, then simplify with the order of operations. The notation <span class="tex">\sin^2\theta</span> means <span class="tex">(\sin\theta)^2</span>: find <span class="tex">\sin\theta</span> first, then square it.</div>
+  <div class="explainer" data-explainer="subst"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Exact expressions</h3></div>
+  <p class="q">Determine the exact value of each expression.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\sin^2 60^\circ+\cos 180^\circ</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\left(\dfrac{\sqrt{3}}{2}\right)^2+(-1)=\dfrac{3}{4}-1=\boldsymbol{-\dfrac{1}{4}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2\cos 45^\circ\sin 135^\circ</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=2\left(\dfrac{\sqrt{2}}{2}\right)\left(\dfrac{\sqrt{2}}{2}\right)=\dfrac{2\cdot2}{4}=\boldsymbol{1}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{\tan 150^\circ}{1+\tan^2 210^\circ}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\tan 150^\circ=-\dfrac{\sqrt{3}}{3}</span>, <span class="tex">\tan 210^\circ=\dfrac{\sqrt{3}}{3}</span>, so <span class="tex">\tan^2 210^\circ=\dfrac{3}{9}=\dfrac{1}{3}</span>.<br><span class="tex">=\dfrac{-\frac{\sqrt{3}}{3}}{\frac{4}{3}}=-\dfrac{\sqrt{3}}{3}\cdot\dfrac{3}{4}=\boldsymbol{-\dfrac{\sqrt{3}}{4}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) Is <span class="tex">\sin 60^\circ=2\sin 30^\circ</span>? Explain.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sin 60^\circ=\dfrac{\sqrt{3}}{2}\approx0.87</span> but <span class="tex">2\sin 30^\circ=2\left(\dfrac{1}{2}\right)=1</span>.<br><b>No</b>: doubling the angle does not double the sine.</div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Brackets first, then the square.</b> <span class="tex">\sin^2 60^\circ=\left(\tfrac{\sqrt{3}}{2}\right)^2=\tfrac{3}{4}</span>. It is <b>not</b> <span class="tex">\sin(60^2)</span>, and <span class="tex">\left(\tfrac{\sqrt{3}}{2}\right)^2</span> squares the top <b>and</b> the bottom.</div></div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u3l4"></section>
+
+<!-- ================= 5. Solving equations exactly ================= -->
+<section class="card" data-ink="s5" data-section="5. Solving Equations Exactly">
+  <div class="sec-h"><span class="badge">5</span><h2>Solving Equations Exactly</h2></div>
+  <p>To solve <span class="tex">\sin\theta=a</span>, <span class="tex">\cos\theta=a</span> or <span class="tex">\tan\theta=a</span> without a calculator, use the same steps as in Lesson 3, but read the reference angle <b>from the table</b> instead of the inverse key.</p>
+  <div class="def amber u3l4-steps"><div><b>1</b> Isolate the ratio; rationalize <span class="tex">a</span> if needed.</div><div><b>2</b> Use the sign of <span class="tex">a</span> and CAST to choose the quadrants.</div><div><b>3</b> Find the angle in the table whose ratio is <span class="tex">|a|</span>: that is <span class="tex">\theta_R</span>.</div><div><b>4</b> Place <span class="tex">\theta_R</span> in each quadrant.</div><div class="u3l4-stepnote">If <span class="tex">a</span> is <span class="tex">0</span>, <span class="tex">1</span>, <span class="tex">-1</span> or the ratio is undefined, the answers are quadrantal angles.</div></div>
+  <p>If the equation has a square, such as <span class="tex">\tan^2\theta=1</span>, take the square root of both sides: <span class="tex">\tan\theta=\pm1</span>. Then both signs give solutions, so there can be <b>four</b>.</p>
+  <div class="explainer" data-explainer="solve"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Solve without a calculator</h3></div>
+  <p class="q">Solve for <span class="tex">\theta</span>, <span class="tex">0^\circ\le\theta&lt;360^\circ</span>, without a calculator.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\sin\theta=-\dfrac{\sqrt{3}}{2}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Negative sin: III, IV.<br><span class="tex">\sin\theta_R=\dfrac{\sqrt{3}}{2}</span>, so <span class="tex">\theta_R=60^\circ</span>.<br><span class="tex">\boldsymbol{\theta=240^\circ}</span> or <span class="tex">\boldsymbol{300^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\cos\theta=-\dfrac{1}{\sqrt{2}}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-\dfrac{1}{\sqrt{2}}=-\dfrac{\sqrt{2}}{2}</span>. Negative cos: II, III.<br><span class="tex">\theta_R=45^\circ</span>.<br><span class="tex">\boldsymbol{\theta=135^\circ}</span> or <span class="tex">\boldsymbol{225^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\tan\theta=\sqrt{3}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Positive tan: I, III.<br><span class="tex">\theta_R=60^\circ</span>.<br><span class="tex">\boldsymbol{\theta=60^\circ}</span> or <span class="tex">\boldsymbol{240^\circ}</span></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Isolate first, then solve</h3></div>
+  <p class="q">Solve, without a calculator.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">2\sin\theta+1=0</span>, <span class="tex">0^\circ\le\theta&lt;360^\circ</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sin\theta=-\dfrac{1}{2}</span>. III, IV; <span class="tex">\theta_R=30^\circ</span>.<br><span class="tex">\boldsymbol{\theta=210^\circ}</span> or <span class="tex">\boldsymbol{330^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\sqrt{3}\tan\theta+1=0</span>, <span class="tex">0^\circ\le\theta\le180^\circ</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\tan\theta=-\dfrac{1}{\sqrt{3}}=-\dfrac{\sqrt{3}}{3}</span>. II, IV; <span class="tex">\theta_R=30^\circ</span>.<br><span class="tex">150^\circ</span> or <span class="tex">330^\circ</span>; in the interval only <span class="tex">\boldsymbol{\theta=150^\circ}</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\tan^2\theta=1</span>, <span class="tex">0^\circ\le\theta&lt;360^\circ</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\tan\theta=1</span> or <span class="tex">\tan\theta=-1</span>; <span class="tex">\theta_R=45^\circ</span>.<br><span class="tex">\tan\theta=1</span>: <span class="tex">\boldsymbol{45^\circ,\ 225^\circ}</span>.<br><span class="tex">\tan\theta=-1</span>: <span class="tex">\boldsymbol{135^\circ,\ 315^\circ}</span>.</div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Check the interval.</b> In (b) the interval stops at <span class="tex">180^\circ</span>, so the Quadrant IV answer is thrown out. And a square gives <b>both signs</b>: <span class="tex">\tan^2\theta=1</span> has four answers, not two.</div></div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Exact angle from a point ================= -->
+<section class="card" data-ink="s6" data-section="6. An Exact Angle from a Point or a Ratio">
+  <div class="sec-h"><span class="badge">6</span><h2>Finding an Exact Angle from a Point or a Ratio</h2></div>
+  <div class="def">If a point on the terminal arm gives a ratio from the table, the angle can be found <b>exactly</b>: find <span class="tex">\tan\theta=\dfrac{y}{x}</span> (or <span class="tex">r</span> and then sine or cosine), match the reference angle, and place it in the quadrant of the point.</div>
+  <p class="u3l4-hint">Look for a special triangle in disguise: sides in the ratio <span class="tex">1:1:\sqrt{2}</span> or <span class="tex">1:\sqrt{3}:2</span>, just scaled up.</p>
+  <div class="explainer" data-explainer="point"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Exact angles</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) The point <span class="tex">P(2\sqrt{3},\ -2)</span> is on the terminal arm of <span class="tex">\theta</span>. Determine <span class="tex">\theta</span> exactly, <span class="tex">0^\circ\le\theta&lt;360^\circ</span>.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant IV. <span class="tex">\tan\theta=\dfrac{-2}{2\sqrt{3}}=-\dfrac{1}{\sqrt{3}}</span>, so <span class="tex">\theta_R=30^\circ</span>.<br><span class="tex">\theta=360^\circ-30^\circ=\boldsymbol{330^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) The point <span class="tex">Q(-3,\ -3\sqrt{3})</span> is on the terminal arm of <span class="tex">\theta</span>. Determine <span class="tex">\theta</span> and <span class="tex">r</span>.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant III. <span class="tex">\tan\theta=\dfrac{-3\sqrt{3}}{-3}=\sqrt{3}</span>, so <span class="tex">\theta_R=60^\circ</span> and <span class="tex">\boldsymbol{\theta=240^\circ}</span>.<br><span class="tex">r=\sqrt{9+27}=\sqrt{36}=\boldsymbol{6}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\sin A=\dfrac{1}{2}</span> and <span class="tex">A</span> is not in Quadrant I. Determine <span class="tex">A</span>, <span class="tex">0^\circ\le A&lt;360^\circ</span>, and the exact values of <span class="tex">\cos A</span> and <span class="tex">\tan A</span>.</div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Positive sin: I or II, so Quadrant II. <span class="tex">\theta_R=30^\circ</span>, <span class="tex">\boldsymbol{A=150^\circ}</span>.<br><span class="tex">\cos A=-\cos 30^\circ=\boldsymbol{-\dfrac{\sqrt{3}}{2}}</span><br><span class="tex">\tan A=-\tan 30^\circ=\boldsymbol{-\dfrac{\sqrt{3}}{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) A terminal arm rotates counterclockwise from the arm through <span class="tex">(-1,\ 1)</span> to the arm through <span class="tex">(1,\ -\sqrt{3})</span>. Through what angle does it rotate?</div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(-1,\ 1)</span>: Quadrant II, <span class="tex">\tan=-1</span>, <span class="tex">\theta_R=45^\circ</span>, angle <span class="tex">135^\circ</span>.<br><span class="tex">(1,\ -\sqrt{3})</span>: Quadrant IV, <span class="tex">\tan=-\sqrt{3}</span>, <span class="tex">\theta_R=60^\circ</span>, angle <span class="tex">300^\circ</span>.<br>Rotation: <span class="tex">300^\circ-135^\circ=\boldsymbol{165^\circ}</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Two triangles.</b> Half a square: <span class="tex">45^\circ,45^\circ,90^\circ</span> with sides <span class="tex">1,\ 1,\ \sqrt{2}</span>. Half an equilateral triangle: <span class="tex">30^\circ,60^\circ,90^\circ</span> with sides <span class="tex">1,\ \sqrt{3},\ 2</span> (1 opposite <span class="tex">30^\circ</span>).</div>
+    <div><b>The table.</b> Sines <span class="tex">\tfrac{\sqrt0}{2},\tfrac{\sqrt1}{2},\tfrac{\sqrt2}{2},\tfrac{\sqrt3}{2},\tfrac{\sqrt4}{2}</span>; cosines the same list reversed; <span class="tex">\tan\theta=\tfrac{\sin\theta}{\cos\theta}</span>, undefined at <span class="tex">90^\circ</span>. Rationalize: <span class="tex">\tfrac{1}{\sqrt2}=\tfrac{\sqrt2}{2}</span>, <span class="tex">\tfrac{1}{\sqrt3}=\tfrac{\sqrt3}{3}</span>.</div>
+    <div><b>Any quadrant.</b> Quadrant and <span class="tex">\theta_R</span>, the size from the table, the sign from CAST. Quadrantal angles: use <span class="tex">(\pm1,0)</span> or <span class="tex">(0,\pm1)</span> with <span class="tex">r=1</span>. Expressions: values in brackets, <span class="tex">\sin^2\theta=(\sin\theta)^2</span>.</div>
+    <div><b>Solving exactly.</b> Isolate, rationalize, choose the quadrants by the sign, read <span class="tex">\theta_R</span> from the table backwards, place it in each quadrant. A square gives <span class="tex">\pm</span>: up to four answers. Check the interval.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u3l4">
+    <div><div class="kicker">Your turn</div><b>Assignment 4 — Exact Values from Special Triangles</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l5/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 5 — The Sine Law</b><div class="muted">Beyond right triangles: find sides and angles of any triangle with <span class="tex">\dfrac{a}{\sin A}=\dfrac{b}{\sin B}</span>.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u3l4.js';
+  boot({ key: 'u3l4', homeHref: '../../', title: '3.4 Exact Values' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

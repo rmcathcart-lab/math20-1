@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The CAST Rule · Math 20-1 3.3</title>
+<meta name="description" content="Math 20-1 Unit 3 Lesson 3: the CAST rule for the signs of sine, cosine and tangent in each quadrant, a ratio of θ as ± the same ratio of its reference angle, finding the other two ratios exactly from one ratio and a quadrant, and solving sin θ = a, cos θ = a and tan θ = a for 0° ≤ θ < 360°, including quadrantal and no-solution cases. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u3l3.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u3l3">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 3 Trigonometry · Lesson 3</div>
+  <h1>The CAST Rule: Signs and Solving for Angles</h1>
+  <p class="lede">Every trig ratio has a <b>size</b> and a <b>sign</b>. The size comes from the <b class="u3l3-cref">reference angle</b>; the sign comes from the <b>quadrant</b>. Put the two together and an equation like <span class="tex">\sin\theta=0.6</span> has <b>two</b> answers from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span>: one in each quadrant where sine is positive.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>use the <b>CAST rule</b> to tell whether <span class="tex">\sin\theta</span>, <span class="tex">\cos\theta</span> or <span class="tex">\tan\theta</span> is positive or negative in each quadrant</li>
+      <li>write a ratio of <span class="tex">\theta</span> as <span class="tex">\pm</span> the same ratio of its reference angle <span class="tex">\textcolor{#c27a0e}{\theta_R}</span>, and find the other angle with the same ratio</li>
+      <li>find the exact values of the other two ratios from one ratio and its quadrant</li>
+      <li>solve <span class="tex">\sin\theta=a</span>, <span class="tex">\cos\theta=a</span> and <span class="tex">\tan\theta=a</span> for <span class="tex">0^\circ\le\theta&lt;360^\circ</span> with the inverse keys</li>
+      <li>spot quadrantal solutions and equations with <b>no solution</b>, isolate the ratio first, and keep only the solutions in a given interval</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>T2</b> Solve problems, using the three primary trigonometric ratios for angles from 0° to 360° in standard position.<br><span class="muted">Today: the CAST rule, a ratio as ± the ratio of its reference angle, the other ratios from one ratio, and solving sin θ = a, cos θ = a and tan θ = a from 0° to 360°.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Kaleidoscope" id="wu" style="--wf-side: 400px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Kaleidoscope</h2>
+  <p class="wf-rule">A ladybug walks on a glass grid between <b>two mirrors</b>, one along each axis. Each mirror shows a <b>twin</b>.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u3l3-kal" id="u3l3-kal"></div>
+    <div class="u3l3-wbtns">
+      <button type="button" class="pill" id="u3l3-my">Mirror on the y-axis</button>
+      <button type="button" class="pill" id="u3l3-mx">Mirror on the x-axis</button>
+      <button type="button" class="pill" id="u3l3-mb">Both mirrors</button>
+      <button type="button" class="pill" id="u3l3-mang">Show the angles</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u3l3-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>The ladybug is at <span class="tex">(4,\ 3)</span>. Where is its twin in the mirror on the <b>y-axis</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l3-wa"><div class="bk-ans"><span class="tex">(-4,\ 3)</span>. The mirror flips left and right: <span class="tex">x</span> changes sign, the <b>height stays the same</b>.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Where are the twins in the mirror on the <b>x-axis</b> and in <b>both</b> mirrors? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l3-wa"><div class="bk-ans"><span class="tex">(4,\ -3)</span> and <span class="tex">(-4,\ -3)</span>. Same distance from the origin, one in every quadrant.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> The bug is on a circle, at about <b><span class="tex">37^\circ</span></b> in standard position. At what angle is its twin in the <b>y-axis mirror</b>? <b>Guess first.</b></div></div>
+      <div class="poll-opts c4">
+        <div class="opt"><b>A</b> <span class="tex">53^\circ</span></div>
+        <div class="opt right"><b>B</b> <span class="tex">143^\circ</span></div>
+        <div class="opt"><b>C</b> <span class="tex">217^\circ</span></div>
+        <div class="opt"><b>D</b> <span class="tex">323^\circ</span></div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>B, <span class="tex">143^\circ</span>.</b> The twin's arm makes the same <span class="tex">37^\circ</span> with the <b>negative</b> x-axis: <span class="tex">180^\circ-37^\circ=143^\circ</span>. Same height, so <b>the same sine</b>.<br>
+        <span class="muted"><b>C</b> <span class="tex">(180^\circ+37^\circ)</span> is the twin in both mirrors and <b>D</b> <span class="tex">(360^\circ-37^\circ)</span> is the x-axis twin. <b>A</b> is the angle to the y-axis, not to the x-axis.</span></div>
+    </div>
+  </div></div>
+  <p class="u3l3-social">Talk to your neighbour: which twin has the <b>same x</b> as the bug? Which one has <b>both</b> signs flipped?</p>
+</section>
+
+<!-- ================= 1. CAST ================= -->
+<section class="card" data-ink="s1" data-section="1. Signs of the Ratios: CAST">
+  <div class="sec-h"><span class="badge">1</span><h2>Signs of the Ratios: the CAST Rule</h2></div>
+  <div class="u3l3-castrow">
+    <div>
+      <div class="def">For a point <span class="tex">P(x,\ y)</span> on the terminal arm, <span class="tex">\sin\theta=\dfrac{y}{r}</span>, <span class="tex">\cos\theta=\dfrac{x}{r}</span> and <span class="tex">\tan\theta=\dfrac{y}{x}</span>, where <span class="tex">r&gt;0</span> <b>always</b>. So the sign of a ratio depends only on the signs of <span class="tex">x</span> and <span class="tex">y</span>:
+        <ul class="u3l3-ul">
+          <li><span class="tex">\sin\theta</span> has the sign of <span class="tex">y</span> (positive above the x-axis);</li>
+          <li><span class="tex">\cos\theta</span> has the sign of <span class="tex">x</span> (positive right of the y-axis);</li>
+          <li><span class="tex">\tan\theta</span> is positive when <span class="tex">x</span> and <span class="tex">y</span> have the <b>same</b> sign.</li>
+        </ul>
+      </div>
+      <p>The diagram shows which ratios are <b>positive</b> in each quadrant. Read the letters counterclockwise from Quadrant IV: <b>C, A, S, T</b>, the <b>CAST rule</b>. <span class="muted">(Memory aid from Quadrant I: <i>All Students Take Calculus</i>.)</span></p>
+      <p>The ratios not named in a quadrant are <b>negative</b> there. On the axes (quadrantal angles) a ratio is <span class="tex">0</span>, <span class="tex">1</span>, <span class="tex">-1</span> or undefined, as in Lesson 2.</p>
+    </div>
+    <div class="u3l3-cast" aria-label="CAST diagram">
+      <div class="u3l3-cq u3l3-cq2"><div class="u3l3-cl">S</div><div class="u3l3-cw">sine <span class="tex">+</span></div><div class="u3l3-cn">II</div></div>
+      <div class="u3l3-cq u3l3-cq1"><div class="u3l3-cl">A</div><div class="u3l3-cw">all <span class="tex">+</span></div><div class="u3l3-cn">I</div></div>
+      <div class="u3l3-cq u3l3-cq3"><div class="u3l3-cl">T</div><div class="u3l3-cw">tangent <span class="tex">+</span></div><div class="u3l3-cn">III</div></div>
+      <div class="u3l3-cq u3l3-cq4"><div class="u3l3-cl">C</div><div class="u3l3-cw">cosine <span class="tex">+</span></div><div class="u3l3-cn">IV</div></div>
+    </div>
+  </div>
+  <div class="explainer" data-explainer="castSigns"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Signs in each quadrant</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Complete the table with <span class="tex">+</span> or <span class="tex">-</span>.</div>
+      <table class="u3l3-tbl u3l3-signs"><tr><th></th><th>I</th><th>II</th><th>III</th><th>IV</th></tr>
+        <tr><th><span class="tex">\sin\theta</span></th><td><span data-reveal><span class="tex u3l3-p">+</span></span></td><td><span data-reveal><span class="tex u3l3-p">+</span></span></td><td><span data-reveal><span class="tex u3l3-m">-</span></span></td><td><span data-reveal><span class="tex u3l3-m">-</span></span></td></tr>
+        <tr><th><span class="tex">\cos\theta</span></th><td><span data-reveal><span class="tex u3l3-p">+</span></span></td><td><span data-reveal><span class="tex u3l3-m">-</span></span></td><td><span data-reveal><span class="tex u3l3-m">-</span></span></td><td><span data-reveal><span class="tex u3l3-p">+</span></span></td></tr>
+        <tr><th><span class="tex">\tan\theta</span></th><td><span data-reveal><span class="tex u3l3-p">+</span></span></td><td><span data-reveal><span class="tex u3l3-m">-</span></span></td><td><span data-reveal><span class="tex u3l3-p">+</span></span></td><td><span data-reveal><span class="tex u3l3-m">-</span></span></td></tr></table>
+      <div class="work" style="--h:40px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant I all <span class="tex">+</span>; II only sin; III only tan; IV only cos.</div></div></div>
+    <div class="part"><div class="pl">(b) In which quadrant(s) does <span class="tex">\theta</span> terminate if</div>
+      <div class="u3l3-blist">
+        <div>(i) <span class="tex">\cos\theta&gt;0</span>? &nbsp; <span data-reveal><b>I or IV</b></span></div>
+        <div>(ii) <span class="tex">\tan\theta&lt;0</span>? &nbsp; <span data-reveal><b>II or IV</b></span></div>
+        <div>(iii) <span class="tex">\sin\theta&lt;0</span> and <span class="tex">\tan\theta&gt;0</span>? &nbsp; <span data-reveal><b>III</b></span></div>
+      </div>
+      <div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">(i) <b>I or IV</b> &nbsp; (ii) <b>II or IV</b> &nbsp; (iii) <b>III</b> (sin negative: III or IV; tan positive: I or III)</div></div></div>
+  </div>
+  <p class="q">(c) Without a calculator, state whether each ratio is positive or negative. Name the quadrant first.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(i) <span class="tex">\sin 162^\circ</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant II: S, so <b>positive</b>.</div></div></div>
+    <div class="part"><div class="pl">(ii) <span class="tex">\cos 251^\circ</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant III: only T, so <b>negative</b>.</div></div></div>
+    <div class="part"><div class="pl">(iii) <span class="tex">\tan 304^\circ</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant IV: only C, so <b>negative</b>.</div></div></div>
+    <div class="part"><div class="pl">(iv) <span class="tex">\tan 200^\circ</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant III: T, so <b>positive</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Reference angle ================= -->
+<section class="card" data-ink="s2" data-section="2. Using the Reference Angle">
+  <div class="sec-h"><span class="badge">2</span><h2>Writing a Ratio Using Its Reference Angle</h2></div>
+  <p>The terminal arms of <span class="tex">\theta</span> and of its reference angle <span class="tex">\textcolor{#c27a0e}{\theta_R}</span> make the <b>same right triangle</b> with the x-axis, only with different signs on <span class="tex">x</span> and <span class="tex">y</span>. So a ratio of <span class="tex">\theta</span> has the same <b>size</b> as that ratio of <span class="tex">\textcolor{#c27a0e}{\theta_R}</span>, and CAST gives the <b>sign</b>.</p>
+  <div class="def amber"><b>Ratio of <span class="tex">\theta</span> <span class="tex">=\ \pm</span> (same ratio of <span class="tex">\textcolor{#c27a0e}{\theta_R}</span>)</b>, with the sign from CAST for the quadrant of <span class="tex">\theta</span>.<br>
+    Example: <span class="tex">150^\circ</span> is in Quadrant II with <span class="tex">\textcolor{#c27a0e}{\theta_R=30^\circ}</span>, so <span class="tex">\sin 150^\circ=\sin 30^\circ</span>, <span class="tex">\cos 150^\circ=-\cos 30^\circ</span>, <span class="tex">\tan 150^\circ=-\tan 30^\circ</span>.</div>
+  <p>This also finds the <b>other</b> angle from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span> with the same ratio: it has the same reference angle and lies in the other quadrant where that ratio has the same sign.</p>
+  <div class="explainer" data-explainer="mirror"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Same size, CAST sign</h3></div>
+  <p class="q">Write each ratio as the same ratio of its reference angle, with the correct sign.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">\cos 132^\circ</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant II, <span class="tex">\theta_R=180^\circ-132^\circ=48^\circ</span>; cos is negative in II.<br><span class="tex">\boldsymbol{\cos 132^\circ=-\cos 48^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\sin 214^\circ</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant III, <span class="tex">\theta_R=214^\circ-180^\circ=34^\circ</span>; sin is negative.<br><span class="tex">\boldsymbol{\sin 214^\circ=-\sin 34^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\tan 297^\circ</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant IV, <span class="tex">\theta_R=360^\circ-297^\circ=63^\circ</span>; tan is negative.<br><span class="tex">\boldsymbol{\tan 297^\circ=-\tan 63^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\sin 349^\circ</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant IV, <span class="tex">\theta_R=11^\circ</span>; sin is negative.<br><span class="tex">\boldsymbol{\sin 349^\circ=-\sin 11^\circ}</span></div></div></div>
+  </div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(e) Determine the other angle <span class="tex">\theta</span>, <span class="tex">0^\circ\le\theta&lt;360^\circ</span>, with <span class="tex">\cos\theta=\cos 132^\circ</span>.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\cos 132^\circ</span> is negative, so <span class="tex">\theta</span> is in Quadrant II or III. The reference angle is <span class="tex">48^\circ</span>.<br>Quadrant III: <span class="tex">\theta=180^\circ+48^\circ=\boldsymbol{228^\circ}</span>.</div></div></div>
+    <div class="part"><div class="pl">(f) Determine the other angle <span class="tex">\theta</span>, <span class="tex">0^\circ\le\theta&lt;360^\circ</span>, with <span class="tex">\tan\theta=\tan 128^\circ</span>.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\tan 128^\circ</span> is negative (Quadrant II), so the other angle is in Quadrant IV. <span class="tex">\theta_R=52^\circ</span>.<br><span class="tex">\theta=360^\circ-52^\circ=\boldsymbol{308^\circ}</span>.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check it on the calculator</b> (Degree mode). <span class="keys"><kbd>cos</kbd><kbd>132</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> and <span class="keys"><kbd>(−)</kbd><kbd>cos</kbd><kbd>48</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> both give <b>−0.6691…</b>; <span class="keys"><kbd>cos</kbd><kbd>228</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives the same.</div>
+    <div class="u3l3-pcol"><button class="pill" data-keys="cos 132 ) = (−) cos 48 ) = cos 228 ) =">Show me</button></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Other ratios ================= -->
+<section class="card" data-ink="s3" data-section="3. The Other Ratios from One Ratio">
+  <div class="sec-h"><span class="badge">3</span><h2>Finding the Other Ratios from One Ratio</h2></div>
+  <p>If one ratio and enough sign information are given, the other two ratios can be found <b>exactly</b>:</p>
+  <ol class="u3l3-steps">
+    <li>Use the signs (CAST) to decide the <b>quadrant</b>.</li>
+    <li>Read two of <span class="tex">x</span>, <span class="tex">y</span>, <span class="tex">r</span> from the given ratio, with the signs for that quadrant (<span class="tex">r</span> is always positive).</li>
+    <li>Find the third with <span class="tex">x^2+y^2=r^2</span>, and give it the sign for the quadrant.</li>
+    <li>Sketch the angle and its reference triangle, then write the ratios. Rationalize any radical denominator.</li>
+  </ol>
+  <div class="explainer" data-explainer="otherRatios"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Two clues, one quadrant</h3></div>
+  <p class="q">Given <span class="tex">\cos\theta=-\dfrac{8}{17}</span> and <span class="tex">\tan\theta&gt;0</span>, determine the exact values of <span class="tex">\sin\theta</span> and <span class="tex">\tan\theta</span>.</p>
+  <div class="part u3l3-solo"><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\cos\theta&lt;0</span> and <span class="tex">\tan\theta&gt;0</span>: Quadrant III (only T positive).<br>
+    <span class="tex">\cos\theta=\dfrac{x}{r}=\dfrac{-8}{17}</span>: <span class="tex">x=-8</span>, <span class="tex">r=17</span>.<br>
+    <span class="tex">y^2=r^2-x^2=289-64=225</span>, so <span class="tex">y=-15</span> (negative in Quadrant III). Point <span class="tex">P(-8,\ -15)</span>.<br>
+    <span class="tex">\boldsymbol{\sin\theta=\dfrac{y}{r}=-\dfrac{15}{17}}</span> &nbsp;&nbsp; <span class="tex">\boldsymbol{\tan\theta=\dfrac{y}{x}=\dfrac{-15}{-8}=\dfrac{15}{8}}</span></div></div></div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Exact values with radicals</h3></div>
+  <p class="q">Determine the exact values of the other two ratios. Rationalize the denominators.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\tan\theta=\dfrac{2}{5}</span> and <span class="tex">\sin\theta&lt;0</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\tan\theta&gt;0</span> and <span class="tex">\sin\theta&lt;0</span>: Quadrant III.<br>
+      <span class="tex">\tan\theta=\dfrac{y}{x}=\dfrac{-2}{-5}</span>: <span class="tex">x=-5</span>, <span class="tex">y=-2</span>.<br>
+      <span class="tex">r=\sqrt{(-5)^2+(-2)^2}=\sqrt{29}</span><br>
+      <span class="tex">\boldsymbol{\sin\theta=\dfrac{-2}{\sqrt{29}}=-\dfrac{2\sqrt{29}}{29}}</span><br>
+      <span class="tex">\boldsymbol{\cos\theta=\dfrac{-5}{\sqrt{29}}=-\dfrac{5\sqrt{29}}{29}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\sin\theta=\dfrac{2}{3}</span> and <span class="tex">90^\circ&lt;\theta&lt;180^\circ</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Quadrant II: <span class="tex">y=2</span>, <span class="tex">r=3</span>, <span class="tex">x&lt;0</span>.<br>
+      <span class="tex">x^2=9-4=5</span>, so <span class="tex">x=-\sqrt{5}</span>.<br>
+      <span class="tex">\boldsymbol{\cos\theta=\dfrac{x}{r}=-\dfrac{\sqrt{5}}{3}}</span><br>
+      <span class="tex">\boldsymbol{\tan\theta=\dfrac{2}{-\sqrt{5}}=-\dfrac{2}{\sqrt{5}}\cdot\dfrac{\sqrt{5}}{\sqrt{5}}=-\dfrac{2\sqrt{5}}{5}}</span></div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b><span class="tex">r</span> never gets a minus sign.</b> It is a distance. The minus signs belong to <span class="tex">x</span> and <span class="tex">y</span>, and the quadrant decides which ones.</div></div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Solving ================= -->
+<section class="card" data-ink="s4" data-section="4. Solving sin θ = a, cos θ = a, tan θ = a">
+  <div class="sec-h"><span class="badge">4</span><h2>Solving <span class="tex">\sin\theta=a</span>, <span class="tex">\cos\theta=a</span> and <span class="tex">\tan\theta=a</span></h2></div>
+  <p>An equation like <span class="tex">\sin\theta=0.42</span> usually has <b>two</b> solutions from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span>, because the ratio has the same sign in two quadrants. Set the calculator to <b>Degree mode</b> first (TI-84: <span class="keys"><kbd>MODE</kbd></span>, choose <b>DEGREE</b>).</p>
+  <div class="explainer" data-explainer="twoAnswers"></div>
+</section>
+
+<section class="card" data-ink="s4b" data-section="4. The Steps">
+  <div class="def amber"><b>To solve</b> <span class="tex">\sin\theta=a</span>, <span class="tex">\cos\theta=a</span> or <span class="tex">\tan\theta=a</span> for <span class="tex">0^\circ\le\theta&lt;360^\circ</span>:
+    <ol class="u3l3-steps u3l3-tight">
+      <li>Use the <b>sign</b> of <span class="tex">a</span> and CAST to find the two quadrants.</li>
+      <li>Find the reference angle with the inverse key on the <b>positive</b> value: <span class="tex">\textcolor{#c27a0e}{\theta_R}=\sin^{-1}|a|</span> (<span class="keys"><kbd>2nd</kbd><kbd>SIN</kbd></span>), <span class="tex">\cos^{-1}|a|</span> or <span class="tex">\tan^{-1}|a|</span>.</li>
+      <li>Place <span class="tex">\textcolor{#c27a0e}{\theta_R}</span> in each quadrant: &nbsp; I: <span class="tex">\theta_R</span> &nbsp;·&nbsp; II: <span class="tex">180^\circ-\theta_R</span> &nbsp;·&nbsp; III: <span class="tex">180^\circ+\theta_R</span> &nbsp;·&nbsp; IV: <span class="tex">360^\circ-\theta_R</span>.</li>
+    </ol></div>
+  <p>Use <span class="tex">|a|</span> in step 2 so the calculator always returns an acute angle; <span class="tex">\sin^{-1}(-0.42)</span> gives <span class="tex">-24.8^\circ</span>, which is not in the interval. Keep the full calculator value and round only the final answers.</p>
+  <div class="explainer" data-explainer="placeR"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Two solutions each</h3></div>
+  <p class="q">Solve for <span class="tex">\theta</span>, <span class="tex">0^\circ\le\theta&lt;360^\circ</span>, to the nearest tenth of a degree.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\sin\theta=0.42</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Positive sin: Quadrants I, II.<br><span class="tex">\theta_R=\sin^{-1}(0.42)\approx24.83^\circ</span><br>I: <span class="tex">\boldsymbol{\theta\approx24.8^\circ}</span><br>II: <span class="tex">180^\circ-24.83^\circ\approx\boldsymbol{155.2^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\cos\theta=-0.73</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Negative cos: Quadrants II, III.<br><span class="tex">\theta_R=\cos^{-1}(0.73)\approx43.11^\circ</span><br>II: <span class="tex">180^\circ-43.11^\circ\approx\boldsymbol{136.9^\circ}</span><br>III: <span class="tex">180^\circ+43.11^\circ\approx\boldsymbol{223.1^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\tan\theta=-3.5</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Negative tan: Quadrants II, IV.<br><span class="tex">\theta_R=\tan^{-1}(3.5)\approx74.05^\circ</span><br>II: <span class="tex">180^\circ-74.05^\circ\approx\boldsymbol{105.9^\circ}</span><br>IV: <span class="tex">360^\circ-74.05^\circ\approx\boldsymbol{285.9^\circ}</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>The inverse keys are 2nd functions.</b> <span class="keys"><kbd>2nd</kbd><kbd>SIN</kbd></span> types <b>sin⁻¹(</b>: <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd><kbd>.42</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>24.8346…</b> Keep it: <span class="keys"><kbd>180</kbd><kbd>−</kbd><kbd>2nd</kbd><kbd>Ans</kbd><kbd>ENTER</kbd></span> gives <b>155.165…</b> Same idea with <span class="keys"><kbd>2nd</kbd><kbd>cos⁻¹</kbd></span> and <span class="keys"><kbd>2nd</kbd><kbd>tan⁻¹</kbd></span>, always on the <b>positive</b> number.</div>
+    <div class="u3l3-pcol"><button class="pill" data-keys="sin⁻¹ .42 ) = 180 − Ans =">Show (a)</button><button class="pill" data-keys="cos⁻¹ .73 ) =">Show (b)</button><button class="pill" data-keys="tan⁻¹ 3.5 ) =">Show (c)</button></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Don't feed it the negative.</b> <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd><kbd>(−)</kbd><kbd>.42</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>−24.83…</b>, a clockwise angle that is not between <span class="tex">0^\circ</span> and <span class="tex">360^\circ</span>. The inverse key on a negative number does not give a reference angle. Use <span class="tex">|a|</span>, then place it with CAST.</div>
+    <div class="u3l3-pcol"><button class="pill" data-keys="sin⁻¹ (−) .42 ) =">Show sin⁻¹(−0.42)</button></div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u3l3"></section>
+
+<!-- ================= 5. Quadrantal and no solution ================= -->
+<section class="card" data-ink="s5" data-section="5. Quadrantal and No Solution">
+  <div class="sec-h"><span class="badge">5</span><h2>Quadrantal Solutions and Equations with No Solution</h2></div>
+  <p>Since <span class="tex">\sin\theta=\dfrac{y}{r}</span> and <span class="tex">\cos\theta=\dfrac{x}{r}</span> with <span class="tex">|x|\le r</span> and <span class="tex">|y|\le r</span>, the values of sine and cosine are always between <span class="tex">-1</span> and <span class="tex">1</span>. So <span class="tex">\sin\theta=a</span> and <span class="tex">\cos\theta=a</span> have <b>no solution</b> when <span class="tex">a&gt;1</span> or <span class="tex">a&lt;-1</span>. Tangent can be any real number, so <span class="tex">\tan\theta=a</span> always has two solutions.</p>
+  <div class="u3l3-qrow">
+    <p>When <span class="tex">a</span> is <span class="tex">0</span>, <span class="tex">1</span> or <span class="tex">-1</span>, the solutions are quadrantal angles, and there may be only <b>one</b>. Use the values from Lesson 2:</p>
+    <table class="u3l3-tbl u3l3-qtbl"><tr><th><span class="tex">\theta</span></th><td><span class="tex">0^\circ</span></td><td><span class="tex">90^\circ</span></td><td><span class="tex">180^\circ</span></td><td><span class="tex">270^\circ</span></td></tr>
+      <tr><th><span class="tex">\sin\theta</span></th><td><span class="tex">0</span></td><td><span class="tex">1</span></td><td><span class="tex">0</span></td><td><span class="tex">-1</span></td></tr>
+      <tr><th><span class="tex">\cos\theta</span></th><td><span class="tex">1</span></td><td><span class="tex">0</span></td><td><span class="tex">-1</span></td><td><span class="tex">0</span></td></tr>
+      <tr><th><span class="tex">\tan\theta</span></th><td><span class="tex">0</span></td><td>undefined</td><td><span class="tex">0</span></td><td>undefined</td></tr></table>
+  </div>
+  <div class="explainer" data-explainer="bounds"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>One, two or none</h3></div>
+  <p class="q">Solve for <span class="tex">\theta</span>, <span class="tex">0^\circ\le\theta&lt;360^\circ</span>.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">\sin\theta=-1</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=-r</span>: the point is on the negative y-axis.<br><span class="tex">\boldsymbol{\theta=270^\circ}</span> (one solution)</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\cos\theta=0</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=0</span>: on the y-axis.<br><span class="tex">\boldsymbol{\theta=90^\circ}</span> or <span class="tex">\boldsymbol{270^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\tan\theta=0</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=0</span>: on the x-axis.<br><span class="tex">\boldsymbol{\theta=0^\circ}</span> or <span class="tex">\boldsymbol{180^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\cos\theta=-1.15</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-1.15&lt;-1</span>, and cosine is never less than <span class="tex">-1</span>. <b>No solution.</b></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>The calculator agrees.</b> <span class="keys"><kbd>2nd</kbd><kbd>cos⁻¹</kbd><kbd>(−)</kbd><kbd>1.15</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives an <b>ERROR: DOMAIN</b>: no angle has that cosine.</div>
+    <div class="u3l3-pcol"><button class="pill" data-keys="cos⁻¹ (−) 1.15 ) =">Show me</button></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Rearranging, intervals, problems ================= -->
+<section class="card" data-ink="s6" data-section="6. Rearranging and Restricted Intervals">
+  <div class="sec-h"><span class="badge">6</span><h2>Rearranging First, Restricted Intervals and Problems</h2></div>
+  <p>If the ratio is not alone, <b>isolate it first</b>, exactly as you would isolate <span class="tex">x</span> in a linear equation. If the question gives a smaller interval (such as <span class="tex">0^\circ\le\theta\le180^\circ</span>), find <b>all</b> the solutions, then keep only those in the interval.</p>
+  <div class="explainer" data-explainer="isolate"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Isolate, then solve</h3></div>
+  <p class="q">Solve, to the nearest tenth of a degree.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">5\sin\theta+2=0</span>, <span class="tex">0^\circ\le\theta&lt;360^\circ</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">5\sin\theta=-2</span>, so <span class="tex">\sin\theta=-0.4</span>.<br>Negative sin: III, IV.<br><span class="tex">\theta_R=\sin^{-1}(0.4)\approx23.58^\circ</span><br><span class="tex">\theta\approx180^\circ+23.58^\circ\approx\boldsymbol{203.6^\circ}</span><br><span class="tex">\theta\approx360^\circ-23.58^\circ\approx\boldsymbol{336.4^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">3(2-\cos\theta)=4</span>, <span class="tex">0^\circ\le\theta&lt;360^\circ</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">6-3\cos\theta=4</span>, so <span class="tex">-3\cos\theta=-2</span> and <span class="tex">\cos\theta=\dfrac{2}{3}</span>.<br>Positive cos: I, IV.<br><span class="tex">\theta_R=\cos^{-1}\!\left(\tfrac{2}{3}\right)\approx48.19^\circ</span><br><span class="tex">\boldsymbol{\theta\approx48.2^\circ}</span> or <span class="tex">\boldsymbol{311.8^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">3\tan\theta+8=0</span>, <span class="tex">0^\circ\le\theta\le180^\circ</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\tan\theta=-\dfrac{8}{3}</span>. Negative tan: II, IV.<br><span class="tex">\theta_R=\tan^{-1}\!\left(\tfrac{8}{3}\right)\approx69.44^\circ</span><br>II: <span class="tex">\theta\approx110.6^\circ</span> &nbsp; IV: <span class="tex">\theta\approx290.6^\circ</span><br>Only <span class="tex">\boldsymbol{110.6^\circ}</span> is in <span class="tex">0^\circ\le\theta\le180^\circ</span>.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Fractions go straight in.</b> <span class="keys"><kbd>2nd</kbd><kbd>cos⁻¹</kbd><kbd>2</kbd><kbd>÷</kbd><kbd>3</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>48.1896…</b> and <span class="keys"><kbd>2nd</kbd><kbd>tan⁻¹</kbd><kbd>8</kbd><kbd>÷</kbd><kbd>3</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>69.4439…</b>: no rounding before the last step.</div>
+    <div class="u3l3-pcol"><button class="pill" data-keys="sin⁻¹ .4 ) =">Show (a)</button><button class="pill" data-keys="cos⁻¹ 2 ÷ 3 ) =">Show (b)</button><button class="pill" data-keys="tan⁻¹ 8 ÷ 3 ) =">Show (c)</button></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s6b" data-section="6. The Bicycle Pedal">
+  <h3 class="sub">A problem in context: the bicycle pedal</h3>
+  <p>When a model like <span class="tex">h=17\sin\theta</span> gives a height, “at what angles?” is an equation to solve: put in the height, isolate <span class="tex">\sin\theta</span>, then use CAST.</p>
+  <div class="explainer" data-explainer="pedal"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The bicycle pedal</h3></div>
+  <p class="q">A bicycle pedal turns about its axle. When the crank arm has rotated <span class="tex">\theta</span> from the horizontal (in standard position), the height of the pedal above the axle is <span class="tex">h=17\sin\theta</span>, in centimetres. A negative height means the pedal is below the axle.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) For <span class="tex">0^\circ\le\theta&lt;360^\circ</span>, at what angles is the pedal 6 cm below the axle? Answer to the nearest tenth of a degree.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">17\sin\theta=-6</span>, so <span class="tex">\sin\theta=-\dfrac{6}{17}</span>.<br>Negative sin: III, IV. <span class="tex">\theta_R=\sin^{-1}\!\left(\tfrac{6}{17}\right)\approx20.67^\circ</span><br><span class="tex">\boldsymbol{\theta\approx200.7^\circ}</span> or <span class="tex">\boldsymbol{339.3^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Can the pedal ever be 20 cm above the axle? Explain using the equation.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">17\sin\theta=20</span> gives <span class="tex">\sin\theta=\dfrac{20}{17}&gt;1</span>.<br>Sine is never greater than 1, so there is <b>no solution</b>: the pedal is never more than 17 cm (the crank length) from the axle.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Reference angle in one line:</b> <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd><kbd>6</kbd><kbd>÷</kbd><kbd>17</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>20.6673…</b>, then <span class="keys"><kbd>180</kbd><kbd>+</kbd><kbd>2nd</kbd><kbd>Ans</kbd><kbd>ENTER</kbd></span> gives <b>200.667…</b></div>
+    <div class="u3l3-pcol"><button class="pill" data-keys="sin⁻¹ 6 ÷ 17 ) = 180 + Ans =">Show me</button></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>CAST.</b> Positive ratios: I <b>A</b>ll, II <b>S</b>in, III <b>T</b>an, IV <b>C</b>os. The others are negative. <span class="tex">r&gt;0</span> always, so the signs of <span class="tex">x</span> and <span class="tex">y</span> decide.</div>
+    <div><b>Same size, CAST sign.</b> Ratio of <span class="tex">\theta</span> <span class="tex">=\pm</span> same ratio of <span class="tex">\theta_R</span>. The other angle with the same ratio has the same <span class="tex">\theta_R</span>, in the other quadrant with that sign.</div>
+    <div><b>Other ratios from one.</b> Quadrant from the clues → two of <span class="tex">x</span>, <span class="tex">y</span>, <span class="tex">r</span> with signs → the third from <span class="tex">x^2+y^2=r^2</span> → ratios (rationalize).</div>
+    <div><b>Solving.</b> Isolate the ratio. Sign → two quadrants. <span class="tex">\theta_R=\sin^{-1}|a|</span> (or cos, tan). Place it: <span class="tex">\theta_R</span>, <span class="tex">180^\circ-\theta_R</span>, <span class="tex">180^\circ+\theta_R</span>, <span class="tex">360^\circ-\theta_R</span>. <span class="tex">|a|&gt;1</span> for sin or cos: no solution. <span class="tex">0,\pm1</span>: quadrantal.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u3l3">
+    <div><div class="kicker">Your turn</div><b>Assignment 3 — The CAST Rule: Signs and Solving for Angles</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l4/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 4 — Exact Values from Special Triangles</b><div class="muted">Exact sine, cosine and tangent of <span class="tex">30^\circ</span>, <span class="tex">45^\circ</span> and <span class="tex">60^\circ</span> (and their twins in every quadrant), no calculator.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u3l3.js';
+  boot({ key: 'u3l3', homeHref: '../../', title: '3.3 The CAST Rule' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

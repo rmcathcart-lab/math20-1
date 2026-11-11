@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Radical Equations · Math 20-1 4.6</title>
+<meta name="description" content="Math 20-1 Unit 4 Lesson 6: solving radical equations with square roots. State the restriction (radicand ≥ 0), isolate the radical, square both sides, solve and verify every answer; why squaring can create extraneous roots (√x = −3, √(x + 3) + 5 = 2); a radical on each side; checking with a graph; formulas with a square root (skid marks, pendulum). Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u4l6.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u4l6">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 4 Factoring and Equations · Lesson 6</div>
+  <h1>Solving Radical Equations and Checking for Extraneous Roots</h1>
+  <p class="lede">A <b>radical equation</b> has the variable under a square root. To solve it we <b>square both sides</b>, which undoes the root. But squaring can't tell <span class="tex">3</span> from <span class="tex">-3</span>, so it can hand us a <b class="u4l6-xr">fake answer</b>. That is why every answer gets checked.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>state the <b class="u4l6-ok">restriction</b> on the variable by solving “radicand <span class="tex">\ge 0</span>” (and reverse the sign when I divide by a negative)</li>
+      <li>solve a radical equation: restriction, <b>isolate</b> the radical, <b>square</b> both sides, solve, <b>verify</b></li>
+      <li>explain why squaring can create an <b class="u4l6-xr">extraneous root</b>, and reject it</li>
+      <li>solve equations with a radical on each side, squaring any coefficient too</li>
+      <li>check a radical equation with a graph: the roots are where the two sides meet</li>
+      <li>solve a formula with a square root for the variable under the root</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN3</b> Solve problems that involve radical equations (limited to square roots).<br><span class="muted">Today: restrictions, isolate–square–solve–verify, extraneous roots, a radical on each side, and formulas with a square root.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Wishing Well" id="wu" style="--wf-side: 420px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Wishing Well</h2>
+  <p class="wf-rule">A coin dropped down a well falls <span class="tex">d=5t^2</span> metres in <span class="tex">t</span> seconds. Turned around, the time to fall <span class="tex">d</span> metres is <span class="tex">t=\sqrt{\tfrac{d}{5}}</span>.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u4l6-well" id="u4l6-well"></div>
+    <div class="u4l6-wbtns">
+      <button type="button" class="pill" id="u4l6-drop">Drop the coin</button>
+      <button type="button" class="pill" id="u4l6-wreset">Reset</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u4l6-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How far does the coin fall in the first <b>2 seconds</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u4l6-wa"><div class="bk-ans"><span class="tex">d=5(2)^2=5(4)=20</span> m.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How long does it take to fall <b>45 m</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u4l6-wa"><div class="bk-ans"><span class="tex">t=\sqrt{\tfrac{45}{5}}=\sqrt{9}=3</span> seconds.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> You drop a coin and hear the splash after <b>4 seconds</b>. How deep is the well? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> 20 m</div>
+        <div class="opt"><b>B</b> 40 m</div>
+        <div class="opt right"><b>C</b> 80 m</div>
+        <div class="opt"><b>D</b> 160 m</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal id="u4l6-wreveal">Reveal</button>
+      <div class="poll-ans"><b>C, 80 m.</b> <span class="tex">4=\sqrt{\tfrac{d}{5}}</span>. <b>Square both sides</b> to undo the root: <span class="tex">16=\tfrac{d}{5}</span>, so <span class="tex">d=80</span>.<br>
+        <span class="muted"><b>A</b> just multiplies <span class="tex">4\times5</span>. <b>B</b> doubles the 2-second answer, but twice the time is <b>four</b> times the depth.</span></div>
+    </div>
+  </div></div>
+  <p class="u4l6-social">Ask your neighbour: could <span class="tex">\sqrt{\tfrac{d}{5}}</span> ever come out to <span class="tex">-4</span> seconds? What would that even mean?</p>
+</section>
+
+<!-- ================= 1. Restrictions ================= -->
+<section class="card" data-ink="s1" data-section="1. Restrictions on the Variable">
+  <div class="sec-h"><span class="badge">1</span><h2>Restrictions on the Variable</h2></div>
+  <div class="def">A <b>radical equation</b> has the variable under a radical sign. In this course the radicals are square roots. A square root of a negative number is not a real number, so the <b class="u4l6-rd">radicand</b> must be non-negative.</div>
+  <div class="def amber u4l6-key"><div class="u4l6-keyh">Key idea</div><span class="tex">\sqrt{\textcolor{#7b4fc4}{A}}</span> is defined only when <span class="tex">\textcolor{#7b4fc4}{A}\ge0</span>. To find the <b class="u4l6-ok">restriction</b>, solve the inequality “radicand <span class="tex">\ge0</span>”. Dividing or multiplying an inequality by a <b>negative</b> number <b>reverses</b> the sign.</div>
+  <div class="u4l6-two">
+    <div class="u4l6-gtxt">The restriction is the <b>domain</b> of the graph: <span class="tex">y=\sqrt{x-2}</span> starts at <span class="tex">x=2</span> and goes right; <span class="tex">y=\sqrt{3-x}</span> starts at <span class="tex">x=3</span> and goes left. When an equation has two radicals, <span class="tex">x</span> must satisfy <b>both</b> restrictions at once.</div>
+    <div class="bk-row u4l6-gpair">
+      <div class="u4l6-gfig"><div data-bk-graph='{"width":270,"height":190,"xmin":-1,"xmax":7,"ymin":-1,"ymax":3,"fontSize":15,"items":[{"fn":["sqrt(x-2)",{"from":2,"color":"purple"}]},{"point":[2,0,{"color":"purple"}]}]}'></div><div class="u4l6-gcap"><span class="tex">y=\sqrt{x-2},\ x\ge2</span></div></div>
+      <div class="u4l6-gfig"><div data-bk-graph='{"width":270,"height":190,"xmin":-4,"xmax":4,"ymin":-1,"ymax":3,"fontSize":15,"items":[{"fn":["sqrt(3-x)",{"to":3,"color":"purple"}]},{"point":[3,0,{"color":"purple"}]}]}'></div><div class="u4l6-gcap"><span class="tex">y=\sqrt{3-x},\ x\le3</span></div></div>
+    </div>
+  </div>
+  <div class="explainer" data-explainer="restrict"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>State the restriction</h3></div>
+  <p class="q">State the restriction on the variable.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\sqrt{x+4}=6</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+4\ge0</span><br><span class="tex">\boldsymbol{x\ge-4}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\sqrt{2x-5}+1=4</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x-5\ge0</span><br><span class="tex">\boldsymbol{x\ge\tfrac{5}{2}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\sqrt{6-3x}=9</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">6-3x\ge0\Rightarrow-3x\ge-6</span><br><span class="tex">\boldsymbol{x\le2}</span> (sign reverses)</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\sqrt{x-1}+\sqrt{5-x}=2</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ge1</span> and <span class="tex">x\le5</span><br><span class="tex">\boldsymbol{1\le x\le5}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\sqrt{x}=\sqrt{x+3}-1</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ge0</span> and <span class="tex">x\ge-3</span><br>Both hold when <span class="tex">\boldsymbol{x\ge0}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Squaring and verifying ================= -->
+<section class="card" data-ink="s2" data-section="2. Solving by Squaring and Verifying">
+  <div class="sec-h"><span class="badge">2</span><h2>Solving by Squaring and Verifying</h2></div>
+  <div class="def">Squaring undoes a square root: <span class="tex">\left(\sqrt{A}\right)^2=A</span> when <span class="tex">A\ge0</span>. Square both <b>sides</b>, not each term: get the radical <b>alone</b> first. If there is a number in front of the radical, divide by it first (or square it too: <span class="tex">\left(2\sqrt{A}\right)^2=4A</span>).</div>
+  <div class="def amber u4l6-key"><div class="u4l6-keyh">Solving a radical equation</div>
+    <div class="u4l6-steps5"><div><b>1</b> State the restriction</div><div><b>2</b> Isolate the radical</div><div><b>3</b> Square both sides</div><div><b>4</b> Solve</div><div><b>5</b> <b>Verify</b> each answer in the <em>original</em> equation (left side = right side)</div></div></div>
+  <div class="explainer" data-explainer="eachTerm"></div>
+  <div class="explainer" data-explainer="steps"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Solve and verify</h3></div>
+  <p class="q">Solve and verify.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\sqrt{3x+1}=5</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Restriction: <span class="tex">x\ge-\tfrac{1}{3}</span><br><span class="tex">3x+1=25</span><br><span class="tex">3x=24\Rightarrow\boldsymbol{x=8}</span><br>Verify: <span class="tex">\sqrt{3(8)+1}=\sqrt{25}=5</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2\sqrt{x-1}+3=9</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Restriction: <span class="tex">x\ge1</span><br><span class="tex">2\sqrt{x-1}=6\Rightarrow\sqrt{x-1}=3</span><br><span class="tex">x-1=9\Rightarrow\boldsymbol{x=10}</span><br>Verify: <span class="tex">2\sqrt{9}+3=6+3=9</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\sqrt{4x-3}-7=-2</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Restriction: <span class="tex">x\ge\tfrac{3}{4}</span><br><span class="tex">\sqrt{4x-3}=5</span><br><span class="tex">4x-3=25\Rightarrow\boldsymbol{x=7}</span><br>Verify: <span class="tex">\sqrt{25}-7=-2</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\sqrt{\dfrac{x+4}{3}}=2</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Restriction: <span class="tex">x\ge-4</span><br><span class="tex">\tfrac{x+4}{3}=4</span><br><span class="tex">x+4=12\Rightarrow\boldsymbol{x=8}</span><br>Verify: <span class="tex">\sqrt{\tfrac{12}{3}}=\sqrt{4}=2</span> ✓</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Extraneous roots ================= -->
+<section class="card" data-ink="s3" data-section="3. Extraneous Roots">
+  <div class="sec-h"><span class="badge">3</span><h2>Extraneous Roots</h2></div>
+  <div class="def">The symbol <span class="tex">\sqrt{\phantom{x}}</span> means the <b>principal</b> (non-negative) square root: <span class="tex">\sqrt{9}=3</span>, never <span class="tex">-3</span>. So an equation like <span class="tex">\sqrt{x}=-3</span> can have no solution.</div>
+  <p>Squaring is <b>not a reversible step</b>. If <span class="tex">a=b</span> then <span class="tex">a^2=b^2</span>, but <span class="tex">a^2=b^2</span> does not mean <span class="tex">a=b</span>: <span class="tex">3^2=(-3)^2</span> and <span class="tex">3\ne-3</span>. The squared equation can therefore have a root that the original equation does not have. A value found by correct algebra that does <b>not</b> satisfy the original equation is an <b class="u4l6-xr">extraneous root</b>. It must be rejected, which is why every answer is verified.</p>
+  <div class="def amber u4l6-key"><div class="u4l6-keyh">Key idea</div>After isolating: if <span class="tex">\sqrt{A}</span> equals a <b>negative number</b>, there is <b>no solution</b> (squaring would produce an extraneous root). A value that breaks a <b>restriction</b> is also extraneous.</div>
+  <div class="explainer" data-explainer="balance"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>A negative root is fine.</b> What can't be negative is the <b>value of the square root</b>, not <span class="tex">x</span>. In <span class="tex">\sqrt{1-x}=3</span>, squaring gives <span class="tex">1-x=9</span>, so <span class="tex">x=-8</span>, and it checks: <span class="tex">\sqrt{1-(-8)}=\sqrt{9}=3</span> ✓.</div></div>
+  <div class="explainer" data-explainer="noMeet"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Catch the extraneous root</h3></div>
+  <div class="u4l6-ex3">
+    <div>
+      <div class="part"><div class="pl">(a) Solve <span class="tex">\sqrt{x}=-3</span> by squaring. Verify, and state the solution.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Squaring: <span class="tex">x=9</span>.<br>Verify: left side <span class="tex">\sqrt{9}=3</span>, right side <span class="tex">-3</span>. <span class="tex">3\ne-3</span>.<br><span class="tex">x=9</span> is <b class="u4l6-xr">extraneous</b>. There is <b>no solution</b>.</div></div></div>
+      <div class="part"><div class="pl">(b) Solve <span class="tex">\sqrt{x+3}+5=2</span> and verify.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Restriction: <span class="tex">x\ge-3</span><br><span class="tex">\sqrt{x+3}=-3</span> (already impossible: a square root is never negative)<br>Squaring anyway: <span class="tex">x+3=9\Rightarrow x=6</span><br>Verify: <span class="tex">\sqrt{9}+5=8\ne2</span>. <span class="tex">x=6</span> is <b class="u4l6-xr">extraneous</b>; <b>no solution</b>.</div></div></div>
+      <div class="part"><div class="pl">(c) The graphs of <span class="tex">y=\sqrt{x+3}+5</span> and <span class="tex">y=2</span> are shown. How do they confirm your answer to (b)?</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The radical graph starts at <span class="tex">(-3,5)</span> and only rises, so it never reaches the line <span class="tex">y=2</span>. No intersection means no solution.</div></div></div>
+    </div>
+    <div class="u4l6-ex3g"><div data-bk-graph='{"width":330,"height":300,"xmin":-5,"xmax":8,"ymin":-1,"ymax":9,"xlabels":2,"ylabels":2,"fontSize":15,"items":[{"fn":["sqrt(x+3)+5",{"from":-3,"color":"purple"}]},{"fn":["2",{"color":"blue","dash":"7 6"}]},{"point":[-3,5,{"color":"purple"}]},{"label":[3.6,8.9,"y=\\sqrt{x+3}+5",{"tex":true,"color":"#7b4fc4","cls":"bk-ptlab"}]},{"label":[5,1.2,"y=2",{"tex":true,"color":"#1f5bd6","cls":"bk-ptlab"}]}]}'></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 4. A radical on each side ================= -->
+<section class="card" data-ink="s4" data-section="4. A Radical on Each Side">
+  <div class="sec-h"><span class="badge">4</span><h2>A Radical on Each Side</h2></div>
+  <div class="def">When each side is a single radical, square both sides at once: <span class="tex">\left(\sqrt{A}\right)^2=\left(\sqrt{B}\right)^2</span> gives <span class="tex">A=B</span>. A <b>coefficient</b> in front of a radical is squared too. Both radicands must be non-negative, so check the answer in <b>both</b> radicands: a value that makes either one negative is extraneous.</div>
+  <div class="explainer" data-explainer="twoRad"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>A radical on each side</h3></div>
+  <p class="q">Solve and verify.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\sqrt{5x-2}=\sqrt{2x+7}</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Restrictions: <span class="tex">x\ge\tfrac{2}{5}</span> and <span class="tex">x\ge-\tfrac{7}{2}</span>, so <span class="tex">x\ge\tfrac{2}{5}</span>.<br><span class="tex">5x-2=2x+7</span><br><span class="tex">3x=9\Rightarrow\boldsymbol{x=3}</span><br>Verify: <span class="tex">\sqrt{13}=\sqrt{13}</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">3\sqrt{x-2}=\sqrt{5x+6}</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Restriction: <span class="tex">x\ge2</span><br><span class="tex">9(x-2)=5x+6</span><br><span class="tex">9x-18=5x+6</span><br><span class="tex">4x=24\Rightarrow\boldsymbol{x=6}</span><br>Verify: <span class="tex">3\sqrt{4}=6</span>, <span class="tex">\sqrt{36}=6</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\sqrt{2x-9}=\sqrt{x-7}</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Restriction: <span class="tex">x\ge\tfrac{9}{2}</span> and <span class="tex">x\ge7</span>, so <span class="tex">x\ge7</span>.<br><span class="tex">2x-9=x-7\Rightarrow x=2</span><br>Verify: <span class="tex">\sqrt{-5}</span> is not real (<span class="tex">x=2</span> breaks <span class="tex">x\ge7</span>).<br><span class="tex">x=2</span> is <b class="u4l6-xr">extraneous</b>: <b>no solution</b>.</div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Square the coefficient too.</b> <span class="tex">\left(3\sqrt{x-2}\right)^2=3^2\left(\sqrt{x-2}\right)^2=9(x-2)</span>, not <span class="tex">3(x-2)</span>.</div></div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u4l6"></section>
+
+<!-- ================= 5. Checking with a graph ================= -->
+<section class="card" data-ink="s5" data-section="5. Checking with a Graph">
+  <div class="sec-h"><span class="badge">5</span><h2>Checking with a Graph</h2></div>
+  <div class="def">A graphing calculator can solve or check a radical equation. Enter the left side as <span class="tex">Y_1</span> and the right side as <span class="tex">Y_2</span>, press <span class="keys"><kbd>GRAPH</kbd></span>, then use <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd></span> (CALC), <b>5: intersect</b>. The <span class="tex">x</span>-coordinate of each point of intersection is a root. If the graphs do not meet, there is no solution; an extraneous root shows up as an <span class="tex">x</span>-value where the graphs do <b>not</b> meet. Graphing also gives decimal approximations when a root is not a whole number.</div>
+  <div class="explainer" data-explainer="calcGraph"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Algebra and a graph</h3></div>
+  <p class="q">Consider the equation <span class="tex">\sqrt{2x-4}=4</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Solve algebraically and verify.</div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Restriction: <span class="tex">x\ge2</span><br><span class="tex">2x-4=16\Rightarrow\boldsymbol{x=10}</span><br>Verify: <span class="tex">\sqrt{16}=4</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) Graph <span class="tex">Y_1=\sqrt{2x-4}</span> and <span class="tex">Y_2=4</span> in the window <span class="tex">x\!:[-2,14,2]</span>, <span class="tex">y\!:[-2,6,1]</span>. Sketch the display and mark the point of intersection.</div>
+      <div class="u4l6-sketch"><div data-bk-graph='{"width":420,"height":230,"xmin":-2,"xmax":14,"ymin":-2,"ymax":6,"xstep":2,"xlabels":2,"ylabels":2,"fontSize":14}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">The graphs meet at <span class="tex">(10,4)</span>, so the root is <span class="tex">\boldsymbol{x=10}</span>. The radical graph starts at <span class="tex">(2,0)</span>: no part of it exists for <span class="tex">x&lt;2</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Formulas ================= -->
+<section class="card" data-ink="s6" data-section="6. Problems Modelled by a Radical Equation">
+  <div class="sec-h"><span class="badge">6</span><h2>Problems Modelled by a Radical Equation</h2></div>
+  <div class="def">Many formulas contain a square root. To find the variable <b>under</b> the radical, substitute the known values, <b>isolate</b> the radical, <b>square</b> both sides and solve. Round only at the end, as the question asks.</div>
+  <div class="explainer" data-explainer="skid"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Skid marks</h3></div>
+  <p class="q">A police officer estimates a car’s speed from the length of its skid marks with the formula <span class="tex">s=4\sqrt{10d}</span>, where <span class="tex">s</span> is the speed in km/h and <span class="tex">d</span> is the length of the skid marks in metres. How long are the skid marks of a car travelling at 80&nbsp;km/h?</p>
+  <div class="part u4l6-solo"><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">80=4\sqrt{10d}\Rightarrow\sqrt{10d}=20\Rightarrow10d=400\Rightarrow d=40</span><br>Verify: <span class="tex">4\sqrt{400}=4(20)=80</span> ✓ &nbsp; The skid marks are <b>40 m</b> long.</div></div></div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s6b" data-section="6. The Pendulum">
+  <h3 class="sub">The pendulum: a formula with a fraction under the root</h3>
+  <p>The period of a pendulum is <span class="tex">T=2\pi\sqrt{\dfrac{L}{9.8}}</span>. To find <span class="tex">L</span>, peel the formula from the outside in: divide by <span class="tex">2\pi</span>, square, then multiply by 9.8.</p>
+  <div class="explainer" data-explainer="pendulum"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>The pendulum</h3></div>
+  <p class="q">The period of a pendulum (the time for one full swing, in seconds) is <span class="tex">T=2\pi\sqrt{\dfrac{L}{9.8}}</span>, where <span class="tex">L</span> is its length in metres.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Determine the period of a 1.5&nbsp;m pendulum, to the nearest hundredth of a second.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">T=2\pi\sqrt{\tfrac{1.5}{9.8}}</span><br><span class="tex">=2\pi\sqrt{0.15306\ldots}</span><br><span class="tex">\approx\boldsymbol{2.46}</span> s</div></div></div>
+    <div class="part"><div class="pl">(b) Determine the length that gives a period of 2.5&nbsp;s, to the nearest centimetre.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2.5=2\pi\sqrt{\tfrac{L}{9.8}}</span><br><span class="tex">\sqrt{\tfrac{L}{9.8}}=\tfrac{2.5}{2\pi}=0.39789\ldots</span><br><span class="tex">\tfrac{L}{9.8}=0.15831\ldots</span><br><span class="tex">L\approx1.551</span> m, about <b>155 cm</b></div></div></div>
+    <div class="part"><div class="pl">(c) Solve the formula for <span class="tex">L</span>.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\tfrac{T}{2\pi}=\sqrt{\tfrac{L}{9.8}}</span><br><span class="tex">\tfrac{T^2}{4\pi^2}=\tfrac{L}{9.8}</span><br><span class="tex">\boldsymbol{L=\dfrac{9.8T^2}{4\pi^2}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Restriction first.</b> Radicand <span class="tex">\ge0</span>. Dividing by a negative reverses the sign: <span class="tex">6-3x\ge0\Rightarrow x\le2</span>. Two radicals: both at once.</div>
+    <div><b>Isolate, square, solve, verify.</b> Get the radical alone, then square both <b>sides</b> (not each term). Square a coefficient too: <span class="tex">\left(2\sqrt{A}\right)^2=4A</span>.</div>
+    <div><b>Extraneous roots.</b> <span class="tex">3^2=(-3)^2</span>, so squaring can add a root the original doesn't have. If <span class="tex">\sqrt{A}=</span> a negative number: no solution. Reject any value that fails the check or breaks a restriction.</div>
+    <div><b>Graphs and formulas.</b> Roots are where <span class="tex">Y_1</span> and <span class="tex">Y_2</span> meet; no meeting, no solution. In a formula, substitute, isolate the root, square, solve, and round at the end.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u4l6">
+    <div><div class="kicker">Your turn</div><b>Assignment 6 — Solving Radical Equations and Checking for Extraneous Roots</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l7/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 7 — Radical Equations That Lead to Quadratics</b><div class="muted">Squaring gives an <span class="tex">x^2</span>: factor, find two roots, and check both.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u4l6.js';
+  boot({ key: 'u4l6', homeHref: '../../', title: '4.6 Radical Equations' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

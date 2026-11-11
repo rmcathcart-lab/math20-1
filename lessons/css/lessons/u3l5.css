@@ -1,0 +1,105 @@
+/* Math 20-1 · Unit 3 · Lesson 5 — The Sine Law: styles used only on this page (prefix u3l5-).
+ * Colours: pair A blue #1f5bd6, pair B green #12805a, pair C purple #7b4fc4, altitude h rose #a33357,
+ * known pair amber #c27a0e, unknown red #c93a33. */
+
+.u3l5 .ex-cap .katex { font-size: 1.04em; }
+.u3l5 .chip .katex { font-size: 1em; }
+.u3l5 .pl .katex { font-size: 1.08em; }
+.u3l5 .ans .katex { font-size: 1.04em; }
+.u3l5 .ans { line-height: 1.5; }
+.u3l5 .katex { white-space: nowrap; }
+.u3l5 h2 .katex, .u3l5 h3 .katex { font-size: .95em; }
+.u3l5 .ex-ask .katex { font-size: 1.02em; }
+.u3l5-hc { color: #a33357; }
+.u3l5-kp { color: #c27a0e; }
+.u3l5-red { color: #c93a33; }
+.u3l5-center { text-align: center; font-size: 20px; }
+
+/* ---------------- warm-up: The Shade Sail ---------------- */
+.u3l5-sail { position: relative; width: 560px; height: 380px; }
+.u3l5-sail .u3l5-hit { cursor: pointer; }
+.u3l5-sedge { font-size: 18px; font-weight: 700; background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 6px; color: #1c2230; }
+.u3l5-sedge.u3l5-on { color: #fff; background: #7a1f3d; }
+.u3l5-sang { font-size: 16px; font-weight: 700; color: #4a1f06; }
+.u3l5-wbtns { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 2px; }
+.u3l5-wbtns .pill { font-size: 15px; padding: 6px 13px; }
+.u3l5-wbtns .pill.u3l5-bon { background: var(--brand2); color: #fff; }
+.wf .u3l5-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
+.wf .u3l5-wqs .q-line .pill.small { padding: 2px 10px; }
+.u3l5-wa { margin: 0 0 6px 40px; }
+.wf .u3l5-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
+.u3l5 .wf .wf-poll { margin-top: 8px; }
+.u3l5 .wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
+.u3l5 .wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
+.u3l5 .wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
+.u3l5-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
+
+/* ---------------- notes and examples ---------------- */
+.u3l5-pcol { display: flex; flex-direction: column; gap: 6px; align-items: stretch; }
+.u3l5-pcol .pill { white-space: nowrap; }
+.u3l5-law { text-align: center; font-size: 20px; }
+.u3l5-law .u3l5-bigf { font-size: 1.18em; }
+.u3l5-legend { font-size: 18px; margin-top: 8px; line-height: 1.45; }
+.u3l5-steps { margin: 4px 0 14px; padding-left: 1.5em; line-height: 1.55; font-size: 19px; }
+.u3l5-steps li { margin: 6px 0; }
+.u3l5-ul { margin: 6px 0 0; padding-left: 1.3em; line-height: 1.55; }
+.u3l5-ul li { margin: 4px 0; }
+.u3l5-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 4px 0 14px; }
+.u3l5-way { background: #fff; border-radius: 12px; padding: 10px 16px; font-size: 19px; line-height: 1.45; border-left: 6px solid; }
+.u3l5-way-b { border-color: #7a1f3d; } .u3l5-way-e { border-color: #1f5bd6; }
+.u3l5-wayh { font: 800 16px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--ink2); margin-bottom: 2px; }
+.u3l5-sfig { position: relative; display: flex; justify-content: center; margin: 2px 0 4px; }
+.u3l5-sfig-l { justify-content: flex-start; }
+.u3l5-exgrid { display: grid; grid-template-columns: 410px minmax(0, 1fr); gap: 18px; align-items: start; margin-bottom: 10px; }
+.u3l5-exgrid-3 { grid-template-columns: 370px minmax(0, 1fr); }
+.u3l5-exgrid .part + .part { margin-top: 10px; }
+.u3l5-solo { margin: 0 0 6px; }
+.u3l5-proof .u3l5-pl { font-size: 20px; line-height: 1.5; margin: 6px 0 14px; }
+.u3l5-blank { display: inline-block; min-width: 92px; min-height: 44px; border-bottom: 2.5px solid #9aa0ab; text-align: center; vertical-align: middle; padding: 0 6px; }
+.u3l5-blank-w { min-width: 190px; }
+
+/* ---------------- explainer pieces ---------------- */
+.u3l5-tri { position: relative; }
+.u3l5-svg { display: block; overflow: visible; }
+.u3l5-ov { position: absolute; left: 0; top: 0; width: 100%; height: 100%; pointer-events: none; }
+.u3l5-lab { position: absolute; white-space: nowrap; line-height: 1.1; pointer-events: none; }
+.u3l5-vx { font-size: 1.05em; font-weight: 700; }
+.u3l5-slab { font-size: .95em; background: rgba(255, 255, 255, .82); border-radius: 5px; padding: 0 3px; }
+.u3l5-alab { font-size: .85em; font-weight: 700; background: rgba(255, 255, 255, .78); border-radius: 5px; padding: 0 2px; }
+.u3l5-lab.u3l5-big { font-size: 1.22em; }
+.u3l5-lab.u3l5-small { font-size: .8em; }
+.u3l5-nlab { font-size: 16px; color: #3a4254; }
+.u3l5-river { font-size: 15px; font-style: italic; color: #3d6fb3; }
+.u3l5-axl { font-size: 16px; color: var(--ink2); }
+.u3l5-axb { font-size: 18px; font-weight: 700; }
+.u3l5-bname { font: 800 19px var(--round); background: rgba(255, 255, 255, .85); border-radius: 6px; padding: 0 4px; }
+.u3l5-piece { pointer-events: none; }
+.u3l5-panel { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; overflow: hidden; }
+.u3l5-ph { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 6px; }
+.u3l5-line { font-size: 19px; line-height: 1.4; margin: 4px 0 10px; }
+.u3l5-line.u3l5-big { font-size: 22px; }
+.u3l5-line.u3l5-huge { font-size: 27px; text-align: center; }
+.u3l5-line.u3l5-small { font-size: 17px; margin: 3px 0 8px; }
+.u3l5-line-key { background: #fff4dd; border-radius: 8px; padding: 4px 8px; }
+.u3l5-line-ans { background: #e8f5ef; border-radius: 8px; padding: 4px 10px; }
+.u3l5-kpill { display: inline-block; font: 800 13px var(--round); text-transform: uppercase; letter-spacing: .04em; color: #fff; background: #c27a0e; border-radius: 999px; padding: 2px 9px; vertical-align: 2px; margin-right: 4px; }
+.u3l5-lawl { font-size: 22px; text-align: center; margin: 4px 0 6px; }
+.u3l5-soh { display: flex; gap: 10px; justify-content: center; margin: 0 0 10px; }
+.u3l5-soh > span { font: 800 22px var(--round); letter-spacing: .06em; padding: 4px 14px; border-radius: 10px; background: #f3f0e8; color: #9aa0ab; }
+.u3l5-soh > span.u3l5-on { background: #7a1f3d; color: #fff; }
+/* proof cards */
+.u3l5-card { border: 2px solid #e4ded2; border-radius: 12px; padding: 6px 12px; box-sizing: border-box; background: #fff; }
+.u3l5-card1 { border-color: #e2a9bb; background: #fdf3f6; }
+.u3l5-card2 { border-color: #b9bfcc; background: #f3f4f7; }
+.u3l5-ch { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--ink2); margin-bottom: 2px; }
+.u3l5-cl { font-size: 20px; line-height: 1.35; margin: 4px 0; }
+.u3l5-slot { display: inline-block; border-radius: 8px; padding: 0 5px; background: #fff4dd; border: 2px dashed #c27a0e; }
+.u3l5-slot.u3l5-gone { opacity: .35; }
+.u3l5-pl1 .u3l5-slot { border-style: solid; }
+.u3l5-fly { font-size: 20px; line-height: 1.35; border-radius: 8px; padding: 0 5px; background: #fff4dd; border: 2px solid #c27a0e; box-shadow: 0 6px 18px rgba(0, 0, 0, .18); z-index: 5; white-space: nowrap; }
+/* pair hunt */
+.u3l5-mini { background: #fff; border: 2px solid #e4ded2; border-radius: 12px; box-sizing: border-box; }
+.u3l5-mh { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--ink2); text-align: center; padding-top: 6px; }
+.u3l5-verdict { border-radius: 12px; padding: 8px 12px; font-size: 17px; line-height: 1.4; box-sizing: border-box; text-align: center; border: 2px solid #e4ded2; background: #fff; }
+.u3l5-verdict.u3l5-vok { background: #fff4dd; border-color: #e6b866; }
+.u3l5-verdict.u3l5-vno { background: #fbe9e8; border-color: #e7a6a2; }

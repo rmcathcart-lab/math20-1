@@ -13,6 +13,9 @@ async def main():
         pg.on('pageerror',lambda e: errs.append(str(e)))
         pg.on('console',lambda m: errs.append('console:'+m.text) if m.type=='error' else None)
         await pg.route('**/cdn.jsdelivr.net/**', lambda r: r.abort())
+        # practice mode: the real config.js has the class backend, so serve one with no backend
+        await pg.route(BASE + 'js/config.js', lambda r: r.fulfill(status=200, content_type='application/javascript',
+            body="var HW_CONFIG = { siteName: 'Math 20-1 Practice', backend: '' };"))
         await pg.goto(BASE)
         await pg.wait_for_selector('#nm',timeout=8000)
         await pg.fill('#nm','Test Student'); await pg.keyboard.press('Enter')

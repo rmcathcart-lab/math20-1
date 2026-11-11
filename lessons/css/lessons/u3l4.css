@@ -1,0 +1,152 @@
+/* Math 20-1 · Unit 3 · Lesson 4 — Exact Values from Special Triangles: styles used only on this page (prefix u3l4-).
+ * Colours: terminal arm brand #7a1f3d, reference angle amber #c27a0e, 45-45-90 blue #1f5bd6, 30-60-90 purple #7b4fc4,
+ * positive green #12805a, negative red #c93a33. */
+
+.u3l4 .ex-cap .katex { font-size: 1.04em; }
+.u3l4 .chip .katex { font-size: 1em; }
+.u3l4 .pl .katex { font-size: 1.08em; }
+.u3l4 .ans .katex { font-size: 1.04em; }
+.u3l4 .katex { white-space: nowrap; }
+.u3l4 h2 .katex, .u3l4 h3 .katex { font-size: .95em; }
+.u3l4 .ex-ask .katex { font-size: 1.02em; }
+.u3l4-c45 { color: #1f5bd6; } .u3l4-c30 { color: #7b4fc4; } .u3l4-cref { color: #c27a0e; }
+
+/* ---------------- warm-up: Which Wrench Fits? ---------------- */
+.u3l4-nut { position: relative; width: 560px; height: 392px; }
+.u3l4-nutsvg { display: block; }
+.u3l4-nl { opacity: 0; transition: opacity .35s; }
+.u3l4-nl.u3l4-on { opacity: 1; }
+.u3l4-nutlabs { position: absolute; inset: 0; pointer-events: none; }
+.u3l4-nlab { opacity: 0; transition: opacity .35s; font-size: 20px; font-weight: 700; }
+.u3l4-nlab.u3l4-on { opacity: 1; }
+.u3l4-nsm { font-size: 16px; }
+.u3l4-nred { color: #c93a33; background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 6px; }
+.u3l4-nblue { color: #1f5bd6; background: #fff; border-radius: 6px; padding: 0 8px; }
+.u3l4-nq { font-size: 24px; }
+.u3l4-nbr { color: #7a1f3d; background: rgba(255, 255, 255, .85); border-radius: 6px; padding: 0 4px; }
+.u3l4-wbtns { display: flex; gap: 8px; flex-wrap: wrap; margin: 6px 0 2px; }
+.u3l4-wbtns .pill { font-size: 15px; padding: 6px 13px; }
+.u3l4-wbtns .pill.u3l4-bon { background: var(--brand2); color: #fff; }
+.wf .u3l4-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
+.wf .u3l4-wqs .q-line .pill.small { padding: 2px 10px; }
+.u3l4-wa { margin: 0 0 6px 40px; }
+.wf .u3l4-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
+.wf .wf-poll { margin-top: 8px; }
+.wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
+.wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
+.wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
+.u3l4-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
+
+/* ---------------- notes ---------------- */
+.u3l4-two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 4px 0 14px; }
+.u3l4-way { background: #fff; border-radius: 12px; padding: 10px 16px; font-size: 19px; line-height: 1.45; border-left: 6px solid; }
+.u3l4-way45 { border-color: #1f5bd6; } .u3l4-way30 { border-color: #7b4fc4; }
+.u3l4-wayh { font: 800 16px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--ink2); margin-bottom: 2px; }
+.u3l4-ul { margin: 6px 0 0; padding-left: 1.3em; line-height: 1.6; }
+.u3l4-ul li { margin: 4px 0; }
+.u3l4-fig { position: relative; height: 180px; margin: 2px 0 6px; }
+.u3l4-fig svg { display: block; }
+.u3l4-fsm { font-size: 15px; }
+.u3l4-solo { margin: 0 0 12px; }
+.u3l4-tbl { border-collapse: collapse; margin: 4px auto 8px; font-size: 21px; }
+.u3l4-tbl th, .u3l4-tbl td { border: 2px solid #c9c3b4; padding: 8px 14px; text-align: center; min-width: 116px; height: 64px; }
+.u3l4-tbl th { background: #f3f0e8; font-weight: 700; }
+.u3l4-tbl tr:first-child th { background: #f6e7ec; }
+.u3l4-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 22px; }
+.u3l4-steps b { display: inline-block; width: 26px; height: 26px; border-radius: 50%; background: var(--amber); color: #fff; text-align: center; line-height: 26px; font-size: 15px; margin-right: 6px; }
+.u3l4-stepnote { grid-column: 1 / -1; font-size: 18px; color: var(--ink2); }
+.u3l4-hint { font-size: 19px; color: var(--ink2); }
+
+/* ---------------- explainer pieces ---------------- */
+.u3l4-panel { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; overflow: hidden; }
+.u3l4-p45 { border-color: #b9cdf3; } .u3l4-p30 { border-color: #d3c4ef; } .u3l4-pq .u3l4-ph { font-size: 20px; text-transform: none; color: var(--ink); }
+.u3l4-ph { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 6px; }
+.u3l4-line { font-size: 19px; line-height: 1.4; margin: 4px 0 10px; }
+.u3l4-big { font-size: 21px; }
+.u3l4-huge { font-size: 30px; }
+.u3l4-small { font-size: 16px; }
+.u3l4-ln-sm { margin: 2px 0 4px; font-size: 18px; }
+.u3l4-line-key { background: #fff4dd; border-radius: 8px; padding: 4px 8px; }
+.u3l4-line-ans { background: #e8f5ef; border-radius: 8px; padding: 4px 10px; }
+.u3l4-lk { display: inline-block; width: 24px; height: 24px; border-radius: 50%; background: var(--amber); color: #fff; text-align: center; line-height: 24px; font: 800 14px var(--round); margin-right: 4px; vertical-align: 2px; }
+.u3l4-or { margin: 0 6px 0 2px; }
+.u3l4-ov { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
+.u3l4-lab { position: absolute; white-space: nowrap; font-size: 20px; line-height: 1.1; pointer-events: none; }
+.u3l4-tl { font-size: 18px; font-weight: 700; background: rgba(255, 255, 255, .82); border-radius: 5px; padding: 0 3px; }
+.u3l4-arclab { position: absolute; white-space: nowrap; font-size: 17px; font-weight: 700; pointer-events: none; background: rgba(255, 255, 255, .8); border-radius: 5px; padding: 0 3px; }
+.u3l4-arcbig { font-size: 22px; }
+.u3l4 .u3l4-cast { font: 800 30px var(--round); color: #b6bcc6; text-align: center; line-height: 1; }
+.u3l4 .u3l4-cast small { display: block; font: 700 12px var(--round); letter-spacing: .04em; text-transform: uppercase; }
+.u3l4 .u3l4-cast-sm { font-size: 26px; }
+.u3l4-thbadge { background: #fff; border: 2px solid #7a1f3d; border-radius: 10px; padding: 3px 10px; font-size: 18px; z-index: 2; }
+.u3l4-alab { font-size: 17px; font-weight: 700; color: #7a1f3d; background: rgba(255, 255, 255, .85); border-radius: 5px; padding: 0 3px; }
+.u3l4-ptl { font-size: 17px; }
+
+/* cut */
+.u3l4-half { pointer-events: none; }
+.u3l4-scis { font-size: 30px; color: #7a1f3d; }
+.u3l4-ang45 { color: #1f5bd6; font-size: 16px; font-weight: 700; }
+.u3l4-ang30 { color: #7b4fc4; font-size: 16px; font-weight: 700; }
+.u3l4-ang30r { color: #c27a0e; font-size: 15px; font-weight: 700; }
+.u3l4-cbr { color: #7a1f3d; font-weight: 700; }
+.u3l4-lab.u3l4-big { font-size: 24px; }
+.u3l4-tribadge { display: inline-block; font-size: 26px; border-radius: 12px; padding: 4px 18px; margin: 4px 8px 6px 0; border: 3px solid; background: #fff; }
+.u3l4-tb45 { border-color: #1f5bd6; color: #1f5bd6; } .u3l4-tb30 { border-color: #7b4fc4; color: #7b4fc4; }
+.u3l4 .u3l4-pair1 { color: #c27a0e; } .u3l4 .u3l4-pair2 { color: #1f5bd6; }
+
+/* unit */
+.u3l4-ax1 { font-size: 16px; color: var(--ink2); }
+.u3l4-hl0 { position: absolute; width: 0; height: 0; }
+.u3l4-r1 { font-size: 15px; color: #6b7280; font-style: italic; }
+.u3l4-utab { border-collapse: collapse; width: 100%; font-size: 20px; }
+.u3l4-utab th, .u3l4-utab td { border-bottom: 2px solid #eee7da; padding: 6px 6px; text-align: center; height: 52px; }
+.u3l4-utab th { font-weight: 700; color: var(--muted); font-size: 17px; height: 40px; }
+.u3l4-hlcols .u3l4-uc { background: #e9f6ef; color: #12805a; } .u3l4-hlcols .u3l4-us { background: #e9effc; color: #1f5bd6; }
+.u3l4-blab { font-size: 15px; }
+.u3l4-bgreen { color: #12805a; } .u3l4-bblue { color: #1f5bd6; }
+
+/* patterns */
+.u3l4-ptab { display: grid; grid-template-rows: 56px repeat(3, 82px); border: 2px solid #c9c3b4; border-radius: 10px; overflow: hidden; background: #fff; }
+.u3l4-pc { display: flex; align-items: center; justify-content: center; border-right: 1.5px solid #e4ded2; border-bottom: 1.5px solid #e4ded2; font-size: 23px; transition: background .3s; }
+.u3l4-ph0 { background: #f6e7ec; font-weight: 700; }
+.u3l4-pr0 { background: #f3f0e8; font-weight: 700; }
+.u3l4-pv { display: inline-block; }
+.u3l4-hit { background: #fff4dd; }
+.u3l4-pairA { background: #efe8fa; } .u3l4-pairB { background: #e3ecfb; }
+.u3l4-undef { color: #c93a33; font-size: 19px; }
+.u3l4-arrlab { font: 800 17px var(--round); white-space: nowrap; }
+.u3l4-pwork { display: flex; align-items: center; justify-content: center; gap: 16px; font-size: 22px; }
+
+/* flip */
+.u3l4-ftab { border-collapse: collapse; width: 100%; font-size: 18px; }
+.u3l4-ftab th, .u3l4-ftab td { border-bottom: 2px solid #eee7da; padding: 4px 4px; text-align: center; height: 62px; }
+.u3l4-ftab th { font-weight: 700; color: var(--muted); font-size: 16px; height: 38px; }
+.u3l4-fq { font: 800 18px var(--round); color: #7a1f3d; }
+.u3l4-signs .u3l4-pos { background: #e9f6ef; } .u3l4-signs .u3l4-neg { background: #fdeceb; }
+.u3l4-fv.u3l4-neg { color: #c93a33; }
+.u3l4-fnote { font-size: 16.5px; color: var(--ink2); margin-top: 10px; line-height: 1.5; }
+
+/* any quadrant */
+.u3l4-tpos { color: #12805a; } .u3l4-tneg { color: #c93a33; }
+
+/* subst */
+.u3l4-sbe { text-align: center; font-size: 32px; }
+.u3l4-look { background: #fff; border: 3px solid; border-radius: 12px; padding: 6px 14px; font-size: 20px; text-align: center; box-sizing: border-box; }
+.u3l4-look small { display: block; font-size: 15px; color: var(--muted); margin-top: 2px; }
+.u3l4-sbw { text-align: center; }
+.u3l4-sbw .u3l4-line { margin: 6px 0 10px; }
+.u3l4-wrong { text-align: center; font-size: 22px; color: #c93a33; }
+.u3l4-wrong > span { font-size: 17px; }
+.u3l4-cpur { color: #7b4fc4; font-weight: 700; } .u3l4-cblu { color: #1f5bd6; font-weight: 700; }
+
+/* solve */
+.u3l4-strip { display: grid; grid-template-columns: 70px repeat(3, 1fr); margin: 6px 0 0; border: 2px solid #e4ded2; border-radius: 8px; overflow: hidden; font-size: 18px; }
+.u3l4-strip > div { padding: 3px 4px; text-align: center; border-right: 1px solid #eee7da; }
+.u3l4-sh { background: #f6e7ec; font-weight: 700; }
+.u3l4-sv0 { background: #f3f0e8; font-weight: 700; }
+.u3l4-sv { transition: background .3s; }
+.u3l4-sv.u3l4-match { background: #ffe2a6; box-shadow: inset 0 0 0 3px #c27a0e; }
+
+.u3l4-und { font-size: 18px; color: inherit; }
+.u3l4-nwhite { background: rgba(255, 255, 255, .85); border-radius: 5px; padding: 0 3px; }
+.u3l4-f30 { font-size: 13px; }
