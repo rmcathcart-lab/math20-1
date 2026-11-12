@@ -23,7 +23,23 @@ import {
 } from '../blocks.js';
 import { standup } from '../standup.js';
 
-const T = (s) => tex(s);
+/* KaTeX reads "|" as an ordinary symbol, so the minus in |-5| gets binary spacing ("| − 5|"). Pair the bars and
+ * write them as \lvert … \rvert (opening / closing delimiters), so |-5| looks like |−5|. Bars after \left, \right,
+ * \bigl, \bigr … are left alone. Used for every formula on this page (the static .tex spans are fixed below, before
+ * boot() typesets them). */
+export function fixBars(s) {
+  let out = '', open = false;
+  for (let i = 0; i < s.length; i++) {
+    const ch = s[i];
+    if (ch !== '|') { out += ch; continue; }
+    const before = s.slice(0, i), bs = (before.match(/\\+$/) || [''])[0].length;
+    if (bs % 2 === 1 || /\\(left|right|bigl|bigr|Bigl|Bigr|biggl|biggr|big|Big|middle)\s*$/.test(before)) { out += ch; continue; }
+    out += open ? '\\rvert ' : '\\lvert '; open = !open;
+  }
+  return out;
+}
+document.querySelectorAll('main.u7l1 .tex').forEach((el) => { if (!el.dataset.texDone && el.textContent.includes('|')) el.textContent = fixBars(el.textContent); });
+const T = (s) => tex(fixBars(String(s)));
 const IN = COLORS.blue, AB = COLORS.green, RED = COLORS.red, INK = COLORS.ink, SL = COLORS.slate, AMB = COLORS.amber;
 const cin = (s) => `\\textcolor{${IN}}{${s}}`, cab = (s) => `\\textcolor{${AB}}{${s}}`, cam = (s) => `\\textcolor{${AMB}}{${s}}`;
 const show = (c, el, ms = 320) => fadeIn(c, el, ms);
@@ -272,15 +288,15 @@ const splitDef = {
   make(stage, v, ex) {
     const W = ex.W;
     if (v === 'ex5') {
-      const L = checkCard(stage, { title: 'Sums', at: 'a=-4,\\ b=6', left: ['|a+b|', '|-4+6|', '|2|', '2'], right: ['|a|+|b|', '|-4|+|6|', '4+6', '10'], ok: false, x: 20, y: 10, width: (W - 70) / 2, hidden: true });
-      const R = checkCard(stage, { title: 'Products', at: 'a=-4,\\ b=6', left: ['|ab|', '|(-4)(6)|', '|-24|', '24'], right: ['|a|\\,|b|', '|-4|\\,|6|', '4\\times6', '24'], ok: true, x: W / 2 + 15, y: 10, width: (W - 70) / 2, hidden: true });
+      const L = checkCard(stage, { title: 'Sums', at: 'a=-4,\\ b=6', left: ['|a+b|', '|-4+6|', '|2|', '2'].map(fixBars), right: ['|a|+|b|', '|-4|+|6|', '4+6', '10'].map(fixBars), ok: false, x: 20, y: 10, width: (W - 70) / 2, hidden: true });
+      const R = checkCard(stage, { title: 'Products', at: 'a=-4,\\ b=6', left: ['|ab|', '|(-4)(6)|', '|-24|', '24'].map(fixBars), right: ['|a|\\,|b|', '|-4|\\,|6|', '4\\times6', '24'].map(fixBars), ok: true, x: W / 2 + 15, y: 10, width: (W - 70) / 2, hidden: true });
       return [
         { cap: `${T('|a+b|=|-4+6|=|2|=2')}, but ${T('|a|+|b|=4+6=10')}: <b>not equal</b>. The bars can’t be split over a sum.`, run: (c) => L.play(c) },
         { cap: `${T('|ab|=|-24|=24')} and ${T('|a|\\,|b|=4\\times6=24')}: <b>equal</b>. Over a product, they can.`, run: (c) => R.play(c) }
       ];
     }
-    const S = SP[v], cw = 118;
-    const tb = new ValueTable(stage, { x: 24, y: 10, headers: [...S.hd, '\\text{same?}'], rows: SPROWS.map(([a, b]) => [a, b, '', '', '']), tap: false, cellW: cw, cellH: 60 });
+    const S = SP[v], cw = 124;
+    const tb = new ValueTable(stage, { x: 24, y: 10, headers: [...S.hd.map(fixBars), '\\text{same?}'], rows: SPROWS.map(([a, b]) => [a, b, '', '', '']), tap: false, cellW: cw, cellH: 60 });
     tb.heads.forEach((e, i) => { if (i === 2) e.classList.add('u7l1-thl'); if (i === 3) e.classList.add('u7l1-thr'); });
     const sx = (24 + cw * 5 + W) / 2;
     const big = hide(stamp(stage, v === 'sum' ? 'NOT always equal' : 'always equal', { ok: v !== 'sum', x: sx, y: 150 }));
@@ -289,7 +305,7 @@ const splitDef = {
       const eq = Math.abs(S.L(a, b) - S.R(a, b)) < 1e-9;
       return { cap: SPCAP[v][i], run: async (c) => {
         tb.highlight(i, true);
-        await tb.set(i, 2, S.lt(a, b), c); await tb.set(i, 3, S.rt(a, b), c);
+        await tb.set(i, 2, fixBars(S.lt(a, b)), c); await tb.set(i, 3, S.rt(a, b), c);
         await tb.set(i, 4, { html: eq ? '<span class="u7l1-yes">✓ yes</span>' : '<span class="u7l1-no">✗ no</span>' }, c);
         if (!eq && i === 2) await stampIn(c, cx);
         tb.highlight(i, false);
@@ -424,7 +440,7 @@ function elevator(stage, ex) {
       netV.textContent = sg(Math.round(D.n0 + D.t * t)); totV.textContent = String(Math.round(D.d0 + Math.abs(D.t) * t));
     });
     put(D.f1); flV.textContent = String(D.f1); netV.textContent = sg(D.n1); totV.textContent = String(D.d1);
-    await tb.set(i, 2, `|${D.t}|=${Math.abs(D.t)}`, c); await tb.set(i, 3, D.f1, c);
+    await tb.set(i, 2, fixBars(`|${D.t}|=${Math.abs(D.t)}`), c); await tb.set(i, 3, D.f1, c);
     tb.highlight(i, false);
   } }));
   steps.push({ cap: `It finishes on floor <b>${T('1')}</b> and travels <b>${T('35')} floors</b>. The net change keeps the signs; the total distance adds the absolute values.`, run: (c) => show(c, fin) });
@@ -534,16 +550,17 @@ const forkDef = {
 
 /* ================================ Stand Up Break ================================ */
 const ab = (v) => Math.abs(v);
+const fixQ = (fn) => (r) => { const o = fn(r); o.q = fixBars(o.q); o.a = [].concat(o.a).map(fixBars); return o; };
 standup('u7l1', {
   intro: 'At your whiteboard: inside the bars first, then the absolute value, then finish.',
   levels: {
-    BEG: (r) => {
+    BEG: fixQ((r) => {
       const t = r.int(1, 3);
       if (t === 1) { const p = r.int(1, 12), q = p + r.int(2, 12); return { q: `|${p}-${q}|`, a: [`|${p - q}|`, `${q - p}`] }; }
       if (t === 2) { const k = r.int(2, 15), m = r.int(2, 15); return { q: `|-${k}|-|${m}|`, a: [`${k}-${m}`, `${k - m}`] }; }
       const k = r.int(2, 15); return { q: `-|-${k}|`, a: [`-(${k})`, `-${k}`] };
-    },
-    PRG: (r) => {
+    }),
+    PRG: fixQ((r) => {
       const t = r.int(1, 2);
       if (t === 1) {
         const a = r.int(2, 5) * r.sign(), p = r.int(1, 9), q = p + r.int(2, 9), k = r.int(2, 6);
@@ -552,8 +569,8 @@ standup('u7l1', {
       }
       const x = -r.int(1, 6), m = r.int(2, 5), b = r.int(1, 9), inner = m * x - b;
       return { q: `|${m}x-${b}|\\ \\text{for}\\ x=${x}`, a: [`|${m}(${x})-${b}|`, `|${inner}|`, `${ab(inner)}`] };
-    },
-    MAS: (r) => {
+    }),
+    MAS: fixQ((r) => {
       const t = r.int(1, 3);
       if (t === 1) {
         const a = -r.int(2, 12) - r.pick([0, 0.5, 0.25]), b = r.int(1, 12) + r.pick([0, 0.5, 0.75]);
@@ -561,7 +578,7 @@ standup('u7l1', {
       }
       if (t === 2) { const a = r.int(-9, 9), d = r.int(2, 9); return { q: `\\text{Numbers } ${d} \\text{ units from } ${a}`, a: [`${a}+${d}=${a + d}`, `${a}-${d}=${a - d}`] }; }
       const k = r.int(2, 7) * r.sign(); return { q: `\\text{If } x<0,\\ \\text{simplify } |x|${k > 0 ? '+' : ''}${k}x`, a: ['|x|=-x', `-x${k > 0 ? '+' : ''}${k}x=${k - 1 === 1 ? '' : k - 1 === -1 ? '-' : k - 1}x`] };
-    }
+    })
   }
 });
 

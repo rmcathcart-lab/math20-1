@@ -94,9 +94,9 @@ const TARGETS = [
   { a: 3, p: -4, q: 0, why: `vertex ${T('(-4,\\ 0)')} on the ${T('x')}-axis, so ${T('q=0')}; one step over goes <b>up 3</b>, so ${T('a=3')}` }
 ];
 const CHAL = [
-  { ask: 'opens <b>down</b> and has <b>no</b> x-intercepts', ans: `any ${T('a<0')} with ${T('q<0')} (same signs), for example ${T('y=-(x-1)^2-3')}`, set: { a: -1, p: 1, q: -3 }, ok: (a, p, q) => a < 0 && q < 0 },
-  { ask: 'has <b>exactly one</b> x-intercept, at x = 3', ans: `the vertex must be on the ${T('x')}-axis: ${T('p=3')}, ${T('q=0')}, any ${T('a')}, for example ${T('y=2(x-3)^2')}`, set: { a: 2, p: 3, q: 0 }, ok: (a, p, q) => p === 3 && q === 0 },
-  { ask: 'has range y ≥ −4 and x-intercepts 0 and 4', ans: `axis midway: ${T('p=2')}; minimum ${T('q=-4')}; ${T('0=a(0-2)^2-4')} gives ${T('a=1')}: ${T('y=(x-2)^2-4')}`, set: { a: 1, p: 2, q: -4 }, ok: (a, p, q) => a === 1 && p === 2 && q === -4 }
+  { ask: `opens <b>down</b> and has <b>no</b> ${T('x')}-intercepts`, ans: `any ${T('a<0')} with ${T('q<0')} (same signs), for example ${T('y=-(x-1)^2-3')}`, set: { a: -1, p: 1, q: -3 }, ok: (a, p, q) => a < 0 && q < 0 },
+  { ask: `has <b>exactly one</b> ${T('x')}-intercept, at ${T('x=3')}`, ans: `the vertex must be on the ${T('x')}-axis: ${T('p=3')}, ${T('q=0')}, any ${T('a')}, for example ${T('y=2(x-3)^2')}`, set: { a: 2, p: 3, q: 0 }, ok: (a, p, q) => p === 3 && q === 0 },
+  { ask: `has range ${T('\\{y\\mid y\\ge-4,\\ y\\in\\mathbb{R}\\}')} and ${T('x')}-intercepts ${T('0')} and ${T('4')}`, ans: `axis midway: ${T('p=2')}; minimum ${T('q=-4')}; ${T('0=a(0-2)^2-4')} gives ${T('a=1')}: ${T('y=(x-2)^2-4')}`, set: { a: 1, p: 2, q: -4 }, ok: (a, p, q) => a === 1 && p === 2 && q === -4 }
 ];
 const LABS = {
   ex1: { ask: `Example 1: ${T('y=-2(x+3)^2+8')}. Watch ${T('y=x^2')} turn into it, read every characteristic, then sketch it with the step pattern.` },
@@ -328,8 +328,8 @@ const method = {
   make(stage, v, ex) {
     const d = MS[v], W = ex.W, BW = (W - 30) / 4;
     const bins = {};
-    BINS.forEach(([k, name], i) => { bins[k] = div(stage, 'u5l11-bin', `<b>${name}</b>`, i * (BW + 10), 4, BW, 70); });
-    const card = div(stage, 'u5l11-card', T(d.eq), W / 2, 112); card.style.translate = '-50% -50%';
+    BINS.forEach(([k, name], i) => { bins[k] = div(stage, 'u5l11-bin', `<b>${name}</b>`, i * (BW + 10), 4, BW, 84); });
+    const card = div(stage, 'u5l11-card', T(d.eq), W / 2, 116); card.style.translate = '-50% -50%';
     const PW = 556, pn = div(stage, 'u5l11-panel u5l11-mp', '', 0, 150, PW, 316);
     const L = d.lines.map((l, i) => {
       if (l[0] === 'X') { const x = h('div', 'u5l11-sl u5l11-xl2', `<b class="u5l11-n">${i + 1}</b>${ryanX(-4, 3, 4, -1, [[1, -4], [-1, 4], [2, -2]])}<span class="u5l11-note">${T('ac=2(-2)=-4')}, sum ${T('3')}</span>`); pn.appendChild(x); x.style.opacity = 0; return x; }
@@ -344,13 +344,13 @@ const method = {
     const steps = [{
       cap: `${d.why}`,
       run: async (c) => {
-        const bi = BINS.findIndex((b) => b[0] === d.bin), dx = bi * (BW + 10) + BW / 2 - W / 2, dy = 4 + 70 * 0.66 - 112;
+        const bi = BINS.findIndex((b) => b[0] === d.bin), dx = bi * (BW + 10) + BW / 2 - W / 2, dy = 4 + 84 * 0.68 - 116;
         await anim(c, card, [{ transform: 'none' }, { transform: `translate(${dx}px, ${dy}px) scale(.62)` }], 700);
         B.classList.add('on'); await pulse(c, B, 1.05);
       }
     }];
     d.lines.forEach((l, i) => steps.push({
-      cap: l[0] === 'X' ? `<b>Step ${i + 1}.</b> Ryan’s X: ${T('ac=-4')} on top, ${T('b=3')} underneath. List the factor pairs of ${T('-4')}: ${T('4')} and ${T('-1')} add to ${T('3')}.`
+      cap: l[0] === 'X' ? `<b>Step ${i + 1}.</b> The X: ${T('ac=-4')} on top, ${T('b=3')} underneath. List the factor pairs of ${T('-4')}: ${T('4')} and ${T('-1')} add to ${T('3')}.`
         : `<b>Step ${i + 1}.</b> ${T(l[0])}${l[1] ? ` <span class="u5l11-capn">(${l[1]})</span>` : ''}${l[2] ? '.' : ''}`,
       run: (c) => show(c, L[i])
     }));

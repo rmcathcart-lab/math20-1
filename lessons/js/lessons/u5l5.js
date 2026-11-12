@@ -400,7 +400,7 @@ const arch = {
     const showAll = (c, els) => Promise.all(els.map((e) => show(c, e)));
     void stone; void joints;
     return [
-      { cap: `A stone arch: <b>24 m</b> wide at its base, <b>18 m</b> high at its centre. Its inner edge is a parabola. Where should the axes go? <b>We</b> choose!`,
+      { cap: `A stone arch: <b>24 m</b> wide at its base, <b>18 m</b> high at its centre: a parabola. Where should the axes go? <b>We</b> choose!`,
         run: async (c) => { edge.style.opacity = 1; await drawIn(c, edge); await show(c, dims); } },
       { cap: `(a) Origin at the <b>left end</b> of the base. The zeros are ${T('0')} and ${T('24')}; the vertex is midway, ${pr(12, 18)}. ${T('y=a(x-12)^2+18')}, and ${pr(0, 0)}: ${T('0=144a+18')}, so ${T('a=-\\frac{1}{8}')}.`,
         run: async (c) => { await go(c, 0, 10); await appearEl(c, axes); await showAll(c, [lL, lR, lT]); await showAll(c, [where, eq, info]); await show(c, aBox); } },
@@ -427,14 +427,14 @@ const toss = {
   ask: () => `<b>Example 7:</b> thrown from ${T('2')} m, greatest height ${T('14')} m at ${T('10')} m away. The origin is on the ground below the release point.`,
   make(stage, v, ex) {
     const W = ex.W, GW = 600, PX = GW + 18;
-    const G = new Graph(stage, { x: 0, y: 0, width: GW, height: 430, xmin: -3, xmax: 24, ymin: -1.5, ymax: 16, xlabels: 4, ylabels: 2, fontSize: 15, arrows: false, fnArrows: false });
-    const [gx0, gy0] = G.toPx(-3, 0), [gx1, gyT] = G.toPx(24, 16), [, gyB] = G.toPx(0, -1.5);
+    const G = new Graph(stage, { x: 0, y: 0, width: GW, height: 430, xmin: -3, xmax: 24, ymin: -3, ymax: 16, xlabels: 4, ylabels: 2, fontSize: 15, arrows: false, fnArrows: false });
+    const [gx0, gy0] = G.toPx(-3, 0), [gx1, gyT] = G.toPx(24, 16), [, gyB] = G.toPx(0, -3);
     svgEl('rect', { x: gx0, y: gyT, width: gx1 - gx0, height: gy0 - gyT, fill: '#eaf3fb' }, G.layers.bg);
     svgEl('rect', { x: gx0, y: gy0, width: gx1 - gx0, height: gyB - gy0, fill: '#bfe0b4' }, G.layers.bg);
     const kid = svgEl('text', { x: G.toPx(-0.55, 0)[0], y: gy0 - 2, 'font-size': 2.25 * G.uy, 'text-anchor': 'middle' }, G.layers.top); kid.textContent = '🧍';
     const fo = { from: 0, to: 0, color: CURVE, width: 4 };
     const cv = G.fn(F7, fo);
-    const ghost = hide(G.fn(F7, { from: -1.4, to: 0, color: COLORS.red, width: 3.5, dash: '6 6' }));
+    const ghost = hide(G.fn(F7, { from: -1.9, to: 0, color: COLORS.red, width: 3.5, dash: '6 6' }));
     const ball = svgEl('g', {}, G.layers.top);
     svgEl('circle', { r: 8, fill: '#fffdf6', stroke: COLORS.red, 'stroke-width': 3 }, ball);
     const setBall = (x) => { const [px, py] = G.toPx(x, Math.max(0, F7(x))); ball.setAttribute('transform', `translate(${px} ${py - (x >= L7 - 1e-6 ? 8 : 0)})`); if (x > fo.to) { fo.to = x; cv._bkDraw(); } };
@@ -443,7 +443,7 @@ const toss = {
     const pV = hide(G.point(10, 14, { color: 'red', r: 7.5, label: pr(10, 14), pos: 'n' }));
     const zG = hide(G.point(L7, 0, { color: 'amber', r: 8, label: T('x\\approx20.8'), pos: 'n' }));
     const zB = hide(G.point(B7, 0, { color: 'red', r: 7.5, open: true, label: T('x\\approx-0.8'), pos: 's' }));
-    const sB = hide(stamp(stage, '✗ reject', { ok: false, x: G.toPx(-0.1, 9.5)[0], y: G.toPx(-0.1, 9.5)[1], size: 'sm' }));
+    const sB = hide(stamp(stage, '✗ reject', { ok: false, x: G.toPx(3, -2.1)[0], y: G.toPx(3, -2.1)[1], size: 'sm' }));
     const sG = hide(stamp(stage, 'lands ≈ 20.8 m', { ok: true, x: G.toPx(L7, 0)[0] - 46, y: G.toPx(0, 3.6)[1], size: 'sm' }));
     const P = panel(stage, PX, W - PX);
     const ra = row(P, '(a)', `${T('2=a(0-10)^2+14')}<br>${T('-12=100a')}, ${T('a=-0.12')}<br>${T('y=-0.12(x-10)^2+14')}`, 'u5l5-lt');

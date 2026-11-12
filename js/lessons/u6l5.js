@@ -490,7 +490,7 @@
     o = o || {};
     var S = sumAll(terms, v), npv = npvOf(terms.map(function (tm) { return tm.df; })), dl = sumWrongs(cp, terms, S).concat(o.dl || []);
     var nw = (o.nw || []).concat(P.isZero(S.N0) ? [] : cancelNW(cp, S.T, npv));
-    var sol = (o.solPre || '') + sumSol(terms, S, npv, o) + (o.solPost || '');
+    var sol = o.sol || ((o.solPre || '') + sumSol(terms, S, npv, o) + (o.solPost || ''));
     var p = simpPart(cp, (o.noTerms ? prompt : prompt + ' ' + t(termsTex(terms))), S.T, npv, { dl: dl, nw: nw, vars: o.vars || [v], keyTex: sumKey(S) }, sol, hints, text);
     p.S = S; p._terms = terms; return p;
   }
@@ -498,7 +498,7 @@
   function sumRatPart(cp, prompt, terms, v, o, hints, text) {
     o = o || {};
     var S = sumAll(terms, v), npv = npvOf(terms.map(function (tm) { return tm.df; })), dl = sumWrongs(cp, terms, S).concat(o.dl || []);
-    var sol = (o.solPre || '') + sumSol(terms, S, npv, { noNpv: true }) + (o.solPost || '');
+    var sol = o.sol || ((o.solPre || '') + sumSol(terms, S, npv, { noNpv: true }) + (o.solPost || ''));
     var p = ratPart(cp, (o.noTerms ? prompt : prompt + ' ' + t(termsTex(terms))), S.T, { dl: dl, vars: o.vars || [v], keyTex: sumKey(S), before: o.before, after: o.after }, sol, hints, text);
     p.S = S; p._terms = terms; return p;
   }

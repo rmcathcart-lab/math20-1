@@ -64,6 +64,7 @@
 .u7l1-bchip.u7l1-win { background: #e4f4ea; }
 
 /* ---------------- the two-road machine ---------------- */
+.u7l1 .bk-fc-node { font-size: 20px; }
 .u7l1 .bk-fc-node .katex { font-size: 1.05em; }
 .u7l1-fout { box-sizing: border-box; background: #fff; border: 2px solid var(--line); border-radius: 16px; padding: 10px 14px; display: flex; flex-direction: column; gap: 6px; }
 .u7l1-fout-h { font: 800 15px var(--round); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }

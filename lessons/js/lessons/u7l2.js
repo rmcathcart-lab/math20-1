@@ -120,7 +120,7 @@ const FL = {
   e1: { m: 2, b: -4, f: 'f(x)=2x-4', a: 'y=|2x-4|', neg: 'f(x)<0', win: { xmin: -2.5, xmax: 6.5, ymin: -8.5, ymax: 8.5, ylabels: 2 }, table: [-1, 0, 1, 2, 3, 4, 5],
     ask: `<b>Example 1:</b> ${T('f(x)=2x-4')}. (a) Complete the table. (b) Graph ${T('y=f(x)')} and ${T('y=|f(x)|')}. (c) Where are the graphs the same?` },
   e2a: { m: 1, b: 3, f: 'f(x)=x+3', a: 'y=|x+3|', neg: 'f(x)<0', win: U7, ex: '2(a)' },
-  e2b: { m: -2, b: 6, f: 'f(x)=-2x+6', a: 'y=|-2x+6|', neg: 'f(x)<0', win: U7, ex: '2(b)' },
+  e2b: { m: -2, b: 6, f: 'f(x)=-2x+6', a: 'y=\\lvert -2x+6\\rvert', neg: 'f(x)<0', win: U7, ex: '2(b)' },
   e2c: { m: 0.5, b: -2, f: 'f(x)=\\frac12x-2', a: 'y=\\left|\\frac12x-2\\right|', neg: 'f(x)<0', win: U7, ex: '2(c)' },
   e3b: { horiz: true, win: U7, ask: `<b>Example 3(b):</b> ${T('g(x)=-2')} and ${T('h(x)=3')} (horizontal lines). Describe the graphs of ${T('y=|g(x)|')} and ${T('y=|h(x)|')}.` }
 };
@@ -131,19 +131,19 @@ const flap = {
   ask: (v) => FL[v].ask || `<b>Example ${FL[v].ex}:</b> the graph of ${T('y=' + FL[v].f.replace('f(x)=', ''))} is shown. Sketch ${T('y=|f(x)|')} and state the invariant point.`,
   make(stage, v, ex) {
     const d = FL[v], W = ex.W, GW = 440, PX = GW + 26, PW = W - PX;
-    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15 }, d.win));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15, pad: [30, 18, 18, 18] }, d.win));
     const P = div(stage, 'u7l2-pn', '', PX, 0, PW);
     const head = h('div', 'u7l2-eqbig'); P.appendChild(head);
     const rows = h('div', 'u7l2-rows'); P.appendChild(rows);
     if (d.horiz) return flapHoriz(G, P, head, rows, d);
     const { m, b } = d, x0 = -b / m, dir = m > 0 ? -1 : 1, side = dir < 0 ? 'left' : 'right';
     const inv = `(${tn(x0)},\\ 0)`, xe = exitPt(G.win, m, b, x0, dir);
-    head.innerHTML = T(d.f);
+    head.innerHTML = `<span class="u7l2-cf">${T(d.f)}</span>`;
     const up = G.ray([x0, 0], [x0 - dir, m * (x0 - dir) + b], { start: null, color: FC, width: 4 });
     const down = G.ray([x0, 0], [x0 + dir, m * (x0 + dir) + b], { start: null, color: FC, width: 4 });
     const ghost = hide(G.ray([x0, 0], [x0 + dir, m * (x0 + dir) + b], { start: null, color: FC, width: 3, dash: '9 7' }));
     const flabX = dir < 0 ? Math.min(G.win.xmax - 1.2, x0 + 2.2) : Math.max(G.win.xmin + 1.2, x0 - 2.2);
-    const flab = G.label(flabX, Math.min(G.win.ymax - 0.6, m * flabX + b), T(d.f.startsWith('y') ? d.f : 'y=f(x)'), { cls: 'bk-ptlab', pos: dir < 0 ? 'se' : 'sw', color: FC, dx: dir < 0 ? 8 : -8 });
+    const flab = (v === 'absx' || v === 'e1') ? G.label(flabX, Math.min(G.win.ymax - 0.6, m * flabX + b), T(d.f.startsWith('y') ? d.f : 'y=f(x)'), { cls: 'bk-ptlab', pos: dir < 0 ? 'se' : 'sw', color: FC, dx: dir < 0 ? 8 : -8 }) : null;
     const xs = d.table || [], negs = xs.filter((x) => m * x + b < 0), pos = xs.filter((x) => m * x + b >= 0);
     const F = makeFlap(G, [[x0, 0], xe, [xe[0], 0]], [[x0, 0], xe], negs.map((x) => [x, m * x + b]));
     hide(F.fp); hide(F.fs); F.ds.forEach(hide);
@@ -204,11 +204,11 @@ function flapHoriz(G, P, head, rows, d) {
   hide(F.g);
   const g2 = hide(G.line({ m: 0, b: 2 }, { color: AC, width: 4.5 })), g2l = hide(G.label(3.6, 2, T('y=|g(x)|=2'), { cls: 'bk-ptlab', pos: 's', color: AC }));
   const h3 = hide(G.line({ m: 0, b: 3 }, { color: AC, width: 4.5 })), h3l = hide(G.label(3.6, 3, T('y=|h(x)|=3'), { cls: 'bk-ptlab', pos: 'n', color: AC }));
-  const r1 = row(rows, 1, `${T('g(x)=-2<0')} for every ${T('x')}: no invariant points`), r2 = row(rows, 2, `${T('|g(x)|=|-2|=2')}`), r3 = row(rows, 3, `${T('|h(x)|=|3|=3')}: no change`);
+  const r1 = row(rows, 1, `${T('g(x)=-2<0')} for every ${T('x')}: no invariant points`), r2 = row(rows, 2, `${T('|g(x)|=\\lvert -2\\rvert=2')}`), r3 = row(rows, 3, `${T('|h(x)|=|3|=3')}: no change`);
   return [
     { cap: `${T('y=g(x)=-2')} is below the ${T('x')}-axis <b>everywhere</b>: the whole line is the flap. It never meets the axis, so there are <b>no invariant points</b>.`,
       run: async (c) => { await show(c, r1); await show(c, unhide(F.g)); } },
-    { cap: `Flip it up: ${T('|g(x)|=|-2|=2')}. The graph of ${T('y=|g(x)|')} is the line ${T('y=2')}.`,
+    { cap: `Flip it up: ${T('|g(x)|=\\lvert -2\\rvert=2')}. The graph of ${T('y=|g(x)|')} is the line ${T('y=2')}.`,
       run: async (c) => { await show(c, r2); hide(gl); unhide(ghost); await F.flip(c, 1900); F.fp.style.opacity = 0.35; await drawIn(unhide(g2), 600, c); await show(c, unhide(g2l)); } },
     { cap: `${T('y=h(x)=3')} is above the axis: ${T('|h(x)|=|3|=3')}, so <b>nothing changes</b>.`,
       run: async (c) => { await show(c, r3); await pulse(c, hl, 1.02); await drawIn(unhide(h3), 600, c); await show(c, unhide(h3l)); } }
@@ -230,7 +230,7 @@ const sketch = {
   make(stage, v, ex) {
     const W = ex.W, GW = 440, PX = GW + 26, PW = W - PX;
     const win = v === 'e4a' ? { xmin: -2.5, xmax: 6.5, ymin: -7.5, ymax: 7.5, ylabels: 2 } : v === 'e4b' ? { xmin: -10.5, xmax: 2.5, ymin: -3.5, ymax: 6.5, xlabels: 2 } : U7;
-    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15 }, win));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15, pad: [30, 18, 18, 18] }, win));
     const P = div(stage, 'u7l2-pn', '', PX, 0, PW);
     const rows = h('div', 'u7l2-rows'); P.appendChild(rows);
     const ring = glowRing(G.layers.top);
@@ -240,11 +240,11 @@ const sketch = {
       const axis = hide(G.vline(2, { color: VC, width: 2.5 }));
       const ghost = hide(G.line([0, 4], [1, 2], { color: FC, width: 3, dash: '9 7' }));
       const V = vee(G, 2, 2); V.els.forEach(hide);
-      const r = [row(rows, 1, `vertex: ${T('4-2x=0\\Rightarrow x=2')}`), row(rows, 2, `${T('y')}-intercept: ${T('|4-0|=4')}`), row(rows, 3, `${T('x=5')}: ${T('|4-10|=|-6|=6')}`), row(rows, 4, `mirror points: ${T('(4,\\ 4)')}, ${T('(-1,\\ 6)')}`), row(rows, 5, `draw the V`)];
+      const r = [row(rows, 1, `vertex: ${T('4-2x=0\\Rightarrow x=2')}`), row(rows, 2, `${T('y')}-intercept: ${T('|4-0|=4')}`), row(rows, 3, `${T('x=5')}: ${T('|4-10|=\\lvert -6\\rvert=6')}`), row(rows, 4, `mirror points: ${T('(4,\\ 4)')}, ${T('(-1,\\ 6)')}`), row(rows, 5, `draw the V`)];
       return [
         { cap: `<b>1</b> Vertex: ${T('4-2x=0\\Rightarrow x=2')}, so ${T('(2,\\ 0)')}. It is on the ${T('x')}-axis.`, run: async (c) => { await show(c, r[0]); await popP(c, el.v); placeRing(ring, G, 2, 0); } },
         { cap: `<b>2</b> ${T('y')}-intercept: ${T('x=0')} gives ${T('y=|4-0|=4')}, so ${T('(0,\\ 4)')}.`, run: async (c) => { await show(c, r[1]); await popP(c, el.y); } },
-        { cap: `<b>3</b> One more point: ${T('x=5')} gives ${T('y=|4-10|=|-6|=6')}, so ${T('(5,\\ 6)')}.`, run: async (c) => { await show(c, r[2]); await popP(c, el.o); } },
+        { cap: `<b>3</b> One more point: ${T('x=5')} gives ${T('y=|4-10|=\\lvert -6\\rvert=6')}, so ${T('(5,\\ 6)')}.`, run: async (c) => { await show(c, r[2]); await popP(c, el.o); } },
         { cap: `<b>4</b> The V is symmetric about ${T('x=2')}: ${T('(0,\\ 4)')} and ${T('(5,\\ 6)')} have mirror points ${T('(4,\\ 4)')} and ${T('(-1,\\ 6)')}.`,
           run: async (c) => { await show(c, r[3]); await drawIn(unhide(axis), 500, c); for (const [k, from] of [['m1', pts.y], ['m2', pts.o]]) { const p = el[k], to = pts[k]; G.moveTo(p, ...from); unhide(p); await G.move(c, p, ...to, 800); } } },
         { cap: `<b>5</b> Join them: the V. It is the line ${T('y=4-2x')} with the part right of ${T('x=2')} reflected.`, run: async (c) => { await show(c, r[4]); await drawIn(unhide(ghost), 600, c); await drawV(c, V); } }
@@ -253,7 +253,6 @@ const sketch = {
     if (v === 'e4a') {
       const line = G.ray([2, 0], [3, 3], { start: null, color: FC, width: 4 }), down = G.ray([2, 0], [1, -3], { start: null, color: FC, width: 4 });
       const ghost = hide(G.ray([2, 0], [1, -3], { start: null, color: FC, width: 3, dash: '9 7' }));
-      G.label(3.9, 5.7, T('y=3x-6'), { cls: 'bk-ptlab', pos: 'e', color: FC, dx: 6 });
       const dom = hide(G.shadeX(-Infinity, Infinity)), ran = hide(G.shadeY(-Infinity, Infinity)), ran2 = hide(G.shadeY(0, Infinity));
       const xi = hide(G.point(2, 0, { color: 'amber', r: 8, label: T('x=2'), pos: 'se' }));
       const yi = hide(G.point(0, -6, { color: FC, r: 7.5, label: T('-6'), pos: 'e' }));
@@ -261,7 +260,7 @@ const sketch = {
       hide(F.g);
       const yi2 = hide(G.point(0, 6, { color: AC, r: 7.5, label: T('6'), pos: 'e' }));
       const V = vee(G, 2, 3); V.els.forEach(hide);
-      const sl = hide(G.label(4, 5.4, `slope ${T('3')}`, { cls: 'bk-ptlab', pos: 'e', color: AC })), sl2 = hide(G.label(0.2, 6.4, `slope ${T('-3')}`, { cls: 'bk-ptlab', pos: 'w', color: AC }));
+      const sl = hide(G.label(3.4, 4.2, `slope ${T('3')}`, { cls: 'bk-ptlab', pos: 'e', color: AC, dx: 6 })), sl2 = hide(G.label(0.6, 4.2, `slope ${T('-3')}`, { cls: 'bk-ptlab', pos: 'w', color: AC, dx: -6 }));
       const tab = div(P, 'u7l2-cmp', `<table><tr><th></th><th>${T('y=f(x)')}</th><th>${T('y=|f(x)|')}</th></tr>
         <tr><th>Domain</th><td>${T('\\{x\\mid x\\in\\mathbb{R}\\}')}</td><td class="u7l2-c2"><span>${T('\\{x\\mid x\\in\\mathbb{R}\\}')}</span></td></tr>
         <tr><th>Range</th><td>${T('\\{y\\mid y\\in\\mathbb{R}\\}')}</td><td class="u7l2-c2 u7l2-chg"><span>${T('\\{y\\mid y\\ge0,\\ y\\in\\mathbb{R}\\}')}</span></td></tr>
@@ -277,7 +276,7 @@ const sketch = {
           run: async (c) => { await popP(c, xi); await popP(c, yi); await show(c, unhide(f1[2])); await show(c, unhide(f1[3])); } },
         { cap: `Now ${T('y=|f(x)|')}: flip up the part below the axis. The ${T('x')}-intercept is the hinge, so it stays at ${T('2')}; the domain stays the same.`,
           run: async (c) => { hide(yi); unhide(F.g); await show(c, F.g); hide(down); unhide(ghost); await F.flip(c, 1700); F.fp.style.opacity = 0.35; await show(c, unhide(c2[0])); await show(c, unhide(c2[2])); } },
-        { cap: `The range shrinks to ${T('y\\ge0')} and the ${T('y')}-intercept ${T('-6')} becomes ${T('|-6|=6')}. Vertex ${T('(2,\\ 0)')}; the arms have slopes ${T('3')} and ${T('-3')}.`,
+        { cap: `The range shrinks to ${T('y\\ge0')} and the ${T('y')}-intercept ${T('-6')} becomes ${T('\\lvert -6\\rvert=6')}. Vertex ${T('(2,\\ 0)')}; the arms have slopes ${T('3')} and ${T('-3')}.`,
           run: async (c) => { await drawV(c, V); hide(ran); await drawIn(unhide(ran2), 600, c); await popP(c, yi2); await show(c, unhide(c2[1])); await show(c, unhide(c2[3])); await show(c, unhide(sl)); await show(c, unhide(sl2)); } }
       ];
     }
@@ -288,10 +287,10 @@ const sketch = {
       const t1 = tri([[-4, 0], [0, 0], [0, 2]], AC), t2 = tri([[-8, 2], [-8, 0], [-4, 0]], AC);
       const l1 = hide(G.label(-2, 2.6, `slope ${T('\\frac{2}{4}=\\frac12')}`, { cls: 'bk-ptlab', pos: 'n', color: AC })), l2 = hide(G.label(-7.6, 3.6, `slope ${T('-\\frac12')}`, { cls: 'bk-ptlab', pos: 'n', color: AC }));
       const dom = hide(G.shadeX(-Infinity, Infinity)), ran = hide(G.shadeY(0, Infinity));
-      const r = [row(rows, 1, `vertex: ${T('-\\frac12x-2=0')}<br>${T('-\\frac12x=2\\Rightarrow x=-4')}`), row(rows, 2, `${T('y')}-intercept: ${T('|-2|=2')}`), row(rows, 3, `slopes ${T('-\\frac12')} (left, ${T('x\\le-4')}), ${T('\\frac12')} (right, ${T('x>-4')})`), row(rows, 4, `domain ${T('\\{x\\mid x\\in\\mathbb{R}\\}')}<br>range ${T('\\{y\\mid y\\ge0,\\ y\\in\\mathbb{R}\\}')}`)];
+      const r = [row(rows, 1, `vertex: ${T('-\\frac12x-2=0')}<br>${T('-\\frac12x=2\\Rightarrow x=-4')}`), row(rows, 2, `${T('y')}-intercept: ${T('\\lvert -2\\rvert=2')}`), row(rows, 3, `slopes ${T('-\\frac12')} (left, ${T('x\\le-4')}), ${T('\\frac12')} (right, ${T('x>-4')})`), row(rows, 4, `domain ${T('\\{x\\mid x\\in\\mathbb{R}\\}')}<br>range ${T('\\{y\\mid y\\ge0,\\ y\\in\\mathbb{R}\\}')}`)];
       return [
         { cap: `<b>1</b> Vertex: ${T('-\\frac12x-2=0\\Rightarrow-\\frac12x=2\\Rightarrow x=-4')}, so ${T('(-4,\\ 0)')}.`, run: async (c) => { await show(c, r[0]); await popP(c, vp); placeRing(ring, G, -4, 0); } },
-        { cap: `<b>2</b> ${T('y')}-intercept: ${T('|-2|=2')}, so ${T('(0,\\ 2)')}.`, run: async (c) => { await show(c, r[1]); await popP(c, yp); } },
+        { cap: `<b>2</b> ${T('y')}-intercept: ${T('\\lvert -2\\rvert=2')}, so ${T('(0,\\ 2)')}.`, run: async (c) => { await show(c, r[1]); await popP(c, yp); } },
         { cap: `<b>3</b> The arms: from the vertex to ${T('(0,\\ 2)')} is up ${T('2')}, right ${T('4')}: slope ${T('\\frac12')}. The left arm has slope ${T('-\\frac12')}. Draw the V.`,
           run: async (c) => { await show(c, r[2]); await drawIn(unhide(t1), 500, c); await show(c, unhide(l1)); await drawV(c, V); await drawIn(unhide(t2), 500, c); await show(c, unhide(l2)); } },
         { cap: `<b>4</b> Domain ${T('\\{x\\mid x\\in\\mathbb{R}\\}')}; range ${T('\\{y\\mid y\\ge0,\\ y\\in\\mathbb{R}\\}')}.`, run: async (c) => { await show(c, r[3]); await drawIn(unhide(dom), 500, c); await drawIn(unhide(ran), 500, c); } }
@@ -315,7 +314,7 @@ const sketch = {
       lp[0] = 0; lp[1] = b; lq[0] = 1; lq[1] = a + b; ln._bkDraw(); V.set(xv, a); G.moveTo(vp, xv, 0); G.moveTo(yp, 0, Math.abs(b));
       sa.querySelector('input').value = a; sa.querySelector('.u7l2-slv').textContent = String(a).replace('-', '−');
       sb.querySelector('input').value = b; sb.querySelector('.u7l2-slv').textContent = String(b).replace('-', '−');
-      eq.innerHTML = T(`y=|${lin(a, b)}|`);
+      eq.innerHTML = T(`y=\\left|${lin(a, b)}\\right|`);
       out.innerHTML = `<div><b class="u7l2-cv">vertex</b> ${T(`\\left(-\\frac ba,\\ 0\\right)=(${frac(-b, a)},\\ 0)`)}</div><div><b class="u7l2-ca">${T('y')}-intercept</b> ${T(`(0,\\ |b|)=(0,\\ ${Math.abs(b)})`)}</div><div><b>slopes</b> ${T(`${tn(a)}`)} and ${T(`${tn(-a)}`)}</div><div><b>range</b> ${T('\\{y\\mid y\\ge0,\\ y\\in\\mathbb{R}\\}')}</div>`;
     };
     sa.querySelector('input').addEventListener('input', (e) => { let a = parseFloat(e.target.value); if (a === 0) a = S.a > 0 ? -0.5 : 0.5; S.a = a; upd(); });
@@ -343,18 +342,18 @@ const piece = {
   ask: (v) => `<b>Example 5(${v}):</b> write ${T(`y=\\left|${PW[v].e}\\right|`)} in piecewise form.`,
   make(stage, v, ex) {
     const d = PW[v], W = ex.W, GW = 420, PX = GW + 26, PWd = W - PX, xv = -d.b / d.m, first = d.m > 0 ? 1 : -1; // first piece: right arm if m > 0
-    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15 }, d.win));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15, pad: [30, 18, 18, 18] }, d.win));
     const P = div(stage, 'u7l2-pn', '', PX, 0, PWd);
     const rows = h('div', 'u7l2-rows'); P.appendChild(rows);
     const bl = hide(G.vline(xv, { color: VC, width: 2.5 }));
-    const vp = hide(G.point(xv, 0, { color: 'amber', r: 8, label: T(`x=${d.bx}`), pos: first > 0 ? 'sw' : 'se' }));
+    const vp = hide(G.point(xv, 0, { color: 'amber', r: 8, label: T(`x=${d.bx}`), pos: 'n', gap: 10 }));
     const arm = (s, cl) => hide(G.ray([xv, 0], [xv + s, Math.abs(d.m)], { start: null, color: cl, width: 5 }));
     const A1 = arm(first, FC), A2 = arm(-first, AC);
     const s1 = hide(G.shadeX(first > 0 ? xv : -Infinity, first > 0 ? Infinity : xv, { color: FC, band: true, offset: 0 }));
     const s2 = hide(G.shadeX(first > 0 ? -Infinity : xv, first > 0 ? xv : Infinity, { color: AC, band: true, openA: first < 0, openB: first > 0 }));
-    const lx1 = xv + first * (d.win.xmax - d.win.xmin) * 0.22, lx2 = xv - first * (d.win.xmax - d.win.xmin) * 0.22;
-    const L1 = hide(G.label(lx1, Math.abs(d.m) * Math.abs(lx1 - xv), T(`y=${d.e}`), { cls: 'bk-ptlab', pos: first > 0 ? 'se' : 'sw', color: FC, dx: first * 6 }));
-    const L2 = hide(G.label(lx2, Math.abs(d.m) * Math.abs(lx2 - xv), T(`y=${d.p2}`), { cls: 'bk-ptlab', pos: first > 0 ? 'sw' : 'se', color: AC, dx: -first * 6 }));
+    const k = (d.win.xmax - d.win.xmin) * 0.3, lx1 = xv + first * k, lx2 = xv - first * k * 0.75;
+    const L1 = hide(G.label(lx1, Math.abs(d.m) * k, T(`y=${d.e}`), { cls: 'bk-ptlab', pos: first > 0 ? 'w' : 'e', color: FC, dx: -first * 10 }));
+    const L2 = hide(G.label(lx2, Math.abs(d.m) * k * 0.75, T(`y=${d.p2}`), { cls: 'bk-ptlab', pos: first > 0 ? 'e' : 'w', color: AC, dx: first * 10 }));
     const def = `${T(`\\left|${d.e}\\right|=\\begin{cases}\\ \\ ${d.e}, & \\text{if } ${d.e}\\ge0\\\\ -(${d.e}), & \\text{if } ${d.e}<0\\end{cases}`)}`;
     const r1 = row(rows, 1, def);
     const sol = d.solve.map((s, i) => T(s) + (d.flip && i === d.solve.length - 1 ? ` <span class="u7l2-flip">÷ (${'−' + d.div.replace('-', '').replace('\\frac12', '½')}): flip!</span>` : '')).join('<br>');
@@ -392,7 +391,7 @@ const tf = {
   ask: (v) => `<b>Example 6(${v}):</b> true or false? ${T(`${TF[v].l}=${TF[v].r}`)} if ${T(TF[v].cond)}.`,
   make(stage, v, ex) {
     const d = TF[v], W = ex.W, GW = 420, PX = GW + 26, PWd = W - PX;
-    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15 }, d.win));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15, pad: [30, 18, 18, 18] }, d.win));
     const xv = [4, -2, 5, 1.5][['a', 'b', 'c', 'd'].indexOf(v)], m = Math.abs(d.f(xv + 1) - d.f(xv));
     const V = vee(G, xv, m); V.els.forEach(hide);
     const ln = hide(G.fn(d.g, { color: IX, width: 3.5, dash: '10 7' }));
@@ -404,7 +403,7 @@ const tf = {
     const tl = hide(G.vline(d.t, { color: INK, width: 2 }));
     const p1 = hide(G.point(d.t, d.f(d.t), { color: 'red', r: 7 })), p2 = hide(G.point(d.t, d.g(d.t), { color: 'purple', r: 7 }));
     const P = div(stage, 'u7l2-pn', '', PX, 0, PWd);
-    const claim = h('div', 'u7l2-claim', `${T(`${d.l}=${d.r}`)}<span>if ${T(d.cond)}</span>`); P.appendChild(claim);
+    const claim = h('div', 'u7l2-claim', `${T(`${d.l}=${d.r}`)}<i class="u7l2-if">if ${T(d.cond)}</i>`); P.appendChild(claim);
     const ck = checkCard(P, { at: `x=${d.t}`, left: { tex: d.l, sub: d.lsub, f: ({ x }) => d.f(x) }, right: { tex: d.r, sub: d.rsub, f: ({ x }) => d.g(x) }, values: { x: d.t }, hidden: true, width: PWd });
     const st = stamp(stage, d.ok ? 'TRUE' : 'FALSE', { ok: d.ok, x: PX + PWd / 2, y: 400, size: 'lg' }); st.style.opacity = 0;
     return [
@@ -425,7 +424,7 @@ const unflap = {
   ask: `<b>Example 7(c):</b> the graph of ${T('y=|f(x)|')}, where ${T('f')} is linear, is shown. Find the two possible lines ${T('y=f(x)')}, then write ${T('y=|f(x)|')} as ${T('y=|ax+b|')}.`,
   make(stage, v, ex) {
     const W = ex.W, GW = 440, PX = GW + 26, PWd = W - PX;
-    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15 }, U7));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15, pad: [30, 18, 18, 18] }, U7));
     const xl = (3 - 6.5) / 1.5, xr = (6.5 + 3) / 1.5;
     const Lg = G.segment([2, 0], [xl, 6.5], { color: INK, width: 4.5 }), Rg = G.segment([2, 0], [xr, 6.5], { color: INK, width: 4.5 });
     [[2, 0], [0, 3], [4, 3]].forEach(([x, y]) => G.point(x, y, { color: INK, r: 6.5, coords: true, pos: x === 0 ? 'w' : x === 4 ? 'e' : 's' }));
@@ -434,7 +433,7 @@ const unflap = {
     const FL2 = makeFlap(G, [[2, 0], [xr, 6.5], [xr, 0]], [[2, 0], [xr, 6.5]], [], cols(IX));
     hide(FL1.g); hide(FL2.g);
     const tri = hide(G.polyline([[2, 0], [4, 0], [4, 3]], { color: AC, width: 2.5, dash: '6 5' }));
-    const tl = hide(G.label(3, 0, `run ${T('2')}`, { cls: 'bk-ptlab', pos: 's', color: AC })), tr = hide(G.label(4, 1.5, `rise ${T('3')}`, { cls: 'bk-ptlab', pos: 'e', color: AC }));
+    const tl = hide(G.label(3.1, 0, `run ${T('2')}`, { cls: 'bk-ptlab', pos: 'n', color: AC })), tr = hide(G.label(4, 1.5, `rise ${T('3')}`, { cls: 'bk-ptlab', pos: 'e', color: AC }));
     const l1 = hide(G.line([0, -3], [2, 0], { color: FC, width: 3.5 })), l2 = hide(G.line([0, 3], [2, 0], { color: IX, width: 3.5, dash: '10 7' }));
     const n1 = hide(G.label(-3.2, -6.0, T('y=\\frac32x-3'), { cls: 'bk-ptlab', pos: 'e', color: FC })), n2 = hide(G.label(4.9, -6.0, T('y=-\\frac32x+3'), { cls: 'bk-ptlab', pos: 'w', color: IX }));
     const P = div(stage, 'u7l2-pn', '', PX, 0, PWd);
@@ -473,19 +472,19 @@ const ride = {
     const flags = [12, 28].map((t) => { const f = svgEl('text', { x: kmx(0.25 * t) + 8, y: 60, 'text-anchor': 'middle', 'font-size': 24 }, sc); f.textContent = '🚩'; f.style.opacity = 0; return f; });
     const bike = svgEl('g', {}, sc); const be = svgEl('text', { x: 0, y: TY - 8, 'font-size': 40, 'text-anchor': 'middle', transform: 'scale(-1 1)' }, bike); be.textContent = '🚴';
     /* the graph */
-    const G = new Graph(stage, { x: 0, y: SH + 6, width: GW, height: GH, xmin: 0, xmax: 42, ymin: -6.5, ymax: 6.5, xstep: 5, ystep: 1, ylabels: 2, xtitle: 't', ytitle: '\\text{km}', fontSize: 14 });
+    const G = new Graph(stage, { x: 0, y: SH + 6, width: GW, height: GH, xmin: 0, xmax: 42, ymin: -6.5, ymax: 6.5, xstep: 5, ystep: 1, ylabels: 2, xtitle: 't', ytitle: '\\text{km}', fontSize: 14, pad: [28, 22, 18, 40] });
     const pp = [[0, 5], [0, 5]], dp = [[0, 5], [0, 5], [0, 5]];
     const pc = G.polyline(pp, { color: FC, width: 3, dash: '9 7' }), dc = G.polyline(dp, { color: AC, width: 4.5 });
     const dot = svgEl('circle', { r: 7, fill: AC, stroke: '#fff', 'stroke-width': 2 }, G.layers.top), pdot = svgEl('circle', { r: 6, fill: FC, stroke: '#fff', 'stroke-width': 2 }, G.layers.top);
-    const tb = new ValueTable(null, { layout: 'h', headers: ['t', 'p', 'd'], rows: [0, 10, 20, 30, 40].map((t) => [t, pE(t), dE(t)]), hide: (r, c) => c > 0, tap: false, cellW: 60, cellH: 44, headW: 50, cls: 'u7l2-vt' });
+    const tb = new ValueTable(null, { layout: 'h', headers: ['t', 'p', 'd'], rows: [0, 10, 20, 30, 40].map((t) => [t, pE(t), dE(t)]), hide: (r, c) => c > 0, tap: false, cellW: 60, cellH: 38, headW: 50, cls: 'u7l2-vt' });
     const P = div(stage, 'u7l2-pn', '', PX, SH + 6, PWd); P.appendChild(tb.el);
-    const rows = h('div', 'u7l2-rows'); P.appendChild(rows);
+    const rows = h('div', 'u7l2-rows u7l2-rows-s'); P.appendChild(rows);
     const S = { t: 0, max: 0 };
     const setT = (t) => {
       S.t = t; const s = 0.25 * t, bx = kmx(s);
       bike.setAttribute('transform', `translate(${bx} 0)`);
       const x1 = Math.min(bx, kmx(5)), x2 = Math.max(bx, kmx(5));
-      brk.setAttribute('x1', x1); brk.setAttribute('x2', x2); brk.style.opacity = x2 - x1 > 4 ? 1 : 0;
+      brk.setAttribute('x1', x1); brk.setAttribute('x2', x2); brk.style.opacity = blab.style.opacity = x2 - x1 > 4 ? 1 : 0;
       blab.innerHTML = T(`d=${tn(dE(t))}`); blab.style.left = ((x1 + x2) / 2 - 40) + 'px'; blab.style.top = '0px';
       if (t > S.max) { S.max = t; pp[1] = [t, pE(t)]; dp[1] = [Math.min(t, 20), dE(Math.min(t, 20))]; dp[2] = [t, dE(t)]; pc._bkDraw(); dc._bkDraw(); }
       const [dx, dy] = G.toPx(t, dE(t)), [px, py] = G.toPx(t, pE(t)); dot.setAttribute('cx', dx); dot.setAttribute('cy', dy); pdot.setAttribute('cx', px); pdot.setAttribute('cy', py);
@@ -531,7 +530,7 @@ standup('u7l2', {
       for (;;) {
         const a = r.pick([2, 3, 4, 5, -2, -3, -4]), b = r.int(-12, 12);
         if (!b) continue;
-        return { text: 'State the vertex, the y-intercept, the domain and the range.', q: `y=|${linT(a, b)}|`,
+        return { text: 'State the vertex, the y-intercept, the domain and the range.', q: `y=\\left|${linT(a, b)}\\right|`,
           a: [`${linT(a, b)}=0\\Rightarrow x=${fr(-b, a)}:\\ \\text{vertex }\\left(${fr(-b, a)},\\ 0\\right)`, `y\\text{-intercept }(0,\\ ${Math.abs(b)})`, `\\{x\\mid x\\in\\mathbb{R}\\},\\ \\{y\\mid y\\ge0,\\ y\\in\\mathbb{R}\\}`] };
       }
     },
@@ -541,7 +540,7 @@ standup('u7l2', {
         if (!b) continue;
         const bd = fr(-b, a), up = a > 0, c1 = `x${up ? '\\ge' : '\\le'}${bd}`, c2 = `x${up ? '<' : '>'}${bd}`;
         const work = a < 0 ? [`${linT(a, b)}\\ge0\\Rightarrow ${linT(a, 0)}\\ge${-b}\\Rightarrow ${c1}\\ (\\text{sign reversed})`] : [`${linT(a, b)}\\ge0\\Rightarrow ${c1}`];
-        return { text: 'Write the function in piecewise form.', q: `y=|${linT(a, b)}|`,
+        return { text: 'Write the function in piecewise form.', q: `y=\\left|${linT(a, b)}\\right|`,
           a: [...work, `y=\\begin{cases}${linT(a, b)}, & ${c1}\\\\ ${negLin(a, b)}, & ${c2}\\end{cases}`] };
       }
     }

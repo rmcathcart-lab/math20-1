@@ -462,8 +462,8 @@
   };
   /* choose the graph: opts [{ f, right, why, points }] on one window */
   Z.graphMC = function (r, prompt, opts, win, sol, hints, text) {
-    var span = Math.max(win.x[1] - win.x[0], win.y[1] - win.y[0]), l = span > 16 ? 4 : 2;
-    var out = opts.map(function (op, i) { return { html: Z.fig({ x: win.x, y: win.y, l: l, fns: [op.f], points: op.points || [], max: 210, bare: true, aria: 'graph option' }), right: !!op.right, why: op.why, code: op.code || ('g' + i) }; });
+    var sx = win.x[1] - win.x[0], sy = win.y[1] - win.y[0], lx = sx > 16 ? 4 : 2, ly = sy > 32 ? 8 : sy > 16 ? 4 : 2;
+    var out = opts.map(function (op, i) { return { html: Z.fig({ x: win.x, y: win.y, lx: lx, ly: ly, g: sx > 24 ? 2 : 1, gy: sy > 40 ? 4 : sy > 20 ? 2 : 1, ux: 210 / sx, uy: 210 / sy, fns: [op.f], max: 230, bare: true, aria: 'graph option' }), right: !!op.right, why: op.why, code: op.code || ('g' + i) }; });
     var p = B.mc(r, prompt, out, sol, hints || [], text);
     p.input.columns = 2;
     return p;

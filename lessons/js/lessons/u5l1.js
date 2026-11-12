@@ -219,15 +219,15 @@ const factor = {
     steps.push({ cap: e.facCap, run: (c) => showRow(c, r2) });
     const r3 = row(rows, 3, e.r3t);
     steps.push({ cap: `<b>3</b> Set each factor that contains ${T('x')} equal to ${T('0')}: ${e.r3t}.`, run: (c) => showRow(c, r3) });
-    const r4 = row(rows, 4, e.r4 + (e.yint ? `<br>${e.yint}` : ''));
+    const r4 = row(rows, 4, e.r4);
     steps.push({ cap: e.r4cap, run: (c) => showRow(c, r4) });
     if (e.yint) {
       const yb = div(stage, 'u5l1-ybox', `${T('f(0)=2(0)^2-6(0)-20=-20')}`, RX, 330, RW); hide(yb);
       steps.push({ cap: `And the ${T('y')}-intercept: substitute ${T('x=0')}: ${T('f(0)=-20')}.`, run: async (c) => { unhide(yb); await show(c, yb); } });
     }
     if (v === 'e3a') {
-      const wbox = div(stage, 'u5l1-why', `<div class="u5l1-whyh">Why make one side ${T('0')} first?</div>${T('x(x-5)=14')} does <b>not</b> mean ${T('x=14')} or ${T('x-5=14')}.<br>Try ${T('x=14')}: ${T('14(14-5)=14\\cdot9=126\\ne14')}`, RX, 300, RW); hide(wbox);
-      const st = stamp(stage, 'Only 0 works!', { ok: false, x: RX + RW - 150, y: 300 }); st.style.opacity = 0;
+      const wbox = div(stage, 'u5l1-why', `<div class="u5l1-whyh">Why make one side ${T('0')} first?</div>${T('x(x-5)=14')} does <b>not</b> mean ${T('x=14')} or ${T('x-5=14')}.<br>Try ${T('x=14')}: ${T('14(14-5)=14\\cdot9=126\\ne14')}`, RX, 318, RW); hide(wbox);
+      const st = stamp(stage, 'Only 0 works!', { ok: false, x: RX + RW - 100, y: 410 }); st.style.opacity = 0;
       steps.push({ cap: `Why move the ${T('14')} first? ${T('x(x-5)=14')} has no shortcut: ${T('x=14')} gives ${T('126')}, not ${T('14')}. Only a product equal to <b>${T('0')}</b> tells us a factor is ${T('0')}.`,
         run: async (c) => { unhide(wbox); await show(c, wbox); st.style.opacity = ''; await stampIn(c, st); } });
     }
@@ -404,8 +404,8 @@ const flare = {
     const dot = svgEl('circle', { r: 7, fill: '#ff6a3d', stroke: '#fff', 'stroke-width': 2 }, G.layers.top);
     const z1 = hide(G.point(-1, 0, { color: 'amber', r: 8.5, label: T('t=-1'), pos: 'nw' })), z2 = hide(G.point(6, 0, { color: 'amber', r: 8.5, label: T('t=6'), pos: 'ne' }));
     const yi = hide(G.point(0, 30, { color: 'green', r: 7.5, label: T('(0,\\ 30)'), pos: 'e' }));
-    const stN = stamp(stage, 'Before it was fired', { ok: false, size: 'sm', x: GX + 112, y: py(-9) }); stN.style.opacity = 0;
-    const stY = stamp(stage, 'The sea, at 6 s', { ok: true, size: 'sm', x: GX + GW - 110, y: py(-9) }); stY.style.opacity = 0;
+    const stN = stamp(stage, 'Before it was fired', { ok: false, size: 'sm', x: GX + 96, y: py(-9) }); stN.style.opacity = 0;
+    const stY = stamp(stage, 'The sea, at 6 s', { ok: true, size: 'sm', x: GX + GW - 64, y: py(-9) }); stY.style.opacity = 0;
     const P = div(stage, 'u5l1-pn', '', PX, 0, PW);
     const rowsEl = h('div', 'u5l1-rows u5l1-rows-s'); P.appendChild(rowsEl);
     const ra = row(rowsEl, 1, `${T('-5t^2+25t+30=0')}<br>${T('-5(t^2-5t-6)=0')}<br>${T('-5(t-6)(t+1)=0')}`);

@@ -590,8 +590,9 @@
       var shown = s.map(function (x, i) { return (i ? OPS[spec.ops[i - 1] === 'div' ? 'div' : 'times'] : '') + ft(x, i, false); }).join('');
       var anyDiv = spec.ops.indexOf('div') >= 0;
       var flipped = s.map(function (x, i) { return (i ? '\\times ' : '') + ft(x, i, i > 0 && spec.ops[i - 1] === 'div'); }).join('');
-      var g = gcd(num, den);
-      var sol = t(shown + (anyDiv ? '=' + flipped : '')) + (anyDiv ? ' (flip only the divisor' + (spec.ops.filter(function (o2) { return o2 === 'div'; }).length > 1 ? 's' : '') + ')' : '') + '.<br>Divide out common factors (a factor of any numerator with a factor of any denominator): ' + t('\\frac{' + (neg >= 0 ? '-' : '') + num + '}{' + den + '}=' + ex.texRat(ans)) + ' (the common factor is ' + g + ').';
+      var g = gcd(num, den), effN = [], effD = [];
+      s.forEach(function (x, i) { var flip = i > 0 && spec.ops[i - 1] === 'div'; effN.push(flip ? x[1] : x[0]); effD.push(flip ? x[0] : x[1]); });
+      var sol = t(shown + (anyDiv ? '=' + flipped : '')) + (anyDiv ? ' (flip only the divisor' + (spec.ops.filter(function (o2) { return o2 === 'div'; }).length > 1 ? 's' : '') + ')' : '') + '.<br>Divide out common factors (a factor of any numerator with a factor of any denominator; together they share ' + t(g) + '): ' + t((neg >= 0 ? '-' : '') + '\\frac{' + effN.join('\\cdot ') + '}{' + effD.join('\\cdot ') + '}=' + ex.texRat(ans)) + '.';
       var noflipN = 1, noflipD = 1; s.forEach(function (x) { noflipN *= x[0]; noflipD *= x[1]; });
       var nf = rv(ex.norm(neg >= 0 ? -noflipN : noflipN, noflipD)), ff = null;
       if (spec.ops[0] === 'div') { var fN = s[0][1] * s[1][0], fD = s[0][0] * s[1][1]; for (var i = 2; i < s.length; i++) { var fl = spec.ops[i - 1] === 'div'; fN *= fl ? s[i][1] : s[i][0]; fD *= fl ? s[i][0] : s[i][1]; } ff = (neg >= 0 ? -1 : 1) * fN / fD; }
@@ -810,7 +811,7 @@
     { num: '9', shared: function (r) {
         return pickWhere(function () { var p = r.int(2, 5), k = r.int(2, 4), b = r.int(1, 9); return { p: p, a: k * p, k: k, b: b }; }, function (z) { return z.b !== z.p && z.b !== z.a && !(z.a === 6 && z.p === 2 && z.b === 3); });
       },
-      stem: function (o) { return 'A student simplified ' + t('\\frac{x+' + o.a + '}{x^{2}-' + o.p * o.p + '}\\cdot\\frac{x-' + o.p + '}{x+' + o.b + '}') + ', ' + t('x\\ne ' + o.p + ',\\ -' + o.p + ',\\ -' + o.b) + ', as shown.<br>Step 1: ' + t('\\frac{x+' + o.a + '}{(x-' + o.p + ')(x+' + o.p + ')}\\cdot\\frac{x-' + o.p + '}{x+' + o.b + '}') + ' &nbsp; Step 2: ' + t('\\frac{x+' + o.a + '}{(x+' + o.p + ')(x+' + o.b + ')}') + ' &nbsp; Step 3: ' + t('\\frac{\\cancel{x}+\\cancelto{' + o.k + '}{' + o.a + '}}{(\\cancel{x}+\\cancel{' + o.p + '})(x+' + o.b + ')}=\\frac{' + o.k + '}{x+' + o.b + '}'); },
+      stem: function (o) { return 'A student simplified ' + t('\\frac{x+' + o.a + '}{x^{2}-' + o.p * o.p + '}\\cdot\\frac{x-' + o.p + '}{x+' + o.b + '}') + ', ' + t('x\\ne ' + o.p + ',\\ -' + o.p + ',\\ -' + o.b) + ', as shown.<br>Step 1: ' + t('\\frac{x+' + o.a + '}{(x-' + o.p + ')(x+' + o.p + ')}\\cdot\\frac{x-' + o.p + '}{x+' + o.b + '}') + ' &nbsp; Step 2: ' + t('\\frac{x+' + o.a + '}{(x+' + o.p + ')(x+' + o.b + ')}') + ' &nbsp; Step 3: ' + t('\\frac{\\cancel{x}+\\overset{' + o.k + '}{\\cancel{' + o.a + '}}}{(\\cancel{x}+\\cancel{' + o.p + '})(x+' + o.b + ')}=\\frac{' + o.k + '}{x+' + o.b + '}'); },
       parts: [
         { id: 'q9a', level: 'EMG', make: function (r, o) {
           return mcp(r, 'Which step has the error?', [
@@ -832,7 +833,7 @@
         var T = canon([box], []), one = canon([[A(1, s.s)]], []), inv = canon([], [box]);
         var p = U.ratPart(CP, 'Determine the polynomial that belongs in the box: ' + t(fracE(n1, d1) + '\\cdot\\frac{\\boxed{\\phantom{xx}}}{' + polyT(d2) + '}=' + fracE([A(1, s.q)], [Mo(1, 'x', 1)])), T,
           { dl: [{ cn: one, code: CP + 'box-one', hint: 'After dividing out, the left side has ' + t('(x' + (s.s > 0 ? '+' : '') + s.s + ')(x+' + s.p + ')') + ' left in the denominator: the box must divide out <b>both</b>.' }, { cn: inv, code: CP + 'box-inv', hint: 'The box is a numerator: it must be a polynomial that divides out the extra denominator factors.' }], placeholder: 'e.g. (x+4)(x+3)' },
-          'Factor: ' + t(fracF(n1, d1) + '\\cdot\\frac{\\boxed{\\phantom{x}}}{' + facTex(d2) + '}=\\frac{' + facTex([A(1, s.q)]) + '\\cdot\\boxed{\\phantom{x}}}{x' + facTex([A(1, s.s), A(1, s.p)]) + '}') + '.<br>For this to equal ' + t(fracE([A(1, s.q)], [Mo(1, 'x', 1)])) + ', the box must divide out ' + t(facTex(box)) + '. The box is ' + t(facTex(box) + '=' + polyT(box)) + '.',
+          'Factor: ' + t(fracF(n1, d1) + '\\cdot\\frac{\\boxed{\\phantom{x}}}{' + facTex(d2) + '}=\\frac{(' + facTex([A(1, s.q)]) + ')\\cdot\\boxed{\\phantom{x}}}{x' + facTex([A(1, s.s), A(1, s.p)]) + '}') + '.<br>For this to equal ' + t(fracE([A(1, s.q)], [Mo(1, 'x', 1)])) + ', the box must divide out ' + t(facTex(box)) + '. The box is ' + t(facTex(box) + '=' + polyT(box)) + '.',
           ['Factor everything you know, and divide out what you can.', 'Compare with the right side: which factors must the box cancel?'], 'missing polynomial');
         return p;
       } }] },
@@ -1000,6 +1001,7 @@
           var A0 = z.n - z.q * z.p, B0 = z.p - z.q, den = A0 * A0 - B0 * B0 * z.n; return den !== 0 && Math.abs(den) <= 60 && A0 !== 0;
         });
       },
+      stem: function (o) { return 'Use the product ' + t(fracE([Mo(1, 'x', 1), A(1, -o.p)], [A(1, -o.q), A(1, o.q)]) + '\\cdot ' + fracE([A(1, o.q)], [A(1, -o.p), A(1, o.p)])) + '.'; },
       parts: [
         { id: 'e11a', level: 'ADV', make: function (r, o) {   // v(v−p)/((v−q)(v+q)) · (v+q)/((v−p)(v+p)) → v/((v−q)(v+p))
           return U.opPart(CP, [E([Mo(1, 'x', 1), A(1, -o.p)], [A(1, -o.q), A(1, o.q)]), E([A(1, o.q)], [A(1, -o.p), A(1, o.p)])], ['mul'], { text: 'simplify, then evaluate' });

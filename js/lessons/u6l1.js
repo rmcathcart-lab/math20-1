@@ -403,10 +403,12 @@
     var vk = function (opt) { return (opt && opt.vars && opt.vars.length ? opt.vars : ['x']).slice(0, 6).map(function (v) { return { label: '<i>' + v + '</i>', tex: v, plain: v }; }); };
     W.KEYSETS.u6k = function (opt) { return [vk(opt), [d(7), d(8), d(9), KY.plus, KY.minus, KY.del], [d(4), d(5), d(6), KY.sq, KY.pow, KY.clear], [d(1), d(2), d(3), KY.frac, KY.left, KY.right], [d(0), KY.par, KY.comma, KY.ne, KY.pm, KY.enter]]; };
     W.KEYSETS.u6kn = function (opt) { return [vk(opt), [d(7), d(8), d(9), KY.plus, KY.minus, KY.del], [d(4), d(5), d(6), KY.sq, KY.pow, KY.clear], [d(1), d(2), d(3), KY.frac, KY.left, KY.right], [d(0), KY.par, KY.comma, KY.ne, KY.pm, KY.none, KY.enter]]; };
+    W.KEYSETS.u6kp = function (opt) { return [vk(opt).concat([{ label: 'π', tex: '\\pi ', plain: 'π' }]), [d(7), d(8), d(9), KY.plus, KY.minus, KY.del], [d(4), d(5), d(6), KY.sq, KY.pow, KY.clear], [d(1), d(2), d(3), KY.frac, KY.left, KY.right], [d(0), KY.par, KY.enter]]; };
     W.KEYSETS.u6kv = function () { return [[d(7), d(8), d(9), KY.frac, KY.del], [d(4), d(5), d(6), KY.minus, KY.clear], [d(1), d(2), d(3), KY.left, KY.right], [d(0), KY.dot, KY.undef, KY.enter]]; };
     if (W.KEYHELP) {
       W.KEYHELP.u6k = ['Use <b><sup>a</sup>⁄<sub>b</sub></b> for a fraction and <b>( )</b> for factors; press <b>▶</b> to step out of a box. NPVs: <b>≠</b> and commas, e.g. x ≠ 3, −2 or x ≠ ±4.', 'Type fractions with <code>/</code> and brackets, e.g. <code>(x+3)/(2(x-1))</code>. NPVs: <code>x != 3, -2</code>.'];
       W.KEYHELP.u6kn = ['Write the NPVs with <b>≠</b> and commas, e.g. x ≠ 3, −2 (or x ≠ ±4), or press <b>none</b>.', 'Type e.g. <code>x != 3, -2</code> (or just <code>3, -2</code>), or <code>none</code>.'];
+      W.KEYHELP.u6kp = ['Use <b>π</b>, the letters and <b>( )</b> for factors, e.g. 2πr(2r + 5).', 'Type e.g. <code>2πr(2r+5)</code> (or <code>2pi r(2r+5)</code>).'];
       W.KEYHELP.u6kv = ['Type the value (a fraction with <b><sup>a</sup>⁄<sub>b</sub></b>), or press <b>undefined</b> if the expression has no value there.', 'Type a number such as <code>-7/8</code>, or <code>undefined</code>.'];
     }
   }
@@ -518,6 +520,51 @@
     p.bad = uniq((o.cands || []).filter(function (c) { return c && rv(c[0]) !== rv(ans) && (fr || R(c[0])[1] === 1); }).map(function (c) { return rt(c[0]); }).concat([String(rv(ans) + 1)]));
     return p;
   };
+
+  /* any expression equal to fn(env) at six points (π allowed). o.vars, o.form(ast) -> form result or null, o.dl [{ fn, code, hint }] */
+  U.exprCheck = function (fn, o) {
+    o = o || {}; var vars = o.vars || ['x'], E = envs(vars, []), tv = E.map(fn);
+    function same(a, b) { return a.every(function (x, i) { return isFinite(x) && isFinite(b[i]) && ex.eq(x, b[i], 1e-7); }); }
+    var dl = (o.dl || []).map(function (d) { return { v: E.map(d.fn), code: d.code, hint: d.hint }; }).filter(function (d) { return !same(d.v, tv); });
+    return function (resp) {
+      var a = K.read(resp); if (a.res) return a.res;
+      var extra = astVars(a.ast).filter(function (v) { return vars.indexOf(v) < 0; });
+      if (extra.length) return wrong('value', 'Use only ' + vars.map(function (v) { return t(v); }).join(', ') + ' (and ' + t('\\pi') + ').');
+      var sv = E.map(function (e) { return ex.value(a.ast, e); });
+      if (same(sv, tv)) return (o.form ? o.form(a.ast) : null) || ok();
+      for (var i = 0; i < dl.length; i++) if (same(sv, dl[i].v)) return wrong(dl[i].code, dl[i].hint);
+      return wrong('value', o.valueHint || null);
+    };
+  };
+  /* factored completely: a product; every bracket has no common factor (π, a number or a variable) left inside */
+  U.factForm = function (ast) {
+    var top = ast; while (top.t === 'paren' || top.t === 'neg') top = top.a;
+    if (top.t === 'add' || top.t === 'sub') return form('u6k-factored', 'Right — now write it in <b>factored form</b>: take out the greatest common factor.');
+    var fz = ex.factors(top);
+    for (var i = 0; i < fz.num.length; i++) {
+      var f = fz.num[i]; while (f.t === 'paren') f = f.a;
+      if (f.t !== 'add' && f.t !== 'sub') continue;
+      var r = P.read(f); if (!r.ok) return form('u6k-factored', 'Right — but take the common factor (such as ' + t('\\pi') + ') out of the bracket.');
+      var cn = FT.content(r.p); if (Math.abs(cn.c[0]) !== 1 || cn.c[1] !== 1 || Object.keys(cn.v).length) return form('u6k-factored', 'Right — but a bracket still has a common factor. Factor it out completely.');
+    }
+    return null;
+  };
+  /* an exact value a + b√n, written expanded and simplified */
+  U.radSumCheck = function (A, Bc, n, o) {
+    o = o || {}; var T = A + Bc * Math.sqrt(n);
+    return function (resp) {
+      var a = K.read(resp); if (a.res) return a.res;
+      if (astVars(a.ast).length) return form('notnumber', 'Give a number (exact, with a radical).');
+      if (!ex.eq(a.val, T, 1e-9)) { var c = o.cands || []; for (var i = 0; i < c.length; i++) if (ex.eq(a.val, c[i][0], 1e-9)) return wrong(c[i][1], c[i][2]); if (!ex.shape(a.ast).roots && Math.abs(a.val - T) < 0.05) return form('decimal-rounded', 'Give the <b>exact</b> value, with a radical, not a decimal.'); return wrong('value', o.valueHint || null); }
+      if (!ex.shape(a.ast).roots) return form('decimal-rounded', 'Give the <b>exact</b> value, with a radical, not a decimal.');
+      var s = String(resp).replace(/\\left|\\right|\s|\\[,;: ]/g, '').replace(/\\sqrt(\d)/g, '\\sqrt{$1}').replace(/\\cdot|\\times/g, '');
+      var ok1 = /^-?\d*\\sqrt\{\d+\}$/.test(s) || /^-?\d+[+-]\d*\\sqrt\{\d+\}$/.test(s) || /^-?\d*\\sqrt\{\d+\}[+-]\d+$/.test(s);
+      if (!ok1) return form('u6k-radical', 'Right value — now expand and collect like terms, so it is one number plus one radical term, like ' + t('a+b\\sqrt{' + n + '}') + '.');
+      var m = /\\sqrt\{(\d+)\}/.exec(s); if (m && !ex.simplest(Number(m[1]), 2)) return form('u6k-radical', 'Right value — now simplify the radical.');
+      return ok();
+    };
+  };
+  U.radSumTex = function (A, Bc, n) { return (A ? A + (Bc < 0 ? '-' : '+') : Bc < 0 ? '-' : '') + (Math.abs(Bc) === 1 ? '' : Math.abs(Bc)) + '\\sqrt{' + n + '}'; };
 
   /* ---------- small generators ---------- */
   U.pickVar = function (r, pool) { return r.pick(pool || ['x', 'x', 'x', 'a', 'm', 'y', 't', 'n', 'p', 'k', 'w']); };

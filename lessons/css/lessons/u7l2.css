@@ -57,6 +57,9 @@
 .u7l2-row { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 7px 12px; font-size: 19px; line-height: 1.5; }
 .u7l2-n { flex: 0 0 auto; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 17px var(--round); margin-top: 1px; }
 .u7l2-rc { min-width: 0; }
+.u7l2-rows-s { gap: 6px; }
+.u7l2-rows-s .u7l2-row { font-size: 17px; padding: 4px 10px; line-height: 1.35; }
+.u7l2-rows-s .u7l2-n { width: 26px; height: 26px; font-size: 15px; }
 .u7l2-flip { display: inline-block; background: #fde9e7; color: #c93a33; font: 800 15px var(--round); border-radius: 8px; padding: 1px 8px; margin-left: 6px; }
 .u7l2-vt .bk-td, .u7l2-vt .bk-th { font-size: 18px; }
 .u7l2-negc { background: #fdeceb !important; color: #c93a33; }
@@ -79,7 +82,7 @@
 
 /* ---------------- true or false ---------------- */
 .u7l2-claim { display: flex; align-items: baseline; justify-content: center; gap: 14px; font-size: 27px; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 8px 12px; }
-.u7l2-claim > span { font-size: 21px; color: var(--muted); }
+.u7l2-if { font-style: normal; font-size: 21px; color: var(--muted); }
 
 /* ---------------- ride ---------------- */
 .u7l2-scene { border-radius: 12px; }

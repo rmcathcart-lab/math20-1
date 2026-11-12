@@ -108,7 +108,7 @@
 .u7l4-vrow { position: relative; background: #faf8f3; border: 2px solid #e4ded2; border-radius: 12px; padding: 8px 14px; margin-bottom: 12px; min-height: 150px; box-sizing: border-box; }
 .u7l4-vlab { display: inline-block; font-size: 17px; background: #eef3ff; border-radius: 7px; padding: 1px 10px; margin-bottom: 6px; }
 .u7l4-vsol { font-size: 20.5px; margin-bottom: 8px; }
-.u7l4-vck { font-size: 19px; line-height: 1.5; padding-right: 150px; }
+.u7l4-vck { font-size: 19px; line-height: 1.5; padding-right: 200px; }
 .u7l4-vend { font-size: 20px; }
 .u7l4-ghostlab { font-size: 13.5px !important; color: #6c717d !important; }
 .u7l4-vrow .bk-stamp { font-size: 24px; }
@@ -122,3 +122,4 @@
 .u7l4-box.no { border-color: #c93a33; background: #fdecea; }
 .u7l4-teq { text-align: center; font-size: 30px; background: #eef3ff; border: 2px solid #1f5bd6; border-radius: 12px; padding: 4px 0; }
 .u7l4-tsol { text-align: center; font-size: 21px; }
+.u7l4-case .u7l4-wl { font-size: 19.5px; margin: 1px 0 5px; }

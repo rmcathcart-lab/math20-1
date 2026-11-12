@@ -47,12 +47,12 @@ const howmany = {
   ask: (v) => `Example 1: solve ${T(HM[v].eq)}.`,
   make(stage, v, ex) {
     const d = HM[v], [x0, x1, y0, y1] = d.win, a = d.a, c0 = d.c, W = ex.W;
-    const G = new Graph(stage, { x: 4, y: 4, width: 452, height: 430, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 2, ylabels: 2, fontSize: 15, pad: 18 });
+    const G = new Graph(stage, { x: 4, y: 4, width: 452, height: 430, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 2, ylabels: 2, fontSize: 15, pad: [30, 18, 16, 18] });
     const V = G.fn((x) => Math.abs(x - a), { color: BL, width: 4 }); hide(V);
     const vl = hide(G.label(a + (x1 - a) * 0.55, Math.min(y1 - 1, (x1 - a) * 0.55) , T(`y=|${d.inT}|`), { pos: 'w', color: BL, cls: 'bk-ptlab', dx: -8 }));
     const st = { c: c0 };
     const L = G.hline(c0, { color: OR, width: 4, dash: false }); hide(L);
-    const ll = hide(G.label(x0 + 0.4, c0, T(`y=${c0}`), { pos: 'ne', color: OR, cls: 'bk-ptlab' }));
+    const ll = hide(G.label(c0 > 0 ? a : x0 + 0.4, c0, T(`y=${c0}`), { pos: 'ne', color: OR, cls: 'bk-ptlab' }));
     const P1 = G.point(a - Math.max(c0, 0), c0, { color: OK, r: 8 }), P2 = G.point(a + Math.max(c0, 0), c0, { color: OK, r: 8 });
     hide(P1); hide(P2);
     const gd = [];
@@ -103,7 +103,7 @@ const howmany = {
       { cap: 'Now slide the line down: <b>two</b> meeting points while the line is above the x-axis, <b>one</b> at the vertex, <b>none</b> below.', run: async (c) => {
         hopEls.forEach((e) => { e.style.opacity = 0; if (e.label) e.label.style.opacity = 0; }); sl.forEach((e) => (e.style.opacity = 0)); gd.forEach((e) => (e.style.opacity = 0)); dnote.style.opacity = 0;
         const go = (from, to, ms) => tween(c, ms, (t) => set(from + (to - from) * t), linear);
-        await go(c0, 6, 700); await go(6, 0, 2000); set(0); await sleep(c, 700); await go(0, -3, 1100); await sleep(c, 600); await go(-3, c0, 1000); set(c0); } }
+        await go(c0, 6, 700); await go(6, 0, 2000); set(0); await sleep(c, 700); await go(0, -3, 1100); await sleep(c, 600); await go(-3, c0, 1000); set(c0); for (const e of [...sl, ...gd]) { e.style.opacity = 1; } await show(c, dnote); } }
     ];
   }
 };
@@ -127,7 +127,7 @@ const methods = {
   ask: (v) => `Solve ${T(MT[v].eq)} graphically.`,
   make(stage, v, ex) {
     const d = MT[v], W = ex.W, GW = 600, GH = 238, [xa, xb] = d.win;
-    const mk = (y, [ya, yb]) => new Graph(stage, { x: 4, y, width: GW, height: GH, xmin: xa, xmax: xb, ymin: ya, ymax: yb, xlabels: 1, ylabels: (yb - ya) > 12 ? 4 : 2, fontSize: 14, pad: 16 });
+    const mk = (y, [ya, yb]) => new Graph(stage, { x: 4, y, width: GW, height: GH, xmin: xa, xmax: xb, ymin: ya, ymax: yb, xlabels: 1, ylabels: (yb - ya) > 12 ? 4 : 2, fontSize: 14, pad: [26, 16, 14, 16] });
     const G1 = mk(4, d.top), G2 = mk(4 + GH + 16, d.bot);
     const t1 = div(stage, 'u7l4-gtag', 'Intersection method', 16, 10), t2 = div(stage, 'u7l4-gtag u7l4-gtag2', 'Zero method', 16, 10 + GH + 16);
     hide(t2);
@@ -188,7 +188,7 @@ const isolate = {
       wrongEls = { box1, sts };
     }
     const st0 = wl(P, '', T(d.start), '', 'u7l4-eqline');
-    const isoEls = d.iso.map(([t, n]) => wl(P, 1, T(t), n));
+    const isoEls = d.iso.length ? d.iso.map(([t, n]) => wl(P, 1, T(t), n)) : [wl(P, 1, 'The absolute value is already alone.')];
     const kept = d.iso.length ? d.iso[d.iso.length - 1][0] : d.start;
     const sgn = wl(P, 2, `${T(`c=${d.c}`)} ${k === 2 ? 'is <b>positive</b>' : k === 1 ? 'is <b>zero</b>' : 'is <b>negative</b>'}`, k === 2 ? 'two solutions' : k === 1 ? 'one solution' : 'no solution');
     const brEls = [];
@@ -250,11 +250,11 @@ const CS = {
   e6: { label: 'Example 6(a)', eq: '|2x+3|=x+6', A: '2x+3', z: -1.5, zT: '-\\tfrac{3}{2}', zline: '2x+3=0\\ \\Rightarrow\\ x=-\\tfrac{3}{2}', min: -6, max: 5,
     c1: { dom: 'x\\ge-\\tfrac{3}{2}', rep: '|2x+3|=2x+3', lines: ['2x+3=x+6', 'x=3'], x: 3, ok: true, why: '3\\ge-\\tfrac{3}{2}?\\ \\text{Yes}' },
     c2: { dom: 'x<-\\tfrac{3}{2}', rep: '|2x+3|=-(2x+3)', lines: ['-(2x+3)=x+6', '-2x-3=x+6', '-3x=9', 'x=-3'], x: -3, ok: true, why: '-3<-\\tfrac{3}{2}?\\ \\text{Yes}' },
-    sol: 'x=-3\\ \\text{or}\\ x=3', chk: '\\text{the graphs meet at }(-3,\\ 3)\\text{ and }(3,\\ 9)' }
+    sol: 'x=-3\\ \\text{or}\\ x=3', chk: '|-3|=3=-3+6,\\ \\ |9|=9=3+6\\ \\checkmark' }
 };
 const cases = {
   title: 'Solving by cases',
-  height: 500, minW: 940,
+  height: 524, minW: 940,
   choices: Object.keys(CS).map((k) => ({ v: k, label: CS[k].label })),
   ask: (v) => `Solve ${T(CS[v].eq)} by cases.`,
   make(stage, v, ex) {
@@ -264,14 +264,13 @@ const cases = {
     const shR = NL.interval(d.z, Infinity, { color: TE, width: 12 }), shL = NL.interval(-Infinity, d.z, { color: PU, width: 12, openB: true });
     [shR, shL].forEach(hide);
     const zp = hide(NL.point(d.z, { open: true, color: 'ink', r: 9 }));
-    const zl = hide(div(stage, 'u7l4-zlab', T(`x=${d.zT}`), 4 + zx - 60, 118, 120));
-    const tagR = hide(div(stage, 'u7l4-rtag u7l4-tagR', `${T(d.c1.dom)}: ${T(d.c1.rep)}`, 4 + zx + 12, 30));
-    const tagL = hide(div(stage, 'u7l4-rtag u7l4-tagL', `${T(d.c2.dom)}: ${T(d.c2.rep)}`, 4 + zx - 12, 30)); tagL.style.translate = '-100% 0';
+    const tagR = hide(div(stage, 'u7l4-rtag u7l4-tagR', `${T(d.c1.dom)}: ${T(d.c1.rep)}`, 4 + zx + 12, 4));
+    const tagL = hide(div(stage, 'u7l4-rtag u7l4-tagL', `${T(d.c2.dom)}: ${T(d.c2.rep)}`, 4 + zx - 12, 4)); tagL.style.translate = '-100% 0';
     const Z = div(stage, 'u7l4-zrow', '', 4, 158, NW, 40);
     const zline = wl(Z, 1, T(d.zline), 'the inside is 0');
     const PW = (NW - 14) / 2;
     const mkCase = (cs, x, cls, n) => {
-      const p = div(stage, 'u7l4-panel u7l4-case ' + cls, '', x, 204, PW, 252);
+      const p = div(stage, 'u7l4-panel u7l4-case ' + cls, '', x, 204, PW, 272);
       const hd = hide(div(p, 'u7l4-caseh', `Case ${n}: ${T(cs.dom)}`));
       const rp = wl(p, 3, T(cs.rep), 'replace the bars');
       const ls = cs.lines.map((t, i) => wl(p, i ? '' : 4, T(t), '', i === cs.lines.length - 1 ? 'u7l4-xline' : ''));
@@ -280,21 +279,20 @@ const cases = {
     };
     // Case 1 is the right-hand subdomain, so it sits on the right
     const K2 = mkCase(d.c2, 4, 'u7l4-caseL', 2), K1 = mkCase(d.c1, 4 + PW + 14, 'u7l4-caseR', 1);
-    const sol = hide(div(stage, 'u7l4-ansl u7l4-csol', `Solution: ${T(d.sol)} &nbsp;·&nbsp; Check: ${T(d.chk)}`, 4, 462));
+    const sol = hide(div(stage, 'u7l4-ansl u7l4-csol', `Solution: ${T(d.sol)} &nbsp;·&nbsp; Check: ${T(d.chk)}`, 4, 482));
     const cand = (cs, K) => { const e = div(stage, 'u7l4-cdot ' + (cs.ok ? 'ok' : 'no'), T(`x=${cs.x}`), 0, 0); hide(e); e.K = K; e.cs = cs; return e; };
     const D1 = cand(d.c1, K1), D2 = cand(d.c2, K2);
     const fly = async (c, D) => {
       const el = D.K.ls[D.K.ls.length - 1], r0 = el.getBoundingClientRect(), rs = stage.getBoundingClientRect(), sc = rs.width / stage.offsetWidth || 1;
       const fx = (r0.left - rs.left) / sc + 30, fy = (r0.top - rs.top) / sc, tx = 4 + NL.toPx(D.cs.x) - 38, ty = 50;
-      D.style.left = '0px'; D.style.top = '0px'; D.style.opacity = 1;
-      await anim(c, D, [{ transform: `translate(${fx}px, ${fy}px)` }, { transform: `translate(${tx}px, ${ty}px)` }], 900);
-      D.style.transform = `translate(${tx}px, ${ty}px)`;
+      D.style.left = tx + 'px'; D.style.top = ty + 'px'; D.style.opacity = 1;
+      await anim(c, D, [{ transform: `translate(${fx - tx}px, ${fy - ty}px)` }, { transform: 'translate(0px, 0px)' }], 900);
       const dot = NL.point(D.cs.x, { color: D.cs.ok ? OK : NO, r: 9 }); await pop(c, dot);
       if (!D.cs.ok) { await shake(c, D); D.classList.add('out'); }
       await show(c, D.K.vd);
     };
     return [
-      { cap: `<b>Step 1:</b> find where the inside is zero: ${T(d.zline)}.`, run: async (c) => { await show(c, zline); zp.style.opacity = 1; await pop(c, zp); await show(c, zl); } },
+      { cap: `<b>Step 1:</b> find where the inside is zero: ${T(d.zline)}.`, run: async (c) => { await show(c, zline); zp.style.opacity = 1; await pop(c, zp); } },
       { cap: `<b>Step 2:</b> split the number line at ${T(d.zT)} into two subdomains: ${T(d.c2.dom)} and ${T(d.c1.dom)}.`, run: async (c) => { shR.style.opacity = 1; shL.style.opacity = 1; await Promise.all([NL.drawIn(shR, 700, c), NL.drawIn(shL, 700, c)]); await show(c, K2.hd); await show(c, K1.hd); } },
       { cap: `<b>Step 3:</b> replace the bars. Where ${T(`${d.A}\\ge0`)}, ${T(`|${d.A}|=${d.A}`)}; where ${T(`${d.A}<0`)}, ${T(`|${d.A}|=-(${d.A})`)}.`, run: async (c) => { await show(c, tagR); await show(c, K1.rp); await show(c, tagL); await show(c, K2.rp); } },
       { cap: `<b>Step 4:</b> solve each case: ${T(`x=${d.c1.x}`)} and ${T(`x=${d.c2.x}`)}.`, run: async (c) => { for (const l of K1.ls) await show(c, l); for (const l of K2.ls) await show(c, l); } },
@@ -307,19 +305,19 @@ const cases = {
 
 /* =============================== explainer: the verdict board (STAR) =============================== */
 const VD = {
-  a: { label: 'Example 7(a)', eq: '|3x+1|=x-5', m: 1, A: (x) => 3 * x + 1, B: (x) => x - 5, AT: '3x+1', BT: 'x-5', win: [-6, 4, -10, 10],
+  a: { label: 'Example 7(a)', eq: '|3x+1|=x-5', m: 1, A: (x) => 3 * x + 1, B: (x) => x - 5, AT: '3x+1', BT: 'x-5', win: [-6, 4, -10, 10], bl: [2.6, 'se'],
     rows: [{ lab: 'A=B', solve: ['3x+1=x-5', 'x=-3'], x: -3, L: '|3(-3)+1|=|-8|=8', R: '-3-5=-8', ok: false },
       { lab: 'A=-B', solve: ['3x+1=-(x-5)', '4x=4', 'x=1'], x: 1, L: '|3(1)+1|=|4|=4', R: '1-5=-4', ok: false }],
     end: `Both are extraneous: <b>no solution</b>. The line ${T('y=x-5')} stays below the V.` },
-  b: { label: '(b)', eq: '2|x-3|=x+3', m: 2, A: (x) => x - 3, B: (x) => x + 3, AT: 'x-3', BT: 'x+3', win: [-2, 11, -4, 14],
+  b: { label: '(b)', eq: '2|x-3|=x+3', m: 2, A: (x) => x - 3, B: (x) => x + 3, AT: 'x-3', BT: 'x+3', win: [-2, 11, -4, 14], bl: [5.5, 'nw'],
     rows: [{ lab: 'A=B', solve: ['2(x-3)=x+3', 'x=9'], x: 9, L: '2|9-3|=2|6|=12', R: '9+3=12', ok: true },
       { lab: 'A=-B', solve: ['-2(x-3)=x+3', '-2x+6=x+3', 'x=1'], x: 1, L: '2|1-3|=2|-2|=4', R: '1+3=4', ok: true }],
     end: `Both check: ${T('x=1')} or ${T('x=9')}.` },
-  c: { label: '(c)', eq: '|x+5|-2x=1', iso: '|x+5|=2x+1', m: 1, A: (x) => x + 5, B: (x) => 2 * x + 1, AT: 'x+5', BT: '2x+1', win: [-7, 6, -6, 12],
+  c: { label: '(c)', eq: '|x+5|-2x=1', iso: '|x+5|=2x+1', m: 1, A: (x) => x + 5, B: (x) => 2 * x + 1, AT: 'x+5', BT: '2x+1', win: [-7, 6, -6, 12], bl: [0.6, 'se'],
     rows: [{ lab: 'A=B', solve: ['x+5=2x+1', 'x=4'], x: 4, L: '|4+5|=|9|=9', R: '2(4)+1=9', ok: true },
       { lab: 'A=-B', solve: ['-(x+5)=2x+1', '-3x=6', 'x=-2'], x: -2, L: '|-2+5|=|3|=3', R: '2(-2)+1=-3', ok: false }],
     end: `${T('x=4')} (${T('x=-2')} is extraneous).` },
-  e8c: { label: 'Example 8(c)', eq: '|x-2|=2x', m: 1, A: (x) => x - 2, B: (x) => 2 * x, AT: 'x-2', BT: '2x', win: [-4, 4, -6, 6],
+  e8c: { label: 'Example 8(c)', eq: '|x-2|=2x', m: 1, A: (x) => x - 2, B: (x) => 2 * x, AT: 'x-2', BT: '2x', win: [-4, 4, -6, 6], bl: [2.3, 'nw'],
     rows: [{ lab: 'A=B', solve: ['x-2=2x', 'x=-2'], x: -2, L: '|-2-2|=|-4|=4', R: '2(-2)=-4', ok: false },
       { lab: 'A=-B', solve: ['-(x-2)=2x', '2=3x', 'x=\\tfrac{2}{3}'], x: 2 / 3, xT: '\\tfrac{2}{3}', L: '\\left|\\tfrac{2}{3}-2\\right|=\\tfrac{4}{3}', R: '2\\left(\\tfrac{2}{3}\\right)=\\tfrac{4}{3}', ok: true }],
     end: `The number is ${T('\\tfrac{2}{3}')}.` }
@@ -333,13 +331,13 @@ const verdict = {
     const d = VD[v], W = ex.W, GW = 420, BX = 4, BW = W - GW - 20, [x0, x1, y0, y1] = d.win;
     const lhsT = d.iso ? d.iso.split('=')[0] : d.eq.split('=')[0];
     const Lf = (x) => d.m * Math.abs(d.A(x));
-    const G = new Graph(stage, { x: W - GW - 4, y: 4, width: GW, height: 492, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 2, ylabels: 2, fontSize: 14, pad: 16 });
+    const G = new Graph(stage, { x: W - GW - 4, y: 4, width: GW, height: 492, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 2, ylabels: 2, fontSize: 14, pad: [28, 16, 16, 16] });
     const g1 = G.fn((x) => d.m * d.A(x), { color: GR, width: 2.6, dash: '8 7' }), g2 = G.fn((x) => -d.m * d.A(x), { color: GR, width: 2.6, dash: '8 7' });
     hide(g1); hide(g2);
     G.fn(Lf, { color: BL, width: 4.5 }); G.fn(d.B, { color: OR, width: 4 });
     const xr = x1 - (x1 - x0) * 0.04;
     G.label(xr, Math.min(y1 - 0.6, Lf(xr)), T(`y=${lhsT}`), { pos: 'w', color: BL, cls: 'bk-ptlab', dx: -6 });
-    const xb = x0 + (x1 - x0) * 0.1; G.label(xb, d.B(xb), T(`y=${d.BT}`), { pos: d.B(xb) < y0 + 2 ? 'ne' : 'se', color: OR, cls: 'bk-ptlab' });
+    G.label(d.bl[0], d.B(d.bl[0]), T(`y=${d.BT}`), { pos: d.bl[1], color: OR, cls: 'bk-ptlab', gap: 6 });
     const ghostLab = hide(G.label(x0 + (x1 - x0) * 0.5, y0 + 0.4, 'ghost lines: the arms before the flip', { pos: 'n', cls: 'bk-ptlab u7l4-ghostlab' }));
     const B = div(stage, 'u7l4-panel u7l4-board', '', BX, 4, BW, 492);
     const top = hide(div(B, 'u7l4-bhead', d.iso ? `Isolate: ${T(d.eq)} &nbsp;→&nbsp; ${T(d.iso)}` : `${T(d.eq)}: the absolute value is already alone.`));
@@ -348,7 +346,7 @@ const verdict = {
       card.insertAdjacentHTML('beforeend', `<div class="u7l4-vlab">${T(r.lab)}</div>`);
       const sv = div(card, 'u7l4-vsol', r.solve.map((t) => T(t)).join(' &nbsp;→&nbsp; '));
       const ck = hide(div(card, 'u7l4-vck', `<div>Left side: ${T(r.L)}</div><div>Right side: ${T(r.R)}</div>`));
-      const sp = stampOn(card, r.ok ? 'keep ✓' : 'extraneous!', r.ok, BW - 104, 92);
+      const sp = stampOn(card, r.ok ? 'keep ✓' : 'extraneous!', r.ok, BW - 150, 92);
       const xv = r.x, yA = d.B(xv);
       const ghost = hide(G.point(xv, yA, { color: GR, r: 7.5, open: true }));
       const vline = hide(G.vline(xv, { color: r.ok ? OK : NO, width: 2.4 }));
@@ -401,10 +399,11 @@ const target = {
         { cap: 'Boxes come off the line and land on the scale. Within 12 g of 750: <b>accepted</b>. Farther: <b>rejected</b>.', run: async (c) => {
           hops.forEach((e) => { e.style.opacity = 0; if (e.label) e.label.style.opacity = 0; }); tg.style.opacity = 0.3; band.style.opacity = 1; await NL.drawIn(band, 600, c);
           for (const b of boxes) {
-            const ok = Math.abs(b.m - 750) <= 12, tx = 4 + NL.toPx(b.m) - 42 - parseFloat(b.style.left);
-            b.style.opacity = 1; await anim(c, b, [{ transform: 'translate(0, -30px)', opacity: 0 }, { transform: 'translate(0, 0)', opacity: 1 }], 300);
-            await anim(c, b, [{ transform: 'translate(0, 0)' }, { transform: `translate(${tx}px, 150px)` }], 650);
-            b.style.transform = `translate(${tx}px, 150px)`; b.classList.add(ok ? 'ok' : 'no');
+            const ok = Math.abs(b.m - 750) <= 12, x0b = parseFloat(b.style.left), tx = 4 + NL.toPx(b.m) - 42 - x0b;
+            b.style.left = x0b + tx + 'px'; b.style.top = '180px'; b.style.opacity = 1;
+            await anim(c, b, [{ transform: `translate(${-tx}px, -180px)`, opacity: 0 }, { transform: `translate(${-tx}px, -150px)`, opacity: 1 }], 300);
+            await anim(c, b, [{ transform: `translate(${-tx}px, -150px)` }, { transform: 'translate(0px, 0px)' }], 650);
+            b.classList.add(ok ? 'ok' : 'no');
             if (!ok) await shake(c, b); else await pulse(c, b, 1.08);
           } } },
         { cap: `The least and greatest accepted masses are exactly 12 g from 750 g: ${T('|m-750|=12')}.`, run: async (c) => { boxes.forEach((b) => (b.style.opacity = 0.35)); await pop(c, eq); } },

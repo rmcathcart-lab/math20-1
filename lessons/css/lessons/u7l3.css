@@ -1,0 +1,108 @@
+/* Math 20-1 · Unit 7 · Lesson 3 — Graphing Absolute Value Functions of Quadratic Functions: styles used only on this
+ * page (prefix u7l3-). Colours: y = f(x) blue; y = |f(x)| purple; the part below the axis red; invariant points amber. */
+
+.u7l3 .pl .katex { font-size: 1.06em; }
+.u7l3 .ans .katex { font-size: 1.03em; }
+.u7l3 .katex { white-space: nowrap; }
+.u7l3 h2 .katex, .u7l3 h3 .katex { font-size: .95em; }
+.u7l3-cf { color: #1f5bd6; }
+.u7l3-ca { color: #7b4fc4; }
+.u7l3-cn { color: #c93a33; }
+.u7l3-ci { color: #a86a08; }
+.u7l3-cg { color: #12805a; }
+.u7l3-cl { color: #a86a08; }
+.u7l3-p { font-size: 19px; line-height: 1.5; margin: 12px 0; }
+.u7l3-ul { font-size: 19px; line-height: 1.5; margin: 6px 0 4px; padding-left: 1.4em; }
+.u7l3-ul li { margin: 4px 0; }
+.u7l3-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u7l3-pcol .pill { white-space: nowrap; }
+
+/* ---------------- key ideas ---------------- */
+.u7l3-key { border-left-width: 7px; }
+.u7l3-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 6px; }
+.u7l3-steps { margin: 4px 0 0; padding-left: 1.5em; font-size: 19px; line-height: 1.5; }
+.u7l3-steps li { margin: 3px 0; }
+.u7l3-kline { font-size: 19px; line-height: 1.55; margin: 4px 0 8px; }
+.u7l3-ktab { width: 100%; border-collapse: collapse; font-size: 18.5px; line-height: 1.35; background: #fff; border-radius: 10px; overflow: hidden; }
+.u7l3-ktab th { text-align: left; font: 800 16px var(--round); color: #a26100; padding: 6px 12px; border-bottom: 2px solid #f0d199; }
+.u7l3-ktab td { padding: 7px 12px; border-bottom: 1px solid #f3e6c8; vertical-align: top; }
+.u7l3-ktab tr:last-child td { border-bottom: none; }
+
+/* ---------------- static figures ---------------- */
+.u7l3-sk { position: relative; background: #fff; border-radius: 12px; display: flex; justify-content: center; }
+.u7l3-sk > .u7l3-ska { position: absolute; left: 50%; top: 0; translate: -50% 0; opacity: 0; pointer-events: none; transition: opacity .35s; }
+.part.shown .u7l3-ska { opacity: 1; }
+.u7l3-skp { padding: 8px; }
+.u7l3-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.u7l3-ex1 { display: grid; grid-template-columns: minmax(0, 1fr) 400px; gap: 16px; align-items: start; }
+.u7l3-ex7 { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 16px; align-items: start; }
+.u7l3-ex8 { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 16px; align-items: start; }
+.u7l3 .parts.u7l3-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.u7l3-g4 .part { padding: 8px 6px; }
+.u7l3-g4 .ans { font-size: 16.5px; }
+.u7l3-exin { margin-top: 16px; }
+.u7l3-vt { border-collapse: collapse; font-size: 19px; background: #fff; margin: 6px auto 8px; }
+.u7l3-vt th { font: 800 16px var(--round); color: var(--muted); padding: 6px 14px; border: 1.5px solid #ddd6c6; background: #faf7f0; }
+.u7l3-vt td { border: 1.5px solid #ddd6c6; padding: 6px 18px; height: 44px; min-width: 96px; text-align: center; vertical-align: middle; color: var(--red); }
+.u7l3-vt td:first-child { color: var(--ink); background: #faf7f0; }
+.u7l3-tpart { padding: 8px 10px; }
+.u7l3-tab { width: 100%; border-collapse: collapse; font-size: 18px; line-height: 1.3; background: #fff; margin-bottom: 8px; }
+.u7l3-tab th { font: 800 16px var(--round); color: var(--muted); padding: 6px 8px; border: 1.5px solid #ddd6c6; background: #faf7f0; }
+.u7l3-tab td { border: 1.5px solid #ddd6c6; padding: 8px; height: 62px; text-align: center; vertical-align: middle; color: var(--red); }
+.u7l3-tab td:first-child { color: var(--ink); white-space: nowrap; text-align: left; }
+
+/* ---------------- explainers: shared ---------------- */
+.u7l3-rows { display: flex; flex-direction: column; gap: 8px; }
+.u7l3-row { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 7px 12px; font-size: 18.5px; line-height: 1.5; }
+.u7l3-n { flex: 0 0 auto; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 17px var(--round); margin-top: 1px; }
+.u7l3-n:empty { display: none; }
+.u7l3-rc { min-width: 0; }
+.u7l3-rowb { font-size: 18px; padding: 6px 12px; }
+.u7l3-negcell { background: #fde9e7 !important; }
+.u7l3-flipcell { background: #efe8fb !important; color: #7b4fc4 !important; font-weight: 700; }
+.u7l3-pn { display: flex; flex-direction: column; gap: 8px; }
+.u7l3-eqbig { font-size: 25px; text-align: center; min-height: 40px; }
+.u7l3-ctl { display: flex; gap: 10px; align-items: center; }
+.u7l3-sl { flex: 1; display: flex; align-items: center; gap: 12px; background: #f3f6fd; border: 2px solid #c9d6f4; border-radius: 14px; padding: 5px 14px; cursor: pointer; }
+.u7l3-sll { font-size: 24px; }
+.u7l3-sl input { flex: 1; height: 34px; accent-color: #7b4fc4; cursor: pointer; touch-action: none; min-width: 0; }
+.u7l3-sl input::-webkit-slider-thumb { width: 34px; height: 34px; }
+.u7l3-slv { font: 800 22px var(--round); min-width: 50px; text-align: right; color: #7b4fc4; }
+.u7l3-flipb { white-space: nowrap; font-size: 17px; }
+.u7l3-live { background: #fff; border: 2.5px solid currentColor; border-radius: 12px; padding: 6px 12px; font-size: 18px; line-height: 1.45; text-align: center; }
+.u7l3-live b { color: inherit; }
+.u7l3-lk1 { color: #a86a08; } .u7l3-lk2 { color: #1f5bd6; } .u7l3-lk3 { color: #7b4fc4; }
+.u7l3-live .katex { color: var(--ink); }
+.u7l3-ct { width: 100%; border-collapse: collapse; background: #fff; font-size: 16.5px; line-height: 1.3; border-radius: 10px; overflow: hidden; }
+.u7l3-ct th { font: 800 14.5px var(--round); color: var(--muted); padding: 5px 8px; border-bottom: 2px solid #ddd6c6; text-align: left; background: #faf7f0; }
+.u7l3-ct td { padding: 7px 8px; border-bottom: 1px solid #ece6da; height: 52px; vertical-align: middle; transition: background .3s; }
+.u7l3-ct td:first-child { width: 36%; }
+.u7l3-ct tr.on td { background: #fff4dc; }
+.u7l3-ct tr.on td:first-child { box-shadow: inset 6px 0 0 #e8a01e; font-weight: 700; }
+.u7l3-ct4 { font-size: 15.5px; }
+.u7l3-ct4 td { height: 58px; padding: 4px 6px; }
+.u7l3-ct4 td:first-child { width: 30px; font-weight: 700; }
+.u7l3-ct4 td:nth-child(2) { width: 128px; }
+.u7l3-ct4 .katex { font-size: 1em; }
+
+/* ---------------- pieces ---------------- */
+.u7l3-strip { overflow: visible; }
+.u7l3-sax { stroke: #3a4254; stroke-width: 2.5; }
+.u7l3-stk { stroke: #3a4254; stroke-width: 3; stroke-dasharray: 5 4; }
+.u7l3-blab { translate: -50% -50%; color: #fff; font-size: 16px; font-weight: 700; white-space: nowrap; pointer-events: none; }
+.u7l3-blab .katex { color: #fff; }
+.u7l3-zl { translate: -50% 0; font-size: 18px; font-weight: 700; color: #a86a08; }
+.u7l3-cases { font-size: 19px; padding: 2px 0; }
+
+/* ---------------- backwards ---------------- */
+.u7l3-gt { text-align: center; font: 700 18px var(--round); color: var(--ink); }
+.u7l3-ksv { display: block; overflow: visible; }
+.u7l3-stk2 { stroke: #3a4254; stroke-width: 2; }
+.u7l3-ktx { font: 700 14px var(--round); fill: #6b7280; }
+.u7l3-kcap { font-size: 18px; text-align: center; min-height: 28px; font-weight: 700; }
+
+/* ---------------- coaster ---------------- */
+.u7l3-scene { border-radius: 10px; }
+.u7l3-gl { font: 700 13px var(--round); fill: #2f5a22; }
+.u7l3-dlab { font-size: 17px; font-weight: 700; color: #a86a08; background: rgba(255,255,255,.9); border-radius: 8px; padding: 0 6px; white-space: nowrap; pointer-events: none; }
+.u7l3-dl10 { color: #7b4fc4; }
