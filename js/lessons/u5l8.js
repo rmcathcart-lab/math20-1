@@ -121,40 +121,40 @@
 
   var QUESTIONS = [
     { num: '1', stem: 'Determine the value of the discriminant.', parts: [
-      { id: '1a', level: 'BEG', make: function (r) { var q = natGen(r, -1, { a: [1] }); return dPart('(a) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'discriminant: negative' }); } },
-      { id: '1b', level: 'BEG', make: function (r) { var q = natGen(r, 0); return dPart('(b) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'discriminant: zero' }); } },
-      { id: '1c', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [2, 3, 4, 5], test: function (q, d) { return q[2] < 0 && isSq(d); } }); return dPart('(c) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'discriminant: c negative' }); } },
+      { id: '1a', level: 'BEG', make: function (r) { var q = natGen(r, -1, { a: [1] }); return dPart('' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'discriminant: negative' }); } },
+      { id: '1b', level: 'BEG', make: function (r) { var q = natGen(r, 0); return dPart('' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'discriminant: zero' }); } },
+      { id: '1c', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [2, 3, 4, 5], test: function (q, d) { return q[2] < 0 && isSq(d); } }); return dPart('' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'discriminant: c negative' }); } },
       { id: '1d', level: 'EMG', make: function (r) {
         var o = pickWhere(function () { return { A: r.int(2, 6), Bc: nz(r, -6, 6), C: r.int(1, 9) }; }, function (o) { return !(o.A === 3 && o.Bc === 1 && o.C === 5) && AV(-o.A, -o.Bc, o.C); });
         var a = -o.A, b = -o.Bc, c = o.C;
-        return dPart('(d) ' + t(o.C + '-' + o.A + 'x^{2}=' + polyT([o.Bc, 0])), a, b, c, { pre: 'Standard form: ' + t(eqT(a, b, c)), cands: [[o.A * o.A - 4 * o.C * o.Bc, CP + 'std', 'Write the equation in standard form first, ' + t(eqT(a, b, c)) + ', then read ' + t('a') + ', ' + t('b') + ' and ' + t('c') + '.'], [4 * o.A * o.C, CP + 'std', 'The ' + t(polyT([o.Bc, 0])) + ' moves to the left side too: ' + t(eqT(a, b, c)) + '.']], text: 'discriminant: rearrange first' });
+        return dPart('' + t(o.C + '-' + o.A + 'x^{2}=' + polyT([o.Bc, 0])), a, b, c, { pre: 'Standard form: ' + t(eqT(a, b, c)), cands: [[o.A * o.A - 4 * o.C * o.Bc, CP + 'std', 'Write the equation in standard form first, ' + t(eqT(a, b, c)) + ', then read ' + t('a') + ', ' + t('b') + ' and ' + t('c') + '.'], [4 * o.A * o.C, CP + 'std', 'The ' + t(polyT([o.Bc, 0])) + ' moves to the left side too: ' + t(eqT(a, b, c)) + '.']], text: 'discriminant: rearrange first' });
       } }] },
     { num: '2', stem: 'Determine the nature of the roots without solving.', parts: [
-      { id: '2a', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [1], test: function (q, d) { return isSq(d); } }); return natMC(r, '(a) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: two distinct' }); } },
-      { id: '2b', level: 'BEG', make: function (r) { var q = natGen(r, 0, { test: function (q) { return q[0] > 1; } }); return natMC(r, '(b) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: equal roots' }); } },
-      { id: '2c', level: 'BEG', make: function (r) { var q = natGen(r, -1, { a: [2, 3, 4, 5] }); return natMC(r, '(c) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: no real roots' }); } },
-      { id: '2d', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [1], test: function (q, d) { return q[2] < 0 && !isSq(d); } }); return natMC(r, '(d) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: two distinct (irrational)' }); } },
+      { id: '2a', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [1], test: function (q, d) { return isSq(d); } }); return natMC(r, '' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: two distinct' }); } },
+      { id: '2b', level: 'BEG', make: function (r) { var q = natGen(r, 0, { test: function (q) { return q[0] > 1; } }); return natMC(r, '' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: equal roots' }); } },
+      { id: '2c', level: 'BEG', make: function (r) { var q = natGen(r, -1, { a: [2, 3, 4, 5] }); return natMC(r, '' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: no real roots' }); } },
+      { id: '2d', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [1], test: function (q, d) { return q[2] < 0 && !isSq(d); } }); return natMC(r, '' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: two distinct (irrational)' }); } },
       { id: '2e', level: 'EMG', make: function (r) {
         var o = pickWhere(function () { return { m: r.int(2, 4), p: r.int(1, 5), c: r.int(1, 9) }; }, function (o) { var a = o.m, b = -o.m * o.p, c = o.c; return D(a, b, c) < 0 && !(o.m === 2 && o.p === 3 && o.c === 5) && gcd(gcd(a, b), c) === 1; });
         var a = o.m, b = -o.m * o.p, c = o.c;
-        return natMC(r, '(e) ' + t(o.m + 'x(x-' + o.p + ')=-' + o.c), a, b, c, { pre: 'Standard form: ' + t(eqT(a, b, c)), slips: [[D(a, b, 0), CP + 'std', 'Move the ' + t('-' + o.c) + ' to the left side first: ' + t(eqT(a, b, c)) + '.'], [D(a, b, -c), CP + 'std', 'When ' + t('-' + o.c) + ' moves to the left side it becomes ' + t('+' + o.c) + '.']], text: 'nature: rearrange first' });
+        return natMC(r, '' + t(o.m + 'x(x-' + o.p + ')=-' + o.c), a, b, c, { pre: 'Standard form: ' + t(eqT(a, b, c)), slips: [[D(a, b, 0), CP + 'std', 'Move the ' + t('-' + o.c) + ' to the left side first: ' + t(eqT(a, b, c)) + '.'], [D(a, b, -c), CP + 'std', 'When ' + t('-' + o.c) + ' moves to the left side it becomes ' + t('+' + o.c) + '.']], text: 'nature: rearrange first' });
       } },
       { id: '2f', level: 'EMG', make: function (r) {
         var o = pickWhere(function () { return { s: r.int(2, 7), u: r.int(1, 9) }; }, function (o) { return gcd(o.s, o.u) === 1 && !(o.s === 4 && o.u === 3); });
         var a = o.s * o.s, b = -2 * o.s * o.u, c = o.u * o.u;
-        return natMC(r, '(f) ' + t(a + 'x^{2}=' + polyT([-b, -c])), a, b, c, { pre: 'Standard form: ' + t(eqT(a, b, c)), slips: [[D(a, -b, -c), CP + 'std', 'Move every term to the left side, changing their signs: ' + t(eqT(a, b, c)) + '.']], text: 'nature: rearrange, equal roots' });
+        return natMC(r, '' + t(a + 'x^{2}=' + polyT([-b, -c])), a, b, c, { pre: 'Standard form: ' + t(eqT(a, b, c)), slips: [[D(a, -b, -c), CP + 'std', 'Move every term to the left side, changing their signs: ' + t(eqT(a, b, c)) + '.']], text: 'nature: rearrange, equal roots' });
       } }] },
     { num: '3', stem: 'How many ' + t('x') + '-intercepts does the graph of each function have?', parts: [
-      { id: '3a', level: 'BEG', make: function (r) { var q = natGen(r, 0, { test: function (q) { return q[0] === 1; } }); return natMC(r, '(a) ' + t('y=' + polyT(q)), q[0], q[1], q[2], { kind: 'xint', text: 'x-intercepts: one' }); } },
-      { id: '3b', level: 'EMG', make: function (r) { var q = pickWhere(function () { return [-r.int(1, 4), nz(r, -9, 9), r.int(1, 12)]; }, function (q) { return AV(q[0], q[1], q[2]) && gcd(gcd(q[0], q[1]), q[2]) === 1; }); return natMC(r, '(b) ' + t('y=' + polyT(q)), q[0], q[1], q[2], { kind: 'xint', text: 'x-intercepts: a < 0' }); } },
-      { id: '3c', level: 'BEG', make: function (r) { var q = natGen(r, -1, { a: [2, 3, 4, 5] }); return natMC(r, '(c) ' + t('y=' + polyT(q)), q[0], q[1], q[2], { kind: 'xint', text: 'x-intercepts: none' }); } },
-      { id: '3d', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { a: r.pick([-4, -3, -2, 2, 3, 4]), p: nz(r, -5, 5), q: r.pick([-6, -5, -3, -2, -1, 1, 2, 3, 5, 6]) }; }, function (o) { return !(o.a === -4 && o.p === 2 && o.q === 3) && !(o.a === 3 && o.p === -2 && o.q === 1) && !(o.a === -2 && o.p === 3 && o.q === -1); }); return vfMC(r, '(d) ' + t('y=' + nT(o.a) + '(' + polyT([1, -o.p]) + ')^{2}' + (o.q > 0 ? '+' : '') + o.q), o.a, o.p, o.q); } }] },
+      { id: '3a', level: 'BEG', make: function (r) { var q = natGen(r, 0, { test: function (q) { return q[0] === 1; } }); return natMC(r, '' + t('y=' + polyT(q)), q[0], q[1], q[2], { kind: 'xint', text: 'x-intercepts: one' }); } },
+      { id: '3b', level: 'EMG', make: function (r) { var q = pickWhere(function () { return [-r.int(1, 4), nz(r, -9, 9), r.int(1, 12)]; }, function (q) { return AV(q[0], q[1], q[2]) && gcd(gcd(q[0], q[1]), q[2]) === 1; }); return natMC(r, '' + t('y=' + polyT(q)), q[0], q[1], q[2], { kind: 'xint', text: 'x-intercepts: a < 0' }); } },
+      { id: '3c', level: 'BEG', make: function (r) { var q = natGen(r, -1, { a: [2, 3, 4, 5] }); return natMC(r, '' + t('y=' + polyT(q)), q[0], q[1], q[2], { kind: 'xint', text: 'x-intercepts: none' }); } },
+      { id: '3d', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { a: r.pick([-4, -3, -2, 2, 3, 4]), p: nz(r, -5, 5), q: r.pick([-6, -5, -3, -2, -1, 1, 2, 3, 5, 6]) }; }, function (o) { return !(o.a === -4 && o.p === 2 && o.q === 3) && !(o.a === 3 && o.p === -2 && o.q === 1) && !(o.a === -2 && o.p === 3 && o.q === -1); }); return vfMC(r, '' + t('y=' + nT(o.a) + '(' + polyT([1, -o.p]) + ')^{2}' + (o.q > 0 ? '+' : '') + o.q), o.a, o.p, o.q); } }] },
     { num: '4', stem: 'Use the discriminant to decide whether the roots are rational or irrational. If they are rational, solve by factoring.', parts: [
-      { id: '4a', level: 'EMG', make: function (r) { return ratPart(r, '(a)', true, 'a'); } },
-      { id: '4b', level: 'EMG', make: function (r) { return ratPart(r, '(b)', false); } },
-      { id: '4c', level: 'PRG', make: function (r) { return ratPart(r, '(c)', true, 'c'); } }] },
+      { id: '4a', level: 'EMG', make: function (r) { return ratPart(r, '', true, 'a'); } },
+      { id: '4b', level: 'EMG', make: function (r) { return ratPart(r, '', false); } },
+      { id: '4c', level: 'PRG', make: function (r) { return ratPart(r, '', true, 'c'); } }] },
     { num: '5', shared: function (r) { return pickWhere(function () { return { m: r.int(3, 9) * sgn(r) }; }, function (o) { return Math.abs(o.m) !== 5; }); }, stem: function (o) { return 'Consider ' + t('x^{2}' + (o.m < 0 ? '+' : '-') + Math.abs(2 * o.m) + 'x+k=0') + '.'; }, parts: [
-      { id: '5a', level: 'PRG', make: function (r, o) { return threeK('(a) For what values of ' + t('k') + ' does it have (i) two distinct real roots, (ii) two equal real roots, (iii) no real roots?', 1, -2 * o.m, 1, 'k'); } },
+      { id: '5a', level: 'PRG', make: function (r, o) { return threeK('For what values of ' + t('k') + ' does it have (i) two distinct real roots, (ii) two equal real roots, (iii) no real roots?', 1, -2 * o.m, 1, 'k'); } },
       { id: '5b', level: 'ADV', make: function (r, o) {
         var m = o.m, b = -2 * m, key = m * m - 1;
         var chk = function (resp) {
@@ -166,32 +166,32 @@
           if (!isSq(d)) return wrong(CP + 'kval', 'With ' + t('k=' + k) + ', ' + t('b^{2}-4ac=' + d) + ' is not a perfect square, so the roots are irrational.');
           return ok();
         };
-        var p = B.math('(b) Give an integer value of ' + t('k') + ' for which the roots are rational and not zero.', chk, String(key),
+        var p = B.math('Give an integer value of ' + t('k') + ' for which the roots are rational and not zero.', chk, String(key),
           'The discriminant ' + t(b * b + '-4k') + ' must be a perfect square, and ' + t('k\\ne 0') + '. For example ' + t('k=' + key) + ': ' + t(b * b + '-' + 4 * key + '=4=2^{2}') + ', and ' + t(polyT([1, b, key]) + '=' + HW.factor.tex([polyT([1, -(m - 1)]), polyT([1, -(m + 1)])])) + ', roots ' + t(m - 1) + ' and ' + t(m + 1) + '. (Also ' + t('k=' + (m * m - 4)) + ', ' + t(m * m - 9) + ', ' + t(m * m) + ', …)', ['Find ' + t('k') + ' so that ' + t(b * b + '-4k') + ' is a perfect square (try ' + t('4') + ', ' + t('16') + ', ' + t('36') + ', …).'], 'values of k: rational roots', { keys: 'p57', placeholder: 'e.g. k = 9' });
         p.outcome = OUT; p.bad = ['0', String(m * m + 1), String(m * m - 2)].filter(function (x) { var k = +x, d = b * b - 4 * k; return !(k !== 0 && d >= 0 && isSq(d)); }); p.good = [String(m * m - 4), String(m * m - 9)].filter(function (x) { return +x !== 0; }); return p;
       } }] },
     { num: '6', parts: [
       { id: '6', level: 'PRG', make: function (r) { var o = pickWhere(function () { return { a: -r.int(1, 4), b: nz(r, -8, 8) }; }, function (o) { return !(o.a === -2 && o.b === 4) && gcd(o.a, o.b) <= 2; }); return threeK('For what values of ' + t('k') + ' does ' + t(polyT([o.a, o.b, 0]) + '+k=0') + ' have (a) two distinct real roots, (b) two equal real roots, (c) no real roots?', o.a, o.b, 1, 'k', { text: 'values of k: a < 0' }); } }] },
     { num: '7', stem: 'Each equation has two equal real roots. Determine every possible value of ' + t('k') + ', and the root for each value.', parts: [
-      { id: '7a', level: 'PRG', make: function (r) { var o = pickWhere(function () { return { a: r.pick([1, 1, 4, 9]), c: r.pick([4, 9, 16, 36, 49, 64, 81]) }; }, function (o) { return gcd(o.a, o.c) === 1; }); return eqKb(r, '(a)', o.a, o.c, 1); } },
-      { id: '7b', level: 'PRG', make: function (r) { var o = pickWhere(function () { return { a: r.pick([9, 16, 25, 36]), c: r.pick([1, 4, 9]) }; }, function (o) { return gcd(o.a, o.c) === 1 && !(o.a === 4 && o.c === 1); }); return eqKb(r, '(b)', o.a, o.c, -1); } },
+      { id: '7a', level: 'PRG', make: function (r) { var o = pickWhere(function () { return { a: r.pick([1, 1, 4, 9]), c: r.pick([4, 9, 16, 36, 49, 64, 81]) }; }, function (o) { return gcd(o.a, o.c) === 1; }); return eqKb(r, '', o.a, o.c, 1); } },
+      { id: '7b', level: 'PRG', make: function (r) { var o = pickWhere(function () { return { a: r.pick([9, 16, 25, 36]), c: r.pick([1, 4, 9]) }; }, function (o) { return gcd(o.a, o.c) === 1 && !(o.a === 4 && o.c === 1); }); return eqKb(r, '', o.a, o.c, -1); } },
       { id: '7c', level: 'ADV', make: function (r) {
         var o = pickWhere(function () { var s = r.int(1, 5), b = -2 * r.int(2, 9); return { b: b, c: s * s }; }, function (o) { var k = o.b * o.b / (4 * o.c); return isInt(k) && !(o.b === -12 && o.c === 4) && k > 1 && gcd(k, gcd(o.b, o.c)) === 1; });
         var k = o.b * o.b / (4 * o.c), x = -o.b / (2 * k);
-        return Z.fields('(c) ' + t('kx^{2}' + polyT([o.b, o.c]) + '=0'), [Z.fNum(CP, t('k='), k, { cands: [[-k, CP + 'flip', 'Solve ' + t(o.b * o.b + '-' + 4 * o.c + 'k=0') + ' carefully.'], [o.b * o.b / o.c, CP + 'no4', 'The discriminant is ' + t('b^{2}-4ac') + '.']] }), Z.fNum(CP, 'root ' + t('x='), x, { cands: [[-x, CP + 'root-sign', t('x=\\frac{-b}{2a}') + ': check the sign.']] })],
+        return Z.fields('' + t('kx^{2}' + polyT([o.b, o.c]) + '=0'), [Z.fNum(CP, t('k='), k, { cands: [[-k, CP + 'flip', 'Solve ' + t(o.b * o.b + '-' + 4 * o.c + 'k=0') + ' carefully.'], [o.b * o.b / o.c, CP + 'no4', 'The discriminant is ' + t('b^{2}-4ac') + '.']] }), Z.fNum(CP, 'root ' + t('x='), x, { cands: [[-x, CP + 'root-sign', t('x=\\frac{-b}{2a}') + ': check the sign.']] })],
           { sol: t(o.b * o.b + '-4(k)(' + o.c + ')=0\\Rightarrow ' + o.b * o.b + '-' + 4 * o.c + 'k=0\\Rightarrow k=' + k) + '<br>' + t(polyT([k, o.b, o.c]) + '=' + HW.factor.tex([{ p: polyT([Math.sqrt(k), -Math.sqrt(o.c)]), k: 2 }]) + '=0') + ', so ' + t('x=' + frT(-o.b, 2 * k)) + '.', hints: ['Equal roots: ' + t('b^{2}-4ac=0') + '. Here ' + t('a=k') + '.', 'The equal root is ' + t('x=\\frac{-b}{2a}') + '.'], text: 'equal roots: k in a' });
       } }] },
     { num: '8', stem: 'For what values of ' + t('k') + ' does each equation have real roots?', parts: [
       { id: '8a', level: 'ADV', make: function (r) {
         var o = pickWhere(function () { return { b: nz(r, -8, 8), c: nz(r, -6, 6) }; }, function (o) { return o.c > 0 && !(o.b === 4 && o.c === 2) && !(o.b === -10 && o.c === 5); });
         var Kv = o.b * o.b / (4 * o.c), tex = 'k' + LE + kT(Kv) + ',\\ k\\ne 0';
-        return setPart('(a) ' + t('kx^{2}' + (o.b > 0 ? '+' : '-') + Math.abs(o.b) + 'x+' + o.c + '=0'), tex, 'k', [{ is: 'k' + LE + kT(Kv), code: CP + 'k0', hint: 'If ' + t('k=0') + ' the equation isn’t quadratic: add ' + t('k\\ne 0') + '.' }, { is: 'k' + GE + kT(Kv) + ',\\ k\\ne 0', code: CP + 'dir', hint: 'Solve ' + t(o.b * o.b + '-' + 4 * o.c + 'k\\ge 0') + ': dividing by ' + t(-4 * o.c) + ' reverses the sign.' }, { is: 'k<' + kT(Kv) + ',\\ k\\ne 0', code: CP + 'strict', hint: '“Real roots” includes equal roots: use ' + t('\\ge 0') + '.' }],
+        return setPart('' + t('kx^{2}' + (o.b > 0 ? '+' : '-') + Math.abs(o.b) + 'x+' + o.c + '=0'), tex, 'k', [{ is: 'k' + LE + kT(Kv), code: CP + 'k0', hint: 'If ' + t('k=0') + ' the equation isn’t quadratic: add ' + t('k\\ne 0') + '.' }, { is: 'k' + GE + kT(Kv) + ',\\ k\\ne 0', code: CP + 'dir', hint: 'Solve ' + t(o.b * o.b + '-' + 4 * o.c + 'k\\ge 0') + ': dividing by ' + t(-4 * o.c) + ' reverses the sign.' }, { is: 'k<' + kT(Kv) + ',\\ k\\ne 0', code: CP + 'strict', hint: '“Real roots” includes equal roots: use ' + t('\\ge 0') + '.' }],
           t('b^{2}-4ac=' + o.b * o.b + '-4(k)(' + o.c + ')=' + o.b * o.b + '-' + 4 * o.c + 'k\\ge 0\\Rightarrow k\\le ' + kT(Kv)) + ', and ' + t('k\\ne 0') + ' (otherwise it isn’t quadratic): ' + t(tex), ['Real roots: ' + t('b^{2}-4ac\\ge 0') + '. Here ' + t('a=k') + ', so it also needs ' + t('k\\ne 0') + '.'], 'real roots: k in a');
       } },
       { id: '8b', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { return { a: r.int(1, 5), b: nz(r, -12, 12), m: r.pick([2, 3, -2]) }; }, function (o) { return !(o.a === 3 && o.b === -12 && o.m === 2) && gcd(o.a, o.b) <= 3; });
         var Kv = o.b * o.b / (4 * o.a * o.m), op = o.a * o.m > 0 ? LE : GE, tex = 'k' + op + kT(Kv);
-        return setPart('(b) ' + t(polyT([o.a, o.b, 0]) + (o.m > 0 ? '+' : '-') + Math.abs(o.m) + 'k=0'), tex, 'k', [{ is: 'k' + flipOp(op) + kT(Kv), code: CP + (o.m > 0 ? 'dir' : 'flip'), hint: o.m > 0 ? 'Check the direction: solve ' + t(o.b * o.b + '-' + 4 * o.a * o.m + 'k\\ge 0') + '.' : 'Dividing by a negative reverses the sign.' }, { is: 'k' + (op === LE ? LT : GT) + kT(Kv), code: CP + 'strict', hint: '“Real roots” includes equal roots: use ' + t('\\ge 0') + '.' }],
+        return setPart('' + t(polyT([o.a, o.b, 0]) + (o.m > 0 ? '+' : '-') + Math.abs(o.m) + 'k=0'), tex, 'k', [{ is: 'k' + flipOp(op) + kT(Kv), code: CP + (o.m > 0 ? 'dir' : 'flip'), hint: o.m > 0 ? 'Check the direction: solve ' + t(o.b * o.b + '-' + 4 * o.a * o.m + 'k\\ge 0') + '.' : 'Dividing by a negative reverses the sign.' }, { is: 'k' + (op === LE ? LT : GT) + kT(Kv), code: CP + 'strict', hint: '“Real roots” includes equal roots: use ' + t('\\ge 0') + '.' }],
           t('b^{2}-4ac=' + o.b * o.b + '-4(' + o.a + ')(' + nT(o.m) + 'k)=' + o.b * o.b + (o.m > 0 ? '-' : '+') + Math.abs(4 * o.a * o.m) + 'k\\ge 0\\Rightarrow ' + tex), ['Real roots: ' + t('b^{2}-4ac\\ge 0') + '. Here ' + t('c=' + nT(o.m) + 'k') + '.'], 'real roots: k in c');
       } }] },
     { num: '9', parts: [
@@ -205,7 +205,7 @@
       { id: '10a', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { return { a: r.int(1, 5), c: -r.int(1, 7), s: sgn(r) }; }, function (o) { return !(o.a === 2 && o.c === -1 && o.s === -1); });
         var T = P.parse('k^{2}+' + (-4 * o.a * o.c)), eq = polyT([o.a, 0, 0]) + (o.s > 0 ? '+' : '-') + 'kx' + '-' + Math.abs(o.c) + '=0';
-        var p = B.math('(a) ' + t(eq) + ': write the discriminant in terms of ' + t('k') + '.', K.poly(T, { wrong: [{ is: P.parse('k^{2}-' + (-4 * o.a * o.c)), code: CP + '4ac', hint: 'Check the sign of ' + t('-4ac') + ' with ' + t('c=' + o.c) + '.' }, { is: P.parse('-k^{2}+' + (-4 * o.a * o.c)), code: CP + 'bsq', hint: t('(-k)^{2}=k^{2}') + '.' }] }), 'k^{2}+' + (-4 * o.a * o.c),
+        var p = B.math('' + t(eq) + ': write the discriminant in terms of ' + t('k') + '.', K.poly(T, { wrong: [{ is: P.parse('k^{2}-' + (-4 * o.a * o.c)), code: CP + '4ac', hint: 'Check the sign of ' + t('-4ac') + ' with ' + t('c=' + o.c) + '.' }, { is: P.parse('-k^{2}+' + (-4 * o.a * o.c)), code: CP + 'bsq', hint: t('(-k)^{2}=k^{2}') + '.' }] }), 'k^{2}+' + (-4 * o.a * o.c),
           t('b^{2}-4ac=(' + (o.s > 0 ? '' : '-') + 'k)^{2}-4(' + o.a + ')(' + o.c + ')=k^{2}+' + (-4 * o.a * o.c)) + '. Since ' + t('k^{2}\\ge 0') + ', ' + t('k^{2}+' + (-4 * o.a * o.c) + '\\ge ' + (-4 * o.a * o.c) + '>0') + ' for every ' + t('k') + ': always two distinct real roots.', ['Here ' + t('b=' + (o.s > 0 ? '' : '-') + 'k') + '. A square is never negative.'], 'show: discriminant in k', { keys: 'poly', vars: ['k'] });
         p.outcome = OUT; p.bad = ['k^{2}-' + (-4 * o.a * o.c), 'k^{2}']; return p;
       } },
@@ -223,19 +223,19 @@
     { num: '12', shared: function (r) {
         return pickWhere(function () { var v = r.int(10, 18), h0 = r.pick([0.5, 1, 1.5, 2]), top = h0 + v * v / 19.6; return { v: v, h0: h0, top: top, H1: Math.ceil(top) + r.int(0, 2), H2: Math.floor(top) - r.int(1, 3) }; }, function (o) { return !(o.v === 14 && o.h0 === 0.5) && o.H1 - o.top > 0.3 && o.H2 > o.h0 + 1 && o.top - o.H2 > 0.3; });
       }, stem: function (o) { return 'A soccer ball is kicked so that its height after ' + t('t') + ' seconds is ' + t('h=-4.9t^{2}+' + o.v + 't+' + nT(o.h0)) + ' metres. Use the discriminant to decide whether it reaches each height.'; }, parts: [
-      { id: '12a', level: 'PRG', make: function (r, o) { return reach(o, o.H1, '(a)'); } },
-      { id: '12b', level: 'PRG', make: function (r, o) { return reach(o, o.H2, '(b)'); } }] },
+      { id: '12a', level: 'PRG', make: function (r, o) { return reach(o, o.H1, ''); } },
+      { id: '12b', level: 'PRG', make: function (r, o) { return reach(o, o.H2, ''); } }] },
     { num: '13', shared: function (r) {
         return pickWhere(function () { var m = r.pick([10, 20, 25, 40, 50]), x0 = r.int(4, 15), R = 100 * r.int(30, 90); return { m: m, x0: x0, R: R, c: R - m * x0 * x0, d: 100 * r.int(1, 4) }; }, function (o) { return o.c > 500 && o.c % 100 === 0 && !(o.m === 20 && o.x0 === 10 && o.R === 5000); });
       }, stem: function (o) { return 'A theatre’s ticket revenue, in dollars, is ' + t('R=-' + o.m + 'x^{2}+' + 2 * o.m * o.x0 + 'x+' + o.c) + ', where ' + t('x') + ' is the number of \\$1 price increases.'; }, parts: [
       { id: '13a', level: 'PRG', make: function (r, o) {
         var b = 2 * o.m * o.x0, c2 = o.c - o.R;
-        return Z.fields('(a) Can the revenue be ' + t('\\$' + o.R) + '? Use the discriminant: how many values of ' + t('x') + ' give this revenue, and what are they?', [Z.fNum(CP, 'Number of values of ' + t('x') + ':', 1, { cands: [[2, CP + 'times', 'The discriminant is ' + t('0') + ': one value only.'], [0, CP + 'times', 'The discriminant is ' + t('0') + ', not negative.']] }), Z.fNum(CP, t('x='), o.x0, { cands: [[-o.x0, CP + 'root-sign', 'Check the sign: ' + t('x=\\frac{-b}{2a}') + '.']] })],
+        return Z.fields('Can the revenue be ' + t('\\$' + o.R) + '? Use the discriminant: how many values of ' + t('x') + ' give this revenue, and what are they?', [Z.fNum(CP, 'Number of values of ' + t('x') + ':', 1, { cands: [[2, CP + 'times', 'The discriminant is ' + t('0') + ': one value only.'], [0, CP + 'times', 'The discriminant is ' + t('0') + ', not negative.']] }), Z.fNum(CP, t('x='), o.x0, { cands: [[-o.x0, CP + 'root-sign', 'Check the sign: ' + t('x=\\frac{-b}{2a}') + '.']] })],
           { sol: t('-' + o.m + 'x^{2}+' + b + 'x+' + o.c + '=' + o.R + '\\Rightarrow -' + o.m + 'x^{2}+' + b + 'x-' + (-c2) + '=0\\Rightarrow ' + polyT([1, -2 * o.x0, o.x0 * o.x0]) + '=0') + ' (divide by ' + t(-o.m) + ').<br>' + t('b^{2}-4ac=' + 4 * o.x0 * o.x0 + '-' + 4 * o.x0 * o.x0 + '=0') + ': exactly one value, ' + t('x=' + o.x0) + '.', hints: ['Set ' + t('R=' + o.R) + ', write the equation in standard form (divide by a common factor), and find the discriminant.'], text: 'revenue: reached once' });
       } },
       { id: '13b', level: 'PRG', make: function (r, o) {
         var R2 = o.R + o.d, c2 = o.c - R2, Dd = (2 * o.x0) * (2 * o.x0) - 4 * (o.x0 * o.x0 + o.d / o.m);
-        return Z.mc(r, '(b) Can the revenue be ' + t('\\$' + R2) + '?', [
+        return Z.mc(r, 'Can the revenue be ' + t('\\$' + R2) + '?', [
           { html: '<b>No</b>: the discriminant is negative, so no value of ' + t('x') + ' gives this revenue.', right: true },
           { html: '<b>Yes</b>, twice: the discriminant is positive.', why: 'Work it out: ' + t(polyT([1, -2 * o.x0, o.x0 * o.x0 + o.d / o.m]) + '=0') + ' has ' + t('b^{2}-4ac=' + nT(Dd)) + '.', code: CP + 'times' },
           { html: '<b>Yes</b>, once: the discriminant is ' + t('0') + '.', why: 'The discriminant is ' + t(nT(Dd)) + ', not ' + t('0') + '.', code: CP + 'times' },
@@ -243,7 +243,7 @@
           t('-' + o.m + 'x^{2}+' + 2 * o.m * o.x0 + 'x+' + o.c + '=' + R2 + '\\Rightarrow ' + polyT([1, -2 * o.x0, o.x0 * o.x0 + o.d / o.m]) + '=0') + ': ' + t('b^{2}-4ac=' + 4 * o.x0 * o.x0 + '-' + nT(4 * (o.x0 * o.x0 + o.d / o.m)) + '=' + nT(Dd) + '<0') + '. No: the revenue can never be ' + t('\\$' + R2) + '.', ['Set ' + t('R=' + R2) + ' and look at the sign of the discriminant.'], 'revenue: never reached');
       } },
       { id: '13c', level: 'ADV', make: function (r, o) {
-        return Z.mc(r, '(c) What does (a) tell you about the maximum revenue?', [
+        return Z.mc(r, 'What does (a) tell you about the maximum revenue?', [
           { html: t('\\$' + o.R) + ' is reached exactly once, so it is the <b>maximum</b> revenue (at ' + o.x0 + ' price increases).', right: true },
           { html: t('\\$' + o.R) + ' is the <b>minimum</b> revenue.', why: 'The parabola opens down (' + t('a<0') + '), so the vertex is a maximum.', code: CP + 'max' },
           { html: 'The maximum is higher than ' + t('\\$' + o.R) + ', because the revenue reaches ' + t('\\$' + o.R) + ' on the way up and down.', why: 'Reached twice would need a positive discriminant; here it is 0, so ' + t('\\$' + o.R) + ' is the vertex.', code: CP + 'max' },
@@ -295,7 +295,7 @@
 
   /* Q4 / Extra A3: rational or irrational */
   function ratPart(r, lab, rational, kind) {
-    var o = rational ? pickWhere(function () { return { m: r.int(2, 6), n: nz(r, -7, 7), p: r.int(1, 4), q: nz(r, -7, 7) }; }, function (o) { var a = o.m * o.p, b = o.m * o.q + o.n * o.p, c = o.n * o.q; return gcd(o.m, o.n) === 1 && gcd(o.p, o.q) === 1 && a >= 6 && b !== 0 && o.m * o.q !== o.n * o.p && (kind === 'c' ? c > 0 && b < 0 : c < 0) && Math.abs(b) <= 20 && AV(a, b, c); })
+    var o = rational ? pickWhere(function () { return { m: r.int(2, 6), n: nz(r, -7, 7), p: r.int(1, 4), q: nz(r, -7, 7) }; }, function (o) { var a = o.m * o.p, b = o.m * o.q + o.n * o.p, c = o.n * o.q; return gcd(o.m, o.n) === 1 && gcd(o.p, o.q) === 1 && a >= 6 && b !== 0 && o.m * o.q !== o.n * o.p && (kind === 'c' ? c > 0 && b < 0 : c < 0) && Math.abs(b) <= 20 && D(a, b, c) <= 700 && AV(a, b, c); })
       : pickWhere(function () { return { a: r.int(2, 6), b: nz(r, -9, 9), c: nz(r, -9, 9) }; }, function (o) { var d = D(o.a, o.b, o.c); return d > 0 && !isSq(d) && gcd(gcd(o.a, o.b), o.c) === 1 && AV(o.a, o.b, o.c); });
     var a = rational ? o.m * o.p : o.a, b = rational ? o.m * o.q + o.n * o.p : o.b, c = rational ? o.n * o.q : o.c, d = D(a, b, c), sq = Math.round(Math.sqrt(d));
     var wordChk = function (resp) {
@@ -312,7 +312,7 @@
       specs.push(Z.fRoots(CP, 'Roots (by factoring):', T, { key: 'x=' + frT(-o.n, o.m) + ',\\ x=' + frT(-o.q, o.p), wrongs: [{ vals: [o.n / o.m, o.q / o.p], code: 'u5l7-factor', hint: 'Set each factor equal to 0: check the signs.' }] }));
       sol += '<br>' + t(ft + '=0') + ', so ' + t('x=' + frT(-o.n, o.m)) + ' or ' + t('x=' + frT(-o.q, o.p)) + '.';
     }
-    return Z.fields(lab + ' ' + t(eqT(a, b, c)), specs, { sol: sol, hints: ['A perfect-square discriminant gives rational roots; otherwise they are irrational.', rational ? 'To factor, find two numbers with product ' + t('ac=' + a * c) + ' and sum ' + t(b) + '.' : 'Is the discriminant a perfect square?'], text: rational ? 'rational roots: factor' : 'irrational roots' });
+    return Z.fields(t(eqT(a, b, c)), specs, { sol: sol, hints: ['A perfect-square discriminant gives rational roots; otherwise they are irrational.', rational ? 'To factor, find two numbers with product ' + t('ac=' + a * c) + ' and sum ' + t(b) + '.' : 'Is the discriminant a perfect square?'], text: rational ? 'rational roots: factor' : 'irrational roots' });
   }
   /* Q7 (a)(b) / Extra B3: equal roots with k in b: ax² ± kx + c = 0 */
   function eqKb(r, lab, a, c, s) {
@@ -320,48 +320,48 @@
     var eq = polyT([a, 0, 0]) + (s > 0 ? '+' : '-') + 'kx+' + c + '=0';
     var rootC = function (x) { return [[-x, CP + 'root-sign', t('x=\\frac{-b}{2a}') + ' with ' + t('b=' + (s > 0 ? '' : '-') + 'k') + ': check the sign.']]; };
     var sq = function (x, sg) { return HW.factor.tex([{ p: polyT([Math.sqrt(a), sg * Math.sqrt(c)]), k: 2 }]); };
-    return Z.fields(lab + ' ' + t(eq), [Z.fNum(CP, 'Positive value: ' + t('k='), k, { cands: [[k * k, CP + 'no4', t('k^{2}=' + 4 * a * c) + ', so ' + t('k=\\pm\\sqrt{' + 4 * a * c + '}') + '.'], [Math.sqrt(a * c), CP + 'no4', 'The discriminant is ' + t('k^{2}-4ac') + '.']] }), Z.fNum(CP, 'its root ' + t('x='), xp, { cands: rootC(xp) }), Z.fNum(CP, 'Negative value: ' + t('k='), -k, { cands: [[k, CP + 'onek', 'The other value is negative: ' + t('k^{2}=' + 4 * a * c) + ' has two solutions.']] }), Z.fNum(CP, 'its root ' + t('x='), xn, { cands: rootC(xn) })],
+    return Z.fields(t(eq), [Z.fNum(CP, 'Positive value: ' + t('k='), k, { cands: [[k * k, CP + 'no4', t('k^{2}=' + 4 * a * c) + ', so ' + t('k=\\pm\\sqrt{' + 4 * a * c + '}') + '.'], [Math.sqrt(a * c), CP + 'no4', 'The discriminant is ' + t('k^{2}-4ac') + '.']] }), Z.fNum(CP, 'its root ' + t('x='), xp, { cands: rootC(xp) }), Z.fNum(CP, 'Negative value: ' + t('k='), -k, { cands: [[k, CP + 'onek', 'The other value is negative: ' + t('k^{2}=' + 4 * a * c) + ' has two solutions.']] }), Z.fNum(CP, 'its root ' + t('x='), xn, { cands: rootC(xn) })],
       { sol: t('b^{2}-4ac=k^{2}-4(' + a + ')(' + c + ')=k^{2}-' + 4 * a * c + '=0\\Rightarrow k=\\pm ' + k) + '<br>' + t('k=' + k) + ': ' + t(polyT([a, s * k, c]) + '=' + sq(k, s) + '=0') + ', ' + t('x=' + vT(xp)) + '<br>' + t('k=-' + k) + ': ' + t(polyT([a, -s * k, c]) + '=' + sq(k, -s) + '=0') + ', ' + t('x=' + vT(xn)), hints: ['Equal roots: ' + t('b^{2}-4ac=0') + '. ' + t('k^{2}=') + ' a number has two solutions.', 'Each equal root is ' + t('x=\\frac{-b}{2a}') + '.'], text: 'equal roots: k in b' });
   }
   /* Q10 (b)(c): x² + 2kx + k² − s² = 0 */
   function dKexact(r, s, lab) {
     var d = 4 * s * s;
-    return Z.num(CP, '(b) ' + t('x^{2}+2kx+k^{2}-' + s * s + '=0') + ': find the discriminant (it doesn’t depend on ' + t('k') + ').', d, { cands: [[-d, CP + '4ac', 'Check the sign: ' + t('-4(k^{2}-' + s * s + ')=-4k^{2}+' + 4 * s * s) + '.'], [s * s, CP + 'no4', 'Multiply ' + t('ac') + ' by 4.']],
+    return Z.num(CP, '' + t('x^{2}+2kx+k^{2}-' + s * s + '=0') + ': find the discriminant (it doesn’t depend on ' + t('k') + ').', d, { cands: [[-d, CP + '4ac', 'Check the sign: ' + t('-4(k^{2}-' + s * s + ')=-4k^{2}+' + 4 * s * s) + '.'], [s * s, CP + 'no4', 'Multiply ' + t('ac') + ' by 4.']],
       sol: t('b^{2}-4ac=(2k)^{2}-4(1)(k^{2}-' + s * s + ')=4k^{2}-4k^{2}+' + d + '=' + d) + ' > 0 for every ' + t('k') + ': two distinct real roots.', hints: ['Here ' + t('b=2k') + ' and ' + t('c=k^{2}-' + s * s) + '. Expand and collect.'], text: 'show: discriminant constant' });
   }
   function dKroots(r, s) {
     var f1 = function (k) { return -k + s; }, f2 = function (k) { return -k - s; };
-    var p = B.math('(c) For ' + t('x^{2}+2kx+k^{2}-' + s * s + '=0') + ', show that the roots are rational when ' + t('k') + ' is an integer: solve for ' + t('x') + ' in terms of ' + t('k') + '.', Z.prChk(CP, [f1, f2], { p: 'k', pts: [-2.3, 0.7, 1.9, 3.4], cands: [[[function (k) { return k + s; }, function (k) { return k - s; }], CP + 'root-sign', 'The formula starts with ' + t('-b=-2k') + '.'], [[function (k) { return -2 * k + 2 * s; }, function (k) { return -2 * k - 2 * s; }], 'u5l7-half', 'Divide every term by ' + t('2a=2') + '.']] }), 'x=-k\\pm ' + s,
+    var p = B.math('For ' + t('x^{2}+2kx+k^{2}-' + s * s + '=0') + ', show that the roots are rational when ' + t('k') + ' is an integer: solve for ' + t('x') + ' in terms of ' + t('k') + '.', Z.prChk(CP, [f1, f2], { p: 'k', pts: [-2.3, 0.7, 1.9, 3.4], cands: [[[function (k) { return k + s; }, function (k) { return k - s; }], CP + 'root-sign', 'The formula starts with ' + t('-b=-2k') + '.'], [[function (k) { return -2 * k + 2 * s; }, function (k) { return -2 * k - 2 * s; }], 'u5l7-half', 'Divide every term by ' + t('2a=2') + '.']] }), 'x=-k\\pm ' + s,
       t('b^{2}-4ac=' + 4 * s * s + '=' + 2 * s + '^{2}') + ', a perfect square, so ' + t('x=\\frac{-2k\\pm ' + 2 * s + '}{2}=-k\\pm ' + s) + ': integers (rational) when ' + t('k') + ' is an integer.', ['Use ' + t('\\sqrt{' + 4 * s * s + '}=' + 2 * s) + ' in the formula, then divide every term by 2.'], 'roots in terms of k', { keys: 'p57', vars: ['x', 'k'], placeholder: 'e.g. x = -k ± 2' });
     p.outcome = OUT; p.good = ['x=-k+' + s + ',\\ x=-k-' + s, 'x=' + s + '-k,\\ x=-' + s + '-k']; p.bad = ['x=k\\pm ' + s, 'x=-k+' + s]; return p;
   }
   /* Q12: does the ball reach H? */
   function reach(o, H, lab) {
     var c = cl(o.h0 - H), d = D(-4.9, o.v, c), n = d > 0 ? 2 : d === 0 ? 1 : 0;
-    return Z.fields(lab + ' Does it reach ' + t(H) + ' m? Give the discriminant and the number of times it is at that height.', [Z.fNum(CP, t('b^{2}-4ac='), d, { cands: [[D(-4.9, o.v, cl(o.h0 + H)), CP + 'std', 'Set ' + t('h=' + H) + ' and move the ' + t(H) + ' to the left: the constant is ' + t(nT(o.h0) + '-' + H + '=' + nT(c)) + '.'], [cl(o.v * o.v + 4 * 4.9 * c), CP + '4ac', 'Check the sign of ' + t('-4ac') + ' (both ' + t('a') + ' and ' + t('c') + ' are negative).'], [D(-4.9, o.v, o.h0), CP + 'std', 'Set ' + t('h=' + H) + ' first, then write the equation in standard form.']] }), Z.fNum(CP, 'Number of times:', n, { cands: [[n ? 0 : 1, CP + 'times', n ? 'A positive discriminant: two times (going up and coming down).' : 'A negative discriminant: no real roots, so it never reaches that height.'], [n ? 1 : 2, CP + 'times', n ? 'Positive discriminant: two roots.' : 'Negative discriminant: no roots.']] })],
+    return Z.fields('Does it reach ' + t(H) + ' m? Give the discriminant and the number of times it is at that height.', [Z.fNum(CP, t('b^{2}-4ac='), d, { cands: [[D(-4.9, o.v, cl(o.h0 + H)), CP + 'std', 'Set ' + t('h=' + H) + ' and move the ' + t(H) + ' to the left: the constant is ' + t(nT(o.h0) + '-' + H + '=' + nT(c)) + '.'], [cl(o.v * o.v + 4 * 4.9 * c), CP + '4ac', 'Check the sign of ' + t('-4ac') + ' (both ' + t('a') + ' and ' + t('c') + ' are negative).'], [D(-4.9, o.v, o.h0), CP + 'std', 'Set ' + t('h=' + H) + ' first, then write the equation in standard form.']] }), Z.fNum(CP, 'Number of times:', n, { cands: [[n ? 0 : 1, CP + 'times', n ? 'A positive discriminant: two times (going up and coming down).' : 'A negative discriminant: no real roots, so it never reaches that height.'], [n ? 1 : 2, CP + 'times', n ? 'Positive discriminant: two roots.' : 'Negative discriminant: no roots.']] })],
       { sol: t('-4.9t^{2}+' + o.v + 't+' + nT(o.h0) + '=' + H + '\\Rightarrow ' + eqT(-4.9, o.v, c, 't')) + '<br>' + dSol(-4.9, o.v, c) + (n ? ' > 0: it reaches ' + H + ' m twice (going up and coming down).' : ' < 0: no real roots, so it never reaches ' + H + ' m.'), hints: ['Set ' + t('h=' + H) + ', move every term to one side, then find ' + t('b^{2}-4ac') + '.'], text: 'does it reach the height?' });
   }
 
   /* =========================== Extra Practice 8 =========================== */
   var EXTRA = [
     { num: 'A1', stem: 'Determine the discriminant and the nature of the roots.', parts: [
-      { id: 'eA1a', level: 'BEG', make: function (r) { var q = natGen(r, -1, { a: [1] }); return natMC(r, '(a) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: none' }); } },
-      { id: 'eA1b', level: 'BEG', make: function (r) { var q = natGen(r, 0, { test: function (q) { return q[0] > 4; } }); return natMC(r, '(b) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: equal' }); } },
-      { id: 'eA1c', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [2, 3], test: function (q, d) { return q[2] < 0 && isSq(d); } }); return natMC(r, '(c) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: two distinct (rational)', post: t(D(q[0], q[1], q[2])) + ' is a perfect square: the roots are rational.' }); } },
-      { id: 'eA1d', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [1], test: function (q, d) { return !isSq(d) && q[2] < 0; } }); return natMC(r, '(d) ' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: two distinct (irrational)' }); } },
+      { id: 'eA1a', level: 'BEG', make: function (r) { var q = natGen(r, -1, { a: [1] }); return natMC(r, '' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: none' }); } },
+      { id: 'eA1b', level: 'BEG', make: function (r) { var q = natGen(r, 0, { test: function (q) { return q[0] > 4; } }); return natMC(r, '' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: equal' }); } },
+      { id: 'eA1c', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [2, 3], test: function (q, d) { return q[2] < 0 && isSq(d); } }); return natMC(r, '' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: two distinct (rational)', post: t(D(q[0], q[1], q[2])) + ' is a perfect square: the roots are rational.' }); } },
+      { id: 'eA1d', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [1], test: function (q, d) { return !isSq(d) && q[2] < 0; } }); return natMC(r, '' + t(eqT(q[0], q[1], q[2])), q[0], q[1], q[2], { text: 'nature: two distinct (irrational)' }); } },
       { id: 'eA1e', level: 'EMG', make: function (r) {
         var o = pickWhere(function () { return { a: r.int(2, 5), b: r.int(1, 6), c: r.int(1, 6) }; }, function (o) { return D(o.a, -o.b, o.c) < 0 && gcd(gcd(o.a, o.b), o.c) === 1 && !(o.a === 3 && o.b === 4 && o.c === 2); });
-        return natMC(r, '(e) ' + t(o.a + 'x^{2}=' + polyT([o.b, -o.c])), o.a, -o.b, o.c, { pre: 'Standard form: ' + t(eqT(o.a, -o.b, o.c)), slips: [[D(o.a, o.b, -o.c), CP + 'std', 'Move every term to the left side (changing signs) before reading ' + t('a') + ', ' + t('b') + ', ' + t('c') + '.']], text: 'nature: rearrange (none)' });
+        return natMC(r, '' + t(o.a + 'x^{2}=' + polyT([o.b, -o.c])), o.a, -o.b, o.c, { pre: 'Standard form: ' + t(eqT(o.a, -o.b, o.c)), slips: [[D(o.a, o.b, -o.c), CP + 'std', 'Move every term to the left side (changing signs) before reading ' + t('a') + ', ' + t('b') + ', ' + t('c') + '.']], text: 'nature: rearrange (none)' });
       } },
       { id: 'eA1f', level: 'EMG', make: function (r) {
         var o = pickWhere(function () { return { p: nz(r, -6, 6), q: nz(r, -6, 6), m: r.int(1, 9) }; }, function (o) { var b = o.q - o.p, c = -o.p * o.q - o.m; return b !== 0 && c !== 0 && !(o.p === -1 && o.q === -5 && o.m === 2) && D(1, b, c) > 0; });
         var b = o.q - o.p, c = -o.p * o.q - o.m;
-        return natMC(r, '(f) ' + t('(' + polyT([1, -o.p]) + ')(' + polyT([1, o.q]) + ')=' + o.m), 1, b, c, { pre: t(polyT([1, b, -o.p * o.q]) + '=' + o.m) + ', so ' + t(eqT(1, b, c)), slips: [[D(1, b, -o.p * o.q), CP + 'std', 'Move the ' + t(o.m) + ' to the left side first.']], text: 'nature: expand and rearrange' });
+        return natMC(r, '' + t('(' + polyT([1, -o.p]) + ')(' + polyT([1, o.q]) + ')=' + o.m), 1, b, c, { pre: t(polyT([1, b, -o.p * o.q]) + '=' + o.m) + ', so ' + t(eqT(1, b, c)), slips: [[D(1, b, -o.p * o.q), CP + 'std', 'Move the ' + t(o.m) + ' to the left side first.']], text: 'nature: expand and rearrange' });
       } }] },
     { num: 'A2', stem: 'How many ' + t('x') + '-intercepts does each graph have?', parts: [
-      { id: 'eA2a', level: 'BEG', make: function (r) { var q = pickWhere(function () { var s = r.int(1, 3), u = nz(r, -7, 7); return [-s * s, 2 * s * u, -u * u]; }, function (q) { return AV(q[0], q[1], q[2]); }); return natMC(r, '(a) ' + t('y=' + polyT(q)), q[0], q[1], q[2], { kind: 'xint', text: 'x-intercepts: one, a < 0' }); } },
-      { id: 'eA2b', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [2, 3, 4, 5], test: function (q) { return q[2] < 0; } }); return natMC(r, '(b) ' + t('y=' + polyT(q)), q[0], q[1], q[2], { kind: 'xint', text: 'x-intercepts: two' }); } },
-      { id: 'eA2c', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { a: r.pick([-3, -2, -1, 1, 2, 3]), p: nz(r, -5, 5), q: nz(r, -6, 6) }; }, function (o) { return !(o.a === -2 && o.p === 3 && o.q === -1); }); return vfMC(r, '(c) ' + t('y=' + (o.a === 1 ? '' : o.a === -1 ? '-' : o.a) + '(' + polyT([1, -o.p]) + ')^{2}' + (o.q > 0 ? '+' : '') + o.q), o.a, o.p, o.q); } }] },
+      { id: 'eA2a', level: 'BEG', make: function (r) { var q = pickWhere(function () { var s = r.int(1, 3), u = nz(r, -7, 7); return [-s * s, 2 * s * u, -u * u]; }, function (q) { return AV(q[0], q[1], q[2]); }); return natMC(r, '' + t('y=' + polyT(q)), q[0], q[1], q[2], { kind: 'xint', text: 'x-intercepts: one, a < 0' }); } },
+      { id: 'eA2b', level: 'BEG', make: function (r) { var q = natGen(r, 1, { a: [2, 3, 4, 5], test: function (q) { return q[2] < 0; } }); return natMC(r, '' + t('y=' + polyT(q)), q[0], q[1], q[2], { kind: 'xint', text: 'x-intercepts: two' }); } },
+      { id: 'eA2c', level: 'EMG', make: function (r) { var o = pickWhere(function () { return { a: r.pick([-3, -2, -1, 1, 2, 3]), p: nz(r, -5, 5), q: nz(r, -6, 6) }; }, function (o) { return !(o.a === -2 && o.p === 3 && o.q === -1); }); return vfMC(r, '' + t('y=' + (o.a === 1 ? '' : o.a === -1 ? '-' : o.a) + '(' + polyT([1, -o.p]) + ')^{2}' + (o.q > 0 ? '+' : '') + o.q), o.a, o.p, o.q); } }] },
     { num: 'A3', shared: function (r) {
         var f = pickWhere(function () { return { m: r.int(2, 5), n: nz(r, -6, 6), p: r.int(1, 4), q: nz(r, -6, 6) }; }, function (o) { var a = o.m * o.p, b = o.m * o.q + o.n * o.p; return gcd(o.m, o.n) === 1 && gcd(o.p, o.q) === 1 && a >= 4 && b !== 0 && o.n * o.q < 0 && AV(a, b, o.n * o.q); });
         var g = pickWhere(function () { return [r.int(2, 7), nz(r, -7, 7), nz(r, -6, 6)]; }, function (q) { var d = D(q[0], q[1], q[2]); return d > 0 && !isSq(d) && gcd(gcd(q[0], q[1]), q[2]) === 1 && AV(q[0], q[1], q[2]); });
@@ -406,11 +406,11 @@
       }, stem: function (o) { return 'A rocket’s height is ' + t('h=-5t^{2}+' + o.v + 't+' + o.h0) + ' metres after ' + t('t') + ' seconds.'; }, parts: [
       { id: 'eB5a', level: 'PRG', make: function (r, o) {
         var H = Math.ceil(o.top) + r.int(1, 6), c = o.h0 - H, d = D(-5, o.v, c);
-        return Z.num(CP, '(a) Use the discriminant to show that it never reaches ' + t(H) + ' m: find the discriminant.', d, { cands: [[D(-5, o.v, o.h0 + H), CP + 'std', 'Set ' + t('h=' + H) + ' and move the ' + t(H) + ' to the left side.'], [o.v * o.v + 20 * c, CP + '4ac', 'Check the sign of ' + t('-4ac') + ': both ' + t('a') + ' and ' + t('c') + ' are negative.']],
+        return Z.num(CP, 'Use the discriminant to show that it never reaches ' + t(H) + ' m: find the discriminant.', d, { cands: [[D(-5, o.v, o.h0 + H), CP + 'std', 'Set ' + t('h=' + H) + ' and move the ' + t(H) + ' to the left side.'], [o.v * o.v + 20 * c, CP + '4ac', 'Check the sign of ' + t('-4ac') + ': both ' + t('a') + ' and ' + t('c') + ' are negative.']],
           sol: t(eqT(-5, o.v, c, 't')) + ': ' + dSol(-5, o.v, c) + ' < 0. No real roots, so it never reaches ' + H + ' m.', hints: ['Set ' + t('h=' + H) + ', write the equation in standard form, then find ' + t('b^{2}-4ac') + '.'], text: 'rocket: never reaches' });
       } },
       { id: 'eB5b', level: 'ADV', make: function (r, o) {
-        return Z.num(CP, '(b) Use the discriminant to determine its maximum height.', o.top, { after: 'm', unit: 'm', cands: [[o.v * o.v / 20, CP + 'max', 'Include the starting height: ' + t('-5t^{2}+' + o.v + 't+(' + o.h0 + '-H)=0') + '.'], [o.v / 10, CP + 'max', 'That is the time of the maximum, not the height.']],
+        return Z.num(CP, 'Use the discriminant to determine its maximum height.', o.top, { after: 'm', unit: 'm', cands: [[o.v * o.v / 20, CP + 'max', 'Include the starting height: ' + t('-5t^{2}+' + o.v + 't+(' + o.h0 + '-H)=0') + '.'], [o.v / 10, CP + 'max', 'That is the time of the maximum, not the height.']],
           sol: t('-5t^{2}+' + o.v + 't+(' + o.h0 + '-H)=0') + ' needs ' + t(o.v * o.v + '+20(' + o.h0 + '-H)\\ge 0\\Rightarrow ' + nT(o.v * o.v + 20 * o.h0) + '\\ge 20H\\Rightarrow H\\le ' + nT(o.top)) + '.<br>Maximum height ' + t(nT(o.top)) + ' m (equal roots, at ' + t('t=' + nT(o.v / 10)) + ' s).', hints: ['A height ' + t('H') + ' is reached when ' + t('-5t^{2}+' + o.v + 't+' + o.h0 + '=H') + ' has real roots: ' + t('b^{2}-4ac\\ge 0') + '.', 'The largest such ' + t('H') + ' gives equal roots.'], text: 'rocket: maximum by the discriminant' });
       } }] },
     { num: 'B6', parts: [

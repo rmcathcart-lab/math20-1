@@ -87,7 +87,7 @@
     var dc = U.setChk(DOM), rc = U.setChk(RNG0, { v: 'y', wrong: [{ is: RNGALL, code: CP + 'rng-f', hint: 'That is the range of the line. The graph of ' + t('y=|f(x)|') + ' is never below the ' + t('x') + '-axis.' }, { is: '\\{y\\mid y\\ge ' + rt(yi) + ',\\ y\\in\\mathbb{R}\\}', code: CP + 'rng-low', hint: 'The lowest point of the V is the vertex, on the ' + t('x') + '-axis.' }] });
     var fields = [{ label: 'Vertex', name: 'vertex', mode: 'math', keys: 'set', vars: ['x', 'y'], placeholder: '(x, y)' }, { label: t('y') + '-intercept', name: 'y-intercept', mode: 'math', keys: 'set', vars: ['x', 'y'] }, { label: 'Domain', name: 'domain', mode: 'math', keys: 'set', vars: ['x', 'y'] }, { label: 'Range', name: 'range', mode: 'math', keys: 'set', vars: ['x', 'y'] }];
     var keys = [pt(h, 0), rt(yi), DOM, RNG0];
-    return U.fields(o.prompt || 'For ' + t('y=' + AL(f)) + ', state the vertex, the ' + t('y') + '-intercept, the domain and the range.', fields, [vchk, yc, dc, rc], keys, 'vertex ' + t(pt(h, 0)) + '; ' + t('y') + '-intercept ' + t(pt(0, yi)) + '; domain ' + t(DOM) + '; range ' + t(RNG0),
+    return U.fields(o.prompt || (o.short ? t('y=' + AL(f)) : 'For ' + t('y=' + AL(f)) + ', state the vertex, the ' + t('y') + '-intercept, the domain and the range.'), fields, [vchk, yc, dc, rc], keys, 'vertex ' + t(pt(h, 0)) + '; ' + t('y') + '-intercept ' + t(pt(0, yi)) + '; domain ' + t(DOM) + '; range ' + t(RNG0),
       t(f + '=0') + ' gives ' + t('x=' + rt(h)) + ': vertex ' + t(pt(h, 0)) + '. ' + t('y') + '-intercept: ' + t(AL(rt(b)) + '=' + rt(yi)) + ', the point ' + t(pt(0, yi)) + '.<br>Domain ' + t(DOM) + '; range ' + t(RNG0) + ' (the V is never below the ' + t('x') + '-axis).',
       ['The vertex is the zero of the line: solve ' + t(f + '=0') + '.', 'The ' + t('y') + '-intercept of ' + t('y=|ax+b|') + ' is ' + t('|b|') + '; the range starts at the vertex, ' + t('y\\ge 0') + '.'], 'vertex, y-intercept, domain, range of y = |ax + b|',
       [[pt(-h, 0), rt(yi), DOM, RNG0], [pt(h, 0), rt(b), DOM, RNG0], [pt(h, 0), rt(yi), DOM, RNGALL]]);
@@ -141,7 +141,7 @@
       S.gi = r.pick(['a', 'b', 'c', 'd', 'f']);
       return S;
     },
-    stem: 'The graph of \\(y=f(x)\\) is shown. Draw the graph of \\(y=|f(x)|\\) on the same grid.', parts: ['a', 'b', 'c', 'd', 'e', 'f'].map(function (k) {
+    parts: ['a', 'b', 'c', 'd', 'e', 'f'].map(function (k) {
       return { id: 'q2' + k, level: { a: 'BEG', b: 'BEG', c: 'EMG', d: 'EMG', e: 'EMG', f: 'PRG' }[k], make: function (r, S) { var s = S[k]; return k === 'e' ? flatDraw(r, s.b) : vDraw(r, s.a, s.b, { showF: true, cf: rv(s.a) < 0 && r.chance(0.5) }); } };
     }).concat([{ id: 'q2g', level: 'EMG', make: function (r, S) {
       var s = S[S.gi], h = -s.b / rv(s.a), c = S.e.b;
@@ -166,15 +166,15 @@
 
   /* ---------- the questions ---------- */
   var QUESTIONS = [Q1, Q2,
-    { num: '3', stem: 'Sketch each graph on the grid without a table.', parts: [
+    { num: '3', parts: [
       { id: 'q3a', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [2, -2], half: true, hmin: -3, hmax: 2, draw: true })); return vDraw(r, s.a, s.b, {}); } },
       { id: 'q3b', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [-1], hmin: -5, hmax: 5, draw: true })); return vDraw(r, s.a, s.b, { cf: false }); } },
       { id: 'q3c', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [[1, 2], [-1, 2], [1, 3], [-1, 3]], hs: [-6, -4, -3, -2, 2, 3, 4, 6], draw: true })); return vDraw(r, s.a, s.b, { cf: rv(s.a) < 0 && r.chance(0.4) }); } }] },
     { num: '4', stem: 'For each function, state the vertex, the \\(y\\)-intercept, the domain and the range.', parts: [
-      { id: 'q4a', level: 'BEG', make: function (r) { var s = L(r, avoidL({ as: [2, 3, 4, 5], hmin: -6, hmax: 6 })); return featPart(r, s.a, s.b); } },
-      { id: 'q4b', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [-2, -3, -4, -5, -6], hmin: -6, hmax: 6 })); return featPart(r, s.a, s.b); } },
-      { id: 'q4c', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [[2, 3], [3, 4], [3, 2], [-2, 3], [-3, 4], [4, 3], [2, 5]], hs: [-9, -8, -6, -4, -3, 3, 4, 6, 8, 9, 10, 12] })); return featPart(r, s.a, s.b); } },
-      { id: 'q4d', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [-0.5, -0.25, -1.5], hs: [8, 10, 12, 14, 16, 18, -8, -12, 6], bmax: 20 })); return featPart(r, s.a, s.b, { cf: true }); } }] },
+      { id: 'q4a', level: 'BEG', make: function (r) { var s = L(r, avoidL({ as: [2, 3, 4, 5], hmin: -6, hmax: 6 })); return featPart(r, s.a, s.b, { short: true }); } },
+      { id: 'q4b', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [-2, -3, -4, -5, -6], hmin: -6, hmax: 6 })); return featPart(r, s.a, s.b, { short: true }); } },
+      { id: 'q4c', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [[2, 3], [3, 4], [3, 2], [-2, 3], [-3, 4], [4, 3], [2, 5]], hs: [-9, -8, -6, -4, -3, 3, 4, 6, 8, 9, 10, 12] })); return featPart(r, s.a, s.b, { short: true }); } },
+      { id: 'q4d', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [-0.5, -0.25, -1.5], hs: [8, 10, 12, 14, 16, 18, -8, -12, 6], bmax: 20 })); return featPart(r, s.a, s.b, { cf: true, short: true }); } }] },
     { num: '5', shared: function (r) { return L(r, avoidL({ as: [-2, -3, -4, 2, 3, 4, 5], hmin: -6, hmax: 6, test: function (z) { return z.b < 0; } })); },
       stem: function (s) { return 'Let ' + t('f(x)=' + fT(s.a, s.b)) + '. Compare ' + t('y=f(x)') + ' with ' + t('y=|f(x)|') + '.'; }, parts: ['f', 'abs'].map(function (w, i) {
       return { id: 'q5' + 'ab'.charAt(i), level: i ? 'EMG' : 'BEG', make: function (r, s) {
@@ -190,12 +190,12 @@
       } };
     }) },
     { num: '6', stem: 'Write each function in piecewise form.', parts: [
-      { id: 'q6a', level: 'BEG', make: function (r) { var s = L(r, avoidL({ as: [1], hmin: -9, hmax: 9 })); return U.piece(CP, s.a, s.b); } },
-      { id: 'q6b', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [2, 3, 4, 5], hmin: -5, hmax: 5 })); return U.piece(CP, s.a, s.b); } },
-      { id: 'q6c', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [-1], hmin: -9, hmax: 9 })); return U.piece(CP, s.a, s.b, { cf: true }); } },
-      { id: 'q6d', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [-2, -3, -4, -5], hmin: -5, hmax: 5, test: function (z) { return z.b > 0; } })); return U.piece(CP, s.a, s.b, { cf: true }); } },
-      { id: 'q6e', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [-2, -4, 2, 4], half: true, hmin: -5, hmax: 4, test: function (z) { return rv(z.a) < 0 || r.chance(0.3); } })); return U.piece(CP, s.a, s.b); } },
-      { id: 'q6f', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [[1, 3], [1, 2], [1, 4], [-1, 2], [-1, 3], [2, 3]], hs: [-9, -8, -6, -4, -3, 3, 4, 6, 8, 9] })); return U.piece(CP, s.a, s.b); } }] },
+      { id: 'q6a', level: 'BEG', make: function (r) { var s = L(r, avoidL({ as: [1], hmin: -9, hmax: 9 })); return U.piece(CP, s.a, s.b, { short: true }); } },
+      { id: 'q6b', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [2, 3, 4, 5], hmin: -5, hmax: 5 })); return U.piece(CP, s.a, s.b, { short: true }); } },
+      { id: 'q6c', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [-1], hmin: -9, hmax: 9 })); return U.piece(CP, s.a, s.b, { cf: true, short: true }); } },
+      { id: 'q6d', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [-2, -3, -4, -5], hmin: -5, hmax: 5, test: function (z) { return z.b > 0; } })); return U.piece(CP, s.a, s.b, { cf: true, short: true }); } },
+      { id: 'q6e', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [-2, -4, 2, 4], half: true, hmin: -5, hmax: 4, test: function (z) { return rv(z.a) < 0 || r.chance(0.3); } })); return U.piece(CP, s.a, s.b, { short: true }); } },
+      { id: 'q6f', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [[1, 3], [1, 2], [1, 4], [-1, 2], [-1, 3], [2, 3]], hs: [-9, -8, -6, -4, -3, 3, 4, 6, 8, 9] })); return U.piece(CP, s.a, s.b, { short: true }); } }] },
     { num: '7', stem: 'True or false?', parts: ['a', 'b', 'c', 'd', 'e'].map(function (k, i) {
       return { id: 'q7' + k, level: i < 2 ? 'EMG' : 'PRG', make: function (r) {
         var s = L(r, avoidL({ as: [1, 2, 3, 4, 5, -1, -2, -3, -5, [1, 2]], hmin: -8, hmax: 8, half: r.chance(0.3) })), cf = rv(s.a) < 0 && r.chance(0.6);
@@ -367,19 +367,19 @@
 
   /* ---------- extra practice ---------- */
   var EXTRA = [
-    { num: '1', section: 'A. Skills', stem: 'The graph of \\(y=f(x)\\) is shown. Draw the graph of \\(y=|f(x)|\\) on the same grid.', shared: function (r) {
+    { num: '1', section: 'A. Skills', shared: function (r) {
         var used = AV.slice(), mk = function (o) { o.avoid = used; o.draw = true; o.bmax = 6; var s = L(r, o); used.push([s.a, s.b]); return s; };
         return { a: mk({ as: [1], hmin: -4, hmax: 4 }), b: mk({ as: [[-1, 2], [1, 2], [-1, 3]], hs: [-4, -2, 2, 4, 6, -6, 3, -3] }), c: mk({ as: [3, -3, 2], hmin: -2, hmax: 2 }) };
       }, parts: ['a', 'b', 'c'].map(function (k, i) { return { id: 'e1' + k, level: ['BEG', 'EMG', 'EMG'][i], make: function (r, S) { var s = S[k]; return vDraw(r, s.a, s.b, { showF: true }); } }; }) },
     { num: '2', stem: 'For each function, state the vertex, the \\(y\\)-intercept, the domain and the range.', parts: [
-      { id: 'e2a', level: 'BEG', make: function (r) { var s = L(r, avoidL({ as: [1], hmin: -9, hmax: 9 })); return featPart(r, s.a, s.b); } },
-      { id: 'e2b', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [3, 4, 5, 6], hmin: -5, hmax: 5 })); return featPart(r, s.a, s.b); } },
-      { id: 'e2c', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [[-3, 4], [-2, 3], [-3, 2], [-4, 3], [-2, 5]], hs: [-8, -6, -4, -3, 3, 4, 6, 8, 9] })); return featPart(r, s.a, s.b); } }] },
+      { id: 'e2a', level: 'BEG', make: function (r) { var s = L(r, avoidL({ as: [1], hmin: -9, hmax: 9 })); return featPart(r, s.a, s.b, { short: true }); } },
+      { id: 'e2b', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [3, 4, 5, 6], hmin: -5, hmax: 5 })); return featPart(r, s.a, s.b, { short: true }); } },
+      { id: 'e2c', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [[-3, 4], [-2, 3], [-3, 2], [-4, 3], [-2, 5]], hs: [-8, -6, -4, -3, 3, 4, 6, 8, 9] })); return featPart(r, s.a, s.b, { short: true }); } }] },
     { num: '3', stem: 'Write each function in piecewise form.', parts: [
-      { id: 'e3a', level: 'BEG', make: function (r) { var s = L(r, avoidL({ as: [1], hmin: -12, hmax: 12 })); return U.piece(CP, s.a, s.b); } },
-      { id: 'e3b', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [2, 4, 6], half: true, hmin: -4, hmax: 3 })); return U.piece(CP, s.a, s.b); } },
-      { id: 'e3c', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [-2, -3, -4, -5], hmin: 1, hmax: 6 })); return U.piece(CP, s.a, s.b, { cf: true }); } },
-      { id: 'e3d', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [-1], hmin: -8, hmax: 8, test: function (z) { return z.b < 0; } })); return U.piece(CP, s.a, s.b); } }] },
+      { id: 'e3a', level: 'BEG', make: function (r) { var s = L(r, avoidL({ as: [1], hmin: -12, hmax: 12 })); return U.piece(CP, s.a, s.b, { short: true }); } },
+      { id: 'e3b', level: 'EMG', make: function (r) { var s = L(r, avoidL({ as: [2, 4, 6], half: true, hmin: -4, hmax: 3 })); return U.piece(CP, s.a, s.b, { short: true }); } },
+      { id: 'e3c', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [-2, -3, -4, -5], hmin: 1, hmax: 6 })); return U.piece(CP, s.a, s.b, { cf: true, short: true }); } },
+      { id: 'e3d', level: 'PRG', make: function (r) { var s = L(r, avoidL({ as: [-1], hmin: -8, hmax: 8, test: function (z) { return z.b < 0; } })); return U.piece(CP, s.a, s.b, { short: true }); } }] },
     { num: '4', section: 'B. Applying', shared: function (r) { return L(r, avoidL({ as: [2, -2], half: true, hmin: -3, hmax: 2, draw: true })); },
       stem: function (s) { return 'Consider ' + t('y=' + AL(fT(s.a, s.b))) + '.'; }, parts: [
       { id: 'e4a', level: 'EMG', make: function (r, s) { return vDraw(r, s.a, s.b, {}); } },

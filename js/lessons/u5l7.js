@@ -103,7 +103,9 @@
   }
   function fx(x, dp) { return nT(K.roundTo(x, dp).toFixed(dp)); }
   /* the booklet's working: x = (−b ± √(b² − 4ac)) / 2a, simplified. o.dp adds the rounded roots; o.v; o.abc shows a, b, c */
-  function solF(a, b, c, o) {
+  function dfr(s) { return String(s).replace(/\\frac\{/g, '\\dfrac{'); }
+  function solF(a, b, c, o) { return dfr(solF0(a, b, c, o)); }
+  function solF0(a, b, c, o) {
     o = o || {}; var v = o.v || 'x', Q = qf(a, b, c), D = Q.D, fac = cl(-4 * a * c);
     var inside = (b ? nT(b * b) : '') + (fac ? (fac > 0 ? (b ? '+' : '') + nT(fac) : '-' + nT(-fac)) : (b ? '' : '0'));
     var s = o.abc ? t('a=' + nT(a) + ',\\ b=' + nT(b) + ',\\ c=' + nT(c)) + ': ' : '';
@@ -132,7 +134,7 @@
     if (o.dp != null && Q.n === 2) out += '<br>' + t(v + '\\approx ' + fx(Q.vals[1], o.dp) + '\\text{ or }' + v + '\\approx ' + fx(Q.vals[0], o.dp));
     return s + out;
   }
-  Z.radT = radT; Z.qf = qf; Z.pmT = pmT; Z.oneT = oneT; Z.keyT = keyT; Z.fx = fx; Z.solF = solF;
+  Z.dfr = dfr; Z.radT = radT; Z.qf = qf; Z.pmT = pmT; Z.oneT = oneT; Z.keyT = keyT; Z.fx = fx; Z.solF = solF;
 
   /* the classic slips, as root sets */
   function fmlWrongs(cp, a, b, c) {
@@ -281,7 +283,7 @@
     o = o || {}; var v = o.v || 'x', T = uniq(vals);
     var key = o.key || (T.length ? T.map(function (x) { return v + '=' + (o.dp != null ? K.roundTo(x, o.dp).toFixed(o.dp) : vT(x)); }).join(',\\ ') : '\\text{no real roots}');
     return { prompt: prompt, input: { type: 'math', keys: 'p57', vars: [v], before: o.before, placeholder: o.placeholder || PH.replace(/x/, v) }, check: rootsChk(cp, vals, o), key: key,
-      answer: o.answer || (T.length ? t(key) : 'no real roots'), solution: o.sol, hints: o.hints || [], text: o.text, bad: badOf(o.wrongs, T, o.dp, v).concat(o.bad || []), good: o.good || [], outcome: OUT };
+      answer: o.answer || (T.length ? t(dfr(key)) : 'no real roots'), solution: o.sol, hints: o.hints || [], text: o.text, bad: badOf(o.wrongs, T, o.dp, v).concat(o.bad || []), good: o.good || [], outcome: OUT };
   }
   /* solve ax² + bx + c = 0 with the formula. o: dp, v, sol, pre (working before the formula), hints, text, wrongs (extra), abc */
   function solvePart(cp, prompt, a, b, c, o) {
@@ -322,7 +324,7 @@
   }
   function numPart(cp, prompt, T, o) {
     o = o || {};
-    var key = o.key || vT(T), frac = !/^-?[\d.]+$/.test(key);
+    var key = o.key || vT(T).replace(/\\,/g, ''), frac = !/^-?[\d.]+$/.test(key);
     return { prompt: prompt, input: frac || o.math ? { type: 'math', keys: 'p57', before: o.before, after: o.after } : { type: 'number', before: o.before, after: o.after, nr: !!o.nr }, check: numChk(cp, T, o.cands, o), key: key,
       answer: t((o.ansPre || '') + key + (o.unit ? '\\text{ ' + o.unit + '}' : '')), solution: o.sol, hints: o.hints || [], text: o.text, outcome: OUT,
       bad: (o.cands || []).filter(function (c) { return c && isFinite(c[0]) && !same(c[0], T); }).map(function (c) { return String(cl(c[0])); }).concat(o.bad || []) };
@@ -422,7 +424,7 @@
   Z.fields = function (prompt, specs, o) {
     o = o || {};
     var fields = specs.map(function (s) { return { label: s.label, name: s.name || String(s.label || '').replace(/<[^>]+>|\\\(|\\\)/g, ''), before: s.before, after: s.after, mode: s.mode, keys: s.mode === 'math' ? (s.keys || 'p57') : undefined, vars: s.vars || ['x'], placeholder: s.placeholder, wide: s.mode === 'math' }; });
-    var p = B.fields(prompt, fields, specs.map(function (s) { return s.chk; }), specs.map(function (s) { return s.key; }), specs.map(function (s) { return (s.label ? s.label + ' ' : '') + (s.ansHtml || t(s.ans != null ? s.ans : s.key)); }).join('<br>'), o.sol, o.hints || [], o.text);
+    var p = B.fields(prompt, fields, specs.map(function (s) { return s.chk; }), specs.map(function (s) { return s.key; }), specs.map(function (s) { return (s.label ? s.label + ' ' : '') + (s.ansHtml || t(dfr(s.ans != null ? s.ans : s.key))); }).join('<br>'), o.sol, o.hints || [], o.text);
     (o.swap || []).forEach(function (sw) {
       var i = sw[0], j = sw[1], inner = p.check;
       p.check = function (resp) { var r1 = inner(resp); if (r1.v === 'correct' || !Array.isArray(resp)) return r1; var s2 = resp.slice(); s2[i] = resp[j]; s2[j] = resp[i]; var r2 = inner(s2); return r2.v === 'correct' ? r2 : r1; };
@@ -432,7 +434,7 @@
   };
   /* field specs for common boxes */
   Z.fRoots = function (cp, label, vals, o) { o = o || {}; var T = uniq(vals), v = o.v || 'x'; return { label: label, mode: 'math', vars: [v], chk: rootsChk(cp, vals, o), key: o.key || (T.length ? T.map(function (x) { return v + '=' + (o.dp != null ? K.roundTo(x, o.dp).toFixed(o.dp) : vT(x)); }).join(',\\ ') : '\\text{no real roots}'), placeholder: o.placeholder || PH.replace(/x/, v) }; };
-  Z.fNum = function (cp, label, T, o) { o = o || {}; var key = o.key || vT(T), frac = !/^-?[\d.]+$/.test(key); return { label: label, mode: frac || o.math ? 'math' : undefined, chk: numChk(cp, T, o.cands, o), key: key, after: o.after, before: o.before }; };
+  Z.fNum = function (cp, label, T, o) { o = o || {}; var key = o.key || vT(T).replace(/\\,/g, ''), frac = !/^-?[\d.]+$/.test(key); return { label: label, mode: frac || o.math ? 'math' : undefined, chk: numChk(cp, T, o.cands, o), key: key, after: o.after, before: o.before }; };
   Z.fApx = function (label, x, dp, o) { o = o || {}; var key = K.roundTo(x, dp).toFixed(dp); return { label: label, chk: K.approx(x, dp, { diag: cdiag(o.cands, dp) }), key: key, ans: F(key), after: o.after, before: o.before }; };
   Z.mc = function (r, prompt, opts, sol, hints, text, keep) {
     var seen = {}, out = [];
@@ -559,21 +561,21 @@
       parts: [
         { id: '1a', level: 'BEG', make: function (r, o) {
           var b = -(o.r1 + o.r2), c = o.r1 * o.r2, ft = HW.factor.tex([polyT([1, -o.r1]), polyT([1, -o.r2])]), T = uniq([o.r1, o.r2]);
-          return Z.fields('(a) Solve by factoring.', [{ label: 'Factored:', mode: 'math', keys: 'poly', chk: K.factored(ft, { wrong: [{ is: HW.factor.tex([polyT([1, o.r1]), polyT([1, o.r2])]), code: CP + 'factor', hint: 'Check the signs: expand your brackets and compare with ' + t(polyT([1, b, c])) + '.' }] }), key: ft, placeholder: 'e.g. (x + 5)(x - 3)' },
+          return Z.fields('Solve by factoring.', [{ label: 'Factored:', mode: 'math', keys: 'poly', chk: K.factored(ft, { wrong: [{ is: HW.factor.tex([polyT([1, o.r1]), polyT([1, o.r2])]), code: CP + 'factor', hint: 'Check the signs: expand your brackets and compare with ' + t(polyT([1, b, c])) + '.' }] }), key: ft, placeholder: 'e.g. (x + 5)(x - 3)' },
             Z.fRoots(CP, 'Roots:', T, { key: 'x=' + T[0] + ',\\ x=' + T[1], wrongs: [{ vals: [-o.r1, -o.r2], code: CP + 'factor', hint: 'Each factor gives a root: ' + t('x-r=0') + ' means ' + t('x=r') + '.' }] })],
             { sol: 'Two numbers with product ' + t(nT(c)) + ' and sum ' + t(nT(b)) + ': ' + t(nT(-o.r1)) + ' and ' + t(nT(-o.r2)) + '.<br>' + t(ft + '=0') + ', so ' + t('x=' + o.r1) + ' or ' + t('x=' + o.r2) + '.', hints: ['Find two numbers with product ' + t(nT(c)) + ' and sum ' + t(nT(b)) + '.'], text: 'factor x² + bx + c, roots' });
         } },
-        { id: '1b', level: 'BEG', make: function (r, o) { return solvePart(CP, '(b) Solve with the quadratic formula.', 1, -(o.r1 + o.r2), o.r1 * o.r2, { text: 'formula: integer roots', post: 'The same roots as factoring ✓' }); } }] },
+        { id: '1b', level: 'BEG', make: function (r, o) { return solvePart(CP, 'Solve with the quadratic formula.', 1, -(o.r1 + o.r2), o.r1 * o.r2, { text: 'formula: integer roots', post: 'The same roots as factoring ✓' }); } }] },
     { num: '2', shared: function (r) { return decPick(r); },
       stem: function (o) { return 'Solve ' + t(eqT(o.m * o.p, o.m * o.q + o.n * o.p, o.n * o.q)) + '.'; },
       parts: [
         { id: '2a', level: 'EMG', make: function (r, o) {
           var ft = HW.factor.tex([polyT([o.m, o.n]), polyT([o.p, o.q])]), T = uniq([-o.n / o.m, -o.q / o.p]);
-          return Z.fields('(a) Solve by decomposition.', [{ label: 'Factored:', mode: 'math', keys: 'poly', chk: K.factored(ft, { wrong: facWrongs(o.m, o.n, o.p, o.q) }), key: ft, placeholder: 'e.g. (3x + 1)(2x - 3)' },
+          return Z.fields('Solve by decomposition.', [{ label: 'Factored:', mode: 'math', keys: 'poly', chk: K.factored(ft, { wrong: facWrongs(o.m, o.n, o.p, o.q) }), key: ft, placeholder: 'e.g. (3x + 1)(2x - 3)' },
             Z.fRoots(CP, 'Roots:', T, { key: 'x=' + frT(-o.n, o.m) + ',\\ x=' + frT(-o.q, o.p), wrongs: [{ vals: [o.n / o.m, o.q / o.p], code: CP + 'factor', hint: 'Set each factor equal to 0: ' + t('(' + polyT([o.m, o.n]) + ')=0') + ' gives ' + t('x=' + frT(-o.n, o.m)) + '.' }, { vals: [-o.n, -o.q], code: CP + 'factor', hint: 'Divide by the ' + t('x') + ' coefficient: ' + t(polyT([o.m, o.n]) + '=0') + ' gives ' + t('x=' + frT(-o.n, o.m)) + '.' }] })],
             { sol: decSol(o.m, o.n, o.p, o.q), hints: ['Find two numbers with product ' + t('ac') + ' and sum ' + t('b') + ', split the middle term, then group.'], text: 'decomposition, roots' });
         } },
-        { id: '2b', level: 'EMG', make: function (r, o) { return solvePart(CP, '(b) Solve with the quadratic formula.', o.m * o.p, o.m * o.q + o.n * o.p, o.n * o.q, { text: 'formula: rational roots', post: 'The discriminant is a perfect square, so the roots are rational (the same as by decomposition ✓).' }); } }] },
+        { id: '2b', level: 'EMG', make: function (r, o) { return solvePart(CP, 'Solve with the quadratic formula.', o.m * o.p, o.m * o.q + o.n * o.p, o.n * o.q, { text: 'formula: rational roots', post: 'The discriminant is a perfect square, so the roots are rational (the same as by decomposition ✓).' }); } }] },
     { num: '3', parts: [
       { id: '3a', level: 'EMG', make: function (r) { var Q = pickWhere(function () { var h = nz(r, -7, 7), k = r.pick([2, 3, 5, 6, 7, 8, 10, 11, 12, 13, 18, 20]); return qf(1, -2 * h, h * h - k); }, function (Q) { return Q.c !== 0 && AV(1, Q.b, Q.c); }); return csPart(r, 1, Q.b, Q.c); } },
       { id: '3b', level: 'PRG', make: function (r) { var o = pickWhere(function () { var a = r.pick([2, 3, 5]), h = nz(r, -4, 4); return { a: a, b: -2 * a * h, c: nz(r, -9, 9) }; }, function (o) { var Q = qf(o.a, o.b, o.c); return Q.irr && gcd(gcd(o.a, o.b), o.c) === 1 && !isInt(o.c / o.a) && AV(o.a, o.b, o.c); }); return csPart(r, o.a, o.b, o.c); } }] },
@@ -598,17 +600,17 @@
       }, stem: 'Determine the zeros of each function, exactly and to the nearest hundredth.', parts: [
       { id: '6a', level: 'EMG', make: function (r, o) {
         var Q = o.A;
-        return Z.fields('(a) ' + t('y=' + polyT([1, Q.b, Q.c])), [Z.fRoots(CP, 'Exact zeros:', Q.vals, { irr: true, key: keyT(Q), wrongs: fmlWrongs(CP, 1, Q.b, Q.c), what: 'zero' }), Z.fRoots(CP, 'To the nearest hundredth:', Q.vals, { dp: 2, wrongs: fmlWrongs(CP, 1, Q.b, Q.c), what: 'zero' })],
+        return Z.fields('' + t('y=' + polyT([1, Q.b, Q.c])), [Z.fRoots(CP, 'Exact zeros:', Q.vals, { irr: true, key: keyT(Q), wrongs: fmlWrongs(CP, 1, Q.b, Q.c), what: 'zero' }), Z.fRoots(CP, 'To the nearest hundredth:', Q.vals, { dp: 2, wrongs: fmlWrongs(CP, 1, Q.b, Q.c), what: 'zero' })],
           { sol: 'Solve ' + t(eqT(1, Q.b, Q.c)) + ': ' + solF(1, Q.b, Q.c, { dp: 2 }), hints: ['The zeros of the function are the roots of ' + t(polyT([1, Q.b, Q.c]) + '=0') + '.'].concat(HF.slice(1)), text: 'zeros exact and rounded' });
       } },
       { id: '6b', level: 'PRG', make: function (r, o) {
         var Q = o.B;
-        return Z.fields('(b) ' + t('y=' + polyT([Q.a, Q.b, Q.c])), [Z.fRoots(CP, 'Exact zeros:', Q.vals, { irr: true, key: keyT(Q), wrongs: fmlWrongs(CP, Q.a, Q.b, Q.c), what: 'zero' }), Z.fRoots(CP, 'To the nearest hundredth:', Q.vals, { dp: 2, wrongs: fmlWrongs(CP, Q.a, Q.b, Q.c), what: 'zero' })],
+        return Z.fields('' + t('y=' + polyT([Q.a, Q.b, Q.c])), [Z.fRoots(CP, 'Exact zeros:', Q.vals, { irr: true, key: keyT(Q), wrongs: fmlWrongs(CP, Q.a, Q.b, Q.c), what: 'zero' }), Z.fRoots(CP, 'To the nearest hundredth:', Q.vals, { dp: 2, wrongs: fmlWrongs(CP, Q.a, Q.b, Q.c), what: 'zero' })],
           { sol: 'Solve ' + t(eqT(Q.a, Q.b, Q.c)) + ': ' + solF(Q.a, Q.b, Q.c, { dp: 2 }), hints: ['Here ' + t('a') + ' is negative, so ' + t('2a') + ' is negative: simplify the signs at the end.'].concat(HF.slice(1)), text: 'zeros with a < 0' });
       } },
       { id: '6c', level: 'EMG', make: function (r, o) {
         var Q = o.B, x1 = Q.vals[1], x2 = Q.vals[0];
-        return Z.fields('(c) State the ' + t('x') + '-intercepts of the graph of ' + t('y=' + polyT([Q.a, Q.b, Q.c])) + ' in (b), to the nearest hundredth.', [{ label: 'One intercept:', mode: 'math', chk: ptRound(x1, 0, 2), key: '(' + fx(x1, 2) + ',0)', placeholder: 'e.g. (2.35, 0)' }, { label: 'The other:', mode: 'math', chk: ptRound(x2, 0, 2), key: '(' + fx(x2, 2) + ',0)', placeholder: 'e.g. (-1.07, 0)' }],
+        return Z.fields('State the ' + t('x') + '-intercepts of the graph of ' + t('y=' + polyT([Q.a, Q.b, Q.c])) + ' in (b), to the nearest hundredth.', [{ label: 'One intercept:', mode: 'math', chk: ptRound(x1, 0, 2), key: '(' + fx(x1, 2) + ',0)', placeholder: 'e.g. (2.35, 0)' }, { label: 'The other:', mode: 'math', chk: ptRound(x2, 0, 2), key: '(' + fx(x2, 2) + ',0)', placeholder: 'e.g. (-1.07, 0)' }],
           { swap: [[0, 1]], sol: 'The ' + t('x') + '-intercepts are the zeros: ' + t('(' + fx(x1, 2) + ',\\ 0)') + ' and ' + t('(' + fx(x2, 2) + ',\\ 0)') + '.<br>Check: graph ' + t('Y_1=' + polyT([Q.a, Q.b, Q.c])) + ', then 2nd [TRACE] (CALC), 2: zero, with a left and a right bound around each intercept.', hints: ['An ' + t('x') + '-intercept is a point ' + t('(x,\\ 0)') + ' where ' + t('x') + ' is a zero.'], text: 'x-intercepts as points', bad: [['(' + fx(x1, 2) + ',' + fx(x1, 2) + ')', '(' + fx(x2, 2) + ',0)'], ['(0,' + fx(x1, 2) + ')', '(0,' + fx(x2, 2) + ')']] });
       } }] },
     { num: '7', shared: q7shared, stem: function (o) {
@@ -620,14 +622,14 @@
       }, parts: [
       { id: '7a', level: 'PRG', make: function (r, o) {
         var a = o.a, b = o.b, c = o.c, Dc = b * b - 4 * a * c;
-        return Z.mc(r, '(a) Identify the two errors.', [
+        return Z.mc(r, 'Identify the two errors.', [
           { html: 'The sign of ' + t('-4ac') + ': ' + t('-4(' + a + ')(' + c + ')=+' + (-4 * a * c)) + ', so the discriminant is ' + t(Dc) + '; and in the last step only ' + t(nT(-b)) + ' was divided by ' + t(2 * a) + '.', right: true },
           { html: 'The sign of ' + t('-b') + ' (it should be ' + t('+' + b) + '); and in the last step only ' + t(nT(-b)) + ' was divided by ' + t(2 * a) + '.', why: 'With ' + t('b=' + b) + ', ' + t('-b=' + nT(-b)) + ' is right. Look at ' + t('-4ac') + ' with ' + t('c=' + c) + '.', code: CP + 'errors' },
           { html: 'The sign of ' + t('-4ac') + '; and the radical should not have been simplified.', why: 'The radical was simplified correctly. Look at the last step: was every term divided by ' + t(2 * a) + '?', code: CP + 'errors' },
           { html: 'The denominator should be ' + t(a) + ', not ' + t(2 * a) + '; and the sign of ' + t('-4ac') + '.', why: 'The denominator ' + t('2a=' + 2 * a) + ' is right. Look at the last step.', code: CP + 'errors' }],
           'Error 1: ' + t('-4(' + a + ')(' + c + ')=+' + (-4 * a * c)) + ', so the discriminant is ' + t(b * b + '+' + (-4 * a * c) + '=' + Dc) + ', not ' + t(b * b + 4 * a * c) + '.<br>Error 2: dividing by ' + t(2 * a) + ' must apply to <b>every</b> term of the numerator.', ['Check each sign in the discriminant, then check the division at the end.'], 'error analysis: which errors');
       } },
-      { id: '7b', level: 'PRG', make: function (r, o) { return solvePart(CP, '(b) Give the correct exact roots.', o.a, o.b, o.c, { text: 'error analysis: correct roots' }); } }] },
+      { id: '7b', level: 'PRG', make: function (r, o) { return solvePart(CP, 'Give the correct exact roots.', o.a, o.b, o.c, { text: 'error analysis: correct roots' }); } }] },
     { num: '8', shared: function (r) {
         var q8 = pickWhere(function () { return { a1: r.pick([2, 3, 5, 6, 7]), s1: r.int(2, 6) }; }, function (z) { return AV(z.a1, 0, -z.a1 * z.s1 * z.s1); }), a1 = q8.a1, s1 = q8.s1, sqA = [a1, 0, -a1 * s1 * s1];
         var fac = pickWhere(function () { return [nz(r, -9, 9), nz(r, -9, 9)]; }, function (z) { return z[0] !== z[1] && z[0] !== -z[1] && AV(1, -(z[0] + z[1]), z[0] * z[1]) && Math.abs(z[0] * z[1]) <= 40; });
@@ -637,17 +639,17 @@
         var fm2 = gen(r, { a: [2, 3, 4, 5], b: [-7, 7], c: [-7, 7], avoid: AV, test: function (Q) { return Q.irr && Q.g === 1 && Q.b !== 0; } });
         return { sqA: sqA, s1: s1, fac: fac, vt: vt, fm1: fm1, gf: gf, fm2: fm2 };
       }, stem: 'Choose an efficient method and solve. Give exact roots.', parts: [
-      { id: '8a', level: 'BEG', make: function (r, o) { var a = o.sqA[0], c = o.sqA[2]; return rootsPart(CP, '(a) ' + t(polyT([a, 0, c]) + '=0'), [-o.s1, o.s1], { key: 'x=\\pm ' + o.s1, sol: 'Square roots (no ' + t('x') + ' term): ' + t(a + 'x^{2}=' + (-c)) + ', ' + t('x^{2}=' + o.s1 * o.s1) + ', ' + t('x=\\pm ' + o.s1), hints: ['There is no ' + t('x') + ' term: isolate ' + t('x^{2}') + ' and take the square root of both sides.'], text: 'square roots: ax² − c = 0', wrongs: [{ vals: [o.s1], code: 'sol-missing', hint: 'A positive number has two square roots: ' + t('\\pm') + '.' }] }); } },
-      { id: '8b', level: 'BEG', make: function (r, o) { var z = o.fac, b = -(z[0] + z[1]), c = z[0] * z[1]; return rootsPart(CP, '(b) ' + t(eqT(1, b, c)), z, { sol: 'Factoring: ' + t(HW.factor.tex([polyT([1, -z[0]]), polyT([1, -z[1]])]) + '=0') + ', so ' + t('x=' + z[0]) + ' or ' + t('x=' + z[1]) + '.', hints: ['It factors: two numbers with product ' + t(c) + ' and sum ' + t(b) + '.'], text: 'factoring: x² + bx + c', wrongs: [{ vals: [-z[0], -z[1]], code: CP + 'factor', hint: t('(x-r)=0') + ' gives ' + t('x=r') + ': check the signs.' }] }); } },
-      { id: '8c', level: 'EMG', make: function (r, o) { var v = o.vt, q = v.k * v.s * v.s; return rootsPart(CP, '(c) ' + t(v.k + '(' + polyT([1, -v.h]) + ')^{2}-' + q + '=0'), [v.h - v.s, v.h + v.s], { sol: 'Square roots: ' + t('(' + polyT([1, -v.h]) + ')^{2}=' + v.s * v.s) + ', ' + t(polyT([1, -v.h]) + '=\\pm ' + v.s) + ', so ' + t('x=' + (v.h + v.s)) + ' or ' + t('x=' + (v.h - v.s)) + '.', hints: ['Isolate the square, then take the square root of both sides (' + t('\\pm') + ').'], text: 'square roots: a(x − p)² − q = 0', wrongs: [{ vals: [-v.h - v.s, -v.h + v.s], code: CP + 'cs-p', hint: 'Check the sign: ' + t('x-p=\\pm s') + ' gives ' + t('x=p\\pm s') + '.' }, { vals: [v.h + v.s], code: 'sol-missing', hint: 'Remember ' + t('\\pm') + ' when you take the square root.' }] }); } },
-      { id: '8d', level: 'EMG', make: function (r, o) { var Q = o.fm1; return solvePart(CP, '(d) ' + t(eqT(1, Q.b, Q.c)), 1, Q.b, Q.c, { text: 'formula: does not factor', pre: 'Formula (no two integers have product ' + t(Q.c) + ' and sum ' + t(Q.b) + '):' }); } },
-      { id: '8e', level: 'EMG', make: function (r, o) { var z = o.gf, g = gcd(z.a, z.b); return rootsPart(CP, '(e) ' + t(z.a + 'x^{2}=' + polyT([z.b, 0])), [0, z.b / z.a], { key: 'x=0,\\ x=' + frT(z.b, z.a), sol: 'Factoring (no constant term): ' + t(polyT([z.a, -z.b, 0]) + '=0') + ', ' + t(polyT([g, 0]).replace(/^1x/, 'x') + '(' + polyT([z.a / g, -z.b / g]) + ')=0') + ', so ' + t('x=0') + ' or ' + t('x=' + frT(z.b, z.a)) + '.', hints: ['Move every term to one side and factor out the common factor. Don’t divide both sides by ' + t('x') + ' (you would lose the root ' + t('x=0') + ').'], text: 'factoring: no constant term', wrongs: [{ vals: [z.b / z.a], code: 'sol-missing', hint: 'Dividing by ' + t('x') + ' loses a root: factor instead, and ' + t('x=0') + ' is a root too.' }] }); } },
-      { id: '8f', level: 'PRG', make: function (r, o) { var Q = o.fm2; return solvePart(CP, '(f) ' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { text: 'formula: a ≠ 1, does not factor', pre: 'Formula (it does not factor over the integers):' }); } },
+      { id: '8a', level: 'BEG', make: function (r, o) { var a = o.sqA[0], c = o.sqA[2]; return rootsPart(CP, '' + t(polyT([a, 0, c]) + '=0'), [-o.s1, o.s1], { key: 'x=\\pm ' + o.s1, sol: 'Square roots (no ' + t('x') + ' term): ' + t(a + 'x^{2}=' + (-c)) + ', ' + t('x^{2}=' + o.s1 * o.s1) + ', ' + t('x=\\pm ' + o.s1), hints: ['There is no ' + t('x') + ' term: isolate ' + t('x^{2}') + ' and take the square root of both sides.'], text: 'square roots: ax² − c = 0', wrongs: [{ vals: [o.s1], code: 'sol-missing', hint: 'A positive number has two square roots: ' + t('\\pm') + '.' }] }); } },
+      { id: '8b', level: 'BEG', make: function (r, o) { var z = o.fac, b = -(z[0] + z[1]), c = z[0] * z[1]; return rootsPart(CP, '' + t(eqT(1, b, c)), z, { sol: 'Factoring: ' + t(HW.factor.tex([polyT([1, -z[0]]), polyT([1, -z[1]])]) + '=0') + ', so ' + t('x=' + z[0]) + ' or ' + t('x=' + z[1]) + '.', hints: ['It factors: two numbers with product ' + t(c) + ' and sum ' + t(b) + '.'], text: 'factoring: x² + bx + c', wrongs: [{ vals: [-z[0], -z[1]], code: CP + 'factor', hint: t('(x-r)=0') + ' gives ' + t('x=r') + ': check the signs.' }] }); } },
+      { id: '8c', level: 'EMG', make: function (r, o) { var v = o.vt, q = v.k * v.s * v.s; return rootsPart(CP, '' + t(v.k + '(' + polyT([1, -v.h]) + ')^{2}-' + q + '=0'), [v.h - v.s, v.h + v.s], { sol: 'Square roots: ' + t('(' + polyT([1, -v.h]) + ')^{2}=' + v.s * v.s) + ', ' + t(polyT([1, -v.h]) + '=\\pm ' + v.s) + ', so ' + t('x=' + (v.h + v.s)) + ' or ' + t('x=' + (v.h - v.s)) + '.', hints: ['Isolate the square, then take the square root of both sides (' + t('\\pm') + ').'], text: 'square roots: a(x − p)² − q = 0', wrongs: [{ vals: [-v.h - v.s, -v.h + v.s], code: CP + 'cs-p', hint: 'Check the sign: ' + t('x-p=\\pm s') + ' gives ' + t('x=p\\pm s') + '.' }, { vals: [v.h + v.s], code: 'sol-missing', hint: 'Remember ' + t('\\pm') + ' when you take the square root.' }] }); } },
+      { id: '8d', level: 'EMG', make: function (r, o) { var Q = o.fm1; return solvePart(CP, '' + t(eqT(1, Q.b, Q.c)), 1, Q.b, Q.c, { text: 'formula: does not factor', pre: 'Formula (no two integers have product ' + t(Q.c) + ' and sum ' + t(Q.b) + '):' }); } },
+      { id: '8e', level: 'EMG', make: function (r, o) { var z = o.gf, g = gcd(z.a, z.b); return rootsPart(CP, '' + t(z.a + 'x^{2}=' + polyT([z.b, 0])), [0, z.b / z.a], { key: 'x=0,\\ x=' + frT(z.b, z.a), sol: 'Factoring (no constant term): ' + t(polyT([z.a, -z.b, 0]) + '=0') + ', ' + t(polyT([g, 0]).replace(/^1x/, 'x') + '(' + polyT([z.a / g, -z.b / g]) + ')=0') + ', so ' + t('x=0') + ' or ' + t('x=' + frT(z.b, z.a)) + '.', hints: ['Move every term to one side and factor out the common factor. Don’t divide both sides by ' + t('x') + ' (you would lose the root ' + t('x=0') + ').'], text: 'factoring: no constant term', wrongs: [{ vals: [z.b / z.a], code: 'sol-missing', hint: 'Dividing by ' + t('x') + ' loses a root: factor instead, and ' + t('x=0') + ' is a root too.' }] }); } },
+      { id: '8f', level: 'PRG', make: function (r, o) { var Q = o.fm2; return solvePart(CP, '' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { text: 'formula: a ≠ 1, does not factor', pre: 'Formula (it does not factor over the integers):' }); } },
       { id: '8g', level: 'EMG', make: function (r, o) {
         var rows = [{ id: 'a', html: '(a) ' + t(polyT([o.sqA[0], 0, o.sqA[2]]) + '=0') }, { id: 'b', html: '(b) ' + t(eqT(1, -(o.fac[0] + o.fac[1]), o.fac[0] * o.fac[1])) }, { id: 'c', html: '(c) ' + t(o.vt.k + '(' + polyT([1, -o.vt.h]) + ')^{2}-' + o.vt.k * o.vt.s * o.vt.s + '=0') },
           { id: 'd', html: '(d) ' + t(eqT(1, o.fm1.b, o.fm1.c)) }, { id: 'e', html: '(e) ' + t(o.gf.a + 'x^{2}=' + polyT([o.gf.b, 0])) }, { id: 'f', html: '(f) ' + t(eqT(o.fm2.a, o.fm2.b, o.fm2.c)) }];
         var cols = [{ id: 'fac', html: 'Factoring' }, { id: 'sq', html: 'Square roots' }, { id: 'qf', html: 'Quadratic formula' }];
-        var p = B.grid('(g) Name the most efficient method for each equation above.', rows, cols, { a: 'sq', b: 'fac', c: 'sq', d: 'qf', e: 'fac', f: 'qf' }, { rowHead: 'Equation', colHead: 'Method' },
+        var p = B.grid('Name the most efficient method for each equation above.', rows, cols, { a: 'sq', b: 'fac', c: 'sq', d: 'qf', e: 'fac', f: 'qf' }, { rowHead: 'Equation', colHead: 'Method' },
           'Square roots: no ' + t('x') + ' term, or the form ' + t('a(x-p)^{2}+q=0') + ' — (a), (c).<br>Factoring: it factors easily, or there is no constant term — (b), (e).<br>Quadratic formula: it does not factor — (d), (f).', ['No ' + t('x') + ' term or a squared bracket: square roots. Easy factors or no constant: factoring. Otherwise: the formula.'], 'choose a method');
         p.outcome = OUT; return p;
       } }] },
@@ -655,12 +657,12 @@
       { id: '9a', level: 'EMG', make: function (r) {
         var o = pickWhere(function () { return { p: r.int(1, 7), q: r.int(1, 6), s: r.int(1, 9) }; }, function (o) { var Q = qf(1, -(o.p + o.q), o.s); return Q.irr && AV(1, Q.b, Q.c) && !(o.p === 4 && o.q === 3 && o.s === 5); });
         var b = -(o.p + o.q), c = o.s;
-        return stdFields('(a) ' + t('x(x-' + o.p + ')=' + o.q + 'x-' + o.s), 'x^2-' + o.p + 'x', o.q + 'x-' + o.s, [1, b, c], { pre: t('x^{2}-' + o.p + 'x=' + o.q + 'x-' + o.s) + ', so ' + t(eqT(1, b, c)), text: 'standard form: x(x − p) = qx − s', wrongs: [{ vals: rootsOf(1, -o.p, 0), code: CP + 'std', hint: 'Put the equation in standard form first (every term on one side, 0 on the other).' }] });
+        return stdFields('' + t('x(x-' + o.p + ')=' + o.q + 'x-' + o.s), 'x^2-' + o.p + 'x', o.q + 'x-' + o.s, [1, b, c], { pre: t('x^{2}-' + o.p + 'x=' + o.q + 'x-' + o.s) + ', so ' + t(eqT(1, b, c)), text: 'standard form: x(x − p) = qx − s', wrongs: [{ vals: rootsOf(1, -o.p, 0), code: CP + 'std', hint: 'Put the equation in standard form first (every term on one side, 0 on the other).' }] });
       } },
       { id: '9b', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { return { h: nz(r, -5, 5), m: r.int(1, 6), n: r.int(-9, 12) }; }, function (o) { var b = 2 * o.h - o.m, c = o.h * o.h - o.n, Q = qf(1, b, c); return Q.irr && c !== 0 && b !== 0 && AV(1, b, c) && !(o.h === 3 && o.m === 2 && o.n === 10); });
         var b = 2 * o.h - o.m, c = o.h * o.h - o.n, rhs = polyT([o.m, o.n]);
-        return stdFields('(b) ' + t('(' + polyT([1, o.h]) + ')^{2}=' + rhs), polyT([1, 2 * o.h, o.h * o.h]), rhs, [1, b, c], { pre: t(polyT([1, 2 * o.h, o.h * o.h]) + '=' + rhs) + ', so ' + t(eqT(1, b, c)), text: 'standard form: (x + h)² = mx + n', hint: t('(x+h)^{2}=x^{2}+2hx+h^{2}'), cands: [[[1, -o.m, o.h * o.h - o.n], CP + 'std-exp', 'Square the binomial fully: ' + t('(' + polyT([1, o.h]) + ')^{2}=' + polyT([1, 2 * o.h, o.h * o.h])) + ' (don’t forget the middle term).']] });
+        return stdFields('' + t('(' + polyT([1, o.h]) + ')^{2}=' + rhs), polyT([1, 2 * o.h, o.h * o.h]), rhs, [1, b, c], { pre: t(polyT([1, 2 * o.h, o.h * o.h]) + '=' + rhs) + ', so ' + t(eqT(1, b, c)), text: 'standard form: (x + h)² = mx + n', hint: t('(x+h)^{2}=x^{2}+2hx+h^{2}'), cands: [[[1, -o.m, o.h * o.h - o.n], CP + 'std-exp', 'Square the binomial fully: ' + t('(' + polyT([1, o.h]) + ')^{2}=' + polyT([1, 2 * o.h, o.h * o.h])) + ' (don’t forget the middle term).']] });
       } },
       { id: '9c', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { var m = r.int(2, 5), p = nz(r, -4, 4), n = nz(r, -5, 5), s = nz(r, -5, 5), u = nz(r, -5, 5); return { m: m, n: n, p: p, s: s, u: u }; }, function (o) {
@@ -668,7 +670,7 @@
         });
         var A = o.m - 1, C = -o.n * o.p - o.s * o.u, v = -C / A, Lt = '(' + polyT([o.m, -o.n]) + ')(' + polyT([1, o.p]) + ')', Rt = '(' + polyT([1, o.s]) + ')(' + polyT([1, o.u]) + ')';
         var Lx = polyT([o.m, o.m * o.p - o.n, -o.n * o.p]), Rx = polyT([1, o.s + o.u, o.s * o.u]);
-        return stdFields('(c) ' + t(Lt + '=' + Rt), Lx, Rx, [A, 0, C], { pre: t(Lx + '=' + Rx) + ', so ' + t(polyT([A, 0, C]) + '=0'), sqrtSol: 'There is no ' + t('x') + ' term: ' + t('x^{2}=' + v) + ', so ' + t('x=\\pm\\sqrt{' + v + '}') + ' (square roots).', text: 'standard form: the x terms cancel' });
+        return stdFields('' + t(Lt + '=' + Rt), Lx, Rx, [A, 0, C], { pre: t(Lx + '=' + Rx) + ', so ' + t(polyT([A, 0, C]) + '=0'), sqrtSol: 'There is no ' + t('x') + ' term: ' + t('x^{2}=' + v) + ', so ' + t('x=\\pm\\sqrt{' + v + '}') + ' (square roots).', text: 'standard form: the x terms cancel' });
       } },
       { id: '9d', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { var d = r.pick([[4, 3], [3, 2], [2, 3], [5, 2], [2, 5], [6, 4], [3, 4], [4, 6]]); return { d1: d[0], d2: d[1], s: sgn(r), k: r.int(1, 3) }; }, function (o) {
@@ -676,30 +678,30 @@
         });
         var L = o.d1 * o.d2 / gcd(o.d1, o.d2), a = L / o.d1, b = o.s * L / o.d2, c = -o.k * L;
         var eq = '\\frac{x^{2}}{' + o.d1 + '}' + (o.s > 0 ? '+' : '-') + '\\frac{x}{' + o.d2 + '}-' + o.k + '=0';
-        return stdFields('(d) ' + t(eq), '\\frac{x^{2}}{' + o.d1 + '}' + (o.s > 0 ? '+' : '-') + '\\frac{x}{' + o.d2 + '}-' + o.k, '0', [a, b, c], { pre: 'Multiply every term by ' + t(L) + ': ' + t(eqT(a, b, c)), text: 'standard form: clear fractions', hint: 'multiply every term by the LCD to clear the fractions' });
+        return stdFields('' + t(eq), '\\frac{x^{2}}{' + o.d1 + '}' + (o.s > 0 ? '+' : '-') + '\\frac{x}{' + o.d2 + '}-' + o.k, '0', [a, b, c], { pre: 'Multiply every term by ' + t(L) + ': ' + t(eqT(a, b, c)), text: 'standard form: clear fractions', hint: 'multiply every term by the LCD to clear the fractions' });
       } },
       { id: '9e', level: 'ADV', make: function (r) {
         var o = pickWhere(function () { return { q: nz(r, -5, 5), s: r.int(1, 9) }; }, function (o) { var Q = qf(1, -o.q, -o.s); return Q.irr && !(o.q === 2 && o.s === 5) && AV(1, -o.q, -o.s); });
         var Q = qf(1, -o.q, -o.s);
-        var p = stdFields('(e) ' + t('x-\\frac{' + o.s + '}{x}=' + o.q) + ', ' + t('x\\ne 0'), 'x^2-' + o.s, polyT([o.q, 0]), [1, -o.q, -o.s], { pre: 'Multiply both sides by ' + t('x') + ': ' + t('x^{2}-' + o.s + '=' + polyT([o.q, 0])) + ', so ' + t(eqT(1, -o.q, -o.s)), text: 'standard form: variable in a denominator', hint: 'first multiply both sides by ' + t('x') });
+        var p = stdFields('' + t('x-\\frac{' + o.s + '}{x}=' + o.q) + ', ' + t('x\\ne 0'), 'x^2-' + o.s, polyT([o.q, 0]), [1, -o.q, -o.s], { pre: 'Multiply both sides by ' + t('x') + ': ' + t('x^{2}-' + o.s + '=' + polyT([o.q, 0])) + ', so ' + t(eqT(1, -o.q, -o.s)), text: 'standard form: variable in a denominator', hint: 'first multiply both sides by ' + t('x') });
         p.solution += '<br>Neither root is ' + t('0') + ', so both are allowed.';
         return p;
       } },
       { id: '9f', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { return { g: r.pick([3, 4, 5, 6]), a: r.int(2, 5), b: nz(r, -8, 8), c: r.int(1, 9) }; }, function (o) { var Q = qf(o.a, o.b, -o.c); return Q.irr && gcd(gcd(o.a, o.b), o.c) === 1 && AV(o.a, o.b, -o.c) && !(o.g === 5 && o.a === 4 && o.b === 8); });
         var A = o.g * o.a, Bc = o.g * o.b, C = o.g * o.c;
-        return stdFields('(f) ' + t(polyT([A, Bc, 0]) + '=' + C), polyT([A, Bc, 0]), String(C), [o.a, o.b, -o.c], { pre: t(polyT([A, Bc, -C]) + '=0') + '; divide every term by ' + t(o.g) + ': ' + t(eqT(o.a, o.b, -o.c)), text: 'standard form: divide out a common factor' });
+        return stdFields('' + t(polyT([A, Bc, 0]) + '=' + C), polyT([A, Bc, 0]), String(C), [o.a, o.b, -o.c], { pre: t(polyT([A, Bc, -C]) + '=0') + '; divide every term by ' + t(o.g) + ': ' + t(eqT(o.a, o.b, -o.c)), text: 'standard form: divide out a common factor' });
       } }] },
     { num: '10', shared: function (r) { return pickWhere(function () { return { v: r.int(9, 19), h0: r.pick([0.5, 1, 1.2, 1.5, 1.8, 2, 2.5]), H: r.int(3, 9) }; }, function (o) { var top = o.h0 + o.v * o.v / 19.6; return !(o.v === 12 && o.h0 === 1.5) && !(o.v === 15 && o.h0 === 2) && o.H < top - 0.8 && o.H > o.h0 + 1 && safe(rootsOf(-4.9, o.v, o.h0), 1) && safe(rootsOf(-4.9, o.v, o.h0 - o.H), 1); }); },
       stem: function (o) { return 'A soccer ball is kicked from a height of ' + t(nT(o.h0)) + ' m. Its height after ' + t('t') + ' seconds is ' + t('h=-4.9t^{2}+' + o.v + 't+' + nT(o.h0)) + ' metres.'; }, parts: [
       { id: '10a', level: 'PRG', make: function (r, o) {
         var V = rootsOf(-4.9, o.v, o.h0), T = V[1];
-        return apxPart('(a) When does the ball land, to the nearest tenth of a second?', T, 1, { after: 's', unit: 's', cands: [[-V[0], CP + 'neg-root', 'That is the negative root without its sign: a negative time is before the kick, so reject it and use the other root.'], [o.v / 9.8, CP + 'vertex', 'That is when the ball is highest. It lands when ' + t('h=0') + '.'], [o.v / 4.9, CP + 'h0', 'Include the starting height: solve ' + t('-4.9t^{2}+' + o.v + 't+' + nT(o.h0) + '=0') + '.']],
+        return apxPart('When does the ball land, to the nearest tenth of a second?', T, 1, { after: 's', unit: 's', cands: [[-V[0], CP + 'neg-root', 'That is the negative root without its sign: a negative time is before the kick, so reject it and use the other root.'], [o.v / 9.8, CP + 'vertex', 'That is when the ball is highest. It lands when ' + t('h=0') + '.'], [o.v / 4.9, CP + 'h0', 'Include the starting height: solve ' + t('-4.9t^{2}+' + o.v + 't+' + nT(o.h0) + '=0') + '.']],
           sol: 'It lands when ' + t('h=0') + ': ' + solF(-4.9, o.v, o.h0, { v: 't', dp: 2 }) + '<br>Reject the negative time. It lands after about ' + t(fx(T, 1)) + ' s.', hints: ['The ball lands when ' + t('h=0') + '.', 'Reject the negative root: it is before the kick.'], text: 'ball: landing time' });
       } },
       { id: '10b', level: 'ADV', make: function (r, o) {
         var c = cl(o.h0 - o.H), V = rootsOf(-4.9, o.v, c);
-        return rootsPart(CP, '(b) At what times is the ball ' + o.H + ' m above the ground, to the nearest tenth of a second?', V, { dp: 1, v: 't', what: 'time', placeholder: 'e.g. t = 0.4, t = 2.1', key: 't=' + fx(V[0], 1) + ',\\ t=' + fx(V[1], 1),
+        return rootsPart(CP, 'At what times is the ball ' + o.H + ' m above the ground, to the nearest tenth of a second?', V, { dp: 1, v: 't', what: 'time', placeholder: 'e.g. t = 0.4, t = 2.1', key: 't=' + fx(V[0], 1) + ',\\ t=' + fx(V[1], 1),
           wrongs: [{ vals: rootsOf(-4.9, o.v, cl(o.h0 + o.H)).filter(function (x) { return x > 0; }), code: CP + 'height-sign', hint: 'Set ' + t('h=' + o.H) + ' and subtract ' + t(o.H) + ' from both sides: the constant becomes ' + t(nT(o.h0) + '-' + o.H + '=' + nT(c)) + '.' }].concat(fmlWrongs(CP, -4.9, o.v, c)),
           sol: t('-4.9t^{2}+' + o.v + 't+' + nT(o.h0) + '=' + o.H) + ', so ' + t(eqT(-4.9, o.v, c, 't')) + ':<br>' + solF(-4.9, o.v, c, { v: 't', dp: 2 }) + '<br>About ' + t(fx(V[0], 1)) + ' s (going up) and ' + t(fx(V[1], 1)) + ' s (coming down).', hints: ['Set ' + t('h=' + o.H) + ', move every term to one side, then use the formula.', 'Both roots are positive: the ball passes this height twice.'], text: 'ball: times at a height' });
       } }] },
@@ -726,14 +728,14 @@
       }, stem: function (o) { var e = 2 * o.t1 - o.d; return 'The arithmetic series ' + t(o.t1 + '+' + (o.t1 + o.d) + '+' + (o.t1 + 2 * o.d) + '+\\dots') + ' has ' + t('S_n=\\dfrac{n(' + polyT([o.d, e], 'n') + ')}{2}') + '.'; }, parts: [
       { id: '13a', level: 'ADV', make: function (r, o) {
         var e = 2 * o.t1 - o.d, S = o.n0 * (o.d * o.n0 + e) / 2, V = rootsOf(o.d, e, -2 * S);
-        return numPart(CP, '(a) Use the quadratic formula to find how many terms give a sum of ' + t(S) + '.', o.n0, { after: 'terms', cands: [[V[0], CP + 'n-neg', 'A number of terms can’t be negative: reject that root.']],
+        return numPart(CP, 'Use the quadratic formula to find how many terms give a sum of ' + t(S) + '.', o.n0, { after: 'terms', cands: [[V[0], CP + 'n-neg', 'A number of terms can’t be negative: reject that root.']],
           sol: t('\\frac{n(' + polyT([o.d, e], 'n') + ')}{2}=' + S + '\\Rightarrow ' + eqT(o.d, e, -2 * S, 'n')) + '<br>' + solF(o.d, e, -2 * S, { v: 'n' }) + '<br>' + t('n=' + o.n0) + ' (the negative root is rejected).', hints: ['Multiply both sides by 2, expand, and write the equation in standard form.', t('n') + ' must be a natural number.'], text: 'series: number of terms' });
       } },
       { id: '13b', level: 'MAS', make: function (r, o) {
         var e = 2 * o.t1 - o.d, Sn = function (n) { return n * (o.d * n + e) / 2; };
         var m = o.n0 + r.int(1, 4), S2 = pickWhere(function () { return Sn(m) + r.int(1, Sn(m + 1) - Sn(m) - 1); }, function (s) { var x = rootsOf(o.d, e, -2 * s)[1]; return Math.abs(x - Math.round(x)) > 0.06; });
         var x = rootsOf(o.d, e, -2 * S2)[1], D = e * e + 8 * o.d * S2;
-        return Z.mc(r, '(b) Can the sum of the series ever be exactly ' + t(S2) + '? Choose the answer with the right reason.', [
+        return Z.mc(r, 'Can the sum of the series ever be exactly ' + t(S2) + '? Choose the answer with the right reason.', [
           { html: '<b>No</b>: ' + t(eqT(o.d, e, -2 * S2, 'n')) + ' gives ' + t('n\\approx ' + fx(x, 2)) + ', which is not a natural number.', right: true },
           { html: '<b>Yes</b>: about ' + t(fx(x, 2)) + ' terms.', why: 'The number of terms must be a natural number: ' + t(fx(x, 2)) + ' terms is impossible.', code: CP + 'n-round' },
           { html: '<b>Yes</b>: ' + t(Math.round(x)) + ' terms (rounded).', why: t('S_{' + Math.round(x) + '}=' + Sn(Math.round(x))) + ', not ' + t(S2) + '. Rounding doesn’t make it exact.', code: CP + 'n-round' },
@@ -781,15 +783,15 @@
   /* =========================== Extra Practice 7 =========================== */
   var EXTRA = [
     { num: 'A1', stem: 'Solve with the quadratic formula. Give exact roots in simplest form.', parts: [
-      { id: 'eA1a', level: 'BEG', make: function (r) { var Q = tA1(r); return solvePart(CP, '(a) ' + t(eqT(1, Q.b, Q.c)), 1, Q.b, Q.c, { text: 'formula: a = 1' }); } },
-      { id: 'eA1b', level: 'BEG', make: function (r) { var Q = tA1j(r); return solvePart(CP, '(b) ' + t(eqT(1, Q.b, Q.c)), 1, Q.b, Q.c, { text: 'formula: a = 1, simplify' }); } },
-      { id: 'eA1c', level: 'EMG', make: function (r) { var Q = tRed(r, 'any'); return solvePart(CP, '(c) ' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { text: 'formula: reduce' }); } },
-      { id: 'eA1d', level: 'PRG', make: function (r) { var Q = tRed(r, 'kc'); return solvePart(CP, '(d) ' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { text: 'formula: reduce, a ≥ 4' }); } },
-      { id: 'eA1e', level: 'EMG', make: function (r) { var Q = tNone(r); return solvePart(CP, '(e) ' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { text: 'formula: no real roots' }); } },
-      { id: 'eA1f', level: 'EMG', make: function (r) { var Q = tPlain(r); return solvePart(CP, '(f) ' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { text: 'formula: nothing to reduce' }); } }] },
+      { id: 'eA1a', level: 'BEG', make: function (r) { var Q = tA1(r); return solvePart(CP, '' + t(eqT(1, Q.b, Q.c)), 1, Q.b, Q.c, { text: 'formula: a = 1' }); } },
+      { id: 'eA1b', level: 'BEG', make: function (r) { var Q = tA1j(r); return solvePart(CP, '' + t(eqT(1, Q.b, Q.c)), 1, Q.b, Q.c, { text: 'formula: a = 1, simplify' }); } },
+      { id: 'eA1c', level: 'EMG', make: function (r) { var Q = tRed(r, 'any'); return solvePart(CP, '' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { text: 'formula: reduce' }); } },
+      { id: 'eA1d', level: 'PRG', make: function (r) { var Q = tRed(r, 'kc'); return solvePart(CP, '' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { text: 'formula: reduce, a ≥ 4' }); } },
+      { id: 'eA1e', level: 'EMG', make: function (r) { var Q = tNone(r); return solvePart(CP, '' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { text: 'formula: no real roots' }); } },
+      { id: 'eA1f', level: 'EMG', make: function (r) { var Q = tPlain(r); return solvePart(CP, '' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { text: 'formula: nothing to reduce' }); } }] },
     { num: 'A2', stem: 'Solve. Give the roots to the nearest hundredth.', parts: [
-      { id: 'eA2a', level: 'BEG', make: function (r) { var Q = gen(r, { a: [2, 3, 4, 5], b: [1, 9], c: [-6, -1], avoid: AV, test: function (Q) { return Q.irr && safe(Q.vals, 2); } }); return solvePart(CP, '(a) ' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { dp: 2, text: 'formula to the nearest hundredth' }); } },
-      { id: 'eA2b', level: 'EMG', make: function (r) { var Q = gen(r, { a: [-1], b: [-8, 8], c: [1, 9], avoid: AV, test: function (Q) { return Q.irr && Q.b !== 0 && safe(Q.vals, 2); } }); return solvePart(CP, '(b) ' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { dp: 2, text: 'formula: a = −1, rounded', pre: 'Multiply by ' + t('-1') + ': ' + t(eqT(1, -Q.b, -Q.c)) + ' (the same roots).', sol: 'Multiply by ' + t('-1') + ': ' + t(eqT(1, -Q.b, -Q.c)) + ' (the same roots).<br>' + solF(1, -Q.b, -Q.c, { dp: 2 }) }); } }] },
+      { id: 'eA2a', level: 'BEG', make: function (r) { var Q = gen(r, { a: [2, 3, 4, 5], b: [1, 9], c: [-6, -1], avoid: AV, test: function (Q) { return Q.irr && safe(Q.vals, 2); } }); return solvePart(CP, '' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { dp: 2, text: 'formula to the nearest hundredth' }); } },
+      { id: 'eA2b', level: 'EMG', make: function (r) { var Q = gen(r, { a: [-1], b: [-8, 8], c: [1, 9], avoid: AV, test: function (Q) { return Q.irr && Q.b !== 0 && safe(Q.vals, 2); } }); return solvePart(CP, '' + t(eqT(Q.a, Q.b, Q.c)), Q.a, Q.b, Q.c, { dp: 2, text: 'formula: a = −1, rounded', pre: 'Multiply by ' + t('-1') + ': ' + t(eqT(1, -Q.b, -Q.c)) + ' (the same roots).', sol: 'Multiply by ' + t('-1') + ': ' + t(eqT(1, -Q.b, -Q.c)) + ' (the same roots).<br>' + solF(1, -Q.b, -Q.c, { dp: 2 }) }); } }] },
     { num: 'A3', parts: [
       { id: 'eA3', level: 'EMG', make: function (r) {
         var o = decPick(r), A = o.m * o.p, Bc = o.m * o.q + o.n * o.p, C = o.n * o.q, ft = HW.factor.tex([polyT([o.m, o.n]), polyT([o.p, o.q])]), T = uniq([-o.n / o.m, -o.q / o.p]);
@@ -803,18 +805,18 @@
       { id: 'eB1a', level: 'EMG', make: function (r) {
         var o = pickWhere(function () { return { p: nz(r, -6, 6), q: nz(r, -6, 6), m: r.int(1, 4), n: r.int(-6, 6) }; }, function (o) { var b = o.q - o.p - o.m, c = -o.p * o.q - o.n, Q = qf(1, b, c); return Q.irr && b !== 0 && c !== 0 && o.p !== o.q && AV(1, b, c) && !(o.p === 2 && o.q === 5 && o.m === 2 && o.n === 1); });
         var b = o.q - o.p - o.m, c = -o.p * o.q - o.n, Lx = polyT([1, o.q - o.p, -o.p * o.q]), Rx = polyT([o.m, o.n]);
-        return stdFields('(a) ' + t('(' + polyT([1, -o.p]) + ')(' + polyT([1, o.q]) + ')=' + Rx), Lx, Rx, [1, b, c], { pre: t(Lx + '=' + Rx) + ', so ' + t(eqT(1, b, c)), text: 'standard form: product = linear' });
+        return stdFields('' + t('(' + polyT([1, -o.p]) + ')(' + polyT([1, o.q]) + ')=' + Rx), Lx, Rx, [1, b, c], { pre: t(Lx + '=' + Rx) + ', so ' + t(eqT(1, b, c)), text: 'standard form: product = linear' });
       } },
       { id: 'eB1b', level: 'ADV', make: function (r) {
         var o = pickWhere(function () { return { d: r.pick([2, 3, 4]), n: r.int(1, 5), k: r.int(1, 4) }; }, function (o) { var Q = qf(1, -o.k * o.d, o.n * o.d); return Q.irr && !(o.d === 2 && o.n === 1 && o.k === 2) && AV(1, -o.k * o.d, o.n * o.d); });
         var b = -o.k * o.d, c = o.n * o.d;
-        var p = stdFields('(b) ' + t('\\frac{x}{' + o.d + '}+\\frac{' + o.n + '}{x}=' + o.k) + ', ' + t('x\\ne 0'), 'x^2+' + o.n * o.d, polyT([o.k * o.d, 0]), [1, b, c], { pre: 'Multiply every term by ' + t(o.d + 'x') + ': ' + t('x^{2}+' + o.n * o.d + '=' + polyT([o.k * o.d, 0])) + ', so ' + t(eqT(1, b, c)), text: 'standard form: x in a denominator', hint: 'first multiply every term by ' + t(o.d + 'x') });
+        var p = stdFields('' + t('\\frac{x}{' + o.d + '}+\\frac{' + o.n + '}{x}=' + o.k) + ', ' + t('x\\ne 0'), 'x^2+' + o.n * o.d, polyT([o.k * o.d, 0]), [1, b, c], { pre: 'Multiply every term by ' + t(o.d + 'x') + ': ' + t('x^{2}+' + o.n * o.d + '=' + polyT([o.k * o.d, 0])) + ', so ' + t(eqT(1, b, c)), text: 'standard form: x in a denominator', hint: 'first multiply every term by ' + t(o.d + 'x') });
         p.solution += '<br>Neither root is ' + t('0') + '.'; return p;
       } },
       { id: 'eB1c', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { return { s: r.pick([0.2, 0.5, 0.25]), b: nz(r, -5, 5), c: nz(r, -5, 5) }; }, function (o) { var Q = qf(1, o.b, o.c); return Q.irr && AV(1, o.b, o.c) && !(o.b === -3 && o.c === -2); });
         var A = o.s, Bd = cl(o.s * o.b), Cd = cl(o.s * o.c), m = Math.round(1 / o.s);
-        return stdFields('(c) ' + t(eqT(A, Bd, Cd)), polyT([A, Bd, Cd]), '0', [1, o.b, o.c], { pre: 'Multiply every term by ' + t(m) + ': ' + t(eqT(1, o.b, o.c)), text: 'standard form: clear decimals', hint: 'multiply every term by ' + t(m) + ' to clear the decimals' });
+        return stdFields('' + t(eqT(A, Bd, Cd)), polyT([A, Bd, Cd]), '0', [1, o.b, o.c], { pre: 'Multiply every term by ' + t(m) + ': ' + t(eqT(1, o.b, o.c)), text: 'standard form: clear decimals', hint: 'multiply every term by ' + t(m) + ' to clear the decimals' });
       } }] },
     { num: 'B2', shared: function (r) {
         var vt = pickWhere(function () { return { k: r.pick([2, 3, 4, 5]), h: nz(r, -5, 5), m: r.pick([2, 3, 5, 6, 7]) }; }, function (z) { return !(z.k === 4 && z.h === 1 && z.m === 5); });
@@ -822,13 +824,13 @@
         var fm = pickWhere(function () { var h = nz(r, -6, 6), f = r.pick([3, 5, 6, 7, 10, 11]); return qf(1, -2 * h, h * h - f); }, function (Q) { return Q.c !== 0 && AV(1, Q.b, Q.c); });
         return { vt: vt, fc: fc, fm: fm };
       }, stem: 'Choose an efficient method and solve exactly.', parts: [
-      { id: 'eB2a', level: 'EMG', make: function (r, o) { var v = o.vt; return rootsPart(CP, '(a) ' + t(v.k + '(' + polyT([1, -v.h]) + ')^{2}=' + v.k * v.m), [v.h - Math.sqrt(v.m), v.h + Math.sqrt(v.m)], { irr: true, key: 'x=' + v.h + '\\pm\\sqrt{' + v.m + '}', sol: 'Square roots: ' + t('(' + polyT([1, -v.h]) + ')^{2}=' + v.m) + ', so ' + t('x=' + v.h + '\\pm\\sqrt{' + v.m + '}'), hints: ['Divide by ' + t(v.k) + ', then take the square root of both sides (' + t('\\pm') + ').'], text: 'square roots: a(x − p)² = q', wrongs: [{ vals: [-v.h - Math.sqrt(v.m), -v.h + Math.sqrt(v.m)], code: CP + 'cs-p', hint: t('x-p=\\pm\\sqrt{m}') + ' gives ' + t('x=p\\pm\\sqrt{m}') + ': check the sign of ' + t('p') + '.' }, { vals: [v.h - Math.sqrt(v.k * v.m), v.h + Math.sqrt(v.k * v.m)], code: CP + 'cs-div', hint: 'Divide both sides by ' + t(v.k) + ' before taking the square root.' }] }); } },
-      { id: 'eB2b', level: 'EMG', make: function (r, o) { var z = o.fc, A = z.m * z.p, Bc = z.m * z.q + z.n * z.p, C = z.n * z.q; return rootsPart(CP, '(b) ' + t(eqT(A, Bc, C)), [-z.n / z.m, -z.q / z.p], { key: 'x=' + frT(-z.n, z.m) + ',\\ x=' + frT(-z.q, z.p), sol: 'Factoring: ' + t(HW.factor.tex([polyT([z.m, z.n]), polyT([z.p, z.q])]) + '=0') + ', so ' + t('x=' + frT(-z.n, z.m)) + ' or ' + t('x=' + frT(-z.q, z.p)) + '.', hints: ['It factors: use decomposition (product ' + t(A * C) + ', sum ' + t(Bc) + ').'], text: 'factoring: ax² + bx + c', wrongs: [{ vals: [z.n / z.m, z.q / z.p], code: CP + 'factor', hint: 'Set each factor equal to 0: check the signs.' }] }); } },
-      { id: 'eB2c', level: 'EMG', make: function (r, o) { var Q = o.fm; return solvePart(CP, '(c) ' + t(eqT(1, Q.b, Q.c)), 1, Q.b, Q.c, { text: 'formula: does not factor', pre: 'Formula (it does not factor):' }); } },
+      { id: 'eB2a', level: 'EMG', make: function (r, o) { var v = o.vt; return rootsPart(CP, '' + t(v.k + '(' + polyT([1, -v.h]) + ')^{2}=' + v.k * v.m), [v.h - Math.sqrt(v.m), v.h + Math.sqrt(v.m)], { irr: true, key: 'x=' + v.h + '\\pm\\sqrt{' + v.m + '}', sol: 'Square roots: ' + t('(' + polyT([1, -v.h]) + ')^{2}=' + v.m) + ', so ' + t('x=' + v.h + '\\pm\\sqrt{' + v.m + '}'), hints: ['Divide by ' + t(v.k) + ', then take the square root of both sides (' + t('\\pm') + ').'], text: 'square roots: a(x − p)² = q', wrongs: [{ vals: [-v.h - Math.sqrt(v.m), -v.h + Math.sqrt(v.m)], code: CP + 'cs-p', hint: t('x-p=\\pm\\sqrt{m}') + ' gives ' + t('x=p\\pm\\sqrt{m}') + ': check the sign of ' + t('p') + '.' }, { vals: [v.h - Math.sqrt(v.k * v.m), v.h + Math.sqrt(v.k * v.m)], code: CP + 'cs-div', hint: 'Divide both sides by ' + t(v.k) + ' before taking the square root.' }] }); } },
+      { id: 'eB2b', level: 'EMG', make: function (r, o) { var z = o.fc, A = z.m * z.p, Bc = z.m * z.q + z.n * z.p, C = z.n * z.q; return rootsPart(CP, '' + t(eqT(A, Bc, C)), [-z.n / z.m, -z.q / z.p], { key: 'x=' + frT(-z.n, z.m) + ',\\ x=' + frT(-z.q, z.p), sol: 'Factoring: ' + t(HW.factor.tex([polyT([z.m, z.n]), polyT([z.p, z.q])]) + '=0') + ', so ' + t('x=' + frT(-z.n, z.m)) + ' or ' + t('x=' + frT(-z.q, z.p)) + '.', hints: ['It factors: use decomposition (product ' + t(A * C) + ', sum ' + t(Bc) + ').'], text: 'factoring: ax² + bx + c', wrongs: [{ vals: [z.n / z.m, z.q / z.p], code: CP + 'factor', hint: 'Set each factor equal to 0: check the signs.' }] }); } },
+      { id: 'eB2c', level: 'EMG', make: function (r, o) { var Q = o.fm; return solvePart(CP, '' + t(eqT(1, Q.b, Q.c)), 1, Q.b, Q.c, { text: 'formula: does not factor', pre: 'Formula (it does not factor):' }); } },
       { id: 'eB2d', level: 'EMG', make: function (r, o) {
         var z = o.fc, rows = [{ id: 'a', html: '(a) ' + t(o.vt.k + '(' + polyT([1, -o.vt.h]) + ')^{2}=' + o.vt.k * o.vt.m) }, { id: 'b', html: '(b) ' + t(eqT(z.m * z.p, z.m * z.q + z.n * z.p, z.n * z.q)) }, { id: 'c', html: '(c) ' + t(eqT(1, o.fm.b, o.fm.c)) }];
-        var p = B.grid('(d) Name the most efficient method for each equation above.', rows, [{ id: 'fac', html: 'Factoring' }, { id: 'sq', html: 'Square roots' }, { id: 'qf', html: 'Quadratic formula' }], { a: 'sq', b: 'fac', c: 'qf' }, { rowHead: 'Equation', colHead: 'Method' },
-          '(a) a squared bracket: square roots. (b) it factors: factoring. (c) it does not factor: the formula.', ['A squared bracket: square roots. Easy factors: factoring. Otherwise: the formula.'], 'choose a method');
+        var p = B.grid('Name the most efficient method for each equation above.', rows, [{ id: 'fac', html: 'Factoring' }, { id: 'sq', html: 'Square roots' }, { id: 'qf', html: 'Quadratic formula' }], { a: 'sq', b: 'fac', c: 'qf' }, { rowHead: 'Equation', colHead: 'Method' },
+          'a squared bracket: square roots. (b) it factors: factoring. (c) it does not factor: the formula.', ['A squared bracket: square roots. Easy factors: factoring. Otherwise: the formula.'], 'choose a method');
         p.outcome = OUT; return p;
       } }] },
     { num: 'B3', shared: function (r) {
@@ -837,14 +839,14 @@
         return 'A student solved ' + t(eqT(o.a, o.b, o.c)) + ' and wrote:<br>' + Z.work(['x=\\dfrac{' + nT(-o.b) + '\\pm\\sqrt{' + o.b * o.b + '-' + 4 * Math.abs(o.a) * o.c + '}}{' + 2 * o.a + '}=\\dfrac{' + nT(-o.b) + '\\pm ' + radT(s[0], s[1]) + '}{' + 2 * o.a + '}=' + (wD === 1 ? (wN ? nT(wN) : '') + '\\pm ' + radT(wK, s[1]) : '\\dfrac{' + nT(wN) + '\\pm ' + radT(wK, s[1]) + '}{' + wD + '}')]); }, parts: [
       { id: 'eB3a', level: 'PRG', make: function (r, o) {
         var f = 4 * Math.abs(o.a) * o.c;
-        return Z.mc(r, '(a) Find the error.', [
+        return Z.mc(r, 'Find the error.', [
           { html: 'The sign of ' + t('-4ac') + ': with ' + t('a=' + o.a) + ' and ' + t('c=' + o.c) + ', ' + t('-4ac=+' + f) + ', so the discriminant is ' + t(o.b * o.b + '+' + f) + '.', right: true },
           { html: 'The sign of ' + t('-b') + ': it should be ' + t('+' + o.b) + '.', why: t('b=' + o.b) + ', so ' + t('-b=' + nT(-o.b)) + ' is right.', code: CP + 'errors' },
           { html: 'The denominator: it should be ' + t(2 * Math.abs(o.a)) + ', not ' + t(2 * o.a) + '.', why: t('2a=2(' + o.a + ')=' + 2 * o.a) + ' is right.', code: CP + 'errors' },
           { html: 'The last step: only ' + t(nT(-o.b)) + ' was divided.', why: 'The last step divides every term correctly. Check the discriminant.', code: CP + 'errors' }],
           'With ' + t('a=' + o.a) + ' and ' + t('c=' + o.c) + ': ' + t('-4ac=-4(' + o.a + ')(' + o.c + ')=+' + f) + ', so ' + t('b^{2}-4ac=' + o.b * o.b + '+' + f + '=' + (o.b * o.b + f)) + ', not ' + t(o.b * o.b - f) + '.', ['Check the sign of every product in the discriminant: ' + t('a') + ' is negative.'], 'error analysis: find the error');
       } },
-      { id: 'eB3b', level: 'PRG', make: function (r, o) { return solvePart(CP, '(b) Give the correct exact roots.', o.a, o.b, o.c, { text: 'error analysis: correct roots' }); } }] },
+      { id: 'eB3b', level: 'PRG', make: function (r, o) { return solvePart(CP, 'Give the correct exact roots.', o.a, o.b, o.c, { text: 'error analysis: correct roots' }); } }] },
     { num: 'B4', parts: [
       { id: 'eB4', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { return { h0: r.pick([3, 5, 7.5, 10]), v: r.pick([1, 1.5, 2, 2.5, 3, 4, 5]) }; }, function (o) { return !(o.h0 === 10 && o.v === 3) && safe(rootsOf(-4.9, o.v, o.h0), 1); });

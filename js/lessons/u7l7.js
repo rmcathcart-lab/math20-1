@@ -957,5 +957,8 @@
     })] }
   ];
 
+  /* the Lesson 7 builders the review (u7l8.js) reuses */
+  Object.assign(HW.u7k78, { REC: REC, tabPart: tabPart, sqMC: sqMC, oneMC: oneMC, yintPart: yintPart, asyOnly: asyOnly, turnYPart: turnYPart, stmtMC: stmtMC, couldMC: couldMC, rangeMC: rangeMC, invCountMC: invCountMC, decPt: decPt, isUndef: isUndef });
+
   HW.defineLesson({ id: LID, unit: 7, num: '7', title: 'Reciprocal Functions of Quadratic Functions', outcome: 'RF11', calc: true, questions: QUESTIONS, extra: EXTRA });
 })(window);

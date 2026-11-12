@@ -228,7 +228,7 @@
     { num: '9', section: 'Fractional and decimal coefficients', parts: [
       { id: '9a', level: 'PRG', make: function (r) {
         var fa = r.pick([[[1, 3], [-2, 3]], [[2, 3], [-1, 3]], [[1, 4], [-3, 4]], [[3, 4], [-1, 4]], [[1, 2], [-1, 2]]]);
-        var z = qqInt(r, { a1: fa[0], a2: fa[1], ex: [{ b2: 2, c2: 4 }] }), o = U.qq(z.P1, z.P2);
+        var z = qqInt(r, { a1: fa[0], a2: fa[1], ex: [{ b2: 2, c2: 4 }], test: function (z) { return [z.p, z.r2].every(function (x) { return Math.abs(qv(z.b2 === undefined ? 0 : fa[1]) * x * x + z.b2 * x + z.c2) <= 20; }); } }), o = U.qq(z.P1, z.P2);
         return qqPart(o, 'Solve the system: ' + t(eqT(z.P1)) + ' and ' + t(eqT(z.P2)) + '.', U.qqSol(o) + '<br>(The ' + t('x^{2}') + '-terms give ' + t(qt(fa[0]) + '-(' + qt(fa[1]) + ')=1') + '.)', 'solve: fractional coefficients');
       } },
       { id: '9b', level: 'PRG', make: function (r) {
@@ -264,7 +264,7 @@
     { num: '12', section: 'Choices', parts: [{ id: '12', level: 'EMG', make: function (r) {
       var z = pickWhere(function () { return { d: r.pick([2, 1, 3]), h: nz(r, 1, 3), a2: r.pick([1, -1, 2]), b2: r.int(-4, 4), c2: r.int(-4, 4) }; }, function (z) { return z.a2 + z.d !== 0 && Math.abs(z.b2 - 2 * z.d * z.h) <= 9 && Math.abs(z.c2 + z.d * z.h * z.h) <= 20 && !(z.d === 2 && z.h === 2 && z.a2 === 1 && z.b2 === 2); });
       var P2 = [z.a2, z.b2, z.c2], P1 = [z.a2 + z.d, z.b2 - 2 * z.d * z.h, z.c2 + z.d * z.h * z.h], o = U.qq(P1, P2);
-      return U.countMC(r, 'The number of solutions of the system ' + t(eqT(P1)) + ' and ' + t(eqT(P2)) + ' is', 1, 'Subtract: ' + t(tx(o.E) + '=0') + ', so ' + t(tx(quad([o.a, o.b, o.c])) + '=0') + ' with discriminant ' + t('0') + ': one solution, ' + prPairs(o) + '.', { qq: true });
+      return U.countMC(r, 'The number of solutions of the system ' + t(eqT(P1)) + ' and ' + t(eqT(P2)) + ' is', 1, 'Subtract: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(dtex(o.A, o.B, o.C) + '=0') + ' (the solution is ' + prPairs(o) + ').', { qq: true });
     } }] },
     { num: '13', parts: [{ id: '13', level: 'EMG', make: function (r) {
       var h = nz(r, 1, 4), a = r.pick([1, 1, 2, -1]), q = r.int(-3, 3), V = function (s, hh) { return 'y=' + coefT(s) + '(x' + sg(-hh) + ')^{2}' + (q ? sg(q) : ''); }, Sx = function (Pc) { return eqT(Pc); };
@@ -373,7 +373,7 @@
       var fa = r.pick([[[1, 4], [-1, 2]], [[1, 2], [-1, 4]], [[1, 3], [-2, 3]], [[1, 2], [-1, 2]]]);
       var z = pickWhere(function () { return { x0: nz(r, 1, 4), b2: r.int(-4, 6), c2: r.int(-4, 4) }; }, function (z) {
         var d = qs(fa[0], fa[1]), b1 = qs(z.b2, qm(d, 2 * z.x0)), c1 = qa(z.c2, qm(d, z.x0 * z.x0));
-        return b1[1] <= 4 && c1[1] <= 4 && Math.abs(qv(b1)) <= 8 && Math.abs(qv(c1)) <= 12 && !(z.x0 === 2 && z.b2 === 4 && z.c2 === -3);
+        return b1[1] <= 2 && c1[1] === 1 && Math.abs(qv(b1)) <= 8 && Math.abs(qv(c1)) <= 12 && !(z.x0 === 2 && z.b2 === 4 && z.c2 === -3);
       });
       var d = qs(fa[0], fa[1]); z.P1 = [fa[0], qs(z.b2, qm(d, 2 * z.x0)), qa(z.c2, qm(d, z.x0 * z.x0))]; z.P2 = [fa[1], z.b2, z.c2]; z.o = U.qq(z.P1, z.P2); return z;
     }, stem: function (z) { return 'Consider the system ' + t(eqT(z.P1)) + ' and ' + t(eqT(z.P2)) + '.'; },
@@ -436,7 +436,7 @@
       var bet = z.gm + z.e, aV = 1 - z.e * z.e / (4 * z.dl), P2 = [1, z.gm, z.dl];
       // a = 1: linear (β − γ)x − δ = 0 -> x = δ / e ; a = aV: x = 2δ / e
       var x1 = R([z.dl, z.e]), x2 = R([2 * z.dl, z.e]), p1 = U.mkPt(U.S(x1), U.S(P.atExact(quad(P2), { x: x1 }))), p2 = U.mkPt(U.S(x2), U.S(P.atExact(quad(P2), { x: x2 })));
-      var sol = 'Subtract: ' + t('(a-1)x^{2}' + sg(z.e) + 'x' + sg(-z.dl) + '=0') + '.<br>If ' + t('a=1') + ', it is linear: ' + t(z.e + 'x' + sg(-z.dl) + '=0') + ', ' + t('x=' + p1.xt) + ', ' + t('y=' + p1.yt) + ': one solution ' + t(ptT(p1)) + '.<br>If ' + t('a\\ne 1') + ': one solution when ' + t(par(z.e) + '^{2}-4(a-1)' + par(-z.dl) + '=0') + ', so ' + t('a-1=' + qt(R([-z.e * z.e, 4 * z.dl]))) + ' and ' + t('a=' + aV) + '. Then ' + t('x=' + p2.xt) + ', ' + t('y=' + p2.yt) + ': ' + t(ptT(p2)) + '.';
+      var sol = 'Subtract: ' + t('(a-1)x^{2}' + sg(z.e) + 'x' + sg(-z.dl) + '=0') + '.<br>If ' + t('a=1') + ', it is linear: ' + t(z.e + 'x' + sg(-z.dl) + '=0') + ', ' + t('x=' + p1.xt) + ', ' + t('y=' + p1.yt) + ': one solution ' + t(ptT(p1)) + '.<br>If ' + t('a\\ne 1') + ': one solution when ' + t(par(z.e) + '^{2}-4(a-1)(' + (-z.dl) + ')=0') + ', so ' + t('a-1=' + qt(R([-z.e * z.e, 4 * z.dl]))) + ' and ' + t('a=' + aV) + '. Then ' + t('x=' + p2.xt) + ', ' + t('y=' + p2.yt) + ': ' + t(ptT(p2)) + '.';
       return U.tanPart(CP, 'Determine all values of ' + t('a') + ' for which the system ' + t('y=ax^{2}' + sg(bet) + 'x') + ' and ' + t(eqT(P2)) + ' has exactly one solution, and give the solution for each.', 'a', [1, aV], [p1, p2], null, sol,
         ['Subtract: the ' + t('x^{2}') + '-coefficient is ' + t('a-1') + '. What happens when it is ' + t('0') + '?', 'Otherwise one solution means a zero discriminant: solve for ' + t('a') + '.'], 'EP: all values of a', { ptsLabel: 'Solutions:' });
     } }] },

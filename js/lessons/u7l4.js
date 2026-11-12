@@ -94,7 +94,16 @@
    * ====================================================================================================== */
   function linSpec(r, o) {
     o = o || {};
-    return pickWhere(function () { return { a: o.as ? r.pick(o.as) : nz(r, 1, 5), b: o.bs ? r.pick(o.bs) : r.int(-10, 10), c: o.cs ? r.pick(o.cs) : nz(r, 1, 4), d: r.int(o.dlo == null ? -10 : o.dlo, o.dhi == null ? 10 : o.dhi) }; }, function (z) {
+    var range = function (lo, hi) { var out = []; for (var i = lo; i <= hi; i++) out.push(i); return out; };
+    var fb = function () { // every combination, in a seeded order, when random tries fail
+      var As = o.as || range(-5, 5).filter(function (x) { return x; }), Bs = o.bs || range(-10, 10), Cs = o.cs || range(-4, 4).filter(function (x) { return x; }), Ds = range(o.dlo == null ? -10 : o.dlo, o.dhi == null ? 10 : o.dhi), all = [];
+      As.forEach(function (a) { Bs.forEach(function (b) { Cs.forEach(function (c) { Ds.forEach(function (d) { all.push({ a: a, b: b, c: c, d: d }); }); }); }); });
+      all = r.shuffle(all); for (var i = 0; i < all.length; i++) if (ok1(all[i])) return all[i];
+      var z0 = { a: 2, b: -1, c: 1, d: 3 }; ok1(z0); return z0; // |2x − 1| = x + 3: x = −2/3 or 4
+    };
+    function ok1(z) { return test0(z); }
+    var test0;
+    return pickWhere(function () { return { a: o.as ? r.pick(o.as) : nz(r, 1, 5), b: o.bs ? r.pick(o.bs) : r.int(-10, 10), c: o.cs ? r.pick(o.cs) : nz(r, 1, 4), d: r.int(o.dlo == null ? -10 : o.dlo, o.dhi == null ? 10 : o.dhi) }; }, test0 = function (z) {
       var a = rv(z.a), c = rv(z.c);
       if (Math.abs(a) === Math.abs(c) || z.b === 0 || z.d === 0 && !o.d0) return false;
       var x1 = (z.d - z.b) / (a - c), x2 = (-z.d - z.b) / (a + c), f1 = toR(x1), f2 = toR(x2);
@@ -103,7 +112,7 @@
       z.x1 = x1; z.x2 = x2; z.v1 = B1 > 0; z.v2 = B2 > 0; z.n = (z.v1 ? 1 : 0) + (z.v2 ? 1 : 0);
       if (o.ints && (f1[1] !== 1 || f2[1] !== 1)) return false;
       return (o.counts || [1, 2]).indexOf(z.n) >= 0 && (!o.test || o.test(z)) && excl(z, o.ex || []);
-    });
+    }, fb);
   }
   var EXLIN = [{ a: 2, b: -4, c: 0, d: 6 }, { a: 1, b: 1, c: 2, d: -1 }, { a: 3, b: -6, c: 1, d: 2 }, { a: 1, b: -4, c: 3, d: 0 }, { a: 2, b: 3, c: 1, d: 6 }, { a: 3, b: 1, c: 1, d: -5 }, { a: 2, b: -6, c: 1, d: 3 }, { a: 1, b: 5, c: 2, d: 1 }];
   function L(z) {

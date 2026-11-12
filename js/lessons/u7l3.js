@@ -75,7 +75,14 @@
    * ====================================================================================================== */
   var U = HW.u7k34 = {};
   function gcd(a, b) { return ex.gcd(Math.abs(a), Math.abs(b)); }
-  function pickWhere(gen, test) { for (var i = 0; i < 8000; i++) { var o = gen(); if (o && test(o)) return o; } throw new Error('u7k34: no instance found'); }
+  /* never throws: after many tries it uses fb() (a deterministic search) if given, else the last candidate */
+  function pickWhere(gen, test, fb) {
+    var last = null;
+    for (var i = 0; i < 40000; i++) { var o = gen(); if (o && test(o)) return o; if (o) last = o; }
+    if (fb) { var f = fb(); if (f) return f; }
+    if (root.console && root.console.warn) root.console.warn('u7k34: no instance found; using the last candidate');
+    return last;
+  }
   function nz(r, lo, hi) { return (r.chance(0.5) ? -1 : 1) * r.int(lo, hi); }
   function toR(x) { if (Array.isArray(x)) return ex.norm(x[0], x[1]); for (var q = 1; q <= 2000; q++) { var p = x * q; if (Math.abs(p - Math.round(p)) < 1e-9) return ex.norm(Math.round(p), q); } return null; }
   function rv(x) { return Array.isArray(x) ? x[0] / x[1] : x; }

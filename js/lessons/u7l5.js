@@ -69,10 +69,10 @@
   function gcd(a, b) { return ex.gcd(Math.abs(a), Math.abs(b)); }
   function pickWhere(gen, test) { for (var i = 0; i < 20000; i++) { var o = gen(); if (o && test(o)) return o; } throw new Error('u7l5–6 practice: no instance found'); }
   function nz(r, lo, hi) { return (r.chance(0.5) ? -1 : 1) * r.int(lo, hi); }
-  function toR(x) { if (Array.isArray(x)) return ex.norm(x[0], x[1]); for (var q = 1; q <= 2000; q++) { var p = x * q; if (Math.abs(p - Math.round(p)) < 1e-9) return ex.norm(Math.round(p), q); } return null; }
+  function toR(x) { if (Array.isArray(x)) return ex.norm(x[0], x[1]); if (typeof x !== 'number' || !isFinite(x)) return null; for (var q = 1; q <= 2000; q++) { var p = x * q; if (Math.abs(p - Math.round(p)) < 1e-9) return ex.norm(Math.round(p), q); } return null; }
   function rv(x) { return Array.isArray(x) ? x[0] / x[1] : x && x.tex ? x.v : x; }
-  function rt(x) { if (x && x.tex) return x.tex; var f = toR(x); return f ? ex.texRat(f) : String(+rv(x).toFixed(6)); }
-  function dt(x) { return String(+rv(x).toFixed(6)); }
+  function rt(x) { if (x && x.tex) return x.tex; var f = toR(x); if (f) return ex.texRat(f); var v = Number(rv(x)); return isFinite(v) ? String(+v.toFixed(6)) : String(x); }
+  function dt(x) { var v = Number(rv(x)); return isFinite(v) ? String(+v.toFixed(6)) : String(x); }
   function sgT(x) { return (rv(x) < 0 ? '-' : '+') + rt(Math.abs(rv(x))); }
   function coefT(a) { var v = rv(a); return v === 1 ? '' : v === -1 ? '-' : rt(a); }
   function has(arr, x) { return arr.some(function (y) { return Math.abs(x - y) < 1e-9 * Math.max(1, Math.abs(x)); }); }

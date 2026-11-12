@@ -225,7 +225,7 @@
     var ge = pos ? t(v + '\\ge ' + rt(h)) : t(v + '\\le ' + rt(h)), lt = pos ? t(v + '<' + rt(h)) : t(v + '>' + rt(h));
     var ineq = pos ? t(fT + '\\ge 0') + ' gives ' + t(v + '\\ge ' + rt(h)) : t(fT + '\\ge 0') + ' gives ' + t(rename(tx(M(aa, 1))) + '\\ge ' + rt(-rv(bb))) + ', so ' + t(v + '\\le ' + rt(h)) + ' (dividing by a negative number reverses the sign)';
     var cases = 'y=\\begin{cases}' + fT + ', & ' + (pos ? v + '\\ge ' : v + '\\le ') + rt(h) + '\\\\ ' + rename(tx(P.neg(E))) + ', & ' + (pos ? v + '<' : v + '>') + rt(h) + '\\end{cases}';
-    return U.fields(o.prompt || 'Write ' + t('y=' + AL(fT)) + ' in piecewise form: give the value of ' + t(v) + ' where the two pieces meet, and the expression for ' + t('y') + ' on each side of it.', fields, checkers, keys, t(cases),
+    return U.fields(o.prompt || (o.short ? t('y=' + AL(fT)) : 'Write ' + t('y=' + AL(fT)) + ' in piecewise form: give the value of ' + t(v) + ' where the two pieces meet, and the expression for ' + t('y') + ' on each side of it.'), fields, checkers, keys, t(cases),
       ineq + '. There ' + t('y=' + fT) + ' (the bars change nothing); on the other side ' + t('y=-(' + fT + ')=' + rename(tx(P.neg(E)))) + '.<br>' + t(cases) + (o.solMore || ''),
       o.hints || ['Solve ' + t(fT + '\\ge 0') + ' for ' + t(v) + '. Dividing by a negative number reverses the inequality sign.', 'Where the expression inside the bars is negative, the piece is its opposite: change the sign of <b>every</b> term.'], o.text || 'piecewise form of y = |ax + b|', bad, combine);
   };

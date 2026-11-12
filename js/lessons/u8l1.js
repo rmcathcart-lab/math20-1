@@ -169,11 +169,11 @@
   U.work = function (o, opt) {
     opt = opt || {};
     var s = '', ET = tx(quad([o.a, o.b, o.c]));
+    if (o.kind === 'lin') return 'The ' + t('x^{2}') + '-terms cancel, leaving a linear equation: ' + t('x=' + stex(o.xs[0])) + '.';
     if (!qeq(o.f, [1, 1])) {
       var f = o.f;
       s += (f[1] === 1 ? 'Multiply by ' + t(qt(f)) : f[0] === 1 ? 'Divide by ' + t(f[1]) : f[0] === -1 ? 'Divide by ' + t(-f[1]) : 'Multiply by ' + t(qt(f))) + ': ' + t(ET + '=0') + '.<br>';
     }
-    if (o.kind === 'lin') return s + 'The ' + t('x^{2}') + '-terms cancel: ' + t(ET + '=0') + ', so ' + t('x=' + stex(o.xs[0])) + '.';
     if (o.kind === 'false') return s + 'Everything but the constant cancels: ' + t(o.c + '=0') + ' is false, so there is <b>no solution</b>.';
     if (o.kind === 'inf') return s + 'Everything cancels: ' + t('0=0') + ', so the equations describe the same graph: <b>infinitely many</b> solutions.';
     var dT = t(dtex(o.a, o.b, o.c) + '=' + o.D);
@@ -221,10 +221,10 @@
     }
     return o.pts.map(function (p) { return t('x=' + p.xt) + ': ' + t('y=' + sub(Ltex, p.xt) + '=' + p.yt); }).join('; ') + '.<br>';
   }
-  function ending(o, chkP, chkName) {
+  function ending(o, chkP, chkName, dec) {
     if (!o.pts.length) return '';
     var s = (o.pts.length === 1 ? 'One solution: ' : 'Solutions: ') + o.pts.map(function (p) { return t(ptT(p)); }).join(' and ') + '.';
-    if (chkP && !irr(o.xs[0])) { var p = o.pts[0]; s += ' Check ' + t(ptT(p)) + ' in ' + chkName + ': ' + t(sub(tx(chkP, true), p.xt) + '=' + qt(P.atExact(chkP, { x: p.X.r }))) + ' ✓'; }
+    if (chkP && !irr(o.xs[0])) { var p = o.pts[0]; s += ' Check ' + t(ptT(p)) + ' in ' + chkName + ': ' + t(sub(tx(chkP, dec), p.xt) + '=' + qt(P.atExact(chkP, { x: p.X.r }))) + ' ✓'; }
     return s;
   }
   /* worked solution, substitution (opt.pre: a first line, e.g. rewriting the line; opt.elim 'sub'|'add': wording) */
@@ -234,14 +234,14 @@
     var s = (opt.pre || '');
     if (opt.elim) s += (opt.elim === 'add' ? 'The ' + t('y') + '-terms are opposites, so add the equations: ' : 'Subtract the equations to eliminate ' + t('y') + ': ') + t(ET + '=0') + '.<br>';
     else s += 'Substitute: ' + t(QT + '=' + LT) + ', so ' + t(ET + '=0') + '.<br>';
-    s += U.work(o, { what: 'the line is tangent' }) + '<br>' + yLines(o, LT, 'the linear equation') + ending(o, opt.check === false ? null : o.Qp, 'the quadratic');
+    s += U.work(o, { what: 'the line is tangent' }) + '<br>' + yLines(o, LT, 'the linear equation') + ending(o, opt.check === false ? null : o.Qp, 'the quadratic', opt.dec);
     return s;
   };
   U.qqSol = function (o, opt) {
     opt = opt || {};
     var T1 = tx(o.P1p, opt.dec), T2 = tx(o.P2p, opt.dec), ET = tx(o.E, opt.dec);
     var s = (opt.pre || '') + 'Set the right sides equal (subtract): ' + t(T1 + '=' + T2) + ', so ' + t(ET + '=0') + '.<br>';
-    s += U.work(o, { what: 'the parabolas touch' }) + '<br>' + yLines(o, T2, t('y=' + T2)) + ending(o, opt.check === false ? null : o.P1p, 'the other equation');
+    s += U.work(o, { what: 'the parabolas touch' }) + '<br>' + yLines(o, T2, t('y=' + T2)) + ending(o, opt.check === false ? null : o.P1p, 'the other equation', opt.dec);
     return s;
   };
   /* standard wrong answers for rational roots: roots with the opposite signs; a double root as ±x */
