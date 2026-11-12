@@ -16,12 +16,16 @@
   ].map(function (p) { return { name: p[0], skill: p[1], effort: p[2], home: p[3], speed: p[4], never: p[2] === 0 }; });
   /* one lesson a school day, the last is today: the first seven lessons with practice built (catalog order), so the demo
      works whichever units are online (none yet = an empty demo class) */
-  var PACE = (function () {
-    var out = [];
-    (HW.CATALOG || []).forEach(function (u) { u.lessons.forEach(function (c) { var l = HW.lessons && HW.lessons[c.id]; if (l && !l.test && !c.intro && out.length < 7) out.push(c.id); }); });
-    return out;
-  })();
-  var EXIT1 = PACE[PACE.length - 2] || PACE[0], EXIT0 = PACE[PACE.length - 3]; // the two finished exit slips
+  var PACE = [], EXIT1, EXIT0; // EXIT1, EXIT0: the two finished exit slips
+  function setPace() {
+    PACE.length = 0;
+    (HW.CATALOG || []).forEach(function (u) { u.lessons.forEach(function (c) { var l = HW.lessons && HW.lessons[c.id]; if (l && !l.test && !c.intro && PACE.length < 7) PACE.push(c.id); }); });
+    EXIT1 = PACE[PACE.length - 2] || PACE[0]; EXIT0 = PACE[PACE.length - 3];
+  }
+  setPace();
+  /* the ledger page loads the lesson files after this one (teacher/index.html: defer), so look again once they are in.
+     Nothing asks for the demo class before then (teacher/dash.js: rawApi waits for the question bank). */
+  document.addEventListener('DOMContentLoaded', setPace);
   var M = null; // the built class (rebuilt once per page load)
 
   function rnd(seed) { return HW.rng(HW.hashStr('demo|' + seed)); }
