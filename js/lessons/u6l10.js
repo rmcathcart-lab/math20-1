@@ -412,9 +412,9 @@
     { num: '19', outcome: AN6, parts: [{ id: '19', level: 'ADV', make: function (r) { return posRootNR(r, false); } }] },
     { num: '20', outcome: AN6, parts: [{ id: '20', level: 'PRG', make: p9('recipMinus', { diff: true }) }] },
     { num: '21', outcome: AN6, parts: [{ id: '21', level: 'PRG', make: p9('boatSame') }] },
-    { num: '22', outcome: AN6, shared: saraShared, parts: [
+    { num: '22–23', outcome: AN6, shared: saraShared, parts: [
       { id: '22', level: 'EMG', make: function (r, z) { return saraMC(r, z); } },
-      { id: '23', sub: '23', level: 'ADV', make: function (r, z) { return P9().fasterSolve(r, CP, z, { prompt: 'Solve the equation from the previous question to find ' + z.who + '’s speed and ' + z.her + ' driving time.' }); } }] },
+      { id: '23', level: 'ADV', make: function (r, z) { return P9().fasterSolve(r, CP, z, { prompt: 'Solve the equation from the previous question to find ' + z.who + '’s speed and ' + z.her + ' driving time.' }); } }] },
     { num: '24', outcome: AN6, parts: [{ id: '24', level: 'PRG', make: p9('workOther', { min: true }) }] },
     { num: '25', outcome: AN6, parts: [{ id: '25', level: 'MAS', make: p9('workFaster', { nr: true }) }] },
     { num: '26', outcome: AN6, parts: [{ id: '26', level: 'EMG', make: p9('fracJobMC', { together: true }) }] },

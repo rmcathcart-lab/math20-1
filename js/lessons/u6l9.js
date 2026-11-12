@@ -54,7 +54,7 @@
     Object.keys(MCC).forEach(function (k) { c['mc-' + cp + k] = MCC[k]; p['mc-' + cp + k] = 'n'; });
     HW.addCodes(c); HW.addPartial(p);
   }
-  codes(CP);
+  codes(CP); codes('u6l10-'); // the Unit 6 Review (u6l10.js) uses this kit too
 
   /* ======================================================================================================
    * Small tools

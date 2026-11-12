@@ -300,7 +300,7 @@
     return s;
   }
   function rangeWhy(Q) { return Q.kind === 'cross' || Q.kind === 'touch' ? 'The graph reaches the ' + t('x') + '-axis and has no negative values: range ' + t(Q.range) + '.' : 'The graph never reaches the ' + t('x') + '-axis; its least value is at the vertex ' + t(pt(Q.vtx[0], Q.vtx[1])) + ': range ' + t(Q.range) + '.'; }
-  function yintWhy(Q, ftex) { return t('y') + '-intercept ' + t(A(Q.y0 < 0 ? '(' + nt(Q.y0) + ')' : nt(Q.y0)).replace(/\\left\\lvert \((.*)\)\\right\\rvert $/, '\\left\\lvert $1\\right\\rvert ') + '=' + nt(Q.yint)) + '.'; }
+  function yintWhy(Q) { return t('y') + '-intercept ' + t(A(nt(Q.y0)) + '=' + nt(Q.yint)) + '.'; }
 
   /* the wrong-answer lists for the features */
   function invWrongs(cp, Q) {
@@ -334,7 +334,7 @@
     want.forEach(function (w, i) {
       if (w === 'inv') {
         var iw = invWrongs(cp, Q);
-        fields.push({ label: 'Invariant points', name: 'invariant points', mode: 'math', keys: keys0, none: true, placeholder: '(x, 0), …   or none' });
+        fields.push({ label: 'Invariant points', name: 'invariant points', mode: 'math', keys: keys0, none: keys0 === 'set', placeholder: '(x, 0), …   or none' });
         checks.push(ptsChk(cp, Q.inv, { wrongs: iw, tol: o.tol, onAxis: true })); keys.push(ptsT(Q.inv)); ans.push('invariant points ' + t(ptsT(Q.inv)));
         iw.forEach(function (x) { bad.push([i, ptsT(x.pairs)]); }); if (Q.inv.length) bad.push([i, '\\text{none}']);
       } else if (w === 'vtx') {
@@ -355,7 +355,7 @@
         rw.forEach(function (x) { bad.push([i, x.is]); });
       } else if (w === 'dom') {
         fields.push({ label: 'Domain of ' + t('y=|f(x)|'), name: 'domain', mode: 'math', keys: keys0, vars: ['x'], placeholder: '{x | x in R}' });
-        checks.push(K.set(setT('x\\in\\mathbb{R}', 'x').replace(',\\ x\\in\\mathbb{R}', ''), { v: 'x' })); keys.push('\\{x\\mid x\\in\\mathbb{R}\\}'); ans.push('domain ' + t('\\{x\\mid x\\in\\mathbb{R}\\}'));
+        checks.push(K.set('\\{x\\mid x\\in\\mathbb{R}\\}', { v: 'x' })); keys.push('\\{x\\mid x\\in\\mathbb{R}\\}'); ans.push('domain ' + t('\\{x\\mid x\\in\\mathbb{R}\\}'));
       }
     });
     var bads = bad.map(function (b) { var k = keys.slice(); k[b[0]] = b[1]; return k; });
@@ -472,7 +472,7 @@
         Pt('2a', 'BEG', function (r, o) {
           var Q = QR(o.a, o.r, o.r + 4), xs = []; for (var x = o.r - 1; x <= o.r + 5; x++) xs.push(x);
           var fields = [], checks = [], keys = [];
-          xs.forEach(function (x) { var v = Q.f(x); fields.push({ label: t('g(' + x + ')='), name: 'g(' + x + ')' }); checks.push(numChk(v, x !== 0 ? [{ v: -o.a * x * x + (Q.f(x) - o.a * x * x), code: 'value', hint: null }] : [])); keys.push(String(v)); });
+          xs.forEach(function (x) { var v = Q.f(x); fields.push({ label: t('g(' + x + ')='), name: 'g(' + x + ')' }); checks.push(numChk(v, x !== 0 ? [{ v: Q.f(x) - 2 * o.a * x * x, code: CP + 'tab-sub', hint: 'Square first: ' + t('(' + x + ')^{2}=' + x * x) + ', then multiply by ' + t(o.a) + '.' }] : [])); keys.push(String(v)); });
           xs.forEach(function (x) { var v = Q.f(x); fields.push({ label: t(A('g(' + x + ')') + '='), name: '|g(' + x + ')|' }); checks.push(numChk(Math.abs(v), v < 0 ? [{ v: v, code: CP + 'tab-abs', hint: 'An absolute value is never negative: ' + t(A(v) + '=' + Math.abs(v)) + '.' }] : [])); keys.push(String(Math.abs(v))); });
           var bad1 = keys.slice(); xs.forEach(function (x, i) { if (Q.f(x) < 0) bad1[7 + i] = String(Q.f(x)); });
           var x0 = xs[0];
@@ -635,7 +635,7 @@
         Pt('12c', 'ADV', function (r, o) {
           var top = (o.s - o.r) * (o.s - o.r) / 4, L0 = o.r * o.s, LX = (o.X - o.r) * (o.X - o.s), loss = Math.max(L0, LX), other = Math.min(L0, LX), M0 = Math.max(top, loss), T = setT('0\\le y\\le ' + M0);
           var fields = [{ label: 'Greatest profit ($)', name: 'greatest profit' }, { label: 'Greatest loss ($)', name: 'greatest loss' }, { label: 'Range of ' + t('y=|P(x)|'), name: 'range', mode: 'math', keys: 'set', vars: ['y'] }];
-          var mny = function (x) { return '\\$' + HW.fmt(x * 100).replace(/\s/g, '\\,'); };
+          var mny = function (x) { return '\\$' + HW.fmt(x * 100); };
           return fieldsPart('State the greatest profit, the greatest loss (in dollars), and the range of ' + t('y=|P(x)|') + ' for ' + t('0\\le x\\le ' + o.X) + '.', fields,
             [numChk(top * 100, [{ v: top, code: CP + 'unit-hund', hint: t('P') + ' is in <b>hundreds</b> of dollars: multiply by 100.' }]), numChk(loss * 100, [{ v: loss, code: CP + 'unit-hund', hint: t('P') + ' is in <b>hundreds</b> of dollars: multiply by 100.' }, { v: other * 100, code: CP + 'loss-end', hint: 'Compare the losses at both ends of the domain, ' + t('x=0') + ' and ' + t('x=' + o.X) + '.' }]),
               K.set(T, { v: 'y', wrong: [{ is: setT('0\\le y\\le ' + top), code: CP + 'arc-top', hint: 'The top of the hump is not the greatest value of ' + t('|P|') + ' here: look at the ends of the domain.' }, { is: setT('y\\ge 0'), code: CP + 'rng-end', hint: 'The domain is ' + t('0\\le x\\le ' + o.X) + ', so the range has a greatest value.' }] })],
@@ -679,7 +679,7 @@
 
     { num: '16', parts: [Pt('16', 'PRG', function (r) {
       var z = rootSpec(r, { evenW: true, lo: -6, hi: 3, wmin: 4, wmax: 10, smax: 8, cmax: 40, ex: [{ r: -3, s: 5 }, { r: -4, s: 2 }, { r: 1, s: 5 }] }), Q = QR(1, z.r, z.s), v = -Q.q;
-      return KP.nr('The graph of ' + t('y=' + A(Q.gT)) + ' has a middle arc between its invariant points. The ' + t('y') + '-coordinate of the vertex of this arc is ____.', v, function (x) { return x === -v ? { code: CP + 'vtx-noreflect', hint: 'The vertex of the parabola is below the axis; the arc is reflected, so its top is positive.' } : x === Math.abs(Q.c || Q.y0) ? { code: 'value', hint: 'That is the ' + t('y') + '-intercept. Find the vertex: the axis is halfway between the zeros.' } : null; },
+      return KP.nr('The graph of ' + t('y=' + A(Q.gT)) + ' has a middle arc between its invariant points. The ' + t('y') + '-coordinate of the vertex of this arc is ____.', v, function (x) { return x === -v ? { code: CP + 'vtx-noreflect', hint: 'The vertex of the parabola is below the axis; the arc is reflected, so its top is positive.' } : x === Math.abs(Q.y0) && Math.abs(Q.y0) !== v ? { code: 'value', hint: 'That is the ' + t('y') + '-intercept. Find the vertex: the axis is halfway between the zeros.' } : null; },
         t(Q.gT + '=' + Q.fT) + ': axis ' + t('x=' + Q.p) + ', ' + t('f(' + Q.p + ')=' + Q.q) + ', reflected to ' + t(pt(Q.p, v)) + '. The answer is ' + t(v) + '.', ['Factor to find the zeros; the axis of symmetry is halfway between them.'], 'NR: top of the middle arc');
     })] },
 
