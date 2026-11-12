@@ -7,7 +7,7 @@
   /* lessons that have a lesson page under lessons/ (examples + the teacher's class notes); the home page, the lesson
    * sidebar and the teaching index (lessons/index.html) link to it as lessons/u1/l7/?class=<block>. Add a lesson's id
    * here once its page lessons/uN/lM/index.html exists (until then it shows as "coming soon"). */
-  root.HW.TEACHING = { base: 'lessons/', lessons: ['u1l1', 'u1l2', 'u1l3', 'u1l4', 'u1l5', 'u1l6', 'u1l7', 'u1l8', 'u1l9', 'u2l1', 'u2l2', 'u2l3', 'u2l4', 'u2l5', 'u2l6', 'u2l7', 'u3l1', 'u3l2', 'u3l3', 'u3l4', 'u3l5', 'u3l6', 'u3l7', 'u3l8', 'u3l9', 'u4l1', 'u4l2', 'u4l3', 'u4l4', 'u4l5', 'u4l6', 'u4l7', 'u4l8'] };
+  root.HW.TEACHING = { base: 'lessons/', lessons: ['u1l1', 'u1l2', 'u1l3', 'u1l4', 'u1l5', 'u1l6', 'u1l7', 'u1l8', 'u1l9', 'u2l1', 'u2l2', 'u2l3', 'u2l4', 'u2l5', 'u2l6', 'u2l7', 'u3l1', 'u3l2', 'u3l3', 'u3l4', 'u3l5', 'u3l6', 'u3l7', 'u3l8', 'u3l9', 'u4l1', 'u4l2', 'u4l3', 'u4l4', 'u4l5', 'u4l6', 'u4l7', 'u4l8', 'u5l1', 'u5l2', 'u5l3', 'u5l4', 'u5l5', 'u5l6', 'u5l7', 'u5l8', 'u5l9', 'u5l10', 'u5l11', 'u6l1', 'u6l2', 'u6l3', 'u6l4', 'u6l5', 'u6l6', 'u6l7', 'u6l8', 'u6l9', 'u6l10', 'u7l1', 'u7l2', 'u7l3', 'u7l4', 'u7l5', 'u7l6', 'u7l7', 'u7l8', 'u8l1', 'u8l2', 'u8l3', 'u8l4', 'u8l5', 'u8l6', 'u8l7', 'u8l8'] };
   root.HW.CATALOG = [
     { unit: 1, title: 'Sequences and Series', outcomes: 'RF9 · RF10', lessons: [
       { id: 'u1l1', num: '1', title: 'Patterns, Sequences and the General Term' },

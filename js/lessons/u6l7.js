@@ -97,7 +97,7 @@
   /* factored form of the reduced quadratic Ar x² + Br x + Cr with rational roots */
   function facQ(info, v) {
     var list = [], dd = 1;
-    info.roots.forEach(function (x) { x = R(x); list.push('(' + tx(lp(x[1], -x[0], v)) + ')'); dd *= x[1]; });
+    info.roots.forEach(function (x) { x = R(x); if (x[0] === 0) list.unshift(v); else list.push('(' + tx(lp(x[1], -x[0], v)) + ')'); dd *= x[1]; });
     if (info.roots.length === 1) { var x0 = R(info.roots[0]); dd *= x0[1]; list = [list[0] + '^{2}']; }
     var k = info.Ar / dd;
     return coefT(k) + list.join('');
@@ -146,6 +146,14 @@
       var sg = tm.s * (tm.c < 0 ? -1 : 1), ca = Math.abs(tm.c), me = tm.mf['1:0'] || 0, bins = '';
       order.forEach(function (k) { if (k !== '1:0' && tm.mf[k] > 0) bins += binT(k, tm.mf[k]); });
       var ts = P.terms(tm.np), body, bare = false;
+      if (ts.length === 2 && P.degreeIn(tm.np, v) === 1) { // a binomial numerator that is one of the multiplier's factors: (x − 2)(x − 2) → (x − 2)²
+        var nf = normF([rv(P.coef(tm.np, mon(v, 1))), rv(P.constant(tm.np))]);
+        if (Math.abs(nf.g) === 1 && tm.mf[nf.key] > 0 && isInt(P.coef(tm.np, mon(v, 1))) && isInt(P.constant(tm.np))) {
+          var bins2 = ''; order.forEach(function (k) { if (k !== '1:0' && tm.mf[k] > 0) bins2 += binT(k, tm.mf[k] + (k === nf.key ? 1 : 0)); });
+          var fr2 = monoTx([Math.abs(tm.c), 1], tm.mf['1:0'] || 0, v, false);
+          return { neg: (sg * nf.g) < 0, body: fr2 + bins2, bare: false };
+        }
+      }
       if (!ts.length) body = '0';
       else if (ts.length === 1) {
         var c0 = ts[0].c; if (c0[0] < 0) sg = -sg;
@@ -161,7 +169,23 @@
       return list.map(function (tm, i) { var p = prodTex(tm), b = p.bare && p.neg ? '(' + p.body + ')' : p.body; return (i === 0 ? (p.neg ? '-' : '') : (p.neg ? '-' : '+')) + b; }).join('');
     }
     function sum(list, f) { return list.reduce(function (s, tm) { return P.add(s, f(tm)); }, P.num(0)); }
-    var Lt = sideT(L), Rt = sideT(Rr), SL = sum(L, function (tm) { return tm.prod; }), SR = sum(Rr, function (tm) { return tm.prod; }), E = P.sub(SL, SR);
+    function shownDen(tm) { return tm.o.dt || (tm.o.asc ? txa(tm.dp) : tx(tm.dp)); }
+    var Lt = sideT(L), Rt = sideT(Rr), SL = sum(L, function (tm) { return tm.prod; }), SR = sum(Rr, function (tm) { return tm.prod; });
+    var crossed = o.cross && L.length === 1 && Rr.length === 1;
+    if (crossed) { // a·d = c·b, written with the denominators as shown (4 = −3(5 − 2y))
+      var mulT = function (np, sg, dp, dT) {
+        var nn = P.scale(np, sg), one = P.count(dp) === 1 && !P.vars(dp).length && rv(P.constant(dp)) === 1;
+        if (one) return tx(nn);
+        var nM = P.count(nn) === 1, dM = P.count(dp) === 1;
+        if (nM && dM) return tx(P.mul(nn, dp));
+        if (nM) { var c = tx(nn); return c === '1' ? dT : c === '-1' ? '-(' + dT + ')' : c + '(' + dT + ')'; }
+        if (dM) { var c2 = tx(dp); return (c2 === '1' ? '' : c2 === '-1' ? '-' : c2) + '(' + tx(nn) + ')'; }
+        return '(' + tx(nn) + ')(' + dT + ')';
+      };
+      Lt = mulT(L[0].np, L[0].s, Rr[0].dp, shownDen(Rr[0])); Rt = mulT(Rr[0].np, Rr[0].s, L[0].dp, shownDen(L[0]));
+      SL = P.scale(P.mul(L[0].np, Rr[0].dp), L[0].s); SR = P.scale(P.mul(Rr[0].np, L[0].dp), Rr[0].s);
+    }
+    var E = P.sub(SL, SR);
     var info = solveE(E, v), cands = info.roots;
     var valid = cands.filter(function (x) { return !has(npvList, x); }), extr = cands.filter(function (x) { return has(npvList, x); });
 
@@ -185,6 +209,7 @@
     all.forEach(function (tm) {
       if (!tm.den.length) return;
       var shown = tm.o.dt || (tm.o.asc ? txa(tm.dp) : tx(tm.dp)), fd = facDen(tm);
+      if (crossed && tm.k < 0) return;
       if (fd !== shown && notes.indexOf(shown + '=' + fd) < 0) notes.push(shown + '=' + fd);
       if (tm.k < 0) opp = true;
     });
@@ -195,14 +220,16 @@
     s += 'NPVs: ' + t(A6npvTex(npv)) + '.';
     if (o.cross) s += ' Cross-multiply: ' + t(Lt + '=' + Rt) + '.';
     else if (lcdT !== '1') s += ' LCD ' + t(lcdT) + '. Multiply every term by it: ' + t(Lt + '=' + Rt) + '.';
-    var Lx = tx(SL), Rx = tx(SR), exp = Lx + '=' + Rx;
-    if (exp !== Lt + '=' + Rt) s += '<br>' + t(exp);
+    var Lx = tx(SL), Rx = tx(SR), exp = Lx + '=' + Rx, last = Lt + '=' + Rt;
+    var nT = function (x) { return (x.replace(/^-/, '').match(/[+-]/g) || []).length + 1; };
+    var reorder = !/\(|\\frac/.test(Lt + Rt) && P.count(SL) === nT(Lt) && P.count(SR) === nT(Rt);
+    if (exp !== last && !reorder) { s += '<br>' + t(exp); last = exp; }
     var cancel = (P.degreeIn(SL, v) === 2 || P.degreeIn(SR, v) === 2) && info.deg < 2;
     if (cancel) s += ' (the ' + t(v + '^{2}') + ' terms cancel)';
     if (info.deg === 1) {
       var B = rv(info.b), C = rv(info.c), lhs = B < 0 ? monoTx([-B, 1], 1, v, true) : monoTx([B, 1], 1, v, true), rhs = rt(B < 0 ? C : -C);
       var lineC = lhs + '=' + rhs;
-      if (lineC !== exp) s += (cancel ? ', so ' : '<br>') + t(lineC);
+      if (lineC !== last) s += (cancel ? ', so ' : '<br>') + t(lineC);
       if (Math.abs(B) !== 1) s += ', so ' + t(v + '=' + rt(cands[0]));
       s += '.';
     } else if (info.deg === 0) {
@@ -396,7 +423,7 @@
     var vals = W.info.irr ? W.info.irr.vals : W.valid.map(rv), v = W.v;
     var srt = vals.slice().sort(function (a, b) { return a - b; });
     return 'Window ' + KT.window(vals, W.npvList.map(rv)) + '. ' + t('Y_1=') + '<code>' + KT.calcSide(W.L, v) + '</code>, ' + t('Y_2=') + '<code>' + KT.calcSide(W.R, v) + '</code>; graph, then use <b>intersect</b> at each crossing:<br>' +
-      srt.map(function (x) { return t(v + '\\approx ' + K.roundTo(x, 2).toFixed(2)) + ''; }).join(' or ') + (W.npvList.length ? ' (neither is the NPV' + (W.npvList.length > 1 ? 's ' : ' ') + t(W.npvList.map(rt).join(',\\ ')) + ')' : '') + '.<br>(Algebraically: ' + W.sol.replace(/^.*?NPVs:[^.]*\.\s*/, '') + ')';
+      srt.map(function (x) { return t(v + '\\approx ' + K.roundTo(x, 2).toFixed(2)); }).join(' or ') + (W.npvList.length ? ' (neither is ' + (W.npvList.length > 1 ? 'an NPV: ' : 'the NPV ') + t(W.npvList.map(rt).join(',\\ ')) + ')' : '') + '.<br>(Algebraically: ' + W.sol.replace(/^.*?NPVs:[^.]*\.\s*/, '') + ')';
   };
   KT.F = F; KT.sgnF = sgnF; KT.X = X; KT.pick = pick; KT.nz = nz; KT.lp = lp; KT.cpoly = cpoly; KT.tx = tx; KT.txa = txa; KT.R = R; KT.rv = rv; KT.rt = rt; KT.qa = qa; KT.qm = qm; KT.qd = qd;
   KT.has = has; KT.isInt = isInt; KT.coefT = coefT; KT.gcd = gcd; KT.lcm = lcm; KT.monoTx = monoTx; KT.mon = mon; KT.ynCheck = ynCheck; KT.uniqR = uniqR;
@@ -589,7 +616,7 @@
   function q12(r) {
     var c = r.pick(RCTX), s = pick(function () { var n = r.int(3, 11), m = r.int(1, n - 1), k = r.int(3, 20); return { m: m, n: n, d: k * (n - m), a: k * m }; }, function (z) { return gcd(z.m, z.n) === 1 && z.d <= 150 && z.a <= 200 && !(z.m === 2 && z.n === 7 && z.d === 85) && !(z.m === 4 && z.n === 5 && z.d === 7); });
     var b = s.a + s.d, L = c.a.toLowerCase(), letter = L.charAt(0);
-    var sol = 'Let ' + t(letter) + ' be the number of ' + L + ' ' + c.unit + '; there are ' + t(letter + '+' + s.d) + ' ' + c.b.toLowerCase() + ' ' + c.unit + '.<br>' + t('\\frac{' + letter + '}{' + letter + '+' + s.d + '}=\\frac{' + s.m + '}{' + s.n + '}') + ' (' + t(letter + '\\ne -' + s.d) + '). Cross-multiply: ' + t(s.n + letter + '=' + s.m + '(' + letter + '+' + s.d + ')') + ', ' + t(s.n + letter + '=' + (s.m === 1 ? '' : s.m) + letter + '+' + s.m * s.d) + ', ' + t((s.n - s.m === 1 ? '' : s.n - s.m) + letter + '=' + s.m * s.d) + ', ' + t(letter + '=' + s.a) + '.<br>' + t(s.a) + ' ' + L + ' and ' + t(b) + ' ' + c.b.toLowerCase() + ' ' + c.unit + '. (Check: ' + t('\\frac{' + s.a + '}{' + b + '}=\\frac{' + s.m + '}{' + s.n + '}') + ' ✓)';
+    var sol = 'Let ' + t(letter) + ' be the number of ' + L + ' ' + c.unit + '; there are ' + t(letter + '+' + s.d) + ' ' + c.b.toLowerCase() + ' ' + c.unit + '.<br>' + t('\\frac{' + letter + '}{' + letter + '+' + s.d + '}=\\frac{' + s.m + '}{' + s.n + '}') + ' (' + t(letter + '\\ne -' + s.d) + '). Cross-multiply: ' + t(s.n + letter + '=' + s.m + '(' + letter + '+' + s.d + ')') + ', ' + t(s.n + letter + '=' + (s.m === 1 ? '' : s.m) + letter + '+' + s.m * s.d) + ', ' + (s.n - s.m === 1 ? t(letter + '=' + s.a) : t((s.n - s.m) + letter + '=' + s.m * s.d) + ', ' + t(letter + '=' + s.a)) + '.<br>' + t(s.a) + ' ' + L + ' and ' + t(b) + ' ' + c.b.toLowerCase() + ' ' + c.unit + '. (Check: ' + t('\\frac{' + s.a + '}{' + b + '}=\\frac{' + s.m + '}{' + s.n + '}') + ' ✓)';
     return KT.numPart(c.txt(s.d, s.m, s.n) + ' Write and solve a rational equation to find how many of each there are.', [{ label: c.a + ':', val: s.a, cands: [[s.d, CP + 'ratio-diff', 'That is the difference. Let ' + t(letter) + ' be the smaller amount: the other is ' + t(letter + '+' + s.d) + '.']] }, { label: c.b + ':', val: b }],
       sol, ['Let ' + t(letter) + ' be the smaller amount; the other is ' + t(letter + '+' + s.d) + '. Write ' + t('\\frac{' + letter + '}{' + letter + '+' + s.d + '}=\\frac{' + s.m + '}{' + s.n + '}') + '.', 'Cross-multiply and solve.'], 'a ratio problem', { swap: CP + 'ratio-swap' });
   }
@@ -662,7 +689,7 @@
   }
   function epB2(r) { // p/(x − a) = c + (x + b)/(a − x)
     var v = 'x';
-    var s2 = pick(function () { return { p: r.int(1, 12), a: r.int(1, 8), c: r.int(2, 4), b: nz(r, 1, 6) }; }, function (z) { var W = KT.eq(v, [F(1, z.p, [[1, -z.a]])], [F(1, z.c, []), F(1, [1, z.b], [[-1, z.a]], { asc: true })]); return okRoot(W, 40, 3) && !(z.p === 9 && z.a === 5 && z.c === 2 && z.b === -1); });
+    var s2 = pick(function () { return { p: r.int(1, 12), a: r.int(1, 8), c: r.int(2, 4), b: nz(r, 1, 6) }; }, function (z) { var W = KT.eq(v, [F(1, z.p, [[1, -z.a]])], [F(1, z.c, []), F(1, [1, z.b], [[-1, z.a]], { asc: true })]); return z.b !== -z.a && okRoot(W, 40, 3) && !(z.p === 9 && z.a === 5 && z.c === 2 && z.b === -1); });
     var W = KT.eq(v, [F(1, s2.p, [[1, -s2.a]])], [F(1, s2.c, []), F(1, [1, s2.b], [[-1, s2.a]], { asc: true })], { verify: true });
     return KT.solvePart(CP, 'Solve. ' + t(W.tex), W, H_OPP, 'opposite denominators and a whole number');
   }

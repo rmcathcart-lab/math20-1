@@ -200,7 +200,7 @@
     var N = s.d - s.k, lhs = s.m * s.q - s.p, rhs = s.m * s.q * s.k + s.p * s.j, newT = s.q === 1 ? String(s.p) : fr(s.p, s.q);
     var eqT = '\\frac{' + s.m + '(d-' + s.k + ')}{d+' + s.j + '}=' + newT;
     var sol = 'Denominator ' + t('d') + ', numerator ' + t('d-' + s.k) + ': ' + t(eqT) + ', ' + t('d\\ne -' + s.j) + '.<br>' +
-      (s.q === 1 ? t(s.m + '(d-' + s.k + ')=' + (s.p === 1 ? '' : s.p) + '(d+' + s.j + ')') : 'Cross-multiply: ' + t(s.q + '\\cdot ' + s.m + '(d-' + s.k + ')=' + s.p + '(d+' + s.j + ')')) + ', so ' + t(pt([s.m * s.q, -s.m * s.q * s.k], 'd') + '=' + pt([s.p, s.p * s.j], 'd')) + ' and ' + t(lt(lhs + 'd', 0) + '=' + rhs).replace('1d', 'd') + ', ' + t('d=' + s.d) + '.<br>' +
+      (s.q === 1 ? t(s.m + '(d-' + s.k + ')=' + (s.p === 1 ? 'd+' + s.j : s.p + '(d+' + s.j + ')')) : 'Cross-multiply: ' + t(s.q + '\\cdot ' + s.m + '(d-' + s.k + ')=' + s.p + '(d+' + s.j + ')')) + ', so ' + t(pt([s.m * s.q, -s.m * s.q * s.k], 'd') + '=' + pt([s.p, s.p * s.j], 'd')) + (lhs === 1 ? '' : ' and ' + t(pt([lhs, 0], 'd') + '=' + F(rhs))) + ', ' + t('d=' + s.d) + '.<br>' +
       'The fraction is ' + t('\\frac{' + N + '}{' + s.d + '}') + '. Check: ' + t('\\frac{' + s.m * N + '}{' + (s.d + s.j) + '}=' + newT) + ' ✓';
     var nf = ex.norm(s.m * N, s.d + s.j);
     var p = KP.math('The numerator of a fraction is ' + t(s.k) + ' less than its denominator. If the numerator is ' + MW[s.m] + ' and the denominator is increased by ' + t(s.j) + ', the new fraction is equal to ' + t(newT) + '. Determine the original fraction.',
@@ -240,8 +240,9 @@
     o = o || {};
     var kind = o.kind || 'cycle';
     return pickWhere(function () {
-      if (kind === 'cycle') return { s: r.int(8, 30), k: r.int(2, 8), h: r.pick([1, 1, 0.5, 2]), who: r.pick(['Priya', 'Jonah', 'Aiyana', 'Mateo', 'Grace']), verb: 'cycles', kind: kind };
-      return { s: 5 * r.int(10, 20), k: 5 * r.int(1, 6), h: r.pick([0.5, 0.5, 1, 0.75]), who: r.pick(['Sara', 'Devon', 'Mrs. Patel', 'Marc', 'Leah']), verb: 'drives', kind: kind };
+      if (kind === 'cycle') { var w = r.pick([['Priya', 'she', 'her'], ['Jonah', 'he', 'his'], ['Aiyana', 'she', 'her'], ['Mateo', 'he', 'his'], ['Grace', 'she', 'her']]); return { s: r.int(8, 30), k: r.int(2, 8), h: r.pick([1, 1, 0.5, 2]), who: w[0], she: w[1], her: w[2], verb: 'cycles', kind: kind }; }
+      var d = r.pick([['Sara', 'she', 'her'], ['Devon', 'he', 'his'], ['Mrs. Patel', 'she', 'her'], ['Marc', 'he', 'his'], ['Leah', 'she', 'her']]);
+      return { s: 5 * r.int(10, 20), k: 5 * r.int(1, 6), h: r.pick([0.5, 0.5, 1, 0.75]), who: d[0], she: d[1], her: d[2], verb: 'drives', kind: kind };
     }, function (z) {
       z.D = z.h * z.s * (z.s + z.k) / z.k;
       return nice(z.D) && z.D >= 20 && z.D <= 600 && nice(z.D / z.s, 4) && nice(z.D / (z.s + z.k), 4) && !(z.D === 60 && z.k === 5 && z.h === 1) && !(z.D === 150 && z.k === 25) && !(z.D === 280 && z.k === 10) && !(z.D === 160 && z.k === 20) && !(z.D === 180 && z.k === 15) && !(o.not && o.not(z));
@@ -251,7 +252,7 @@
   P9.fasterSol = function (z) {
     var E = fasterEq(z), h = E.h, mul = (h[1] === 1 ? '' : h[1]) + 's(s+' + z.k + ')', neg = -(z.s + z.k);
     return 'Actual speed ' + t('s') + ', faster ' + t('s+' + z.k) + '. The actual trip takes ' + hText(z.h) + ' longer: ' + t(E.eqT) + ', ' + t('s\\ne 0,\\ -' + z.k) + '.<br>' +
-      'Multiply by ' + t(mul) + ': ' + t(F(h[1] * z.D) + '(s+' + z.k + ')-' + F(h[1] * z.D) + 's=' + (h[0] === 1 ? '' : h[0]) + 's(s+' + z.k + ')') + ', so ' + t(F(h[1] * z.D * z.k) + '=' + pt([h[0], h[0] * z.k], 's')) + (h[0] === 1 ? '' : ' and ' + t(F(E.C) + '=' + pt([1, z.k], 's'))) + '.<br>' +
+      'Multiply by ' + t(mul) + ': ' + t(F(h[1] * z.D) + '(s+' + z.k + ')-' + F(h[1] * z.D) + 's=' + (h[0] === 1 ? '' : h[0]) + 's(s+' + z.k + ')') + ', so ' + t(F(h[1] * z.D * z.k) + '=' + pt([h[0], h[0] * z.k, 0], 's')) + (h[0] === 1 ? '' : ' and ' + t(F(E.C) + '=' + pt([1, z.k, 0], 's'))) + '.<br>' +
       t(pt([1, z.k, -E.C], 's') + '=0') + ', ' + t(facT('s', z.s, neg) + '=0') + ': ' + t('s=' + F(z.s)) + ' (reject ' + t('s=' + F(neg)) + ': a speed is positive).';
   }
   P9.fasterTable = function (r, cp, z, o) {
@@ -268,8 +269,8 @@
   P9.fasterSolve = function (r, cp, z, o) {
     o = o || {};
     var neg = -(z.s + z.k), T = z.D / z.s, Tf = z.D / (z.s + z.k);
-    return boxesN(o.prompt || 'Write an equation and determine ' + (z.kind === 'cycle' ? 'her' : 'the') + ' actual speed and time.', [
-      { label: 'Speed:', ans: z.s, after: 'km/h', diag: function (v) { if (v === neg || v === -neg) return { code: cp + 'neg', hint: 'Reject the negative root: ' + t('s=' + neg) + ' is not a speed.' }; if (v === z.s + z.k) return { code: cp + 'other', hint: 'That is the faster speed. Give the actual speed ' + t('s') + '.' }; return null; }, bad: [z.s + z.k] },
+    return boxesN(o.prompt || 'Write an equation and determine ' + z.her + ' actual speed and time.', [
+      { label: 'Speed:', ans: z.s, after: 'km/h', diag: function (v) { if (v === neg) return { code: cp + 'neg', hint: 'Reject the negative root: ' + t('s=' + neg) + ' is not a speed.' }; if (v === z.s + z.k) return { code: cp + 'other', hint: 'That is the faster speed. Give the actual speed ' + t('s') + '.' }; return null; }, bad: [z.s + z.k] },
       { label: 'Time:', ans: T, after: 'h', diag: function (v) { if (Math.abs(v - Tf) < 1e-9) return { code: cp + 'other', hint: 'That is the time for the faster trip.' }; return null; }, bad: [Tf] }],
       P9.fasterSol(z) + '<br>Actual speed ' + n(z.s) + ' km/h for ' + t('\\frac{' + F(z.D) + '}{' + F(z.s) + '}=' + dec(T)) + ' h (the faster trip would take ' + dec(Tf) + ' h).',
       ['The actual time minus the faster time is ' + hText(z.h) + (z.h < 1 ? ' (in hours: ' + t(rx(z.h)) + ')' : '') + '.', 'Multiply by the LCD, solve the quadratic and reject the negative root.'], 'a time saved: a quadratic');
@@ -283,11 +284,11 @@
     });
     var D = z.D, s = z.s, k = z.k, h = rat(z.h), Cc = D * k / z.h, neg = -(s - k), T1 = D / s, T2 = D / (s - k);
     var sol = 'Going ' + t('s') + ', home ' + t('s-' + k) + '. The trip home takes ' + hText(z.h) + ' longer: ' + t('\\frac{' + F(D) + '}{s-' + k + '}-\\frac{' + F(D) + '}{s}=' + ex.texRat(h)) + ', ' + t('s\\ne 0,\\ ' + k) + '.<br>' +
-      'Multiply by ' + t((h[1] === 1 ? '' : h[1]) + 's(s-' + k + ')') + ': ' + t(F(h[1] * D) + 's-' + F(h[1] * D) + '(s-' + k + ')=' + (h[0] === 1 ? '' : h[0]) + 's(s-' + k + ')') + ', so ' + t(F(h[1] * D * k) + '=' + pt([h[0], -h[0] * k], 's')) + '.<br>' +
+      'Multiply by ' + t((h[1] === 1 ? '' : h[1]) + 's(s-' + k + ')') + ': ' + t(F(h[1] * D) + 's-' + F(h[1] * D) + '(s-' + k + ')=' + (h[0] === 1 ? '' : h[0]) + 's(s-' + k + ')') + ', so ' + t(F(h[1] * D * k) + '=' + pt([h[0], -h[0] * k, 0], 's')) + '.<br>' +
       t(pt([1, -k, -Cc], 's') + '=0') + ', ' + t(facT('s', s, neg) + '=0') + ': ' + t('s=' + s) + ' (reject ' + t('s=' + neg) + ').<br>' +
       'Going: ' + n(s) + ' km/h for ' + dec(T1) + ' h. Home: ' + n(s - k) + ' km/h for ' + dec(T2) + ' h.';
     return boxesN(C[0] + ' ' + n(D) + ' km ' + C[1] + '. ' + C[2] + ' ' + n(k) + ' km/h less and the trip takes ' + hText(z.h) + ' longer. Determine the average speed and the time for each direction.', [
-      { label: 'Going, speed:', name: 'Speed going', ans: s, after: 'km/h', diag: function (v) { if (v === -neg || v === neg) return { code: cp + 'neg', hint: 'That comes from the rejected root. Going is the faster direction: ' + t('s') + ' itself.' }; return null; }, bad: [s - k] },
+      { label: 'Going, speed:', name: 'Speed going', ans: s, after: 'km/h', diag: function (v) { if (v === neg) return { code: cp + 'neg', hint: 'Reject the negative root: a speed is positive.' }; if (v === s - k) return { code: cp + 'other', hint: 'That is the speed home. Going is the faster direction.' }; return null; }, bad: [s - k] },
       { label: 'Going, time:', name: 'Time going', ans: T1, after: 'h', bad: [T2] },
       { label: 'Home, speed:', name: 'Speed home', ans: s - k, after: 'km/h' },
       { label: 'Home, time:', name: 'Time home', ans: T2, after: 'h' }], sol,
@@ -319,9 +320,9 @@
   P9.currentRound = function (r, cp, o) {
     o = o || {};
     var jet = o.jet != null ? o.jet : r.chance(0.3);
-    var z = pickWhere(function () { return jet ? { b: r.int(20, 40), c: r.int(2, 9), d: 2 * r.int(10, 30) } : { b: r.int(4, 12), c: r.int(1, 5), d: r.int(4, 30) }; }, function (z) {
+    var z = pickWhere(function () { return jet ? { b: r.int(20, 40), c: r.int(2, 9), d: 2 * r.int(10, 30) } : { b: r.int(5, 12), c: r.int(2, 5), d: r.int(4, 30) }; }, function (z) {
       z.T = 2 * z.b * z.d / (z.b * z.b - z.c * z.c);
-      return z.c < z.b / 2 && nice(z.T, 4) && z.T <= 9 && z.T >= 1 && !(z.b === 6 && z.c === 2 && z.d === 12) && !(z.b === 30 && z.c === 6 && z.d === 36) && !nice(z.T / (z.d / z.b)) ;
+      return z.c < z.b / 2 && nice(z.T, 4) && z.T <= 9 && z.T >= 1 && !(z.b === 6 && z.c === 2 && z.d === 12) && !(z.b === 30 && z.c === 6 && z.d === 36);
     });
     var b = z.b, c = z.c, d = z.d, q = rat(z.T), a = q[0], qq = q[1], two = 2 * qq * b * d, ab2 = a * b * b;
     var sol = 'Current ' + t('c') + ': downstream ' + t(b + '+c') + ', upstream ' + t(b + '-c') + '. ' + t('\\frac{' + d + '}{' + b + '+c}+\\frac{' + d + '}{' + b + '-c}=' + ex.texRat(q)) + ', ' + t('c\\ne\\pm ' + b) + '.<br>' +
@@ -330,7 +331,7 @@
     var p = KP.number((jet ? 'A jet boat travels at ' + n(b) + ' km/h in still water. It goes ' + n(d) + ' km up a river and ' + n(d) + ' km back in ' + dec(z.T) + ' h.' : 'A canoeist who paddles at ' + n(b) + ' km/h in still water goes ' + n(d) + ' km downstream and returns to the start in a total of ' + dec(z.T) + ' h.') + ' Determine the speed of the current.', c,
       function (v) { if (v === -c) return { code: cp + 'neg', hint: 'Reject the negative root: the current’s speed is positive.' }; if (v === c * c) return { code: cp + 'sq', hint: 'That is ' + t('c^{2}') + '. Take the square root.' }; if (v === b + c || v === b - c) return { code: cp + 'other', hint: 'That is the boat’s speed with or against the current. The question asks for the current ' + t('c') + '.' }; return null; },
       sol, ['Downstream the speed is ' + t(b + '+c') + '; upstream ' + t(b + '-c') + '. Add the two times.', 'Multiply by the LCD: the ' + t('c') + ' terms cancel and you are left with ' + t('c^{2}') + '.'], 'a current: a round trip', { after: 'km/h' });
-    p.bad = [String(c * c), String(b - c)];
+    p.bad = [String(c * c), String(b - c)].filter(function (x) { return x !== String(c); });
     return p;
   };
   /* a tailwind and a headwind, the same time (#8; o.nr: the airspeed only, numerical response) */
@@ -372,11 +373,11 @@
     { a: 'One crew', b: 'a second crew', job: 'paint a house', u: 'h' },
     { a: 'Kai', b: 'Mo', job: 'wash the team’s jerseys', u: 'h' },
     { a: 'One pump', b: 'a second pump', job: 'drain a pool', u: 'h' }];
-  function togetherPair(r, u, avoid) {
+  function togetherPair(r, u, avoid, q) {
     return pickWhere(function () { return u === 'min' ? { a: r.int(10, 90), b: r.int(12, 120) } : { a: r.int(2, 24), b: r.int(3, 30) }; }, function (z) {
-      z.t = z.a * z.b / (z.a + z.b);
+      z.t = z.a * z.b / (z.a + z.b); if (q && !nice(z.t)) { if (!nice(z.t, q)) return false; } else if (!nice(z.t)) return false;
       var bad = [[30, 45], [4, 6], [3, 6], [40, 60], [30, 60], [6, 12]].concat(avoid || []);
-      return z.a < z.b && nice(z.t) && z.t >= 2 && !bad.some(function (p) { return p[0] === z.a && p[1] === z.b; });
+      return z.a < z.b && z.t >= 1.5 && !bad.some(function (p) { return p[0] === z.a && p[1] === z.b; });
     });
   }
   /* together (#9a, EP A4; o.nr: numerical response) */
@@ -418,32 +419,34 @@
   };
   /* one is h faster (or slower); together T: each alone (#10, EP B3, L10 #25 (o.nr), EP10 #18 (o.crew)) */
   var FAST = {
-    machine: { p: function (h, T) { return 'A new machine can package an order ' + n(h) + ' h faster than an old machine. Using both machines, the order takes ' + n(T) + ' h. How long does each machine take alone?'; }, f: 'New machine:', s: 'Old machine:', u: 'h', fv: 'new machine', sv: 'old machine' },
-    pipe: { p: function (h, T) { return 'A small pipe takes ' + n(h) + ' h longer than a large pipe to fill a tank. Together they fill it in ' + n(T) + ' h. How long does each pipe take alone?'; }, f: 'Large pipe:', s: 'Small pipe:', u: 'h', fv: 'large pipe', sv: 'small pipe' },
-    crew: { p: function (h, T) { return 'Working alone, Crew B takes ' + n(h) + ' days longer than Crew A to frame a house. Working together, the crews take ' + n(T) + ' days. Determine how long each crew takes alone.'; }, f: 'Crew A:', s: 'Crew B:', u: 'days', fv: 'Crew A', sv: 'Crew B' },
-    plow: { p: function (h, T) { return 'Working alone, one snow plow takes ' + n(h) + ' h longer than another to clear a parking lot. Together they clear it in ' + n(T) + ' h. How long does each take alone?'; }, f: 'Faster plow:', s: 'Slower plow:', u: 'h', fv: 'faster plow', sv: 'slower plow' }
+    machine: { p: function (h, T) { return 'A new machine can package an order ' + n(h) + ' h faster than an old machine. Using both machines, the order takes ' + T + '. How long does each machine take alone?'; }, f: 'New machine:', s: 'Old machine:', u: 'h', fv: 'new machine', sv: 'old machine' },
+    pipe: { p: function (h, T) { return 'A small pipe takes ' + n(h) + ' h longer than a large pipe to fill a tank. Together they fill it in ' + T + '. How long does each pipe take alone?'; }, f: 'Large pipe:', s: 'Small pipe:', u: 'h', fv: 'large pipe', sv: 'small pipe' },
+    crew: { p: function (h, T) { return 'Working alone, Crew B takes ' + n(h) + ' days longer than Crew A to frame a house. Working together, the crews take ' + T + '. Determine how long each crew takes alone.'; }, f: 'Crew A:', s: 'Crew B:', u: 'days', fv: 'Crew A', sv: 'Crew B' },
+    pump: { f: 'Faster pump:', s: 'Slower pump:', u: 'h', fv: 'faster pump', sv: 'slower pump' },
+    plow: { p: function (h, T) { return 'Working alone, one snow plow takes ' + n(h) + ' h longer than another to clear a parking lot. Together they clear it in ' + T + '. How long does each take alone?'; }, f: 'Faster plow:', s: 'Slower plow:', u: 'h', fv: 'faster plow', sv: 'slower plow' }
   };
   P9.workFaster = function (r, cp, o) {
     o = o || {};
-    var C = FAST[o.ctx || r.pick(['machine', 'pipe', 'plow'])];
-    var z = pickWhere(function () { return C.u === 'days' ? { x: r.int(4, 40), h: r.int(2, 20) } : { x: r.int(2, 20), h: r.int(1, 15) }; }, function (z) {
+    var C = FAST[o.nr ? 'pump' : o.ctx || r.pick(['machine', 'pipe', 'plow'])], days = C.u === 'days';
+    var z = pickWhere(function () { return days ? { x: r.int(4, 40), h: r.int(2, 20) } : { x: r.int(2, 24), h: r.int(1, 16) }; }, function (z) {
       z.T = z.x * (z.x + z.h) / (2 * z.x + z.h);
       var bad = [[3, 3], [6, 6], [9, 9], [10, 5], [8, 4], [20, 10], [5, 2]];
-      return nice(z.T) && z.T >= 2 && !bad.some(function (p) { return p[0] === z.x && p[1] === z.h; }) && z.x + z.h <= (C.u === 'days' ? 60 : 30);
+      return nice(z.T, days || o.nr ? 1 : 10) && z.T >= 1.5 && !bad.some(function (p) { return p[0] === z.x && p[1] === z.h; }) && z.x + z.h <= (days ? 60 : 36);
     });
-    var x = z.x, h = z.h, T = z.T, neg = -T * h / x, u = C.u;
-    var sol = (C.u === 'days' ? cap(C.fv) : 'The ' + C.fv) + ' alone ' + t('x') + ' ' + u + ', the ' + (C.u === 'days' ? '' : '') + C.sv + ' ' + t('x+' + h) + ': ' + t('\\frac{' + T + '}{x}+\\frac{' + T + '}{x+' + h + '}=1') + ', ' + t('x\\ne 0,\\ -' + h) + '.<br>' +
-      'Multiply by ' + t('x(x+' + h + ')') + ': ' + t(T + '(x+' + h + ')+' + T + 'x=x(x+' + h + ')') + ', so ' + t(pt([2 * T, T * h], 'x') + '=' + pt([1, h, 0], 'x')) + ' and ' + t(pt([1, h - 2 * T, -T * h], 'x') + '=0') + '.<br>' +
-      t(facT('x', x, neg) + '=0') + ': ' + t('x=' + x) + ' (reject ' + t('x=' + F(neg)) + ': a time cannot be negative).<br>' +
-      cap(C.fv) + ' ' + n(x) + ' ' + u + ', ' + C.sv + ' ' + n(x + h) + ' ' + u + '. Check: ' + t('\\frac{' + T + '}{' + x + '}+\\frac{' + T + '}{' + (x + h) + '}=1') + ' ✓';
-    var hints = ['Let the faster one take ' + t('x') + ' ' + u + '; the slower takes ' + t('x+' + h) + '. In ' + t(T) + ' ' + u + ' each does ' + t('\\frac{' + T + '}{\\text{its time}}') + ' of the job.', 'The parts add to ' + t(1) + '. Multiply by the LCD, solve the quadratic and reject the negative root.'];
-    var dn = function (v) { if (Math.abs(v - neg) < 1e-9 || Math.abs(v + neg) < 1e-9) return { code: cp + 'neg', hint: 'That comes from the negative root, ' + t('x=' + F(neg)) + ': reject it.' }; if (v === 2 * T) return { code: cp + 'w-avg', hint: 'Set up ' + t('\\frac{' + T + '}{x}+\\frac{' + T + '}{x+' + h + '}=1') + ' and solve it.' }; return null; };
+    var x = z.x, h = z.h, T = z.T, q = rat(T), a = q[0], qq = q[1], neg = -T * h / x, u = C.u, c1 = a * h / x, Tt = dec(T), g1 = gcd(qq, c1);
+    var Tw = days ? n(T) + ' days' : nice(T, 2) ? n(T) + ' h' : hmT(T);
+    var sol = (nice(T, 2) || days ? '' : hmT(T) + ' ' + t('=' + Tt) + ' h. ') + cap(C.fv) + ' alone ' + t('x') + ' ' + u + ', ' + C.sv + ' ' + t('x+' + h) + ': ' + t('\\frac{' + Tt + '}{x}+\\frac{' + Tt + '}{x+' + h + '}=1') + ', ' + t('x\\ne 0,\\ -' + h) + '.<br>' +
+      'Multiply by ' + t((qq === 1 ? '' : qq) + 'x(x+' + h + ')') + ': ' + t(F(a) + '(x+' + h + ')+' + F(a) + 'x=' + (qq === 1 ? '' : qq) + 'x(x+' + h + ')') + ', so ' + t(pt([qq, qq * h - 2 * a, -a * h], 'x') + '=0') + '.<br>' +
+      t((g1 > 1 ? g1 : '') + fac('x', x) + (qq === 1 ? fac('x', neg) : '(' + lt((qq / g1 === 1 ? '' : qq / g1) + 'x', c1 / g1) + ')') + '=0') + ': ' + t('x=' + x) + ' (reject ' + t('x=' + ex.texRat(rat(neg))) + ': a time cannot be negative).<br>' +
+      cap(C.fv) + ' ' + n(x) + ' ' + u + ', ' + C.sv + ' ' + n(x + h) + ' ' + u + '. Check: ' + t('\\frac{' + Tt + '}{' + x + '}+\\frac{' + Tt + '}{' + (x + h) + '}=1') + ' ✓';
+    var hints = ['Let the faster one take ' + t('x') + ' ' + u + '; the slower takes ' + t('x+' + h) + '. In ' + Tw + ' each does ' + t('\\frac{' + Tt + '}{\\text{its time}}') + ' of the job.', 'The parts add to ' + t(1) + '. Multiply by the LCD, solve the quadratic and reject the negative root.'];
+    var dn = function (v) { if (Math.abs(v - neg) < 1e-9 || (Math.abs(v + neg) < 1e-9 && -neg !== x + h)) return { code: cp + 'neg', hint: 'That comes from the negative root: reject it.' }; return null; };
     if (o.nr) {
       var p = KP.nr('<i>(Numerical Response)</i> One pump takes ' + n(h) + ' h less than a second pump to drain a pond. Together they drain it in ' + n(T) + ' h. The number of hours the faster pump takes alone is ________.', x,
-        function (v) { if (v === x + h) return { code: cp + 'other', hint: 'That is the slower pump. The question asks for the faster one.' }; return dn(v); }, sol.replace(/The faster plow|The new machine|The large pipe/, 'The faster pump').replace(/old machine|small pipe|slower plow/g, 'slower pump').replace(/New machine|Large pipe|Faster plow/, 'Faster pump'), hints, 'NR: one is faster');
+        function (v) { if (v === x + h) return { code: cp + 'other', hint: 'That is the slower pump. The question asks for the faster one.' }; return dn(v); }, sol, hints, 'NR: one is faster');
       p.bad = [String(x + h)]; return p;
     }
-    return boxesN(C.p(h, T), [{ label: C.f, ans: x, after: u, diag: dn }, { label: C.s, ans: x + h, after: u }], sol, hints, 'work rate: a quadratic');
+    return boxesN(C.p(h, Tw), [{ label: C.f, ans: x, after: u, diag: dn }, { label: C.s, ans: x + h, after: u }], sol, hints, 'work rate: a quadratic');
   };
   /* one works alone first, then both (#11a) */
   P9.headStart = function (r, cp) {
@@ -473,14 +476,15 @@
   };
   /* a drain left open (#11b) */
   P9.drain = function (r, cp) {
-    var C = r.pick([['A hot tub', 'fills', 'with the drain closed and empties', 'with the tap off', 'min'], ['A pool', 'fills', 'from its inlet pipe, and its drain empties it', '', 'h'], ['A sink', 'fills', 'with the plug in, and the open drain empties it', '', 'min']]);
-    var z = pickWhere(function () { return C[4] === 'min' ? { f: r.int(4, 40), e: r.int(6, 90) } : { f: r.int(3, 16), e: r.int(4, 30) }; }, function (z) { z.t = z.f * z.e / (z.e - z.f); return z.e > z.f && nice(z.t) && z.t <= (C[4] === 'min' ? 240 : 60) && !(z.f === 30 && z.e === 45) && !(z.f === 8 && z.e === 12); });
-    var f = z.f, e = z.e, L = lcm(f, e), u = C[4];
-    var prompt = C[2].indexOf('drain empties') >= 0 ? C[0] + ' ' + C[1] + ' in ' + n(f) + ' ' + u + ' ' + C[2].replace(/^from its inlet pipe, and its drain empties it|^with the plug in, and the open drain empties it/, function (m) { return m; }) + ' in ' + n(e) + ' ' + u + '. How long does it take to fill if the drain is left open?'
-      : C[0] + ' ' + C[1] + ' in ' + n(f) + ' ' + u + ' ' + C[2] + ' in ' + n(e) + ' ' + u + ' ' + C[3] + '. How long does it take to fill if the drain is left open?';
+    var C = r.pick([[function (f, e, u) { return 'A hot tub fills in ' + n(f) + ' ' + u + ' with the drain closed and empties in ' + n(e) + ' ' + u + ' with the tap off.'; }, 'min'],
+      [function (f, e, u) { return 'An inlet pipe fills a pool in ' + n(f) + ' ' + u + ' and the drain empties it in ' + n(e) + ' ' + u + '.'; }, 'h'],
+      [function (f, e, u) { return 'A tap fills a laundry tub in ' + n(f) + ' ' + u + ' and the open drain empties it in ' + n(e) + ' ' + u + '.'; }, 'min']]);
+    var z = pickWhere(function () { return C[1] === 'min' ? { f: r.int(4, 40), e: r.int(6, 90) } : { f: r.int(3, 16), e: r.int(4, 30) }; }, function (z) { z.t = z.f * z.e / (z.e - z.f); return z.e > z.f && nice(z.t) && z.t <= (C[1] === 'min' ? 240 : 60) && !(z.f === 30 && z.e === 45) && !(z.f === 8 && z.e === 12); });
+    var f = z.f, e = z.e, L = lcm(f, e), u = C[1];
+    var prompt = C[0](f, e, u) + ' How long does it take to fill if the drain is left open by mistake?';
     var sol = 'The drain undoes the work, so its part subtracts: ' + t('\\frac{t}{' + f + '}-\\frac{t}{' + e + '}=1') + '. Multiply by ' + t(L) + ': ' + t((L / f === 1 ? '' : L / f) + 't-' + (L / e === 1 ? '' : L / e) + 't=' + L) + ', so ' + t('t=' + z.t) + ' ' + u + '.';
-    var p = KP.number(prompt.replace(/\s+/g, ' '), z.t, function (v) { if (Math.abs(v - f * e / (f + e)) < 1e-9) return { code: cp + 'drain', hint: 'The drain <b>empties</b> the tub: subtract its part, ' + t('\\frac{t}{' + f + '}-\\frac{t}{' + e + '}=1') + '.' }; if (v === e - f) return { code: cp + 'w-sub', hint: 'Times do not subtract. Subtract the parts of the job done: ' + t('\\frac{t}{' + f + '}-\\frac{t}{' + e + '}=1') + '.' }; return null; },
-      sol, ['In ' + t('t') + ' ' + u + ' the tap fills ' + t('\\frac{t}{' + f + '}') + ' and the drain empties ' + t('\\frac{t}{' + e + '}') + '.', 'Filled minus emptied is one whole tub: ' + t('= 1') + '.'], 'work: a drain open', { after: u });
+    var p = KP.number(prompt, z.t, function (v) { if (Math.abs(v - f * e / (f + e)) < 1e-9) return { code: cp + 'drain', hint: 'The drain <b>empties</b> the tub: subtract its part, ' + t('\\frac{t}{' + f + '}-\\frac{t}{' + e + '}=1') + '.' }; if (v === e - f) return { code: cp + 'w-sub', hint: 'Times do not subtract. Subtract the parts of the job done: ' + t('\\frac{t}{' + f + '}-\\frac{t}{' + e + '}=1') + '.' }; return null; },
+      sol, ['In ' + t('t') + ' ' + u + ' the tap fills ' + t('\\frac{t}{' + f + '}') + ' and the drain empties ' + t('\\frac{t}{' + e + '}') + '.', 'Filled minus emptied is one whole job: the parts give ' + t(1) + '.'], 'work: a drain open', { after: u });
     p.bad = [String(e - f)];
     return p;
   };
@@ -518,7 +522,7 @@
       'The number must be a whole number: after ' + t(N - 1) + ' the rate is ' + t('\\frac{' + (z.w + N - 1) + '}{' + (z.g + N - 1) + '}\\approx ' + K.roundTo(pc1, 1) + '\\%') + ' (not enough); after ' + t(N) + ' it is ' + t('\\frac{' + (z.w + N) + '}{' + (z.g + N) + '}\\approx ' + K.roundTo(pc2, 1) + '\\%') + '. The answer is ' + t(N) + ' in a row.';
     var p = KP.number(C[0] + ' has ' + made + ' this season. How many ' + C[1] + ' in a row must it ' + C[2] + ' to raise its ' + C[3] + ' to at least ' + n(z.p) + '%?', N,
       function (v) { if (v === N - 1) return { code: cp + 'round', hint: 'Check it: after ' + t(N - 1) + ' the rate is only ' + t(K.roundTo(pc1, 1) + '\\%') + '. “At least” means round <b>up</b>.' }; if (Math.abs(v - z.xs) < 0.06) return { code: cp + 'raw', hint: 'You cannot ' + C[2] + ' part of one: the answer is a whole number. Which whole number first reaches ' + t(z.p + '\\%') + '?' }; return null; },
-      sol.replace(/must it/, ''), ['Each one in a row adds ' + t(1) + ' to the top <b>and</b> to the bottom: ' + t('\\frac{' + z.w + '+x}{' + z.g + '+x}') + '.', 'Solve with the percent as a decimal; the answer must be a whole number, so check the whole numbers next to your root.'], 'in a row: a whole number', { after: C[1] });
+      sol, ['Each one in a row adds ' + t(1) + ' to the top <b>and</b> to the bottom: ' + t('\\frac{' + z.w + '+x}{' + z.g + '+x}') + '.', 'Solve with the percent as a decimal; the answer must be a whole number, so check the whole numbers next to your root.'], 'in a row: a whole number', { after: C[1] });
     if (C[0].indexOf('player') >= 0) p.prompt = p.prompt.replace('must it make', 'must she make').replace('raise its', 'raise her');
     p.bad = [String(N - 1), String(xsT)];
     return p;
@@ -542,8 +546,7 @@
   P9.modelMC = function (r, cp) {
     var nm = r.pick([['Liam', 'Noor', 'his'], ['Ava', 'Ben', 'her'], ['Kofi', 'Mei', 'his'], ['Hana', 'Raj', 'her']]);
     var z = pickWhere(function () { return { s: 10 * r.int(4, 10), d: 2 * r.int(3, 10), T: r.pick([2, 3, 4, 2.5]) }; }, function (z) { return nice(z.s * z.T) && nice((z.s + z.d) * z.T) && !(z.s * z.T === 200 && z.d === 12); });
-    var d1 = z.s * z.T, d2 = (z.s + z.d) * z.T, k = z.d, c = 'mc-' + cp + 'model';
-    void c;
+    var d1 = z.s * z.T, d2 = (z.s + z.d) * z.T, k = z.d;
     return mcPart(r, nm[0] + ' drives ' + n(d1) + ' km in the same time that ' + nm[1] + ' drives ' + n(d2) + ' km. ' + nm[1] + '’s average speed is ' + n(k) + ' km/h greater than ' + nm[0] + '’s. If ' + nm[0] + '’s average speed is ' + t('s') + ' km/h, an equation that can be used to determine ' + t('s') + ' is', [
       { html: t('\\dfrac{' + F(d1) + '}{s}=\\dfrac{' + F(d2) + '}{s+' + k + '}'), right: true },
       { html: t('\\dfrac{' + F(d1) + '}{s+' + k + '}=\\dfrac{' + F(d2) + '}{s}'), why: 'That gives ' + nm[0] + ' the faster speed. ' + nm[0] + ' is slower: ' + nm[2] + ' speed is ' + t('s') + '.', code: cp + 'model' },
@@ -577,7 +580,7 @@
       who + '’s rate is ' + t('\\frac{1}{x}') + ' of the job per hour, so in ' + t(k) + ' h ' + who + ' does ' + t(k + '\\times\\frac{1}{x}=\\frac{' + k + '}{x}') + '.', ['Part done ' + t('=') + ' rate ' + t('\\times') + ' time.'], 'MC: the part of a job');
   };
   P9.pipesMC = function (r, cp) {
-    var z = togetherPair(r, 'h', [[3, 6]]), a = z.a, b = z.b, tt = z.t;
+    var z = togetherPair(r, 'h', [[3, 6]], 10), a = z.a, b = z.b, tt = z.t;
     var vals = [[tt, true], [(a + b) / 2, false, 'That averages the times. Together must be <b>faster</b> than either pipe alone.'], [a + b, false, 'That adds the times. Together must be faster than either pipe alone.'], [a / 2, false, 'That would be two pipes each as fast as the first. Use ' + t('\\frac{t}{' + a + '}+\\frac{t}{' + b + '}=1') + '.']];
     var seen = []; vals = vals.filter(function (v) { if (seen.indexOf(v[0]) >= 0) return false; seen.push(v[0]); return true; });
     if (vals.length < 4) vals.push([b, false, 'That is the slower pipe alone.']);
@@ -750,7 +753,7 @@
       { id: '1b', level: 'MAS', make: mk(P9.recipPair) }] },
     { num: '2', parts: [{ id: '2', level: 'PRG', make: mk(P9.fracProb) }] },
     { num: '3', section: 'Distance, speed and time', parts: [{ id: '3', level: 'BEG', make: function (r) { return P9.sameTime(r, CP, { ctx: r.pick([0, 1, 2, 3]) }); } }] },
-    { num: '4', shared: function (r) { return P9.fasterShared(r, { kind: 'cycle' }); }, stem: function (z) { return z.who + ' ' + z.verb + ' ' + n(z.D) + ' km. If she rode ' + n(z.k) + ' km/h faster, the trip would take ' + hText(z.h) + ' less.'; }, parts: [
+    { num: '4', shared: function (r) { return P9.fasterShared(r, { kind: 'cycle' }); }, stem: function (z) { return z.who + ' ' + z.verb + ' ' + n(z.D) + ' km. If ' + z.she + ' rode ' + n(z.k) + ' km/h faster, the trip would take ' + hText(z.h) + ' less.'; }, parts: [
       { id: '4a', level: 'EMG', make: function (r, z) { return P9.fasterTable(r, CP, z); } },
       { id: '4b', level: 'ADV', make: function (r, z) { return P9.fasterSolve(r, CP, z); } }] },
     { num: '5', parts: [{ id: '5', level: 'ADV', make: mk(P9.slowerHome) }] },

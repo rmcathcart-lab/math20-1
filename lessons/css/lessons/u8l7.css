@@ -39,7 +39,7 @@
 .u8l7-tab.u8l7-sm td { height: 32px; min-width: 38px; font-size: 17px; padding: 2px 6px; }
 .u8l7-fig { display: flex; justify-content: flex-start; margin: 6px 0 2px; }
 .u8l7-exin { margin-top: 16px; }
-.u8l7-tl { font-size: 17px; white-space: nowrap; }
+.u8l7-tl { font-size: 19px; white-space: nowrap; }
 
 /* ---------------- explainers: numbered rows ---------------- */
 .u8l7-rows { display: flex; flex-direction: column; gap: 7px; }
@@ -86,7 +86,8 @@
 .u8l7-cell.u8l7-p { color: #12805a; background: #edf8f2; }
 .u8l7-cell.u8l7-m { color: #c93a33; background: #fdeeed; }
 .u8l7-cell.u8l7-z { color: #1c2230; }
-.u8l7-cell.u8l7-flipped { box-shadow: inset 0 0 0 3px #e8a01e; }
+.u8l7-cell.u8l7-flipped { animation: u8l7-flash 1.4s ease-out forwards; }
+@keyframes u8l7-flash { 0%, 45% { box-shadow: inset 0 0 0 4px #e8a01e; } 100% { box-shadow: inset 0 0 0 4px rgba(232, 160, 30, 0); } }
 .u8l7-cell.u8l7-hit { box-shadow: inset 0 0 0 4px #c27a0e; font-weight: 800; }
 .u8l7-mul { font-size: 15px; color: #3a4254; white-space: nowrap; }
 .u8l7-scan { background: #e8a01e; border-radius: 3px; box-shadow: 0 0 14px 5px rgba(232, 160, 30, .55); z-index: 3; }

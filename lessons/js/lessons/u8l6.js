@@ -266,7 +266,7 @@ const TP = {
   e6b: { label: '(b)', ask: `Example 6(b): solve ${T('(x-2)^2<3x-2')}.`,
     c1: `Expand and collect: ${T('x^2-4x+4-3x+2<0')}, so ${T('x^2-7x+6<0')}.`, s1: 'x^2-7x+6<0', s1n: 'expand, collect',
     s2: ['(x-1)(x-6)=0'], roots: [1, 6], rl: ['1', '6'], nl: [-1, 8], tests: [0, 2, 7],
-    sub: ['4<-2', '0<4', '25<19'], ct: ['(0-2)^2=4<-2', '(2-2)^2=0<4', '(7-2)^2=25<19'], ok: [0, 1, 0],
+    sub: ['4<-2', '0<4', '25<19'], ct: ['(0-2)^2=4\\ \\text{and}\\ 3(0)-2=-2:\\ 4<-2', '(2-2)^2=0\\ \\text{and}\\ 3(2)-2=4:\\ 0<4', '(7-2)^2=25\\ \\text{and}\\ 3(7)-2=19:\\ 25<19'], ok: [0, 1, 0],
     vh: `${T('(x-2)^2')} and ${T('3x-2')}`, qh: 'Is it true?', op: '<', closed: false, set: `\\{x\\mid 1<x<6,\\ x${R}\\}` }
 };
 const tests = {
@@ -423,17 +423,17 @@ function appsK(stage, ex) {
   const rts = [-6, 6].map((r) => hide(G.point(r, 0, { color: OR, r: 7 })));
   const mk = hide(G.point(-10, f(-10), { color: PU, r: 8 }));
   const P = div(stage, 'u8l6-panel', '', 580, 4, W - 584, 96);
-  const L1 = wl(P, '', `Two distinct real roots: ${T('b^2-4ac>0')}`), L2 = wl(P, '', `${T('k^2-4(1)(9)>0\\Rightarrow k^2-36>0')}`);
-  const P2 = div(stage, 'u8l6-panel', '', 580, 360, W - 584, 112);
+  const L1 = wl(P, '', `${T('b^2-4ac>0')}`, 'two distinct real roots'), L2 = wl(P, '', `${T('k^2-4(1)(9)>0\\Rightarrow k^2-36>0')}`);
+  const P2 = div(stage, 'u8l6-panel', '', 580, 346, W - 584, 126);
   const L3 = wl(P2, '', `Two: <span class="u8l6-ans">${T(`\\{k\\mid k<-6\\ \\text{or}\\ k>6,\\ k${R}\\}`)}</span>`);
   const L4 = wl(P2, '', `None: <span class="u8l6-ans">${T(`\\{k\\mid -6<k<6,\\ k${R}\\}`)}</span>`);
   // the little parabola y = x² + kx + 9, in step with k
-  const M = new Graph(stage, { x: 580, y: 106, width: W - 584, height: 206, xmin: -10, xmax: 10, ymin: -18, ymax: 14, xstep: 1, ystep: 2, xlabels: 5, ylabels: 10, fontSize: 12, pad: [22, 14, 12, 14] });
+  const M = new Graph(stage, { x: 580, y: 104, width: W - 584, height: 196, xmin: -10, xmax: 10, ymin: -18, ymax: 14, xstep: 1, ystep: 2, xlabels: 5, ylabels: 10, fontSize: 12, pad: [22, 14, 12, 14] });
   hide(M.el);
   const mc = M.fn((x) => x * x + st.k * x + 9, { color: PU, width: 3.5 });
   const mlab = div(stage, 'u8l6-mlab', `${T('y=x^2+kx+9')}`, 596, 112);
   hide(mlab);
-  const rd = hide(div(stage, '', '', 584, 314, W - 588, 42)); rd.style.display = 'flex'; rd.style.alignItems = 'center'; rd.style.gap = '16px';
+  const rd = hide(div(stage, '', '', 584, 302, W - 588, 40)); rd.style.display = 'flex'; rd.style.alignItems = 'center'; rd.style.gap = '16px';
   rd.innerHTML = '<span class="u8l6-kread"></span><span class="u8l6-badge"></span>';
   const kr = rd.firstChild, bd = rd.lastChild;
   const setK = (k) => {

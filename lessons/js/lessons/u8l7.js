@@ -164,16 +164,16 @@ const cases = {
   choices: [{ sep: 'Example 1:' }, { v: 'a', label: '(a)' }, { v: 'b', label: '(b)' }],
   ask: (v) => `<b>Example 1${CA[v].ex}:</b> solve ${T(CA[v].q)} by case analysis. Show the solution on a number line.`,
   make(stage, v, ex) {
-    const D = CA[v], LW = 318, rows = div(stage, 'u8l7-rows', '', 0, 0, LW - 14);
+    const D = CA[v], LW = 318, rows = div(stage, 'u8l7-rows u8l7-rows-s', '', 0, 0, LW - 14);
     const S = new Strip(stage, { x: LW, y: 0, width: ex.W - LW, height: 452, xmin: D.win[0], xmax: D.win[1], l: 26, r: ex.W - LW - 30 });
-    const AX = [112, 254, 404], ticks = D.ticks.map((t) => ({ v: t, t: String(t) }));
+    const AX = [118, 262, 410], ticks = D.ticks.map((t) => ({ v: t, t: String(t) }));
     const ax = AX.map((y) => hide(S.axis(y, ticks)));
     ax.forEach((a) => a.labs.forEach(hide));
-    const titles = [`<b>Case 1:</b> ${D.c1.t}`, `<b>Case 2:</b> ${D.c2.t}`, '<b>Case 1 or Case 2</b>'].map((t, i) => hide(S.hlabel(8, AX[i] - (i < 2 ? 98 : 46), t, { pos: 'e', gap: 0, cls: 'u8l7-ctit' })));
+    const titles = ['Case 1', 'Case 2', '<b>Case 1 or Case 2</b>'].map((t, i) => hide(S.hlabel(4, AX[i] - (i < 2 ? 22 : 44), t, { pos: 'e', gap: 0, cls: 'u8l7-ctit' })));
     const mkCase = (C, y) => {
-      const ra = hide(S.interval(y - 60, C.A.a, C.A.b, { color: RA, width: 6, r: 7, openA: C.A.open, openB: C.A.open })), rb = hide(S.interval(y - 34, C.B.a, C.B.b, { color: RB, width: 6, r: 7, openA: C.B.open, openB: C.B.open }));
-      const la = hide(S.hlabel(Number.isFinite(C.A.a) ? S.X(C.A.a) + 14 : S.X(C.A.b) - 14, y - 66, T(C.A.r), { pos: Number.isFinite(C.A.a) ? 'ne' : 'nw', gap: 2, cls: 'u8l7-rl u8l7-ra' }));
-      const lb = hide(S.hlabel(Number.isFinite(C.B.a) ? S.X(C.B.a) + 14 : S.X(C.B.b) - 14, y - 40, T(C.B.r), { pos: Number.isFinite(C.B.a) ? 'ne' : 'nw', gap: 2, cls: 'u8l7-rl u8l7-rb' }));
+      const ra = hide(S.interval(y - 76, C.A.a, C.A.b, { color: RA, width: 6, r: 7, openA: C.A.open, openB: C.A.open })), rb = hide(S.interval(y - 38, C.B.a, C.B.b, { color: RB, width: 6, r: 7, openA: C.B.open, openB: C.B.open }));
+      const la = hide(S.hlabel(Number.isFinite(C.A.a) ? S.X(C.A.a) + 14 : S.X(C.A.b) - 14, y - 82, T(C.A.r), { pos: Number.isFinite(C.A.a) ? 'ne' : 'nw', gap: 2, cls: 'u8l7-rl u8l7-ra' }));
+      const lb = hide(S.hlabel(Number.isFinite(C.B.a) ? S.X(C.B.a) + 14 : S.X(C.B.b) - 14, y - 44, T(C.B.r), { pos: Number.isFinite(C.B.a) ? 'ne' : 'nw', gap: 2, cls: 'u8l7-rl u8l7-rb' }));
       const res = C.res ? hide(S.interval(y, C.res.a, C.res.b, { color: SOL, width: 9, r: 8.5, openA: C.res.openA, openB: C.res.openB, cls: 'u8l7-glowl' })) : null;
       return { ra, rb, la, lb, res };
     };
@@ -190,11 +190,11 @@ const cases = {
     }
     const i0 = R.length;
     R.push(row(rows, ++n, D.rule));
-    R.push(row(rows, ++n, `<b>Case 1:</b> ${T(D.c1.A.s)} and ${T(D.c1.B.s)}<br>${T(D.c1.A.r)} and ${T(D.c1.B.r)}, so ${T(D.c1.rt)}`));
-    R.push(row(rows, ++n, `<b>Case 2:</b> ${T(D.c2.A.s)} and ${T(D.c2.B.s)}<br>${T(D.c2.A.r)} and ${T(D.c2.B.r)}${D.c2.rt ? ', so ' + T(D.c2.rt) : ': no number does both'}`));
+    R.push(row(rows, ++n, `<b>Case 1:</b> ${T(D.c1.A.s)} and ${T(D.c1.B.s)}<br>so ${T(D.c1.rt)}`));
+    R.push(row(rows, ++n, `<b>Case 2:</b> ${T(D.c2.A.s)} and ${T(D.c2.B.s)}<br>${D.c2.rt ? 'so ' + T(D.c2.rt) : 'no number does both'}`));
     R.push(row(rows, ++n, `Case 1 <b>or</b> Case 2:<br>${T(D.ans)}`, 'u8l7-rowans'));
     const caseRun = (K, k) => async (c) => {
-      await show(c, unhide(R[i0 + k])); unhide(ax[k]); await show(c, ax[k]); ax[k].labs.forEach(unhide); unhide(titles[k]); await show(c, titles[k]);
+      await show(c, unhide(R[i0 + 1 + k])); unhide(ax[k]); await show(c, ax[k]); ax[k].labs.forEach(unhide); unhide(titles[k]); await show(c, titles[k]);
       unhide(K.ra); await drawIn(K.ra, 520, c); unhide(K.la); await show(c, K.la);
       unhide(K.rb); await drawIn(K.rb, 520, c); unhide(K.lb); await show(c, K.lb);
       if (K.res) { unhide(K.res); await drawIn(K.res, 600, c); } else { unhide(none); await stampIn(c, none); }
@@ -218,13 +218,13 @@ const SC = {
   e2b: { ex: 'Example 2(b)', q: 'x^2-3x-10\\le0', ask: 'use the same chart to solve', reuse: true, win: [-5, 8], yr: [-14, 14], g: (x) => x * x - 3 * x - 10, gt: 'y=x^2-3x-10',
     r1: `${T('x^2-3x-10\\le0')}`, r2: `${T('(x+2)(x-5)\\le0')}`, rel: '≤',
     fac: [{ t: 'x+2', f: L(1, 2) }, { t: 'x-5', f: L(1, -5) }], zeros: [{ v: -2, t: '-2' }, { v: 5, t: '5' }], ans: SETR('-2\\le x\\le5') },
-  e3a: { ex: 'Example 3(a)', q: '6x^2+x\\le2', ask: 'rearrange so one side is 0, then solve with a sign chart', win: [-1.6, 1.5], yr: [-3, 4.5], g: (x) => 6 * x * x + x - 2, gt: 'y=6x^2+x-2',
+  e3a: { ex: 'Example 3(a)', q: '6x^2+x\\le2', ask: 'rearrange so one side is 0, then solve with a sign chart', re: true, win: [-1.6, 1.5], yr: [-3, 4.5], g: (x) => 6 * x * x + x - 2, gt: 'y=6x^2+x-2',
     r1: `${T('6x^2+x\\le2')}<br>${T('6x^2+x-2\\le0')}`, X: { ac: -12, b: 1 }, r2: `${T('6x^2+4x-3x-2')}<br>${T('(3x+2)(2x-1)\\le0')}`, rel: '≤',
     fac: [{ t: '3x+2', f: L(3, 2) }, { t: '2x-1', f: L(2, -1) }], zeros: [{ v: -2 / 3, t: '-\\frac23' }, { v: 0.5, t: '\\frac12' }], ans: SETR('-\\frac23\\le x\\le\\frac12') },
-  e3b: { ex: 'Example 3(b)', q: 'x(x+6)<16', ask: 'rearrange so one side is 0, then solve with a sign chart', win: [-11, 5], yr: [-28, 22], g: (x) => x * x + 6 * x - 16, gt: 'y=x^2+6x-16',
+  e3b: { ex: 'Example 3(b)', q: 'x(x+6)<16', ask: 'rearrange so one side is 0, then solve with a sign chart', re: true, win: [-11, 5], yr: [-28, 22], g: (x) => x * x + 6 * x - 16, gt: 'y=x^2+6x-16',
     r1: `${T('x(x+6)<16')}<br>${T('x^2+6x-16<0')}`, X: { ac: -16, b: 6 }, r2: `${T('(x+8)(x-2)<0')}`, rel: '<',
     fac: [{ t: 'x+8', f: L(1, 8) }, { t: 'x-2', f: L(1, -2) }], zeros: [{ v: -8, t: '-8' }, { v: 2, t: '2' }], ans: SETR('-8<x<2') },
-  e4a: { ex: 'Example 4(a)', q: '-x^2+2x+15\\ge0', ask: 'solve, keeping −1 as a factor', win: [-6, 8], yr: [-18, 19], g: (x) => -x * x + 2 * x + 15, gt: 'y=-x^2+2x+15',
+  e4a: { ex: 'Example 4(a)', q: '-x^2+2x+15\\ge0', ask: 'solve, keeping −1 as a factor', neg: true, win: [-6, 8], yr: [-18, 19], g: (x) => -x * x + 2 * x + 15, gt: 'y=-x^2+2x+15',
     r1: `${T('-x^2+2x+15\\ge0')}<br>${T('-(x^2-2x-15)\\ge0')}`, X: { ac: -15, b: -2 }, r2: `${T('-(x+3)(x-5)\\ge0')}<br><span class="u8l7-mut">the ${T('-1')} gets its own row</span>`, rel: '≥',
     fac: [{ t: '-1', f: () => -1 }, { t: 'x+3', f: L(1, 3) }, { t: 'x-5', f: L(1, -5) }], zeros: [{ v: -3, t: '-3' }, { v: 5, t: '5' }], ans: SETR('-3\\le x\\le5') },
   e4b: { ex: 'Example 4(b)', q: '-x^2+2x+15\\ge0', ask: 'solve, multiplying by −1 first', win: [-6, 8], yr: [-18, 19], g: (x) => -x * x + 2 * x + 15, gt: 'y=-x^2+2x+15',
@@ -309,7 +309,7 @@ const scan = {
     const gTop = 10, gBot = 146, Yg = S.yMap(gTop, gBot, D.yr);
     const gAx = hide(svgEl('line', { x1: cx0 - 8, x2: cx1, y1: Yg(0), y2: Yg(0), stroke: INK, 'stroke-width': 2 }, S.layers.bg));
     const tint = hide(S.tint(D.g, gTop, gBot, D.yr)), curve = hide(S.plot(D.g, gTop, gBot, D.yr));
-    const gLab = hide(S.hlabel(cx0 - 12, gTop + 4, T(D.gt), { pos: 'sw', gap: 0, cls: 'u8l7-glab' }));
+    const gLab = hide(S.hlabel(cx0 + 6, gTop - 2, T(D.gt), { pos: 'se', gap: 0, cls: 'u8l7-glab' }));
     const ok = hide(stamp(stage, 'matches', { ok: true, x: W - 80, y: 34, size: 'sm' }));
     const Xd = D.X ? xDiagram(stage, LW + 40, 8, D.X.ac, D.X.b) : null;
     /* the numbered rows (as in the key idea) */
@@ -321,7 +321,7 @@ const scan = {
       for (let r = 0; r < nF; r++) {
         const e = cl.fc[r], sg = cl.signs[r], prev = i > 0 ? cols[i - 1].signs[r] : null;
         e.innerHTML = SG[sg]; e.className = 'u8l7-cell' + (cl.kind === 'zero' ? ' u8l7-zc' : '') + (sg === '+' ? ' u8l7-p' : sg === '-' ? ' u8l7-m' : ' u8l7-z');
-        if (!quick && prev === '0' && sg !== '0') e.classList.add('u8l7-flipped');
+        if (!quick && !c.fast && prev === '0' && sg !== '0') e.classList.add('u8l7-flipped');
         await pop(c, e, quick ? 160 : 260);
       }
       const p = cl.pc;
@@ -360,7 +360,8 @@ const scan = {
         run: async (c) => { for (const r of R.slice(0, 5)) unhide(r); await Promise.all(R.slice(0, 5).map((r) => show(c, r))); await showChart(c); await sweep(c, true); } });
     } else {
       steps.push({ cap: D.flip ? `<b>1</b> One side is ${T('0')}. Multiply both sides by ${T('-1')} and <b>reverse the inequality sign</b>: ${T('\\ge')} becomes ${T('\\le')}.`
-        : /^x\^2-3x|^\(x/.test(D.q) ? `<b>1</b> Move every term to one side so the other side is ${T('0')}. Here it already is.` : `<b>1</b> Move every term to one side so the other side is ${T('0')}. Never divide by an expression containing ${T('x')}.`,
+        : D.neg ? `<b>1</b> One side is already ${T('0')}. The leading coefficient is negative: take out ${T('-1')} and keep it as a row of the chart.`
+        : D.re ? `<b>1</b> Move every term to one side so the other side is ${T('0')}. Never divide by an expression containing ${T('x')}.` : `<b>1</b> Move every term to one side so the other side is ${T('0')}. Here it already is.`,
       run: async (c) => { await show(c, unhide(R[0])); } });
       steps.push({ cap: D.X ? `<b>2</b> Factor fully. The X: ${T('ac=' + D.X.ac)} on top, ${T('b=' + D.X.b)} underneath; the factor pair that adds to ${T(String(D.X.b))} goes on the sides.${v === 'e3a' ? ` Split ${T('x')} into ${T('4x-3x')} and group: ${T('2x(3x+2)-(3x+2)')}.` : ''}`
         : `<b>2</b> Factor fully. ${v === 'e6b' ? `${T('(x-2)^2')} is a factor too: it is ${T('0')} at ${T('x=2')} and positive everywhere else.` : 'Already done: one linear factor per zero.'}`,
@@ -380,7 +381,7 @@ const scan = {
 const OS = {
   a: { q: 'x^2-10x+25>0', f: (x) => (x - 5) * (x - 5), win: { xmin: -0.5, xmax: 10.5, ymin: -4, ymax: 28, ystep: 4, ylabels: 8, xlabels: 1 }, zeros: [5], rel: '>',
     r1: `${T('x^2-10x+25=(x-5)^2')}: a perfect square`, scanCap: `${T('(x-5)^2')} is ${T('0')} at ${T('x=5')} and positive everywhere else: the graph <b>touches</b> the axis and the sign does <b>not flip</b>.`,
-    r3: `${T('>0')}: every ${T('+')}<br>${T('\\{x\\mid x\\ne5,\\ x\\in\\mathbb{R}\\}')}`, st: 'every x but 5', runs: [{ a: -Infinity, b: 5, openB: true }, { a: 5, b: Infinity, openA: true }],
+    r3: `${T('>0')}: every ${T('+')}<br>${T('\\{x\\mid x\\ne5,\\ x\\in\\mathbb{R}\\}')}`, st: 'every number but 5', runs: [{ a: -Infinity, b: 5, openB: true }, { a: 5, b: Infinity, openA: true }],
     cap3: `${T('>0')}: true for every ${T('x')} except ${T('x=5')}, where it is ${T('0')}. ${T('\\{x\\mid x\\ne5,\\ x\\in\\mathbb{R}\\}')}` },
   b: { q: '4x^2+12x+9\\le0', f: (x) => (2 * x + 3) * (2 * x + 3), win: { xmin: -4, xmax: 1, ymin: -2, ymax: 14, xstep: 0.5, xlabels: 1, ystep: 2, ylabels: 4 }, zeros: [-1.5], rel: '≤',
     r1: `${T('4x^2+12x+9=(2x+3)^2')}`, scanCap: `${T('(2x+3)^2')} is never negative: ${T('0')} at ${T('x=-\\frac32')}, positive everywhere else.`,
@@ -413,7 +414,7 @@ const onesign = {
     for (let i = 0; i < cuts.length - 1; i++) { const m = (cuts[i] + cuts[i + 1]) / 2, s = sgnOf(D.f(m)); regs.push({ a: cuts[i], b: cuts[i + 1], s, r: svgEl('rect', { x: gx(cuts[i]), y: 10, width: 0, height: 22, fill: s === '+' ? POS : NEG, 'fill-opacity': 0.75 }, tape), t: null }); }
     regs.forEach((rg) => { rg.t = div(tw, 'u8l7-tsg ' + (rg.s === '+' ? 'u8l7-cp' : 'u8l7-cm'), SG[rg.s], (gx(rg.a) + gx(rg.b)) / 2 - 10, 34); hide(rg.t); });
     const zd = D.zeros.map((z) => { const d = svgEl('circle', { cx: gx(z), cy: 21, r: 8, fill: '#fff', stroke: INK, 'stroke-width': 3 }, tape); hide(d); return d; });
-    const tlab = div(tw, 'u8l7-tlab', 'sign', 0, 10); hide(tlab);
+    const tlab = div(tw, 'u8l7-tlab', 'sign', gx(G.win.xmin) + 2, -8); hide(tlab);
     /* the solution, drawn on the tape */
     const solS = new Strip(tw, { x: 0, y: 0, width: GW, height: 60, xmin: G.win.xmin, xmax: G.win.xmax, l: gx(G.win.xmin), r: gx(G.win.xmax) });
     const sol = drawSol(solS, 21, D.runs, { width: 10 }).map(hide);
@@ -484,9 +485,9 @@ const back = {
       await anim(c, g, [{ left: g.style.left, top: g.style.top, opacity: 1 }, { left: tx + 'px', top: ty + 'px', opacity: 1 }], 700);
       g.remove(); unhide(tile); await pop(c, tile, 300);
     };
-    const sign = D.between ? `<b>between</b> its zeros, a parabola with ${T('a>0')} is <b>negative</b>: ${T(D.open ? '<0' : '\\le0')}` : `<b>outside</b> its zeros it is <b>positive</b>: ${T(D.open ? '>0' : '\\ge0')}`;
+    const sign = D.between ? `<b>between</b> its zeros the parabola is <b>negative</b>: ${T(D.open ? '<0' : '\\le0')}` : `<b>outside</b> its zeros it is <b>positive</b>: ${T(D.open ? '>0' : '\\ge0')}`;
     return [
-      { cap: `Each endpoint ${T('r')} gives a factor ${T('(x-r)')}${D.ends[0].note ? `; an endpoint ${T('\\frac pq')} gives ${T('(qx-p)')}: ${D.ends[0].note}` : ''}${v === 'd' ? `; the endpoint ${T('0')} gives ${T('x')}` : ''}.`,
+      { cap: `Each endpoint ${T('r')} gives a factor ${T('(x-r)')}: ${D.ends.map((e) => T(e.t) + ' gives ' + T(e.f === 'x' ? 'x' : '(' + e.f + ')')).join(', ')}${D.ends[0].note ? `; an endpoint ${T('\\frac pq')} gives ${T('(qx-p)')}: ${D.ends[0].note}` : ''}.`,
         run: async (c) => { await show(c, unhide(R[0])); for (let i = 0; i < D.ends.length; i++) await fly(c, D.ends[i], ft[i]); if (note) await show(c, unhide(note)); } },
       { cap: `The shading is ${D.between ? 'between' : 'outside'} the endpoints, and the dots are ${D.open ? '<b>open</b> (not included)' : '<b>closed</b> (included)'}. With ${T('a>0')}: ${sign}.`,
         run: async (c) => { await show(c, unhide(R[1])); unhide(rt); await pop(c, rt, 380); } },
@@ -523,7 +524,7 @@ function rocketMake(stage, ex) {
   const fo = { color: FN, width: 3.5, to: 0, from: 0 }, curve = G.fn(hR, fo);
   const tr = hide(G.point(0, 0, { color: SCN, r: 8 })), clock = div(scene, 'u8l7-clock', '', 6, 6); hide(clock);
   const h60 = hide(G.hline(60, { color: SOL, width: 2.5 })), p2 = hide(G.point(2, 60, { color: SOL, r: 7, label: T('(2,\\ 60)'), pos: 'nw' })), p6 = hide(G.point(6, 60, { color: SOL, r: 7, label: T('(6,\\ 60)'), pos: 'ne' }));
-  const s26 = hide(G.shadeX(2, 6, { color: SOL, width: 10 })), s08 = hide(G.shadeX(0, 8, { color: FN, width: 8, openA: true, openB: true, offset: 16 }));
+  const s26 = hide(G.shadeX(2, 6, { color: SOL, width: 10 })), s08 = hide(G.shadeX(0, 8, { color: FN, width: 8, openA: true, openB: true, offset: -18 }));
   const brk = hide(G.label(4, 4, '4 s', { cls: 'u8l7-br' })), h90 = hide(G.hline(90, { color: NEG, width: 2.5 })), top = hide(G.point(4, 80, { color: FN, r: 7, label: T('(4,\\ 80)'), pos: 'n' }));
   const st = hide(stamp(stage, 'never 90 m', { ok: false, x: SW + 10 + GW / 2 + 20, y: 64, size: 'sm' }));
   const R = [row(P, '(a)', `${T('40t-5t^2\\ge60')}<br>${T('-5t^2+40t-60\\ge0')}<br>${T('\\div(-5)')}, reverse: ${T('t^2-8t+12\\le0')}<br>${T('(t-2)(t-6)\\le0')}: ${T('2\\le t\\le6')}`),
@@ -554,7 +555,7 @@ function ticketMake(stage, ex) {
   const set = (x) => { const p = -20 * x * x + 1000 * x - 8000; price.innerHTML = `price<br><b>$${x.toFixed(2)}</b>`; prof.innerHTML = `profit<br><b class="${p > 0 ? 'u8l7-cp' : p < 0 ? 'u8l7-cm' : ''}">${p < 0 ? '−' : ''}$${Math.abs(Math.round(p))}</b>`; mask.style.opacity = p > 0 ? 1 : 0.25; };
   set(0);
   const s1 = hide(G.shadeX(10, 40, { color: SOL, width: 10, openA: true, openB: true })), h3 = hide(G.hline(3, { color: SOL, width: 2.5 }));
-  const a = 25 - 5 * Math.sqrt(3), b = 25 + 5 * Math.sqrt(3), s2 = hide(G.shadeX(a, b, { color: POS, width: 10, offset: 16 }));
+  const a = 25 - 5 * Math.sqrt(3), b = 25 + 5 * Math.sqrt(3), s2 = hide(G.shadeX(a, b, { color: POS, width: 10, offset: -18 }));
   const pa = hide(G.point(a, 3, { color: SOL, r: 7, label: T('16.34'), pos: 'nw' })), pb = hide(G.point(b, 3, { color: SOL, r: 7, label: T('33.66'), pos: 'ne' }));
   const R = [row(P, '(a)', `${T('-20x^2+1000x-8000>0')}<br>${T('\\div(-20)')}, reverse:<br>${T('x^2-50x+400<0')}<br>${T('(x-10)(x-40)<0')}: ${T('10<x<40')}`),
     row(P, '(b)', `${T('-20x^2+1000x-11\\,000\\ge0')}<br>${T('x^2-50x+550\\le0')}<br>${T('x=\\dfrac{50\\pm\\sqrt{2500-2200}}{2}=25\\pm5\\sqrt3')}<br>From $16.34 to $33.66`)];
@@ -580,13 +581,13 @@ const kslide = {
     const f = (x) => x * x + (st.k - 2) * x + 4, Dk = (k) => (k - 2) * (k - 2) - 16;
     const curve = G.fn(f, { color: FN, width: 3.5 });
     const rts = [G.point(0, 0, { color: SOL, r: 7 }), G.point(0, 0, { color: SOL, r: 7 })];
-    const RX = GW + 24, S = new Strip(stage, { x: RX, y: 0, width: W - RX, height: 150, xmin: -6, xmax: 10, l: 22, r: W - RX - 22 });
-    const ky = 70, ticks = []; for (let t = -6; t <= 10; t++) ticks.push({ v: t, t: String(t) });
+    const RX = GW + 24, S = new Strip(stage, { x: RX, y: 0, width: W - RX, height: 104, xmin: -6, xmax: 10, l: 22, r: W - RX - 22 });
+    const ky = 62, ticks = []; for (let t = -6; t <= 10; t++) ticks.push({ v: t, t: String(t) });
     S.axis(ky, ticks.filter((t) => t.v % 2 === 0)); S.hlabel(S.r + 16, ky - 12, T('k'), { pos: 'n', gap: 0, cls: 'u8l7-tl' });
     const paint = svgEl('g', {}, S.layers.data);
     const kdot = svgEl('circle', { cx: S.X(st.k), cy: ky, r: 9, fill: SCN, stroke: '#fff', 'stroke-width': 2 }, S.layers.top);
-    const rd = div(stage, 'u8l7-out', '', RX, 150, W - RX - 6);
-    const P = div(stage, 'u8l7-rows u8l7-rows-s', '', RX, 248, W - RX - 6);
+    const rd = div(stage, 'u8l7-out', '', RX, 100, W - RX - 6);
+    const P = div(stage, 'u8l7-rows u8l7-rows-s', '', RX, 196, W - RX - 6);
     let lastK = null;
     const upd = (k) => {
       st.k = k; curve._bkDraw();
@@ -594,7 +595,7 @@ const kslide = {
       const z = n === 2 ? [(-b - Math.sqrt(D)) / 2, (-b + Math.sqrt(D)) / 2] : n === 1 ? [-b / 2, -b / 2] : [];
       rts.forEach((p, i) => { if (z[i] != null) { G.moveTo(p, z[i], 0); p.style.opacity = ''; } else p.style.opacity = 0; });
       kdot.setAttribute('cx', S.X(k));
-      if (lastK !== null && k > lastK) { const seg = (a, bb) => svgEl('line', { x1: S.X(a), x2: S.X(bb), y1: ky, y2: ky, stroke: Dk((a + bb) / 2) < 0 ? POS : NEG, 'stroke-width': 9, 'stroke-opacity': .8 }, paint); seg(lastK, k); }
+      if (lastK !== null && k > lastK) { const cut = [lastK, ...[-2, 6].filter((q) => q > lastK && q < k), k]; for (let i = 0; i < cut.length - 1; i++) svgEl('line', { x1: S.X(cut[i]), x2: S.X(cut[i + 1]), y1: ky, y2: ky, stroke: Dk((cut[i] + cut[i + 1]) / 2) < 0 ? POS : NEG, 'stroke-width': 9, 'stroke-opacity': .8 }, paint); }
       lastK = k;
       rd.innerHTML = `<div>${T('k=' + texNum(k, 2))}: ${T('x^2' + (b ? (b > 0 ? '+' : '') + texNum(b, 2) + 'x' : '') + '+4')}</div><div>${T('b^2-4ac=' + texNum(D, 2))}</div><div class="${n === 0 ? 'u8l7-cp' : n === 2 ? 'u8l7-cm' : 'u8l7-cv'}"><b>${n === 0 ? 'no real roots' : n === 1 ? 'one real root' : 'two real roots'}</b></div>`;
     };

@@ -72,8 +72,8 @@
 .u8l6-kread { font: 800 24px var(--round); color: #7b4fc4; }
 
 /* the test-point table inside the explainer */
-.u8l6-tt { display: grid; grid-template-columns: 128px repeat(3, minmax(0, 1fr)); border: 2px solid #d9d3c4; border-radius: 12px; overflow: hidden; background: #fff; }
-.u8l6-tt > div { display: grid; place-items: center; min-height: 50px; padding: 2px 4px; font-size: 17.5px; border-right: 1.5px solid #e6e0d3; border-bottom: 1.5px solid #e6e0d3; text-align: center; transition: background .3s; }
+.u8l6-tt { display: grid; grid-template-columns: 116px repeat(3, minmax(0, 1fr)); border: 2px solid #d9d3c4; border-radius: 12px; overflow: hidden; background: #fff; }
+.u8l6-tt > div { display: grid; place-items: center; min-height: 50px; padding: 2px 3px; font-size: 17px; border-right: 1.5px solid #e6e0d3; border-bottom: 1.5px solid #e6e0d3; text-align: center; transition: background .3s; }
 .u8l6-tt > div:nth-child(4n) { border-right: 0; }
 .u8l6-tt > div:nth-last-child(-n+4) { border-bottom: 0; }
 .u8l6-tt > .u8l6-th { justify-items: start; text-align: left; background: #f6f2ea; font: 700 15px var(--round); color: var(--ink2); line-height: 1.2; }

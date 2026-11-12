@@ -252,7 +252,10 @@
       } else {
         if (sameSet(A, T)) {
           if (L.dec && o.irr) return form(cp + 'exact', 'Give the <b>exact</b> ' + what + 's (with a square root, in simplest form), not calculator decimals.');
-          for (var k = 0; k < L.asts.length; k++) { var fi = exactIssue(cp, L.asts[k]); if (fi) return fi; }
+          for (var k = 0; k < L.asts.length; k++) {
+            var fi = exactIssue(cp, L.asts[k]); if (fi) return fi;
+            if (!o.irr) { var sh = ex.shape(L.asts[k]); if (sh.ops || sh.roots || sh.pow || sh.muls || (sh.divs && !ex.plainFraction(L.asts[k]))) return form('simplify', 'Right ' + what + 's — now simplify each one to a single number (a fraction in lowest terms).'); }
+          }
           return ok();
         }
         if (L.dec && sameSet(A, T, function (x, y) { return Math.abs(x - y) < 0.01; })) return form(cp + 'exact', 'Give the <b>exact</b> ' + what + 's, not rounded decimals.');
@@ -605,7 +608,7 @@
       } },
       { id: '6c', level: 'EMG', make: function (r, o) {
         var Q = o.B, x1 = Q.vals[1], x2 = Q.vals[0];
-        return Z.fields('(c) State the ' + t('x') + '-intercepts of the graph in (b), to the nearest hundredth.', [{ label: 'One intercept:', mode: 'math', chk: ptRound(x1, 0, 2), key: '(' + fx(x1, 2) + ',0)', placeholder: 'e.g. (2.35, 0)' }, { label: 'The other:', mode: 'math', chk: ptRound(x2, 0, 2), key: '(' + fx(x2, 2) + ',0)', placeholder: 'e.g. (-1.07, 0)' }],
+        return Z.fields('(c) State the ' + t('x') + '-intercepts of the graph of ' + t('y=' + polyT([Q.a, Q.b, Q.c])) + ' in (b), to the nearest hundredth.', [{ label: 'One intercept:', mode: 'math', chk: ptRound(x1, 0, 2), key: '(' + fx(x1, 2) + ',0)', placeholder: 'e.g. (2.35, 0)' }, { label: 'The other:', mode: 'math', chk: ptRound(x2, 0, 2), key: '(' + fx(x2, 2) + ',0)', placeholder: 'e.g. (-1.07, 0)' }],
           { swap: [[0, 1]], sol: 'The ' + t('x') + '-intercepts are the zeros: ' + t('(' + fx(x1, 2) + ',\\ 0)') + ' and ' + t('(' + fx(x2, 2) + ',\\ 0)') + '.<br>Check: graph ' + t('Y_1=' + polyT([Q.a, Q.b, Q.c])) + ', then 2nd [TRACE] (CALC), 2: zero, with a left and a right bound around each intercept.', hints: ['An ' + t('x') + '-intercept is a point ' + t('(x,\\ 0)') + ' where ' + t('x') + ' is a zero.'], text: 'x-intercepts as points', bad: [['(' + fx(x1, 2) + ',' + fx(x1, 2) + ')', '(' + fx(x2, 2) + ',0)'], ['(0,' + fx(x1, 2) + ')', '(0,' + fx(x2, 2) + ')']] });
       } }] },
     { num: '7', shared: q7shared, stem: function (o) {
@@ -702,7 +705,7 @@
       } }] },
     { num: '11', parts: [
       { id: '11', level: 'ADV', make: function (r) {
-        var o = pickWhere(function () { return { s: 2 * r.int(5, 12), A: r.int(10, 60) }; }, function (o) { var D = o.s * o.s - 4 * o.A; return D > 0 && !isSq(D) && !(o.s === 14 && o.A === 42) && !(o.s === 6 && o.A === 24) && safe(rootsOf(1, -o.s, o.A), 1); });
+        var o = pickWhere(function () { return { s: 2 * r.int(5, 12), A: r.int(10, 60) }; }, function (o) { var D = o.s * o.s - 4 * o.A, V = rootsOf(1, -o.s, o.A); return D > 0 && !isSq(D) && !(o.s === 14 && o.A === 42) && !(o.s === 6 && o.A === 24) && V[0] > o.s / 5 && safe(V, 1); });
         var Pm = 2 * o.s, Q = qf(1, -o.s, o.A), V = Q.vals;
         return Z.fields('A rectangular dog run is enclosed by ' + t(Pm) + ' m of fencing and has an area of ' + t(o.A + '\\text{ m}^{2}') + '. Determine its exact dimensions, then give them to the nearest tenth of a metre.', [
           Z.fRoots(CP, 'Exact side lengths:', V, { irr: true, key: pmT(Q), what: 'side length', placeholder: 'e.g. 5 ± sqrt(3)', wrongs: [{ vals: rootsOf(1, -Pm, o.A), code: CP + 'perim', hint: 'Two sides (one length and one width) add to half the perimeter: ' + t('\\frac{' + Pm + '}{2}=' + o.s) + '.' }].concat(fmlWrongs(CP, 1, -o.s, o.A)) }),
@@ -851,7 +854,7 @@
       } }] },
     { num: 'B5', parts: [
       { id: 'eB5', level: 'ADV', make: function (r) {
-        var o = pickWhere(function () { return { s: 2 * r.int(4, 12) + 1, A: r.int(10, 60) }; }, function (o) { var D = o.s * o.s - 4 * o.A; return D > 0 && !isSq(D) && !(o.s === 15 && o.A === 40) && safe(rootsOf(1, -o.s, o.A), 1); });
+        var o = pickWhere(function () { return { s: 2 * r.int(4, 12) + 1, A: r.int(10, 60) }; }, function (o) { var D = o.s * o.s - 4 * o.A, V = rootsOf(1, -o.s, o.A); return D > 0 && !isSq(D) && !(o.s === 15 && o.A === 40) && V[0] > o.s / 5 && safe(V, 1); });
         var Pm = 2 * o.s, Q = qf(1, -o.s, o.A), V = Q.vals;
         return Z.fields('A rectangular patio has a perimeter of ' + t(Pm) + ' m and an area of ' + t(o.A + '\\text{ m}^{2}') + '. Determine its exact dimensions, then round to the nearest tenth.', [
           Z.fRoots(CP, 'Exact side lengths:', V, { irr: true, key: pmT(Q), what: 'side length', placeholder: 'e.g. (9 ± sqrt(41))/2', wrongs: [{ vals: rootsOf(1, -Pm, o.A), code: CP + 'perim', hint: 'A length and a width add to half the perimeter, ' + t(o.s) + '.' }].concat(fmlWrongs(CP, 1, -o.s, o.A)) }),
@@ -902,7 +905,7 @@
         var key = 'x=a\\left(' + inner + '\\right)';
         var f1 = function (a) { return a * (N + Kc * Math.sqrt(s[1])) / Den; }, f2 = function (a) { return a * (N - Kc * Math.sqrt(s[1])) / Den; };
         var eq = 'x^{2}' + (o.p > 0 ? '+' : '-') + Math.abs(o.p) + 'ax' + (o.q > 0 ? '+' : '-') + (Math.abs(o.q) === 1 ? '' : Math.abs(o.q)) + 'a^{2}=0';
-        var p = B.math('Solve ' + t(eq) + ' for ' + t('x') + ' in terms of ' + t('a') + ', where ' + t('a>0') + '. Give the answer in simplest form.', prChk(CP, [f1, f2], { p: 'a', pos: true, cands: [[[function (a) { return -f1(a); }, function (a) { return -f2(a); }], CP + 'negb', 'The formula starts with ' + t('-b') + '.'], [[function (a) { return a * (N + Kc * Math.sqrt(s[1])); }, function (a) { return a * (N - Kc * Math.sqrt(s[1])); }], CP + 'half', 'Divide every term by ' + t('2a') + ' (here ' + t('2') + ').']] }), key,
+        var p = B.math('Solve ' + t(eq) + ' for ' + t('x') + ' in terms of ' + t('a') + ', where ' + t('a>0') + '. Give the answer in simplest form.', prChk(CP, [f1, f2], { p: 'a', pos: true, cands: [[[function (a) { return -f1(a); }, function (a) { return -f2(a); }], CP + 'negb', 'The formula starts with ' + t('-b') + '.'], [[function (a) { return a * (-o.p + s[0] * Math.sqrt(s[1])); }, function (a) { return a * (-o.p - s[0] * Math.sqrt(s[1])); }], CP + 'half', 'Divide every term of the numerator by ' + t('2a=2') + '.'], [[function (a) { return a * (-o.p / 2 + s[0] * Math.sqrt(s[1])); }, function (a) { return a * (-o.p / 2 - s[0] * Math.sqrt(s[1])); }], CP + 'half', 'Divide <b>every</b> term of the numerator by ' + t('2') + ', the radical term too.']] }), key,
           'The coefficients are ' + t('1') + ', ' + t(nT(o.p) + 'a') + ' and ' + t(nT(o.q) + 'a^{2}') + ':<br>' + t('x=\\frac{' + nT(-o.p) + 'a\\pm\\sqrt{' + o.p * o.p + 'a^{2}' + (o.q > 0 ? '-' : '+') + Math.abs(4 * o.q) + 'a^{2}}}{2}=\\frac{' + nT(-o.p) + 'a\\pm\\sqrt{' + D + 'a^{2}}}{2}=\\frac{' + nT(-o.p) + 'a\\pm ' + (s[0] === 1 ? '' : s[0]) + 'a\\sqrt{' + s[1] + '}}{2}=a\\left(' + inner + '\\right)') + ' (' + t('\\sqrt{a^{2}}=a') + ' since ' + t('a>0') + ')',
           ['Here ' + t('b=' + nT(o.p) + 'a') + ' and ' + t('c=' + nT(o.q) + 'a^{2}') + '. Substitute into the formula.', t('\\sqrt{' + D + 'a^{2}}=a\\sqrt{' + D + '}') + ' since ' + t('a>0') + '; then simplify.'], 'roots in terms of a', { keys: 'p57', vars: ['x', 'a'], placeholder: 'e.g. x = a(1 ± sqrt(2))' });
         p.outcome = OUT; p.good = ['x=' + nT(N) + 'a\\pm ' + (Kc === 1 ? '' : Kc) + 'a\\sqrt{' + s[1] + '}'].filter(function () { return Den === 1; }); p.bad = ['x=a\\left(' + nT(-N) + '\\pm\\sqrt{' + s[1] + '}\\right)', 'x=\\frac{' + nT(-o.p) + 'a\\pm\\sqrt{' + D + 'a^{2}}}{2}'];
