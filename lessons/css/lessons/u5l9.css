@@ -1,0 +1,100 @@
+/* Math 20-1 · Unit 5 · Lesson 9 — Maximum and Minimum Problems: Graphical Approach: styles used only on this page
+ * (prefix u5l9-). Colours: the curve blue, the vertex (max/min) red, the y-intercept green, zeros amber, an
+ * intersection with y = k purple, domain and range burgundy. */
+
+.u5l9 .ex-cap .katex { font-size: 1.04em; }
+.u5l9 .pl .katex { font-size: 1.06em; }
+.u5l9 .ans .katex { font-size: 1.03em; }
+.u5l9 .katex { white-space: nowrap; }
+.u5l9 h2 .katex, .u5l9 h3 .katex { font-size: .95em; }
+.u5l9-cv { color: #c93a33; }
+.u5l9-cy { color: #12805a; }
+.u5l9-cz { color: #a86a08; }
+.u5l9-ci { color: #7b4fc4; }
+.u5l9-cd { color: #7a1f3d; }
+
+/* ---------------- notes ---------------- */
+.u5l9-p { font-size: 19px; line-height: 1.5; margin: 10px 0; }
+.u5l9-key { border-left-width: 7px; }
+.u5l9-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 6px; }
+.u5l9-keysub { font: 600 16px var(--round); color: var(--muted); }
+.u5l9-ktab { width: 100%; border-collapse: collapse; font-size: 18px; line-height: 1.35; background: #fff; border-radius: 10px; overflow: hidden; }
+.u5l9-ktab th { text-align: left; font: 800 16px var(--round); color: #a26100; padding: 6px 12px; border-bottom: 2px solid #f0d199; }
+.u5l9-ktab td { padding: 5px 12px; border-bottom: 1px solid #f3e6c8; vertical-align: top; }
+.u5l9-ktab td:first-child { width: 58%; }
+.u5l9-ktab tr:last-child td { border-bottom: none; }
+.u5l9-steps { display: grid; gap: 7px; }
+.u5l9-steps > div { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid #f0d199; border-radius: 10px; padding: 7px 12px; font-size: 18px; line-height: 1.4; }
+.u5l9-steps > div > b:first-child { flex: 0 0 auto; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 16px var(--round); margin-top: 1px; }
+.u5l9-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u5l9-pcol .pill { white-space: nowrap; }
+
+/* ---------------- examples ---------------- */
+.u5l9-ex1 { display: grid; grid-template-columns: 1fr 360px; gap: 18px; align-items: start; }
+.u5l9-ex1 .part { margin-bottom: 8px; }
+.u5l9-fig { background: #fff; border-radius: 12px; padding: 8px; text-align: center; }
+.u5l9-figcap { font-size: 16px; color: var(--muted); margin-top: 2px; }
+.u5l9-ex2 { display: grid; grid-template-columns: 430px 1fr; gap: 18px; align-items: start; margin-bottom: 12px; }
+.u5l9-ex2 > div > .part { margin-bottom: 8px; }
+.u5l9-sketch { background: #fff; border-radius: 10px; padding: 6px; margin: 6px 0 8px; display: inline-block; }
+.u5l9-ansfig { background: #fff; border-radius: 10px; padding: 4px; margin-top: 4px; display: inline-block; }
+.u5l9-ex3h { display: grid; grid-template-columns: 1fr 300px; gap: 18px; align-items: center; margin-bottom: 10px; }
+.u5l9-poles { width: 300px; height: 120px; display: block; }
+.u5l9-ex5 { display: grid; grid-template-columns: 1fr 376px; gap: 18px; align-items: start; margin-bottom: 12px; }
+.u5l9-dtab { border-collapse: collapse; font-size: 18px; background: #fff; margin: 8px 0; }
+.u5l9-dtab th, .u5l9-dtab td { border: 2px solid #d9d3c4; padding: 6px 12px; text-align: center; }
+.u5l9-dtab th { text-align: left; font-weight: 700; background: #f6f3ea; }
+.u5l9-ex6 { display: grid; grid-template-columns: 1fr 240px; gap: 18px; align-items: start; margin-bottom: 12px; }
+.u5l9-gut { position: relative; width: 230px; height: 146px; background: #fff; border-radius: 12px; }
+.u5l9-gut svg { position: absolute; left: 5px; top: 4px; width: 220px; height: 130px; }
+.u5l9-gl { position: absolute; font-size: 19px; }
+
+/* ---------------- explainer: flight ---------------- */
+.u5l9-clock { font: 800 17px var(--round); background: #1c2230; color: #9ff0b5; border-radius: 9px; padding: 3px 10px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.u5l9-over { pointer-events: none; }
+.u5l9-tag { font-size: 15.5px; line-height: 1.25; padding: 3px 8px; border-radius: 8px; background: #fff; border: 2px solid; white-space: nowrap; }
+.u5l9-tgy { border-color: #12805a; color: #0e6a4a; }
+.u5l9-tgv { border-color: #c93a33; color: #a52a24; }
+.u5l9-tgz { border-color: #c27a0e; color: #8a5806; }
+.u5l9-sym { position: absolute; display: flex; font: 800 15px var(--round); color: #7b4fc4; }
+.u5l9-sym > span { flex: 1; text-align: center; border-bottom: 2px solid #7b4fc4; margin: 0 3px; padding-bottom: 1px; }
+.u5l9-drbox { background: rgba(255, 255, 255, .95); border: 2px solid #c9879e; border-radius: 10px; padding: 4px 8px; font-size: 15.5px; line-height: 1.3; color: #7a1f3d; box-sizing: border-box; }
+.u5l9-drbox > div + div { margin-top: 4px; }
+.u5l9-drbox .katex { font-size: 1em; color: #1c2230; }
+
+/* ---------------- explainer: rocket (calculator) ---------------- */
+.u5l9-rail { display: flex; gap: 8px; box-sizing: border-box; }
+.u5l9-rstep { flex: 1; background: #fff; border: 2px solid #e4ded2; border-radius: 12px; padding: 5px 8px; font: 800 16px var(--round); color: var(--muted); display: flex; align-items: center; gap: 7px; white-space: nowrap; transition: background .25s, border-color .25s, color .25s; }
+.u5l9-rstep b { display: inline-grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; background: #e4ded2; color: #fff; flex: 0 0 auto; }
+.u5l9-rstep.on { background: #fff4dd; border-color: #c27a0e; color: #1c2230; }
+.u5l9-rstep.on b { background: #c27a0e; }
+.u5l9-rstep.done { color: #12805a; border-color: #a7d8c2; }
+.u5l9-rstep.done b { background: #12805a; }
+.u5l9-rk { width: 44px; height: 44px; display: grid; place-items: center; }
+.u5l9-rkb { display: block; font-size: 36px; line-height: 1; transition: transform .2s; }
+.u5l9-hlab { font: 700 14px/1.25 var(--round); color: #3a4254; text-align: center; font-variant-numeric: tabular-nums; }
+.u5l9-ti { background: #dfe9d0; border: 2px solid #9fb08a; border-radius: 8px; padding: 6px 10px; font: 600 17px/1.45 ui-monospace, Menlo, Consolas, monospace; color: #1c2230; box-sizing: border-box; overflow: hidden; }
+.u5l9-ti > div { white-space: nowrap; }
+.u5l9-tih { font-weight: 800; border-bottom: 1px solid #9fb08a; margin-bottom: 2px; }
+.u5l9-tisel { background: #1c2230; color: #dfe9d0; border-radius: 3px; padding: 0 4px; margin: 0 -4px; }
+.u5l9-tiin { color: #7a1f3d; margin-top: 3px; }
+.u5l9-tiin i { font-style: normal; font-weight: 800; }
+.u5l9-y1 { color: #1f5bd6; } .u5l9-y2 { color: #c93a33; }
+.u5l9-bnd { font: 800 18px ui-monospace, Menlo, monospace; color: #1c2230; }
+.u5l9-res { background: #fff4dd; border: 2px solid #c27a0e; border-radius: 10px; padding: 4px 10px; font: 700 17px var(--round); color: #1c2230; box-sizing: border-box; text-align: center; z-index: 4; }
+
+/* ---------------- explainer: revenue ---------------- */
+.u5l9-rlab { font: 800 16px var(--round); white-space: nowrap; }
+.u5l9-rp { color: #1f5bd6; }
+.u5l9-rt { color: #3a4254; transform: translateX(-50%); }
+.u5l9-rp small, .u5l9-rt small { font-weight: 600; font-size: 13px; color: var(--muted); }
+.u5l9-ra { color: #1c2230; text-align: center; font-size: 17px; overflow: hidden; }
+.u5l9-axl { font: 700 14px var(--round); color: var(--muted); }
+.u5l9-num { font-size: 14px; color: #3a4254; white-space: nowrap; }
+.u5l9-tab .bk-th { font-size: 15px; }
+.u5l9-tab .bk-td { font-size: 16px; }
+
+/* ---------------- explainer: gutter ---------------- */
+.u5l9-glab { font-size: 17px; white-space: nowrap; color: #3a4254; }
+.u5l9-gread { font: 800 18px var(--round); color: #1f5bd6; text-align: center; }
+.u5l9-gtag { font-size: 17px; background: #fff; border: 2px solid #7b4fc4; border-radius: 8px; padding: 2px 10px; color: #5b37a0; }

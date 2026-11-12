@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Differences of Squares · Math 20-1 4.4</title>
+<meta name="description" content="Math 20-1 Unit 4 Lesson 4: factoring a difference of squares A² − B² = (A − B)(A + B). Sums of squares do not factor, take out the GCF first, rational coefficients, repeated factoring of higher powers (x⁴ − 81), squares of binomials a²(f(x))² − b²(g(y))², and choosing a factoring method. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u4l4.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u4l4">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 4 Factoring and Equations · Lesson 4</div>
+  <h1>Differences of Squares, Including <span class="tex">a^2(f(x))^2-b^2(g(y))^2</span></h1>
+  <p class="lede">When <b>one perfect square is subtracted from another</b>, the expression factors into two brackets that differ only in the sign between their terms: <span class="tex">\textcolor{#a33357}{A}^2-\textcolor{#c27a0e}{B}^2=(\textcolor{#a33357}{A}-\textcolor{#c27a0e}{B})(\textcolor{#a33357}{A}+\textcolor{#c27a0e}{B})</span>. The squares can hold fractions, higher powers and even whole binomials.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>recognize a <b>difference of squares</b> (two terms, both perfect squares, subtracted) and factor it as <span class="tex">(A-B)(A+B)</span></li>
+      <li>explain why a <b>sum of squares</b> such as <span class="tex">x^2+36</span> does not factor</li>
+      <li>take out the <b>GCF first</b> (a negative one if the first term is negative)</li>
+      <li>factor differences of squares with <b>fractions and decimals</b> as coefficients</li>
+      <li><b>keep factoring</b> when a factor is again a difference of squares, as in <span class="tex">x^4-81</span></li>
+      <li>factor <span class="tex">a^2(f(x))^2-b^2(g(y))^2</span> by <b>keeping the brackets</b> while I substitute back</li>
+      <li>choose a method with the <b>factoring checklist</b>, including grouping three terms into a perfect square</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF1</b> Factor polynomial expressions of the form <span class="tex">ax^2+bx+c</span>, <span class="tex">a^2x^2-b^2y^2</span>, <span class="tex">a(f(x))^2+b(f(x))+c</span> and <span class="tex">a^2(f(x))^2-b^2(g(y))^2</span> (<span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> rational).<br><span class="muted">Today: differences of squares, with fractions, higher powers and squares of binomials, and a checklist for choosing a method. </span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Chocolate Trade" id="wu" style="--wf-side: 386px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Chocolate Trade</h2>
+  <p class="wf-rule">You have a <b>square</b> chocolate bar. A friend offers a trade: a bar that is a few rows <b>shorter</b> but the same number of columns <b>longer</b>.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u4l4-choc" id="u4l4-choc"></div>
+    <div class="u4l4-wbtns">
+      <button type="button" class="pill" id="u4l4-wsmall">4 by 4 bar</button>
+      <button type="button" class="pill" id="u4l4-wbig">20 by 20 bar</button>
+      <button type="button" class="pill" id="u4l4-wtrade">Make the trade</button>
+      <button type="button" class="pill" id="u4l4-wreset">Start over</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u4l4-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How many pieces are in a <b>4 by 4</b> bar? In a <b>3 by 5</b> bar? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u4l4-wa"><div class="bk-ans"><b>16</b> and <b>15</b>. One row shorter and one column longer, but one piece <b>fewer</b>.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Press <b>Make the trade</b> on the 4 by 4 bar. The top row turns to become the new column. What is <b>left over</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u4l4-wa"><div class="bk-ans"><b>One piece</b>, in the corner: <span class="tex">4^2-1^2=3\times5</span>.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Trade your <b>20 by 20</b> bar for a <b>17 by 23</b> bar. How many pieces do you <b>lose</b>? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> None: 3 less, 3 more</div>
+        <div class="opt"><b>B</b> 3 pieces</div>
+        <div class="opt"><b>C</b> 6 pieces</div>
+        <div class="opt right"><b>D</b> 9 pieces</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>D, 9 pieces.</b> <span class="tex">20\times20=400</span> but <span class="tex">17\times23=391</span>. Cut the top 3 rows off and turn them into 3 new columns: a <b>3 by 3</b> square is left in the corner. <span class="tex">20^2-3^2=(20-3)(20+3)</span>.<br>
+        <span class="muted">You always lose a <b>square</b> of chocolate: a square minus a square is a rectangle. That is today’s lesson.</span></div>
+    </div>
+  </div></div>
+  <p class="u4l4-social">Challenge your neighbour: trade a 30 by 30 bar for a 25 by 35 bar. How many pieces do you lose? No multiplying allowed!</p>
+</section>
+
+<!-- ================= 1. The pattern ================= -->
+<section class="card" data-ink="s1" data-section="1. The Difference of Squares Pattern">
+  <div class="sec-h"><span class="badge">1</span><h2>The Difference of Squares Pattern</h2></div>
+  <p>Multiply two binomials that differ <b>only in the sign</b> between their terms:</p>
+  <div class="u4l4-bigf"><span class="tex">(A-B)(A+B)=A^2+AB-AB-B^2=A^2-B^2</span></div>
+  <p>The middle terms cancel. Read backwards, this is a factoring pattern.</p>
+  <div class="explainer" data-explainer="foilCancel"></div>
+  <div class="u4l4-key">
+    <div class="u4l4-key-h">Difference of squares</div>
+    <div class="u4l4-key-f"><span class="tex">\textcolor{#a33357}{A}^2-\textcolor{#c27a0e}{B}^2=(\textcolor{#a33357}{A}-\textcolor{#c27a0e}{B})(\textcolor{#a33357}{A}+\textcolor{#c27a0e}{B})</span></div>
+    <div class="u4l4-key-l">It applies when there are <b>two terms</b>, both are <b>perfect squares</b>, and they are <b>subtracted</b>. Find <span class="tex">A</span> and <span class="tex">B</span> by taking the square root of each term: <span class="tex">49x^2=(7x)^2</span>, <span class="tex">25y^2=(5y)^2</span>, so <span class="tex">49x^2-25y^2=(7x-5y)(7x+5y)</span>.</div>
+  </div>
+  <h3 class="sub">Why it works: cut a square out of a square</h3>
+  <p>Take a square of side <span class="tex">\textcolor{#a33357}{A}</span> and cut a square of side <span class="tex">\textcolor{#c27a0e}{B}</span> out of its corner. The area left is <span class="tex">A^2-B^2</span>. Cut that L shape in two and slide one piece round: it becomes a <b>rectangle</b>.</p>
+  <div class="explainer" data-explainer="cutSlide"></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> In Unit 2 you multiplied conjugates: <span class="tex">(3-\sqrt{2})(3+\sqrt{2})</span>. Why does the answer have no radical in it?</div><div class="work" style="--h:80px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Conjugates are <span class="tex">(A-B)(A+B)</span> with <span class="tex">A=3</span>, <span class="tex">B=\sqrt{2}</span>. The middle terms cancel and only the squares are left: <span class="tex">3^2-(\sqrt{2})^2=9-2=\boldsymbol{7}</span>.</div></div></div>
+</section>
+
+<section class="card" data-ink="s1b" data-section="1. Sums of Squares">
+  <h3 class="sub">A sum of squares does not factor</h3>
+  <div class="def">A <b>sum of squares</b> <span class="tex">A^2+B^2</span> does <b>not</b> factor over the real numbers. For <span class="tex">x^2+36</span> we would need two numbers with <b>sum 0</b> and <b>product +36</b>; numbers with sum 0 are opposites, and opposites have a <b>negative</b> product.</div>
+  <div class="explainer" data-explainer="sumNo"></div>
+  <h3 class="sub">Is it a difference of squares? Find A and B.</h3>
+  <p>Check the three conditions, then take the square root of each term. If the negative term comes first, <b>reorder</b> the terms.</p>
+  <div class="explainer" data-explainer="dosTest"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Factor, if possible</h3></div>
+  <p class="q">Factor, if possible.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">25x^2-64</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(5x)^2-8^2=\boldsymbol{(5x-8)(5x+8)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">49a^2-81b^2</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{(7a-9b)(7a+9b)}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">100m^2n^2-9p^2</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(10mn)^2-(3p)^2</span><br><span class="tex">=\boldsymbol{(10mn-3p)(10mn+3p)}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">x^2+36</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">A <b>sum</b> of squares: it <b>does not factor</b>.</div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">-y^2+4x^2</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Reorder: <span class="tex">4x^2-y^2=\boldsymbol{(2x-y)(2x+y)}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">1-\sin^2x</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">1^2-(\sin x)^2=\boldsymbol{(1-\sin x)(1+\sin x)}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Common factor first ================= -->
+<section class="card" data-ink="s2" data-section="2. Common Factor First">
+  <div class="sec-h"><span class="badge">2</span><h2>Common Factor First</h2></div>
+  <div class="def">Always look for a <b>GCF</b> first. Numbers like 12 and 27 are not perfect squares, but after removing the common factor 3 the binomial is <span class="tex">4x^2-9y^2</span>. If the first term is negative, taking out a <b>negative</b> common factor makes the pattern easier to see.</div>
+  <div class="explainer" data-explainer="gcfFirst"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>GCF, then the pattern</h3></div>
+  <p class="q">Factor fully.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">12x^2-27y^2</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3(4x^2-9y^2)=\boldsymbol{3(2x-3y)(2x+3y)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">5a^3b-45ab^3</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">5ab(a^2-9b^2)=\boldsymbol{5ab(a-3b)(a+3b)}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">8x^2+50</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{2(4x^2+25)}</span>. The sum of squares does not factor, so this is fully factored.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">-18x^2+8</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-2(9x^2-4)=\boldsymbol{-2(3x-2)(3x+2)}</span><br>(or <span class="tex">2(2-3x)(2+3x)</span>)</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. Dimensions from an Area">
+  <h3 class="sub">Dimensions from a factored area</h3>
+  <p>If the area of a rectangle factors into two binomials, they can be its length and width. In the perimeter the <b>opposite terms cancel</b>, which often hands you one variable straight away.</p>
+  <div class="explainer" data-explainer="banner"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>The banner</h3></div>
+  <p class="q">A rectangular banner has an area of <span class="tex">36x^2-25y^2</span> square centimetres. Its length and width are both of the form <span class="tex">ax+by</span>, where <span class="tex">a</span> and <span class="tex">b</span> are integers.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Write expressions for the length and the width.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">36x^2-25y^2=(6x+5y)(6x-5y)</span>. Length <span class="tex">\boldsymbol{6x+5y}</span>, width <span class="tex">\boldsymbol{6x-5y}</span> (with <span class="tex">x,y&gt;0</span>).</div></div></div>
+    <div class="part"><div class="pl">(b) The perimeter is 96 cm. Determine <span class="tex">x</span>.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2(6x+5y)+2(6x-5y)=24x=96</span><br><span class="tex">\Rightarrow\boldsymbol{x=4}</span></div></div></div>
+    <div class="part"><div class="pl">(c) The length is also 3 times the width. Determine <span class="tex">y</span> and the dimensions of the banner.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">24+5y=3(24-5y)</span><br><span class="tex">\Rightarrow24+5y=72-15y\Rightarrow20y=48\Rightarrow\boldsymbol{y=2.4}</span><br>Length <span class="tex">24+12=\boldsymbol{36}</span> cm, width <span class="tex">24-12=\boldsymbol{12}</span> cm.<br><span class="muted">(Check: <span class="tex">36\times12=432=36(16)-25(5.76)</span>.)</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Rational coefficients ================= -->
+<section class="card" data-ink="s3" data-section="3. Rational Coefficients">
+  <div class="sec-h"><span class="badge">3</span><h2>Rational Coefficients</h2></div>
+  <div class="def">A fraction is a perfect square when its <b>numerator and denominator</b> are both perfect squares: <span class="tex">\dfrac{1}{4}x^2=\left(\dfrac{1}{2}x\right)^2</span> and <span class="tex">\dfrac{y^2}{25}=\left(\dfrac{y}{5}\right)^2</span>. Decimals work too: <span class="tex">0.09=0.3^2</span>. Another way is to take out a <b>fractional common factor</b> first, as in Lesson 2.</div>
+  <div class="explainer" data-explainer="fracSquares"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Fractions and decimals</h3></div>
+  <p class="q">Factor fully.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{1}{4}x^2-9</span> (two ways)</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{\left(\tfrac{1}{2}x-3\right)\left(\tfrac{1}{2}x+3\right)}</span><br>or <span class="tex">\tfrac{1}{4}(x^2-36)=\boldsymbol{\tfrac{1}{4}(x-6)(x+6)}</span><br><span class="muted">(the same: <span class="tex">\tfrac{1}{2}(x-6)=\tfrac{1}{2}x-3</span>)</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x^2}{16}-\dfrac{y^2}{25}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{\left(\dfrac{x}{4}-\dfrac{y}{5}\right)\left(\dfrac{x}{4}+\dfrac{y}{5}\right)}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">0.09a^2-0.49</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{(0.3a-0.7)(0.3a+0.7)}</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Higher powers ================= -->
+<section class="card" data-ink="s4" data-section="4. Higher Powers and Repeated Factoring">
+  <div class="sec-h"><span class="badge">4</span><h2>Higher Powers and Repeated Factoring</h2></div>
+  <div class="def"><b>Even powers are perfect squares:</b> <span class="tex">x^4=(x^2)^2</span>, <span class="tex">x^6=(x^3)^2</span>, <span class="tex">16y^4=(4y^2)^2</span>. After one use of the pattern, the <b>difference</b> factor may be a difference of squares again, so <b>keep going</b>. The <b>sum</b> factor stays.</div>
+  <div class="explainer" data-explainer="keepGoing"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Odd powers are not squares.</b> <span class="tex">x^3-7</span> is not a difference of squares: <span class="tex">x^3</span> is not a perfect square (and neither is 7). Stop there.</div></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Keep going</h3></div>
+  <p class="q">Factor fully.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">x^4-81</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x^2-9)(x^2+9)</span><br><span class="tex">=\boldsymbol{(x-3)(x+3)(x^2+9)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">16a^4-b^4</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(4a^2-b^2)(4a^2+b^2)</span><br><span class="tex">=\boldsymbol{(2a-b)(2a+b)(4a^2+b^2)}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">3x^4-48y^4</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3(x^4-16y^4)=3(x^2-4y^2)(x^2+4y^2)</span><br><span class="tex">=\boldsymbol{3(x-2y)(x+2y)(x^2+4y^2)}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">m^8-1</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(m^4-1)(m^4+1)=(m^2-1)(m^2+1)(m^4+1)</span><br><span class="tex">=\boldsymbol{(m-1)(m+1)(m^2+1)(m^4+1)}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">x^6-49</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{(x^3-7)(x^3+7)}</span></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u4l4"></section>
+
+<!-- ================= 5. Squares of binomials ================= -->
+<section class="card" data-ink="s5" data-section="5. Squares of Binomials">
+  <div class="sec-h"><span class="badge">5</span><h2>Squares of Binomials: <span class="tex">a^2(f(x))^2-b^2(g(y))^2</span></h2></div>
+  <div class="def">The squared quantities can be binomials. Let <span class="tex">\textcolor{#a33357}{A}=a\,f(x)</span> and <span class="tex">\textcolor{#c27a0e}{B}=b\,g(y)</span>, use <span class="tex">(A-B)(A+B)</span>, then <b>keep the brackets</b> while you substitute back (the minus sign applies to <b>every term</b> of <span class="tex">B</span>), simplify each factor and take out any common factor.</div>
+  <div class="u4l4-bigf"><span class="tex">4(2x-1)^2-9(y+2)^2=\big[\textcolor{#a33357}{2(2x-1)}\big]^2-\big[\textcolor{#c27a0e}{3(y+2)}\big]^2\qquad A=2(2x-1),\ B=3(y+2)</span></div>
+  <div class="explainer" data-explainer="boxSub"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Binomials inside the squares</h3></div>
+  <p class="q">Factor fully.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">(x+3)^2-25</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\big[(x+3)-5\big]\big[(x+3)+5\big]=\boldsymbol{(x-2)(x+8)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">16-(y-1)^2</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\big[4-(y-1)\big]\big[4+(y-1)\big]=\boldsymbol{(5-y)(y+3)}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">4(2x-1)^2-9(y+2)^2</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\big[2(2x-1)-3(y+2)\big]\big[2(2x-1)+3(y+2)\big]</span><br><span class="tex">=(4x-2-3y-6)(4x-2+3y+6)</span><br><span class="tex">=\boldsymbol{(4x-3y-8)(4x+3y+4)}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">(3x+1)^2-(x-5)^2</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\big[(3x+1)-(x-5)\big]\big[(3x+1)+(x-5)\big]</span><br><span class="tex">=(2x+6)(4x-4)=2(x+3)\cdot4(x-1)</span><br><span class="tex">=\boldsymbol{8(x+3)(x-1)}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s5b" data-section="5. The Patio">
+  <h3 class="sub">The patio: the square cut from a square, with binomial sides</h3>
+  <p>The picture from Section 1 works with binomial sides too. Here <span class="tex">\textcolor{#a33357}{A}=2x+5</span> and <span class="tex">\textcolor{#c27a0e}{B}=x+1</span>.</p>
+  <div class="explainer" data-explainer="cutSlide2"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>The patio</h3></div>
+  <p class="q">A square patio has side length <span class="tex">(2x+5)</span> m. A square planter with side length <span class="tex">(x+1)</span> m is cut out of it.</p>
+  <div class="u4l4-exg">
+    <div class="parts c2">
+      <div class="part"><div class="pl">(a) Write an expression for the area of the patio that remains.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{(2x+5)^2-(x+1)^2}</span></div></div></div>
+      <div class="part"><div class="pl">(b) Factor it fully using a difference of squares.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\big[(2x+5)-(x+1)\big]\big[(2x+5)+(x+1)\big]</span><br><span class="tex">=(x+4)(3x+6)=\boldsymbol{3(x+4)(x+2)}</span></div></div></div>
+      <div class="part"><div class="pl">(c) Check by expanding each square first, then factoring.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">4x^2+20x+25-(x^2+2x+1)</span><br><span class="tex">=3x^2+18x+24=3(x^2+6x+8)</span><br><span class="tex">=3(x+2)(x+4)\ \checkmark</span></div></div></div>
+      <div class="part"><div class="pl">(d) Find the remaining area when <span class="tex">x=3</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3(7)(5)=\boldsymbol{105\text{ m}^2}</span><br><span class="muted">(Check: <span class="tex">11^2-4^2=121-16=105</span>.)</span></div></div></div>
+    </div>
+    <div class="u4l4-patio" id="u4l4-patio"></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Choosing a method ================= -->
+<section class="card" data-ink="s6" data-section="6. Choosing a Method">
+  <div class="sec-h"><span class="badge">6</span><h2>Choosing a Method</h2></div>
+  <div class="u4l4-check">
+    <div class="u4l4-key-h">Factoring checklist</div>
+    <ol>
+      <li>Take out the <b>GCF</b> (a negative one if the first term is negative).</li>
+      <li>Count the terms.
+        <div class="u4l4-ck"><b>Two:</b> a difference of squares? (A sum of squares does not factor.)</div>
+        <div class="u4l4-ck"><b>Three:</b> <span class="tex">x^2+bx+c</span>; <span class="tex">ax^2+bx+c</span> by decomposition; a perfect square; quadratic form (substitution).</div>
+        <div class="u4l4-ck"><b>Four:</b> grouping (two and two, or three and one to make a difference of squares).</div></li>
+      <li>Check every factor and <b>factor again</b> if you can. &nbsp; 4. <b>Check</b> by expanding.</li>
+    </ol>
+  </div>
+  <div class="def gray">A binomial is a <b>factor</b> of a polynomial if it appears in the polynomial’s <b>fully factored form</b> (or is a product of factors that appear there).</div>
+  <div class="explainer" data-explainer="checklist"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Use the checklist</h3></div>
+  <p class="q">Factor fully.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">2x^3-18x</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x(x^2-9)=\boldsymbol{2x(x-3)(x+3)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x^3+2x^2-9x-18</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2(x+2)-9(x+2)</span><br><span class="tex">=(x+2)(x^2-9)</span><br><span class="tex">=\boldsymbol{(x+2)(x-3)(x+3)}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">4x^4-37x^2+9</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Product 36, sum <span class="tex">-37</span>: <span class="tex">-36</span>, <span class="tex">-1</span><br><span class="tex">=(4x^2-1)(x^2-9)</span><br><span class="tex">=\boldsymbol{(2x-1)(2x+1)(x-3)(x+3)}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">6x^2-7x-20</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Product <span class="tex">-120</span>, sum <span class="tex">-7</span>: <span class="tex">-15</span>, 8<br><span class="tex">=3x(2x-5)+4(2x-5)</span><br><span class="tex">=\boldsymbol{(3x+4)(2x-5)}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">x^2-6x+9-y^2</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Group the first three: <span class="tex">(x-3)^2-y^2</span><br><span class="tex">=\boldsymbol{(x-3-y)(x-3+y)}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">3a^2+12</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{3(a^2+4)}</span>; the sum of squares does not factor.</div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s6b" data-section="6. Is It a Factor?">
+  <h3 class="sub">Is it a factor? Factor fully, then look.</h3>
+  <p>Write the polynomial in fully factored form. A binomial is a factor if it is one of the pieces, or a product of pieces.</p>
+  <div class="explainer" data-explainer="factorOf"></div>
+</section>
+
+<section class="card example" data-ink="ex9" data-section="Example 9">
+  <div class="ex-head"><span class="ex-tag">Example 9</span><h3>Factor or not?</h3></div>
+  <p class="q">Determine whether each binomial is a factor of <span class="tex">3x^4-48</span>. &nbsp; (a) <span class="tex">x-2</span> &nbsp;&nbsp; (b) <span class="tex">x-4</span> &nbsp;&nbsp; (c) <span class="tex">x^2+4</span></p>
+  <div class="part u4l4-solo"><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3x^4-48=3(x^4-16)=3(x^2-4)(x^2+4)=3(x-2)(x+2)(x^2+4)</span>.<br>(a) <b>Yes.</b> &nbsp; (b) <b>No</b>: <span class="tex">x-4</span> is not in the factored form. &nbsp; (c) <b>Yes.</b></div></div></div>
+  <div class="space" id="ex9-space"></div>
+  <button class="more" data-more="ex9-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>The pattern.</b> <span class="tex">A^2-B^2=(A-B)(A+B)</span>: two terms, both perfect squares, <b>subtracted</b>. Find <span class="tex">A</span> and <span class="tex">B</span> with square roots. A <b>sum</b> of squares <span class="tex">A^2+B^2</span> does not factor.</div>
+    <div><b>GCF first.</b> <span class="tex">12x^2-27y^2=3(4x^2-9y^2)</span>. Negative first term: take out a negative. Fractions: <span class="tex">\tfrac{1}{4}x^2=\left(\tfrac{1}{2}x\right)^2</span>, decimals: <span class="tex">0.09=0.3^2</span>.</div>
+    <div><b>Keep going.</b> Even powers are squares. <span class="tex">x^4-81=(x^2-9)(x^2+9)=(x-3)(x+3)(x^2+9)</span>: the difference opens again, the sum stays.</div>
+    <div><b>Binomials inside.</b> Keep the brackets: <span class="tex">\big[(x+3)-5\big]\big[(x+3)+5\big]</span>; the minus hits every term of <span class="tex">B</span>. Simplify, take out a GCF, use the checklist, then check.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u4l4">
+    <div><div class="kicker">Your turn</div><b>Assignment 4 — Differences of Squares</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l5/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 5 — Solving Quadratic Equations by Factoring</b><div class="muted">Factor, then use the zero product property: if <span class="tex">AB=0</span>, then <span class="tex">A=0</span> or <span class="tex">B=0</span>.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u4l4.js';
+  boot({ key: 'u4l4', homeHref: '../../', title: '4.4 Differences of Squares' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

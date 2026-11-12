@@ -143,3 +143,14 @@
 .u4l1-plab { font-size: 22px; background: rgba(255, 255, 255, .85); border-radius: 8px; padding: 0 6px; }
 .u4l1-pgrid line { stroke: rgba(28, 34, 48, .22); stroke-width: 1; }
 .u4l1-ptot { position: absolute; font-size: 19px; white-space: nowrap; color: #7a1f3d; font-weight: 700; }
+
+/* Ryan's X (new format, 2026-11-11): c on top, b underneath, the two numbers on the sides, the pairs beside it */
+.u4l1-xv { font-size: 30px; font-weight: 700; white-space: nowrap; }
+.u4l1-xv.u4l1-xlab { font-size: 21px; color: var(--muted); }
+.u4l1-xv.u4l1-xtop { color: #c27a0e; } .u4l1-xv.u4l1-xbot { color: #12805a; }
+.u4l1-xv.u4l1-xside { color: #c93a33; font-size: 32px; }
+.u4l1-xp { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 16px; box-sizing: border-box; font-size: 23px; border: 3px solid transparent; border-radius: 999px; }
+.u4l1-xps { font-size: 17px; color: var(--ink2); }
+.u4l1-xp.u4l1-xp-ok { border-color: #12805a; background: #e9f6ef; }
+.u4l1-xp.u4l1-xp-no { color: var(--muted); opacity: .55; }
+.u4l1-sn { width: 30px; height: 30px; border-radius: 50%; background: #2b55a0; color: #fff; font: 800 17px/30px var(--round); text-align: center; }

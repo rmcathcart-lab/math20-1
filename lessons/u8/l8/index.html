@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unit 8 Review · Math 20-1 8.8</title>
+<meta name="description" content="Math 20-1 Unit 8 Lesson 8: Unit 8 review of systems and inequalities. Linear–quadratic and quadratic–quadratic systems, the number of solutions and the discriminant, linear and quadratic inequalities in two variables, and quadratic inequalities in one variable on one page, mixed review examples, and a Which Region? round. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u8l8.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u8l8">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: What Comes Next?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><text x="40" font-size="30" text-anchor="middle">1<animate attributeName="y" values="64;-6" dur="3s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3s" begin="0s" repeatCount="indefinite"/></text><text x="110" font-size="30" text-anchor="middle">2<animate attributeName="y" values="64;-6" dur="3s" begin="0.9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3s" begin="0.9s" repeatCount="indefinite"/></text><text x="180" font-size="30" text-anchor="middle">1<animate attributeName="y" values="64;-6" dur="3s" begin="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3s" begin="1.8s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="290" y="46" font-size="40" text-anchor="middle">🤔</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>What Comes Next?</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">A famous sequence starts like this. Each row is made from the row just above it.</p><p class="vw-ctx u8l8-wseq">1 → 11 → 21 → 1211 → 111221 → ?</p><p class="vw-ask">What is the next row?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Rows of number tiles appear one under another: 1, then 1 1, then 2 1, then 1 2 1 1, then 1 1 1 2 2 1, and then a row of question marks"><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.050;0.090;0.93;1" dur="8.0s" repeatCount="indefinite"/><rect x="148.0" y="4" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="165.0" y="29" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.163;0.203;0.93;1" dur="8.0s" repeatCount="indefinite"/><rect x="128.5" y="44" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="145.5" y="69" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text><rect x="167.5" y="44" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="184.5" y="69" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.275;0.315;0.93;1" dur="8.0s" repeatCount="indefinite"/><rect x="128.5" y="84" width="34" height="34" rx="7" fill="#fdf1dc" stroke="#c27a0e" stroke-width="2.5"/><text x="145.5" y="109" font-size="24" font-weight="800" fill="#8a5a0a" text-anchor="middle" font-family="Arial, sans-serif">2</text><rect x="167.5" y="84" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="184.5" y="109" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.388;0.427;0.93;1" dur="8.0s" repeatCount="indefinite"/><rect x="89.5" y="124" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="106.5" y="149" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text><rect x="128.5" y="124" width="34" height="34" rx="7" fill="#fdf1dc" stroke="#c27a0e" stroke-width="2.5"/><text x="145.5" y="149" font-size="24" font-weight="800" fill="#8a5a0a" text-anchor="middle" font-family="Arial, sans-serif">2</text><rect x="167.5" y="124" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="184.5" y="149" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text><rect x="206.5" y="124" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="223.5" y="149" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.500;0.540;0.93;1" dur="8.0s" repeatCount="indefinite"/><rect x="50.5" y="164" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="67.5" y="189" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text><rect x="89.5" y="164" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="106.5" y="189" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text><rect x="128.5" y="164" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="145.5" y="189" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text><rect x="167.5" y="164" width="34" height="34" rx="7" fill="#fdf1dc" stroke="#c27a0e" stroke-width="2.5"/><text x="184.5" y="189" font-size="24" font-weight="800" fill="#8a5a0a" text-anchor="middle" font-family="Arial, sans-serif">2</text><rect x="206.5" y="164" width="34" height="34" rx="7" fill="#fdf1dc" stroke="#c27a0e" stroke-width="2.5"/><text x="223.5" y="189" font-size="24" font-weight="800" fill="#8a5a0a" text-anchor="middle" font-family="Arial, sans-serif">2</text><rect x="245.5" y="164" width="34" height="34" rx="7" fill="#e8eefc" stroke="#2b55a0" stroke-width="2.5"/><text x="262.5" y="189" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle" font-family="Arial, sans-serif">1</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.613;0.653;0.93;1" dur="8.0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.2s" begin="0s" repeatCount="indefinite"/><rect x="105" y="205" width="120" height="40" rx="10" fill="#fff" stroke="#7a1f3d" stroke-width="2.5" stroke-dasharray="7 5"/><text x="165" y="235" font-size="30" font-weight="800" fill="#7a1f3d" text-anchor="middle" font-family="Arial, sans-serif">? ? ?</text></g></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Write down your guess first. What rule turns each row into the next one?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>312211.</b> Read each row out loud, then write down what you said:<br>1 is “one 1” → <b>11</b> · 11 is “two 1s” → <b>21</b> · 21 is “one 2, one 1” → <b>1211</b> · 1211 is “one 1, one 2, two 1s” → <b>111221</b> · 111221 is “three 1s, two 2s, one 1” → <b>312211</b>.<br><span class="muted">It’s called the look-and-say sequence. Twist: no digit bigger than 3 ever shows up, however far you go, and each row is about 30% longer than the one before.</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 8 Systems and Inequalities · Lesson 8</div>
+  <h1>Unit 8 Review</h1>
+  <p class="lede">Systems of equations, inequalities in two variables and quadratic inequalities in one variable on one page, then mixed examples that combine them. One question runs the whole unit: <b>what does the solution look like?</b> A system’s solutions are <b class="u8l8-am">points</b> where two graphs meet, an inequality in two variables has a shaded <b class="u8l8-bl">region</b> of points, and an inequality in one variable has a set of <b class="u8l8-gr">x-values</b> on a number line.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>solve linear–quadratic and quadratic–quadratic systems algebraically (and with <b>intersect</b>), and verify in <b>both</b> equations</li>
+      <li>use the <b>discriminant</b> to tell how many solutions a system has, and find <span class="tex">k</span> for a tangent line</li>
+      <li>graph linear and quadratic inequalities in two variables with a <b>solid</b> or <b>dashed</b> boundary and a <b>test point</b>, and write one from its graph</li>
+      <li>solve quadratic inequalities in one variable with roots and test points, a <b>sign chart</b> or a graph, in set notation</li>
+      <li>solve problems with systems and inequalities, with restrictions, and answer in context</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF6</b> Solve, algebraically and graphically, problems that involve systems of linear-quadratic and quadratic-quadratic equations in two variables.<br><b>RF7</b> Solve problems that involve linear and quadratic inequalities in two variables.<br><b>RF8</b> Solve problems that involve quadratic inequalities in one variable.<br><span class="muted">Today: the whole unit on one page, mixed examples in the style of the unit test, and a Which Region? round.</span></div>
+</section>
+
+<!-- ================= 1. Unit summary ================= -->
+<section class="card" data-ink="s1" data-section="1. Unit Summary">
+  <div class="sec-h"><span class="badge">1</span><h2>Unit Summary</h2></div>
+  <h3 class="sub">The whole unit on one page <span class="muted u8l8-subnote">tap a grey box to check yourself</span></h3>
+  <table class="u8l8-mtab">
+    <tr><th>Topic</th><th>Method</th><th>Example</th></tr>
+    <tr><th>Linear–quadratic system</th><td>Write the line as <span class="tex">y=\dots</span> and substitute into the quadratic (or eliminate <span class="tex">y</span>). Solve the quadratic, find each <span class="tex">y</span> from the <b>linear</b> equation, verify in both. Graphically: graph both and use <b>intersect</b>.</td>
+      <td><span class="tex">y=x^2-1</span>, &nbsp;<span class="tex">y=x+1</span><br><span data-reveal><span class="tex">x^2-x-2=0</span>, <span class="tex">x=2</span> or <span class="tex">-1</span></span><br><span data-reveal>Solutions <span class="tex">(2,\ 3)</span> and <span class="tex">(-1,\ 0)</span></span></td></tr>
+    <tr><th>Quadratic–quadratic system</th><td>Set the right sides equal, collect terms on one side and solve. If the <span class="tex">x^2</span>-terms cancel, the equation is linear.</td>
+      <td><span class="tex">y=x^2+x</span>, &nbsp;<span class="tex">y=2x^2-x-3</span><br><span data-reveal><span class="tex">x^2-2x-3=0</span>, <span class="tex">x=3</span> or <span class="tex">-1</span></span><br><span data-reveal>Solutions <span class="tex">(3,\ 12)</span> and <span class="tex">(-1,\ 0)</span></span></td></tr>
+    <tr><th>Linear inequality in two variables</th><td>Graph the boundary line: <b>solid</b> for <span class="tex">\le,\ \ge</span>; <b>dashed</b> for <span class="tex">\lt,\ \gt</span>. Substitute a <b>test point</b> not on the line (<span class="tex">(0,\ 0)</span> if possible); shade its side if true, the other side if false.</td>
+      <td><span class="tex">y\lt2x+1</span>: <span data-reveal>dashed line</span><br><span data-reveal><span class="tex">(0,\ 0)</span>: <span class="tex">0\lt1</span> true, so shade the side with the origin (below)</span></td></tr>
+    <tr><th>Quadratic inequality in two variables</th><td>The same steps with a boundary parabola (vertex, intercepts). <span class="tex">y\gt\dots</span> is above the parabola, <span class="tex">y\lt\dots</span> below.</td>
+      <td><span class="tex">y\ge x^2-4</span>: <span data-reveal>solid</span><br><span data-reveal><span class="tex">(0,\ 0)</span>: <span class="tex">0\ge-4</span> true, so shade above (inside)</span></td></tr>
+    <tr><th>Quadratic inequality in one variable</th><td>One side <span class="tex">0</span>, factor, find the roots. Use test points, a sign chart, or the graph (where it is above/below the <span class="tex">x</span>-axis). Answer in set notation.</td>
+      <td><span class="tex">x^2-x-6\le0</span>: <span data-reveal><span class="tex">(x-3)(x+2)\le0</span></span><br><span data-reveal><span class="tex">\{x\mid -2\le x\le3,\ x\in\mathbb{R}\}</span></span></td></tr>
+  </table>
+</section>
+
+<section class="card" data-ink="s1b" data-section="Key ideas and common errors">
+  <div class="u8l8-keys">
+    <div class="def amber"><b>Number of solutions of a system.</b> After eliminating <span class="tex">y</span>, the quadratic equation’s discriminant tells how many times the graphs meet: <span class="tex">b^2-4ac\gt0</span>: <b class="u8l8-k2">two</b> solutions; <span class="tex">=0</span>: <b class="u8l8-k1">one</b> (a line meeting a parabola this way is <b>tangent</b> to it); <span class="tex">\lt0</span>: <b class="u8l8-k0">none</b>. Two parabolas can also be the same parabola: infinitely many solutions.</div>
+    <div class="def"><b>Solving and checking.</b> A solution of a system is a point <span class="tex">(x,\ y)</span> on both graphs: check it in <b>both</b> equations. A solution of an inequality in two variables is a <b>region</b> of points; a solution of an inequality in one variable is a set of <span class="tex">x</span>-values on a number line. In a word problem, define the variables, reject values that make no sense (negative times or lengths, fractions of items) and answer in context.</div>
+    <div class="def"><b>Quadratic inequalities in one variable.</b> <span class="tex">a\gt0</span>: <span class="tex">ax^2+bx+c\lt0</span> <b>between</b> the roots, <span class="tex">\gt0</span> <b>outside</b> them. Include the roots for <span class="tex">\le,\ \ge</span>. Multiply by a negative number <span class="tex">\Rightarrow</span> reverse the sign. No real roots (<span class="tex">b^2-4ac\lt0</span>): the expression has one sign everywhere (test one value): all real numbers or no solution.</div>
+  </div>
+  <h3 class="sub">Common errors <span class="muted u8l8-subnote">tap a card to see the fix</span></h3>
+  <div class="bk-flips u8l8-flips" style="--bk-cols:4">
+    <div class="bk-flip"><div class="bk-front">Finding <span class="tex">x</span> and forgetting <span class="tex">y</span></div><div class="bk-back">A solution is a <b>point</b>: find <span class="tex">y</span> for every <span class="tex">x</span>.</div></div>
+    <div class="bk-flip"><div class="bk-front">Substituting into the wrong equation without checking in the other</div><div class="bk-back">Find <span class="tex">y</span> from the <b>linear</b> equation, then check in <b>both</b>.</div></div>
+    <div class="bk-flip"><div class="bk-front">A dashed line for <span class="tex">\ge</span></div><div class="bk-back"><span class="tex">\le,\ \ge</span>: <b>solid</b> (the boundary is included). <span class="tex">\lt,\ \gt</span>: dashed.</div></div>
+    <div class="bk-flip"><div class="bk-front">Using <span class="tex">(0,\ 0)</span> as a test point when it is on the boundary</div><div class="bk-back">It gives an equality and tells nothing: test another point, such as <span class="tex">(1,\ 0)</span>.</div></div>
+    <div class="bk-flip"><div class="bk-front"><span class="tex">x(x+6)\lt16</span>, so <span class="tex">x\lt16</span>?</div><div class="bk-back">Make one side <span class="tex">0</span> first: <span class="tex">x^2+6x-16\lt0</span>, then factor.</div></div>
+    <div class="bk-flip"><div class="bk-front">Dividing by a negative and keeping the sign</div><div class="bk-back">Reverse it: <span class="tex">-2y\lt6</span> gives <span class="tex">y\gt-3</span>.</div></div>
+    <div class="bk-flip"><div class="bk-front"><span class="tex">x^2\lt9</span>, so <span class="tex">x\lt\pm3</span>?</div><div class="bk-back"><span class="tex">-3\lt x\lt3</span>: <b>between</b> the roots.</div></div>
+  </div>
+</section>
+
+<!-- ================= 2. Systems ================= -->
+<section class="card" data-ink="s2" data-section="2. Systems of Equations">
+  <div class="sec-h"><span class="badge">2</span><h2>Systems of Equations</h2></div>
+  <div class="def"><b>Eliminate <span class="tex">y</span>, solve, find <span class="tex">y</span>, verify.</b> Set the two expressions for <span class="tex">y</span> equal, collect everything on one side and solve the quadratic (factor or the quadratic formula). Each <span class="tex">x</span> gives a point: find its <span class="tex">y</span> and check it in <b>both</b> equations.</div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>A line and a parabola</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Solve the system <span class="tex">y=x^2-4x+1</span> and <span class="tex">y=2x-4</span> algebraically, and verify.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-4x+1=2x-4\Rightarrow x^2-6x+5=0\Rightarrow(x-1)(x-5)=0</span><br><span class="tex">x=1</span>: <span class="tex">y=2(1)-4=-2</span>; &nbsp;<span class="tex">x=5</span>: <span class="tex">y=2(5)-4=6</span>.<br>Solutions <span class="tex">\boldsymbol{(1,\ -2)}</span> and <span class="tex">\boldsymbol{(5,\ 6)}</span>.<br>Verify in the parabola: <span class="tex">1-4+1=-2</span> ✓; <span class="tex">25-20+1=6</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) Determine <span class="tex">k</span> so that the line <span class="tex">y=2x+k</span> is tangent to <span class="tex">y=x^2-4x+1</span>, and find the point of tangency.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-4x+1=2x+k\Rightarrow x^2-6x+(1-k)=0</span>. Tangent: one solution, so <span class="tex">b^2-4ac=0</span>.<br><span class="tex">36-4(1-k)=0\Rightarrow32+4k=0\Rightarrow\boldsymbol{k=-8}</span>.<br><span class="tex">x^2-6x+9=0\Rightarrow x=3</span>, <span class="tex">y=2(3)-8=-2</span>. Point of tangency <span class="tex">\boldsymbol{(3,\ -2)}</span>.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check (a) with intersect.</b> Enter both sides in <span class="keys"><kbd>Y=</kbd></span>, set a window that shows both points, then <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd><kbd>5</kbd></span> (intersect): <kbd>ENTER</kbd> for the first curve, <kbd>ENTER</kbd> for the second, then type a guess near the point you want and <kbd>ENTER</kbd>.</div>
+    <div class="u8l8-pcol"><button class="pill" data-keys="Y= CLEAR X x² − 4 X + 1 ▼ CLEAR 2 X − 4 WINDOW (−) 2 ENTER 8 ENTER 1 ENTER (−) 5 ENTER 10 ENTER 1 ENTER GRAPH intersect ENTER ENTER 5 ENTER">Show me: (5, 6)</button></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Two parabolas</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Solve <span class="tex">y=2x^2+x-3</span> and <span class="tex">y=x^2+3x+5</span>.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x^2+x-3=x^2+3x+5</span><br><span class="tex">x^2-2x-8=0\Rightarrow(x-4)(x+2)=0</span><br><span class="tex">x=4</span>: <span class="tex">y=16+12+5=33</span>; &nbsp;<span class="tex">x=-2</span>: <span class="tex">y=4-6+5=3</span><br><span class="tex">\boldsymbol{(-2,\ 3)}</span> and <span class="tex">\boldsymbol{(4,\ 33)}</span>. Check in the first: <span class="tex">32+4-3=33</span> ✓, <span class="tex">8-2-3=3</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) How many solutions does the system <span class="tex">y=x^2+2</span>, <span class="tex">y=-x^2+2x</span> have? Explain.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+2=-x^2+2x\Rightarrow2x^2-2x+2=0</span><br><span class="tex">b^2-4ac=4-16=-12\lt0</span><br>No real roots: the parabolas do not meet. <b>No solution.</b></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Break-even and profit</h3></div>
+  <p class="q">A company’s revenue and cost for making and selling <span class="tex">x</span> hundred items are <span class="tex">R=-2x^2+60x</span> and <span class="tex">C=10x+200</span>, both in hundreds of dollars.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine the break-even points (where <span class="tex">R=C</span>).</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-2x^2+60x=10x+200</span><br><span class="tex">-2x^2+50x-200=0\Rightarrow x^2-25x+100=0</span><br><span class="tex">(x-5)(x-20)=0</span><br><span class="tex">x=5</span>: <span class="tex">C=250</span>; &nbsp;<span class="tex">x=20</span>: <span class="tex">C=400</span>.<br>Break even at <b>500 items ($25&#8239;000)</b> and <b>2000 items ($40&#8239;000)</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) For what production levels does the company make a profit?</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Profit: <span class="tex">R\gt C</span>, &nbsp;<span class="tex">-2x^2+50x-200\gt0</span><br><span class="tex">x^2-25x+100\lt0</span> (dividing by <span class="tex">-2</span> reverses the sign), <span class="tex">(x-5)(x-20)\lt0</span><br><span class="tex">\boldsymbol{5\lt x\lt20}</span>: between <b>500 and 2000 items</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="How many meeting points?">
+  <h3 class="sub">How many meeting points? <span class="muted u8l8-subnote">the discriminant counts them</span></h3>
+  <p>Once <span class="tex">y</span> is eliminated, every system in this unit becomes one quadratic equation, and its discriminant <span class="tex">b^2-4ac</span> says how many points the graphs share: <b class="u8l8-k2">two</b>, <b class="u8l8-k1">one</b> (tangent) or <b class="u8l8-k0">none</b>.</p>
+  <div class="explainer" data-explainer="meet"></div>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u8l8"></section>
+
+<!-- ================= 3. Inequalities in two variables ================= -->
+<section class="card" data-ink="s3" data-section="3. Inequalities in Two Variables">
+  <div class="sec-h"><span class="badge">3</span><h2>Inequalities in Two Variables</h2></div>
+  <div class="def amber u8l8-key"><div class="u8l8-steps">
+    <div><b>1</b>Graph the <b>boundary</b> (replace the sign with <span class="tex">=</span>): <b>solid</b> for <span class="tex">\le,\ \ge</span>, <b>dashed</b> for <span class="tex">\lt,\ \gt</span>.</div>
+    <div><b>2</b>Substitute a <b>test point</b> that is not on the boundary (<span class="tex">(0,\ 0)</span> if possible).</div>
+    <div><b>3</b><b>True</b>: shade the side with the test point. <b>False</b>: shade the other side.</div>
+  </div></div>
+  <p>Solved for <span class="tex">y</span>: <span class="tex">y\gt\dots</span> is <b>above</b> the boundary and <span class="tex">y\lt\dots</span> is <b>below</b>. Dividing by a negative while isolating <span class="tex">y</span> reverses the sign.</p>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>A boundary line</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Graph <span class="tex">3x-2y\lt6</span>.</div><div class="u8l8-fig" data-fig="e4a"></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-2y\lt-3x+6\Rightarrow y\gt\tfrac{3}{2}x-3</span> (sign reversed).<br>Boundary <span class="tex">y=\tfrac{3}{2}x-3</span>: intercepts <span class="tex">(2,\ 0)</span>, <span class="tex">(0,\ -3)</span>; <b>dashed</b> (<span class="tex">\lt</span>).<br>Test <span class="tex">(0,\ 0)</span>: <span class="tex">0-0\lt6</span> true. Shade the side containing the origin (above the line).</div></div></div>
+    <div class="part"><div class="pl">(b) The graph shows the solution region of a linear inequality. The boundary passes through <span class="tex">(0,\ 2)</span> and <span class="tex">(4,\ 0)</span>. Write the inequality.</div><div class="u8l8-fig" data-fig="e4b"></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Slope <span class="tex">=\dfrac{0-2}{4-0}=-\dfrac{1}{2}</span>, <span class="tex">y</span>-intercept <span class="tex">2</span>: <span class="tex">y=-\tfrac{1}{2}x+2</span>.<br>Solid line, region below: <span class="tex">\boldsymbol{y\le-\tfrac{1}{2}x+2}</span> (or <span class="tex">x+2y\le4</span>). Check <span class="tex">(0,\ 0)</span>: <span class="tex">0\le2</span> ✓</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>A boundary parabola</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Graph <span class="tex">y\ge x^2+2x-3</span>.</div><div class="u8l8-fig" data-fig="e5"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+2x-3=(x+3)(x-1)</span>: <span class="tex">x</span>-intercepts <span class="tex">-3</span>, <span class="tex">1</span>; <span class="tex">y</span>-intercept <span class="tex">-3</span>; axis <span class="tex">x=-1</span>, vertex <span class="tex">(-1,\ -4)</span>.<br><b>Solid</b> (<span class="tex">\ge</span>). Test <span class="tex">(0,\ 0)</span>: <span class="tex">0\ge-3</span> true.<br>Shade above (inside) the parabola.</div></div></div>
+    <div class="part"><div class="pl">(b) Is <span class="tex">(-2,\ 1)</span> a solution? Is <span class="tex">(1,\ -1)</span>?</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(-2,\ 1)</span>: <span class="tex">4-4-3=-3</span>; <span class="tex">1\ge-3</span>: <b>yes</b>.<br><span class="tex">(1,\ -1)</span>: <span class="tex">1+2-3=0</span>; <span class="tex">-1\ge0</span> is false: <b>no</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>The school play</h3></div>
+  <p class="q">A school play needs ticket sales of at least <span class="tex">\$480</span>. Adult tickets cost <span class="tex">\$12</span> and student tickets cost <span class="tex">\$8</span>. Let <span class="tex">x</span> be the number of adult tickets and <span class="tex">y</span> the number of student tickets.</p>
+  <div class="u8l8-ctx">
+    <div class="u8l8-col">
+      <div class="part"><div class="pl">(a) Write an inequality, with any restrictions, and graph it.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">12x+8y\ge480</span>, <span class="tex">x\ge0</span>, <span class="tex">y\ge0</span>, whole numbers.<br>Boundary intercepts <span class="tex">(40,\ 0)</span> and <span class="tex">(0,\ 60)</span>, solid. Test <span class="tex">(0,\ 0)</span>: <span class="tex">0\ge480</span> false: shade the side away from the origin (in the first quadrant).</div></div></div>
+      <div class="part"><div class="pl">(b) Do <span class="tex">20</span> adult and <span class="tex">25</span> student tickets reach the goal? Do <span class="tex">24</span> and <span class="tex">24</span>?</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">12(20)+8(25)=440\lt480</span>: <b>no</b>.<br><span class="tex">12(24)+8(24)=480\ge480</span>: <b>yes</b> (on the boundary).</div></div></div>
+    </div>
+    <div class="part u8l8-gpart"><div class="u8l8-fig" data-fig="e6"></div><div class="ansrow"><button class="reveal">Graph</button><div class="ans">Solid line from <span class="tex">(0,\ 60)</span> to <span class="tex">(40,\ 0)</span>, shaded away from the origin, first quadrant only.</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 4. One variable ================= -->
+<section class="card" data-ink="s4" data-section="4. Quadratic Inequalities in One Variable">
+  <div class="sec-h"><span class="badge">4</span><h2>Quadratic Inequalities in One Variable</h2></div>
+  <div class="def"><b>One side <span class="tex">0</span>, factor, roots on a number line.</b> The roots split the number line into intervals. Find the sign in each one with a test value, a sign chart, or the graph of <span class="tex">y=ax^2+bx+c</span> (above the <span class="tex">x</span>-axis: positive; below: negative). Write the answer in set notation.</div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Sign chart and graph</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Solve <span class="tex">2x^2-x-15\ge0</span> with a sign chart.</div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">ac=-30</span>: <span class="tex">-6+5</span><br><span class="tex">2x(x-3)+5(x-3)=(x-3)(2x+5)\ge0</span>. Zeros <span class="tex">-\tfrac{5}{2}</span>, <span class="tex">3</span>.
+      <table class="u8l8-sc"><tr><th><span class="tex">x</span></th><th><span class="tex">\lt-\tfrac{5}{2}</span></th><th><span class="tex">-\tfrac{5}{2}</span></th><th>between</th><th><span class="tex">3</span></th><th><span class="tex">\gt3</span></th></tr>
+        <tr><th><span class="tex">2x+5</span></th><td>−</td><td>0</td><td>+</td><td>+</td><td>+</td></tr>
+        <tr><th><span class="tex">x-3</span></th><td>−</td><td>−</td><td>−</td><td>0</td><td>+</td></tr>
+        <tr><th>Product</th><td class="p">+</td><td>0</td><td class="n">−</td><td>0</td><td class="p">+</td></tr></table>
+      <span class="tex">\boldsymbol{\{x\mid x\le-\tfrac{5}{2}\text{ or }x\ge3,\ x\in\mathbb{R}\}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Use the graph in Example 5 to solve <span class="tex">x^2+2x-3\lt0</span>. Explain.</div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+2x-3\lt0</span> asks where the graph of <span class="tex">y=x^2+2x-3</span> is <b>below</b> the <span class="tex">x</span>-axis (<span class="tex">y\lt0</span>).<br>That is between the <span class="tex">x</span>-intercepts <span class="tex">-3</span> and <span class="tex">1</span>, not including them.<br><span class="tex">\boldsymbol{\{x\mid -3\lt x\lt1,\ x\in\mathbb{R}\}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s4b" data-section="Signs from the chart and the graph">
+  <h3 class="sub">Signs from the chart, signs from the graph</h3>
+  <p>The sign chart and the graph tell the same story: the product is <b class="u8l8-gr">positive</b> exactly where the parabola is above the <span class="tex">x</span>-axis.</p>
+  <div class="explainer" data-explainer="signs"></div>
+</section>
+
+<!-- ================= 5. Which region? (whole-class round) ================= -->
+<section class="card" data-ink="s5" data-section="5. Which Region?">
+  <div class="sec-h"><span class="badge">5</span><h2>Which Region?</h2></div>
+  <p>Six rounds, four pictures each, <b>one</b> right answer. Vote with your fingers (1, 2, 3 or 4 for A, B, C or D) before the checks knock out the wrong ones: first the <b>boundary</b>, then a <b>test point</b>.</p>
+  <div class="explainer" data-explainer="region"></div>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Systems.</b> Eliminate <span class="tex">y</span>, solve the quadratic, find each <span class="tex">y</span> (from the linear equation), verify in <b>both</b>. Graphically: <b>intersect</b>.</div>
+    <div><b>How many?</b> The discriminant of the combined equation: <span class="tex">\gt0</span> two, <span class="tex">=0</span> one (tangent), <span class="tex">\lt0</span> none. For a tangent, set <span class="tex">b^2-4ac=0</span> and solve for <span class="tex">k</span>.</div>
+    <div><b>Two variables.</b> Boundary <b>solid</b> for <span class="tex">\le,\ \ge</span>, <b>dashed</b> for <span class="tex">\lt,\ \gt</span>; a test point off the boundary picks the side. The solution is a <b>region</b>.</div>
+    <div><b>One variable.</b> One side <span class="tex">0</span>, factor, roots, then test values, a sign chart or the graph. <span class="tex">a\gt0</span>: <span class="tex">\lt0</span> between the roots, <span class="tex">\gt0</span> outside. Set notation.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u8l8">
+    <div><div class="kicker">Your turn</div><b>Assignment 8 — Unit 8 Review</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <div class="u8l8-review">
+    <div class="u8l8-review-h"><span class="kicker">Up next</span><b>Unit 8 test.</b> <span class="muted">Shaky on an idea today? Go back to its lesson.</span></div>
+    <div class="u8l8-review-grid">
+      <a href="../l1/"><span class="rn">8.1</span>Linear–quadratic systems <small>Example 1</small></a>
+      <a href="../l2/"><span class="rn">8.2</span>Quadratic–quadratic systems <small>Example 2</small></a>
+      <a href="../l3/"><span class="rn">8.3</span>Problems involving systems <small>Example 3</small></a>
+      <a href="../l4/"><span class="rn">8.4</span>Linear inequalities in two variables <small>Examples 4, 6</small></a>
+      <a href="../l5/"><span class="rn">8.5</span>Quadratic inequalities in two variables <small>Example 5</small></a>
+      <a href="../l6/"><span class="rn">8.6</span>One variable: roots and test points <small>Example 7(b)</small></a>
+      <a href="../l7/"><span class="rn">8.7</span>One variable: sign analysis <small>Example 7(a)</small></a>
+      <div class="test"><span class="rn">Test</span>Unit 8 test: RF6, RF7, RF8 <small>calculator allowed · answers in set notation</small></div>
+    </div>
+  </div>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u8l8.js';
+  boot({ key: 'u8l8', homeHref: '../../', title: '8.8 Unit 8 Review' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

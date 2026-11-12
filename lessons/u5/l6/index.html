@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Completing the Square · Math 20-1 5.6</title>
+<meta name="description" content="Math 20-1 Unit 5 Lesson 6: completing the square. Perfect-square trinomials, rewriting y = ax² + bx + c in vertex form for a = 1, a ≠ 1, negative and fractional a, reading the vertex, axis and maximum or minimum value, finding zeros with square roots, and the common errors. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u5l6.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u5l6">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Locker Hallway">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><line x1="0" y1="52" x2="340" y2="52" stroke="#d9d3c4" stroke-width="3" stroke-dasharray="16 12"><animate attributeName="stroke-dashoffset" values="0;-28" dur=".7s" repeatCount="indefinite"/></line><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="40" text-anchor="middle" transform="scale(-1 1)">🎒</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="250" y="46" font-size="30" text-anchor="middle">🔑</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/><text x="300" y="46" font-size="30" text-anchor="middle">❓</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Locker Hallway</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">A hallway has <b>100 closed lockers</b>. Student 1 opens every locker. Student 2 changes every 2nd locker, student 3 every 3rd locker, and so on up to student 100. (To <b>change</b> a locker: open it if it is closed, close it if it is open.)</p><p class="vw-ask">When all 100 students are done, which lockers are open?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A hallway of lockers numbered 1, 2, 3 and so on up to 100. Student number 1 walks past and opens every locker; student number 2 walks past and closes every second locker; then it starts again"><rect x="0" y="0" width="330" height="250" rx="16" fill="#eef4fb"/><rect x="0" y="190" width="330" height="60" fill="#e4d9c4"/><line x1="0" y1="190" x2="330" y2="190" stroke="#c9b99b" stroke-width="3"/><text x="165" y="26" font-size="17" font-weight="800" fill="#2b55a0" text-anchor="middle">100 lockers, 100 students</text><rect x="10" y="40" width="24" height="146" rx="2" fill="#3a4254"/><g><rect x="10" y="40" width="24" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="24;24;5;5;24;24" keyTimes="0;0.0892;0.1025;0.9444;0.9578;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="14" y="48" width="16" height="13" rx="2" fill="#fffdf6"/><text x="22.0" y="59" font-size="11" font-weight="800" fill="#4a4436" text-anchor="middle">1</text><rect x="37" y="40" width="24" height="146" rx="2" fill="#3a4254"/><g><rect x="37" y="40" width="24" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="24;24;5;5;24;24" keyTimes="0;0.1180;0.1313;0.5846;0.5980;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="41" y="48" width="16" height="13" rx="2" fill="#fffdf6"/><text x="49.0" y="59" font-size="11" font-weight="800" fill="#4a4436" text-anchor="middle">2</text><rect x="64" y="40" width="24" height="146" rx="2" fill="#3a4254"/><g><rect x="64" y="40" width="24" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="24;24;5;5;24;24" keyTimes="0;0.1467;0.1601;0.9444;0.9578;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="68" y="48" width="16" height="13" rx="2" fill="#fffdf6"/><text x="76.0" y="59" font-size="11" font-weight="800" fill="#4a4436" text-anchor="middle">3</text><rect x="91" y="40" width="24" height="146" rx="2" fill="#3a4254"/><g><rect x="91" y="40" width="24" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="24;24;5;5;24;24" keyTimes="0;0.1755;0.1888;0.6422;0.6555;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="95" y="48" width="16" height="13" rx="2" fill="#fffdf6"/><text x="103.0" y="59" font-size="11" font-weight="800" fill="#4a4436" text-anchor="middle">4</text><rect x="118" y="40" width="24" height="146" rx="2" fill="#3a4254"/><g><rect x="118" y="40" width="24" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="24;24;5;5;24;24" keyTimes="0;0.2043;0.2176;0.9444;0.9578;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="122" y="48" width="16" height="13" rx="2" fill="#fffdf6"/><text x="130.0" y="59" font-size="11" font-weight="800" fill="#4a4436" text-anchor="middle">5</text><rect x="145" y="40" width="24" height="146" rx="2" fill="#3a4254"/><g><rect x="145" y="40" width="24" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="24;24;5;5;24;24" keyTimes="0;0.2330;0.2464;0.6997;0.7130;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="149" y="48" width="16" height="13" rx="2" fill="#fffdf6"/><text x="157.0" y="59" font-size="11" font-weight="800" fill="#4a4436" text-anchor="middle">6</text><rect x="172" y="40" width="24" height="146" rx="2" fill="#3a4254"/><g><rect x="172" y="40" width="24" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="24;24;5;5;24;24" keyTimes="0;0.2618;0.2751;0.9444;0.9578;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="176" y="48" width="16" height="13" rx="2" fill="#fffdf6"/><text x="184.0" y="59" font-size="11" font-weight="800" fill="#4a4436" text-anchor="middle">7</text><rect x="199" y="40" width="24" height="146" rx="2" fill="#3a4254"/><g><rect x="199" y="40" width="24" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="24;24;5;5;24;24" keyTimes="0;0.2906;0.3039;0.7572;0.7706;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="203" y="48" width="16" height="13" rx="2" fill="#fffdf6"/><text x="211.0" y="59" font-size="11" font-weight="800" fill="#4a4436" text-anchor="middle">8</text><rect x="226" y="40" width="24" height="146" rx="2" fill="#3a4254"/><g><rect x="226" y="40" width="24" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="24;24;5;5;24;24" keyTimes="0;0.3193;0.3327;0.9444;0.9578;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="230" y="48" width="16" height="13" rx="2" fill="#fffdf6"/><text x="238.0" y="59" font-size="11" font-weight="800" fill="#4a4436" text-anchor="middle">9</text><rect x="253" y="40" width="24" height="146" rx="2" fill="#3a4254"/><g><rect x="253" y="40" width="24" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="24;24;5;5;24;24" keyTimes="0;0.3481;0.3614;0.8148;0.8281;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="257" y="48" width="16" height="13" rx="2" fill="#fffdf6"/><text x="265.0" y="59" font-size="11" font-weight="800" fill="#4a4436" text-anchor="middle">10</text><rect x="298" y="40" width="26" height="146" rx="2" fill="#3a4254"/><g><rect x="298" y="40" width="26" height="146" rx="2" fill="#7fa8d6" stroke="#2b55a0" stroke-width="2"><animate attributeName="width" values="26;26;5;5;26;26" keyTimes="0;0.3971;0.4104;0.8638;0.8771;1" dur="9.0s" repeatCount="indefinite"/></rect></g><rect x="302" y="48" width="18" height="13" rx="2" fill="#fffdf6"/><text x="311.0" y="59" font-size="10" font-weight="800" fill="#4a4436" text-anchor="middle">100</text><text x="287.5" y="120" font-size="16" font-weight="800" fill="#4a4436" text-anchor="middle">⋯</text><g opacity="0"><animateTransform attributeName="transform" type="translate" values="-20 0;-20 0;345 0;345 0" keyTimes="0;0.0444;0.4333;1" dur="9.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.0444;0.0500;0.4278;0.4333;1" dur="9.0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.45s" begin="0s" repeatCount="indefinite"/><text x="0" y="238" font-size="38" text-anchor="middle">🧑</text></g><rect x="-15" y="194" width="30" height="18" rx="9" fill="#c93a33"/><text x="0" y="208" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">#1</text></g><g opacity="0"><animateTransform attributeName="transform" type="translate" values="-20 0;-20 0;345 0;345 0" keyTimes="0;0.5111;0.9000;1" dur="9.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.5111;0.5167;0.8944;0.9000;1" dur="9.0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.45s" begin="0s" repeatCount="indefinite"/><text x="0" y="238" font-size="38" text-anchor="middle">👧</text></g><rect x="-15" y="194" width="30" height="18" rx="9" fill="#12805a"/><text x="0" y="208" font-size="13" font-weight="800" fill="#fff" text-anchor="middle">#2</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Try lockers 1 to 10 first. Do you see a pattern?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Lockers 1, 4, 9, 16, 25, 36, 49, 64, 81 and 100</b>: the <b>perfect squares</b>, 10 lockers. Locker <span class="tex">n</span> is changed once by every student whose number is a factor of <span class="tex">n</span>. Factors come in pairs (<span class="tex">12=1\times12=2\times6=3\times4</span>: six factors), so most lockers are changed an even number of times and end up closed. A perfect square has one pair that is a number with itself (<span class="tex">36=6\times6</span>), so it has an <b>odd</b> number of factors and stays open.</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 5 Quadratic Functions · Lesson 6</div>
+  <h1>Completing the Square</h1>
+  <p class="lede">The general form <span class="tex">y=ax^2+bx+c</span> hides the vertex; the vertex form <span class="tex">y=a(x-p)^2+q</span> shows it. <b>Completing the square</b> turns one into the other.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>find the number that makes <span class="tex">x^2+bx</span> a <b>perfect square</b>, and write the trinomial as a square</li>
+      <li>complete the square to write <span class="tex">y=x^2+bx+c</span> in vertex form</li>
+      <li>complete the square when <span class="tex">a\ne1</span>, including <b>negative</b> and <b>fractional</b> values of <span class="tex">a</span></li>
+      <li>use the vertex form to state the vertex, the axis of symmetry, the maximum or minimum value and the range, and to find the zeros</li>
+      <li>find and correct the common errors</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF4</b> Analyze quadratic functions of the form <span class="tex">y=ax^2+bx+c</span> to identify characteristics of the corresponding graph, including vertex, domain and range, direction of opening, axis of symmetry, <span class="tex">x</span>- and <span class="tex">y</span>-intercepts, and to solve problems.<br><b>RF3</b> Analyze quadratic functions of the form <span class="tex">y=a(x-p)^2+q</span> and determine the vertex, domain and range, direction of opening, axis of symmetry, <span class="tex">x</span>- and <span class="tex">y</span>-intercepts.<br><span class="muted">Today: perfect-square trinomials, completing the square for any <span class="tex">a</span>, using the vertex form, and the common errors.</span></div>
+</section>
+
+<!-- ================= 1. Perfect-square trinomials ================= -->
+<section class="card" data-ink="s1" data-section="1. Perfect-Square Trinomials">
+  <div class="sec-h"><span class="badge">1</span><h2>Perfect-Square Trinomials</h2></div>
+  <div class="def">The general form <span class="tex">y=ax^2+bx+c</span> does not show the vertex; the vertex form <span class="tex">y=a(x-p)^2+q</span> does. <b>Completing the square</b> changes general form into vertex form. It is built on perfect-square trinomials:
+    <div class="u5l6-pair"><span class="tex">(x+k)^2=x^2+2kx+k^2</span><span class="tex">(x-k)^2=x^2-2kx+k^2</span></div>
+    The constant <span class="tex">k^2</span> is the square of <b>half</b> the coefficient of <span class="tex">x</span>.</div>
+  <div class="def amber u5l6-key"><div class="u5l6-keyh">Key idea</div>To make <span class="tex">x^2+\textcolor{#c27a0e}{b}x</span> a perfect square, add <span class="tex">\left(\dfrac{\textcolor{#c27a0e}{b}}{2}\right)^2</span>: &nbsp; <span class="tex">x^2+\textcolor{#c27a0e}{b}x+\textcolor{#7b4fc4}{\left(\dfrac{b}{2}\right)^2}=\left(x+\dfrac{b}{2}\right)^2</span></div>
+  <div class="explainer" data-explainer="halfsq"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Make a perfect square</h3></div>
+  <p class="q">Determine the number that must be added to make a perfect square, then write the trinomial as a square.</p>
+  <div class="part u5l6-solo">
+    <table class="u5l6-ptab">
+      <tr><th>Expression</th><th>Add</th><th>Perfect square</th></tr>
+      <tr><td>(a) <span class="tex">x^2+12x</span></td><td><span data-reveal><span class="tex">6^2=36</span></span></td><td><span data-reveal><span class="tex">x^2+12x+36=(x+6)^2</span></span></td></tr>
+      <tr><td>(b) <span class="tex">x^2-18x</span></td><td><span data-reveal><span class="tex">(-9)^2=81</span></span></td><td><span data-reveal><span class="tex">x^2-18x+81=(x-9)^2</span></span></td></tr>
+      <tr><td>(c) <span class="tex">x^2+7x</span></td><td><span data-reveal><span class="tex">\left(\tfrac{7}{2}\right)^2=\tfrac{49}{4}</span></span></td><td><span data-reveal><span class="tex">x^2+7x+\tfrac{49}{4}=\left(x+\tfrac{7}{2}\right)^2</span></span></td></tr>
+      <tr><td>(d) <span class="tex">x^2-\tfrac{2}{3}x</span></td><td><span data-reveal><span class="tex">\left(-\tfrac{1}{3}\right)^2=\tfrac{1}{9}</span></span></td><td><span data-reveal><span class="tex">x^2-\tfrac{2}{3}x+\tfrac{1}{9}=\left(x-\tfrac{1}{3}\right)^2</span></span></td></tr>
+    </table>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Every cell is filled in above. (Tap a <b>?</b> to show one cell at a time.) The sign inside the bracket is the sign of <span class="tex">b</span>.</div></div></div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. a = 1 ================= -->
+<section class="card" data-ink="s2" data-section="2. Completing the Square When a = 1">
+  <div class="sec-h"><span class="badge">2</span><h2>Completing the Square When <span class="tex">a=1</span></h2></div>
+  <div class="def">An equation must stay equal, so we cannot just add a number. Instead we add it <b>and</b> subtract it (adding <span class="tex">0</span>).</div>
+  <div class="def amber u5l6-key"><div class="u5l6-keyh"><span class="tex">y=x^2+bx+c</span> to vertex form</div>
+    <div class="u5l6-steps n3">
+      <div><b>1</b>Find <span class="tex">\left(\dfrac{b}{2}\right)^2</span>.</div>
+      <div><b>2</b>Add and subtract it right after the <span class="tex">x</span>-term.</div>
+      <div><b>3</b>Write the first three terms as <span class="tex">\left(x+\dfrac{b}{2}\right)^2</span> and combine the constants.</div>
+    </div>
+    <p class="u5l6-eg">Example: <span class="tex">y=x^2+8x+5=(x^2+8x+\textcolor{#7b4fc4}{16})\textcolor{#7b4fc4}{-16}+5=(x+4)^2-11</span></p></div>
+  <p>Check by expanding the answer: you should get the original general form. A graphing calculator check: graph both forms; the graphs are identical.</p>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check: both forms give the same values.</b> Put the general form in <span class="tex">Y_1</span> and your vertex form in <span class="tex">Y_2</span>, then look at <span class="keys"><kbd>2nd</kbd><kbd>GRAPH</kbd></span> (TABLE): the two columns match on every row (and <kbd>GRAPH</kbd> draws one parabola).</div>
+    <div class="u5l6-pcol"><button class="pill" data-keys="Y= CLEAR X x² + 8 X + 5 ▼ CLEAR ( X + 4 ) x² − 11 TBLSET (−) 6 ENTER 1 ENTER TABLE ► ▼ ▼ ▼ ▼">Show me</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Vertex form when <span class="tex">a=1</span></h3></div>
+  <p class="q">Write each function in vertex form by completing the square.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">y=x^2-6x+14</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\left(\tfrac{-6}{2}\right)^2=9</span><br><span class="tex">y=(x^2-6x+9)-9+14</span><br><span class="tex">\boldsymbol{y=(x-3)^2+5}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y=x^2+2x-8</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\left(\tfrac{2}{2}\right)^2=1</span><br><span class="tex">y=(x^2+2x+1)-1-8</span><br><span class="tex">\boldsymbol{y=(x+1)^2-9}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">y=x^2+5x+3</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\left(\tfrac{5}{2}\right)^2=\tfrac{25}{4}</span><br><span class="tex">y=\left(x^2+5x+\tfrac{25}{4}\right)-\tfrac{25}{4}+\tfrac{12}{4}</span><br><span class="tex">\boldsymbol{y=\left(x+\tfrac{5}{2}\right)^2-\tfrac{13}{4}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Vertex, axis, minimum and range</h3></div>
+  <p class="q">Complete the square. State the vertex, the axis of symmetry, the minimum value and the range.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y=x^2-10x+31</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=(x^2-10x+25)-25+31</span><br><span class="tex">\boldsymbol{y=(x-5)^2+6}</span><br>Vertex <span class="tex">(5,\ 6)</span>; axis <span class="tex">x=5</span><br>Minimum value <span class="tex">6</span> (<span class="tex">a=1&gt;0</span>)<br>Range <span class="tex">\{y\mid y\ge6,\ y\in\mathbb{R}\}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">f(x)=x^2+3x+5</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">f(x)=\left(x^2+3x+\tfrac{9}{4}\right)-\tfrac{9}{4}+\tfrac{20}{4}</span><br><span class="tex">\boldsymbol{f(x)=\left(x+\tfrac{3}{2}\right)^2+\tfrac{11}{4}}</span><br>Vertex <span class="tex">\left(-\tfrac{3}{2},\ \tfrac{11}{4}\right)</span>; axis <span class="tex">x=-\tfrac{3}{2}</span><br>Minimum value <span class="tex">\tfrac{11}{4}=2.75</span><br>Range <span class="tex">\left\{y\mid y\ge\tfrac{11}{4},\ y\in\mathbb{R}\right\}</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check the vertex with the minimum feature.</b> Graph <span class="tex">Y_1=X^2-10X+31</span>, <span class="keys"><kbd>ZOOM</kbd><kbd>6</kbd></span>, then <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd><kbd>3</kbd></span>: a left bound, a right bound and a guess (<span class="tex">4</span>, <span class="tex">6</span>, guess <span class="tex">5</span>). The screen shows <span class="tex">X=5</span>, <span class="tex">Y=6</span>.</div>
+    <div class="u5l6-pcol"><button class="pill" data-keys="Y= CLEAR X x² − 10 X + 31 ZStandard minimum 4 ENTER 6 ENTER 5 ENTER">Show me</button></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. a ≠ 1 ================= -->
+<section class="card" data-ink="s3" data-section="3. Completing the Square When a ≠ 1">
+  <div class="sec-h"><span class="badge">3</span><h2>Completing the Square When <span class="tex">a\ne1</span></h2></div>
+  <div class="def">The method needs <span class="tex">x^2</span> with coefficient <span class="tex">1</span>, so first factor <span class="tex">a</span> out of the <span class="tex">x^2</span>- and <span class="tex">x</span>-terms <b>only</b> (not the constant).</div>
+  <div class="def amber u5l6-key"><div class="u5l6-keyh"><span class="tex">y=ax^2+bx+c</span> to vertex form</div>
+    <div class="u5l6-steps n4">
+      <div><b>1</b>Factor <span class="tex">\textcolor{#1f5bd6}{a}</span> from the first two terms: <span class="tex">y=a\left(x^2+\dfrac{b}{a}x\right)+c</span>.</div>
+      <div><b>2</b>Inside the brackets, add and subtract the square of half the new <span class="tex">x</span>-coefficient.</div>
+      <div><b>3</b>Move the subtracted number out of the brackets by <b>multiplying it by <span class="tex">\textcolor{#1f5bd6}{a}</span></b>.</div>
+      <div><b>4</b>Factor the perfect square and combine the constants.</div>
+    </div></div>
+  <div class="explainer" data-explainer="steps"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Vertex form when <span class="tex">a\ne1</span></h3></div>
+  <p class="q">Write each function in vertex form.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">y=2x^2+12x+7</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=2(x^2+6x)+7</span><br><span class="tex">y=2(x^2+6x+9-9)+7</span><br><span class="tex">y=2(x+3)^2-18+7</span><br><span class="tex">\boldsymbol{y=2(x+3)^2-11}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y=4x^2-24x+31</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=4(x^2-6x)+31</span><br><span class="tex">y=4(x^2-6x+9-9)+31</span><br><span class="tex">y=4(x-3)^2-36+31</span><br><span class="tex">\boldsymbol{y=4(x-3)^2-5}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">y=3x^2+9x-2</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=3(x^2+3x)-2</span><br><span class="tex">y=3\left(x^2+3x+\tfrac{9}{4}-\tfrac{9}{4}\right)-2</span><br><span class="tex">y=3\left(x+\tfrac{3}{2}\right)^2-\tfrac{27}{4}-\tfrac{8}{4}</span><br><span class="tex">\boldsymbol{y=3\left(x+\tfrac{3}{2}\right)^2-\tfrac{35}{4}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= 4. negative and fractional a ================= -->
+<section class="card" data-ink="s4" data-section="4. Negative and Fractional Values of a">
+  <div class="sec-h"><span class="badge">4</span><h2>Negative and Fractional Values of <span class="tex">a</span></h2></div>
+  <div class="def">The same steps work when <span class="tex">a</span> is negative or a fraction. Take care with signs: factoring <span class="tex">-3</span> out of <span class="tex">-3x^2-12x</span> gives <span class="tex">-3(x^2+4x)</span>, and moving <span class="tex">-4</span> out of brackets multiplied by <span class="tex">-3</span> gives <span class="tex">+12</span>. If the terms are not in order, rearrange them first (<span class="tex">5-12x-3x^2=-3x^2-12x+5</span>). For a fraction, dividing by <span class="tex">a</span> is the same as multiplying by its reciprocal: <span class="tex">\tfrac{1}{2}x^2-3x=\tfrac{1}{2}(x^2-6x)</span>.</div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Negative and fractional <span class="tex">a</span></h3></div>
+  <p class="q">Write each function in vertex form. State the vertex, the direction of opening and the maximum or minimum value.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y=-x^2+8x-3</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=-(x^2-8x)-3</span><br><span class="tex">y=-(x^2-8x+16-16)-3</span><br><span class="tex">y=-(x-4)^2+16-3</span><br><span class="tex">\boldsymbol{y=-(x-4)^2+13}</span><br>Vertex <span class="tex">(4,\ 13)</span>, opens down, maximum <span class="tex">13</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y=5-12x-3x^2</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=-3x^2-12x+5=-3(x^2+4x)+5</span><br><span class="tex">y=-3(x^2+4x+4-4)+5</span><br><span class="tex">y=-3(x+2)^2+12+5</span><br><span class="tex">\boldsymbol{y=-3(x+2)^2+17}</span><br>Vertex <span class="tex">(-2,\ 17)</span>, opens down, maximum <span class="tex">17</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">y=\tfrac{1}{2}x^2-3x+1</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=\tfrac{1}{2}(x^2-6x)+1</span><br><span class="tex">y=\tfrac{1}{2}(x^2-6x+9-9)+1</span><br><span class="tex">y=\tfrac{1}{2}(x-3)^2-\tfrac{9}{2}+1</span><br><span class="tex">\boldsymbol{y=\tfrac{1}{2}(x-3)^2-\tfrac{7}{2}}</span><br>Vertex <span class="tex">\left(3,\ -\tfrac{7}{2}\right)</span>, opens up, minimum <span class="tex">-\tfrac{7}{2}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">y=-\tfrac{1}{3}x^2+2x+4</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=-\tfrac{1}{3}(x^2-6x)+4</span><br><span class="tex">y=-\tfrac{1}{3}(x^2-6x+9-9)+4</span><br><span class="tex">y=-\tfrac{1}{3}(x-3)^2+3+4</span><br><span class="tex">\boldsymbol{y=-\tfrac{1}{3}(x-3)^2+7}</span><br>Vertex <span class="tex">(3,\ 7)</span>, opens down, maximum <span class="tex">7</span></div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Dividing by a fraction.</b> <span class="tex">2x\div\left(-\tfrac{1}{3}\right)=2x\times(-3)=-6x</span>, so <span class="tex">-\tfrac{1}{3}x^2+2x=-\tfrac{1}{3}(x^2-6x)</span>. Check by expanding: <span class="tex">-\tfrac{1}{3}\times(-6x)=+2x\ \checkmark</span></div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 6 · Questions 1–6</h2>
+  <p class="pr-t">Half of <span class="tex">b</span>, squared. Factor <span class="tex">a</span> from the first two terms only, and multiply the number you move out by <span class="tex">a</span>.</p>
+  <div class="pr-chips n4"><span><b>1</b>Make a perfect square</span><span><b>2–3</b>Vertex form when <span class="tex">a=1</span></span><span><b>4</b>Vertex form when <span class="tex">a\ne1</span></span><span><b>5–6</b>Negative and fractional <span class="tex">a</span>; maximum or minimum</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u5l6">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 5. Using the vertex form ================= -->
+<section class="card" data-ink="s5" data-section="5. Using the Vertex Form">
+  <div class="sec-h"><span class="badge">5</span><h2>Using the Vertex Form</h2></div>
+  <div class="def">Once a function is in vertex form, you can read the vertex and the maximum or minimum value, and you can solve for the zeros with square roots (set <span class="tex">y=0</span>, isolate the square, take <span class="tex">\pm</span> the square root). If the square would have to equal a negative number, there are no <span class="tex">x</span>-intercepts.</div>
+  <div class="explainer" data-explainer="useit"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Zeros and the greatest height</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Write <span class="tex">f(x)=2x^2-8x-3</span> in vertex form, state its minimum value, and determine its zeros as exact values and to the nearest hundredth.</div><div class="work" style="--h:290px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">f(x)=2(x^2-4x+4-4)-3</span><br><span class="tex">f(x)=2(x-2)^2-8-3=\boldsymbol{2(x-2)^2-11}</span><br>Minimum value <span class="tex">\boldsymbol{-11}</span> (at <span class="tex">x=2</span>).<br>Zeros: <span class="tex">2(x-2)^2=11\Rightarrow(x-2)^2=\tfrac{11}{2}</span><br><span class="tex">x=2\pm\sqrt{\tfrac{11}{2}}=\boldsymbol{2\pm\tfrac{\sqrt{22}}{2}}</span><br><span class="tex">x\approx4.35</span> and <span class="tex">x\approx-0.35</span></div></div></div>
+    <div class="part"><div class="pl">(b) The height of a ball, in metres, <span class="tex">t</span> seconds after it is thrown is <span class="tex">h=-5t^2+20t+1</span>. Complete the square to find the greatest height and when it occurs.</div><div class="work" style="--h:290px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">h=-5(t^2-4t)+1</span><br><span class="tex">h=-5(t^2-4t+4-4)+1</span><br><span class="tex">h=-5(t-2)^2+20+1</span><br><span class="tex">\boldsymbol{h=-5(t-2)^2+21}</span><br>The vertex is <span class="tex">(2,\ 21)</span>: the greatest height is <b>21 m</b>, <b>2 s</b> after the throw.</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u5l6"></section>
+
+<!-- ================= 6. General case and common errors ================= -->
+<section class="card" data-ink="s6" data-section="6. The General Case and Common Errors">
+  <div class="sec-h"><span class="badge">6</span><h2>The General Case and Common Errors</h2></div>
+  <p>Completing the square works with letters too. Common errors to watch for:</p>
+  <ul class="u5l6-errs">
+    <li>factoring <span class="tex">a</span> out of the <span class="tex">x^2</span>-term but not out of the <span class="tex">x</span>-term (or out of the constant as well);</li>
+    <li>forgetting to <b>multiply the subtracted number by <span class="tex">a</span></b> when it leaves the brackets;</li>
+    <li>a <b>sign error</b> when <span class="tex">a</span> is negative;</li>
+    <li>writing <span class="tex">(x+3)^2</span> for <span class="tex">x^2-6x+9</span> (the sign inside matches the sign of <span class="tex">b</span>).</li>
+  </ul>
+  <div class="explainer" data-explainer="verdict"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>With letters, and find the error</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Complete the square for <span class="tex">y=x^2+bx+c</span>, and state the vertex in terms of <span class="tex">b</span> and <span class="tex">c</span>.</div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=\left(x^2+bx+\tfrac{b^2}{4}\right)-\tfrac{b^2}{4}+c</span><br><span class="tex">y=\left(x+\tfrac{b}{2}\right)^2+c-\tfrac{b^2}{4}</span><br>Vertex <span class="tex">\boldsymbol{\left(-\tfrac{b}{2},\ c-\tfrac{b^2}{4}\right)}</span>. (The axis <span class="tex">x=-\tfrac{b}{2}</span> matches <span class="tex">x=-\tfrac{b}{2a}</span> with <span class="tex">a=1</span>.)</div></div></div>
+    <div class="part"><div class="pl">(b) A student wrote <span class="tex">y=-2x^2+12x-5</span> in vertex form. Find the step with the error, and correct the work.</div>
+      <div class="u5l6-sw">
+        <div><span class="u5l6-swl">Step 1:</span> <span class="tex">y=-2(x^2-6x)-5</span></div>
+        <div><span class="u5l6-swl">Step 2:</span> <span class="tex">y=-2(x^2-6x+9-9)-5</span></div>
+        <div><span class="u5l6-swl">Step 3:</span> <span class="tex">y=-2(x-3)^2-9-5</span></div>
+        <div><span class="u5l6-swl">Step 4:</span> <span class="tex">y=-2(x-3)^2-14</span></div>
+      </div>
+      <div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The error is in <b>Step 3</b>: the <span class="tex">-9</span> leaving the brackets must be multiplied by <span class="tex">-2</span>, giving <span class="tex">+18</span>.<br>Step 3: <span class="tex">y=-2(x-3)^2+18-5</span><br>Step 4: <span class="tex">\boldsymbol{y=-2(x-3)^2+13}</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Perfect squares.</b> Add <span class="tex">\left(\tfrac{b}{2}\right)^2</span>: <span class="tex">x^2+bx+\left(\tfrac{b}{2}\right)^2=\left(x+\tfrac{b}{2}\right)^2</span>. The sign inside matches the sign of <span class="tex">b</span>.</div>
+    <div><b>Add and subtract.</b> To keep the equation equal, add <b>and</b> subtract <span class="tex">\left(\tfrac{b}{2}\right)^2</span> right after the <span class="tex">x</span>-term, then factor and combine the constants.</div>
+    <div><b>When <span class="tex">a\ne1</span>.</b> Factor <span class="tex">a</span> from the first two terms only. The number moved out of the brackets is <b>multiplied by <span class="tex">a</span></b>. Watch the signs when <span class="tex">a&lt;0</span>.</div>
+    <div><b>Use it.</b> <span class="tex">y=a(x-p)^2+q</span>: vertex <span class="tex">(p,\ q)</span>, axis <span class="tex">x=p</span>, maximum (<span class="tex">a&lt;0</span>) or minimum (<span class="tex">a&gt;0</span>) value <span class="tex">q</span>. Zeros: set <span class="tex">y=0</span>, isolate the square, take <span class="tex">\pm</span> the square root.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u5l6">
+    <div><div class="kicker">Your turn</div><b>Assignment 6 · Questions 7–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l7/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 7 — The Quadratic Formula</b><div class="muted">Complete the square once with <span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span>: a formula that solves every quadratic equation.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u5l6.js';
+  boot({ key: 'u5l6', homeHref: '../../', title: '5.6 Completing the Square' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

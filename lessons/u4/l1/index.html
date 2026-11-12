@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Factoring Review · Math 20-1 4.1</title>
-<meta name="description" content="Math 20-1 Unit 4 Lesson 1: factoring review. The greatest common factor (including a negative GCF), a binomial as the common factor and opposite brackets, factoring four terms by grouping, factoring x^2 + bx + c and x^2 + bxy + cy^2 with product and sum (algebra tiles making a rectangle), factoring fully with the GCF first, trinomials that do not factor over the integers, and testing whether a binomial is a factor. Write on it with an Apple Pencil.">
+<meta name="description" content="Math 20-1 Unit 4 Lesson 1: factoring review. The greatest common factor (including a negative GCF), a binomial as the common factor and opposite brackets, factoring four terms by grouping, factoring x^2 + bx + c and x^2 + bxy + cy^2 with product and sum (the X), factoring fully with the GCF first, trinomials that do not factor over the integers, and testing whether a binomial is a factor. Write on it with an Apple Pencil.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="20-1 Lessons">
@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u4l1.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u4l1">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Which One Doesn’t Belong?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><text x="70" y="46" font-size="34" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text><text x="170" y="46" font-size="34" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0.5s" repeatCount="indefinite"/></text><text x="270" y="46" font-size="34" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="1s" repeatCount="indefinite"/></text><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="38" text-anchor="middle" transform="scale(-1 1)">🔍</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Which One Doesn’t Belong?</h2>
+  <p class="wf-rule vw-rule">Which number doesn’t belong with the others? Why?</p></div>
+  <div class="vw-wodb"><div><b>A</b>12</div><div><b>B</b>16</div><div><b>C</b>25</div><div><b>D</b>36</div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Pick one and give a reason. Can someone beat it?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Every one of them can be the odd one out.</b> <b>12</b> is the only one that isn’t a perfect square. <b>16</b> is the only one made of 2s alone (2 × 2 × 2 × 2). <b>25</b> is the only odd number. <b>36</b> is the only one with 9 factors (1, 2, 3, 4, 6, 9, 12, 18, 36). Any answer with a good reason wins.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -42,41 +53,6 @@
     </ul>
   </div>
   <div class="outcome"><b>RF1</b> Factor polynomial expressions of the form <span class="tex">ax^2+bx+c</span>, <span class="tex">a^2x^2-b^2y^2</span>, <span class="tex">a(f(x))^2+b(f(x))+c</span> and <span class="tex">a^2(f(x))^2-b^2(g(y))^2</span> (<span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> rational).<br><span class="muted">Today: common factors, grouping and <span class="tex">x^2+bx+c</span>. </span></div>
-</section>
-
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Mind-Reading Trick" id="wu" style="--wf-side: 390px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Mind-Reading Trick</h2>
-  <p class="wf-rule">Think of a whole number <b>n</b>. <b>Square it</b>, add <b>11 times</b> your number, then add <b>30</b>. Tell me only the answer, and I will tell you your number.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u4l1-wpick" id="u4l1-wpick"><span class="u4l1-wpl">Your number <i>n</i>:</span></div>
-    <div class="u4l1-wcalc" id="u4l1-wcalc"></div>
-    <div class="u4l1-dots" id="u4l1-dots"></div>
-    <div class="u4l1-wbtns">
-      <button type="button" class="pill" id="u4l1-wsort">Make a rectangle</button>
-      <button type="button" class="pill" id="u4l1-wunsort">Back to a pile</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u4l1-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Try <span class="tex">n=1</span>, then <span class="tex">n=5</span>. What comes out? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l1-wa"><div class="bk-ans"><span class="tex">1+11+30=42</span> and <span class="tex">25+55+30=110</span>. Notice: <span class="tex">42=6\times7</span> and <span class="tex">110=10\times11</span>.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Try <span class="tex">n=10</span>. Is the answer two numbers in a row multiplied? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l1-wa"><div class="bk-ans"><span class="tex">100+110+30=240=15\times16</span>. Yes: always <span class="tex">(n+5)</span> times <span class="tex">(n+6)</span>.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Your friend does the trick and gets <b>182</b>. What was their number? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt right"><b>A</b> 8</div>
-        <div class="opt"><b>B</b> 13</div>
-        <div class="opt"><b>C</b> 14</div>
-        <div class="opt"><b>D</b> 7</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>A, 8.</b> <span class="tex">182=13\times14</span>, two numbers in a row. They are <span class="tex">n+5</span> and <span class="tex">n+6</span>, so <span class="tex">n=8</span>. Check: <span class="tex">64+88+30=182</span>.<br>
-        <span class="muted">The secret: <span class="tex">n^2+11n+30=(n+5)(n+6)</span>. The dots always make a rectangle. Turning a sum into a product is <b>factoring</b>.</span></div>
-    </div>
-  </div></div>
-  <p class="u4l1-social">Make your own trick: what product is <span class="tex">n^2+3n+2</span> always equal to? Test it on your neighbour.</p>
 </section>
 
 <!-- ================= 1. GCF ================= -->
@@ -141,12 +117,19 @@
   <button class="more" data-more="ex3-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–3">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 1 · Questions 1–3</h2>
+  <p class="pr-t">Common factors: a GCF, a common bracket, then grouping.</p>
+  <div class="pr-chips n3"><span><b>1</b>Take out the GCF</span><span><b>2</b>A common bracket</span><span><b>3</b>Factor by grouping</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 3.</span><a class="pill" href="../../../#/lesson/u4l1">Open the Practice site</a></div>
+</section>
+
 <!-- ================= 4. x^2 + bx + c ================= -->
 <section class="card" data-ink="s4" data-section="4. Factoring x² + bx + c">
   <div class="sec-h"><span class="badge">4</span><h2>Factoring <span class="tex">x^2+bx+c</span></h2></div>
   <div class="def">Expanding <span class="tex">(x+m)(x+n)</span> gives <span class="tex">x^2+\textcolor{#12805a}{(m+n)}x+\textcolor{#c27a0e}{mn}</span>. So to factor a trinomial with leading coefficient 1, find two integers <span class="tex">m</span> and <span class="tex">n</span> that <b class="u4l1-cc">multiply to <span class="tex">c</span></b> and <b class="u4l1-cb">add to <span class="tex">b</span></b>.</div>
-  <p class="u4l1-tilenote">With <b>algebra tiles</b> you can see it: an <span class="u4l1-sw u4l1-sw-x2"></span> <span class="tex">x^2</span> tile, <span class="tex">\textcolor{#12805a}{b}</span> <span class="u4l1-sw u4l1-sw-x"></span> <span class="tex">x</span>-tiles and <span class="tex">\textcolor{#c27a0e}{c}</span> <span class="u4l1-sw u4l1-sw-u"></span> unit tiles (<span class="u4l1-sw u4l1-sw-n"></span> red means negative). The trinomial factors exactly when the tiles make a <b>rectangle</b>; its side lengths are the factors.</p>
-  <div class="explainer" data-explainer="tiles"></div>
 </section>
 
 <section class="card" data-ink="s4b" data-section="4. Product and Sum">
@@ -203,7 +186,6 @@
 <section class="card" data-ink="s5b" data-section="5. Ascending Order">
   <h3 class="sub">Constant first: ascending order</h3>
   <p>A trinomial written in <b>ascending order</b> (constant first) can also be factored directly: <span class="tex">35+2x-x^2=(7-x)(5+x)</span>. This equals <span class="tex">-(x-7)(x+5)</span>, since <span class="tex">7-x=-(x-7)</span>. Both forms are correct.</p>
-  <div class="explainer" data-explainer="ascending"></div>
 </section>
 
 <section class="card example" data-ink="ex6" data-section="Example 6">
@@ -223,7 +205,6 @@
 <section class="card" data-ink="s6" data-section="6. Trinomials That Do Not Factor">
   <div class="sec-h"><span class="badge">6</span><h2>Trinomials That Do Not Factor, and Testing a Factor</h2></div>
   <div class="def">If no pair of integers has product <span class="tex">c</span> and sum <span class="tex">b</span>, the trinomial <b>does not factor over the integers</b>. Say so, and show the pairs you checked. To decide whether a binomial is a <b>factor</b> of a polynomial, factor the polynomial fully and see whether the binomial appears (a factor such as <span class="tex">-(x-7)</span> or <span class="tex">(7-x)</span> also counts as <span class="tex">x-7</span>).</div>
-  <div class="explainer" data-explainer="tryRect"></div>
 </section>
 
 <section class="card" data-ink="s6b" data-section="6. Testing a Factor">
@@ -267,11 +248,11 @@
   <div class="sum-grid">
     <div><b>GCF first.</b> The largest number and highest power of each variable in <em>every</em> term. Divide each term by it for the bracket (a term that is all GCF leaves 1). Leading term negative: take out a negative GCF and every sign flips.</div>
     <div><b>Common brackets and grouping.</b> <span class="tex">4x(x-3)+7(x-3)=(x-3)(4x+7)</span>. Opposites: <span class="tex">2-b=-(b-2)</span>. Four terms: GCF of each pair, then the common bracket (try a negative, or rearrange).</div>
-    <div><b><span class="tex">x^2+bx+c=(x+m)(x+n)</span></b> with <span class="tex">mn=c</span>, <span class="tex">m+n=b</span>. <span class="tex">c&gt;0</span>: same signs (sign of <span class="tex">b</span>). <span class="tex">c&lt;0</span>: opposite signs. Two variables: <span class="tex">(x+my)(x+ny)</span>. Tiles: the sides of the rectangle.</div>
+    <div><b><span class="tex">x^2+bx+c=(x+m)(x+n)</span></b> with <span class="tex">mn=c</span>, <span class="tex">m+n=b</span>. <span class="tex">c&gt;0</span>: same signs (sign of <span class="tex">b</span>). <span class="tex">c&lt;0</span>: opposite signs. Two variables: <span class="tex">(x+my)(x+ny)</span>.</div>
     <div><b>Factor fully, then check.</b> Can any factor factor again? Expand to check. No pair with product <span class="tex">c</span> and sum <span class="tex">b</span>: <b>does not factor</b> over the integers. A factor test: factor fully and look (<span class="tex">7-x</span> counts as <span class="tex">x-7</span>).</div>
   </div>
   <a class="assign" href="../../../#/lesson/u4l1">
-    <div><div class="kicker">Your turn</div><b>Assignment 1 — Factoring Review</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 1 · Questions 4–16</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l2/">
     <div><div class="kicker">Next lesson</div><b>Lesson 2 — Factoring <span class="tex">ax^2+bx+c</span></b><div class="muted">When the leading coefficient is not 1: decomposition, splitting the middle term and grouping.</div></div><span class="arrow">→</span>

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quadratic Inequalities: Sign Analysis · Math 20-1 8.7</title>
+<meta name="description" content="Math 20-1 Unit 8 Lesson 7: solving quadratic inequalities in one variable from the signs of their factors: the sign of a product and case analysis, sign charts (rearranging first, a negative leading coefficient), squared factors and quadratics that don't factor, writing an inequality from its solution, and problems about heights, profits and coefficients. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u8l7.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u8l7">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Fake Coin">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="0 40 30;360 40 30" dur="3s" repeatCount="indefinite"/><text x="40" y="30" font-size="40" text-anchor="middle" dominant-baseline="central">🪙</text></g><g><animateTransform attributeName="transform" type="rotate" values="-14 120 46;14 120 46;-14 120 46" dur="2.4s" repeatCount="indefinite"/><text x="120" y="46" font-size="44" text-anchor="middle">⚖️</text></g><g><animateTransform attributeName="transform" type="rotate" values="360 200 30;0 200 30" dur="3.6s" repeatCount="indefinite"/><text x="200" y="30" font-size="40" text-anchor="middle" dominant-baseline="central">🪙</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.4s" repeatCount="indefinite"/><text x="280" y="46" font-size="40" text-anchor="middle">🤔</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Fake Coin</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">I have <b>9 coins</b> that look exactly the same. One of them is a <b>fake</b>, and it is a little <b>heavier</b> than the others. All I have is a balance scale: no weights, it just tips toward the heavier side.</p><p class="vw-ask">What is the fewest number of weighings that is guaranteed to find the fake coin?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A balance scale rocks back and forth with a question-mark coin on each pan; below it, nine identical gold coins bob in a row."><rect x="0" y="0" width="330" height="250" rx="14" fill="#f4f1e8"/><rect x="159" y="74" width="12" height="104" fill="#4a4436"/><path d="M125 186 L205 186 L188 172 L142 172 Z" fill="#4a4436"/><g><animateTransform attributeName="transform" type="translate" values="0 14;0 -14;0 14" dur="3.2s" calcMode="spline" keyTimes="0;.5;1" keySplines=".45 0 .55 1;.45 0 .55 1" repeatCount="indefinite"/><line x1="62" y1="74" x2="28" y2="136" stroke="#4a4436" stroke-width="2.5"/><line x1="62" y1="74" x2="96" y2="136" stroke="#4a4436" stroke-width="2.5"/><path d="M18 136 Q62 160 106 136 Z" fill="#cfd6e2" stroke="#4a4436" stroke-width="3" stroke-linejoin="round"/><circle cx="62" cy="126" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="62" cy="126" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/><text x="62" y="132" font-size="17" font-weight="800" fill="#4a4436" text-anchor="middle">?</text></g><g><animateTransform attributeName="transform" type="translate" values="0 -14;0 14;0 -14" dur="3.2s" calcMode="spline" keyTimes="0;.5;1" keySplines=".45 0 .55 1;.45 0 .55 1" repeatCount="indefinite"/><line x1="268" y1="74" x2="234" y2="136" stroke="#4a4436" stroke-width="2.5"/><line x1="268" y1="74" x2="302" y2="136" stroke="#4a4436" stroke-width="2.5"/><path d="M224 136 Q268 160 312 136 Z" fill="#cfd6e2" stroke="#4a4436" stroke-width="3" stroke-linejoin="round"/><circle cx="268" cy="126" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="268" cy="126" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/><text x="268" y="132" font-size="17" font-weight="800" fill="#4a4436" text-anchor="middle">?</text></g><g><animateTransform attributeName="transform" type="rotate" values="-8 165 74;8 165 74;-8 165 74" dur="3.2s" calcMode="spline" keyTimes="0;.5;1" keySplines=".45 0 .55 1;.45 0 .55 1" repeatCount="indefinite"/><rect x="57" y="69" width="216" height="10" rx="5" fill="#4a4436"/><circle cx="62" cy="74" r="6" fill="#4a4436"/><circle cx="268" cy="74" r="6" fill="#4a4436"/></g><circle cx="165" cy="74" r="8" fill="#e0a11b" stroke="#4a4436" stroke-width="3"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="0.0s" repeatCount="indefinite"/><circle cx="37" cy="222" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="37" cy="222" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="0.18s" repeatCount="indefinite"/><circle cx="69" cy="222" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="69" cy="222" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="0.36s" repeatCount="indefinite"/><circle cx="101" cy="222" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="101" cy="222" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="0.54s" repeatCount="indefinite"/><circle cx="133" cy="222" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="133" cy="222" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="0.72s" repeatCount="indefinite"/><circle cx="165" cy="222" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="165" cy="222" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="0.8999999999999999s" repeatCount="indefinite"/><circle cx="197" cy="222" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="197" cy="222" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="1.08s" repeatCount="indefinite"/><circle cx="229" cy="222" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="229" cy="222" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="1.26s" repeatCount="indefinite"/><circle cx="261" cy="222" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="261" cy="222" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="1.44s" repeatCount="indefinite"/><circle cx="293" cy="222" r="13" fill="#f2c14e" stroke="#b8860b" stroke-width="3"/><circle cx="293" cy="222" r="8.1" fill="none" stroke="#b8860b" stroke-opacity=".55" stroke-width="2"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.3s" begin="0s" repeatCount="indefinite"/><text x="300" y="40" font-size="28" text-anchor="middle">✨<animate attributeName="opacity" values="1;0.2;1" dur="1.3s" begin="0s" repeatCount="indefinite"/></text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="32" y="46" font-size="40" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Guess first. Then plan your weighings with your neighbour.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Two weighings.</b> Split the coins into three piles of 3 and weigh one pile against another. If one side drops, the fake is in that pile; if they balance, it is in the pile you left off. Now take the 3 suspects and weigh one coin against one coin: the heavier side is the fake, and if they balance, it is the coin you kept in your hand.<br><span class="muted">Most people guess 3 or 4 because they split the coins in half. But a balance has <b>three</b> outcomes (left, right, balance), so two weighings can tell apart 3 × 3 = 9 coins. Three weighings would handle 27 coins.</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 8 Systems and Inequalities · Lesson 7</div>
+  <h1>Quadratic Inequalities in One Variable: Sign Analysis</h1>
+  <p class="lede">Lesson 6 solved quadratic inequalities with roots and test points. Today the inequality is solved from its <b>factors</b>: once one side is <span class="tex">0</span> and the other side is factored, only the <b>signs</b> of the factors matter.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>solve a factored quadratic inequality by case analysis</li>
+      <li>solve a quadratic inequality with a sign chart, rearranging first and handling a negative leading coefficient</li>
+      <li>solve inequalities with a squared factor, with no real zeros, or with zeros from the quadratic formula</li>
+      <li>write a quadratic inequality that has a given solution</li>
+      <li>solve problems about heights, profits and coefficients with quadratic inequalities</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF8</b> Solve problems that involve quadratic inequalities in one variable.<br><span class="muted">Today: the sign of a product, case analysis and sign charts; squared factors and quadratics that don't factor; working backwards from a solution; rocket heights, ticket profits and the values of <span class="tex">k</span>.</span></div>
+</section>
+<section class="card" data-ink="s1" data-section="1. The Sign of a Product">
+  <div class="sec-h"><span class="badge">1</span><h2>The Sign of a Product</h2></div>
+  <p class="u8l7-p">Once one side is <span class="tex">0</span> and the other side is factored, only the <b>signs</b> of the factors matter.</p>
+  <div class="def amber u8l7-key"><div class="u8l7-keyh">Signs of a product</div><div class="u8l7-three"><div><span class="tex">AB&gt;0</span> when <span class="tex">A</span> and <span class="tex">B</span> have the <b>same</b> sign (both positive or both negative)</div><div><span class="tex">AB&lt;0</span> when <span class="tex">A</span> and <span class="tex">B</span> have <b>opposite</b> signs</div><div><span class="tex">AB=0</span> when <span class="tex">A=0</span> or <span class="tex">B=0</span></div></div></div>
+  <p class="u8l7-p"><b>Case analysis</b> turns this into pairs of linear inequalities. Within a case both inequalities must hold (“and”: keep the overlap); the solution is the result of Case 1 <b>or</b> Case 2. A case can have no solution. Solutions are written in set notation, for example <span class="tex">\{x\mid x&lt;-2\text{ or }x&gt;3,\ x\in\mathbb{R}\}</span>, and can be shown on a number line (closed dot <span class="tex">\bullet</span> for <span class="tex">\le</span> or <span class="tex">\ge</span>, open dot <span class="tex">\circ</span> for <span class="tex">&lt;</span> or <span class="tex">&gt;</span>).</p>
+  <div class="explainer" data-explainer="cases"></div>
+</section>
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Case analysis</h3></div>
+  <p class="q">Solve by case analysis. Show each solution on a number line.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">(x-3)(x+2)&gt;0</span></div><div class="work" style="--h:270px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The product is positive: same signs.<br>Case 1: <span class="tex">x-3&gt;0</span> and <span class="tex">x+2&gt;0</span>: <span class="tex">x&gt;3</span> and <span class="tex">x&gt;-2</span>, so <span class="tex">x&gt;3</span><br>Case 2: <span class="tex">x-3&lt;0</span> and <span class="tex">x+2&lt;0</span>: <span class="tex">x&lt;3</span> and <span class="tex">x&lt;-2</span>, so <span class="tex">x&lt;-2</span><br><span class="tex">\{x\mid x&lt;-2\text{ or }x&gt;3,\ x\in\mathbb{R}\}</span><div class="u8l7-fig" data-fig="e1a"></div></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x^2+4x-21\le0</span></div><div class="work" style="--h:270px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x+7)(x-3)\le0</span>: opposite signs (or <span class="tex">0</span>).<br>Case 1: <span class="tex">x+7\ge0</span> and <span class="tex">x-3\le0</span>: <span class="tex">x\ge-7</span> and <span class="tex">x\le3</span>, so <span class="tex">-7\le x\le3</span><br>Case 2: <span class="tex">x+7\le0</span> and <span class="tex">x-3\ge0</span>: <span class="tex">x\le-7</span> and <span class="tex">x\ge3</span>: no number does both.<br><span class="tex">\{x\mid -7\le x\le3,\ x\in\mathbb{R}\}</span><div class="u8l7-fig" data-fig="e1b"></div></div></div></div>
+  </div>
+
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+<section class="card" data-ink="s2" data-section="2. Sign Charts">
+  <div class="sec-h"><span class="badge">2</span><h2>Sign Charts</h2></div>
+  <p class="u8l7-p">Case analysis gets long. A <b>sign chart</b> does the same reasoning in a table. A linear factor such as <span class="tex">x-5</span> is <span class="tex">0</span> at its zero (<span class="tex">x=5</span>), negative to the left of it and positive to the right (when the coefficient of <span class="tex">x</span> is positive). The zeros of the factors split the number line into intervals, and in each interval every factor keeps one sign.</p>
+  <div class="def amber u8l7-key"><div class="u8l7-keyh">Solving with a sign chart</div><ol class="u8l7-ol"><li>Move every term to one side so the other side is <span class="tex">0</span>.</li><li>Factor fully.</li><li>Find the zero of each factor and write the zeros in order across the top of the chart, with an interval between and around them.</li><li>Fill in a row for each factor: <span class="tex">-</span>, <span class="tex">0</span> or <span class="tex">+</span>.</li><li>Product row: an even number of negative factors gives <span class="tex">+</span>, an odd number gives <span class="tex">-</span>.</li><li>Read the intervals whose sign matches the inequality (<span class="tex">&gt;0</span>: <span class="tex">+</span>; <span class="tex">&lt;0</span>: <span class="tex">-</span>). Include the zeros for <span class="tex">\le</span> or <span class="tex">\ge</span>; leave them out for <span class="tex">&lt;</span> or <span class="tex">&gt;</span>.</li></ol></div>
+  <div class="explainer" data-explainer="scan"></div>
+</section>
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Complete the sign chart</h3></div>
+  <div class="part"><div class="pl">(a) Complete the sign chart and solve <span class="tex">x^2-3x-10&gt;0</span>.</div>
+    <div class="work" style="--h:60px"></div>
+    <table class="u8l7-tab u8l7-big"><tr><th><span class="tex">x</span></th><th class=""><span class="tex">x&lt;-2</span></th><th class="u8l7-zh"><span class="tex">-2</span></th><th class=""><span class="tex">-2&lt;x&lt;5</span></th><th class="u8l7-zh"><span class="tex">5</span></th><th class=""><span class="tex">x&gt;5</span></th></tr><tr><th><span class="tex">x+2</span></th><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-z"><span data-reveal><span class="tex">0</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td></tr><tr><th><span class="tex">x-5</span></th><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-z"><span data-reveal><span class="tex">0</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td></tr><tr class="u8l7-prow"><th>Product</th><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td><td class="u8l7-z"><span data-reveal><span class="tex">0</span></span></td><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-z"><span data-reveal><span class="tex">0</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td></tr></table>
+    <div class="work" style="--h:70px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Factor: <span class="tex">(x+2)(x-5)&gt;0</span>. Zeros: <span class="tex">-2</span> and <span class="tex">5</span>.<br>The product is positive (<span class="tex">+</span>) when <span class="tex">x&lt;-2</span> or <span class="tex">x&gt;5</span>. <span class="tex">\{x\mid x&lt;-2\text{ or }x&gt;5,\ x\in\mathbb{R}\}</span></div></div></div>
+  <div class="parts" style="margin-top:12px">
+    <div class="part"><div class="pl">(b) Use the same chart to solve <span class="tex">x^2-3x-10\le0</span>.</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Negative or zero: <span class="tex">\{x\mid -2\le x\le5,\ x\in\mathbb{R}\}</span> (the zeros are included).</div></div></div>
+  </div>
+
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Rearrange first</h3></div>
+  <p class="q">Rearrange so one side is <span class="tex">0</span>, then solve with a sign chart.</p>
+  <div class="tip watch"><b>Watch out.</b> Never divide both sides by an expression containing <span class="tex">x</span>, and do not set each factor equal to the number on the right side.</div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">6x^2+x\le2</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">6x^2+x-2\le0</span><br><span class="tex">ac=-12</span>; <span class="tex">4+(-3)=1</span><br><span class="tex">6x^2+4x-3x-2=2x(3x+2)-(3x+2)</span><br><span class="tex">(3x+2)(2x-1)\le0</span>; zeros <span class="tex">-\frac23</span>, <span class="tex">\frac12</span><table class="u8l7-tab u8l7-sm"><tr><th><span class="tex">x</span></th><th class=""><span class="tex">&lt;-\frac23</span></th><th class="u8l7-zh"><span class="tex">-\frac23</span></th><th class="">between</th><th class="u8l7-zh"><span class="tex">\frac12</span></th><th class=""><span class="tex">&gt;\frac12</span></th></tr><tr><th><span class="tex">3x+2</span></th><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-p"><span class="tex">+</span></td><td class="u8l7-p"><span class="tex">+</span></td><td class="u8l7-p"><span class="tex">+</span></td></tr><tr><th><span class="tex">2x-1</span></th><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-p"><span class="tex">+</span></td></tr><tr class="u8l7-prow"><th>Product</th><td class="u8l7-p"><span class="tex">+</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-p"><span class="tex">+</span></td></tr></table><span class="tex">\{x\mid -\frac23\le x\le\frac12,\ x\in\mathbb{R}\}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x(x+6)&lt;16</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+6x-16&lt;0</span><br><span class="tex">(x+8)(x-2)&lt;0</span>; zeros <span class="tex">-8</span>, <span class="tex">2</span><table class="u8l7-tab u8l7-sm"><tr><th><span class="tex">x</span></th><th class=""><span class="tex">&lt;-8</span></th><th class="u8l7-zh"><span class="tex">-8</span></th><th class="">between</th><th class="u8l7-zh"><span class="tex">2</span></th><th class=""><span class="tex">&gt;2</span></th></tr><tr><th><span class="tex">x+8</span></th><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-p"><span class="tex">+</span></td><td class="u8l7-p"><span class="tex">+</span></td><td class="u8l7-p"><span class="tex">+</span></td></tr><tr><th><span class="tex">x-2</span></th><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-p"><span class="tex">+</span></td></tr><tr class="u8l7-prow"><th>Product</th><td class="u8l7-p"><span class="tex">+</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-p"><span class="tex">+</span></td></tr></table><span class="tex">\{x\mid -8&lt;x&lt;2,\ x\in\mathbb{R}\}</span><br>(Writing <span class="tex">x&lt;16</span> and <span class="tex">x+6&lt;16</span> is wrong: the zero product idea only works with <span class="tex">0</span> on one side.)</div></div></div>
+  </div>
+
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>A negative leading coefficient</h3></div>
+  <p class="q">When the leading coefficient is negative, either keep the negative constant as a row of the chart (it is negative everywhere), or multiply both sides by <span class="tex">-1</span> and <b>reverse the inequality sign</b>. Solve <span class="tex">-x^2+2x+15\ge0</span> both ways.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Keep <span class="tex">-1</span> as a factor.</div><div class="work" style="--h:280px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-(x^2-2x-15)\ge0</span><br><span class="tex">-(x+3)(x-5)\ge0</span><table class="u8l7-tab u8l7-sm"><tr><th><span class="tex">x</span></th><th class=""><span class="tex">&lt;-3</span></th><th class="u8l7-zh"><span class="tex">-3</span></th><th class="">between</th><th class="u8l7-zh"><span class="tex">5</span></th><th class=""><span class="tex">&gt;5</span></th></tr><tr><th><span class="tex">-1</span></th><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-m"><span class="tex">-</span></td></tr><tr><th><span class="tex">x+3</span></th><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-p"><span class="tex">+</span></td><td class="u8l7-p"><span class="tex">+</span></td><td class="u8l7-p"><span class="tex">+</span></td></tr><tr><th><span class="tex">x-5</span></th><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-p"><span class="tex">+</span></td></tr><tr class="u8l7-prow"><th>Product</th><td class="u8l7-m"><span class="tex">-</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-p"><span class="tex">+</span></td><td class="u8l7-z"><span class="tex">0</span></td><td class="u8l7-m"><span class="tex">-</span></td></tr></table><span class="tex">\{x\mid -3\le x\le5,\ x\in\mathbb{R}\}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Multiply by <span class="tex">-1</span> first.</div><div class="work" style="--h:280px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-2x-15\le0</span> (sign reversed)<br><span class="tex">(x+3)(x-5)\le0</span><br>The product row is <span class="tex">+,\ 0,\ -,\ 0,\ +</span>, so the product is <span class="tex">\le0</span> for <span class="tex">-3\le x\le5</span>.<br><span class="tex">\{x\mid -3\le x\le5,\ x\in\mathbb{R}\}</span> (the same answer)<br>Check <span class="tex">x=0</span>: <span class="tex">-0+0+15=15\ge0</span> ✓</div></div></div>
+  </div>
+
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+<section class="card" data-ink="s3" data-section="3. Squared Factors, No Factoring">
+  <div class="sec-h"><span class="badge">3</span><h2>Squared Factors and Quadratics That Do Not Factor</h2></div>
+  <p class="u8l7-p">A squared factor such as <span class="tex">(x-5)^2</span> is never negative: it is <span class="tex">0</span> at <span class="tex">x=5</span> and positive everywhere else, so it <b>does not change sign</b>. If <span class="tex">ax^2+bx+c</span> has <b>no real zeros</b> (discriminant <span class="tex">b^2-4ac&lt;0</span>), its graph never crosses the <span class="tex">x</span>-axis, so it has one sign for every <span class="tex">x</span>: test any one value. If it has real zeros but does not factor, find the zeros with the quadratic formula and use them as the boundaries of the intervals.</p>
+  <div class="explainer" data-explainer="onesign"></div>
+</section>
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Squares, no zeros, and the formula</h3></div>
+  <p class="q">Solve.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">x^2-10x+25&gt;0</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x-5)^2&gt;0</span><br>True for every <span class="tex">x</span> except <span class="tex">x=5</span> (where it is <span class="tex">0</span>).<br><span class="tex">\{x\mid x\ne5,\ x\in\mathbb{R}\}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">4x^2+12x+9\le0</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(2x+3)^2\le0</span><br>A square is never negative, so only <span class="tex">(2x+3)^2=0</span> works.<br><span class="tex">x=-\frac32</span> is the only solution: <span class="tex">\{x\mid x=-\tfrac{3}{2}\}</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">x^2-4x+7&lt;0</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">b^2-4ac=16-28=-12&lt;0</span>: no real zeros, so the sign never changes.<br>Test <span class="tex">x=0</span>: <span class="tex">7&gt;0</span>, so <span class="tex">x^2-4x+7</span> is always positive.<br>It is never <span class="tex">&lt;0</span>: no solution.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">x^2-2x-4\ge0</span> (exact, then to the nearest hundredth)</div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zeros: <span class="tex">x=\dfrac{2\pm\sqrt{4+16}}{2}=\dfrac{2\pm2\sqrt5}{2}=1\pm\sqrt5</span><br><span class="tex">x^2-2x-4=(x-(1-\sqrt5))(x-(1+\sqrt5))</span>: positive outside the zeros (<span class="tex">a&gt;0</span>).<br><span class="tex">\{x\mid x\le1-\sqrt5\text{ or }x\ge1+\sqrt5,\ x\in\mathbb{R}\}</span><br><span class="tex">x\le-1.24</span> or <span class="tex">x\ge3.24</span></div></div></div>
+  </div>
+  <div class="tip calc-tip"><div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Zeros to the nearest hundredth.</b> Graph <span class="tex">y=x^2-2x-4</span> and use <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd><kbd>2</kbd></span> (zero) once for each zero: give a left bound, a right bound and a guess.</div>
+    <div class="u8l7-pcol"><button class="pill" data-keys="Y= CLEAR X x² − 2 X − 4 ZStandard zero (−) 3 ENTER 0 ENTER (−) 1 ENTER">Left zero</button><button class="pill" data-keys="Y= CLEAR X x² − 2 X − 4 ZStandard zero 2 ENTER 5 ENTER 3 ENTER">Right zero</button></div>
+  </div>
+
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 7 · Questions 1–6</h2>
+  <p class="pr-t">One side <span class="tex">0</span>, factor, then the signs: two cases, or a sign chart (count the <span class="tex">-</span> signs). A negative leading coefficient: a <span class="tex">-1</span> row, or multiply by <span class="tex">-1</span> and reverse. Squares never go negative; <span class="tex">b^2-4ac&lt;0</span> means one sign everywhere.</p>
+  <div class="pr-chips n3"><span><b>1</b>Case analysis, with number lines</span><span><b>2</b>Sign charts</span><span><b>3</b>Rearrange first</span><span><b>4</b>Negative leading coefficient</span><span><b>5</b>Squares, no zeros, the formula</span><span><b>6</b>One inequality, four methods</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u8l7">Open the Practice site</a></div>
+</section>
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3><i>(Extension)</i> More than two factors</h3></div>
+  <p class="q">A sign chart works for a product of any number of factors. Solve.</p>
+  <div class="part"><div class="pl">(a) <span class="tex">(x+2)(x-1)(x-4)\ge0</span></div>
+    <div class="work" style="--h:50px"></div>
+    <table class="u8l7-tab u8l7-big"><tr><th><span class="tex">x</span></th><th class=""><span class="tex">x&lt;-2</span></th><th class="u8l7-zh"><span class="tex">-2</span></th><th class=""><span class="tex">-2&lt;x&lt;1</span></th><th class="u8l7-zh"><span class="tex">1</span></th><th class=""><span class="tex">1&lt;x&lt;4</span></th><th class="u8l7-zh"><span class="tex">4</span></th><th class=""><span class="tex">x&gt;4</span></th></tr><tr><th><span class="tex">x+2</span></th><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-z"><span data-reveal><span class="tex">0</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td></tr><tr><th><span class="tex">x-1</span></th><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-z"><span data-reveal><span class="tex">0</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td></tr><tr><th><span class="tex">x-4</span></th><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-z"><span data-reveal><span class="tex">0</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td></tr><tr class="u8l7-prow"><th>Product</th><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-z"><span data-reveal><span class="tex">0</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td><td class="u8l7-z"><span data-reveal><span class="tex">0</span></span></td><td class="u8l7-m"><span data-reveal><span class="tex">-</span></span></td><td class="u8l7-z"><span data-reveal><span class="tex">0</span></span></td><td class="u8l7-p"><span data-reveal><span class="tex">+</span></span></td></tr></table>
+    <div class="work" style="--h:60px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zeros: <span class="tex">-2</span>, <span class="tex">1</span>, <span class="tex">4</span> (four intervals).<br><span class="tex">\{x\mid -2\le x\le1\text{ or }x\ge4,\ x\in\mathbb{R}\}</span></div></div></div>
+  <div class="parts" style="margin-top:12px">
+    <div class="part"><div class="pl">(b) <span class="tex">(x-2)^2(x+1)&gt;0</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x-2)^2</span> is positive except at <span class="tex">x=2</span>, where the product is <span class="tex">0</span>. So the product has the sign of <span class="tex">x+1</span>, which is positive for <span class="tex">x&gt;-1</span>.<br><span class="tex">\{x\mid x&gt;-1,\ x\ne2,\ x\in\mathbb{R}\}</span></div></div></div>
+  </div>
+
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+<section class="card" data-ink="s4" data-section="4. Writing an Inequality from Its Solution">
+  <div class="sec-h"><span class="badge">4</span><h2>Writing an Inequality from Its Solution</h2></div>
+  <p class="u8l7-p">Work backwards. Each endpoint <span class="tex">r</span> gives a factor <span class="tex">(x-r)</span>; an endpoint <span class="tex">\frac pq</span> gives <span class="tex">(qx-p)</span>. With a positive leading coefficient, the quadratic is <b>negative between</b> its zeros and <b>positive outside</b> them.</p>
+  <div class="def amber u8l7-key"><div class="u8l7-keyh">Key idea</div><div class="u8l7-two2"><div>Solution <b>between</b> <span class="tex">r_1</span> and <span class="tex">r_2</span>: <span class="tex">(x-r_1)(x-r_2)&lt;0</span> (or <span class="tex">\le0</span>)</div><div>Solution <b>outside</b> (<span class="tex">x&lt;r_1</span> or <span class="tex">x&gt;r_2</span>): <span class="tex">(x-r_1)(x-r_2)&gt;0</span> (or <span class="tex">\ge0</span>)</div></div><div class="u8l7-kn">Closed dots (endpoints included) → <span class="tex">\le</span> or <span class="tex">\ge</span>; open dots → <span class="tex">&lt;</span> or <span class="tex">&gt;</span>.</div></div>
+  <div class="explainer" data-explainer="back"></div>
+</section>
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Write the inequality</h3></div>
+  <p class="q">Write a quadratic inequality, in the form <span class="tex">ax^2+bx+c&lt;0</span> (or <span class="tex">&gt;</span>, <span class="tex">\le</span>, <span class="tex">\ge</span>) with integer coefficients and <span class="tex">a&gt;0</span>, that has the given solution.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\{x\mid -4&lt;x&lt;3,\ x\in\mathbb{R}\}</span></div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Between, open: <span class="tex">(x+4)(x-3)&lt;0</span><br><span class="tex">x^2+x-12&lt;0</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\{x\mid x\le-6\text{ or }x\ge-1,\ x\in\mathbb{R}\}</span></div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Outside, closed: <span class="tex">(x+6)(x+1)\ge0</span><br><span class="tex">x^2+7x+6\ge0</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\{x\mid -\frac12\le x\le3,\ x\in\mathbb{R}\}</span></div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=-\frac12</span> gives <span class="tex">(2x+1)</span>: <span class="tex">(2x+1)(x-3)\le0</span><br><span class="tex">2x^2-5x-3\le0</span></div></div></div>
+    <div class="part"><div class="pl">(d) The solution shown on the number line.</div><div class="u8l7-fig" data-fig="e7d"></div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x&lt;0</span> or <span class="tex">x&gt;7</span> (outside, open)<br><span class="tex">x(x-7)&gt;0</span>, so <span class="tex">x^2-7x&gt;0</span></div></div></div>
+  </div>
+  <p class="u8l7-p">Multiplying by <span class="tex">-1</span> and reversing the sign gives another correct inequality: (a) is also <span class="tex">-x^2-x+12&gt;0</span>.</p>
+
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u8l7"></section>
+<section class="card" data-ink="s5" data-section="5. Problems">
+  <div class="sec-h"><span class="badge">5</span><h2>Problems</h2></div>
+  <p class="u8l7-p">Write the inequality from the words (“at least” → <span class="tex">\ge</span>, “more than” → <span class="tex">&gt;</span>, “at most” → <span class="tex">\le</span>), move every term to one side, solve, and answer in context. A time or a price cannot be negative.</p>
+  <div class="explainer" data-explainer="rocket"></div>
+</section>
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The model rocket</h3></div>
+  <p class="q">A model rocket is launched from the ground. Its height after <span class="tex">t</span> seconds is <span class="tex">h=40t-5t^2</span> metres.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) When is the rocket at least <span class="tex">60</span> m high?</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">40t-5t^2\ge60</span><br><span class="tex">-5t^2+40t-60\ge0</span><br>Divide by <span class="tex">-5</span> (reverse): <span class="tex">t^2-8t+12\le0</span><br><span class="tex">(t-2)(t-6)\le0</span><br><span class="tex">2\le t\le6</span>: from 2 s to 6 s after launch.</div></div></div>
+    <div class="part"><div class="pl">(b) For how many seconds is it at least <span class="tex">60</span> m high?</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">6-2=4</span> seconds</div></div></div>
+    <div class="part"><div class="pl">(c) For what times is the rocket in the air?</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">40t-5t^2&gt;0</span><br><span class="tex">5t(8-t)&gt;0</span><br>Both factors positive for <span class="tex">0&lt;t&lt;8</span> (for <span class="tex">t&gt;8</span> the height would be negative).<br>In the air for <span class="tex">0&lt;t&lt;8</span>.</div></div></div>
+    <div class="part"><div class="pl">(d) Show that the rocket never reaches <span class="tex">90</span> m.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">40t-5t^2\ge90\Rightarrow t^2-8t+18\le0</span><br><span class="tex">b^2-4ac=64-72=-8&lt;0</span>: no zeros, and <span class="tex">t=0</span> gives <span class="tex">18&gt;0</span>, so <span class="tex">t^2-8t+18</span> is always positive. No solution: it never reaches 90 m (its maximum is 80 m at <span class="tex">t=4</span>).</div></div></div>
+  </div>
+
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+<section class="card example" data-ink="ex9" data-section="Example 9">
+  <div class="ex-head"><span class="ex-tag">Example 9</span><h3>Ticket prices and profit</h3></div>
+  <p class="q">A theatre group estimates that if a ticket costs <span class="tex">x</span> dollars, its profit for one show is <span class="tex">P=-20x^2+1000x-8000</span> dollars.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) For what ticket prices does the group make a profit?</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-20x^2+1000x-8000&gt;0</span><br>Divide by <span class="tex">-20</span> (reverse): <span class="tex">x^2-50x+400&lt;0</span><br><span class="tex">(x-10)(x-40)&lt;0</span><br><span class="tex">10&lt;x&lt;40</span>: any price between $10 and $40.</div></div></div>
+    <div class="part"><div class="pl">(b) For what prices is the profit at least <span class="tex">\$3000</span>? Give the prices to the nearest cent.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-20x^2+1000x-11\,000\ge0\Rightarrow x^2-50x+550\le0</span><br>Zeros: <span class="tex">x=\dfrac{50\pm\sqrt{2500-2200}}{2}=25\pm5\sqrt3</span><br><span class="tex">25-5\sqrt3\le x\le25+5\sqrt3</span><br>From $16.34 to $33.66.</div></div></div>
+  </div>
+
+  <div class="space" id="ex9-space"></div>
+  <button class="more" data-more="ex9-space">+ More space</button>
+</section>
+<section class="card example" data-ink="ex10" data-section="Example 10">
+  <div class="ex-head"><span class="ex-tag">Example 10</span><h3>A value of k</h3></div>
+  <div class="part"><div class="pl">For what values of <span class="tex">k</span> does <span class="tex">x^2+(k-2)x+4=0</span> have no real roots?</div><div class="work" style="--h:170px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">No real roots: <span class="tex">b^2-4ac&lt;0</span>.<br><span class="tex">(k-2)^2-4(1)(4)&lt;0\Rightarrow k^2-4k+4-16&lt;0\Rightarrow k^2-4k-12&lt;0</span><br><span class="tex">(k-6)(k+2)&lt;0</span>: <span class="tex">\{k\mid -2&lt;k&lt;6,\ k\in\mathbb{R}\}</span><br>Check <span class="tex">k=0</span>: <span class="tex">x^2-2x+4=0</span> has <span class="tex">b^2-4ac=4-16&lt;0</span> ✓</div></div></div>
+  <div class="explainer u8l7-exin" data-explainer="kslide"></div>
+
+  <div class="space" id="ex10-space"></div>
+  <button class="more" data-more="ex10-space">+ More space</button>
+</section>
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Signs of a product.</b> Same signs: <span class="tex">+</span>; opposite signs: <span class="tex">-</span>. Case analysis: both inequalities in a case must hold (keep the overlap); the solution is Case 1 <b>or</b> Case 2.</div>
+    <div><b>Sign chart.</b> One side <span class="tex">0</span>, factor, the zeros across the top, a row per factor, then the product (an even number of <span class="tex">-</span> gives <span class="tex">+</span>). Zeros in for <span class="tex">\le</span>, <span class="tex">\ge</span>. Negative <span class="tex">a</span>: a <span class="tex">-1</span> row, or <span class="tex">\times(-1)</span> and reverse.</div>
+    <div><b>Squares and no zeros.</b> <span class="tex">(x-r)^2</span> is <span class="tex">0</span> at <span class="tex">r</span> and positive elsewhere: no sign change. <span class="tex">b^2-4ac&lt;0</span>: one sign everywhere, test one value. Doesn't factor: zeros from the formula.</div>
+    <div><b>Backwards and problems.</b> Between: <span class="tex">(x-r_1)(x-r_2)&lt;0</span>; outside: <span class="tex">&gt;0</span>; closed dots <span class="tex">\le</span>, <span class="tex">\ge</span>. Words: at least <span class="tex">\ge</span>, more than <span class="tex">&gt;</span>, at most <span class="tex">\le</span>; a time or price can't be negative.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u8l7">
+    <div><div class="kicker">Your turn</div><b>Assignment 7 · Questions 7–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l8/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 8 — Unit 8 Review</b><div class="muted">Systems of equations and inequalities together: substitution and elimination, graphing regions, and solving quadratic inequalities.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u8l7.js';
+  boot({ key: 'u8l7', homeHref: '../../', title: '8.7 Sign Analysis' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

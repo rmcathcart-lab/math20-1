@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Ambiguous Case · Math 20-1 3.7</title>
+<meta name="description" content="Math 20-1 Unit 3 Lesson 7: the ambiguous case of the sine law. Which measurements fix a triangle (SSS, SAS, ASA, AAS) and why SSA does not, sin B = sin(180° − B), the swinging side with the height h = b sin A and the number of triangles (0, 1 or 2) for an acute or obtuse angle, solving both triangles, and word problems with two possible positions. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u3l7.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u3l7">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 3 Trigonometry · Lesson 7</div>
+  <h1>The Ambiguous Case</h1>
+  <p class="lede">Two sides and an angle that is <b>not between them</b> (SSA) can give <b>no triangle, one triangle or two triangles</b>. Today: how to tell which, and how to find every solution.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>tell which measurements fix exactly one triangle (SSS, SAS, ASA, AAS) and recognise <b>SSA</b>, the ambiguous case</li>
+      <li>explain why <span class="tex">\sin B=k</span> has two answers between <span class="tex">0^\circ</span> and <span class="tex">180^\circ</span>: <span class="tex">\sin B=\sin(180^\circ-B)</span></li>
+      <li>use the <b class="u3l7-hc">height</b> <span class="tex">h=b\sin A</span> to decide whether SSA gives 0, 1 or 2 triangles</li>
+      <li>solve <b>both</b> triangles when there are two, and reject an angle that does not fit</li>
+      <li>solve problems where a length swings from a fixed point to two possible positions</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>T3</b> Solve problems, using the cosine law and sine law, including the ambiguous case.<br><span class="muted">Today: the ambiguous case (SSA): counting the triangles with <span class="tex">h=b\sin A</span>, then solving every one of them.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: Gus the Goat" id="wu" style="--wf-side: 400px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Gus the Goat</h2>
+  <p class="wf-rule">Gus is tied to a post <b>5 m</b> from a long, straight fence. Dandelions grow all along the fence.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u3l7-field" id="u3l7-field"></div>
+    <div class="u3l7-wbtns">
+      <button type="button" class="pill" data-rope="4">Rope 4 m</button>
+      <button type="button" class="pill" data-rope="5">Rope 5 m</button>
+      <button type="button" class="pill" data-rope="7">Rope 7 m</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u3l7-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>The rope is <b>4 m</b>. Can Gus reach the fence? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l7-wa"><div class="bk-ans"><b>No.</b> The closest point of the fence is straight across, <b>5 m</b> away. A 4 m rope falls 1 m short.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>The rope is <b>5 m</b>. At how many spots can he just touch the fence? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l7-wa"><div class="bk-ans"><b>One</b>, straight across. The tight rope meets the fence at a <b>right angle</b>.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> The rope is <b>7 m</b>. Pulled tight, at how many spots does Gus’s nose touch the fence? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> None</div>
+        <div class="opt"><b>B</b> One</div>
+        <div class="opt right"><b>C</b> Two</div>
+        <div class="opt"><b>D</b> Seven</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>C, two.</b> The 7 m circle crosses the fence twice, <span class="tex">\sqrt{7^2-5^2}=\sqrt{24}\approx4.9</span> m on each side of the closest point. He can eat every dandelion between them.<br>
+        <span class="muted">The 5 m line straight across decides it: a shorter rope gives <b>none</b>, an equal rope <b>one</b>, a longer rope <b>two</b>. Today that line is the <b>height</b> <span class="tex">h</span>.</span></div>
+    </div>
+  </div></div>
+  <p class="u3l7-social">Challenge your neighbour: how long must the rope be so that the two spots are exactly <b>24 m</b> apart?</p>
+</section>
+
+<!-- ================= 1. Which measurements fix a triangle? ================= -->
+<section class="card" data-ink="s1" data-section="1. Which Measurements Fix a Triangle?">
+  <div class="sec-h"><span class="badge">1</span><h2>Which Measurements Fix a Triangle?</h2></div>
+  <div class="def">Three measurements, at least one of them a side, describe a triangle. With <b>SSS</b>, <b>SAS</b> (the angle is <em>between</em> the two sides), <b>ASA</b> and <b>AAS</b>, every triangle drawn from the measurements is congruent to every other: there is <b>exactly one</b> triangle.</div>
+  <div class="def amber">With <b>SSA</b> (two sides and an angle that is <em>not</em> between them) this is not guaranteed. There may be no triangle, one triangle or two different triangles. SSA is called the <b>ambiguous case</b>.</div>
+  <div class="explainer" data-explainer="fixers"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>SSS, SAS, ASA, AAS or SSA?</h3></div>
+  <p class="q">For each <span class="tex">\triangle PQR</span>, name the type of information given (SSS, SAS, ASA, AAS or SSA) and state whether it fixes exactly one triangle.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">p=7</span> cm, <span class="tex">q=9</span> cm, <span class="tex">r=12</span> cm</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>SSS</b>: exactly one triangle.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\angle P=50^\circ</span>, <span class="tex">q=8</span> cm, <span class="tex">r=11</span> cm</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Sides <span class="tex">q=PR</span> and <span class="tex">r=PQ</span> meet at <span class="tex">P</span>, so <span class="tex">\angle P</span> is between them. <b>SAS</b>: exactly one triangle.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\angle P=50^\circ</span>, <span class="tex">\angle Q=72^\circ</span>, <span class="tex">r=10</span> cm</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Side <span class="tex">r=PQ</span> is between <span class="tex">\angle P</span> and <span class="tex">\angle Q</span>. <b>ASA</b>: exactly one triangle.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\angle P=50^\circ</span>, <span class="tex">p=7</span> cm, <span class="tex">q=8</span> cm</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\angle P</span> is opposite <span class="tex">p</span>, not between <span class="tex">p</span> and <span class="tex">q</span>. <b>SSA</b>: not guaranteed (ambiguous case).</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s1b" data-section="1. Two Angles, One Sine">
+  <h3 class="sub">Where the trouble comes from: two angles with the same sine</h3>
+  <p>The sine law gives the <b>sine</b> of the unknown angle, and two angles between <span class="tex">0^\circ</span> and <span class="tex">180^\circ</span> have the same sine (sine is positive in quadrants I and II). The calculator’s <span class="keys"><kbd>sin⁻¹</kbd></span> key gives only the <b class="u3l7-g1">acute</b> one.</p>
+  <div class="def amber u3l7-center">For <span class="tex">0^\circ&lt;\theta&lt;180^\circ</span>: &nbsp; <span class="tex u3l7-bigf">\sin\theta=\sin(180^\circ-\theta)</span>
+    <div class="u3l7-legend">If <span class="tex">\sin B=k</span> with <span class="tex">0&lt;k&lt;1</span>, then <span class="tex">\textcolor{#12805a}{B=\sin^{-1}k}</span> (acute) <b>or</b> <span class="tex">\textcolor{#7b4fc4}{B=180^\circ-\sin^{-1}k}</span> (obtuse).<br>Each one gives a triangle only if the angles still add to less than <span class="tex">180^\circ</span>.</div></div>
+  <div class="explainer" data-explainer="supp"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Mia and Theo are both right</h3></div>
+  <p class="q">Two students each sketched <span class="tex">\triangle ABC</span> with <span class="tex">\angle A=40^\circ</span>, <span class="tex">AC=10</span> cm and <span class="tex">BC=7</span> cm. Mia’s triangle has an acute angle at <span class="tex">B</span>. Theo’s has an obtuse angle at <span class="tex">B</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Use the sine law to find both possible measures of <span class="tex">\angle B</span>, to the nearest tenth of a degree.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">b=AC=10</span>, <span class="tex">a=BC=7</span>.<br><span class="tex">\dfrac{\sin B}{10}=\dfrac{\sin40^\circ}{7}\Rightarrow\sin B=\dfrac{10\sin40^\circ}{7}\approx0.9183</span><br><span class="tex">B=\sin^{-1}(0.9183)\approx\boldsymbol{66.7^\circ}</span> &nbsp;or&nbsp; <span class="tex">B=180^\circ-66.7^\circ=\boldsymbol{113.3^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Explain how both students can be right.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Both angles work: <span class="tex">40^\circ+66.7^\circ&lt;180^\circ</span> and <span class="tex">40^\circ+113.3^\circ&lt;180^\circ</span>. The 7 cm side can swing to two different positions, so <b>two different triangles</b> fit the same measurements.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Degree mode, then <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd></span>.</b> <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd><kbd>10</kbd><kbd>×</kbd><kbd>sin</kbd><kbd>40</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>7</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>66.674…</b> The calculator never shows the obtuse one: type <span class="keys"><kbd>180</kbd><kbd>−</kbd><kbd>2nd</kbd><kbd>Ans</kbd><kbd>ENTER</kbd></span> to get <b>113.325…</b></div>
+    <div class="u3l7-pcol"><button class="pill" data-keys="sin⁻¹ 10 × sin 40 ) ÷ 7 ) = 180 − Ans =">Show me</button></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. The swinging side ================= -->
+<section class="card" data-ink="s2" data-section="2. Picturing SSA: The Swinging Side">
+  <div class="sec-h"><span class="badge">2</span><h2>Picturing SSA: The Swinging Side</h2></div>
+  <div class="u3l7-two">
+    <p class="u3l7-p">Suppose <span class="tex">\textcolor{#a33357}{\angle A}</span>, side <span class="tex">\textcolor{#1f5bd6}{b=AC}</span> and side <span class="tex">\textcolor{#a33357}{a=BC}</span> (opposite <span class="tex">\angle A</span>) are given. Draw <span class="tex">\angle A</span> and mark <span class="tex">C</span> on one arm, <span class="tex">b</span> units from <span class="tex">A</span>. Side <span class="tex">a</span> hangs from <span class="tex">C</span> and <b>swings like a compass</b>; <span class="tex">B</span> is wherever it lands on the other arm. The shortest distance from <span class="tex">C</span> to that arm is the <b class="u3l7-hc">height</b> <span class="tex">h</span>. From the right triangle, <span class="tex">\sin A=\dfrac{h}{b}</span>.</p>
+    <div class="u3l7-fig0" id="u3l7-fig0"></div>
+  </div>
+  <div class="def amber u3l7-center"><span class="tex u3l7-bigf">\textcolor{#c27a0e}{h}=b\sin A</span><div class="u3l7-legend">Compare <span class="tex">\textcolor{#a33357}{a}</span> (the side opposite the given angle) with <span class="tex">\textcolor{#c27a0e}{h}</span> and with <span class="tex">\textcolor{#1f5bd6}{b}</span>.</div></div>
+  <div class="explainer" data-explainer="swing"></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> Why can an <b>obtuse</b> <span class="tex">\angle A</span> never give two triangles?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">C</span> leans back over the extension of the arm, so the near landing spot is always <b>behind</b> <span class="tex">A</span>. Only the far one can be on the arm, and only when <span class="tex">a&gt;b</span>. (A triangle can’t have two obtuse angles anyway.)</div></div></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Complete the summary</h3></div>
+  <p class="q">Sketches (i)–(iv) have an <b>acute</b> given angle <span class="tex">A</span>; sketches (v)–(vi) have an <b>obtuse</b> given angle <span class="tex">A</span>.</p>
+  <div class="u3l7-six" id="u3l7-six"></div>
+  <div class="part u3l7-solo"><table class="u3l7-tbl u3l7-sum">
+      <tr><th>Given angle <span class="tex">A</span></th><th>Condition</th><th>Number of triangles</th></tr>
+      <tr><td>acute</td><td><span class="tex">a&lt;h</span></td><td><span data-reveal>0 (side <span class="tex">a</span> is too short to reach)</span></td></tr>
+      <tr><td>acute</td><td><span class="tex">a=h</span></td><td><span data-reveal>1 (a right triangle, <span class="tex">B=90^\circ</span>)</span></td></tr>
+      <tr><td>acute</td><td><span class="tex">h&lt;a&lt;b</span></td><td><span data-reveal>2 (<span class="tex">B</span> acute or <span class="tex">B</span> obtuse)</span></td></tr>
+      <tr><td>acute</td><td><span class="tex">a\ge b</span></td><td><span data-reveal>1</span></td></tr>
+      <tr><td>obtuse or right</td><td><span class="tex">a\le b</span></td><td><span data-reveal>0</span></td></tr>
+      <tr><td>obtuse or right</td><td><span class="tex">a&gt;b</span></td><td><span data-reveal>1</span></td></tr>
+    </table>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Quick check:</b> if the side opposite the given angle is the <em>longer</em> of the two given sides (<span class="tex">a\ge b</span>), there is exactly one triangle (or none if <span class="tex">a=b</span> with <span class="tex">A</span> obtuse or right). Only an <b>acute</b> <span class="tex">A</span> with <span class="tex">a&lt;b</span> can give two.</div></div></div>
+  <div class="explainer" data-explainer="six"></div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. Counting Triangles: a Decision Chart">
+  <h3 class="sub">Counting the triangles in three questions</h3>
+  <p>The summary as a decision chart: first look at the angle, then compare <span class="tex">a</span> with <span class="tex">b</span>, and only then (acute angle, <span class="tex">a&lt;b</span>) work out <span class="tex">h</span>.</p>
+  <div class="explainer" data-explainer="decide"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>How many triangles?</h3></div>
+  <p class="q">In <span class="tex">\triangle ABC</span>, <span class="tex">\angle A=30^\circ</span> and <span class="tex">b=14</span> cm. Determine the height <span class="tex">h</span> from <span class="tex">C</span>, then the number of triangles for each length of <span class="tex">a</span>.</p>
+  <div class="part u3l7-solo">
+    <table class="u3l7-tbl u3l7-cnt">
+      <tr><th><span class="tex">h=</span> <span data-reveal><span class="tex">14\sin30^\circ=7</span> cm</span></th><th><span class="tex">a=5</span> cm</th><th><span class="tex">a=7</span> cm</th><th><span class="tex">a=10</span> cm</th><th><span class="tex">a=16</span> cm</th></tr>
+      <tr><th>Number of triangles</th><td><span data-reveal>0</span></td><td><span data-reveal>1 (right)</span></td><td><span data-reveal>2</span></td><td><span data-reveal>1</span></td></tr>
+    </table>
+    <p class="u3l7-obt">For an obtuse angle, <span class="tex">\angle A=115^\circ</span> and <span class="tex">b=8</span> cm: &nbsp; <span class="tex">a=6</span> cm gives <span data-reveal>0 triangles</span> &nbsp;&nbsp; <span class="tex">a=11</span> cm gives <span data-reveal>1 triangle</span></p>
+    <div class="work" style="--h:150px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a=5&lt;h</span>; &nbsp; <span class="tex">a=h</span>; &nbsp; <span class="tex">7&lt;10&lt;14</span>; &nbsp; <span class="tex">16\ge14</span>. &nbsp; Obtuse <span class="tex">A</span>: <span class="tex">6\le8</span> gives none, <span class="tex">11&gt;8</span> gives one.</div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u3l7"></section>
+
+<!-- ================= 3. Solving the ambiguous case ================= -->
+<section class="card" data-ink="s3" data-section="3. Solving the Ambiguous Case">
+  <div class="sec-h"><span class="badge">3</span><h2>Solving the Ambiguous Case</h2></div>
+  <div class="def amber"><b>Solving SSA</b> (given <span class="tex">\angle A</span>, <span class="tex">a</span> and <span class="tex">b</span>; find <span class="tex">\angle B</span>)
+    <ol class="u3l7-steps">
+      <li><b>Sketch.</b> Optionally count the triangles first with <span class="tex">h=b\sin A</span>.</li>
+      <li><b>Sine law:</b> <span class="tex">\sin B=\dfrac{b\sin A}{a}</span>. If this is greater than 1, there is no triangle.</li>
+      <li><span class="tex">\textcolor{#12805a}{B_1=\sin^{-1}(\sin B)}</span> (acute) and <span class="tex">\textcolor{#7b4fc4}{B_2=180^\circ-B_1}</span> (obtuse).</li>
+      <li>Keep <span class="tex">B_2</span> only if <span class="tex">A+B_2&lt;180^\circ</span>.</li>
+      <li><b>Finish each triangle:</b> <span class="tex">C=180^\circ-A-B</span>, then the third side with the sine law.</li>
+    </ol>
+    Keep unrounded values in the calculator until the final answers.</div>
+  <div class="explainer" data-explainer="solve2"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Solve both triangles</h3></div>
+  <p class="q">Solve all possible triangles <span class="tex">ABC</span> in which <span class="tex">\angle A=38^\circ</span>, <span class="tex">a=9.0</span> cm and <span class="tex">b=13.0</span> cm. Round angles to the nearest degree and sides to the nearest tenth.</p>
+  <div class="u3l7-figrow"><div id="u3l7-fig5"></div></div>
+  <div class="part u3l7-solo"><div class="work" style="--h:330px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">
+    <span class="tex">h=13.0\sin38^\circ\approx8.0</span>. Since <span class="tex">8.0&lt;9.0&lt;13.0</span>, there are <b>two</b> triangles.<br>
+    <span class="tex">\sin B=\dfrac{13.0\sin38^\circ}{9.0}\approx0.8893\Rightarrow B_1\approx62.8^\circ</span>, &nbsp; <span class="tex">B_2=180^\circ-62.8^\circ=117.2^\circ</span> &nbsp; (check: <span class="tex">38^\circ+117.2^\circ&lt;180^\circ</span> ✓)<br>
+    <b class="u3l7-g1">Triangle 1:</b> <span class="tex">C=180^\circ-38^\circ-62.8^\circ=79.2^\circ</span>; &nbsp; <span class="tex">c=\dfrac{9.0\sin79.2^\circ}{\sin38^\circ}\approx14.4</span> cm<br>
+    So <span class="tex">\boldsymbol{\angle B\approx63^\circ}</span>, <span class="tex">\boldsymbol{\angle C\approx79^\circ}</span>, <span class="tex">\boldsymbol{c\approx14.4}</span> <b>cm</b>.<br>
+    <b class="u3l7-g2">Triangle 2:</b> <span class="tex">C=180^\circ-38^\circ-117.2^\circ=24.8^\circ</span>; &nbsp; <span class="tex">c=\dfrac{9.0\sin24.8^\circ}{\sin38^\circ}\approx6.1</span> cm<br>
+    So <span class="tex">\boldsymbol{\angle B\approx117^\circ}</span>, <span class="tex">\boldsymbol{\angle C\approx25^\circ}</span>, <span class="tex">\boldsymbol{c\approx6.1}</span> <b>cm</b>.<br>
+    <span class="muted">(Rounding <span class="tex">C</span> to <span class="tex">25^\circ</span> before finding <span class="tex">c</span> gives 6.2 cm: keep the unrounded values.)</span></div></div></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Keep the unrounded angle with <span class="keys"><kbd>Ans</kbd></span>.</b> <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd><kbd>13</kbd><kbd>×</kbd><kbd>sin</kbd><kbd>38</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>9</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <span class="tex">B_1\approx62.78^\circ</span>; then <span class="keys"><kbd>9</kbd><kbd>×</kbd><kbd>sin</kbd><kbd>180</kbd><kbd>−</kbd><kbd>38</kbd><kbd>−</kbd><kbd>2nd</kbd><kbd>Ans</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>38</kbd><kbd>ENTER</kbd></span> gives <span class="tex">c\approx14.36</span>. For triangle 2, put <span class="keys"><kbd>180</kbd><kbd>−</kbd><kbd>2nd</kbd><kbd>Ans</kbd><kbd>ENTER</kbd></span> (117.22…) in between: <span class="tex">c\approx6.13</span>.</div>
+    <div class="u3l7-pcol"><button class="pill" data-keys="sin⁻¹ 13 × sin 38 ) ÷ 9 ) = 9 × sin 180 − 38 − Ans ) ÷ sin 38 ) =">Triangle 1</button><button class="pill" data-keys="sin⁻¹ 13 × sin 38 ) ÷ 9 ) = 180 − Ans = 9 × sin 180 − 38 − Ans ) ÷ sin 38 ) =">Triangle 2</button></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>One, two or none?</h3></div>
+  <p class="q">Determine all possible measures of the indicated angle(s), to the nearest degree. If there is no triangle, explain why.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\triangle PQR</span>: <span class="tex">\angle P=47^\circ</span>, <span class="tex">p=15</span> m, <span class="tex">q=11</span> m. Find <span class="tex">\angle Q</span> and <span class="tex">\angle R</span>.</div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">p&gt;q</span> (the side opposite the given angle is longer): one triangle.<br><span class="tex">\sin Q=\dfrac{11\sin47^\circ}{15}\approx0.5363</span><br><span class="tex">Q\approx32.4^\circ</span> (or <span class="tex">147.6^\circ</span>, but <span class="tex">47^\circ+147.6^\circ&gt;180^\circ</span>: rejected)<br><span class="tex">\boldsymbol{\angle Q\approx32^\circ}</span>, &nbsp; <span class="tex">\angle R=180^\circ-47^\circ-32.4^\circ\approx\boldsymbol{101^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\triangle XYZ</span>: <span class="tex">\angle X=62^\circ</span>, <span class="tex">x=8</span> cm, <span class="tex">y=10</span> cm. Find <span class="tex">\angle Y</span>.</div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sin Y=\dfrac{10\sin62^\circ}{8}\approx1.104&gt;1</span><br>No angle has a sine greater than 1, so there is <b>no triangle</b>.<br><span class="muted">(Also <span class="tex">h=10\sin62^\circ\approx8.8</span> and <span class="tex">x=8&lt;h</span>: side <span class="tex">x</span> cannot reach.)</span></div></div></div>
+  </div>
+  <div class="part"><div class="pl">(c) <span class="tex">\triangle KLM</span>: <span class="tex">\angle K=108^\circ</span>, <span class="tex">k=20</span> cm, <span class="tex">l=14</span> cm. Find <span class="tex">\angle L</span>, <span class="tex">\angle M</span> and side <span class="tex">m</span> (nearest tenth).</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\angle K</span> is obtuse and <span class="tex">k&gt;l</span>: one triangle.<br><span class="tex">\sin L=\dfrac{14\sin108^\circ}{20}\approx0.6657\Rightarrow L\approx41.7^\circ</span> (the obtuse option <span class="tex">138.3^\circ</span> is impossible beside <span class="tex">108^\circ</span>)<br><span class="tex">\boldsymbol{\angle L\approx42^\circ}</span>, &nbsp; <span class="tex">\angle M=180^\circ-108^\circ-41.7^\circ\approx\boldsymbol{30^\circ}</span> (<span class="tex">30.3^\circ</span>), &nbsp; <span class="tex">m=\dfrac{20\sin30.3^\circ}{\sin108^\circ}\approx\boldsymbol{10.6}</span> <b>cm</b></div></div></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>When there is no triangle, the calculator says so.</b> In (b), <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd><kbd>10</kbd><kbd>×</kbd><kbd>sin</kbd><kbd>62</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>8</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>ERROR: DOMAIN</b>: there is no angle whose sine is 1.104. In (a) the same keys with 11, 47 and 15 give <b>32.43…</b></div>
+    <div class="u3l7-pcol"><button class="pill" data-keys="sin⁻¹ 11 × sin 47 ) ÷ 15 ) =">Show (a)</button><button class="pill" data-keys="sin⁻¹ 10 × sin 62 ) ÷ 8 ) =">Show (b)</button></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Two possible positions ================= -->
+<section class="card" data-ink="s4" data-section="4. Problems with Two Possible Positions">
+  <div class="sec-h"><span class="badge">4</span><h2>Problems with Two Possible Positions</h2></div>
+  <div class="def">In a word problem the ambiguous case shows up when a <b>fixed length swings from a fixed point</b>: a gate on a hinge, a strut, a rope, or the edge of a range (radio signal, sprinkler, sound). <b>Sketch both positions, solve both triangles</b>, then decide whether each one makes sense.</div>
+  <div class="explainer" data-explainer="ferry"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>The ferry and the beacon</h3></div>
+  <p class="q">A ferry leaves port <span class="tex">P</span> and travels in a straight line. A buoy <span class="tex">B</span> is 15 km from <span class="tex">P</span>, and the angle between the ferry’s path and the line <span class="tex">PB</span> is <span class="tex">22^\circ</span>. The buoy’s radio beacon reaches 8 km. At what distances from <span class="tex">P</span> along its path is the ferry exactly 8 km from the buoy? Round to the nearest tenth of a kilometre.</p>
+  <div class="u3l7-figrow"><div id="u3l7-fig7"></div></div>
+  <div class="part u3l7-solo"><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">
+    In <span class="tex">\triangle PBF</span>: <span class="tex">\angle P=22^\circ</span>, <span class="tex">BF=8</span> (opposite <span class="tex">\angle P</span>), <span class="tex">PB=15</span> (opposite <span class="tex">\angle F</span>).<br>
+    <span class="tex">h=15\sin22^\circ\approx5.6&lt;8&lt;15</span>: two positions.<br>
+    <span class="tex">\sin F=\dfrac{15\sin22^\circ}{8}\approx0.7024\Rightarrow F_2\approx44.6^\circ</span> &nbsp;or&nbsp; <span class="tex">F_1=180^\circ-44.6^\circ=135.4^\circ</span><br>
+    <span class="tex">F=44.6^\circ</span>: <span class="tex">\angle B=180^\circ-22^\circ-44.6^\circ=113.4^\circ</span>, &nbsp; <span class="tex">PF=\dfrac{8\sin113.4^\circ}{\sin22^\circ}\approx19.6</span> km<br>
+    <span class="tex">F=135.4^\circ</span>: <span class="tex">\angle B=180^\circ-22^\circ-135.4^\circ=22.6^\circ</span>, &nbsp; <span class="tex">PF=\dfrac{8\sin22.6^\circ}{\sin22^\circ}\approx8.2</span> km<br>
+    The ferry is exactly 8 km from the buoy when it is about <b>8.2 km</b> and <b>19.6 km</b> from port (it is within range between those points).</div></div></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Chain with <span class="keys"><kbd>Ans</kbd></span>.</b> <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd><kbd>15</kbd><kbd>×</kbd><kbd>sin</kbd><kbd>22</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>8</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <span class="tex">F\approx44.6^\circ</span>; then <span class="keys"><kbd>8</kbd><kbd>×</kbd><kbd>sin</kbd><kbd>180</kbd><kbd>−</kbd><kbd>22</kbd><kbd>−</kbd><kbd>2nd</kbd><kbd>Ans</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>22</kbd><kbd>ENTER</kbd></span> gives <b>19.60…</b> For the near point, put <span class="keys"><kbd>180</kbd><kbd>−</kbd><kbd>2nd</kbd><kbd>Ans</kbd><kbd>ENTER</kbd></span> in between: <b>8.21…</b></div>
+    <div class="u3l7-pcol"><button class="pill" data-keys="sin⁻¹ 15 × sin 22 ) ÷ 8 ) = 8 × sin 180 − 22 − Ans ) ÷ sin 22 ) =">Far point</button><button class="pill" data-keys="sin⁻¹ 15 × sin 22 ) ÷ 8 ) = 180 − Ans = 8 × sin 180 − 22 − Ans ) ÷ sin 22 ) =">Near point</button></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The roof strut</h3></div>
+  <p class="q">A roof rafter <span class="tex">AC</span> is 6.0 m long and makes an angle of <span class="tex">28^\circ</span> with the horizontal ceiling beam at <span class="tex">A</span>. A 3.5 m support strut is hinged at the top end <span class="tex">C</span> of the rafter and swings down to rest on the beam. How far from <span class="tex">A</span> can the foot of the strut be? Round to the nearest tenth of a metre.</p>
+  <div class="part u3l7-solo"><div class="work" style="--h:330px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">
+    In <span class="tex">\triangle ACD</span> (<span class="tex">D</span> = foot of the strut): <span class="tex">\angle A=28^\circ</span>, <span class="tex">CD=3.5</span> (opposite <span class="tex">\angle A</span>), <span class="tex">AC=6.0</span> (opposite <span class="tex">\angle D</span>).<br>
+    <span class="tex">h=6.0\sin28^\circ\approx2.8&lt;3.5&lt;6.0</span>: two positions.<br>
+    <span class="tex">\sin D=\dfrac{6.0\sin28^\circ}{3.5}\approx0.8048\Rightarrow D\approx53.6^\circ</span> or <span class="tex">126.4^\circ</span><br>
+    <span class="tex">D=53.6^\circ</span>: <span class="tex">\angle C=98.4^\circ</span>, &nbsp; <span class="tex">AD=\dfrac{3.5\sin98.4^\circ}{\sin28^\circ}\approx7.4</span> m<br>
+    <span class="tex">D=126.4^\circ</span>: <span class="tex">\angle C=25.6^\circ</span>, &nbsp; <span class="tex">AD=\dfrac{3.5\sin25.6^\circ}{\sin28^\circ}\approx3.2</span> m<br>
+    The foot of the strut can be about <b>3.2 m</b> or <b>7.4 m</b> from <span class="tex">A</span>.</div></div></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>One triangle or not?</b> SSS, SAS, ASA and AAS fix exactly one triangle. <b>SSA</b> (the angle is <em>not</em> between the sides) is the <b>ambiguous case</b>: 0, 1 or 2 triangles.</div>
+    <div><b>Two angles, one sine.</b> <span class="tex">\sin B=\sin(180^\circ-B)</span>. <span class="keys"><kbd>sin⁻¹</kbd></span> gives only the acute <span class="tex">B_1</span>; the other is <span class="tex">B_2=180^\circ-B_1</span>. Keep it only if <span class="tex">A+B_2&lt;180^\circ</span>.</div>
+    <div><b>Count with the height.</b> <span class="tex">h=b\sin A</span>. Acute <span class="tex">A</span>: <span class="tex">a&lt;h</span> none, <span class="tex">a=h</span> one (right), <span class="tex">h&lt;a&lt;b</span> two, <span class="tex">a\ge b</span> one. Obtuse <span class="tex">A</span>: <span class="tex">a\le b</span> none, <span class="tex">a&gt;b</span> one.</div>
+    <div><b>Solve every triangle.</b> For each <span class="tex">B</span>: <span class="tex">C=180^\circ-A-B</span>, then <span class="tex">c</span> by the sine law. Keep unrounded values. In word problems, sketch both positions and check each makes sense.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u3l7">
+    <div><div class="kicker">Your turn</div><b>Assignment 7 — The Ambiguous Case</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l8/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 8 — Choosing the Sine Law or the Cosine Law</b><div class="muted">Look at what you are given, pick the law that fits, then solve.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u3l7.js';
+  boot({ key: 'u3l7', homeHref: '../../', title: '3.7 The Ambiguous Case' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

@@ -1,13 +1,9 @@
 /* Math 20-1 · Unit 1 · Lesson 1 — Patterns, Sequences and the General Term.
- * Warm-up (Toothpick Houses: build a row of houses, count the picks; the 100-pick box can't be used up), static
- * Example 5 grids and answer graphs, a Stand Up Break, and the explainers:
+ * Static Example 5 grids and answer graphs, a Stand Up Break, and the explainers (the warm-up is plain markup in the
+ * page, tools/newformat/specs/u1l1.py):
  *   machine (the sequence machine: feed n in, t_n drops into a row of terms and onto a dot plot; difference / ratio
  *     hops above the row; ruler test on the dots; Example 3 and Example 4 checks),
- *   twoWays (rule from term to term vs formula for t_n: hop 49 times to t_50 or substitute once),
- *   cups (Example 1 check: nested cups, each adds a 2 cm rim; table with +2 arrows),
  *   hopTest (subtract, then divide: differences above the row, ratios below; Example 2 checks),
- *   shapes (neither: square numbers, triangular numbers (Example 2(c)), Fibonacci as stacked blocks),
- *   finite (4, 7, 10, …, 31 stops at a wall; 4, 7, 10, … rolls on forever),
  *   isTerm (is it a term? set t_n equal and solve; n lands on a position or between two; Example 3(c)(d) checks),
  *   dots (plot (n, t_n), staircase rises, ruler: linear or not; no term at n = 1.5; Example 5 checks).
  * Colours (Unit 1): common difference / ratio amber, first term t_1 teal (#0e7c86), terms and dots burgundy; misses red. */
@@ -90,79 +86,6 @@ class Strip {
 }
 /** a term tile (HTML), centred on cx */
 function tile(stage, cx, y, w, hh, html, cls = '') { const d = add(stage, box(h('div', 'u1l1-tile ' + cls, html), w, hh), cx - w / 2, y); return d; }
-
-/* ====================================================================================================
- * Warm-up: Toothpick Houses. House k spans x0 + (k−1)U … x0 + kU; first house 5 picks, each next 4: 4n + 1.
- * ==================================================================================================== */
-function mountStreet() {
-  const host = document.getElementById('u1l1-street'); if (!host) return;
-  const W = 600, H = 250, U = 76, R = Math.sqrt(U * U - (U / 2) * (U / 2)), base = 214, x0 = 32, MAX = 7;
-  const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H, class: 'u1l1-street-svg' }, host);
-  svgEl('rect', { x: 0, y: 0, width: W, height: base + 4, rx: 14, fill: '#eef5fb' }, svg);
-  svgEl('rect', { x: 0, y: base + 4, width: W, height: H - base - 4, rx: 0, fill: '#e7dfcc' }, svg);
-  const picksL = svgEl('g', {}, svg), numsL = svgEl('g', {}, svg);
-  const note = h('div', 'u1l1-snote'); host.appendChild(note);
-  const st = { n: 0, counted: false, busy: false, sticks: [] };
-  const sticksOf = (k) => { // [x1, y1, x2, y2] of the new picks for house k
-    const L = x0 + (k - 1) * U, Rr = L + U, top = base - U, mid = L + U / 2, peak = top - R;
-    const s = [];
-    if (k === 1) s.push([L, base, L, top]);
-    s.push([L, base, Rr, base], [Rr, base, Rr, top], [L, top, mid, peak], [mid, peak, Rr, top]);
-    return s;
-  };
-  const colOf = (k) => (k === 1 ? T1 : AMB);
-  function pick(sx, k) {
-    const g = svgEl('g', { class: 'u1l1-pick' }, picksL);
-    svgEl('line', { x1: sx[0], y1: sx[1], x2: sx[2], y2: sx[3], stroke: '#8d6532', 'stroke-width': 10, 'stroke-linecap': 'round' }, g);
-    const top = svgEl('line', { x1: sx[0], y1: sx[1], x2: sx[2], y2: sx[3], stroke: '#e6c08a', 'stroke-width': 6.5, 'stroke-linecap': 'round' }, g);
-    g.paint = (on) => top.setAttribute('stroke', on ? colOf(k) : '#e6c08a');
-    g.k = k; g.mid = [(sx[0] + sx[2]) / 2, (sx[1] + sx[3]) / 2];
-    return g;
-  }
-  const total = () => (st.n ? 4 * st.n + 1 : 0);
-  function say() {
-    note.innerHTML = st.counted
-      ? `<b>${st.n}</b> house${st.n === 1 ? '' : 's'} · <b>${total()}</b> toothpicks`
-      : `<b>${st.n}</b> house${st.n === 1 ? '' : 's'} · <b>?</b> toothpicks`;
-  }
-  function numberAll() {
-    numsL.innerHTML = '';
-    st.sticks.forEach((g, i) => {
-      g.paint(st.counted);
-      if (!st.counted) return;
-      const t = svgEl('text', { x: g.mid[0], y: g.mid[1] + 5, 'text-anchor': 'middle', class: 'u1l1-picknum' }, numsL); t.textContent = i + 1;
-    });
-  }
-  async function addHouse(c) {
-    if (st.n >= MAX) return;
-    st.n++; const k = st.n;
-    for (const sx of sticksOf(k)) {
-      const g = pick(sx, k); st.sticks.push(g); g.paint(st.counted);
-      if (c) await tween(c, 170, (t) => { g.setAttribute('transform', `translate(0 ${(-60 * (1 - t)).toFixed(1)})`); g.style.opacity = t; });
-    }
-    numberAll(); say();
-  }
-  function removeHouse() {
-    if (st.n <= 1) return;
-    const k = st.n, drop = k === 1 ? 5 : 4;
-    st.sticks.splice(-drop).forEach((g) => g.remove()); st.n--; numberAll(); say();
-  }
-  function reset() { picksL.innerHTML = ''; numsL.innerHTML = ''; st.sticks = []; st.n = 0; st.counted = false; for (let i = 0; i < 3; i++) addHouse(null); say(); }
-  const run = (fn) => async () => { if (st.busy) return; st.busy = true; try { await fn(); } finally { st.busy = false; } };
-  document.getElementById('u1l1-add').addEventListener('click', run(() => addHouse(liveCtx())));
-  document.getElementById('u1l1-sub').addEventListener('click', run(async () => removeHouse()));
-  document.getElementById('u1l1-count').addEventListener('click', run(async () => {
-    st.counted = true; numsL.innerHTML = ''; const c = liveCtx();
-    for (let i = 0; i < st.sticks.length; i++) {
-      const g = st.sticks[i]; g.paint(true);
-      const t = svgEl('text', { x: g.mid[0], y: g.mid[1] + 5, 'text-anchor': 'middle', class: 'u1l1-picknum' }, numsL); t.textContent = i + 1;
-      await pop(c, t, 160); await sleep(c, 60);
-    }
-    say();
-  }));
-  document.getElementById('u1l1-wreset').addEventListener('click', run(async () => reset()));
-  reset();
-}
 
 /* ====================================================================================================
  * Static figures: Example 5 grids and answer graphs (the booklet's 0–6 by 0–16 grid)
@@ -286,133 +209,6 @@ const machine = {
   }
 };
 
-/* =============================== explainer: rule vs formula =============================== */
-const twoWays = {
-  title: 'Rule or formula?',
-  height: 430,
-  minW: 860,
-  choices: [{ v: 6, label: T('t_6') }, { v: 50, label: T('t_{50}') }, { v: 100, label: T('t_{100}') }],
-  intro: (N) => `Find ${T(`t_{${N}}`)} for ${T('5,\\ 9,\\ 13,\\ 17,\\ \\dots')} two ways. Press <b>Next</b>.`,
-  ask: false,
-  make(stage, N, ex) {
-    const W = ex.W, ans = 4 * N + 1;
-    const P1 = panel(stage, 10, 6, W - 20, 236, `Rule: <b>start at ${T(cT('5'))}, add ${T(cD('4'))}</b>`, 'u1l1-p-rule');
-    const P2 = panel(stage, 10, 256, W - 20, 166, `Formula: <b>${T('t_n=4n+1')}</b>`, 'u1l1-p-form');
-    const S = new Strip(stage, 25, 58, W - 50, 150), SP = 92, TW = 70, count = N;
-    const tiles = [], hops = [];
-    for (let i = 1; i <= count; i++) {
-      const cx = 20 + TW / 2 + (i - 1) * SP;
-      const t = tile(S.vp, cx, 52, TW, 48, T(String(4 * i + 1)), 'u1l1-term' + (i === 1 ? ' u1l1-t1' : '') + (i === N ? ' u1l1-goal' : ''));
-      const s = lab(S.vp, T(i === 1 ? cT('t_1') : `t_{${i}}`), 'u1l1-tsub', cx, 104, 's', 0);
-      hide(t); hide(s); tiles.push([t, s]);
-      const hp = i > 1 ? hopWith(S.vp, S.g, cx - SP + 8, cx - 8, 50, 20, T(cD('+4')), AMB) : null;
-      if (hp) hops.push(hp);
-      S.item(cx, TW, [t, s], hp);
-    }
-    const counter = add(stage, h('div', 'u1l1-counter', 'hops: <b>0</b>'), W - 200, 16);
-    const cnt = counter.querySelector('b');
-    const scrollTo = (i) => S.scroll(Math.max(0, 20 + (i - 1) * SP + TW - (S.w - 10)));
-    const showTile = (i) => { tiles[i - 1][0].style.opacity = 1; tiles[i - 1][1].style.opacity = 1; };
-    const showHop = (i) => { const hp = hops[i - 2]; hp.g.style.opacity = 1; hp.l.style.opacity = 1; };
-    const fline = add(stage, box(h('div', 'u1l1-fline'), W - 60, 64), 30, 306); hide(fline);
-    fline.innerHTML = T(`t_{${N}}=4(${N})+1=${ans}`);
-    const fbadge = add(stage, h('div', 'u1l1-badge', '1 step'), W - 150, 270); hide(fbadge);
-    const rAns = add(stage, h('div', 'u1l1-rans', ''), W - 330, 196); hide(rAns);
-    rAns.innerHTML = `${T(`t_{${N}}=${ans}`)} after <b>${N - 1}</b> hops`;
-    const steps = [{ cap: `The rule starts at the first term: ${T(cT('t_1=5'))}.`, run: async (c) => { showTile(1); await pop(c, tiles[0][0]); await fadeIn(c, tiles[0][1], 200); } }];
-    const slow = Math.min(N, 6);
-    steps.push({ cap: `Each new term needs the one before it: add 4, add 4, … ${slow === N ? `${T(`t_{${N}}`)} takes <b>${N - 1} hops</b>.` : 'one hop at a time.'}`,
-      run: async (c) => {
-        for (let i = 2; i <= slow; i++) {
-          showTile(i); tiles[i - 1][0].style.opacity = 0; scrollTo(i);
-          const hp = hops[i - 2]; await drawHop(c, hp, 260); await pop(c, tiles[i - 1][0], 240); tiles[i - 1][1].style.opacity = 1; cnt.textContent = i - 1;
-        }
-        if (slow === N) { await show(c, rAns); }
-      } });
-    if (N > slow) {
-      steps.push({ cap: `Keep going… and going. Reaching ${T(`t_{${N}}`)} takes <b>${N - 1} hops</b>: ${T(`t_{${N}}=${ans}`)}.`,
-        run: async (c) => {
-          let last = slow;
-          await tween(c, Math.min(3200, 60 * N), (t) => {
-            const i = Math.round(slow + (N - slow) * t);
-            for (let j = last + 1; j <= i; j++) { showTile(j); showHop(j); }
-            last = Math.max(last, i); scrollTo(i); cnt.textContent = i - 1;
-          }, (t) => t);
-          for (let j = last + 1; j <= N; j++) { showTile(j); showHop(j); }
-          scrollTo(N); cnt.textContent = N - 1; await show(c, rAns);
-        } });
-    }
-    steps.push({ cap: `The formula skips the list: put ${T('n=' + N)} straight in. ${T(`t_{${N}}=4(${N})+1=${ans}`)}.`,
-      run: async (c) => { await show(c, fline); await pop(c, fbadge); } });
-    steps.push({ cap: `Same answer, ${T(String(ans))}. The rule needs <b>every term before</b> it; the formula <b>jumps straight</b> to any position.`,
-      run: async (c) => { const s1 = stamp(stage, '✓ same', { ok: true, x: W - 110, y: 386, size: 'sm' }); await stampIn(c, s1); } });
-    return steps;
-  }
-};
-
-/* =============================== explainer: the cup tower (Example 1) =============================== */
-const cups = {
-  title: 'Nested cups',
-  height: 440,
-  minW: 860,
-  intro: 'Each cup slides inside the one below it. Press <b>Next</b>.',
-  ask: 'Example 1: a tower of 1 cup is 11 cm tall, 2 cups 13 cm, 3 cups 15 cm, 4 cups 17 cm.',
-  make(stage, v, ex) {
-    const W = ex.W, H = 440, svg = stageSvg(stage, W, H);
-    const S = 15, BASE = 412, RX = 60, CX = 232, TOPW = 120, BOTW = 82, CH = 11 * S;
-    // ruler
-    svgEl('rect', { x: RX - 30, y: BASE - 23 * S, width: 34, height: 23 * S + 2, rx: 4, fill: '#fbf3dc', stroke: '#b99a4c', 'stroke-width': 2 }, svg);
-    for (let cm = 0; cm <= 22; cm++) {
-      const y = BASE - cm * S;
-      svgEl('line', { x1: RX + 4, x2: RX + 4 - (cm % 2 ? 9 : 16), y1: y, y2: y, stroke: '#7d6526', 'stroke-width': 1.6 }, svg);
-      if (cm % 2 === 0) { const t = svgEl('text', { x: RX - 15, y: y + 5, 'text-anchor': 'end', class: 'u1l1-rnum' }, svg); t.textContent = cm; }
-    }
-    lab(stage, 'cm', 'u1l1-small', RX - 14, BASE - 23 * S - 4, 'n', 0);
-    svgEl('line', { x1: 110, x2: 340, y1: BASE, y2: BASE, stroke: INK, 'stroke-width': 3 }, svg);
-    const cupL = svgEl('g', {}, svg), markL = svgEl('g', {}, svg);
-    const mkCup = (k) => { // cup k (1 = bottom); bottom at BASE − 2(k−1) cm
-      const b = BASE - 2 * S * (k - 1), t = b - CH, g = svgEl('g', { class: 'u1l1-cup' });
-      svgEl('path', { d: `M${CX - TOPW / 2} ${t} L${CX + TOPW / 2} ${t} L${CX + BOTW / 2} ${b} L${CX - BOTW / 2} ${b} Z`, fill: '#fffaf1', stroke: '#8a6a3a', 'stroke-width': 2.4, 'stroke-linejoin': 'round' }, g);
-      const sl = (y) => [CX - TOPW / 2 + (TOPW - BOTW) / 2 * (y - t) / CH, CX + TOPW / 2 - (TOPW - BOTW) / 2 * (y - t) / CH];
-      const [a1, a2] = sl(t + 54), [b1, b2] = sl(t + 112);
-      svgEl('path', { d: `M${a1} ${t + 54} L${a2} ${t + 54} L${b2} ${t + 112} L${b1} ${t + 112} Z`, fill: k === 1 ? '#c9e6e6' : '#ead2a8', stroke: 'none' }, g);
-      svgEl('rect', { x: CX - TOPW / 2 - 5, y: t - 4, width: TOPW + 10, height: 9, rx: 4.5, fill: '#fff', stroke: '#8a6a3a', 'stroke-width': 2.2 }, g);
-      cupL.insertBefore(g, cupL.firstChild); // a higher cup sits inside (behind) the ones below it
-      return g;
-    };
-    const top = (k) => BASE - 2 * S * (k - 1) - CH;
-    const mline = svgEl('line', { x1: CX + TOPW / 2 + 8, x2: RX + 6, y1: top(1) - 4, y2: top(1) - 4, stroke: BR, 'stroke-width': 2.4, 'stroke-dasharray': '6 5' }, markL); hide(mline);
-    const mread = lab(stage, '', 'u1l1-mread', CX + TOPW / 2 + 14, top(1) - 4, 'e', 0); hide(mread);
-    const setH = (k) => { const y = top(k) - 4; mline.setAttribute('y1', y); mline.setAttribute('y2', y); place(mread, CX + TOPW / 2 + 14, y, 'e', 0); mread.innerHTML = `${T(String(11 + 2 * (k - 1)))} cm`; };
-    // bracket for the 2 cm rim
-    const br = svgEl('path', { d: '', fill: 'none', stroke: AMB, 'stroke-width': 3.2 }, markL); hide(br);
-    const brl = lab(stage, `+2 cm`, 'u1l1-brl', 0, 0, 'e', 0); hide(brl);
-    const setBr = (k) => { const y1 = top(k) - 4, y2 = top(k - 1) - 4, x = CX - TOPW / 2 - 14; br.setAttribute('d', `M${x + 8} ${y1} L${x} ${y1} L${x} ${y2} L${x + 8} ${y2}`); place(brl, x - 6, (y1 + y2) / 2, 'w', 0); };
-    const tb = new ValueTable(stage, { x: 394, y: 14, headers: ['n\\ \\text{(cups)}', 't_n\\ \\text{(cm)}'], rows: [1, 2, 3, 4, 5, 6].map((n) => [n, 9 + 2 * n]), hide: 1, tap: false, cellW: 116, cellH: 54, diffs: true, diffSpace: 90 });
-    const rule = panel(stage, 728, 30, W - 738, 250, ''); hide(rule);
-    rule.innerHTML = `<div class="u1l1-rbig">${T(cD('+2'))}</div><div>each cup adds its <b>rim</b>, 2 cm</div><div class="u1l1-rsm">${T(cT('t_1=11'))}<br>${T('t_4=17')}<br>${T('t_6=21')}</div>`;
-    const cupsUp = []; let n = 0;
-    const addCup = async (c) => {
-      n++; const k = n, g = mkCup(k); cupsUp.push(g);
-      await tween(c, 420, (t) => { g.setAttribute('transform', `translate(0 ${(-90 * (1 - t)).toFixed(1)})`); g.style.opacity = Math.min(1, t * 2); });
-      setH(k); mline.style.opacity = 1; mread.style.opacity = 1; await tb.reveal(k - 1, 1, c);
-    };
-    return [
-      { cap: `One cup: the tower is ${T(cT('11'))} cm tall. That is the first term, ${T(cT('t_1=11'))}.`, run: (c) => addCup(c) },
-      { cap: `Add a cup. It slides <b>inside</b> the first: only its rim sticks out, ${T(cD('2'))} cm higher. ${T('t_2=13')}.`,
-        run: async (c) => { await addCup(c); setBr(2); br.style.opacity = 1; await drawIn(br, 300, c); await pop(c, brl); } },
-      { cap: `Third and fourth cups: ${T('t_3=15')} and ${T('t_4=17')}, as the question says.`,
-        run: async (c) => { br.style.opacity = 0; brl.style.opacity = 0; await addCup(c); await addCup(c); setBr(4); br.style.opacity = 1; brl.style.opacity = 1; } },
-      { cap: `<b>Example 1(b) check.</b> Every cup adds the same 2 cm: <b>add 2</b> to the previous term.`,
-        run: async (c) => { await tb.diffs(c, { labels: () => T(cD('+2')) }); await show(c, rule); } },
-      { cap: `<b>Example 1(a) check.</b> Keep going: ${T('t_5=17+2=19')} and ${T('t_6=19+2=21')}.`,
-        run: async (c) => { br.style.opacity = 0; brl.style.opacity = 0; await addCup(c); await addCup(c); } },
-      { cap: `<b>Example 1(c) check.</b> The little number counts cups: ${T(cT('t_1=11'))}, ${T('t_4=17')}, ${T('t_6=21')}.`,
-        run: async (c) => { [0, 3, 5].forEach((r) => tb.highlight(r, true)); await pulse(c, rule, 1.04); } }
-    ];
-  }
-};
-
 /* =============================== explainer: the hop test (Example 2) =============================== */
 const HT = {
   ar: { label: T('5,\\ 9,\\ 13,\\ 17'), s: ['5', '9', '13', '17'] },
@@ -464,127 +260,6 @@ const hopTest = {
           : `<b>${verdict}</b>, with ${verdict === 'Arithmetic' ? T(cD('d=' + qtex(ds[0]))) : T(cD('r=' + qtex(rs[0])))}.`,
         run: (c) => pop(c, fin) }
     ];
-  }
-};
-
-/* =============================== explainer: patterns that are neither =============================== */
-const SH = {
-  sq: { label: 'Square numbers', vals: [1, 4, 9, 16], name: 'square numbers' },
-  tri: { label: `Example 2(c): ${T('1,\\ 3,\\ 6,\\ 10,\\ 15')}`, vals: [1, 3, 6, 10, 15], name: 'triangular numbers' },
-  fib: { label: 'Fibonacci', vals: [1, 1, 2, 3, 5, 8], name: 'Fibonacci sequence' }
-};
-const shapes = {
-  title: 'Patterns that are neither',
-  height: 450,
-  minW: 900,
-  choices: Object.keys(SH).map((k) => ({ v: k, label: SH[k].label })),
-  intro: (k) => `Build the ${SH[k].name} as pictures. Press <b>Next</b>.`,
-  ask: false,
-  make(stage, k, ex) {
-    const d = SH[k], W = ex.W, H = 450, svg = stageSvg(stage, W, H), N = d.vals.length;
-    const SP = (W - 60) / N, cxs = d.vals.map((_, i) => 30 + SP * (i + 0.5)), FB = 290; // figures sit on y = FB
-    const figs = d.vals.map(() => { const g = svgEl('g', {}, svg); g.style.opacity = 0; return g; });
-    const R = 12, GAP = 34;
-    const dot = (g, x, y, color) => svgEl('circle', { cx: x, cy: y, r: R, fill: color, stroke: '#fff', 'stroke-width': 1.5 }, g);
-    d.vals.forEach((v, i) => {
-      const g = figs[i], n = i + 1, cx = cxs[i];
-      if (k === 'sq') {
-        for (let r = 0; r < n; r++) for (let cc = 0; cc < n; cc++) { const isNew = n > 1 && (r === n - 1 || cc === n - 1); dot(g, cx - (n - 1) * GAP / 2 + cc * GAP, FB - 14 - r * GAP, isNew ? AMB : n === 1 ? T1 : BR); }
-      } else if (k === 'tri') {
-        for (let r = 1; r <= n; r++) for (let cc = 0; cc < r; cc++) { const isNew = n > 1 && r === n; dot(g, cx - (r - 1) * GAP / 2 + cc * GAP, FB - 14 - (n - r) * GAP, isNew ? AMB : n === 1 ? T1 : BR); }
-      } else {
-        const U = 28, bw = 54;
-        const seg = (y0, cnt, color) => { for (let j = 0; j < cnt; j++) svgEl('rect', { x: cx - bw / 2, y: FB - (y0 + j + 1) * U, width: bw, height: U - 2, rx: 3, fill: color, stroke: '#fff', 'stroke-width': 1 }, g); };
-        if (i < 2) seg(0, v, i === 0 ? T1 : BR);
-        else { seg(0, d.vals[i - 2], '#c9a3b1'); seg(d.vals[i - 2], d.vals[i - 1], AMB); }
-      }
-    });
-    const tiles = d.vals.map((v, i) => { const t = tile(stage, cxs[i], FB + 14, 64, 44, T(String(v)), 'u1l1-term' + (i === 0 ? ' u1l1-t1' : '')); hide(t); return t; });
-    const subs = d.vals.map((_, i) => { const s = lab(stage, T(i === 0 ? cT('t_1') : `t_${i + 1}`), 'u1l1-tsub', cxs[i], FB + 60, 's', 0); hide(s); return s; });
-    const diffs = d.vals.slice(1).map((v, i) => v - d.vals[i]), rats = d.vals.slice(1).map((v, i) => v / d.vals[i]);
-    const hops = diffs.map((x, i) => hopWith(stage, svg, cxs[i] + 34, cxs[i + 1] - 34, FB + 98, 20, T('+' + x), SLATE, true));
-    const showFig = async (c, i) => { await appear(c, figs[i], 320); tiles[i].style.opacity = 1; subs[i].style.opacity = 1; await pop(c, tiles[i], 260); };
-    const note = add(stage, box(h('div', 'u1l1-snote2'), W - 40, 46), 20, 6); hide(note);
-    const steps = [];
-    if (k === 'sq') {
-      steps.push({ cap: `The square numbers are squares of dots: ${T(cT('t_1=1'))}, then ${T('2\\times2=4')}.`, run: async (c) => { await showFig(c, 0); await showFig(c, 1); } });
-      steps.push({ cap: `To grow the next square, add an L-shaped border: ${T(cD('+3'))}, then ${T(cD('+5'))}, then ${T(cD('+7'))}.`, run: async (c) => { await showFig(c, 2); await showFig(c, 3); } });
-    } else if (k === 'tri') {
-      steps.push({ cap: `${T('1,\\ 3,\\ 6,\\ 10,\\ 15')} are triangles of dots: each figure adds a new <b>bottom row</b>.`, run: async (c) => { await showFig(c, 0); await showFig(c, 1); await showFig(c, 2); } });
-      steps.push({ cap: `The new row is one dot longer every time: ${T(cD('+2'))}, ${T(cD('+3'))}, ${T(cD('+4'))}, ${T(cD('+5'))}.`, run: async (c) => { await showFig(c, 3); await showFig(c, 4); } });
-    } else {
-      steps.push({ cap: `Fibonacci starts ${T(cT('1') + ',\\ 1')}. Every term after that is the <b>two before it stacked together</b>.`, run: async (c) => { await showFig(c, 0); await showFig(c, 1); } });
-      steps.push({ cap: `${T('1+1=2')}, ${T('1+2=3')}, ${T('2+3=5')}, ${T('3+5=8')}: the newest block (amber) sits on the one before (pink).`, run: async (c) => { for (let i = 2; i < N; i++) await showFig(c, i); } });
-    }
-    steps.push({ cap: `Differences ${T(diffs.join(',\\ '))}: not all equal, so <b>not arithmetic</b>.`, run: async (c) => { for (const hp of hops) await drawHop(c, hp, 260); } });
-    steps.push({ cap: `Ratios ${T(rats.map(dec).join(',\\ '))}${rats.some((x) => !Number.isInteger(x * 100)) ? ' (rounded)' : ''}: not all equal, so <b>not geometric</b>. <b>Neither</b>, but still a pattern.`,
-      run: async (c) => {
-        note.innerHTML = `<b>Neither</b>: ${k === 'sq' ? `the rule is ${T('t_n=n^2')}` : k === 'tri' ? 'each figure adds a row one dot longer' : 'each term is the sum of the two before it'}`;
-        hops.forEach((hp) => hp.recolor(RED)); await show(c, note);
-      } });
-    return steps;
-  }
-};
-
-/* =============================== explainer: finite and infinite =============================== */
-const finite = {
-  title: 'Finite or infinite?',
-  height: 340,
-  minW: 900,
-  choices: [{ v: 'fin', label: T('4,\\ 7,\\ 10,\\ \\dots,\\ 31') }, { v: 'inf', label: T('4,\\ 7,\\ 10,\\ \\dots') }],
-  intro: 'Where are the three dots? Press <b>Next</b>.',
-  ask: false,
-  make(stage, k, ex) {
-    const W = ex.W, H = 340, fin = k === 'fin', svg = stageSvg(stage, W, H), SY = 112;
-    // the written form, piece by piece
-    const parts = fin ? ['4,', '7,', '10,', '\\dots,', '31'] : ['4,', '7,', '10,', '\\dots'];
-    const wr = add(stage, h('div', 'u1l1-written'), 0, 10);
-    const pe = parts.map((p) => { const s = h('div', 'u1l1-wp' + (p.startsWith('\\dots') ? ' u1l1-wdots' : ''), T(p)); wr.appendChild(s); return s; });
-    hide(wr);
-    const VPX = 20, S = new Strip(stage, VPX, SY, W - 40, 150);
-    const SP = fin ? 82 : 86, TW = 68, NT = fin ? 10 : 26, x0 = 14 + TW / 2, tiles = [];
-    for (let i = 1; i <= NT; i++) {
-      const cx = x0 + (i - 1) * SP, t = tile(S.vp, cx, 50, TW, 48, T(String(3 * i + 1)), 'u1l1-term' + (i === 1 ? ' u1l1-t1' : '') + (i >= 4 && (!fin || i <= 9) ? ' u1l1-ghost' : ''));
-      const s = lab(S.vp, T(i === 1 ? cT('t_1') : `t_{${i}}`), 'u1l1-tsub', cx, 102, 's', 0);
-      const hp = i > 1 ? hopWith(S.vp, S.g, cx - SP + 8, cx - 8, 48, 18, T(cD('+3')), AMB) : null;
-      hide(t); hide(s); tiles.push({ t, s, hp }); S.item(cx, TW, [t, s], hp);
-    }
-    const showT = (i) => { const o = tiles[i - 1]; o.t.style.opacity = 1; o.s.style.opacity = 1; if (o.hp) { o.hp.g.style.opacity = 1; o.hp.l.style.opacity = 1; } };
-    const steps = [{ cap: fin ? `Read it: ${T('4,\\ 7,\\ 10,\\ \\dots,\\ 31')}. The three dots are in the <b>middle</b>.` : `Read it: ${T('4,\\ 7,\\ 10,\\ \\dots')}. The three dots are at the <b>end</b>.`,
-      run: async (c) => { wr.style.left = ((W - wr.offsetWidth) / 2) + 'px'; await show(c, wr); await pulse(c, pe[3], 1.25, 500); } }];
-    steps.push({ cap: `The first three terms: start at ${T(cT('4'))} and add ${T(cD('3'))} each time.`,
-      run: async (c) => { for (let i = 1; i <= 3; i++) { showT(i); await pop(c, tiles[i - 1].t, 220); } } });
-    if (fin) {
-      const a = VPX + x0 + 3 * SP - TW / 2, b = VPX + x0 + 8 * SP + TW / 2, y = SY + 132;
-      const brace = svgEl('path', { class: 'bk-stroke', d: `M${a} ${y} L${a} ${y + 10} L${b} ${y + 10} L${b} ${y}`, fill: 'none', stroke: AMB, 'stroke-width': 3 }, svg); hide(brace);
-      const bl = lab(stage, `the ${T(cD('\\dots'))} stands for these`, 'u1l1-blab', (a + b) / 2, y + 14, 's', 0); hide(bl);
-      steps.push({ cap: `The dots in the middle stand for the terms nobody wrote out: ${T('13,\\ 16,\\ 19,\\ 22,\\ 25,\\ 28')}.`,
-        run: async (c) => {
-          for (let i = 4; i <= 9; i++) { showT(i); await pop(c, tiles[i - 1].t, 160); }
-          brace.style.opacity = 1; await drawIn(brace, 400, c); await fadeIn(c, bl, 260);
-        } });
-      const wallX = VPX + x0 + 9 * SP + TW / 2 + 14;
-      const wall = svgEl('rect', { x: wallX, y: SY + 26, width: 12, height: 110, rx: 3, fill: BR }, svg); hide(wall);
-      const flag = lab(stage, '<b>last term</b>', 'u1l1-flag', wallX + 12, SY + 160, 'sw', 0); hide(flag);
-      steps.push({ cap: `Then ${T('31')}, and it <b>stops</b>. A last term means the sequence is <b>finite</b> (this one has 10 terms).`,
-        run: async (c) => { showT(10); await pop(c, tiles[9].t, 260); wall.style.opacity = 1; await appear(c, wall, 260); await pop(c, flag); } });
-    } else {
-      const offOf = (i) => Math.max(0, x0 + (i - 1) * SP + TW / 2 - (S.w - 10));
-      steps.push({ cap: `The dots at the end mean <b>keep going</b>: ${T('13,\\ 16,\\ 19,\\ \\dots')} and on, and on.`,
-        run: async (c) => {
-          let last = 3;
-          await tween(c, 3000, (t) => {
-            const i = Math.round(3 + (NT - 3) * t);
-            for (let j = last + 1; j <= i; j++) showT(j);
-            last = Math.max(last, i); S.scroll(offOf(i));
-          }, (t) => t);
-          for (let j = last + 1; j <= NT; j++) showT(j);
-          S.scroll(offOf(NT));
-        } });
-      const fe = lab(stage, 'no last term → forever', 'u1l1-flag u1l1-forever', W - 26, SY + 164, 'w', 0); hide(fe);
-      steps.push({ cap: `However far you go there is always a next term. <b>No last term</b>: the sequence is <b>infinite</b>.`, run: (c) => pop(c, fe) });
-    }
-    return steps;
   }
 };
 
@@ -718,7 +393,6 @@ standup('u1l1', {
 });
 
 /* =============================== mount =============================== */
-mountStreet();
 mountFigures();
-export const explainers = mountExplainers({ machine, twoWays, cups, hopTest, shapes, finite, isTerm, dots });
-export const _test = { MS, HT, SH, IT, DT, Q, qsub, qdiv };
+export const explainers = mountExplainers({ machine, hopTest, isTerm, dots });
+export const _test = { MS, HT, IT, DT, Q, qsub, qdiv };

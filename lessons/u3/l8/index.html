@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u3l8.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,15 @@
 </head>
 <body>
 <main class="lesson screen u3l8">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Bear Walk">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="8s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="30" text-anchor="middle">🐾</text></g><g><animateTransform attributeName="transform" type="rotate" values="0 300 30;360 300 30" dur="6s" repeatCount="indefinite"/><text x="300" y="30" font-size="36" text-anchor="middle" dominant-baseline="central">🧭</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Bear Walk</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">A bear walks <b>1&nbsp;km south</b>, then <b>1&nbsp;km east</b>, then <b>1&nbsp;km north</b>. It ends up exactly where it started.</p><p class="vw-ask">What colour is the bear?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A walk of 1 km south, 1 km east and 1 km north, drawn on a map"><path d="M80 48 L80 188 L220 188 L220 48" fill="none" stroke="#4a4436" stroke-width="4" stroke-dasharray="2 10" stroke-linecap="round"/><line x1="96" y1="48" x2="204" y2="48" stroke="#c93a33" stroke-width="3" stroke-dasharray="8 7"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="150" y="40" font-size="36" font-weight="800" fill="#c93a33" text-anchor="middle">?</text></g><circle cx="80" cy="48" r="8" fill="#12805a"/><text x="62" y="40" font-size="16" font-weight="800" fill="#12805a" text-anchor="end">start</text><text x="66" y="124" font-size="18" font-weight="800" fill="#2b55a0" text-anchor="end">1 km</text><text x="150" y="214" font-size="18" font-weight="800" fill="#2b55a0" text-anchor="middle">1 km</text><text x="234" y="124" font-size="18" font-weight="800" fill="#2b55a0" text-anchor="start">1 km</text><g><animateMotion path="M80 48 L80 188 L220 188 L220 48" dur="6s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;.85;1" calcMode="linear"/><text x="0" y="0" font-size="30" text-anchor="middle" dominant-baseline="central">🐾</text></g><g transform="translate(292 200)"><circle r="26" fill="#fffdf6" stroke="#4a4436" stroke-width="3"/><text y="-32" font-size="16" font-weight="800" fill="#4a4436" text-anchor="middle">N</text><g><animateTransform attributeName="transform" type="rotate" values="-14;10;-6;4;-14" dur="3s" repeatCount="indefinite"/><polygon points="0,-20 6,0 -6,0" fill="#c93a33"/><polygon points="0,20 6,0 -6,0" fill="#9aa0aa"/></g></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>How could that walk end where it started?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>White: it is a polar bear.</b> Start at the <b>North Pole</b>. From the pole, every direction is south; walking “east” keeps you 1&nbsp;km from the pole, on a circle around it; walking north takes you straight back to the pole. (There are also starting points near the South Pole where the walk works, but no bears live there.)</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -44,41 +54,6 @@
   <div class="outcome"><b>T3</b> Solve problems, using the cosine law and sine law, including the ambiguous case.<br><span class="muted">Today: choosing a method, bearings, two-triangle problems, triangles in circles and the area of a triangle. Calculator in <b>Degree</b> mode.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Treasure Map" id="wu" style="--wf-side: 400px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Treasure Map</h2>
-  <p class="wf-rule">“From the palm tree, walk <b>10 paces</b> on a bearing of <b>060°</b>, then <b>10 paces</b> on a bearing of <b>180°</b>. Dig.” A <b>bearing</b> is an angle measured <b>clockwise from north</b>.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u3l8-map" id="u3l8-map"></div>
-    <div class="u3l8-wbtns">
-      <button type="button" class="pill" id="u3l8-m1">Walk leg 1</button>
-      <button type="button" class="pill" id="u3l8-m2">Walk leg 2</button>
-      <button type="button" class="pill" id="u3l8-m3">Line back to the tree</button>
-      <button type="button" class="pill" id="u3l8-m0">Start over</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u3l8-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Which direction is a bearing of <span class="tex">090^\circ</span>? Of <span class="tex">270^\circ</span>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l8-wa"><div class="bk-ans"><b>East</b> and <b>west.</b> A quarter turn clockwise from north is east; three quarters is west.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>To walk straight back along leg 1, what bearing do you need? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l8-wa"><div class="bk-ans"><span class="tex">240^\circ</span>. Turning around adds half a turn: <span class="tex">060^\circ+180^\circ=240^\circ</span>.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> How far is the treasure from the palm tree? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> 5 paces</div>
-        <div class="opt right"><b>B</b> 10 paces</div>
-        <div class="opt"><b>C</b> about 14 paces</div>
-        <div class="opt"><b>D</b> 20 paces</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>B, 10 paces.</b> At the turn, the way back to the tree is <span class="tex">240^\circ</span> and the new path is <span class="tex">180^\circ</span>: the angle between them is <span class="tex">60^\circ</span>. Two sides of 10 with <span class="tex">60^\circ</span> between them: the other two angles share <span class="tex">120^\circ</span> equally, so all three are <span class="tex">60^\circ</span>. It’s <b>equilateral</b>!<br>
-        <span class="muted">Today: when the angle isn’t a nice <span class="tex">60^\circ</span>, the cosine law finds the distance.</span></div>
-    </div>
-  </div></div>
-  <p class="u3l8-social">Challenge your neighbour: keep leg 1 the same. What bearing for leg 2 (still 10 paces) would leave the treasure <b>due east</b> of the tree?</p>
-</section>
-
 <!-- ================= 1. Choosing a method ================= -->
 <section class="card" data-ink="s1" data-section="1. Choosing a Method">
   <div class="sec-h"><span class="badge">1</span><h2>Choosing a Method</h2></div>
@@ -89,8 +64,6 @@
     <div class="u3l8-key u3l8-kgreen"><div class="u3l8-kh">Cosine law, then sine law</div>Once the cosine law gives one missing part, a full pair is known, so the (easier) sine law usually finishes the triangle.</div>
     <div class="u3l8-key u3l8-kamber"><div class="u3l8-kh">Finding an angle?</div>The cosine law is safer: it is <b>never ambiguous</b>, and a <b>negative cosine</b> shows an obtuse angle.</div>
   </div>
-  <div class="part think"><div class="pl"><span class="think-tag">Think</span> For SAS, why can’t we start with the sine law?</div><div class="work" style="--h:70px"></div>
-    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">No angle is known <b>together with</b> its opposite side, so every sine-law ratio has an unknown in it. The cosine law uses the angle <b>between</b> the two sides.</div></div></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -111,7 +84,6 @@
 <section class="card" data-ink="s1b" data-section="1. Clock Hands">
   <h3 class="sub">Clock hands make a triangle</h3>
   <p>The two hands of a clock and the line joining their tips form a triangle. The 12 hour marks are <span class="tex">360^\circ\div12=30^\circ</span> apart. The minute hand moves <span class="tex">6^\circ</span> each minute, and the hour hand moves <span class="tex">0.5^\circ</span> each minute (halfway between marks at the half hour).</p>
-  <div class="explainer" data-explainer="clock"></div>
 </section>
 
 <section class="card example" data-ink="ex2" data-section="Example 2">
@@ -141,7 +113,6 @@
     </div>
     <div class="u3l8-figcol"><div id="u3l8-fig140"></div><div class="muted u3l8-figcap">bearing <span class="tex">140^\circ=\text{S}\,40^\circ\,\text{E}</span></div></div>
   </div>
-  <div class="explainer" data-explainer="bearingForms"></div>
 </section>
 
 <section class="card example" data-ink="ex3" data-section="Example 3">
@@ -218,6 +189,15 @@
   <button class="more" data-more="ex5-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 8 · Questions 1–5</h2>
+  <p class="pr-t">Choose a method, clock hands, bearing forms, and bearings that make a triangle.</p>
+  <div class="pr-chips n4"><span><b>1</b>Choose a method</span><span><b>2</b>Clock hands</span><span><b>3</b>The two bearing forms</span><span><b>4–5</b>Bearings make a triangle</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u3l8">Open the Practice site</a></div>
+</section>
+
 <!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
 <section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u3l8"></section>
 
@@ -241,12 +221,6 @@
     Right <span class="tex">\triangle BFT</span>: <span class="tex">TF=BT\sin47^\circ\approx42.2</span> m<br>The mast is about <b>42.2 m</b> tall.</div></div></div>
   <div class="space" id="ex6-space"></div>
   <button class="more" data-more="ex6-space">+ More space</button>
-</section>
-
-<section class="card" data-ink="s3b" data-section="3. A Quadrilateral and a Diagonal">
-  <h3 class="sub">A quadrilateral split by a diagonal</h3>
-  <p>A diagonal cuts a quadrilateral into two triangles that <b>share</b> the diagonal. Solve the triangle with enough information, then carry the shared side into the other one.</p>
-  <div class="explainer" data-explainer="plot"></div>
 </section>
 
 <section class="card example" data-ink="ex7" data-section="Example 7">
@@ -338,7 +312,7 @@
     <div><b>Circles and area.</b> Radii are equal (isosceles); central <span class="tex">=2\times</span> inscribed; tangent <span class="tex">\perp</span> radius. <span class="tex">\text{Area}=\tfrac12ab\sin C</span> with the angle <b>between</b> the sides.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u3l8">
-    <div><div class="kicker">Your turn</div><b>Assignment 8 — Choosing the Sine Law or the Cosine Law</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 8 · Questions 6–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l9/">
     <div><div class="kicker">Next lesson</div><b>Lesson 9 — Unit 3 Review</b><div class="muted">Every tool in the unit together: angles in standard position, ratios, the CAST rule, exact values and the laws.</div></div><span class="arrow">→</span>

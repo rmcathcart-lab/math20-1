@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rational Expressions and Non-Permissible Values · Math 20-1 6.1</title>
+<meta name="description" content="Math 20-1 Unit 6 Lesson 1: what a rational expression is, evaluating one, why division by zero is undefined, non-permissible values from monomial, binomial and trinomial denominators (factor first), NPVs in terms of y, building an expression with given NPVs, and NPVs in a context. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u6l1.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u6l1">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Missing Dollar">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="7s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="40" text-anchor="middle" transform="scale(-1 1)">🧳</text></g><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="7s" begin="3.5s" repeatCount="indefinite"/><text x="0" y="46" font-size="40" text-anchor="middle">🛎️</text></g><text x="250" font-size="30" text-anchor="middle">💵<animate attributeName="y" values="64;-6" dur="3.2s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.2s" begin="0s" repeatCount="indefinite"/></text><text x="305" font-size="30" text-anchor="middle">💵<animate attributeName="y" values="64;-6" dur="3.6s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.6s" begin="1.6s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Missing Dollar</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Three friends pay <b>$30</b> for a hotel room, $10 each. It really costs <b>$25</b>, so the bellhop brings back $5: he gives each friend <b>$1</b> and keeps <b>$2</b>.</p><p class="vw-ctx">Each paid $9: <span class="tex">3\times\$9=\$27</span>, and <span class="tex">\$27+\$2=\$29</span>.</p><p class="vw-ask">Where did the missing dollar go?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A hotel desk bell ringing and three one-dollar coins hopping beside a big question mark"><g><animateTransform attributeName="transform" type="rotate" values="0 110 190;-7 110 190;6 110 190;0 110 190;0 110 190" keyTimes="0;.08;.16;.24;1" dur="2.4s" repeatCount="indefinite"/><rect x="40" y="186" width="140" height="18" rx="6" fill="#4a4436"/><path d="M52 186 A58 58 0 0 1 168 186 Z" fill="#e0a11b" stroke="#4a4436" stroke-width="4"/><path d="M78 160 A34 34 0 0 1 104 140" fill="none" stroke="#fff6d8" stroke-width="6" stroke-linecap="round"/><rect x="104" y="116" width="12" height="14" fill="#4a4436"/><rect x="96" y="108" width="28" height="9" rx="4" fill="#4a4436"/></g><text x="110" y="88" font-size="26" font-weight="800" fill="#c93a33" text-anchor="middle">DING!<animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.06;.3;.4;1" dur="2.4s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -16;0 0" dur="1.2s" begin="0s" repeatCount="indefinite"/><circle cx="214" cy="196" r="20" fill="#e9c35a" stroke="#4a4436" stroke-width="3.5"/><circle cx="214" cy="196" r="13" fill="none" stroke="#b88a1c" stroke-width="2"/><text x="214" y="202" font-size="17" font-weight="800" fill="#4a4436" text-anchor="middle">$1</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -16;0 0" dur="1.2s" begin="0.4s" repeatCount="indefinite"/><circle cx="259" cy="196" r="20" fill="#e9c35a" stroke="#4a4436" stroke-width="3.5"/><circle cx="259" cy="196" r="13" fill="none" stroke="#b88a1c" stroke-width="2"/><text x="259" y="202" font-size="17" font-weight="800" fill="#4a4436" text-anchor="middle">$1</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -16;0 0" dur="1.2s" begin="0.8s" repeatCount="indefinite"/><circle cx="304" cy="196" r="20" fill="#e9c35a" stroke="#4a4436" stroke-width="3.5"/><circle cx="304" cy="196" r="13" fill="none" stroke="#b88a1c" stroke-width="2"/><text x="304" y="202" font-size="17" font-weight="800" fill="#4a4436" text-anchor="middle">$1</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -9;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="262" y="120" font-size="86" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Follow the money. Where is every dollar?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>No dollar is missing!</b> Adding the bellhop’s $2 to the $27 is the trick: that $2 is already <b>inside</b> the $27. The friends paid $27 in total: <span class="tex">\$25</span> to the hotel <span class="tex">+\ \$2</span> to the bellhop. The right sum adds the money they got back: <span class="tex">\$27+\$3=\$30</span>. (Every dollar: $25 hotel, $2 bellhop, $3 back in their pockets.)</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 6 Rational Expressions and Equations · Lesson 1</div>
+  <h1>Rational Expressions and Non-Permissible Values</h1>
+  <p class="lede">A <b>rational expression</b> is a fraction made of polynomials. It works like any fraction, except where its <b>denominator is 0</b>: those values of the variable are its <b>non-permissible values</b>, and the expression has no value there.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>tell whether an expression is a <b>rational expression</b>, and <b>evaluate</b> one</li>
+      <li>explain why <b>division by zero</b> is undefined, using multiplication and a table of values</li>
+      <li>find the <b>non-permissible values</b> (NPVs), <b>factoring the denominator first</b>, including in terms of <span class="tex">y</span></li>
+      <li>see why two expressions with the same values can have <b>different restrictions</b></li>
+      <li><b>build</b> an expression with given NPVs, and use NPVs in a <b>context</b></li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN4</b> Determine equivalent forms of rational expressions (limited to numerators and denominators that are monomials, binomials or trinomials).<br><span class="muted">Today: what a rational expression is, evaluating it, and its non-permissible values.</span></div>
+</section>
+
+<!-- ================= 1. What is a rational expression? ================= -->
+<section class="card" data-ink="s1" data-section="1. What Is a Rational Expression?">
+  <div class="sec-h"><span class="badge">1</span><h2>What Is a Rational Expression?</h2></div>
+  <p>A <b>rational number</b> is a quotient <span class="tex">\dfrac{p}{q}</span> of two integers with <span class="tex">q\ne0</span>. In the same way, a <b>rational expression</b> is a quotient <span class="tex">\dfrac{P}{Q}</span> of two <b>polynomials</b>, where <span class="tex">Q\ne0</span>. A polynomial has only whole-number exponents on its variables: no variable under a radical, in an exponent or in a denominator. A polynomial by itself, such as <span class="tex">x^2-4x+1</span>, is also a rational expression (its denominator is <span class="tex">1</span>).</p>
+  <div class="def amber u6l1-key"><b>Rational expression:</b>&ensp;<span class="tex">\dfrac{\textcolor{#12805a}{\text{polynomial}}}{\textcolor{#1f5bd6}{\text{polynomial}}}</span>, the denominator not <span class="tex">0</span>. &emsp; Examples: <span class="tex">\dfrac{5}{x}</span>, &ensp;<span class="tex">\dfrac{x+3}{x^2-4}</span>, &ensp;<span class="tex">\dfrac{2a^2-1}{7}</span>.</div>
+  <p>To <b>evaluate</b> a rational expression, substitute the value and simplify the <span class="u6l1-n">numerator</span> and the <span class="u6l1-d">denominator</span> separately. A numerator of <span class="tex">0</span> is fine (the value is <span class="tex">0</span>); a denominator of <span class="tex">0</span> makes the expression <b>undefined</b>.</p>
+  <div class="explainer" data-explainer="machine"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Rational or not?</h3></div>
+  <p class="q">Is each a rational expression? Explain.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x^2-5}{3x}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Yes:</b> both parts are polynomials.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{4}{\sqrt{x}+1}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>No:</b> <span class="tex">\sqrt{x}</span> is not a polynomial term.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{2y+7}{9}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Yes:</b> a polynomial over the polynomial <span class="tex">9</span>.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{x}{x^2+1}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Yes:</b> both parts are polynomials.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Evaluate</h3></div>
+  <p class="q">Evaluate <span class="tex">\dfrac{x^2-4x}{2x+6}</span> for each value of <span class="tex">x</span>.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">x=5</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{25-20}{10+6}=\boldsymbol{\dfrac{5}{16}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x=-1</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{1+4}{-2+6}=\boldsymbol{\dfrac{5}{4}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">x=4</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{16-16}{8+6}=\dfrac{0}{14}=\boldsymbol{0}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">x=-3</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{9+12}{-6+6}=\dfrac{21}{0}</span>: <b>undefined</b></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Why division by zero is undefined ================= -->
+<section class="card" data-ink="s2" data-section="2. Why Division by Zero Is Undefined">
+  <div class="sec-h"><span class="badge">2</span><h2>Why Division by Zero Is Undefined</h2></div>
+  <p>Division undoes multiplication: <span class="tex">\dfrac{12}{3}=4</span> because <span class="tex">4\times3=12</span>. If <span class="tex">\dfrac{12}{0}</span> had a value <span class="tex">k</span>, then <span class="tex">k\times0</span> would be <span class="tex">12</span>, but <span class="tex">k\times0=0</span> for every <span class="tex">k</span>. So <span class="tex">\dfrac{12}{0}</span> has no value. (<span class="tex">\dfrac{0}{0}</span> fails too: every <span class="tex">k</span> works, so there is no single value.)</p>
+  <p>A table of values shows what happens near a value that makes a denominator <span class="tex">0</span>: the expression grows without bound and changes sign, so no number fits there. On a calculator, enter the expression as Y1 and look at its TABLE: it shows ERROR at that value.</p>
+  <div class="explainer" data-explainer="zero"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Close to the denominator’s zero</h3></div>
+  <div class="u6l1-ex3">
+    <div>
+      <div class="part"><div class="pl">(a) Complete the table for <span class="tex">\dfrac{x+1}{x-3}</span>.</div>
+        <table class="u6l1-tbl"><tr><th><span class="tex">x</span></th><td><span class="tex">2.9</span></td><td><span class="tex">2.99</span></td><td><span class="tex">3</span></td><td><span class="tex">3.01</span></td><td><span class="tex">3.1</span></td><td><span class="tex">4</span></td></tr>
+          <tr><th><span class="tex">\dfrac{x+1}{x-3}</span></th><td><span data-reveal><span class="tex">-39</span></span></td><td><span data-reveal><span class="tex">-399</span></span></td><td><span data-reveal><span class="u6l1-und">undef.</span></span></td><td><span data-reveal><span class="tex">401</span></span></td><td><span data-reveal><span class="tex">41</span></span></td><td><span data-reveal><span class="tex">5</span></span></td></tr></table>
+        <div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-39,\ -399,\ \text{undefined},\ 401,\ 41,\ 5</span></div></div></div>
+      <div class="part"><div class="pl">(b) Describe what happens to the value as <span class="tex">x</span> gets close to <span class="tex">3</span>, and explain why there is no value at <span class="tex">x=3</span>.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">From the left the values are <b>large and negative</b> (<span class="tex">-39</span>, <span class="tex">-399</span>, …); from the right they are <b>large and positive</b> (<span class="tex">41</span>, <span class="tex">401</span>, …). At <span class="tex">x=3</span> the denominator is <span class="tex">0</span>: <span class="tex">\frac{4}{0}</span> has no value, so the expression is <b>undefined</b> there.</div></div></div>
+    </div>
+    <figure class="u6l1-fig"><div data-bk-graph='{"width":300,"height":300,"xmin":-3,"xmax":9,"ymin":-12,"ymax":12,"xlabels":2,"ylabels":5,"ystep":1,"fontSize":14,"items":[{"fn":["(x+1)/(x-3)",{"color":"blue"}]},{"vline":[3]}]}'></div>
+      <figcaption>The graph of <span class="tex">y=\dfrac{x+1}{x-3}</span> has no point at <span class="tex">x=3</span>.</figcaption></figure>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Table of values.</b> Type it as Y1 with brackets around the top and the bottom: <span class="keys"><kbd>Y=</kbd><kbd>(</kbd><kbd>X,T,θ,n</kbd><kbd>+</kbd><kbd>1</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(</kbd><kbd>X,T,θ,n</kbd><kbd>−</kbd><kbd>3</kbd><kbd>)</kbd></span>. Set <span class="keys"><kbd>2nd</kbd><kbd>TBLSET</kbd></span> (TblStart 1, ΔTbl 1), then <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>: the row <span class="tex">x=3</span> says <b>ERROR</b>. With TblStart 2.98 and ΔTbl 0.01 you see the values blow up on both sides of 3.</div>
+    <div class="u6l1-pcol"><button class="pill" data-keys="Y= CLEAR ( X + 1 ) ÷ ( X − 3 ) TBLSET 1 ENTER 1 ENTER TABLE ► ▼ ▼ ▼">Show me</button><button class="pill" data-keys="Y= CLEAR ( X + 1 ) ÷ ( X − 3 ) TBLSET 2.98 ENTER .01 ENTER TABLE ► ▼ ▼ ▼">Close to 3</button></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Non-permissible values ================= -->
+<section class="card" data-ink="s3" data-section="3. Non-Permissible Values">
+  <div class="sec-h"><span class="badge">3</span><h2>Non-Permissible Values</h2></div>
+  <p>A <b>non-permissible value</b> (NPV) is a value of the variable that makes a denominator equal <span class="tex">0</span>. These values are the <b>restrictions</b> on the variable. Only the denominator matters: a numerator equal to <span class="tex">0</span> is allowed.</p>
+  <div class="def amber"><b>To find the NPVs:</b>&ensp;set each <span class="u6l1-d">denominator</span> (each factor with a variable) equal to <span class="tex">0</span> and solve. Write them as <span class="tex">x\ne3</span>, or <span class="tex">x\ne-2,\ 5</span>, or <span class="tex">x\ne\pm4</span>.</div>
+  <p>A denominator with no variable, such as <span class="tex">8</span>, gives no NPV. A denominator like <span class="tex">x^2+16</span> is never <span class="tex">0</span> (a square is never negative, so <span class="tex">x^2+16\ge16</span>), so it gives no NPV either.</p>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Monomial and binomial denominators</h3></div>
+  <p class="q">Determine the non-permissible values.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{9}{5x}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">5x=0</span><br><span class="tex">\boldsymbol{x\ne0}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{2y-1}{y+8}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y+8=0</span><br><span class="tex">\boldsymbol{y\ne-8}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{m^2+4}{12-3m}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">12-3m=0\Rightarrow m=4</span><br><span class="tex">\boldsymbol{m\ne4}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{x}{7x+2}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">7x+2=0\Rightarrow x=-\frac{2}{7}</span><br><span class="tex">\boldsymbol{x\ne-\frac{2}{7}}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\dfrac{4k+3}{10}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The denominator <span class="tex">10</span> is never <span class="tex">0</span>: <b>no NPVs</b>.</div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\dfrac{3x}{x^2+16}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+16\ge16</span>, never <span class="tex">0</span>: <b>no NPVs</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Factor the denominator first ================= -->
+<section class="card" data-ink="s4" data-section="4. Factor the Denominator First">
+  <div class="sec-h"><span class="badge">4</span><h2>Factor the Denominator First</h2></div>
+  <p>When a denominator is a trinomial, a difference of squares or has a common factor, <b>factor it fully</b> (Unit 4) and use the zero product property: each factor with a variable gives an NPV. Ignore the numerator, even if it shares a factor with the denominator. In an expression with more than one fraction, <b>every</b> denominator gives NPVs. With two variables, solve for the variable asked for (for example, <span class="tex">x</span> in terms of <span class="tex">y</span>).</p>
+  <div class="explainer" data-explainer="punch"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Factor, then find the NPVs</h3></div>
+  <p class="q">Determine the non-permissible values.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x-4}{x^2+2x-15}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x+5)(x-3)=0</span><br><span class="tex">\boldsymbol{x\ne-5,\ 3}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{8}{x^2-36}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x-6)(x+6)=0</span><br><span class="tex">\boldsymbol{x\ne\pm6}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{n+2}{3n^2-12n}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3n(n-4)=0</span><br><span class="tex">\boldsymbol{n\ne0,\ 4}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{1}{2x^2+7x-4}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">ac=-8</span>: <span class="tex">8</span> and <span class="tex">-1</span><br><span class="tex">(2x-1)(x+4)=0</span><br><span class="tex">\boldsymbol{x\ne\frac{1}{2},\ -4}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\dfrac{y+3}{y^2-10y+25}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(y-5)^2=0</span><br><span class="tex">\boldsymbol{y\ne5}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\dfrac{5}{x^3-9x}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x(x^2-9)=x(x-3)(x+3)=0</span><br><span class="tex">\boldsymbol{x\ne0,\ \pm3}</span></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Two variables, two fractions</h3></div>
+  <p class="q">Determine the non-permissible values (in (b), for <span class="tex">x</span> in terms of <span class="tex">y</span>).</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{5}{3a^2b}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3a^2b=0</span> when <span class="tex">a=0</span> or <span class="tex">b=0</span>.<br><span class="tex">\boldsymbol{a\ne0,\ b\ne0}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x+y}{x^2-25y^2}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x-5y)(x+5y)=0</span><br><span class="tex">\boldsymbol{x\ne\pm5y}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{x}{x-1}+\dfrac{2}{x^2+4x}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x-1=0</span> and <span class="tex">x(x+4)=0</span><br><span class="tex">\boldsymbol{x\ne1,\ 0,\ -4}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–8">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 1 · Questions 1–8</h2>
+  <p class="pr-t">Rational or not, evaluating, a table near an NPV, then non-permissible values: simple denominators, factored ones, in terms of <span class="tex">y</span>, and two fractions.</p>
+  <div class="pr-chips n4"><span><b>1–3</b>Rational or not, evaluate</span><span><b>4</b>Table near an NPV</span><span><b>5–6</b>NPVs, factor first</span><span><b>7–8</b>In terms of <span class="tex">y</span>, two fractions</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 6.</span><a class="pill" href="../../../#/lesson/u6l1">Open the Practice site</a></div>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u6l1"></section>
+
+<!-- ================= 5. Same values, different restrictions ================= -->
+<section class="card" data-ink="s5" data-section="5. Same Values, Different Restrictions">
+  <div class="sec-h"><span class="badge">5</span><h2>Same Values, Different Restrictions</h2></div>
+  <p>Two rational expressions can give the same value for almost every <span class="tex">x</span> but have different NPVs. This is the idea behind simplifying (Lesson 2): the restrictions of the original expression must be kept.</p>
+  <div class="explainer" data-explainer="twins"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Spot the difference</h3></div>
+  <div class="part"><div class="pl">(a) Complete the table. Write “undefined” where there is no value.</div>
+    <table class="u6l1-tbl u6l1-tbl7"><tr><th><span class="tex">x</span></th><td><span class="tex">-4</span></td><td><span class="tex">-3</span></td><td><span class="tex">-2</span></td><td><span class="tex">0</span></td><td><span class="tex">1</span></td><td><span class="tex">2</span></td></tr>
+      <tr><th><span class="tex">\dfrac{3x+6}{x^2+5x+6}</span></th><td><span data-reveal><span class="tex">-3</span></span></td><td><span data-reveal><span class="u6l1-und">undefined</span></span></td><td><span data-reveal><span class="u6l1-und">undefined</span></span></td><td><span data-reveal><span class="tex">1</span></span></td><td><span data-reveal><span class="tex">\frac{3}{4}</span></span></td><td><span data-reveal><span class="tex">\frac{3}{5}</span></span></td></tr>
+      <tr><th><span class="tex">\dfrac{3}{x+3}</span></th><td><span data-reveal><span class="tex">-3</span></span></td><td><span data-reveal><span class="u6l1-und">undefined</span></span></td><td><span data-reveal><span class="tex">3</span></span></td><td><span data-reveal><span class="tex">1</span></span></td><td><span data-reveal><span class="tex">\frac{3}{4}</span></span></td><td><span data-reveal><span class="tex">\frac{3}{5}</span></span></td></tr></table>
+    <div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">First row: <span class="tex">-3,\ \text{undefined},\ \text{undefined},\ 1,\ \tfrac{3}{4},\ \tfrac{3}{5}</span>. Second row: <span class="tex">-3,\ \text{undefined},\ 3,\ 1,\ \tfrac{3}{4},\ \tfrac{3}{5}</span>.</div></div></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(b) For which value of <span class="tex">x</span> do the expressions differ?</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">At <span class="tex">\boldsymbol{x=-2}</span>: the first is <span class="tex">\frac{0}{0}</span> (undefined), the second is <span class="tex">3</span>. Everywhere else they are equal.</div></div></div>
+    <div class="part"><div class="pl">(c) State the NPVs of each expression.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+5x+6=(x+2)(x+3)</span>, so the first has <span class="tex">\boldsymbol{x\ne-2,\ -3}</span>. The second has only <span class="tex">\boldsymbol{x\ne-3}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Building expressions, context ================= -->
+<section class="card" data-ink="s6" data-section="6. Building Expressions and Using Them in Context">
+  <div class="sec-h"><span class="badge">6</span><h2>Building Expressions and Using Them in Context</h2></div>
+  <p>To build an expression with given NPVs, work backwards as in Unit 4: an NPV <span class="tex">x=r</span> comes from a factor <span class="tex">(x-r)</span> in the denominator, and <span class="tex">x=\frac{p}{q}</span> from <span class="tex">(qx-p)</span>. In a context, the NPVs are values the variable can never take, and the situation often restricts the variable further (a length or a speed must be positive, a count must be a whole number).</p>
+  <div class="explainer" data-explainer="build"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Build it backwards</h3></div>
+  <p class="q">Write a rational expression with a numerator of <span class="tex">1</span> and the denominator expanded that has the given NPVs.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">x\ne-1,\ 6</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{1}{(x+1)(x-6)}=\boldsymbol{\dfrac{1}{x^2-5x-6}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x\ne0,\ \frac{2}{3}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{1}{x(3x-2)}=\boldsymbol{\dfrac{1}{3x^2-2x}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">x\ne\pm4</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{1}{(x-4)(x+4)}=\boldsymbol{\dfrac{1}{x^2-16}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) no NPVs</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">For example <span class="tex">\boldsymbol{\dfrac{1}{x^2+1}}</span> (<span class="tex">x^2+1\ge1</span>)</div></div></div>
+  </div>
+  <div class="part"><div class="pl">(e) The expression <span class="tex">\dfrac{1}{x^2+kx-12}</span> has an NPV of <span class="tex">x=2</span>. Determine <span class="tex">k</span> and the other NPV.</div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=2</span> makes the denominator <span class="tex">0</span>: <span class="tex">4+2k-12=0</span>, so <span class="tex">\boldsymbol{k=4}</span>.<br><span class="tex">x^2+4x-12=(x+6)(x-2)</span>. The other NPV is <span class="tex">\boldsymbol{x=-6}</span>.</div></div></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex9" data-section="Example 9">
+  <div class="ex-head"><span class="ex-tag">Example 9</span><h3>Up the river</h3></div>
+  <p class="q">A boat travels <span class="tex">36</span> km up a river against a current of <span class="tex">3</span> km/h. If its speed in still water is <span class="tex">v</span> km/h, its speed upstream is <span class="tex">(v-3)</span> km/h and the trip takes <span class="tex">t=\dfrac{36}{v-3}</span> hours.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Determine the time for <span class="tex">v=15</span> and for <span class="tex">v=12</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">v=15</span>: <span class="tex">t=\frac{36}{12}=</span> <b>3 h</b><br><span class="tex">v=12</span>: <span class="tex">t=\frac{36}{9}=</span> <b>4 h</b></div></div></div>
+    <div class="part"><div class="pl">(b) State the NPV. What would it mean for the boat?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{v\ne3}</span>. At <span class="tex">v=3</span> the boat moves upstream at <span class="tex">0</span> km/h: it never arrives, so there is no time.</div></div></div>
+    <div class="part"><div class="pl">(c) Which values of <span class="tex">v</span> make sense here?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{v&gt;3}</span>. For <span class="tex">v&lt;3</span> the time is negative: the current carries the boat backwards.</div></div></div>
+  </div>
+  <div class="explainer" data-explainer="boat"></div>
+  <div class="space" id="ex9-space"></div>
+  <button class="more" data-more="ex9-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Rational expression.</b> <span class="tex">\dfrac{\text{polynomial}}{\text{polynomial}}</span>, the denominator not 0. To evaluate, simplify the numerator and the denominator separately. A 0 on top is fine; a 0 underneath is <b>undefined</b>.</div>
+    <div><b>Why ÷ 0 fails.</b> <span class="tex">\frac{12}{0}=k</span> would need <span class="tex">k\times0=12</span>: impossible. Near an NPV the values grow without bound and change sign; the calculator TABLE shows ERROR.</div>
+    <div><b>NPVs.</b> Factor every denominator fully, set each factor with a variable equal to 0, and solve. Ignore the numerator. Write <span class="tex">x\ne-5,\ 3</span>. A denominator like <span class="tex">x^2+16</span> gives none.</div>
+    <div><b>Backwards and in context.</b> <span class="tex">x\ne r</span> comes from <span class="tex">(x-r)</span>, <span class="tex">x\ne\frac{p}{q}</span> from <span class="tex">(qx-p)</span>. Keep the original NPVs. A context often allows even fewer values (<span class="tex">v&gt;3</span>).</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u6l1">
+    <div><div class="kicker">Your turn</div><b>Assignment 1 · Questions 9–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l2/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 2 — Simplifying Rational Expressions by Factoring</b><div class="muted">Factor, cancel the common factors, and keep the original restrictions.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u6l1.js';
+  boot({ key: 'u6l1', homeHref: '../../', title: '6.1 Rational Expressions and NPVs' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

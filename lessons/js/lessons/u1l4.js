@@ -1,16 +1,11 @@
 /* Math 20-1 · Unit 1 · Lesson 4 — Arithmetic Series.
- * Warm-up (The Chiming Clock: tap an hour to hear it strike, a running tally, "Pair them up" draws the chords k ↔ 13 − k),
- * a Math History box (Gauss's slate: 1 to 100 on a 10 × 10 grid, 50 pairs of 101 through the centre), and the explainers:
+ * A Math History box (Gauss's slate: 1 to 100 on a 10 × 10 grid, 50 pairs of 101 through the centre) and the explainers
+ * (the warm-up is plain markup in the page, tools/newformat/specs/u1l4.py):
  *   partialSums (sequence → series, then the running-total bars S_1, S_2, … over a table; S_4 − S_3 is the new block t_4;
  *     Example 1 check), gaussRows (the series forwards and backwards, every column t_1 + t_n, 2S = n(t_1 + t_n); Example 2
- *     check), staircase (a staircase of blocks and an upside-down copy fit into an n by (t_1 + t_n) rectangle; Example 1's
- *     S_6 = 117), twoFormulas (each column is t_1 plus (k − 1) d's, so t_n = t_1 + (n − 1)d turns the pairing formula
- *     into S_n = n/2[2t_1 + (n − 1)d]), whichFormula (a flowchart: last term known? n known?; Example 3(a)(b)(c) and 4
- *     checks), unknownHunt (what is unknown decides linear or quadratic; Example 6(a)(b) checks), findN (the quadratic
- *     for n next to the dots (n, S_n) reaching the target line; Example 5 check), cans (the can display rows, then left-
- *     aligned with an upside-down copy into a 13 by 36 rectangle; Example 7 check), runner (weekly bars: 7 jumps from
- *     week 4 to 11, back to week 1, then all 16 weeks; Example 8 check), sumToTerms (towers S_n on a graph of (n, S_n):
- *     each new tower's top is the next term; Example 9 check).
+ *     check), whichFormula (a flowchart: last term known? n known?; Example 3(a)(b)(c) and 4 checks), findN (the
+ *     quadratic for n next to the dots (n, S_n) reaching the target line; Example 5 check), sumToTerms (towers S_n on a
+ *     graph of (n, S_n): each new tower's top is the next term; Example 9 check).
  * Colours (kept through Unit 1): first term t_1 teal, common difference d amber, last term t_n blue, sums S_n burgundy,
  * number of terms n purple; mistakes / rejected roots red. */
 import {
@@ -51,95 +46,6 @@ function braceH(parent, x0, x1, y, dir = 1, color = INK) {
 function braceV(parent, x, y0, y1, color = INK) {
   const m = (y0 + y1) / 2;
   return svgEl('path', { d: `M${x} ${y0} q10 0 10 10 L${x + 10} ${m - 10} q0 10 10 10 q-10 0 -10 10 L${x + 10} ${y1 - 10} q0 10 -10 10`, fill: 'none', stroke: color, 'stroke-width': 2.5, 'stroke-linecap': 'round', class: 'bk-stroke' }, parent);
-}
-
-/* ====================================================================================================
- * Warm-up: The Chiming Clock
- * ==================================================================================================== */
-function mountClock() {
-  const host = document.getElementById('u1l4-clock'); if (!host) return;
-  const C = 200, svg = svgEl('svg', { viewBox: '0 0 400 400', class: 'u1l4-clocksvg', role: 'img', 'aria-label': 'A clock face. Tap an hour to make the clock strike it.' }, host);
-  const nowEl = document.getElementById('u1l4-tl-now'), totEl = document.getElementById('u1l4-tl-tot'), logEl = document.getElementById('u1l4-tl-log');
-  svgEl('circle', { cx: C, cy: C, r: 190, fill: '#7a4a26' }, svg);
-  svgEl('circle', { cx: C, cy: C, r: 180, fill: '#fffaf1', stroke: '#b48a5f', 'stroke-width': 2 }, svg);
-  for (let i = 0; i < 60; i++) {
-    const a = i * Math.PI / 30, r0 = i % 5 ? 170 : 162;
-    svgEl('line', { x1: C + r0 * Math.sin(a), y1: C - r0 * Math.cos(a), x2: C + 176 * Math.sin(a), y2: C - 176 * Math.cos(a), stroke: '#7a4a26', 'stroke-width': i % 5 ? 1.2 : 3 }, svg);
-  }
-  const chords = svgEl('g', {}, svg);
-  const pos = (k, r) => [C + r * Math.sin(k * Math.PI / 6), C - r * Math.cos(k * Math.PI / 6)];
-  // the bell (swings when it strikes) and its ring
-  const bell = svgEl('g', { class: 'u1l4-bell' }, svg);
-  bell.style.transformBox = 'view-box'; bell.style.transformOrigin = '200px 236px';
-  svgEl('path', { d: 'M184 272 q0 -26 16 -30 q16 4 16 30 l5 6 h-42 z', fill: '#d9a62e', stroke: '#7a4a26', 'stroke-width': 2 }, bell);
-  svgEl('circle', { cx: 200, cy: 282, r: 4, fill: '#7a4a26' }, bell);
-  svgEl('circle', { cx: 200, cy: 240, r: 3, fill: '#7a4a26' }, bell);
-  const ring = svgEl('circle', { cx: 200, cy: 262, r: 22, fill: 'none', stroke: '#d9a62e', 'stroke-width': 4, opacity: 0 }, svg);
-  ring.style.transformBox = 'view-box'; ring.style.transformOrigin = '200px 262px';
-  // hands
-  const handG = svgEl('g', { class: 'u1l4-hands' }, svg);
-  const hourH = svgEl('line', { x1: C, y1: C, x2: C, y2: C - 92, stroke: INK, 'stroke-width': 9, 'stroke-linecap': 'round' }, handG);
-  svgEl('line', { x1: C, y1: C, x2: C, y2: C - 136, stroke: INK, 'stroke-width': 5, 'stroke-linecap': 'round' }, handG);
-  svgEl('circle', { cx: C, cy: C, r: 8, fill: INK }, handG);
-  svg.appendChild(chords);
-  const dim = (on) => { handG.style.opacity = bell.style.opacity = on ? 0.12 : 1; };
-  const setHour = (k) => { const [x, y] = pos(k, 92); hourH.setAttribute('x2', x); hourH.setAttribute('y2', y); };
-  setHour(10);
-  const nums = {};
-  for (let k = 1; k <= 12; k++) {
-    const [x, y] = pos(k, 140), g = svgEl('g', { class: 'u1l4-hr', 'data-tap': '', role: 'button', tabindex: 0, 'aria-label': 'Strike ' + k + ' o’clock' }, svg);
-    svgEl('circle', { cx: x, cy: y, r: 23, class: 'u1l4-hr-bg' }, g);
-    const t = svgEl('text', { x, y: y + 9, 'text-anchor': 'middle', class: 'u1l4-hr-t' }, g); t.textContent = k;
-    g.addEventListener('click', () => strikeOne(k));
-    g.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); strikeOne(k); } });
-    nums[k] = g;
-  }
-  let busy = false, gen = 0, total = 0, struck = [];
-  const wait = (ms, g) => new Promise((res, rej) => setTimeout(() => (g === gen ? res() : rej(new Error('reset'))), ms));
-  const paintLog = (extra) => {
-    if (!struck.length) { logEl.innerHTML = ''; return; }
-    const s = struck.length > 4 ? `${struck[0]}+\\dots+${struck[struck.length - 1]}` : struck.join('+');
-    logEl.innerHTML = struck.length > 1 ? T(s + '=' + total) + (extra ? '<br>' + extra : '') : '';
-  };
-  async function strike(k, g, ms) {
-    dim(false); chords.innerHTML = ''; setHour(k); Object.values(nums).forEach((n) => n.classList.remove('on')); nums[k].classList.add('on');
-    for (let i = 1; i <= k; i++) {
-      nowEl.textContent = i; total++; totEl.textContent = total;
-      bell.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(18deg)' }, { transform: 'rotate(-14deg)' }, { transform: 'rotate(0)' }], { duration: ms * 0.9 });
-      ring.animate([{ opacity: 0.9, transform: 'scale(.6)' }, { opacity: 0, transform: 'scale(2.4)' }], { duration: ms * 1.4 });
-      await wait(ms, g);
-    }
-    struck.push(k); paintLog();
-  }
-  async function strikeOne(k) {
-    if (busy) return; busy = true; const g = gen;
-    try { await strike(k, g, 380); } catch (e) { /* reset */ } finally { if (g === gen) busy = false; }
-  }
-  document.getElementById('u1l4-run12').addEventListener('click', async () => {
-    if (busy) return; busy = true; const g = ++gen; reset(true);
-    try { for (let k = 1; k <= 12; k++) { await strike(k, g, 95); await wait(260, g); } } catch (e) { return; }
-    busy = false;
-  });
-  document.getElementById('u1l4-pair').addEventListener('click', () => {
-    chords.innerHTML = ''; dim(true);
-    const cols = ['#0f7f80', '#1f5bd6', '#7b4fc4', '#c27a0e', '#c93a33', '#12805a'];
-    for (let k = 1; k <= 6; k++) {
-      const a = pos(k, 118), b = pos(13 - k, 118), m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
-      const l = svgEl('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: cols[k - 1], 'stroke-width': 4, 'stroke-linecap': 'round', opacity: 0.85 }, chords);
-      const tg = svgEl('g', {}, chords);
-      svgEl('rect', { x: m[0] - 17, y: m[1] - 13, width: 34, height: 25, rx: 7, fill: '#fff', stroke: cols[k - 1], 'stroke-width': 2 }, tg);
-      const t = svgEl('text', { x: m[0], y: m[1] + 7, 'text-anchor': 'middle', class: 'u1l4-pair-t', fill: cols[k - 1] }, tg); t.textContent = '13';
-      l.animate([{ opacity: 0 }, { opacity: 0.85 }], { duration: 300, delay: k * 220, fill: 'backwards' });
-      tg.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, delay: k * 220 + 150, fill: 'backwards' });
-    }
-    logEl.innerHTML = '<b>6 pairs</b> of 13:<br>' + T('6\\times13=78');
-  });
-  function reset(keepBusy) {
-    if (!keepBusy) { gen++; busy = false; }
-    total = 0; struck = []; nowEl.textContent = '0'; totEl.textContent = '0'; logEl.innerHTML = ''; chords.innerHTML = ''; dim(false);
-    Object.values(nums).forEach((n) => n.classList.remove('on')); setHour(10);
-  }
-  document.getElementById('u1l4-wreset').addEventListener('click', () => reset(false));
 }
 
 /* =============================== explainer: partial sums =============================== */
@@ -286,118 +192,6 @@ const gaussRows = {
   }
 };
 
-/* =============================== explainer: two staircases make a rectangle =============================== */
-const ST = {
-  six: { label: T('1+2+3+4+5+6'), t: [1, 2, 3, 4, 5, 6] },
-  five: { label: T('2+5+8+11+14'), t: [2, 5, 8, 11, 14] },
-  ex1: { label: 'Example 1: ' + T('S_6'), t: [7, 12, 17, 22, 27, 32], ex: true }
-};
-const staircase = {
-  title: 'Two staircases make a rectangle',
-  height: 440,
-  minW: 900,
-  choices: Object.keys(ST).map((k) => ({ v: k, label: ST[k].label })),
-  ask: (k) => (ST[k].ex ? `<b>Example 1:</b> ${T('S_6=7+12+17+22+27+32')}` : `Find ${T(ST[k].t.join('+'))} with blocks.`),
-  make(stage, k, ex) {
-    const t = ST[k].t, n = t.length, t1 = t[0], tn = t[n - 1], tall = t1 + tn, W = ex.W;
-    const base = 380, u = Math.min(30, Math.floor(318 / tall)), cw = Math.min(56, 340 / n), x0 = 52;
-    const svg = mkSvg(stage, W, ex.def.height);
-    const stairs = (fill, stroke) => {
-      const g = svgEl('g', {});
-      t.forEach((v, i) => {
-        const cg = svgEl('g', { class: 'u1l4-scol' }, g);
-        svgEl('rect', { x: x0 + i * cw, y: base - v * u, width: cw, height: v * u, fill, stroke, 'stroke-width': 2 }, cg);
-        if (u >= 6) for (let j = 1; j < v; j++) svgEl('line', { x1: x0 + i * cw, x2: x0 + (i + 1) * cw, y1: base - j * u, y2: base - j * u, stroke, 'stroke-width': u >= 14 ? 1.4 : 0.8, opacity: u >= 14 ? 0.9 : 0.55 }, cg);
-      });
-      return g;
-    };
-    svgEl('line', { x1: x0 - 10, x2: x0 + n * cw + 10, y1: base, y2: base, stroke: INK, 'stroke-width': 2 }, svg);
-    const g1 = stairs('#cfe9e8', T1); svg.appendChild(g1);
-    const g2 = stairs('#fbe6c2', DC); svg.appendChild(g2);
-    g2.style.transformBox = 'view-box'; g2.style.transformOrigin = '0 0';
-    const ccx = x0 + n * cw / 2, ccy = base - tall * u / 2, DX = n * cw + 64;
-    const setT = (tx, th) => g2.setAttribute('transform', `translate(${tx.toFixed(1)} 0) rotate(${th.toFixed(1)} ${ccx} ${ccy.toFixed(1)})`);
-    setT(DX, 0); g2.style.opacity = 0;
-    [...g1.children].forEach((e) => (e.style.opacity = 0));
-    const vals = t.map((v, i) => { const l = lab(stage, x0 + (i + 0.5) * cw, base + 4, T(cT(N(v))), 'u1l4-sval', 's'); hide(l); return l; });
-    const R = n * tall, S = R / 2, PX = x0 + n * cw + 190;
-    const out = add(stage, box(h('div', 'u1l4-sout'), W - PX - 14, 300), PX, 70);
-    return [
-      { cap: `Each term is a <b>column of blocks</b>: ${T(t.map((v) => cT(N(v))).join(',\\ '))}.`,
-        run: async (c) => { for (let i = 0; i < n; i++) { await pop(c, g1.children[i], 260); vals[i].style.opacity = 1; } } },
-      { cap: `${T(cS('S_' + n))} is the number of blocks in the staircase. Make a <b>copy</b> of it.`,
-        run: (c) => appear(c, g2, 400) },
-      { cap: `Turn the copy <b>upside down</b>.`,
-        run: (c) => tween(c, 1000, (p) => setT(DX, 180 * p)) },
-      { cap: `Slide it on top of the first staircase. It fits <b>exactly</b>!`,
-        run: (c) => tween(c, 1000, (p) => setT(DX * (1 - p), 180)) },
-      { cap: `Every column is now ${T(`${cT(N(t1))}+${cL(N(tn))}=${N(tall)}`)} blocks tall, and there are ${T(cN(String(n)))} columns.`,
-        run: async (c) => {
-          const bh = braceV(svg, x0 + n * cw + 10, base - tall * u, base, INK); await drawIn(bh, 500, c);
-          await pop(c, lab(stage, x0 + n * cw + 32, base - tall * u / 2, T(`${cT('t_1')}+${cL('t_n')}=${N(tall)}`), 'u1l4-sdim', 'e'), 300);
-          const top = lab(stage, x0 + n * cw / 2, base - tall * u - 6, `${T(cN('n=' + n))} columns`, 'u1l4-sdim', 'n'); await pop(c, top, 300);
-        } },
-      { cap: `The rectangle holds ${T(`${n}\\times${N(tall)}=${N(R)}`)} blocks: <b>two</b> staircases.`,
-        run: (c) => show(c, line(out, T(`2${cS('S_' + n)}=${n}\\times${N(tall)}=${N(R)}`))) },
-      { cap: `So one staircase is ${T(`${cS('S_' + n)}=${N(R)}\\div2=${N(S)}`)}.${ST[k].ex ? ' Just like Example 1(b)!' : ''}`,
-        run: async (c) => {
-          await show(c, line(out, T(`${cS('S_' + n)}=\\dfrac{${N(R)}}{2}=\\boldsymbol{${N(S)}}`), 'u1l4-big'));
-          await show(c, line(out, `${T(`S_n=\\dfrac{${cN('n')}(${cT('t_1')}+${cL('t_n')})}{2}`)}`, 'u1l4-formline'));
-        } }
-    ];
-  }
-};
-
-/* =============================== explainer: where n/2[2t1 + (n − 1)d] comes from =============================== */
-const TF = {
-  a: { label: T('3+5+7+9+11'), t1: 3, d: 2, n: 5 },
-  b: { label: T('4+7+10+13+16+19'), t1: 4, d: 3, n: 6 }
-};
-const twoFormulas = {
-  title: 'Swap the last term for t₁ + (n − 1)d',
-  height: 430,
-  minW: 900,
-  choices: Object.keys(TF).map((k) => ({ v: k, label: TF[k].label })),
-  ask: false,
-  intro: 'Each term is the first term plus some copies of <b>d</b>. Press <b>Next</b>.',
-  make(stage, k, ex) {
-    const { t1, d, n } = TF[k], tn = t1 + (n - 1) * d, S = n * (t1 + tn) / 2, W = ex.W;
-    const base = 370, cw = 58, u = Math.min(26, Math.floor(300 / tn)), x0 = 44;
-    const svg = mkSvg(stage, W, ex.def.height);
-    svgEl('line', { x1: x0 - 10, x2: x0 + n * cw + 10, y1: base, y2: base, stroke: INK, 'stroke-width': 2 }, svg);
-    const tealR = [], ambR = [];
-    for (let i = 0; i < n; i++) {
-      tealR.push(rect(svg, x0 + i * cw + 4, base - t1 * u, cw - 8, t1 * u, { fill: '#cfe9e8', stroke: T1, 'stroke-width': 2 }));
-      ambR.push([...Array(i).keys()].map((j) => { const r = rect(svg, x0 + i * cw + 4, base - (t1 + (j + 1) * d) * u, cw - 8, d * u, { fill: '#fbe6c2', stroke: DC, 'stroke-width': 2 }); r.style.opacity = 0; return r; }));
-      lab(stage, x0 + (i + 0.5) * cw, base + 4, T(`t_${i + 1}`), 'u1l4-sval', 's');
-    }
-    tealR.forEach((r) => r.setAttribute('height', 0));
-    const vtop = [...Array(n).keys()].map((i) => { const l = lab(stage, x0 + (i + 0.5) * cw, base - (t1 + i * d) * u - 4, T(N(t1 + i * d)), 'u1l4-ptop', 'n'); hide(l); return l; });
-    const PX = 470, pn = panel(stage, PX, 14, W - PX - 14, 400, '');
-    return [
-      { cap: `Every term starts with the first term, ${T(cT('t_1=' + t1))}.`,
-        run: async (c) => { await Promise.all(tealR.map((r, i) => sleep(c, i * 60).then(() => growRect(c, r, 380)))); } },
-      { cap: `Then add ${T(cD('d=' + d))} once for each step along: ${T('0,\\ 1,\\ 2,\\ \\dots,\\ ' + (n - 1))} times.`,
-        run: async (c) => { for (let i = 1; i < n; i++) { for (const r of ambR[i]) await pop(c, r, 160); vtop[i].style.opacity = 1; } vtop[0].style.opacity = 1; } },
-      { cap: `The last column has ${T(cT('t_1'))} and ${T(`n-1=${n - 1}`)} copies of ${T(cD('d'))}: ${T(`${cL('t_n')}=${cT('t_1')}+(n-1)${cD('d')}=${t1}+${n - 1}(${d})=${tn}`)}.`,
-        run: async (c) => {
-          const b = braceV(svg, x0 + n * cw + 4, base - tn * u, base, TN); await drawIn(b, 450, c);
-          await show(c, line(pn, T(`${cL('t_n')}=${cT('t_1')}+(n-1)${cD('d')}`), 'u1l4-tnline'));
-        } },
-      { cap: `Start with the pairing formula.`, run: (c) => show(c, line(pn, T(`S_n=\\dfrac{n}{2}(${cT('t_1')}+${cL('t_n')})`))) },
-      { cap: `Replace ${T(cL('t_n'))} with ${T(`${cT('t_1')}+(n-1)${cD('d')}`)}.`,
-        run: (c) => show(c, line(pn, T(`S_n=\\dfrac{n}{2}\\left(${cT('t_1')}+\\underbrace{${cT('t_1')}+(n-1)${cD('d')}}_{${cL('t_n')}}\\right)`))) },
-      { cap: `Two ${T(cT('t_1'))}’s make ${T(cT('2t_1'))}. This is the formula to use when you know ${T(cD('d'))} but not the last term.`,
-        run: (c) => show(c, line(pn, T(`S_n=\\dfrac{n}{2}\\left[2${cT('t_1')}+(n-1)${cD('d')}\\right]`), 'u1l4-boxed')) },
-      { cap: `Check: both formulas give ${T(`S_${n}=${S}`)}.`,
-        run: async (c) => {
-          await show(c, line(pn, T(`\\tfrac{${n}}{2}\\left[2(${t1})+${n - 1}(${d})\\right]=\\tfrac{${n}}{2}(${2 * t1 + (n - 1) * d})=${S}`), 'u1l4-small'));
-          await show(c, line(pn, T(`\\tfrac{${n}}{2}(${t1}+${tn})=\\tfrac{${n}}{2}(${t1 + tn})=${S}\\ \\checkmark`), 'u1l4-small'));
-        } }
-    ];
-  }
-};
-
 /* =============================== explainer: which formula? (flowchart) =============================== */
 const WFQ = {
   a: { label: 'Example 3(a)', ask: `<b>Example 3(a):</b> the first 25 terms of ${T('7+11+15+\\dots')}`, steps: [
@@ -458,67 +252,6 @@ const whichFormula = {
   }
 };
 
-/* =============================== explainer: what is unknown? linear or quadratic =============================== */
-const UH = {
-  quad: { label: 'Why does n give n²?', ask: `How many terms of ${T('4+10+16+\\dots')} give a sum of 200?`,
-    known: [['t_1', '4', T1], ['d', '6', DC], ['S_n', '200', SC]], unknown: ['n', NC],
-    f0: `${cS('S_n')}=\\dfrac{${cN('n')}}{2}\\left[2${cT('t_1')}+(${cN('n')}-1)${cD('d')}\\right]`,
-    f1: `${cS('200')}=\\dfrac{\\boxed{${cN('n')}}}{2}\\left[2(${cT('4')})+(\\boxed{${cN('n')}}-1)(${cD('6')})\\right]`,
-    steps: [
-      { cap: `${T('n')} is in <b>two places</b>: in ${T('\\frac{n}{2}')} and inside the bracket.`, kind: 'mark' },
-      { cap: `Simplify the bracket: ${T('8+6n-6=6n+2')}.`, line: `200=\\dfrac{n}{2}(6n+2)=n(3n+1)` },
-      { cap: `Multiply out: ${T('n')} times ${T('n')} makes ${T(cN('n^2'))}.`, line: `200=3${cN('n^2')}+n\\ \\Rightarrow\\ 3n^2+n-200=0` },
-      { cap: `An ${T('n^2')} term: a <b>quadratic</b>. Factor it: ${T('(3n+25)(n-8)=0')}.`, stamp: 'quadratic', line: `(3n+25)(n-8)=0` },
-      { cap: `${T('n=8')}, or ${T('n=-\\tfrac{25}{3}')} (not a natural number: reject it). So <b>8 terms</b>.`, line: `n=\\boldsymbol{8}\\quad ${cX('\\text{reject }n=-\\tfrac{25}{3}')}` }] },
-  a: { label: 'Example 6(a) check', ask: `<b>Example 6(a):</b> ${T('S_{20}=650')} and ${T('d=3')}. Determine ${T('t_1')}.`,
-    known: [['S_{20}', '650', SC], ['n', '20', NC], ['d', '3', DC]], unknown: ['t_1', T1],
-    f0: `${cS('S_n')}=\\dfrac{${cN('n')}}{2}\\left[2${cT('t_1')}+(${cN('n')}-1)${cD('d')}\\right]`,
-    f1: `${cS('650')}=\\dfrac{${cN('20')}}{2}\\left[2\\boxed{${cT('t_1')}}+(${cN('20')}-1)(${cD('3')})\\right]`,
-    steps: [
-      { cap: `${T('t_1')} appears <b>once</b>, not squared: a <b>linear</b> equation.`, stamp: 'linear', kind: 'mark' },
-      { cap: `${T('\\frac{20}{2}=10')} and ${T('19(3)=57')}.`, line: `650=10(2t_1+57)` },
-      { cap: `Divide both sides by 10.`, line: `65=2t_1+57` },
-      { cap: `Subtract 57, then divide by 2: ${T('t_1=4')}.`, line: `8=2t_1\\ \\Rightarrow\\ ${cT('t_1')}=\\boldsymbol{4}` },
-      { cap: `Check: ${T('\\frac{20}{2}\\left[2(4)+19(3)\\right]=10(65)=650')} ✓`, line: `\\tfrac{20}{2}\\left[8+57\\right]=650\\ \\checkmark`, cls: 'u1l4-small' }] },
-  b: { label: 'Example 6(b) check', ask: `<b>Example 6(b):</b> 15 terms, first term 8, sum 645. Determine the last term and ${T('d')}.`,
-    known: [['n', '15', NC], ['t_1', '8', T1], ['S_{15}', '645', SC]], unknown: ['t_{15},\\ d', TN],
-    f0: `${cS('S_n')}=\\dfrac{${cN('n')}}{2}(${cT('t_1')}+${cL('t_n')})`,
-    f1: `${cS('645')}=\\dfrac{${cN('15')}}{2}(${cT('8')}+\\boxed{${cL('t_{15}')}})`,
-    pre: `The last term is wanted, so use the formula with ${T(cL('t_n'))}.`,
-    steps: [
-      { cap: `One unknown, ${T(cL('t_{15}'))}, not squared: <b>linear</b>.`, stamp: 'linear', kind: 'mark' },
-      { cap: `Multiply both sides by ${T('\\frac{2}{15}')}: ${T('645\\times\\frac{2}{15}=86')}.`, line: `86=8+t_{15}\\ \\Rightarrow\\ ${cL('t_{15}')}=\\boldsymbol{78}` },
-      { cap: `Now ${T('d')}: use ${T('t_n=t_1+(n-1)d')} with ${T('n=15')}.`, line: `78=8+14d` },
-      { cap: `${T('70=14d')}, so ${T('d=5')}. Linear again.`, line: `70=14d\\ \\Rightarrow\\ ${cD('d')}=\\boldsymbol{5}` }] }
-};
-const unknownHunt = {
-  title: 'What is unknown?',
-  height: 440,
-  minW: 900,
-  choices: Object.keys(UH).map((k) => ({ v: k, label: UH[k].label })),
-  ask: (k) => UH[k].ask,
-  make(stage, k, ex) {
-    const d = UH[k], W = ex.W;
-    const tiles = add(stage, box(h('div', 'u1l4-tiles'), W - 28, 58), 14, 12);
-    const tEls = d.known.map(([s, v, c]) => { const e = h('div', 'u1l4-tile', `<span class="u1l4-tk">know</span>${T(`\\textcolor{${c}}{${s}=${v}}`)}`); e.style.borderColor = c; tiles.appendChild(e); hide(e); return e; });
-    const uEl = h('div', 'u1l4-tile u1l4-tile-q', `<span class="u1l4-tk">find</span>${T(`\\textcolor{${d.unknown[1]}}{${d.unknown[0]}}=\\ ?`)}`); tiles.appendChild(uEl); hide(uEl);
-    const fb = add(stage, box(h('div', 'u1l4-fbox'), W - 28, 96), 14, 84); hide(fb);
-    const pn = add(stage, box(h('div', 'u1l4-ulines'), W - 300, 240), 40, 194);
-    let st = null;
-    const steps = [
-      { cap: `List what you know, and what you want.`, run: async (c) => { for (const e of tEls) await pop(c, e, 260); await pop(c, uEl, 300); } },
-      { cap: d.pre || `${T('d')} is known, so use ${T('S_n=\\frac{n}{2}\\left[2t_1+(n-1)d\\right]')}.`, run: async (c) => { fb.innerHTML = T(d.f0); await show(c, fb); } },
-      { cap: `Substitute every known value. The unknown is boxed.`, run: async (c) => { fb.innerHTML = T(d.f1); await pulse(c, fb, 1.03); } }
-    ];
-    d.steps.forEach((s) => steps.push({ cap: s.cap, run: async (c) => {
-      if (s.kind === 'mark') fb.classList.add('u1l4-fbox-on');
-      if (s.stamp) { if (st) st.remove(); st = stamp(stage, s.stamp, { ok: s.stamp === 'linear' ? true : null, x: W - 140, y: 290, size: 'lg', cls: 'u1l4-stamp' }); await stampIn(c, st); }
-      if (s.line) await show(c, line(pn, T(s.line), s.cls || ''));
-    } }));
-    return steps;
-  }
-};
-
 /* =============================== explainer: finding n (quadratic) beside the dots (n, S_n) =============================== */
 const FN = {
   c155: { label: T('2+5+8+\\dots=155'), t1: 2, d: 3, S: 155, ans: 10, xmax: 12.6, ymax: 200, ystep: 25, ylab: 50,
@@ -563,103 +296,6 @@ const findN = {
         }
       } });
     return steps;
-  }
-};
-
-/* =============================== explainer: the can display =============================== */
-const cans = {
-  title: 'Two displays make a rectangle',
-  height: 440,
-  minW: 920,
-  ask: `<b>Example 7:</b> 30 cans in the bottom row, 2 fewer in each row above, 6 in the top row.`,
-  make(stage, k, ex) {
-    const W = ex.W, s = 15, ch = 25, R = 13, rows = [...Array(R).keys()].map((i) => 30 - 2 * i), X0 = 60, base = 404, mid = X0 + 15 * s;
-    const svg = mkSvg(stage, W, ex.def.height);
-    svgEl('line', { x1: X0 - 6, x2: X0 + 36 * s + 6, y1: base + ch / 2 + 2, y2: base + ch / 2 + 2, stroke: '#7a4a26', 'stroke-width': 4 }, svg);
-    const can = (g, x, fill, rim) => { svgEl('rect', { x: x - s / 2 + 0.8, y: -ch / 2 + 1, width: s - 1.6, height: ch - 2, rx: 3, fill, stroke: rim, 'stroke-width': 1.2 }, g); svgEl('rect', { x: x - s / 2 + 0.8, y: -3, width: s - 1.6, height: 7, fill: '#fff', opacity: 0.8 }, g); };
-    const rowG = rows.map((r, i) => {
-      const g = svgEl('g', {}, svg); g.r = r; g.y = base - i * ch;
-      for (let j = 0; j < r; j++) can(g, j * s + s / 2, '#c93a33', '#7d1f1a');
-      g.cx = mid - r * s / 2; g.setAttribute('transform', `translate(${g.cx} ${g.y})`); g.style.opacity = 0; return g;
-    });
-    const copyG = rows.map((r, i) => {
-      const cnt = 36 - r, g = svgEl('g', {}, svg); g.y = base - i * ch;
-      for (let j = 0; j < cnt; j++) can(g, j * s + s / 2, '#2f6fd0', '#173a73');
-      g.fx = X0 + r * s; g.setAttribute('transform', `translate(${g.fx + 300} ${g.y})`); g.style.opacity = 0; return g;
-    });
-    const PX = X0 + 36 * s + 40, pn = panel(stage, PX, 10, W - PX - 12, 420, 'Example 7');
-    const bl = lab(stage, mid, base + ch / 2 + 3, T(cT('t_1=30')) + ' cans', 'u1l4-canl', 's'); hide(bl);
-    const tl = lab(stage, mid, base - (R - 1) * ch - ch / 2 - 2, T(cL('t_n=6')), 'u1l4-canl', 'n'); hide(tl);
-    const nums = rowG.map((g, i) => { const l = lab(stage, X0 - 12, g.y, String(i + 1), 'u1l4-rown', 'w'); hide(l); return l; });
-    return [
-      { cap: `Bottom row: ${T(cT('t_1=30'))} cans.`, run: async (c) => { await appear(c, rowG[0], 350); bl.style.opacity = 1; } },
-      { cap: `Each row up has 2 fewer: ${T(cD('d=-2'))}. The top row is ${T(cL('t_n=6'))}.`,
-        run: async (c) => { for (let i = 1; i < R; i++) await appear(c, rowG[i], 110); tl.style.opacity = 1; } },
-      { cap: `(a) How many rows? ${T('6=30+(n-1)(-2)')} gives ${T('n-1=12')}, so ${T(cN('n=13'))} rows.`,
-        run: async (c) => {
-          await show(c, line(pn, T(`6=30+(n-1)(-2)`))); await show(c, line(pn, T(`-24=-2(n-1)`))); await show(c, line(pn, T(`n-1=12`)));
-          for (const l of nums) l.style.opacity = 1; await show(c, line(pn, T(`${cN('n=13')}`) + ' rows', 'u1l4-big'));
-        } },
-      { cap: `(b) How many cans altogether? That is ${T('S_{13}')}. First, slide every row to the left.`,
-        run: async (c) => { tl.style.opacity = 0; await tween(c, 800, (p) => rowG.forEach((g) => g.setAttribute('transform', `translate(${(g.cx + (X0 - g.cx) * p).toFixed(1)} ${g.y})`))); } },
-      { cap: `Bring in an <b>upside-down copy</b> (blue): 6 on the bottom row, up to 30 on top. Each row now holds ${T('30+6=36')} cans.`,
-        run: async (c) => {
-          copyG.forEach((g) => (g.style.opacity = 1));
-          await tween(c, 1000, (p) => copyG.forEach((g) => g.setAttribute('transform', `translate(${(g.fx + 300 * (1 - p)).toFixed(1)} ${g.y})`)));
-          const bh = braceV(svg, X0 + 36 * s + 2, base - (R - 1) * ch - ch / 2, base + ch / 2, INK); bh.style.opacity = 0.9;
-        } },
-      { cap: `${T('13')} rows of ${T('36')} is ${T('468')} cans: <b>two</b> displays. One display is ${T('468\\div2=234')}.`,
-        run: async (c) => {
-          await show(c, line(pn, T(`2S_{13}=13(36)=468`)));
-          await show(c, line(pn, T(`S_{13}=\\dfrac{13}{2}(30+6)`)));
-          await show(c, line(pn, T(`=13(18)=\\boldsymbol{234}`) + ' cans', 'u1l4-big'));
-        } }
-    ];
-  }
-};
-
-/* =============================== explainer: the runner's weeks =============================== */
-const runner = {
-  title: 'Example 8 check: the training weeks',
-  height: 470,
-  minW: 920,
-  ask: `<b>Example 8:</b> 18 km in week 4 and 39 km in week 11.`,
-  make(stage, k, ex) {
-    const W = ex.W, X0 = 66, slot = (W - X0 - 20) / 16, bw = slot * 0.62, base = 380, kpx = 4.2, wk = (i) => 6 + 3 * i; // week i (1-based): 9 + 3(i − 1)
-    const svg = mkSvg(stage, W, ex.def.height), cx = (i) => X0 + (i - 0.5) * slot;
-    svgEl('line', { x1: X0 - 8, x2: W - 14, y1: base, y2: base, stroke: INK, 'stroke-width': 2 }, svg);
-    const bars = [], vals = [];
-    for (let i = 1; i <= 16; i++) {
-      const v = wk(i), r = rect(svg, cx(i) - bw / 2, base - v * kpx, bw, v * kpx, { rx: 4, fill: i === 1 ? '#bfe3e2' : '#c9d9f4', stroke: i === 1 ? T1 : TN, 'stroke-width': 2 });
-      r.setAttribute('height', 0); bars.push(r);
-      const gq = rect(svg, cx(i) - bw / 2, base - 40, bw, 40, { rx: 4, fill: 'none', stroke: '#c9c3b5', 'stroke-width': 1.5, 'stroke-dasharray': '4 4' }); gq.cls = 'ghost';
-      bars[i - 1].ghost = gq;
-      lab(stage, cx(i), base + 4, String(i), 'u1l4-wk', 's');
-      const vl = lab(stage, cx(i), base - v * kpx - 3, T(N(v)), 'u1l4-wv', 'n'); hide(vl); vals.push(vl);
-    }
-    lab(stage, X0 - 10, base + 16, 'week', 'u1l4-wkh', 'w');
-    const pn = add(stage, box(h('div', 'u1l4-rpanel'), 470, 190), X0, 6);
-    const grow = (c, i) => { bars[i - 1].ghost.style.opacity = 0; vals[i - 1].style.opacity = 1; return growRect(c, bars[i - 1], 380); };
-    const hop = async (c, a, b, txt, y = 432) => {
-      const x1 = cx(a), x2 = cx(b), m = (x1 + x2) / 2, up = b > a;
-      const p = svgEl('path', { d: `M${x1} ${y} Q${m} ${y + (up ? 30 : 30)} ${x2} ${y}`, fill: 'none', stroke: up ? DC : T1, 'stroke-width': 3, class: 'bk-stroke' }, svg);
-      await drawIn(p, 260, c);
-      if (txt) await pop(c, lab(stage, m, y + 20, T(txt), 'u1l4-hoptag', 's'), 160);
-    };
-    return [
-      { cap: `Week 4: ${T('t_4=18')} km. Week 11: ${T('t_{11}=39')} km. The other weeks are unknown.`,
-        run: async (c) => { await grow(c, 4); await grow(c, 11); } },
-      { cap: `From week 4 to week 11 is ${T('11-4=7')} <b>steps</b> of ${T(cD('d'))}.`,
-        run: async (c) => { for (let i = 4; i < 11; i++) await hop(c, i, i + 1, cD('+d'), 418); } },
-      { cap: `${T(`7${cD('d')}=39-18=21`)}, so ${T(cD('d=3'))} km more each week.`,
-        run: (c) => show(c, line(pn, T(`7${cD('d')}=39-18=21\\Rightarrow ${cD('d=3')}`))) },
-      { cap: `Step back 3 weeks to week 1: ${T(`${cT('t_1')}=18-3(3)=9`)} km.`,
-        run: async (c) => { for (let i = 4; i > 1; i--) await hop(c, i, i - 1, null, 446); await grow(c, 1); await show(c, line(pn, T(`${cT('t_1')}=18-3(3)=9`))); } },
-      { cap: `Fill in every week. Week 16: ${T(`${cL('t_{16}')}=9+15(3)=54`)} km.`,
-        run: async (c) => { for (let i = 2; i <= 16; i++) if (i !== 4 && i !== 11) await grow(c, i); bars[15].setAttribute('stroke-width', 3.5); await show(c, line(pn, T(`${cL('t_{16}')}=9+15(3)=54`))); } },
-      { cap: `Total distance = all 16 bars: ${T('S_{16}=\\tfrac{16}{2}(9+54)=8(63)=504')} km.`,
-        run: async (c) => { await show(c, line(pn, T(`S_{16}=\\tfrac{16}{2}(9+54)=8(63)=\\boldsymbol{504}`) + ' km', 'u1l4-big')); } }
-    ];
   }
 };
 
@@ -800,7 +436,6 @@ standup('u1l4', {
 });
 
 /* =============================== mount =============================== */
-mountClock();
 gaussSlate();
-export const explainers = mountExplainers({ partialSums, gaussRows, staircase, twoFormulas, whichFormula, unknownHunt, findN, cans, runner, sumToTerms });
-export const _test = { N, PS, GR, ST, TF, WFQ, UH, FN, STT, suS };
+export const explainers = mountExplainers({ partialSums, gaussRows, whichFormula, findN, sumToTerms });
+export const _test = { N, PS, GR, WFQ, FN, STT, suS };

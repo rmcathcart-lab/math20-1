@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geometric Growth and Decay · Math 20-1 1.6</title>
+<meta name="description" content="Math 20-1 Unit 1 Lesson 6: repeated percent increases and decreases as geometric sequences. Growth and decay factors r = 1 ± rate, where the sequence starts (time 0 or after one period), doubling and half-life, compound interest A = P(1 + i)^n, and finding the number of periods by trying values. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u1l6.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u1l6">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 1 Sequences and Series · Lesson 6</div>
+  <h1>Geometric Growth and Decay</h1>
+  <p class="lede">When a quantity changes by the <b>same percent</b> every period, each value is the one before it <b>times the same number</b>. That number is the common ratio <b class="u1l6-cr">r</b>, now called the <b>growth factor</b>, and the values form a geometric sequence.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>write the <b class="u1l6-cr">growth factor</b> for a percent increase <span class="tex">\left(r=1+\tfrac{p}{100}\right)</span>, a percent decrease <span class="tex">\left(r=1-\tfrac{p}{100}\right)</span>, doubling, halving or “keeps a fraction”</li>
+      <li>build a growth or decay sequence and find any term with <span class="tex">t_n=t_1r^{n-1}</span></li>
+      <li>decide where the sequence <b>starts</b> (time 0 or after one period) and pick the right term</li>
+      <li>count the periods in doubling and half-life problems: <span class="tex">n=\dfrac{\text{total time}}{\text{length of one period}}</span></li>
+      <li>use compound interest <span class="tex">A=P(1+i)^n</span>, including finding the rate</li>
+      <li>find the number of periods it takes to pass a target by trying values of <span class="tex">n</span></li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF10</b> Analyze geometric sequences and series to solve problems.<br><span class="muted">Today: percent growth and decay, doubling, half-life and compound interest as geometric sequences.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Lily Pond" id="wu" style="--wf-side: 390px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Lily Pond</h2>
+  <p class="wf-rule">A patch of lily pads <b>doubles</b> its area <b>every day</b>.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u1l6-pond" id="u1l6-pond"></div>
+    <div class="u1l6-wbtns">
+      <button type="button" class="pill" id="u1l6-dback">◂ Day before</button>
+      <button type="button" class="pill" id="u1l6-dfwd">Day after ▸</button>
+      <button type="button" class="pill" id="u1l6-dreset">Back to day 30</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u1l6-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>On day 1 the patch covers <b>1 m²</b>. How much does it cover on <b>day 4</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l6-wa"><div class="bk-ans"><b>8 m².</b> Day 1 → 2 → 3 → 4 is only <b>3</b> doublings: <span class="tex">1\times2\times2\times2=8</span>.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How much on <b>day 11</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u1l6-wa"><div class="bk-ans">Day 11 is 10 days after day 1: <span class="tex">2^{10}=1\,024</span> m². More than a hockey rink!</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> The patch covers the <b>whole pond on day 30</b>. On what day was the pond <b>half</b> covered? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> Day 15</div>
+        <div class="opt"><b>B</b> Day 20</div>
+        <div class="opt"><b>C</b> Day 28</div>
+        <div class="opt right"><b>D</b> Day 29</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>D, day 29.</b> It doubles every day, so the day before it is full it was half full. Day 28: a quarter. Day 25: only <span class="tex">\tfrac{1}{32}</span>, about 3%: it looks like nothing is happening, then it explodes.<br>
+        <span class="muted"><b>A</b> halves the <em>time</em>, but halving the <em>amount</em> takes just one day. Going back one day at a time is <b>multiplying by <span class="tex">\tfrac{1}{2}</span></b>.</span></div>
+    </div>
+  </div></div>
+  <p class="u1l6-social">Challenge your neighbour: if the pond had started with <b>two</b> patches instead of one, on what day would it be full?</p>
+</section>
+
+<!-- ================= 1. Growth and decay factors ================= -->
+<section class="card" data-ink="s1" data-section="1. Growth and Decay Factors">
+  <div class="sec-h"><span class="badge">1</span><h2>Growth and Decay Factors</h2></div>
+  <div class="def">When a quantity changes by the <b>same percent</b> every period (every year, hour, bounce, …), each value is the previous value times the same number. The values form a geometric sequence, and the common ratio <span class="tex">\textcolor{#c27a0e}{r}</span> is called the <b>growth factor</b>. When <span class="tex">0&lt;r&lt;1</span> the quantity shrinks, and we call it <b>geometric decay</b> (<span class="tex">r</span> is then also called the decay factor).</div>
+  <div class="u1l6-keys">
+    <div class="u1l6-key u1l6-kup"><div class="u1l6-kh">Increase by <span class="tex">p\%</span> each period</div><div class="u1l6-kbig"><span class="tex">r=1+\dfrac{p}{100}</span></div><div class="muted">up 6%: <span class="tex">r=1.06</span></div></div>
+    <div class="u1l6-key u1l6-kdown"><div class="u1l6-kh">Decrease by <span class="tex">p\%</span> each period</div><div class="u1l6-kbig"><span class="tex">r=1-\dfrac{p}{100}</span></div><div class="muted">down 6%: <span class="tex">r=0.94</span></div></div>
+    <div class="u1l6-key u1l6-kother"><div class="u1l6-kh">Other words</div><div class="u1l6-klist">Doubles: <span class="tex">r=2</span> · Triples: <span class="tex">r=3</span> · Halves: <span class="tex">r=\tfrac{1}{2}</span><br>Keeps a fraction <span class="tex">f</span> of its value (“rebounds to <span class="tex">\tfrac{3}{5}</span> of its height”): <span class="tex">r=f</span></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Read carefully.</b> “Loses <span class="tex">\tfrac{1}{4}</span> of its value” means it <b>keeps</b> <span class="tex">\tfrac{3}{4}</span>, so <span class="tex">r=\tfrac{3}{4}</span>. “Rebounds <b>to</b> 80%” means <span class="tex">r=0.8</span>, but “<b>loses</b> 80% of its height” means <span class="tex">r=0.2</span>.</div></div>
+  <div class="explainer" data-explainer="factor"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>State the growth factor</h3></div>
+  <p class="q">State the growth factor <span class="tex">r</span> in each situation.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) A herd of elk grows by 7% each year.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=1+0.07=\boldsymbol{1.07}</span></div></div></div>
+    <div class="part"><div class="pl">(b) A laptop loses 28% of its value each year.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=1-0.28=\boldsymbol{0.72}</span></div></div></div>
+    <div class="part"><div class="pl">(c) The views of a video triple every day.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=\boldsymbol{3}</span></div></div></div>
+    <div class="part"><div class="pl">(d) A swing’s arc gets shorter by one-eighth with each swing.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">It keeps <span class="tex">\tfrac{7}{8}</span>: <span class="tex">r=\boldsymbol{\tfrac{7}{8}=0.875}</span></div></div></div>
+    <div class="part"><div class="pl">(e) A ball rebounds to 65% of its previous height.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=\boldsymbol{0.65}</span></div></div></div>
+    <div class="part"><div class="pl">(f) Wages rise by 2.75% per year.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=1+0.0275=\boldsymbol{1.0275}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Building a sequence ================= -->
+<section class="card" data-ink="s2" data-section="2. Building a Growth or Decay Sequence">
+  <div class="sec-h"><span class="badge">2</span><h2>Building a Growth or Decay Sequence</h2></div>
+  <div class="def">Multiply by <span class="tex">\textcolor{#c27a0e}{r}</span> to get each next value. Keep the <b>unrounded</b> values in your calculator and round only the answers you write down. Once you know <span class="tex">\textcolor{#a33357}{t_1}</span> and <span class="tex">\textcolor{#c27a0e}{r}</span>, any term comes from <span class="tex">t_n=\textcolor{#a33357}{t_1}\textcolor{#c27a0e}{r}^{\,n-1}</span>.</div>
+  <div class="explainer" data-explainer="buildSeq"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>A growing garden program</h3></div>
+  <p class="q">A community garden program had 450 members when it started in January 2022. Its membership grows by 12% each year.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Complete the table (nearest whole number).</div>
+      <table class="u1l6-tbl"><tr><th>January</th><td>2022</td><td>2023</td><td>2024</td><td>2025</td></tr>
+        <tr><th>Members</th><td>450</td><td><span data-reveal><span class="tex">504</span></span></td><td><span data-reveal><span class="tex">564</span></span></td><td><span data-reveal><span class="tex">632</span></span></td></tr></table>
+      <div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Multiply by <span class="tex">1.12</span> each year: <span class="tex">450\to504\to564.48\to632.2176</span>, so <b>504, 564, 632</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) Show that the sequence is geometric and state <span class="tex">r</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{504}{450}=1.12,\quad\dfrac{564.48}{504}=1.12,\ \dots</span><br>Same ratio each year: geometric, <span class="tex">\boldsymbol{r=1.12}</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) If <span class="tex">t_1</span> is the membership in January 2022, which term gives the membership in January 2032?</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">2022 is <span class="tex">t_1</span>, 2023 is <span class="tex">t_2</span>, …, so 2032 (10 years later) is <span class="tex">\boldsymbol{t_{11}}</span>.</div></div></div>
+    <div class="part"><div class="pl">(d) Estimate the membership in January 2032.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_{11}=450(1.12)^{10}\approx1\,397.6</span><br>About <b>1&#8239;398 members</b>.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>One line on the calculator.</b> Powers come before multiplying, so no brackets are needed: <span class="keys"><kbd>450</kbd><kbd>×</kbd><kbd>1.12</kbd><kbd>^</kbd><kbd>10</kbd><kbd>ENTER</kbd></span> gives <b>1&#8239;397.631…</b></div>
+    <div class="u1l6-pcol"><button class="pill" data-keys="450 × 1.12 ^ 10 =">Show me</button></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Where does the sequence start? ================= -->
+<section class="card" data-ink="s3" data-section="3. Where Does the Sequence Start?">
+  <div class="sec-h"><span class="badge">3</span><h2>Where Does the Sequence Start?</h2></div>
+  <p>Problems often ask for the value “after <span class="tex">n</span> years” or “after the <span class="tex">n</span>th bounce”. There are two correct ways to set up the sequence; the danger is mixing them up. Let <span class="tex">\textcolor{#1f5bd6}{P}</span> be the starting amount (at time 0).</p>
+  <div class="u1l6-two">
+    <div class="u1l6-way u1l6-wayA"><div class="u1l6-wayh">Start at time 0</div><span class="tex">\textcolor{#a33357}{t_1}=P</span>. Then <span class="tex">t_2</span> is the value after 1 period, so the value after <span class="tex">n</span> periods is <span class="tex">\boldsymbol{t_{n+1}}</span>.</div>
+    <div class="u1l6-way u1l6-wayB"><div class="u1l6-wayh">Start after one period</div><span class="tex">\textcolor{#a33357}{t_1}=Pr</span>. Then the value after <span class="tex">n</span> periods is <span class="tex">\boldsymbol{t_n}</span>.</div>
+  </div>
+  <div class="def amber u1l6-center">Both give the same result: &nbsp; <b>value after <span class="tex">n</span> periods</b> <span class="tex">=\textcolor{#1f5bd6}{P}\textcolor{#c27a0e}{r}^{\,n}</span> &nbsp; <span class="muted">(<span class="tex">P</span> = starting amount at time 0, <span class="tex">r</span> = growth factor)</span></div>
+  <div class="explainer" data-explainer="startShift"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>The bouncing ball, two ways</h3></div>
+  <p class="q">A ball is dropped from a height of 16 m. Each bounce reaches 75% of the height of the bounce before. Determine the height of the 7th bounce, to the nearest centimetre, in two ways.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Let <span class="tex">t_1=16</span>, the height it is dropped from. Which term is the height of the 7th bounce? Evaluate it.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=16</span> is the drop (no bounces yet), <span class="tex">t_2</span> is the 1st bounce, …, so the 7th bounce is <span class="tex">t_8</span>.<br><span class="tex">t_8=16(0.75)^7\approx2.1357</span><br>The 7th bounce is about <b>2.14 m</b> high.</div></div></div>
+    <div class="part"><div class="pl">(b) Let <span class="tex">t_1</span> be the height of the first bounce. State <span class="tex">t_1</span>, then evaluate the term that gives the 7th bounce.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_1=16(0.75)=12</span> m. Now the 7th bounce is <span class="tex">t_7</span>.<br><span class="tex">t_7=12(0.75)^6\approx2.1357</span><br>About <b>2.14 m</b>, the same answer.</div></div></div>
+  </div>
+  <div class="part"><div class="pl">(c) Write a formula for the height <span class="tex">h</span> of the ball after <span class="tex">x</span> bounces.</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{h=16(0.75)^x}</span> &nbsp; <span class="muted">(<span class="tex">P=16</span> at time 0, multiplied by 0.75 once per bounce)</span></div></div></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Same number both ways.</b> <span class="keys"><kbd>16</kbd><kbd>×</kbd><kbd>.75</kbd><kbd>^</kbd><kbd>7</kbd><kbd>ENTER</kbd></span> and <span class="keys"><kbd>12</kbd><kbd>×</kbd><kbd>.75</kbd><kbd>^</kbd><kbd>6</kbd><kbd>ENTER</kbd></span> both give <b>2.1357…</b></div>
+    <div class="u1l6-pcol"><button class="pill" data-keys="16 × .75 ^ 7 =">Show (a)</button><button class="pill" data-keys="12 × .75 ^ 6 =">Show (b)</button></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Doubling and half-life ================= -->
+<section class="card" data-ink="s4" data-section="4. Doubling, Half-Life and Other Periods">
+  <div class="sec-h"><span class="badge">4</span><h2>Doubling, Half-Life and Other Periods</h2></div>
+  <div class="def">The change does not have to happen once a year. If a quantity doubles every 20 minutes, the <b>period</b> is 20 minutes, and the number of periods is the total time divided by 20 minutes. The <b>half-life</b> of a radioactive substance is the time it takes for half of it to decay, so <span class="tex">r=\tfrac{1}{2}</span> for each half-life.</div>
+  <div class="def amber u1l6-center">Number of periods <span class="tex">n=\dfrac{\text{total time}}{\text{length of one period}}</span>, &nbsp;&nbsp; amount <span class="tex">=Pr^{\,n}</span></div>
+  <div class="explainer" data-explainer="periods"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Doubling and half-life</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) A culture starts with 300 bacteria and the number doubles every 20 minutes. How many bacteria are there after 4 hours?</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">4 h <span class="tex">=240</span> min, so <span class="tex">n=\dfrac{240}{20}=12</span> doublings.<br><span class="tex">300(2)^{12}=300(4096)=\boldsymbol{1\,228\,800}</span> bacteria.</div></div></div>
+    <div class="part"><div class="pl">(b) A hospital receives 96 mg of a medical isotope whose half-life is 6 hours. How much is left after 2 days?</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">2 days <span class="tex">=48</span> h, so <span class="tex">n=\dfrac{48}{6}=8</span> half-lives.<br><span class="tex">96\left(\tfrac{1}{2}\right)^{8}=\dfrac{96}{256}=\boldsymbol{0.375}</span> mg.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Half is 0.5.</b> <span class="keys"><kbd>300</kbd><kbd>×</kbd><kbd>2</kbd><kbd>^</kbd><kbd>12</kbd><kbd>ENTER</kbd></span> and <span class="keys"><kbd>96</kbd><kbd>×</kbd><kbd>.5</kbd><kbd>^</kbd><kbd>8</kbd><kbd>ENTER</kbd></span>.</div>
+    <div class="u1l6-pcol"><button class="pill" data-keys="300 × 2 ^ 12 =">Show (a)</button><button class="pill" data-keys="96 × .5 ^ 8 =">Show (b)</button></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u1l6"></section>
+
+<!-- ================= 5. Compound interest ================= -->
+<section class="card" data-ink="s5" data-section="5. Compound Interest">
+  <div class="sec-h"><span class="badge">5</span><h2>Compound Interest</h2></div>
+  <div class="def">When interest is <b>compounded annually</b> at a rate <span class="tex">i</span> (as a decimal), the interest each year is added to the balance, and the next year’s interest is paid on that new balance. Each year the value is multiplied by <span class="tex">1+i</span>, so the values form a geometric sequence with <span class="tex">\textcolor{#c27a0e}{r=1+i}</span>.</div>
+  <div class="def amber u1l6-center"><b>Compound interest:</b> &nbsp; <span class="tex u1l6-bigf">A=P(1+i)^n</span><div class="u1l6-legend"><span class="tex">P</span> = principal (amount invested) · <span class="tex">i</span> = interest rate per period (decimal) · <span class="tex">n</span> = number of periods · <span class="tex">A</span> = final amount</div></div>
+  <p>If interest is compounded more often, use the rate <b>per period</b> and count periods: 6% per year compounded monthly gives <span class="tex">i=\tfrac{0.06}{12}=0.005</span>, and 3 years is <span class="tex">n=36</span> months.</p>
+  <div class="explainer" data-explainer="compound"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Lena’s GIC</h3></div>
+  <p class="q">Lena invests $6&#8239;500 in a GIC that pays 3.8% per year, compounded annually.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) State the growth factor.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">r=1+0.038=\boldsymbol{1.038}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Write a product (do not evaluate) for the value after 1 year and after 2 years.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">After 1 year: <span class="tex">6\,500(1.038)</span>.<br>After 2 years: <span class="tex">6\,500(1.038)(1.038)=6\,500(1.038)^2</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) Let <span class="tex">t_1</span> be the value after 1 year. Write <span class="tex">t_n</span> and show it equals <span class="tex">6\,500(1.038)^n</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_n=t_1r^{n-1}=6\,500(1.038)(1.038)^{n-1}</span><br><span class="tex">=6\,500(1.038)^{1+n-1}=6\,500(1.038)^n</span></div></div></div>
+    <div class="part"><div class="pl">(d) Determine the value after 9 years, to the nearest cent.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_9=6\,500(1.038)^9\approx9\,092.63</span><br>The GIC is worth <b>$9&#8239;092.63</b>.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Money: round at the end.</b> <span class="keys"><kbd>6500</kbd><kbd>×</kbd><kbd>1.038</kbd><kbd>^</kbd><kbd>9</kbd><kbd>ENTER</kbd></span> gives <b>9&#8239;092.6304…</b>, so $9&#8239;092.63.</div>
+    <div class="u1l6-pcol"><button class="pill" data-keys="6500 × 1.038 ^ 9 =">Show me</button></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s5b" data-section="5. Finding the Rate">
+  <h3 class="sub">Working backwards: finding the rate</h3>
+  <p>When the rate is the unknown, divide to get the growth factor’s power on its own, then <b>undo the power with a root</b>: the <span class="tex">n</span>th root undoes the <span class="tex">n</span>th power.</p>
+  <div class="explainer" data-explainer="rateRoot"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Find the interest rate</h3></div>
+  <p class="q">An investment of $2&#8239;500 grows to $3&#8239;400 in 7 years with interest compounded annually. Determine the annual interest rate, to the nearest tenth of a percent.</p>
+  <div class="part u1l6-solo"><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2\,500(1+i)^7=3\,400\ \Rightarrow\ (1+i)^7=\dfrac{3\,400}{2\,500}=1.36</span><br>Take the 7th root: <span class="tex">1+i=\sqrt[7]{1.36}\approx1.0449</span><br><span class="tex">i\approx0.0449</span>: the rate is about <b>4.5% per year</b>.</div></div></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>The 7th root.</b> Type the <b>index first</b>: <span class="keys"><kbd>7</kbd><kbd>2nd</kbd><kbd>ˣ√</kbd><kbd>1.36</kbd><kbd>ENTER</kbd></span>. Or use the power <span class="tex">\tfrac{1}{7}</span>: <span class="keys"><kbd>1.36</kbd><kbd>^</kbd><kbd>(</kbd><kbd>1</kbd><kbd>÷</kbd><kbd>7</kbd><kbd>)</kbd><kbd>ENTER</kbd></span>. Both give <b>1.0449…</b></div>
+    <div class="u1l6-pcol"><button class="pill" data-keys="7 ˣ√ 1.36 =">Show ˣ√</button><button class="pill" data-keys="1.36 ^ ( 1 ÷ 7 ) =">Show ^(1÷7)</button></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Finding n ================= -->
+<section class="card" data-ink="s6" data-section="6. Finding the Number of Periods">
+  <div class="sec-h"><span class="badge">6</span><h2>Finding the Number of Periods with a Table</h2></div>
+  <div class="def">To find <b>when</b> a growing or decaying quantity passes a target, we need the exponent <span class="tex">n</span>. Logarithms are not part of this course, so use a <b>table of values</b>: evaluate <span class="tex">Pr^{\,n}</span> on your calculator for <span class="tex">n=1,2,3,\dots</span> (the TI-84’s table, <kbd>2nd</kbd> <kbd>TABLE</kbd>, does this for you). Find the <b>first</b> whole number of periods that passes the target, and <b>check the value just before it</b>.</div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Build the table on the TI-84.</b> <span class="keys"><kbd>Y=</kbd></span> <span class="tex">Y_1=500\times0.7^X</span> (the <span class="keys"><kbd>X,T,θ,n</kbd></span> key types <span class="tex">X</span>, the number of passes), <span class="keys"><kbd>2nd</kbd><kbd>TBLSET</kbd></span> TblStart = 0, ΔTbl = 1, then <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>. Scroll with <span class="keys"><kbd>▼</kbd></span> to the first row below the target, and check the row just before it. Without the table: <span class="keys"><kbd>500</kbd><kbd>ENTER</kbd></span>, then <span class="keys"><kbd>×</kbd><kbd>.7</kbd><kbd>ENTER</kbd></span> and <span class="keys"><kbd>ENTER</kbd></span> again and again (each <span class="keys"><kbd>ENTER</kbd></span> is one more period: the calculator writes <b>Ans*.7</b> for you), or one row at a time: <span class="keys"><kbd>500</kbd><kbd>×</kbd><kbd>.7</kbd><kbd>^</kbd><kbd>8</kbd><kbd>ENTER</kbd></span>.</div>
+    <div class="u1l6-pcol"><button class="pill" data-keys="Y= CLEAR 500 × .7 ^ X TBLSET 0 ENTER 1 ENTER TABLE ► ▼ ▼ ▼ ▼ ▼ ▼ ▼ ▼">Show the table</button><button class="pill" data-keys="500 = × .7 = = =">Show the rows</button><button class="pill" data-keys="500 × .7 ^ 8 =">Show one row</button></div>
+  </div>
+  <div class="explainer" data-explainer="hunt"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Filtering the water</h3></div>
+  <p class="q">A quantity of water holds 500 mg of a contaminant. Each pass through a filter removes 30% of the contaminant that is left. How many passes are needed to bring it below 40 mg?</p>
+  <div class="part u1l6-solo"><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Each pass keeps 70%, so <span class="tex">r=0.7</span>. After <span class="tex">n</span> passes: <span class="tex">500(0.7)^n</span>.<br>Table: <span class="tex">n=6</span>: 58.82 mg; &nbsp; <span class="tex">n=7</span>: 41.18 mg; &nbsp; <span class="tex">n=8</span>: 28.82 mg.<br>After 7 passes it is still above 40 mg; <b>8 passes</b> are needed.</div></div></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s6b" data-section="6. Two Rates">
+  <h3 class="sub">When the rate changes after the first year</h3>
+  <p>Some things lose a big chunk in the first year, then less each year after. Work out the first year on its own, then <b>start the sequence after year 1</b>.</p>
+  <div class="explainer" data-explainer="twoRates"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The tractor</h3></div>
+  <p class="q">A tractor bought for $180&#8239;000 loses 22% of its value in the first year and 9% of its value each year after that.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Determine its value after 1 year.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">180\,000(0.78)=\boldsymbol{\$140\,400}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Determine its value after 6 years, to the nearest dollar.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">From year 1 on, <span class="tex">r=0.91</span> with <span class="tex">t_1=140\,400</span> (after 1 year).<br>After 6 years: <span class="tex">t_6=140\,400(0.91)^5\approx\boldsymbol{\$87\,614}</span></div></div></div>
+    <div class="part"><div class="pl">(c) After how many years is it first worth less than $80&#8239;000?</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Table of <span class="tex">140\,400(0.91)^{n-1}</span>:<br><span class="tex">t_6\approx87\,614</span>, <span class="tex">t_7\approx79\,729</span>.<br>After <b>7 years</b>.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>After 6 years is 5 hops of 0.91</b> from year 1: <span class="keys"><kbd>140400</kbd><kbd>×</kbd><kbd>.91</kbd><kbd>^</kbd><kbd>5</kbd><kbd>ENTER</kbd></span> gives <b>87&#8239;614.1…</b><br>For (c), a table of values: <span class="keys"><kbd>Y=</kbd></span> <span class="tex">Y_1=140\,400\times0.91^{X-1}</span>, TblStart = 1, ΔTbl = 1, <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>: <span class="tex">Y_1</span> first drops below 80&#8239;000 at <span class="tex">X=7</span>.</div>
+    <div class="u1l6-pcol"><button class="pill" data-keys="140400 × .91 ^ 5 =">Show me</button><button class="pill" data-keys="Y= CLEAR 140400 × .91 ^ ( X − 1 ) TBLSET 1 ENTER 1 ENTER TABLE ► ▼ ▼ ▼ ▼ ▼ ▼">Table for (c)</button></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Growth factor.</b> Up <span class="tex">p\%</span>: <span class="tex">r=1+\tfrac{p}{100}</span>. Down <span class="tex">p\%</span>: <span class="tex">r=1-\tfrac{p}{100}</span>. Doubles: 2, halves: <span class="tex">\tfrac{1}{2}</span>. “Loses <span class="tex">\tfrac14</span>” <b>keeps</b> <span class="tex">\tfrac34</span>. <span class="tex">r&gt;1</span> grows, <span class="tex">0&lt;r&lt;1</span> decays.</div>
+    <div><b>Where it starts.</b> <span class="tex">t_1=P</span> (time 0): after <span class="tex">n</span> periods is <span class="tex">t_{n+1}</span>. <span class="tex">t_1=Pr</span> (after 1 period): after <span class="tex">n</span> periods is <span class="tex">t_n</span>. Either way the value is <span class="tex">Pr^{\,n}</span>.</div>
+    <div><b>Count the periods.</b> <span class="tex">n=\tfrac{\text{total time}}{\text{one period}}</span> (same units!). Half-life: <span class="tex">r=\tfrac12</span>. Compound interest: <span class="tex">A=P(1+i)^n</span>, with <span class="tex">i</span> and <span class="tex">n</span> per period. Find a rate with the <span class="tex">n</span>th root.</div>
+    <div><b>When does it pass a target?</b> Try values of <span class="tex">n</span> (a table). The answer is the <b>first</b> whole <span class="tex">n</span> past the target; check the one just before it.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u1l6">
+    <div><div class="kicker">Your turn</div><b>Assignment 6 — Geometric Growth and Decay</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l7/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 7 — Geometric Series</b><div class="muted">Add up the terms of a geometric sequence: a quick formula for <span class="tex">S_n</span>.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u1l6.js';
+  boot({ key: 'u1l6', homeHref: '../../', title: '1.6 Growth and Decay' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

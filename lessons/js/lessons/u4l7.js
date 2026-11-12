@@ -1,12 +1,7 @@
 /* Math 20-1 · Unit 4 · Lesson 7 — Radical Equations That Lead to Quadratics (no calculator demos; the intersect check is
  * shown only as keycaps on a calculator-style graph).
- * Warm-up (The Patio Builder: a square of x tiles plus one extra row of √x tiles; 42 tiles in all → x + √x = 42),
- * Example 5's graph (the dashed ghost line y = 3 − x and (1, 2) appear with the answer), Example 8(b)'s board,
- * and the explainers:
- *   binSq (square a binomial in a 2 × 2 grid: the corners a², b², the two equal middle cells make 2ab; the x² + 4 trap
- *     tested with x = 5; (3√x)² as one cell; Example 1 checks),
- *   restrict2 (both sides graphed: the radicand gives the curve's domain, the curve never goes below the x-axis so it can
- *     only meet the line where B ≥ 0; the two conditions and their overlap on a number line; Example 2 checks),
+ * New format (2026-11-11): the warm-up is plain markup on the page (no code). Example 5's graph (the dashed ghost line
+ * y = 3 − x and (1, 2) appear with the answer), Example 8(b)'s board, and the explainers:
  *   solve (the five-step rail: restrictions, isolate, square, factor, check each root with a check card and a stamp;
  *     Example 3 and 4 checks, including 4(c) where both roots are valid),
  *   ghost (STAR: y = √(x + 3) and y = x − 3 cross once; the squared equation's line and parabola cross twice; at x = 1
@@ -14,8 +9,6 @@
  *     at (1, 2): that is where the extraneous root comes from. Also Example 3 and Example 4(c) (no ghost root)),
  *   calcCheck (a calculator-style screen with key presses as keycaps only: Y=, WINDOW, GRAPH, 2nd TRACE 5: intersect;
  *     Examples 5, 6, 7(a)),
- *   twoWays (x + √x = 12 by squaring and by u = √x side by side; u = −4 rejected on a u-number line; the ghost x = 16 is
- *     the rejected u squared; also the warm-up patio x + √x = 42 and x + 2√x = 15),
  *   twice (squaring twice with a "radicals left" meter and the (1 + √B)² grid whose middle cell is the radical that
  *     remains; Example 7 checks),
  *   admiss (root, extraneous or inadmissible: three bins; Example 8(a), 8(b) with the board drawn to scale, and a sort of
@@ -46,41 +39,6 @@ const hideP = (p) => { hide(p); if (p.label) hide(p.label); return p; };
 const popP = (c, p) => Promise.all([pop(c, p), p.label ? show(c, p.label) : null]);
 const lab = (G, x, y, t, color, pos = 'c', extra = {}) => hide(G.label(x, y, t, Object.assign({ tex: true, color, cls: 'bk-ptlab', pos }, extra)));
 const keys = (...ks) => `<span class="keys">${ks.map((k) => `<kbd>${k}</kbd>`).join('')}</span>`;
-
-/* ====================================================================================================
- * Warm-up: The Patio Builder. A square of n × n tiles plus one extra row of n tiles.
- * ==================================================================================================== */
-function mountPatio() {
-  const host = document.getElementById('u4l7-patio'); if (!host) return;
-  const W = 540, H = 380, S = 40, G = 3, MAX = 7, OX = 18, OY = 18;
-  const svg = svgEl('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, class: 'u4l7-patiosvg' }, host);
-  svgEl('rect', { x: 0, y: 0, width: W, height: H, rx: 14, fill: '#e3edd6' }, svg);
-  for (let i = 0; i < 60; i++) { const x = (i * 89) % W, y = (i * 47) % H; svgEl('line', { x1: x, y1: y, x2: x + 3, y2: y - 7, stroke: '#9fbf86', 'stroke-width': 2, 'stroke-linecap': 'round' }, svg); }
-  const tiles = svgEl('g', {}, svg);
-  const cnt = div(host, 'u4l7-pcount', '', 352, 26, 170);
-  let n = 2;
-  const paint = () => {
-    tiles.innerHTML = '';
-    for (let r = 0; r <= n; r++) for (let q = 0; q < n; q++) {
-      const row = r === n, x = OX + q * (S + G), y = OY + r * (S + G);
-      svgEl('rect', { x, y, width: S, height: S, rx: 4, fill: row ? '#e8c27a' : '#c7643f', stroke: row ? '#a77d2c' : '#8f3f22', 'stroke-width': 2 }, tiles);
-    }
-    const side = OX + n * (S + G) - G;
-    svgEl('line', { x1: side + 10, x2: side + 10, y1: OY, y2: OY + n * (S + G) - G, stroke: '#1c2230', 'stroke-width': 2 }, tiles);
-    const t = svgEl('text', { x: side + 18, y: OY + (n * (S + G)) / 2 + 6, 'font-size': 18, 'font-weight': 800, fill: '#1c2230' }, tiles); t.textContent = n;
-    cnt.innerHTML = `<div class="u4l7-pc u4l7-pcsq"><b>${n * n}</b> in the square<span>${n} × ${n}</span></div><div class="u4l7-pc u4l7-pcrow"><b>${n}</b> in the row</div><div class="u4l7-pc u4l7-pctot"><b>${n * n + n}</b> tiles in all</div>`;
-  };
-  const set = (v) => { n = Math.max(1, Math.min(MAX, v)); paint(); };
-  document.getElementById('u4l7-pminus').addEventListener('click', () => set(n - 1));
-  document.getElementById('u4l7-pplus').addEventListener('click', () => set(n + 1));
-  const bRev = document.getElementById('u4l7-preveal');
-  if (bRev) {
-    bRev.addEventListener('click', () => set(6));
-    const poll = bRev.closest('.poll');
-    new MutationObserver(() => { if (poll.classList.contains('revealed') && n !== 6) set(6); }).observe(poll, { attributes: true, attributeFilter: ['class'] });
-  }
-  paint();
-}
 
 /* =============================== Example 5's graph and Example 8(b)'s board (static, on the cards) =============================== */
 function mountCardFigures() {
@@ -124,131 +82,6 @@ function sqGrid(stage, x, y, heads, cw, ch, hw = 86, hh = 50) {
   return { el, hdr, cells };
 }
 const fillCell = (c, cell, t) => { cell.innerHTML = `<span class="u4l7-gct">${T(t)}</span>`; return pop(c, cell.firstChild); };
-
-/* =============================== explainer: squaring a binomial =============================== */
-const BS = {
-  trap: { label: '(x − 2)²: the trap', expr: '(x-2)^2', a: 'x', b: '2', s: -1, a2: 'x^2', ab: '2x', twoab: '4x', b2: '4', res: ['x^2-4x+4'], trap: true },
-  a: { label: 'Example 1(a)', expr: '(x-3)^2', a: 'x', b: '3', s: -1, a2: 'x^2', ab: '3x', twoab: '6x', b2: '9', res: ['x^2-6x+9'] },
-  b: { label: '(b)', expr: '(2x+5)^2', a: '2x', b: '5', s: 1, a2: '4x^2', ab: '10x', twoab: '20x', b2: '25', res: ['4x^2+20x+25'] },
-  c: { label: '(c)', expr: '(6-x)^2', a: '6', b: 'x', s: -1, a2: '36', ab: '6x', twoab: '12x', b2: 'x^2', res: ['36-12x+x^2', 'x^2-12x+36'], re: 'descending powers of x' },
-  d: { label: '(d)', expr: '\\left(2+\\sqrt{x}\\right)^2', a: '2', b: '\\sqrt{x}', s: 1, a2: '4', ab: '2\\sqrt{x}', twoab: '4\\sqrt{x}', b2: 'x', res: ['4+4\\sqrt{x}+x', 'x+4\\sqrt{x}+4'], re: 'the usual order' },
-  e: { label: '(e)', expr: '\\left(3\\sqrt{x}\\right)^2', single: true, k: '3', r: '\\sqrt{x}', res: ['9x'] },
-  f: { label: '(f)', expr: '\\left(\\sqrt{x+1}-3\\right)^2', a: '\\sqrt{x+1}', b: '3', s: -1, a2: '(x+1)', ab: '3\\sqrt{x+1}', twoab: '6\\sqrt{x+1}', b2: '9', res: ['(x+1)-6\\sqrt{x+1}+9', 'x+10-6\\sqrt{x+1}'], re: 'collect the numbers: 1 + 9 = 10' }
-};
-const binSq = {
-  title: 'Squaring a binomial: don’t lose the middle term',
-  height: 410, minW: 900,
-  choices: [{ v: 'trap', label: BS.trap.label }, { sep: 'Check:' }, ...['a', 'b', 'c', 'd', 'e', 'f'].map((k) => ({ v: k, label: BS[k].label }))],
-  ask: (v) => (v === 'trap' ? `Is ${T('(x-2)^2')} the same as ${T('x^2+4')}?` : `Example 1(${v}): expand and simplify ${T(BS[v].expr)}.`),
-  make(stage, v, ex) {
-    const d = BS[v], W = ex.W, GX = 14, PX = 500;
-    const P = panel(stage, PX, 6, W - PX - 6, 398, '', 'u4l7-big');
-    if (d.single) {
-      const top = div(stage, 'u4l7-eq u4l7-eqg', T(`${d.expr}=\\left(${d.k}${d.r}\\right)\\left(${d.k}${d.r}\\right)`), GX, 8);
-      const g = sqGrid(stage, GX + 60, 90, [`${d.k}${d.r}`], 230, 150, 120, 56); g.hdr.forEach(hide);
-      const l1 = workLine(P, `${d.expr}=${cS(`${d.k}^2`)}\\cdot${cR(`\\left(${d.r}\\right)^2`)}`, 'square each factor');
-      const l2 = workLine(P, `=${cS('9')}\\cdot${cR('x')}`, '');
-      const l3 = workLine(P, `=${d.res[0]}`, '', 'u4l7-xans');
-      const note = lineIn(P, `One term, not a binomial: no middle term. ${T('\\left(k\\sqrt{A}\\right)^2=k^2A')}.`, 'u4l7-tipline');
-      return [
-        { cap: `${T(d.expr)} has only <b>one term</b>: it is ${T(`${d.k}${d.r}`)} times itself.`, run: async (c) => { await show(c, top); for (const e of g.hdr) await show(c, e); } },
-        { cap: `Square the ${T(d.k)} and square the root: ${T('3^2=9')} and ${T('\\left(\\sqrt{x}\\right)^2=x')}.`, run: async (c) => { await fillCell(c, g.cells[0][0], `${cS('9')}${cR('x')}`); await show(c, l1); await show(c, l2); } },
-        { cap: `${T(`${d.expr}=${d.res[0]}`)}. No middle term, because there is no second term.`, run: async (c) => { await show(c, l3); await show(c, note); } }
-      ];
-    }
-    const bS = (d.s < 0 ? '-' : '+') + d.b, sg = d.s < 0 ? '-' : '+';
-    const top = div(stage, 'u4l7-eq u4l7-eqg' + (d.a.length > 5 ? ' u4l7-eqsm' : ''), T(`${d.expr}=\\left(${d.a}${bS}\\right)\\left(${d.a}${bS}\\right)`), GX, 8);
-    const g = sqGrid(stage, GX, 70, [d.a, bS], 190, 112); g.hdr.forEach(hide);
-    const brace = hide(div(stage, 'u4l7-mid', `two equal cells: ${T(`${sg}${cS(d.twoab)}`)}`, GX + 86, 70 + 50 + 224 + 8, 380));
-    const wrong = d.trap ? lineIn(P, `Tempting: ${T('(x-2)^2=x^2+4')} <b class="u4l7-xr">✗?</b>`, 'u4l7-xline') : null;
-    const l1 = workLine(P, `(a${sg}b)^2=a^2${sg}${cS('2ab')}+b^2`, 'the pattern');
-    const l2 = workLine(P, `=${d.a2}${sg}${cS(`2(${d.a})(${d.b})`)}+${d.b2}`, `${T(`a=${d.a},\\ b=${d.b}`)}`);
-    const l3 = workLine(P, `=${d.res[0]}`, '', d.res.length > 1 ? '' : 'u4l7-xans');
-    const l4 = d.res.length > 1 ? workLine(P, `=${d.res[1]}`, '', 'u4l7-xans') : null;
-    const t1 = d.trap ? lineIn(P, `Test ${T('x=5')}: ${T('(5-2)^2=9')}, but ${T('5^2+4=29')}.`, 'u4l7-xline') : null;
-    const t2 = d.trap ? lineIn(P, `${T('5^2-4(5)+4=25-20+4=9')} ✓`, 'u4l7-okline') : null;
-    const corners = async (c) => { await fillCell(c, g.cells[0][0], cR(d.a2)); await fillCell(c, g.cells[1][1], `+${d.b2}`); };
-    const middles = async (c) => { await fillCell(c, g.cells[0][1], `${sg}${cS(d.ab)}`); await fillCell(c, g.cells[1][0], `${sg}${cS(d.ab)}`); g.cells[0][1].classList.add('on'); g.cells[1][0].classList.add('on'); await show(c, brace); };
-    const setup = async (c) => { await show(c, top); for (const e of g.hdr) await show(c, e); };
-    if (d.trap) {
-      return [
-        { cap: `Tempting: square each term and write ${T('x^2+4')}. Let's see if that is right.`, run: (c) => show(c, wrong) },
-        { cap: `Squaring means multiplying by itself: ${T('(x-2)(x-2)')}. Every term meets every term: a 2-by-2 grid.`, run: setup },
-        { cap: `The corners: ${T('x\\cdot x=x^2')} and ${T('(-2)(-2)=+4')}. These are the only two terms in ${T('x^2+4')}.`, run: corners },
-        { cap: `The other two cells: ${T('x(-2)=-2x')}, twice. ${T('x^2+4')} <b>forgot</b> the middle term ${T('-4x')}.`, run: async (c) => { await middles(c); g.cells[0][1].classList.add('miss'); g.cells[1][0].classList.add('miss'); await shake(c, wrong); } },
-        { cap: `Add the four cells: ${T('(x-2)^2=x^2-4x+4')}.`, run: async (c) => { await show(c, l1); await show(c, l2); await show(c, l3); } },
-        { cap: `Test with a number, ${T('x=5')}: ${T('(5-2)^2=9')}. The pattern gives 9; ${T('x^2+4')} gives 29. <b>Not the same.</b>`, run: async (c) => { await show(c, t1); await show(c, t2); } }
-      ];
-    }
-    const steps = [
-      { cap: `Squaring means multiplying by itself: ${T(`\\left(${d.a}${bS}\\right)\\left(${d.a}${bS}\\right)`)}. Every term meets every term.`, run: setup },
-      { cap: `The corners: ${T(`a^2=${d.a2}`)} and ${T(`b^2=${d.b2}`)}.`, run: corners },
-      { cap: `The other two cells are the same, ${T(`${sg}${d.ab}`)} each. Together they make the <b>middle term</b> ${T(`${sg}2ab=${sg}${d.twoab}`)}.`, run: middles },
-      { cap: `Add the four cells: ${T(`${d.expr}=${d.res[0]}`)}.`, run: async (c) => { await show(c, l1); await show(c, l2); await show(c, l3); } }
-    ];
-    if (l4) steps.push({ cap: `Simplify (${d.re}): ${T(d.res[1])}.`, run: (c) => show(c, l4) });
-    return steps;
-  }
-};
-
-/* =============================== explainer: the two restrictions =============================== */
-const RS = {
-  a: { label: 'Example 2(a)', eq: '\\sqrt{x+12}=x', A: 'x+12', B: 'x', fA: (x) => Math.sqrt(x + 12), from: -12, fB: (x) => x,
-    rA: ['x+12\\ge0', 'x\\ge-12'], rB: ['x\\ge0'], aB: -12, aD: 1, bB: 0, bD: 1, both: 'x\\ge0', oB: 0, oD: 1, win: [-14, 8, -6, 6],
-    fl: [-8.5, 3.6, 'n'], gl: [4.6, 2.2, 'e'], bl: 1 },
-  b: { label: '(b)', eq: '\\sqrt{3x+4}=x-2', A: '3x+4', B: 'x-2', fA: (x) => Math.sqrt(3 * x + 4), from: -4 / 3, fB: (x) => x - 2,
-    rA: ['3x+4\\ge0', 'x\\ge-\\tfrac{4}{3}'], rB: ['x-2\\ge0', 'x\\ge2'], aB: -4 / 3, aD: 1, bB: 2, bD: 1, both: 'x\\ge2', oB: 2, oD: 1, win: [-3, 9, -5, 6],
-    fl: [4.6, 5.4, 'w'], gl: [5.4, 1.4, 'e'], bl: 1 },
-  c: { label: '(c)', eq: '\\sqrt{10-3x}+2=4-x', iso: '\\sqrt{10-3x}=2-x', A: '10-3x', B: '2-x', fA: (x) => Math.sqrt(10 - 3 * x), to: 10 / 3, fB: (x) => 2 - x,
-    rA: ['10-3x\\ge0', 'x\\le\\tfrac{10}{3}'], rB: ['2-x\\ge0', 'x\\le2'], aB: 10 / 3, aD: -1, bB: 2, bD: -1, both: 'x\\le2', oB: 2, oD: -1, win: [-6, 5, -4, 6],
-    fl: [-5.6, 2.8, 'e'], gl: [4.4, -2.5, 'sw'], bl: -1 }
-};
-const restrict2 = {
-  title: 'Two restrictions: radicand ≥ 0 and the other side ≥ 0',
-  height: 440, minW: 900,
-  choices: [{ sep: 'Check:' }, ...Object.keys(RS).map((k) => ({ v: k, label: RS[k].label }))],
-  ask: (v) => `Example 2(${v}): state the restrictions on ${T('x')} for ${T(RS[v].eq)}.`,
-  make(stage, v, ex) {
-    const d = RS[v], W = ex.W, GW = 540, [x0, x1, y0, y1] = d.win;
-    const G = new Graph(stage, { x: 4, y: 18, width: GW, height: 286, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 2, ylabels: 2, fontSize: 15 });
-    const N = new NumberLine(stage, { x: 4, y: 306, width: GW, height: 130, min: x0, max: x1, step: 1, labelStep: 2, axisY: 100, fontSize: 16 });
-    const P = panel(stage, GW + 18, 6, W - GW - 24, 428, '', 'u4l7-big2');
-    const eqT = d.iso || d.eq;
-    const sideT = `\\sqrt{${cR(d.A)}}=${cN(d.B)}`;
-    lineIn(P, T(d.iso ? d.eq : sideT), 'u4l7-eq').style.opacity = 1;
-    const lIso = d.iso ? workLine(P, sideT, 'isolate first') : null;
-    const lA = workLine(P, `${cR(d.rA[0])}${d.rA[1] ? '\\Rightarrow ' + d.rA[1] : ''}`, 'radicand');
-    const lB = workLine(P, d.rB.length > 1 ? `${cN(d.rB[0])}\\Rightarrow ${d.rB[1]}` : cN(d.rB[0]), 'other side');
-    const lO = lineIn(P, `Together: ${T(`\\boldsymbol{${d.both}}`)}`, 'u4l7-okline u4l7-bigok');
-    // the graph
-    const below = hide(G.polyline([[x0, 0], [x1, 0], [x1, y0], [x0, y0]], { closed: true, fill: '#c93a33', fillOpacity: 0.07, color: 'rgba(0,0,0,0)', width: 0.1 }));
-    const belowL = d.bl > 0 ? lab(G, x1 - 0.3, y0 + 0.4, '\\text{a square root never goes here}', NO, 'nw') : lab(G, x0 + 0.3, y0 + 0.4, '\\text{a square root never goes here}', NO, 'ne');
-    const fo = { color: RAD, width: 4 }; if (d.from != null) fo.from = d.from; if (d.to != null) fo.to = d.to;
-    const f = hide(G.fn(d.fA, fo)), fp = hideP(G.point(d.from != null ? d.from : d.to, 0, { color: RAD, r: 6 }));
-    const g = hide(G.fn(d.fB, { color: NUM, width: 3.5 }));
-    const fL = lab(G, d.fl[0], d.fl[1], `y=\\sqrt{${d.A}}`, RAD, d.fl[2]), gL = lab(G, d.gl[0], d.gl[1], `y=${d.B}`, NUM, d.gl[2]);
-    // the part of the line below the axis (B < 0)
-    const zx = d.bB, neg = d.bD > 0 ? [Math.max(x0, x0), zx] : [zx, x1];
-    const gNeg = hide(G.fn(d.fB, { from: neg[0], to: neg[1], color: NO, width: 7, arrows: false }));
-    // number line
-    const iv = (b, dir, color, lift, w) => hide(dir > 0 ? N.interval(b, Infinity, { color, lift, width: w }) : N.interval(-Infinity, b, { color, lift, width: w }));
-    const nA = iv(d.aB, d.aD, RAD, 68, 6), nB = iv(d.bB, d.bD, NUM, 38, 6), nO = iv(d.oB, d.oD, OK, 0, 11);
-    const tagAt = (b, dir, lift, html, cls) => { const px = 4 + N.toPx(b); return hide(div(stage, 'u4l7-ivlab ' + (cls || ''), html, dir > 0 ? px + 12 : Math.max(4, px - 170), 306 + 100 - lift - 34)); };
-    const tA = tagAt(d.aB, d.aD, 68, T(d.rA[d.rA.length - 1]), 'u4l7-ivr'), tB = tagAt(d.bB, d.bD, 38, T(d.rB[d.rB.length - 1]), 'u4l7-ivb');
-    const steps = [];
-    if (d.iso) steps.push({ cap: `First <b>isolate</b> the radical: subtract 2 from both sides, ${T(d.iso)}.`, run: (c) => show(c, lIso) });
-    steps.push(
-      { cap: `Graph both sides of ${T(eqT)}: the radical side ${T(cR(`y=\\sqrt{${d.A}}`))} and the other side ${T(cN(`y=${d.B}`))}.`,
-        run: async (c) => { await popP(c, fp); await drawOn(c, G, f, 800); await show(c, fL); await drawOn(c, G, g, 600); await show(c, gL); } },
-      { cap: `<b>Radicand ≥ 0:</b> ${T(`${d.rA[0]}`)}, so ${T(d.rA[d.rA.length - 1])}. That is where the curve exists.`,
-        run: async (c) => { await show(c, lA); await drawOn(c, N, nA, 600); await show(c, tA); } },
-      { cap: `A square root is <b>never negative</b>: the curve stays on or above the ${T('x')}-axis. It can only meet the line where the line is too: ${T(`${d.B}\\ge0`)}.`,
-        run: async (c) => { await show(c, below); await show(c, belowL); await drawOn(c, G, gNeg, 500); await show(c, lB); await drawOn(c, N, nB, 600); await show(c, tB); } },
-      { cap: `<b>Both</b> must be true: keep the overlap, ${T(d.both)}.`, run: async (c) => { await drawOn(c, N, nO, 600); await show(c, lO); } }
-    );
-    return steps;
-  }
-};
 
 /* =============================== explainer: isolate, square, factor, check =============================== */
 const SV = {
@@ -418,57 +251,6 @@ const calcCheck = {
   }
 };
 
-/* =============================== explainer: x + k√x = N two ways =============================== */
-/* p > 0 and n < 0 are the roots of u² + ku − N = 0 */
-const TW = {
-  e6: { label: 'Example 6: x + √x = 12', k: 1, N: 12, p: 3, n: -4 },
-  wu: { label: 'Warm-up patio: x + √x = 42', k: 1, N: 42, p: 6, n: -7 },
-  c2: { label: 'x + 2√x = 15', k: 2, N: 15, p: 3, n: -5 }
-};
-const twoWays = {
-  title: 'Two ways: square, or substitute u = √x',
-  height: 470, minW: 940,
-  choices: Object.keys(TW).map((k) => ({ v: k, label: TW[k].label })),
-  ask: (v) => { const d = TW[v]; return `Solve ${T(`x+${d.k === 1 ? '' : d.k}\\sqrt{x}=${d.N}`)} in two ways.`; },
-  make(stage, v, ex) {
-    const d = TW[v], { k, N, p, n } = d, W = ex.W, PW = Math.floor((W - 22) / 2), K = k === 1 ? '' : String(k), m = -n;
-    const X1 = p * p, X2 = n * n, B = 2 * N + k * k;
-    const eq = `x+${K}\\sqrt{x}=${N}`;
-    div(stage, 'u4l7-eq u4l7-eqc', T(eq), 0, 0, W, 40);
-    const A = panel(stage, 4, 44, PW, 300, '(a) Isolate the radical and square', 'u4l7-big2');
-    const Bp = panel(stage, PW + 18, 44, PW, 300, `(b) Substitute ${T('u=\\sqrt{x}')}`, 'u4l7-big2');
-    const a1 = workLine(A, `${K}\\sqrt{x}=${N}-x`, `so ${T(`0\\le x\\le${N}`)}`);
-    const a2 = workLine(A, `${k * k === 1 ? '' : k * k}x=${N * N}-${2 * N}x+x^2`, 'square');
-    const a3 = workLine(A, `0=x^2-${B}x+${N * N}`, '');
-    const a4 = workLine(A, `0=(x-${X1})(x-${X2})`, 'factor', 'u4l7-cand');
-    const a5 = lineIn(A, `${T(`x=${X1}`)}: ${T(`${X1}+${K ? K + '(' + p + ')' : p}=${N}`)} ✓`, 'u4l7-okline');
-    const a6 = lineIn(A, `${T(`x=${X2}`)}: ${T(`${X2}+${K ? K + '(' + m + ')' : m}=${X2 + k * m}\\ne${N}`)} <b class="u4l7-xr">extraneous</b>`, 'u4l7-xline');
-    const b1 = workLine(Bp, `u^2+${K}u=${N}`, `${T('x=u^2')}`);
-    const b2 = workLine(Bp, `u^2+${K}u-${N}=0`, '');
-    const b3 = workLine(Bp, `(u+${m})(u-${p})=0`, 'factor');
-    const b4 = workLine(Bp, `u=-${m}\\ \\text{or}\\ u=${p}`, '', 'u4l7-cand');
-    const b5 = lineIn(Bp, `${T(`\\sqrt{x}=${p}\\Rightarrow\\boldsymbol{x=${X1}}`)} <span class="muted">(no extraneous root this way)</span>`, 'u4l7-okline');
-    // the u-number line under (b)
-    const NL = new NumberLine(stage, { x: PW + 18, y: 348, width: PW, height: 92, min: -9, max: 9, step: 1, labelStep: 3, axisY: 58, fontSize: 15 });
-    const nlT = hide(div(stage, 'u4l7-nlt', T('u'), PW + 18 + PW - 22, 348 + 24));
-    const uOk = hide(NL.interval(0, Infinity, { color: OK, width: 9 }));
-    const uOkL = hide(div(stage, 'u4l7-ivlab u4l7-ivok', T('u=\\sqrt{x}\\ge0'), PW + 18 + NL.toPx(0) + 10, 348 + 4));
-    const up = hide(NL.point(p, { color: OK })), un = hide(NL.point(n, { color: NO, open: true }));
-    const unX = hide(div(stage, 'u4l7-rej', `✗ ${T(`u=-${m}`)}`, PW + 18 + NL.toPx(n) - 40, 348 + 2));
-    const sA = stampAt(stage, `x = ${X2} ✗`, false, 4 + PW - 80, 44 + 252, { size: 'sm' });
-    const link = hide(div(stage, 'u4l7-link', `The ghost ${T(`x=${X2}`)} is the rejected ${T(`u=-${m}`)}, squared: ${T(`(-${m})^2=${X2}`)}. Squaring the equation let a negative ${T('\\sqrt{x}')} sneak back in.`, 4, 350, PW, 110));
-    return [
-      { cap: `<b>(a)</b> Isolate the radical: ${T(`${K}\\sqrt{x}=${N}-x`)}. The right side must be ≥ 0, so ${T(`0\\le x\\le${N}`)}.`, run: (c) => show(c, a1) },
-      { cap: `Square both sides (the right side is a binomial), then factor: ${T(`x=${X1}`)} or ${T(`x=${X2}`)}.`, run: async (c) => { await show(c, a2); await show(c, a3); await show(c, a4); } },
-      { cap: `Check both: ${T(`x=${X1}`)} works; ${T(`x=${X2}`)} gives ${X2 + k * m}, not ${N}. ${T(`x=${X2}`)} is extraneous (it also breaks ${T(`x\\le${N}`)}).`, run: async (c) => { await show(c, a5); await show(c, a6); await stampIn(c, sA); } },
-      { cap: `<b>(b)</b> Let ${T('u=\\sqrt{x}')}, so ${T('x=u^2')}. The equation becomes a quadratic in ${T('u')}: ${T(`u^2+${K}u-${N}=0`)}.`, run: async (c) => { await show(c, b1); await show(c, b2); } },
-      { cap: `Factor: ${T(`u=-${m}`)} or ${T(`u=${p}`)}.`, run: async (c) => { await show(c, b3); await show(c, b4); await show(c, nlT); await pop(c, up); await pop(c, un); } },
-      { cap: `But ${T('u=\\sqrt{x}')} is never negative: <b>reject</b> ${T(`u=-${m}`)}. Then ${T(`\\sqrt{x}=${p}`)}, so ${T(`x=${X1}`)}.`, run: async (c) => { await drawOn(c, NL, uOk, 600); await show(c, uOkL); await show(c, unX); await shake(c, unX); await show(c, b5); } },
-      { cap: `Same answer both ways, ${T(`x=${X1}`)}. And the ghost: ${T(`x=${X2}`)} is the rejected ${T(`u=-${m}`)}, squared.`, run: (c) => show(c, link) }
-    ];
-  }
-};
-
 /* =============================== explainer: squaring twice =============================== */
 const TT = {
   a: { label: 'Example 7(a)', eq: '\\sqrt{x+7}-\\sqrt{x}=1', R: 'x\\ge-7,\\ x\\ge0\\ \\Rightarrow\\ x\\ge0', Rshort: 'x\\ge0', iso1: '\\sqrt{x+7}=1+\\sqrt{x}', b: '\\sqrt{x}', bb: 'x',
@@ -633,7 +415,6 @@ standup('u4l7', {
 });
 
 /* =============================== mount =============================== */
-mountPatio();
 mountCardFigures();
-export const explainers = mountExplainers({ binSq, restrict2, solve, ghost, calcCheck, twoWays, twice, admiss });
-export const _test = { BS, RS, SV, GH, CC, TW, TT, SORT };
+export const explainers = mountExplainers({ solve, ghost, calcCheck, twice, admiss });
+export const _test = { SV, GH, CC, TT, SORT };

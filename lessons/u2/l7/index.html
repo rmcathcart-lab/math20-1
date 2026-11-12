@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u2l7.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u2l7">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Which One Doesn’t Belong?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="-12 40 46;12 40 46;-12 40 46" dur="2.2s" repeatCount="indefinite"/><text x="40" y="46" font-size="44" text-anchor="middle">🤔</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="130" y="46" font-size="34" text-anchor="middle">❓</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.4s" repeatCount="indefinite"/><text x="200" y="46" font-size="34" text-anchor="middle">❓</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.8s" repeatCount="indefinite"/><text x="270" y="46" font-size="34" text-anchor="middle">❓</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Which One Doesn’t Belong?</h2>
+  <p class="wf-rule vw-rule">Three of these belong together. Which one is the odd one out, and why?</p></div>
+  <div class="vw-wodb"><div><b>A</b><span class="tex">\sqrt{36}</span></div><div><b>B</b><span class="tex">\sqrt[3]{27}</span></div><div><b>C</b><span class="tex">\sqrt{20}</span></div><div><b>D</b><span class="tex">\sqrt{\tfrac94}</span></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>What is your reason?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Every one of them can be the odd one out.</b> <b>A</b> <span class="tex">\sqrt{36}=6</span> is the only even number. <b>B</b> <span class="tex">\sqrt[3]{27}=3</span> is the only cube root. <b>C</b> <span class="tex">\sqrt{20}=2\sqrt5</span> is the only irrational number. <b>D</b> <span class="tex">\sqrt{\tfrac94}=\tfrac32</span> is the only one with a fraction under the root, and the only answer less than 2. Did your neighbour pick a different one?</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -41,38 +52,6 @@
     </ul>
   </div>
   <div class="outcome"><b>AN2</b> Solve problems that involve operations on radicals and radical expressions with numerical and variable radicands.<br><span class="muted">Today: choosing the operation and finishing in simplest form; mixed practice in the style of the unit test.</span></div>
-</section>
-
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: Radical Dominoes" id="wu" style="--wf-side: 360px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Radical Dominoes</h2>
-  <p class="wf-rule">Build a chain from <b>START</b> to <b>END</b>. A domino can join only if its left end is <b>equal</b> to the end it touches, once both are simplified. Tap a loose domino to try it. Some dominoes are traps!</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u2l7-dom" id="u2l7-dom"></div>
-    <div class="u2l7-dmsg" id="u2l7-dmsg">The chain ends in <span class="tex">\sqrt{12}</span>. Which domino comes next?</div>
-    <div class="u2l7-wbtns"><button type="button" class="pill" id="u2l7-dreset">Start over</button></div>
-    <p class="u2l7-social">Challenge your neighbour: design a domino that could join after <span class="tex">4\sqrt{5}</span>, with its left end written as an <b>entire radical</b>.</p>
-  </div><div class="wf-side">
-    <div class="u2l7-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>START ends in <span class="tex">\sqrt{12}</span>. What must the next domino start with? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l7-wa"><div class="bk-ans"><span class="tex">\sqrt{12}=\sqrt{4}\cdot\sqrt{3}=2\sqrt{3}</span></div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Simplify <span class="tex">\sqrt{3}\cdot\sqrt{15}</span>. <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l7-wa"><div class="bk-ans"><span class="tex">\sqrt{45}=\sqrt{9}\cdot\sqrt{5}=3\sqrt{5}</span></div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Simplify <span class="tex">\dfrac{10}{\sqrt{5}}</span>. <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l7-wa"><div class="bk-ans"><span class="tex">\dfrac{10}{\sqrt{5}}\cdot\dfrac{\sqrt{5}}{\sqrt{5}}=\dfrac{10\sqrt{5}}{5}=2\sqrt{5}</span></div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> The last join is <span class="tex">\sqrt{2}+\sqrt{8}</span>. Which <b>END</b> domino fits? <b>Guess!</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> <span class="tex">\sqrt{10}</span></div>
-        <div class="opt right"><b>B</b> <span class="tex">\sqrt{18}</span></div>
-        <div class="opt"><b>C</b> <span class="tex">2\sqrt{2}</span></div>
-        <div class="opt"><b>D</b> <span class="tex">4</span></div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>B, <span class="tex">\sqrt{18}</span>.</b> <span class="tex">\sqrt{2}+\sqrt{8}=\sqrt{2}+2\sqrt{2}=3\sqrt{2}=\sqrt{18}</span>. <b>A</b> adds under the root (<span class="tex">\sqrt{2+8}</span>), a classic error. <b>D</b> multiplies instead: <span class="tex">\sqrt{2}\cdot\sqrt{8}=4</span>.</div>
-    </div>
-  </div></div>
 </section>
 
 <!-- ================= 1. Unit summary ================= -->
@@ -126,7 +105,6 @@
     <div class="bk-flip"><div class="bk-front"><span class="u2l7-fq">A student wrote</span><span class="tex">\dfrac{8+2\sqrt{3}}{2}=4+2\sqrt{3}</span></div><div class="bk-back"><span class="u2l7-fq">Divide <b>every</b> term by 2</span><span class="tex">\dfrac{8}{2}+\dfrac{2\sqrt{3}}{2}=4+\sqrt{3}</span></div></div>
     <div class="bk-flip"><div class="bk-front"><span class="u2l7-fq">A student wrote</span><span class="tex">(2\sqrt{5})^2=2\cdot5=10</span></div><div class="bk-back"><span class="u2l7-fq">Square both factors</span><span class="tex">2^2\cdot(\sqrt{5})^2=4\cdot5=20</span></div></div>
   </div>
-  <div class="explainer" data-explainer="whyWrong"></div>
 </section>
 
 <!-- ================= 2. Converting, comparing, restrictions ================= -->
@@ -156,7 +134,6 @@
 <section class="card" data-ink="s2c" data-section="Variable radicands">
   <h3 class="sub">Variable radicands</h3>
   <p class="u2l7-p">Divide each exponent by the index: the <b>quotient</b> goes outside, the <b>remainder</b> stays inside. Going the other way (mixed to entire), each outside factor goes in raised to the index.</p>
-  <div class="explainer" data-explainer="varRad"></div>
 </section>
 
 <section class="card example" data-ink="ex2" data-section="Example 2">
@@ -182,7 +159,6 @@
 <section class="card" data-ink="s3" data-section="3. Adding, Subtracting and Multiplying">
   <div class="sec-h"><span class="badge">3</span><h2>Adding, Subtracting and Multiplying</h2></div>
   <div class="def"><b>Add and subtract:</b> simplify every radical first, then treat each like radical as a <b>unit</b> (like <span class="tex">x</span>) and add the coefficients. Unlike radicals stay separate.</div>
-  <div class="explainer" data-explainer="collect"></div>
 </section>
 
 <section class="card example" data-ink="ex3" data-section="Example 3">
@@ -197,10 +173,9 @@
   <button class="more" data-more="ex3-space">+ More space</button>
 </section>
 
-<section class="card" data-ink="s3b" data-section="Multiplying: the area model">
+<section class="card" data-ink="s3b" data-section="Multiplying">
   <h3 class="sub">Multiplying: every term times every term</h3>
-  <p class="u2l7-p">An area model keeps track: one box for each pair of terms. Inside each box, multiply coefficients with coefficients and radicands with radicands, and remember <span class="tex">\left(\sqrt{a}\right)^2=a</span>. Then collect like terms.</p>
-  <div class="explainer" data-explainer="areaModel"></div>
+  <p class="u2l7-p">Multiply every term of one bracket by every term of the other. In each product, multiply coefficients with coefficients and radicands with radicands, and remember <span class="tex">\left(\sqrt{a}\right)^2=a</span>. Then collect like terms.</p>
 </section>
 
 <section class="card example" data-ink="ex4" data-section="Example 4">
@@ -222,7 +197,6 @@
 <section class="card" data-ink="s4" data-section="4. Dividing and Rationalizing">
   <div class="sec-h"><span class="badge">4</span><h2>Dividing and Rationalizing</h2></div>
   <div class="def">To get a radical out of a denominator, multiply by a <b>form of 1</b>. One term: multiply top and bottom by the radical that makes the radicand a perfect power (<span class="tex">\sqrt{3}\cdot\sqrt{3}=3</span>, <span class="tex">\sqrt[3]{9}\cdot\sqrt[3]{3}=3</span>). Two terms: multiply by the <b>conjugate</b>, so the middle terms cancel: <span class="tex">(a+\sqrt{b})(a-\sqrt{b})=a^2-b</span>.</div>
-  <div class="explainer" data-explainer="rationalize"></div>
 </section>
 
 <section class="card example" data-ink="ex5" data-section="Example 5">
@@ -255,7 +229,6 @@
 <section class="card" data-ink="s5" data-section="5. Problem Solving">
   <div class="sec-h"><span class="badge">5</span><h2>Problem Solving</h2></div>
   <div class="def">In a measurement problem, decide the operation from the formula: a <b>perimeter</b> adds lengths (combine like radicals), an <b>area</b> multiplies them (conjugates give a rational answer), and a <b>diagonal</b> uses the Pythagorean theorem. Give exact answers in simplest form, with units.</div>
-  <div class="explainer" data-explainer="rectangle"></div>
 </section>
 
 <section class="card example" data-ink="ex7" data-section="Example 7">

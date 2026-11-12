@@ -1,10 +1,7 @@
 /* Math 20-1 · Unit 1 · Lesson 6 — Geometric Growth and Decay.
- * Warm-up (The Lily Pond: a patch that doubles daily; step back from the full pond on day 30), and the explainers:
- *   factor (a 100% bar gains, loses, keeps or doubles → the growth factor r; Example 1 check: six mini bars),
- *   buildSeq (terms march out ×r, divide neighbours to check the ratio, count years on a ruler; Example 2 check),
+ * The explainers (2026-11-11 class format: the old warm-up and the factor / buildSeq / periods explainers were removed):
  *   startShift (STAR: a growth table builds row by row beside its dots; a toggle "t1 = time 0" / "t1 = after 1 period"
  *     slides every term name a row and shifts the exponent; both give P r^n; Example 3, 2 and 5 checks),
- *   periods (a timeline cut into doubling / half-life periods: n = total ÷ period, then P r^n; Example 4 checks),
  *   compound (balance bars: interest added each year, interest on interest in gold; monthly periods as a calendar;
  *     Example 5 check), rateRoot (guess the rate on a number line, then the nth root; Example 6 check),
  *   hunt (a table of values with bars against a target line: first n past it, check the one before; Examples 7, 8(c)),
@@ -31,208 +28,6 @@ const hide = (el) => { if (el) el.style.opacity = 0; return el; };
 const div = (host, cls, html, x, y, w, hh) => { const d = h('div', cls, html); if (w != null || hh != null) box(d, w, hh); if (x != null) d.style.position = 'absolute'; return add(host, d, x, y); };
 const panel = (stage, x, y, w, hh, title, cls = '') => div(stage, 'u1l6-panel ' + cls, title ? `<div class="u1l6-ph">${title}</div>` : '', x, y, w, hh);
 const lineIn = (p, html, cls = '') => { const d = h('div', 'u1l6-line ' + cls, html); p.appendChild(d); hide(d); return d; };
-
-/* ====================================================================================================
- * Warm-up: The Lily Pond. 64 patches fill the pond on day 30; day d shows 2^(d − 24) of them.
- * ==================================================================================================== */
-function mountPond() {
-  const host = document.getElementById('u1l6-pond'); if (!host) return;
-  const W = 560, H = 370, cx = 280, cy = 182, rx = 258, ry = 166;
-  const svg = svgEl('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, class: 'u1l6-pondsvg' }, host);
-  svgEl('ellipse', { cx, cy: cy + 5, rx: rx + 12, ry: ry + 12, fill: '#a9cf86' }, svg);
-  svgEl('ellipse', { cx, cy, rx, ry, fill: '#cfe7f5', stroke: '#86b4cf', 'stroke-width': 3 }, svg);
-  [[150, 110, 40], [390, 250, 52], [420, 95, 30]].forEach(([x, y, r]) => svgEl('ellipse', { cx: x, cy: y, rx: r, ry: r * 0.42, fill: 'none', stroke: '#a9cde3', 'stroke-width': 2 }, svg));
-  // slots on a hex grid inside the pond: the smallest spacing that still gives 64, spread from a seed point
-  let s = 60, pts = [];
-  while (s > 20) {
-    pts = []; const dy = s * 0.866;
-    for (let j = 0, y = cy - ry; y <= cy + ry; j++, y += dy) for (let x = cx - rx + (j % 2) * s / 2; x <= cx + rx; x += s) {
-      const ex = (x - cx) / (rx - s * 0.42), ey = (y - cy) / (ry - s * 0.42); if (ex * ex + ey * ey <= 1) pts.push([x, y]);
-    }
-    if (pts.length >= 64) break; s -= 1;
-  }
-  const seed = [cx - 95, cy + 25];
-  pts.sort((a, b) => Math.hypot(a[0] - seed[0], (a[1] - seed[1]) * 1.4) - Math.hypot(b[0] - seed[0], (b[1] - seed[1]) * 1.4));
-  pts = pts.slice(0, 64);
-  const rnd = (i) => { const x = Math.sin(i * 12.9898) * 43758.5453; return x - Math.floor(x); };
-  const R = s * 0.64, pads = pts.map(([x, y], i) => {
-    const g = svgEl('g', { class: 'u1l6-lily' }, svg), a = rnd(i) * Math.PI * 2, w = 0.42, r = R * (0.88 + rnd(i + 99) * 0.2);
-    const p1 = [x + r * Math.cos(a - w), y + r * Math.sin(a - w)], p2 = [x + r * Math.cos(a + w), y + r * Math.sin(a + w)];
-    svgEl('path', { d: `M${x} ${y} L${p2[0].toFixed(1)} ${p2[1].toFixed(1)} A${r.toFixed(1)} ${r.toFixed(1)} 0 1 1 ${p1[0].toFixed(1)} ${p1[1].toFixed(1)} Z`, fill: i % 3 ? '#4f9c3f' : '#5aab48', stroke: '#2b5e22', 'stroke-width': 1.3 }, g);
-    if (i % 11 === 4) { svgEl('circle', { cx: x - r * 0.25, cy: y + r * 0.1, r: r * 0.3, fill: '#f4a7c4', stroke: '#c9668e', 'stroke-width': 1 }, g); svgEl('circle', { cx: x - r * 0.25, cy: y + r * 0.1, r: r * 0.1, fill: '#f6d24a' }, g); }
-    g.style.transformOrigin = `${x}px ${y}px`;
-    return g;
-  });
-  const info = div(host, 'u1l6-pondinfo', '', 10, 8);
-  const bBack = document.getElementById('u1l6-dback'), bFwd = document.getElementById('u1l6-dfwd'), bReset = document.getElementById('u1l6-dreset');
-  const FR = { 64: '<b>full</b>', 32: '<b>half</b> covered', 16: '<b>a quarter</b> covered', 8: '<b>⅛</b> covered (12.5%)', 4: '<sup>1</sup>⁄<sub>16</sub> covered (about 6%)', 2: '<sup>1</sup>⁄<sub>32</sub> covered (about 3%)', 1: '<sup>1</sup>⁄<sub>64</sub> covered (under 2%)' };
-  let day = 30;
-  const paint = () => {
-    const k = Math.pow(2, day - 24);
-    pads.forEach((g, i) => g.classList.toggle('u1l6-lily-on', i < k));
-    info.innerHTML = `<b>Day ${day}</b> · ${k} of 64 patches · pond ${FR[k]}`;
-    bBack.disabled = day <= 24; bFwd.disabled = day >= 30;
-  };
-  bBack.addEventListener('click', () => { if (day > 24) { day--; paint(); } });
-  bFwd.addEventListener('click', () => { if (day < 30) { day++; paint(); } });
-  bReset.addEventListener('click', () => { day = 30; paint(); });
-  paint();
-}
-
-/* =============================== explainer: percent change → growth factor =============================== */
-const FA = {
-  up6: { label: 'Up 6%', kind: 'up', p: 6 },
-  down6: { label: 'Down 6%', kind: 'down', p: 6 },
-  lose14: { label: 'Loses ¼', kind: 'frac', num: 1, den: 4 },
-  reb80: { label: 'Rebounds to 80%', kind: 'keep', p: 80 },
-  lose80: { label: 'Loses 80%', kind: 'down', p: 80 },
-  dbl: { label: 'Doubles', kind: 'times', k: 2 }
-};
-const EX1 = [
-  { t: '(a) Elk herd grows by 7%', blue: 1, gain: 0.07, r: '1+0.07=1.07', cap: 'It keeps all 100% and <b>gains</b> 7%.' },
-  { t: '(b) Laptop loses 28%', blue: 0.72, lost: 0.28, r: '1-0.28=0.72', cap: 'It <b>loses</b> 28%, so it keeps 72%.' },
-  { t: '(c) Views triple', blue: 3, seg: 3, r: '3', cap: '<b>Triple</b>: three copies of the whole amount.' },
-  { t: '(d) Arc shorter by one-eighth', blue: 7 / 8, lost: 1 / 8, seg: 8, r: '\\tfrac{7}{8}=0.875', cap: 'One-eighth is <b>lost</b>, so it keeps seven-eighths.' },
-  { t: '(e) Rebounds to 65%', blue: 0.65, ghost: 0.35, r: '0.65', cap: 'The new height <b>is</b> 65% of the old one. Nothing to subtract.' },
-  { t: '(f) Wages rise by 2.75%', blue: 1, gain: 0.0275, r: '1+0.0275=1.0275', cap: 'Keeps 100%, <b>gains</b> 2.75%. Careful with the decimal: 2.75% is 0.0275.' }
-];
-function bar(host, x, y, w, hh, cls, html = '') { return div(host, 'u1l6-bar ' + cls, html, x, y, w, hh); }
-const factor = {
-  title: 'Percent change → growth factor',
-  height: 384, minW: 900,
-  choices: [...Object.keys(FA).map((k) => ({ v: k, label: FA[k].label })), { sep: 'Check:' }, { v: 'ex1', label: 'Example 1 check' }],
-  ask: (v) => (v === 'ex1' ? 'Example 1: state the growth factor <i>r</i> in each situation.' : `What does “${FA[v].label.toLowerCase()}” do to the amount each period?`),
-  make(stage, v, ex) {
-    if (v === 'ex1') return factorEx1(stage, ex);
-    const d = FA[v], X0 = 170, S = 320, BH = 66, Y1 = 34, Y2 = 150;
-    div(stage, 'u1l6-blab', 'Before', 16, Y1 + 18); const aLab = hide(div(stage, 'u1l6-blab', 'After 1<br>period', 16, Y2 + 6));
-    const before = bar(stage, X0, Y1, S, BH, 'u1l6-b-blue', '100%');
-    let r, rTex, after = [], keepTxt;
-    if (d.kind === 'up') { r = 1 + d.p / 100; rTex = `r=1+\\dfrac{${d.p}}{100}=1+${fx(d.p / 100, 4)}=${cR(fx(r, 4))}`; keepTxt = `${100 + d.p}%`; }
-    else if (d.kind === 'down') { r = 1 - d.p / 100; rTex = `r=1-\\dfrac{${d.p}}{100}=1-${fx(d.p / 100, 2, true)}=${cR(fx(r, 4))}`; keepTxt = `${100 - d.p}%`; }
-    else if (d.kind === 'frac') { r = 1 - d.num / d.den; rTex = `r=1-\\tfrac{${d.num}}{${d.den}}=${cR(`\\tfrac{${d.den - d.num}}{${d.den}}`)}=${fx(r, 4)}`; keepTxt = '¾'; }
-    else if (d.kind === 'keep') { r = d.p / 100; rTex = `r=\\dfrac{${d.p}}{100}=${cR(fx(r, 4))}`; keepTxt = `${d.p}%`; }
-    else { r = d.k; rTex = `r=${cR(String(d.k))}`; keepTxt = `${d.k * 100}%`; }
-    // the "after" picture
-    let fall = null, grow = null;
-    if (d.kind === 'up') {
-      after = [bar(stage, X0, Y2, S, BH, 'u1l6-b-blue', '100%')]; grow = bar(stage, X0 + S, Y2, S * d.p / 100, BH, 'u1l6-b-green');
-      grow.appendChild(h('div', 'u1l6-btag u1l6-tag-up', `+${d.p}%`)); after.push(grow);
-    } else if (d.kind === 'down') {
-      const keep = S * (1 - d.p / 100);
-      after = [bar(stage, X0, Y2, keep, BH, 'u1l6-b-blue', `${100 - d.p}%`)]; fall = bar(stage, X0 + keep, Y2, S - keep, BH, 'u1l6-b-red', d.p >= 20 ? `−${d.p}%` : '');
-      if (d.p < 20) fall.appendChild(h('div', 'u1l6-btag u1l6-tag-dn', `−${d.p}%`));
-      after.push(fall);
-    } else if (d.kind === 'frac') {
-      const q = S / d.den;
-      for (let i = 0; i < d.den; i++) after.push(bar(stage, X0 + i * q, Y2, q, BH, i < d.den - d.num ? 'u1l6-b-blue u1l6-b-seg' : 'u1l6-b-red u1l6-b-seg', i < d.den - d.num ? '¼' : '−¼'));
-      fall = after[after.length - 1];
-    } else if (d.kind === 'keep') {
-      div(stage, 'u1l6-ghostbar', '', X0, Y2, S, BH);
-      after = [bar(stage, X0, Y2, S * r, BH, 'u1l6-b-blue', `${d.p}%`)];
-    } else {
-      after = [bar(stage, X0, Y2, S, BH, 'u1l6-b-blue', '100%'), bar(stage, X0 + S, Y2, S, BH, 'u1l6-b-blue u1l6-b-copy', '100%')];
-      grow = after[1];
-    }
-    after.forEach(hide);
-    const tag = hide(div(stage, 'u1l6-xr', T(`\\times ${cR(fx(r, 4))}`), 22, Y2 - 34));
-    const F = hide(panel(stage, X0, 262, ex.W - X0 - 16, 104, '', 'u1l6-fpanel'));
-    F.innerHTML = `<div class="u1l6-fbig">${T(rTex)}</div><div class="u1l6-fv ${r > 1 ? 'u1l6-fv-up' : 'u1l6-fv-dn'}">${r > 1 ? T('r>1') + ': it <b>grows</b>' : T('0<r<1') + ': it <b>decays</b>'}</div>`;
-    const caps = {
-      up: `<b>Up ${d.p}%</b>: it keeps all <b>100%</b> and <b>gains</b> another ${d.p}%. That makes <b>${keepTxt}</b>.`,
-      down: d.p === 80 ? '<b>“Loses 80%”</b>: 80% falls away. Only <b>20%</b> is left.' : `<b>Down ${d.p}%</b>: ${d.p}% is <b>taken away</b>, so <b>${keepTxt}</b> is left.`,
-      frac: '<b>Loses ¼</b>: cut it into 4 equal parts and one falls off. It <b>keeps ¾</b>.',
-      keep: '<b>“Rebounds to 80%”</b>: the new height <b>is</b> 80% of the old one. Nothing to subtract.',
-      times: '<b>Doubles</b>: two copies of the whole amount, <b>200%</b>.'
-    };
-    const last = v === 'lose80' ? `Compare: “rebounds <b>to</b> 80%” keeps 80%, so ${T('r=0.8')}. “<b>Loses</b> 80%” keeps 20%, so ${T('r=0.2')}.`
-      : v === 'reb80' ? `Compare: “<b>loses</b> 80%” would keep only 20%: ${T('r=0.2')}. Read the words carefully.`
-        : r > 1 ? `${T('r>1')}: the amount <b>grows</b> every period.` : `${T('0<r<1')}: the amount <b>decays</b> (shrinks) every period.`;
-    return [
-      { cap: 'Start with the amount at the beginning of a period: <b>100%</b> of it.', run: (c) => pulse(c, before, 1.06) },
-      { cap: caps[d.kind],
-        run: async (c) => {
-          await show(c, aLab);
-          if (d.kind === 'up' || d.kind === 'times') { await show(c, after[0]); grow.style.opacity = 1; await anim(c, grow, [{ clipPath: 'inset(-40px 100% 0 0)' }, { clipPath: 'inset(-40px 0 0 0)' }], 600); grow.style.clipPath = ''; }
-          else { for (const b of after) b.style.opacity = 1; await pop(c, after[0], 300); if (fall) { await sleep(c, 250); await anim(c, fall, [{ transform: 'none', opacity: 1 }, { transform: 'translate(30px, 120px) rotate(14deg)', opacity: 0 }], 800); } }
-        } },
-      { cap: `Growth factor: ${T(rTex)}. Each period, <b>multiply by ${T(cR(fx(r, 4)))}</b>.`, run: async (c) => { await show(c, tag); await show(c, F); } },
-      { cap: last, run: (c) => pulse(c, F.querySelector('.u1l6-fv'), 1.08) }
-    ];
-  }
-};
-function factorEx1(stage, ex) {
-  const X = 380, S = 100, RH = 58, rows = EX1.map((d, i) => {
-    const y = 12 + i * RH;
-    const g = hide(div(stage, 'u1l6-e1row', '', 8, y, ex.W - 16, RH - 8));
-    div(g, 'u1l6-e1t', d.t, 8, 0);
-    const out = div(g, 'u1l6-e1out', '', X - 8, 6, S, RH - 20); // the 100% outline
-    void out;
-    const blueW = S * Math.min(d.blue, 3);
-    if (d.seg) { const n = d.seg, segW = S * (d.blue >= 1 ? 1 : 1 / n); const cnt = d.blue >= 1 ? n : Math.round(d.blue * n); for (let k = 0; k < cnt; k++) div(g, 'u1l6-bar u1l6-b-blue u1l6-b-mini', '', X - 8 + k * segW, 6, segW, RH - 20); }
-    else div(g, 'u1l6-bar u1l6-b-blue u1l6-b-mini', '', X - 8, 6, blueW, RH - 20);
-    if (d.gain) div(g, 'u1l6-bar u1l6-b-green u1l6-b-mini', '', X - 8 + S, 6, Math.max(4, S * d.gain), RH - 20);
-    if (d.lost) div(g, 'u1l6-bar u1l6-b-red u1l6-b-mini u1l6-b-lost', '', X - 8 + blueW, 6, S * d.lost, RH - 20);
-    const parts = d.r.split('='), last = parts.pop();
-    div(g, 'u1l6-e1r', T(`r=${parts.length ? parts.join('=') + '=' : ''}${cR(last)}`), 700, 6);
-    return g;
-  });
-  return EX1.map((d, i) => ({ cap: `${d.t.slice(0, 3)} ${d.cap} ${T('r=' + d.r)}`, run: (c) => show(c, rows[i]) }));
-}
-
-/* =============================== explainer: build the sequence =============================== */
-const BS = {
-  garden: { label: 'Example 2 check', t1: 450, r: 1.12, y0: 2022, yT: 2032, rate: 'Up 12%', word: 'members', money: false,
-    ask: 'Example 2: 450 members in January 2022, growing 12% a year. Membership in January 2032?', end: 'about <b>1398 members</b>' },
-  car: { label: 'A car loses 15% a year', t1: 30000, r: 0.85, y0: 2024, yT: 2030, rate: 'Down 15%', word: 'dollars', money: true,
-    ask: 'A $30 000 car, bought in January 2024, loses 15% of its value each year. Its value in January 2030?', end: 'worth about <b>$11 314</b>' }
-};
-const buildSeq = {
-  title: 'Multiply by r, again and again',
-  height: 450, minW: 900,
-  choices: Object.keys(BS).map((k) => ({ v: k, label: BS[k].label })),
-  ask: (v) => BS[v].ask,
-  make(stage, v, ex) {
-    const d = BS[v], vals = [0, 1, 2, 3].map((k) => d.t1 * Math.pow(d.r, k)), N = d.yT - d.y0 + 1, tN = d.t1 * Math.pow(d.r, N - 1);
-    const $ = d.money ? '$' : '', BW = 158, GAP = 205, X0 = 26, BY = 74, rS = fx(d.r, 4);
-    const svg = svgEl('svg', { class: 'u1l6-ov', width: ex.W, height: 450 }, stage);
-    const boxes = vals.map((val, k) => {
-      const b = hide(div(stage, 'u1l6-term' + (k === 0 ? ' u1l6-term1' : ''), '', X0 + k * GAP, BY, BW, 82));
-      const exact = fx(val, 4), round = nh(val, 0);
-      b.innerHTML = `<div class="u1l6-tn">${T(k === 0 ? cT('t_1') : `t_${k + 1}`)}</div><div class="u1l6-tv">${$}${round}</div>${exact !== fx(val, 0) ? `<div class="u1l6-tx">(${nh(val, 4)})</div>` : ''}`;
-      div(b, 'u1l6-ty', `Jan ${d.y0 + k}`, 0, 88, BW);
-      return b;
-    });
-    const dots = hide(div(stage, 'u1l6-dots', '…', X0 + 4 * GAP - 20, BY + 18));
-    const arcs = [1, 2, 3].map((k) => {
-      const x1 = X0 + (k - 1) * GAP + BW * 0.62, x2 = X0 + k * GAP + BW * 0.38, y = BY - 4;
-      const g = svgEl('g', { class: 'bk-curve' }, svg); g.style.color = RC;
-      svgEl('path', { class: 'bk-stroke', d: `M${x1} ${y} Q${(x1 + x2) / 2} ${y - 56} ${x2} ${y}`, fill: 'none', stroke: RC, 'stroke-width': 3.2, 'stroke-linecap': 'round' }, g);
-      arrowHead(g, x2, y, x2 - (x1 + x2) / 2, 56, { width: 3.2, color: RC });
-      const lab = hide(div(stage, 'u1l6-hoplab', T(`\\times${cR(rS)}`), (x1 + x2) / 2, y - 50)); lab.style.translate = '-50% -50%';
-      hide(g); return { g, lab };
-    });
-    const ratios = [1, 2, 3].map((k) => {
-      const a = vals[k - 1], b = vals[k], x = X0 + (k - 1) * GAP + BW + (GAP - BW) / 2;
-      const el = hide(div(stage, 'u1l6-ratio', T(`\\dfrac{${nt(b, 4)}}{${nt(a, 4)}}=${cR(rS)}`), x, 196)); el.style.translate = '-50% 0'; return el;
-    });
-    const NL = new NumberLine(stage, { x: 14, y: 262, width: ex.W - 28, height: 112, min: d.y0, max: d.yT, step: 1, axisY: 50, arrows: false,
-      labels: (y) => `<div class="u1l6-yr">${y}</div><div class="u1l6-yt">${T(y === d.y0 ? cT('t_1') : `t_{${y - d.y0 + 1}}`)}</div>` });
-    hide(NL.el);
-    const tNs = d.money ? nt(tN, 2, true) : nt(tN, 1);
-    const F = hide(div(stage, 'u1l6-fbox', T(`t_{${N}}=${cT(nt(d.t1, 0))}(${cR(rS)})^{${N - 1}}\\approx ${d.money ? '\\$' : ''}${tNs}`), ex.W / 2, 392)); F.style.translate = '-50% 0';
-    const hopIn = async (c, k) => { const a = arcs[k - 1]; a.g.style.opacity = 1; await drawIn(a.g, 420, c); await show(c, a.lab); await pop(c, boxes[k], 340); boxes[k].style.opacity = 1; };
-    return [
-      { cap: `January ${d.y0}: ${$}${nh(d.t1, 0)}${d.money ? '' : ' ' + d.word}. This is the first term, ${T(cT('t_1'))}.`, run: async (c) => { boxes[0].style.opacity = 1; await pop(c, boxes[0], 380); } },
-      { cap: `${d.rate} each year: <b>multiply by ${T(cR(rS))}</b> to get the next term.`, run: (c) => hopIn(c, 1) },
-      { cap: `Again and again, ×${T(cR(rS))} each year. Keep the <b>unrounded</b> values (in brackets) in your calculator.`, run: async (c) => { await hopIn(c, 2); await hopIn(c, 3); await show(c, dots); } },
-      { cap: `<b>Geometric?</b> Divide each term by the one before it: the ratio is always ${T(cR(rS))}.`, run: async (c) => { for (const el of ratios) { await show(c, el); await sleep(c, 150); } } },
-      { cap: `${d.yT} is ${d.yT - d.y0} years after ${d.y0}. Count terms: ${d.y0} is ${T(cT('t_1'))}, so ${d.yT} is ${T(`t_{${N}}`)}, ${N - 1} jumps later.`,
-        run: async (c) => { await show(c, NL.el); for (let y = d.y0; y < d.yT; y++) await NL.hop(c, y, y + 1, { label: T(`\\times${cR(rS)}`), height: 24, ms: 200 }); } },
-      { cap: `${T(`t_{${N}}=t_1r^{${N}-1}=${nt(d.t1, 0)}(${rS})^{${N - 1}}\\approx${tNs}`)}: ${d.end}.`, run: (c) => pop(c, F, 420).then(() => { F.style.opacity = 1; }) }
-    ];
-  }
-};
 
 /* =============================== STAR explainer: where does the sequence start? =============================== */
 const SS = {
@@ -334,47 +129,6 @@ const startShift = {
           curve.style.opacity = 1; await G.drawIn(curve, 900, c); await show(c, cLab);
           const f3 = h('div', 'u1l6-sf u1l6-sf3', T(`\\text{either way}=${cP(nt(d.P, 2))}(${cR(rS)})^{${N}}=${cP('P')}${cR('r')}^{\\,n}`)); F.appendChild(f3); await show(c, f3);
         } }
-    ];
-  }
-};
-
-/* =============================== explainer: count the periods =============================== */
-const PD = {
-  bact: { label: 'Example 4(a) check', P: 300, r: 2, per: 20, total: 240, u: 'min', conv: '4\\text{ h}=240\\text{ min}', what: 'bacteria', word: 'doubling', fac: '2', d: 0,
-    ask: 'Example 4(a): 300 bacteria, doubling every 20 minutes. How many after 4 hours?' },
-  iso: { label: 'Example 4(b) check', P: 96, r: 0.5, per: 6, total: 48, u: 'h', conv: '2\\text{ days}=48\\text{ h}', what: 'mg', word: 'half-life', fac: '\\tfrac{1}{2}', d: 3,
-    ask: 'Example 4(b): 96 mg, half-life 6 hours. How much is left after 2 days?' },
-  town: { label: 'Doubles every 15 years', P: 5000, r: 2, per: 15, total: 60, u: 'years', conv: '60\\text{ years}', what: 'people', word: 'doubling', fac: '2', d: 0,
-    ask: 'A town of 5 000 people doubles every 15 years. How many people after 60 years?' }
-};
-const periods = {
-  title: 'How many periods fit in the time?',
-  height: 400, minW: 900,
-  choices: Object.keys(PD).map((k) => ({ v: k, label: PD[k].label })),
-  ask: (v) => PD[v].ask,
-  make(stage, v, ex) {
-    const d = PD[v], n = d.total / d.per, A = d.P * Math.pow(d.r, n), rp = Math.pow(d.r, n), half = d.r < 1;
-    const NL = new NumberLine(stage, { x: 14, y: 96, width: ex.W - 28, height: 130, min: 0, max: d.total, step: d.per, axisY: 78, arrows: false, fontSize: 17,
-      labels: (t) => `<span class="u1l6-tl">${t}</span>` });
-    div(stage, 'u1l6-unit', d.u, ex.W - 60, 206);
-    const nBox = div(stage, 'u1l6-cnt', `<div class="u1l6-ck">periods</div><div class="u1l6-cv">${T('n=0')}</div>`, 24, 8, 190, 76);
-    const vBox = div(stage, 'u1l6-cnt u1l6-cnt-v', `<div class="u1l6-ck">${half ? 'amount left' : 'amount'}</div><div class="u1l6-cv">${nh(d.P, d.d)}</div>`, 236, 8, 280, 76);
-    const conv = hide(div(stage, 'u1l6-conv', T(`\\text{total: }${d.conv}`), ex.W - 340, 18, 320));
-    const nCv = nBox.querySelector('.u1l6-cv'), vCv = vBox.querySelector('.u1l6-cv');
-    const setN = (k) => { nCv.innerHTML = T(`n=${k}`); vCv.innerHTML = nh(d.P * Math.pow(d.r, k), d.d); };
-    const prod = hide(div(stage, 'u1l6-prod', '', 24, 252, ex.W - 48));
-    prod.innerHTML = `<span class="u1l6-pt">${T(nt(d.P, 0))}</span>` + Array.from({ length: n }, () => `<span class="u1l6-ptok">${T('\\times' + cR(d.fac))}</span>`).join('');
-    const toks = [...prod.querySelectorAll('.u1l6-ptok')];
-    const res = hide(div(stage, 'u1l6-fbox', T(`${nt(d.P, 0)}(${cR(d.fac)})^{${n}}=${nt(d.P, 0)}${half ? `\\left(\\tfrac{1}{${nt(1 / rp, 0)}}\\right)=\\dfrac{${d.P}}{${nt(1 / rp, 0)}}` : `(${nt(rp, 0)})`}=${nt(A, d.d)}\\text{ ${d.what}}`), ex.W / 2, 322)); res.style.translate = '-50% 0';
-    const hop = (c, k, ms) => NL.hop(c, k * d.per, (k + 1) * d.per, { label: T('\\times' + cR(d.fac)), height: 26, ms, color: half ? DN : UP });
-    return [
-      { cap: `One period is <b>${d.per} ${d.u}</b>: one ${d.word} every ${d.per} ${d.u}.`, run: async (c) => { await hop(c, 0, 600); setN(1); await pulse(c, vBox, 1.06); } },
-      { cap: `Write the total time in the <b>same units</b>: ${T(d.conv)}.`, run: async (c) => { await show(c, conv); await pulse(c, NL.el.querySelector('.bk-nl-lab:last-child') || conv, 1.15); } },
-      { cap: `Count the periods: ${T(`n=\\dfrac{\\text{total time}}{\\text{one period}}=\\dfrac{${d.total}}{${d.per}}=${n}`)} ${d.word === 'half-life' ? 'half-lives' : d.word + 's'}.`,
-        run: async (c) => { for (let k = 1; k < n; k++) { await hop(c, k, 160); setN(k + 1); } } },
-      { cap: `Each ${d.word} multiplies by ${T(cR(d.fac))}: ${n} factors of ${T(d.fac)}, so ${T(`${nt(d.P, 0)}(${d.fac})^{${n}}`)}.`,
-        run: async (c) => { prod.style.opacity = 1; for (const t of toks) { await pop(c, t, 160); } } },
-      { cap: `${T(`${nt(d.P, 0)}(${d.fac})^{${n}}=${nt(A, d.d)}`)} ${d.what}.`, run: async (c) => { await pop(c, res, 420); res.style.opacity = 1; } }
     ];
   }
 };
@@ -626,6 +380,5 @@ standup('u1l6', {
 });
 
 /* =============================== mount =============================== */
-mountPond();
-export const explainers = mountExplainers({ factor, buildSeq, startShift, periods, compound, rateRoot, hunt, twoRates });
-export const _test = { fx, nt, nh, FA, BS, SS, PD, CI, RR, HN, TR };
+export const explainers = mountExplainers({ startShift, compound, rateRoot, hunt, twoRates });
+export const _test = { fx, nt, nh, SS, CI, RR, HN, TR };

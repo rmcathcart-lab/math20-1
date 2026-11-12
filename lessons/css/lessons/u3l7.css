@@ -23,23 +23,6 @@
 .u3l7-fig0 { width: 400px; height: 230px; }
 .u3l7-figrow { display: flex; justify-content: center; margin: 2px 0 10px; }
 
-/* ---------------- warm-up: Gus the Goat ---------------- */
-.u3l7-field { position: relative; width: 560px; height: 350px; }
-.u3l7-fieldsvg { display: block; }
-.u3l7-finfo { position: absolute; left: 10px; top: 8px; font-size: 17px; background: rgba(255, 255, 255, .94); border: 2px solid #b9d39f; border-radius: 10px; padding: 3px 12px; max-width: 520px; }
-.u3l7-flab { position: absolute; font: 800 17px var(--round); color: #c27a0e; background: rgba(255, 255, 255, .85); border-radius: 6px; padding: 0 5px; }
-.u3l7-wbtns { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0 2px; }
-.u3l7-wbtns .pill { font-size: 15px; padding: 6px 14px; }
-.u3l7-wbtns .pill.on { background: #7a1f3d; color: #fff; }
-.wf .u3l7-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
-.wf .u3l7-wqs .q-line .pill.small { padding: 2px 10px; }
-.u3l7-wa { margin: 0 0 6px 40px; }
-.wf .u3l7-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
-.wf .wf-poll { margin-top: 8px; }
-.wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
-.wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
-.wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
-.u3l7-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
 
 /* ---------------- the SSA figure ---------------- */
 .u3l7-fig { position: relative; }

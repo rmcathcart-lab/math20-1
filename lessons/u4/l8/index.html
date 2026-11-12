@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u4l8.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,15 @@
 </head>
 <body>
 <main class="lesson screen u4l8">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Number Machine">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="0 140 30;360 140 30" dur="4s" repeatCount="indefinite"/><text x="140" y="30" font-size="40" text-anchor="middle" dominant-baseline="central">⚙️</text></g><text x="190" y="46" font-size="34" text-anchor="middle">💡<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="rotate" values="360 240 30;0 240 30" dur="3s" repeatCount="indefinite"/><text x="240" y="30" font-size="40" text-anchor="middle" dominant-baseline="central">⚙️</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Number Machine</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Pick any number (not 0). Add 3. Square the answer. Subtract 9.</p><p class="vw-ctx">Divide by the number you picked. Then subtract 6.</p><p class="vw-ask">What number do you end up with? Compare with the person beside you.</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A number machine with turning gears: a mystery number goes in the top and a mystery number comes out"><rect x="70" y="70" width="190" height="120" rx="14" fill="#efe9dc" stroke="#4a4436" stroke-width="4"/><path d="M135 70 L120 40 L210 40 L195 70 Z" fill="#d9d3c4" stroke="#4a4436" stroke-width="4"/><rect x="240" y="150" width="50" height="26" rx="4" fill="#d9d3c4" stroke="#4a4436" stroke-width="3"/><g><animateTransform attributeName="transform" type="rotate" from="0 120 130" to="360 120 130" dur="4s" repeatCount="indefinite"/><polygon points="150.0,130.0 142.0,138.0 143.0,149.3 131.7,150.3 125.2,159.5 115.9,153.0 105.0,156.0 102.1,145.0 91.8,140.3 96.6,130.0 91.8,119.7 102.1,115.0 105.0,104.0 115.9,107.0 125.2,100.5 131.7,109.7 143.0,110.7 142.0,122.0" fill="#2b55a0"/><circle cx="120" cy="130" r="9.0" fill="#fff"/></g><g><animateTransform attributeName="transform" type="rotate" from="0 170 118" to="-360 170 118" dur="2.7s" repeatCount="indefinite"/><polygon points="190.0,118.0 184.1,124.8 182.5,133.6 173.5,133.2 165.5,137.5 160.3,130.2 152.0,126.7 154.4,118.0 152.0,109.3 160.3,105.8 165.5,98.5 173.5,102.8 182.5,102.4 184.1,111.2" fill="#e0a11b"/><circle cx="170" cy="118" r="6.0" fill="#fff"/></g><g><animateTransform attributeName="transform" type="rotate" from="0 212 140" to="360 212 140" dur="3.5s" repeatCount="indefinite"/><polygon points="238.0,140.0 230.7,147.8 230.4,158.4 219.8,158.7 212.0,166.0 204.2,158.7 193.6,158.4 193.3,147.8 186.0,140.0 193.3,132.2 193.6,121.6 204.2,121.3 212.0,114.0 219.8,121.3 230.4,121.6 230.7,132.2" fill="#12805a"/><circle cx="212" cy="140" r="7.8" fill="#fff"/></g><circle cx="236" cy="88" r="9" fill="#c93a33"><animate attributeName="opacity" values="1;0.2;1" dur="0.9s" begin="0s" repeatCount="indefinite"/></circle><g><animateTransform attributeName="transform" type="translate" values="0 -40;0 -40;0 30;0 30" keyTimes="0;.15;.5;1" dur="3.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.45;.5;1" dur="3.2s" repeatCount="indefinite"/><rect x="146" y="20" width="38" height="44" rx="6" fill="#fff" stroke="#4a4436" stroke-width="3"/><text x="165" y="52" font-size="30" font-weight="700" text-anchor="middle" fill="#2b55a0">?</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 0;46 0;46 0" keyTimes="0;.55;.8;1" dur="3.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.55;.6;.95;1" dur="3.2s" repeatCount="indefinite"/><rect x="248" y="182" width="38" height="44" rx="6" fill="#fff" stroke="#4a4436" stroke-width="3"/><text x="267" y="214" font-size="30" font-weight="700" text-anchor="middle" fill="#c93a33">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Will it work for every number? Why?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>You get back the number you picked!</b> Call it <span class="tex">x</span>: <span class="tex">(x+3)^2-9=x^2+6x</span>, and <span class="tex">\dfrac{x^2+6x}{x}=\dfrac{x(x+6)}{x}=x+6</span>. Subtract 6: <span class="tex">x</span>.<br><span class="muted">That’s also why 0 is not allowed: you can’t divide by 0.</span></div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -41,40 +51,6 @@
     </ul>
   </div>
   <div class="outcome"><b>RF1</b> Factor polynomial expressions of the form <span class="tex">ax^2+bx+c</span>, <span class="tex">a^2x^2-b^2y^2</span>, <span class="tex">a(f(x))^2+b(f(x))+c</span> and <span class="tex">a^2(f(x))^2-b^2(g(y))^2</span> (<span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> rational).<br><b>RF5</b> Solve problems that involve quadratic equations.<br><b>AN3</b> Solve problems that involve radical equations (limited to square roots).<br><span class="muted">Today: the whole unit on one page, the factoring checklist, common errors, and mixed practice in the style of the unit test. </span></div>
-</section>
-
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Mystery Box" id="wu" style="--wf-side: 400px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Mystery Box</h2>
-  <p class="wf-rule">A shipping box has whole-number edges (in cm), all different. The label only gives a formula for its volume: <span class="tex u4l8-wlab">V=x^3+6x^2+8x</span></p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u4l8-box" id="u4l8-box"></div>
-    <div class="u4l8-wbtns">
-      <button type="button" class="pill" id="u4l8-xdn">◂ smaller <span class="tex">x</span></button>
-      <button type="button" class="pill" id="u4l8-xup">bigger <span class="tex">x</span> ▸</button>
-      <button type="button" class="pill" id="u4l8-edges">Show the edges</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u4l8-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>For <span class="tex">x=1</span>, what volume does the label give? Which three different whole numbers multiply to it? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l8-wa"><div class="bk-ans"><span class="tex">1+6+8=15</span> cm³, and <span class="tex">15=1\times3\times5</span>.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>For <span class="tex">x=2</span>: the volume, and the three edges? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l8-wa"><div class="bk-ans"><span class="tex">8+24+16=48</span> cm³, and <span class="tex">48=2\times4\times6</span>. A pattern: <span class="tex">x</span>, then 2 more, then 4 more.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Which three edges give <span class="tex">x^3+6x^2+8x</span> for <b>every</b> <span class="tex">x</span>? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> <span class="tex">x,\ x+6,\ x+8</span></div>
-        <div class="opt right"><b>B</b> <span class="tex">x,\ x+2,\ x+4</span></div>
-        <div class="opt"><b>C</b> <span class="tex">x^2,\ 6x,\ 8x</span></div>
-        <div class="opt"><b>D</b> <span class="tex">x+1,\ x+3,\ x+5</span></div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal id="u4l8-wreveal">Reveal</button>
-      <div class="poll-ans"><b>B.</b> Every term has an <span class="tex">x</span>: take out the <b>GCF</b>, <span class="tex">x(x^2+6x+8)</span>. Then two numbers with <b>product 8</b> and <b>sum 6</b>: 2 and 4. So <span class="tex">V=x(x+2)(x+4)</span>. Check <span class="tex">x=10</span>: <span class="tex">10\times12\times14=1\,680</span> and <span class="tex">1\,000+600+80=1\,680</span> ✓.<br>
-        <span class="muted"><b>A</b> just reads off the coefficients. <b>C</b> uses the terms as edges, but the volume is their <em>sum</em>, not their product. <b>D</b> would give a constant term of 15.</span></div>
-    </div>
-  </div></div>
-  <p class="u4l8-social">Challenge your neighbour: make your own mystery box. Pick edges like <span class="tex">x</span>, <span class="tex">x+1</span>, <span class="tex">x+5</span>, expand the volume, and see if they can unpack it.</p>
 </section>
 
 <!-- ================= 1. Unit summary ================= -->
@@ -120,7 +96,6 @@
     <div class="def"><b>Steps.</b> Move every term to one side <span class="tex">(ax^2+bx+c=0)</span>, divide out a common factor, factor, and use the <b class="u4l8-cz">zero product property</b>: if <span class="tex">AB=0</span> then <span class="tex">A=0</span> or <span class="tex">B=0</span>. <b>Never divide both sides by an expression containing the variable</b> (a root is lost).</div>
     <div class="def amber"><b>Same numbers, three names.</b> The <b>roots</b> of <span class="tex">ax^2+bx+c=0</span>, the <b>zeros</b> of <span class="tex">y=ax^2+bx+c</span> and the <b><span class="tex">x</span>-intercepts</b> of its graph. Roots <span class="tex">r_1</span> and <span class="tex">r_2</span> give the equation <span class="tex">(x-r_1)(x-r_2)=0</span>; a root <span class="tex">\frac{p}{q}</span> gives the factor <span class="tex">(qx-p)</span>. In a word problem, reject roots that are <b>inadmissible</b> (a negative length or time).</div>
   </div>
-  <div class="explainer" data-explainer="solveRecap"></div>
 </section>
 
 <section class="card" data-ink="s1d" data-section="Radical equations">
@@ -134,7 +109,6 @@
     <div><b>6</b><b>Verify</b> every root in the <b>original</b> equation.</div>
   </div>
   <div class="tip watch"><div class="tip-ic">!</div><div>Squaring can create an <b class="u4l8-cx">extraneous root</b> because <span class="tex">a^2=b^2</span> does not mean <span class="tex">a=b</span> (for example <span class="tex">3^2=(-3)^2</span>).</div></div>
-  <div class="explainer" data-explainer="radRecap"></div>
 </section>
 
 <section class="card" data-ink="s1e" data-section="Common errors">
@@ -146,14 +120,12 @@
     <div class="bk-flip"><div class="bk-front">Dividing <span class="tex">x^2=5x</span> by <span class="tex">x</span> loses the root <span class="tex">x=0</span></div><div class="bk-back"><span class="tex">x(x-5)=0</span>: <span class="tex">x=0</span> or <span class="tex">x=5</span></div></div>
     <div class="bk-flip"><div class="bk-front">A root of the squared equation is not automatically a root of the radical equation</div><div class="bk-back"><b>Verify</b> every root in the original</div></div>
   </div>
-  <div class="explainer" data-explainer="errors"></div>
 </section>
 
 <!-- ================= 2. Factoring ================= -->
 <section class="card" data-ink="s2" data-section="2. Factoring">
   <div class="sec-h"><span class="badge">2</span><h2>Factoring</h2></div>
   <div class="def"><b>Factor fully:</b> keep going until no factor can be factored again. A bracket can be the thing that repeats: <b>box it</b>, call it <span class="tex">\textcolor{#c27a0e}{A}</span> (and <span class="tex">\textcolor{#1f5bd6}{B}</span>), factor, then <b>unwrap in brackets</b> and simplify each factor. Simplifying can uncover a new GCF.</div>
-  <div class="explainer" data-explainer="subDos"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -204,8 +176,7 @@
 <!-- ================= 3. Solving quadratic equations ================= -->
 <section class="card" data-ink="s3" data-section="3. Solving Quadratic Equations">
   <div class="sec-h"><span class="badge">3</span><h2>Solving Quadratic Equations</h2></div>
-  <div class="def">Get <b>0 on one side</b> first: <span class="tex">(x-4)(x+1)=6</span> does not say either factor is 6. Then factor and set each factor equal to 0. Check the solving pipeline above (Example 4 chips). On a graph, the roots are where the parabola crosses the <span class="tex">x</span>-axis; a double root is where it just <b>touches</b>.</div>
-  <div class="explainer" data-explainer="rootsGraph"></div>
+  <div class="def">Get <b>0 on one side</b> first: <span class="tex">(x-4)(x+1)=6</span> does not say either factor is 6. Then factor and set each factor equal to 0. On a graph, the roots are where the parabola crosses the <span class="tex">x</span>-axis; a double root is where it just <b>touches</b>.</div>
 </section>
 
 <section class="card example" data-ink="ex4" data-section="Example 4">
@@ -250,7 +221,7 @@
 <!-- ================= 4. Radical equations ================= -->
 <section class="card" data-ink="s4" data-section="4. Radical Equations">
   <div class="sec-h"><span class="badge">4</span><h2>Radical Equations</h2></div>
-  <div class="def">Each side of a radical equation is a graph: the <b>roots</b> are the <span class="tex">x</span>-values where the two graphs <b>meet</b>. Squaring both sides also lets in the meeting points of the other side with the <b>mirror image</b> of the radical (the “<span class="tex">-\sqrt{\ }</span>” half), and those are the <b class="u4l8-cx">extraneous roots</b>. Check the radical-equation steps above (Example 7 chips).</div>
+  <div class="def">Each side of a radical equation is a graph: the <b>roots</b> are the <span class="tex">x</span>-values where the two graphs <b>meet</b>. Squaring both sides also lets in the meeting points of the other side with the <b>mirror image</b> of the radical (the “<span class="tex">-\sqrt{\ }</span>” half), and those are the <b class="u4l8-cx">extraneous roots</b>.</div>
   <div class="explainer" data-explainer="radGraph"></div>
 </section>
 
@@ -267,7 +238,6 @@
 <section class="card" data-ink="s4b" data-section="4. Two Radicals: Square Twice">
   <h3 class="sub">Two radicals: isolate one, square, isolate the other, square again</h3>
   <p>With two radicals, move one to the other side first. Squaring <span class="tex">1+\sqrt{x+4}</span> is squaring a <b>binomial</b>: <span class="tex">(a+b)^2=a^2+2ab+b^2</span> leaves a middle term <span class="tex">2\sqrt{x+4}</span> with a radical still in it, so isolate that and square again.</p>
-  <div class="explainer" data-explainer="twoRad"></div>
 </section>
 
 <section class="card example" data-ink="ex8" data-section="Example 8">

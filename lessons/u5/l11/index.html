@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unit 5 Review · Math 20-1 5.11</title>
+<meta name="description" content="Math 20-1 Unit 5 Lesson 11: Unit 5 review of quadratic functions and equations. The three forms of a quadratic function and what each shows, transformations and the step pattern, writing equations, completing the square, the quadratic formula, the discriminant and maximum and minimum problems on one page, with mixed examples in the style of the unit test and a Hit the Target game. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u5l11.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u5l11">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Chocolate Bars">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="60" y="46" font-size="40" text-anchor="middle">🍫</text></g><text x="170" y="42" font-size="24" text-anchor="middle">2, 6, 12, …<animate attributeName="opacity" values="1;0.15;1" dur="2.0s" begin="0s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.7s" repeatCount="indefinite"/><text x="280" y="46" font-size="40" text-anchor="middle">🍫</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Chocolate Bars</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">A chocolate maker moulds its bars in a growing pattern: Bar 1, Bar 2, Bar 3, and so on.</p><p class="vw-ask">How many squares are in Bar 10? Which bar has exactly 100 squares?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Chocolate bars in a growing pattern appear one after another: Bar 1 is 1 square by 2 squares, Bar 2 is 2 by 3, Bar 3 is 3 by 4, and Bar 4 is a dashed outline with a question mark"><rect x="0" y="0" width="330" height="250" rx="16" fill="#f6f3ea"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.8s" begin="0s" repeatCount="indefinite"/><text x="165" y="58" font-size="44" text-anchor="middle">🍫</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.043;0.100;.94;1" dur="7s" repeatCount="indefinite"/><rect x="8" y="180" width="40" height="20" rx="4" fill="#6b3e26" stroke="#4a2a18" stroke-width="2.5"/><rect x="10.0" y="182.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="30.0" y="182.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><text x="28.0" y="224" font-size="16" font-weight="800" fill="#4a4436" text-anchor="middle">Bar 1</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.214;0.271;.94;1" dur="7s" repeatCount="indefinite"/><rect x="60" y="160" width="60" height="40" rx="4" fill="#6b3e26" stroke="#4a2a18" stroke-width="2.5"/><rect x="62.0" y="162.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="82.0" y="162.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="102.0" y="162.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="62.0" y="182.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="82.0" y="182.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="102.0" y="182.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><text x="90.0" y="224" font-size="16" font-weight="800" fill="#4a4436" text-anchor="middle">Bar 2</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.386;0.443;.94;1" dur="7s" repeatCount="indefinite"/><rect x="132" y="140" width="80" height="60" rx="4" fill="#6b3e26" stroke="#4a2a18" stroke-width="2.5"/><rect x="134.0" y="142.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="154.0" y="142.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="174.0" y="142.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="194.0" y="142.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="134.0" y="162.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="154.0" y="162.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="174.0" y="162.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="194.0" y="162.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="134.0" y="182.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="154.0" y="182.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="174.0" y="182.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><rect x="194.0" y="182.0" width="16.0" height="16.0" rx="2.5" fill="#8f5a3a"/><text x="172.0" y="224" font-size="16" font-weight="800" fill="#4a4436" text-anchor="middle">Bar 3</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.557;0.614;.94;1" dur="7s" repeatCount="indefinite"/><rect x="224" y="120" width="100" height="80" rx="4" fill="#fff" stroke="#4a2a18" stroke-width="2.5" stroke-dasharray="7 6"/><text x="274.0" y="174.0" font-size="40" font-weight="800" fill="#2b55a0" text-anchor="middle">?<animate attributeName="opacity" values="1;0.25;1" dur="1.2s" begin="0s" repeatCount="indefinite"/></text><text x="274.0" y="224" font-size="16" font-weight="800" fill="#4a4436" text-anchor="middle">Bar 4</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Compare with the person beside you. How do you know?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Bar 10 has <span class="tex">10\times11=110</span> squares, and no bar has exactly 100!</b> Bar <span class="tex">n</span> is <span class="tex">n</span> rows of <span class="tex">n+1</span> squares: 2, 6, 12, 20, 30, 42, 56, 72, 90, 110, … Bar 9 has 90 and Bar 10 has 110, so 100 is skipped.<br><span class="muted">The jumps grow (4, 6, 8, 10, …), so more and more numbers are skipped.</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 5 Quadratic Functions · Lesson 11</div>
+  <h1>Unit 5 Review</h1>
+  <p class="lede">The whole unit on one page: the <b>three forms</b> of a quadratic function and what each one shows at a glance, then mixed examples in the style of the unit test. One question runs through all of it: <b>which form helps here?</b> Vertex form gives the <b class="u5l11-cv">vertex</b>, general form the <span class="tex">y</span>-intercept, factored form the <b class="u5l11-cz">zeros</b>. Calculator allowed.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>state the vertex, axis of symmetry, direction of opening, maximum or minimum value, domain, range and intercepts from any form</li>
+      <li>describe how <span class="tex">y=x^2</span> is transformed, and sketch a parabola with the step pattern</li>
+      <li>change forms: complete the square, factor and expand, and write an equation from the vertex or the zeros and a point</li>
+      <li>solve a quadratic equation by square roots, factoring, the quadratic formula or graphing, and use the discriminant</li>
+      <li>solve maximum and minimum problems from a given model or one I write</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF3</b> Analyze quadratic functions of the form <span class="tex">y=a(x-p)^2+q</span> and determine the vertex, domain and range, direction of opening, axis of symmetry, <span class="tex">x</span>- and <span class="tex">y</span>-intercepts.<br><b>RF4</b> Analyze quadratic functions of the form <span class="tex">y=ax^2+bx+c</span> to identify characteristics of the corresponding graph, including vertex, domain and range, direction of opening, axis of symmetry, <span class="tex">x</span>- and <span class="tex">y</span>-intercepts, and to solve problems.<br><b>RF5</b> Solve problems that involve quadratic equations.<br><span class="muted">Today: the unit summary, analyzing and writing quadratic functions, solving quadratic equations, the discriminant, max/min problems, and a game of Hit the Target.</span></div>
+</section>
+
+<!-- ================= 1. Unit summary ================= -->
+<section class="card" data-ink="s1" data-section="1. Unit Summary">
+  <div class="sec-h"><span class="badge">1</span><h2>Unit Summary</h2></div>
+  <table class="u5l11-ftab">
+    <tr><th>Form</th><th>Read directly from the equation</th><th>Find the rest</th></tr>
+    <tr><th>Vertex form<span class="tex">y=a(x-p)^2+q</span></th><td><b class="u5l11-cv">Vertex <span class="tex">(p,\ q)</span></b>; axis of symmetry <span class="tex">x=p</span>; opens up if <span class="tex">a&gt;0</span> (minimum value <span class="tex">q</span>), down if <span class="tex">a&lt;0</span> (maximum value <span class="tex">q</span>).</td><td><span class="tex">y</span>-intercept: let <span class="tex">x=0</span>. <span class="tex">x</span>-intercepts: solve <span class="tex">a(x-p)^2+q=0</span> by square roots.</td></tr>
+    <tr><th>General form<span class="tex">y=ax^2+bx+c</span></th><td><b><span class="tex">y</span>-intercept <span class="tex">(0,\ c)</span></b>; direction of opening from <span class="tex">a</span>.</td><td>Axis <span class="tex">x=-\dfrac{b}{2a}</span>, then substitute for <span class="tex">q</span> (or complete the square). Zeros by factoring or the formula.</td></tr>
+    <tr><th>Factored form<span class="tex">y=a(x-r)(x-s)</span></th><td><b class="u5l11-cz">Zeros <span class="tex">r</span> and <span class="tex">s</span></b> (<span class="tex">x</span>-intercepts <span class="tex">(r,\ 0)</span> and <span class="tex">(s,\ 0)</span>); direction of opening from <span class="tex">a</span>.</td><td>Axis <span class="tex">x=\dfrac{r+s}{2}</span> (midway between the zeros), then substitute for <span class="tex">q</span>. Expand for general form.</td></tr>
+  </table>
+  <div class="u5l11-keys">
+    <div class="def"><b>Transformations of <span class="tex">y=x^2</span> to <span class="tex">y=a(x-p)^2+q</span>.</b> <span class="tex">|a|&gt;1</span>: vertical stretch by a factor of <span class="tex">|a|</span>; <span class="tex">0&lt;|a|&lt;1</span>: vertical compression; <span class="tex">a&lt;0</span>: reflection in the <span class="tex">x</span>-axis. <span class="tex">p</span>: horizontal translation (<span class="tex">p&gt;0</span> right, <span class="tex">p&lt;0</span> left). <span class="tex">q</span>: vertical translation. Mapping: <span class="tex">(x,\ y)\to(x+p,\ ay+q)</span>. <b>Step pattern</b> from the vertex: over 1, 2, 3, … the graph moves <span class="tex">1a</span>, <span class="tex">3a</span>, <span class="tex">5a</span>, … vertically.</div>
+    <div class="def"><b>Domain and range.</b> Domain <span class="tex">\{x\mid x\in\mathbb{R}\}</span>. Range <span class="tex">\{y\mid y\ge q,\ y\in\mathbb{R}\}</span> if <span class="tex">a&gt;0</span>, <span class="tex">\{y\mid y\le q,\ y\in\mathbb{R}\}</span> if <span class="tex">a&lt;0</span>.<br><b>Number of <span class="tex">x</span>-intercepts:</b> <span class="tex">a</span> and <span class="tex">q</span> opposite signs → 2; <span class="tex">q=0</span> → 1; same signs → 0.</div>
+    <div class="def"><b>Writing the equation.</b> Vertex and a point: substitute the point into <span class="tex">y=a(x-p)^2+q</span> and solve for <span class="tex">a</span>. Zeros and a point: substitute into <span class="tex">y=a(x-r)(x-s)</span>. In a context, choose a convenient origin (at the vertex, or at one end on the ground) and say where it is.</div>
+    <div class="def u5l11-cts"><b>Completing the square</b> <span class="tex">y=ax^2+bx+c\to y=a(x-p)^2+q</span>
+      <ol class="u5l11-ol"><li>Factor <span class="tex">a</span> from the <span class="tex">x^2</span> and <span class="tex">x</span> terms.</li><li>Inside the bracket add and subtract (half the coefficient of <span class="tex">x</span>)².</li><li>Move the subtracted number out of the bracket by <b>multiplying it by <span class="tex">a</span></b>.</li><li>Write the perfect square and simplify.</li></ol>
+      Check: the <span class="tex">y</span>-intercept must still be <span class="tex">c</span>.</div>
+    <div class="def u5l11-qf"><b>Quadratic formula.</b> <span class="tex">ax^2+bx+c=0</span>, <span class="tex">a\ne0</span>: <span class="tex">x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}</span>. Give exact answers in simplest radical form, or round as asked.<br><b>Discriminant</b> <span class="tex">b^2-4ac</span>: <span class="tex">&gt;0</span> two distinct real roots (two <span class="tex">x</span>-intercepts); <span class="tex">=0</span> one real (equal) root (vertex on the <span class="tex">x</span>-axis); <span class="tex">&lt;0</span> no real roots (no <span class="tex">x</span>-intercepts).</div>
+    <div class="def"><b>Choosing a method:</b> factor if it factors; square roots for <span class="tex">a(x-p)^2+q=0</span> or <span class="tex">ax^2+c=0</span>; the formula for anything else; graphing (zero or intersect) to check or for decimal answers.</div>
+    <div class="def amber u5l11-wide"><b>Max/min problems.</b> Given a model: the <b class="u5l11-cv">vertex</b> gives the maximum or minimum (calculator: maximum/minimum); a <b class="u5l11-cz">zero</b> gives when the value is 0; intersect with a horizontal line gives when it reaches a value. Creating a model: define the variable, write the quantity as a quadratic (area = length × width; revenue = price × number sold), find the vertex (complete the square, <span class="tex">x=-\frac{b}{2a}</span>, or midway between the zeros) and answer in context with units. State the domain and range that make sense.</div>
+  </div>
+</section>
+
+<!-- ================= 2. Analyzing quadratic functions ================= -->
+<section class="card" data-ink="s2" data-section="2. Analyzing Quadratic Functions">
+  <div class="sec-h"><span class="badge">2</span><h2>Analyzing Quadratic Functions</h2></div>
+  <p>Pick the form that answers the question fastest. Vertex form is the quickest for a sketch: plot the <b class="u5l11-cv">vertex</b>, then use the step pattern <span class="tex">1a</span>, <span class="tex">3a</span>, <span class="tex">5a</span> on both sides of the axis.</p>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Vertex form: transformations, characteristics and a sketch</h3></div>
+  <p class="q">Consider the function <span class="tex">y=-2(x+3)^2+8</span>.</p>
+  <div class="part"><div class="pl">(a) Describe how the graph of <span class="tex">y=x^2</span> is transformed to give this graph.</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertical stretch by a factor of 2, reflection in the <span class="tex">x</span>-axis, horizontal translation 3 units left, vertical translation 8 units up.</div></div></div>
+  <div class="u5l11-ex1">
+    <div class="part"><div class="pl">(b) State each characteristic.</div>
+      <table class="u5l11-char">
+        <tr><th>Vertex</th><td><span data-reveal><span class="tex">(-3,\ 8)</span></span></td></tr>
+        <tr><th>Axis of symmetry</th><td><span data-reveal><span class="tex">x=-3</span></span></td></tr>
+        <tr><th>Direction of opening</th><td><span data-reveal>down (<span class="tex">a&lt;0</span>)</span></td></tr>
+        <tr><th>Maximum or minimum value</th><td><span data-reveal>maximum value 8</span></td></tr>
+        <tr><th>Domain</th><td><span data-reveal><span class="tex">\{x\mid x\in\mathbb{R}\}</span></span></td></tr>
+        <tr><th>Range</th><td><span data-reveal><span class="tex">\{y\mid y\le8,\ y\in\mathbb{R}\}</span></span></td></tr>
+        <tr><th><span class="tex">y</span>-intercept</th><td><span data-reveal><span class="tex">-2(3)^2+8=-10</span></span></td></tr>
+        <tr><th><span class="tex">x</span>-intercepts</th><td><span data-reveal><span class="tex">-5</span> and <span class="tex">-1</span></span></td></tr>
+      </table>
+      <div class="work" style="--h:70px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x</span>-intercepts: <span class="tex">-2(x+3)^2+8=0\Rightarrow(x+3)^2=4\Rightarrow x+3=\pm2\Rightarrow \boldsymbol{x=-1}</span> or <span class="tex">\boldsymbol{x=-5}</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) Sketch the graph using the step pattern.</div>
+      <div class="u5l11-grid" data-bk-graph='{"width":340,"height":420,"xmin":-7,"xmax":2,"ymin":-11,"ymax":10,"xlabels":2,"ylabels":2,"fontSize":15,"items":[]}'></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">From <span class="tex">(-3,\ 8)</span>: over 1, down <span class="tex">2</span>; over 2, down <span class="tex">6</span> more; over 3, down <span class="tex">10</span> more.<br>Points <span class="tex">(-4,\ 6)</span>, <span class="tex">(-2,\ 6)</span>, <span class="tex">(-5,\ 0)</span>, <span class="tex">(-1,\ 0)</span>, <span class="tex">(-6,\ -10)</span>, <span class="tex">(0,\ -10)</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="Hit the Target">
+  <h3 class="sub">The parabola lab: Hit the Target <span class="muted u5l11-subnote">a whole-class game</span></h3>
+  <p>Set <span class="tex">a</span>, <span class="tex">p</span> and <span class="tex">q</span> with the buttons and every characteristic updates. In the game a <b>dashed target</b> appears: read its vertex and one step off the vertex, call out <span class="tex">a</span>, <span class="tex">p</span> and <span class="tex">q</span>, and see if we hit it.</p>
+  <div class="explainer" data-explainer="lab"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>General form to vertex form and factored form</h3></div>
+  <p class="q">The function <span class="tex">y=2x^2-12x+10</span> is in general form.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Write it in vertex form by completing the square.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=2(x^2-6x)+10</span><br><span class="tex">y=2(x^2-6x+9-9)+10</span><br><span class="tex">y=2(x-3)^2-18+10</span><br><span class="tex">\boldsymbol{y=2(x-3)^2-8}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Write it in factored form.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=2(x^2-6x+5)</span><br><span class="tex">\boldsymbol{y=2(x-1)(x-5)}</span></div></div></div>
+  </div>
+  <div class="part"><div class="pl">(c) Use the most convenient form to state the vertex, the axis of symmetry, the <span class="tex">y</span>-intercept, the zeros and the range. Check the axis with <span class="tex">x=-\dfrac{b}{2a}</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex form: vertex <span class="tex">\boldsymbol{(3,\ -8)}</span>, axis <span class="tex">\boldsymbol{x=3}</span>, range <span class="tex">\boldsymbol{\{y\mid y\ge-8,\ y\in\mathbb{R}\}}</span> (opens up, minimum value <span class="tex">-8</span>).<br>General form: <span class="tex">y</span>-intercept <span class="tex">\boldsymbol{10}</span>. Factored form: zeros <span class="tex">\boldsymbol{1}</span> and <span class="tex">\boldsymbol{5}</span> (and <span class="tex">3</span> is midway between them).<br>Check: <span class="tex">x=-\dfrac{-12}{2(2)}=3\ \checkmark</span></div></div></div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Writing the equation ================= -->
+<section class="card" data-ink="s3" data-section="3. Writing the Equation of a Quadratic Function">
+  <div class="sec-h"><span class="badge">3</span><h2>Writing the Equation of a Quadratic Function</h2></div>
+  <p>Know the <b class="u5l11-cv">vertex</b>? Start from <span class="tex">y=a(x-p)^2+q</span>. Know the <b class="u5l11-cz">zeros</b>? Start from <span class="tex">y=a(x-r)(x-s)</span>. Either way one more point gives <span class="tex">a</span>.</p>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>From the vertex or the zeros, and a point</h3></div>
+  <p class="q">Write the equation of each quadratic function.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Vertex <span class="tex">(2,\ -5)</span>, passing through <span class="tex">(4,\ 3)</span>. Use vertex form.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=a(x-2)^2-5</span><br><span class="tex">3=a(4-2)^2-5</span><br><span class="tex">8=4a\Rightarrow a=2</span><br><span class="tex">\boldsymbol{y=2(x-2)^2-5}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Zeros <span class="tex">-1</span> and <span class="tex">5</span>, passing through <span class="tex">(3,\ 16)</span>. Give factored and general form, and the vertex.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=a(x+1)(x-5)</span>; <span class="tex">16=a(4)(-2)\Rightarrow a=-2</span><br><span class="tex">\boldsymbol{y=-2(x+1)(x-5)=-2x^2+8x+10}</span><br>Axis <span class="tex">x=\frac{-1+5}{2}=2</span>; <span class="tex">y=-2(3)(-3)=18</span><br>Vertex <span class="tex">\boldsymbol{(2,\ 18)}</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>The park arch</h3></div>
+  <div class="u5l11-qfig">
+    <div>
+      <p class="q">A parabolic arch over a park entrance is <span class="tex">24</span> m wide at the ground and <span class="tex">9</span> m high at its centre.</p>
+      <div class="part"><div class="pl">(a) Place the origin at the left end of the arch on the ground. Write the equation of the arch in factored form.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zeros <span class="tex">0</span> and <span class="tex">24</span>, vertex <span class="tex">(12,\ 9)</span>: <span class="tex">y=a(x-0)(x-24)</span><br><span class="tex">9=a(12)(-12)\Rightarrow a=-\dfrac{9}{144}=-\dfrac{1}{16}</span><br><span class="tex">\boldsymbol{y=-\tfrac{1}{16}x(x-24)}</span></div></div></div>
+    </div>
+    <svg class="u5l11-fig" viewBox="0 0 300 190" role="img" aria-label="A parabolic arch on the ground, 24 m wide, with a dashed line from its top down to the ground marked 9 m">
+      <line x1="10" y1="150" x2="290" y2="150" stroke="#1c2230" stroke-width="3"/>
+      <path d="M30 150 Q150 -6 270 150" fill="none" stroke="#1f5bd6" stroke-width="5"/>
+      <line x1="150" y1="72" x2="150" y2="150" stroke="#c27a0e" stroke-width="3" stroke-dasharray="7 6"/>
+      <text x="160" y="118" class="u5l11-ft" fill="#c27a0e">9 m</text>
+      <line x1="30" y1="170" x2="270" y2="170" stroke="#3a4254" stroke-width="2"/><path d="M30 170 l9 -5 v10 z M270 170 l-9 -5 v10 z" fill="#3a4254"/>
+      <rect x="128" y="160" width="44" height="20" fill="#fff"/><text x="150" y="176" class="u5l11-ft" text-anchor="middle">24 m</text>
+      <circle cx="150" cy="72" r="6" fill="#c27a0e"/>
+    </svg>
+  </div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(b) How high is the arch <span class="tex">3</span> m in from one end, to the nearest tenth of a metre?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=-\frac{1}{16}(3)(3-24)=\frac{63}{16}=3.9375</span>. About <b>3.9 m</b>.</div></div></div>
+    <div class="part"><div class="pl">(c) Write the equation of the same arch with the origin on the ground directly below the top of the arch.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex <span class="tex">(0,\ 9)</span>, zeros <span class="tex">\pm12</span> (the shape, and so <span class="tex">a</span>, does not change): <span class="tex">\boldsymbol{y=-\tfrac{1}{16}x^2+9}</span>.<br>Check: <span class="tex">-\frac{1}{16}(144)+9=0\ \checkmark</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="Move the origin">
+  <h3 class="sub">Move the origin, keep the arch</h3>
+  <p>The arch stays where it is; only the axes move. The equation changes, but <span class="tex">a</span> does not.</p>
+  <div class="explainer" data-explainer="arch"></div>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u5l11"></section>
+
+<!-- ================= 4. Solving quadratic equations ================= -->
+<section class="card" data-ink="s4" data-section="4. Solving Quadratic Equations">
+  <div class="sec-h"><span class="badge">4</span><h2>Solving Quadratic Equations</h2></div>
+  <div class="u5l11-methods">
+    <div><b>Square roots</b><span>for <span class="tex">a(x-p)^2+q=0</span> or <span class="tex">ax^2+c=0</span></span></div>
+    <div><b>Factoring</b><span>if it factors (0 on one side first)</span></div>
+    <div><b>Quadratic formula</b><span>for anything else</span></div>
+    <div><b>Graphing</b><span>zero or intersect, to check or for decimal answers</span></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Choose a method</h3></div>
+  <p class="q">Solve. Choose an efficient method and say which one you used.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">3(x-2)^2=27</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Square roots: <span class="tex">(x-2)^2=9</span><br><span class="tex">x-2=\pm3</span><br><span class="tex">\boldsymbol{x=5}</span> or <span class="tex">\boldsymbol{x=-1}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2x^2+3x=2</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Factoring: <span class="tex">2x^2+3x-2=0</span><br><span class="tex">(2x-1)(x+2)=0</span><br><span class="tex">\boldsymbol{x=\frac{1}{2}}</span> or <span class="tex">\boldsymbol{x=-2}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">x^2-6x+4=0</span> (exact)</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Formula (<span class="tex">a=1</span>, <span class="tex">b=-6</span>, <span class="tex">c=4</span>):<br><span class="tex">x=\dfrac{6\pm\sqrt{36-16}}{2}=\dfrac{6\pm\sqrt{20}}{2}</span><br><span class="tex">=\dfrac{6\pm2\sqrt{5}}{2}=\boldsymbol{3\pm\sqrt{5}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">3x^2+2x-4=0</span> (to the nearest hundredth)</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Formula: <span class="tex">x=\dfrac{-2\pm\sqrt{4+48}}{6}=\dfrac{-2\pm\sqrt{52}}{6}=\dfrac{-1\pm\sqrt{13}}{3}</span><br><span class="tex">\boldsymbol{x\approx0.87}</span> or <span class="tex">\boldsymbol{x\approx-1.54}</span><br>(Check: graph and use zero.)</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check (d) on the calculator.</b> Type <span class="tex">3x^2+2x-4</span> in <span class="keys"><kbd>Y=</kbd></span>, <span class="keys"><kbd>ZOOM</kbd><kbd>6</kbd></span> (ZStandard), then <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd><kbd>2</kbd></span> (zero) with a left bound, a right bound and a guess around each crossing: <b>0.8685…</b> and <b>−1.5351…</b></div>
+    <div class="u5l11-pcol"><button class="pill" data-keys="Y= CLEAR 3 X x² + 2 X − 4 ZStandard zero 0 ENTER 2 ENTER 1 ENTER">The right zero</button><button class="pill" data-keys="Y= CLEAR 3 X x² + 2 X − 4 ZStandard zero (−) 3 ENTER (−) 1 ENTER (−) 2 ENTER">The left zero</button></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s4b" data-section="The method sorter">
+  <h3 class="sub">The method sorter <span class="muted u5l11-subnote">vote on the method before you press Next</span></h3>
+  <div class="explainer" data-explainer="method"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>The discriminant</h3></div>
+  <div class="part"><div class="pl">(a) Use the discriminant to determine the nature of the roots of (i) <span class="tex">4x^2-12x+9=0</span> and (ii) <span class="tex">2x^2+x+5=0</span>.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">(i) <span class="tex">b^2-4ac=144-144=0</span>: <b>one real (equal) root</b>. (ii) <span class="tex">b^2-4ac=1-40=-39&lt;0</span>: <b>no real roots</b>.</div></div></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(b) For what values of <span class="tex">k</span> does <span class="tex">x^2+kx+9=0</span> have equal roots? two distinct real roots?</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">b^2-4ac=k^2-36</span>. Equal roots: <span class="tex">k^2-36=0\Rightarrow \boldsymbol{k=\pm6}</span>.<br>Two distinct real roots: <span class="tex">k^2&gt;36\Rightarrow \boldsymbol{k&lt;-6}</span> or <span class="tex">\boldsymbol{k&gt;6}</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) For what values of <span class="tex">k</span> does <span class="tex">kx^2-6x+3=0</span> have no real roots? Describe the graph of <span class="tex">y=kx^2-6x+3</span> for these values.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">b^2-4ac=36-12k&lt;0\Rightarrow \boldsymbol{k&gt;3}</span>.<br>The parabola opens up (<span class="tex">k&gt;0</span>) and its vertex is above the <span class="tex">x</span>-axis, so it has no <span class="tex">x</span>-intercepts.</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s4c" data-section="Turn the k dial">
+  <h3 class="sub">Turn the <span class="tex">k</span> dial</h3>
+  <p>As <span class="tex">k</span> changes, the parabola moves and the <b>discriminant</b> changes with it: two crossings, one touch, or none.</p>
+  <div class="explainer" data-explainer="disc"></div>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–12">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 11 · Questions 1–12</h2>
+  <p class="pr-t">Analyze, sketch and write quadratic functions, complete the square, and solve quadratic equations.</p>
+  <div class="pr-chips n4"><span><b>1–5</b>Zeros, transformations, the step pattern and characteristics</span><span><b>6–7</b>Write the equation, and the footbridge arch</span><span><b>8–9</b>Complete the square, and Mila’s error</span><span><b>10–12</b>The formula, choosing a method, the discriminant</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 8.</span><a class="pill" href="../../../#/lesson/u5l11">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 5. Maximum and minimum problems ================= -->
+<section class="card" data-ink="s5" data-section="5. Maximum and Minimum Problems">
+  <div class="sec-h"><span class="badge">5</span><h2>Maximum and Minimum Problems</h2></div>
+  <p>A <b class="u5l11-cv">vertex</b> answers “how high?” or “how much?”, a <b class="u5l11-cz">zero</b> answers “when is it 0?”, and an <b>intersection</b> with a horizontal line answers “when does it reach this value?”. Answer in a sentence, with units.</p>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>The balcony throw</h3></div>
+  <p class="q">A ball is thrown upward from a balcony. Its height, <span class="tex">h</span> metres, after <span class="tex">t</span> seconds is <span class="tex">h=-4.9t^2+19.6t+1.5</span>. Use a graphing calculator (graph the function, then use maximum, zero and intersect).</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) What is the maximum height, and when is it reached?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Maximum: <span class="tex">(2,\ 21.1)</span>. The ball reaches <b>21.1 m after 2 s</b>.<br>(Algebra: <span class="tex">t=-\frac{19.6}{2(-4.9)}=2</span>.)</div></div></div>
+    <div class="part"><div class="pl">(b) When does the ball hit the ground, to the nearest hundredth of a second?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zero: <span class="tex">\boldsymbol{t\approx4.08}</span> <b>s</b>. (The other zero, <span class="tex">t\approx-0.08</span>, is inadmissible.)</div></div></div>
+    <div class="part"><div class="pl">(c) For how long is the ball higher than <span class="tex">15</span> m, to the nearest hundredth of a second?</div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Graph <span class="tex">y=15</span> too and use intersect: <span class="tex">t\approx0.88</span> and <span class="tex">t\approx3.12</span>.<br><span class="tex">3.116-0.884\approx\boldsymbol{2.23}</span> <b>s</b> <span class="muted">(subtract the unrounded values)</span></div></div></div>
+    <div class="part"><div class="pl">(d) State the domain and range of the function in this context.</div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Domain <span class="tex">\boldsymbol{\{t\mid 0\le t\le4.08,\ t\in\mathbb{R}\}}</span><br>Range <span class="tex">\boldsymbol{\{h\mid 0\le h\le21.1,\ h\in\mathbb{R}\}}</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>On the calculator.</b> Type <span class="tex">-4.9x^2+19.6x+1.5</span> in <span class="tex">Y_1</span> and <span class="tex">15</span> in <span class="tex">Y_2</span>, set the <span class="keys"><kbd>WINDOW</kbd></span> to <span class="tex">0\le x\le5</span>, <span class="tex">-5\le y\le25</span>, then <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd></span>: <b>4</b> maximum gives <b>(2, 21.1)</b>, <b>2</b> zero gives <b>4.0751…</b>, and <b>5</b> intersect gives <b>0.8842…</b> and <b>3.1157…</b></div>
+    <div class="u5l11-pcol"><button class="pill" data-keys="Y= CLEAR (−) 4.9 X x² + 19.6 X + 1.5 ▼ CLEAR WINDOW 0 ENTER 5 ENTER 1 ENTER (−) 5 ENTER 25 ENTER 5 ENTER GRAPH maximum 1 ENTER 3 ENTER 2 ENTER">Maximum</button><button class="pill" data-keys="Y= CLEAR (−) 4.9 X x² + 19.6 X + 1.5 ▼ CLEAR WINDOW 0 ENTER 5 ENTER 1 ENTER (−) 5 ENTER 25 ENTER 5 ENTER GRAPH zero 3 ENTER 5 ENTER 4 ENTER">Zero</button><button class="pill" data-keys="Y= CLEAR (−) 4.9 X x² + 19.6 X + 1.5 ▼ CLEAR 15 WINDOW 0 ENTER 5 ENTER 1 ENTER (−) 5 ENTER 25 ENTER 5 ENTER GRAPH intersect ENTER ENTER 1 ENTER">Intersect (up)</button><button class="pill" data-keys="Y= CLEAR (−) 4.9 X x² + 19.6 X + 1.5 ▼ CLEAR 15 WINDOW 0 ENTER 5 ENTER 1 ENTER (−) 5 ENTER 25 ENTER 5 ENTER GRAPH intersect ENTER ENTER 3 ENTER">Intersect (down)</button></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Theatre tickets</h3></div>
+  <p class="q">A theatre sells <span class="tex">400</span> tickets a night at <span class="tex">\$12</span> each. A survey shows that for every <span class="tex">\$0.50</span> increase in price, <span class="tex">10</span> fewer tickets are sold. What price gives the maximum revenue, and what is that revenue?</p>
+  <div class="part"><div class="work" style="--h:280px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">x</span> be the number of <span class="tex">\$0.50</span> increases. Price <span class="tex">=12+0.5x</span>; tickets <span class="tex">=400-10x</span>.<br><span class="tex">R=(12+0.5x)(400-10x)=4\,800-120x+200x-5x^2=-5x^2+80x+4\,800</span><br><span class="tex">R=-5(x^2-16x)+4\,800=-5(x^2-16x+64-64)+4\,800=-5(x-8)^2+320+4\,800=-5(x-8)^2+5\,120</span><br>Vertex <span class="tex">(8,\ 5\,120)</span>: 8 increases, so the price is <span class="tex">12+0.5(8)=\boldsymbol{\$16}</span> (with 320 tickets sold).<br>The maximum revenue is <b>$5 120</b>. (Check: the zeros are <span class="tex">x=-24</span> and <span class="tex">x=40</span>; midway is <span class="tex">x=8\ \checkmark</span>)</div></div></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Three forms.</b> Vertex form → vertex <span class="tex">(p,\ q)</span>, axis, max/min, range. General form → <span class="tex">y</span>-intercept <span class="tex">c</span>, axis <span class="tex">x=-\frac{b}{2a}</span>. Factored form → zeros, axis midway. Domain is always <span class="tex">\{x\mid x\in\mathbb{R}\}</span>.</div>
+    <div><b>Change forms.</b> Complete the square (multiply the subtracted number by <span class="tex">a</span>), factor, or expand. Write an equation from the vertex or the zeros and one point: substitute and solve for <span class="tex">a</span>.</div>
+    <div><b>Solve.</b> Square roots, factoring, the formula, or graphing to check. Discriminant <span class="tex">b^2-4ac</span>: positive → 2 roots, zero → 1, negative → none.</div>
+    <div><b>Max/min.</b> Vertex → the maximum or minimum; zero → when it is 0; intersect → when it reaches a value. Build the model, find the vertex, answer in context with units and a sensible domain.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u5l11">
+    <div><div class="kicker">Your turn</div><b>Assignment 11 · Questions 13–28</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <div class="u5l11-review">
+    <div class="u5l11-review-h"><span class="kicker">Up next</span><b>Unit 5 test.</b> <span class="muted">Shaky on an idea today? Go back to its lesson.</span></div>
+    <div class="u5l11-review-grid">
+      <a href="../l1/"><span class="rn">5.1</span>Zeros, roots and <span class="tex">x</span>-intercepts <small>Example 3(b)</small></a>
+      <a href="../l2/"><span class="rn">5.2</span>Graphing <span class="tex">y=a(x-p)^2+q</span> <small>Example 1(a), (c)</small></a>
+      <a href="../l3/"><span class="rn">5.3</span>Characteristics in vertex form <small>Example 1(b)</small></a>
+      <a href="../l4/"><span class="rn">5.4</span>General and factored form <small>Examples 2(b), (c), 3(b)</small></a>
+      <a href="../l5/"><span class="rn">5.5</span>Writing the equation <small>Examples 3(a), 4</small></a>
+      <a href="../l6/"><span class="rn">5.6</span>Completing the square <small>Examples 2(a), 8</small></a>
+      <a href="../l7/"><span class="rn">5.7</span>The quadratic formula <small>Example 5</small></a>
+      <a href="../l8/"><span class="rn">5.8</span>The discriminant <small>Example 6</small></a>
+      <a href="../l9/"><span class="rn">5.9</span>Max/min: graphical approach <small>Example 7</small></a>
+      <a href="../l10/"><span class="rn">5.10</span>Max/min: algebraic approach <small>Example 8</small></a>
+      <div class="test"><span class="rn">Test</span>Unit 5 test: RF3, RF4, RF5 <small>calculator allowed · exact answers where asked · every idea from today’s review</small></div>
+    </div>
+  </div>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u5l11.js';
+  boot({ key: 'u5l11', homeHref: '../../', title: '5.11 Unit 5 Review' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

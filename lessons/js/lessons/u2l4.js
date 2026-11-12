@@ -1,4 +1,6 @@
 /* Math 20-1 · Unit 2 · Lesson 4 — Multiplying Radicals.
+ * New lesson format (2026-11-11, tools/newformat/specs/u2l4.py): the page no longer has the old warm-up or the explainers twoWays, squareTiles, splitBack, squareGrid, stretchSquash, areaFigs;
+ * their code below is unused (each mount is skipped when its element is missing).
  * Warm-up (Stretch and Squash: a 6 × 6 patio rebuilt as 7 × 5, 8 × 4, 9 × 3; the top strip turns into the new column and a
  * k × k corner is left over, leading to (√10 + 1)(√10 − 1) = 9), and the explainers:
  *   multRule (factor cards; coefficients fly to one bin, radicands to the other under one root; then the perfect-square or

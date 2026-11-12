@@ -1,14 +1,10 @@
 /* Math 20-1 · Unit 1 · Lesson 3 — Arithmetic Sequences in Context.
- * Warm-up (Kangaroo Tracks: two prints left on the beach, count the hops, find print #1), the Example 8 figures,
- * and the explainers:
+ * The Example 8 figures and the explainers (the warm-up is plain markup in the page, tools/newformat/specs/u1l3.py):
  *   gapSplit (STAR: two known tiles on a strip, count the jumps, split the gap equally, step back to t1, then the
  *     tiles drop onto a graph as dots (n, t_n) and the slope triangle shows slope = d; Example 1, 2, 3 checks),
- *   system (bar model of t1 + (p−1)d and t1 + (q−1)d: the common part cancels when you subtract; Example 1(c) check),
  *   amphi (rows of seats as arcs: d from rows p and q, row 1, and the number of rows from the back row; Example 3),
  *   startOrAfter (one money timeline, two numberings: t1 at the start vs after one period; Example 4(b)(c)),
  *   firstPass (bars against a threshold: solve the inequality, round to fit the question, check both sides; 4(d), 5(d)),
- *   feeRate (stacked bars: hourly blocks plus the fixed fee; the fee is a "0-hour job" = t1 − d; Example 5),
- *   truck (years as positions, straight-line depreciation and the first year below a value; Example 6),
  *   balloon (readings every 100 m with a thermometer: reading n is at 100(n − 1) m; Example 7),
  *   linear (dots (n, t_n) on a line: slope d, intercept t1 − d is not a term, dots not joined; Example 8 checks).
  * Colours (unit pair): d / common difference amber, t1 / first term teal (#0e7c7b); known terms burgundy; b purple. */
@@ -128,83 +124,6 @@ class Bars extends Box {
 async function growAll(c, B, rs, ms = 360, gap = 40) { for (const r of rs) { await B.grow(c, r, ms); if (gap) await sleep(c, gap); } }
 
 /* ====================================================================================================
- * Warm-up: Kangaroo Tracks. Print n is at 4n − 2 m (2, 6, 10, …, 34). Only #3 (10 m) and #8 (30 m) are left.
- * ==================================================================================================== */
-function mountBeach() {
-  const host = document.getElementById('u1l3-beach'); if (!host) return;
-  let busyJ = false, busyB = false;
-  const build = () => {
-    host.innerHTML = '';
-    const W = Math.max(480, host.clientWidth || 600), H = 262, X = (m) => 26 + m * (W - 52) / 41, PY = 150;
-    const svg = svgEl('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, class: 'u1l3-bsvg', role: 'img', 'aria-label': 'Kangaroo footprints on a beach with a tape measure' }, host);
-    svgEl('rect', { x: 0, y: 0, width: W, height: H, rx: 14, fill: '#f4e4bf' }, svg);
-    // the sea at the top
-    let d = `M0 0 H${W} V34`;
-    for (let x = W; x > 0; x -= 40) d += ` q-10 10 -20 0 q-10 -10 -20 0`;
-    svgEl('path', { d: d + ' Z', fill: '#8ccbe0' }, svg);
-    // the wave that washed the prints away (wet sand)
-    let w2 = `M0 40 H${W} V178`;
-    for (let x = W; x > 0; x -= 60) w2 += ` q-15 14 -30 0 q-15 -14 -30 0`;
-    const wet = svgEl('path', { d: w2 + ' Z', fill: '#bfe0e8', 'fill-opacity': 0.55 }, svg);
-    // tape measure
-    svgEl('rect', { x: X(0) - 8, y: 206, width: X(40) - X(0) + 16, height: 34, rx: 5, fill: '#f6c945', stroke: '#9a7a14', 'stroke-width': 1.5 }, svg);
-    for (let m = 0; m <= 40; m++) {
-      const big = m % 10 === 0, mid = m % 2 === 0;
-      svgEl('line', { x1: X(m), x2: X(m), y1: 206, y2: 206 + (big ? 16 : mid ? 10 : 6), stroke: '#5b470a', 'stroke-width': big ? 2 : 1.2 }, svg);
-      if (big) { const t = svgEl('text', { x: X(m), y: 236, 'text-anchor': 'middle', class: 'u1l3-tape' }, svg); t.textContent = m + ' m'; }
-    }
-    // kangaroo, facing right, at the far end
-    const k = svgEl('g', { transform: `translate(${X(39.2)} ${PY - 4})`, class: 'u1l3-roo' }, svg);
-    svgEl('path', { d: 'M-6 22 C-26 30 -40 34 -52 30 C-40 26 -26 20 -14 12 Z', fill: '#a8642c' }, k); // tail
-    svgEl('ellipse', { cx: 0, cy: 2, rx: 13, ry: 22, transform: 'rotate(18)', fill: '#b8733a' }, k);
-    svgEl('ellipse', { cx: 2, cy: 26, rx: 16, ry: 5, fill: '#a8642c' }, k); // feet
-    svgEl('circle', { cx: 9, cy: -24, r: 8.5, fill: '#b8733a' }, k);
-    svgEl('path', { d: 'M12 -26 L22 -22 L12 -19 Z', fill: '#b8733a' }, k); // snout
-    svgEl('ellipse', { cx: 5, cy: -36, rx: 3, ry: 8, transform: 'rotate(-12 5 -36)', fill: '#a8642c' }, k);
-    svgEl('circle', { cx: 11, cy: -26, r: 1.6, fill: '#111' }, k);
-    svgEl('path', { d: 'M8 -6 L16 2', stroke: '#a8642c', 'stroke-width': 4, 'stroke-linecap': 'round' }, k);
-    const prints = {};
-    for (let n = 1; n <= 9; n++) {
-      const x = X(4 * n - 2), g = svgEl('g', { class: 'u1l3-print' }, svg);
-      for (const dy of [-8, 8]) {
-        svgEl('ellipse', { cx: x, cy: PY + dy, rx: 12, ry: 4.6, fill: '#8a6a3c' }, g);
-        svgEl('circle', { cx: x + 13, cy: PY + dy, r: 2.6, fill: '#8a6a3c' }, g);
-      }
-      const tag = h('div', 'u1l3-ptag' + (n === 3 || n === 8 ? ' u1l3-ptag-on' : ''), '#' + n);
-      host.appendChild(tag); place(tag, x, PY - 22, 'n', 0);
-      const ml = h('div', 'u1l3-pm', (4 * n - 2) + ' m'); host.appendChild(ml); place(ml, x, 188, 'c', 0);
-      const drop = svgEl('line', { x1: x, x2: x, y1: PY + 16, y2: 206, stroke: '#8a6a3c', 'stroke-width': 1.5, 'stroke-dasharray': '3 4' }, svg);
-      prints[n] = { g, tag, ml, drop };
-      if (n !== 3 && n !== 8) { g.style.opacity = 0; tag.style.opacity = 0; ml.style.opacity = 0; drop.style.opacity = 0; }
-    }
-    const arcs = svgEl('g', {}, svg), nums = [];
-    return { svg, X, PY, prints, wet, arcs, nums };
-  };
-  let S = build();
-  const c = liveCtx();
-  const jumps = async () => {
-    if (busyJ || S.arcs.childNodes.length) return; busyJ = true; const S0 = S;
-    for (let i = 3; i < 8; i++) {
-      const x1 = S.X(4 * i - 2) + 6, x2 = S.X(4 * i + 2) - 6, p = arc(S.arcs, x1, x2, S.PY - 30, 22, DC, { w: 3 });
-      await drawIn(p, 260, c);
-      const t = h('div', 'u1l3-hopn', String(i - 2)); if (S !== S0) break; S.svg.parentNode.appendChild(t); place(t, (x1 + x2) / 2, S.PY - 74, 'c', 0); await c.pop(t, 240); S.nums.push(t);
-    }
-    busyJ = false;
-  };
-  const back = async () => {
-    if (busyB || S.back) return; busyB = true; S.back = true;
-    await c.anim(S.wet, [{ opacity: 1 }, { opacity: 0 }], 500);
-    for (let n = 1; n <= 9; n++) { const P = S.prints[n]; if (n === 3 || n === 8) { P.ml.style.opacity = 1; continue; } for (const e of [P.g, P.tag, P.ml, P.drop]) e.style.opacity = 1; await c.pop(P.g, 200); }
-    busyB = false;
-  };
-  document.getElementById('u1l3-wjumps')?.addEventListener('click', jumps);
-  document.getElementById('u1l3-wprints')?.addEventListener('click', back);
-  document.getElementById('u1l3-wreset')?.addEventListener('click', () => { if (!busyJ && !busyB) S = build(); });
-  let lastW = host.clientWidth;
-  new ResizeObserver(() => { const w = host.clientWidth; if (!busyJ && !busyB && w && Math.abs(w - lastW) > 4) { lastW = w; S = build(); } }).observe(host);
-}
-
-/* ====================================================================================================
  * Explainer (STAR): two known terms on a strip → equal jumps → back to t1 → dots on a line with slope d.
  * ==================================================================================================== */
 const GS = {
@@ -306,63 +225,6 @@ const gapSplit = {
         run: async (c) => { await show(c, L5); if (L6) await show(c, L6); } }
     ];
     return steps;
-  }
-};
-
-/* ====================================================================================================
- * Explainer: the system of two equations as two bars; subtracting cancels t1 and the shared d's.
- * ==================================================================================================== */
-const SY = {
-  demo: { label: T('t_3=14,\\ t_7=30'), p: 3, tp: 14, q: 7, tq: 30 },
-  ex1c: { label: 'Example 1(c) check', p: 4, tp: 19, q: 11, tq: 54 }
-};
-const system = {
-  title: 'Two equations, one subtraction',
-  height: 470,
-  choices: Object.keys(SY).map((k) => ({ v: k, label: SY[k].label })),
-  intro: 'Write each known term as t₁ plus some d’s. Then compare the two bars. Press <b>Next</b>.',
-  make(stage, k, ex) {
-    const g = SY[k], { p, tp, q, tq } = g, J = q - p, dv = (tq - tp) / J, t1 = tp - (p - 1) * dv;
-    const W = ex.W, BX = 120, s = (W - BX - 120) / tq, BH = 50, YA = 34, YB = 120;
-    const mkBar = (y, nd) => {
-      const blocks = [];
-      const t = add(stage, box(h('div', 'u1l3-blk u1l3-blk-t', T('t_1')), t1 * s - 3, BH), BX, y); blocks.push(hide(t));
-      for (let i = 0; i < nd; i++) { const b = add(stage, box(h('div', 'u1l3-blk u1l3-blk-d', T('d')), dv * s - 3, BH), BX + (t1 + i * dv) * s, y); blocks.push(hide(b)); }
-      return blocks;
-    };
-    const lA = add(stage, h('div', 'u1l3-blab', T(`t_{${p}}`)), 20, YA + 10), lB = add(stage, h('div', 'u1l3-blab', T(`t_{${q}}`)), 20, YB + 10);
-    const A = mkBar(YA, p - 1), B = mkBar(YB, q - 1);
-    const eA = add(stage, h('div', 'u1l3-beq', T(`=${tn(tp)}`)), BX + tp * s + 8, YA + 10), eB = add(stage, h('div', 'u1l3-beq', T(`=${tn(tq)}`)), BX + tq * s + 8, YB + 10);
-    const ov = overlay(stage, W, 470);
-    const alg = add(stage, box(h('div', 'u1l3-alg'), W - 40, 250), 20, 206);
-    const al = (html) => { const d = h('div', 'u1l3-aline', html); alg.appendChild(d); return hide(d); };
-    const A1 = al(T(`t_{${p}}:\\quad ${cT('t_1')}+${p - 1}${cD('d')}=${tn(tp)}`)), A2 = al(T(`t_{${q}}:\\quad ${cT('t_1')}+${q - 1}${cD('d')}=${tn(tq)}`));
-    const A3 = al(T(`\\text{subtract:}\\quad (${cT('t_1')}+${q - 1}${cD('d')})-(${cT('t_1')}+${p - 1}${cD('d')})=${tn(tq)}-${tn(tp)}`));
-    const A4 = al(T(`${J}${cD('d')}=${tn(tq - tp)}\\ \\Rightarrow\\ ${cD('d')}=${cD(tn(dv))}`));
-    const A5 = al(T(`${cT('t_1')}+${p - 1}(${tn(dv)})=${tn(tp)}\\ \\Rightarrow\\ ${cT('t_1')}=${cT(tn(t1))}`));
-    const shared = BX + tp * s;
-    return [
-      { cap: `Write ${T(`t_{${p}}`)} with the general term: ${T(`${cT('t_1')}+${p - 1}${cD('d')}=${tn(tp)}`)}. One ${T('t_1')} and ${p - 1} ${T('d')}’s.`,
-        run: async (c) => { for (const b of A) await pop(c, b, 200); await pulse(c, eA, 1.15); await show(c, A1); } },
-      { cap: `And ${T(`t_{${q}}`)}: ${T(`${cT('t_1')}+${q - 1}${cD('d')}=${tn(tq)}`)}.`,
-        run: async (c) => { for (const b of B) await pop(c, b, 160); await pulse(c, eB, 1.15); await show(c, A2); } },
-      { cap: `Both bars start with the same ${T(`${cT('t_1')}+${p - 1}${cD('d')}`)}. Line them up.`,
-        run: async (c) => {
-          const r = svgEl('rect', { class: 'bk-stroke', x: BX - 6, y: YA - 8, width: shared - BX + 9, height: YB + BH - YA + 16, rx: 10, fill: 'none', stroke: KC, 'stroke-width': 3, 'stroke-dasharray': '8 6' }, ov);
-          await drawIn(r, 600, c);
-        } },
-      { cap: `<b>Subtract</b> the equations: ${T('t_1')} and the ${p - 1} shared ${T('d')}’s cancel. What is left: ${T(`${J}${cD('d')}=${tn(tq)}-${tn(tp)}=${tn(tq - tp)}`)}.`,
-        run: async (c) => {
-          await show(c, A3);
-          await Promise.all(B.slice(0, p).map((b) => c ? c.anim(b, [{ opacity: 1 }, { opacity: 0.18 }], 500) : (b.style.opacity = 0.18)));
-          const br = brace(ov, shared, BX + tq * s, YB + BH + 8, DC); await drawIn(br, 500, c);
-          const l = slab(stage, (shared + BX + tq * s) / 2, YB + BH + 24, T(`${J}${cD('d')}=${tn(tq - tp)}`), 's', 'u1l3-brl'); await pop(c, l, 250);
-        } },
-      { cap: `So ${T(`${cD('d')}=${tn(tq - tp)}\\div${J}=${cD(tn(dv))}`)}: every amber block is ${tn(dv)}.`,
-        run: async (c) => { await show(c, A4); for (const b of A.slice(1).concat(B.slice(1))) b.innerHTML = T(cD(tn(dv))); } },
-      { cap: `Substitute into either equation: ${T(`${cT('t_1')}+${p - 1}(${tn(dv)})=${tn(tp)}`)}, so ${T(`${cT('t_1')}=${cT(tn(t1))}`)}. Same answer as counting jumps.`,
-        run: async (c) => { A[0].innerHTML = T(cT(tn(t1))); B[0].innerHTML = T(cT(tn(t1))); await pulse(c, A[0], 1.12); await show(c, A5); } }
-    ];
   }
 };
 
@@ -525,113 +387,6 @@ const firstPass = {
           const a = B.vlab(other, m * other + b, T(money(m * other + b)), 'u1l3-vlab-x'), bb = B.vlab(ans, m * ans + b, T(money(m * ans + b)), 'u1l3-vlab-ok');
           await pop(c, a, 200); await pop(c, bb, 200); await show(c, L5); await show(c, L6);
         } }
-    ];
-  }
-};
-
-/* ====================================================================================================
- * Explainer: a fixed fee plus a rate (stacked bars; the fee is a "0-hour job").
- * ==================================================================================================== */
-const FR = {
-  ex5: { label: 'Example 5 check', c1: 115, d: 45, ask: 8 },
-  bike: { label: 'Bike rental: $22, $30, $38', c1: 22, d: 8, ask: 8 }
-};
-const feeRate = {
-  title: 'Fee plus rate: the fee is one step before t₁',
-  height: 470,
-  choices: Object.keys(FR).map((k) => ({ v: k, label: FR[k].label })),
-  intro: 'Three job prices. Where is the fixed fee hiding? Press <b>Next</b>.',
-  make(stage, k, ex) {
-    const g = FR[k], { c1, d, ask } = g, fee = c1 - d, W = ex.W, BW = 570, cost = (n) => fee + d * n;
-    const vmax = cost(ask) * 1.12, st = niceStep(vmax, 5);
-    const ticks = []; for (let v = 0; v <= vmax; v += st) ticks.push(v);
-    const B = new Bars(stage, { x: 10, y: 10, width: BW, height: 450, n0: 0, n1: ask, vmin: 0, vmax, ticks, tickFmt: (v) => '$' + hn(v),
-      pad: { l: 58, r: 10, t: 24, b: 40 }, bw: 46, nlab: (n) => `${n} h` });
-    B.nl[0].classList.add('u1l3-ghostl');
-    const tot = [1, 2, 3].map((n) => B.bar(n, cost(n), { color: '#c9c3b5' }));
-    const vls = [1, 2, 3].map((n) => hide(B.vlab(n, cost(n), T(money(cost(n))))));
-    const P = panel(stage, BW + 26, 10, W - BW - 40, 450, 'Cost of an n-hour job');
-    const L1 = pline(P, T(`${cT('t_1')}=${cT(c1)},\\quad ${cD('d')}=${c1 + d}-${c1}=${cD(d)}`));
-    const L2 = pline(P, `${T(cD('d'))} = the hourly rate, ${T(money(d))}/h`);
-    const L3 = pline(P, T(`\\text{fee}=${cT('t_1')}-${cD('d')}=${c1}-${d}=${cB(money(fee))}`), 'u1l3-big');
-    const L4 = pline(P, T(`t_n=${c1}+${d}(n-1)=${cD(d)}n+${cB(fee)}`), 'u1l3-ans');
-    const L5 = pline(P, T(`t_{${ask}}=${d}(${ask})+${fee}=${money(cost(ask))}`));
-    const stack = (n, layer) => { const out = [B.seg(n, 0, fee, { color: BC, op: 0.85 })]; for (let i = 0; i < n; i++) out.push(B.seg(n, fee + i * d, fee + (i + 1) * d - d * 0.04, { color: DC })); return out; };
-    return [
-      { cap: `A 1-hour job costs ${T(money(c1))}, 2 hours ${T(money(c1 + d))}, 3 hours ${T(money(c1 + 2 * d))}.`,
-        run: async (c) => { await growAll(c, B, tot, 300, 40); for (const v of vls) await show(c, v, 200); } },
-      { cap: `Each extra hour adds ${T(`${c1 + d}-${c1}=${cD(d)}`)}: ${T(`${cD('d')}=${d}`)} is the <b>hourly rate</b>.`,
-        run: async (c) => {
-          const ov = overlay(stage, W, 470);
-          for (let n = 1; n < 3; n++) {
-            const a = arc(ov, 10 + B.px(n), 10 + B.px(n + 1), 10 + B.py(cost(n)) - 30, 16, DC, { w: 2.6 }); await drawIn(a, 300, c);
-            const l = slab(stage, 10 + (B.px(n) + B.px(n + 1)) / 2, 10 + B.py(cost(n)) - 50, T(cD(`+${d}`)), 'n', 'u1l3-jn'); await pop(c, l, 180);
-          }
-          await show(c, L1); await show(c, L2);
-        } },
-      { cap: `Split each bar into one ${T(cD(money(d)))} block per hour… and the same ${T(cB(money(fee)))} is always left at the bottom: the <b>fixed fee</b>.`,
-        run: async (c) => {
-          vls.forEach((v) => (v.style.opacity = 0));
-          tot.forEach((r) => (r.style.opacity = 0.15));
-          for (const n of [1, 2, 3]) { const s = stack(n); for (const r of s) await B.grow(c, r, 160); }
-        } },
-      { cap: `The fee is the cost of a “0-hour job”, one step <b>before</b> ${T('t_1')}: ${T(`${cT('t_1')}-${cD('d')}=${c1}-${d}=${cB(fee)}`)}.`,
-        run: async (c) => {
-          const gst = B.seg(0, 0, fee, { color: BC, op: 0.18, stroke: BC, sw: 2.5, dash: '6 4' }); await B.grow(c, gst, 400);
-          const l = B.vlab(0, fee, T(cB(money(fee))), 'u1l3-vlab-b'); await pop(c, l, 220); await show(c, L3);
-        } },
-      { cap: `General term: ${T(`t_n=${c1}+${d}(n-1)=${cD(d)}n+${cB(fee)}`)}: ${T(money(d))} per hour plus the ${T(money(fee))} fee.`,
-        run: (c) => show(c, L4) },
-      { cap: `An ${ask}-hour job: ${T(`t_{${ask}}=${d}(${ask})+${fee}=${money(cost(ask))}`)}.`,
-        run: async (c) => { const s = stack(ask); for (const r of s) await B.grow(c, r, 110); const l = B.vlab(ask, cost(ask), T(money(cost(ask))), 'u1l3-vlab-ok'); await pop(c, l, 220); await show(c, L5); } }
-    ];
-  }
-};
-
-/* ====================================================================================================
- * Explainer: straight-line depreciation; years are positions.
- * ==================================================================================================== */
-const TK = {
-  ex6: { label: 'Example 6 check', y1: 2018, ya: 2021, va: 96800, yb: 2026, vb: 63800, lim: 15000, what: 'food truck' },
-  tractor: { label: 'A tractor (bought 2019)', y1: 2019, ya: 2020, va: 85000, yb: 2024, vb: 61000, lim: 40000, what: 'tractor' }
-};
-const truck = {
-  title: 'Losing the same value every year',
-  height: 480,
-  choices: Object.keys(TK).map((k) => ({ v: k, label: TK[k].label })),
-  intro: (k) => `The ${TK[k].what} was bought in ${TK[k].y1}, so ${TK[k].y1} is t₁. Press <b>Next</b>.`,
-  make(stage, k, ex) {
-    const g = TK[k], pa = g.ya - g.y1 + 1, pb = g.yb - g.y1 + 1, dv = (g.vb - g.va) / (pb - pa), t1 = g.va - (pa - 1) * dv, bb = t1 - dv;
-    const nStar = (bb - g.lim) / (-dv), ans = Math.floor(nStar + 1e-9) + 1, N = ans, W = ex.W, val = (n) => t1 + (n - 1) * dv;
-    const vmax = t1 * 1.12, st = niceStep(vmax, 5), ticks = []; for (let v = 0; v <= vmax; v += st) ticks.push(v);
-    const B = new Bars(stage, { x: 10, y: 6, width: W - 24, height: 350, n0: 1, n1: N, vmin: 0, vmax, ticks, tickFmt: (v) => hn(v),
-      pad: { l: 74, r: 8, t: 22, b: 62 }, bw: 34, nlab: (n) => String(g.y1 + n - 1) });
-    Object.values(B.nl).forEach((e) => e.classList.add('u1l3-yr'));
-    const nrow = []; for (let n = 1; n <= N; n++) { const e = B.hlabel(B.px(n), B.py(0) + 32, T(`t_{${n}}`), { pos: 's', cls: 'u1l3-nlab u1l3-tpos', gap: 0 }); nrow.push(hide(e)); }
-    const bars = {}; for (let n = 1; n <= N; n++) bars[n] = B.bar(n, val(n), { color: n === pa || n === pb ? KC : '#c9c3b5' });
-    const P = add(stage, box(h('div', 'u1l3-panel u1l3-hpanel'), W - 24, 112), 10, 362);
-    const L1 = pline(P, `${T(`d=\\dfrac{${tn(g.vb)}-${tn(g.va)}}{${pb}-${pa}}=\\dfrac{${tn(g.vb - g.va)}}{${pb - pa}}=${cD(tn(dv))}`)}`);
-    const L2 = pline(P, T(`${tn(g.va)}=${cT('t_1')}+${pa - 1}(${tn(dv)})\\Rightarrow ${cT('t_1')}=${cT(money(t1))}`));
-    const L3 = pline(P, T(`t_n=${tn(t1)}${tn(dv)}(n-1)=${lin(dv, bb)}<${tn(g.lim)}\\Rightarrow n>${texNum(nStar, 1)}`));
-    const L4 = pline(P, `${T(`n=${ans}`)}: the year ${T(`${g.y1}+${ans - 1}=${g.y1 + ans - 1}`)}`, 'u1l3-ans');
-    const ys = (n) => g.y1 + n - 1;
-    return [
-      { cap: `${g.y1} is ${T('t_1')}, so count positions from there: ${g.ya} is ${T(`t_{${pa}}`)} and ${g.yb} is ${T(`t_{${pb}}`)} (position = year − ${g.y1 - 1}).`,
-        run: async (c) => { for (const e of nrow) await appear(c, e, 50); B.nl[pa].classList.add('u1l3-yr-k'); B.nl[pb].classList.add('u1l3-yr-k'); } },
-      { cap: `Known: ${T(`t_{${pa}}=${money(g.va)}`)} and ${T(`t_{${pb}}=${money(g.vb)}`)}.`,
-        run: async (c) => { await B.grow(c, bars[pa], 400); await B.grow(c, bars[pb], 400); await pop(c, B.vlab(pa, g.va, T(tn(g.va)), 'u1l3-vlab-k'), 200); await pop(c, B.vlab(pb, g.vb, T(tn(g.vb)), 'u1l3-vlab-k'), 200); } },
-      { cap: `${T(`${pb}-${pa}=${pb - pa}`)} jumps, change ${T(`${tn(g.vb - g.va)}`)}: ${T(`d=${tn(g.vb - g.va)}\\div${pb - pa}=${cD(tn(dv))}`)}. It loses ${T(money(-dv))} every year.`,
-        run: async (c) => { for (let n = pa + 1; n < pb; n++) await B.grow(c, bars[n], 220); await show(c, L1); } },
-      { cap: `Back ${pa - 1} jump${pa > 2 ? 's' : ''} to ${g.y1}: ${T(`${cT('t_1')}=${tn(g.va)}+${pa - 1}(${tn(-dv)})=${cT(money(t1))}`)}, the purchase price.`,
-        run: async (c) => { for (let n = pa - 1; n >= 1; n--) { if (n === 1) bars[1].setAttribute('fill', TC); await B.grow(c, bars[n], 260); } await pop(c, B.vlab(1, t1, T(cT(tn(t1))), 'u1l3-vlab-t'), 200); await show(c, L2); } },
-      { cap: `Worth less than ${T(money(g.lim))}: ${T(`${lin(dv, bb)}<${tn(g.lim)}`)} gives ${T(`n>${texNum(nStar, 1)}`)}, so the first one is ${T(`n=${ans}`)}.`,
-        run: async (c) => {
-          const lv = B.level(g.lim, T(money(g.lim))); await drawIn(lv, 400, c);
-          for (let n = pb + 1; n <= N; n++) await B.grow(c, bars[n], 160);
-          bars[ans].setAttribute('fill', GRN); await show(c, L3);
-        } },
-      { cap: `${T(`t_{${ans}}`)} is the year ${T(`${g.y1}+${ans - 1}=${ys(ans)}`)}: worth ${T(money(val(ans)))}. (In ${ys(ans - 1)}, ${T(`t_{${ans - 1}}=${money(val(ans - 1))}`)}, still above.)`,
-        run: async (c) => { await pop(c, B.vlab(ans, val(ans), T(tn(val(ans))), 'u1l3-vlab-ok'), 200); bars[ans - 1].setAttribute('fill', '#e9b9b4'); B.nl[ans].classList.add('u1l3-yr-ok'); await show(c, L4); } }
     ];
   }
 };
@@ -815,7 +570,6 @@ standup('u1l3', {
 });
 
 /* =============================== mount =============================== */
-mountBeach();
 mountFigures();
-export const explainers = mountExplainers({ gapSplit, system, amphi, startOrAfter, firstPass, feeRate, truck, balloon, linear });
-export const _test = { tn, lin, GS, SY, AM, SA, FP, FR, TK, LN };
+export const explainers = mountExplainers({ gapSplit, amphi, startOrAfter, firstPass, balloon, linear });
+export const _test = { tn, lin, GS, AM, SA, FP, LN };

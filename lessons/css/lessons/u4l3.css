@@ -143,3 +143,13 @@
 .u4l3-gneg { background: #fde8e6; border-color: #c93a33; }
 .u4l3-gs { position: absolute; font-size: 21px; }
 .u4l3-gside { font-size: 19px; white-space: nowrap; }
+
+/* Ryan's X (new format, 2026-11-11): ac on top, b underneath, the two numbers on the sides, the pairs under it */
+.u4l3-xv { font-size: 25px; font-weight: 700; white-space: nowrap; }
+.u4l3-xv.u4l3-xlab { font-size: 18px; color: var(--muted); }
+.u4l3-xv.u4l3-xtop { color: #a33357; } .u4l3-xv.u4l3-xbot { color: #12805a; }
+.u4l3-xv.u4l3-xside { color: #c93a33; font-size: 26px; }
+.u4l3-xp { display: flex; align-items: center; justify-content: space-between; padding: 0 12px; box-sizing: border-box; font-size: 19px; border: 3px solid transparent; border-radius: 999px; white-space: nowrap; }
+.u4l3-xp.u4l3-xp-ok { border-color: #12805a; background: #e9f6ef; }
+.u4l3-xp.u4l3-xp-ok .u4l3-hs { color: #12805a; font-weight: 700; }
+.u4l3-xp.u4l3-xp-no { color: #8a8f99; opacity: .6; }

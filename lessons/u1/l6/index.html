@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u1l6.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,15 @@
 </head>
 <body>
 <main class="lesson screen u1l6">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Sneaky Sale">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="0.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="34" text-anchor="middle" transform="scale(-1 1)">👟</text></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="2s" begin="0s" repeatCount="indefinite"/><text x="300" y="46" font-size="30" text-anchor="middle">🏷️</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Sneaky Sale</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">A pair of sneakers costs <b>$100</b>.</p><p class="vw-ctx">The store <b>raises</b> the price by <b>50%</b>. A month later, the new price goes on sale for <b>50% off</b>.</p><p class="vw-ask">What do the sneakers cost now?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A sneaker with a $100 price tag; a +50% sticker, then a −50% sticker, then the tag shows $ ?"><path d="M140 97 C110 120 100 150 110 175" fill="none" stroke="#4a4436" stroke-width="2.5"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="0s" repeatCount="indefinite"/><text x="110" y="228" font-size="76" text-anchor="middle">👟</text></g><g transform="rotate(-8 205 95)"><path d="M150 60 h120 a8 8 0 0 1 8 8 v58 a8 8 0 0 1 -8 8 h-120 l-26 -37 z" fill="#fff6d8" stroke="#4a4436" stroke-width="3"/><circle cx="140" cy="97" r="6" fill="#fff" stroke="#4a4436" stroke-width="2.5"/><text x="212" y="113" font-size="44" font-weight="800" fill="#4a4436" text-anchor="middle">$100<animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;.62;.64;.97;1" dur="6s" repeatCount="indefinite"/></text><text x="212" y="113" font-size="44" font-weight="800" fill="#c93a33" text-anchor="middle" opacity="0">$ ?<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.62;.64;.97;1" dur="6s" repeatCount="indefinite"/></text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2;0.22;.97;1" dur="6s" repeatCount="indefinite"/><circle cx="266" cy="44" r="32" fill="#12805a"/><text x="266" y="50" font-size="17" font-weight="800" fill="#fff" text-anchor="middle">+50%</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.42;0.44;.97;1" dur="6s" repeatCount="indefinite"/><circle cx="292" cy="150" r="32" fill="#c93a33"/><text x="292" y="156" font-size="17" font-weight="800" fill="#fff" text-anchor="middle">−50%</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Work it out, then convince the person beside you.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>$75, not $100!</b> Up 50%: the price becomes $150. Then 50% off takes half of <b>$150</b>, which is $75 off, not $50. The second percent is taken from a bigger number. (Sale first, then the raise? $50, then $75 again.)</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -44,40 +54,6 @@
   <div class="outcome"><b>RF10</b> Analyze geometric sequences and series to solve problems.<br><span class="muted">Today: percent growth and decay, doubling, half-life and compound interest as geometric sequences.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Lily Pond" id="wu" style="--wf-side: 390px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Lily Pond</h2>
-  <p class="wf-rule">A patch of lily pads <b>doubles</b> its area <b>every day</b>.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u1l6-pond" id="u1l6-pond"></div>
-    <div class="u1l6-wbtns">
-      <button type="button" class="pill" id="u1l6-dback">◂ Day before</button>
-      <button type="button" class="pill" id="u1l6-dfwd">Day after ▸</button>
-      <button type="button" class="pill" id="u1l6-dreset">Back to day 30</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u1l6-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>On day 1 the patch covers <b>1 m²</b>. How much does it cover on <b>day 4</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l6-wa"><div class="bk-ans"><b>8 m².</b> Day 1 → 2 → 3 → 4 is only <b>3</b> doublings: <span class="tex">1\times2\times2\times2=8</span>.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How much on <b>day 11</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l6-wa"><div class="bk-ans">Day 11 is 10 days after day 1: <span class="tex">2^{10}=1\,024</span> m². More than a hockey rink!</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> The patch covers the <b>whole pond on day 30</b>. On what day was the pond <b>half</b> covered? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> Day 15</div>
-        <div class="opt"><b>B</b> Day 20</div>
-        <div class="opt"><b>C</b> Day 28</div>
-        <div class="opt right"><b>D</b> Day 29</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>D, day 29.</b> It doubles every day, so the day before it is full it was half full. Day 28: a quarter. Day 25: only <span class="tex">\tfrac{1}{32}</span>, about 3%: it looks like nothing is happening, then it explodes.<br>
-        <span class="muted"><b>A</b> halves the <em>time</em>, but halving the <em>amount</em> takes just one day. Going back one day at a time is <b>multiplying by <span class="tex">\tfrac{1}{2}</span></b>.</span></div>
-    </div>
-  </div></div>
-  <p class="u1l6-social">Challenge your neighbour: if the pond had started with <b>two</b> patches instead of one, on what day would it be full?</p>
-</section>
-
 <!-- ================= 1. Growth and decay factors ================= -->
 <section class="card" data-ink="s1" data-section="1. Growth and Decay Factors">
   <div class="sec-h"><span class="badge">1</span><h2>Growth and Decay Factors</h2></div>
@@ -88,7 +64,6 @@
     <div class="u1l6-key u1l6-kother"><div class="u1l6-kh">Other words</div><div class="u1l6-klist">Doubles: <span class="tex">r=2</span> · Triples: <span class="tex">r=3</span> · Halves: <span class="tex">r=\tfrac{1}{2}</span><br>Keeps a fraction <span class="tex">f</span> of its value (“rebounds to <span class="tex">\tfrac{3}{5}</span> of its height”): <span class="tex">r=f</span></div></div>
   </div>
   <div class="tip watch"><div class="tip-ic">!</div><div><b>Read carefully.</b> “Loses <span class="tex">\tfrac{1}{4}</span> of its value” means it <b>keeps</b> <span class="tex">\tfrac{3}{4}</span>, so <span class="tex">r=\tfrac{3}{4}</span>. “Rebounds <b>to</b> 80%” means <span class="tex">r=0.8</span>, but “<b>loses</b> 80% of its height” means <span class="tex">r=0.2</span>.</div></div>
-  <div class="explainer" data-explainer="factor"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -110,7 +85,6 @@
 <section class="card" data-ink="s2" data-section="2. Building a Growth or Decay Sequence">
   <div class="sec-h"><span class="badge">2</span><h2>Building a Growth or Decay Sequence</h2></div>
   <div class="def">Multiply by <span class="tex">\textcolor{#c27a0e}{r}</span> to get each next value. Keep the <b>unrounded</b> values in your calculator and round only the answers you write down. Once you know <span class="tex">\textcolor{#a33357}{t_1}</span> and <span class="tex">\textcolor{#c27a0e}{r}</span>, any term comes from <span class="tex">t_n=\textcolor{#a33357}{t_1}\textcolor{#c27a0e}{r}^{\,n-1}</span>.</div>
-  <div class="explainer" data-explainer="buildSeq"></div>
 </section>
 
 <section class="card example" data-ink="ex2" data-section="Example 2">
@@ -163,12 +137,20 @@
   <button class="more" data-more="ex3-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–4">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 6 · Questions 1–4</h2>
+  <p class="pr-t">Growth factors, building a sequence, and where the sequence starts.</p>
+  <div class="pr-chips n3"><span><b>1</b>State the growth factor</span><span><b>2</b>Build the sequence</span><span><b>3–4</b>Where does it start?</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has finished Question 3.</span><a class="pill" href="../../../#/lesson/u1l6">Open the Practice site</a></div>
+</section>
+
 <!-- ================= 4. Doubling and half-life ================= -->
 <section class="card" data-ink="s4" data-section="4. Doubling, Half-Life and Other Periods">
   <div class="sec-h"><span class="badge">4</span><h2>Doubling, Half-Life and Other Periods</h2></div>
   <div class="def">The change does not have to happen once a year. If a quantity doubles every 20 minutes, the <b>period</b> is 20 minutes, and the number of periods is the total time divided by 20 minutes. The <b>half-life</b> of a radioactive substance is the time it takes for half of it to decay, so <span class="tex">r=\tfrac{1}{2}</span> for each half-life.</div>
   <div class="def amber u1l6-center">Number of periods <span class="tex">n=\dfrac{\text{total time}}{\text{length of one period}}</span>, &nbsp;&nbsp; amount <span class="tex">=Pr^{\,n}</span></div>
-  <div class="explainer" data-explainer="periods"></div>
 </section>
 
 <section class="card example" data-ink="ex4" data-section="Example 4">
@@ -288,7 +270,7 @@
     <div><b>When does it pass a target?</b> Try values of <span class="tex">n</span> (a table). The answer is the <b>first</b> whole <span class="tex">n</span> past the target; check the one just before it.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u1l6">
-    <div><div class="kicker">Your turn</div><b>Assignment 6 — Geometric Growth and Decay</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 6 · Questions 5–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l7/">
     <div><div class="kicker">Next lesson</div><b>Lesson 7 — Geometric Series</b><div class="muted">Add up the terms of a geometric sequence: a quick formula for <span class="tex">S_n</span>.</div></div><span class="arrow">→</span>

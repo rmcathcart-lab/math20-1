@@ -1,0 +1,134 @@
+/* Math 20-1 · Unit 8 · Lesson 7 — Quadratic Inequalities in One Variable: Sign Analysis (prefix u8l7-).
+ * Colours: + green, − red, solutions amber, the graph blue, the scanner orange. */
+
+.u8l7 .pl .katex { font-size: 1.06em; }
+.u8l7 .ans .katex { font-size: 1.03em; }
+.u8l7 .katex { white-space: nowrap; }
+.u8l7 h2 .katex, .u8l7 h3 .katex { font-size: .95em; }
+.u8l7-p { font-size: 19px; line-height: 1.5; margin: 12px 0; }
+.u8l7-cp { color: #12805a; }
+.u8l7-cm { color: #c93a33; }
+.u8l7-cv { color: #a86a08; }
+.u8l7-mut { color: var(--muted); font-size: .92em; }
+.u8l7-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u8l7-pcol .pill { white-space: nowrap; }
+
+/* ---------------- key ideas ---------------- */
+.u8l7-key { border-left-width: 7px; font-size: 19px; line-height: 1.5; }
+.u8l7-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 6px; }
+.u8l7-ol { margin: 4px 0 4px; padding-left: 28px; font-size: 19px; line-height: 1.5; }
+.u8l7-ol li { margin: 3px 0; }
+.u8l7-three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.u8l7-three > div, .u8l7-two2 > div { background: #fff; border: 1.5px solid #ecd9b4; border-radius: 10px; padding: 8px 12px; }
+.u8l7-two2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.u8l7-kn { margin-top: 8px; }
+
+/* ---------------- sign charts on the cards ---------------- */
+.u8l7-tab { border-collapse: collapse; background: #fff; font-size: 19px; margin: 8px 0; }
+.u8l7-tab th, .u8l7-tab td { border: 1.5px solid #ddd6c6; text-align: center; vertical-align: middle; }
+.u8l7-tab th { background: #faf7f0; font: 700 17px var(--round); padding: 6px 10px; white-space: nowrap; }
+.u8l7-tab td { min-width: 50px; height: 44px; padding: 4px 8px; font-size: 22px; }
+.u8l7-tab.u8l7-big { width: 100%; }
+.u8l7-tab.u8l7-big th:first-child { width: 120px; }
+.u8l7-tab th.u8l7-zh { width: 60px; }
+.u8l7-tab tr.u8l7-prow th, .u8l7-tab tr.u8l7-prow td { border-top: 3px solid #b9b19e; }
+.u8l7-tab td.u8l7-p { color: #12805a; }
+.u8l7-tab td.u8l7-m { color: #c93a33; }
+.u8l7-tab.u8l7-sm { font-size: 16px; margin: 6px 0; }
+.u8l7-tab.u8l7-sm th { font-size: 15px; padding: 3px 7px; }
+.u8l7-tab.u8l7-sm td { height: 32px; min-width: 38px; font-size: 17px; padding: 2px 6px; }
+.u8l7-fig { display: flex; justify-content: flex-start; margin: 6px 0 2px; }
+.u8l7-exin { margin-top: 16px; }
+.u8l7-tl { font-size: 19px; white-space: nowrap; }
+
+/* ---------------- explainers: numbered rows ---------------- */
+.u8l7-rows { display: flex; flex-direction: column; gap: 7px; }
+.u8l7-row { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 6px 11px; font-size: 18px; line-height: 1.45; }
+.u8l7-n { flex: 0 0 auto; display: inline-grid; place-items: center; min-width: 28px; height: 28px; padding: 0 4px; border-radius: 14px; background: #7a1f3d; color: #fff; font: 800 15px var(--round); margin-top: 1px; }
+.u8l7-rc { min-width: 0; }
+.u8l7-rows-s { gap: 5px; }
+.u8l7-rows-s .u8l7-row { font-size: 16px; padding: 4px 9px; line-height: 1.38; }
+.u8l7-rows-s .u8l7-n { min-width: 24px; height: 24px; font-size: 13.5px; }
+.u8l7-rowans { border-color: #e9c37a; background: #fffaf0; }
+.u8l7-rowck { border-color: #9fd4b8; background: #f2fbf6; }
+.u8l7-rowck .u8l7-n { background: #12805a; }
+.u8l7-flip { display: inline-block; background: #fde9e7; color: #c93a33; font: 800 13.5px var(--round); border-radius: 8px; padding: 0 7px; margin-left: 4px; white-space: nowrap; }
+
+/* ---------------- the X ---------------- */
+.u8l7-xd { display: flex; gap: 14px; align-items: center; background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 6px 12px; }
+.u8l7-xbox { position: relative; width: 120px; height: 120px; flex: 0 0 auto; }
+.u8l7-xbox svg { position: absolute; inset: 0; }
+.u8l7-xbox line { stroke: #3a4254; stroke-width: 3.5; stroke-linecap: round; }
+.u8l7-xt, .u8l7-xb, .u8l7-xl, .u8l7-xr { position: absolute; font-size: 21px; font-weight: 700; translate: -50% -50%; }
+.u8l7-xt { left: 60px; top: 14px; } .u8l7-xb { left: 60px; top: 106px; }
+.u8l7-xl { left: 14px; top: 60px; color: #7b4fc4; } .u8l7-xr { left: 106px; top: 60px; color: #7b4fc4; }
+.u8l7-xp { display: flex; flex-direction: column; gap: 4px; }
+.u8l7-xph { font: 700 14.5px var(--round); color: var(--muted); }
+.u8l7-xpg { display: grid; grid-template-columns: repeat(3, auto); gap: 4px 10px; font-size: 17px; }
+.u8l7-pr { padding: 1px 8px; border: 2px solid transparent; border-radius: 999px; }
+.u8l7-pr.circ { border-color: #7b4fc4; background: #f3eefb; }
+
+/* ---------------- cases ---------------- */
+.u8l7-ctit { font: 600 17px var(--round); color: var(--ink); white-space: nowrap; }
+.u8l7-rl { font-size: 17px; font-weight: 700; background: rgba(255,255,255,.85); border-radius: 6px; padding: 0 4px; }
+.u8l7-ra { color: #7b4fc4; } .u8l7-rb { color: #0f7c8a; }
+.u8l7-glowl .bk-stroke { filter: drop-shadow(0 0 5px rgba(232, 160, 30, .8)); }
+
+/* ---------------- the self-filling sign chart ---------------- */
+.u8l7-chart { position: absolute; inset: 0; pointer-events: none; }
+.u8l7-cell { position: absolute; display: grid; place-items: center; box-sizing: border-box; border: 1.5px solid #ddd6c6; margin-left: -0.75px; margin-top: -0.75px; background: #fff; font-size: 23px; line-height: 1; }
+.u8l7-cell.u8l7-hd { background: #faf7f0; font: 700 15.5px var(--round); }
+.u8l7-cell.u8l7-hd .katex { font-size: 1.08em; }
+.u8l7-cell.u8l7-lab { justify-items: start; padding-left: 10px; font-size: 19px; background: #faf7f0; }
+.u8l7-cell.u8l7-plab { border-top: 3px solid #b9b19e; font: 800 16.5px var(--round); }
+.u8l7-cell.u8l7-pc { border-top: 3px solid #b9b19e; }
+.u8l7-cell.u8l7-zc { background: #fbfaf6; }
+.u8l7-cell.u8l7-p { color: #12805a; background: #edf8f2; }
+.u8l7-cell.u8l7-m { color: #c93a33; background: #fdeeed; }
+.u8l7-cell.u8l7-z { color: #1c2230; }
+.u8l7-cell.u8l7-flipped { animation: u8l7-flash 1.4s ease-out forwards; }
+@keyframes u8l7-flash { 0%, 45% { box-shadow: inset 0 0 0 4px #e8a01e; } 100% { box-shadow: inset 0 0 0 4px rgba(232, 160, 30, 0); } }
+.u8l7-cell.u8l7-hit { box-shadow: inset 0 0 0 4px #c27a0e; font-weight: 800; }
+.u8l7-mul { font-size: 15px; color: #3a4254; white-space: nowrap; }
+.u8l7-scan { background: #e8a01e; border-radius: 3px; box-shadow: 0 0 14px 5px rgba(232, 160, 30, .55); z-index: 3; }
+.u8l7-glab { font-size: 16px; color: #1f5bd6; background: rgba(255,255,255,.85); border-radius: 6px; padding: 0 4px; white-space: nowrap; }
+
+/* ---------------- one sign: the tape ---------------- */
+.u8l7-tw { position: absolute; }
+.u8l7-tape { position: absolute; left: 0; top: 0; }
+.u8l7-tsg { position: absolute; font-size: 22px; font-weight: 800; }
+.u8l7-tlab { position: absolute; font: 700 13px var(--round); color: var(--muted); }
+
+/* ---------------- back: the factor tiles ---------------- */
+.u8l7-bline { display: flex; justify-content: center; align-items: center; gap: 4px; font-size: 30px; height: 50px; }
+.u8l7-bt { display: inline-block; padding: 2px 6px; border-radius: 10px; }
+.u8l7-bf { background: #fff4df; border: 2px solid #e9c37a; }
+.u8l7-brel { background: #f3eefb; border: 2px solid #c9b6ec; }
+.u8l7-ghost { position: absolute; font-size: 26px; z-index: 4; }
+.u8l7-bnote { font-size: 17px; color: var(--muted); }
+.u8l7-bexp { text-align: center; font-size: 28px; }
+
+/* ---------------- rocket and ticket scenes ---------------- */
+.u8l7-scene { overflow: hidden; border-radius: 14px; background: linear-gradient(#cfe3fb, #eef5fd); }
+.u8l7-scene2 { background: linear-gradient(#fbeee0, #fff8ef); }
+.u8l7-ground { position: absolute; background: #b9874f; }
+.u8l7-ledge { position: absolute; border-top: 2.5px dashed #c27a0e; }
+.u8l7-ledge span { position: absolute; right: 4px; top: -24px; font: 800 15px var(--round); color: #a86a08; }
+.u8l7-ledge.red { border-top-color: #c93a33; } .u8l7-ledge.red span { color: #c93a33; }
+.u8l7-rk { position: absolute; font-size: 42px; line-height: 1; transition: filter .2s; }
+.u8l7-rk.hi { filter: drop-shadow(0 0 10px #e8a01e) drop-shadow(0 0 4px #e8a01e); }
+.u8l7-clock { position: absolute; font-size: 15px; line-height: 1.35; background: rgba(255,255,255,.85); border-radius: 8px; padding: 2px 7px; }
+.u8l7-br { font: 800 17px var(--round); color: #a86a08; }
+.u8l7-tk { position: absolute; font-size: 54px; }
+.u8l7-mask { position: absolute; font-size: 48px; transition: opacity .2s; }
+.u8l7-price, .u8l7-prof { position: absolute; text-align: center; font-size: 15px; color: var(--muted); }
+.u8l7-price b, .u8l7-prof b { display: block; font: 800 24px var(--round); color: var(--ink); }
+.u8l7-prof b.u8l7-cp { color: #12805a; } .u8l7-prof b.u8l7-cm { color: #c93a33; }
+.u8l7-unit { position: absolute; font-size: 13.5px; color: var(--muted); text-align: center; }
+
+/* ---------------- k slider ---------------- */
+.u8l7-out { display: grid; gap: 4px; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 7px 14px; font-size: 18px; line-height: 1.4; }
+.u8l7-sl { display: flex; align-items: center; gap: 12px; background: #f3f6fd; border: 2px solid #c9d6f4; border-radius: 14px; padding: 4px 14px; cursor: pointer; }
+.u8l7-sll { font-size: 26px; min-width: 22px; }
+.u8l7-sl input { flex: 1; height: 36px; accent-color: #1f5bd6; cursor: pointer; touch-action: none; }
+.u8l7-slv { font: 800 24px var(--round); min-width: 56px; text-align: right; color: #1f5bd6; }

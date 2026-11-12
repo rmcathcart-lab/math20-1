@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u2l1.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,15 @@
 </head>
 <body>
 <main class="lesson screen u2l1">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Who Am I?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="7s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="34" text-anchor="middle">🔍</text></g><text x="300" y="46" font-size="30" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Who Am I?</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">I am a whole number bigger than 1.</p><p class="vw-ctx">My <b>square root</b> is a whole number.</p><p class="vw-ctx">My <b>cube root</b> is a whole number too.</p><p class="vw-ask">What is the smallest number I could be?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A square root sign and a cube root sign, each over a mystery number, and a mystery card"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -9;0 0" dur="1.8s" begin="0s" repeatCount="indefinite"/><path d="M18,68 L29,61 L43,104 L62,34 L130,34" fill="none" stroke="#2b55a0" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><text x="98.0" y="92" font-size="48" font-weight="800" fill="#4a4436" text-anchor="middle">?</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -9;0 0" dur="1.8s" begin="0.7s" repeatCount="indefinite"/><path d="M178,68 L189,61 L203,104 L222,34 L290,34" fill="none" stroke="#c93a33" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><text x="192" y="56" font-size="24" font-weight="800" fill="#c93a33" text-anchor="middle">3</text><text x="258.0" y="92" font-size="48" font-weight="800" fill="#4a4436" text-anchor="middle">?</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="2.2s" begin="0.3s" repeatCount="indefinite"/><rect x="113" y="150" width="104" height="80" rx="14" fill="#fffdf6" stroke="#4a4436" stroke-width="5"/><text x="165" y="208" font-size="54" font-weight="800" fill="#e0a11b" text-anchor="middle">?<animate attributeName="opacity" values="1;0.25;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>How do you know nothing smaller works?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>64.</b> <span class="tex">\sqrt{64}=8</span> and <span class="tex">\sqrt[3]{64}=4</span>. The perfect squares 4, 9, 16, 25, 36 and 49 all fail the cube-root test, and the cubes 8 and 27 fail the square-root test. The next number that works is <b>729</b> (<span class="tex">27^2</span> and <span class="tex">9^3</span>).</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -41,41 +51,6 @@
     </ul>
   </div>
   <div class="outcome"><b>AN2</b> Solve problems that involve operations on radicals and radical expressions with numerical and variable radicands.<br><span class="muted">Today: numerical radicands only: roots, entire and mixed radicals, simplest form and comparing sizes.</span></div>
-</section>
-
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: Tilted Squares" id="wu" style="--wf-side: 330px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Tilted Squares</h2>
-  <p class="wf-rule">Three squares are drawn on a dot grid (dots 1 unit apart). <b>A</b> sits straight; <b>B</b> and <b>C</b> are <b>tilted</b>. Find an area by drawing a <b>box</b> around the square and cutting off the four corner triangles.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u2l1-dots" id="u2l1-dots"></div>
-    <div class="u2l1-wbtns">
-      <button type="button" class="pill" id="u2l1-box">Box and corners</button>
-      <button type="button" class="pill" id="u2l1-lay">Lay B’s side along C</button>
-      <button type="button" class="pill" id="u2l1-wreset">Start over</button>
-    </div>
-    <div class="u2l1-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Square <b>A</b>: what are its area and its side length? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l1-wa"><div class="bk-ans">Area <b>9</b>, side <b>3</b>. The side is the number whose square is the area: <span class="tex">\sqrt9=3</span>.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Square <b>B</b>: box <span class="tex">2\times2</span>, minus four corners. Area? Side? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l1-wa"><div class="bk-ans"><span class="tex">4-4\left(\tfrac12\right)=\boldsymbol 2</span>, so the side is <span class="tex">\boldsymbol{\sqrt2}</span> (about 1.41, not a whole number).</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Square <b>C</b>: box <span class="tex">4\times4</span>, minus four corners. Area? Side? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l1-wa"><div class="bk-ans"><span class="tex">16-4(2)=\boldsymbol 8</span>, so the side is <span class="tex">\boldsymbol{\sqrt8}</span>.</div></div></div>
-    </div>
-  </div><div class="wf-side">
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> C’s area is <b>4 times</b> B’s. How many of <b>B’s sides</b> fit exactly along <b>one side of C</b>? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> 4</div>
-        <div class="opt right"><b>B</b> 2</div>
-        <div class="opt"><b>C</b> 8</div>
-        <div class="opt"><b>D</b> not a whole number</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>B: exactly 2.</b> Each step across C’s side is B’s side, so <span class="tex">\sqrt8=2\sqrt2</span>. Area <b>×4</b> only makes the side <b>×2</b>, because <span class="tex">\sqrt4=2</span>. <span class="muted">(A forgets the square root.)</span> Today: rewrite any root this way.</div>
-    </div>
-  </div></div>
-  <p class="u2l1-social">Challenge your neighbour: draw a tilted square of area <b>18</b> on the grid. How many B-sides fit along it?</p>
 </section>
 
 <!-- ================= 1. Roots and radicals ================= -->
@@ -175,11 +150,6 @@
   <button class="more" data-more="ex3-space">+ More space</button>
 </section>
 
-<section class="card" data-ink="s2b" data-section="Check Example 3">
-  <h3 class="sub">Check Example 3: work out both sides</h3>
-  <div class="explainer" data-explainer="trueFalse"></div>
-</section>
-
 <!-- ================= 3. Entire to mixed ================= -->
 <section class="card" data-ink="s3" data-section="3. Entire Radicals to Mixed Radicals">
   <div class="sec-h"><span class="badge">3</span><h2>Entire Radicals to Mixed Radicals</h2></div>
@@ -188,8 +158,6 @@
     <div class="u2l1-tbox"><div class="u2l1-tbh">Mixed radical</div><div class="u2l1-tbig"><span class="tex">\textcolor{#c27a0e}{4}\sqrt{\textcolor{#1f5bd6}{3}},\quad \textcolor{#c27a0e}{3}\sqrt[3]{\textcolor{#1f5bd6}{2}}</span></div>A number <b>in front</b> multiplies the radical.</div>
   </div>
   <div class="def">A radical is in <b>simplest form</b> when the radicand has no perfect-square factor (index 2), no perfect-cube factor (index 3), and so on.</div>
-  <h3 class="sub">Why can a number come out? Cut the square into tiles</h3>
-  <div class="explainer" data-explainer="tiles"></div>
   <p>To simplify, write the radicand as a product using the <b>largest</b> perfect power that divides it, split the root, and take that root out:</p>
   <div class="u2l1-disp"><span class="tex">\sqrt{48}=\sqrt{\textcolor{#c27a0e}{16}\times\textcolor{#1f5bd6}{3}}=\sqrt{\textcolor{#c27a0e}{16}}\times\sqrt{\textcolor{#1f5bd6}{3}}=\textcolor{#c27a0e}{4}\sqrt{\textcolor{#1f5bd6}{3}}</span><span class="tex">\sqrt[3]{54}=\sqrt[3]{\textcolor{#c27a0e}{27}\times\textcolor{#1f5bd6}{2}}=\sqrt[3]{\textcolor{#c27a0e}{27}}\times\sqrt[3]{\textcolor{#1f5bd6}{2}}=\textcolor{#c27a0e}{3}\sqrt[3]{\textcolor{#1f5bd6}{2}}</span></div>
   <div class="u2l1-pows">
@@ -219,6 +187,15 @@
   <button class="more" data-more="ex4-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 1 · Questions 1–5</h2>
+  <p class="pr-t">Evaluate roots, sort rational from irrational, use one root sign, then write entire radicals as mixed radicals.</p>
+  <div class="pr-chips n4"><span><b>1–2</b>Evaluate roots; principal roots</span><span><b>3</b>Rational or irrational; between two whole numbers</span><span><b>4</b>True or false: one root sign</span><span><b>5</b>Entire to mixed, simplest form</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u2l1">Open the Practice site</a></div>
+</section>
+
 <section class="card" data-ink="s3b" data-section="Prime factors">
   <h3 class="sub">Big radicands: use prime factors</h3>
   <p>For a large radicand, use its <b>prime factorization</b>. For a square root, each <b>pair</b> of equal factors comes out as one factor; for a cube root, each <b>triple</b>.</p>
@@ -236,12 +213,6 @@
   </div>
   <div class="space" id="ex5-space"></div>
   <button class="more" data-more="ex5-space">+ More space</button>
-</section>
-
-<section class="card" data-ink="s3c" data-section="Simplest form check">
-  <h3 class="sub">The simplest-form check (Example 5(c))</h3>
-  <p>Before you stop, hunt once more: does the radicand still have a perfect-power factor?</p>
-  <div class="explainer" data-explainer="simplest"></div>
 </section>
 
 <!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
@@ -263,11 +234,6 @@
   </div>
   <div class="space" id="ex6-space"></div>
   <button class="more" data-more="ex6-space">+ More space</button>
-</section>
-
-<section class="card" data-ink="s3e" data-section="Check Example 6">
-  <h3 class="sub">Check Example 6: copies of <span class="tex">\sqrt3</span></h3>
-  <div class="explainer" data-explainer="copies"></div>
 </section>
 
 <!-- ================= 4. Mixed to entire ================= -->
@@ -353,11 +319,6 @@
   <button class="more" data-more="ex10-space">+ More space</button>
 </section>
 
-<section class="card" data-ink="s6b" data-section="Check Examples 9 and 10">
-  <h3 class="sub">Check Examples 9 and 10: exact lengths</h3>
-  <div class="explainer" data-explainer="context"></div>
-</section>
-
 <!-- ================= summary ================= -->
 <section class="card summary" data-ink="sum" data-section="Summary">
   <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
@@ -368,7 +329,7 @@
     <div><b>Compare and apply.</b> To order radicals, make them all entire with the same index and compare radicands. Lengths from areas, volumes and Pythagoras: exact, in simplest form.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u2l1">
-    <div><div class="kicker">Your turn</div><b>Assignment 1 — Mixed and Entire Radicals</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 1 · Questions 6–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l2/">
     <div><div class="kicker">Next lesson</div><b>Lesson 2 — Radicals with Variables and Their Restrictions</b><div class="muted">Variables under the root: simplify <span class="tex">\sqrt{x^3}</span> and say which values of <span class="tex">x</span> make a radical real (<span class="tex">x\ge0</span>).</div></div><span class="arrow">→</span>

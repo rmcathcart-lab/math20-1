@@ -1,17 +1,12 @@
 /* Math 20-1 · Unit 2 · Lesson 5 — Dividing Radicals and Rationalizing Monomial Denominators.
- * Warm-up (Same Pizza, More Slices: cutting every slice keeps 3/4 the same amount → multiplying by a form of 1;
- * the big one: 1/√2 = √2/2), and the explainers:
- *   divideRule (coefficients ÷ coefficients, radicands ÷ radicands; "why": a rectangle of area √48 and width √3;
- *     Example 1 checks),
- *   twoRoutes (reduce under the radical vs simplest form first and divide out the like radicals; Example 2 checks),
+ * The warm-up is plain markup in the page (tools/newformat/specs/u2l5.py). Explainers:
+ *   divideRule (coefficients ÷ coefficients, radicands ÷ radicands; Example 1 checks),
  *   splitBar (the fraction bar groups the numerator; the denominator copies under every term; the 6 + 4 trap; Ex 3),
  *   simplestStamp (the five simplest-form checks stamped on six expressions),
- *   formOfOne (the star: × √b/√b = 1; b unit squares rearranged into a square of side √b show √b·√b = b; Ex 4),
- *   twoTermNum (divide each term vs rationalize first; reduce only by a factor of every term; Example 5 checks),
+ *   formOfOne (× √b/√b = 1, and √b·√b = b clears the denominator; Example 4 checks),
  *   cubeFill (the star, 3-D: factor slots fill to three of each and a box of unit cubes grows into a perfect cube;
  *     ∛2·∛2 = ∛4 is only a flat slab; a fourth root needs four of each; Example 6 checks),
- *   restrictions (even index: radicand ≥ 0; in a denominator: ≠ 0; shaded on a number line; Example 7 checks),
- *   problems (square diagonal, banner, an equation with a balance; Example 8 checks).
+ *   restrictions (even index: radicand ≥ 0; in a denominator: ≠ 0; shaded on a number line; Example 7 checks).
  * Colours: the form of 1 / multiplier amber; coefficients burgundy (the site's teal token); radicands blue;
  * finished answers green; mistakes red. No calculator in Unit 2. */
 import {
@@ -65,48 +60,6 @@ function radQ(n, d, r, k = 2) {
 }
 
 /* ====================================================================================================
- * Warm-up: Same Pizza, More Slices. 3/4 of the pizza has pepperoni; cutting every slice keeps the amount.
- * ==================================================================================================== */
-function mountPizza() {
-  const host = document.getElementById('u2l5-pizza'); if (!host) return;
-  const S = 400, C = S / 2, R = 182;
-  const svg = svgEl('svg', { viewBox: `0 0 ${S} ${S}`, class: 'u2l5-pzsvg', role: 'img', 'aria-label': 'A pizza cut into equal slices; three quarters has pepperoni' }, host);
-  svgEl('circle', { cx: C, cy: C, r: R + 8, class: 'u2l5-crust' }, svg);
-  svgEl('circle', { cx: C, cy: C, r: R, class: 'u2l5-cheese' }, svg);
-  const P = (deg, r = R) => { const a = (deg - 90) * Math.PI / 180; return [C + r * Math.cos(a), C + r * Math.sin(a)]; };
-  // the pepperoni quarter-circle region: from 12 o'clock clockwise to 9 o'clock (3/4 of the turn)
-  const [sx, sy] = P(0), [ex, ey] = P(270);
-  svgEl('path', { d: `M${C} ${C} L${sx} ${sy} A${R} ${R} 0 1 1 ${ex} ${ey} Z`, class: 'u2l5-sauce' }, svg);
-  const pep = [[30, 120], [62, 70], [95, 140], [130, 95], [160, 150], [195, 60], [215, 125], [250, 80], [20, 50], [110, 40], [175, 105], [240, 150], [140, 165], [75, 160], [205, 165], [265, 130]];
-  pep.forEach(([deg, r]) => { const [x, y] = P(deg, r); svgEl('circle', { cx: x, cy: y, r: 15, class: 'u2l5-pep' }, svg); });
-  const gCuts = svgEl('g', {}, svg);
-  const labEl = document.getElementById('u2l5-wlab');
-  let n = 4, hist = [];
-  const render = (fresh = []) => {
-    gCuts.innerHTML = '';
-    for (let i = 0; i < n; i++) {
-      const [x, y] = P(360 * i / n, R + 4);
-      svgEl('line', { x1: C, y1: C, x2: x, y2: y, class: 'u2l5-cut' + (fresh.includes(i) ? ' u2l5-cutnew' : '') }, gCuts);
-    }
-    const k = 3 * n / 4, f = n / 4;
-    const chain = ['\\dfrac34'].concat(hist.map((_, j) => { const nn = 4 * hist.slice(0, j + 1).reduce((a, b) => a * b, 1); return `\\dfrac{${3 * nn / 4}}{${nn}}`; })).join('=');
-    labEl.innerHTML = `<b>${n} slices</b>, ${k} with pepperoni: ${T(chain)}` + (f > 1 ? ` <span class="u2l5-wnote">${T(`\\dfrac34\\cdot${ca(`\\dfrac{${f}}{${f}}`)}`)}, and ${T(`\\dfrac{${f}}{${f}}=1`)}</span>` : '');
-    document.getElementById('u2l5-cut2').disabled = n * 2 > 48;
-    document.getElementById('u2l5-cut3').disabled = n * 3 > 48;
-  };
-  const cut = (m) => {
-    if (n * m > 48) return;
-    const old = new Set(Array.from({ length: n }, (_, i) => i * m));
-    hist.push(m); n *= m;
-    render(Array.from({ length: n }, (_, i) => i).filter((i) => !old.has(i)));
-  };
-  document.getElementById('u2l5-cut2').addEventListener('click', () => cut(2));
-  document.getElementById('u2l5-cut3').addEventListener('click', () => cut(3));
-  document.getElementById('u2l5-wreset').addEventListener('click', () => { n = 4; hist = []; render(); });
-  render();
-}
-
-/* ====================================================================================================
  * Explainer: divideRule — coefficients by coefficients, radicands by radicands.
  * ==================================================================================================== */
 const DR = {
@@ -125,33 +78,10 @@ const divideRule = {
   title: 'Divide coefficients by coefficients, radicands by radicands',
   height: 400,
   capH: 84,
-  choices: [{ v: 'why', label: 'Why it works' }, { sep: 'Example 1 check:' }, ...['a', 'b', 'c', 'd', 'e', 'f'].map((k) => ({ v: 'e1' + k, label: `(${k})` }))],
-  ask: (k) => (k === 'why' ? '' : `Example 1(${k.slice(2)}): divide ${T(frac(DR[k], false))} and write it in simplest form.`),
-  intro: 'Press <b>Next</b>.',
+  choices: [{ sep: 'Example 1 check:' }, ...['a', 'b', 'c', 'd', 'e', 'f'].map((k) => ({ v: 'e1' + k, label: `(${k})` }))],
+  ask: (k) => `Example 1(${k.slice(2)}): divide ${T(frac(DR[k], false))} and write it in simplest form.`,
   make(stage, k, ex) {
     const W = ex.W, ov = overlay(stage, W, 400);
-    if (k === 'why') {
-      const u = 82, rw = 4 * u, rh = Math.sqrt(3) * u, x0 = 60, y0 = 70;
-      const g = svgEl('g', {}, ov);
-      svgEl('rect', { x: x0, y: y0, width: rw, height: rh, rx: 4, class: 'u2l5-rect' }, g);
-      hide(g);
-      const aL = hide(lab(stage, x0 + rw / 2, y0 + rh / 2, `area ${T(cb('\\sqrt{48}'))}`, 'u2l5-in'));
-      const wL = hide(lab(stage, x0, y0 + rh / 2, T('\\sqrt3'), 'u2l5-side', 'w', 10));
-      const lQ = lab(stage, x0 + rw / 2, y0 + rh, `length ${T('?')}`, 'u2l5-side', 's', 10); hide(lQ);
-      const lA = hide(lab(stage, x0 + rw / 2, y0 + rh, `length ${T(cg('4'))}`, 'u2l5-side', 's', 10));
-      const L = lines(stage, 470, 30, W - 490, 'u2l5-big2');
-      const l1 = L.add(T('\\text{length}=\\dfrac{\\text{area}}{\\text{width}}=\\dfrac{\\sqrt{48}}{\\sqrt3}'));
-      const l2 = L.add(T('\\text{Try }\\sqrt{16}:\\ \\ \\sqrt{16}\\cdot\\sqrt3=\\sqrt{16\\cdot3}=\\sqrt{48}\\ \\checkmark'));
-      const l3 = L.add(T('\\dfrac{\\sqrt{48}}{\\sqrt3}=\\sqrt{\\dfrac{48}{3}}=\\sqrt{16}=4'));
-      const l4 = L.add(T('\\dfrac{\\sqrt a}{\\sqrt b}=\\sqrt{\\dfrac ab}'), 'u2l5-rule');
-      return [
-        { cap: `A rectangle has area ${T('\\sqrt{48}')} and width ${T('\\sqrt3')}. How long is it?`, run: async (c) => { await show(c, g); await show(c, aL); await show(c, wL); await show(c, lQ); } },
-        { cap: `Length = area ÷ width: ${T('\\frac{\\sqrt{48}}{\\sqrt3}')}.`, run: (c) => show(c, l1) },
-        { cap: `Division undoes multiplication. Lesson 4: ${T('\\sqrt{16}\\cdot\\sqrt3=\\sqrt{48}')}, so the length is ${T('\\sqrt{16}')}.`, run: (c) => show(c, l2) },
-        { cap: `That is ${T('\\sqrt{\\frac{48}{3}}')}: divide the radicands. The length is ${T('\\sqrt{16}=4')}.`, run: async (c) => { await show(c, l3); lQ.style.opacity = 0; await pop(c, lA); } },
-        { cap: `The multiplication rule run <b>backward</b>: ${T('\\frac{\\sqrt a}{\\sqrt b}=\\sqrt{\\frac ab}')} (same index).`, run: (c) => pop(c, l4) }
-      ];
-    }
     const d = DR[k];
     const fb = add(stage, box(h('div', 'u2l5-bigfrac', T(frac(d))), 330, 190), 20, 24);
     const split = (d.m ? `\\dfrac{${ct(d.m)}}{${ct(d.k)}}` : '') + rt(`\\dfrac{${cb(d.a)}}{${cb(d.b)}}`, d.n);
@@ -172,69 +102,6 @@ const divideRule = {
       { cap: `Together: ${T(d.tog)}.`, run: (c) => show(c, tg) },
       { cap: d.simp.cap, run: async (c) => { if (sm) await show(c, sm); done(sm || tg); await pulse(c, sm || tg, 1.05); } }
     ];
-  }
-};
-
-/* ====================================================================================================
- * Explainer: twoRoutes — reduce under the radical, or simplest form first (Example 2).
- * ==================================================================================================== */
-const TR = {
-  e2a: {
-    f: '\\dfrac{\\sqrt{98}}{\\sqrt{18}}', ans: '\\dfrac73',
-    A: [['\\sqrt{\\dfrac{98}{18}}', `<b>Route A:</b> put it under one radical: ${T('\\sqrt{\\frac{98}{18}}')}.`],
-      ['=\\sqrt{\\dfrac{49}{9}}', `Reduce the fraction inside (divide by 2): ${T('\\frac{49}{9}')}, two perfect squares.`],
-      ['=\\dfrac{7}{3}', `${T('\\sqrt{49}=7')} and ${T('\\sqrt9=3')}: ${T('\\frac73')}.`]],
-    B: [['\\dfrac{7\\sqrt2}{3\\sqrt2}', `<b>Route B:</b> simplest form first: ${T('\\sqrt{98}=7\\sqrt2')} and ${T('\\sqrt{18}=3\\sqrt2')}.`],
-      ['=\\dfrac{7\\cancel{\\sqrt2}}{3\\cancel{\\sqrt2}}', `${T('\\sqrt2')} is in the top and the bottom: it divides out, just like ${T('\\frac{7x}{3x}=\\frac73')}.`],
-      ['=\\dfrac{7}{3}', `${T('\\frac73')} again: both routes give the same answer.`]]
-  },
-  e2b: {
-    f: '\\dfrac{4\\sqrt{90}}{3\\sqrt{40}}', ans: '2',
-    A: [['\\dfrac{4}{3}\\sqrt{\\dfrac{90}{40}}', `<b>Route A:</b> coefficients over coefficients, radicands under one radical: ${T('\\frac43\\sqrt{\\frac{90}{40}}')}.`],
-      ['=\\dfrac{4}{3}\\sqrt{\\dfrac{9}{4}}', `Reduce inside (divide by 10): ${T('\\frac94')}, two perfect squares.`],
-      ['=\\dfrac{4}{3}\\cdot\\dfrac{3}{2}=2', `${T('\\sqrt{\\frac94}=\\frac32')}, and ${T('\\frac43\\cdot\\frac32=2')}.`]],
-    B: [['\\dfrac{4(3\\sqrt{10})}{3(2\\sqrt{10})}', `<b>Route B:</b> simplest form first: ${T('\\sqrt{90}=3\\sqrt{10}')} and ${T('\\sqrt{40}=2\\sqrt{10}')}.`],
-      ['=\\dfrac{12\\cancel{\\sqrt{10}}}{6\\cancel{\\sqrt{10}}}', `Multiply out: ${T('\\frac{12\\sqrt{10}}{6\\sqrt{10}}')}. The like radicals ${T('\\sqrt{10}')} divide out.`],
-      ['=2', `${T('12\\div6=2')}: the same answer both ways.`]]
-  },
-  e2c: {
-    f: '\\dfrac{15\\sqrt{72}}{10\\sqrt{50}}', ans: '\\dfrac95',
-    A: [['\\dfrac{15}{10}\\sqrt{\\dfrac{72}{50}}', `<b>Route A:</b> ${T('\\frac{15}{10}\\sqrt{\\frac{72}{50}}')}.`],
-      ['=\\dfrac{3}{2}\\sqrt{\\dfrac{36}{25}}', `Reduce both fractions: ${T('\\frac{15}{10}=\\frac32')} and ${T('\\frac{72}{50}=\\frac{36}{25}')}.`],
-      ['=\\dfrac{3}{2}\\cdot\\dfrac{6}{5}=\\dfrac{9}{5}', `${T('\\sqrt{\\frac{36}{25}}=\\frac65')}, and ${T('\\frac32\\cdot\\frac65=\\frac{18}{10}=\\frac95')}.`]],
-    B: [['\\dfrac{15(6\\sqrt2)}{10(5\\sqrt2)}', `<b>Route B:</b> ${T('\\sqrt{72}=6\\sqrt2')} and ${T('\\sqrt{50}=5\\sqrt2')}.`],
-      ['=\\dfrac{90\\cancel{\\sqrt2}}{50\\cancel{\\sqrt2}}', `${T('\\frac{90\\sqrt2}{50\\sqrt2}')}: the ${T('\\sqrt2')} divides out.`],
-      ['=\\dfrac{90}{50}=\\dfrac{9}{5}', `Reduce: ${T('\\frac{90}{50}=\\frac95')}. The same answer.`]]
-  },
-  e2d: {
-    f: '\\dfrac{6\\sqrt[3]{54}}{\\sqrt[3]{16}}', ans: '9',
-    A: [['6\\sqrt[3]{\\dfrac{54}{16}}', `<b>Route A:</b> one cube root: ${T('6\\sqrt[3]{\\frac{54}{16}}')}.`],
-      ['=6\\sqrt[3]{\\dfrac{27}{8}}', `Reduce inside (divide by 2): ${T('\\frac{27}{8}')}, two perfect cubes.`],
-      ['=6\\cdot\\dfrac{3}{2}=9', `${T('\\sqrt[3]{\\frac{27}{8}}=\\frac32')}, and ${T('6\\cdot\\frac32=9')}.`]],
-    B: [['\\dfrac{6(3\\sqrt[3]{2})}{2\\sqrt[3]{2}}', `<b>Route B:</b> ${T('\\sqrt[3]{54}=3\\sqrt[3]2')} and ${T('\\sqrt[3]{16}=2\\sqrt[3]2')}.`],
-      ['=\\dfrac{18\\cancel{\\sqrt[3]{2}}}{2\\cancel{\\sqrt[3]{2}}}', `Multiply out: ${T('\\frac{18\\sqrt[3]2}{2\\sqrt[3]2}')}. The ${T('\\sqrt[3]2')} divides out.`],
-      ['=\\dfrac{18}{2}=9', `${T('18\\div2=9')}: the same answer.`]]
-  }
-};
-const twoRoutes = {
-  title: 'Two routes, one answer',
-  height: 440,
-  capH: 84,
-  choices: [{ sep: 'Example 2 check:' }, ...['a', 'b', 'c', 'd'].map((k) => ({ v: 'e2' + k, label: `(${k})` }))],
-  ask: (k) => `Example 2(${k.slice(2)}): simplify ${T(TR[k].f)}.`,
-  make(stage, k, ex) {
-    const W = ex.W, d = TR[k];
-    add(stage, box(h('div', 'u2l5-head', T(d.f)), W), 0, 6);
-    const lw = (W - 60) / 2, xs = [20, 40 + lw];
-    const heads = [['Route A', 'reduce under the radical', 'u2l5-laneT'], ['Route B', 'simplest form first', 'u2l5-laneB']]
-      .map(([a, b, cls], i) => hide(add(stage, box(h('div', 'u2l5-lane ' + cls, `<b>${a}:</b> ${b}`), lw), xs[i], 92)));
-    const mk = (i, arr) => { const L = lines(stage, xs[i] + 14, 146, lw - 28, 'u2l5-big2 u2l5-lanel'); return arr.map(([t]) => L.add(T(t))); };
-    const la = mk(0, d.A), lb = mk(1, d.B);
-    const st = stampAt(stage, W / 2, 392, `Same answer: ${T(d.ans)}`, true);
-    const steps = [];
-    d.A.forEach(([, cap], i) => steps.push({ cap, run: async (c) => { if (i === 0) await show(c, heads[0]); await show(c, la[i]); if (i === 2) done(la[i]); } }));
-    d.B.forEach(([, cap], i) => steps.push({ cap, run: async (c) => { if (i === 0) await show(c, heads[1]); await show(c, lb[i]); if (i === 2) { done(lb[i]); await sIn(c, st); } } }));
-    return steps;
   }
 };
 
@@ -344,10 +211,9 @@ const simplestStamp = {
 };
 
 /* ====================================================================================================
- * Explainer: formOfOne (the star) — multiply by √b/√b = 1; a square of side √b has area b (Example 4).
+ * Explainer: formOfOne — multiply by √b/√b = 1; √b·√b = b clears the denominator (Example 4).
  * ==================================================================================================== */
 const FO = {
-  w: { start: '\\dfrac{1}{\\sqrt{2}}', b: 2, top: '1\\cdot\\sqrt2=\\sqrt2', bot: '\\sqrt2\\cdot\\sqrt2=2', res: '=\\dfrac{\\sqrt{2}}{2}', endCap: `${T('\\frac{1}{\\sqrt2}=\\frac{\\sqrt2}{2}')}: the warm-up's big one. Same value, whole-number denominator.` },
   e4a: { start: '\\dfrac{5}{\\sqrt{3}}', b: 3, top: '5\\cdot\\sqrt3=5\\sqrt3', bot: '\\sqrt3\\cdot\\sqrt3=3', res: '=\\dfrac{5\\sqrt{3}}{3}', endCap: `3 does not divide 5 (and the 3s can't cancel: one is under a radical). Answer: ${T('\\frac{5\\sqrt3}{3}')}.` },
   e4b: { start: '\\dfrac{\\sqrt{2}}{\\sqrt{7}}', b: 7, top: '\\sqrt2\\cdot\\sqrt7=\\sqrt{14}', bot: '\\sqrt7\\cdot\\sqrt7=7', res: '=\\dfrac{\\sqrt{14}}{7}', endCap: `Nothing to reduce: ${T('\\frac{\\sqrt{14}}{7}')}.` },
   e4c: { start: '\\dfrac{14}{3\\sqrt{7}}', b: 7, m: '3', top: '14\\cdot\\sqrt7=14\\sqrt7', bot: '3\\sqrt7\\cdot\\sqrt7=3(7)', res: '=\\dfrac{14\\sqrt{7}}{3(7)}=\\dfrac{14\\sqrt{7}}{21}', red: [['=\\dfrac{2\\sqrt{7}}{3}', `Reduce: 14 and 21 share 7. Answer: ${T('\\frac{2\\sqrt7}{3}')}.`]] },
@@ -359,11 +225,10 @@ const formOfOne = {
   title: 'Multiply by a form of 1',
   height: 450,
   capH: 84,
-  choices: [{ v: 'w', label: T('\\tfrac{1}{\\sqrt2}') }, { sep: 'Example 4 check:' }, ...['a', 'b', 'c', 'd', 'e', 'f'].map((k) => ({ v: 'e4' + k, label: `(${k})` }))],
-  ask: (k) => (k === 'w' ? '' : `Example 4(${k.slice(2)}): rationalize the denominator of ${T(FO[k].start)} and simplify.`),
+  choices: [{ sep: 'Example 4 check:' }, ...['a', 'b', 'c', 'd', 'e', 'f'].map((k) => ({ v: 'e4' + k, label: `(${k})` }))],
+  ask: (k) => `Example 4(${k.slice(2)}): rationalize the denominator of ${T(FO[k].start)} and simplify.`,
   make(stage, k, ex) {
     const W = ex.W, d = FO[k], b = d.b, rb = `\\sqrt{${b}}`, from = d.from || d.start;
-    const ov = overlay(stage, W, 450);
     // ---- left: the working
     const L = lines(stage, 22, 16, 530, 'u2l5-big');
     L.add(T(d.start)).style.opacity = 1;
@@ -371,114 +236,16 @@ const formOfOne = {
     const mul = L.add(`${T(`${from}\\cdot${ONE(rb)}`)} <span class="u2l5-one">${T(ca(`\\dfrac{${rb}}{${rb}}=1`))}</span>`);
     const res = L.add(T(d.res));
     const red = (d.red || []).map(([t]) => L.add(T(t)));
-    // ---- right: b unit squares rearranged into a square of side √b
-    const PX = 580, PW = W - PX - 16, yB = 398, u = Math.min(88, (PW - 40) / b), s = u * Math.sqrt(b);
-    const xs0 = PX + (PW - b * u) / 2, xs1 = PX + (PW - s) / 2;
-    lab(stage, PX + PW / 2, 16, `the denominator's ${T(cb(rb))}`, 'u2l5-ptitle', 's', 0);
-    const gP = svgEl('g', {}, ov); hide(gP);
-    const rect = svgEl('rect', { x: xs0, y: yB - u, width: b * u, height: u, class: 'u2l5-sq' }, gP);
-    const gGrid = svgEl('g', {}, gP);
-    for (let i = 1; i < b; i++) svgEl('line', { x1: xs0 + i * u, x2: xs0 + i * u, y1: yB - u, y2: yB, class: 'u2l5-sqgrid' }, gGrid);
-    const ones = [];
-    for (let i = 0; i < b; i++) ones.push(lab(stage, xs0 + (i + 0.5) * u, yB - u / 2, '1', 'u2l5-unit'));
-    ones.forEach(hide);
-    const stripL = hide(lab(stage, PX + PW / 2, yB - u - 10, `${b} unit squares: area ${b}`, 'u2l5-plab', 'n', 0));
-    const sB = hide(lab(stage, xs1 + s / 2, yB, T(cb(rb)), 'u2l5-side', 's', 6));
-    const sL = hide(lab(stage, xs1, yB - s / 2, T(cb(rb)), 'u2l5-side', 'w', 8));
-    const aIn = hide(lab(stage, xs1 + s / 2, yB - s / 2, `area ${b}`, 'u2l5-in'));
-    const eq = hide(lab(stage, PX + PW / 2, yB - s - 16, T(`${cb(rb)}\\cdot${cb(rb)}=${b}`), 'u2l5-eq', 'n', 0));
-    const morph = (c) => tween(c, 900, (t) => {
-      const w = b * u + (s - b * u) * t, hh = u + (s - u) * t, x = xs0 + (xs1 - xs0) * t;
-      rect.setAttribute('x', x); rect.setAttribute('y', yB - hh); rect.setAttribute('width', w); rect.setAttribute('height', hh);
-    });
+    // ---- right: why the bottom becomes rational
+    const PX = 580, PW = W - PX - 16;
+    const eq = hide(lab(stage, PX + PW / 2, 150, T(`${cb(rb)}\\cdot${cb(rb)}=${b}`), 'u2l5-eq', 'c', 0));
     const steps = (d.pre || []).map(([, cap], i) => ({ cap, run: (c) => show(c, pre[i]) }));
     steps.push(
-      { cap: `The denominator holds ${T(rb)}. Picture ${b} unit squares: their area is ${b}.`, run: async (c) => { await show(c, gP); for (const o of ones) await appear(c, o, 120); await show(c, stripL); } },
-      { cap: `Rearrange them into a <b>square</b> of area ${b}: its side is ${T(rb)}. So ${T(`${rb}\\cdot${rb}=${b}`)}, a whole number!`,
-        run: async (c) => { stripL.style.opacity = 0; ones.forEach((o) => (o.style.opacity = 0)); gGrid.style.opacity = 0; await morph(c); await show(c, sB); await show(c, sL); await show(c, aIn); await pop(c, eq); } },
       { cap: `Multiply by ${T(`\\frac{${rb}}{${rb}}`)}. It equals <b>1</b>, so the value does not change.${d.m ? ` The ${T(d.m)} is already rational: multiply by ${T(rb)} <b>only</b>.` : ''}`, run: async (c) => { await show(c, mul); } },
-      { cap: `Top: ${T(d.top)}. Bottom: ${T(d.bot)}, the square's area. No radical left in the denominator.`, run: async (c) => { await pulse(c, eq, 1.08); await show(c, res); if (!red.length) done(res); } }
+      { cap: `Top: ${T(d.top)}. Bottom: ${T(d.bot)}${d.m ? `, because ${T(`${rb}\\cdot${rb}=${b}`)}` : ''}. No radical left in the denominator.`, run: async (c) => { await pop(c, eq); await show(c, res); if (!red.length) done(res); } }
     );
     (d.red || []).forEach(([, cap], i) => steps.push({ cap, run: async (c) => { await show(c, red[i]); if (i === red.length - 1) done(red[i]); } }));
     if (d.endCap) steps.push({ cap: d.endCap, run: (c) => pulse(c, res, 1.05) });
-    return steps;
-  }
-};
-
-/* ====================================================================================================
- * Explainer: twoTermNum — two-term numerators (Example 5): divide each term or rationalize first; reduce only by a
- * factor of every term.
- * ==================================================================================================== */
-const TT = {
-  e5ab: {
-    A: [['\\dfrac{8\\sqrt{15}}{2\\sqrt{3}}-\\dfrac{4\\sqrt{6}}{2\\sqrt{3}}', `<b>(a) Divide each term</b> by ${T('2\\sqrt3')}.`],
-      ['=4\\sqrt{5}-2\\sqrt{2}', `${T('8\\div2=4')}, ${T('15\\div3=5')}; ${T('4\\div2=2')}, ${T('6\\div3=2')}: ${T('4\\sqrt5-2\\sqrt2')}.`]],
-    B: [[`\\dfrac{(8\\sqrt{15}-4\\sqrt{6})${ca('\\sqrt3')}}{2\\sqrt{3}\\cdot${ca('\\sqrt3')}}`, `<b>(b) Rationalize first:</b> multiply by ${T('\\frac{\\sqrt3}{\\sqrt3}')}. <b>Every</b> term of the top gets the ${T('\\sqrt3')}.`],
-      ['=\\dfrac{8\\sqrt{45}-4\\sqrt{18}}{2(3)}', `${T('\\sqrt{15}\\cdot\\sqrt3=\\sqrt{45}')}, ${T('\\sqrt6\\cdot\\sqrt3=\\sqrt{18}')}, and ${T('2\\sqrt3\\cdot\\sqrt3=2(3)')}.`],
-      ['=\\dfrac{24\\sqrt{5}-12\\sqrt{2}}{6}', `Simplest form inside: ${T('8\\sqrt{45}=8(3\\sqrt5)')} and ${T('4\\sqrt{18}=4(3\\sqrt2)')}.`],
-      ['=4\\sqrt{5}-2\\sqrt{2}', `6 divides <b>every</b> term (24, 12 and 6): ${T('4\\sqrt5-2\\sqrt2')}. The same answer!`]]
-  },
-  e5c: {
-    L: [[`\\dfrac{4+\\sqrt{6}}{\\sqrt{2}}\\cdot${ONE('\\sqrt2')}`, `Multiply by ${T('\\frac{\\sqrt2}{\\sqrt2}')}: <b>both</b> terms of the top get a ${T('\\sqrt2')}.`],
-      ['=\\dfrac{(4+\\sqrt{6})\\sqrt{2}}{2}=\\dfrac{4\\sqrt{2}+\\sqrt{12}}{2}', `${T('4\\cdot\\sqrt2=4\\sqrt2')}, ${T('\\sqrt6\\cdot\\sqrt2=\\sqrt{12}')}, and ${T('\\sqrt2\\cdot\\sqrt2=2')}.`],
-      ['=\\dfrac{4\\sqrt{2}+2\\sqrt{3}}{2}', `Simplest form: ${T('\\sqrt{12}=2\\sqrt3')}.`],
-      ['=2\\sqrt{2}+\\sqrt{3}', `2 divides <b>every</b> term (4, 2 and the 2 below): ${T('2\\sqrt2+\\sqrt3')}.`]],
-    chk: [{ q: 'Does 2 divide every term?', t: [['4\\sqrt2', true], ['2\\sqrt3', true], ['2', true]], ok: true }]
-  },
-  e5d: {
-    L: [[`\\dfrac{3\\sqrt{5}-10}{2\\sqrt{5}}\\cdot${ONE('\\sqrt5')}`, `Multiply by ${T('\\frac{\\sqrt5}{\\sqrt5}')}: both terms of the top get a ${T('\\sqrt5')}.`],
-      ['=\\dfrac{(3\\sqrt{5}-10)\\sqrt{5}}{2(5)}', `${T('3\\sqrt5\\cdot\\sqrt5=3(5)')}, ${T('10\\cdot\\sqrt5=10\\sqrt5')}, ${T('2\\sqrt5\\cdot\\sqrt5=2(5)')}.`],
-      ['=\\dfrac{15-10\\sqrt{5}}{10}', `So ${T('\\frac{15-10\\sqrt5}{10}')}. Can it be reduced?`],
-      ['=\\dfrac{3-2\\sqrt{5}}{2}', `10 does not divide 15, but <b>5 divides every term</b>: ${T('\\frac{3-2\\sqrt5}{2}')}.`]],
-    chk: [{ q: 'Does 10 divide every term?', t: [['15', false]], ok: false }, { q: 'Does 5?', t: [['15', true], ['10\\sqrt5', true], ['10', true]], ok: true }]
-  },
-  trap: {
-    L: [['\\dfrac{15-10\\sqrt{5}}{10}', 'Reduce this. Watch out for a trap.'],
-      [`\\dfrac{15-\\cancel{10}\\sqrt{5}}{\\cancel{10}}=15-\\sqrt{5}\\ \\ ${cx('\\times')}`, `Cancelling the 10s divides only <b>one</b> term: the 15 was never divided. ${T('15-\\sqrt5')} is wrong.`],
-      ['=\\dfrac{15}{10}-\\dfrac{10\\sqrt{5}}{10}=\\dfrac{3}{2}-\\sqrt{5}', `Divide <b>every</b> term by 10: ${T('\\frac32-\\sqrt5')}. Correct, as two fractions.`],
-      ['=\\dfrac{3-2\\sqrt{5}}{2}', `Or divide every term by their common factor 5: ${T('\\frac{3-2\\sqrt5}{2}')}. The same number, one fraction.`]],
-    bad: 1
-  }
-};
-const twoTermNum = {
-  title: 'Two-term numerators: every term counts',
-  height: 450,
-  capH: 84,
-  choices: [{ sep: 'Example 5 check:' }, { v: 'e5ab', label: '(a) and (b)' }, { v: 'e5c', label: '(c)' }, { v: 'e5d', label: '(d)' }, { v: 'trap', label: 'A reducing trap' }],
-  ask: (k) => ({ e5ab: `Example 5(a) and (b): simplify ${T('\\dfrac{8\\sqrt{15}-4\\sqrt6}{2\\sqrt3}')} two ways.`, e5c: `Example 5(c): rationalize ${T('\\dfrac{4+\\sqrt6}{\\sqrt2}')}.`, e5d: `Example 5(d): rationalize ${T('\\dfrac{3\\sqrt5-10}{2\\sqrt5}')}.`, trap: '' }[k]),
-  make(stage, k, ex) {
-    const W = ex.W, d = TT[k];
-    if (k === 'e5ab') {
-      const lw = (W - 60) / 2, xs = [20, 40 + lw];
-      const heads = [['(a)', 'divide each term', 'u2l5-laneT'], ['(b)', 'rationalize first', 'u2l5-laneB']]
-        .map(([a, b, cls], i) => hide(add(stage, box(h('div', 'u2l5-lane ' + cls, `<b>${a}</b> ${b}`), lw), xs[i], 12)));
-      const mk = (i, arr) => { const L = lines(stage, xs[i] + 14, 70, lw - 28, 'u2l5-big u2l5-lanel'); return arr.map(([t]) => L.add(T(t))); };
-      const la = mk(0, d.A), lb = mk(1, d.B);
-      const st = stampAt(stage, xs[0] + lw / 2, 300, `Same answer ${T('4\\sqrt5-2\\sqrt2')}`, true);
-      const steps = [];
-      d.A.forEach(([, cap], i) => steps.push({ cap, run: async (c) => { if (i === 0) await show(c, heads[0]); await show(c, la[i]); if (i === 1) done(la[i]); } }));
-      d.B.forEach(([, cap], i) => steps.push({ cap, run: async (c) => { if (i === 0) await show(c, heads[1]); await show(c, lb[i]); if (i === 3) { done(lb[i]); await sIn(c, st); } } }));
-      return steps;
-    }
-    const L = lines(stage, 22, 18, 600, 'u2l5-big');
-    const ln = d.L.map(([t], i) => { const e = L.add(T(t), d.bad === i ? 'u2l5-badln' : ''); return e; });
-    ln[0].style.opacity = k === 'trap' ? 1 : 0;
-    const panel = d.chk ? hide(add(stage, box(h('div', 'u2l5-chk'), W - 680), 660, 40)) : null;
-    const rowsEl = [];
-    if (panel) d.chk.forEach((r) => {
-      const row = h('div', 'u2l5-chk-r', `<div class="u2l5-chk-q">${r.q}</div><div class="u2l5-chk-t">${r.t.map(([t, ok]) => `<span class="u2l5-chip ${ok ? 'u2l5-cok' : 'u2l5-cno'}">${T(t)} ${ok ? '✓' : '✗'}</span>`).join('')}</div>`);
-      panel.appendChild(row); rowsEl.push(row); hide(row);
-    });
-    const steps = d.L.map(([, cap], i) => ({
-      cap,
-      run: async (c) => {
-        if (i === 0 && k === 'trap') { await pulse(c, ln[0], 1.05); return; }
-        if (i === d.L.length - 1 && panel) { panel.style.opacity = 1; for (const r of rowsEl) await show(c, r); }
-        await show(c, ln[i]);
-        if (d.bad === i) await shake(c, ln[i]);
-        if (i === d.L.length - 1) done(ln[i]);
-      }
-    }));
     return steps;
   }
 };
@@ -652,73 +419,6 @@ const restrictions = {
 };
 
 /* ====================================================================================================
- * Explainer: problems — Example 8: square diagonal, banner, an equation.
- * ==================================================================================================== */
-const problems = {
-  title: 'Exact answers in problems',
-  height: 440,
-  capH: 84,
-  choices: [{ sep: 'Example 8 check:' }, { v: 'a', label: '(a) square' }, { v: 'b', label: '(b) banner' }, { v: 'c', label: '(c) equation' }],
-  ask: (k) => ({ a: 'Example 8(a): a square has a diagonal of 12 cm. Find the exact side length and the area.', b: `Example 8(b): a banner has area ${T('(6\\sqrt{30}+9\\sqrt{10})')} m² and height ${T('3\\sqrt5')} m. Find its length and perimeter.`, c: `Example 8(c): solve ${T('x\\sqrt6+\\sqrt8=\\sqrt{50}')}.` }[k]),
-  make(stage, k, ex) {
-    const W = ex.W, ov = overlay(stage, W, 440);
-    if (k === 'a') {
-      const S = 250, x0 = 90, y0 = 90;
-      svgEl('rect', { x: x0, y: y0, width: S, height: S, class: 'u2l5-rect' }, ov);
-      const dg = svgEl('g', {}, ov);
-      svgEl('path', { class: 'bk-stroke', d: `M${x0} ${y0 + S} L${x0 + S} ${y0}`, stroke: AM, 'stroke-width': 4, fill: 'none' }, dg);
-      lab(stage, x0 + S * 0.42, y0 + S * 0.42, T(ca('12\\text{ cm}')), 'u2l5-side u2l5-dlab', 'c');
-      const sb = lab(stage, x0 + S / 2, y0 + S, T('s'), 'u2l5-side', 's', 8), sl = lab(stage, x0, y0 + S / 2, T('s'), 'u2l5-side', 'w', 8);
-      const sb2 = hide(lab(stage, x0 + S / 2, y0 + S, T(cg('6\\sqrt2\\text{ cm}')), 'u2l5-side', 's', 8)), sl2 = hide(lab(stage, x0, y0 + S / 2, T(cg('6\\sqrt2')), 'u2l5-side', 'w', 8));
-      const ar = hide(lab(stage, x0 + S * 0.7, y0 + S * 0.74, T(cg('72\\text{ cm}^2')), 'u2l5-in'));
-      const L = lines(stage, 470, 30, W - 490, 'u2l5-big');
-      const l = [L.add(T('\\sqrt2\\,s=12')), L.add(T(`s=\\dfrac{12}{\\sqrt2}\\cdot${ONE('\\sqrt2')}`)), L.add(T('=\\dfrac{12\\sqrt2}{2}=6\\sqrt2\\text{ cm}')), L.add(T('A=(6\\sqrt2)^2=36(2)=72\\text{ cm}^2'))];
-      return [
-        { cap: `The diagonal is ${T('\\sqrt2')} times the side: ${T('\\sqrt2\\,s=12')}.`, run: async (c) => { await drawIn(dg, 600, c); await show(c, l[0]); } },
-        { cap: `Divide by ${T('\\sqrt2')}: ${T('s=\\frac{12}{\\sqrt2}')}. A radical in the denominator: multiply by ${T('\\frac{\\sqrt2}{\\sqrt2}')}.`, run: (c) => show(c, l[1]) },
-        { cap: `${T('\\frac{12\\sqrt2}{2}=6\\sqrt2')}: the side is ${T('6\\sqrt2')} cm.`, run: async (c) => { await show(c, l[2]); sb.style.opacity = 0; sl.style.opacity = 0; await show(c, sb2); await show(c, sl2); } },
-        { cap: `Area: square the side. ${T('(6\\sqrt2)^2=36\\cdot2=72')} cm², a whole number.`, run: async (c) => { await show(c, l[3]); done(l[3]); await pop(c, ar); } }
-      ];
-    }
-    if (k === 'b') {
-      const rw = 360, rh = 150, x0 = 70, y0 = 120;
-      svgEl('rect', { x: x0, y: y0, width: rw, height: rh, class: 'u2l5-rect u2l5-banner' }, ov);
-      lab(stage, x0 + rw / 2, y0 + rh / 2, `area<br>${T('(6\\sqrt{30}+9\\sqrt{10})\\text{ m}^2')}`, 'u2l5-in u2l5-inC');
-      lab(stage, x0, y0 + rh / 2, T(ct('3\\sqrt5')), 'u2l5-side', 'w', 8);
-      const lq = lab(stage, x0 + rw / 2, y0 + rh, `${T('\\ell=\\ ?')}`, 'u2l5-side', 's', 8);
-      const la = hide(lab(stage, x0 + rw / 2, y0 + rh, T(cg('\\ell=2\\sqrt6+3\\sqrt2')), 'u2l5-side', 's', 8));
-      const L = lines(stage, 470, 14, W - 486, 'u2l5-big2');
-      const l = [L.add(T(`\\ell=\\dfrac{A}{h}=\\dfrac{6\\sqrt{30}+9\\sqrt{10}}{${ct('3\\sqrt5')}}`)), L.add(T(`=\\dfrac{6\\sqrt{30}}{${ct('3\\sqrt5')}}+\\dfrac{9\\sqrt{10}}{${ct('3\\sqrt5')}}`)), L.add(T('=2\\sqrt6+3\\sqrt2\\text{ m}')),
-        L.add(T('P=2(2\\sqrt6+3\\sqrt2)+2(3\\sqrt5)')), L.add(T('=4\\sqrt6+6\\sqrt2+6\\sqrt5\\text{ m}'))];
-      return [
-        { cap: `Area = length × height, so the length is area ÷ height.`, run: (c) => show(c, l[0]) },
-        { cap: `A one-term denominator: divide <b>each</b> term by ${T('3\\sqrt5')}.`, run: (c) => show(c, l[1]) },
-        { cap: `${T('6\\div3=2')}, ${T('30\\div5=6')}; ${T('9\\div3=3')}, ${T('10\\div5=2')}. The length is ${T('2\\sqrt6+3\\sqrt2')} m.`, run: async (c) => { await show(c, l[2]); lq.style.opacity = 0; await pop(c, la); } },
-        { cap: `Perimeter: two lengths and two heights.`, run: (c) => show(c, l[3]) },
-        { cap: `${T('4\\sqrt6+6\\sqrt2+6\\sqrt5')} m. No like radicals, so it is in simplest form.`, run: async (c) => { await show(c, l[4]); done(l[4]); } }
-      ];
-    }
-    // (c) the equation, with a balance and a check
-    const L = lines(stage, 22, 14, 560, 'u2l5-big2');
-    const l = [L.add(T('x\\sqrt6+\\sqrt8=\\sqrt{50}')), L.add(T('x\\sqrt6=\\sqrt{50}-\\sqrt8=5\\sqrt2-2\\sqrt2=3\\sqrt2')), L.add(T('x=\\dfrac{3\\sqrt2}{\\sqrt6}=3\\sqrt{\\dfrac26}=\\dfrac{3}{\\sqrt3}')), L.add(T(`=\\dfrac{3}{\\sqrt3}\\cdot${ONE('\\sqrt3')}=\\dfrac{3\\sqrt3}{3}=\\sqrt3`))];
-    l[0].style.opacity = 1;
-    const bx = 620, bw = W - bx - 24, bcx = bx + bw / 2;
-    const gb = svgEl('g', {}, ov);
-    svgEl('polygon', { points: `${bcx},120 ${bcx - 26},170 ${bcx + 26},170`, fill: '#c6cad3' }, gb);
-    svgEl('line', { x1: bx + 10, x2: bx + bw - 10, y1: 118, y2: 118, stroke: INK, 'stroke-width': 5, 'stroke-linecap': 'round' }, gb);
-    lab(stage, bx + bw * 0.22, 112, T('x\\sqrt6+\\sqrt8'), 'u2l5-pan', 'n', 0);
-    lab(stage, bx + bw * 0.78, 112, T('\\sqrt{50}'), 'u2l5-pan', 'n', 0);
-    const ck = hide(add(stage, box(h('div', 'u2l5-ckbox', `<div><b>Check</b> ${T('x=\\sqrt3')}:</div><div>${T('\\sqrt3\\cdot\\sqrt6+\\sqrt8=\\sqrt{18}+\\sqrt8')}</div><div>${T('=3\\sqrt2+2\\sqrt2=5\\sqrt2=\\sqrt{50}\\ \\checkmark')}</div>`), bw), bx, 210));
-    return [
-      { cap: `Get the ${T('x')}-term alone: subtract ${T('\\sqrt8')}. Simplify both radicals: ${T('5\\sqrt2-2\\sqrt2=3\\sqrt2')} (like radicals).`, run: (c) => show(c, l[1]) },
-      { cap: `Divide by ${T('\\sqrt6')}: ${T('\\frac{3\\sqrt2}{\\sqrt6}=3\\sqrt{\\frac26}=\\frac{3}{\\sqrt3}')}.`, run: (c) => show(c, l[2]) },
-      { cap: `Rationalize: ${T('\\frac{3\\sqrt3}{3}=\\sqrt3')}. So ${T('x=\\sqrt3')}.`, run: async (c) => { await show(c, l[3]); done(l[3]); } },
-      { cap: `Check in the original equation: both sides are ${T('5\\sqrt2')}, so the scale balances.`, run: (c) => show(c, ck) }
-    ];
-  }
-};
-
-/* ====================================================================================================
  * Stand Up Break
  * ==================================================================================================== */
 const coefT = (v) => (v === 1 ? '' : v === -1 ? '-' : String(v));
@@ -751,6 +451,5 @@ standup('u2l5', {
 });
 
 /* =============================== mount =============================== */
-mountPizza();
-export const explainers = mountExplainers({ divideRule, twoRoutes, splitBar, simplestStamp, formOfOne, twoTermNum, cubeFill, restrictions, problems });
-export const _test = { sqf, radQ, DR, TR, SB, FO, TT, CF, RS };
+export const explainers = mountExplainers({ divideRule, splitBar, simplestStamp, formOfOne, cubeFill, restrictions });
+export const _test = { sqf, radQ, DR, SB, FO, CF, RS };

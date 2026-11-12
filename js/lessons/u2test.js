@@ -1,37 +1,44 @@
-/* Math 20-1 · Unit 2 Test (AN2) — Radical Expressions: evaluating roots, mixed and entire radicals, comparing radicals,
- * restrictions on variables, simplifying with variables, adding/subtracting, multiplying, dividing, and rationalizing
- * monomial and binomial (conjugate) denominators. Written from Ryan's Unit 2 booklet (m201book/unit2: Lessons 1–7, their
- * assignments and extra practice; Lesson 7's assignment and EP07 are the practice tests that set the style and
- * difficulty). There is no older test for this course. One 75-minute class, NO calculator; one outcome (AN2);
- * 20 questions / 35 parts: Beginning 7 questions / 14 parts, Progressing 6 / 12, Mastery 7 / 9.
+/* Math 20-1 · Unit 2 Test (AN2) — Radical Expressions: mixed and entire radicals, restrictions on variables, simplifying
+ * with variables, adding/subtracting, multiplying, dividing, and rationalizing monomial and binomial (conjugate)
+ * denominators. Written from Ryan's Unit 2 booklet (m201book/unit2: Lessons 1–7, their assignments and extra practice;
+ * Lesson 7's assignment and EP07 are the practice tests that set the style and difficulty). There is no older test for
+ * this course. One 75-minute class (about 75 minutes by tests/short_report.js), calculator allowed; the skill is
+ * exactness, so every answer is exact, in simplest radical form (a decimal is "right value, wrong form"). One outcome
+ * (AN2); 15 questions / 26 parts: Beginning 5 questions / 10 parts, Progressing 5 / 10, Mastery 5 / 6.
+ * (Cut from 20 questions / 35 parts, ~102 min, on 2026-11-11: the full test ran long, and calculators are now allowed.
+ * Dropped evaluating a root and "which is not real" (a calculator does both), ordering radicals (likewise), the square-root
+ * entire radical (the cube-root one with a negative coefficient is kept), the power of a radical (a calculator gives it;
+ * the square of a binomial covers the idea), the restriction of √(c − ax) (repeats the sign reversal of √(−kx) in Q2b),
+ * the perimeter as an entire radical (repeats the rectangle's perimeter, Q13b) and the arithmetic sequence with radical
+ * terms (two Mastery parts, a Unit 1 crossover). Their builders (q1a, q1b, q3a, q6b, q8, q9a, q14, q19*) stay below,
+ * unused; the builders keep the first draft's numbers: Q1 = q2a, q2b, q3b · Q2 = q4 · Q3 = q5 · Q4 = q6a · Q5 = q7 ·
+ * Q6 = q9b, q9c · Q7 = q10 · Q8 = q11 · Q9 = q12 · Q10 = q13 · Q11 = q15 · Q12 = q16 · Q13 = q17 · Q14 = q18 · Q15 = q20.)
  *
  * How each box is pitched:
- *   Beginning  — each lesson's core skill as first taught: evaluate a cube / fourth / fifth root (a negative or a fraction)
- *                and pick the root that is not real (L1 Ex 1, #1, MC: recognition); √n and ∛n to simplest mixed form
- *                (L1 Ex 4, #5); mixed → entire, a square root and a cube root with a negative coefficient (L1 Ex 7, #9);
- *                the restriction of √(ax + b), of an odd root (x ∈ ℝ) or of √(−kx) (L2 Ex 1, #1); like radicals, and like
- *                radicals with a different index in the mix (L3 Ex 1, #1); (a√p)(b√q) and (c√m)² / (c∛m)³ (L4 Ex 1–2, #1–2);
- *                a quotient of radicals and a/(m√b) (L5 Ex 1, Ex 4, #1, #4).
- *   Progressing — the typical assignment question: order five radicals (square or cube roots, with a whole number or
- *                negatives) without a calculator (L1 Ex 8, #10–12, L7 #6); the restriction of √(c − ax) (sign reversal),
- *                a variable radical in simplest form and a mixed radical with a variable as an entire radical (L2 #1, #6,
- *                #8); simplify-then-combine with three terms, and with a variable (L3 Ex 2, #3, #7); FOIL with one or two
- *                radicals and the square of a binomial (L4 Ex 3–4, #7–8); a cube-root denominator and dividing each term of
- *                a numerator (L5 Ex 3, Ex 5, #3, #10); k/(a ± √b) and a binomial over a binomial (L6 Ex 2–3, #2, #4).
- *   Mastery    — the hardest assignment / extra-practice items: a rectangle's perimeter as an entire radical (L7 #16); where
- *                √(x − a) + √(b − x) (or with one radical in a denominator) is defined (EP02 C1, L2 Ex 2d); solve
- *                x√a ∓ √b = √c (L5 #16, EP05 B5, L3 #11); a rectangle from its area and a binomial width: the length
- *                (conjugate) and the perimeter (L6 Ex 5b, #11, EP07 C3); a sum of two conjugate fractions that is rational
- *                (L6 #19, EP07 C4a); an arithmetic sequence with radical terms: d and a far term (L3 Ex 10b, #12b);
- *                the value of x² + px + c at x = a ± √b (L4 C4, L7 #15a).
- * Coverage: L1 Q1, Q2, Q3, Q8, Q14 · L2 Q4, Q9, Q15 · L3 Q5, Q10, Q14, Q16, Q19 · L4 Q6, Q11, Q20 · L5 Q7, Q12, Q16 ·
- *           L6 Q13, Q17, Q18 · L7 (review) numbers and styles throughout (Q8, Q14, Q17, Q20).
- * Short version (def.short): Q2, Q4, Q6, Q7 (Beginning, 8 parts), Q8, Q10, Q11, Q13 (Progressing, 7), Q16, Q17
- * (Mastery, 3) — about half the working time; every box keeps 3+ parts.
+ *   Beginning  — each lesson's core skill as first taught: √n and ∛n to simplest mixed form, and a cube root with a
+ *                (usually negative) coefficient as an entire radical (L1 Ex 4, Ex 7, #5, #9); the restriction of
+ *                √(ax + b), of an odd root (x ∈ ℝ) or of √(−kx) (L2 Ex 1, #1); like radicals, and like radicals with a
+ *                different index in the mix (L3 Ex 1, #1); (a√p)(b√q) (L4 Ex 1, #1); a quotient of radicals and a/(m√b)
+ *                (L5 Ex 1, Ex 4, #1, #4).
+ *   Progressing — the typical assignment question: a variable radical in simplest form and a mixed radical with a variable
+ *                as an entire radical (L2 #6, #8); simplify-then-combine with three terms, and with a variable (L3 Ex 2,
+ *                #3, #7); FOIL with one or two radicals and the square of a binomial (L4 Ex 3–4, #7–8); a cube-root
+ *                denominator and dividing each term of a numerator (L5 Ex 3, Ex 5, #3, #10); k/(a ± √b) and a binomial
+ *                over a binomial (L6 Ex 2–3, #2, #4).
+ *   Mastery    — the hardest assignment / extra-practice items: where √(x − a) + √(b − x) (or with one radical in a
+ *                denominator) is defined (EP02 C1, L2 Ex 2d); solve x√a ∓ √b = √c (L5 #16, EP05 B5, L3 #11); a
+ *                rectangle from its area and a binomial width: the length (conjugate) and the perimeter (L6 Ex 5b, #11,
+ *                EP07 C3); a sum of two conjugate fractions that is rational (L6 #19, EP07 C4a); the value of
+ *                x² + px + c at x = a ± √b (L4 C4, L7 #15a).
+ * Coverage: L1 Q1 · L2 Q2, Q6, Q11 · L3 Q3, Q7, Q12 · L4 Q4, Q8, Q15 · L5 Q5, Q9, Q12 · L6 Q10, Q13, Q14 ·
+ *           L7 (review) numbers and styles throughout (Q13, Q15).
+ * Short version (def.short): Q1a, Q2, Q4, Q5 (Beginning, 6 parts), Q7, Q10 (Progressing, 4), Q12, Q13 (Mastery, 3) —
+ * 8 questions / 13 parts, about half the working time (~36 of ~75 min by tests/short_report.js); every box is kept and
+ * every lesson 1–6 has a part.
  * Not used: numerical-response boxes ("the value of a + b is") — the online version asks for the expression itself; the
  * approximation items (√3 ≈ 1.732, L1 Ex 6) and "explain" items — their checkable step is asked instead (the corrected
  * answer, the conjugate product).
- * Answers are typed (one MC, Q1b). Radical answers: exact value AND simplest form (the Unit 2 kit below: simplest radicals,
+ * Answers are typed. Radical answers: exact value AND simplest form (the Unit 2 kit below: simplest radicals,
  * no radical in a denominator, no fraction under a radical, like terms combined, reduced, positive denominator); any
  * equivalent simplest form is accepted. Variable radicals: K.varRadical (checked by evaluation at positive values + form).
  * Restrictions: K.set (inequality, set notation, interval, x ∈ ℝ, "all real numbers" or "no restriction"). Every part has
@@ -132,7 +139,7 @@
       out.push({ s: sign, a: a }); return out;
     }
     var H = {
-      decimal: 'That’s a decimal. Give the <b>exact</b> answer with radicals — no calculator in this unit.',
+      decimal: 'That’s a decimal (a calculator’s answer is only an approximation). Give the <b>exact</b> answer with radicals, in simplest form.',
       expand: 'Right value — now multiply out the brackets and simplify, so the answer is a sum of simplified terms.',
       oneroot: 'Right value, but one term still has two radicals multiplied together. Multiply them into one radical and simplify it.',
       fracunder: 'Right value, but there is a fraction under a radical. Write it as a radical over a radical, then rationalize the denominator.',
@@ -301,7 +308,7 @@
   /* =====================================================================================================
    * BEGINNING
    * ===================================================================================================== */
-  /* Q1 (L1) — evaluate a root exactly; which number is not real */
+  /* (cut 2026-11-11, unused) Q1 (L1) — evaluate a root exactly; which number is not real */
   function q1a(r) {
     var kind = r.pick(['cneg', 'cfrac', 'four', 'five']), N, A, R, sol, dl = [];
     if (kind === 'cneg') { var k = r.int(4, 10); A = term(-k); R = cb(-k * k * k); sol = t('(-' + k + ')^{3}=-' + F(k * k * k)) + ', so ' + t(R + '=-' + k) + '.'; dl = [[k, 'u2t-ev-sign', 'The cube root of a negative number is negative.'], [-k * k * k / 3, 'u2t-ev-div', 'A cube root is not a third: find the number that, cubed, gives the radicand.']]; }
@@ -321,7 +328,7 @@
     return P.mc(r, 'Which of these is <b>not</b> a real number?', opts, t(badTex) + ': the index is even and the radicand is negative. No real number raised to an even power is negative. (The others are ' + t('-' + c3) + ', ' + t('-' + Math.round(Math.sqrt(c4))) + ' and ' + t('-' + c5) + '.)',
       ['An <b>even</b> root (square root, fourth root, …) of a negative number is not real.', 'An odd root of a negative number is negative, and a negative sign outside a root is fine.'], 'which root is not real');
   }
-  /* Q2 (L1) — simplest mixed radical */
+  /* Q2 (L1) — simplest mixed radical (now Q1a, Q1b) */
   var AVOID1 = [8, 12, 18, 20, 27, 28, 32, 45, 48, 50, 63, 72, 75, 98, 108, 120, 150, 175, 180, 200, 242, 252, 288, 300, 363, 500];
   function q2a(r) {
     var s = pickWhere(function () { return { k: r.int(3, 10), m: r.pick([2, 3, 5, 6, 7, 10, 11, 13, 14, 15]) }; }, function (s) { var N = s.k * s.k * s.m; return N >= 40 && N <= 700 && AVOID1.indexOf(N) < 0; });
@@ -345,7 +352,7 @@
     if (sqf > 1 && !RK.isPow(sqf * sqf, 3)) p.bad.push((sg < 0 ? '-' : '') + sqf + cb(N / (sqf * sqf)));
     return p;
   }
-  /* Q3 (L1) — entire radicals */
+  /* Q3 (L1) — entire radicals (q3a cut 2026-11-11, unused; q3b is now Q1c) */
   function q3a(r) {
     var s = pickWhere(function () { return { c: r.int(2, 9), m: r.pick([2, 3, 5, 6, 7, 10, 11]) }; }, function (s) { return ['6,2', '3,11', '5,3', '9,2', '7,2', '4,3', '5,6'].indexOf(s.c + ',' + s.m) < 0 && s.c * s.c * s.m <= 600; });
     var c = s.c, m = s.m, EM = c * c * m;
@@ -412,7 +419,7 @@
       'Only the cube roots are like radicals: ' + t(pa(cT(a, true) + cT(c, false)) + cb(m) + cT(b, false, sq(m)) + '=' + rtex(S)) + '. ' + t(sq(m)) + ' has a different index, so it stays a separate term.',
       ['Like radicals need the same index <b>and</b> the same radicand.', t(sq(m)) + ' and ' + t(cb(m)) + ' are not like radicals.'], 'like radicals: index matters');
   }
-  /* Q6 (L4) — multiply monomials; a power of a radical */
+  /* Q6 (L4) — multiply monomials (now Q4); a power of a radical (q6b cut 2026-11-11, unused) */
   function q6a(r) {
     var s = pickWhere(function () { return { g: r.pick([2, 3, 5, 6, 7]), u: r.pick([1, 2, 3, 5, 7]), v: r.pick([1, 2, 3, 5, 7]), a: r.pick([-6, -5, -4, -3, -2, 2, 3, 4, 5, 6]), b: r.int(2, 6) }; },
       function (s) { return s.u !== s.v && s.g * s.u <= 35 && s.g * s.v <= 35 && ex.simplest(s.u * s.v, 2) && !(s.g * s.u === 6 && s.g * s.v === 15) && !(s.g * s.u === 6 && s.g * s.v === 10); });
@@ -449,7 +456,7 @@
   /* =====================================================================================================
    * PROGRESSING
    * ===================================================================================================== */
-  /* Q8 (L1) — order radicals */
+  /* (cut 2026-11-11, unused) Q8 (L1) — order radicals */
   function q8(r) {
     var cube = r.chance(0.3), items;
     if (!cube) {
@@ -476,11 +483,11 @@
     }
     var up = r.chance(0.5); items.sort(function (a, b) { return up ? a.N - b.N : b.N - a.N; });
     var first = up ? 'least' : 'greatest', last = up ? 'greatest' : 'least', its = items.map(function (x, i) { return { id: 'i' + i, tex: x.tex }; });
-    return P.order(r, 'Without a calculator, arrange the numbers from <b>' + first + '</b> to <b>' + last + '</b>.', its, { first: first, last: last },
+    return P.order(r, 'Write each number as an entire radical to compare them, then arrange the numbers from <b>' + first + '</b> to <b>' + last + '</b>.', its, { first: first, last: last },
       'As entire radicals with the same index: ' + items.map(function (x) { return t(x.tex + (x.tex === x.ent ? '' : '=' + x.ent)); }).join(', ') + '. The larger radicand is the larger number. ' + (up ? 'Least to greatest' : 'Greatest to least') + ': ' + its.map(function (x) { return t(x.tex); }).join(', ') + '.',
       ['Write each number as an entire radical with the same index' + (cube ? ' (a negative in front goes inside a cube root).' : ', and a whole number as ' + t('n=\\sqrt{n^{2}}') + '.'), 'Compare the radicands.'], 'order radicals');
   }
-  /* Q9 (L2) — restriction with a sign flip; simplest form with variables; entire radical with a variable */
+  /* Q9 (L2) — restriction with a sign flip (q9a cut 2026-11-11, unused); simplest form with variables; entire radical with a variable (now Q6a, Q6b) */
   function q9a(r) {
     var s = pickWhere(function () { return { a: r.int(2, 6), c: r.int(3, 30) }; }, function (s) { return !(s.a === 5 && s.c === 10) && !(s.a === 3 && s.c === 9) && !(s.a === 3 && s.c === 6) && !(s.a === 4 && s.c === 20) && !(s.a === 3 && s.c === 12) && !(s.a === 5 && s.c === 15) && !(s.a === 2 && s.c === 9); });
     var a = s.a, c = s.c, bd = rat(c, a), key = 'x\\le ' + bd;
@@ -621,7 +628,7 @@
   /* =====================================================================================================
    * MASTERY
    * ===================================================================================================== */
-  /* Q14 (L1, L3) — a perimeter as an entire radical */
+  /* (cut 2026-11-11, unused) Q14 (L1, L3) — a perimeter as an entire radical */
   function q14(r) {
     var s = pickWhere(function () { var ab = r.sample([1, 2, 3, 4, 5, 6], 2); return { m: r.pick([2, 3, 5, 6, 7]), a: Math.max(ab[0], ab[1]), b: Math.min(ab[0], ab[1]), tri: r.chance(0.3) }; },
       function (s) { var tot = 2 * (s.a + s.b); return s.a > 1 && tot * tot * s.m <= 2000 && !(s.m === 3 && s.a === 4 && s.b === 3); });
@@ -699,7 +706,7 @@
       'Common denominator ' + t(pa(sq(m) + '-' + k) + pa(sq(m) + '+' + k) + '=' + m + '-' + (k * k) + '=' + D) + '. Numerator: ' + t(pa(sq(m) + '+' + k) + '^{2}+' + pa(sq(m) + '-' + k) + '^{2}=' + pa((m + k * k) + '+' + (2 * k) + sq(m)) + '+' + pa((m + k * k) + '-' + (2 * k) + sq(m)) + '=' + (2 * (m + k * k))) + '. The sum is ' + t('\\dfrac{' + (2 * (m + k * k)) + '}{' + D + '}=' + rtex(V)) + ', a rational number.',
       ['Rationalize each fraction with the conjugate of its denominator — both denominators become ' + t(D) + '.', 'Expand each numerator as a square, then add: the radical terms cancel.'], 'show a sum is rational');
   }
-  /* Q19 (L3 + Unit 1) — an arithmetic sequence with radical terms */
+  /* (cut 2026-11-11, unused) Q19 (L3 + Unit 1) — an arithmetic sequence with radical terms */
   function q19shared(r) {
     return pickWhere(function () { return { m: r.pick([2, 3, 5, 6, 7]), a: r.int(-5, 12), b: r.pick([-3, -2, -1, 1, 2, 3, 4]), da: r.pick([-3, -2, -1, 1, 2, 3, 4]), db: r.pick([-3, -2, -1, 1, 2, 3]), n: r.int(8, 25) }; },
       function (s) { return s.da !== s.db && !(s.m === 2 && s.a === 3 && s.b === 1 && s.da === 2 && s.db === 3) && !(s.m === 3 && s.a === 10 && s.b === -1 && s.da === -2 && s.db === 2); });
@@ -733,36 +740,35 @@
   }
 
   var QUESTIONS = [
-    { num: '1', outcome: 'AN2', lesson: 'L1', stem: 'Without a calculator, evaluate each root.', parts: [{ id: '1a', outcome: 'AN2', level: 'BEG', make: q1a }, { id: '1b', outcome: 'AN2', level: 'BEG', make: q1b }] },
-    { num: '2', outcome: 'AN2', lesson: 'L1', stem: 'Mixed radicals in simplest form.', parts: [{ id: '2a', outcome: 'AN2', level: 'BEG', make: q2a }, { id: '2b', outcome: 'AN2', level: 'BEG', make: q2b }] },
-    { num: '3', outcome: 'AN2', lesson: 'L1', stem: 'Entire radicals.', parts: [{ id: '3a', outcome: 'AN2', level: 'BEG', make: q3a }, { id: '3b', outcome: 'AN2', level: 'BEG', make: q3b }] },
-    { num: '4', outcome: 'AN2', lesson: 'L2', stem: 'Restrictions on the variable (the values for which the radical is a real number).', parts: [{ id: '4a', outcome: 'AN2', level: 'BEG', make: q4a }, { id: '4b', outcome: 'AN2', level: 'BEG', make: q4b }] },
-    { num: '5', outcome: 'AN2', lesson: 'L3', stem: 'Combine like radicals.', parts: [{ id: '5a', outcome: 'AN2', level: 'BEG', make: q5a }, { id: '5b', outcome: 'AN2', level: 'BEG', make: q5b }] },
-    { num: '6', outcome: 'AN2', lesson: 'L4', stem: 'Multiply and simplify.', parts: [{ id: '6a', outcome: 'AN2', level: 'BEG', make: q6a }, { id: '6b', outcome: 'AN2', level: 'BEG', make: q6b }] },
-    { num: '7', outcome: 'AN2', lesson: 'L5', stem: 'Divide; rationalize the denominator.', parts: [{ id: '7a', outcome: 'AN2', level: 'BEG', make: q7a }, { id: '7b', outcome: 'AN2', level: 'BEG', make: q7b }] },
-    { num: '8', outcome: 'AN2', lesson: 'L1', stem: 'Comparing radicals.', parts: [{ id: '8', outcome: 'AN2', level: 'PRG', make: q8 }] },
-    { num: '9', outcome: 'AN2', lesson: 'L2', stem: 'Radicals with variables.', parts: [{ id: '9a', outcome: 'AN2', level: 'PRG', make: q9a }, { id: '9b', outcome: 'AN2', level: 'PRG', make: q9b }, { id: '9c', outcome: 'AN2', level: 'PRG', make: q9c }] },
-    { num: '10', outcome: 'AN2', lesson: 'L3', stem: 'Adding and subtracting radicals.', parts: [{ id: '10a', outcome: 'AN2', level: 'PRG', make: q10a }, { id: '10b', outcome: 'AN2', level: 'PRG', make: q10b }] },
-    { num: '11', outcome: 'AN2', lesson: 'L4', stem: 'Multiplying binomials.', parts: [{ id: '11a', outcome: 'AN2', level: 'PRG', make: q11a }, { id: '11b', outcome: 'AN2', level: 'PRG', make: q11b }] },
-    { num: '12', outcome: 'AN2', lesson: 'L5', stem: 'Dividing and rationalizing.', parts: [{ id: '12a', outcome: 'AN2', level: 'PRG', make: q12a }, { id: '12b', outcome: 'AN2', level: 'PRG', make: q12b }] },
-    { num: '13', outcome: 'AN2', lesson: 'L6', stem: 'Binomial denominators.', parts: [{ id: '13a', outcome: 'AN2', level: 'PRG', make: q13a }, { id: '13b', outcome: 'AN2', level: 'PRG', make: q13b }] },
-    { num: '14', outcome: 'AN2', lesson: 'L1, L3', stem: 'A perimeter.', parts: [{ id: '14', outcome: 'AN2', level: 'MAS', make: q14 }] },
-    { num: '15', outcome: 'AN2', lesson: 'L2', stem: 'Where is it defined?', parts: [{ id: '15', outcome: 'AN2', level: 'MAS', make: q15 }] },
-    { num: '16', outcome: 'AN2', lesson: 'L3, L5', stem: 'An unknown radical expression.', parts: [{ id: '16', outcome: 'AN2', level: 'MAS', make: q16 }] },
-    { num: '17', outcome: 'AN2', lesson: 'L6', shared: q17shared,
+    /* ---------------- Beginning ---------------- */
+    { num: '1', outcome: 'AN2', lesson: 'L1', stem: 'Mixed and entire radicals.', parts: [{ id: '1a', outcome: 'AN2', level: 'BEG', make: q2a }, { id: '1b', outcome: 'AN2', level: 'BEG', make: q2b }, { id: '1c', outcome: 'AN2', level: 'BEG', make: q3b }] },
+    { num: '2', outcome: 'AN2', lesson: 'L2', stem: 'Restrictions on the variable (the values for which the radical is a real number).', parts: [{ id: '2a', outcome: 'AN2', level: 'BEG', make: q4a }, { id: '2b', outcome: 'AN2', level: 'BEG', make: q4b }] },
+    { num: '3', outcome: 'AN2', lesson: 'L3', stem: 'Combine like radicals.', parts: [{ id: '3a', outcome: 'AN2', level: 'BEG', make: q5a }, { id: '3b', outcome: 'AN2', level: 'BEG', make: q5b }] },
+    { num: '4', outcome: 'AN2', lesson: 'L4', stem: 'Multiply and simplify.', parts: [{ id: '4', outcome: 'AN2', level: 'BEG', make: q6a }] },
+    { num: '5', outcome: 'AN2', lesson: 'L5', stem: 'Divide; rationalize the denominator.', parts: [{ id: '5a', outcome: 'AN2', level: 'BEG', make: q7a }, { id: '5b', outcome: 'AN2', level: 'BEG', make: q7b }] },
+    /* ---------------- Progressing ---------------- */
+    { num: '6', outcome: 'AN2', lesson: 'L2', stem: 'Radicals with variables.', parts: [{ id: '6a', outcome: 'AN2', level: 'PRG', make: q9b }, { id: '6b', outcome: 'AN2', level: 'PRG', make: q9c }] },
+    { num: '7', outcome: 'AN2', lesson: 'L3', stem: 'Adding and subtracting radicals.', parts: [{ id: '7a', outcome: 'AN2', level: 'PRG', make: q10a }, { id: '7b', outcome: 'AN2', level: 'PRG', make: q10b }] },
+    { num: '8', outcome: 'AN2', lesson: 'L4', stem: 'Multiplying binomials.', parts: [{ id: '8a', outcome: 'AN2', level: 'PRG', make: q11a }, { id: '8b', outcome: 'AN2', level: 'PRG', make: q11b }] },
+    { num: '9', outcome: 'AN2', lesson: 'L5', stem: 'Dividing and rationalizing.', parts: [{ id: '9a', outcome: 'AN2', level: 'PRG', make: q12a }, { id: '9b', outcome: 'AN2', level: 'PRG', make: q12b }] },
+    { num: '10', outcome: 'AN2', lesson: 'L6', stem: 'Binomial denominators.', parts: [{ id: '10a', outcome: 'AN2', level: 'PRG', make: q13a }, { id: '10b', outcome: 'AN2', level: 'PRG', make: q13b }] },
+    /* ---------------- Mastery ---------------- */
+    { num: '11', outcome: 'AN2', lesson: 'L2', stem: 'Where is it defined?', parts: [{ id: '11', outcome: 'AN2', level: 'MAS', make: q15 }] },
+    { num: '12', outcome: 'AN2', lesson: 'L3, L5', stem: 'An unknown radical expression.', parts: [{ id: '12', outcome: 'AN2', level: 'MAS', make: q16 }] },
+    { num: '13', outcome: 'AN2', lesson: 'L6', shared: q17shared,
       stem: function (s) { var D = q17D(s); return 'A rectangle has an area of ' + t(s.j * D) + ' m² and a width of ' + t(pa(rtex(q17W(s), { first: s.two ? '2:' + s.p : '2:' + s.m }))) + ' m.'; },
-      parts: [{ id: '17a', outcome: 'AN2', level: 'MAS', make: q17a }, { id: '17b', outcome: 'AN2', level: 'MAS', make: q17b }] },
-    { num: '18', outcome: 'AN2', lesson: 'L6', stem: 'A rational sum.', parts: [{ id: '18', outcome: 'AN2', level: 'MAS', make: q18 }] },
-    { num: '19', outcome: 'AN2', lesson: 'L3', shared: q19shared, stem: q19stem, parts: [{ id: '19a', outcome: 'AN2', level: 'MAS', make: q19a }, { id: '19b', outcome: 'AN2', level: 'MAS', make: q19b }] },
-    { num: '20', outcome: 'AN2', lesson: 'L4, L7', stem: 'Substituting a radical.', parts: [{ id: '20', outcome: 'AN2', level: 'MAS', make: q20 }] }
+      parts: [{ id: '13a', outcome: 'AN2', level: 'MAS', make: q17a }, { id: '13b', outcome: 'AN2', level: 'MAS', make: q17b }] },
+    { num: '14', outcome: 'AN2', lesson: 'L6', stem: 'A rational sum.', parts: [{ id: '14', outcome: 'AN2', level: 'MAS', make: q18 }] },
+    { num: '15', outcome: 'AN2', lesson: 'L4, L7', stem: 'Substituting a radical.', parts: [{ id: '15', outcome: 'AN2', level: 'MAS', make: q20 }] }
   ];
 
   HW.defineTest({
     id: 'u2test', unit: 2, title: 'Unit 2 Test', outcome: 'AN2', calc: true,
-    blurb: 'The Unit 2 outcomes-based test on AN2 (radical expressions): evaluating roots, mixed and entire radicals, comparing radicals, restrictions on variables, adding, subtracting, multiplying and dividing radicals, and rationalizing monomial and binomial denominators — in Beginning, Progressing and Mastery boxes. No calculator.',
-    // Short version (~half the time): mixed radicals, restrictions, multiplying and rationalizing at Beginning; ordering, adding,
-    // multiplying binomials and conjugates at Progressing; solving for x and the rectangle from its area at Mastery.
-    short: ['2', '4', '6', '7', '8', '10', '11', '13', '16', '17'],
+    blurb: 'The Unit 2 outcomes-based test on AN2 (radical expressions): mixed and entire radicals, restrictions on variables, adding, subtracting, multiplying and dividing radicals, and rationalizing monomial and binomial denominators — in Beginning, Progressing and Mastery boxes. Calculator allowed; answers are exact (simplest radical form).',
+    // Short version (~half the time): a mixed radical, restrictions, multiplying and dividing / rationalizing at Beginning;
+    // adding and subtracting, and binomial denominators at Progressing; solving for an unknown radical expression and the
+    // rectangle from its area at Mastery.
+    short: ['1a', '2', '4', '5', '7', '10', '12', '13'],
     questions: QUESTIONS
   });
 })(window);

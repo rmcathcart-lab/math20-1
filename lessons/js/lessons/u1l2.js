@@ -1,16 +1,12 @@
 /* Math 20-1 · Unit 1 · Lesson 2 — Arithmetic Sequences.
- * Warm-up (Fence Posts and Clock Chimes: posts vs rails, chimes vs gaps — always one fewer), the Example 5 toothpick
- * figure, and the explainers:
- *   diffHops (difference hops above a row of terms: equal → arithmetic, d, next two terms; Example 1(a)–(f); one pair
- *     isn't enough), jumps (STAR: a number line of terms with the n − 1 jumps of d counted out from t_1 to t_n;
- *     3, 7, 11 … to t_6 and Example 2(b) t_30), generalTerm (substitute t_1 and d, expand, simplify, check with a table;
- *     Example 2(a)–(b), Example 5(a)–(b)), isTerm (solve for n; a natural n lands on a term, a decimal n falls between
- *     two terms; Example 2(c), 2(d), a negative n), bothWays (from a middle term: add d going right, subtract d going
- *     left; Example 3(a), 3(b)), countTerms (gap ÷ d = jumps, + 1 = terms; 2, 5, …, 20, Example 4(a), 4(b)),
- *     toothpicks (4, 7, 10, 13 built stick by stick; 3n + 1 = one stick + 3 per square; Example 5(b)–(c)),
- *     findPart (two known terms: share the gap over n − 1 jumps for d, or walk back for t_1; Example 6(a)–(c)),
- *     means (squeeze k boxes between the ends: k + 2 terms, k + 1 jumps; notes example, Example 7(a), 7(b)),
- *     unknown (three expressions: equal differences, or the middle is the mean; Example 8).
+ * The Example 5 toothpick figure and the explainers (the warm-up is plain markup in the page,
+ * tools/newformat/specs/u1l2.py):
+ *   generalTerm (substitute t_1 and d, expand, simplify, check with a table; Example 2(a)–(b), Example 5(a)–(b)),
+ *   isTerm (solve for n; a natural n lands on a term, a decimal n falls between two terms; Example 2(c), 2(d), a
+ *     negative n), countTerms (gap ÷ d = jumps, + 1 = terms; 2, 5, …, 20, Example 4(a), 4(b)),
+ *   findPart (two known terms: share the gap over n − 1 jumps for d, or walk back for t_1; Example 6(a)–(c)),
+ *   means (squeeze k boxes between the ends: k + 2 terms, k + 1 jumps; notes example, Example 7(a), 7(b)),
+ *   unknown (three expressions: equal differences, or the middle is the mean; Example 8).
  * Colours: first term t_1 teal, common difference d amber, position n blue, the target term / given term burgundy. */
 import {
   h, tex, add, box, NumberLine, ValueTable, stamp, stampIn, mountExplainers, pop, fadeIn, appear, sleep, tween,
@@ -93,80 +89,7 @@ function rowFor(stage, W, n, y, o = {}) {
 }
 
 /* ====================================================================================================
- * Warm-up: Fence Posts and Clock Chimes
- * ==================================================================================================== */
-function bell(parent, x, y, s = 1) {
-  const g = svgEl('g', { class: 'u1l2-bell', transform: `translate(${x} ${y}) scale(${s})` }, parent);
-  const inner = svgEl('g', {}, g);
-  svgEl('path', { d: 'M-13 9 Q-14 -14 0 -15 Q14 -14 13 9 Z', fill: '#e8b12f', stroke: '#8a5a00', 'stroke-width': 1.6 }, inner);
-  svgEl('rect', { x: -16, y: 8, width: 32, height: 5, rx: 2.5, fill: '#c98f12', stroke: '#8a5a00', 'stroke-width': 1.2 }, inner);
-  svgEl('circle', { cx: 0, cy: 16, r: 3.6, fill: '#8a5a00' }, inner);
-  svgEl('circle', { cx: 0, cy: -16, r: 3, fill: '#8a5a00' }, inner);
-  g.inner = inner; return g;
-}
-function mountYard() {
-  const host = document.getElementById('u1l2-yard'); if (!host) return;
-  const W = 600, H = 390, X0 = 52, X1 = 548, GY = 160, TY = 330;
-  const svg = svgEl('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H, class: 'u1l2-yardsvg' }, host);
-  const fx = (m) => X0 + (m / 12) * (X1 - X0);
-  svgEl('rect', { x: 0, y: 0, width: W, height: GY, fill: '#eef5fb' }, svg);
-  svgEl('rect', { x: 0, y: GY, width: W, height: 44, fill: '#dcebd2' }, svg);
-  svgEl('line', { x1: 10, x2: W - 10, y1: GY, y2: GY, stroke: '#5b7a45', 'stroke-width': 3 }, svg);
-  for (let m = 0; m <= 12; m++) {
-    svgEl('line', { x1: fx(m), x2: fx(m), y1: GY, y2: GY + (m % 3 ? 6 : 11), stroke: '#3d5530', 'stroke-width': 2 }, svg);
-    if (m % 3 === 0) svgEl('text', { x: fx(m), y: GY + 32, 'text-anchor': 'middle', class: 'u1l2-ytk' }, svg).textContent = m + ' m';
-  }
-  const fence = svgEl('g', {}, svg), chimes = svgEl('g', {}, svg);
-  const c1 = svgEl('text', { x: 16, y: 32, class: 'u1l2-ytxt' }, svg), c2 = svgEl('text', { x: 16, y: 236, class: 'u1l2-ytxt' }, svg);
-  svgEl('line', { x1: 0, x2: W, y1: 206, y2: 206, stroke: '#e2ddd1', 'stroke-width': 2 }, svg);
-  const st = { busy: false };
-  const reset = () => { fence.innerHTML = ''; chimes.innerHTML = ''; c1.textContent = 'Fence: press Build'; c2.textContent = 'Chimes: press Ring'; };
-  const run = (fn) => async () => { if (st.busy) return; st.busy = true; try { await fn(liveCtx()); } finally { st.busy = false; } };
-  document.getElementById('u1l2-build').addEventListener('click', run(async (c) => {
-    fence.innerHTML = '';
-    for (let i = 0; i <= 4; i++) {
-      const m = 3 * i;
-      if (i) for (const y of [GY - 58, GY - 30]) {
-        const r = svgEl('path', { d: `M${fx(m - 3) + 7} ${y} L${fx(m) - 7} ${y}`, class: 'bk-stroke', stroke: '#b07a43', 'stroke-width': 7, 'stroke-linecap': 'round' }, fence);
-        await drawIn(r, 260, c);
-      }
-      const g = svgEl('g', {}, fence);
-      svgEl('rect', { x: fx(m) - 8, y: GY - 80, width: 16, height: 80, rx: 2, fill: '#7a4a24', stroke: '#4a2c12', 'stroke-width': 1.5 }, g);
-      svgEl('path', { d: `M${fx(m) - 8} ${GY - 80} L${fx(m)} ${GY - 92} L${fx(m) + 8} ${GY - 80} Z`, fill: '#7a4a24', stroke: '#4a2c12', 'stroke-width': 1.5 }, g);
-      await pop(c, g, 300);
-      c1.textContent = `posts: ${i + 1}     rails: ${i}`;
-      await sleep(c, 220);
-    }
-    c1.textContent = 'posts: 5     rails: 4   (one fewer!)';
-  }));
-  const ring = (k) => run(async (c) => {
-    chimes.innerHTML = '';
-    const secs = k - 1, tx = (s) => X0 + (s / secs) * (X1 - X0);
-    svgEl('line', { x1: X0 - 14, x2: X1 + 14, y1: TY, y2: TY, stroke: INK, 'stroke-width': 2.5 }, chimes);
-    for (let s = 0; s <= secs; s++) {
-      svgEl('line', { x1: tx(s), x2: tx(s), y1: TY - 6, y2: TY + 6, stroke: INK, 'stroke-width': 2 }, chimes);
-      svgEl('text', { x: tx(s), y: TY + 26, 'text-anchor': 'middle', class: 'u1l2-ytk' }, chimes).textContent = s + ' s';
-    }
-    for (let i = 0; i < k; i++) {
-      if (i) {
-        const a = svgEl('path', { d: `M${tx(i - 1) + 6} ${TY - 12} Q${(tx(i - 1) + tx(i)) / 2} ${TY - 30} ${tx(i) - 6} ${TY - 12}`, class: 'bk-stroke', fill: 'none', stroke: AMB, 'stroke-width': 2.6 }, chimes);
-        await drawIn(a, k > 6 ? 150 : 240, c);
-      }
-      const b = bell(chimes, tx(i), TY - 58, k > 6 ? 0.8 : 1);
-      await pop(c, b.inner, 260);
-      c2.textContent = `chimes: ${i + 1}     gaps: ${i}     time: ${i} s`;
-      await sleep(c, k > 6 ? 90 : 200);
-    }
-    c2.textContent = `chimes: ${k}     gaps: ${k - 1}     time: ${k - 1} s`;
-  });
-  document.getElementById('u1l2-ring6').addEventListener('click', ring(6));
-  document.getElementById('u1l2-ring12').addEventListener('click', ring(12));
-  document.getElementById('u1l2-wreset').addEventListener('click', () => { if (!st.busy) reset(); });
-  reset();
-}
-
-/* ====================================================================================================
- * Toothpick squares (Example 5 figure and the toothpicks explainer)
+ * Toothpick squares (the Example 5 figure)
  * ==================================================================================================== */
 const PICK = '#d39a4f';
 function stick(parent, x1, y1, x2, y2, color = PICK, w = 7) {
@@ -190,141 +113,6 @@ function mountFigures() {
     svgEl('text', { x: x0 + (n * u) / 2, y: 104, 'text-anchor': 'middle', class: 'u1l2-figt' }, svg).textContent = `${n} square${n > 1 ? 's' : ''}`;
   });
 }
-
-/* =============================== explainer: the common difference =============================== */
-const DH = {
-  a: { lab: '(a)', terms: ['13', '21', '29', '37'], diffs: ['8', '8', '8'], d: '8', next: ['45', '53'] },
-  b: { lab: '(b)', terms: ['6', '1.5', '-3', '-7.5'], diffs: ['-4.5', '-4.5', '-4.5'], d: '-4.5', next: ['-12', '-16.5'] },
-  c: { lab: '(c)', terms: ['\\frac{1}{3}', '\\frac{5}{6}', '\\frac{4}{3}', '\\frac{11}{6}'], six: ['\\frac{2}{6}', '\\frac{5}{6}', '\\frac{8}{6}', '\\frac{11}{6}'],
-    diffs: ['\\frac{3}{6}', '\\frac{3}{6}', '\\frac{3}{6}'], d: '\\frac{1}{2}', next: ['\\frac{14}{6}', '\\frac{17}{6}'] },
-  d: { lab: '(d)', terms: ['3', '6', '12', '24'], diffs: ['3', '6', '12'], no: true },
-  e: { lab: '(e)', terms: ['4a+b', '7a-b', '10a-3b'], diffs: ['3a-2b', '3a-2b'], d: '3a-2b', next: ['13a-5b', '16a-7b'] },
-  f: { lab: '(f)', terms: ['2', '5', '9', '14'], diffs: ['3', '4', '5'], no: true },
-  pair: { lab: 'One pair isn’t enough', terms: ['1', '3', '5', '9'], diffs: ['2', '2', '4'], no: true, pair: true }
-};
-const hopT = (s) => (s.startsWith('-') ? s : '+' + (needP(s) ? `(${s})` : s));
-const diffHops = {
-  title: 'Find the common difference',
-  height: 330,
-  minW: 860,
-  choices: [{ sep: 'Example 1:' }, ...['a', 'b', 'c', 'd', 'e', 'f'].map((k) => ({ v: k, label: DH[k].lab })), { sep: 'Watch out:' }, { v: 'pair', label: DH.pair.lab }],
-  ask: (v) => (v === 'pair' ? `Is ${T('1,\\ 3,\\ 5,\\ 9,\\ \\dots')} arithmetic?` : `Example 1${DH[v].lab}: is ${T(DH[v].terms.join(',\\ ') + ',\\ \\dots')} arithmetic? If so, find ${T('d')} and the next two terms.`),
-  make(stage, v, ex) {
-    const D = DH[v], W = ex.W, k = D.terms.length, slots = D.no ? k : k + 2;
-    const svg = overlay(stage, W, 330);
-    const R = rowFor(stage, W, slots, 96, { gap: 40, max: 150, subs: Array.from({ length: slots }, (_, i) => T(cN(`t_${i + 1}`))) });
-    D.terms.forEach((t, i) => R.set(i, T(i ? t : cT(t)), i ? '' : 'u1l2-c1'));
-    for (let i = k; i < slots; i++) { R.cells[i].classList.add('u1l2-cnext'); hide(R.cells[i]); hide(R.subs[i]); }
-    const cur = D.six || D.terms;
-    const verdict = add(stage, box(h('div', 'u1l2-verdict'), W - 260), 30, 236); hide(verdict);
-    const hops = [];
-    const doHop = async (c, i, red) => {
-      const r = await hopArc(c, stage, svg, R.cx(i) + 14, R.cx(i + 1) - 14, R.top, T(hopT(D.diffs[i]).replace('\\frac', '\\dfrac')), { hgt: 30, color: red ? RED : AMB });
-      hops.push(r); return r;
-    };
-    const work = (i) => `${subT(cur[i + 1], cur[i])}=${D.diffs[i]}`;
-    const steps = [];
-    if (D.six) steps.push({ cap: `Fractions: rewrite every term with the <b>same denominator</b>, sixths. Then subtracting is easy.`,
-      run: async (c) => { for (let i = 0; i < k; i++) { R.set(i, T(i ? D.six[i] : cT(D.six[i]))); await pop(c, R.cells[i], 260); } } });
-    steps.push({ cap: `Subtract each term from the one <b>after</b> it: ${T(work(0))}.`, run: (c) => doHop(c, 0) });
-    if (D.pair) {
-      steps.push({ cap: `Next pair: ${T(work(1))}. So far, so good…`, run: (c) => doHop(c, 1) });
-      steps.push({ cap: `Last pair: ${T(work(2))}. <b>Not</b> the same as the others!`, run: (c) => doHop(c, 2, true) });
-      steps.push({ cap: `Two matching differences were <b>not enough</b>: check <b>every</b> difference. ${T('1,3,5,9')} is <b>not arithmetic</b>.`,
-        run: async (c) => { verdict.innerHTML = `Differences ${T('2,\\ 2,\\ ' + cX('4'))}: not all equal`; await show(c, verdict); await stampIn(c, stamp(stage, 'Not arithmetic', { ok: false, x: W - 160, y: 266 })); } });
-      return steps;
-    }
-    steps.push({ cap: `Do the same for <b>every</b> pair: ${D.diffs.slice(1).map((s, i) => T(work(i + 1))).join(' and ')}.`,
-      run: async (c) => { for (let i = 1; i < k - 1; i++) await doHop(c, i); } });
-    if (D.no) {
-      steps.push({ cap: `The differences ${T(D.diffs.join(',\\ '))} are <b>not all equal</b>, so the sequence is <b>not arithmetic</b>.`,
-        run: async (c) => {
-          hops.forEach((r, i) => { if (i) { r.l.style.color = RED; r.g.path.setAttribute('stroke', RED); r.g.head.setAttribute('fill', RED); } });
-          verdict.innerHTML = `Differences ${T(D.diffs.join(',\\ '))}: not equal`; await show(c, verdict);
-          await stampIn(c, stamp(stage, 'Not arithmetic', { ok: false, x: W - 160, y: 266 }));
-        } });
-      return steps;
-    }
-    steps.push({ cap: `All the differences are equal: <b>arithmetic</b>, with ${T(cD('d=' + D.d))}${D.six ? ` (${T('\\frac{3}{6}=\\frac{1}{2}')})` : ''}.`,
-      run: async (c) => {
-        verdict.innerHTML = `${T(`${cD('d')}=t_2-t_1=${D.diffs[0]}${D.six ? '=' + D.d : ''}`)}`; await show(c, verdict);
-        await stampIn(c, stamp(stage, 'Arithmetic', { ok: true, x: W - 150, y: 266 }));
-      } });
-    const dP = needP(D.diffs[0]) ? `(${D.diffs[0]})` : D.diffs[0];
-    steps.push({ cap: `Next two terms: keep adding ${T(cD('d'))}. ${T(`${cur[k - 1]}+${dP}=${D.next[0]}${D.six ? '=\\frac{7}{3}' : ''}`)}, then ${T(`${D.next[0]}+${dP}=${D.next[1]}`)}.`,
-      run: async (c) => {
-        for (let j = 0; j < 2; j++) {
-          const i = k + j; await hopArc(c, stage, svg, R.cx(i - 1) + 14, R.cx(i) - 14, R.top, T(hopT(D.diffs[0]).replace('\\frac', '\\dfrac')), { hgt: 30 });
-          R.set(i, T(D.next[j])); await show(c, R.cells[i], 260); await show(c, R.subs[i], 200);
-        }
-      } });
-    return steps;
-  }
-};
-
-/* =============================== explainer (STAR): why n − 1 jumps =============================== */
-const JP = {
-  small: { lab: T('3,7,11,\\dots') + ' to ' + T('t_6'), t1: 3, d: 4, n: 6, min: -1, max: 26, step: 1 },
-  ex2: { lab: 'Example 2(b): ' + T('t_{30}'), t1: 41, d: -7, n: 30, min: -172, max: 50, step: 10 }
-};
-const jumps = {
-  title: 'From t₁ to tₙ: count the jumps',
-  height: 430,
-  minW: 880,
-  choices: Object.keys(JP).map((k) => ({ v: k, label: JP[k].lab })),
-  ask: (v) => (v === 'small' ? `How many jumps of ${T(cD('d=4'))} take ${T(cT('t_1=3'))} to ${T('t_6')} in ${T('3,\\ 7,\\ 11,\\ \\dots')}?` : `Example 2(b): find ${T('t_{30}')} for ${T('41,\\ 34,\\ 27,\\ 20,\\ \\dots')} by counting the jumps.`),
-  make(stage, v, ex) {
-    const D = JP[v], W = ex.W, big = D.n > 8, n = D.n;
-    const vals = Array.from({ length: n }, (_, i) => D.t1 + i * D.d), last = vals[n - 1];
-    const NL = new NumberLine(stage, { x: 10, y: 0, width: W - 20, height: 204, min: D.min, max: D.max, step: D.step, numbers: false, axisY: 126 });
-    const dots = [], tlabs = [];
-    const labelled = (i) => !big || i < 3 || i === n - 1;
-    vals.forEach((t, i) => {
-      if (!labelled(i)) { tlabs.push(null); return; }
-      const d = h('div', 'u1l2-tlab' + (big ? ' u1l2-tlab-sm' : ''), `<div class="u1l2-tv">${T(i === 0 ? cT(N(t)) : i === n - 1 ? cB(N(t)) : N(t))}</div>${big && i > 0 && i < n - 1 ? '' : `<div>${T(cN(`t_{${i + 1}}`))}</div>`}`);
-      NL.html.appendChild(d); place(d, NL.toPx(t), NL.ay + 12, 's', 0); hide(d); tlabs.push(d);
-    });
-    const PY = 214, LW = Math.round(W * 0.5) - 20;
-    const left = panel(stage, 14, PY, LW, 206, 'u1l2-plist', `<div class="u1l2-ph">Jumps from ${T('t_1')}</div>`);
-    const rows = [];
-    const rowTex = (i) => `t_{${i + 1}}=${cT(N(D.t1))}+${cN(i)}${cD(Q(D.d))}${i === n - 1 ? '=' + cB(N(last)) : ''}`;
-    const shown = big ? [0, 1, 2, -1, n - 1] : vals.map((_, i) => i);
-    shown.forEach((i) => { const d = h('div', 'u1l2-ln' + (i < 0 ? ' u1l2-vd' : ''), i < 0 ? '⋮' : T(rowTex(i))); hide(d); left.appendChild(d); rows[i < 0 ? 'dots' : i] = d; });
-    const right = panel(stage, LW + 28, PY, W - LW - 42, 206, 'u1l2-pr');
-    right.innerHTML = `<div class="u1l2-count"><div><span class="u1l2-ck">terms</span><b class="u1l2-cv">0</b></div><div class="u1l2-cj"><span class="u1l2-ck">jumps</span><b class="u1l2-cv">0</b></div></div>
-      <div class="u1l2-legend1">1 jump = ${T(cD('d=' + N(D.d)))}</div><div class="u1l2-fbox"></div>`;
-    const [cTerms, cJumps] = right.querySelectorAll('.u1l2-cv'), fbox = right.querySelector('.u1l2-fbox'), jcell = right.querySelector('.u1l2-cj');
-    hide(right.querySelector('.u1l2-legend1')); hide(fbox);
-    const setCount = (t, j) => { cTerms.textContent = t; cJumps.textContent = j; };
-    const hops = [];
-    const dot = async (c, i) => {
-      const p = NL.point(vals[i], { color: i === 0 ? TEAL : i === n - 1 ? BRD : INK, r: big ? 6 : 8 }); dots[i] = p;
-      await pop(c, p, 220); if (tlabs[i]) await show(c, tlabs[i], 200);
-      if (rows[i]) await show(c, rows[i], 200);
-      setCount(i + 1, i);
-    };
-    const jump = async (c, i, ms) => { // the jump from term i-1 to term i
-      const r = await NL.hop(c, vals[i - 1], vals[i], { label: labelled(i) || i === n - 1 ? `<span class="u1l2-jn">${i}</span>` : null, height: big ? 20 : 56, ms, color: AMB });
-      hops.push(r); await dot(c, i);
-    };
-    const fT = `t_n=${cT('t_1')}+(${cN('n')}-1)${cD('d')}`;
-    const fillF = `${T(fT)}<div class="u1l2-fsub">${T(`t_{${n}}=${cT(N(D.t1))}+(${cN(n)}-1)${cD(Q(D.d))}=${N(D.t1)}${D.d * (n - 1) < 0 ? '-' : '+'}${N(Math.abs(D.d * (n - 1)))}=${cB(N(last))}`)}</div>`;
-    const steps = [
-      { cap: `Start on the first term, ${T(cT(`t_1=${N(D.t1)}`))}. Standing on ${T('t_1')} takes <b>0 jumps</b>.`, run: (c) => dot(c, 0) },
-      { cap: `One jump of ${T(cD(`d=${N(D.d)}`))}${D.d < 0 ? ' (a step <b>left</b>: d is negative)' : ''} lands on ${T(`t_2=${N(vals[1])}`)}: <b>1 jump</b> to reach position 2.`,
-        run: async (c) => { await show(c, right.querySelector('.u1l2-legend1')); await jump(c, 1); } },
-      { cap: `Two jumps reach ${T(`t_3=${N(vals[2])}`)}. The jump count is always <b>one behind</b> the position.`, run: (c) => jump(c, 2) }
-    ];
-    if (!big) steps.push({ cap: `Keep going: ${T('t_4,\\ t_5,\\ t_6')}. Reaching ${T('t_6')} takes <b>5 jumps</b>.`, run: async (c) => { for (let i = 3; i < n; i++) await jump(c, i); } });
-    else steps.push({ cap: `Keep jumping, all the way to ${T(`t_{${n}}`)}. Watch the jump counter…`,
-      run: async (c) => { if (rows.dots) await show(c, rows.dots, 150); for (let i = 3; i < n; i++) await jump(c, i, 70); } });
-    steps.push({ cap: `<b>${n} terms</b>, but only <b>${n - 1} jumps</b>: the jumps sit <b>between</b> the terms, like rails between fence posts. ${T('t_1')} needs none.`,
-      run: async (c) => { jcell.classList.add('u1l2-hot'); await pulse(c, jcell, 1.12); } });
-    steps.push({ cap: `So ${T('t_n')} is ${T(cT('t_1'))} plus ${T(cN('(n-1)'))} jumps of ${T(cD('d'))}: ${T(fT)}. Here ${T(`t_{${n}}=${N(D.t1)}+${n - 1}${Q(D.d)}=${N(last)}`)}.`,
-      run: async (c) => { fbox.innerHTML = fillF; await show(c, fbox); } });
-    return steps;
-  }
-};
 
 /* =============================== explainer: writing the general term =============================== */
 const GT = {
@@ -413,40 +201,6 @@ const isTerm = {
   }
 };
 
-/* =============================== explainer: going both ways from a middle term =============================== */
-const BW = {
-  a: { lab: 'Example 3(a)', n: 6, k: 4, v: 11, d: -3 },
-  b: { lab: 'Example 3(b)', n: 5, k: 4, v: 4, d: 2.5 }
-};
-const bothWays = {
-  title: 'Right: add d. Left: subtract d.',
-  height: 350,
-  minW: 860,
-  choices: Object.keys(BW).map((k) => ({ v: k, label: BW[k].lab })),
-  ask: (v) => (v === 'a' ? `Example 3(a): ${T('t_4=11')} and ${T('d=-3')}. Write the first six terms.` : `Example 3(b): fill in the missing terms, with ${T('d=2.5')} and ${T('t_4=4')}.`),
-  make(stage, v, ex) {
-    const D = BW[v], W = ex.W, vals = Array.from({ length: D.n }, (_, i) => D.v + (i + 1 - D.k) * D.d), kk = D.k - 1;
-    const svg = overlay(stage, W, 350);
-    const R = rowFor(stage, W, D.n, 92, { gap: 46, max: 130, subs: vals.map((_, i) => T(cN(`t_${i + 1}`))) });
-    vals.forEach((_, i) => R.set(i, '?', 'u1l2-cq'));
-    R.set(kk, T(cB(N(D.v)))); R.cells[kk].classList.remove('u1l2-cq'); R.cells[kk].classList.add('u1l2-cgiven');
-    const fill = async (c, i) => { const cl = R.cells[i]; cl.classList.remove('u1l2-cq'); R.set(i, T(i === 0 ? cT(N(vals[i])) : N(vals[i]))); await pop(c, cl, 260); };
-    const right = vals.slice(D.k), leftV = vals.slice(0, kk).reverse();
-    const box1 = add(stage, box(h('div', 'u1l2-note u1l2-short'), W - 80), 40, 292); hide(box1);
-    return [
-      { cap: `We know ${T(cB(`t_${D.k}=${N(D.v)}`))} and ${T(cD(`d=${N(D.d)}`))}.`, run: (c) => pulse(c, R.cells[kk], 1.08) },
-      { cap: `Going <b>right</b>, add ${T('d')}: ${right.map((x, j) => T(`${N(j ? right[j - 1] : D.v)}+${P(D.d)}=${N(x)}`)).join(', then ')}.`,
-        run: async (c) => { for (let i = D.k; i < D.n; i++) { await hopArc(c, stage, svg, R.cx(i - 1) + 14, R.cx(i) - 14, R.top, T(sgn(D.d)), { hgt: 30 }); await fill(c, i); } } },
-      { cap: `Going <b>left</b>, undo it: <b>subtract</b> ${T('d')}${D.d < 0 ? ` (subtracting ${T(N(D.d))} adds ${T(N(-D.d))})` : ''}: ${T(leftV.map(N).join(',\\ '))}.`,
-        run: async (c) => { for (let i = kk - 1; i >= 0; i--) { await hopArc(c, stage, svg, R.cx(i + 1) - 22, R.cx(i) + 22, R.bot + 2, T(sgn(-D.d)), { hgt: 26, below: true, color: TEAL }); await fill(c, i); } } },
-      { cap: `The sequence: ${T(vals.map(N).join(',\\ '))}. Every step to the right is ${T(sgn(D.d))} ✓`,
-        run: async (c) => { for (const cl of R.cells) await pulse(c, cl, 1.06, 220); } },
-      { cap: `Shortcut: ${T(cT('t_1'))} is ${T(String(D.k - 1))} jumps <b>back</b> from ${T(`t_${D.k}`)}: ${T(`t_1=${N(D.v)}-${D.k - 1}${Q(D.d)}=${N(vals[0])}`)}.`,
-        run: async (c) => { box1.innerHTML = `${T(`t_1=t_${D.k}-(${D.k}-1)${cD('d')}=${N(D.v)}-${D.k - 1}${cD(Q(D.d))}=${cT(N(vals[0]))}`)}`; await show(c, box1); } }
-    ];
-  }
-};
-
 /* =============================== explainer: how many terms? =============================== */
 const CT = {
   small: { lab: T('2,5,8,\\dots,20'), t1: 2, d: 3, tn: 20, min: -1, max: 23, step: 1 },
@@ -501,71 +255,11 @@ const countTerms = {
         }
         await show(c, cr[1]);
       } });
-    steps.push({ cap: `The terms are the posts: <b>one more</b> than the jumps, because ${T('t_1')} counts too. ${T(`${N(J)}+1=${N(n)}`)} ${v === 'b' ? 'multiples' : 'terms'}.`,
+    steps.push({ cap: `The terms are <b>one more</b> than the jumps, because ${T('t_1')} counts too. ${T(`${N(J)}+1=${N(n)}`)} ${v === 'b' ? 'multiples' : 'terms'}.`,
       run: async (c) => { await show(c, cr[2]); await pulse(c, cr[2], 1.08); } });
     steps.push({ cap: `Same thing with the formula: substitute into ${T('t_n=t_1+(n-1)d')} and solve: ${T(`n=${N(n)}`)}.`,
       run: async (c) => { await show(c, L[0]); await show(c, L[1]); } });
     return steps;
-  }
-};
-
-/* =============================== explainer: toothpick squares =============================== */
-const toothpicks = {
-  title: 'Toothpick squares: 4, 7, 10, 13, …',
-  height: 400,
-  minW: 860,
-  choices: [{ v: 'build', label: 'Example 5(a): build it' }, { v: 'bc', label: 'Example 5(b)–(c)' }],
-  ask: (v) => (v === 'build' ? 'Example 5(a): toothpicks for 1, 2, 3 and 4 squares, and the general term.' : 'Example 5(b) 40 squares? (c) The longest row from a box of 200 toothpicks, and how many are left over?'),
-  make(stage, v, ex) {
-    const W = ex.W, svg = overlay(stage, W, 400);
-    if (v === 'build') {
-      const u = 90, x0 = 40, y0 = 50, sq = [];
-      const tb = new ValueTable(stage, { x: W - 350, y: 16, headers: ['\\text{squares}', '\\text{toothpicks}'], rows: [[1, 4], [2, 7], [3, 10], [4, 13]], hide: 1, tap: false, cellW: 120, cellH: 48, diffs: true, diffSpace: 64 });
-      const L = lines(stage, 30, 260, W - 400, [T(`${cT('t_1=4')},\\quad ${cD('d=3')}`), T(`t_n=${cT('4')}+(n-1)${cD('(3)')}=4+3n-3=\\boxed{3n+1}`)], 'u1l2-alg');
-      const tags = [];
-      const build = async (c, i) => { const s = squareSticks(svg, x0, y0, u, i, i ? AMB : TEAL, i === 0); sq.push(s); for (const k of s) await drawIn(k, 160, c); await tb.reveal(i, 1, c); };
-      return [
-        { cap: `1 square: <b>4</b> toothpicks.`, run: (c) => build(c, 0) },
-        { cap: `2 squares: the new square <b>shares</b> a side, so it needs only <b>3</b> more: ${T('4+3=7')}.`, run: (c) => build(c, 1) },
-        { cap: `3 squares: 10. 4 squares: 13. Each new square adds 3 toothpicks, so ${T(cD('d=3'))}.`, run: async (c) => { await build(c, 2); await build(c, 3); await tb.diffs(c, { col: 1 }); } },
-        { cap: `Arithmetic with ${T(cT('t_1=4'))} and ${T(cD('d=3'))}: ${T('t_n=4+(n-1)(3)=3n+1')}.`, run: async (c) => { await show(c, L[0]); await show(c, L[1]); } },
-        { cap: `See ${T('3n+1')} in the picture: <b>1</b> starting toothpick, then <b>3</b> for every square (a ⊐ shape).`,
-          run: async (c) => {
-            recolor(sq[0][0], GRAY);
-            sq.forEach((s, i) => s.slice(i ? 0 : 1).forEach((k) => recolor(k, i % 2 ? BLU : AMB)));
-            tags.push(lab(stage, '<b>1</b>', x0, y0 + u + 26, 'c', 'u1l2-sqtag u1l2-sqtag1'));
-            for (let i = 0; i < 4; i++) tags.push(lab(stage, '<b>3</b>', x0 + i * u + u / 2 + 8, y0 + u + 26, 'c', 'u1l2-sqtag'));
-            for (const t of tags) await pop(c, t, 200);
-          } }
-      ];
-    }
-    // (b)–(c): a long row, then the box of 200
-    const u = 50, x0 = 30, y0 = 30, items = [];
-    for (let i = 0; i < 5; i++) items.push(...squareSticks(svg, x0, y0, u, i, PICK, i === 0));
-    const dx = x0 + 5 * u + 60;
-    for (let i = 0; i < 2; i++) items.push(...squareSticks(svg, dx, y0, u, i, PICK, i === 0));
-    const ell = lab(stage, T('\\cdots'), x0 + 5 * u + 30, y0 + u / 2, 'c', 'u1l2-dots');
-    const brace = lab(stage, '40 squares', (x0 + dx + 2 * u) / 2, y0 + u + 14, 's', 'u1l2-brace');
-    const row = [ell, brace, ...items]; row.forEach(hide);
-    const L = lines(stage, 30, 150, W - 330, [
-      T(`t_{40}=3(40)+1=${cB('121')}`),
-      T('3n+1=200\\ \\Rightarrow\\ 3n=199\\ \\Rightarrow\\ n=66.\\overline{3}'),
-      T(`\\text{round down:}\\ \\ n=${cN('66')}\\ \\text{squares}`),
-      T(`t_{66}=3(66)+1=199,\\qquad 200-199=${cB('1')}\\ \\text{left over}`)
-    ], 'u1l2-alg');
-    const boxEl = panel(stage, W - 280, 160, 250, 210, 'u1l2-tbox', '<div class="u1l2-ph">A box of 200</div>');
-    const bs = svgEl('svg', { viewBox: '0 0 230 150', width: 230, height: 150 }, boxEl);
-    svgEl('rect', { x: 20, y: 30, width: 190, height: 100, rx: 10, fill: '#f6e7cf', stroke: '#a8743f', 'stroke-width': 3 }, bs);
-    for (let i = 0; i < 18; i++) stick(bs, 32 + i * 9.5, 42, 32 + i * 9.5, 118, PICK, 4);
-    const spare = stick(bs, 70, 14, 170, 14, RED, 6); hide(spare);
-    const sl = h('div', 'u1l2-spare', '1 left over'); boxEl.appendChild(sl); hide(sl);
-    hide(boxEl);
-    return [
-      { cap: `(b) A row of 40 squares: ${T('t_{40}=3(40)+1=121')} toothpicks.`, run: async (c) => { for (const e of row) e.style.opacity = 1; await appear(c, svg, 300); await show(c, L[0]); } },
-      { cap: `(c) A box of 200 toothpicks: solve ${T('3n+1=200')}. ${T('n=66.\\overline{3}')} is not a natural number.`, run: async (c) => { await show(c, boxEl); await show(c, L[1]); } },
-      { cap: `You can’t build a third of a square, so round <b>down</b>: the longest row is <b>66 squares</b>.`, run: (c) => show(c, L[2]) },
-      { cap: `${T('t_{66}=3(66)+1=199')} toothpicks are used, so <b>1</b> is left over.`, run: async (c) => { await show(c, L[3]); await appear(c, spare, 300); await show(c, sl); } }
-    ];
   }
 };
 
@@ -741,9 +435,8 @@ standup('u1l2', {
 });
 
 /* =============================== mount =============================== */
-mountYard();
 mountFigures();
-export const explainers = mountExplainers({ diffHops, jumps, generalTerm, isTerm, bothWays, countTerms, toothpicks, findPart, means, unknown });
-export const _test = { lin, DH, JP, GT, IT, BW, CT, FP, MN };
+export const explainers = mountExplainers({ generalTerm, isTerm, countTerms, findPart, means, unknown });
+export const _test = { lin, GT, IT, CT, FP, MN };
 void fmt; void tween; void GRN; void cG; void RED;
 

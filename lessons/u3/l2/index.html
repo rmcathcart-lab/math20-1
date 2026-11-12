@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u3l2.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u3l2">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Which One Doesn’t Belong?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="70" y="46" font-size="40" text-anchor="middle">📍</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/><text x="150" y="46" font-size="40" text-anchor="middle">📍</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.6s" repeatCount="indefinite"/><text x="230" y="46" font-size="40" text-anchor="middle">📍</text></g><g><animateTransform attributeName="transform" type="rotate" values="-12 305 46;12 305 46;-12 305 46" dur="2.2s" repeatCount="indefinite"/><text x="305" y="46" font-size="44" text-anchor="middle">🤔</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Which One Doesn’t Belong?</h2>
+  <p class="wf-rule vw-rule">Four points. Which one doesn’t belong? Be ready to say why.</p></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><div class="vw-tiles" style="--n:2;--fs:40px"><div><b>A</b><span class="tex">(3,\ 4)</span></div><div><b>B</b><span class="tex">(-4,\ -3)</span></div><div><b>C</b><span class="tex">(0,\ -5)</span></div><div><b>D</b><span class="tex">(-4,\ 4)</span></div></div></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Four points on a grid"><g stroke="#d9d3c4" stroke-width="1.5"><line x1="60" y1="20" x2="60" y2="230"/><line x1="81" y1="20" x2="81" y2="230"/><line x1="102" y1="20" x2="102" y2="230"/><line x1="123" y1="20" x2="123" y2="230"/><line x1="144" y1="20" x2="144" y2="230"/><line x1="165" y1="20" x2="165" y2="230"/><line x1="186" y1="20" x2="186" y2="230"/><line x1="207" y1="20" x2="207" y2="230"/><line x1="228" y1="20" x2="228" y2="230"/><line x1="249" y1="20" x2="249" y2="230"/><line x1="270" y1="20" x2="270" y2="230"/><line x1="60" y1="20" x2="270" y2="20"/><line x1="60" y1="41" x2="270" y2="41"/><line x1="60" y1="62" x2="270" y2="62"/><line x1="60" y1="83" x2="270" y2="83"/><line x1="60" y1="104" x2="270" y2="104"/><line x1="60" y1="125" x2="270" y2="125"/><line x1="60" y1="146" x2="270" y2="146"/><line x1="60" y1="167" x2="270" y2="167"/><line x1="60" y1="188" x2="270" y2="188"/><line x1="60" y1="209" x2="270" y2="209"/><line x1="60" y1="230" x2="270" y2="230"/></g><g stroke="#4a4436" stroke-width="3" stroke-linecap="round"><line x1="54" y1="125" x2="276" y2="125"/><line x1="165" y1="14" x2="165" y2="236"/></g><g><animate attributeName="opacity" values="1;0.25;1" dur="2.4s" begin="0.0s" repeatCount="indefinite"/><circle cx="228" cy="41" r="8" fill="#2b55a0"/><text x="244" y="35" font-size="22" font-weight="800" fill="#2b55a0" text-anchor="middle">A</text></g><g><animate attributeName="opacity" values="1;0.25;1" dur="2.4s" begin="0.6s" repeatCount="indefinite"/><circle cx="81" cy="188" r="8" fill="#12805a"/><text x="65" y="204" font-size="22" font-weight="800" fill="#12805a" text-anchor="middle">B</text></g><g><animate attributeName="opacity" values="1;0.25;1" dur="2.4s" begin="1.2s" repeatCount="indefinite"/><circle cx="165" cy="230" r="8" fill="#e0a11b"/><text x="149" y="246" font-size="22" font-weight="800" fill="#e0a11b" text-anchor="middle">C</text></g><g><animate attributeName="opacity" values="1;0.25;1" dur="2.4s" begin="1.7999999999999998s" repeatCount="indefinite"/><circle cx="81" cy="41" r="8" fill="#c93a33"/><text x="65" y="35" font-size="22" font-weight="800" fill="#c93a33" text-anchor="middle">D</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Can you find a reason for a different one?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Every one can be the odd one out.</b> A is the only one with both coordinates positive (quadrant 1). B is the only one in quadrant 3. C is the only one on an axis. D is the only one that is <b>not 5 units</b> from the origin: A, B and C are all exactly 5 away (for A, <span class="tex">\sqrt{3^2+4^2}=5</span>), but D is <span class="tex">\sqrt{32}\approx5.7</span>.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -43,41 +54,6 @@
   <div class="outcome"><b>T2</b> Solve problems, using the three primary trigonometric ratios for angles from 0° to 360° in standard position.<br><span class="muted">Today: <span class="tex">r</span>, <span class="tex">\sin\theta</span>, <span class="tex">\cos\theta</span> and <span class="tex">\tan\theta</span> from a point on the terminal arm, and the angle <span class="tex">\theta</span> from a point.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Tower Crane" id="wu" style="--wf-side: 380px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Tower Crane</h2>
-  <p class="wf-rule">A site map, seen from above: the crane’s tower is at the origin, east is <span class="tex">+x</span>, north is <span class="tex">+y</span> (metres). The <b>trolley</b> rolls along the jib and the jib swings around the tower.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u3l2-crane" id="u3l2-crane"></div>
-    <div class="u3l2-wbtns">
-      <button type="button" class="pill" id="u3l2-cin">◂ Trolley in</button>
-      <button type="button" class="pill" id="u3l2-cout">Trolley out ▸</button>
-      <button type="button" class="pill" id="u3l2-cswing">Swing the jib</button>
-      <button type="button" class="pill" id="u3l2-cdist">Show distance</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u3l2-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>The trolley is at <b>(6, 8)</b>: 6 m east and 8 m north of the tower. How far is it from the tower? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l2-wa"><div class="bk-ans"><b>10 m.</b> East and north make a right angle: <span class="tex">\sqrt{6^2+8^2}=\sqrt{100}=10</span>.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>The jib swings until the trolley is at <b>(−8, 6)</b>. Is it closer to the tower now? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l2-wa"><div class="bk-ans"><b>No, still 10 m.</b> <span class="tex">\sqrt{(-8)^2+6^2}=10</span>. West is negative, but a distance never is: squaring takes the sign away.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Back at <b>(6, 8)</b>, the trolley rolls out along the jib until it is <b>25 m</b> from the tower. How far <b>east</b> of the tower is it now? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> 21 m</div>
-        <div class="opt right"><b>B</b> 15 m</div>
-        <div class="opt"><b>C</b> 20 m</div>
-        <div class="opt"><b>D</b> 25 m</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>B, 15 m.</b> On this jib, east is always <span class="tex">\tfrac{6}{10}=\tfrac{3}{5}</span> of the distance out: <span class="tex">\tfrac{3}{5}\times25=15</span> (and north is <span class="tex">\tfrac{4}{5}\times25=20</span>: that’s C).<br>
-        <span class="muted"><b>A</b> adds the 15 m it rolled to the 6 m east. But the trolley rolls along the slanted jib, not east. The <b>fraction</b> stays the same along the whole jib: today that fraction is <span class="tex">\cos\theta</span>.</span></div>
-    </div>
-  </div></div>
-  <p class="u3l2-social">Challenge your neighbour: where is the trolley when it is <b>35 m</b> out along the same jib?</p>
-</section>
-
 <!-- ================= 1. The distance r ================= -->
 <section class="card" data-ink="s1" data-section="1. The Distance r from the Origin">
   <div class="sec-h"><span class="badge">1</span><h2>The Distance <span class="tex">r</span> from the Origin</h2></div>
@@ -89,7 +65,6 @@
     </div>
     <div class="u3l2-fig" id="u3l2-fig1"></div>
   </div>
-  <div class="explainer" data-explainer="rFind"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -143,7 +118,6 @@
 <section class="card" data-ink="s3" data-section="3. Quadrantal Angles">
   <div class="sec-h"><span class="badge">3</span><h2>Quadrantal Angles</h2></div>
   <div class="def">For a <b>quadrantal angle</b>, the terminal arm lies on an axis, so one coordinate of <span class="tex">P</span> is 0. Using the point with <span class="tex">r=1</span> on each axis makes the values easy to read. When <span class="tex">x=0</span>, <span class="tex">\tan\theta=\dfrac{y}{0}</span> is <b>undefined</b> (we cannot divide by zero).</div>
-  <div class="explainer" data-explainer="quadrantal"></div>
 </section>
 
 <section class="card example" data-ink="ex4" data-section="Example 4">
@@ -171,6 +145,15 @@
   <h3 class="sub">Why is <span class="tex">\tan 90^\circ</span> undefined? Sweep the arm all the way round</h3>
   <p class="u3l2-p">Keep <span class="tex">r=1</span> and turn the terminal arm. Watch <span class="tex">\tan\theta=\dfrac{y}{x}</span> as <span class="tex">x</span> gets close to 0.</p>
   <div class="explainer" data-explainer="sweep"></div>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–7">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 2 · Questions 1–7</h2>
+  <p class="pr-t">The distance <span class="tex">r</span>, then exact ratios from a point, including points on an axis.</p>
+  <div class="pr-chips n4"><span><b>1</b>The distance <span class="tex">r</span></span><span><b>2–4</b>Exact ratios from a point</span><span><b>5–6</b>Quadrantal angles</span><span><b>7</b>Signs without calculating</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u3l2">Open the Practice site</a></div>
 </section>
 
 <!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
@@ -208,7 +191,6 @@
 <section class="card" data-ink="s4b" data-section="4. The Reference Angle Decides the Size">
   <h3 class="sub">The reference angle gives the size, the quadrant gives the sign</h3>
   <div class="def amber">The value of <span class="tex">\sin\theta</span>, <span class="tex">\cos\theta</span> or <span class="tex">\tan\theta</span> is the value of the same ratio of <span class="tex">\textcolor{#c27a0e}{\theta_R}</span>, with a sign decided by the quadrant: positive or negative as <span class="tex">y</span> (for sine), <span class="tex">x</span> (for cosine) or <span class="tex">\dfrac{y}{x}</span> (for tangent) is in that quadrant.</div>
-  <div class="explainer" data-explainer="refSign"></div>
 </section>
 
 <section class="card example" data-ink="ex6" data-section="Example 6">
@@ -293,7 +275,7 @@
     <div><b>Finding θ.</b> Sketch, <span class="tex">\theta_R=\tan^{-1}\!\left(\tfrac{|y|}{|x|}\right)</span> in Degree mode, then Q1 <span class="tex">\theta_R</span>, Q2 <span class="tex">180^\circ-\theta_R</span>, Q3 <span class="tex">180^\circ+\theta_R</span>, Q4 <span class="tex">360^\circ-\theta_R</span>.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u3l2">
-    <div><div class="kicker">Your turn</div><b>Assignment 2 — Trigonometric Ratios from a Point on the Terminal Arm</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 2 · Questions 8–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l3/">
     <div><div class="kicker">Next lesson</div><b>Lesson 3 — The CAST Rule: Signs and Solving for Angles</b><div class="muted">Which ratios are positive in each quadrant, and how to find every angle from 0° to 360° with a given ratio.</div></div><span class="arrow">→</span>

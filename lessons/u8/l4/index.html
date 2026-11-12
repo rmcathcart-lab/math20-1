@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Linear Inequalities in Two Variables · Math 20-1 8.4</title>
+<meta name="description" content="Math 20-1 Unit 8 Lesson 4: linear inequalities in two variables. A review of one-variable inequalities (reversing the sign, test values, number lines, set notation), solution points, graphing with a solid or dashed boundary line and a test point, the above/below shortcut, horizontal and vertical boundaries, writing an inequality from its graph, and problems with restrictions, whole-number solutions and two conditions at once. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u8l4.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u8l4">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Nugget Order">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><line x1="0" y1="54" x2="340" y2="54" stroke="#d9d3c4" stroke-width="3" stroke-dasharray="16 12"><animate attributeName="stroke-dashoffset" values="0;-28" dur=".7s" repeatCount="indefinite"/></line><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="34" text-anchor="middle" transform="scale(-1 1)">🚗</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="300" y="34" font-size="30" text-anchor="middle">🍟</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Nugget Order</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">At Cluck Shack, chicken nuggets only come in boxes of 4 and boxes of 7. You can order exactly 11 nuggets (4&nbsp;+&nbsp;7) or exactly 12 (4&nbsp;+&nbsp;4&nbsp;+&nbsp;4), but not exactly 5.</p><p class="vw-ask">What is the largest number of nuggets you can NOT order exactly?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Two boxes of chicken nuggets on a counter, a box of 4 and a box of 7, under an order screen showing question marks"><rect x="78" y="12" width="174" height="62" rx="10" fill="#1c2230"/><text x="165" y="35" font-size="15" font-weight="800" fill="#9fd3ff" text-anchor="middle" letter-spacing="1.5">YOUR ORDER</text><text x="138" y="63" font-size="24" font-weight="800" fill="#ffcf4a" text-anchor="middle">?<animate attributeName="opacity" values="1;0.25;1" dur="1.3s" begin="0s" repeatCount="indefinite"/></text><text x="156" y="63" font-size="24" font-weight="800" fill="#ffcf4a" text-anchor="middle">?<animate attributeName="opacity" values="1;0.25;1" dur="1.3s" begin="0.4s" repeatCount="indefinite"/></text><text x="205" y="62" font-size="16" font-weight="700" fill="#e9edf3" text-anchor="middle">nuggets</text><rect x="10" y="212" width="310" height="14" rx="4" fill="#c9b79a" stroke="#4a4436" stroke-width="2.5"/><rect x="22" y="226" width="286" height="18" fill="#e6dcc8" stroke="#4a4436" stroke-width="2.5"/><g transform="translate(70 142) rotate(-12)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><path d="M-15 -2 C-16 -11 -4 -13 3 -10 C12 -12 17 -4 14 3 C13 11 2 12 -5 10 C-13 10 -15 5 -15 -2 Z" fill="#e9a43c" stroke="#a8641a" stroke-width="2.2"/><circle cx="-5" cy="-3" r="1.6" fill="#c98025"/><circle cx="5" cy="2" r="1.4" fill="#c98025"/><circle cx="2" cy="-6" r="1.2" fill="#c98025"/></g></g><g transform="translate(98 138) rotate(14)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.5s" repeatCount="indefinite"/><path d="M-15 -2 C-16 -11 -4 -13 3 -10 C12 -12 17 -4 14 3 C13 11 2 12 -5 10 C-13 10 -15 5 -15 -2 Z" fill="#e9a43c" stroke="#a8641a" stroke-width="2.2"/><circle cx="-5" cy="-3" r="1.6" fill="#c98025"/><circle cx="5" cy="2" r="1.4" fill="#c98025"/><circle cx="2" cy="-6" r="1.2" fill="#c98025"/></g></g><g transform="translate(84 128) rotate(4)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.9s" repeatCount="indefinite"/><path d="M-15 -2 C-16 -11 -4 -13 3 -10 C12 -12 17 -4 14 3 C13 11 2 12 -5 10 C-13 10 -15 5 -15 -2 Z" fill="#e9a43c" stroke="#a8641a" stroke-width="2.2"/><circle cx="-5" cy="-3" r="1.6" fill="#c98025"/><circle cx="5" cy="2" r="1.4" fill="#c98025"/><circle cx="2" cy="-6" r="1.2" fill="#c98025"/></g></g><g transform="translate(196 122) rotate(-10)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.2s" repeatCount="indefinite"/><path d="M-15 -2 C-16 -11 -4 -13 3 -10 C12 -12 17 -4 14 3 C13 11 2 12 -5 10 C-13 10 -15 5 -15 -2 Z" fill="#e9a43c" stroke="#a8641a" stroke-width="2.2"/><circle cx="-5" cy="-3" r="1.6" fill="#c98025"/><circle cx="5" cy="2" r="1.4" fill="#c98025"/><circle cx="2" cy="-6" r="1.2" fill="#c98025"/></g></g><g transform="translate(226 116) rotate(8)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.7s" repeatCount="indefinite"/><path d="M-15 -2 C-16 -11 -4 -13 3 -10 C12 -12 17 -4 14 3 C13 11 2 12 -5 10 C-13 10 -15 5 -15 -2 Z" fill="#e9a43c" stroke="#a8641a" stroke-width="2.2"/><circle cx="-5" cy="-3" r="1.6" fill="#c98025"/><circle cx="5" cy="2" r="1.4" fill="#c98025"/><circle cx="2" cy="-6" r="1.2" fill="#c98025"/></g></g><g transform="translate(254 124) rotate(18)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="1.1s" repeatCount="indefinite"/><path d="M-15 -2 C-16 -11 -4 -13 3 -10 C12 -12 17 -4 14 3 C13 11 2 12 -5 10 C-13 10 -15 5 -15 -2 Z" fill="#e9a43c" stroke="#a8641a" stroke-width="2.2"/><circle cx="-5" cy="-3" r="1.6" fill="#c98025"/><circle cx="5" cy="2" r="1.4" fill="#c98025"/><circle cx="2" cy="-6" r="1.2" fill="#c98025"/></g></g><g transform="translate(212 104) rotate(-4)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.4s" repeatCount="indefinite"/><path d="M-15 -2 C-16 -11 -4 -13 3 -10 C12 -12 17 -4 14 3 C13 11 2 12 -5 10 C-13 10 -15 5 -15 -2 Z" fill="#e9a43c" stroke="#a8641a" stroke-width="2.2"/><circle cx="-5" cy="-3" r="1.6" fill="#c98025"/><circle cx="5" cy="2" r="1.4" fill="#c98025"/><circle cx="2" cy="-6" r="1.2" fill="#c98025"/></g></g><g transform="translate(240 102) rotate(12)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.9s" repeatCount="indefinite"/><path d="M-15 -2 C-16 -11 -4 -13 3 -10 C12 -12 17 -4 14 3 C13 11 2 12 -5 10 C-13 10 -15 5 -15 -2 Z" fill="#e9a43c" stroke="#a8641a" stroke-width="2.2"/><circle cx="-5" cy="-3" r="1.6" fill="#c98025"/><circle cx="5" cy="2" r="1.4" fill="#c98025"/><circle cx="2" cy="-6" r="1.2" fill="#c98025"/></g></g><path d="M46 142 L124 142 L114 212 L56 212 Z" fill="#d8402f" stroke="#4a4436" stroke-width="3" stroke-linejoin="round"/><path d="M46 142 L124 142" stroke="#fff" stroke-width="2" opacity=".6"/><circle cx="85.0" cy="180.5" r="21.0" fill="#fff6dc" stroke="#4a4436" stroke-width="2.5"/><text x="85.0" y="188.2" font-size="24" font-weight="800" fill="#4a4436" text-anchor="middle">4</text><path d="M176 120 L284 120 L274 212 L186 212 Z" fill="#2b6cc4" stroke="#4a4436" stroke-width="3" stroke-linejoin="round"/><path d="M176 120 L284 120" stroke="#fff" stroke-width="2" opacity=".6"/><circle cx="230.0" cy="170.6" r="27.599999999999998" fill="#fff6dc" stroke="#4a4436" stroke-width="2.5"/><text x="230.0" y="180.72" font-size="31" font-weight="800" fill="#4a4436" text-anchor="middle">7</text><g transform="translate(150 200) rotate(0)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.3s" repeatCount="indefinite"/><path d="M-12.0 -1.6 C-12.8 -8.8 -3.2 -10.4 2.4000000000000004 -8.0 C9.600000000000001 -9.600000000000001 13.600000000000001 -3.2 11.200000000000001 2.4000000000000004 C10.4 8.8 1.6 9.600000000000001 -4.0 8.0 C-10.4 8.0 -12.0 4.0 -12.0 -1.6 Z" fill="#e9a43c" stroke="#a8641a" stroke-width="2.2"/><circle cx="-4.0" cy="-2.4000000000000004" r="1.2800000000000002" fill="#c98025"/><circle cx="4.0" cy="1.6" r="1.1199999999999999" fill="#c98025"/><circle cx="1.6" cy="-4.800000000000001" r="0.96" fill="#c98025"/></g></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Make a guess first. Then test some numbers.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>17!</b> You can’t make 17 with 4s and 7s: take away no 7s, one 7 or two 7s and you are left with 17, 10 or 3, and none of those is a multiple of 4. But 18&nbsp;=&nbsp;4&nbsp;+&nbsp;7&nbsp;+&nbsp;7, 19&nbsp;=&nbsp;4&nbsp;+&nbsp;4&nbsp;+&nbsp;4&nbsp;+&nbsp;7, 20&nbsp;=&nbsp;five 4s and 21&nbsp;=&nbsp;three 7s. Once four numbers in a row work, add one more box of 4 to each, and every bigger number works too: there are only finitely many impossible orders (1, 2, 3, 5, 6, 9, 10, 13 and 17).<br>For two box sizes with no common factor, the largest impossible order is always (size × size) − size − size: 4&nbsp;×&nbsp;7&nbsp;−&nbsp;4&nbsp;−&nbsp;7&nbsp;=&nbsp;17.</div></div>
+</section>
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 8 Systems and Inequalities · Lesson 4</div>
+  <h1>Linear Inequalities in Two Variables</h1>
+  <p class="lede">Graphing the solution region of an inequality such as <span class="tex">2x-y\lt 4</span> with a boundary line and a test point, writing an inequality from its graph, and using inequalities in context.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>solve a linear inequality in one variable, <b>reversing the sign</b> when I multiply or divide by a negative, and check it with a <b>test value</b></li>
+      <li>decide whether an ordered pair is a <b>solution</b> of an inequality in two variables</li>
+      <li>graph a linear inequality: a <b>solid</b> or <b>dashed</b> boundary line, a <b>test point</b>, and the shaded <b>half-plane</b></li>
+      <li>write the inequality whose solution region is shown on a graph</li>
+      <li>write and graph inequalities for a situation, with <b>restrictions</b>, and find the region where two conditions <b>overlap</b></li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF7</b> Solve problems that involve linear and quadratic inequalities in two variables.<br><span class="muted">Today: a review of one-variable inequalities, solution points, graphing with a boundary line and a test point, writing an inequality from its graph, and problems.</span></div>
+</section>
+
+<!-- ================= 1. Review ================= -->
+<section class="card" data-ink="s1" data-section="1. Review: Inequalities in One Variable">
+  <div class="sec-h"><span class="badge">1</span><h2>Review: Linear Inequalities in One Variable</h2></div>
+  <p>An <b>inequality</b> uses one of the symbols <span class="tex">\lt,\ \le,\ \gt,\ \ge</span>. Solve a linear inequality like an equation, with one extra rule.</p>
+  <div class="def amber u8l4-key"><b>Multiplying or dividing both sides by a negative number reverses the inequality sign:</b> &nbsp;<span class="tex">-2x\ge12\ \Rightarrow\ x\le-6</span>.</div>
+  <p>Check with a <b>test value</b>: a number in the solution should make the original inequality true, and one outside it false. On a number line, an <b>open circle</b> means the endpoint is not included (<span class="tex">\lt,\ \gt</span>) and a <b>closed dot</b> means it is (<span class="tex">\le,\ \ge</span>). In set notation, <span class="tex">x\le-6</span> is written <span class="tex">\{x\mid x\le-6,\ x\in\mathbb{R}\}</span>. Unless told otherwise, variables are real numbers.</p>
+  <div class="explainer" data-explainer="onevar"></div>
+</section>
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Solve, test, graph, set notation</h3></div>
+  <p class="q">Solve, check with a test value, graph the solution on the number line and write it in set notation.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">3-2(x+4)\ge7</span></div><div class="work" style="--h:230px"></div><div class="u8l4-nlw" data-nl="e1a"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3-2x-8\ge7</span><br><span class="tex">-2x-5\ge7</span><br><span class="tex">-2x\ge12</span><br><span class="tex">x\le-6</span> (dividing by <span class="tex">-2</span> reverses the sign)<br>Test <span class="tex">x=-7</span>: <span class="tex">3-2(-3)=9\ge7</span> ✓; &nbsp;test <span class="tex">x=0</span>: <span class="tex">-5\ge7</span> is false ✓<br><span class="tex">\{x\mid x\le-6,\ x\in\mathbb{R}\}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x-1}{3}\lt\dfrac{2x+5}{4}</span></div><div class="work" style="--h:230px"></div><div class="u8l4-nlw" data-nl="e1b"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Multiply both sides by <span class="tex">12</span>:<br><span class="tex">4(x-1)\lt3(2x+5)</span><br><span class="tex">4x-4\lt6x+15</span><br><span class="tex">-2x\lt19\ \Rightarrow\ x\gt-\tfrac{19}{2}</span> &nbsp;(<span class="tex">x\gt-9.5</span>)<br>Test <span class="tex">x=0</span>: <span class="tex">-\tfrac{1}{3}\lt\tfrac{5}{4}</span> ✓<br><span class="tex">\{x\mid x\gt-9.5,\ x\in\mathbb{R}\}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Solutions in two variables ================= -->
+<section class="card" data-ink="s2" data-section="2. Solutions in Two Variables">
+  <div class="sec-h"><span class="badge">2</span><h2>Solutions of an Inequality in Two Variables</h2></div>
+  <p>In a <b>linear inequality in two variables</b>, such as <span class="tex">2x-y\lt4</span>, a solution is an ordered pair <span class="tex">(x,\ y)</span> that makes the inequality true. There are infinitely many solutions; together they fill a <b>solution region</b>. The line <span class="tex">2x-y=4</span>, the <b>boundary line</b>, splits the plane into two <b>half-planes</b>, and the solution region is one of them.</p>
+  <div class="def amber u8l4-key"><div class="u8l4-keyh">Boundary</div><div class="u8l4-two">
+    <div><b><span class="tex">\le</span> or <span class="tex">\ge</span>: solid line</b><svg class="u8l4-ln" viewBox="0 0 120 14" aria-hidden="true"><line x1="4" y1="7" x2="116" y2="7" stroke="#1f5bd6" stroke-width="4" stroke-linecap="round"/></svg>points on the line are solutions</div>
+    <div><b><span class="tex">\lt</span> or <span class="tex">\gt</span>: dashed line</b><svg class="u8l4-ln" viewBox="0 0 120 14" aria-hidden="true"><line x1="4" y1="7" x2="116" y2="7" stroke="#1f5bd6" stroke-width="4" stroke-dasharray="11 9"/></svg>points on the line are not solutions</div>
+  </div></div>
+  <div class="explainer" data-explainer="dropper"></div>
+</section>
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Which points are solutions?</h3></div>
+  <div class="u8l4-ex2">
+    <div class="u8l4-col">
+      <div class="part"><div class="pl">(a) Determine whether each point is a solution of <span class="tex">2x-y\lt4</span>.</div><div class="work" style="--h:200px"></div>
+        <div class="u8l4-pts">
+          <div>(i) <span class="tex">(0,\ 0)</span> <span data-reveal>yes: <span class="tex">0\lt4</span></span></div>
+          <div>(ii) <span class="tex">(3,\ 1)</span> <span data-reveal>no: <span class="tex">5\lt4</span> false</span></div>
+          <div>(iii) <span class="tex">(1,\ -3)</span> <span data-reveal>no: <span class="tex">5\lt4</span> false</span></div>
+          <div>(iv) <span class="tex">(2,\ 0)</span> <span data-reveal>no: <span class="tex">4\lt4</span> false</span></div>
+          <div>(v) <span class="tex">(-2,\ 3)</span> <span data-reveal>yes: <span class="tex">-7\lt4</span></span></div>
+        </div></div>
+      <div class="part"><div class="pl">(b) Graph the boundary line <span class="tex">2x-y=4</span> (should it be solid or dashed?), plot the five points, and shade the side of the line that holds the solutions.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Dashed</b>: the sign is <span class="tex">\lt</span>, so points on the line, such as <span class="tex">(2,\ 0)</span>, are not solutions.<br>The solutions <span class="tex">(0,\ 0)</span> and <span class="tex">(-2,\ 3)</span> are on the upper-left side, so shade that side; <span class="tex">(3,\ 1)</span> and <span class="tex">(1,\ -3)</span> are on the other side.</div></div></div>
+    </div>
+    <div class="part u8l4-gpart"><div class="u8l4-fig" data-fig="e2"></div><div class="ansrow"><button class="reveal">Graph</button><div class="ans">Dashed line, the upper-left side shaded.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Graphing ================= -->
+<section class="card" data-ink="s3" data-section="3. Graphing a Linear Inequality">
+  <div class="sec-h"><span class="badge">3</span><h2>Graphing a Linear Inequality</h2></div>
+  <div class="def amber u8l4-key"><div class="u8l4-keyh">To graph a linear inequality</div>
+    <div class="u8l4-steps">
+      <div><b>1</b>Graph the <b>boundary line</b> by replacing the sign with <span class="tex">=</span> (use <span class="tex">y=mx+b</span>, or the two intercepts).</div>
+      <div><b>2</b>Make it <b>solid</b> for <span class="tex">\le,\ \ge</span> or <b>dashed</b> for <span class="tex">\lt,\ \gt</span>.</div>
+      <div><b>3</b>Choose a <b>test point</b> not on the line (<span class="tex">(0,\ 0)</span> is easiest unless the line passes through it) and substitute it into the inequality.</div>
+      <div><b>4</b>If it is <b>true</b>, shade the side with the test point; if <b>false</b>, shade the other side.</div>
+    </div></div>
+  <p><b>Shortcut:</b> once the inequality is solved for <span class="tex">y</span>, <span class="tex">y\gt mx+b</span> (or <span class="tex">\ge</span>) is the region <b>above</b> the line and <span class="tex">y\lt mx+b</span> (or <span class="tex">\le</span>) is <b>below</b>. Remember to reverse the sign if you divide by a negative while isolating <span class="tex">y</span>. Use a test point to confirm.</p>
+  <div class="explainer" data-explainer="graph4"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Graphing calculator (optional).</b> Solve for <span class="tex">y</span>, enter <span class="tex">mx+b</span> in <span class="keys"><kbd>Y=</kbd></span>, move the cursor to the left of <span class="tex">Y_1</span> and press <span class="keys"><kbd>ENTER</kbd></span> until the shade-above or shade-below symbol shows, then <span class="keys"><kbd>GRAPH</kbd></span>. The calculator does not show solid or dashed lines, so you must decide that yourself.</div>
+  </div>
+</section>
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Solved for <span class="tex">y</span></h3></div>
+  <p class="q">Graph each inequality.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y\lt2x-1</span></div><div class="u8l4-fig" data-fig="e3a"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Slope <span class="tex">2</span>, <span class="tex">y</span>-intercept <span class="tex">-1</span>; <b>dashed</b>.<br>Test <span class="tex">(0,\ 0)</span>: <span class="tex">0\lt-1</span> is false, so shade the side without the origin (<b>below</b>).</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y\ge-\tfrac{2}{3}x+3</span></div><div class="u8l4-fig" data-fig="e3b"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Slope <span class="tex">-\tfrac{2}{3}</span>, <span class="tex">y</span>-intercept <span class="tex">3</span>; <b>solid</b>.<br>Test <span class="tex">(0,\ 0)</span>: <span class="tex">0\ge3</span> is false, so shade <b>above</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Standard form</h3></div>
+  <p class="q">Graph each inequality. Use intercepts, or solve for <span class="tex">y</span> first.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">4x-3y\ge12</span></div><div class="u8l4-fig" data-fig="e4a"></div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Intercepts <span class="tex">(3,\ 0)</span> and <span class="tex">(0,\ -4)</span>; <b>solid</b>.<br>Test <span class="tex">(0,\ 0)</span>: <span class="tex">0\ge12</span> false, so shade the side away from the origin.<br>(Solving: <span class="tex">-3y\ge-4x+12\Rightarrow y\le\tfrac{4}{3}x-4</span>, below.)</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2x+5y\lt0</span></div><div class="u8l4-fig" data-fig="e4b"></div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">5y\lt-2x\Rightarrow y\lt-\tfrac{2}{5}x</span>; <b>dashed</b>, through the origin.<br><span class="tex">(0,\ 0)</span> is on the line, so test <span class="tex">(0,\ 1)</span>: <span class="tex">5\lt0</span> is false; shade <b>below</b>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">5x+2y-10\le0</span></div><div class="u8l4-fig" data-fig="e4c"></div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Intercepts <span class="tex">(2,\ 0)</span> and <span class="tex">(0,\ 5)</span>; <b>solid</b>.<br>Test <span class="tex">(0,\ 0)</span>: <span class="tex">-10\le0</span> is true, so shade the side with the origin (below).</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Horizontal and vertical boundaries</h3></div>
+  <p class="q"><span class="tex">x\gt a</span> is the half-plane to the right of the vertical line <span class="tex">x=a</span>, and <span class="tex">y\le b</span> is the half-plane below the horizontal line <span class="tex">y=b</span>. Graph each inequality.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">x\gt-2</span></div><div class="u8l4-fig" data-fig="e5a"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Dashed</b> vertical line <span class="tex">x=-2</span>; shade to the <b>right</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y+1\le0</span></div><div class="u8l4-fig" data-fig="e5b"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y\le-1</span>: <b>solid</b> horizontal line <span class="tex">y=-1</span>; shade <b>below</b>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">-3\le y\lt2</span></div><div class="u8l4-fig" data-fig="e5c"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Both at once: <b>solid</b> <span class="tex">y=-3</span>, <b>dashed</b> <span class="tex">y=2</span>; shade the <b>band</b> between them.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 4 · Questions 1–6</h2>
+  <p class="pr-t">Solve and check one-variable inequalities, test points, and graph inequalities with a boundary line and a test point.</p>
+  <div class="pr-chips n4"><span><b>1</b>Solve, test, set notation</span><span><b>2</b>Is the point a solution?</span><span><b>3–5</b>Graph: slope-intercept, intercepts, horizontal and vertical lines</span><span><b>6</b>Find Maya’s error</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u8l4">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. Writing from the graph ================= -->
+<section class="card" data-ink="s4" data-section="4. Writing an Inequality from Its Graph">
+  <div class="sec-h"><span class="badge">4</span><h2>Writing an Inequality from Its Graph</h2></div>
+  <div class="def amber u8l4-key"><div class="u8l4-steps u8l4-s3">
+      <div><b>1</b>Write the <b>equation of the boundary line</b> (from its slope and <span class="tex">y</span>-intercept, two points, or the intercepts).</div>
+      <div><b>2</b><b>Dashed</b> <span class="tex">\Rightarrow\ \lt</span> or <span class="tex">\gt</span>; &nbsp;<b>solid</b> <span class="tex">\Rightarrow\ \le</span> or <span class="tex">\ge</span>.</div>
+      <div><b>3</b>Substitute a point from the <b>shaded region</b> to choose the direction of the sign (or use above/below when the line is written <span class="tex">y=mx+b</span>).</div>
+  </div></div>
+  <div class="explainer" data-explainer="fromgraph"></div>
+</section>
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Read the graph</h3></div>
+  <p class="q">Write the inequality whose solution region is shown.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a)</div><div class="u8l4-fig" data-fig="e6a"></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Through <span class="tex">(0,\ -1)</span> and <span class="tex">(3,\ 1)</span>: slope <span class="tex">\tfrac{2}{3}</span>, so <span class="tex">y=\tfrac{2}{3}x-1</span>.<br>Dashed, shaded above: <span class="tex">y\gt\tfrac{2}{3}x-1</span>.</div></div></div>
+    <div class="part"><div class="pl">(b)</div><div class="u8l4-fig" data-fig="e6b"></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Intercepts <span class="tex">(4,\ 0)</span>, <span class="tex">(0,\ 3)</span>: <span class="tex">3x+4y=12</span>.<br>Solid; <span class="tex">(0,\ 0)</span> is shaded and <span class="tex">0\le12</span>, so <span class="tex">3x+4y\le12</span> &nbsp;(or <span class="tex">y\le-\tfrac{3}{4}x+3</span>).</div></div></div>
+    <div class="part"><div class="pl">(c)</div><div class="u8l4-fig" data-fig="e6c"></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Dashed vertical line <span class="tex">x=3</span>, shaded to the left: <span class="tex">x\lt3</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u8l4"></section>
+
+<!-- ================= 5. Context ================= -->
+<section class="card" data-ink="s5" data-section="5. Inequalities in Context">
+  <div class="sec-h"><span class="badge">5</span><h2>Inequalities in Context</h2></div>
+  <p>In a problem, define the variables, then write the inequality from the words:</p>
+  <div class="u8l4-words"><div><b>at least</b><span class="tex">\ge</span></div><div><b>at most, no more than</b><span class="tex">\le</span></div><div><b>more than</b><span class="tex">\gt</span></div><div><b>less than</b><span class="tex">\lt</span></div></div>
+  <p>Add the <b>restrictions</b> the situation needs: quantities that cannot be negative give <span class="tex">x\ge0</span> and <span class="tex">y\ge0</span> (the graph stays in the first quadrant), and counts of people or objects must be whole numbers, so only the points with whole-number coordinates in the region are real answers.</p>
+  <div class="explainer" data-explainer="tickets"></div>
+</section>
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>The school play</h3></div>
+  <p class="q">A school play sells adult tickets for <span class="tex">\$15</span> and student tickets for <span class="tex">\$10</span>. To cover its costs it must take in at least <span class="tex">\$1500</span>. Let <span class="tex">a</span> be the number of adult tickets and <span class="tex">s</span> the number of student tickets.</p>
+  <div class="u8l4-ctx">
+    <div class="u8l4-col">
+      <div class="part"><div class="pl">(a) Write an inequality, with restrictions, for the situation.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">15a+10s\ge1500</span>, &nbsp;<span class="tex">a\ge0</span>, &nbsp;<span class="tex">s\ge0</span>, &nbsp;<span class="tex">a</span> and <span class="tex">s</span> whole numbers.</div></div></div>
+      <div class="part"><div class="pl">(b) Graph the solution region.</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Intercepts <span class="tex">(100,\ 0)</span> and <span class="tex">(0,\ 150)</span>; solid. Test <span class="tex">(0,\ 0)</span>: <span class="tex">0\ge1500</span> false, so shade away from the origin, in the first quadrant only.</div></div></div>
+      <div class="part"><div class="pl">(c) Are <span class="tex">60</span> adult and <span class="tex">50</span> student tickets enough?</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">15(60)+10(50)=1400\lt1500</span>. <b>No.</b></div></div></div>
+      <div class="part"><div class="pl">(d) If <span class="tex">40</span> adult tickets are sold, what is the least number of student tickets needed?</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">600+10s\ge1500\Rightarrow s\ge90</span>. At least <span class="tex">90</span> student tickets.</div></div></div>
+    </div>
+    <div class="part u8l4-gpart"><div class="u8l4-fig" data-fig="e7"></div><div class="ansrow"><button class="reveal">Graph</button><div class="ans">Solid line from <span class="tex">(0,\ 150)</span> to <span class="tex">(100,\ 0)</span>, shaded away from the origin.</div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+<section class="card" data-ink="s5b" data-section="Two Conditions at Once">
+  <div class="sec-h"><span class="badge">5</span><h2>Two Conditions at Once</h2></div>
+  <p>When two conditions must hold at once, graph both inequalities; the solution region is where the shadings <b>overlap</b>.</p>
+  <div class="explainer" data-explainer="overlap"></div>
+</section>
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Tutoring and lifeguarding</h3></div>
+  <p class="q">Jordan earns <span class="tex">\$20</span> per hour tutoring (<span class="tex">x</span> hours) and <span class="tex">\$15</span> per hour lifeguarding (<span class="tex">y</span> hours). He can work at most <span class="tex">20</span> hours a week and wants to earn at least <span class="tex">\$330</span>.</p>
+  <div class="u8l4-ctx">
+    <div class="u8l4-col">
+      <div class="part"><div class="pl">(a) Write a system of inequalities, with restrictions.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+y\le20</span>, &nbsp;<span class="tex">20x+15y\ge330</span>, &nbsp;<span class="tex">x\ge0</span>, &nbsp;<span class="tex">y\ge0</span>.</div></div></div>
+      <div class="part"><div class="pl">(b) Graph the solution region.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+y=20</span>: intercepts <span class="tex">(20,\ 0)</span>, <span class="tex">(0,\ 20)</span>, solid, shade toward the origin.<br><span class="tex">20x+15y=330</span>: intercepts <span class="tex">(16.5,\ 0)</span>, <span class="tex">(0,\ 22)</span>, solid, shade away from the origin.<br>The overlap is the triangle with corners <span class="tex">(6,\ 14)</span>, <span class="tex">(16.5,\ 0)</span> and <span class="tex">(20,\ 0)</span>.</div></div></div>
+      <div class="part"><div class="pl">(c) Can he work <span class="tex">10</span> hours tutoring and <span class="tex">8</span> hours lifeguarding?</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">10+8=18\le20</span> ✓, but <span class="tex">200+120=320\lt330</span>. <b>No.</b></div></div></div>
+      <div class="part"><div class="pl">(d) What is the least number of tutoring hours he can work and still meet both conditions?</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The left corner of the region: <span class="tex">x+y=20</span> and <span class="tex">20x+15y=330</span>.<br><span class="tex">20x+15(20-x)=330\Rightarrow5x=30\Rightarrow x=6</span>, <span class="tex">y=14</span>.<br>At least <span class="tex">6</span> hours (with <span class="tex">14</span> hours lifeguarding).</div></div></div>
+    </div>
+    <div class="part u8l4-gpart"><div class="u8l4-fig" data-fig="e8"></div><div class="ansrow"><button class="reveal">Graph</button><div class="ans">The overlap: the triangle with corners <span class="tex">(6,\ 14)</span>, <span class="tex">(16.5,\ 0)</span>, <span class="tex">(20,\ 0)</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>One variable.</b> Solve like an equation, but <b>reverse the sign</b> when you multiply or divide by a negative. Check with a test value; open circle for <span class="tex">\lt,\ \gt</span>, closed dot for <span class="tex">\le,\ \ge</span>.</div>
+    <div><b>Boundary line.</b> Replace the sign with <span class="tex">=</span>. <b>Solid</b> for <span class="tex">\le,\ \ge</span> (the line is included), <b>dashed</b> for <span class="tex">\lt,\ \gt</span>.</div>
+    <div><b>Which side?</b> Substitute a test point such as <span class="tex">(0,\ 0)</span>: true → shade its side, false → the other side. Solved for <span class="tex">y</span>: <span class="tex">y\gt</span> is above, <span class="tex">y\lt</span> is below.</div>
+    <div><b>In context.</b> Add <span class="tex">x\ge0,\ y\ge0</span> and whole numbers where needed. Two conditions: the solution is where the shadings <b>overlap</b>; its corners come from solving the boundary lines as a system.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u8l4">
+    <div><div class="kicker">Your turn</div><b>Assignment 4 · Questions 7–16</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l5/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 5 — Quadratic Inequalities in Two Variables</b><div class="muted">The same boundary and test point, with a parabola as the boundary.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u8l4.js';
+  boot({ key: 'u8l4', homeHref: '../../', title: '8.4 Linear Inequalities' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

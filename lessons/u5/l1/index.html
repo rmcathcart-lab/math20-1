@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zeros, Roots and x-Intercepts · Math 20-1 5.1</title>
+<meta name="description" content="Math 20-1 Unit 5 Lesson 1: quadratic functions and their graphs (opening, vertex, axis of symmetry, maximum or minimum, intercepts); roots of equations, zeros of functions and x-intercepts of graphs; finding zeros by factoring; how many real roots from a graph; zeros with a graphing calculator; writing a quadratic function from its zeros. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u5l1.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u5l1">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Matchstick Grids">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><line x1="60" y1="28" x2="60" y2="56" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="60" y1="28" x2="60" y2="56" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="60" cy="27" r="4.5" fill="#c93a33"/><ellipse cx="60" cy="15" rx="6" ry="9" fill="#f28c28"><animate attributeName="ry" values="9;12;8;10;9" dur="0.9s" begin="0s" repeatCount="indefinite"/><animate attributeName="cy" values="15;12;16;14;15" dur="0.9s" begin="0s" repeatCount="indefinite"/></ellipse><ellipse cx="60" cy="18" rx="3" ry="5" fill="#ffd866"><animate attributeName="ry" values="5;7;4;6;5" dur="0.9s" begin="0s" repeatCount="indefinite"/></ellipse><line x1="130" y1="28" x2="130" y2="56" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="130" y1="28" x2="130" y2="56" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="130" cy="27" r="4.5" fill="#c93a33"/><ellipse cx="130" cy="15" rx="6" ry="9" fill="#f28c28"><animate attributeName="ry" values="9;12;8;10;9" dur="0.9s" begin="0.3s" repeatCount="indefinite"/><animate attributeName="cy" values="15;12;16;14;15" dur="0.9s" begin="0.3s" repeatCount="indefinite"/></ellipse><ellipse cx="130" cy="18" rx="3" ry="5" fill="#ffd866"><animate attributeName="ry" values="5;7;4;6;5" dur="0.9s" begin="0.3s" repeatCount="indefinite"/></ellipse><line x1="200" y1="28" x2="200" y2="56" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="200" y1="28" x2="200" y2="56" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="200" cy="27" r="4.5" fill="#c93a33"/><ellipse cx="200" cy="15" rx="6" ry="9" fill="#f28c28"><animate attributeName="ry" values="9;12;8;10;9" dur="0.9s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="cy" values="15;12;16;14;15" dur="0.9s" begin="0.6s" repeatCount="indefinite"/></ellipse><ellipse cx="200" cy="18" rx="3" ry="5" fill="#ffd866"><animate attributeName="ry" values="5;7;4;6;5" dur="0.9s" begin="0.6s" repeatCount="indefinite"/></ellipse><line x1="270" y1="28" x2="270" y2="56" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="270" y1="28" x2="270" y2="56" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="270" cy="27" r="4.5" fill="#c93a33"/><ellipse cx="270" cy="15" rx="6" ry="9" fill="#f28c28"><animate attributeName="ry" values="9;12;8;10;9" dur="0.9s" begin="0.15s" repeatCount="indefinite"/><animate attributeName="cy" values="15;12;16;14;15" dur="0.9s" begin="0.15s" repeatCount="indefinite"/></ellipse><ellipse cx="270" cy="18" rx="3" ry="5" fill="#ffd866"><animate attributeName="ry" values="5;7;4;6;5" dur="0.9s" begin="0.15s" repeatCount="indefinite"/></ellipse></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Matchstick Grids</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">One square takes <b>4</b> matchsticks. A 2&nbsp;×&nbsp;2 grid of squares takes <b>12</b>, and a 3&nbsp;×&nbsp;3 grid takes <b>24</b>.</p><p class="vw-ask">How many matchsticks do you need to build a 10&nbsp;×&nbsp;10 grid?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Matchsticks appearing one by one to build a 1 by 1 square (4 matches), a 2 by 2 grid (12 matches) and a 3 by 3 grid (24 matches), with 10 by 10 and a question mark"><rect x="0" y="0" width="330" height="250" rx="14" fill="#f6f1e7"/><rect x="10" y="172" width="310" height="3" rx="1.5" fill="#d9d3c4"/><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0278;0.0398;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="25.5" y1="130" x2="54.5" y2="130" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="25.5" y1="130" x2="54.5" y2="130" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="54.5" cy="130" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0400;0.0520;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="22" y1="133.5" x2="22" y2="162.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="22" y1="133.5" x2="22" y2="162.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="22" cy="133.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0522;0.0642;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="58" y1="133.5" x2="58" y2="162.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="58" y1="133.5" x2="58" y2="162.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="58" cy="133.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0644;0.0764;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="25.5" y1="166" x2="54.5" y2="166" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="25.5" y1="166" x2="54.5" y2="166" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="54.5" cy="166" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1322;0.1442;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="83.5" y1="94" x2="112.5" y2="94" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="83.5" y1="94" x2="112.5" y2="94" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="112.5" cy="94" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1444;0.1564;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="80" y1="97.5" x2="80" y2="126.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="80" y1="97.5" x2="80" y2="126.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="80" cy="97.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1567;0.1687;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="119.5" y1="94" x2="148.5" y2="94" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="119.5" y1="94" x2="148.5" y2="94" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="148.5" cy="94" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1689;0.1809;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="116" y1="97.5" x2="116" y2="126.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="116" y1="97.5" x2="116" y2="126.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="116" cy="97.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1811;0.1931;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="152" y1="97.5" x2="152" y2="126.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="152" y1="97.5" x2="152" y2="126.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="152" cy="97.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1933;0.2053;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="83.5" y1="130" x2="112.5" y2="130" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="83.5" y1="130" x2="112.5" y2="130" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="112.5" cy="130" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2056;0.2176;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="80" y1="133.5" x2="80" y2="162.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="80" y1="133.5" x2="80" y2="162.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="80" cy="133.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2178;0.2298;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="119.5" y1="130" x2="148.5" y2="130" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="119.5" y1="130" x2="148.5" y2="130" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="148.5" cy="130" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2300;0.2420;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="116" y1="133.5" x2="116" y2="162.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="116" y1="133.5" x2="116" y2="162.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="116" cy="133.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2422;0.2542;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="152" y1="133.5" x2="152" y2="162.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="152" y1="133.5" x2="152" y2="162.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="152" cy="133.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2544;0.2664;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="83.5" y1="166" x2="112.5" y2="166" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="83.5" y1="166" x2="112.5" y2="166" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="112.5" cy="166" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2667;0.2787;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="119.5" y1="166" x2="148.5" y2="166" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="119.5" y1="166" x2="148.5" y2="166" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="148.5" cy="166" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3344;0.3464;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="177.5" y1="58" x2="206.5" y2="58" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="177.5" y1="58" x2="206.5" y2="58" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="206.5" cy="58" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3467;0.3587;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="174" y1="61.5" x2="174" y2="90.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="174" y1="61.5" x2="174" y2="90.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="174" cy="61.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3589;0.3709;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="213.5" y1="58" x2="242.5" y2="58" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="213.5" y1="58" x2="242.5" y2="58" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="242.5" cy="58" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3711;0.3831;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="210" y1="61.5" x2="210" y2="90.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="210" y1="61.5" x2="210" y2="90.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="210" cy="61.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3833;0.3953;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="249.5" y1="58" x2="278.5" y2="58" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="249.5" y1="58" x2="278.5" y2="58" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="278.5" cy="58" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.3956;0.4076;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="246" y1="61.5" x2="246" y2="90.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="246" y1="61.5" x2="246" y2="90.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="246" cy="61.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4078;0.4198;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="282" y1="61.5" x2="282" y2="90.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="282" y1="61.5" x2="282" y2="90.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="282" cy="61.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4200;0.4320;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="177.5" y1="94" x2="206.5" y2="94" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="177.5" y1="94" x2="206.5" y2="94" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="206.5" cy="94" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4322;0.4442;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="174" y1="97.5" x2="174" y2="126.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="174" y1="97.5" x2="174" y2="126.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="174" cy="97.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4444;0.4564;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="213.5" y1="94" x2="242.5" y2="94" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="213.5" y1="94" x2="242.5" y2="94" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="242.5" cy="94" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4567;0.4687;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="210" y1="97.5" x2="210" y2="126.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="210" y1="97.5" x2="210" y2="126.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="210" cy="97.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4689;0.4809;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="249.5" y1="94" x2="278.5" y2="94" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="249.5" y1="94" x2="278.5" y2="94" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="278.5" cy="94" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4811;0.4931;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="246" y1="97.5" x2="246" y2="126.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="246" y1="97.5" x2="246" y2="126.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="246" cy="97.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4933;0.5053;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="282" y1="97.5" x2="282" y2="126.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="282" y1="97.5" x2="282" y2="126.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="282" cy="97.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5056;0.5176;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="177.5" y1="130" x2="206.5" y2="130" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="177.5" y1="130" x2="206.5" y2="130" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="206.5" cy="130" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5178;0.5298;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="174" y1="133.5" x2="174" y2="162.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="174" y1="133.5" x2="174" y2="162.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="174" cy="133.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5300;0.5420;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="213.5" y1="130" x2="242.5" y2="130" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="213.5" y1="130" x2="242.5" y2="130" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="242.5" cy="130" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5422;0.5542;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="210" y1="133.5" x2="210" y2="162.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="210" y1="133.5" x2="210" y2="162.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="210" cy="133.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5544;0.5664;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="249.5" y1="130" x2="278.5" y2="130" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="249.5" y1="130" x2="278.5" y2="130" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="278.5" cy="130" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5667;0.5787;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="246" y1="133.5" x2="246" y2="162.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="246" y1="133.5" x2="246" y2="162.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="246" cy="133.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5789;0.5909;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="282" y1="133.5" x2="282" y2="162.5" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="282" y1="133.5" x2="282" y2="162.5" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="282" cy="133.5" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5911;0.6031;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="177.5" y1="166" x2="206.5" y2="166" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="177.5" y1="166" x2="206.5" y2="166" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="206.5" cy="166" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.6033;0.6153;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="213.5" y1="166" x2="242.5" y2="166" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="213.5" y1="166" x2="242.5" y2="166" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="242.5" cy="166" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.6156;0.6276;0.94;1" dur="9.0s" repeatCount="indefinite"/><line x1="249.5" y1="166" x2="278.5" y2="166" stroke="#8a6a2c" stroke-width="6.5" stroke-linecap="round"/><line x1="249.5" y1="166" x2="278.5" y2="166" stroke="#e3b65f" stroke-width="4" stroke-linecap="round"/><circle cx="278.5" cy="166" r="4.3" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.0767;0.0887;0.94;1" dur="9.0s" repeatCount="indefinite"/><text x="40.0" y="200" font-size="26" font-weight="800" fill="#4a4436" text-anchor="middle">4</text><text x="40.0" y="220" font-size="15" fill="#7a7466" text-anchor="middle">1 × 1</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.2789;0.2909;0.94;1" dur="9.0s" repeatCount="indefinite"/><text x="116.0" y="200" font-size="26" font-weight="800" fill="#4a4436" text-anchor="middle">12</text><text x="116.0" y="220" font-size="15" fill="#7a7466" text-anchor="middle">2 × 2</text></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.6278;0.6398;0.94;1" dur="9.0s" repeatCount="indefinite"/><text x="228.0" y="200" font-size="26" font-weight="800" fill="#4a4436" text-anchor="middle">24</text><text x="228.0" y="220" font-size="15" fill="#7a7466" text-anchor="middle">3 × 3</text></g><text x="60" y="48" font-size="24" font-weight="800" fill="#2b55a0" text-anchor="middle">10 × 10</text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="60" y="92" font-size="44" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Make a guess first. Then look for a quick way to count.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>220 matchsticks</b>, not <span class="tex">4\times100=400</span>: squares side by side <b>share</b> their matchsticks.<br>Count the lines instead: a 10&nbsp;×&nbsp;10 grid has <b>11 rows</b> of 10 matchsticks going across (110) and <b>11 columns</b> of 10 going down (110). <span class="tex">110+110=220</span>.<br><span class="muted">The same count for an <span class="tex">n\times n</span> grid gives <span class="tex">2n(n+1)</span>: 4, 12, 24, 40, 60, … Each grid needs 4 more extra matchsticks than the jump before (+8, +12, +16, +20, …).</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 5 Quadratic Functions · Lesson 1</div>
+  <h1>Zeros, Roots and <span class="tex">x</span>-Intercepts</h1>
+  <p class="lede">Today we meet the <b>parabola</b> and name its parts. Three words, <b class="u5l1-cz">roots</b>, <b class="u5l1-cz">zeros</b> and <b class="u5l1-cz"><span class="tex">x</span>-intercepts</b>, describe the same numbers from three points of view, and factoring finds them. At the end we turn it around and write a quadratic function from its zeros.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>read the direction of opening, vertex, axis of symmetry, maximum or minimum value and the intercepts from the graph of a quadratic function</li>
+      <li>explain how the roots of <span class="tex">f(x)=0</span>, the zeros of <span class="tex">f</span> and the <span class="tex">x</span>-intercepts of its graph are the same numbers</li>
+      <li>find zeros and roots by factoring, and the <span class="tex">y</span>-intercept with <span class="tex">f(0)</span></li>
+      <li>tell from a graph or a sketch whether there are two, one or no real roots</li>
+      <li>find zeros with a graphing calculator, exactly or to the nearest hundredth</li>
+      <li>write a quadratic function from its zeros and one more point</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF4</b> Analyze quadratic functions of the form <span class="tex">y=ax^2+bx+c</span> to identify characteristics of the corresponding graph, including vertex, domain and range, direction of opening, axis of symmetry, <span class="tex">x</span>- and <span class="tex">y</span>-intercepts, and to solve problems.<br><b>RF5</b> Solve problems that involve quadratic equations.<br><span class="muted">Today: the parts of a parabola, roots vs zeros vs <span class="tex">x</span>-intercepts, zeros by factoring, the number of real roots, zeros on a graphing calculator, and factored form <span class="tex">y=a(x-r)(x-s)</span>.</span></div>
+</section>
+
+<!-- ================= 1. Quadratic functions and their graphs ================= -->
+<section class="card" data-ink="s1" data-section="1. Quadratic Functions and Their Graphs">
+  <div class="sec-h"><span class="badge">1</span><h2>Quadratic Functions and Their Graphs</h2></div>
+  <div class="def">A <b>quadratic function</b> can be written as <span class="tex">y=ax^2+bx+c</span> (or <span class="tex">f(x)=ax^2+bx+c</span>), where <span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> are real numbers and <span class="tex">a\ne0</span>. This is its <b>general form</b>. Its graph is a U-shaped curve called a <b class="u5l1-cc">parabola</b>. In function notation, <span class="tex">f(x)</span> is the <span class="tex">y</span>-value for a given <span class="tex">x</span>: <span class="tex">f(3)</span> is the value of <span class="tex">y</span> when <span class="tex">x=3</span>.</div>
+  <ul class="u5l1-list">
+    <li>The <b class="u5l1-ca">axis of symmetry</b> is the vertical line that splits the parabola into two mirror-image halves. Its equation is <span class="tex">x=</span> a number. Because of the symmetry, it is halfway between the two <span class="tex">x</span>-intercepts.</li>
+    <li>The <b class="u5l1-cv">vertex</b> is the point where the axis of symmetry meets the parabola: the turning point.</li>
+    <li>If <span class="tex">a&gt;0</span> the parabola <b>opens up</b>; the vertex is its lowest point and its <span class="tex">y</span>-coordinate is the <b>minimum value</b> of the function. If <span class="tex">a&lt;0</span> it <b>opens down</b>; the vertex is its highest point and its <span class="tex">y</span>-coordinate is the <b>maximum value</b>.</li>
+    <li>The <b class="u5l1-cy"><span class="tex">y</span>-intercept</b> is where the graph crosses the <span class="tex">y</span>-axis (<span class="tex">x=0</span>). For <span class="tex">y=ax^2+bx+c</span> it is <span class="tex">c</span>. The <b class="u5l1-cz"><span class="tex">x</span>-intercepts</b> are where the graph meets the <span class="tex">x</span>-axis (<span class="tex">y=0</span>).</li>
+  </ul>
+  <div class="explainer" data-explainer="parts"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Reading a parabola</h3></div>
+  <p class="q">The graphs of two quadratic functions are shown. Complete the table.</p>
+  <div class="u5l1-g2">
+    <div><div class="u5l1-gt">(a) <span class="tex">y=x^2-4x-5</span></div><div data-bk-graph='{"width":360,"height":330,"xmin":-3,"xmax":7,"ymin":-10,"ymax":6,"ylabels":2,"fontSize":14,"items":[{"fn":["x^2-4*x-5",{"color":"blue","from":-2.1,"to":6.1}]}]}'></div></div>
+    <div><div class="u5l1-gt">(b) <span class="tex">y=-x^2-2x+3</span></div><div data-bk-graph='{"width":360,"height":330,"xmin":-5,"xmax":3,"ymin":-6,"ymax":6,"ylabels":2,"fontSize":14,"items":[{"fn":["-x^2-2*x+3",{"color":"blue","from":-4.1,"to":2.1}]}]}'></div></div>
+  </div>
+  <div class="part u5l1-tpart">
+    <table class="u5l1-tab">
+      <tr><th></th><th>(a) <span class="tex">y=x^2-4x-5</span></th><th>(b) <span class="tex">y=-x^2-2x+3</span></th></tr>
+      <tr><td>Opens up or down</td><td><span data-reveal>up (<span class="tex">a=1&gt;0</span>)</span></td><td><span data-reveal>down (<span class="tex">a=-1&lt;0</span>)</span></td></tr>
+      <tr><td>Vertex</td><td><span data-reveal><span class="tex">(2,\ -9)</span></span></td><td><span data-reveal><span class="tex">(-1,\ 4)</span></span></td></tr>
+      <tr><td>Axis of symmetry</td><td><span data-reveal><span class="tex">x=2</span></span></td><td><span data-reveal><span class="tex">x=-1</span></span></td></tr>
+      <tr><td>Maximum or minimum value</td><td><span data-reveal>minimum value <span class="tex">-9</span></span></td><td><span data-reveal>maximum value <span class="tex">4</span></span></td></tr>
+      <tr><td><span class="tex">x</span>-intercepts</td><td><span data-reveal><span class="tex">-1</span> and <span class="tex">5</span></span></td><td><span data-reveal><span class="tex">-3</span> and <span class="tex">1</span></span></td></tr>
+      <tr><td><span class="tex">y</span>-intercept</td><td><span data-reveal><span class="tex">-5</span></span></td><td><span data-reveal><span class="tex">3</span></span></td></tr>
+    </table>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Check the axis: (a) <span class="tex">\frac{-1+5}{2}=2</span>; &nbsp;(b) <span class="tex">\frac{-3+1}{2}=-1</span>. Check the <span class="tex">y</span>-intercepts: <span class="tex">c=-5</span> and <span class="tex">c=3</span>.</div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Roots, zeros and x-intercepts ================= -->
+<section class="card" data-ink="s2" data-section="2. Roots, Zeros and x-Intercepts">
+  <div class="sec-h"><span class="badge">2</span><h2>Roots, Zeros and <span class="tex">x</span>-Intercepts</h2></div>
+  <p class="u5l1-p">Three words describe the same numbers from three points of view.</p>
+  <div class="u5l1-3v">
+    <div><b>Root</b><span class="u5l1-3k">of an <i>equation</i></span>A <b>root</b> (or solution) of an equation is a value of <span class="tex">x</span> that makes the equation true.</div>
+    <div><b>Zero</b><span class="u5l1-3k">of a <i>function</i></span>A <b>zero</b> of a function <span class="tex">f</span> is a value of <span class="tex">x</span> that makes <span class="tex">f(x)=0</span>.</div>
+    <div><b><span class="tex">x</span>-intercept</b><span class="u5l1-3k">of a <i>graph</i></span>An <b><span class="tex">x</span>-intercept</b> of a graph is where the graph meets the <span class="tex">x</span>-axis. The point is <span class="tex">(r,\ 0)</span>; the number <span class="tex">r</span> is also called the <span class="tex">x</span>-intercept.</div>
+  </div>
+  <div class="def amber u5l1-key"><div class="u5l1-keyh">Key idea</div>For a function <span class="tex">y=f(x)</span>: &nbsp;the <b>zeros</b> of <span class="tex">f</span> <span class="tex">=</span> the <b><span class="tex">x</span>-intercepts</b> of the graph of <span class="tex">y=f(x)</span> <span class="tex">=</span> the <b>roots</b> of the equation <span class="tex">f(x)=0</span>.<br>Each factor <span class="tex">(x-r)</span> of <span class="tex">f(x)</span> gives the zero <span class="tex">r</span>: &nbsp;<span class="tex">f(x)=(x-3)(x+5)</span> has zeros <span class="tex">3</span> and <span class="tex">-5</span>.</div>
+  <div class="explainer" data-explainer="views"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>One number, three names</h3></div>
+  <div class="u5l1-ex2">
+    <div class="u5l1-col">
+      <div class="part"><div class="pl">(a) For the linear function <span class="tex">f(x)=3x-12</span>, determine the root of <span class="tex">3x-12=0</span>, the zero of <span class="tex">f</span> and the <span class="tex">x</span>-intercept of its graph.</div><div class="work" style="--h:96px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3x-12=0\Rightarrow x=4</span>. &nbsp;Root: <span class="tex">4</span>. &nbsp;Zero: <span class="tex">4</span> (since <span class="tex">f(4)=0</span>). &nbsp;<span class="tex">x</span>-intercept: <span class="tex">4</span>, the point <span class="tex">(4,\ 0)</span>. All the same number.</div></div></div>
+      <div class="part"><div class="pl">(b) The graph of <span class="tex">f(x)=x^2+2x-8</span> is shown. Factor <span class="tex">x^2+2x-8</span>, then fill in the blanks.</div><div class="work" style="--h:70px"></div>
+        <div class="u5l1-blanks">
+          <div>The function <span class="tex">f</span> has zeros <span data-reveal><span class="tex">-4</span>, <span class="tex">2</span></span>.</div>
+          <div>The equation <span class="tex">x^2+2x-8=0</span> has roots <span data-reveal><span class="tex">-4</span>, <span class="tex">2</span></span>.</div>
+          <div>The graph has <span class="tex">x</span>-intercepts <span data-reveal><span class="tex">-4</span>, <span class="tex">2</span></span> and <span class="tex">y</span>-intercept <span data-reveal><span class="tex">-8</span></span>.</div>
+        </div>
+        <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+2x-8=(x+4)(x-2)</span></div></div></div>
+      <div class="part"><div class="pl">(c) How do the factors of <span class="tex">x^2+2x-8</span> show the zeros?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The factor <span class="tex">(x+4)</span> is <span class="tex">0</span> when <span class="tex">x=-4</span> and <span class="tex">(x-2)</span> is <span class="tex">0</span> when <span class="tex">x=2</span>: each factor gives one zero, by the zero product property.</div></div></div>
+    </div>
+    <div class="u5l1-gcol"><div data-bk-graph='{"width":330,"height":420,"xmin":-6,"xmax":4,"ymin":-10,"ymax":6,"ylabels":2,"fontSize":14,"items":[{"fn":["x^2+2*x-8",{"color":"blue","from":-5.3,"to":3.3}]}]}'></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- sources: https://mathshistory.st-andrews.ac.uk/DSB/Al-Khwarizmi.pdf (Dictionary of Scientific Biography: shay' "thing" for the unknown,
+     jidhr "root" for the first power, mal "wealth, property" for the second power, dirham for the unit; the Algebra composed under al-Ma'mun);
+     https://mathshistory.st-andrews.ac.uk/Biographies/Al-Khwarizmi/ (House of Wisdom in Baghdad; equations of units, roots and squares, done
+     entirely in words; the six standard forms, "squares equal to roots" first);
+     https://en.wikipedia.org/wiki/Al-Jabr (written in Baghdad around 820; translated into Latin by Robert of Chester in 1145;
+     the example x² = 40x − 4x² becoming 5x² = 40x);
+     https://mathshistory.st-andrews.ac.uk/Miller/mathword/r/ (al-Khwarizmi's "root" rendered radix by Robert of Chester, also by Gerard of
+     Cremona and Leonardo of Pisa; Chambers's Cyclopaedia, 1728: "The Root of an Equation, is the Value of the unknown Quantity in the Equation") -->
+<!-- ================= Math History box (brown) ================= -->
+<section class="card history" data-ink="hist" data-section="Math History: Why “Root”?">
+  <div class="hist-head"><span class="hist-tag">Math History</span><span class="hist-dates">Baghdad · about 820 CE</span></div>
+  <div class="hist-grid">
+    <div class="hist-text">
+      <h3 class="hist-title">Why is a solution called a “root”?</h3>
+      <p>Around 820 CE in Baghdad, <b>al-Khwarizmi</b> wrote the book that gave us the word <i>algebra</i>. He called the unknown number <i>jidhr</i>, Arabic for the <b>root</b> of a plant (its square was <i>māl</i>, “wealth”).</p>
+      <p>In 1145 Robert of Chester put the book into Latin as <i>radix</i>, “root” (as in <i>radical</i> and <i>radish</i>). An English encyclopedia of 1728: “The Root of an Equation, is the Value of the unknown Quantity in the Equation.”</p>
+      <div class="part hist-q"><div class="pl">His example “a square equals forty roots minus four squares” becomes <span class="tex">5x^2=40x</span>. Find its roots.</div>
+        <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">5x^2-40x=0</span>, <span class="tex">5x(x-8)=0</span>: <span class="tex">x=0</span> or <span class="tex">x=8</span>. (Dividing by <span class="tex">x</span> would lose the root <span class="tex">0</span>.)</div></div></div>
+    </div>
+    <figure class="hist-anim">
+      <svg id="u5l1-hist" viewBox="0 0 600 300" role="img" aria-label="A plant grows from the ground: its roots spread under the soil, and the words jidhr in Arabic, radix in Latin and root in English appear one after another along a timeline from 820 to 1145 to 1728"></svg>
+      <figcaption><button class="hist-play" type="button">Replay</button><span>Tap the picture to play it again.</span></figcaption>
+      <p class="hist-note">Al-Khwarizmi's equations were “squares”, “roots” and “numbers”: <span class="tex">x^2</span>, <span class="tex">x</span> and constants.</p>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= 3. Finding zeros and roots by factoring ================= -->
+<section class="card" data-ink="s3" data-section="3. Finding Zeros and Roots by Factoring">
+  <div class="sec-h"><span class="badge">3</span><h2>Finding Zeros and Roots by Factoring</h2></div>
+  <div class="def amber u5l1-key"><div class="u5l1-keyh">To find the zeros of <span class="tex">f</span> algebraically</div>
+    <div class="u5l1-steps">
+      <div><b>1</b>Set <span class="tex">f(x)=0</span> and move every term to one side.</div>
+      <div><b>2</b>Factor fully (a common factor first).</div>
+      <div><b>3</b>Set each factor that contains <span class="tex">x</span> equal to <span class="tex">0</span>.</div>
+      <div><b>4</b>Solve each one.</div>
+    </div>
+    <b>To find the <span class="tex">y</span>-intercept:</b> substitute <span class="tex">x=0</span>, i.e. calculate <span class="tex">f(0)</span>.</div>
+  <p class="u5l1-p">The same method works for a product of more than two factors, such as <span class="tex">x(x-1)(x+6)</span>: each factor with an <span class="tex">x</span> gives a zero. (Except for a linear equation, never factor before the other side is <span class="tex">0</span>.)</p>
+  <div class="explainer" data-explainer="factor"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Roots by factoring</h3></div>
+  <p class="q">Find the roots of each equation.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">x^2-5x=14</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-5x-14=0</span><br><span class="tex">(x-7)(x+2)=0</span><br><span class="tex">x=7</span> or <span class="tex">x=-2</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">3(2x+1)(x-4)=0</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3\ne0</span>, so <span class="tex">2x+1=0</span> or <span class="tex">x-4=0</span><br><span class="tex">x=-\frac{1}{2}</span> or <span class="tex">x=4</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">5x^2-45=0</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">5(x^2-9)=0</span><br><span class="tex">5(x-3)(x+3)=0</span><br><span class="tex">x=\pm3</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">6x^2+x=2</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">6x^2+x-2=0</span>; &nbsp;<span class="tex">ac=-12</span>: <span class="tex">4</span> and <span class="tex">-3</span><br><span class="tex">6x^2+4x-3x-2=2x(3x+2)-1(3x+2)</span><br><span class="tex">(3x+2)(2x-1)=0</span>, &nbsp;<span class="tex">x=-\frac{2}{3}</span> or <span class="tex">x=\frac{1}{2}</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Zeros and the <span class="tex">y</span>-intercept</h3></div>
+  <p class="q">For each function, determine the zeros and the <span class="tex">y</span>-intercept of its graph.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">f(x)=2x^2-6x-20</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2(x^2-3x-10)=0</span><br><span class="tex">2(x-5)(x+2)=0</span><br>Zeros: <span class="tex">5</span> and <span class="tex">-2</span><br><span class="tex">y</span>-intercept: <span class="tex">f(0)=-20</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">g(x)=4x^2-12x+9</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(2x-3)^2=0</span><br>Zero: <span class="tex">\frac{3}{2}</span> only (a double root; the graph touches the <span class="tex">x</span>-axis there)<br><span class="tex">y</span>-intercept: <span class="tex">g(0)=9</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">h(x)=x^3-x^2-12x</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x(x^2-x-12)=0</span><br><span class="tex">x(x-4)(x+3)=0</span><br>Zeros: <span class="tex">0</span>, <span class="tex">4</span> and <span class="tex">-3</span><br><span class="tex">y</span>-intercept: <span class="tex">h(0)=0</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–4">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 1 · Questions 1–4</h2>
+  <p class="pr-t">Read the parts of a parabola from its graph; then set the function equal to <span class="tex">0</span>, factor fully, and set each factor equal to <span class="tex">0</span>.</p>
+  <div class="pr-chips"><span><b>1</b>The vertex, axis, maximum and intercepts from a graph</span><span><b>2</b>The roots of equations by factoring</span><span><b>3</b>The zeros of functions</span><span><b>4</b>The zeros and the <span class="tex">y</span>-intercept</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u5l1">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. How many real roots? ================= -->
+<section class="card" data-ink="s4" data-section="4. How Many Real Roots?">
+  <div class="sec-h"><span class="badge">4</span><h2>How Many Real Roots?</h2></div>
+  <p class="u5l1-p">A parabola can cross the <span class="tex">x</span>-axis twice, touch it once at its vertex, or miss it completely.</p>
+  <div class="def amber u5l1-key"><div class="u5l1-keyh">Key idea</div>
+    <div class="u5l1-n3">
+      <div class="u5l1-k2"><div data-bk-graph='{"width":200,"height":130,"xmin":-1,"xmax":5,"ymin":-2,"ymax":4,"grid":false,"numbers":false,"xtitle":"","ytitle":"","fnArrows":false,"items":[{"fn":["x^2-4*x+3",{"color":"blue","from":-0.4,"to":4.4}]},{"point":[1,0,{"color":"amber"}]},{"point":[3,0,{"color":"amber"}]}]}'></div><b>Two <span class="tex">x</span>-intercepts</b><span>two distinct real roots (two zeros)</span></div>
+      <div class="u5l1-k1"><div data-bk-graph='{"width":200,"height":130,"xmin":-1,"xmax":5,"ymin":-2,"ymax":4,"grid":false,"numbers":false,"xtitle":"","ytitle":"","fnArrows":false,"items":[{"fn":["x^2-4*x+4",{"color":"blue","from":0.1,"to":3.9}]},{"point":[2,0,{"color":"amber"}]}]}'></div><b>One <span class="tex">x</span>-intercept</b><span>(the vertex is on the <span class="tex">x</span>-axis): one real root, a <b>double root</b></span></div>
+      <div class="u5l1-k0"><div data-bk-graph='{"width":200,"height":130,"xmin":-1,"xmax":5,"ymin":-2,"ymax":4,"grid":false,"numbers":false,"xtitle":"","ytitle":"","fnArrows":false,"items":[{"fn":["x^2-4*x+5",{"color":"blue","from":0.4,"to":3.6}]}]}'></div><b>No <span class="tex">x</span>-intercepts</b><span>no real roots (no zeros)</span></div>
+    </div>
+  </div>
+  <p class="u5l1-p">You can often tell from a sketch: a parabola that opens up with its vertex <i>above</i> the <span class="tex">x</span>-axis (or opens down with its vertex <i>below</i> it) never meets the axis.</p>
+  <div class="explainer" data-explainer="slide"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Two, one or none</h3></div>
+  <p class="q">(a) The graphs of three functions are shown. For each, state the number of <span class="tex">x</span>-intercepts and the real roots of the equation <span class="tex">f(x)=0</span>.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl u5l1-pc"><span class="tex">y=x^2-4x+3</span></div><div class="u5l1-gfig" data-bk-graph='{"width":290,"height":260,"xmin":-1,"xmax":5,"ymin":-2,"ymax":7,"fontSize":14,"items":[{"fn":["x^2-4*x+3",{"color":"blue","from":-0.6,"to":4.6}]}]}'></div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Two <span class="tex">x</span>-intercepts; roots <span class="tex">x=1</span> and <span class="tex">x=3</span>.</div></div></div>
+    <div class="part"><div class="pl u5l1-pc"><span class="tex">y=x^2-4x+4</span></div><div class="u5l1-gfig" data-bk-graph='{"width":290,"height":260,"xmin":-1,"xmax":5,"ymin":-2,"ymax":7,"fontSize":14,"items":[{"fn":["x^2-4*x+4",{"color":"blue","from":-0.5,"to":4.5}]}]}'></div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">One <span class="tex">x</span>-intercept (the vertex <span class="tex">(2,\ 0)</span>); one real root, <span class="tex">x=2</span> (double).</div></div></div>
+    <div class="part"><div class="pl u5l1-pc"><span class="tex">y=x^2-4x+6</span></div><div class="u5l1-gfig" data-bk-graph='{"width":290,"height":260,"xmin":-1,"xmax":5,"ymin":-2,"ymax":7,"fontSize":14,"items":[{"fn":["x^2-4*x+6",{"color":"blue","from":-0.2,"to":4.2}]}]}'></div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">No <span class="tex">x</span>-intercepts (the vertex <span class="tex">(2,\ 2)</span> is above the axis); no real roots.</div></div></div>
+  </div>
+  <p class="q u5l1-q2">(b) Without graphing, state how many <span class="tex">x</span>-intercepts each parabola has.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(i) It opens down; its vertex is <span class="tex">(2,\ -3)</span>.</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">None: the highest point is below the <span class="tex">x</span>-axis.</div></div></div>
+    <div class="part"><div class="pl">(ii) It opens up; its vertex is <span class="tex">(-1,\ -4)</span>.</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Two: the lowest point is below the axis and the graph rises on both sides.</div></div></div>
+    <div class="part"><div class="pl">(iii) <span class="tex">y=x^2+5</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">None: <span class="tex">x^2\ge0</span>, so <span class="tex">x^2+5\ge5</span> is never <span class="tex">0</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Finding zeros with a graphing calculator ================= -->
+<section class="card" data-ink="s5" data-section="5. Zeros with a Graphing Calculator">
+  <div class="sec-h"><span class="badge">5</span><h2>Finding Zeros with a Graphing Calculator</h2></div>
+  <div class="def amber u5l1-key"><div class="u5l1-keyh">Zeros on a TI-84</div>Enter the function in <span class="keys"><kbd>Y=</kbd></span>, then <span class="keys"><kbd>GRAPH</kbd></span> (adjust the <span class="keys"><kbd>WINDOW</kbd></span> until every <span class="tex">x</span>-intercept shows). Press <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd></span> (CALC) <b>2:zero</b>; move to the <b>left</b> of one <span class="tex">x</span>-intercept and press <span class="keys"><kbd>ENTER</kbd></span> (left bound), move to its <b>right</b> and press <span class="keys"><kbd>ENTER</kbd></span> (right bound), then <span class="keys"><kbd>ENTER</kbd></span> again (guess). Repeat for each <span class="tex">x</span>-intercept. <span class="muted">(Casio: <b>G-SOLV</b>, <b>ROOT</b>.)</span></div>
+  <p class="u5l1-p">A decimal such as <span class="tex">1.3333\dots</span> is probably the fraction <span class="tex">\frac{4}{3}</span> (on a TI-84, <span class="keys"><kbd>MATH</kbd><kbd>1</kbd></span> ►Frac converts it). A zero <span class="tex">r</span> gives a factor <span class="tex">(x-r)</span>, and a zero <span class="tex">\frac{m}{n}</span> gives a factor <span class="tex">(nx-m)</span>; expand to check that the leading coefficient matches. When the zeros are not rational, the calculator gives decimals: round as the question asks.</p>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Example 6(a) on the calculator.</b> <span class="tex">Y_1=6X^2+7X-20</span>, <span class="keys"><kbd>ZOOM</kbd><kbd>6</kbd></span>, then <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd><kbd>2</kbd></span> around each intercept: left bound <span class="tex">-4</span>, right bound <span class="tex">-1</span>, guess <span class="tex">-2</span>; then <span class="tex">1</span>, <span class="tex">2</span>, guess <span class="tex">1.5</span>.</div>
+    <div class="u5l1-pcol"><button class="pill" data-keys="Y= CLEAR 6 X x² + 7 X − 20 ZStandard zero (−) 4 ENTER (−) 1 ENTER (−) 2 ENTER">Show the left zero</button><button class="pill" data-keys="Y= CLEAR 6 X x² + 7 X − 20 ZStandard zero 1 ENTER 2 ENTER 1.5 ENTER">Show the right zero</button></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Roots of an equation, another way: intersect.</b> For <span class="tex">x^2-5x=14</span> (Example 3(a)), graph each side, <span class="tex">Y_1=X^2-5X</span> and <span class="tex">Y_2=14</span>, and use <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd></span> <b>5:intersect</b> (<span class="keys"><kbd>ENTER</kbd><kbd>ENTER</kbd></span>, then a guess near each crossing). The <span class="tex">x</span>-coordinates of the crossings are the roots, <span class="tex">7</span> and <span class="tex">-2</span>. <span class="muted">(Casio: G-SOLV, INTSECT.)</span></div>
+    <div class="u5l1-pcol"><button class="pill" data-keys="Y= CLEAR X x² − 5 X ▼ CLEAR 14 WINDOW (−) 5 ENTER 10 ENTER 1 ENTER (−) 10 ENTER 30 ENTER 5 ENTER GRAPH intersect ENTER ENTER 7 ENTER">Right crossing</button><button class="pill" data-keys="Y= CLEAR X x² − 5 X ▼ CLEAR 14 WINDOW (−) 5 ENTER 10 ENTER 1 ENTER (−) 10 ENTER 30 ENTER 5 ENTER GRAPH intersect ENTER ENTER (−) 2 ENTER">Left crossing</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Exact zeros, or decimals?</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Use a graphing calculator to find the exact zeros of <span class="tex">f(x)=6x^2+7x-20</span>. Use them to write <span class="tex">f(x)</span> in factored form.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The calculator gives <span class="tex">x=-2.5</span> and <span class="tex">x=1.3333\dots</span><br>Exact zeros: <span class="tex">-\frac{5}{2}</span> and <span class="tex">\frac{4}{3}</span>.<br>Factors: <span class="tex">(2x+5)</span> and <span class="tex">(3x-4)</span>.<br>Check: <span class="tex">(2x+5)(3x-4)=6x^2-8x+15x-20=6x^2+7x-20</span> ✓<br><span class="tex">f(x)=(2x+5)(3x-4)</span></div></div></div>
+    <div class="part"><div class="pl">(b) Find the zeros of <span class="tex">y=x^2-3x-5</span> to the nearest hundredth. Can it be factored over the integers?</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zeros: <span class="tex">x\approx-1.19</span> and <span class="tex">x\approx4.19</span>.<br>No: no two integers have a product of <span class="tex">-5</span> and a sum of <span class="tex">-3</span>, and the zeros are not rational. (Lesson 7, the quadratic formula, gives their exact values.)</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check (b).</b> <span class="tex">Y_1=X^2-3X-5</span>, <span class="keys"><kbd>ZOOM</kbd><kbd>6</kbd></span>, zero: bounds <span class="tex">-2</span> and <span class="tex">-1</span>, then <span class="tex">4</span> and <span class="tex">5</span>. The screen shows <span class="tex">-1.192582</span> and <span class="tex">4.1925824</span>: round to <span class="tex">-1.19</span> and <span class="tex">4.19</span>.</div>
+    <div class="u5l1-pcol"><button class="pill" data-keys="Y= CLEAR X x² − 3 X − 5 ZStandard zero (−) 2 ENTER (−) 1 ENTER (−) 1 ENTER">Left zero</button><button class="pill" data-keys="Y= CLEAR X x² − 3 X − 5 ZStandard zero 4 ENTER 5 ENTER 4 ENTER">Right zero</button></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Writing a quadratic function from its zeros ================= -->
+<section class="card" data-ink="s6" data-section="6. A Function from Its Zeros">
+  <div class="sec-h"><span class="badge">6</span><h2>Writing a Quadratic Function from Its Zeros</h2></div>
+  <p class="u5l1-p">If a quadratic function has zeros <span class="tex">r</span> and <span class="tex">s</span>, it has factors <span class="tex">(x-r)</span> and <span class="tex">(x-s)</span>. Every function <span class="tex">y=a(x-r)(x-s)</span>, <span class="tex">a\ne0</span>, has these zeros: changing <span class="tex">a</span> stretches or flips the parabola but keeps its <span class="tex">x</span>-intercepts. One more point on the graph fixes <span class="tex">a</span>.</p>
+  <div class="def amber u5l1-key"><div class="u5l1-keyh">Factored form</div><span class="tex">y=a(x-r)(x-s)</span> has zeros <span class="tex">r</span> and <span class="tex">s</span>. &nbsp;To find <span class="tex">a</span>, substitute the coordinates of another point on the graph and solve.<br>A <b>double zero</b> <span class="tex">r</span> (the graph touches the <span class="tex">x</span>-axis at <span class="tex">r</span>) gives <span class="tex">y=a(x-r)^2</span>.</div>
+  <div class="explainer" data-explainer="family"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>From the zeros to the function</h3></div>
+  <p class="q">Write each quadratic function in factored form, then in general form.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) zeros <span class="tex">-2</span> and <span class="tex">4</span>; the graph passes through <span class="tex">(0,\ -16)</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=a(x+2)(x-4)</span><br><span class="tex">-16=a(0+2)(0-4)=-8a</span>, so <span class="tex">a=2</span><br><span class="tex">y=2(x+2)(x-4)</span><br><span class="tex">y=2(x^2-2x-8)=2x^2-4x-16</span></div></div></div>
+    <div class="part"><div class="pl">(b) zeros <span class="tex">1</span> and <span class="tex">5</span>; the graph passes through <span class="tex">(3,\ 6)</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=a(x-1)(x-5)</span><br><span class="tex">6=a(3-1)(3-5)=-4a</span>, so <span class="tex">a=-\frac{3}{2}</span><br><span class="tex">y=-\frac{3}{2}(x-1)(x-5)</span><br><span class="tex">y=-\frac{3}{2}(x^2-6x+5)=-\frac{3}{2}x^2+9x-\frac{15}{2}</span></div></div></div>
+  </div>
+  <div class="u5l1-ex7">
+    <div class="u5l1-gcol"><div data-bk-graph='{"width":300,"height":300,"xmin":-5,"xmax":3,"ymin":-2,"ymax":6,"fontSize":14,"items":[{"fn":["-0.5*(x+4)*(x-2)",{"color":"blue","from":-4.5,"to":2.5}]},{"point":[-4,0,{"color":"ink","r":5.5}]},{"point":[2,0,{"color":"ink","r":5.5}]},{"point":[0,4,{"color":"ink","r":5.5}]}]}'></div></div>
+    <div class="part"><div class="pl">(c) Write the function shown in the graph. The marked points have integer coordinates.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zeros <span class="tex">-4</span> and <span class="tex">2</span>; <span class="tex">y</span>-intercept <span class="tex">4</span>.<br><span class="tex">y=a(x+4)(x-2)</span><br><span class="tex">4=a(4)(-2)=-8a</span>, so <span class="tex">a=-\frac{1}{2}</span><br><span class="tex">y=-\frac{1}{2}(x+4)(x-2)</span><br><span class="tex">y=-\frac{1}{2}x^2-x+4</span></div></div></div>
+    <div class="part"><div class="pl">(d) The graph touches the <span class="tex">x</span>-axis only at <span class="tex">x=3</span> and passes through <span class="tex">(1,\ 8)</span>.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">A double zero at <span class="tex">3</span>: <span class="tex">y=a(x-3)^2</span><br><span class="tex">8=a(1-3)^2=4a</span>, so <span class="tex">a=2</span><br><span class="tex">y=2(x-3)^2</span><br><span class="tex">y=2x^2-12x+18</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u5l1"></section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>A signal flare</h3></div>
+  <p class="q">A signal flare is fired upward from the top of a cliff. Its height above the sea after <span class="tex">t</span> seconds is <span class="tex">h(t)=-5t^2+25t+30</span> metres.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine the zeros of <span class="tex">h</span>. Which zero answers “when does the flare reach the sea?”</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-5t^2+25t+30=0</span><br><span class="tex">-5(t^2-5t-6)=0</span><br><span class="tex">-5(t-6)(t+1)=0</span><br>Zeros: <span class="tex">6</span> and <span class="tex">-1</span>. Reject <span class="tex">t=-1</span> (before the flare was fired). It reaches the sea after <span class="tex">6</span> s.</div></div></div>
+    <div class="part"><div class="pl">(b) Find <span class="tex">h(0)</span> and explain what it means.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">h(0)=30</span>: the <span class="tex">y</span>-intercept. The flare is fired from <span class="tex">30</span> m above the sea (the cliff is <span class="tex">30</span> m high).</div></div></div>
+  </div>
+  <div class="explainer u5l1-exin" data-explainer="flare"></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>The parabola.</b> <span class="tex">y=ax^2+bx+c</span>, <span class="tex">a\ne0</span>. <span class="tex">a&gt;0</span>: opens up, the vertex gives the <b>minimum</b>; <span class="tex">a&lt;0</span>: opens down, the <b>maximum</b>. The axis of symmetry is halfway between the <span class="tex">x</span>-intercepts; the <span class="tex">y</span>-intercept is <span class="tex">c</span>.</div>
+    <div><b>Three names, one number.</b> The <b>zeros</b> of <span class="tex">f</span> = the <b><span class="tex">x</span>-intercepts</b> of its graph = the <b>roots</b> of <span class="tex">f(x)=0</span>. To find them: set <span class="tex">f(x)=0</span>, factor fully, set each factor with <span class="tex">x</span> equal to <span class="tex">0</span>. The <span class="tex">y</span>-intercept is <span class="tex">f(0)</span>.</div>
+    <div><b>Two, one or none.</b> Two <span class="tex">x</span>-intercepts: two real roots. The vertex on the axis: one (double) root. Opens up with the vertex above the axis, or down with it below: no real roots. A calculator's <b>zero</b> finds them as decimals.</div>
+    <div><b>From the zeros.</b> Zeros <span class="tex">r</span> and <span class="tex">s</span>: <span class="tex">y=a(x-r)(x-s)</span>; a double zero: <span class="tex">y=a(x-r)^2</span>. Substitute one more point to find <span class="tex">a</span>, then expand for general form.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u5l1">
+    <div><div class="kicker">Your turn</div><b>Assignment 1 · Questions 5–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l2/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 2 — Graphing <span class="tex">y=a(x-p)^2+q</span></b><div class="muted">Seeing how <span class="tex">a</span>, <span class="tex">p</span> and <span class="tex">q</span> stretch, reflect and translate the graph of <span class="tex">y=x^2</span>, and sketching a parabola from its vertex with the step pattern.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u5l1.js';
+  boot({ key: 'u5l1', homeHref: '../../', title: '5.1 Zeros, Roots and x-Intercepts' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

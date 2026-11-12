@@ -1,17 +1,14 @@
 /* Math 20-1 · Unit 4 · Lesson 3 — Factoring by Substitution: a(f(x))² + b(f(x)) + c.
- * Warm-up (The Mystery Gift: every gift on a line holds the same number; unwrap one to find x² inside; try values of x;
- * the big one: x⁴ − 5x² + 4 = 0 has four solutions), and the explainers:
+ * New lesson format (2026-11-11): the warm-up is plain markup on the page (no code), and the explainers are
  *   spot (six trinomials: square the middle term's variable part, does it give the first term? quadratic form or not),
  *   boxIt (STAR: the substitution box. The repeated chunk is boxed, the boxes wrap to a gift-wrapped A, the trinomial
  *     factors in A, the boxes unwrap back and each factor is written out; concept x⁴ − 7x² + 12, x⁶ + 2x³ − 8;
  *     Example 1 checks),
- *   dos (difference of squares: two tests, then the split with the middle terms cancelling; a sum and x² − 7 don't split),
- *   tree (factor fully as a factor tree: GCF, the box, differences of squares, leaves checked; warm-up and Example 2),
- *   decomp (Example 3 both ways side by side: with A and directly, row by row the same work),
- *   acHunt (the box with a product–sum hunt table for a ≠ 1; Example 4 checks),
+ *   tree (factor fully as a factor tree: GCF, the box, differences of squares, leaves checked; Example 2),
+ *   acHunt (the box with Ryan's X for a ≠ 1: ac on top, b underneath, the pairs listed and the right one circled;
+ *     Example 4 checks),
  *   boxBin (STAR, binomial: (x + 2) in the box, unwrap IN BRACKETS, simplify each factor, common factor; Example 5),
  *   race (substitute vs expand first, two lanes with stage tags and the product to hunt; Example 6 and 3(x + 4)²…),
- *   perfectSq (A² ± 2kA + k² as a square area grid → (A ± k)²; Example 7 checks),
  *   twoBox (any chunk: A = sin x; two boxes A and B; Example 8 checks).
  * Colours: box A amber, box B blue, finished answers green, mistakes red. No calculator in Unit 4. */
 import {
@@ -135,62 +132,6 @@ function derivSteps(stage, ex, spec) {
   return { D, steps };
 }
 
-/* ====================================================================================================
- * Warm-up: The Mystery Gift
- * ==================================================================================================== */
-function giftSVG(host) {
-  const svg = svgEl('svg', { viewBox: '0 0 220 200', width: 220, height: 200, class: 'u4l3-gsvg' }, host);
-  const inside = svgEl('g', { class: 'u4l3-gin' }, svg);
-  svgEl('rect', { x: 30, y: 82, width: 160, height: 108, rx: 8, fill: '#fff4dd', stroke: '#c27a0e', 'stroke-width': 3 }, inside);
-  const body = svgEl('g', { class: 'u4l3-gbody' }, svg);
-  svgEl('rect', { x: 30, y: 82, width: 160, height: 108, rx: 8, fill: '#c27a0e' }, body);
-  svgEl('rect', { x: 98, y: 82, width: 24, height: 108, fill: '#7a1f3d' }, body);
-  svgEl('rect', { x: 30, y: 124, width: 160, height: 22, fill: '#7a1f3d', opacity: 0.85 }, body);
-  const lid = svgEl('g', { class: 'u4l3-glid' }, svg);
-  svgEl('rect', { x: 20, y: 56, width: 180, height: 32, rx: 6, fill: '#e8a01e', stroke: '#b9700c', 'stroke-width': 2 }, lid);
-  svgEl('rect', { x: 97, y: 56, width: 26, height: 32, fill: '#7a1f3d' }, lid);
-  svgEl('path', { d: 'M110 56 C 86 14, 52 22, 66 44 C 74 56, 98 56, 110 56 C 122 56, 146 56, 154 44 C 168 22, 134 14, 110 56 Z', fill: '#a33357', stroke: '#7a1f3d', 'stroke-width': 3 }, lid);
-  const tag = svgEl('g', { class: 'u4l3-gtag' }, svg);
-  svgEl('path', { d: 'M150 150 l40 -14 l14 20 l-40 14 z', fill: '#fff', stroke: '#7a1f3d', 'stroke-width': 2 }, tag);
-  const tt = svgEl('text', { x: 178, y: 162, 'text-anchor': 'middle', 'font-size': 18, 'font-weight': 800, fill: '#7a1f3d', transform: 'rotate(-19 178 158)' }, tag); tt.textContent = '?';
-  return { svg, lid, body };
-}
-function mountGift() {
-  const host = document.getElementById('u4l3-gift'); if (!host) return;
-  const g = giftSVG(h('div', 'u4l3-gpic')); host.appendChild(g.svg.parentNode);
-  const xin = add(g.svg.parentNode, h('div', 'u4l3-gx', T('x^2')));
-  const eqs = add(host, h('div', 'u4l3-geqs'));
-  const GI = '<span class="u4l3-gi"></span>';
-  const e1 = add(eqs, h('div', 'u4l3-geq', `${GI}<sup class="u4l3-sq">2</sup>${T('{}-5')}${GI}${T('{}+4=0')}`));
-  const e2 = add(eqs, h('div', 'u4l3-geq u4l3-geq2', T(`(${ca('x^2')})^2-5(${ca('x^2')})+4=0`)));
-  const e3 = add(eqs, h('div', 'u4l3-geq u4l3-geq2', T('x^4-5x^2+4=0')));
-  const tb = add(host, h('table', 'u4l3-gtab'));
-  const XS = [-3, -2, -1, 0, 1, 2, 3];
-  tb.innerHTML = `<tr><th>${T('x')}</th>${XS.map((x) => `<td>${T(String(x))}</td>`).join('')}</tr>`
-    + `<tr><th>${GI} ${T('=x^2')}</th>${XS.map((x, i) => `<td data-c="${i}" class="u4l3-gq">?</td>`).join('')}</tr>`
-    + `<tr><th>${GI}<sup class="u4l3-sq">2</sup>${T('-5')}${GI}${T('+4')}</th>${XS.map((x, i) => `<td data-v="${i}" class="u4l3-gq">?</td>`).join('')}</tr>`;
-  const bU = document.getElementById('u4l3-unwrap'), tries = document.getElementById('u4l3-tries');
-  const btns = XS.map((x, i) => {
-    const b = h('button', 'pill small u4l3-try', T(String(x))); b.type = 'button'; b.disabled = true; tries.appendChild(b);
-    b.addEventListener('click', () => {
-      const s = x * x, v = s * s - 5 * s + 4;
-      const c1 = tb.querySelector(`[data-c="${i}"]`), c2 = tb.querySelector(`[data-v="${i}"]`);
-      c1.innerHTML = T(String(s)); c2.innerHTML = T(String(v)); c1.classList.remove('u4l3-gq'); c2.classList.remove('u4l3-gq');
-      c2.classList.toggle('u4l3-gzero', v === 0); b.classList.add('u4l3-tried');
-    });
-    return b;
-  });
-  let open = false;
-  const paint = () => {
-    host.classList.toggle('u4l3-open', open);
-    bU.textContent = open ? 'Wrap it again' : 'Unwrap the gift';
-    [e2, e3, xin].forEach((el) => { el.style.visibility = open ? 'visible' : 'hidden'; });
-    btns.forEach((b) => { b.disabled = !open; });
-  };
-  bU.addEventListener('click', () => { open = !open; paint(); });
-  void e1; paint();
-}
-
 /* =============================== explainer: spot quadratic form =============================== */
 const SP = [
   { e: `x^4-7${ca('x^2')}+12`, mid: 'x^2', sq: 'x^4', first: 'x^4', ok: true, st: 'A = x²', cap: 'The middle term has $x^2$. Square it: $(x^2)^2=x^4$, the first term. <b>Quadratic form</b>, with $A=x^2$.' },
@@ -256,62 +197,10 @@ const boxIt = {
   make(stage, v, ex) { return derivSteps(stage, ex, Object.assign({ o: { gap: 58 } }, BX[v].s)).steps; }
 };
 
-/* =============================== explainer: difference of squares =============================== */
-const DS = {
-  x9: { label: 'x² − 9', e: 'x^2-9', minus: true, sq: true, a: 'x', b: '3', aa: 'x^2', bb: '9' },
-  f1: { label: '4x² − 1', e: '4x^2-1', minus: true, sq: true, a: '2x', b: '1', aa: '4x^2', bb: '1' },
-  p9: { label: 'x² + 9', e: 'x^2+9', minus: false, sq: true },
-  x7: { label: 'x² − 7', e: 'x^2-7', minus: true, sq: false }
-};
-const dos = {
-  title: 'Can it split? Difference of squares',
-  height: 360, minW: 860,
-  choices: Object.keys(DS).map((k) => ({ v: k, label: DS[k].label })),
-  ask: (v) => `Does $${DS[v].e}$ factor?`,
-  make(stage, v, ex) {
-    const d = DS[v], W = ex.W;
-    const big = div(stage, 'u4l3-dbig', T(d.e), 30, 16);
-    const P = div(stage, 'u4l3-dpanel', '<div class="u4l3-ph">Two tests</div>', W - 330, 12, 316, 150);
-    const t1 = div(P, 'u4l3-dt', `<span class="u4l3-dn">1</span> Two terms with a <b>minus</b> between them?`, null, null);
-    const t2 = div(P, 'u4l3-dt', `<span class="u4l3-dn">2</span> Both terms <b>perfect squares</b>?`, null, null);
-    const mark = (t, ok) => { const m = h('span', 'u4l3-dm ' + (ok ? 'u4l3-ok' : 'u4l3-no'), ok ? '✓' : '✗'); t.appendChild(m); hide(m); return m; };
-    const m1 = mark(t1, d.minus), m2 = mark(t2, d.sq);
-    const steps = [{ cap: 'A difference of squares has exactly <b>two</b> terms, a <b>minus</b> between them, and <b>both</b> terms perfect squares.', run: (c) => pulse(c, P, 1.03) }];
-    if (d.minus && d.sq) {
-      const sqs = hide(div(stage, 'u4l3-dl', T(`${d.aa}=(${ca(d.a)})^2,\\qquad ${d.bb}=(${cb(d.b)})^2`), 30, 96));
-      const split = hide(div(stage, 'u4l3-dbig u4l3-dsplit', T(`${d.e}=(${ca(d.a)}-${cb(d.b)})(${ca(d.a)}+${cb(d.b)})`), 30, 170));
-      const chk = hide(div(stage, 'u4l3-dl u4l3-dchk', T(`(${d.a}-${d.b})(${d.a}+${d.b})=${d.aa}+\\cancel{${d.b === '1' ? '' : d.b}${d.a === 'x' ? 'x' : d.a}}-\\cancel{${d.b === '1' ? '' : d.b}${d.a === 'x' ? 'x' : d.a}}-${d.bb}=${d.e}`), 30, 262));
-      steps.push(
-        { cap: 'Test 1: two terms, minus between them ✓', run: async (c) => { m1.style.opacity = 1; await pop(c, m1); } },
-        { cap: `Test 2: ${T(d.aa)} is ${T(`(${d.a})^2`)} and ${T(d.bb)} is ${T(`(${d.b})^2`)} ✓`, run: async (c) => { m2.style.opacity = 1; await pop(c, m2); await show(c, sqs); } },
-        { cap: `So it splits: ${T(`A^2-B^2=(A-B)(A+B)`)} with ${T(ca('A') + '=' + d.a)} and ${T(cb('B') + '=' + d.b)}.`, run: (c) => show(c, split) },
-        { cap: `Why it works: expanding gives two <b>middle terms that cancel</b>, ${T(`-${d.b === '1' ? '' : d.b}${d.a}+${d.b === '1' ? '' : d.b}${d.a}=0`)}.`, run: (c) => show(c, chk) }
-      );
-    } else if (!d.minus) {
-      const tries = ['(x+3)(x+3)=x^2+6x+9', '(x-3)(x-3)=x^2-6x+9', '(x-3)(x+3)=x^2-9'].map((s, i) => hide(div(stage, 'u4l3-dl', T(s) + ' <span class="u4l3-dm u4l3-no">✗</span>', 30, 104 + i * 54)));
-      const lk = stamp(stage, 'does not factor', { ok: false, x: 190, y: 300, rotate: -4 }); hide(lk);
-      steps.push(
-        { cap: 'Test 1: it is a <b>sum</b> (plus), not a difference ✗', run: async (c) => { m1.style.opacity = 1; await pop(c, m1); await shake(c, big); } },
-        { cap: 'Try anyway. Every pair of brackets gives the wrong middle term or the wrong sign on 9.', run: async (c) => { for (const t of tries) { await show(c, t); await sleep(c, 200); } } },
-        { cap: `A <b>sum of squares</b> such as ${T('x^2+9')} does <b>not</b> factor. It is finished as it is.`, run: (c) => stampIn(c, lk) }
-      );
-    } else {
-      const nt = hide(div(stage, 'u4l3-dl', `${T('x^2=(x)^2')} ✓ &nbsp; but 7 is not a perfect square: ${T('2^2=4,\\ 3^2=9')}`, 30, 104));
-      const lk = stamp(stage, 'not over the integers', { ok: false, x: 220, y: 200, rotate: -4 }); hide(lk);
-      steps.push(
-        { cap: 'Test 1: two terms with a minus ✓', run: async (c) => { m1.style.opacity = 1; await pop(c, m1); } },
-        { cap: 'Test 2: 7 is <b>not</b> a perfect square ✗ (it sits between 4 and 9).', run: async (c) => { m2.style.opacity = 1; await pop(c, m2); await show(c, nt); } },
-        { cap: `${T('x^2-7')} does not factor <b>over the integers</b>. Leave it as it is.`, run: (c) => stampIn(c, lk) }
-      );
-    }
-    return steps;
-  }
-};
-
 /* =============================== explainer: factor tree (factor fully) =============================== */
 const n = (t, why, kids, done) => ({ t, why, kids: kids || [], done });
 const TR = {
-  warm: { label: 'Warm-up: x⁴ − 5x² + 4', ask: 'Factor fully: $x^4-5x^2+4$ (the warm-up’s gift line).',
+  warm: { label: 'x⁴ − 5x² + 4', ask: 'Factor fully: $x^4-5x^2+4$.',
     tree: n('x^4-5x^2+4', 'A=x^2', [n('x^2-1', 'diff. of squares', [n('x-1'), n('x+1')]), n('x^2-4', 'diff. of squares', [n('x-2'), n('x+2')])]),
     ans: '(x-1)(x+1)(x-2)(x+2)', cap1: 'With $A=x^2$: $A^2-5A+4=(A-1)(A-4)$, so $(x^2-1)(x^2-4)$.' },
   e2a: { label: 'Example 2(a) check', ask: 'Example 2(a): factor $x^4-13x^2+36$ fully.',
@@ -364,36 +253,6 @@ const tree = {
   }
 };
 
-/* =============================== explainer: Example 3 two ways =============================== */
-const decomp = {
-  title: 'With A, or directly: the same work',
-  height: 450, minW: 900,
-  ask: 'Example 3: factor $3x^4-10x^2-8$ fully two ways.',
-  make(stage, v, ex) {
-    const W = ex.W, cw = (W - 30) / 2, K = KEYS('x^2');
-    const hd = (x, t) => div(stage, 'u4l3-lhead', t, x, 52, cw);
-    const hunt = hide(div(stage, 'u4l3-hunt', `${T('ac=3(-8)=-24')}, &nbsp; ${T('b=-10')}: &nbsp; ${T('-12')} and ${T('2')}`, W / 2, 6)); hunt.style.translate = '-50% 0';
-    hd(10, `(a) Substitute ${T('A=x^2')} first`); hd(20 + cw, `(b) Split ${T('-10x^2')} directly`);
-    const o = { labW: 0, gap: 52, size: 23, y: 96 };
-    const L = new Deriv(stage, ex, K, Object.assign({ x: 14 }, o)), R = new Deriv(stage, ex, K, Object.assign({ x: 24 + cw }, o));
-    const X2 = ca('x^2');
-    const rows = [
-      ['3⟦A:ub>w⟧^2-10⟦A:ub>w⟧-8', `3x^4-10${X2}-8`, `Both start the same way. On the left the ${T('x^2')}’s are wrapped into ${T(ca('A'))}; on the right they stay, but play the same role.`],
-      ['3⟦A⟧^2-12⟦A⟧+2⟦A⟧-8', `3x^4-12${X2}+2${X2}-8`, `Split the middle term into ${T('-12')} and ${T('+2')} (product ${T('-24')}, sum ${T('-10')}).`],
-      ['3⟦A⟧(⟦A⟧-4)+2(⟦A⟧-4)', `3${X2}(x^2-4)+2(x^2-4)`, 'Group in pairs and take out the common factor of each pair.'],
-      ['(3⟦A⟧+2)(⟦A⟧-4)', '(x^2-4)(3x^2+2)', `Take out the common bracket. On the left it is ${T('(A-4)')}, on the right ${T('(x^2-4)')}.`],
-      ['(3⟦A:w>u⟧+2)(⟦A:w>u⟧-4)', null, `Only the left side has to <b>unwrap</b>: ${T('(3x^2+2)(x^2-4)')}.`],
-      ['(3x^2+2)(x-2)(x+2)', '(x-2)(x+2)(3x^2+2)', `${T('x^2-4')} is a difference of squares. <b>Same answer</b> both ways (the order of factors doesn’t matter).`]
-    ];
-    const LR = rows.map((r) => L.row({ m: r[0], cls: r === rows[5] ? 'ans' : '' }));
-    const RR = rows.map((r) => R.row({ m: r[1] || '\\phantom{x}', cls: r === rows[5] ? 'ans' : '' }));
-    const st = stamp(stage, 'same answer', { ok: true, x: W / 2 - 80, y: 404, rotate: -4, size: 'sm' }); hide(st);
-    const steps = [{ cap: `Both ways need the pair: product ${T('ac=-24')}, sum ${T('-10')}: ${T('-12')} and ${T('2')}.`, run: (c) => pop(c, hunt).then(() => { hunt.style.opacity = 1; }) }];
-    rows.forEach((r, i) => steps.push({ cap: r[2], run: async (c) => { await L.showRow(c, LR[i]); if (r[1]) await R.showRow(c, RR[i]); if (i === 5) await stampIn(c, st); } }));
-    return steps;
-  }
-};
-
 /* =============================== explainer: product–sum hunt with the box (a ≠ 1) =============================== */
 const AH = {
   e4a: { label: 'Example 4(a) check', ask: 'Example 4(a): factor $9x^4-37x^2+4$ fully.', A: 'x^2', a: 9, b: -37, c: 4, pair: [-36, -1],
@@ -430,15 +289,23 @@ const acHunt = {
   make(stage, v, ex) {
     const d = AH[v], W = ex.W, K = KEYS(d.A), TW = 236, ac = d.a * d.c;
     const D = new Deriv(stage, ex, K, { gap: 58, keyX: W - TW - 4, keyY: 4, size: 24 });
-    const tb = div(stage, 'u4l3-htab', '', W - TW - 4, 62, TW);
-    tb.innerHTML = `<div class="u4l3-hh">product ${T(`ac=${d.a}(${d.c})=${ac}`)}<br>sum ${T(`b=${d.b}`)}</div>`;
-    const trs = d.tries.map(([p, q]) => { const r = h('div', 'u4l3-hr', `${T(`${p},\\ ${q}`)}<span class="u4l3-hs">${T(`\\text{sum }${p + q}`)}</span>`); tb.appendChild(r); hide(r); return { r, ok: p + q === d.b }; });
-    hide(tb);
+    // Ryan's X (2026-11-11): ac on top, b underneath, the two numbers on the sides; the pairs listed under it, the right one circled
+    const XC = W - TW / 2 - 4, YC = 146, XR = 52;
+    const xsvg = svgEl('svg', { width: W, height: 400 }, stage); xsvg.style.cssText = 'position:absolute;left:0;top:0;pointer-events:none;overflow:visible';
+    const xg = svgEl('g', {}, xsvg); xg.style.opacity = 0;
+    [[XC - XR, YC - XR, XC + XR, YC + XR], [XC + XR, YC - XR, XC - XR, YC + XR]].forEach(([x1, y1, x2, y2]) => svgEl('line', { x1, y1, x2, y2, stroke: BL, 'stroke-width': 5, 'stroke-linecap': 'round' }, xg));
+    const xv = (cls, html, x, y) => { const e = hide(div(stage, 'u4l3-xv ' + cls, html, x, y)); e.style.translate = '-50% -50%'; return e; };
+    const xla = xv('u4l3-xlab', T('ac'), XC, YC - XR - 16), xlb = xv('u4l3-xlab', T('b'), XC, YC + XR + 17);
+    const xt = xv('u4l3-xtop', T(String(ac)), XC, YC - XR * 0.7), xb = xv('u4l3-xbot', T(String(d.b)), XC, YC + XR * 0.72);
+    const xL = xv('u4l3-xside', T(String(d.pair[0])), XC - XR * 0.86, YC), xR = xv('u4l3-xside', T(String(d.pair[1])), XC + XR * 0.86, YC);
+    const trs = d.tries.map(([p, q], i) => ({ r: hide(div(stage, 'u4l3-xp', `<span>${T(`${p}\\times${q < 0 ? `(${q})` : q}`)}</span><span class="u4l3-hs">${T(`\\text{sum }${p + q}`)}</span>`, W - TW + 4, 230 + i * 32, TW - 16, 28)), ok: p + q === d.b }));
     const R = d.rows.map((r) => D.row({ lab: r[0], m: r[1], cls: r[3] || '' }));
     const steps = [];
     steps.push({ cap: d.rows[0][2], run: async (c) => { await D.showTags(c, ['A']); await D.showRow(c, R[0]); } });
-    steps.push({ cap: `Hunt: list factor pairs of ${T(String(ac))} until the sum is ${T(String(d.b))}. ${ac < 0 ? 'A negative product: one positive, one negative.' : 'A positive product with a negative sum: both negative.'}`,
-      run: async (c) => { tb.style.opacity = 1; await show(c, tb); for (const t of trs) { t.r.style.opacity = 1; await fadeIn(c, t.r, 220); if (t.ok) { t.r.classList.add('u4l3-hok'); await pulse(c, t.r, 1.06); } else { t.r.classList.add('u4l3-hno'); } await sleep(c, 120); } } });
+    steps.push({ cap: `Find the two numbers with the X: ${T(`ac=${d.a}(${d.c})=${ac}`)} on top, ${T(`b=${d.b}`)} underneath. ${ac < 0 ? 'A negative product: one positive, one negative.' : 'A positive product with a negative sum: both negative.'}`,
+      run: async (c) => { xg.style.opacity = 1; await show(c, xg); await show(c, xla); await pop(c, xt); await show(c, xlb); await pop(c, xb); } });
+    steps.push({ cap: `List the factor pairs of ${T(String(Math.abs(ac)))} until the sum is ${T(String(d.b))}, and circle that pair: ${T(String(d.pair[0]))} and ${T(String(d.pair[1]))} go on the sides of the X.`,
+      run: async (c) => { for (const t of trs) { t.r.style.opacity = 1; await fadeIn(c, t.r, 220); t.r.classList.add(t.ok ? 'u4l3-xp-ok' : 'u4l3-xp-no'); if (t.ok) await pulse(c, t.r, 1.06); await sleep(c, 120); } await pop(c, xL); await pop(c, xR); } });
     d.rows.slice(1).forEach((r, i) => steps.push({ cap: r[2], run: (c) => D.showRow(c, R[i + 1]) }));
     if (d.f) {
       const v2 = d.v || 'x', a = d.f(d.x), b = d.g(d.x);
@@ -536,58 +403,6 @@ const race = {
   }
 };
 
-/* =============================== explainer: perfect squares as a square area =============================== */
-const PS = {
-  e7b: { label: 'Example 7(b) check', ask: 'Example 7(b): factor $x^4+10x^2+25$ fully.', A: 'x^2', k: 5,
-    rows: [['Wrap', '⟦A:ub>w⟧^2+10⟦A:ub>w⟧+25', '$x^4=(x^2)^2$, so let $A=x^2$: $A^2+10A+25$.'],
-      ['Factor', '(⟦A⟧+5)^2', '$(A+5)^2$: a perfect square.'],
-      ['Unwrap', '(⟦A:w>u⟧+5)^2', 'Unwrap $A=x^2$: $\\boldsymbol{(x^2+5)^2}$. And $x^2+5$ is a sum: it does not factor. Done.', 'ans']],
-    f: (x) => x ** 4 + 10 * x * x + 25, g: (x) => (x * x + 5) ** 2, x: 1 },
-  e7a: { label: 'Example 7(a) check', ask: 'Example 7(a): factor $(2x+1)^2-6(2x+1)+9$ fully.', A: '2x+1', k: -3,
-    rows: [['Wrap', '⟦A:ub>w⟧^2-6⟦A:ub>w⟧+9', 'Let $A=2x+1$: $A^2-6A+9$.'],
-      ['Factor', '(⟦A⟧-3)^2', '$(A-3)^2$: a perfect square.'],
-      ['Unwrap', '(⟦A:w>u⟧-3)^2', 'Unwrap: $(2x+1-3)^2$. With coefficient 1 in front of $A$, no extra brackets are needed.'],
-      ['Simplify', '(2x-2)^2', 'Simplify inside: $2x+1-3=2x-2$.'],
-      ['Fully', '\\big[2(x-1)\\big]^2=4(x-1)^2', '$2x-2$ has a common factor 2: $\\big[2(x-1)\\big]^2$. The 2 is squared too: $\\boldsymbol{4(x-1)^2}$.', 'ans']],
-    f: (x) => (2 * x + 1) ** 2 - 6 * (2 * x + 1) + 9, g: (x) => 4 * (x - 1) ** 2, x: 3 }
-};
-const perfectSq = {
-  title: 'A perfect square makes a square',
-  height: 380, minW: 900,
-  choices: [{ v: 'e7a', label: PS.e7a.label }, { v: 'e7b', label: PS.e7b.label }],
-  ask: (v) => PS[v].ask,
-  make(stage, v, ex) {
-    const d = PS[v], W = ex.W, K = KEYS(d.A), k = d.k, ak = Math.abs(k), sg = k > 0 ? '+' : '-';
-    const D = new Deriv(stage, ex, K, { gap: 58, size: 24, keyX: W - 300, keyY: 4 });
-    // the area grid: A by A, then |k| strips
-    const GX = W - 300, GY = 58, SA = 170, SK = 74;
-    const g = hide(div(stage, 'u4l3-grid', '', GX, GY, SA + SK + 40, SA + SK + 40));
-    const cell = (x, y, w, hh, html, cls) => div(g, 'u4l3-gc ' + cls, html, 34 + x, 34 + y, w, hh);
-    const c1 = cell(0, 0, SA, SA, T('A^2'), 'u4l3-gA');
-    const c2 = cell(SA, 0, SK, SA, T(`${k}A`), k < 0 ? 'u4l3-gneg' : 'u4l3-gpos');
-    const c3 = cell(0, SA, SA, SK, T(`${k}A`), k < 0 ? 'u4l3-gneg' : 'u4l3-gpos');
-    const c4 = cell(SA, SA, SK, SK, T(String(k * k)), 'u4l3-gpos');
-    div(g, 'u4l3-gs', T(ca('A')), 34 + SA / 2 - 8, 4); div(g, 'u4l3-gs', T(String(k)), 34 + SA + SK / 2 - 12, 4);
-    div(g, 'u4l3-gs', T(ca('A')), 6, 34 + SA / 2 - 14); div(g, 'u4l3-gs', T(String(k)), 2, 34 + SA + SK / 2 - 14);
-    [c1, c2, c3, c4].forEach(hide);
-    const R = d.rows.map((r) => D.row({ lab: r[0], m: r[1], cls: r[3] || '' }));
-    const side = hide(div(stage, 'u4l3-gside', `side ${T(`A${sg}${ak}`)}, area ${T(`(A${sg}${ak})^2`)}`, GX + 30, GY + 34 + SA + SK + 8));
-    const steps = [
-      { cap: d.rows[0][2], run: async (c) => { await D.showTags(c, ['A']); await D.showRow(c, R[0]); } },
-      { cap: `First and last terms are squares: ${T('A^2=(A)^2')} and ${T(`${k * k}=(${k})^2`)}. They are the two <b>square</b> corners.`,
-        run: async (c) => { g.style.opacity = 1; await show(c, g); for (const e of [c1, c4]) { e.style.opacity = 1; await pop(c, e, 340); } } },
-      { cap: `The middle term must be <b>twice</b> their product: ${T(`2(A)(${k})=${2 * k}A`)} ✓. It splits into the two strips ${T(`${k}A+(${k}A)`)}.`,
-        run: async (c) => { for (const e of [c2, c3]) { e.style.opacity = 1; await pop(c, e, 340); } } },
-      { cap: `The four pieces make a <b>square</b> with side ${T(`A${sg}${ak}`)}. So ${T(`A^2${sg}${2 * ak}A+${k * k}=(A${sg}${ak})^2`)}.`, run: async (c) => { await show(c, side); await D.showRow(c, R[1]); } }
-    ];
-    d.rows.slice(2).forEach((r, i) => steps.push({ cap: r[2], run: (c) => D.showRow(c, R[i + 2]) }));
-    const a = d.f(d.x), b = d.g(d.x), kk = hide(div(stage, 'u4l3-chk', `<b>Check</b> ${T(`x=${d.x}`)}: ${T(String(a))} both ways ✓`, null, null));
-    kk.style.position = 'absolute'; kk.style.left = '8px'; kk.style.bottom = '6px';
-    steps.push({ cap: `<b>Check</b> with ${T(`x=${d.x}`)}: the question gives ${T(String(a))} and the answer gives ${T(String(b))}.`, run: (c) => pop(c, kk).then(() => { kk.style.opacity = 1; }) });
-    return steps;
-  }
-};
-
 /* =============================== explainer: any chunk; two boxes =============================== */
 const TB = {
   e8a: { label: 'Example 8(a) check', ask: 'Example 8(a): factor $2\\sin^2x+\\sin x-1$ fully.', s: {
@@ -669,8 +484,7 @@ standup('u4l3', {
 });
 
 /* =============================== mount =============================== */
-mountGift();
-const DEFS = { spot, boxIt, dos, tree, decomp, acHunt, boxBin, race, perfectSq, twoBox };
+const DEFS = { spot, boxIt, tree, acHunt, boxBin, race, twoBox };
 Object.values(DEFS).forEach(mdDef);
 export const explainers = mountExplainers(DEFS);
-export const _test = { parseLine, cst, co, lead, BX, AH, BB, RC, PS, TB, TR };
+export const _test = { parseLine, cst, co, lead, BX, AH, BB, RC, TB, TR };

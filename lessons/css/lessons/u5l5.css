@@ -1,0 +1,76 @@
+/* Math 20-1 · Unit 5 · Lesson 5 — Writing a Quadratic Equation from Its Vertex and a Point: styles used only on this
+ * page (prefix u5l5-). Colours: the curve blue, the vertex red, the given point purple, zeros amber, the y-intercept
+ * green, the axis of symmetry slate, domain and range burgundy. */
+
+.u5l5 .ex-cap .katex { font-size: 1.04em; }
+.u5l5 .pl .katex { font-size: 1.06em; }
+.u5l5 .ans .katex { font-size: 1.03em; }
+.u5l5 .katex { white-space: nowrap; }
+.u5l5 h2 .katex, .u5l5 h3 .katex { font-size: .95em; }
+.u5l5-cv { color: #c93a33; }
+.u5l5-cp { color: #7b4fc4; }
+.u5l5-cz { color: #a86a08; }
+.u5l5-cy { color: #12805a; }
+
+/* ---------------- notes ---------------- */
+.u5l5-p { font-size: 19px; line-height: 1.5; margin: 10px 0; }
+.u5l5-key { border-left-width: 7px; }
+.u5l5-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 8px; }
+.u5l5-kl { font-size: 18.5px; line-height: 1.45; margin: 4px 0; }
+.u5l5-steps { display: grid; gap: 7px; }
+.u5l5-steps > div { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid #f0d199; border-radius: 10px; padding: 7px 12px; font-size: 18.5px; line-height: 1.4; }
+.u5l5-steps > div > b:first-child { flex: 0 0 auto; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 16px var(--round); margin-top: 1px; }
+.u5l5-msteps { margin: 8px 0; }
+.u5l5-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u5l5-pcol .pill { white-space: nowrap; }
+
+/* ---------------- examples ---------------- */
+.u5l5-ex3 { display: grid; grid-template-columns: 1fr 346px; gap: 18px; align-items: start; margin-bottom: 10px; }
+.u5l5-ex3 .part { margin-bottom: 8px; }
+.u5l5-fig { background: #fff; border-radius: 12px; padding: 8px; text-align: center; }
+.u5l5-ex6 { display: grid; grid-template-columns: 1fr 316px; gap: 18px; align-items: start; margin-bottom: 10px; }
+.u5l5-archfig { width: 300px; height: 230px; display: block; }
+.u5l5-exin { margin-top: 14px; }
+
+/* ---------------- explainers: shared ---------------- */
+.u5l5-pn { display: flex; flex-direction: column; gap: 8px; }
+.u5l5-row { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid #dfe3ea; border-radius: 12px; padding: 7px 12px; font-size: 18px; line-height: 1.5; }
+.u5l5-n { flex: 0 0 auto; display: inline-grid; place-items: center; min-width: 30px; height: 30px; padding: 0 4px; border-radius: 15px; background: #7a1f3d; color: #fff; font: 800 16px var(--round); margin-top: 2px; }
+.u5l5-rc { min-width: 0; }
+.u5l5-row.u5l5-final { border-color: #1f5bd6; background: #f1f5fe; }
+.u5l5-row.u5l5-final .u5l5-n { background: #1f5bd6; }
+.u5l5-row.u5l5-gf { border-style: dashed; }
+.u5l5-row.u5l5-lt .u5l5-n { background: #3a4254; font-size: 14.5px; }
+.u5l5-ring { fill: none; stroke: #7b4fc4; stroke-width: 3.5; }
+.u5l5-hopt { font: 800 15px var(--round); }
+
+/* ---------------- explainer: mirror (a): the subtraction ---------------- */
+.u5l5-sub { background: #fff; border: 2px solid #dfe3ea; border-radius: 12px; padding: 10px 14px; display: grid; gap: 4px; }
+.u5l5-sr { display: grid; grid-template-columns: 92px 64px 26px 64px 26px 40px; align-items: center; font-size: 21px; }
+.u5l5-sr > span { font-size: 15.5px; color: #7b4fc4; }
+.u5l5-sr > b { font-weight: 400; text-align: right; }
+.u5l5-sr > i { font-style: normal; text-align: center; }
+.u5l5-sr > span.u5l5-minus { font-size: 24px; color: #c93a33; text-align: right; padding-right: 10px; }
+.u5l5-sbar { height: 0; border-top: 3px solid #1c2230; margin: 2px 0 2px 92px; width: 216px; }
+.u5l5-q { position: relative; transition: color .3s; }
+.u5l5-q.u5l5-gone { color: #c93a33; }
+.u5l5-q.u5l5-gone::after { content: ''; position: absolute; left: 8px; right: 6px; top: 52%; border-top: 3px solid #c93a33; transform: rotate(-24deg); }
+.u5l5-s3 b { color: #1f5bd6; font-weight: 700; }
+
+/* ---------------- explainer: arch ---------------- */
+.u5l5-scene { pointer-events: none; }
+.u5l5-dim { font: 800 17px var(--round); fill: #1c2230; }
+.u5l5-tick { font: 600 14px var(--font); fill: #1c2230; }
+.u5l5-axt { font: italic 700 18px Georgia, serif; fill: #1c2230; }
+.u5l5-alab, .u5l5-plab { position: absolute; font-size: 16px; padding: 1px 6px; border-radius: 7px; background: rgba(255, 255, 255, .88); white-space: nowrap; }
+.u5l5-plab { color: #7b4fc4; line-height: 1.35; font-size: 15.5px; }
+.u5l5-where { font-size: 17px; line-height: 1.35; min-height: 46px; }
+.u5l5-eqbig { font-size: 25px; background: #f1f5fe; border: 2px solid #1f5bd6; border-radius: 12px; padding: 10px 12px; text-align: center; min-height: 64px; }
+.u5l5-info { font-size: 17px; line-height: 1.55; background: #fff; border: 2px solid #dfe3ea; border-radius: 12px; padding: 6px 12px; }
+.u5l5-abox { font-size: 19px; background: #fff; border: 2px solid #dfe3ea; border-radius: 12px; padding: 6px 12px; }
+.u5l5-every { font: 700 15px var(--round); color: #12805a; margin-left: 6px; }
+.u5l5-pbox { font-size: 16.5px; line-height: 1.4; color: #5b3aa0; background: #f6f2fd; border: 2px solid #cdbdf0; border-radius: 12px; padding: 6px 12px; }
+.u5l5-sl { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 10px; background: #fff; border: 2px solid #7a1f3d; border-radius: 12px; padding: 8px 12px; }
+.u5l5-sll { font: 800 16px var(--round); color: #7a1f3d; }
+.u5l5-sl input { width: 100%; accent-color: #7a1f3d; height: 28px; }
+.u5l5-slv { font: 800 17px var(--round); min-width: 46px; text-align: right; font-variant-numeric: tabular-nums; }

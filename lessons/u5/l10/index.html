@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maximum and Minimum Problems: Algebraic Approach · Math 20-1 5.10</title>
+<meta name="description" content="Math 20-1 Unit 5 Lesson 10: finding the vertex of a quadratic function algebraically (completing the square, x = −b/2a, midway between the zeros, the vertex formula), writing a quadratic function for a situation (number problems, a pen beside a river, a rectangle in a triangle, revenue with price decreases) and finding its maximum or minimum, and questions that ask for a given value. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u5l10.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u5l10">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Race to 21">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="64" y="46" font-size="36" text-anchor="middle">🙂</text></g><text x="170" y="46" font-size="24" text-anchor="middle">1, 2, 3 …<animate attributeName="opacity" values="1;0.15;1" dur="2.0s" begin="0s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.7s" repeatCount="indefinite"/><text x="276" y="46" font-size="36" text-anchor="middle">😎</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Race to 21</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Two players take turns counting up from 1. On your turn you say <b>one, two or three</b> numbers (“1”, or “1, 2”, or “1, 2, 3”). Whoever says <b>21</b> wins.</p><p class="vw-ask">Would you rather go first or second? What is your plan to win?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Two players take turns colouring the numbers 1 to 21 on a track, blue and red, one to three numbers at a time; a trophy waits for whoever says 21"><rect x="0" y="0" width="330" height="250" rx="16" fill="#f6f3ea"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.2s" begin="0s" repeatCount="indefinite"/><text x="42" y="66" font-size="48" text-anchor="middle">🙂</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.2s" begin="0.6s" repeatCount="indefinite"/><text x="288" y="66" font-size="48" text-anchor="middle">😎</text></g><g><rect x="70" y="18" width="62" height="34" rx="12" fill="#fff" stroke="#2b55a0" stroke-width="3"/><text x="101" y="42" font-size="20" font-weight="800" fill="#2b55a0" text-anchor="middle">1, 2</text><animate attributeName="opacity" values="1;0.1;1" dur="2.4s" begin="0s" repeatCount="indefinite"/></g><g><rect x="198" y="18" width="62" height="34" rx="12" fill="#fff" stroke="#c93a33" stroke-width="3"/><text x="229" y="42" font-size="20" font-weight="800" fill="#c93a33" text-anchor="middle">3, 4</text><animate attributeName="opacity" values="1;0.1;1" dur="2.4s" begin="1.2s" repeatCount="indefinite"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="165" y="54" font-size="36" text-anchor="middle">🏆</text></g><rect x="6" y="84" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#2b55a0;#2b55a0;#fff" keyTimes="0;0.043;0.053;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="26.0" y="111" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">1<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.043;0.053;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="51" y="84" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#2b55a0;#2b55a0;#fff" keyTimes="0;0.087;0.097;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="71.0" y="111" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">2<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.087;0.097;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="96" y="84" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.130;0.140;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="116.0" y="111" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">3<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.130;0.140;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="141" y="84" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.174;0.184;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="161.0" y="111" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">4<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.174;0.184;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="186" y="84" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.217;0.227;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="206.0" y="111" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">5<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.217;0.227;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="231" y="84" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#2b55a0;#2b55a0;#fff" keyTimes="0;0.261;0.271;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="251.0" y="111" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">6<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.261;0.271;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="276" y="84" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.304;0.314;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="296.0" y="111" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">7<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.304;0.314;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="6" y="129" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.348;0.358;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="26.0" y="156" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">8<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.348;0.358;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="51" y="129" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.391;0.401;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="71.0" y="156" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">9<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.391;0.401;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="96" y="129" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#2b55a0;#2b55a0;#fff" keyTimes="0;0.435;0.445;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="116.0" y="156" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">10<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.435;0.445;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="141" y="129" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#2b55a0;#2b55a0;#fff" keyTimes="0;0.478;0.488;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="161.0" y="156" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">11<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.478;0.488;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="186" y="129" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.522;0.532;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="206.0" y="156" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">12<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.522;0.532;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="231" y="129" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.565;0.575;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="251.0" y="156" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">13<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.565;0.575;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="276" y="129" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#2b55a0;#2b55a0;#fff" keyTimes="0;0.609;0.619;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="296.0" y="156" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">14<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.609;0.619;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="6" y="174" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.652;0.662;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="26.0" y="201" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">15<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.652;0.662;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="51" y="174" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.696;0.706;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="71.0" y="201" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">16<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.696;0.706;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="96" y="174" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.739;0.749;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="116.0" y="201" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">17<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.739;0.749;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="141" y="174" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#2b55a0;#2b55a0;#fff" keyTimes="0;0.783;0.793;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="161.0" y="201" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">18<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.783;0.793;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="186" y="174" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#2b55a0;#2b55a0;#fff" keyTimes="0;0.826;0.836;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="206.0" y="201" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">19<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.826;0.836;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="231" y="174" width="40" height="40" rx="8" fill="#fff" stroke="#d9d3c4" stroke-width="2"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.870;0.880;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="251.0" y="201" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">20<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.870;0.880;.97;1" dur="14.0s" repeatCount="indefinite"/></text><rect x="276" y="174" width="40" height="40" rx="8" fill="#fff" stroke="#4a4436" stroke-width="3"><animate attributeName="fill" values="#fff;#fff;#c93a33;#c93a33;#fff" keyTimes="0;0.913;0.923;.97;1" dur="14.0s" repeatCount="indefinite"/></rect><text x="296.0" y="201" font-size="18" font-weight="800" text-anchor="middle" fill="#4a4436">21<animate attributeName="fill" values="#4a4436;#4a4436;#fff;#fff;#4a4436" keyTimes="0;0.913;0.923;.97;1" dur="14.0s" repeatCount="indefinite"/></text></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Play a few rounds with the person beside you. Is there a number you always want to say?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Go first and say “1”.</b> To say 21 you need to say <b>17</b> first: then your opponent can only reach 18, 19 or 20, and you finish. For the same reason you want 13, 9, 5 and 1: the winning numbers go up by 4.<br><span class="muted">After every turn of your opponent’s, make the two turns add to 4: they say one number, you say three; they say two, you say two.</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 5 Quadratic Functions · Lesson 10</div>
+  <h1>Maximum and Minimum Problems: Algebraic Approach</h1>
+  <p class="lede">The <b class="u5l10-cv">maximum or minimum</b> of a quadratic function is the <span class="tex">y</span>-coordinate of its <b class="u5l10-cv">vertex</b>. Today algebra finds the vertex <b>exactly</b>: complete the square, use <span class="tex">x=-\frac{b}{2a}</span>, or go midway between the <b class="u5l10-cz">zeros</b>. Then the real work: <b>build the function</b> from a situation and answer every question it asks.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>find the vertex by completing the square, with <span class="tex">x=-\frac{b}{2a}</span>, from the zeros or with the vertex formula, and state the maximum or minimum value</li>
+      <li>write a quadratic function for a situation: number problems, fenced areas, a rectangle in a triangle, and revenue with price changes</li>
+      <li>check that the answer makes sense and answer every part of the question in a sentence, with units</li>
+      <li>solve for a given value (“when is it 12 m high?”) and explain two answers, or none</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF4</b> Analyze quadratic functions of the form <span class="tex">y=ax^2+bx+c</span> to identify characteristics of the corresponding graph, including vertex, domain and range, direction of opening, axis of symmetry, <span class="tex">x</span>- and <span class="tex">y</span>-intercepts, and to solve problems.<br><b>RF5</b> Solve problems that involve quadratic equations.<br><span class="muted">Today: the vertex three ways (and the vertex formula), setting up the function from a situation (numbers, a pen beside a river, a rectangle in a triangle, ticket prices), and questions that ask for a given value.</span></div>
+</section>
+
+<!-- ================= 1. Finding the vertex algebraically ================= -->
+<section class="card" data-ink="s1" data-section="1. Finding the Vertex Algebraically">
+  <div class="sec-h"><span class="badge">1</span><h2>Finding the Vertex Algebraically</h2></div>
+  <p>The maximum or minimum value of a quadratic function is the <span class="tex">y</span>-coordinate of its vertex; it happens at the <span class="tex">x</span>-coordinate. There are three algebraic ways to find the vertex. Use whichever suits the form of the function.</p>
+  <div class="u5l10-forms">
+    <div><b>Vertex form</b><span class="tex">y=a(x-p)^2+q</span><span>(complete the square if needed): vertex <span class="tex">\textcolor{#c27a0e}{(p,\ q)}</span>.</span></div>
+    <div><b>General form</b><span class="tex">y=ax^2+bx+c</span><span>the axis is <span class="tex">x=-\dfrac{b}{2a}</span>; substitute this <span class="tex">x</span> to get the <span class="tex">y</span>-coordinate.</span></div>
+    <div><b>Factored form</b><span class="tex">y=a(x-r)(x-s)</span><span>the axis is midway between the <b class="u5l10-cz">zeros</b>, <span class="tex">x=\dfrac{r+s}{2}</span>; substitute.</span></div>
+  </div>
+  <div class="def amber u5l10-maxmin">If <span class="tex">a&lt;0</span> the parabola opens down and the vertex is a <b>maximum</b>; if <span class="tex">a&gt;0</span> it opens up and the vertex is a <b>minimum</b>.</div>
+  <p class="u5l10-vf">Completing the square on <span class="tex">y=ax^2+bx+c</span> once and for all gives the <b>vertex formula</b> <span class="tex">\left(-\dfrac{b}{2a},\ \dfrac{4ac-b^2}{4a}\right)</span>. It is a shortcut when the numbers are fractions; substituting <span class="tex">x=-\frac{b}{2a}</span> always gives the same <span class="tex">y</span>-value.</p>
+  <div class="explainer" data-explainer="roads"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>The vertex, and the maximum or minimum value</h3></div>
+  <p class="q">Determine the vertex of the graph of each function, and state the maximum or minimum value.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y=3(x+2)^2-5</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex form: vertex <span class="tex">\boldsymbol{(-2,\ -5)}</span>.<br><span class="tex">a=3&gt;0</span>: <b>minimum value <span class="tex">-5</span></b> (at <span class="tex">x=-2</span>).</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y=-2x^2+12x-7</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=-\frac{12}{2(-2)}=3</span><br><span class="tex">y=-2(9)+36-7=11</span><br>Vertex <span class="tex">\boldsymbol{(3,\ 11)}</span>; <span class="tex">a&lt;0</span>: <b>maximum value <span class="tex">11</span></b>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">y=(x-3)(x+7)</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zeros <span class="tex">3</span> and <span class="tex">-7</span>: axis <span class="tex">x=\frac{3+(-7)}{2}=-2</span>.<br><span class="tex">y=(-2-3)(-2+7)=(-5)(5)=-25</span><br>Vertex <span class="tex">\boldsymbol{(-2,\ -25)}</span>; <span class="tex">a=1&gt;0</span>: <b>minimum value <span class="tex">-25</span></b>.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">y=2x^2+5x-1</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=-\frac{5}{2(2)}=-\frac{5}{4}</span><br><span class="tex">y=\frac{4ac-b^2}{4a}=\frac{4(2)(-1)-25}{8}=-\frac{33}{8}</span><br>Vertex <span class="tex">\boldsymbol{\left(-\frac{5}{4},\ -\frac{33}{8}\right)}</span>; <b>minimum value <span class="tex">-\frac{33}{8}</span></b>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>A ball is hit upward</h3></div>
+  <p class="q">A ball is hit upward. Its height in metres after <span class="tex">t</span> seconds is <span class="tex">h(t)=-5t^2+30t+2</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Complete the square to write <span class="tex">h(t)</span> in vertex form.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">h(t)=-5(t^2-6t)+2</span><br><span class="tex">=-5(t^2-6t+9-9)+2</span><br><span class="tex">=-5(t-3)^2+45+2</span><br><span class="tex">\boldsymbol{h(t)=-5(t-3)^2+47}</span></div></div></div>
+    <div class="part"><div class="pl">(b) How high is the ball after <span class="tex">1</span> s?</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">h(1)=-5(1-3)^2+47=-20+47=\boldsymbol{27}</span> <b>m</b></div></div></div>
+    <div class="part"><div class="pl">(c) What is the maximum height, and when is it reached?</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex <span class="tex">(3,\ 47)</span>, <span class="tex">a&lt;0</span>: a <b>maximum height of 47 m after 3 s</b>.</div></div></div>
+    <div class="part"><div class="pl">(d) How high was the ball when it was hit?</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">h(0)=\boldsymbol{2}</span> <b>m</b></div></div></div>
+  </div>
+  <div class="part"><div class="pl">(e) When does the ball hit the ground? Answer to the nearest hundredth of a second.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-5(t-3)^2+47=0\Rightarrow(t-3)^2=\frac{47}{5}=9.4</span><br><span class="tex">t-3=\pm\sqrt{9.4}\Rightarrow t=3\pm3.066</span><br><span class="tex">\boldsymbol{t\approx6.07}</span> <b>s</b> (<span class="tex">t\approx-0.07</span> is rejected: it is before the hit).</div></div></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check (c) and (e) on the calculator.</b> Type <span class="tex">-5x^2+30x+2</span> in <span class="keys"><kbd>Y=</kbd></span>, set the <span class="keys"><kbd>WINDOW</kbd></span> to <span class="tex">0\le x\le8</span>, <span class="tex">-10\le y\le60</span>, then <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd><kbd>4</kbd></span> (maximum) gives <b>(3, 47)</b> and <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd><kbd>2</kbd></span> (zero) gives <b>6.0659…</b></div>
+    <div class="u5l10-pcol"><button class="pill" data-keys="Y= CLEAR (−) 5 X x² + 30 X + 2 WINDOW 0 ENTER 8 ENTER 1 ENTER (−) 10 ENTER 60 ENTER 10 ENTER GRAPH maximum 2 ENTER 4 ENTER 3 ENTER">Show the maximum</button><button class="pill" data-keys="Y= CLEAR (−) 5 X x² + 30 X + 2 WINDOW 0 ENTER 8 ENTER 1 ENTER (−) 10 ENTER 60 ENTER 10 ENTER GRAPH zero 5 ENTER 7 ENTER 6 ENTER">Show the zero</button></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s1b" data-section="1. Watch the ball fly">
+  <h3 class="sub">Watch the ball fly</h3>
+  <p>The height is on both sides of the picture: the ball on the left goes up and down while its graph is drawn. Every answer to Example 2 is a point on this curve.</p>
+  <div class="explainer" data-explainer="flight"></div>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u5l10"></section>
+
+<!-- ================= 2. Setting up the function ================= -->
+<section class="card" data-ink="s2" data-section="2. Setting Up the Function">
+  <div class="sec-h"><span class="badge">2</span><h2>Setting Up the Function</h2></div>
+  <p>In most problems the function is not given: you build it.</p>
+  <div class="u5l10-steps6">
+    <div><b>1</b>Let <span class="tex">\textcolor{#12805a}{x}</span> be one quantity (draw a diagram when there is a shape).</div>
+    <div><b>2</b>Write every other quantity <b>in terms of <span class="tex">x</span></b>.</div>
+    <div><b>3</b>Write the function for the quantity to be made <b>greatest or least</b>.</div>
+    <div><b>4</b>Find the <b>vertex</b> algebraically.</div>
+    <div><b>5</b>Check that the <span class="tex">x</span>-value makes sense (lengths positive, counts whole).</div>
+    <div><b>6</b>Answer every part of the question in a sentence, with units.</div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Number problems</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Two numbers have a sum of <span class="tex">30</span>. Determine the numbers whose product is as large as possible, and that product.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let one number be <span class="tex">x</span>; the other is <span class="tex">30-x</span>.<br><span class="tex">P(x)=x(30-x)=-x^2+30x</span><br>Zeros <span class="tex">0</span> and <span class="tex">30</span>: axis <span class="tex">x=15</span>.<br><span class="tex">P(15)=15(15)=225</span><br>The numbers are <b>15 and 15</b>; the <b>maximum product is 225</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) One number is <span class="tex">4</span> more than three times another. Determine the numbers whose product is as small as possible, and that product.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let the number be <span class="tex">x</span>; the other is <span class="tex">3x+4</span>.<br><span class="tex">P(x)=x(3x+4)=3x^2+4x</span><br><span class="tex">x=-\frac{4}{2(3)}=-\frac{2}{3}</span>; other: <span class="tex">3\left(-\frac{2}{3}\right)+4=2</span><br><span class="tex">P=-\frac{2}{3}(2)=-\frac{4}{3}</span><br>The numbers are <b><span class="tex">-\frac{2}{3}</span> and 2</b>; the <b>minimum product is <span class="tex">-\frac{4}{3}</span></b>.</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Area problems ================= -->
+<section class="card" data-ink="s3" data-section="3. Area Problems">
+  <div class="sec-h"><span class="badge">3</span><h2>Area Problems</h2></div>
+  <p>With a fixed length of fencing, the area of a rectangle depends on its shape. Write one side as <span class="tex">\textcolor{#12805a}{x}</span>, use the fencing total to write the <span class="u5l10-co">other side</span> in terms of <span class="tex">x</span>, and multiply. Only the sides that are fenced use fencing: a side along a wall or a river does not, and a dividing fence inside does.</p>
+  <div class="explainer" data-explainer="shape"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>A pen beside a river</h3></div>
+  <div class="u5l10-qfig">
+    <div>
+      <p class="q">A farmer has <span class="tex">240</span> m of fencing to make a rectangular pen beside a river. No fence is needed along the river, and a fence perpendicular to the river divides the pen into two parts, as shown.</p>
+      <div class="part"><div class="pl">(a) Let <span class="tex">x</span> be the length of each fence perpendicular to the river. Show that the area is <span class="tex">A(x)=240x-3x^2</span>.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Three fences of length <span class="tex">x</span> use <span class="tex">3x</span> m, so the side parallel to the river is <span class="tex">240-3x</span>.<br><span class="tex">A(x)=x(240-3x)=240x-3x^2</span></div></div></div>
+    </div>
+    <svg class="u5l10-fig" viewBox="0 0 300 200" role="img" aria-label="A rectangular pen against a river, divided in two by a fence perpendicular to the river. The three perpendicular fences are each x; the side parallel to the river is 240 − 3x.">
+      <rect x="10" y="14" width="280" height="20" rx="4" fill="#cfe2fb"/><path d="M14 24 q14 -7 28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0 t28 0" fill="none" stroke="#5b8fd9" stroke-width="2.5"/>
+      <text x="150" y="12" class="u5l10-ft" text-anchor="middle">river</text>
+      <rect x="40" y="34" width="220" height="110" fill="#e8f3e9"/>
+      <g stroke="#12805a" stroke-width="5" stroke-linecap="round"><line x1="40" y1="34" x2="40" y2="144"/><line x1="150" y1="34" x2="150" y2="144"/><line x1="260" y1="34" x2="260" y2="144"/></g>
+      <line x1="40" y1="144" x2="260" y2="144" stroke="#a33357" stroke-width="5" stroke-linecap="round"/>
+      <g class="u5l10-ft" fill="#12805a" style="font-style:italic"><text x="28" y="96" text-anchor="end">x</text><text x="162" y="96">x</text><text x="272" y="96">x</text></g>
+      <text x="150" y="176" class="u5l10-ft" fill="#a33357" text-anchor="middle">240 − 3<tspan style="font-style:italic">x</tspan></text>
+    </svg>
+  </div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(b) Complete the square to find the maximum area.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A(x)=-3(x^2-80x)</span><br><span class="tex">=-3(x^2-80x+1\,600-1\,600)</span><br><span class="tex">=-3(x-40)^2+4\,800</span><br><b>Maximum area <span class="tex">4\,800\text{ m}^2</span></b>, when <span class="tex">x=40</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) State the dimensions of the pen with the maximum area.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=40</span> m; <span class="tex">240-3(40)=120</span> m.<br>The pen is <b>40 m by 120 m</b>.<br>Check: <span class="tex">3(40)+120=240</span> m of fence.</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- sources: https://en.wikipedia.org/wiki/Dido (the oxhide story from Justin's epitome of Pompeius Trogus; Byrsa = "oxhide" in Greek; founding date 814 BC from Timaeus);
+     https://arxiv.org/abs/2301.02917 ("Dido's Problem. When a myth of ancient literature became a problem of variational calculus": Virgil, Aeneid 1.365–368; the sea coast and the half circle are modern additions; Lord Kelvin, 1893) -->
+<!-- ================= Math History box (brown) ================= -->
+<section class="card history" data-ink="hist" data-section="Math History: Dido's Problem">
+  <div class="hist-head"><span class="hist-tag">Math History</span><span class="hist-dates">Carthage · traditionally 814 BCE</span></div>
+  <div class="hist-grid">
+    <div class="hist-text">
+      <h3 class="hist-title">Dido and the oxhide</h3>
+      <p>Legend says that Dido, a princess from Tyre, was offered only as much land on the coast of North Africa as one <b>oxhide</b> could enclose. She cut the hide into thin strips, joined them into one long cord and enclosed a whole hill, where she founded <b>Carthage</b>. Virgil tells the story in the <i>Aeneid</i>.</p>
+      <p>Modern retellings make the <b>sea</b> one side of her land, just like today’s river: a fixed length of “fence” and none along the water.</p>
+      <div class="part hist-q"><div class="pl">Dido’s cord is <span class="tex">1\,000</span> m long and the sea is one side. Which rectangle encloses the most land?</div>
+        <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A(x)=x(1\,000-2x)</span>: zeros <span class="tex">0</span> and <span class="tex">500</span>, so <span class="tex">x=250</span>.<br><b>250 m by 500 m</b>: <span class="tex">125\,000\text{ m}^2</span>.</div></div></div>
+    </div>
+    <figure class="hist-anim">
+      <svg id="u5l10-hist" viewBox="0 0 600 300" role="img" aria-label="An oxhide is cut into one long cord, which is laid against the sea as a 250 m by 500 m rectangle (125 000 square metres), then as a half circle that encloses about 159 000 square metres."></svg>
+      <figcaption><button class="hist-play" type="button">Replay</button><span>Tap the picture to play it again.</span></figcaption>
+      <p class="hist-note">Enclosing the most area with a fixed boundary is still called <b>Dido’s problem</b>. With the sea as one side, the best shape of all is a <b>half circle</b> (Lord Kelvin, 1893); the ancient sources only mention the strips.</p>
+    </figure>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>A rectangle in a triangle</h3></div>
+  <div class="u5l10-qfig">
+    <div>
+      <p class="q">A rectangle is drawn inside a right triangle with legs <span class="tex">12</span> cm and <span class="tex">8</span> cm. Two sides of the rectangle lie along the legs, and its fourth corner is on the hypotenuse, as shown.</p>
+      <div class="part"><div class="pl">(a) Let the width of the rectangle be <span class="tex">x</span> cm. Use similar triangles to show that its height is <span class="tex">y=8-\frac{2}{3}x</span>.</div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The small triangle to the right of the rectangle has base <span class="tex">12-x</span> and height <span class="tex">y</span>, and is similar to the whole triangle:<br><span class="tex">\dfrac{y}{12-x}=\dfrac{8}{12}</span>, so <span class="tex">y=\frac{2}{3}(12-x)=8-\frac{2}{3}x</span>.</div></div></div>
+    </div>
+    <svg class="u5l10-fig" viewBox="0 0 300 200" role="img" aria-label="A right triangle with horizontal leg 12 and vertical leg 8. A shaded rectangle of width x and height y sits in the right-angle corner with its top right corner on the hypotenuse; the rest of the base is 12 − x.">
+      <path d="M40 166 L256 166 L40 22 Z" fill="#fff" stroke="#1c2230" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M148 166 L256 166 L148 94 Z" fill="#fde9cf"/>
+      <rect x="40" y="94" width="108" height="72" fill="#dbe7fb" stroke="#1f5bd6" stroke-width="3"/>
+      <path d="M40 154 h12 v12" fill="none" stroke="#1c2230" stroke-width="2"/>
+      <circle cx="148" cy="94" r="5" fill="#1f5bd6"/>
+      <g class="u5l10-ft"><text x="94" y="188" text-anchor="middle" fill="#12805a" style="font-style:italic">x</text><text x="202" y="188" text-anchor="middle">12 − <tspan style="font-style:italic">x</tspan></text>
+        <text x="30" y="136" text-anchor="end" fill="#a33357" style="font-style:italic">y</text><text x="30" y="64" text-anchor="end">8</text></g>
+    </svg>
+  </div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(b) Write the area <span class="tex">A(x)</span> of the rectangle and find the dimensions that give the greatest area.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A(x)=x\left(8-\frac{2}{3}x\right)=-\frac{2}{3}x^2+8x</span><br>Zeros <span class="tex">0</span> and <span class="tex">12</span>: axis <span class="tex">x=6</span>.<br><span class="tex">y=8-4=4</span>; <span class="tex">A=6(4)=24\text{ cm}^2</span>.<br>The rectangle is <b>6 cm by 4 cm</b>.</div></div></div>
+    <div class="part"><div class="pl">(c) Compare the greatest area with the area of the triangle.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Triangle: <span class="tex">\frac{1}{2}(12)(8)=48\text{ cm}^2</span>.<br>The largest rectangle fills <b>exactly half</b> the triangle, with each side half of a leg.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–7">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 10 · Questions 1–7</h2>
+  <p class="pr-t">Find the vertex the quickest way, then build the function from the story and find its vertex.</p>
+  <div class="pr-chips n4"><span><b>1–2</b>The vertex three ways</span><span><b>3</b>The soccer ball</span><span><b>4</b>Number problems</span><span><b>5–7</b>Fences and a rectangle in a triangle</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u5l10">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. Revenue problems ================= -->
+<section class="card" data-ink="s4" data-section="4. Revenue Problems">
+  <div class="sec-h"><span class="badge">4</span><h2>Revenue Problems</h2></div>
+  <p>Let <span class="tex">x</span> be the number of price changes, write the <span class="u5l10-cp">price</span> and the <span class="u5l10-cn">number sold</span> in terms of <span class="tex">x</span>, and multiply: <span class="tex">R(x)=(\text{price})(\text{number sold})</span>. Leaving <span class="tex">R(x)</span> as a product of two linear factors is useful: each factor gives a <b class="u5l10-cz">zero</b>, and the maximum is midway between the zeros.</p>
+  <div class="explainer" data-explainer="revenue"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Concert tickets</h3></div>
+  <p class="q">A theatre sells <span class="tex">900</span> concert tickets at <span class="tex">\$40</span> each. For every <span class="tex">\$5</span> decrease in price, it expects to sell <span class="tex">150</span> more tickets.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Let <span class="tex">x</span> be the number of <span class="tex">\$5</span> decreases. Write the revenue function.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Price: <span class="tex">40-5x</span>; tickets: <span class="tex">900+150x</span>.<br><span class="tex">\boldsymbol{R(x)=(40-5x)(900+150x)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Use the zeros to find the price that gives the maximum revenue.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">40-5x=0\Rightarrow x=8</span>; &nbsp; <span class="tex">900+150x=0\Rightarrow x=-6</span>.<br>Axis: <span class="tex">x=\frac{8+(-6)}{2}=1</span>. One decrease: <b>price $35</b>.</div></div></div>
+    <div class="part"><div class="pl">(c) State the number of tickets sold and the maximum revenue. Compare with the current revenue.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">900+150=1\,050</span> tickets; <span class="tex">R(1)=35(1\,050)=\$36\,750</span>.<br>Now: <span class="tex">40(900)=\$36\,000</span>, so <b>$750 more</b>.</div></div></div>
+    <div class="part"><div class="pl">(d) Check part (b) with <span class="tex">x=-\dfrac{b}{2a}</span>.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">R(x)=36\,000+6\,000x-4\,500x-750x^2</span><br><span class="tex">=-750x^2+1\,500x+36\,000</span><br><span class="tex">x=-\frac{1\,500}{2(-750)}=1\ \checkmark</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 5. When the question asks for a given value ================= -->
+<section class="card" data-ink="s5" data-section="5. When the Question Asks for a Given Value">
+  <div class="sec-h"><span class="badge">5</span><h2>When the Question Asks for a Given Value</h2></div>
+  <p>Not every question in a problem asks for a maximum. “When is the ball 12 m high?” or “What are the dimensions?” means: <b>set the function equal to the given value</b>, write the equation in standard form, and solve it by factoring or by the quadratic formula. Two admissible answers are common (on the way up and on the way down); a <b class="u5l10-cr">negative discriminant</b> means the value is never reached.</p>
+  <div class="explainer" data-explainer="heightLine"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>A given value</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) A stone is thrown straight up. Its height in metres after <span class="tex">t</span> seconds is <span class="tex">h(t)=18t-5t^2</span>. When is it <span class="tex">12</span> m high? Answer to the nearest tenth of a second and explain the two answers. Can the stone reach <span class="tex">20</span> m?</div><div class="work" style="--h:270px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">18t-5t^2=12\Rightarrow5t^2-18t+12=0</span><br><span class="tex">t=\frac{18\pm\sqrt{324-240}}{10}=\frac{18\pm\sqrt{84}}{10}</span><br><span class="tex">t\approx0.9</span> s (going up) and <span class="tex">t\approx2.7</span> s (coming down).<br>20 m: <span class="tex">5t^2-18t+20=0</span> has <span class="tex">b^2-4ac=324-400&lt;0</span>, no real roots. <b>No</b>: the maximum is <span class="tex">h(1.8)=16.2</span> m.</div></div></div>
+    <div class="part"><div class="pl">(b) The two shorter sides of a right-triangular garden bed have a total length of <span class="tex">17</span> m, and the longest side is <span class="tex">13</span> m. Determine the lengths of the two shorter sides.</div><div class="work" style="--h:270px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let one side be <span class="tex">x</span>; the other is <span class="tex">17-x</span>.<br><span class="tex">x^2+(17-x)^2=13^2</span><br><span class="tex">2x^2-34x+289=169</span><br><span class="tex">2x^2-34x+120=0\Rightarrow x^2-17x+60=0</span><br><span class="tex">(x-5)(x-12)=0</span>, <span class="tex">x=5</span> or <span class="tex">x=12</span>.<br>The shorter sides are <b>5 m and 12 m</b>.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>A given value on the calculator.</b> Put <span class="tex">18x-5x^2</span> in <span class="tex">Y_1</span> and <span class="tex">12</span> in <span class="tex">Y_2</span>, set the <span class="keys"><kbd>WINDOW</kbd></span> to <span class="tex">0\le x\le4</span>, <span class="tex">0\le y\le20</span>, then <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd><kbd>5</kbd></span> (intersect) with a guess near each crossing: <b>0.8835…</b> and <b>2.7165…</b></div>
+    <div class="u5l10-pcol"><button class="pill" data-keys="Y= CLEAR 18 X − 5 X x² ▼ CLEAR 12 WINDOW 0 ENTER 4 ENTER 1 ENTER 0 ENTER 20 ENTER 2 ENTER GRAPH intersect ENTER ENTER 1 ENTER">Going up</button><button class="pill" data-keys="Y= CLEAR 18 X − 5 X x² ▼ CLEAR 12 WINDOW 0 ENTER 4 ENTER 1 ENTER 0 ENTER 20 ENTER 2 ENTER GRAPH intersect ENTER ENTER 3 ENTER">Coming down</button></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>The vertex, three ways.</b> Vertex form: read <span class="tex">(p,\ q)</span>. General form: <span class="tex">x=-\frac{b}{2a}</span>, then substitute (or the vertex formula). Factored form: midway between the zeros. <span class="tex">a&lt;0</span>: maximum; <span class="tex">a&gt;0</span>: minimum.</div>
+    <div><b>Build the function.</b> Let <span class="tex">x</span> be one quantity, write the others in terms of <span class="tex">x</span>, write the function to be made greatest or least, find its vertex, check it makes sense, answer in a sentence with units.</div>
+    <div><b>Areas and revenue.</b> Only fenced sides use fencing; an inside fence does. Revenue <span class="tex">=(\text{price})(\text{number sold})</span>: keep it factored, and the maximum is midway between the zeros.</div>
+    <div><b>A given value.</b> Set the function equal to it, standard form, factor or the quadratic formula. Often two answers (up and down); a negative discriminant means never.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u5l10">
+    <div><div class="kicker">Your turn</div><b>Assignment 10 · Questions 8–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l11/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 11 — Unit 5 Review</b><div class="muted">Quadratic functions, all together: the forms, their graphs, and the problems.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u5l10.js';
+  boot({ key: 'u5l10', homeHref: '../../', title: '5.10 Max and Min: Algebra' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

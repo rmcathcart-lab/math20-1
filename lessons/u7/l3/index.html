@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Absolute Value of Quadratic Functions · Math 20-1 7.3</title>
+<meta name="description" content="Math 20-1 Unit 7 Lesson 3: graphing y = |f(x)| for a quadratic function. A table of values, then reflecting the part of the parabola below the x-axis; three cases (crosses the axis, entirely above, entirely below); invariant points, domain and range, the y-intercept |f(0)|; the piecewise form with subdomains from the zeros; working backwards to the two possible functions f, and problems. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u7l3.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u7l3">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Skipping Stone">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><line x1="0" y1="52" x2="340" y2="52" stroke="#8ec9ea" stroke-width="4" stroke-dasharray="18 10"><animate attributeName="stroke-dashoffset" values="0;-28" dur="1.2s" repeatCount="indefinite"/></line><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="9s" begin="0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="1.1s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="34" text-anchor="middle" transform="scale(-1 1)">🦆</text></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -9;0 0" dur="1.3s" begin="0s" repeatCount="indefinite"/><text x="306" y="44" font-size="34" text-anchor="middle">🐸</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Skipping Stone</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Maya skips a stone across a pond that is <b>20 m</b> wide. Its first hop is <b>4 m</b> long, and every hop after that is <b>¾</b> as long as the hop before it.</p><p class="vw-ctx">Pretend the stone never sinks: it keeps hopping forever.</p><p class="vw-ask">Does the stone ever reach the other side of the pond?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A pond with a stone skipping across it in smaller and smaller hops, with ripples where it touches the water"><rect x="0" y="0" width="330" height="250" rx="14" fill="#eaf4fb"/><path d="M0 128 Q55 92 112 118 Q178 80 238 112 Q290 92 330 106 V250 H0 Z" fill="#cfe6c4"/><rect x="0" y="140" width="330" height="110" fill="#e3cf9f"/><path d="M34 146 H300 Q312 192 300 238 H34 Q22 192 34 146 Z" fill="#8ec9ea" stroke="#5aa3cf" stroke-width="3"/><path d="M60 214 q10 -5 20 0 t20 0 M160 226 q10 -5 20 0 t20 0 M232 212 q8 -4 16 0 t16 0" fill="none" stroke="#ffffff" stroke-width="2" opacity=".7"/><line x1="40" y1="64" x2="294" y2="64" stroke="#4a4436" stroke-width="2.5"/><path d="M40 64 l10 -6 v12 z M294 64 l-10 -6 v12 z" fill="#4a4436"/><line x1="40" y1="56" x2="40" y2="140" stroke="#4a4436" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="294" y1="56" x2="294" y2="140" stroke="#4a4436" stroke-width="1.5" stroke-dasharray="4 4"/><rect x="142" y="50" width="52" height="28" rx="8" fill="#ffffff" stroke="#4a4436" stroke-width="2"/><text x="168" y="70" font-size="18" font-weight="800" fill="#4a4436" text-anchor="middle">20 m</text><text x="16" y="146" font-size="34" text-anchor="middle">🧒</text><text x="318" y="150" font-size="24" text-anchor="middle">🚩</text><path d="M44 196 Q79 116 114 196 Q140 136 166 196 Q185.5 152 205 196 Q219.5 164 234 196 Q245 172 256 196 Q264 178 272 196" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-dasharray="3 6" opacity=".85"/><g fill="none" stroke="#ffffff" stroke-width="2.5"><ellipse cx="114" cy="198" rx="2" ry="1" opacity="0"><animate attributeName="rx" values="2;18;18" keyTimes="0;.3;1" dur="3.5s" begin="0.86s" repeatCount="indefinite"/><animate attributeName="ry" values="1;5;5" keyTimes="0;.3;1" dur="3.5s" begin="0.86s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;0" keyTimes="0;.3;1" dur="3.5s" begin="0.86s" repeatCount="indefinite"/></ellipse><ellipse cx="166" cy="198" rx="2" ry="1" opacity="0"><animate attributeName="rx" values="2;15;15" keyTimes="0;.3;1" dur="3.5s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="ry" values="1;4.5;4.5" keyTimes="0;.3;1" dur="3.5s" begin="1.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;0" keyTimes="0;.3;1" dur="3.5s" begin="1.5s" repeatCount="indefinite"/></ellipse><ellipse cx="205" cy="198" rx="2" ry="1" opacity="0"><animate attributeName="rx" values="2;13;13" keyTimes="0;.3;1" dur="3.5s" begin="1.98s" repeatCount="indefinite"/><animate attributeName="ry" values="1;4;4" keyTimes="0;.3;1" dur="3.5s" begin="1.98s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;0" keyTimes="0;.3;1" dur="3.5s" begin="1.98s" repeatCount="indefinite"/></ellipse><ellipse cx="234" cy="198" rx="2" ry="1" opacity="0"><animate attributeName="rx" values="2;11;11" keyTimes="0;.3;1" dur="3.5s" begin="2.33s" repeatCount="indefinite"/><animate attributeName="ry" values="1;3.5;3.5" keyTimes="0;.3;1" dur="3.5s" begin="2.33s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;0" keyTimes="0;.3;1" dur="3.5s" begin="2.33s" repeatCount="indefinite"/></ellipse><ellipse cx="256" cy="198" rx="2" ry="1" opacity="0"><animate attributeName="rx" values="2;9;9" keyTimes="0;.3;1" dur="3.5s" begin="2.6s" repeatCount="indefinite"/><animate attributeName="ry" values="1;3;3" keyTimes="0;.3;1" dur="3.5s" begin="2.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;0" keyTimes="0;.3;1" dur="3.5s" begin="2.6s" repeatCount="indefinite"/></ellipse></g><ellipse cx="0" cy="0" rx="7" ry="4.5" fill="#6f6a60" stroke="#4a4436" stroke-width="1.5"><animateMotion path="M44 196 Q79 116 114 196 Q140 136 166 196 Q185.5 152 205 196 Q219.5 164 234 196 Q245 172 256 196 Q264 178 272 196" keyPoints="0;1;1" keyTimes="0;.8;1" calcMode="linear" dur="3.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;.8;.86;1" dur="3.5s" repeatCount="indefinite"/></ellipse><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="296" y="120" font-size="38" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Guess first: yes or no? Then add up a few hops.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>No, never!</b> The hops are <span class="tex">4+3+2.25+1.6875+\dots</span> metres: a geometric series with <span class="tex">r=\frac34</span>.<br>Its sum is <span class="tex">S_\infty=\dfrac{4}{1-\frac34}=16</span> m, so even after infinitely many hops the stone gets closer and closer to <b>16 m</b> and stays <b>4 m</b> short of the far side.<br><span class="muted">The twist: infinitely many hops can still add up to a short distance. (The first 10 hops already cover about 15 m; the next million barely add another metre.)</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 7 Absolute Value and Reciprocal Functions · Lesson 3</div>
+  <h1>Graphing Absolute Value Functions of Quadratic Functions</h1>
+  <p class="lede">The rule from Lesson 2 works for parabolas too: keep what is on or above the <span class="tex">x</span>-axis and <b class="u7l3-cn">flip up</b> what is below it. A parabola that dips below the axis turns into a <b class="u7l3-ca">W</b> (or an M with its arms bent up), and where the parabola sits decides how much of it changes.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>complete a table of values for <span class="tex">y=|f(x)|</span> and sketch it by reflecting the part of the parabola below the <span class="tex">x</span>-axis</li>
+      <li>sketch <span class="tex">y=|f(x)|</span> from a graph or an equation when the parabola crosses the axis, is entirely above it, or is entirely below it</li>
+      <li>state the invariant points, the domain and range, the <span class="tex">y</span>-intercept <span class="tex">|f(0)|</span> and the vertex of the graph</li>
+      <li>write <span class="tex">y=|f(x)|</span> in piecewise form, with subdomains from the zeros</li>
+      <li>work backwards from the graph of <span class="tex">y=|f(x)|</span> to the two possible functions <span class="tex">f</span>, and solve problems</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF2</b> Graph and analyze absolute value functions (limited to linear and quadratic functions) to solve problems.<br><span class="muted">Today: <span class="tex">y=|f(x)|</span> for quadratic functions, from a table and from a sketch; the three cases; invariant points, domain, range and the <span class="tex">y</span>-intercept; piecewise form; working backwards and problems.</span></div>
+</section>
+
+<!-- ================= 1. From y = f(x) to y = |f(x)| ================= -->
+<section class="card" data-ink="s1" data-section="1. From f(x) to |f(x)|">
+  <div class="sec-h"><span class="badge">1</span><h2>From <span class="tex">y=f(x)</span> to <span class="tex">y=|f(x)|</span> for a Parabola</h2></div>
+  <p class="u7l3-p">The rule from Lesson 2 works for every function: keep the part of the graph of <span class="tex">y=f(x)</span> that is on or above the <span class="tex">x</span>-axis, and reflect the part below the <span class="tex">x</span>-axis in the <span class="tex">x</span>-axis, <span class="tex">(x,\ y)\to(x,\ -y)</span>. Each <span class="tex">y</span>-value of <span class="tex">y=|f(x)|</span> is the absolute value of the <span class="tex">y</span>-value of <span class="tex">y=f(x)</span> at the same <span class="tex">x</span>.</p>
+  <p class="u7l3-p">For a parabola that crosses the <span class="tex">x</span>-axis twice, the part below the axis is a single arc: the arc <b>between the zeros</b> when the parabola opens up, and the two arms <b>outside the zeros</b> when it opens down. After the reflection the graph has a sharp corner at each <span class="tex">x</span>-intercept, and the vertex of that arc is reflected too.</p>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>A table of values, then two graphs</h3></div>
+  <p class="q">Consider <span class="tex">f(x)=x^2-2x-3</span>.</p>
+  <div class="u7l3-ex1">
+    <div class="u7l3-col">
+      <div class="part"><div class="pl">(a) Complete the table of values.</div>
+        <table class="u7l3-vt">
+          <tr><th><span class="tex">x</span></th><th><span class="tex">y=f(x)</span></th><th><span class="tex">y=|f(x)|</span></th></tr>
+          <tr><td><span class="tex">-2</span></td><td><span data-reveal><span class="tex">5</span></span></td><td><span data-reveal><span class="tex">5</span></span></td></tr>
+          <tr><td><span class="tex">-1</span></td><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal><span class="tex">0</span></span></td></tr>
+          <tr><td><span class="tex">0</span></td><td><span data-reveal><span class="tex">-3</span></span></td><td><span data-reveal><span class="tex">3</span></span></td></tr>
+          <tr><td><span class="tex">1</span></td><td><span data-reveal><span class="tex">-4</span></span></td><td><span data-reveal><span class="tex">4</span></span></td></tr>
+          <tr><td><span class="tex">2</span></td><td><span data-reveal><span class="tex">-3</span></span></td><td><span data-reveal><span class="tex">3</span></span></td></tr>
+          <tr><td><span class="tex">3</span></td><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal><span class="tex">0</span></span></td></tr>
+          <tr><td><span class="tex">4</span></td><td><span data-reveal><span class="tex">5</span></span></td><td><span data-reveal><span class="tex">5</span></span></td></tr>
+        </table>
+        <div class="ansrow"><button class="reveal">Answer</button><div class="ans">e.g. <span class="tex">f(0)=-3</span>, so <span class="tex">|f(0)|=3</span>; <span class="tex">f(1)=1-2-3=-4</span>, so <span class="tex">|f(1)|=4</span>.</div></div></div>
+      <div class="part"><div class="pl">(c) Which points are the same on both graphs? Which part of <span class="tex">y=f(x)</span> was reflected?</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The points with <span class="tex">f(x)\ge0</span> are unchanged, including the invariant points <span class="tex">(-1,\ 0)</span> and <span class="tex">(3,\ 0)</span>.<br>The arc between the zeros, <span class="tex">-1&lt;x&lt;3</span>, was below the axis and is reflected. The vertex <span class="tex">(1,\ -4)</span> becomes <span class="tex">(1,\ 4)</span>.</div></div></div>
+    </div>
+    <div class="part u7l3-skp"><div class="pl">(b) Plot both graphs on the grid.</div>
+      <div class="u7l3-sk">
+        <div data-bk-graph='{"width":380,"height":470,"xmin":-3,"xmax":5,"ymin":-5,"ymax":6,"fontSize":14}'></div>
+        <div class="u7l3-ska" data-bk-graph='{"width":380,"height":470,"xmin":-3,"xmax":5,"ymin":-5,"ymax":6,"fontSize":14,"items":[{"fn":["x^2-2*x-3",{"color":"blue","width":2.5,"dash":true,"from":-2.2,"to":4.2}]},{"fn":["abs(x^2-2*x-3)",{"color":"purple","width":4.5,"from":-2.2,"to":4.2}]},{"point":[-2,5,{"color":"purple"}]},{"point":[0,3,{"color":"purple"}]},{"point":[1,4,{"color":"purple"}]},{"point":[2,3,{"color":"purple"}]},{"point":[4,5,{"color":"purple"}]},{"point":[-1,0,{"color":"amber"}]},{"point":[3,0,{"color":"amber"}]},{"label":[2.7,5.4,"y=|f(x)|",{"tex":true,"color":"purple","cls":"bk-ptlab"}]},{"label":[2.6,-4.4,"y=f(x)",{"tex":true,"color":"blue","cls":"bk-ptlab"}]}]}'></div>
+      </div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="u7l3-cf">Dashed: <span class="tex">y=f(x)</span></span> &nbsp; <span class="u7l3-ca">Solid: <span class="tex">y=|f(x)|</span></span></div></div>
+    </div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s1k" data-section="Key idea: sketching |f(x)|">
+  <div class="def amber u7l3-key"><div class="u7l3-keyh">Key idea: to sketch <span class="tex">y=|f(x)|</span> for a quadratic function <span class="tex">f</span></div>
+    <ol class="u7l3-steps">
+      <li>Sketch <span class="tex">y=f(x)</span> (vertex, <span class="tex">x</span>-intercepts, <span class="tex">y</span>-intercept).</li>
+      <li>Keep every part on or above the <span class="tex">x</span>-axis.</li>
+      <li>Reflect every part below the <span class="tex">x</span>-axis in the <span class="tex">x</span>-axis: the <span class="tex">y</span>-values change sign, the <span class="tex">x</span>-values stay.</li>
+      <li>The <span class="tex">x</span>-intercepts are the <b class="u7l3-ci">invariant points</b>; a vertex <span class="tex">(p,\ q)</span> below the axis moves to <span class="tex">(p,\ -q)</span>.</li>
+    </ol>
+  </div>
+  <div class="explainer" data-explainer="flip"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check with the calculator.</b> The absolute value is <span class="keys"><kbd>MATH</kbd><kbd>►</kbd><kbd>1</kbd></span> <b>abs(</b>. Put <span class="tex">|x^2-2x-3|</span> in <span class="keys"><kbd>Y=</kbd></span> and graph it, or look at its table (Example 1).</div>
+    <div class="u7l3-pcol"><button class="pill" data-keys="Y= CLEAR abs( X x² − 2 X − 3 ) ZStandard">Graph</button><button class="pill" data-keys="Y= CLEAR abs( X x² − 2 X − 3 ) TBLSET (−) 2 ENTER 1 ENTER TABLE">Table</button></div>
+  </div>
+</section>
+
+<!-- ================= 2. Sketching from a graph or an equation ================= -->
+<section class="card" data-ink="s2" data-section="2. Sketching |f(x)|">
+  <div class="sec-h"><span class="badge">2</span><h2>Sketching <span class="tex">y=|f(x)|</span> from a Graph or an Equation</h2></div>
+  <p class="u7l3-p">Where the parabola sits decides how much of it changes:</p>
+  <ul class="u7l3-ul">
+    <li>it <b>crosses</b> the <span class="tex">x</span>-axis: only the part below the axis is reflected, and the graph has two invariant points;</li>
+    <li>it is <b>entirely above</b> the <span class="tex">x</span>-axis: nothing changes, <span class="tex">|f(x)|=f(x)</span>;</li>
+    <li>it is <b>entirely below</b> the <span class="tex">x</span>-axis: the whole parabola is reflected, <span class="tex">|f(x)|=-f(x)</span>, and there are no invariant points.</li>
+  </ul>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>From the graph of <span class="tex">y=f(x)</span></h3></div>
+  <p class="q">The graph of <span class="tex">y=f(x)</span> is shown. Sketch the graph of <span class="tex">y=|f(x)|</span> on the same grid. State the invariant points, if any.</p>
+  <div class="parts c4 u7l3-g4">
+    <div class="part"><div class="pl">(a)</div>
+      <div class="u7l3-sk"><div data-bk-graph='{"width":228,"height":228,"xmin":-6,"xmax":6,"ymin":-6,"ymax":6,"fontSize":12,"xlabels":2,"ylabels":2,"items":[{"fn":["(x-1)^2-4",{"color":"blue","width":3}]}]}'></div>
+        <div class="u7l3-ska" data-bk-graph='{"width":228,"height":228,"xmin":-6,"xmax":6,"ymin":-6,"ymax":6,"fontSize":12,"xlabels":2,"ylabels":2,"items":[{"fn":["(x-1)^2-4",{"color":"blue","width":3}]},{"fn":["abs((x-1)^2-4)",{"color":"purple","width":4,"from":-1,"to":3}]},{"point":[-1,0,{"color":"amber","r":5}]},{"point":[3,0,{"color":"amber","r":5}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Reflect the arc between <span class="tex">x=-1</span> and <span class="tex">x=3</span>; the vertex <span class="tex">(1,\ -4)\to(1,\ 4)</span>.<br>Invariant points <span class="tex">(-1,\ 0)</span>, <span class="tex">(3,\ 0)</span>.</div></div></div>
+    <div class="part"><div class="pl">(b)</div>
+      <div class="u7l3-sk"><div data-bk-graph='{"width":228,"height":228,"xmin":-6,"xmax":6,"ymin":-6,"ymax":6,"fontSize":12,"xlabels":2,"ylabels":2,"items":[{"fn":["-0.5*(x+1)^2+2",{"color":"blue","width":3,"from":-4.8,"to":2.8}]}]}'></div>
+        <div class="u7l3-ska" data-bk-graph='{"width":228,"height":228,"xmin":-6,"xmax":6,"ymin":-6,"ymax":6,"fontSize":12,"xlabels":2,"ylabels":2,"items":[{"fn":["-0.5*(x+1)^2+2",{"color":"blue","width":3,"from":-4.8,"to":2.8}]},{"fn":["abs(-0.5*(x+1)^2+2)",{"color":"purple","width":4,"from":-4.8,"to":-3}]},{"fn":["abs(-0.5*(x+1)^2+2)",{"color":"purple","width":4,"from":1,"to":2.8}]},{"point":[-3,0,{"color":"amber","r":5}]},{"point":[1,0,{"color":"amber","r":5}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Opens down: reflect the two arms outside <span class="tex">x=-3</span> and <span class="tex">x=1</span>. The vertex <span class="tex">(-1,\ 2)</span> stays.<br>Invariant points <span class="tex">(-3,\ 0)</span>, <span class="tex">(1,\ 0)</span>.</div></div></div>
+    <div class="part"><div class="pl">(c)</div>
+      <div class="u7l3-sk"><div data-bk-graph='{"width":228,"height":228,"xmin":-6,"xmax":6,"ymin":-6,"ymax":6,"fontSize":12,"xlabels":2,"ylabels":2,"items":[{"fn":["-(x-2)^2-1",{"color":"blue","width":3,"from":-0.3,"to":4.3}]}]}'></div>
+        <div class="u7l3-ska" data-bk-graph='{"width":228,"height":228,"xmin":-6,"xmax":6,"ymin":-6,"ymax":6,"fontSize":12,"xlabels":2,"ylabels":2,"items":[{"fn":["-(x-2)^2-1",{"color":"blue","width":3,"from":-0.3,"to":4.3}]},{"fn":["(x-2)^2+1",{"color":"purple","width":4,"from":-0.3,"to":4.3}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">All of it is below the axis, so all of it is reflected: vertex <span class="tex">(2,\ -1)\to(2,\ 1)</span>, opening up.<br>No invariant points.</div></div></div>
+    <div class="part"><div class="pl">(d)</div>
+      <div class="u7l3-sk"><div data-bk-graph='{"width":228,"height":228,"xmin":-6,"xmax":6,"ymin":-6,"ymax":6,"fontSize":12,"xlabels":2,"ylabels":2,"items":[{"fn":["0.5*x^2+1",{"color":"blue","width":3,"from":-3.1,"to":3.1}]}]}'></div>
+        <div class="u7l3-ska" data-bk-graph='{"width":228,"height":228,"xmin":-6,"xmax":6,"ymin":-6,"ymax":6,"fontSize":12,"xlabels":2,"ylabels":2,"items":[{"fn":["0.5*x^2+1",{"color":"blue","width":3,"from":-3.1,"to":3.1}]},{"fn":["0.5*x^2+1",{"color":"purple","width":4,"dash":"10 8","from":-3.1,"to":3.1}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">All of it is above the axis: the graph does not change.<br>No invariant points.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>From the equation</h3></div>
+  <p class="q">Sketch the graph of each function. Show the graph of <span class="tex">y=f(x)</span> lightly first, and label the invariant points and the vertex of <span class="tex">y=|f(x)|</span>.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">y=|x^2-6x+5|</span></div><div class="work" style="--h:96px"></div>
+      <div class="u7l3-sk"><div data-bk-graph='{"width":300,"height":340,"xmin":-1,"xmax":7,"ymin":-5,"ymax":8,"fontSize":13,"ylabels":2}'></div>
+        <div class="u7l3-ska" data-bk-graph='{"width":300,"height":340,"xmin":-1,"xmax":7,"ymin":-5,"ymax":8,"fontSize":13,"ylabels":2,"items":[{"fn":["x^2-6*x+5",{"color":"blue","width":2.5,"dash":true,"from":-0.4,"to":6.4}]},{"fn":["abs(x^2-6*x+5)",{"color":"purple","width":4,"from":-0.4,"to":6.4}]},{"point":[1,0,{"color":"amber","r":5}]},{"point":[5,0,{"color":"amber","r":5}]},{"point":[3,4,{"color":"purple","r":5,"label":"(3,\\ 4)","tex":true,"pos":"n"}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-6x+5=(x-1)(x-5)</span>: zeros <span class="tex">1</span> and <span class="tex">5</span>.<br>Axis <span class="tex">x=3</span>; <span class="tex">f(3)=-4</span>, vertex <span class="tex">(3,\ -4)\to(3,\ 4)</span>.<br><span class="tex">y</span>-intercept <span class="tex">|5|=5</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y=\left|-\frac12(x+2)^2+8\right|</span></div><div class="work" style="--h:96px"></div>
+      <div class="u7l3-sk"><div data-bk-graph='{"width":300,"height":340,"xmin":-8,"xmax":4,"ymin":-8,"ymax":10,"fontSize":13,"xlabels":2,"ylabels":2}'></div>
+        <div class="u7l3-ska" data-bk-graph='{"width":300,"height":340,"xmin":-8,"xmax":4,"ymin":-8,"ymax":10,"fontSize":13,"xlabels":2,"ylabels":2,"items":[{"fn":["-0.5*(x+2)^2+8",{"color":"blue","width":2.5,"dash":true,"from":-7.6,"to":3.6}]},{"fn":["abs(-0.5*(x+2)^2+8)",{"color":"purple","width":4,"from":-7.6,"to":3.6}]},{"point":[-6,0,{"color":"amber","r":5}]},{"point":[2,0,{"color":"amber","r":5}]},{"point":[-2,8,{"color":"purple","r":5,"label":"(-2,\\ 8)","tex":true,"pos":"n"}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex <span class="tex">(-2,\ 8)</span>, opens down.<br>Zeros: <span class="tex">(x+2)^2=16</span>, <span class="tex">x+2=\pm4</span>, <span class="tex">x=2</span> or <span class="tex">x=-6</span>.<br>The arms outside <span class="tex">-6</span> and <span class="tex">2</span> are reflected; <span class="tex">y</span>-intercept <span class="tex">\left|-2+8\right|=6</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">y=\left|-(x-1)^2-2\right|</span></div><div class="work" style="--h:96px"></div>
+      <div class="u7l3-sk"><div data-bk-graph='{"width":300,"height":340,"xmin":-2,"xmax":4,"ymin":-8,"ymax":8,"fontSize":13,"ylabels":2}'></div>
+        <div class="u7l3-ska" data-bk-graph='{"width":300,"height":340,"xmin":-2,"xmax":4,"ymin":-8,"ymax":8,"fontSize":13,"ylabels":2,"items":[{"fn":["-(x-1)^2-2",{"color":"blue","width":2.5,"dash":true,"from":-1.5,"to":3.5}]},{"fn":["(x-1)^2+2",{"color":"purple","width":4,"from":-1.5,"to":3.5}]},{"point":[1,2,{"color":"purple","r":5,"label":"(1,\\ 2)","tex":true,"pos":"s"}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex <span class="tex">(1,\ -2)</span>, opens down: entirely below the axis.<br>The whole graph is reflected: <span class="tex">y=(x-1)^2+2</span>, vertex <span class="tex">(1,\ 2)</span>; <span class="tex">y</span>-intercept <span class="tex">\left|-3\right|=3</span>. No invariant points.</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Invariant points, domain and range ================= -->
+<section class="card" data-ink="s3" data-section="3. Invariant Points, Domain and Range">
+  <div class="sec-h"><span class="badge">3</span><h2>Invariant Points, Domain and Range</h2></div>
+  <p class="u7l3-p">Reflecting in the <span class="tex">x</span>-axis does not change any <span class="tex">x</span>-value, so the domain of <span class="tex">y=|f(x)|</span> is the same as the domain of <span class="tex">y=f(x)</span>: all real numbers for a quadratic function. The range changes, because no <span class="tex">y</span>-value of <span class="tex">y=|f(x)|</span> is negative.</p>
+  <div class="def amber u7l3-key"><div class="u7l3-keyh">Key idea: for a quadratic function <span class="tex">f(x)=a(x-p)^2+q</span></div>
+    <div class="u7l3-kline">Domain of <span class="tex">y=|f(x)|</span>: <span class="tex">\{x\mid x\in\mathbb{R}\}</span> &nbsp;&nbsp;·&nbsp;&nbsp; <span class="tex">y</span>-intercept: <span class="tex">|f(0)|</span></div>
+    <table class="u7l3-ktab">
+      <tr><th>The parabola …</th><th>Invariant points</th><th>Range of <span class="tex">y=|f(x)|</span></th></tr>
+      <tr class="u7l3-k1"><td>crosses or touches the <span class="tex">x</span>-axis</td><td>the <span class="tex">x</span>-intercepts</td><td><span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span></td></tr>
+      <tr class="u7l3-k2"><td>is entirely above the <span class="tex">x</span>-axis (<span class="tex">a&gt;0</span>, <span class="tex">q&gt;0</span>)</td><td>none</td><td><span class="tex">\{y\mid y\ge q,\ y\in\mathbb{R}\}</span> (unchanged)</td></tr>
+      <tr class="u7l3-k3"><td>is entirely below the <span class="tex">x</span>-axis (<span class="tex">a&lt;0</span>, <span class="tex">q&lt;0</span>)</td><td>none</td><td><span class="tex">\{y\mid y\ge -q,\ y\in\mathbb{R}\}</span></td></tr>
+    </table>
+  </div>
+  <div class="explainer" data-explainer="cases"></div>
+  <p class="u7l3-p">When an arc between the zeros is reflected, its vertex <span class="tex">(p,\ -q)</span> is the highest point of that arc but not of the whole graph, since the outer arms keep rising. The graph has no maximum value.</p>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Without graphing</h3></div>
+  <p class="q">Complete the table for each function without graphing it.</p>
+  <div class="part u7l3-tpart">
+    <table class="u7l3-tab">
+      <tr><th>Function</th><th>Invariant points</th><th><span class="tex">y</span>-intercept</th><th>Vertex of the graph</th><th>Range</th></tr>
+      <tr><td>(a) <span class="tex">y=|x^2+2x-8|</span></td><td><span data-reveal><span class="tex">(-4,\ 0)</span>, <span class="tex">(2,\ 0)</span></span></td><td><span data-reveal><span class="tex">8</span></span></td><td><span data-reveal><span class="tex">(-1,\ 9)</span></span></td><td><span data-reveal><span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span></span></td></tr>
+      <tr><td>(b) <span class="tex">y=|2(x-3)^2+1|</span></td><td><span data-reveal>none</span></td><td><span data-reveal><span class="tex">19</span></span></td><td><span data-reveal><span class="tex">(3,\ 1)</span></span></td><td><span data-reveal><span class="tex">\{y\mid y\ge1,\ y\in\mathbb{R}\}</span></span></td></tr>
+      <tr><td>(c) <span class="tex">y=\left|-3(x+1)^2-6\right|</span></td><td><span data-reveal>none</span></td><td><span data-reveal><span class="tex">9</span></span></td><td><span data-reveal><span class="tex">(-1,\ 6)</span></span></td><td><span data-reveal><span class="tex">\{y\mid y\ge6,\ y\in\mathbb{R}\}</span></span></td></tr>
+      <tr><td>(d) <span class="tex">y=\left|-(x-2)^2+9\right|</span></td><td><span data-reveal><span class="tex">(-1,\ 0)</span>, <span class="tex">(5,\ 0)</span></span></td><td><span data-reveal><span class="tex">5</span></span></td><td><span data-reveal><span class="tex">(2,\ 9)</span></span></td><td><span data-reveal><span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span></span></td></tr>
+    </table>
+    <div class="work" style="--h:110px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">(a) <span class="tex">(x+4)(x-2)</span>: zeros <span class="tex">-4</span>, <span class="tex">2</span>. Axis <span class="tex">x=-1</span>, <span class="tex">f(-1)=1-2-8=-9</span>, so <span class="tex">(-1,\ -9)\to(-1,\ 9)</span>. <span class="tex">y</span>-intercept <span class="tex">\left|-8\right|=8</span>.<br>(b) Opens up, vertex <span class="tex">(3,\ 1)</span> above the axis: no change. <span class="tex">y</span>-intercept <span class="tex">2(9)+1=19</span>.<br>(c) Opens down, vertex <span class="tex">(-1,\ -6)</span> below the axis: all reflected, vertex <span class="tex">(-1,\ 6)</span>. <span class="tex">y</span>-intercept <span class="tex">\left|-3-6\right|=9</span>.<br>(d) Opens down, vertex <span class="tex">(2,\ 9)</span> above the axis: zeros <span class="tex">(x-2)^2=9</span>, <span class="tex">x=-1</span> or <span class="tex">5</span>. The outer arms are reflected, the vertex stays. <span class="tex">y</span>-intercept <span class="tex">\left|-4+9\right|=5</span>. All domains: <span class="tex">\{x\mid x\in\mathbb{R}\}</span>.</div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 3 · Questions 1–5</h2>
+  <p class="pr-t">Sketch <span class="tex">y=f(x)</span> first, then flip up whatever is below the <span class="tex">x</span>-axis. The zeros are the invariant points; the vertex and the range depend on where the parabola sits.</p>
+  <div class="pr-chips"><span><b>1</b>From a graph: sketch <span class="tex">|f(x)|</span>, invariant points</span><span><b>2</b>A table of values, both graphs, domain and range</span><span><b>3</b>From an equation: sketch and label</span><span><b>4</b>Invariant points, <span class="tex">y</span>-intercept, vertex and range without graphing</span><span><b>5</b>Compare <span class="tex">y=f(x)</span> and <span class="tex">y=|f(x)|</span></span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u7l3">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. Piecewise form ================= -->
+<section class="card" data-ink="s4" data-section="4. Piecewise Form">
+  <div class="sec-h"><span class="badge">4</span><h2>Piecewise Form of <span class="tex">y=|f(x)|</span></h2></div>
+  <p class="u7l3-p">Without absolute value bars, <span class="tex">|f(x)|=f(x)</span> where <span class="tex">f(x)\ge0</span> and <span class="tex">|f(x)|=-f(x)</span> where <span class="tex">f(x)&lt;0</span>. For a parabola with zeros <span class="tex">r&lt;s</span>, the sign of <span class="tex">f(x)</span> changes only at the zeros, so find the zeros first and use the direction of opening (or a test value) to see where <span class="tex">f(x)&lt;0</span>.</p>
+  <div class="def amber u7l3-key"><div class="u7l3-keyh">Key idea</div>
+    <div class="u7l3-kline">If <span class="tex">f</span> opens <b>up</b> with zeros <span class="tex">r&lt;s</span>: &nbsp; <span class="tex">|f(x)|=\begin{cases}\ \ f(x), &amp; \text{if } x\le r\text{ or }x\ge s\\ -f(x), &amp; \text{if } r&lt;x&lt;s\end{cases}</span></div>
+    <div class="u7l3-kline">If <span class="tex">f</span> opens <b>down</b>, the pieces swap: <span class="tex">|f(x)|=f(x)</span> for <span class="tex">r\le x\le s</span> and <span class="tex">-f(x)</span> for <span class="tex">x&lt;r</span> or <span class="tex">x&gt;s</span>.</div>
+    <div class="u7l3-kline">If <span class="tex">f(x)\ge0</span> for every <span class="tex">x</span>, one piece is enough: <span class="tex">|f(x)|=f(x)</span>. If <span class="tex">f(x)&lt;0</span> for every <span class="tex">x</span>, <span class="tex">|f(x)|=-f(x)</span>.</div>
+  </div>
+  <div class="explainer" data-explainer="pieces"></div>
+  <p class="u7l3-p">The piecewise form can also be written in three pieces (left arm, middle arc, right arm). At a zero both pieces give <span class="tex">0</span>, so it does not matter which piece includes it.</p>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Piecewise form</h3></div>
+  <p class="q">Write each function in piecewise form, without absolute value symbols.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y=|x^2-x-12|</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x-4)(x+3)=0</span>: zeros <span class="tex">-3</span> and <span class="tex">4</span>; opens up, so <span class="tex">f(x)&lt;0</span> between them.<br><span class="tex">y=\begin{cases} x^2-x-12, &amp; \text{if } x\le-3\text{ or }x\ge4\\ -x^2+x+12, &amp; \text{if } -3&lt;x&lt;4\end{cases}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y=|16-4x^2|</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">4(2-x)(2+x)=0</span>: zeros <span class="tex">\pm2</span>; opens down, so <span class="tex">f(x)&lt;0</span> outside them.<br><span class="tex">y=\begin{cases} 16-4x^2, &amp; \text{if } -2\le x\le2\\ 4x^2-16, &amp; \text{if } x&lt;-2\text{ or }x&gt;2\end{cases}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">y=|x^2+4x+7|</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+4x+7=(x+2)^2+3\ge3</span> for every <span class="tex">x</span> (vertex <span class="tex">(-2,\ 3)</span>, opens up).<br>One piece: <span class="tex">y=x^2+4x+7</span>, <span class="tex">x\in\mathbb{R}</span>.</div></div></div>
+    <div class="part"><div class="pl">(d) Use (a) to evaluate <span class="tex">y</span> at <span class="tex">x=1</span> and at <span class="tex">x=5</span>. Check with the bars.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=1</span> is between <span class="tex">-3</span> and <span class="tex">4</span>: <span class="tex">y=-1+1+12=12</span>. &nbsp;Check <span class="tex">|1-1-12|=12</span>.<br><span class="tex">x=5\ge4</span>: <span class="tex">y=25-5-12=8</span>. &nbsp;Check <span class="tex">|8|=8</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>True or false?</h3></div>
+  <p class="q">True or false? Explain.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">|x^2-1|=1-x^2</span> if <span class="tex">-1\le x\le1</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>True:</b> for <span class="tex">-1\le x\le1</span>, <span class="tex">x^2\le1</span>, so <span class="tex">x^2-1\le0</span> and <span class="tex">|x^2-1|=-(x^2-1)</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">|x^2-25|=x^2-25</span> if <span class="tex">x&gt;-5</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>False:</b> <span class="tex">x=0&gt;-5</span> gives <span class="tex">\left|-25\right|=25</span>, but <span class="tex">0-25=-25</span>.<br>It is true only for <span class="tex">x\le-5</span> or <span class="tex">x\ge5</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">|(x-6)^2|=(x-6)^2</span> for every real <span class="tex">x</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>True:</b> a square is never negative.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\left|-x^2+4\right|=|x^2-4|</span> for every real <span class="tex">x</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>True:</b> <span class="tex">-x^2+4=-(x^2-4)</span>, and opposites have the same absolute value. The two graphs are identical.</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u7l3"></section>
+
+<!-- ================= 5. Working backwards and solving problems ================= -->
+<section class="card" data-ink="s5" data-section="5. Working Backwards and Problems">
+  <div class="sec-h"><span class="badge">5</span><h2>Working Backwards and Solving Problems</h2></div>
+  <p class="u7l3-p">The graph of <span class="tex">y=|f(x)|</span> does not show which parts of <span class="tex">y=f(x)</span> were below the axis. If <span class="tex">f</span> is quadratic, there are two possibilities: <span class="tex">f(x)</span> or its reflection <span class="tex">-f(x)</span>, because both have the same absolute value. A point <span class="tex">(x,\ k)</span> on <span class="tex">y=|f(x)|</span> with <span class="tex">k&gt;0</span> comes from <span class="tex">(x,\ k)</span> or <span class="tex">(x,\ -k)</span> on <span class="tex">y=f(x)</span>.</p>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Which <span class="tex">f</span> was it?</h3></div>
+  <div class="u7l3-ex7">
+    <div class="u7l3-col">
+      <div class="part"><div class="pl">(a) The graph of <span class="tex">y=|f(x)|</span> is shown, where <span class="tex">f</span> is a quadratic function. Sketch the two possible graphs of <span class="tex">y=f(x)</span> and write the equation of each in factored form.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Invariant points <span class="tex">(-2,\ 0)</span> and <span class="tex">(4,\ 0)</span>; the middle arc has its vertex at <span class="tex">(1,\ 9)</span>.<br>If the middle arc was reflected, <span class="tex">f</span> opens up with vertex <span class="tex">(1,\ -9)</span>: <span class="tex">f(x)=a(x+2)(x-4)</span> and <span class="tex">f(1)=a(3)(-3)=-9</span>, so <span class="tex">a=1</span>: <span class="tex">f(x)=(x+2)(x-4)</span>.<br>Otherwise <span class="tex">f</span> opens down with vertex <span class="tex">(1,\ 9)</span>: <span class="tex">f(x)=-(x+2)(x-4)</span>.</div></div></div>
+      <div class="part"><div class="pl">(b) <span class="tex">g(x)=-2(x-1)^2+k</span>. Determine <span class="tex">k</span> if the range of <span class="tex">y=|g(x)|</span> is <span class="tex">\{y\mid y\ge4,\ y\in\mathbb{R}\}</span>.</div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">A minimum of <span class="tex">4</span> (not <span class="tex">0</span>) means <span class="tex">g</span> does not reach the <span class="tex">x</span>-axis. It opens down, so it is entirely below the axis and its vertex <span class="tex">(1,\ k)</span> reflects to <span class="tex">(1,\ 4)</span>: <span class="tex">k=-4</span>.</div></div></div>
+      <div class="part"><div class="pl">(c) For which values of <span class="tex">k</span> is the range of <span class="tex">y=|g(x)|</span> equal to <span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span>?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">When <span class="tex">g</span> reaches the <span class="tex">x</span>-axis: the vertex is on or above it, <span class="tex">k\ge0</span>.</div></div></div>
+    </div>
+    <div class="part u7l3-skp">
+      <div class="u7l3-sk">
+        <div data-bk-graph='{"width":340,"height":500,"xmin":-3,"xmax":5,"ymin":-10,"ymax":10,"fontSize":13,"ylabels":2,"items":[{"fn":["abs((x+2)*(x-4))",{"color":"ink","width":4,"from":-3.2,"to":5.2}]},{"label":[2.2,9.2,"y=|f(x)|",{"tex":true,"cls":"bk-ptlab","pos":"e"}]}]}'></div>
+        <div class="u7l3-ska" data-bk-graph='{"width":340,"height":500,"xmin":-3,"xmax":5,"ymin":-10,"ymax":10,"fontSize":13,"ylabels":2,"items":[{"fn":["abs((x+2)*(x-4))",{"color":"ink","width":4,"from":-3.2,"to":5.2}]},{"label":[2.2,9.2,"y=|f(x)|",{"tex":true,"cls":"bk-ptlab","pos":"e"}]},{"fn":["(x+2)*(x-4)",{"color":"blue","width":3,"dash":true}]},{"fn":["-(x+2)*(x-4)",{"color":"green","width":3,"dash":"3 6"}]}]}'></div>
+      </div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="u7l3-cf">Dashed: <span class="tex">f(x)=(x+2)(x-4)</span></span><br><span class="u7l3-cg">Dotted: <span class="tex">f(x)=-(x+2)(x-4)</span></span></div></div>
+    </div>
+  </div>
+  <div class="explainer u7l3-exin" data-explainer="backwards"></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The roller coaster tunnel</h3></div>
+  <div class="u7l3-ex8">
+    <div class="u7l3-col">
+      <p class="q">Part of a roller coaster track dips into a tunnel below ground level. Its height above ground level is modelled by <span class="tex">h(x)=0.1x^2-2x+7.5</span>, where <span class="tex">h</span> is in metres and <span class="tex">x</span> is the horizontal distance in metres, <span class="tex">0\le x\le20</span>. The distance between the track and ground level is <span class="tex">d(x)=|h(x)|</span>.</p>
+      <div class="part"><div class="pl">(a) Where is the track at ground level?</div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">0.1x^2-2x+7.5=0\Rightarrow x^2-20x+75=0</span><br><span class="tex">(x-5)(x-15)=0</span>: at <span class="tex">x=5</span> m and <span class="tex">x=15</span> m.</div></div></div>
+      <div class="part"><div class="pl">(c) How far below ground does the track go, and where?</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Axis <span class="tex">x=10</span>; <span class="tex">h(10)=10-20+7.5=-2.5</span>.<br>The track is <span class="tex">2.5</span> m below ground at <span class="tex">x=10</span> m; on <span class="tex">d</span> this is the point <span class="tex">(10,\ 2.5)</span>.</div></div></div>
+      <div class="part"><div class="pl">(d) State the range of <span class="tex">d</span> for <span class="tex">0\le x\le20</span>.</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">d(0)=d(20)=7.5</span> is the greatest distance and <span class="tex">d=0</span> at the invariant points: <span class="tex">\{d\mid 0\le d\le7.5,\ d\in\mathbb{R}\}</span>.</div></div></div>
+    </div>
+    <div class="part u7l3-skp"><div class="pl">(b) Sketch <span class="tex">y=d(x)</span> on the grid.</div>
+      <div class="u7l3-sk">
+        <div data-bk-graph='{"width":400,"height":300,"xmin":-1,"xmax":21,"ymin":-3,"ymax":8,"fontSize":13,"xlabels":5,"ylabels":2,"xtitle":"x\\text{ (m)}","ytitle":"y\\text{ (m)}","pad":[24,46,18,18]}'></div>
+        <div class="u7l3-ska" data-bk-graph='{"width":400,"height":300,"xmin":-1,"xmax":21,"ymin":-3,"ymax":8,"fontSize":13,"xlabels":5,"ylabels":2,"items":[{"fn":["0.1*x^2-2*x+7.5",{"color":"blue","width":2.5,"dash":true,"from":0,"to":20}]},{"fn":["abs(0.1*x^2-2*x+7.5)",{"color":"purple","width":4,"from":0,"to":20}]},{"point":[0,7.5,{"color":"purple","r":5}]},{"point":[5,0,{"color":"amber","r":5}]},{"point":[10,2.5,{"color":"purple","r":5}]},{"point":[15,0,{"color":"amber","r":5}]},{"point":[20,7.5,{"color":"purple","r":5}]}]}'></div>
+      </div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="u7l3-cf">Dashed: <span class="tex">y=h(x)</span></span> &nbsp; <span class="u7l3-ca">Solid: <span class="tex">y=d(x)</span></span></div></div>
+    </div>
+  </div>
+  <div class="explainer u7l3-exin" data-explainer="coaster"></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Flip what is below.</b> For <span class="tex">y=|f(x)|</span>: keep every part on or above the <span class="tex">x</span>-axis, reflect every part below it, <span class="tex">(x,\ y)\to(x,\ -y)</span>. The <span class="tex">x</span>-intercepts are the invariant points; a vertex <span class="tex">(p,\ q)</span> below the axis moves to <span class="tex">(p,\ -q)</span>.</div>
+    <div><b>Three cases.</b> Crosses the axis: invariant points at the zeros, range <span class="tex">y\ge0</span>. Entirely above: no change, range <span class="tex">y\ge q</span>. Entirely below: the whole parabola flips, range <span class="tex">y\ge-q</span>. Domain <span class="tex">\{x\mid x\in\mathbb{R}\}</span>; <span class="tex">y</span>-intercept <span class="tex">|f(0)|</span>.</div>
+    <div><b>Piecewise form.</b> The zeros cut the domain: <span class="tex">f(x)</span> where <span class="tex">f(x)\ge0</span>, <span class="tex">-f(x)</span> where <span class="tex">f(x)&lt;0</span>. Opens up: <span class="tex">-f(x)</span> between the zeros; opens down: outside them. No zeros: one piece.</div>
+    <div><b>Working backwards.</b> The graph of <span class="tex">y=|f(x)|</span> comes from <span class="tex">f(x)</span> or <span class="tex">-f(x)</span>: two possible quadratics. A range that starts above <span class="tex">0</span> means the parabola never reaches the <span class="tex">x</span>-axis.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u7l3">
+    <div><div class="kicker">Your turn</div><b>Assignment 3 · Questions 6–17</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l4/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 4 — Solving Absolute Value Equations (Linear)</b><div class="muted">Equations such as <span class="tex">|2x-5|=9</span> and <span class="tex">|x-4|=3x</span>: solving graphically and by cases, and rejecting extraneous solutions.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u7l3.js';
+  boot({ key: 'u7l3', homeHref: '../../', title: '7.3 Absolute Value of Quadratics' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

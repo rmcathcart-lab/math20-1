@@ -1,0 +1,110 @@
+/* Math 20-1 · Unit 5 · Lesson 7 — The Quadratic Formula: styles used only on this page (prefix u5l7-).
+ * Colours: a blue, b amber, c green, the discriminant purple, the roots brand, errors / rejected red. */
+
+.u5l7 .ex-cap .katex { font-size: 1.04em; }
+.u5l7 .chip .katex { font-size: 1em; }
+.u5l7 .pl .katex { font-size: 1.08em; }
+.u5l7 .ans .katex { font-size: 1.04em; }
+.u5l7 .katex { white-space: nowrap; }
+.u5l7 h2 .katex, .u5l7 h3 .katex { font-size: .95em; }
+.u5l7-cd { color: #7b4fc4; }
+
+/* ---------------- notes ---------------- */
+.u5l7-key { border-left-width: 7px; }
+.u5l7-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 6px; }
+.u5l7-fbig { font-size: 21px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.u5l7-ftex { font-size: 1.55em; background: #fff; border: 2.5px solid #e8a01e; border-radius: 14px; padding: 8px 22px; }
+.u5l7-kp { margin: 10px 0 0; font-size: 19px; line-height: 1.5; }
+.u5l7-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 2px 0 14px; }
+.u5l7-steps > div { background: #fff; border: 2px solid #f0d199; border-radius: 12px; padding: 10px 12px; font-size: 17.5px; line-height: 1.38; }
+.u5l7-steps > div > b:first-child { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 17px var(--round); margin-bottom: 6px; }
+.u5l7-note { font: 700 14.5px var(--round); color: #a26100; background: #fff4dd; border-radius: 7px; padding: 1px 8px; white-space: nowrap; }
+.u5l7-pcol { display: flex; flex-direction: column; gap: 8px; align-self: center; }
+.u5l7-pcol .pill { white-space: nowrap; }
+p.u5l7-note { display: block; white-space: normal; font: inherit; font-size: 19px; color: inherit; background: #f7f4ee; padding: 8px 14px; border-radius: 10px; margin: 6px 0 10px; }
+
+/* Example 1(b): the derivation to fill in */
+.u5l7-der { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 8px 14px; margin: 8px 0 10px; align-items: stretch; }
+.u5l7-dl { font-size: 18px; line-height: 1.4; padding: 10px 4px; align-self: center; }
+.u5l7-dr { min-height: 74px; background: #fff; border: 2px dashed #d9d3c4; border-radius: 12px; display: flex; align-items: center; padding: 6px 16px; font-size: 20px; }
+.u5l7-d0 { border-style: solid; background: #f7f4ee; }
+
+/* Example 5: the student's work */
+.u5l7-ex5 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: 20px; align-items: start; margin-bottom: 10px; }
+.u5l7-ex5 .q { margin-top: 4px; }
+.u5l7-sw { background: #fffdf3; border: 2px solid #1c2230; border-radius: 6px; padding: 10px 16px; font-size: 19px; display: grid; gap: 6px; }
+.u5l7-swl { font: 700 15px var(--round); color: var(--muted); display: inline-block; min-width: 56px; }
+.u5l7-solo { margin: 0 0 12px; }
+
+/* choosing a method */
+.u5l7-mtab { width: 100%; border-collapse: separate; border-spacing: 0; margin: 4px 0 14px; font-size: 18px; background: #fff; border: 2px solid #e4ded2; border-radius: 12px; overflow: hidden; }
+.u5l7-mtab th { text-align: left; background: #f7f4ee; font: 800 16px var(--round); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; padding: 8px 14px; }
+.u5l7-mtab td { padding: 8px 14px; border-top: 1.5px solid #eee8dc; line-height: 1.4; vertical-align: top; }
+.u5l7-mtab td:first-child { width: 200px; } .u5l7-mtab td:last-child { width: 260px; }
+
+/* ---------------- explainer pieces ---------------- */
+.u5l7-panel { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; }
+.u5l7-ph { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.u5l7-line { font-size: 19px; line-height: 1.4; margin: 4px 0 8px; }
+.u5l7-wl { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.u5l7-big { font-size: 21px; }
+.u5l7-strong { font-weight: 700; background: #f6e9ef; border-radius: 8px; padding: 4px 8px; }
+.u5l7-eqin { font-size: 21px; white-space: nowrap; margin-bottom: 10px; }
+.u5l7-sn { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 16px var(--round); flex: 0 0 auto; letter-spacing: 0; text-transform: none; }
+.u5l7-sn0 { background: transparent; }
+
+/* the formula machine */
+.u5l7-ball { display: grid; place-items: center; align-content: center; border: 4px solid; border-radius: 50%; background: #fff; font-size: 22px; box-sizing: border-box; box-shadow: 0 3px 0 rgba(0, 0, 0, .15); }
+.u5l7-ball i { font: italic 700 16px Georgia, serif; line-height: 1; }
+.u5l7-mname { font: 800 15px var(--round); letter-spacing: .14em; fill: #5b5470; }
+.u5l7-scr { background: #fffdf6; border: 3px solid #5b5470; border-radius: 12px; padding: 10px 12px; box-sizing: border-box; overflow: hidden; }
+.u5l7-srow { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; min-height: 40px; }
+.u5l7-srow.u5l7-big { min-height: 62px; }
+.u5l7-bad .u5l7-lt { color: #c93a33; }
+.u5l7-tray { background: #fff; border: 2.5px solid #5b5470; border-radius: 14px; box-sizing: border-box; padding: 6px 10px; }
+.u5l7-th { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .06em; color: #9a92b5; }
+.u5l7-t5 { display: flex; align-items: center; gap: 8px; font: 800 17px var(--round); color: #1c2230; }
+.u5l7-capsule { margin-top: 2px; background: #f6e9ef; border: 2.5px solid #7a1f3d; border-radius: 22px; padding: 2px 10px; font-size: 19px; text-align: center; }
+.u5l7-dec { font-size: 16px; line-height: 1.1; color: #5b5470; }
+
+/* zeros */
+.u5l7-tag0 { font: 800 13px var(--round); text-transform: uppercase; letter-spacing: .05em; color: #fff; background: #3a4254; border-radius: 6px; padding: 2px 8px; }
+.u5l7-tagx { background: #c93a33; } .u5l7-tagr { background: #7a1f3d; }
+.u5l7-ti { background: #dfe9d0; border: 2px solid #9fb08a; border-radius: 8px; padding: 6px 12px; font: 600 18px/1.45 ui-monospace, Menlo, Consolas, monospace; color: #1c2230; }
+
+/* the mistake detector */
+.u5l7-paper { border-radius: 10px; box-sizing: border-box; padding: 8px 14px; }
+.u5l7-stu { background: #fffdf3; border: 2px solid #1c2230; background-image: repeating-linear-gradient(180deg, transparent 0 77px, #e3ecf7 77px 78px); background-position: 0 46px; }
+.u5l7-cor { background: #f1faf5; border: 2px solid #a7d8c2; }
+.u5l7-cor .u5l7-ph { color: #12805a; }
+.u5l7-vrow { display: flex; align-items: center; gap: 10px; font-size: 20px; border-radius: 10px; padding: 0 8px; box-sizing: border-box; border: 2.5px solid transparent; }
+.u5l7-vn { font: 800 14px var(--round); color: var(--muted); flex: 0 0 auto; }
+.u5l7-vbad { border-color: #c93a33; background: #fde3e0; }
+.u5l7-vcarry { border-color: #e8a01e; border-style: dashed; background: #fff4dd; }
+.u5l7-vmk { display: grid; place-items: center; border-radius: 50%; font: 900 24px var(--round); color: #fff; }
+.u5l7-vmk-ok { background: #12805a; } .u5l7-vmk-err { background: #c93a33; } .u5l7-vmk-carry { background: #e8a01e; }
+.u5l7-vtag { font: 800 14px var(--round); border-radius: 8px; padding: 2px 9px; white-space: nowrap; color: #fff; }
+.u5l7-vtag-err { background: #c93a33; } .u5l7-vtag-carry { background: #c27a0e; }
+.u5l7-scan { background: rgba(255, 214, 92, .22); border-top: 3px solid #e8a01e; border-bottom: 3px solid #e8a01e; border-radius: 8px; pointer-events: none; }
+.u5l7-vfin { display: flex; align-items: center; justify-content: center; background: #e8f5ef; border: 2.5px solid #12805a; border-radius: 12px; font-size: 21px; box-sizing: border-box; }
+
+/* the method race */
+.u5l7-lane { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; box-sizing: border-box; }
+.u5l7-lh { font: 800 19px var(--round); text-align: center; padding: 8px 0 0; }
+.u5l7-track { background: repeating-linear-gradient(90deg, #f3f0e8 0 18px, #ebe6da 18px 36px); border-radius: 20px; }
+.u5l7-runner { position: absolute; top: 2px; font-size: 28px; line-height: 1; transform: scaleX(-1); }
+.u5l7-flag { position: absolute; right: 6px; top: 4px; font-size: 26px; line-height: 1; }
+.u5l7-rl { display: flex; align-items: center; justify-content: center; font-size: 19px; background: #f7f4ee; border-radius: 10px; box-sizing: border-box; padding: 0 6px; }
+.u5l7-rstuck { background: #fde3e0; color: #c93a33; font: 700 17px var(--round); text-align: center; }
+
+/* the ball and the rectangle */
+.u5l7-sky { background: linear-gradient(180deg, #dcecfb, #f4f9ff); border: 2px solid #c9dcef; border-radius: 14px; box-sizing: border-box; overflow: hidden; }
+.u5l7-tick { font: 700 13px var(--round); color: #6b7a90; }
+.u5l7-ground { position: absolute; background: #5aa469; border-top: 4px solid #4a8f58; }
+.u5l7-thrower { font-size: 40px; line-height: 1; }
+.u5l7-bball { border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffd27a, #e8a01e 60%, #b5730c); border: 2px solid #8a560a; box-sizing: border-box; }
+.u5l7-clock { display: grid; place-items: center; background: #1c2230; color: #9ff0b5; border-radius: 10px; font-size: 18px; }
+.u5l7-clock .katex { color: #9ff0b5; }
+.u5l7-rfig { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; box-sizing: border-box; }
+.u5l7-rlab { font-size: 22px; white-space: nowrap; }
+.u5l7-rarea { color: #7a1f3d; font-weight: 700; }

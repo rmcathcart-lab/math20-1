@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Solving Rational Equations · Math 20-1 6.7</title>
+<meta name="description" content="Math 20-1 Unit 6 Lesson 7: solving rational equations. Non-permissible values first, multiplying every term by the LCD, cross-multiplying a proportion, binomial and trinomial denominators (including opposites), rejected values and equations with no solution, and solving with a graphing calculator (intersect and zero). Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u6l7.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u6l7">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Dice Deal">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="0.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="36" text-anchor="middle" transform="scale(-1 1)">🎲</text></g></g><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0.5s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -8;0 0" dur="0.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="30" text-anchor="middle" transform="scale(-1 1)">🎲</text></g></g><g><animateTransform attributeName="transform" type="rotate" values="0 30 30;360 30 30" dur="3s" repeatCount="indefinite"/><text x="30" y="30" font-size="30" text-anchor="middle" dominant-baseline="central">🎲</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Dice Deal</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Ava and Ben roll two dice and add the numbers.</p><p class="vw-ctx">Ava wins if the sum is <b>6, 7 or 8</b>, the three most common sums. Ben wins on <b>any other</b> sum.</p><p class="vw-ask">Is this game fair? Would you rather be Ava or Ben?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Two dice tumbling and changing faces, with Ava and Ben waiting"><g><animateTransform attributeName="transform" type="rotate" values="-10 112.0 82.0;10 112.0 82.0;-10 112.0 82.0" dur="1.8s" repeatCount="indefinite"/><g opacity="1"><animate attributeName="opacity" values="1;0;0;0;0;0" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="70" y="40" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="92.7" cy="62.7" r="7.1" fill="#c93a33"/><circle cx="112.0" cy="82.0" r="7.1" fill="#c93a33"/><circle cx="131.3" cy="101.3" r="7.1" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;1;0;0;0;0" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="70" y="40" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="92.7" cy="61.0" r="7.1" fill="#c93a33"/><circle cx="131.3" cy="61.0" r="7.1" fill="#c93a33"/><circle cx="92.7" cy="82.0" r="7.1" fill="#c93a33"/><circle cx="131.3" cy="82.0" r="7.1" fill="#c93a33"/><circle cx="92.7" cy="103.0" r="7.1" fill="#c93a33"/><circle cx="131.3" cy="103.0" r="7.1" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;0;0;0" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="70" y="40" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="112.0" cy="82.0" r="7.1" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;0;1;0;0" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="70" y="40" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="92.7" cy="62.7" r="7.1" fill="#c93a33"/><circle cx="131.3" cy="62.7" r="7.1" fill="#c93a33"/><circle cx="92.7" cy="101.3" r="7.1" fill="#c93a33"/><circle cx="131.3" cy="101.3" r="7.1" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;0;0;1;0" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="70" y="40" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="92.7" cy="62.7" r="7.1" fill="#c93a33"/><circle cx="131.3" cy="101.3" r="7.1" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;0;0;0;1" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="70" y="40" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="92.7" cy="62.7" r="7.1" fill="#c93a33"/><circle cx="131.3" cy="62.7" r="7.1" fill="#c93a33"/><circle cx="112.0" cy="82.0" r="7.1" fill="#c93a33"/><circle cx="92.7" cy="101.3" r="7.1" fill="#c93a33"/><circle cx="131.3" cy="101.3" r="7.1" fill="#c93a33"/></g></g><g><animateTransform attributeName="transform" type="rotate" values="12 220.0 96.0;-12 220.0 96.0;12 220.0 96.0" dur="1.8s" repeatCount="indefinite"/><g opacity="1"><animate attributeName="opacity" values="1;0;0;0;0;0" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="178" y="54" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="200.7" cy="76.7" r="7.1" fill="#c93a33"/><circle cx="239.3" cy="76.7" r="7.1" fill="#c93a33"/><circle cx="220.0" cy="96.0" r="7.1" fill="#c93a33"/><circle cx="200.7" cy="115.3" r="7.1" fill="#c93a33"/><circle cx="239.3" cy="115.3" r="7.1" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;1;0;0;0;0" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="178" y="54" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="200.7" cy="76.7" r="7.1" fill="#c93a33"/><circle cx="239.3" cy="115.3" r="7.1" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;1;0;0;0" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="178" y="54" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="200.7" cy="76.7" r="7.1" fill="#c93a33"/><circle cx="239.3" cy="76.7" r="7.1" fill="#c93a33"/><circle cx="200.7" cy="115.3" r="7.1" fill="#c93a33"/><circle cx="239.3" cy="115.3" r="7.1" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;0;1;0;0" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="178" y="54" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="200.7" cy="75.0" r="7.1" fill="#c93a33"/><circle cx="239.3" cy="75.0" r="7.1" fill="#c93a33"/><circle cx="200.7" cy="96.0" r="7.1" fill="#c93a33"/><circle cx="239.3" cy="96.0" r="7.1" fill="#c93a33"/><circle cx="200.7" cy="117.0" r="7.1" fill="#c93a33"/><circle cx="239.3" cy="117.0" r="7.1" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;0;0;1;0" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="178" y="54" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="220.0" cy="96.0" r="7.1" fill="#c93a33"/></g><g opacity="0"><animate attributeName="opacity" values="0;0;0;0;0;1" keyTimes="0.000;0.167;0.333;0.500;0.667;0.833" dur="3.6s" calcMode="discrete" repeatCount="indefinite"/><rect x="178" y="54" width="84" height="84" rx="13.44" fill="#fffdf6" stroke="#4a4436" stroke-width="2.5"/><circle cx="200.7" cy="76.7" r="7.1" fill="#c93a33"/><circle cx="220.0" cy="96.0" r="7.1" fill="#c93a33"/><circle cx="239.3" cy="115.3" r="7.1" fill="#c93a33"/></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -8;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="70" y="230" font-size="56" text-anchor="middle">👧</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -8;0 0" dur="1.5s" begin="0.75s" repeatCount="indefinite"/><text x="262" y="230" font-size="56" text-anchor="middle">👦</text></g><text x="70" y="172" font-size="20" font-weight="800" fill="#2b55a0" text-anchor="middle">Ava</text><text x="262" y="172" font-size="20" font-weight="800" fill="#12805a" text-anchor="middle">Ben</text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="165" y="205" font-size="44" font-weight="800" fill="#c93a33" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Convince the person beside you.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Not fair, and it’s Ben’s game!</b> There are 36 equally likely rolls. Only 5 + 6 + 5 = <b>16</b> of them make 6, 7 or 8, so Ava wins 16 out of 36 (about 44%) and Ben wins <b>20 out of 36</b> (about 56%). Ava has the three most likely sums, but Ben has the other eight. To make it fair, give Ava 2 and 12 as well: 16 + 1 + 1 = 18 of the 36 rolls.</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 6 Rational Expressions and Equations · Lesson 7</div>
+  <h1>Solving Rational Equations</h1>
+  <p class="lede">A rational equation has a variable in a denominator. State the <b class="u6l7-npv">NPVs first</b>, multiply <b>every term</b> by the <b class="u6l7-lcd">LCD</b> so all the fractions disappear, solve, then <b class="u6l7-no">reject</b> any value that is an NPV.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>state the <b>non-permissible values</b> of a rational equation, and <b>verify</b> whether a value is a solution</li>
+      <li>solve a rational equation by multiplying <b>every term</b> by the <b>LCD</b></li>
+      <li>solve a <b>proportion</b> (one fraction on each side) by <b>cross-multiplying</b></li>
+      <li>solve equations with <b>binomial and trinomial denominators</b>, including opposites like <span class="tex">x-4</span> and <span class="tex">4-x</span></li>
+      <li><b>reject</b> a root that is an NPV and recognize an equation with <b>no solution</b></li>
+      <li>solve a rational equation with a <b>graphing calculator</b> (intersect or zero)</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN6</b> Solve problems that involve rational equations (limited to numerators and denominators that are monomials, binomials or trinomials).<br><span class="muted">Today: solving rational equations: NPVs, the LCD, cross-multiplying, rejected values and the graphing calculator.</span></div>
+</section>
+
+<!-- ================= 1. Rational equations and NPVs ================= -->
+<section class="card" data-ink="s1" data-section="1. Rational Equations and Their NPVs">
+  <div class="sec-h"><span class="badge">1</span><h2>Rational Equations and Their Non-Permissible Values</h2></div>
+  <div class="def">A <b>rational equation</b> is an equation with a variable in a denominator, such as <span class="tex">\dfrac{3}{x}+1=\dfrac{5}{2x}</span>. Before solving, find the <b class="u6l7-npv">non-permissible values</b> (NPVs): factor every denominator in the <i>original</i> equation and set each factor with a variable equal to <span class="tex">0</span>. No NPV can be a solution, because it would make a denominator <span class="tex">0</span>.</div>
+  <p>A value is a <b>solution</b> (root) if it is permissible and makes the left side (LS) equal to the right side (RS). To <b>verify</b> a solution, substitute it into the original equation and evaluate each side separately.</p>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>NPVs first</h3></div>
+  <p class="q">State the non-permissible values.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{7}{x}+2=\dfrac{3}{4x}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{x\ne0}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x}{x+5}=\dfrac{2}{3x-1}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+5\ne0</span> and <span class="tex">3x-1\ne0</span>:<br><span class="tex">\boldsymbol{x\ne-5,\ \tfrac{1}{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{1}{x^2-6x}=\dfrac{4}{x^2-36}</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x(x-6)</span> and <span class="tex">(x-6)(x+6)</span><br><span class="tex">\boldsymbol{x\ne0,\ 6,\ -6}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{3}{x^2+x-12}-\dfrac{1}{x}=2</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x+4)(x-3)</span> and <span class="tex">x</span><br><span class="tex">\boldsymbol{x\ne-4,\ 3,\ 0}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Is it a solution?</h3></div>
+  <p class="q">Verify whether the given value is a solution of the equation.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">x=3</span>; &nbsp; <span class="tex">\dfrac{6}{x}+1=\dfrac{9}{x}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=3</span> is permissible (<span class="tex">x\ne0</span>).<br>LS <span class="tex">=\tfrac{6}{3}+1=3</span> &nbsp; RS <span class="tex">=\tfrac{9}{3}=3</span><br>LS <span class="tex">=</span> RS, so <b><span class="tex">x=3</span> is a solution</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x=1</span>; &nbsp; <span class="tex">\dfrac{x}{x+3}=\dfrac{4}{x}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=1</span> is permissible (<span class="tex">x\ne-3,\ 0</span>).<br>LS <span class="tex">=\tfrac{1}{4}</span> &nbsp; RS <span class="tex">=\tfrac{4}{1}=4</span><br>LS <span class="tex">\ne</span> RS, so <b><span class="tex">x=1</span> is not a solution</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Multiplying by the LCD ================= -->
+<section class="card" data-ink="s2" data-section="2. Solving by Multiplying by the LCD">
+  <div class="sec-h"><span class="badge">2</span><h2>Solving by Multiplying by the LCD</h2></div>
+  <p>Multiplying <b>every term on both sides</b> by the lowest common denominator (<b class="u6l7-lcd">LCD</b>) clears all the fractions and leaves a polynomial equation. Terms with no denominator (like the <span class="tex">1</span> in <span class="tex">\frac{3}{x}+1</span>) must be multiplied too.</p>
+  <div class="def amber"><b>Solving a rational equation</b>
+    <ol class="u6l7-steps">
+      <li>Factor each denominator and state the <b class="u6l7-npv">NPVs</b>.</li>
+      <li>Multiply every term by the <b class="u6l7-lcd">LCD</b> and simplify.</li>
+      <li>Solve the resulting equation.</li>
+      <li><b class="u6l7-no">Reject</b> any value that is an NPV.</li>
+      <li>Verify in the original equation.</li>
+    </ol></div>
+  <div class="explainer" data-explainer="clear"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Clear the fractions</h3></div>
+  <p class="q">State the NPVs, then solve. Verify the solution to (a).</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{2}{x}+\dfrac{1}{3}=\dfrac{7}{3x}</span></div><div class="work" style="--h:270px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPV: <span class="tex">x\ne0</span>. &nbsp;LCD <span class="tex">=3x</span><br><span class="tex">3x\left(\tfrac{2}{x}\right)+3x\left(\tfrac{1}{3}\right)=3x\left(\tfrac{7}{3x}\right)</span><br><span class="tex">6+x=7</span><br><span class="tex">\boldsymbol{x=1}</span><br>Verify: LS <span class="tex">=2+\tfrac{1}{3}=\tfrac{7}{3}</span>, RS <span class="tex">=\tfrac{7}{3}</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x+1}{2x}-\dfrac{3}{4}=\dfrac{1}{x}</span></div><div class="work" style="--h:270px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPV: <span class="tex">x\ne0</span>. &nbsp;LCD <span class="tex">=4x</span><br><span class="tex">2(x+1)-3x=4</span><br><span class="tex">2x+2-3x=4</span><br><span class="tex">-x=2</span><br><span class="tex">\boldsymbol{x=-2}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{4}{3x}+\dfrac{x-2}{x}=\dfrac{5}{6}</span></div><div class="work" style="--h:270px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPV: <span class="tex">x\ne0</span>. &nbsp;LCD <span class="tex">=6x</span><br><span class="tex">8+6(x-2)=5x</span><br><span class="tex">8+6x-12=5x</span><br><span class="tex">\boldsymbol{x=4}</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Cross-multiplying ================= -->
+<section class="card" data-ink="s3" data-section="3. One Fraction on Each Side">
+  <div class="sec-h"><span class="badge">3</span><h2>One Fraction on Each Side: Cross-Multiplying</h2></div>
+  <p>An equation with exactly one fraction on each side is a <b>proportion</b>. Cross-multiplying is a shortcut for multiplying both sides by the LCD.</p>
+  <div class="def amber u6l7-center"><span class="u6l7-bigf">If <span class="tex">\dfrac{a}{b}=\dfrac{c}{d}</span> &nbsp;(<span class="tex">b,\ d\ne0</span>), then <span class="tex">ad=bc</span>.</span></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div>Put <b>brackets</b> around binomials when you cross-multiply. If <span class="tex">x^2</span> terms appear on both sides, they may <b>cancel</b> and leave a linear equation.</div></div>
+  <div class="explainer" data-explainer="cross"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Cross-multiply</h3></div>
+  <p class="q">State the NPVs and solve.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{4}{x-1}=\dfrac{3}{x+2}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPVs: <span class="tex">x\ne1,\ -2</span><br><span class="tex">4(x+2)=3(x-1)</span><br><span class="tex">4x+8=3x-3</span><br><span class="tex">\boldsymbol{x=-11}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{2x+1}{x-3}=\dfrac{4x-5}{2x+1}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPVs: <span class="tex">x\ne3,\ -\tfrac{1}{2}</span><br><span class="tex">(2x+1)^2=(4x-5)(x-3)</span><br><span class="tex">4x^2+4x+1=4x^2-17x+15</span><br><span class="tex">21x=14</span><br><span class="tex">\boldsymbol{x=\tfrac{2}{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{5}{3-y}=2</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPV: <span class="tex">y\ne3</span><br><span class="tex">\tfrac{5}{3-y}=\tfrac{2}{1}</span><br><span class="tex">5=2(3-y)</span><br><span class="tex">5=6-2y</span><br><span class="tex">\boldsymbol{y=\tfrac{1}{2}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Boys and girls</h3></div>
+  <p class="q">A club has 7 more girls than boys. The ratio of boys to girls is <span class="tex">4:5</span>. Write and solve a rational equation to determine the number of boys and girls.</p>
+  <div class="part u6l7-solo"><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">b</span> be the number of boys; there are <span class="tex">b+7</span> girls.<br><span class="tex">\dfrac{b}{b+7}=\dfrac{4}{5}</span> &nbsp; (<span class="tex">b\ne-7</span>)<br><span class="tex">5b=4(b+7)\Rightarrow5b=4b+28\Rightarrow b=28</span><br>There are <b>28 boys and 35 girls</b>. (Check: <span class="tex">\tfrac{28}{35}=\tfrac{4}{5}</span> ✓)</div></div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Binomial and trinomial denominators ================= -->
+<section class="card" data-ink="s4" data-section="4. Binomial and Trinomial Denominators">
+  <div class="sec-h"><span class="badge">4</span><h2>Binomial and Trinomial Denominators</h2></div>
+  <div class="def"><b>Factor every denominator first.</b> The <b class="u6l7-lcd">LCD</b> is the product of all the different factors, each used the greatest number of times it appears in any one denominator. Denominators that are <b>opposites</b>, like <span class="tex">x-4</span> and <span class="tex">4-x</span>, are related by <span class="tex">4-x=-(x-4)</span>, so <span class="tex">\dfrac{3}{4-x}=-\dfrac{3}{x-4}</span>.</div>
+  <div class="explainer" data-explainer="tiles"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Factor, then clear</h3></div>
+  <p class="q">State the NPVs, solve and verify.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{3}{x+2}+\dfrac{1}{x-2}=\dfrac{8}{x^2-4}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-4=(x-2)(x+2)</span>. NPVs: <span class="tex">x\ne-2,\ 2</span><br>LCD <span class="tex">=(x-2)(x+2)</span><br><span class="tex">3(x-2)+1(x+2)=8</span><br><span class="tex">4x-4=8</span>, &nbsp;<span class="tex">\boldsymbol{x=3}</span><br>Verify: LS <span class="tex">=\tfrac{3}{5}+1=\tfrac{8}{5}</span>, RS <span class="tex">=\tfrac{8}{5}</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{2}{x-1}-\dfrac{1}{x+3}=\dfrac{6}{x^2+2x-3}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+2x-3=(x+3)(x-1)</span>. NPVs: <span class="tex">x\ne1,\ -3</span><br><span class="tex">2(x+3)-1(x-1)=6</span><br><span class="tex">2x+6-x+1=6</span>, &nbsp;<span class="tex">\boldsymbol{x=-1}</span><br>Verify: LS <span class="tex">=\tfrac{2}{-2}-\tfrac{1}{2}=-\tfrac{3}{2}</span><br>RS <span class="tex">=\tfrac{6}{-4}=-\tfrac{3}{2}</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{7}{x-4}+\dfrac{3}{4-x}=2</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPV: <span class="tex">x\ne4</span><br><span class="tex">\tfrac{7}{x-4}-\tfrac{3}{x-4}=2</span><br><span class="tex">\tfrac{4}{x-4}=2</span><br><span class="tex">4=2(x-4)\Rightarrow4=2x-8\Rightarrow\boldsymbol{x=6}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{3}{x}+\dfrac{x}{x+2}=1</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPVs: <span class="tex">x\ne0,\ -2</span>. &nbsp;LCD <span class="tex">=x(x+2)</span><br><span class="tex">3(x+2)+x^2=x(x+2)</span><br><span class="tex">x^2+3x+6=x^2+2x</span> &nbsp;(<span class="tex">x^2</span> cancels)<br><span class="tex">\boldsymbol{x=-6}</span><br>Verify: LS <span class="tex">=-\tfrac{1}{2}+\tfrac{-6}{-4}=1</span>, RS <span class="tex">=1</span> ✓</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–7">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 7 · Questions 1–7</h2>
+  <p class="pr-t">NPVs first, multiply every term by the LCD, solve, then check your answer against the NPVs.</p>
+  <div class="pr-chips n4"><span><b>1–2</b>NPVs and verifying</span><span><b>3</b>Multiply by the LCD</span><span><b>4</b>Cross-multiply</span><span><b>5–7</b>Binomial and trinomial denominators</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u6l7">Open the Practice site</a></div>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u6l7"></section>
+
+<!-- ================= 5. Rejected values ================= -->
+<section class="card" data-ink="s5" data-section="5. Rejected Values and No Solution">
+  <div class="sec-h"><span class="badge">5</span><h2>Rejected Values and Equations with No Solution</h2></div>
+  <div class="def">Multiplying by the LCD multiplies by an expression that equals <span class="tex">0</span> at each NPV, so the polynomial equation can have a root that the original equation does not. Such a root is <b class="u6l7-no">extraneous</b> and must be <b class="u6l7-no">rejected</b>. If every value you find is rejected, or the variable cancels and leaves a false statement (like <span class="tex">0=5</span>), the equation has <b>no solution</b>.</div>
+  <div class="explainer" data-explainer="verdict"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Keep it or reject it?</h3></div>
+  <p class="q">Solve.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{3x}{x-2}=1+\dfrac{6}{x-2}</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPV: <span class="tex">x\ne2</span>. &nbsp;LCD <span class="tex">=x-2</span><br><span class="tex">3x=(x-2)+6</span><br><span class="tex">2x=4</span><br><span class="tex">x=2</span>, but 2 is an NPV: <b class="u6l7-no">reject it</b>.<br>The equation has <b>no solution</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{2}{x+3}+\dfrac{1}{x-3}=\dfrac{6}{x^2-9}</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPVs: <span class="tex">x\ne-3,\ 3</span><br><span class="tex">2(x-3)+1(x+3)=6</span><br><span class="tex">3x-3=6</span><br><span class="tex">x=3</span>, an NPV: <b class="u6l7-no">reject it</b>.<br><b>No solution.</b></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Graphing calculator ================= -->
+<section class="card" data-ink="s6" data-section="6. Solving with a Graphing Calculator">
+  <div class="sec-h"><span class="badge">6</span><h2>Solving with a Graphing Calculator</h2></div>
+  <p>The solutions of an equation are the <span class="tex">x</span>-coordinates of the points where the graphs of <span class="tex">y=\text{LS}</span> and <span class="tex">y=\text{RS}</span> intersect.</p>
+  <div class="def amber"><div class="u6l7-meth"><b>Intersect method:</b> <span class="tex">Y_1=</span> left side, <span class="tex">Y_2=</span> right side; graph, then use <b>intersect</b> at each crossing.</div>
+    <div class="u6l7-meth"><b>Zero method:</b> <span class="tex">Y_1=</span> left side <span class="tex">-</span> right side; graph, then use <b>zero</b> at each <span class="tex">x</span>-intercept.</div></div>
+  <p>Use brackets: type <span class="tex">\dfrac{5}{x+1}</span> as <code class="u6l7-code">5/(X+1)</code>. Each NPV gives a vertical asymptote, where the graph breaks into separate pieces; the calculator may draw a near-vertical line there that is not part of the graph. Choose a window that shows every intersection.</p>
+  <div class="explainer" data-explainer="calc"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Algebra and the graphing calculator</h3></div>
+  <div class="u6l7-ex8">
+    <div>
+      <div class="part"><div class="pl">(a) Solve <span class="tex">\dfrac{5}{x+1}=\dfrac{2}{x-3}</span> algebraically, then confirm with a graphing calculator.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPVs: <span class="tex">x\ne-1,\ 3</span><br><span class="tex">5(x-3)=2(x+1)\Rightarrow5x-15=2x+2\Rightarrow3x=17</span><br><span class="tex">\boldsymbol{x=\tfrac{17}{3}}</span> &nbsp; Calculator: the graphs intersect at <span class="tex">x\approx5.67</span> ✓</div></div></div>
+      <div class="part"><div class="pl">(b) The graphs of <span class="tex">y=\dfrac{2}{x}+1</span> and <span class="tex">y=\dfrac{x}{3}</span> are shown. Use a graphing calculator to solve <span class="tex">\dfrac{2}{x}+1=\dfrac{x}{3}</span>, to the nearest hundredth. State a suitable window.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Window: <span class="tex">x</span> from <span class="tex">-10</span> to <span class="tex">10</span>, <span class="tex">y</span> from <span class="tex">-10</span> to <span class="tex">10</span>.<br><span class="tex">Y_1=2/X+1</span>, <span class="tex">Y_2=X/3</span>; intersect twice.<br><span class="tex">\boldsymbol{x\approx-1.37}</span> or <span class="tex">\boldsymbol{x\approx4.37}</span> (neither is the NPV <span class="tex">0</span>).<br>(Lesson 8 shows how to find these exactly.)</div></div></div>
+    </div>
+    <figure class="u6l7-fig">
+      <div data-bk-graph='{"width":340,"height":300,"xmin":-6,"xmax":8,"ymin":-5,"ymax":5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"fn":["2/x+1",{"breaks":[0],"color":"#1f5bd6","width":3}]},{"fn":["x/3",{"color":"#c93a33","width":3,"dash":"9 7"}]},{"vline":[0,{"color":"#9aa0ab","width":1.5,"dash":"3 5"}]}]}'></div>
+      <figcaption><span class="u6l7-k1">solid:</span> <span class="tex">y=\frac{2}{x}+1</span> &nbsp; <span class="u6l7-k2">dashed:</span> <span class="tex">y=\frac{x}{3}</span></figcaption>
+    </figure>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>On the calculator.</b> <span class="keys"><kbd>Y=</kbd></span> enter both sides, <span class="keys"><kbd>ZOOM</kbd><kbd>6</kbd></span> (ZStandard), then <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd></span> <b>5: intersect</b> and <span class="keys"><kbd>ENTER</kbd></span> for the first curve, the second curve, and a guess near the crossing.
+      <div class="u6l7-ckpills"><button class="chip" data-keys="Y= CLEAR 5 ÷ ( X + 1 ) ▼ CLEAR 2 ÷ ( X − 3 ) ZStandard intersect ENTER ENTER 6 ENTER">(a) intersect</button><button class="chip" data-keys="Y= CLEAR 2 ÷ X + 1 ▼ CLEAR X ÷ 3 ZStandard intersect ENTER ENTER (−) 1 ENTER">(b) left crossing</button><button class="chip" data-keys="Y= CLEAR 2 ÷ X + 1 ▼ CLEAR X ÷ 3 ZStandard intersect ENTER ENTER 4 ENTER">(b) right crossing</button><button class="chip" data-keys="Y= CLEAR 2 ÷ X + 1 − X ÷ 3 ▼ CLEAR ZStandard zero 1 ENTER 6 ENTER 4 ENTER">(b) zero method</button></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>NPVs first.</b> Factor every denominator of the <b>original</b> equation and set each factor with a variable to <span class="tex">0</span>. No NPV can be a solution.</div>
+    <div><b>Clear the fractions.</b> Multiply <b>every term</b> by the LCD, including terms with no denominator. One fraction on each side: <b>cross-multiply</b>, <span class="tex">\frac{a}{b}=\frac{c}{d}\Rightarrow ad=bc</span>, with brackets around binomials.</div>
+    <div><b>Reject and verify.</b> A root that is an NPV is <b>extraneous</b>: reject it. If every root is rejected (or you get <span class="tex">0=5</span>), there is <b>no solution</b>. Verify in the original equation.</div>
+    <div><b>Graphing calculator.</b> <span class="tex">Y_1=</span> LS, <span class="tex">Y_2=</span> RS and <b>intersect</b>, or <span class="tex">Y_1=</span> LS <span class="tex">-</span> RS and <b>zero</b>. Brackets around denominators; a window that shows every crossing.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u6l7">
+    <div><div class="kicker">Your turn</div><b>Assignment 7 · Questions 8–17</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l8/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 8 — Rational Equations That Lead to Quadratics</b><div class="muted">When the <span class="tex">x^2</span> terms don’t cancel: factor or use the quadratic formula, then check the NPVs.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u6l7.js';
+  boot({ key: 'u6l7', homeHref: '../../', title: '6.7 Solving Rational Equations' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

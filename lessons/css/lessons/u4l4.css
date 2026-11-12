@@ -158,3 +158,14 @@
 .u4l4-ckp .u4l4-line { font-size: 19px; margin: 6px 0; }
 .u4l4-ckp .u4l4-line.u4l4-big { font-size: 22px; }
 .u4l4-ckp .u4l4-line.u4l4-key-line { font-size: 18.5px; padding: 4px 6px; }
+
+/* Ryan's X (new format, 2026-11-11): c on top, b underneath, the two numbers on the sides, the pairs beside it */
+.u4l4-xv { font-size: 27px; font-weight: 700; white-space: nowrap; }
+.u4l4-xv.u4l4-xlab { font-size: 19px; color: var(--muted); }
+.u4l4-xv.u4l4-xtop { color: #a33357; } .u4l4-xv.u4l4-xbot { color: #12805a; }
+.u4l4-xv.u4l4-xside { color: #c27a0e; font-size: 28px; }
+.u4l4-xp { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 184px; height: 28px; padding: 0 10px; box-sizing: border-box; font-size: 17.5px; border: 3px solid transparent; border-radius: 999px; white-space: nowrap; }
+.u4l4-xp.u4l4-xp-ok { border-color: #12805a; background: #e9f6ef; }
+.u4l4-xp.u4l4-xp-no { color: var(--muted); opacity: .55; }
+.u4l4-need { font-size: 18px; color: var(--ink2); white-space: nowrap; }
+.u4l4-snv { white-space: nowrap; }

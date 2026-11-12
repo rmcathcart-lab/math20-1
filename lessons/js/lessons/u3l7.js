@@ -1,17 +1,12 @@
 /* Math 20-1 · Unit 3 · Lesson 7 — The Ambiguous Case.
- * Warm-up (Gus the Goat: a goat tied 5 m from a fence; ropes of 4, 5 and 7 m reach it 0, 1 or 2 times), and the explainers:
- *   fixers (build a triangle from SSS, SAS, ASA, AAS: always one; SSA: the free side swings and lands twice;
- *     Example 1 check: four mini triangles PQR with the given parts coloured),
- *   supp (two arms on a semicircle with the same height: sin θ = sin(180° − θ); backwards from sin B = k: two angles,
- *     one (k = 1) or none (k > 1); Example 2 check),
+ * The warm-up (Which One Doesn't Belong?) is plain markup with SVG triangles (tools/newformat/specs/u3l7.py). Explainers:
  *   swing (STAR: ∠A and b fixed, a slider sets a; side a swings from C and lands 0, 1 or 2 times on the arm, with h and b
  *     marked on the slider's ruler and the count live; acute and obtuse A; Example 4 checks),
- *   six (Example 3 check: the six summary sketches swing one by one and get their counts),
- *   decide (a decision chart: acute? a ≥ b? then h; Example 4 checks),
  *   solve2 (both triangles solved side by side: count, sine law, B1 and B2 = 180° − B1, keep or reject, finish each;
  *     Example 5 and 6 checks),
  *   ferry (word problems with two positions: the ferry entering and leaving the beacon's range, the roof strut swinging
  *     onto the beam; Example 7 and 8 checks).
+ * The six SSA sketches on Example 3's card are static (mountStatics).
  * Colours (kept through the lesson): the given angle A and its opposite side a rose (the course accent), side b blue,
  * the height h amber, triangle 1 / B acute green, triangle 2 / B obtuse purple, impossible landings red. */
 import {
@@ -172,324 +167,14 @@ class SSAFig {
 }
 
 /* ====================================================================================================
- * Warm-up: Gus the Goat. Post 5 m from the fence; the rope's circle meets the fence 0, 1 or 2 times.
- * ==================================================================================================== */
-function goat(parent, x, y, flip = 1) {
-  const g = svgEl('g', { transform: `translate(${x} ${y}) scale(${flip} 1)` }, parent);
-  svgEl('ellipse', { cx: -14, cy: -14, rx: 20, ry: 12, fill: '#fbfaf6', stroke: '#6b6458', 'stroke-width': 2 }, g);
-  [[-28, -4], [-20, -4], [-8, -4], [-1, -4]].forEach(([lx, ly]) => svgEl('line', { x1: lx, y1: ly, x2: lx, y2: ly + 13, stroke: '#6b6458', 'stroke-width': 3, 'stroke-linecap': 'round' }, g));
-  svgEl('path', { d: 'M-2 -20 L8 -30 L14 -22 L10 -14 L2 -12 Z', fill: '#fbfaf6', stroke: '#6b6458', 'stroke-width': 2, 'stroke-linejoin': 'round' }, g);
-  svgEl('path', { d: 'M5 -29 Q2 -40 -6 -38 M9 -29 Q10 -40 4 -41', fill: 'none', stroke: '#8a6d3b', 'stroke-width': 2.6, 'stroke-linecap': 'round' }, g);
-  svgEl('circle', { cx: 8, cy: -24, r: 1.8, fill: '#1c2230' }, g);
-  svgEl('path', { d: 'M11 -14 L10 -7 L13 -10', fill: 'none', stroke: '#6b6458', 'stroke-width': 1.8 }, g);
-  svgEl('path', { d: 'M-33 -20 Q-38 -24 -36 -16', fill: 'none', stroke: '#6b6458', 'stroke-width': 2.4, 'stroke-linecap': 'round' }, g);
-  return g;
-}
-function mountField() {
-  const host = document.getElementById('u3l7-field'); if (!host) return;
-  const W = 560, H = 350, S = 34, X0 = 280, FY = 300, PY = FY - 5 * S;
-  const svg = svgEl('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, class: 'u3l7-fieldsvg' }, host);
-  const defs = svgEl('defs', {}, svg), cp = svgEl('clipPath', { id: 'u3l7-fclip' }, defs); svgEl('rect', { x: 0, y: 0, width: W, height: H, rx: 14 }, cp);
-  const root = svgEl('g', { 'clip-path': 'url(#u3l7-fclip)' }, svg);
-  svgEl('rect', { x: 0, y: 0, width: W, height: H, fill: '#cfe8b4' }, root);
-  for (let i = 0; i < 46; i++) { const x = (i * 97) % W, y = (i * 61) % (FY - 20) + 8; svgEl('path', { d: `M${x} ${y} l3 -7 M${x + 5} ${y} l-2 -8`, stroke: '#9cc77f', 'stroke-width': 2, 'stroke-linecap': 'round' }, root); }
-  svgEl('rect', { x: 0, y: FY + 8, width: W, height: H - FY, fill: '#e6d9b8' }, root);
-  for (let x = 10; x < W; x += 22) { const yy = FY - 10 - ((x * 7) % 5); svgEl('line', { x1: x, y1: yy + 8, x2: x, y2: yy, stroke: '#5c9a43', 'stroke-width': 2 }, root); svgEl('circle', { cx: x, cy: yy, r: 4.2, fill: '#f6cf2c', stroke: '#d6a400', 'stroke-width': 1 }, root); }
-  svgEl('rect', { x: 0, y: FY - 2, width: W, height: 6, fill: '#a5783f' }, root);
-  svgEl('rect', { x: 0, y: FY + 9, width: W, height: 5, fill: '#a5783f' }, root);
-  for (let x = 14; x < W; x += 48) svgEl('rect', { x: x - 4, y: FY - 10, width: 9, height: 30, rx: 2, fill: '#8a5f2d' }, root);
-  const dyn = svgEl('g', {}, root);
-  svgEl('circle', { cx: X0, cy: PY, r: 9, fill: '#7a5230', stroke: '#4a3018', 'stroke-width': 2 }, root);
-  const info = h('div', 'u3l7-finfo', ''); host.appendChild(info);
-  const draw = (L) => {
-    dyn.innerHTML = '';
-    if (!L) { goat(dyn, X0 + 46, PY + 40); svgEl('path', { d: `M${X0} ${PY} Q${X0 + 30} ${PY + 40} ${X0 + 42} ${PY + 28}`, fill: 'none', stroke: '#8b6b3e', 'stroke-width': 3 }, dyn); info.innerHTML = 'Pick a rope length.'; return; }
-    svgEl('circle', { cx: X0, cy: PY, r: L * S, fill: 'rgba(255,255,255,.18)', stroke: '#5f6b7a', 'stroke-width': 2.5, 'stroke-dasharray': '7 7' }, dyn);
-    svgEl('line', { x1: X0, y1: PY, x2: X0, y2: FY, stroke: HC, 'stroke-width': 3, 'stroke-dasharray': '6 5' }, dyn);
-    const t5 = h('div', 'u3l7-flab', '5 m'); host.appendChild(t5); t5.classList.add('u3l7-fdyn');
-    host.querySelectorAll('.u3l7-fdyn').forEach((e) => { if (e !== t5) e.remove(); }); place(t5, X0 - 8, (PY + FY) / 2 - 22, 'w', 2);
-    if (L < 5) {
-      const ty = PY + L * S;
-      svgEl('line', { x1: X0, y1: PY, x2: X0, y2: ty, stroke: '#8b6b3e', 'stroke-width': 3.5 }, dyn);
-      svgEl('line', { x1: X0 + 10, y1: ty, x2: X0 + 10, y2: FY, stroke: RED, 'stroke-width': 3, 'stroke-dasharray': '3 4' }, dyn);
-      goat(dyn, X0 + 20, ty + 14);
-      info.innerHTML = `<b>Rope ${L} m:</b> ${5 - L} m short. Gus can’t reach the fence.`;
-    } else if (L === 5) {
-      svgEl('line', { x1: X0, y1: PY, x2: X0, y2: FY - 6, stroke: '#8b6b3e', 'stroke-width': 3.5 }, dyn);
-      svgEl('circle', { cx: X0, cy: FY - 8, r: 9, fill: 'none', stroke: G1, 'stroke-width': 3.5 }, dyn);
-      goat(dyn, X0 + 26, FY - 14);
-      info.innerHTML = '<b>Rope 5 m:</b> it just touches, at <b>1</b> spot (straight across).';
-    } else {
-      const dx = Math.sqrt(L * L - 25) * S, xs = [X0 - dx, X0 + dx];
-      if (xs[0] > 0) svgEl('line', { x1: xs[0], y1: FY - 9, x2: xs[1], y2: FY - 9, stroke: G1, 'stroke-width': 7, 'stroke-linecap': 'round', 'stroke-opacity': 0.55 }, dyn);
-      xs.forEach((x, i) => {
-        svgEl('line', { x1: X0, y1: PY, x2: x, y2: FY - 6, stroke: '#8b6b3e', 'stroke-width': i ? 3.5 : 2.5, 'stroke-dasharray': i ? null : '6 5' }, dyn);
-        svgEl('circle', { cx: x, cy: FY - 8, r: 9, fill: 'none', stroke: G1, 'stroke-width': 3.5 }, dyn);
-      });
-      goat(dyn, xs[1] - 6, FY - 14, -1);
-      info.innerHTML = `<b>Rope ${L} m:</b> touches at <b>2</b> spots, ${fx(Math.sqrt(L * L - 25), 1)} m each side of the closest point.`;
-    }
-  };
-  host.parentElement.querySelectorAll('[data-rope]').forEach((b) => b.addEventListener('click', () => {
-    host.parentElement.querySelectorAll('[data-rope]').forEach((x) => x.classList.toggle('on', x === b)); draw(+b.dataset.rope);
-  }));
-  draw(0);
-}
-
-/* ====================================================================================================
  * explainer: which measurements fix a triangle?
  * ==================================================================================================== */
-const FXK = { sss: 'SSS', sas: 'SAS', asa: 'ASA', aas: 'AAS', ssa: 'SSA' };
 function plane(stage, x, y, w, hh) {
   const el = div(stage, 'u3l7-fig', '', x, y, w, hh);
   const svg = svgEl('svg', { width: w, height: hh, viewBox: `0 0 ${w} ${hh}`, class: 'u3l7-svg' }, el);
   const ov = add(el, h('div', 'u3l7-ov'));
   return { el, svg, ov };
 }
-/** a triangle PQR (unit coords) fitted into a box, given parts coloured; returns the pieces */
-function miniTri(host, x, y, w, hh, V, giv, ghost) {
-  const pts = Object.values(V).concat(ghost ? [ghost.p] : []), xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
-  const xmn = Math.min(...xs), xmx = Math.max(...xs), ymn = Math.min(...ys), ymx = Math.max(...ys);
-  const s = Math.min((w - 70) / (xmx - xmn), (hh - 64) / (ymx - ymn)), ox = x + (w - (xmx - xmn) * s) / 2 - xmn * s, oy = y + hh - 36 - ((hh - 64) - (ymx - ymn) * s) / 2 + ymn * s;
-  const P = (p) => [ox + p[0] * s, oy - p[1] * s], K = Object.keys(V), Vp = {}; K.forEach((k) => (Vp[k] = P(V[k])));
-  const cen = [(Vp[K[0]][0] + Vp[K[1]][0] + Vp[K[2]][0]) / 3, (Vp[K[0]][1] + Vp[K[1]][1] + Vp[K[2]][1]) / 3];
-  const g = svgEl('g', {}, host.svg);
-  svgEl('polygon', { points: K.map((k) => Vp[k].join(',')).join(' '), fill: '#f6eef1', stroke: 'none' }, g);
-  if (ghost) {
-    const gp = P(ghost.p);
-    stroke(g, [Vp[ghost.from], gp], GRAY, 2.5, '6 6'); stroke(g, [Vp[ghost.base], gp], GRAY, 2.5, '6 6');
-    lab(host.ov, T(ghost.name), gp[0], gp[1] + 2, 's', 'u3l7-vx u3l7-ghost', 3);
-  }
-  [[K[0], K[1]], [K[1], K[2]], [K[2], K[0]]].forEach(([u, v]) => {
-    const key = u + v, key2 = v + u, gv = giv.sides[key] || giv.sides[key2];
-    stroke(g, [Vp[u], Vp[v]], gv ? gv.c : SLATE, gv ? 4.5 : 2.2);
-    if (gv) {
-      const m = [(Vp[u][0] + Vp[v][0]) / 2, (Vp[u][1] + Vp[v][1]) / 2], d = [m[0] - cen[0], m[1] - cen[1]], L = Math.hypot(...d);
-      lab(host.ov, gv.t, m[0] + (d[0] / L) * 4, m[1] + (d[1] / L) * 4, posFrom(d[0] / L, d[1] / L), 'u3l7-lab-sm', 3);
-    }
-  });
-  K.forEach((k) => {
-    const p = Vp[k], d = [p[0] - cen[0], p[1] - cen[1]], L = Math.hypot(...d);
-    lab(host.ov, T(k), p[0] + (d[0] / L) * 4, p[1] + (d[1] / L) * 4, posFrom(d[0] / L, d[1] / L), 'u3l7-vx', 3);
-    if (giv.angles[k]) {
-      const o2 = K.filter((q) => q !== k);
-      angleArc(g, p, Vp[o2[0]], Vp[o2[1]], 22, { color: AC, width: 3 });
-      lab(host.ov, giv.angles[k], p[0] - (d[0] / L) * 44, p[1] - (d[1] / L) * 44, 'c', 'u3l7-lab-sm');
-    }
-  });
-  return g;
-}
-const fixers = {
-  title: 'Which measurements fix a triangle?',
-  height: 380, minW: 940,
-  choices: [...Object.keys(FXK).map((k) => ({ v: k, label: FXK[k] })), { sep: 'Check:' }, { v: 'ex1', label: 'Example 1 check' }],
-  ask: (v) => (v === 'ex1' ? 'Example 1: name the type of information and say whether it fixes exactly one triangle.' : `Build a triangle from ${FXK[v]} information. Does everyone get the same one?`),
-  make(stage, v, ex) {
-    const W = ex.W;
-    if (v === 'ex1') return fixersEx1(stage, ex);
-    const info = panel(stage, 10, 14, 250, 170, 'Given');
-    const verdict = hide(div(stage, 'u3l7-verdict', '', 10, 200, 250, 110));
-    if (v === 'ssa') {
-      const F = new SSAFig(stage, { x: 270, y: 0, w: W - 280, h: 370, A: 35, b: 8, amax: 5.9, labA: T(cA('35^\\circ')), labB: T(cB('b=8')), labS: T(cA('5.5')), showH: false, angB: true });
-      info.insertAdjacentHTML('beforeend', `<div class="u3l7-line">${T(cA('\\angle A=35^\\circ'))}</div><div class="u3l7-line">${T(cB('b=AC=8'))}</div><div class="u3l7-line">${T(cA('a=BC=5.5'))}</div>`);
-      verdict.innerHTML = '<b>Two</b> different triangles fit the same three measurements. SSA is <b>ambiguous</b>.';
-      const st = stamp(stage, '2 triangles!', { ok: false, x: W - 110, y: 60 }); hide(st);
-      return [
-        { cap: `${T('\\angle A=35^\\circ')}, ${T('b=AC=8')} and ${T('a=BC=5.5')}. The angle is <b>not</b> between the two sides. ${T('C')} is fixed …`, run: (c) => pulse(c, F.el, 1.02) },
-        { cap: `… but side ${T(cA('a'))} is attached only at ${T('C')}. It <b>swings like a compass</b> …`, run: (c) => F.swing(c, 5.5) },
-        { cap: `… and lands in <b>two</b> places, ${T(c1('B_1'))} and ${T(c2('B_2'))}: two different triangles with the same three measurements.`, run: async (c) => { await show(c, verdict); await stampIn(c, st); } }
-      ];
-    }
-    const pl = plane(stage, 270, 0, W - 280, 372), S = 42, P = (x, y) => [70 + x * S, 330 - y * S];
-    const g = svgEl('g', {}, pl.svg), V = {};
-    const st = stamp(stage, '1 triangle', { ok: true, x: W - 110, y: 60 }); hide(st);
-    const base = stroke(g, [P(0, 0), P(8, 0)], BC, 4.5); hide(base);
-    const lA = hide(lab(pl.ov, T('A'), ...P(0, 0), 'sw', 'u3l7-vx')), lB = hide(lab(pl.ov, T('B'), ...P(8, 0), 'se', 'u3l7-vx')), lc = hide(lab(pl.ov, T(cB('c=8')), ...P(4, 0), 's', 'u3l7-lab-b', 8));
-    const baseIn = async (c) => { base.style.opacity = 1; await drawIn(base, 600, c); await Promise.all([show(c, lA), show(c, lB), show(c, lc)]); };
-    const triFill = (Cu) => { const f = svgEl('polygon', { points: [P(0, 0), P(8, 0), P(...Cu)].map((q) => q.join(',')).join(' '), fill: G1, 'fill-opacity': 0.15 }, g); g.insertBefore(f, g.firstChild); return hide(f); };
-    const lines = (arr) => arr.forEach((t) => info.insertAdjacentHTML('beforeend', `<div class="u3l7-line">${t}</div>`));
-    const finish = async (c) => { await show(c, verdict); await stampIn(c, st); };
-    if (v === 'sss') {
-      const a = 5, b = 6, xC = (b * b - a * a + 64) / 16, yC = Math.sqrt(b * b - xC * xC), Cu = [xC, yC];
-      lines([T(cB('a=5')), T(cB('b=6')), T(cB('c=8'))]);
-      verdict.innerHTML = 'The two circles cross at one point above <span class="tex-i">AB</span>: <b>exactly one</b> triangle.';
-      const arc = (cx, r, a0, a1, colr) => { const pts = []; for (let t = a0; t <= a1 + 0.01; t += 3) pts.push(P(cx + r * cosD(t), r * sinD(t))); return hide(stroke(g, pts, colr, 2.5, '6 6')); };
-      const arcA = arc(0, b, 0, 150, BC), arcB = arc(8, a, 30, 180, AC);
-      const sAC = hide(stroke(g, [P(0, 0), P(...Cu)], BC, 4.5)), sBC = hide(stroke(g, [P(8, 0), P(...Cu)], BC, 4.5)), fill = triFill(Cu);
-      const Cd = dotG(g, P(...Cu), G1); hide(Cd); const lC = hide(lab(pl.ov, T('C'), ...P(...Cu), 'n', 'u3l7-vx', 10));
-      const lb = hide(lab(pl.ov, T(cB('6')), ...P(xC / 2, yC / 2), 'nw', 'u3l7-lab-b', 4)), la = hide(lab(pl.ov, T(cB('5')), ...P((8 + xC) / 2, yC / 2), 'ne', 'u3l7-lab-b', 4));
-      return [
-        { cap: `Three sides: ${T('a=5')}, ${T('b=6')}, ${T('c=8')}. Lay down ${T('c=8')} as ${T('AB')}.`, run: baseIn },
-        { cap: `Side ${T('b=6')} starts at ${T('A')}, so its end ${T('C')} is somewhere on this circle …`, run: async (c) => { arcA.style.opacity = 1; await drawIn(arcA, 700, c); } },
-        { cap: `… and side ${T('a=5')} starts at ${T('B')}, so ${T('C')} is also on this circle.`, run: async (c) => { arcB.style.opacity = 1; await drawIn(arcB, 700, c); } },
-        { cap: `The circles cross at <b>one</b> point above ${T('AB')}: that is ${T('C')}. (Below ${T('AB')} is the same triangle flipped over.)`, run: async (c) => { await pop(c, Cd); await show(c, lC); sAC.style.opacity = sBC.style.opacity = 1; await Promise.all([drawIn(sAC, 400, c), drawIn(sBC, 400, c)]); await Promise.all([show(c, fill), show(c, lb), show(c, la)]); } },
-        { cap: `Everyone who builds it gets this same triangle: SSS fixes <b>exactly one</b> triangle.`, run: finish }
-      ];
-    }
-    if (v === 'sas') {
-      const Cu = [6 * cosD(50), 6 * sinD(50)], a = Math.sqrt(36 + 64 - 96 * cosD(50));
-      lines([T(cB('b=6')), T(cA('\\angle A=50^\\circ')) + ' <span class="muted">(between)</span>', T(cB('c=8'))]);
-      verdict.innerHTML = 'The angle is <b>between</b> the sides, so the gap can close only one way: <b>exactly one</b> triangle.';
-      const arm = hide(stroke(g, [P(0, 0), P(...Cu)], BC, 4.5)), arcA = hide(angleArc(g, P(0, 0), P(1, 0), P(...Cu), 40, { color: AC, width: 3 }));
-      const la = hide(lab(pl.ov, T(cA('50^\\circ')), ...P(1.45 * cosD(25), 1.45 * sinD(25)), 'c', 'u3l7-lab-sm')), lb = hide(lab(pl.ov, T(cB('6')), ...P(Cu[0] / 2, Cu[1] / 2), 'nw', 'u3l7-lab-b', 4));
-      const Cd = dotG(g, P(...Cu), G1); hide(Cd); const lC = hide(lab(pl.ov, T('C'), ...P(...Cu), 'n', 'u3l7-vx', 10));
-      const gapL = hide(stroke(g, [P(...Cu), P(8, 0)], G1, 4.5)), fill = triFill(Cu), lA2 = hide(lab(pl.ov, T(c1(`a\\approx${fx(a, 1)}`)), ...P((8 + Cu[0]) / 2, Cu[1] / 2), 'ne', 'u3l7-lab-b', 4));
-      return [
-        { cap: `Two sides and the angle <b>between</b> them: ${T('b=6')}, ${T('\\angle A=50^\\circ')}, ${T('c=8')}. Lay down ${T('c=8')}.`, run: baseIn },
-        { cap: `Turn ${T('50^\\circ')} at ${T('A')} and measure ${T('b=6')} along that arm: ${T('C')} is fixed.`, run: async (c) => { arcA.style.opacity = arm.style.opacity = 1; await drawIn(arcA, 300, c); await show(c, la); await drawIn(arm, 500, c); await show(c, lb); await pop(c, Cd); await show(c, lC); } },
-        { cap: `Only one way to close the gap: the third side ${T(`a\\approx${fx(a, 1)}`)} is fixed too.`, run: async (c) => { gapL.style.opacity = 1; await drawIn(gapL, 500, c); await Promise.all([show(c, fill), show(c, lA2)]); } },
-        { cap: `SAS fixes <b>exactly one</b> triangle.`, run: finish }
-      ];
-    }
-    if (v === 'asa' || v === 'aas') {
-      const A = 50, B = 60, Cang = 70;
-      if (v === 'asa') {
-        const bl = 8 * sinD(B) / sinD(Cang), Cu = [bl * cosD(A), bl * sinD(A)];
-        lines([T(cA('\\angle A=50^\\circ')), T(cB('c=8')) + ' <span class="muted">(between)</span>', T(cA('\\angle B=60^\\circ'))]);
-        verdict.innerHTML = 'Two rays from the ends of the side cross only once: <b>exactly one</b> triangle.';
-        const rA = hide(stroke(g, [P(0, 0), P(9.4 * cosD(A), 9.4 * sinD(A))], BC, 3)), rB = hide(stroke(g, [P(8, 0), P(8 - 7.6 * cosD(B), 7.6 * sinD(B))], BC, 3));
-        const aA = hide(angleArc(g, P(0, 0), P(1, 0), P(...Cu), 40, { color: AC, width: 3 })), aB = hide(angleArc(g, P(8, 0), P(7, 0), P(...Cu), 40, { color: AC, width: 3 }));
-        const la = hide(lab(pl.ov, T(cA('50^\\circ')), ...P(1.45 * cosD(25), 1.45 * sinD(25)), 'c', 'u3l7-lab-sm')), lbb = hide(lab(pl.ov, T(cA('60^\\circ')), ...P(8 - 1.45 * cosD(30), 1.45 * sinD(30)), 'c', 'u3l7-lab-sm'));
-        const Cd = dotG(g, P(...Cu), G1); hide(Cd); const lC = hide(lab(pl.ov, T('C'), ...P(...Cu), 'w', 'u3l7-vx', 12)), fill = triFill(Cu);
-        return [
-          { cap: `Two angles and the side <b>between</b> them: ${T('\\angle A=50^\\circ')}, ${T('c=8')}, ${T('\\angle B=60^\\circ')}. Lay down ${T('c=8')}.`, run: baseIn },
-          { cap: `A ray at ${T('50^\\circ')} from ${T('A')} …`, run: async (c) => { aA.style.opacity = rA.style.opacity = 1; await drawIn(aA, 300, c); await show(c, la); await drawIn(rA, 600, c); } },
-          { cap: `… and a ray at ${T('60^\\circ')} from ${T('B')}.`, run: async (c) => { aB.style.opacity = rB.style.opacity = 1; await drawIn(aB, 300, c); await show(c, lbb); await drawIn(rB, 600, c); } },
-          { cap: `Two rays cross <b>once</b>: ${T('C')} is fixed. ASA fixes <b>exactly one</b> triangle.`, run: async (c) => { await pop(c, Cd); await Promise.all([show(c, lC), show(c, fill)]); await finish(c); } }
-        ];
-      }
-      // AAS: the angles fix the shape, the side fixes the size
-      const a = 7, cFull = a * sinD(Cang) / sinD(A), bFull = a * sinD(B) / sinD(A);
-      lines([T(cA('\\angle A=50^\\circ')), T(cA('\\angle B=60^\\circ')), T(cB('a=BC=7')) + ' <span class="muted">(not between)</span>']);
-      verdict.innerHTML = 'The angles fix the <b>shape</b>, the side fixes the <b>size</b>: <b>exactly one</b> triangle. (AAS is ASA in disguise.)';
-      base.remove(); lc.remove(); lB.remove();
-      const tri = svgEl('polygon', { fill: G1, 'fill-opacity': 0.15, stroke: SLATE, 'stroke-width': 3, 'stroke-linejoin': 'round' }, g);
-      const bc = svgEl('line', { stroke: BC, 'stroke-width': 5, 'stroke-linecap': 'round' }, g);
-      const lB2 = lab(pl.ov, T('B'), 0, 0, 'se', 'u3l7-vx'), lC2 = lab(pl.ov, T('C'), 0, 0, 'nw', 'u3l7-vx', 6), lbc = lab(pl.ov, '', 0, 0, 'ne', 'u3l7-lab-b u3l7-live', 6);
-      const lCang = hide(lab(pl.ov, T(`\\angle C=70^\\circ`), 0, 0, 'ne', 'u3l7-lab-sm', 10));
-      const ruler = hide(lab(pl.ov, `<span class="u3l7-rtag">target ${T('BC=7')}</span>`, 470, 14, 's', '', 0));
-      const draw = (k) => {
-        const Bu = [cFull * k, 0], Cu = [bFull * k * cosD(A), bFull * k * sinD(A)];
-        tri.setAttribute('points', [P(0, 0), P(...Bu), P(...Cu)].map((q) => q.join(',')).join(' ')); setLn(bc, P(...Bu), P(...Cu));
-        place(lB2, ...P(...Bu), 'se', 4); place(lC2, ...P(...Cu), 'nw', 6); place(lCang, ...P(...Cu), 'ne', 10);
-        const m = P((Bu[0] + Cu[0]) / 2, (Bu[1] + Cu[1]) / 2); place(lbc, m[0] + 4, m[1] - 4, 'ne', 4); lbc.innerHTML = `<i>BC</i> = ${fx(a * k, 1)}`;
-      };
-      const k0 = 0.36; draw(k0); lA.style.opacity = 1;
-      return [
-        { cap: `Two angles and a side <b>not</b> between them: ${T('\\angle A=50^\\circ')}, ${T('\\angle B=60^\\circ')}, ${T('a=7')}. The third angle is fixed too: ${T('\\angle C=180^\\circ-50^\\circ-60^\\circ=70^\\circ')}.`, run: (c) => show(c, lCang) },
-        { cap: `The angles fix the <b>shape</b>. Grow the shape until ${T('BC=7')} …`, run: async (c) => { await show(c, ruler); await tween(c, 1500, (t) => draw(k0 + (1 - k0) * t)); } },
-        { cap: `… it happens at exactly one size. AAS is ASA in disguise: <b>exactly one</b> triangle.`, run: finish }
-      ];
-    }
-    return [];
-  }
-};
-function fixersEx1(stage, ex) {
-  const W = ex.W, cw = (W - 24) / 2, ch = 180, PP = [
-    { t: '(a)', V: { P: [0, 0], Q: [12, 0], R: [7.333, 5.217] }, giv: { sides: { QR: { t: T(cB('p=7')), c: BC }, PR: { t: T(cB('q=9')), c: BC }, PQ: { t: T(cB('r=12')), c: BC } }, angles: {} }, v: '<b>SSS</b>: exactly one triangle.', ok: true },
-    { t: '(b)', V: { P: [0, 0], Q: [11, 0], R: [8 * cosD(50), 8 * sinD(50)] }, giv: { sides: { PR: { t: T(cB('q=8')), c: BC }, PQ: { t: T(cB('r=11')), c: BC } }, angles: { P: T(cA('50^\\circ')) } }, v: '<span class="tex-i">∠P</span> is between <span class="tex-i">q</span> and <span class="tex-i">r</span>. <b>SAS</b>: exactly one.', ok: true },
-    { t: '(c)', V: { P: [0, 0], Q: [10, 0], R: [(10 * sinD(72) / sinD(58)) * cosD(50), (10 * sinD(72) / sinD(58)) * sinD(50)] }, giv: { sides: { PQ: { t: T(cB('r=10')), c: BC } }, angles: { P: T(cA('50^\\circ')), Q: T(cA('72^\\circ')) } }, v: '<span class="tex-i">r</span> is between the angles. <b>ASA</b>: exactly one.', ok: true },
-    { t: '(d)', V: { P: [0, 0], Q: [8 * cosD(50) + Math.sqrt(49 - Math.pow(8 * sinD(50), 2)), 0], R: [8 * cosD(50), 8 * sinD(50)] }, giv: { sides: { QR: { t: T(cA('p=7')), c: AC }, PR: { t: T(cB('q=8')), c: BC } }, angles: { P: T(cA('50^\\circ')) } }, ghost: { p: [8 * cosD(50) - Math.sqrt(49 - Math.pow(8 * sinD(50), 2)), 0], from: 'R', base: 'P', name: "Q'" }, v: '<span class="tex-i">∠P</span> is opposite <span class="tex-i">p</span>. <b>SSA</b>: not guaranteed (ambiguous case).', ok: false }
-  ];
-  const cards = PP.map((d, i) => {
-    const x = 8 + (i % 2) * (cw + 8), y = 4 + Math.floor(i / 2) * (ch + 8), card = hide(div(stage, 'u3l7-mini', `<div class="u3l7-mh">${d.t}</div>`, x, y, cw, ch));
-    const pl = { svg: svgEl('svg', { width: 300, height: ch, viewBox: `0 0 300 ${ch}`, class: 'u3l7-svg' }, card), ov: div(card, 'u3l7-ov', '', 0, 0, 300, ch) };
-    miniTri(pl, 0, 6, 300, ch - 6, d.V, d.giv, d.ghost);
-    div(card, 'u3l7-mv ' + (d.ok ? 'u3l7-mv-ok' : 'u3l7-mv-no'), d.v, 304, 34, cw - 316);
-    return card;
-  });
-  const hh = 8 * sinD(50);
-  return [
-    { cap: `(a) Three sides are given: ${T('p')}, ${T('q')} and ${T('r')}. <b>SSS</b>: exactly one triangle.`, run: (c) => show(c, cards[0]) },
-    { cap: `(b) ${T('q=PR')} and ${T('r=PQ')} meet at ${T('P')}, so ${T('\\angle P')} is <b>between</b> them. <b>SAS</b>: exactly one.`, run: (c) => show(c, cards[1]) },
-    { cap: `(c) ${T('r=PQ')} joins ${T('P')} and ${T('Q')}: the side is <b>between</b> the angles. <b>ASA</b>: exactly one.`, run: (c) => show(c, cards[2]) },
-    { cap: `(d) ${T('\\angle P')} is opposite ${T('p')}, not between ${T('p')} and ${T('q')}. <b>SSA</b>: not guaranteed. (Here ${T('p')} can land at ${T('Q')} or ${T("Q'")}: ${T(`h=8\\sin50^\\circ\\approx${fx(hh, 2)}<7<8`)}.)`, run: (c) => show(c, cards[3]) }
-  ];
-}
-
-/* ====================================================================================================
- * explainer: sin θ = sin(180° − θ) on a semicircle (r = 1)
- * ==================================================================================================== */
-const SP = {
-  t30: { label: 'θ = 30°', th: 30 }, t50: { label: 'θ = 50°', th: 50 }, t80: { label: 'θ = 80°', th: 80 },
-  ex2: { label: 'Example 2 check', k: 10 * sinD(40) / 7, ex2: true }, k1: { label: 'sin B = 1', k: 1 }, k11: { label: 'sin B = 1.1', k: 1.1 }
-};
-const supp = {
-  title: 'Two angles, the same sine',
-  height: 352, minW: 940,
-  choices: [{ v: 't30', label: SP.t30.label }, { v: 't50', label: SP.t50.label }, { v: 't80', label: SP.t80.label }, { sep: 'Backwards:' }, { v: 'k1', label: 'sin B = 1' }, { v: 'k11', label: 'sin B = 1.1' }, { sep: 'Check:' }, { v: 'ex2', label: 'Example 2 check' }],
-  ask: (v) => (SP[v].th ? `Compare ${T(`\\sin${SP[v].th}^\\circ`)} with ${T(`\\sin${180 - SP[v].th}^\\circ`)}.` : SP[v].ex2 ? `Example 2: ${T('\\sin B=\\dfrac{10\\sin40^\\circ}{7}\\approx0.9183')}. Which angles ${T('B')} between ${T('0^\\circ')} and ${T('180^\\circ')} work?` : `Which angles ${T('B')} between ${T('0^\\circ')} and ${T('180^\\circ')} have ${T(`\\sin B=${SP[v].k}`)}?`),
-  make(stage, v, ex) {
-    const W = ex.W, d = SP[v];
-    const G = new Graph(stage, { x: 8, y: 18, width: 560, height: 330, xmin: -1.28, xmax: 1.28, ymin: -0.24, ymax: 1.3, xstep: 0.25, ystep: 0.25, xlabels: 0.5, ylabels: 0.5, fontSize: 15 });
-    const pts = []; for (let t = 0; t <= 180; t += 3) pts.push(G.toPx(cosD(t), sinD(t)));
-    stroke(G.layers.data, pts, SLATE, 2.5);
-    const O = G.toPx(0, 0), pnl = panel(stage, 584, 8, W - 592, 336, '');
-    const arms = (th) => {
-      const P1 = [cosD(th), sinD(th)], P2 = [-cosD(th), sinD(th)];
-      const a1 = hide(G.segment([0, 0], P1, { color: G1, width: 4 })), a2 = hide(G.segment([0, 0], P2, { color: G2, width: 4 }));
-      const d1 = hide(G.point(...P1, { color: G1, r: 7 })), d2 = hide(G.point(...P2, { color: G2, r: 7 }));
-      const h1 = hide(G.segment(P1, [P1[0], 0], { color: INK, dash: true, width: 2.5 })), h2 = hide(G.segment(P2, [P2[0], 0], { color: INK, dash: true, width: 2.5 }));
-      const arc1 = hide(angleArc(G.layers.top, O, [O[0] + 10, O[1]], G.toPx(...P1), 44, { color: G1, width: 3 }));
-      const arc2 = hide(angleArc(G.layers.top, O, [O[0] + 10, O[1]], G.toPx(...P2), 66, { color: G2, width: 3 }));
-      const arcR = hide(angleArc(G.layers.top, O, [O[0] - 10, O[1]], G.toPx(...P2), 34, { color: HC, width: 3.5 }));
-      const l1 = hide(G.label(0.32 * cosD(th / 2), 0.32 * sinD(th / 2) + 0.03, T(c1(`${fz(th, 1)}^\\circ`)), { pos: 'c', cls: 'bk-ptlab' }));
-      const m2 = (180 - th) / 2, l2b = hide(G.label(0.47 * cosD(m2), 0.47 * sinD(m2) + 0.03, T(c2(`${fz(180 - th, 1)}^\\circ`)), { pos: 'c', cls: 'bk-ptlab' }));
-      const lR = hide(G.label(-0.66, 0.1, T(cH(`\\theta_R=${fz(th, 1)}^\\circ`)), { pos: 'c', cls: 'bk-ptlab' }));
-      const lP1 = hide(G.label(...P1, T('P(x,\\ y)'), { pos: P1[0] > 0.9 ? 'n' : 'ne', cls: 'bk-ptlab' })), lP2 = hide(G.label(...P2, T("P'(-x,\\ y)"), { pos: P2[0] < -0.9 ? 'n' : 'nw', cls: 'bk-ptlab' }));
-      const same = hide(G.segment(P2, P1, { color: HC, dash: true, width: 2.5 }));
-      const in1 = async (c) => { a1.style.opacity = arc1.style.opacity = 1; await drawIn(arc1, 300, c); await drawIn(a1, 500, c); await Promise.all([show(c, d1), show(c, l1), show(c, lP1)]); };
-      const in2 = async (c) => { a2.style.opacity = arc2.style.opacity = 1; await drawIn(arc2, 400, c); await drawIn(a2, 500, c); await Promise.all([show(c, d2), show(c, l2b), show(c, lP2)]); };
-      const hIn = async (c, both) => { for (const e of both ? [h1, h2] : [h1]) { e.style.opacity = 1; await drawIn(e, 350, c); } };
-      return { in1, in2, hIn, same, arcR, lR, d1, d2, h1, h2 };
-    };
-    if (d.th) {
-      const th = d.th, y = sinD(th), Z = arms(th);
-      const L = [lineIn(pnl, `${T(`\\sin${th}^\\circ=\\dfrac{y}{r}=\\dfrac{y}{1}\\approx${fx(y, 4)}`)}`), lineIn(pnl, `${T(`180^\\circ-${th}^\\circ=${180 - th}^\\circ`)}`), lineIn(pnl, `${T(`\\sin${180 - th}^\\circ\\approx${fx(y, 4)}`)}`, 'u3l7-line-key'),
-        lineIn(pnl, `Quadrant II, ${T(cH(`\\theta_R=${th}^\\circ`))}: sine is <b>positive</b> (the S in CAST).`), lineIn(pnl, `${T(`\\sin^{-1}(${fx(y, 4)})=${th}^\\circ`)} only.<br>The other answer: ${T(`180^\\circ-${th}^\\circ=${180 - th}^\\circ`)}.`, 'u3l7-line-ans')];
-      return [
-        { cap: `${T(c1(`\\theta=${th}^\\circ`))} in standard position, with ${T('r=1')}. Its sine is the <b>height</b> ${T('y')} of ${T('P')}.`, run: async (c) => { await Z.in1(c); await Z.hIn(c); await show(c, L[0]); } },
-        { cap: `Reflect ${T('P')} in the ${T('y')}-axis: the terminal arm at ${T(c2(`180^\\circ-${th}^\\circ=${180 - th}^\\circ`))}.`, run: async (c) => { await Z.in2(c); await show(c, L[1]); } },
-        { cap: `<b>Same height</b>, so the same sine: ${T(`\\sin${180 - th}^\\circ=\\sin${th}^\\circ\\approx${fx(y, 4)}`)}.`, run: async (c) => { await Z.hIn(c, true); Z.same.style.opacity = 1; await drawIn(Z.same, 500, c); await show(c, L[2]); } },
-        { cap: `${T(`${180 - th}^\\circ`)} is in quadrant II with reference angle ${T(cH(`\\theta_R=${th}^\\circ`))}, where sine is positive.`, run: async (c) => { Z.arcR.style.opacity = 1; await drawIn(Z.arcR, 400, c); await show(c, Z.lR); await show(c, L[3]); } },
-        { cap: `Backwards: ${T(`\\sin^{-1}(${fx(y, 4)})`)} gives only ${T(c1(`${th}^\\circ`))}. The other answer is ${T(c2(`180^\\circ-${th}^\\circ=${180 - th}^\\circ`))}.`, run: (c) => show(c, L[4]) }
-      ];
-    }
-    const k = d.k, kl = d.ex2 ? fx(k, 4) : String(k);
-    const kLine = hide(G.segment([-1.24, k], [1.24, k], { color: HC, dash: true, width: 3 })), kLab = hide(G.label(-1.24, k, T(cH(`y=${kl}`)), { pos: 'ne', cls: 'bk-ptlab' }));
-    const kIn = async (c) => { kLine.style.opacity = 1; await drawIn(kLine, 600, c); await show(c, kLab); };
-    if (d.ex2) {
-      const B1 = asinD(k), Z = arms(B1);
-      const L = [lineIn(pnl, `${T(`\\sin B\\approx${kl}`)}: find the points at height ${T(kl)}.`), lineIn(pnl, `${T(c1(`B_1=\\sin^{-1}(${kl})\\approx${fx(B1, 1)}^\\circ`))}`), lineIn(pnl, `${T(c2(`B_2=180^\\circ-${fx(B1, 1)}^\\circ=${fx(180 - B1, 1)}^\\circ`))}`),
-        lineIn(pnl, `${T(`40^\\circ+${fx(B1, 1)}^\\circ<180^\\circ`)} ✓<br>${T(`40^\\circ+${fx(180 - B1, 1)}^\\circ<180^\\circ`)} ✓`), lineIn(pnl, '<b>Both</b> angles work: two triangles (Mia’s and Theo’s).', 'u3l7-line-ans')];
-      return [
-        { cap: `Example 2: ${T(`\\sin B\\approx${kl}`)}. On a circle with ${T('r=1')} the sine is the height: draw the line ${T(`y=${kl}`)}.`, run: async (c) => { await kIn(c); await show(c, L[0]); } },
-        { cap: `The line crosses the semicircle <b>twice</b>, so <b>two</b> angles have this sine.`, run: async (c) => { Z.d1.style.opacity = Z.d2.style.opacity = 1; await Promise.all([pop(c, Z.d1), pop(c, Z.d2)]); } },
-        { cap: `${T(`\\sin^{-1}(${kl})\\approx${fx(B1, 1)}^\\circ`)}: the <b>acute</b> one. That is all the calculator shows.`, run: async (c) => { await Z.in1(c); await show(c, L[1]); } },
-        { cap: `The other: ${T(`180^\\circ-${fx(B1, 1)}^\\circ=${fx(180 - B1, 1)}^\\circ`)}, the <b>obtuse</b> one.`, run: async (c) => { await Z.in2(c); await show(c, L[2]); } },
-        { cap: `Both fit beside ${T('\\angle A=40^\\circ')}: the angle sums stay under ${T('180^\\circ')}. <b>Two triangles.</b>`, run: async (c) => { await show(c, L[3]); await show(c, L[4]); } }
-      ];
-    }
-    if (k === 1) {
-      const top = hide(G.point(0, 1, { color: G1, r: 7 })), arm = hide(G.segment([0, 0], [0, 1], { color: G1, width: 4 }));
-      const arc = hide(angleArc(G.layers.top, O, [O[0] + 10, O[1]], G.toPx(0, 1), 44, { color: G1, width: 3 }));
-      const L = [lineIn(pnl, `${T('\\sin B=1')}: height 1, the top of the circle.`), lineIn(pnl, `${T(c1('B=90^\\circ'))} only (${T('180^\\circ-90^\\circ=90^\\circ')}: the same angle).`), lineIn(pnl, 'One angle: one <b>right</b> triangle.', 'u3l7-line-ans')];
-      return [
-        { cap: `${T('\\sin B=1')}: draw the line ${T('y=1')}.`, run: async (c) => { await kIn(c); await show(c, L[0]); } },
-        { cap: `It <b>touches</b> the semicircle once, at the top: ${T('B=90^\\circ')}. Here ${T('180^\\circ-B')} is the same angle.`, run: async (c) => { arm.style.opacity = arc.style.opacity = 1; await drawIn(arc, 300, c); await drawIn(arm, 400, c); await pop(c, top); await show(c, L[1]); } },
-        { cap: `One angle: <b>one</b> triangle, with a right angle at ${T('B')}.`, run: (c) => show(c, L[2]) }
-      ];
-    }
-    const L = [lineIn(pnl, `${T('\\sin B=1.1')}: draw ${T('y=1.1')}.`), lineIn(pnl, `The highest point of the circle is ${T('y=1')}. Nothing reaches ${T('1.1')}.`), lineIn(pnl, '<b>No angle</b>, so <b>no triangle</b>.<br>The calculator says <b>ERROR: DOMAIN</b>.', 'u3l7-line-ans')];
-    const miss = hide(stamp(stage, 'no angle', { ok: false, x: 300, y: 70 }));
-    return [
-      { cap: `${T('\\sin B=1.1')}: draw the line ${T('y=1.1')}.`, run: async (c) => { await kIn(c); await show(c, L[0]); } },
-      { cap: `The line <b>misses</b> the semicircle: no point on it is higher than 1. No angle has a sine greater than 1.`, run: async (c) => { await show(c, L[1]); await stampIn(c, miss); } },
-      { cap: `No angle, so <b>no triangle</b>. The calculator gives <b>ERROR: DOMAIN</b> for ${T('\\sin^{-1}(1.1)')}.`, run: (c) => show(c, L[2]) }
-    ];
-  }
-};
-
 /* ====================================================================================================
  * explainer (STAR): the swinging side with a live slider
  * ==================================================================================================== */
@@ -593,25 +278,6 @@ const SIX = [
   { A: 120, b: 8, a: 11, amax: 11.4, t: '(vi)\\ A\\text{ obtuse},\\ a>b', cap: () => `Obtuse ${T('A')}, ${T('a>b')}: the far landing is on the arm: <b>1</b>.` }
 ];
 const sixFig = (host, d, o) => new SSAFig(host, Object.assign({ A: d.A, b: d.b, amax: d.amax, labA: false, labB: false, small: true, font: 16, lw: 3, arcR: 22, padT: 26, padB: 26, padX: 14, showH: d.A < 90 }, o));
-const six = {
-  title: 'Example 3 check: the six cases',
-  height: 404, minW: 940,
-  ask: 'Example 3: how many triangles does each sketch give?',
-  make(stage, v, ex) {
-    const W = ex.W, cw = (W - 32) / 3, ch = 196;
-    const items = SIX.map((d, i) => {
-      const x = 8 + (i % 3) * (cw + 8), y = 4 + Math.floor(i / 3) * (ch + 6);
-      const card = div(stage, 'u3l7-sk6', '', x, y, cw, ch);
-      const F = sixFig(card, d, { w: cw - 4, h: ch - 36 });
-      card.appendChild(h('div', 'u3l7-skl', T(d.t)));
-      const n = ROWN[caseRow(d.A, d.a, d.b)], bd = hide(div(card, 'u3l7-badge u3l7-badge' + n, `${n}`, cw - 52, 6));
-      return { F, bd, d };
-    });
-    const st = items.map((it) => ({ cap: it.d.cap(), run: async (c) => { await it.F.swing(c, it.d.a, 900); await pop(c, it.bd); } }));
-    st.push({ cap: `Only an <b>acute</b> ${T('A')} with ${T('h<a<b')} gives two triangles.`, run: (c) => pulse(c, items[2].bd, 1.4) });
-    return st;
-  }
-};
 function mountStatics() {
   const sx = document.getElementById('u3l7-six');
   if (sx) SIX.forEach((d) => { const card = add(sx, h('div', 'u3l7-sk')); sixFig(card, d, { w: 300, h: 160, a: d.a }); card.appendChild(h('div', 'u3l7-skl', T(d.t))); });
@@ -622,61 +288,6 @@ function mountStatics() {
   const f7 = document.getElementById('u3l7-fig7');
   if (f7) new SSAFig(f7, { w: 560, h: 230, A: 22, b: 15, amax: 9.4, a: 8, names: ['P', 'F', 'B'], hitNames: { near: 'F_1', far: 'F_2' }, labA: T(cA('22^\\circ')), labB: T(cB('15\\text{ km}')), labS: T(cA('8')), showH: false, arrow: 'path', font: 18, padT: 30 });
 }
-
-/* ====================================================================================================
- * explainer: a decision chart for counting triangles
- * ==================================================================================================== */
-const DC = { a5: { A: 30, b: 14, a: 5 }, a7: { A: 30, b: 14, a: 7 }, a10: { A: 30, b: 14, a: 10 }, a16: { A: 30, b: 14, a: 16 }, o6: { A: 115, b: 8, a: 6 }, o11: { A: 115, b: 8, a: 11 } };
-const decide = {
-  title: 'Counting triangles: a decision chart',
-  height: 424, minW: 940,
-  choices: [{ sep: 'Example 4, ∠A = 30°, b = 14:' }, { v: 'a5', label: 'a = 5' }, { v: 'a7', label: 'a = 7' }, { v: 'a10', label: 'a = 10' }, { v: 'a16', label: 'a = 16' }, { sep: '∠A = 115°, b = 8:' }, { v: 'o6', label: 'a = 6' }, { v: 'o11', label: 'a = 11' }],
-  ask: (v) => { const d = DC[v]; return `${T(`\\angle A=${d.A}^\\circ`)}, ${T(`b=${d.b}`)}, ${T(`a=${d.a}`)}: how many triangles?`; },
-  make(stage, v, ex) {
-    const W = ex.W, cx = W / 2 + 60, d = DC[v], hg = d.b * sinD(d.A), row = caseRow(d.A, d.a, d.b);
-    const nodes = {
-      start: { x: cx, y: 32, w: 430, h: 50, html: `<b>SSA</b> ${T('\\angle A')}, ${T('a')} (opposite ${T('\\angle A')}), ${T('b')}`, cls: 'bk-round' },
-      qA: { x: cx, y: 116, w: 250, h: 54, html: `<b>Is ${T('\\angle A')} acute?</b>`, cls: 'bk-diamond' },
-      oq: { x: cx - 250, y: 206, w: 200, h: 54, html: `<b>Is ${T('a>b')}?</b>`, cls: 'bk-diamond' },
-      o0: { x: cx - 345, y: 318, w: 150, h: 60, html: '<b>0 triangles</b>', color: 'red' },
-      o1: { x: cx - 160, y: 318, w: 150, h: 60, html: '<b>1 triangle</b>', color: 'blue' },
-      aq: { x: cx + 120, y: 206, w: 190, h: 54, html: `<b>Is ${T('a\\ge b')}?</b>`, cls: 'bk-diamond' },
-      a1: { x: W - 80, y: 206, w: 136, h: 54, html: '<b>1 triangle</b>', color: 'blue' },
-      hq: { x: cx + 120, y: 296, w: 250, h: 50, html: `<b>Find ${T(cH('h=b\\sin A'))}</b>` },
-      r0: { x: cx - 40, y: 386, w: 150, h: 56, html: `${T('a<h')}<br><b>0</b>`, color: 'red' },
-      r1: { x: cx + 120, y: 386, w: 150, h: 56, html: `${T('a=h')}<br><b>1</b> (right)`, color: 'amber' },
-      r2: { x: cx + 280, y: 386, w: 150, h: 56, html: `${T('h<a<b')}<br><b>2</b>`, color: 'green' }
-    };
-    const edges = [
-      { from: 'start', to: 'qA' }, { from: 'qA', to: 'oq', label: 'no', route: 'hv' }, { from: 'qA', to: 'aq', label: 'yes', route: 'hv' },
-      { from: 'oq', to: 'o0', label: 'no', route: 'vhv' }, { from: 'oq', to: 'o1', label: 'yes', route: 'vhv' },
-      { from: 'aq', to: 'a1', label: 'yes' }, { from: 'aq', to: 'hq', label: 'no' },
-      { from: 'hq', to: 'r0', route: 'vhv' }, { from: 'hq', to: 'r1' }, { from: 'hq', to: 'r2', route: 'vhv' }
-    ];
-    const F = new Flowchart(stage, { x: 0, y: 0, width: W, height: 424, nodes, edges });
-    const nb = panel(stage, 8, 8, 192, 166, 'Given');
-    nb.insertAdjacentHTML('beforeend', `<div class="u3l7-line u3l7-line-sm">${T(cA(`\\angle A=${d.A}^\\circ`))}</div><div class="u3l7-line u3l7-line-sm">${T(cB(`b=${d.b}`))}</div><div class="u3l7-line u3l7-line-sm">${T(cA(`a=${d.a}`))}</div>`);
-    const hl = lineIn(nb, T(cH(`h=${d.b}\\sin${d.A}^\\circ=${fz(hg, 2)}`)), 'u3l7-line-sm');
-    const steps = [{ cap: `Given ${T(`\\angle A=${d.A}^\\circ`)}, ${T(`b=${d.b}`)} and ${T(`a=${d.a}`)} (the side opposite ${T('\\angle A')}).`, run: (c) => F.visit(c, 'start') }];
-    const go = (from, to, cap, extra) => steps.push({ cap, run: async (c) => { await F.go(c, from, to); await F.visit(c, to); if (extra) await extra(c); } });
-    if (d.A < 90) {
-      go('start', 'qA', `${T(`\\angle A=${d.A}^\\circ`)} is <b>acute</b>.`);
-      go('qA', 'aq', `Is ${T('a\\ge b')}? ${T(`${d.a}\\ge${d.b}`)}? <b>${d.a >= d.b ? 'Yes' : 'No'}</b>.`);
-      if (d.a >= d.b) go('aq', 'a1', `The side opposite ${T('\\angle A')} is the longer one: <b>1 triangle</b>.`);
-      else {
-        go('aq', 'hq', `Not settled yet: find the height. ${T(`h=${d.b}\\sin${d.A}^\\circ=${fz(hg, 2)}`)}.`, (c) => show(c, hl));
-        const r = ['r0', 'r1', 'r2'][row];
-        const cap = row === 0 ? `${T(`${d.a}<${fz(hg, 2)}`)}: too short: <b>0 triangles</b>.` : row === 1 ? `${T(`a=h=${fz(hg, 2)}`)}: just touches: <b>1</b> right triangle.` : `${T(`${fz(hg, 2)}<${d.a}<${d.b}`)}: <b>2 triangles</b>.`;
-        go('hq', r, cap);
-      }
-    } else {
-      go('start', 'qA', `${T(`\\angle A=${d.A}^\\circ`)} is <b>obtuse</b>: no height needed.`);
-      go('qA', 'oq', `Is ${T('a>b')}? ${T(`${d.a}>${d.b}`)}? <b>${d.a > d.b ? 'Yes' : 'No'}</b>.`);
-      go('oq', d.a > d.b ? 'o1' : 'o0', d.a > d.b ? `<b>1 triangle</b>.` : `${T(`${d.a}\\le${d.b}`)}: <b>0 triangles</b>.`);
-    }
-    return steps;
-  }
-};
 
 /* ====================================================================================================
  * explainer: solving both triangles
@@ -902,7 +513,6 @@ standup('u3l7', {
 });
 
 /* =============================== mount =============================== */
-mountField();
 mountStatics();
-export const explainers = mountExplainers({ fixers, supp, swing, six, decide, solve2, ferry });
+export const explainers = mountExplainers({ swing, solve2, ferry });
 export const _test = { fx, fz, caseRow, SSAFig, SW, SV, WP, SIX };

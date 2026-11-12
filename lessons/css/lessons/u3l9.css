@@ -12,34 +12,10 @@
 .u3l9-subnote { font-size: 15.5px; font-weight: 500; margin-left: 6px; }
 .u3l9-plh { margin: 10px 0 4px; font-size: 18px; }
 
-/* ---------------- warm-up: The Mystery Triangle ---------------- */
-.u3l9-myst { position: relative; }
-.u3l9-mbox { border-radius: 16px; border: 2px solid #e6dfcf; }
-.u3l9-mbox > svg { overflow: hidden; border-radius: 16px; }
-.u3l9-clues { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 8px; }
-.u3l9-clue { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 8px; border-radius: 12px; border: 2.5px dashed #c9b38a; background: #f3ead6; cursor: pointer; font: inherit; color: transparent; min-height: 52px; }
-.u3l9-clue > span { font: 800 15px var(--round); color: #8a6a3a; }
-.u3l9-clue > b { font-size: 21px; visibility: hidden; color: var(--ink); }
-.u3l9-clue.open { border-style: solid; border-color: #7a1f3d; background: #fff; }
-.u3l9-clue.open > b { visibility: visible; }
-.u3l9-mmsg { font: 800 19px var(--round); color: #a33357; background: #fff; border-radius: 10px; padding: 2px 10px; box-shadow: 0 0 0 2px #e6b8c8; }
-.u3l9-mmsg:empty { display: none; }
-.u3l9-mq0 { font: 900 90px var(--round); color: #e3d6bd; transition: opacity .3s; }
-.u3l9-try { font-size: 16px; font-weight: 700; color: var(--ink2); align-self: center; }
-.u3l9-wbtns .pill.on { background: #a33357; color: #fff; }
-.u3l9-wbtns { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0 2px; }
-.u3l9-wbtns .pill { font-size: 15px; padding: 6px 12px; }
-.u3l9-social { margin: 6px 0 0; font-size: 16.5px; color: var(--ink2); }
-.wf .u3l9-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
-.wf .u3l9-wqs .q-line .pill.small { padding: 2px 10px; }
-.u3l9-wa { margin: 0 0 2px 40px; }
-.wf .u3l9-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
-.wf .wf-poll { margin-top: 8px; }
-.wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
-.wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
-.wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
-.wf .wf-poll:not(.revealed) .poll-ans { display: none; }
-.wf .wf-poll .q-line { font-size: 17px; }
+/* ---------------- warm-up: Two Truths and a Lie (compact statement tiles) ---------------- */
+.u3l9-ttl { gap: 10px; }
+.vw-tiles.u3l9-ttl > div.lab { position: relative; display: block; min-height: 0; padding: 14px 18px 14px 58px; text-align: left; }
+.vw-tiles.u3l9-ttl > div.lab > b:first-child { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-size: 26px; }
 
 /* ---------------- summary cards ---------------- */
 .u3l9-sumgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }

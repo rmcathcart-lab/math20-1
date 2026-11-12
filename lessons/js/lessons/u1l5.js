@@ -1,16 +1,13 @@
 /* Math 20-1 · Unit 1 · Lesson 5 — Geometric Sequences.
- * Warm-up (The Triangle Cutter: a Sierpinski triangle; the count 1, 3, 9, … grows ×3 while the side 64, 32, … shrinks ×½),
- * static Example 3 grids and answer dots, and the explainers:
- *   ratioHops (divide each term by the one before; "4, 8, …?" fits both kinds; Example 1 (a)–(f) checks),
+ * Static Example 3 grids and answer dots, and the explainers (the warm-up is plain markup in the page,
+ * tools/newformat/specs/u1l5.py):
  *   buildPower (each step multiplies by r once more: n − 1 copies of r; Example 2 (a)–(c) checks),
  *   notFifteen (5(3)^(n−1) vs 15^(n−1) in a table; Example 2(d): 4(2)^(n−1) = 2^(n+1)),
  *   barsDots (the star: each term is a bar copied, slid right and stretched ×r — flipping for r < 0, shrinking for
  *     0 < r < 1 — beside the curving dot plot; Example 3 checks; +4 vs ×2 comparison),
  *   countTerms (divide by t1, climb a ladder of powers, compare exponents; jumps vs terms; Example 4 checks),
- *   oddEven (y = r^k against a height: an odd power crosses once, an even power twice or never; Examples 5–7),
  *   twoTerms (count the jumps between two known terms, divide, walk back to t1; the row splits for ±r; Ex 5, 6),
- *   means (k means make k + 2 terms; Example 7 checks),
- *   bSquared (b/a = c/b → b² = ac, a b-by-b square beside an a-by-c rectangle; Example 8 checks).
+ *   means (k means make k + 2 terms; Example 7 checks).
  * Colours (Unit 1): common ratio r amber, first term t1 teal (the site's teal token); other terms ink/blue; mistakes red. */
 import {
   h, tex, fmt, add, box, Graph, mountExplainers, pop, fadeIn, appear, sleep, tween, anim,
@@ -60,113 +57,6 @@ function arc(stage, ov, x1, x2, y, html, o = {}) {
   hide(g); hide(l);
   return { g, l, async draw(c) { g.style.opacity = 1; await drawIn(g, o.ms || 380, c); if (l) await pop(c, l, 260); } };
 }
-
-/* ====================================================================================================
- * Warm-up: The Triangle Cutter (Sierpinski). Stage s: 3^(s−1) shaded triangles, side 64(½)^(s−1) cm.
- * ==================================================================================================== */
-function mountTri() {
-  const host = document.getElementById('u1l5-tri'); if (!host) return;
-  const VW = 520, VH = 420, S = 470, x0 = (VW - S) / 2, yb = VH - 8, ht = S * Math.sqrt(3) / 2;
-  const svg = svgEl('svg', { viewBox: `0 0 ${VW} ${VH}`, class: 'u1l5-trisvg', role: 'img', 'aria-label': 'A shaded triangle cut into smaller triangles' }, host);
-  svgEl('polygon', { points: `${x0},${yb} ${x0 + S},${yb} ${x0 + S / 2},${yb - ht}`, fill: '#fff', stroke: '#cfc6b8', 'stroke-width': 2 }, svg);
-  const gShade = svgEl('g', {}, svg), gHole = svgEl('g', {}, svg);
-  const labEl = document.getElementById('u1l5-wlab'), cut = document.getElementById('u1l5-cut');
-  let stage = 1, busy = false;
-  const MAX = 8;
-  const tris = (s) => { // [[ax, ay, side]] bottom-left corners
-    let out = [[x0, yb, S]];
-    for (let k = 1; k < s; k++) out = out.flatMap(([x, y, a]) => { const b = a / 2, hh = b * Math.sqrt(3) / 2; return [[x, y, b], [x + b, y, b], [x + b / 2, y - hh, b]]; });
-    return out;
-  };
-  const poly = (x, y, a, up = true) => { const hh = a * Math.sqrt(3) / 2; return up ? `${x},${y} ${x + a},${y} ${x + a / 2},${y - hh}` : `${x + a / 2},${y} ${x + a / 4},${y - hh / 2} ${x + 3 * a / 4},${y - hh / 2}`; };
-  const render = () => {
-    gShade.innerHTML = gHole.innerHTML = '';
-    tris(stage).forEach(([x, y, a]) => svgEl('polygon', { points: poly(x, y, a), class: 'u1l5-shade' }, gShade));
-    const n = 3 ** (stage - 1), side = 64 / 2 ** (stage - 1);
-    labEl.innerHTML = `<b>Stage ${stage}</b>: ${fmt(n)} shaded triangle${n > 1 ? 's' : ''}, side ${String(side)} cm`;
-    cut.disabled = stage >= MAX;
-  };
-  cut.addEventListener('click', () => {
-    if (busy || stage >= MAX) return; busy = true;
-    tris(stage).forEach(([x, y, a]) => svgEl('polygon', { points: poly(x, y, a, false), class: 'u1l5-hole' }, gHole));
-    setTimeout(() => { stage++; render(); busy = false; }, 650);
-  });
-  document.getElementById('u1l5-wreset').addEventListener('click', () => { stage = 1; busy = false; render(); });
-  render();
-}
-
-/* ====================================================================================================
- * Explainer: ratioHops — divide each term by the one before.
- * ==================================================================================================== */
-const RH = {
-  amb: { label: T('4,\\ 8,\\ \\dots\\ ?'), amb: true },
-  e1a: { t: ['5', '20', '80'], q: ['\\frac{20}{5}=4', '\\frac{80}{20}=4'], r: '4', nx: ['320', '1\\,280'] },
-  e1b: { t: ['405', '135', '45'], q: ['\\frac{135}{405}=\\frac13', '\\frac{45}{135}=\\frac13'], r: '\\tfrac13', nx: ['15', '5'] },
-  e1c: { t: ['-2', '6', '-18'], q: ['\\frac{6}{-2}=-3', '\\frac{-18}{6}=-3'], r: '-3', rx: '(-3)', nx: ['54', '-162'], alt: true },
-  e1d: { t: ['2', '2\\sqrt2', '4'], q: ['\\frac{2\\sqrt2}{2}=\\sqrt2', '\\frac{4}{2\\sqrt2}=\\sqrt2'], r: '\\sqrt2', nx: ['4\\sqrt2', '8'] },
-  e1e: { t: ['3a', '6a^2', '12a^3'], q: ['\\frac{6a^2}{3a}=2a', '\\frac{12a^3}{6a^2}=2a'], r: '2a', nx: ['24a^4', '48a^5'] },
-  e1f: { t: ['50', '45', '40'], q: ['\\frac{45}{50}=0.9', '\\frac{40}{45}\\approx0.89'], arith: true, d: '-5', nx: ['35', '30'] }
-};
-const ratioHops = {
-  title: 'Divide to find the common ratio',
-  height: 400,
-  capH: 84,
-  choices: [{ v: 'amb', label: RH.amb.label }, { sep: 'Example 1 check:' }, ...['a', 'b', 'c', 'd', 'e', 'f'].map((k) => ({ v: 'e1' + k, label: `(${k})` }))],
-  ask: (k) => (k === 'amb' ? '' : `Example 1(${k.slice(2)}): ${T(RH[k].t.join(',\\ ') + ',\\ \\dots')}`),
-  intro: 'Two terms or three? Press <b>Next</b>.',
-  make(stage, k, ex) {
-    const W = ex.W, d = RH[k], ov = overlay(stage, W, 400);
-    const bw = 150, gap = Math.min(48, (W - 60 - 5 * bw) / 4), x0 = (W - (5 * bw + 4 * gap)) / 2, bh = 78;
-    const X = (i) => x0 + i * (bw + gap), CX = (i) => X(i) + bw / 2;
-    const boxAt = (i, y, html, cls = '') => add(stage, box(h('div', 'u1l5-tb ' + cls, html), bw, bh), X(i), y);
-    if (d.amb) {
-      const yM = 150, yU = 40, yL = 262;
-      boxAt(0, yM, T(ct('4')), 'u1l5-tb1'); boxAt(1, yM, T('8'));
-      const up = [boxAt(2, yU, T('12'), 'u1l5-tbA'), boxAt(3, yU, T('16'), 'u1l5-tbA')].map(hide);
-      const dn = [boxAt(2, yL, T('16'), 'u1l5-tbG'), boxAt(3, yL, T('32'), 'u1l5-tbG')].map(hide);
-      const link = (i, yA, yB, html, color) => {
-        const g = svgEl('g', {}, ov), xa = X(i) + bw + 4, xb = X(i + 1) - 4, ya = yA + bh / 2, yb = yB + bh / 2;
-        svgEl('path', { class: 'bk-stroke', d: `M${xa} ${ya} L${xb} ${yb}`, stroke: color, 'stroke-width': 3.2, fill: 'none', 'stroke-linecap': 'round' }, g);
-        arrowHead(g, xb, yb, xb - xa, yb - ya, { color, cls: 'bk-end', width: 3 });
-        const l = lab(stage, (xa + xb) / 2, (ya + yb) / 2, T(html), 'u1l5-hoplab', yb < ya ? 'nw' : yb > ya ? 'sw' : 'n', 2);
-        hide(g); hide(l);
-        return async (c) => { g.style.opacity = 1; await drawIn(g, 380, c); await pop(c, l, 240); };
-      };
-      const aU = [link(1, yM, yU, cr('+4'), RC), link(2, yU, yU, cr('+4'), RC)];
-      const aD = [link(1, yM, yL, cr('\\times2'), RC), link(2, yL, yL, cr('\\times2'), RC)];
-      const tagU = hide(lab(stage, X(4) + 8, yU + bh / 2, `<b>arithmetic</b><br>${T('d=4')}`, 'u1l5-tag u1l5-tagA', 'e', 0));
-      const tagD = hide(lab(stage, X(4) + 8, yL + bh / 2, `<b>geometric</b><br>${T('r=2')}`, 'u1l5-tag u1l5-tagG', 'e', 0));
-      const verdict = hide(lab(stage, X(4) + bw / 2, yM + bh / 2, 'Both fit!<br>Need a <b>3rd</b> term.', 'u1l5-verdict u1l5-vwarn'));
-      return [
-        { cap: `Add the same amount each time? ${T('8-4=4')}, so the next terms are ${T('12,\\ 16')}: <b>arithmetic</b>, ${T('d=4')}.`,
-          run: async (c) => { await aU[0](c); await pop(c, up[0]); await aU[1](c); await pop(c, up[1]); await show(c, tagU); } },
-        { cap: `Multiply by the same number each time? ${T('\\frac84=2')}, so the next terms are ${T('16,\\ 32')}: <b>geometric</b>, ${T('r=2')}.`,
-          run: async (c) => { await aD[0](c); await pop(c, dn[0]); await aD[1](c); await pop(c, dn[1]); await show(c, tagD); } },
-        { cap: `Both fit ${T('4,\\ 8')}! Two terms are not enough: you need <b>at least three terms</b> to decide the type of sequence.`,
-          run: (c) => pop(c, verdict) }
-      ];
-    }
-    const yB = 130;
-    const bx = d.t.map((t, i) => boxAt(i, yB, T(i === 0 ? ct(t) : t), i === 0 ? 'u1l5-tb1' : ''));
-    const nb = d.nx.map((t, i) => hide(boxAt(3 + i, yB, T(t), 'u1l5-tbnew')));
-    const tagL = (i, html) => lab(stage, (CX(i) + CX(i + 1)) / 2, yB + bh + 14, T(html.replace(/\\frac/g, '\\dfrac')), 'u1l5-qlab', 's', 0);
-    const ql = d.q.map((q, i) => hide(tagL(i, q)));
-    const hopTex = d.arith ? cr(d.d) : cr('\\times' + (d.rx || d.r));
-    const arcs = [0, 1, 2, 3].map((i) => arc(stage, ov, CX(i) + 16, CX(i + 1) - 16, yB - 4, T(hopTex)));
-    const verdict = hide(lab(stage, W / 2, 352, d.arith ? `<b>Arithmetic</b>, ${T('d=' + d.d)}` : `<b>Geometric</b>, ${T('r=' + d.r)}`, 'u1l5-verdict'));
-    const steps = [
-      { cap: `Divide the second term by the first: ${T(d.q[0])}.`, run: async (c) => { await pulse(c, bx[1], 1.06); await show(c, ql[0]); } },
-      d.arith
-        ? { cap: `Divide the third by the second: ${T(d.q[1])}. The ratios are <b>not</b> equal, so it is <b>not</b> geometric.`, run: async (c) => { await show(c, ql[1]); ql.forEach((e) => e.classList.add('u1l5-qbad')); await pulse(c, ql[1], 1.08); } }
-        : { cap: `Divide the third by the second: ${T(d.q[1])}. The same ratio, so it is <b>geometric</b> with ${T(cr('r=' + d.r))}.${d.alt ? ' A negative ratio makes the signs alternate.' : ''}`,
-          run: async (c) => { await show(c, ql[1]); await arcs[0].draw(c); await arcs[1].draw(c); } }
-    ];
-    if (d.arith) steps.push({ cap: `Subtract instead: ${T('45-50=-5')} and ${T('40-45=-5')}. A common difference: <b>arithmetic</b>, ${T(cr('d=-5'))}.`, run: async (c) => { await arcs[0].draw(c); await arcs[1].draw(c); } });
-    steps.push({ cap: d.arith ? `Keep subtracting 5: the next two terms are ${T(d.nx.join(',\\ '))}.` : `Keep multiplying by ${T(cr(d.r))}: the next two terms are ${T(d.nx.join(',\\ '))}.`,
-      run: async (c) => { await arcs[2].draw(c); await pop(c, nb[0]); await arcs[3].draw(c); await pop(c, nb[1]); await pop(c, verdict); } });
-    return steps;
-  }
-};
 
 /* ====================================================================================================
  * Explainer: buildPower — each step multiplies by r once more.
@@ -413,47 +303,6 @@ const countTerms = {
 };
 
 /* ====================================================================================================
- * Explainer: oddEven — y = r^k against a height: odd crosses once, even twice (or never).
- * ==================================================================================================== */
-const OE = {
-  e5: { lab: 'Ex 5', k: 3, v: -8, roots: [-2], win: { xmin: -3.6, xmax: 3.6, ymin: -10, ymax: 10, ystep: 2, ylab: 4 } },
-  e6: { lab: 'Ex 6', k: 2, v: 9, roots: [-3, 3], win: { xmin: -4.6, xmax: 4.6, ymin: -2, ymax: 12, ystep: 1, ylab: 3 } },
-  e7a: { lab: 'Ex 7(a)', k: 4, v: 81, roots: [-3, 3], win: { xmin: -4.6, xmax: 4.6, ymin: -10, ymax: 100, ystep: 10, ylab: 20 } },
-  e7b: { lab: 'Ex 7(b)', k: 3, v: -125, roots: [-5], win: { xmin: -6.6, xmax: 6.6, ymin: -150, ymax: 150, ystep: 25, ylab: 50 } },
-  none: { lab: '', k: 2, v: -4, roots: [], win: { xmin: -4.6, xmax: 4.6, ymin: -6, ymax: 12, ystep: 1, ylab: 3 } }
-};
-const oddEven = {
-  title: 'One r or two?',
-  height: 450,
-  capH: 84,
-  choices: Object.keys(OE).map((k) => ({ v: k, label: (OE[k].lab ? OE[k].lab + ': ' : '') + T(`r^${OE[k].k}=${OE[k].v}`) })),
-  make(stage, key, ex) {
-    const W = ex.W, d = OE[key], { k, v } = d, odd = k % 2 === 1, w = d.win;
-    const G = new Graph(stage, { x: 14, y: 22, width: 470, height: 424, xmin: w.xmin, xmax: w.xmax, ymin: w.ymin, ymax: w.ymax, xstep: 1, ystep: w.ystep, xlabels: key === 'e7b' ? 2 : 1, ylabels: w.ylab, xtitle: 'r', ytitle: `r^${k}` });
-    const P = lines(stage, 520, 20, W - 540, 'u1l5-oe');
-    const p1 = P.add(odd ? `<b>Odd power</b>: ${T(`r^${k}`)} keeps the sign of ${T('r')}. The curve rises from bottom-left to top-right, through <b>every</b> height once.`
-      : `<b>Even power</b>: ${T(`r^${k}`)} is never negative, and ${T(`(-r)^${k}=r^${k}`)}. A U shape.`);
-    const p2 = P.add(`The height ${T(`${v}`)}:`);
-    const rootsT = d.roots.map((x) => `(${x})^${k}=${v}\\ \\checkmark`);
-    const p3 = P.add(d.roots.length === 1 ? `<b>one</b> crossing: ${T(cr(`r=${d.roots[0]}`))}<br>${T(rootsT[0])}<br><span class="muted">${T(`${-d.roots[0]}^${k}=${-v}`)}, not ${T(String(v))}</span>`
-      : d.roots.length === 2 ? `<b>two</b> crossings: ${T(cr(`r=\\pm${d.roots[1]}`))}<br>${T(`${d.roots[1]}^${k}=${v}`)} and ${T(rootsT[0])}<br>Both work: <b>two answers</b>.`
-        : `<b>no</b> crossing: no real ${T('r')}. No geometric sequence has these terms.`);
-    const curve = hide(G.fn((x) => x ** k, { color: BLUE, width: 3.5 }));
-    const line = hide(G.hline(v, { color: PURPLE, width: 3 }));
-    const hl = hide(G.label(w.xmax - 0.2, v, T(`${v}`), { pos: v > 0 ? 'nw' : 'sw', cls: 'u1l5-hlab' }));
-    const pts = d.roots.map((x) => hide(G.point(x, v, { color: RC, r: 9, label: T(cr(`r=${x}`)), pos: x < 0 ? (v < 0 ? 'sw' : 'nw') : 'ne' })));
-    pts.forEach((p) => hide(p.label));
-    return [
-      { cap: odd ? `Graph ${T(`y=r^${k}`)}. An <b>odd</b> power keeps the sign: negative ${T('r')} gives a negative power.` : `Graph ${T(`y=r^${k}`)}. An <b>even</b> power is never negative: ${T('r')} and ${T('-r')} give the same height.`,
-        run: async (c) => { curve.style.opacity = 1; await G.drawIn(curve, 900, c); await show(c, p1); } },
-      { cap: `Which ${T('r')} give a height of ${T(String(v))}? Draw the line ${T(`y=${v}`)}.`, run: async (c) => { line.style.opacity = 1; await G.drawIn(line, 600, c); await show(c, hl); await show(c, p2); } },
-      { cap: d.roots.length === 1 ? `It crosses <b>once</b>: ${T(`r=${d.roots[0]}`)}. An odd power has one real root.` : d.roots.length === 2 ? `It crosses <b>twice</b>: ${T(`r=${d.roots[1]}`)} or ${T(`r=${d.roots[0]}`)}. An even power has two roots, so there are <b>two sequences</b>.` : `It <b>never</b> crosses: an even power can't be negative. No real ${T('r')}.`,
-        run: async (c) => { for (const p of pts) { p.style.opacity = 1; await pop(c, p); await show(c, p.label); } await show(c, p3); } }
-    ];
-  }
-};
-
-/* ====================================================================================================
  * twoTerms and means: a row of term boxes; count the jumps between the known terms, divide, (split for ±r), fill.
  * ==================================================================================================== */
 class TermRow {
@@ -576,77 +425,6 @@ const means = {
 };
 
 /* ====================================================================================================
- * Explainer: bSquared — equal ratios give b² = ac: a b-by-b square has the area of an a-by-c rectangle.
- * ==================================================================================================== */
-const BS = {
-  why: { label: T('\\text{Why }b^2=ac') },
-  e8a: { label: 'Example 8(a) check' },
-  e8b: { label: 'Example 8(b) check' }
-};
-/** square b×b beside rectangle a×c (to scale) in a panel; returns { el, parts[] } hidden */
-function areaPic(stage, x, y, w, a, b, cc, u) {
-  const el = add(stage, box(h('div', 'u1l5-area'), w, 350), x, y);
-  const H = 350, svg = svgEl('svg', { width: w, height: H, viewBox: `0 0 ${w} ${H}` }, el);
-  const sq = b * u, rw = cc * u, rh = a * u, sx = 30, sy = 40, rx = 30, ry = sy + sq + 56;
-  svgEl('rect', { x: sx, y: sy, width: sq, height: sq, class: 'u1l5-sq' }, svg);
-  svgEl('rect', { x: rx, y: ry, width: rw, height: rh, class: 'u1l5-rc' }, svg);
-  const L = (px, py, html, pos, cls = '') => { const d = add(el, h('div', 'u1l5-lab u1l5-alab ' + cls, html)); place(d, px, py, pos, 4); return d; };
-  L(sx + sq / 2, sy, T(`b=${b}`), 'n'); L(sx + sq, sy + sq / 2, T(`b=${b}`), 'e');
-  L(sx + sq / 2, sy + sq / 2, T(`b^2=${b * b}`), 'c', 'u1l5-ain');
-  L(rx + rw / 2, ry + rh, T(`c=${cc}`), 's'); L(rx, ry + rh / 2, T(`a=${a}`), 'w');
-  L(rx + rw + 4, ry + rh / 2, T(`ac=${a * cc}`), 'e', 'u1l5-ain2');
-  hide(el); return el;
-}
-const bSquared = {
-  title: 'Equal ratios: b² = ac',
-  height: 440,
-  capH: 84,
-  choices: Object.keys(BS).map((k) => ({ v: k, label: BS[k].label })),
-  ask: (k) => (k === 'e8a' ? `Example 8(a): ${T('x+1,\\ x+4,\\ x+10')} are consecutive terms. Find ${T('x')}, the terms and ${T('r')}.` : k === 'e8b' ? `Example 8(b): ${T('x,\\ x+4,\\ 9x')} are consecutive terms. Find ${T('x')}, the terms and ${T('r')}.` : ''),
-  make(stage, k, ex) {
-    const W = ex.W, P = lines(stage, 24, 14, 540, 'u1l5-big2');
-    const px = 580, pw = W - px - 10;
-    if (k === 'why') {
-      const ov = overlay(stage, W, 440);
-      const bx = [0, 1, 2].map((i) => add(stage, box(h('div', 'u1l5-tb u1l5-tbs', T(['a', 'b', 'c'][i])), 100, 60), 40 + i * 150, 60));
-      const arcs = [0, 1].map((i) => arc(stage, ov, 90 + i * 150 + 14, 90 + (i + 1) * 150 - 14, 56, T(cr('\\times r')), { h: 22 }));
-      P.el.style.top = '150px';
-      const l1 = P.add(T('b=ar,\\qquad c=br'));
-      const l2 = P.add(T('\\dfrac{b}{a}=\\dfrac{c}{b}=r'));
-      const l3 = P.add(T('b\\cdot b=a\\cdot c\\ \\ \\Rightarrow\\ \\ \\boldsymbol{b^2=ac}'));
-      const l4 = P.add(T('4,\\ 12,\\ 36:\\quad 12^2=144=4\\times36\\ \\checkmark'));
-      const pic = areaPic(stage, px, 40, pw, 4, 12, 36, Math.min(10, (pw - 120) / 36));
-      return [
-        { cap: `Three consecutive terms ${T('a,\\ b,\\ c')}: each is the one before times ${T(cr('r'))}.`, run: async (c) => { await arcs[0].draw(c); await arcs[1].draw(c); await show(c, l1); } },
-        { cap: `So the ratios are equal: ${T('\\dfrac{b}{a}=\\dfrac{c}{b}')}.`, run: (c) => show(c, l2) },
-        { cap: `Cross-multiply: ${T('b\\cdot b=a\\cdot c')}, so ${T('b^2=ac')}.`, run: (c) => show(c, l3) },
-        { cap: `Try ${T('4,\\ 12,\\ 36')} (${T('r=3')}): ${T('12^2=144')} and ${T('4\\times36=144')}. A 12-by-12 square has the same area as a 4-by-36 rectangle.`, run: async (c) => { await show(c, l4); await show(c, pic); } }
-      ];
-    }
-    if (k === 'e8a') {
-      const L = ['(x+4)^2=(x+1)(x+10)', 'x^2+8x+16=x^2+11x+10', '6=3x\\ \\Rightarrow\\ \\boldsymbol{x=2}', '\\text{terms }3,\\ 6,\\ 12;\\quad r=2'].map((s) => P.add(T(s)));
-      const pic = areaPic(stage, px, 30, pw, 3, 6, 12, Math.min(24, (pw - 120) / 12));
-      return [
-        { cap: `${T('a=x+1')}, ${T('b=x+4')}, ${T('c=x+10')}. Use ${T('b^2=ac')}: ${T('(x+4)^2=(x+1)(x+10)')}.`, run: (c) => show(c, L[0]) },
-        { cap: 'Expand both sides.', run: (c) => show(c, L[1]) },
-        { cap: `The ${T('x^2')} terms cancel: ${T('16-10=11x-8x')}, so ${T('6=3x')} and ${T('x=2')}.`, run: (c) => show(c, L[2]) },
-        { cap: `${T('x=2')} gives ${T('3,\\ 6,\\ 12')} with ${T('r=2')}, and no term is zero ✓. Check: ${T('6^2=36=3\\times12')}.`, run: async (c) => { await show(c, L[3]); await show(c, pic); } }
-      ];
-    }
-    const L = ['(x+4)^2=x(9x)', 'x^2+8x+16=9x^2\\ \\Rightarrow\\ 8x^2-8x-16=0', 'x^2-x-2=0\\ \\Rightarrow\\ (x-2)(x+1)=0', 'x=2:\\ \\ 2,\\ 6,\\ 18,\\quad r=3', 'x=-1:\\ \\ -1,\\ 3,\\ -9,\\quad r=-3'].map((s) => P.add(T(s)));
-    const pic = areaPic(stage, px, 30, pw, 2, 6, 18, Math.min(20, (pw - 120) / 18));
-    const ck = hide(add(stage, h('div', 'u1l5-note u1l5-ckneg', `${T('x=-1')}: ${T('3^2=9')} and ${T('(-1)(-9)=9')} ✓`), px + 20, 390));
-    return [
-      { cap: `${T('b^2=ac')}: ${T('(x+4)^2=x(9x)')}.`, run: (c) => show(c, L[0]) },
-      { cap: `Expand and collect: ${T('8x^2-8x-16=0')}. This time the ${T('x^2')} terms do <b>not</b> cancel: a quadratic.`, run: (c) => show(c, L[1]) },
-      { cap: `Divide by 8 and factor: ${T('(x-2)(x+1)=0')}, so ${T('x=2')} or ${T('x=-1')}.`, run: (c) => show(c, L[2]) },
-      { cap: `${T('x=2')}: ${T('2,\\ 6,\\ 18')}, ${T('r=3')}. Check: ${T('6^2=36=2\\times18')} ✓.`, run: async (c) => { await show(c, L[3]); await show(c, pic); } },
-      { cap: `${T('x=-1')}: ${T('-1,\\ 3,\\ -9')}, ${T('r=-3')}. No term is zero, so both work: <b>two answers</b>.`, run: async (c) => { await show(c, L[4]); await show(c, ck); } }
-    ];
-  }
-};
-
-/* ====================================================================================================
  * Example 3 figures: empty grids to plot on, and the answer dots.
  * ==================================================================================================== */
 function mountFigures() {
@@ -693,7 +471,6 @@ standup('u1l5', {
 });
 
 /* =============================== mount =============================== */
-mountTri();
 mountFigures();
-export const explainers = mountExplainers({ ratioHops, buildPower, notFifteen, barsDots, countTerms, oddEven, twoTerms, means, bSquared });
-export const _test = { Q, qt, rp, times, targetTex, BP, BD, CT, OE, TT, ME };
+export const explainers = mountExplainers({ buildPower, notFifteen, barsDots, countTerms, twoTerms, means });
+export const _test = { Q, qt, rp, times, targetTex, BP, BD, CT, TT, ME };

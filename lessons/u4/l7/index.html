@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u4l7.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,15 @@
 </head>
 <body>
 <main class="lesson screen u4l7">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Squares on a Chessboard">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="0.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="38" text-anchor="middle" transform="scale(-1 1)">♞</text></g></g><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="3s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="0.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="34" text-anchor="middle" transform="scale(-1 1)">♟</text></g></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Squares on a Chessboard</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">A chessboard is an 8 by 8 grid of little squares.</p><p class="vw-ask">How many squares can you find on a chessboard?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A chessboard with a knight hopping on it"><rect x="55" y="11" width="220" height="220" rx="6" fill="none" stroke="#4a4436" stroke-width="5"/><rect x="61" y="17" width="26" height="26" fill="#e9d9c2"/><rect x="87" y="17" width="26" height="26" fill="#8a6440"/><rect x="113" y="17" width="26" height="26" fill="#e9d9c2"/><rect x="139" y="17" width="26" height="26" fill="#8a6440"/><rect x="165" y="17" width="26" height="26" fill="#e9d9c2"/><rect x="191" y="17" width="26" height="26" fill="#8a6440"/><rect x="217" y="17" width="26" height="26" fill="#e9d9c2"/><rect x="243" y="17" width="26" height="26" fill="#8a6440"/><rect x="61" y="43" width="26" height="26" fill="#8a6440"/><rect x="87" y="43" width="26" height="26" fill="#e9d9c2"/><rect x="113" y="43" width="26" height="26" fill="#8a6440"/><rect x="139" y="43" width="26" height="26" fill="#e9d9c2"/><rect x="165" y="43" width="26" height="26" fill="#8a6440"/><rect x="191" y="43" width="26" height="26" fill="#e9d9c2"/><rect x="217" y="43" width="26" height="26" fill="#8a6440"/><rect x="243" y="43" width="26" height="26" fill="#e9d9c2"/><rect x="61" y="69" width="26" height="26" fill="#e9d9c2"/><rect x="87" y="69" width="26" height="26" fill="#8a6440"/><rect x="113" y="69" width="26" height="26" fill="#e9d9c2"/><rect x="139" y="69" width="26" height="26" fill="#8a6440"/><rect x="165" y="69" width="26" height="26" fill="#e9d9c2"/><rect x="191" y="69" width="26" height="26" fill="#8a6440"/><rect x="217" y="69" width="26" height="26" fill="#e9d9c2"/><rect x="243" y="69" width="26" height="26" fill="#8a6440"/><rect x="61" y="95" width="26" height="26" fill="#8a6440"/><rect x="87" y="95" width="26" height="26" fill="#e9d9c2"/><rect x="113" y="95" width="26" height="26" fill="#8a6440"/><rect x="139" y="95" width="26" height="26" fill="#e9d9c2"/><rect x="165" y="95" width="26" height="26" fill="#8a6440"/><rect x="191" y="95" width="26" height="26" fill="#e9d9c2"/><rect x="217" y="95" width="26" height="26" fill="#8a6440"/><rect x="243" y="95" width="26" height="26" fill="#e9d9c2"/><rect x="61" y="121" width="26" height="26" fill="#e9d9c2"/><rect x="87" y="121" width="26" height="26" fill="#8a6440"/><rect x="113" y="121" width="26" height="26" fill="#e9d9c2"/><rect x="139" y="121" width="26" height="26" fill="#8a6440"/><rect x="165" y="121" width="26" height="26" fill="#e9d9c2"/><rect x="191" y="121" width="26" height="26" fill="#8a6440"/><rect x="217" y="121" width="26" height="26" fill="#e9d9c2"/><rect x="243" y="121" width="26" height="26" fill="#8a6440"/><rect x="61" y="147" width="26" height="26" fill="#8a6440"/><rect x="87" y="147" width="26" height="26" fill="#e9d9c2"/><rect x="113" y="147" width="26" height="26" fill="#8a6440"/><rect x="139" y="147" width="26" height="26" fill="#e9d9c2"/><rect x="165" y="147" width="26" height="26" fill="#8a6440"/><rect x="191" y="147" width="26" height="26" fill="#e9d9c2"/><rect x="217" y="147" width="26" height="26" fill="#8a6440"/><rect x="243" y="147" width="26" height="26" fill="#e9d9c2"/><rect x="61" y="173" width="26" height="26" fill="#e9d9c2"/><rect x="87" y="173" width="26" height="26" fill="#8a6440"/><rect x="113" y="173" width="26" height="26" fill="#e9d9c2"/><rect x="139" y="173" width="26" height="26" fill="#8a6440"/><rect x="165" y="173" width="26" height="26" fill="#e9d9c2"/><rect x="191" y="173" width="26" height="26" fill="#8a6440"/><rect x="217" y="173" width="26" height="26" fill="#e9d9c2"/><rect x="243" y="173" width="26" height="26" fill="#8a6440"/><rect x="61" y="199" width="26" height="26" fill="#8a6440"/><rect x="87" y="199" width="26" height="26" fill="#e9d9c2"/><rect x="113" y="199" width="26" height="26" fill="#8a6440"/><rect x="139" y="199" width="26" height="26" fill="#e9d9c2"/><rect x="165" y="199" width="26" height="26" fill="#8a6440"/><rect x="191" y="199" width="26" height="26" fill="#e9d9c2"/><rect x="217" y="199" width="26" height="26" fill="#8a6440"/><rect x="243" y="199" width="26" height="26" fill="#e9d9c2"/><g><animateTransform attributeName="transform" type="translate" values="0 0;52 -26;78 26;26 52;0 0" keyTimes="0;.25;.5;.75;1" dur="5s" calcMode="discrete" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -10;0 0" dur="0.62s" begin="0s" repeatCount="indefinite"/><text x="126.0" y="160.0" font-size="40" text-anchor="middle" dominant-baseline="central">♞</text></g></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="300" y="60" font-size="44" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>How did you count them?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>204</b>, not 64! Count the squares of <b>every</b> size: 64 small ones (<span class="tex">1\times1</span>), 49 of size <span class="tex">2\times2</span>, 36 of size <span class="tex">3\times3</span>, … down to 1 big one (<span class="tex">8\times8</span>).<br><span class="tex">64+49+36+25+16+9+4+1=204</span>, the sum of the first eight perfect squares.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -44,39 +54,6 @@
   <div class="outcome"><b>AN3</b> Solve problems that involve radical equations (limited to square roots).<br><b>RF5</b> Solve problems that involve quadratic equations.<br><span class="muted">Today: binomial squares and two restrictions, isolate–square–factor–check, the ghost graph behind extraneous roots, <span class="tex">x+\sqrt{x}=12</span> two ways, squaring twice, and problems.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Patio Builder" id="wu" style="--wf-side: 430px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Patio Builder</h2>
-  <p class="wf-rule">Every patio is a <b class="u4l7-tsq">square of tiles</b> with <b class="u4l7-trow">one extra row</b> along the bottom. Tap <b>−</b> and <b>+</b> to change the size of the square.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u4l7-patio" id="u4l7-patio"></div>
-    <div class="u4l7-pbtns">
-      <button type="button" class="pill" id="u4l7-pminus" aria-label="Smaller square">− smaller</button>
-      <button type="button" class="pill" id="u4l7-pplus" aria-label="Bigger square">+ bigger</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u4l7-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>The square is <b>3 tiles</b> on a side. How many tiles in the whole patio? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l7-wa"><div class="bk-ans"><span class="tex">9</span> in the square <span class="tex">+\,3</span> in the row <span class="tex">=12</span> tiles.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>A patio uses <b>20 tiles</b>. How long is the side of its square? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l7-wa"><div class="bk-ans"><span class="tex">4</span> tiles: <span class="tex">16+4=20</span>.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> A patio uses <b>42 tiles</b>. How many tiles are in the <b>square</b> part? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt right"><b>A</b> 36</div>
-        <div class="opt"><b>B</b> 49</div>
-        <div class="opt"><b>C</b> 21</div>
-        <div class="opt"><b>D</b> 6</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal id="u4l7-preveal">Reveal</button>
-      <div class="poll-ans"><b>A, 36 tiles</b> (a <span class="tex">6\times6</span> square, plus a row of 6). If the square has <span class="tex">x</span> tiles, its side is <span class="tex">\sqrt{x}</span>, so <span class="tex">x+\sqrt{x}=42</span>.<br>
-        <span class="muted"><b>D</b> is the side, not the tiles. <b>C</b> halves 42. <b>B</b> is a sneaky one: squaring the algebra later gives <span class="tex">36</span> <b>and</b> <span class="tex">49</span>, but <span class="tex">49+7=56</span>.</span></div>
-    </div>
-  </div></div>
-  <p class="u4l7-social">Ask your neighbour: someone says a 49-tile square works too, “because <span class="tex">49-7=42</span>.” What did they build?</p>
-</section>
-
 <!-- ================= 1. Binomial squares ================= -->
 <section class="card" data-ink="s1" data-section="1. Before You Square: Binomial Squares">
   <div class="sec-h"><span class="badge">1</span><h2>Before You Square: Binomial Squares and Restrictions</h2></div>
@@ -84,7 +61,6 @@
   <div class="def amber u4l7-key"><div class="u4l7-keyh">Key idea</div>
     <div class="u4l7-pat"><span class="tex">(a+b)^2=a^2+\textcolor{#c27a0e}{2ab}+b^2</span><span class="tex">(a-b)^2=a^2-\textcolor{#c27a0e}{2ab}+b^2</span><span class="tex">(x-2)^2=x^2-4x+4,\ \ \textbf{not}\ \ x^2+4</span></div>
     A radical squared gives its radicand: <span class="tex">\left(\sqrt{A}\right)^2=A</span>, and <span class="tex">\left(k\sqrt{A}\right)^2=k^2A</span>.</div>
-  <div class="explainer" data-explainer="binSq"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -105,7 +81,6 @@
 <section class="card" data-ink="s1b" data-section="1. Restrictions">
   <h3 class="sub">Restrictions: two conditions</h3>
   <div class="def">A square root is never negative, so in <span class="tex">\sqrt{\textcolor{#7b4fc4}{A}}=\textcolor{#1f5bd6}{B}</span> two things must be true: the radicand <span class="tex">\textcolor{#7b4fc4}{A}\ge0</span>, and the other side <span class="tex">\textcolor{#1f5bd6}{B}\ge0</span>. <b>Isolate the radical first</b>, then write both conditions and combine them.</div>
-  <div class="explainer" data-explainer="restrict2"></div>
 </section>
 
 <section class="card example" data-ink="ex2" data-section="Example 2">
@@ -182,11 +157,19 @@
   <button class="more" data-more="ex5-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–7">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 7 · Questions 1–7</h2>
+  <p class="pr-t">Square a whole side, factor, then check every root in the original.</p>
+  <div class="pr-chips n3"><span><b>1–2</b>Squaring a binomial, restrictions</span><span><b>3–6</b>Isolate, square, factor, check</span><span><b>7</b>Read the graph</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 6.</span><a class="pill" href="../../../#/lesson/u4l7">Open the Practice site</a></div>
+</section>
+
 <!-- ================= 4. x + √x = 12 ================= -->
 <section class="card" data-ink="s4" data-section="4. Equations Like x + √x = 12">
   <div class="sec-h"><span class="badge">4</span><h2>Equations Like <span class="tex">x+\sqrt{x}=12</span></h2></div>
   <p>When the variable appears both inside and outside the radical, isolate the radical and square as usual. Another way is <b>substitution</b>: let <span class="tex">u=\sqrt{x}</span> (so <span class="tex">u\ge0</span> and <span class="tex">x=u^2</span>), factor the quadratic in <span class="tex">u</span>, <b>reject any negative <span class="tex">u</span></b>, then square to get <span class="tex">x</span>.</p>
-  <div class="explainer" data-explainer="twoWays"></div>
 </section>
 
 <section class="card example" data-ink="ex6" data-section="Example 6">
@@ -256,7 +239,7 @@
     <div><b>More kinds.</b> <span class="tex">x+\sqrt{x}=12</span>: square, or let <span class="tex">u=\sqrt{x}\ge0</span>. Two radicals: square twice. In a problem, a root that fails the context is <b>inadmissible</b>, not extraneous.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u4l7">
-    <div><div class="kicker">Your turn</div><b>Assignment 7 — Radical Equations That Lead to Quadratics</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 7 · Questions 8–17</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l8/">
     <div><div class="kicker">Next lesson</div><b>Lesson 8 — Unit 4 Review</b><div class="muted">Factoring, quadratic equations and radical equations, all together.</div></div><span class="arrow">→</span>

@@ -1,4 +1,6 @@
 /* Math 20-1 · Unit 2 · Lesson 1 — Mixed and Entire Radicals.
+ * New lesson format (2026-11-11, tools/newformat/specs/u2l1.py): the page no longer has the old warm-up or the explainers tiles, trueFalse, simplest, copies, context;
+ * their code below is unused (each mount is skipped when its element is missing).
  * Warm-up (Tilted Squares on a dot grid: box-and-corners areas 9, 2, 8; two of B's sides lie along C, so √8 = 2√2),
  * the Example 10 grid, a Stand Up Break, and the explainers:
  *   rootFind (what number, used n times? fill n factor boxes; principal root; even index + negative = not real;

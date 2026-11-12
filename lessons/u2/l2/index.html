@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u2l2.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u2l2">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Which One Doesn’t Belong?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="-9 120 46;9 120 46;-9 120 46" dur="2.4s" repeatCount="indefinite"/><text x="120" y="46" font-size="42" text-anchor="middle">🤔</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/><text x="185" y="46" font-size="36" text-anchor="middle">🧩</text></g><text x="245" y="46" font-size="32" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Which One Doesn’t Belong?</h2>
+  <p class="wf-rule vw-rule">Four numbers. Which one doesn’t belong? Pick one and give a reason.</p></div>
+  <div class="vw-tiles" style="--n:4;--fs:64px"><div><b>A</b>16</div><div><b>B</b>27</div><div><b>C</b>36</div><div><b>D</b>64</div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>What’s your reason? Does anyone have a different pick?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Every one of them can be the odd one out.</b> <b>A 16</b> is the only perfect <b>fourth</b> power (<span class="tex">2^4</span>). <b>B 27</b> is the only odd number, and the only one that is not a perfect square. <b>C 36</b> is the only one with two different prime factors (<span class="tex">2\times2\times3\times3</span>). <b>D 64</b> is the only one that is a perfect square <b>and</b> a perfect cube (<span class="tex">8^2</span> and <span class="tex">4^3</span>).</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -43,40 +54,6 @@
   <div class="outcome"><b>AN2</b> Solve problems that involve operations on radicals and radical expressions with numerical and variable radicands.<br><span class="muted">Today: radicals with variable radicands: restrictions, simplifying, and mixed ↔ entire. Exact answers.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Root Machine" id="wu" style="--wf-side: 420px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Root Machine</h2>
-  <p class="wf-rule">Drop in ball <span class="tex">x</span>: the machine <b>subtracts 6</b> and takes the <b>square root</b>, <span class="tex">\sqrt{x-6}</span>. Not a real number? It <b class="u2l2-cno">JAMS</b>.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u2l2-mach" id="u2l2-mach"></div>
-    <div class="u2l2-wbtns">
-      <button type="button" class="pill" id="u2l2-switch">Flip the switch: <span class="tex">\sqrt[3]{\ }</span></button>
-      <button type="button" class="pill" id="u2l2-wreset">Start over</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u2l2-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>What comes out for ball <b>10</b>? For ball <b>22</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l2-wa"><div class="bk-ans">Ball 10: <span class="tex">\sqrt{10-6}=\sqrt4=2</span>. Ball 22: <span class="tex">\sqrt{16}=4</span>.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Ball <b>14</b> gives <span class="tex">\sqrt8</span>. Write it as a mixed radical. What does ball <b>6</b> give? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l2-wa"><div class="bk-ans"><span class="tex">\sqrt8=\sqrt{4\cdot2}=2\sqrt2</span>. Ball 6: <span class="tex">\sqrt0=0</span>, no jam.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Which balls <b>jam</b> the machine? Which numbers would? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u2l2-wa"><div class="bk-ans">Balls <b>5</b> and <b>−2</b>: <span class="tex">x-6</span> is negative. Any number <b>less than 6</b> jams it.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Flip the switch: now the machine takes the <b>cube root</b>, <span class="tex">\sqrt[3]{x-6}</span>. Which balls jam it? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> 5 and −2 again</div>
-        <div class="opt"><b>B</b> only −2</div>
-        <div class="opt right"><b>C</b> none of them</div>
-        <div class="opt"><b>D</b> all of them</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>C, none.</b> A cube root of a negative is negative: <span class="tex">\sqrt[3]{-1}=-1</span> because <span class="tex">(-1)^3=-1</span>, and ball −2 gives <span class="tex">\sqrt[3]{-8}=-2</span>.<br><span class="muted">Two equal factors can never multiply to a negative, but three can. Today: which <span class="tex">x</span>-values each radical allows.</span></div>
-    </div>
-  </div></div>
-  <p class="u2l2-social">Challenge your neighbour: design a square-root machine that jams on every ball <b>bigger than 10</b>.</p>
-</section>
-
 <!-- ================= 1. Restrictions ================= -->
 <section class="card" data-ink="s1" data-section="1. Restrictions on the Variable">
   <div class="sec-h"><span class="badge">1</span><h2>Restrictions on the Variable</h2></div>
@@ -90,12 +67,6 @@
   <h3 class="sub">Which <span class="tex">x</span>-values are allowed?</h3>
   <p>Solve the radicand's inequality, shade the answer on a number line, then test it with a probe: the probe turns <b class="u2l2-cno">red</b> wherever the radicand is negative.</p>
   <div class="explainer" data-explainer="allowed"></div>
-</section>
-
-<section class="card" data-ink="s1b" data-section="1. Why the sign reverses">
-  <h3 class="sub">Why does the sign reverse?</h3>
-  <p>Multiplying by a negative number flips every point to the other side of 0, and the order of the points flips with it.</p>
-  <div class="explainer" data-explainer="flip"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -122,11 +93,17 @@
     <div class="part"><div class="pl">(c) <span class="tex">\sqrt{x^3}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^3</span> is negative when <span class="tex">x</span> is negative, so <span class="tex">\boldsymbol{x\ge0}</span>.</div></div></div>
     <div class="part"><div class="pl">(d) <span class="tex">\dfrac{8}{\sqrt{x+2}}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+2\ge0</span> and <span class="tex">\sqrt{x+2}\ne0</span>, so <span class="tex">x+2&gt;0</span>: <span class="tex">\boldsymbol{x&gt;-2}</span>.</div></div></div>
   </div>
-  <h3 class="sub">Where is the radicand above zero?</h3>
-  <p>Graph the radicand. The allowed <span class="tex">x</span>-values are where the graph is <b>on or above</b> the <span class="tex">x</span>-axis (only <b>above</b> for a denominator).</p>
-  <div class="explainer" data-explainer="radgraph"></div>
   <div class="space" id="ex2-space"></div>
   <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–3">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 2 · Questions 1–3</h2>
+  <p class="pr-t">State the restrictions, then evaluate where the radical is real.</p>
+  <div class="pr-chips n3"><span><b>1</b>State the restriction</span><span><b>2</b>Squares, cubes and denominators</span><span><b>3</b>Restrict, then evaluate exactly</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 3.</span><a class="pill" href="../../../#/lesson/u2l2">Open the Practice site</a></div>
 </section>
 
 <!-- ================= 2. Powers under a radical ================= -->
@@ -143,7 +120,6 @@
 <section class="card" data-ink="s2b" data-section="2. A caution about even roots">
   <h3 class="sub">A caution about even roots</h3>
   <div class="def gray">Try <span class="tex">x=-5</span>: <span class="tex">\sqrt{x^2}=\sqrt{25}=5</span>, which is <b>not</b> <span class="tex">x</span>. In general <span class="tex">\sqrt{x^2}=|x|</span> (the absolute value of <span class="tex">x</span>, studied in Unit 7). To avoid this, for an <b>even index</b> we state that the variables are <b>non-negative</b> (<span class="tex">x\ge0</span>); then <span class="tex">\sqrt{x^2}=x</span>. For an odd index no restriction is needed: <span class="tex">\sqrt[3]{x^3}=x</span> for every <span class="tex">x</span>.</div>
-  <div class="explainer" data-explainer="abs"></div>
 </section>
 
 <section class="card example" data-ink="ex3" data-section="Example 3">
@@ -228,20 +204,18 @@
     <div class="part"><div class="pl">(b) A cube has a volume of <span class="tex">54a^4\ \text{m}^3</span>. Determine its edge length.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">e=\sqrt[3]{54a^4}=\sqrt[3]{27\cdot2\cdot a^3\cdot a}</span><br><span class="tex">=\boldsymbol{3a\sqrt[3]{2a}}</span> m (a length, so <span class="tex">a&gt;0</span>)</div></div></div>
     <div class="part"><div class="pl">(c) A right triangle has legs <span class="tex">3x</span> and <span class="tex">6x</span>. Determine the length of the hypotenuse.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">c=\sqrt{(3x)^2+(6x)^2}=\sqrt{9x^2+36x^2}</span><br><span class="tex">=\sqrt{45x^2}=\boldsymbol{3x\sqrt5},\ \ x&gt;0</span></div></div></div>
   </div>
-  <div class="explainer" data-explainer="shapes"></div>
   <div class="space" id="ex6-space"></div>
   <button class="more" data-more="ex6-space">+ More space</button>
 </section>
 
 <section class="card example" data-ink="ex7" data-section="Example 7">
-  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Allowed, evaluated, or jammed?</h3></div>
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Allowed, evaluated, or not real?</h3></div>
   <p class="q">Consider the expression <span class="tex">\sqrt{20-4x}</span>.</p>
   <div class="parts c3">
     <div class="part"><div class="pl">(a) State the restriction on <span class="tex">x</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">20-4x\ge0\Rightarrow-4x\ge-20</span><br><span class="tex">\Rightarrow\boldsymbol{x\le5}</span></div></div></div>
     <div class="part"><div class="pl">(b) Evaluate the expression exactly, in simplest form, for <span class="tex">x=-5</span> and for <span class="tex">x=2</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=-5:\ \sqrt{20+20}=\sqrt{40}=\boldsymbol{2\sqrt{10}}</span><br><span class="tex">x=2:\ \sqrt{20-8}=\sqrt{12}=\boldsymbol{2\sqrt3}</span></div></div></div>
     <div class="part"><div class="pl">(c) Can the expression be evaluated for <span class="tex">x=6</span>? Explain.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>No:</b> <span class="tex">6&gt;5</span>; the radicand would be <span class="tex">20-24=-4</span>, and <span class="tex">\sqrt{-4}</span> is not a real number.</div></div></div>
   </div>
-  <div class="explainer" data-explainer="allowed7"></div>
   <div class="space" id="ex7-space"></div>
   <button class="more" data-more="ex7-space">+ More space</button>
 </section>
@@ -256,7 +230,7 @@
     <div><b>Mixed → entire.</b> Raise everything in front to the index and multiply it in: <span class="tex">3x\sqrt{2x}=\sqrt{9x^2\cdot2x}=\sqrt{18x^3}</span>. A negative sign goes in only for an odd index.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u2l2">
-    <div><div class="kicker">Your turn</div><b>Assignment 2 — Radicals with Variables and Their Restrictions</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 2 · Questions 4–16</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l3/">
     <div><div class="kicker">Next lesson</div><b>Lesson 3 — Adding and Subtracting Radicals</b><div class="muted">Like radicals collect like like terms: <span class="tex">2\sqrt3+5\sqrt3=7\sqrt3</span>, but <span class="tex">\sqrt2+\sqrt3</span> stays as it is.</div></div><span class="arrow">→</span>

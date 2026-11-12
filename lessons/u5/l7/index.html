@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Quadratic Formula · Math 20-1 5.7</title>
+<meta name="description" content="Math 20-1 Unit 5 Lesson 7: the quadratic formula. Where it comes from (completing the square with a, b and c), reading a, b and c from standard form, exact roots with simplified radicals and roots to a given accuracy, no real roots, zeros and x-intercepts, finding and correcting errors, choosing an efficient method, equations that need rearranging first, and problems solved with the formula. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u5l7.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u5l7">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Busy Fly">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><line x1="0" y1="52" x2="340" y2="52" stroke="#d9d3c4" stroke-width="3" stroke-dasharray="16 12"><animate attributeName="stroke-dashoffset" values="0;-28" dur=".7s" repeatCount="indefinite"/></line><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0s" repeatCount="indefinite"/><text x="0" y="44" font-size="34" text-anchor="middle" transform="scale(-1 1)">🚂</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -10;0 0" dur="0.6s" begin="0s" repeatCount="indefinite"/><text x="290" y="30" font-size="26" text-anchor="middle">🪰</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.8s" begin="0s" repeatCount="indefinite"/><text x="250" y="40" font-size="26" text-anchor="middle">❓</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Busy Fly</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Two trains on the same track are <b>100 km</b> apart, rolling toward each other at <b>50 km/h</b> each. A fly zips from the front of one train to the other at <b>75 km/h</b>, turns around, zips back, and keeps going until the trains stop nose to nose.</p><p class="vw-ask">How far does the fly travel?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Two trains on one track, 100 km apart, roll toward each other at 50 km/h each while a fly zigzags back and forth between their fronts at 75 km/h"><rect x="0" y="0" width="330" height="250" rx="16" fill="#eef4fb"/><g opacity=".9"><animateTransform attributeName="transform" type="translate" values="-20 0;30 0;-20 0" dur="12s" repeatCount="indefinite"/><ellipse cx="80" cy="40" rx="30" ry="11" fill="#fff"/><ellipse cx="100" cy="34" rx="18" ry="10" fill="#fff"/></g><rect x="0" y="176" width="330" height="74" fill="#cfe3c4"/><g stroke="#8a6d4b" stroke-width="5"><line x1="8" y1="168" x2="8" y2="182"/><line x1="30" y1="168" x2="30" y2="182"/><line x1="52" y1="168" x2="52" y2="182"/><line x1="74" y1="168" x2="74" y2="182"/><line x1="96" y1="168" x2="96" y2="182"/><line x1="118" y1="168" x2="118" y2="182"/><line x1="140" y1="168" x2="140" y2="182"/><line x1="162" y1="168" x2="162" y2="182"/><line x1="184" y1="168" x2="184" y2="182"/><line x1="206" y1="168" x2="206" y2="182"/><line x1="228" y1="168" x2="228" y2="182"/><line x1="250" y1="168" x2="250" y2="182"/><line x1="272" y1="168" x2="272" y2="182"/><line x1="294" y1="168" x2="294" y2="182"/><line x1="316" y1="168" x2="316" y2="182"/></g><line x1="0" y1="170" x2="330" y2="170" stroke="#4a4436" stroke-width="3"/><line x1="0" y1="178" x2="330" y2="178" stroke="#4a4436" stroke-width="3"/><g><animateTransform attributeName="transform" type="translate" values="0 0;78 0;78 0;0 0" keyTimes="0;.8;.95;1" dur="7s" repeatCount="indefinite"/><text x="0" y="0" font-size="52" text-anchor="middle" transform="translate(44 166) scale(-1 1)">🚂</text><text x="44" y="206" font-size="16" font-weight="800" fill="#4a4436" text-anchor="middle">50 km/h</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;-78 0;-78 0;0 0" keyTimes="0;.8;.95;1" dur="7s" repeatCount="indefinite"/><text x="286" y="166" font-size="52" text-anchor="middle">🚂</text><text x="286" y="206" font-size="16" font-weight="800" fill="#4a4436" text-anchor="middle">50 km/h</text></g><g><animateTransform attributeName="transform" type="translate" values="72 120;252 108;98 124;226 110;122 122;204 112;140 120;188 114;160 118;165 118;165 118;72 120" keyTimes="0;0.2;0.36;0.5;0.6;0.68;0.74;0.78;0.8;0.8;0.95;1" dur="7s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="0.25s" begin="0s" repeatCount="indefinite"/><text x="0" y="0" font-size="26" text-anchor="middle">🪰</text></g></g><text x="165" y="84" font-size="16" font-weight="800" fill="#c93a33" text-anchor="middle">75 km/h<animate attributeName="opacity" values="1;.35;1" dur="1.6s" repeatCount="indefinite"/></text><g><line x1="44" y1="232" x2="286" y2="232" stroke="#2b55a0" stroke-width="3"/><path d="M54 226 L44 232 L54 238 M276 226 L286 232 L276 238" fill="none" stroke="#2b55a0" stroke-width="3"/><rect x="128" y="221" width="74" height="22" rx="6" fill="#eef4fb"/><text x="165" y="238" font-size="16" font-weight="800" fill="#2b55a0" text-anchor="middle">100 km</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Is there a shortcut? Compare with the person beside you.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>75 km.</b> Don't follow the zigzags! The gap of 100 km closes at <span class="tex">50+50=100</span> km/h, so the trains meet after exactly <b>1 hour</b>. The fly flies the whole hour at 75 km/h: <span class="tex">75</span> km. (Adding up every zigzag also gives 75 km, but that takes an infinite series. A famous story says John von Neumann answered this instantly; when told most people sum the series, he said that is what he had done.)</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 5 Quadratic Functions · Lesson 7</div>
+  <h1>The Quadratic Formula</h1>
+  <p class="lede">Many quadratic equations, such as <span class="tex">3x^2-12x+7=0</span>, do not factor. Completing the square always works, and doing it <b>once</b> with the letters <span class="tex">\textcolor{#1f5bd6}{a}</span>, <span class="tex">\textcolor{#c27a0e}{b}</span> and <span class="tex">\textcolor{#12805a}{c}</span> gives a <b>formula</b> that solves every quadratic equation.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>write a quadratic equation in standard form and read <span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> <b>with their signs</b></li>
+      <li>solve with the quadratic formula, giving <b>exact</b> roots with the radical in simplest form, and roots to a given accuracy</li>
+      <li>recognise when there are <b>no real roots</b>, and find the zeros and <span class="tex">x</span>-intercepts of <span class="tex">y=ax^2+bx+c</span></li>
+      <li>find and correct the common errors with the formula</li>
+      <li>choose an efficient method: factoring, square roots, the formula, completing the square or graphing</li>
+      <li>rearrange an equation first, and solve problems with the formula, rejecting roots that don't make sense</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF5</b> Solve problems that involve quadratic equations.<br><b>RF4</b> Analyze quadratic functions of the form <span class="tex">y=ax^2+bx+c</span> to identify characteristics of the corresponding graph, including vertex, domain and range, direction of opening, axis of symmetry, <span class="tex">x</span>- and <span class="tex">y</span>-intercepts, and to solve problems.<br><span class="muted">Today: the formula, exact and decimal roots, no real roots, zeros, spotting errors, choosing a method, rearranging first, and problems in context.</span></div>
+</section>
+
+<!-- ================= 1. Deriving the formula ================= -->
+<section class="card" data-ink="s1" data-section="1. Deriving the Quadratic Formula">
+  <div class="sec-h"><span class="badge">1</span><h2>Deriving the Quadratic Formula</h2></div>
+  <div class="def">Many quadratic equations, such as <span class="tex">3x^2-12x+7=0</span>, cannot be factored over the integers. <b>Completing the square</b> (Lesson 6) always works: rewrite the equation as <span class="tex">(x-p)^2=k</span> and take the square root of both sides. Doing this once with the letters <span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> gives a formula that solves <em>every</em> quadratic equation.</div>
+  <div class="def amber u5l7-key"><div class="u5l7-keyh">The quadratic formula</div>
+    <div class="u5l7-fbig">The roots of <span class="tex">\textcolor{#1f5bd6}{a}x^2+\textcolor{#c27a0e}{b}x+\textcolor{#12805a}{c}=0,\ a\ne0</span>, are <span class="tex u5l7-ftex">x=\dfrac{-\textcolor{#c27a0e}{b}\pm\sqrt{\textcolor{#7b4fc4}{\textcolor{#c27a0e}{b}^2-4\textcolor{#1f5bd6}{a}\textcolor{#12805a}{c}}}}{2\textcolor{#1f5bd6}{a}}</span></div>
+    <p class="u5l7-kp">The <b>whole numerator</b>, <span class="tex">-b\pm\sqrt{b^2-4ac}</span>, is divided by <span class="tex">2a</span>. The expression <span class="tex">\textcolor{#7b4fc4}{b^2-4ac}</span> under the radical is the <b class="u5l7-cd">discriminant</b> (Lesson 8).</p></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Completing the square, then with letters</h3></div>
+  <div class="part"><div class="pl">(a) Solve <span class="tex">3x^2-12x+7=0</span> by completing the square. Give the exact roots in simplest form.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3x^2-12x=-7</span><br><span class="tex">x^2-4x=-\dfrac{7}{3}</span> &nbsp;(divide every term by <span class="tex">3</span>)<br><span class="tex">x^2-4x+4=-\dfrac{7}{3}+4</span> &nbsp;(add <span class="tex">\left(\dfrac{-4}{2}\right)^2=4</span> to both sides)<br><span class="tex">(x-2)^2=\dfrac{5}{3}</span><br><span class="tex">x-2=\pm\sqrt{\dfrac{5}{3}}=\pm\dfrac{\sqrt5}{\sqrt3}\cdot\dfrac{\sqrt3}{\sqrt3}=\pm\dfrac{\sqrt{15}}{3}</span><br><span class="tex">\boldsymbol{x=2\pm\dfrac{\sqrt{15}}{3}=\dfrac{6\pm\sqrt{15}}{3}}</span></div></div></div>
+  <div class="part u5l7-derp"><div class="pl">(b) Follow the same steps for <span class="tex">ax^2+bx+c=0,\ a\ne0</span>. Fill in each line.</div>
+    <div class="u5l7-der">
+      <div class="u5l7-dl">Start with the general equation.</div><div class="u5l7-dr u5l7-d0"><span class="tex">ax^2+bx+c=0</span></div>
+      <div class="u5l7-dl">Subtract <span class="tex">c</span>, then divide every term by <span class="tex">a</span>.</div><div class="u5l7-dr"><span data-reveal><span class="tex">x^2+\dfrac{b}{a}x=-\dfrac{c}{a}</span></span></div>
+      <div class="u5l7-dl">Add <span class="tex">\left(\dfrac{b}{2a}\right)^2=\dfrac{b^2}{4a^2}</span> to both sides.</div><div class="u5l7-dr"><span data-reveal><span class="tex">x^2+\dfrac{b}{a}x+\dfrac{b^2}{4a^2}=\dfrac{b^2}{4a^2}-\dfrac{c}{a}</span></span></div>
+      <div class="u5l7-dl">Factor the left side as a perfect square; write the right side over the common denominator <span class="tex">4a^2</span>.</div><div class="u5l7-dr"><span data-reveal><span class="tex">\left(x+\dfrac{b}{2a}\right)^2=\dfrac{b^2-4ac}{4a^2}</span></span></div>
+      <div class="u5l7-dl">Take the square root of both sides (<span class="tex">\sqrt{4a^2}=2a</span>; the <span class="tex">\pm</span> covers the sign of <span class="tex">a</span>).</div><div class="u5l7-dr"><span data-reveal><span class="tex">x+\dfrac{b}{2a}=\pm\dfrac{\sqrt{b^2-4ac}}{2a}</span></span></div>
+      <div class="u5l7-dl">Subtract <span class="tex">\dfrac{b}{2a}</span> from both sides.</div><div class="u5l7-dr"><span data-reveal><span class="tex">\boldsymbol{x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}}</span></span></div>
+    </div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Every line is filled in above: the last line is the <b>quadratic formula</b>. (Tap a <b>?</b> to show one line at a time.)</div></div></div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- sources: https://en.wikipedia.org/wiki/Brahmagupta (Brahmasphutasiddhanta, 628 CE, verse 18.44: the rule for ax^2 + bx = c in words);
+     https://mathshistory.st-andrews.ac.uk/Biographies/Brahmagupta/ ;
+     https://en.wikipedia.org/wiki/Al-Jabr (al-Khwarizmi, about 820 CE: "a square and ten roots are equal to thirty-nine", answer 3) -->
+<!-- ================= Math History box (brown) ================= -->
+<section class="card history" data-ink="hist" data-section="Math History: Brahmagupta's Rule">
+  <div class="hist-head"><span class="hist-tag">Math History</span><span class="hist-dates">India · 628 CE</span></div>
+  <div class="hist-grid">
+    <div class="hist-text">
+      <h3 class="hist-title">A formula written in words</h3>
+      <p>In 628 CE the Indian astronomer <b>Brahmagupta</b> wrote a rule for solving <span class="tex">ax^2+bx=c</span>, entirely in words (there were no letters or symbols yet): <i>“To the absolute number multiplied by four times the square, add the square of the middle term; the square root of the same, less the middle term, being divided by twice the square is the value.”</i></p>
+      <p>About 200 years later in Baghdad, <b>al-Khwarizmi</b> solved the same kind of equation by completing a real, drawn square. His book <i>al-jabr</i> gave us the word <b>algebra</b>.</p>
+      <div class="part hist-q"><div class="pl">The picture follows Brahmagupta's rule for al-Khwarizmi's famous example, “a square and ten roots equal thirty-nine”, <span class="tex">x^2+10x=39</span>. Now use the rule yourself to solve <span class="tex">2x^2+3x=27</span>.</div>
+        <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">27\times4\times2=216</span>, &nbsp;<span class="tex">216+3^2=225</span>, &nbsp;<span class="tex">\sqrt{225}=15</span>, &nbsp;<span class="tex">15-3=12</span>, &nbsp;<span class="tex">12\div(2\times2)=\boldsymbol{3}</span>. Check: <span class="tex">2(9)+3(3)=27</span> ✓<br>The rule is <span class="tex">x=\dfrac{-b+\sqrt{b^2+4ac}}{2a}</span> for <span class="tex">ax^2+bx=c</span>: our formula with only the <span class="tex">+</span> root. (The other root, <span class="tex">-4.5</span>, is negative.)</div></div></div>
+    </div>
+    <figure class="hist-anim">
+      <svg id="u5l7-hist" viewBox="0 0 600 300" role="img" aria-label="A palm-leaf scroll on which Brahmagupta's rule is carried out for x squared plus 10 x equals 39: times four a gives 156, add 10 squared gives 256, the square root gives 16, less 10 gives 6, divided by 2 gives 3"></svg>
+      <figcaption><button class="hist-play" type="button">Replay</button><span>Tap the picture to play it again.</span></figcaption>
+      <p class="hist-note">Rules like this were written in words, often in verse, for many centuries. Writing the formula with letters, the way we do, came much later.</p>
+    </figure>
+  </div>
+</section>
+
+<!-- ================= 2. Solving with the formula ================= -->
+<section class="card" data-ink="s2" data-section="2. Solving with the Quadratic Formula">
+  <div class="sec-h"><span class="badge">2</span><h2>Solving with the Quadratic Formula</h2></div>
+  <div class="u5l7-steps">
+    <div><b>1</b>Write the equation in standard form <span class="tex">ax^2+bx+c=0</span> and read <span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> <b>with their signs</b>.</div>
+    <div><b>2</b>Substitute, using <b>brackets</b> for negative values: <span class="tex">(-3)^2=9</span>, but <span class="tex">-3^2=-9</span>.</div>
+    <div><b>3</b>Simplify <span class="tex">b^2-4ac</span> first. If it is <b>negative</b>, there are <b>no real roots</b> (a negative number has no real square root).</div>
+    <div><b>4</b>Write the radical in <b>simplest form</b> (Unit 2), then divide out a factor common to <em>all</em> the terms: <span class="tex">-b</span>, the coefficient of the radical, and <span class="tex">2a</span>.</div>
+    <div><b>5</b>For <b>decimal</b> answers, evaluate the <span class="tex">+</span> root and the <span class="tex">-</span> root separately with a calculator and round only at the end.</div>
+  </div>
+  <div class="explainer" data-explainer="machine"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Exact and decimal roots</h3></div>
+  <p class="q">Solve. Give exact roots in simplest form and roots to the nearest tenth.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">x^2+4x-3=0</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a=1,\ b=4,\ c=-3</span><br><span class="tex">x=\dfrac{-4\pm\sqrt{16-4(1)(-3)}}{2(1)}</span><br><span class="tex">=\dfrac{-4\pm\sqrt{28}}{2}=\dfrac{-4\pm2\sqrt7}{2}</span><br><span class="tex">\boldsymbol{=-2\pm\sqrt7}</span><br><span class="tex">x\approx0.6</span> or <span class="tex">x\approx-4.6</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">9x^2-6x-4=0</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a=9,\ b=-6,\ c=-4</span><br><span class="tex">x=\dfrac{6\pm\sqrt{36-4(9)(-4)}}{2(9)}</span><br><span class="tex">=\dfrac{6\pm\sqrt{180}}{18}=\dfrac{6\pm6\sqrt5}{18}</span><br><span class="tex">\boldsymbol{=\dfrac{1\pm\sqrt5}{3}}</span><br><span class="tex">x\approx1.1</span> or <span class="tex">x\approx-0.4</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">x(x+6)=2(2x+7)</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+6x=4x+14</span><br><span class="tex">x^2+2x-14=0</span><br><span class="tex">x=\dfrac{-2\pm\sqrt{4+56}}{2}=\dfrac{-2\pm2\sqrt{15}}{2}</span><br><span class="tex">\boldsymbol{=-1\pm\sqrt{15}}</span><br><span class="tex">x\approx2.9</span> or <span class="tex">x\approx-4.9</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Decimal roots: one root at a time.</b> Put brackets around the whole numerator: <span class="keys"><kbd>(</kbd><kbd>(−)</kbd><kbd>4</kbd><kbd>+</kbd><kbd>2nd</kbd><kbd>x²</kbd><kbd>28</kbd><kbd>)</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>2</kbd><kbd>ENTER</kbd></span>, then the same with <kbd>−</kbd> in place of <kbd>+</kbd>. Round only at the end.</div>
+    <div class="u5l7-pcol"><button class="pill" data-keys="( (−) 4 + √ 28 ) ) ÷ 2 =">Show the + root</button><button class="pill" data-keys="( (−) 4 − √ 28 ) ) ÷ 2 =">Show the − root</button></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Two methods, one answer</h3></div>
+  <p class="q">Solve <span class="tex">6x^2+x-15=0</span> &nbsp;(a) with the quadratic formula, &nbsp;(b) by decomposition.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) The quadratic formula</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=\dfrac{-1\pm\sqrt{1-4(6)(-15)}}{2(6)}=\dfrac{-1\pm\sqrt{361}}{12}=\dfrac{-1\pm19}{12}</span><br><span class="tex">\boldsymbol{x=\tfrac{18}{12}=\tfrac{3}{2}}</span> or <span class="tex">\boldsymbol{x=\tfrac{-20}{12}=-\tfrac{5}{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Decomposition</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Product <span class="tex">ac=-90</span>, sum <span class="tex">1</span>: <span class="tex">10</span> and <span class="tex">-9</span>.<br><span class="tex">6x^2+10x-9x-15=2x(3x+5)-3(3x+5)</span><br><span class="tex">(2x-3)(3x+5)=0</span>, so <span class="tex">\boldsymbol{x=\tfrac{3}{2}}</span> or <span class="tex">\boldsymbol{x=-\tfrac{5}{3}}</span>.</div></div></div>
+  </div>
+  <p class="u5l7-note">The formula always works. Here <span class="tex">b^2-4ac=361=19^2</span> is a <b>perfect square</b>, so the roots are rational and the equation could also be factored.</p>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. Zeros and x-Intercepts">
+  <h3 class="sub">Zeros of <span class="tex">y=ax^2+bx+c</span></h3>
+  <p>The <b>zeros</b> of <span class="tex">y=ax^2+bx+c</span> are the roots of <span class="tex">ax^2+bx+c=0</span>, and they are the <span class="tex">x</span>-coordinates of the <b><span class="tex">x</span>-intercepts</b> of its graph. When <span class="tex">b^2-4ac</span> is negative, there are no zeros: the parabola never meets the <span class="tex">x</span>-axis.</p>
+  <div class="explainer" data-explainer="zeros"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Zeros and x-intercepts</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine the zeros of <span class="tex">y=2x^2+6x-3</span>, exactly and to the nearest hundredth, and state the <span class="tex">x</span>-intercepts of its graph. Check with a graphing calculator: graph the function, then use <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd></span> (CALC), <b>2: zero</b>.</div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Solve <span class="tex">2x^2+6x-3=0</span>:<br><span class="tex">x=\dfrac{-6\pm\sqrt{36-4(2)(-3)}}{2(2)}=\dfrac{-6\pm\sqrt{60}}{4}=\dfrac{-6\pm2\sqrt{15}}{4}=\dfrac{-3\pm\sqrt{15}}{2}</span><br>Zeros: <span class="tex">\boldsymbol{\tfrac{-3+\sqrt{15}}{2}\approx0.44}</span> and <span class="tex">\boldsymbol{\tfrac{-3-\sqrt{15}}{2}\approx-3.44}</span>.<br><span class="tex">x</span>-intercepts about <span class="tex">(0.44,\ 0)</span> and <span class="tex">(-3.44,\ 0)</span>. The calculator's zero feature gives <span class="tex">x\approx0.436</span> and <span class="tex">x\approx-3.436</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) Show that <span class="tex">y=x^2-2x+6</span> has no zeros. What does this mean for its graph?</div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">b^2-4ac=(-2)^2-4(1)(6)=4-24=-20</span><br><span class="tex">x=\dfrac{2\pm\sqrt{-20}}{2}</span> is not a real number.<br>There are <b>no real roots</b>, so the parabola <b>never meets the <span class="tex">x</span>-axis</b> (it opens up with its vertex above the axis).</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check (a) with the zero feature.</b> <span class="tex">Y_1=2X^2+6X-3</span>, <span class="keys"><kbd>ZOOM</kbd><kbd>6</kbd></span>, then <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd><kbd>2</kbd></span>: a left bound, a right bound and a guess around each intercept (<span class="tex">0</span>, <span class="tex">1</span>, guess <span class="tex">0.5</span>; then <span class="tex">-4</span>, <span class="tex">-3</span>, guess <span class="tex">-3.5</span>).</div>
+    <div class="u5l7-pcol"><button class="pill" data-keys="Y= CLEAR 2 X x² + 6 X − 3 ZStandard zero 0 ENTER 1 ENTER .5 ENTER">Show the right zero</button><button class="pill" data-keys="Y= CLEAR 2 X x² + 6 X − 3 ZStandard zero (−) 4 ENTER (−) 3 ENTER (−) 3.5 ENTER">Show the left zero</button></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 7 · Questions 1–6</h2>
+  <p class="pr-t">Standard form, read <span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> with their signs, simplify the radical, and divide out the common factor.</p>
+  <div class="pr-chips n4"><span><b>1–2</b>Factor, then use the formula</span><span><b>3</b>Complete the square, check with the formula</span><span><b>4–5</b>Exact roots, then decimals</span><span><b>6</b>Zeros and <span class="tex">x</span>-intercepts</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u5l7">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 3. Errors ================= -->
+<section class="card" data-ink="s3" data-section="3. Finding and Correcting Errors">
+  <div class="sec-h"><span class="badge">3</span><h2>Finding and Correcting Errors</h2></div>
+  <div class="def">The most common mistakes with the formula: using <span class="tex">b</span> instead of <span class="tex">-b</span>; squaring a negative <span class="tex">b</span> without brackets; a sign error in <span class="tex">-4ac</span> when <span class="tex">a</span> or <span class="tex">c</span> is negative; dividing only <b>one term</b> of the numerator by <span class="tex">2a</span>; not putting the equation in <b>standard form</b> first.</div>
+  <div class="explainer" data-explainer="verdict"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Find the two errors</h3></div>
+  <div class="u5l7-ex5">
+    <p class="q">A student solved <span class="tex">2x^2-4x-3=0</span> as shown. Find the <b>two errors</b>, explain each one, and give the correct roots.</p>
+    <div class="u5l7-sw">
+      <div><span class="u5l7-swl">Line 1:</span> <span class="tex">x=\dfrac{-(-4)\pm\sqrt{-4^2-4(2)(-3)}}{2(2)}</span></div>
+      <div><span class="u5l7-swl">Line 2:</span> <span class="tex">x=\dfrac{4\pm\sqrt{-16+24}}{4}=\dfrac{4\pm\sqrt8}{4}</span></div>
+      <div><span class="u5l7-swl">Line 3:</span> <span class="tex">x=\dfrac{4\pm2\sqrt2}{4}</span></div>
+      <div><span class="u5l7-swl">Line 4:</span> <span class="tex">x=1\pm2\sqrt2</span></div>
+    </div>
+  </div>
+  <div class="part u5l7-solo"><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Error 1 (Lines 1–2):</b> <span class="tex">b^2=(-4)^2=16</span>, not <span class="tex">-16</span>. The discriminant is <span class="tex">16+24=40</span>.<br><b>Error 2 (Line 4):</b> only the <span class="tex">4</span> was divided by <span class="tex">4</span>; every term of the numerator must be divided: <span class="tex">\tfrac{4\pm2\sqrt2}{4}=\tfrac{2\pm\sqrt2}{2}</span>.<br><b>Correct:</b> <span class="tex">x=\dfrac{4\pm\sqrt{40}}{4}=\dfrac{4\pm2\sqrt{10}}{4}=\boldsymbol{\dfrac{2\pm\sqrt{10}}{2}}</span> &nbsp;(<span class="tex">x\approx2.58</span> or <span class="tex">x\approx-0.58</span>)</div></div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Choosing a method ================= -->
+<section class="card" data-ink="s4" data-section="4. Choosing a Method">
+  <div class="sec-h"><span class="badge">4</span><h2>Choosing a Method</h2></div>
+  <p>Every method gives the same roots; choose the one that is quickest for the equation in front of you.</p>
+  <table class="u5l7-mtab">
+    <tr><th>Method</th><th>Best when</th><th>Example</th></tr>
+    <tr><td><b>Factoring</b></td><td>the trinomial factors easily over the integers, or there is no constant term</td><td><span class="tex">x^2-3x-10=0</span>, &nbsp;<span class="tex">4x^2=9x</span></td></tr>
+    <tr><td><b>Square roots</b></td><td>there is no <span class="tex">x</span> term, or the equation is <span class="tex">a(x-p)^2+q=0</span></td><td><span class="tex">5x^2=20</span>, &nbsp;<span class="tex">(x-1)^2=7</span></td></tr>
+    <tr><td><b>Quadratic formula</b></td><td>it does not factor (or factoring is hard to see); it always works</td><td><span class="tex">3x^2+5x-1=0</span></td></tr>
+    <tr><td><b>Completing the square</b></td><td>you also want the vertex form; it always works, but takes longer</td><td><span class="tex">x^2+6x+2=0</span></td></tr>
+    <tr><td><b>Graphing (zero)</b></td><td>a decimal answer is enough, or to check an algebraic answer</td><td>any equation</td></tr>
+  </table>
+  <div class="explainer" data-explainer="race"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Choose a method</h3></div>
+  <p class="q">Choose an efficient method, name it, and solve. Give exact roots.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">5x^2-45=0</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Square roots:</b><br><span class="tex">x^2=9</span><br><span class="tex">\boldsymbol{x=\pm3}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">(x-3)^2=12</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Square roots:</b><br><span class="tex">x-3=\pm\sqrt{12}=\pm2\sqrt3</span><br><span class="tex">\boldsymbol{x=3\pm2\sqrt3}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">x^2-x-20=0</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Factoring:</b><br><span class="tex">(x-5)(x+4)=0</span><br><span class="tex">\boldsymbol{x=5}</span> or <span class="tex">\boldsymbol{x=-4}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">3x^2+5x-1=0</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Formula</b> (no factors of <span class="tex">-3</span> add to <span class="tex">5</span>):<br><span class="tex">x=\dfrac{-5\pm\sqrt{25+12}}{6}</span><br><span class="tex">\boldsymbol{=\dfrac{-5\pm\sqrt{37}}{6}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u5l7"></section>
+
+<!-- ================= 5. Rearranging first ================= -->
+<section class="card" data-ink="s5" data-section="5. Equations That Need Rearranging First">
+  <div class="sec-h"><span class="badge">5</span><h2>Equations That Need Rearranging First</h2></div>
+  <div class="def">The formula needs <b>standard form</b>. <b>Expand</b> and collect terms; clear fractions by multiplying every term by the <b>LCD</b>; divide out a <b>common factor</b> to make the numbers smaller. If the variable is in a denominator, state the restriction (e.g. <span class="tex">x\ne0</span>), multiply both sides by it, and check that no root breaks the restriction.</div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Standard form first</h3></div>
+  <p class="q">Write each equation in standard form, then solve. Give exact roots and roots to the nearest tenth.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">(2x+1)(x-3)=(x+2)(x-1)</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x^2-5x-3=x^2+x-2</span><br><span class="tex">x^2-6x-1=0</span><br><span class="tex">x=\dfrac{6\pm\sqrt{36+4}}{2}=\dfrac{6\pm2\sqrt{10}}{2}=\boldsymbol{3\pm\sqrt{10}}</span><br><span class="tex">x\approx6.2</span> or <span class="tex">x\approx-0.2</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x^2}{3}-\dfrac{x}{2}-1=0</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Multiply every term by <span class="tex">6</span>: <span class="tex">2x^2-3x-6=0</span><br><span class="tex">x=\dfrac{3\pm\sqrt{9+48}}{4}=\boldsymbol{\dfrac{3\pm\sqrt{57}}{4}}</span><br>(<span class="tex">57=3\times19</span> has no square factor.)<br><span class="tex">x\approx2.6</span> or <span class="tex">x\approx-1.1</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">3x-\dfrac{2}{x}=4,\ x\ne0</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Multiply by <span class="tex">x</span>: <span class="tex">3x^2-2=4x</span><br><span class="tex">3x^2-4x-2=0</span><br><span class="tex">x=\dfrac{4\pm\sqrt{16+24}}{6}=\dfrac{4\pm2\sqrt{10}}{6}=\boldsymbol{\dfrac{2\pm\sqrt{10}}{3}}</span><br><span class="tex">x\approx1.7</span> or <span class="tex">x\approx-0.4</span> (neither is <span class="tex">0</span>)</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">12x^2-36x=15</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">12x^2-36x-15=0</span>; divide by <span class="tex">3</span>: <span class="tex">4x^2-12x-5=0</span><br><span class="tex">x=\dfrac{12\pm\sqrt{144+80}}{8}=\dfrac{12\pm\sqrt{224}}{8}=\dfrac{12\pm4\sqrt{14}}{8}</span><br><span class="tex">\boldsymbol{=\dfrac{3\pm\sqrt{14}}{2}}</span><br><span class="tex">x\approx3.4</span> or <span class="tex">x\approx-0.4</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Problems ================= -->
+<section class="card" data-ink="s6" data-section="6. Problems Solved with the Formula">
+  <div class="sec-h"><span class="badge">6</span><h2>Problems Solved with the Formula</h2></div>
+  <div class="def">Set up the equation as in Unit 4, Lesson 5. When it does not factor, use the formula, then <b>reject inadmissible roots</b> (negative lengths or times) and round as the question asks.</div>
+  <div class="explainer" data-explainer="flight"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The formula in context</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) A ball is thrown upward. Its height after <span class="tex">t</span> seconds is <span class="tex">h=-4.9t^2+15t+2</span> metres. When does it hit the ground, to the nearest tenth of a second?</div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Ground: <span class="tex">h=0</span>. &nbsp;<span class="tex">-4.9t^2+15t+2=0</span><br><span class="tex">t=\dfrac{-15\pm\sqrt{225-4(-4.9)(2)}}{2(-4.9)}=\dfrac{-15\pm\sqrt{264.2}}{-9.8}</span><br><span class="tex">t=\dfrac{-15-16.254}{-9.8}\approx3.19</span> or <span class="tex">t=\dfrac{-15+16.254}{-9.8}\approx-0.13</span> (reject: before the throw)<br>It hits the ground after about <b>3.2 s</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) A rectangle is <span class="tex">6</span> cm longer than it is wide, and its area is <span class="tex">24\text{ cm}^2</span>. Determine its exact dimensions and exact perimeter, then give each to the nearest hundredth.</div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Width <span class="tex">w</span>, length <span class="tex">w+6</span>: &nbsp;<span class="tex">w(w+6)=24</span><br><span class="tex">w^2+6w-24=0</span><br><span class="tex">w=\dfrac{-6\pm\sqrt{36+96}}{2}=\dfrac{-6\pm2\sqrt{33}}{2}=-3\pm\sqrt{33}</span><br>Reject <span class="tex">-3-\sqrt{33}&lt;0</span>. Width <span class="tex">\boldsymbol{-3+\sqrt{33}\approx2.74}</span> cm, length <span class="tex">\boldsymbol{3+\sqrt{33}\approx8.74}</span> cm.<br>Perimeter <span class="tex">=2(-3+\sqrt{33}+3+\sqrt{33})=\boldsymbol{4\sqrt{33}\approx22.98}</span> cm.</div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>The formula.</b> <span class="tex">ax^2+bx+c=0</span> has roots <span class="tex">x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}</span>. The whole numerator is divided by <span class="tex">2a</span>.</div>
+    <div><b>Standard form, signs, brackets.</b> Rearrange first (expand, clear fractions, divide out a common factor). Read <span class="tex">a</span>, <span class="tex">b</span>, <span class="tex">c</span> with their signs; <span class="tex">(-3)^2=9</span>, but <span class="tex">-3^2=-9</span>.</div>
+    <div><b>Simplify.</b> <span class="tex">b^2-4ac</span> first: negative means no real roots. Simplify the radical, then divide a common factor out of <em>every</em> term. Decimals: each root separately, round at the end.</div>
+    <div><b>Choose and check.</b> No <span class="tex">x</span> term: square roots. Factors easily: factor. Otherwise: the formula. In a problem, reject negative lengths and times.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u5l7">
+    <div><div class="kicker">Your turn</div><b>Assignment 7 · Questions 7–17</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l8/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 8 — The Discriminant</b><div class="muted"><span class="tex">b^2-4ac</span> tells how many real roots there are before you solve.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u5l7.js';
+  boot({ key: 'u5l7', homeHref: '../../', title: '5.7 The Quadratic Formula' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

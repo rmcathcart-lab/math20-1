@@ -184,3 +184,17 @@ Explainer tip: the stage height is `ex.def.height` (there is no `ex.H`); width i
 MC options: everything after the letter is wrapped in `.bk-otxt` automatically, so words and math flow on one line.
 Rotating/sliding SVG groups: blocks.css gives `g` `transform-box: fill-box; transform-origin: center`; to rotate about a
 point with `rotate(θ cx cy)` set `style.transformBox = 'view-box'; style.transformOrigin = '0 0'` on that group.
+
+## Gotchas (from the Units 5–8 builders)
+- `fadeIn` / `pop` set the element's CSS `transform`, which wipes any `transform` attribute or translate/scale you set on it
+  (SVG `<g transform>` too). Position with left/top or wrap the content in an inner element.
+- `stamp(…, x, y)`: x and y are the stamp's CENTRE (it is shifted by −50%). The stamp CSS uppercases its text, so avoid
+  variable names and units (a, m²) in stamps.
+- A Graph placed near the top of a stage with a `ytitle` puts the title outside the stage: pass `pad: [30, 18, 18, 18]`.
+- Recolouring `fn()` after drawing leaves its arrowheads the old colour.
+- Never name a custom property `.slot` on a DOM element (`HTMLElement.slot` exists).
+- `COLORS.teal` is actually rose (#a33357); use your own hex for a real teal.
+- Calculator demos share Y= state across demos on a page: clear Y2… at the start of a demo that sets them.
+- Absolute values: KaTeX spaces `|-6|` as a subtraction ("| − 6|"). Write `\lvert -6\rvert` (or `\lvert…\rvert` always).
+- `anim()` commits its final keyframe, so a later `pulse`/`shake`/`pop` resets `transform`: place moving pieces with
+  left/top and animate transforms back to zero.

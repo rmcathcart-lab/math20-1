@@ -70,8 +70,11 @@
         out.push({ t: 'var', v: c }); i++; continue;
       }
       // a number expression: digits, -, ., \frac{}{}, ^, spaces inside
-      if ((m = /^(-\s*)?(\\frac\{[^{}]*\}\{[^{}]*\}|\\frac\d\d|\d+(\.\d+)?|\.\d+)(\s*\/\s*\d+)?/.exec(s.slice(i)))) {
-        var p = ex.parse(m[0].replace(/\s+/g, '')); if (!p.ok) return null;
+      // MathLive may write \frac{49}8 or \frac1{12} (single-digit groups without braces): accept every mix
+      if ((m = /^(-\s*)?(\\frac(?:\{[^{}]*\}|\d)(?:\{[^{}]*\}|\d)|\d+(\.\d+)?|\.\d+)(\s*\/\s*\d+)?/.exec(s.slice(i)))) {
+        var p = ex.parse(m[0].replace(/\s+/g, '').replace(/\\frac(\{[^{}]*\}|\d)(\{[^{}]*\}|\d)/, function (_, a, b) {
+          return '\\frac' + (a.charAt(0) === '{' ? a : '{' + a + '}') + (b.charAt(0) === '{' ? b : '{' + b + '}'); }));
+        if (!p.ok) return null;
         var v = ex.value(p.ast); if (!isFinite(v)) return null;
         out.push({ t: 'num', v: v }); i += m[0].length; continue;
       }
@@ -215,20 +218,23 @@
       return { ok: true, set: { kind: 'int', parts: merge(ps) }, form: 'interval', v: '' };
     }
     // a bare chain, possibly with ", x ∈ R"
-    var conds2 = splitCommas(toks), parts2 = ALL(), v2 = null, ns2 = null, tagged2 = false;
+    var conds2 = splitCommas(toks), parts2 = ALL(), v2 = null, ns2 = null, tagged2 = false, pts2 = [];
     for (var c2 = 0; c2 < conds2.length; c2++) {
       var cd2 = conds2[c2]; if (!cd2.length) continue;
       if (cd2.length === 3 && cd2[0].t === 'var' && cd2[1].t === 'in' && cd2[2].t === 'numset') { ns2 = cd2[2].v; tagged2 = true; if (v2 && v2 !== cd2[0].v) return { ok: false, why: 'var-mix' }; v2 = cd2[0].v; continue; }
       var ch2 = chainOr(cd2); if (!ch2) { if (cd2.every(function (k) { return k.t === 'num' || k.t === ','; })) return { ok: false, why: 'no-braces' }; return { ok: false, why: 'unreadable' }; }
       if (ch2.backwards) return { ok: false, why: 'backwards' };
       if (v2 && v2 !== ch2.v) return { ok: false, why: 'var-mix' }; v2 = ch2.v;
-      parts2 = intersect(parts2, ch2.parts);
+      pts2.push(ch2.parts); parts2 = intersect(parts2, ch2.parts);
     }
+    // "x = -1, x = 5": a comma between single values lists them (or), it does not intersect them
+    if (pts2.length > 1 && pts2.every(isPoint)) parts2 = [].concat.apply([], pts2);
     if (!v2) return { ok: false, why: conds2.length > 1 && toks.every(function (k) { return k.t === 'num' || k.t === ','; }) ? 'no-braces' : 'unreadable' };
     parts2 = merge(parts2);
     if (ns2 && ns2 !== 'R') { var dv2 = discretize(parts2, ns2); if (!dv2) return { ok: false, why: 'unbounded-discrete' }; return { ok: true, set: { kind: 'list', vals: dv2 }, form: 'ineq', v: v2, tagged: true }; }
     return { ok: true, set: { kind: 'int', parts: parts2 }, form: 'ineq', v: v2, tagged: tagged2 };
   }
+  function isPoint(ps) { return ps.length === 1 && ps[0].lo === ps[0].hi; }
   function uniq(a) { var s = a.slice().sort(function (x, y) { return x - y; }); return s.filter(function (x, i) { return i === 0 || Math.abs(x - s[i - 1]) > 1e-9; }); }
   function feq(a, b) { return a === b || Math.abs(a - b) < 1e-9; }
   function canon(set) { // single points of an interval set -> list when all parts are points

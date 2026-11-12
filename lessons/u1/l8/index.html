@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u1l8.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u1l8">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Two Truths and a Lie">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="90" y="46" font-size="40" text-anchor="middle">😇</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/><text x="170" y="46" font-size="40" text-anchor="middle">😇</text></g><g><animateTransform attributeName="transform" type="rotate" values="-12 250 46;12 250 46;-12 250 46" dur="2.2s" repeatCount="indefinite"/><text x="250" y="46" font-size="44" text-anchor="middle">🤥</text></g><g><animateTransform attributeName="transform" type="rotate" values="0 312 30;360 312 30" dur="5s" repeatCount="indefinite"/><text x="312" y="30" font-size="28" text-anchor="middle" dominant-baseline="central">🌀</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Two Truths and a Lie</h2>
+  <p class="wf-rule vw-rule">Two of these are true. One is a lie. Which one?</p></div>
+  <div class="vw-tiles" style="--n:3;--fs:25px"><div style="padding-top:34px"><b>A</b><span>Keep adding <span class="tex">\tfrac12+\tfrac14+\tfrac18+\tfrac1{16}+\cdots</span> forever. The total never gets past <b>1</b>.</span></div><div style="padding-top:34px"><b>B</b><span>Keep adding <span class="tex">1+\tfrac12+\tfrac13+\tfrac14+\cdots</span> forever. The total never gets past <b>100</b>.</span></div><div style="padding-top:34px"><b>C</b><span><span class="tex">0.999\ldots</span> (nines that go on forever) is exactly equal to <b>1</b>.</span></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Which one is the lie? How sure are you?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>B is the lie!</b> Its total grows forever, just very slowly: <span class="tex">\tfrac13+\tfrac14</span> is more than <span class="tex">\tfrac12</span>, the next four terms are more than <span class="tex">\tfrac12</span>, the next eight are more than <span class="tex">\tfrac12</span>, and so on: another half, again and again. (It passes 100 only after about <span class="tex">10^{43}</span> terms.) <b>A</b> is true: each piece fills half of the gap that is left, so it never gets past 1. <b>C</b> is true too: <span class="tex">\tfrac13=0.333\ldots</span>, so <span class="tex">3\times\tfrac13=0.999\ldots</span>, and that is 1.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -42,41 +53,6 @@
     </ul>
   </div>
   <div class="outcome"><b>RF10</b> Analyze geometric sequences and series to solve problems.<br><span class="muted">Today: infinite geometric series, convergence and the sum to infinity <span class="tex">S_\infty</span>.</span></div>
-</section>
-
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Last Piece" id="wu" style="--wf-side: 400px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Last Piece</h2>
-  <p class="wf-rule"><b class="u1l8-fa">Ava</b>, <b class="u1l8-fb">Ben</b> and <b class="u1l8-fc">Cy</b> share a square chocolate bar. Each round, the piece that is left is cut into <b>4 equal pieces</b>: each friend takes one, and the 4th piece is left for the next round.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u1l8-choc" id="u1l8-choc"></div>
-    <div class="u1l8-wbtns">
-      <button type="button" class="pill" id="u1l8-share">Share a round</button>
-      <button type="button" class="pill" id="u1l8-share5">Five more rounds</button>
-      <button type="button" class="pill" id="u1l8-wreset">Start over</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u1l8-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>After round 1, what fraction of the bar does Ava have? How much is left? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l8-wa"><div class="bk-ans">Ava has <span class="tex">\tfrac14</span> of the bar, and <span class="tex">\tfrac14</span> is left.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>After round 2, how much does Ava have now? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l8-wa"><div class="bk-ans">The leftover <span class="tex">\tfrac14</span> is cut in 4, so each new piece is <span class="tex">\tfrac1{16}</span>. Ava: <span class="tex">\tfrac14+\tfrac1{16}=\tfrac5{16}</span>. Left: <span class="tex">\tfrac1{16}</span>.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>How much is left after round 3? After round 10? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l8-wa"><div class="bk-ans">Round 3: <span class="tex">\tfrac1{64}</span>. Each round leaves a quarter of the last leftover, so round 10 leaves <span class="tex">\left(\tfrac14\right)^{10}</span>: about one millionth of the bar.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> They keep sharing <b>forever</b>. In the end, how much of the bar does Ava get? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> <span class="tex">\tfrac14</span></div>
-        <div class="opt"><b>B</b> <span class="tex">\tfrac{5}{16}</span></div>
-        <div class="opt right"><b>C</b> <span class="tex">\tfrac13</span></div>
-        <div class="opt"><b>D</b> infinitely much</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>C, exactly <span class="tex">\tfrac13</span>.</b> Every round is fair, so the three friends always have <b>equal</b> amounts, and the leftover shrinks to nothing. The whole bar ends up split three ways:<br><span class="tex">\tfrac14+\tfrac1{16}+\tfrac1{64}+\dots=\tfrac13</span><br><span class="muted">Infinitely many pieces, but a <b>finite</b> total. Today: how to find totals like this.</span></div>
-    </div>
-  </div></div>
-  <p class="u1l8-social">Challenge your neighbour: <b>4 friends</b> share by cutting the leftover into <b>5</b> pieces each round. What does each one get?</p>
 </section>
 
 <!-- ================= 1. Partial sums ================= -->
@@ -116,12 +92,6 @@
   <button class="more" data-more="ex1-space">+ More space</button>
 </section>
 
-<section class="card" data-ink="s1b" data-section="1. Watching partial sums">
-  <h3 class="sub">Settle down, or run away?</h3>
-  <p>Plot the points <span class="tex">(n,\ S_n)</span>. A convergent series levels off at a line; a divergent one runs off the grid or never settles.</p>
-  <div class="explainer" data-explainer="partials"></div>
-</section>
-
 <!-- ================= 2. Sum to infinity ================= -->
 <section class="card" data-ink="s2" data-section="2. The Sum to Infinity">
   <div class="sec-h"><span class="badge">2</span><h2>The Sum to Infinity of a Geometric Series</h2></div>
@@ -134,7 +104,6 @@
     <tr><td><span class="tex">-1.5</span></td><td><span class="tex">-7.5938</span></td><td><span class="tex">3\,325.26</span></td><td>about 638 million</td><td class="u1l8-tl">grows in size, sign keeps switching</td></tr>
   </table>
   <p>Write the Lesson 7 formula as <span class="tex">S_n=\dfrac{t_1(1-r^n)}{1-r}</span> (multiply its top and bottom by <span class="tex">-1</span>). When <span class="tex">-1&lt;r&lt;1</span>, <span class="tex">r^n</span> shrinks to 0, so <span class="tex">S_n</span> gets closer and closer to <span class="tex">\dfrac{t_1(1-0)}{1-r}</span>.</p>
-  <div class="explainer" data-explainer="powers"></div>
   <div class="def u1l8-key"><div class="u1l8-keyh">Infinite geometric series</div>
     <div class="u1l8-keyg"><div>If <span class="tex">-1&lt;r&lt;1</span>, the series is <b>convergent</b> and</div><div class="u1l8-keyf"><span class="tex">S_\infty=\dfrac{\textcolor{#0f7c80}{t_1}}{1-\textcolor{#c27a0e}{r}}</span></div></div>
     <div>If <span class="tex">r\le -1</span> or <span class="tex">r\ge 1</span>, the series is <b>divergent</b> and has no sum to infinity. <span class="muted">(For <span class="tex">r=1</span> the partial sums <span class="tex">t_1,\ 2t_1,\ 3t_1,\ \dots</span> grow; for <span class="tex">r=-1</span> they jump between <span class="tex">t_1</span> and <span class="tex">0</span>.)</span></div></div>
@@ -173,16 +142,23 @@
     <div><b>On the TI-84.</b> Brackets around the top and the bottom: <span class="keys"><kbd>4</kbd><kbd>0</kbd><kbd>×</kbd><kbd>(</kbd><kbd>1</kbd><kbd>−</kbd><kbd>.</kbd><kbd>7</kbd><kbd>5</kbd><kbd>^</kbd><kbd>1</kbd><kbd>0</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(</kbd><kbd>1</kbd><kbd>−</kbd><kbd>.</kbd><kbd>7</kbd><kbd>5</kbd><kbd>)</kbd><kbd>ENTER</kbd></span>. For (c), make a table of values of the gap <span class="tex">160(0.75)^n</span>: <span class="keys"><kbd>Y=</kbd></span> <span class="tex">Y_1=160\times0.75^X</span>, <span class="keys"><kbd>2nd</kbd><kbd>TBLSET</kbd></span> TblStart = 15, ΔTbl = 1, then <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>. The gap is first below 1 at <span class="tex">X=18</span>.</div>
     <div class="u1l8-pcol"><button class="pill" data-keys="40 × ( 1 − .75 ^ 10 ) ÷ ( 1 − .75 ) =">Show S₁₀</button><button class="pill" data-keys="Y= CLEAR 160 × .75 ^ X TBLSET 15 ENTER 1 ENTER TABLE ► ▼ ▼ ▼">Table of the gap</button><button class="pill" data-keys="160 × .75 ^ 18 =">Gap at n = 18</button></div>
   </div>
-  <div class="explainer" data-explainer="gap"></div>
   <div class="space" id="ex3-space"></div>
   <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–4">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 8 · Questions 1–4</h2>
+  <p class="pr-t">Partial sums, convergent or divergent, and the sum to infinity.</p>
+  <div class="pr-chips n3"><span><b>1–2</b>Partial sums</span><span><b>3</b>Convergent or divergent?</span><span><b>4</b>How close is close?</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has finished Question 3.</span><a class="pill" href="../../../#/lesson/u1l8">Open the Practice site</a></div>
 </section>
 
 <!-- ================= 3. Finding t1 or r ================= -->
 <section class="card" data-ink="s3" data-section="3. Finding t1 or r">
   <div class="sec-h"><span class="badge">3</span><h2>Finding <span class="tex">t_1</span> or <span class="tex">r</span></h2></div>
   <div class="def">Substitute what you know into <span class="tex">S_\infty=\dfrac{t_1}{1-r}</span> and solve. Any value of <span class="tex">r</span> you find must satisfy <span class="tex">-1&lt;r&lt;1</span>, or the series has no sum.</div>
-  <div class="explainer" data-explainer="solve"></div>
 </section>
 
 <section class="card example" data-ink="ex4" data-section="Example 4">
@@ -258,7 +234,6 @@
     <div><b>Check (a) and (b).</b> <span class="keys"><kbd>1</kbd><kbd>2</kbd><kbd>0</kbd><kbd>0</kbd><kbd>0</kbd><kbd>×</kbd><kbd>.</kbd><kbd>8</kbd><kbd>5</kbd><kbd>^</kbd><kbd>4</kbd><kbd>ENTER</kbd></span> for week 5 (the exponent is <span class="tex">n-1=4</span>), then the sum formula with brackets for <span class="tex">S_{10}</span>.</div>
     <div class="u1l8-pcol"><button class="pill" data-keys="12000 × .85 ^ 4 =">Show t₅</button><button class="pill" data-keys="12000 × ( 1 − .85 ^ 10 ) ÷ ( 1 − .85 ) =">Show S₁₀</button></div>
   </div>
-  <div class="explainer" data-explainer="ceiling"></div>
   <div class="space" id="ex7-space"></div>
   <button class="more" data-more="ex7-space">+ More space</button>
 </section>
@@ -294,7 +269,7 @@
     <div><b>Totals over all time.</b> A bouncing ball goes down <b>and</b> up: add two series. With a variable ratio, solve <span class="tex">-1&lt;r&lt;1</span> for <span class="tex">x</span>, doing the same thing to all three parts.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u1l8">
-    <div><div class="kicker">Your turn</div><b>Assignment 8 — Infinite Geometric Series</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 8 · Questions 5–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l9/">
     <div><div class="kicker">Next lesson</div><b>Lesson 9 — Unit 1 Review</b><div class="muted">Arithmetic and geometric sequences and series, all together: which one is it, and which formula fits?</div></div><span class="arrow">→</span>

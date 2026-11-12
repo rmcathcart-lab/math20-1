@@ -1,21 +1,15 @@
 /* Math 20-1 · Unit 3 · Lesson 6 — The Cosine Law.
- * Warm-up (The Snapping Crocodile: jaws of 30 cm and 40 cm hinged together; the gap between the tips at 0°, 90° and,
- * the big one, 60° — not 50 cm, because Pythagoras only works at 90°), and the explainers:
+ * The warm-up (Clyde's Big Bite) is plain markup with an SVG picture (tools/newformat/specs/u3l6.py). Explainers:
  *   cases (Example 1: mark the three known parts, then look for a known pair ∠A & a, ∠B & b, ∠C & c; SAS and SSS have none),
- *   alt (Example 2: drop the altitude, h = b sin A, AD = b cos A, DB = c − AD, then Pythagoras; plus a demo triangle),
- *   derive (the proof with letters: x = b cos A, h² + x² = b², a² = h² + (c − x)², expand, regroup, substitute),
- *   forms (which letters go where: pick the side, the angle opposite it, the two sides that form it; Example 6's y² form),
  *   pythag (STAR: "Pythagoras with a correction": sides a and b fixed with a hinge at C; as C opens from 60° through 90° to
  *     130°, side c stretches, squares on the three sides show c² against a² + b², and the −2ab cos C bar changes sign at
  *     90°; a slider for any angle; Example 4(c) check: 3, 5, 120° gives 49),
  *   side (SAS, Example 4(a), (b), (c) checks, and "The order trap": multiply first gives 8.7, subtract first gives an
  *     impossible 3.4),
  *   angle (solving the law for cos A; Example 5(a) and 5(b) checks: the subtracted side, the sign of the cosine),
- *   dial (cos θ as the x-coordinate on a half circle: one angle for each cosine; sine has two; Example 5 values),
  *   solve (Example 6: cosine law, then the sine law for the smaller angle, then the angle sum, checked; and why the
  *     smaller angle: the sine law gives 58° for an angle that is really 122°),
- *   boats (Example 7: bearings N25°E and S60°E, the angle between them, the cosine law; a demo N40°E / S10°W),
- *   para (Example 8: both diagonals of a parallelogram from 62° and 118°; a rectangle check at 90°).
+ *   boats (Example 7: bearings N25°E and S60°E, the angle between them, the cosine law; a demo N50°W / S20°W).
  * Colours (kept through the unit's sine/cosine law lessons): the angle in the law and the side opposite it rose (the course
  * accent), the two sides that form the angle blue, the correction term −2ab cos C and the altitude h amber, acute green,
  * obtuse purple, impossible red. */
@@ -125,80 +119,6 @@ const sasPts = (ang, lp, lq) => ({ V: [0, 0], P: [lp, 0], Q: [lq * cosD(ang), lq
 const sssC = (a, b, c) => { const x = (b * b + c * c - a * a) / (2 * c); return [x, Math.sqrt(Math.max(0, b * b - x * x))]; };
 
 /* ====================================================================================================
- * Warm-up: The Snapping Crocodile. Lower jaw 30 cm (fixed), upper jaw 40 cm hinged to it; the gap between the tips.
- * ==================================================================================================== */
-function mountCroc() {
-  const host = document.getElementById('u3l6-croc'); if (!host) return;
-  const W = 560, H = 340, S = 6.1, HX = 150, HY = 286, LL = 30 * S, LU = 40 * S;
-  const svg = svgEl('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, class: 'u3l6-crocsvg' }, host);
-  const ov = add(host, h('div', 'u3l6-ov'));
-  const defs = svgEl('defs', {}, svg), cp = svgEl('clipPath', { id: 'u3l6-cclip' }, defs); svgEl('rect', { x: 0, y: 0, width: W, height: H, rx: 14 }, cp);
-  const root = svgEl('g', { 'clip-path': 'url(#u3l6-cclip)' }, svg);
-  svgEl('rect', { x: 0, y: 0, width: W, height: H, fill: '#d6edf3' }, root);
-  for (let i = 0; i < 9; i++) { const y = 30 + i * 34, x = (i * 131) % 460 + 20; svgEl('path', { d: `M${x} ${y} q10 -6 20 0 t20 0`, fill: 'none', stroke: '#a9d3df', 'stroke-width': 2.5, 'stroke-linecap': 'round' }, root); }
-  svgEl('rect', { x: 0, y: HY + 26, width: W, height: H - HY, fill: '#9cc9d6' }, root);
-  for (let x = 470; x < W; x += 16) svgEl('path', { d: `M${x} ${H} q${4 + (x % 5)} -60 ${-2 + (x % 7)} -${110 + (x % 40)}`, fill: 'none', stroke: '#5f9a4a', 'stroke-width': 4, 'stroke-linecap': 'round' }, root);
-  const GRN = '#5d8f3c', DRK = '#3f6b28';
-  const mouth = svgEl('polygon', { points: '0,0', fill: '#e58f8f', 'fill-opacity': 0.85 }, root);
-  // lower jaw (fixed), teeth pointing up
-  const lower = svgEl('g', { transform: `translate(${HX} ${HY})` }, root);
-  for (let x = 26; x < LL - 6; x += 15) svgEl('polygon', { points: `${x},3 ${x + 7},3 ${x + 3.5},-6`, fill: '#fffdf4', stroke: '#c9c2a8', 'stroke-width': 1 }, lower);
-  svgEl('path', { d: `M-34 26 L-30 3 L${LL} 3 Q${LL + 8} 6 ${LL + 4} 14 L${LL - 18} 22 Q${LL / 2} 30 -34 26 Z`, fill: GRN, stroke: DRK, 'stroke-width': 2.5, 'stroke-linejoin': 'round' }, lower);
-  svgEl('path', { d: `M10 16 Q${LL / 2} 22 ${LL - 24} 16`, fill: 'none', stroke: '#c8d88a', 'stroke-width': 5, 'stroke-linecap': 'round' }, lower);
-  // upper jaw (rotates about the hinge), teeth pointing down
-  const upper = svgEl('g', {}, root);
-  for (let x = 30; x < LU - 6; x += 15) svgEl('polygon', { points: `${x},-3 ${x + 7},-3 ${x + 3.5},6`, fill: '#fffdf4', stroke: '#c9c2a8', 'stroke-width': 1 }, upper);
-  svgEl('path', { d: `M-30 4 L0 -3 L${LU} -3 Q${LU + 10} -6 ${LU + 6} -16 Q${LU - 4} -24 ${LU - 18} -20 L60 -30 Q20 -36 -30 -34 Z`, fill: GRN, stroke: DRK, 'stroke-width': 2.5, 'stroke-linejoin': 'round' }, upper);
-  svgEl('ellipse', { cx: LU - 6, cy: -17, rx: 6, ry: 4, fill: DRK }, upper);
-  for (let x = 70; x < LU - 30; x += 26) svgEl('circle', { cx: x, cy: -20, r: 3, fill: DRK, 'fill-opacity': 0.5 }, upper);
-  // head and body (fixed, on top of the hinge)
-  const body = svgEl('g', {}, root);
-  svgEl('path', { d: `M-20 ${HY + 30} L-20 ${HY - 40} Q40 ${HY - 66} ${HX - 10} ${HY - 40} Q${HX + 34} ${HY - 22} ${HX + 26} ${HY + 4} Q${HX + 14} ${HY + 32} ${HX - 20} ${HY + 30} Z`, fill: GRN, stroke: DRK, 'stroke-width': 2.5, 'stroke-linejoin': 'round' }, body);
-  for (let x = 6; x < HX - 30; x += 22) svgEl('path', { d: `M${x} ${HY - 46 - (x > 60 ? 4 : 0)} l8 -12 l8 12`, fill: DRK, stroke: DRK, 'stroke-width': 2, 'stroke-linejoin': 'round' }, body);
-  svgEl('ellipse', { cx: HX - 18, cy: HY - 46, rx: 19, ry: 15, fill: GRN, stroke: DRK, 'stroke-width': 2.5 }, body);
-  svgEl('circle', { cx: HX - 15, cy: HY - 49, r: 9, fill: '#fff8c6', stroke: DRK, 'stroke-width': 1.5 }, body);
-  svgEl('ellipse', { cx: HX - 13, cy: HY - 49, rx: 2.6, ry: 7, fill: '#1c2230' }, body);
-  svgEl('path', { d: `M${HX - 40} ${HY + 8} Q${HX - 10} ${HY + 20} ${HX + 16} ${HY + 6}`, fill: 'none', stroke: '#c8d88a', 'stroke-width': 6, 'stroke-linecap': 'round' }, body);
-  // measurements
-  const top = svgEl('g', {}, svg);
-  const gap = svgEl('line', { stroke: AC, 'stroke-width': 4, 'stroke-dasharray': '9 7', 'stroke-linecap': 'round' }, top);
-  const tipL = svgEl('circle', { r: 6, fill: AC, stroke: '#fff', 'stroke-width': 2 }, top), tipU = svgEl('circle', { r: 6, fill: AC, stroke: '#fff', 'stroke-width': 2 }, top);
-  let arcEl = null;
-  const lLow = lab(ov, '30 cm', HX + LL / 2, HY + 30, 's', 'u3l6-ctag u3l6-ctag-b', 2);
-  const lUp = lab(ov, '40 cm', 0, 0, 'n', 'u3l6-ctag u3l6-ctag-b', 2);
-  const lAng = lab(ov, '', 0, 0, 'c', 'u3l6-ctag u3l6-ctag-a');
-  const lGap = lab(ov, '', 0, 0, 'ne', 'u3l6-ctag u3l6-ctag-g', 6);
-  let revealed = false, cur = 0;
-  const set = (th) => {
-    cur = th;
-    upper.setAttribute('transform', `translate(${HX} ${HY}) rotate(${-th})`);
-    const LT = [HX + LL, HY], UT = [HX + LU * cosD(th), HY - LU * sinD(th)];
-    mouth.setAttribute('points', ptsAttr([[HX, HY], LT, UT]));
-    setLn(gap, LT, UT); tipL.setAttribute('cx', LT[0]); tipL.setAttribute('cy', LT[1]); tipU.setAttribute('cx', UT[0]); tipU.setAttribute('cy', UT[1]);
-    if (arcEl) arcEl.remove(); arcEl = null;
-    if (th > 3) { arcEl = angleArc(top, [HX, HY], LT, UT, 46, { color: AC, width: 3.5 }); }
-    vis(lAng, th > 3); place(lAng, HX + 72 * cosD(th / 2), HY - 72 * sinD(th / 2), 'c'); lAng.textContent = Math.round(th) + '°';
-    const um = [HX + (LU / 2) * cosD(th), HY - (LU / 2) * sinD(th)];
-    place(lUp, um[0] - 30 * sinD(th), um[1] - 30 * cosD(th), 'c');
-    const gl = Math.sqrt(900 + 1600 - 2400 * cosD(th));
-    const gm = [(LT[0] + UT[0]) / 2, (LT[1] + UT[1]) / 2];
-    lGap.innerHTML = 'gap ' + (revealed ? (Math.abs(gl - Math.round(gl)) < 0.05 ? Math.round(gl) : fx(gl, 1)) + ' cm' : '?');
-    place(lGap, gm[0] + 6, gm[1] - (th < 8 ? 18 : 6), th < 8 ? 'n' : 'ne', 6);
-  };
-  set(0);
-  const btns = [...document.querySelectorAll('#wu [data-open]')];
-  let job = 0;
-  btns.forEach((b) => b.addEventListener('click', () => {
-    btns.forEach((x) => x.classList.toggle('on', x === b));
-    const th1 = +b.dataset.open, th0 = cur, my = ++job;
-    tween(liveCtx(), 700, (t) => { if (my !== job) return false; set(th0 + (th1 - th0) * t); });
-  }));
-  // the real numbers appear once the big one is revealed (they would give it away)
-  const rv = document.querySelector('#u3l6-poll [data-poll-reveal]');
-  if (rv) rv.addEventListener('click', () => { revealed = true; set(cur); });
-}
-
-/* ====================================================================================================
  * explainer: can the sine law start? (Example 1)
  * ==================================================================================================== */
 const CS = {
@@ -258,139 +178,6 @@ const cases = {
     steps.push({ cap: d.pair ? `The pair ${T(`(\\angle ${d.pair},\\ ${d.pair.toLowerCase()})`)} gets the sine law started: ${T(`\\dfrac{\\sin ${d.pair}}{${d.pair.toLowerCase()}}`)} is known.` : `<b>${d.kind}</b>: no angle comes with its opposite side, so every sine-law ratio has two unknowns. Today’s tool: the <b>cosine law</b>.`,
       run: async (c) => { if (prev) prev.style.opacity = 0; if (d.pair) await appear(c, halo[d.pair], 250); await show(c, verdict); await stampIn(c, st); } });
     return steps;
-  }
-};
-
-/* ====================================================================================================
- * explainer: Example 2, right triangles only
- * ==================================================================================================== */
-const AL = {
-  ex2: { label: 'Example 2 check', A: 42, b: 9, c: 13, sb: '9.0', sc: '13.0' },
-  demo: { label: '∠A = 65°, AC = 7.0, AB = 10.0', A: 65, b: 7, c: 10, sb: '7.0', sc: '10.0' }
-};
-const alt = {
-  title: 'Splitting a SAS triangle into right triangles',
-  height: 392, minW: 940,
-  choices: [{ v: 'ex2', label: AL.ex2.label }, { v: 'demo', label: AL.demo.label }],
-  ask: (v) => { const d = AL[v]; return `${T(`\\angle A=${d.A}^\\circ`)}, ${T(`AC=${d.sb}`)} cm, ${T(`AB=${d.sc}`)} cm. Find ${T('BC')} with right triangles only.`; },
-  make(stage, v, ex) {
-    const d = AL[v], W = ex.W, A = d.A;
-    const hh = +fx(d.b * sinD(A), 3), x = +fx(d.b * cosD(A), 3), rest = +fx(d.c - x, 3), bc = Math.sqrt(hh * hh + rest * rest);
-    const F = new TriFig(stage, { x: 0, y: 0, w: 520, h: 388, pts: { A: [0, 0], B: [d.c, 0], C: [d.b * cosD(A), d.b * sinD(A)], D: [d.b * cosD(A), 0] }, pad: [44, 40, 92, 40] });
-    const fL = hide(F.fill(['A', 'C', 'D'], HC, 0.14)), fR = hide(F.fill(['B', 'C', 'D'], G2, 0.12));
-    F.seg('A', 'C', BC, 4.5); F.seg('A', 'B', BC, 4.5);
-    const bcD = F.seg('B', 'C', AC, 4, '9 7'), bcS = hide(F.seg('B', 'C', AC, 5));
-    F.arc('A', AC, 34); F.angLab('A', T(cA(`${A}^\\circ`)), 34, 'u3l6-lab-ang');
-    ['A', 'B', 'C'].forEach((k) => F.vlab(k));
-    F.sideLab('A', 'C', T(cB(`${d.sb}\\text{ cm}`)), 'u3l6-lab-b');
-    const lAB = F.sideLab('A', 'B', T(cB(`${d.sc}\\text{ cm}`)), 'u3l6-lab-b', { t: 0.8 });
-    const lBCq = F.sideLab('B', 'C', `${T('BC')}<span class="u3l6-q">?</span>`, 'u3l6-lab-a');
-    const lBC = hide(F.sideLab('B', 'C', T(cA(`\\approx${fx(bc, 1)}\\text{ cm}`)), 'u3l6-lab-a'));
-    const alt = hide(F.seg('C', 'D', HC, 3.5, '8 6')), rm = hide(F.rmark('D', 'B', 'C'));
-    const lD = hide(lab(F.ov, T('D'), F.V.D[0], F.V.D[1] + 4, 's', 'u3l6-vx', 4));
-    const lh = hide(lab(F.ov, T(cH('h')), F.V.D[0] + 6, (F.V.C[1] + F.V.D[1]) / 2, 'e', 'u3l6-lab-h', 4));
-    const dA = F.dim('A', 'D', 46, T(c2(`${fx(x, 3)}`)), G2), dB = F.dim('D', 'B', 46, T(c2(`${fx(rest, 3)}`)), G2);
-    [dA.g, dA.l, dB.g, dB.l].forEach(hide);
-    const pn = panel(stage, 534, 8, W - 542, 374, 'Right triangles only');
-    const L0 = lineIn(pn, `${T(`\\angle A=${A}^\\circ`)}, ${T(`AC=${d.sb}`)}, ${T(`AB=${d.sc}`)}: SAS, no known pair.`, 'u3l6-line-sm');
-    const L1 = lineIn(pn, `${T('\\triangle ACD')}: ${T(`${cH('h')}=${d.sb}\\sin${A}^\\circ\\approx${fx(hh, 3)}`)}`);
-    const L2 = lineIn(pn, T(`${c2('AD')}=${d.sb}\\cos${A}^\\circ\\approx${fx(x, 3)}`));
-    const L3 = lineIn(pn, T(`${c2('DB')}=${d.sc}-${fx(x, 3)}\\approx${fx(rest, 3)}`));
-    const L4 = lineIn(pn, `${T('\\triangle BCD')}: ${T(`BC=\\sqrt{${fx(hh, 3)}^2+${fx(rest, 3)}^2}`)}`);
-    const L5 = lineIn(pn, `${T(cA(`BC\\approx${fx(bc, 1)}`))} <b>cm</b>`, 'u3l6-line-ans');
-    return [
-      { cap: `${T(`\\angle A=${A}^\\circ`)} is between ${T(`AC=${d.sb}`)} and ${T(`AB=${d.sc}`)}: SAS. Find ${T('BC')} using <b>right triangles only</b>.`, run: (c) => show(c, L0) },
-      { cap: `Drop the <b>altitude</b> ${T('CD')} from ${T('C')} to ${T('AB')}. It makes two right triangles.`, run: async (c) => { await drawOn(c, alt, 500); await Promise.all([show(c, rm), show(c, lD), show(c, lh)]); } },
-      { cap: `In ${T('\\triangle ACD')}, ${T(cB(d.sb))} is the hypotenuse: ${T(`h=${d.sb}\\sin${A}^\\circ\\approx${fx(hh, 3)}`)} cm.`, run: async (c) => { await appear(c, fL, 300); await show(c, L1); } },
-      { cap: `And ${T(`AD=${d.sb}\\cos${A}^\\circ\\approx${fx(x, 3)}`)} cm.`, run: async (c) => { lAB.style.opacity = 0; await Promise.all([appear(c, dA.g, 300), show(c, dA.l)]); await show(c, L2); } },
-      { cap: `The rest of ${T('AB')}: ${T(`DB=${d.sc}-${fx(x, 3)}\\approx${fx(rest, 3)}`)} cm.`, run: async (c) => { await Promise.all([appear(c, dB.g, 300), show(c, dB.l)]); await appear(c, fR, 300); await show(c, L3); } },
-      { cap: `${T('\\triangle BCD')} has legs ${T('h')} and ${T('DB')}. Pythagoras: ${T(`BC=\\sqrt{${fx(hh, 3)}^2+${fx(rest, 3)}^2}\\approx${fx(bc, 1)}`)} cm.`, run: async (c) => { await show(c, L4); bcD.style.opacity = 0; lBCq.style.opacity = 0; await drawOn(c, bcS, 400); await show(c, lBC); await show(c, L5); } },
-      { cap: `It works, but it takes four steps. Next: do the same steps <b>once, with letters</b>, and get one formula.`, run: (c) => pulse(c, pn, 1.02) }
-    ];
-  }
-};
-
-/* ====================================================================================================
- * explainer: the proof with letters
- * ==================================================================================================== */
-const derive = {
-  title: 'Where the cosine law comes from',
-  height: 404, minW: 940,
-  ask: `Prove that ${T('a^2=b^2+c^2-2bc\\cos A')} in any ${T('\\triangle ABC')}.`,
-  make(stage, v, ex) {
-    const W = ex.W;
-    const F = new TriFig(stage, { x: 0, y: 0, w: 450, h: 400, pts: { A: [0, 0], B: [4, 0], C: [1.6, 2.2], D: [1.6, 0] }, pad: [40, 40, 96, 40] });
-    const fL = hide(F.fill(['A', 'C', 'D'], HC, 0.16)), fR = hide(F.fill(['B', 'C', 'D'], G2, 0.13));
-    F.seg('A', 'C', BC, 4.5); F.seg('A', 'B', BC, 4.5); F.seg('B', 'C', AC, 4.5);
-    F.arc('A', AC, 30); F.angLab('A', T(cA('A')), 30, 'u3l6-lab-ang');
-    ['A', 'B', 'C'].forEach((k) => F.vlab(k));
-    F.sideLab('A', 'C', T(cB('b')), 'u3l6-lab-b'); F.sideLab('B', 'C', T(cA('a')), 'u3l6-lab-a');
-    const lc = F.sideLab('A', 'B', T(cB('c')), 'u3l6-lab-b', { gap: 10 });
-    const altS = hide(F.seg('C', 'D', HC, 3.5, '8 6')), rm = hide(F.rmark('D', 'B', 'C'));
-    const lD = hide(lab(F.ov, T('D'), F.V.D[0], F.V.D[1] + 4, 's', 'u3l6-vx', 4));
-    const lh = hide(lab(F.ov, T(cH('h')), F.V.D[0] + 6, (F.V.C[1] + F.V.D[1]) / 2, 'e', 'u3l6-lab-h', 4));
-    const dA = F.dim('A', 'D', 50, T(c2('x')), G2), dB = F.dim('D', 'B', 50, T(c2('c-x')), G2);
-    [dA.g, dA.l, dB.g, dB.l].forEach(hide);
-    const pn = panel(stage, 462, 6, W - 470, 392, 'The proof');
-    const X = c2('x'), Hh = cH('h');
-    const L = [
-      lineIn(pn, `${T('\\triangle ACD')}: ${T(`\\cos A=\\dfrac{${X}}{b}\\ \\Rightarrow\\ ${X}=b\\cos A`)}`),
-      lineIn(pn, T(`${Hh}^2+${X}^2=b^2`), 'u3l6-line-sm'),
-      lineIn(pn, `${T('\\triangle BCD')}: ${T(`a^2=${Hh}^2+(c-${X})^2`)}`),
-      lineIn(pn, `Expand: ${T(`a^2=${Hh}^2+c^2-2c${X}+${X}^2`)}`),
-      lineIn(pn, `Regroup: ${T(`a^2=\\boxed{${Hh}^2+${X}^2}+c^2-2c${X}`)}`),
-      lineIn(pn, `Substitute: ${T(`a^2=b^2+c^2-2c(b\\cos A)`)}`),
-      lineIn(pn, T(`${cA('a')}^2=${cB('b')}^2+${cB('c')}^2${cH('-2bc\\cos A')}`), 'u3l6-line-key')
-    ];
-    return [
-      { cap: `Any ${T('\\triangle ABC')}. Drop the altitude ${T(Hh)} from ${T('C')}; its foot ${T('D')} splits ${T('c')} into ${T(X)} and ${T(`c-${X}`)}.`, run: async (c) => { await drawOn(c, altS, 450); await Promise.all([show(c, rm), show(c, lD), show(c, lh)]); lc.style.opacity = 0; await Promise.all([appear(c, dA.g, 300), show(c, dA.l), appear(c, dB.g, 300), show(c, dB.l)]); } },
-      { cap: `Left right triangle ${T('ACD')}: ${T(`\\cos A=\\dfrac{\\text{adjacent}}{\\text{hypotenuse}}=\\dfrac{${X}}{b}`)}, so ${T(`${X}=b\\cos A`)}.`, run: async (c) => { await appear(c, fL, 300); await show(c, L[0]); } },
-      { cap: `Pythagoras in ${T('ACD')}: ${T(`${Hh}^2+${X}^2=b^2`)}.`, run: (c) => show(c, L[1]) },
-      { cap: `Right triangle ${T('BCD')} has legs ${T(Hh)} and ${T(`c-${X}`)}: ${T(`a^2=${Hh}^2+(c-${X})^2`)}.`, run: async (c) => { await appear(c, fR, 300); await show(c, L[2]); } },
-      { cap: `Expand ${T(`(c-${X})^2=c^2-2c${X}+${X}^2`)}.`, run: (c) => show(c, L[3]) },
-      { cap: `Regroup: ${T(`${Hh}^2`)} and ${T(`${X}^2`)} side by side. That pair is exactly ${T('b^2')}.`, run: async (c) => { await show(c, L[4]); await pulse(c, L[1], 1.06); } },
-      { cap: `Substitute ${T('b^2')} for ${T(`${Hh}^2+${X}^2`)} and ${T('b\\cos A')} for ${T(X)}.`, run: (c) => show(c, L[5]) },
-      { cap: `${T('a^2=b^2+c^2-2bc\\cos A')}. ${T('h')} and ${T('x')} are gone: only two sides and the angle between them (<b>SAS</b>) are left.`, run: async (c) => { await show(c, L[6]); await pulse(c, L[6], 1.05); } }
-    ];
-  }
-};
-
-/* ====================================================================================================
- * explainer: which letters go where
- * ==================================================================================================== */
-const FM = {
-  a: { label: 'a² = …', N: ['A', 'B', 'C'], pts: { A: [0, 0], B: [7.6, 0], C: [2.7, 4.1] }, k: 'A' },
-  b: { label: 'b² = …', N: ['A', 'B', 'C'], pts: { A: [0, 0], B: [7.6, 0], C: [2.7, 4.1] }, k: 'B' },
-  c: { label: 'c² = …', N: ['A', 'B', 'C'], pts: { A: [0, 0], B: [7.6, 0], C: [2.7, 4.1] }, k: 'C' },
-  xyz: { label: 'Example 6: △XYZ, y² = …', N: ['X', 'Y', 'Z'], pts: { Y: [0, 0], X: [22, 0], Z: [15 * cosD(37), 15 * sinD(37)] }, k: 'Y' }
-};
-const forms = {
-  title: 'Which letters go where?',
-  height: 360, minW: 940,
-  choices: [{ v: 'a', label: FM.a.label }, { v: 'b', label: FM.b.label }, { v: 'c', label: FM.c.label }, { sep: 'Check:' }, { v: 'xyz', label: FM.xyz.label }],
-  ask: (v) => `Write the form of the cosine law that starts with ${T(FM[v].k.toLowerCase() + '^2')}.`,
-  make(stage, v, ex) {
-    const W = ex.W, d = FM[v], k = d.k, s = k.toLowerCase();
-    const F = new TriFig(stage, { x: 0, y: 0, w: 450, h: 356, pts: d.pts, tri: Object.keys(d.pts), pad: [44, 44, 44, 44] });
-    const [p, q] = F.others(k).sort();    // the other two vertices, alphabetical
-    const ps = p.toLowerCase(), qs = q.toLowerCase();
-    // side opposite vertex X joins the other two
-    const sideOf = (X) => F.others(X);
-    const base = {};
-    for (const X of F.tri) { const [u, w] = sideOf(X); base[X] = F.seg(u, w, INK, 3.5); F.sideLab(u, w, T(X.toLowerCase()), 'u3l6-lab-k'); F.vlab(X); }
-    const hiS = hide(F.seg(...sideOf(k), AC, 6)), hiP = hide(F.seg(...sideOf(p), BC, 6)), hiQ = hide(F.seg(...sideOf(q), BC, 6));
-    const arcK = hide(F.arc(k, AC, 34)), labK = hide(F.angLab(k, T(cA(k)), 34, 'u3l6-lab-ang'));
-    const pn = panel(stage, 464, 30, W - 472, 300, '');
-    const big = div(pn, 'u3l6-fbig', '');
-    const p1 = add(big, h('span', 'u3l6-fp', T(`${cA(s)}^2={}`))), p2 = add(big, h('span', 'u3l6-fp', T(`${cB(ps)}^2+${cB(qs)}^2-2${cB(ps + qs)}`))), p3 = add(big, h('span', 'u3l6-fp', T(`\\,\\cos ${cA(k)}`)));
-    [p1, p2, p3].forEach(hide);
-    const note = hide(div(pn, 'u3l6-fnote', `The side on the left, ${T(cA(s))}, is <b>opposite</b> the angle at the end, ${T(cA('\\angle ' + k))}. The other two sides, ${T(cB(ps))} and ${T(cB(qs))}, <b>form</b> that angle.`));
-    return [
-      { cap: `Start with the side you want, ${T(cA(s))}. It goes on the left: ${T(`${s}^2=\\dots`)}`, run: async (c) => { await drawOn(c, hiS, 400); await show(c, p1); } },
-      { cap: `The angle <b>opposite</b> ${T(s)} is ${T('\\angle ' + k)}. It goes at the end: ${T(`\\dots\\cos ${k}`)}`, run: async (c) => { await drawOn(c, arcK, 300); await show(c, labK); await show(c, p3); } },
-      { cap: `The other two sides, ${T(cB(ps))} and ${T(cB(qs))}, meet at ${T(k)}: they <b>form</b> the angle. They fill the middle: ${T(`${ps}^2+${qs}^2-2${ps}${qs}`)}.`, run: async (c) => { await Promise.all([drawOn(c, hiP, 400), drawOn(c, hiQ, 400)]); await show(c, p2); } },
-      { cap: `${T(`${s}^2=${ps}^2+${qs}^2-2${ps}${qs}\\cos ${k}`)}. Same pattern every time, whatever the letters.`, run: (c) => show(c, note) }
-    ];
   }
 };
 
@@ -692,70 +479,6 @@ const angle = {
 };
 
 /* ====================================================================================================
- * explainer: one cosine, one angle (cos θ is the x-coordinate on a half circle of radius 1)
- * ==================================================================================================== */
-const dial = {
-  title: 'One cosine, one angle',
-  height: 404, minW: 940,
-  ask: `Can two different angles between ${T('0^\\circ')} and ${T('180^\\circ')} have the same cosine?`,
-  make(stage, v, ex) {
-    const W = ex.W, R = 196, O = [262, 266];
-    const svg = svgEl('svg', { width: 540, height: 404, viewBox: '0 0 540 404', class: 'u3l6-svg' }, stage); svg.style.position = 'absolute'; svg.style.left = '0px'; svg.style.top = '0px';
-    const ov = div(stage, 'u3l6-ov', '', 0, 0, 540, 404);
-    const X = (cv) => O[0] + cv * R;
-    // zones on the axis
-    const zA = svgEl('rect', { x: X(0), y: O[1] - 7, width: R, height: 14, rx: 4, fill: G1, 'fill-opacity': 0.22 }, svg), zO = svgEl('rect', { x: X(-1), y: O[1] - 7, width: R, height: 14, rx: 4, fill: G2, 'fill-opacity': 0.22 }, svg);
-    hide(zA); hide(zO);
-    svgEl('path', { d: `M${X(-1)} ${O[1]} A${R} ${R} 0 0 1 ${X(1)} ${O[1]}`, fill: 'none', stroke: '#c9c3b4', 'stroke-width': 3 }, svg);
-    svgEl('line', { x1: X(-1) - 20, y1: O[1], x2: X(1) + 22, y2: O[1], stroke: INK, 'stroke-width': 2.5 }, svg);
-    arrowHead(svg, X(1) + 30, O[1], 1, 0, { color: INK, width: 2.5 });
-    for (const t of [-1, -0.5, 0, 0.5, 1]) { svgEl('line', { x1: X(t), y1: O[1] - 6, x2: X(t), y2: O[1] + 6, stroke: INK, 'stroke-width': 2 }, svg); lab(ov, T(t === 0 ? '0' : String(t)), X(t), O[1] + 10, 's', 'u3l6-tk', 2); }
-    lab(ov, T('x=\\cos\\theta'), X(1) + 18, O[1] + 40, 'c', 'u3l6-tk');
-    const lAc = hide(lab(ov, '<b>acute</b>', X(0.5), O[1] + 58, 'c', 'u3l6-zl u3l6-g1')), lOb = hide(lab(ov, '<b>obtuse</b>', X(-0.5), O[1] + 58, 'c', 'u3l6-zl u3l6-g2')), lRt = hide(lab(ov, `${T('90^\\circ')}`, X(0), O[1] + 58, 'c', 'u3l6-zl u3l6-hc'));
-    const gD = svgEl('g', {}, svg);
-    const trace = svgEl('path', { fill: 'none', stroke: AC, 'stroke-width': 5, 'stroke-opacity': 0.35, 'stroke-linecap': 'round' }, gD);
-    const rad = svgEl('line', { stroke: AC, 'stroke-width': 4.5, 'stroke-linecap': 'round' }, gD), drop = svgEl('line', { stroke: BC, 'stroke-width': 3, 'stroke-dasharray': '7 6' }, gD);
-    const dot = svgEl('circle', { r: 8, fill: AC, stroke: '#fff', 'stroke-width': 2.5 }, gD), cdot = svgEl('circle', { r: 8, fill: BC, stroke: '#fff', 'stroke-width': 2.5 }, gD);
-    let arcEl = null;
-    const aLab = lab(ov, '', 0, 0, 'c', 'u3l6-al u3l6-lab-ang'), cLab = lab(ov, '', 0, 0, 'n', 'u3l6-lab-cv', 10);
-    // the sine comparison (two points at the same height)
-    const gS = svgEl('g', {}, svg); hide(gS);
-    const yS = O[1] - 0.6 * R, s1 = asinD(0.6), xS1 = X(cosD(s1)), xS2 = X(cosD(180 - s1));
-    svgEl('line', { x1: X(-1) - 14, y1: yS, x2: X(1) + 14, y2: yS, stroke: HC, 'stroke-width': 3, 'stroke-dasharray': '8 6' }, gS);
-    for (const xs of [xS1, xS2]) { svgEl('line', { x1: O[0], y1: O[1], x2: xs, y2: yS, stroke: HC, 'stroke-width': 3 }, gS); svgEl('circle', { cx: xs, cy: yS, r: 7, fill: HC, stroke: '#fff', 'stroke-width': 2 }, gS); }
-    const sL1 = hide(lab(ov, T(cH(`${fx(s1, 0)}^\\circ`)), xS1 + 8, yS - 4, 'ne', 'u3l6-lab-h', 4)), sL2 = hide(lab(ov, T(cH(`${fx(180 - s1, 0)}^\\circ`)), xS2 - 8, yS - 4, 'nw', 'u3l6-lab-h', 4)), sL = hide(lab(ov, T(cH('\\sin\\theta=0.6')), X(0.86), yS + 6, 'se', 'u3l6-lab-h', 2));
-    // readout
-    const pn = panel(stage, 552, 30, W - 560, 300, '');
-    pn.innerHTML = `<div class="u3l6-dv"><span class="u3l6-dth"></span></div><div class="u3l6-dv"><span class="u3l6-dcs"></span></div><div class="u3l6-dkind"></div><div class="u3l6-dnote"></div>`;
-    const dth = pn.querySelector('.u3l6-dth'), dcs = pn.querySelector('.u3l6-dcs'), dk = pn.querySelector('.u3l6-dkind'), dn = pn.querySelector('.u3l6-dnote');
-    let t0 = null;
-    const set = (th, tr) => {
-      const P = [O[0] + R * cosD(th), O[1] - R * sinD(th)], Cx = X(cosD(th));
-      setLn(rad, O, P); setLn(drop, P, [Cx, O[1]]); dot.setAttribute('cx', P[0]); dot.setAttribute('cy', P[1]); cdot.setAttribute('cx', Cx); cdot.setAttribute('cy', O[1]);
-      if (arcEl) arcEl.remove(); arcEl = th > 2 ? angleArc(gD, O, [O[0] + 10, O[1]], P, 40, { color: AC, width: 3 }) : null;
-      place(aLab, O[0] + 66 * cosD(th / 2), O[1] - 66 * sinD(th / 2), 'c'); aLab.innerHTML = T(cA(`${fx(th, 0)}^\\circ`));
-      place(cLab, Cx, O[1] - 12, 'n', 4); cLab.innerHTML = T(cB(fx(cosD(th), 2)));
-      dth.innerHTML = T(cA(`\\theta=${fx(th, 1)}^\\circ`)); dcs.innerHTML = T(cB(`\\cos\\theta\\approx${fx(cosD(th), 4)}`));
-      const k = Math.abs(th - 90) < 0.3 ? 'r' : th < 90 ? 'a' : 'o';
-      dk.className = 'u3l6-dkind ' + k; dk.innerHTML = k === 'r' ? `cos = 0: <b>right angle</b>` : k === 'a' ? `cos &gt; 0: <b>acute</b>` : `cos &lt; 0: <b>obtuse</b>`;
-      if (tr) { if (t0 == null) t0 = th; const pts = []; for (let q = t0; q <= th + 0.01; q += 2) pts.push([O[0] + R * cosD(q), O[1] - R * sinD(q)]); trace.setAttribute('d', pts.length > 1 ? dPath(pts) : ''); }
-    };
-    let cur = 38;
-    const go = (c, th1, ms = 1200, tr = false) => { const a0 = cur; return tween(c, ms, (t) => { cur = a0 + (th1 - a0) * t; set(cur, tr); }); };
-    set(cur);
-    const a5 = acosD(226 / 286), b5 = acosD((6.5 * 6.5 + 9.2 * 9.2 - 13.8 * 13.8) / (2 * 6.5 * 9.2));
-    return [
-      { cap: `Put the angle ${T(cA('\\theta'))} at the centre of a half circle of radius 1. The point’s ${T('x')}-coordinate is ${T(cB('\\cos\\theta'))}.`, run: (c) => pulse(c, cdot, 1.0, 300) },
-      { cap: `Sweep ${T('\\theta')} from ${T('0^\\circ')} to ${T('180^\\circ')}: ${T(cB('\\cos\\theta'))} slides from ${T('1')} down to ${T('-1')} and <b>never comes back</b>.`, run: async (c) => { await go(c, 0, 500); t0 = 0; await go(c, 180, 2600, true); } },
-      { cap: `Acute angles have <b>positive</b> cosines, ${T('90^\\circ')} has cosine 0, obtuse angles have <b>negative</b> cosines.`, run: async (c) => { await Promise.all([appear(c, zA, 300), appear(c, zO, 300)]); await Promise.all([show(c, lAc), show(c, lOb), show(c, lRt)]); } },
-      { cap: `So each cosine belongs to <b>one</b> angle. Example 5(a): ${T(`\\cos A\\approx${fx(226 / 286, 4)}`)} gives only ${T(`${fx(a5, 0)}^\\circ`)}.`, run: async (c) => { trace.setAttribute('d', ''); await go(c, a5, 1200); dn.innerHTML = `Example 5(a): ${T(`\\angle A\\approx${fx(a5, 0)}^\\circ`)}`; } },
-      { cap: `Example 5(b): ${T(`\\cos\\theta\\approx${fx(cosD(b5), 4)}`)} is negative and gives only ${T(`${fx(b5, 0)}^\\circ`)}: obtuse, straight from ${T('\\cos^{-1}')}.`, run: async (c) => { await go(c, b5, 1200); dn.innerHTML = `Example 5(b): ${T(`\\theta\\approx${fx(b5, 0)}^\\circ`)}`; } },
-      { cap: `Sine is different: ${T('\\sin\\theta=0.6')} is the <b>height</b> of two points, ${T(`${fx(s1, 0)}^\\circ`)} and ${T(`${fx(180 - s1, 0)}^\\circ`)}. The sine law can miss the obtuse one; the cosine law can’t.`, run: async (c) => { await appear(c, gS, 400); await Promise.all([show(c, sL), show(c, sL1), show(c, sL2)]); dn.innerHTML = `${T('\\sin^{-1}0.6')} gives only ${T(`${fx(s1, 1)}^\\circ`)}, but ${T(`${fx(180 - s1, 1)}^\\circ`)} has the same sine.`; } }
-    ];
-  }
-};
-
-/* ====================================================================================================
  * explainer: solving a SAS triangle completely (Example 6) and why the smaller angle comes next
  * ==================================================================================================== */
 const solve = {
@@ -906,47 +629,6 @@ const PA = {
   ex8: { label: 'Example 8 check', l: 14, s: 9, ang: 62, sl: '14.0', ss: '9.0' },
   rect: { label: 'Rectangle check: 90°', l: 14, s: 9, ang: 90, sl: '14.0', ss: '9.0' }
 };
-const para = {
-  title: 'The diagonals of a parallelogram',
-  height: 400, minW: 940, capH: 84,
-  choices: [{ v: 'ex8', label: PA.ex8.label }, { v: 'rect', label: PA.rect.label }],
-  ask: (v) => `Parallelogram ${T('ABCD')}: ${T('AB=14.0')} cm, ${T('AD=9.0')} cm, ${T(`\\angle DAB=${PA[v].ang}^\\circ`)}. Determine both diagonals.`,
-  make(stage, v, ex) {
-    const W = ex.W, d = PA[v], bd = law(d.l, d.s, d.ang), ac = law(d.l, d.s, 180 - d.ang);
-    const S = paraScene(stage, d, { x: 0, y: 0, w: 520, h: 396, pad: d.ang === 90 ? [40, 40, 44, 80] : [40, 40, 44, 40] });
-    [S.fABD, S.fABC, S.aB, S.lB, S.bd, S.ac, S.lBC].forEach(hide);
-    const pn = panel(stage, 532, 6, W - 540, 388, 'Two triangles, two diagonals');
-    const lBD = hide(S.F.sideLab('B', 'D', T(cA(`${fx(bd, 1)}`)), 'u3l6-lab-a', { in: true, t: 0.62 })), lAC = hide(S.F.sideLab('A', 'C', T(c2(`${fx(ac, 1)}`)), 'u3l6-lab-g2', { in: true, t: 0.7 }));
-    if (v === 'rect') {
-      const L = [
-        lineIn(pn, T(`BD^2=14.0^2+9.0^2-2(14.0)(9.0)(0)=277`), 'u3l6-line-sm'),
-        lineIn(pn, T(`AC^2=14.0^2+9.0^2-2(14.0)(9.0)(0)=277`), 'u3l6-line-sm'),
-        lineIn(pn, `${T(`BD=AC=\\sqrt{277}\\approx${fx(bd, 1)}`)} <b>cm</b>`, 'u3l6-line-ans')
-      ];
-      return [
-        { cap: `A rectangle is a parallelogram with ${T('90^\\circ')} angles. ${T('\\cos90^\\circ=0')}, so the correction vanishes: plain Pythagoras.`, run: async (c) => { await appear(c, S.fABD, 300); await drawOn(c, S.bd, 400); await show(c, L[0]); await show(c, lBD); } },
-        { cap: `${T('\\angle ABC')} is also ${T('90^\\circ')}, so ${T('AC')} gives the same: the diagonals of a rectangle are <b>equal</b>.`, run: async (c) => { S.fABD.style.opacity = 0; await appear(c, S.fABC, 300); await drawOn(c, S.ac, 400); await show(c, L[1]); await show(c, lAC); } },
-        { cap: `${T(`\\sqrt{277}\\approx${fx(bd, 1)}`)} cm. Tilt the rectangle into Example 8’s parallelogram and one diagonal shrinks while the other grows.`, run: (c) => show(c, L[2]) }
-      ];
-    }
-    const L = [
-      lineIn(pn, `${T('\\triangle ABD')}: ${T(cA('\\angle A=62^\\circ'))} is between 14.0 and 9.0.`, 'u3l6-line-sm'),
-      lineIn(pn, T(`BD^2=14.0^2+9.0^2-2(14.0)(9.0)\\cos62^\\circ`), 'u3l6-line-sm'),
-      lineIn(pn, `${T(`BD^2\\approx${fx(bd * bd, 2)}`)}, &nbsp;${T(cA(`BD\\approx${fx(bd, 1)}`))} <b>cm</b>`, 'u3l6-line-ans'),
-      lineIn(pn, `${T(c2('\\angle ABC=180^\\circ-62^\\circ=118^\\circ'))}, ${T('BC=AD=9.0')}`, 'u3l6-line-sm'),
-      lineIn(pn, T(`AC^2=14.0^2+9.0^2-2(14.0)(9.0)\\cos118^\\circ`), 'u3l6-line-sm'),
-      lineIn(pn, `${T(`AC^2\\approx${fx(ac * ac, 2)}`)}, &nbsp;${T(c2(`AC\\approx${fx(ac, 1)}`))} <b>cm</b>`, 'u3l6-line-ans')
-    ];
-    return [
-      { cap: `Diagonal ${T('BD')} cuts off ${T('\\triangle ABD')}: sides 14.0 and 9.0 with the ${T('62^\\circ')} angle <b>between</b> them. SAS, and ${T('BD')} is opposite ${T('\\angle A')}.`, run: async (c) => { await appear(c, S.fABD, 300); await drawOn(c, S.bd, 500); await show(c, L[0]); } },
-      { cap: `${T(`BD^2=14.0^2+9.0^2-2(14.0)(9.0)\\cos62^\\circ\\approx${fx(bd * bd, 2)}`)}, so ${T(`BD\\approx${fx(bd, 1)}`)} cm.`, run: async (c) => { await show(c, L[1]); await show(c, L[2]); await show(c, lBD); } },
-      { cap: `For ${T('AC')}, use ${T('\\triangle ABC')}. Adjacent angles of a parallelogram add to ${T('180^\\circ')}: ${T('\\angle ABC=118^\\circ')}, and opposite sides are equal: ${T('BC=AD=9.0')}.`, run: async (c) => { S.fABD.style.opacity = 0; await appear(c, S.fABC, 300); await drawOn(c, S.aB, 300); await Promise.all([show(c, S.lB), show(c, S.lBC)]); await show(c, L[3]); } },
-      { cap: `${T(`AC^2=14.0^2+9.0^2-2(14.0)(9.0)\\cos118^\\circ\\approx${fx(ac * ac, 2)}`)}: the cosine is negative, so this time the term is <b>added</b>.`, run: async (c) => { await drawOn(c, S.ac, 500); await show(c, L[4]); } },
-      { cap: `${T(`AC\\approx${fx(ac, 1)}`)} cm. The <b>longer</b> diagonal is opposite the <b>obtuse</b> angle.`, run: async (c) => { await show(c, L[5]); await show(c, lAC); } }
-    ];
-  }
-};
-
 /* ====================================================================================================
  * static figures on the example cards
  * ==================================================================================================== */
@@ -1020,7 +702,6 @@ standup('u3l6', {
 });
 
 /* =============================== mount =============================== */
-mountCroc();
 mountStatics();
-export const explainers = mountExplainers({ cases, alt, derive, forms, pythag, side, angle, dial, solve, boats, para });
+export const explainers = mountExplainers({ cases, pythag, side, angle, solve, boats });
 export const _test = { fx, fz, law, angSSS, sssC, TriFig, Hinge, SS, BT, PA };

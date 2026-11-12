@@ -1,0 +1,113 @@
+/* Math 20-1 · Unit 6 · Lesson 4 — Dividing Rational Expressions: styles used only on this page (prefix u6l4-).
+ * Colours: the divisor / flip blue #1f5bd6, the divisor's numerator (C) amber #c27a0e, NPVs from denominators red
+ * #c93a33, ✓ green #12805a, the course burgundy for the step numbers. */
+
+.u6l4 .ex-cap .katex { font-size: 1.04em; }
+.u6l4 .chip .katex { font-size: 1em; }
+.u6l4 .pl .katex { font-size: 1.08em; }
+.u6l4 .ans .katex { font-size: 1.04em; }
+.u6l4 .katex { white-space: nowrap; }
+.u6l4 .parts .part.u6l4-wide { grid-column: 1 / -1; }
+.u6l4-solo { margin-top: 6px; }
+
+/* ---------------- warm-up: the mystery machine ---------------- */
+.vw-mach.u6l4-mach { grid-template-columns: 1fr 1fr; gap: 10px; margin: 0; }
+.vw-mach.u6l4-mach > div { padding: 8px 12px; min-height: 92px; font-size: 30px; }
+.vw-mach.u6l4-mach > div:last-child { grid-column: 1 / -1; }
+.u6l4-mach .u6l4-mo.q { color: var(--red); font-size: 40px; }
+
+/* ---------------- key ideas and steps on the cards ---------------- */
+.u6l4-key { background: #fff; border: 2.5px solid var(--brand2); border-radius: 14px; padding: 12px 18px; margin: 12px 0 16px; }
+.u6l4-key-f { text-align: center; font-size: 28px; margin: 4px 0; }
+.u6l4-key-l { font-size: 19px; color: var(--ink2); line-height: 1.45; text-align: center; margin-top: 4px; }
+.u6l4-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 6px 0 14px; }
+.u6l4-step { position: relative; background: #fff; border: 1.5px solid #e4ddcf; border-radius: 12px; padding: 10px 12px 10px 48px; font-size: 18.5px; line-height: 1.4; }
+.u6l4-sn { position: absolute; left: 10px; top: 10px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--brand); color: #fff; font: 800 16px var(--round); }
+
+/* ---------------- Example 8 ---------------- */
+.u6l4-exg { display: grid; grid-template-columns: 1fr 280px; gap: 18px; align-items: start; }
+.u6l4-rect { position: relative; width: 270px; height: 250px; margin-top: 8px; }
+.u6l4-rectsvg { display: block; }
+.u6l4-rl { position: absolute; font-size: 18px; line-height: 1.3; text-align: center; white-space: nowrap; }
+.u6l4-rl-w { color: var(--muted); font-weight: 700; }
+.u6l4-ckpills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+/* ---------------- explainers: fraction cards ---------------- */
+.u6l4-row { display: flex; align-items: center; justify-content: center; gap: 14px; font-size: 25px; }
+.u6l4-row-l { justify-content: flex-start; }
+.u6l4-fc { position: relative; perspective: 900px; }
+.u6l4-fci { position: relative; display: grid; transform-style: preserve-3d; }
+.u6l4-face { grid-area: 1 / 1; display: grid; place-items: center; background: #fff; border: 2.5px solid #d9d3c4; border-radius: 14px; padding: 28px 14px; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.u6l4-back { transform: rotateX(180deg); border-color: #1f5bd6; background: #f3f7ff; }
+.u6l4-lay { grid-area: 1 / 1; display: flex; align-items: center; gap: 4px; }
+.u6l4-ex { font-size: 1.04em; }
+.u6l4-fr { display: inline-flex; flex-direction: column; align-items: center; }
+.u6l4-fp { display: flex; align-items: center; gap: 1px; padding: 1px 4px; }
+.u6l4-bar { align-self: stretch; height: 2.5px; background: #1c2230; margin: 3px 0; border-radius: 1px; }
+.u6l4-f { position: relative; display: inline-block; padding: 0 2px; border-radius: 6px; }
+.u6l4-dot { display: inline-block; padding: 0 1px; }
+.u6l4-sg { display: inline-block; margin-right: 2px; }
+.u6l4-st { position: absolute; left: -3px; right: -3px; top: 50%; height: 3.5px; margin-top: -2px; border-radius: 2px; transform-origin: left center; rotate: -14deg; }
+.u6l4-cut .katex { opacity: .42; }
+.u6l4-rem { position: absolute; left: 50%; translate: -50% 0; font-size: .82em; font-weight: 400; line-height: 1; }
+.u6l4-fn .u6l4-rem { bottom: 92%; }
+.u6l4-fd .u6l4-rem { top: 92%; }
+.u6l4-mk-d { box-shadow: inset 0 -3.5px 0 #c93a33; }
+.u6l4-mk-c { background: #fdeccf; box-shadow: 0 0 0 2.5px #c27a0e; }
+.u6l4-op { font-size: 1.15em; }
+.u6l4-op-x { color: #1f5bd6; }
+.u6l4-op-keep { color: #5b6270; }
+.u6l4-keep .u6l4-front { border-color: #12805a; }
+.u6l4-tag { position: absolute; top: -14px; left: 50%; translate: -50% 0; z-index: 3; padding: 2px 9px; border-radius: 8px; color: #fff; font: 800 13px var(--round); letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; }
+.u6l4-tag-keep { background: #12805a; } .u6l4-tag-flip { background: #1f5bd6; } .u6l4-tag-stay { background: #5b6270; }
+
+/* the step tracker */
+.u6l4-pills { display: flex; gap: 8px; }
+.u6l4-pill { display: inline-flex; align-items: center; gap: 7px; padding: 3px 13px 3px 3px; border-radius: 20px; background: #efe9dd; color: var(--muted); font: 700 16px var(--round); white-space: nowrap; }
+.u6l4-pill b { display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; background: #9aa0ab; color: #fff; font-size: 15px; }
+.u6l4-pill-on { background: #f6e4ea; color: var(--brand); }
+.u6l4-pill-on b { background: var(--brand); }
+
+/* the NPV net */
+.u6l4-net { background: #fff; border: 1.5px solid #e4ddcf; border-radius: 12px; padding: 10px 14px; box-sizing: border-box; }
+.u6l4-net-h { font: 800 18px var(--round); color: var(--ink); }
+.u6l4-ng { margin-top: 10px; }
+.u6l4-ng-h { font-size: 15.5px; color: var(--muted); }
+.u6l4-ng-c .u6l4-ng-h { color: #a26100; font-weight: 700; }
+.u6l4-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; min-height: 36px; }
+.u6l4-chip { display: inline-block; padding: 3px 9px; border: 2px solid; border-radius: 10px; font-size: 19px; }
+.u6l4-ng-d .u6l4-chip { border-color: #c93a33; background: #fdeceb; }
+.u6l4-ng-c .u6l4-chip { border-color: #c27a0e; background: #fdf0dc; }
+.u6l4-net-f { margin-top: 12px; padding-top: 8px; border-top: 2px solid #e4ddcf; font-size: 20px; color: #12805a; white-space: nowrap; }
+.u6l4-ans { text-align: center; }
+.u6l4-al { margin: 4px 0; }
+
+/* who lost a restriction? */
+.u6l4-ls-also { text-align: center; font-size: 23px; color: var(--ink2); }
+.u6l4-stu { background: #fff; border: 2.5px solid #e4ddcf; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; }
+.u6l4-stu-h { display: flex; align-items: center; gap: 8px; font-size: 20px; }
+.u6l4-av { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #fff; font: 800 16px var(--round); }
+.u6l4-stu-m { font-size: 16.5px; color: var(--muted); margin: 4px 0 6px; min-height: 44px; line-height: 1.3; }
+.u6l4-stu-l { font-size: 23px; text-align: center; }
+.u6l4-stu-hot { border-color: #c27a0e; box-shadow: 0 0 0 3px #fbe3bf; }
+.u6l4-stu-no { border-color: #c93a33; }
+.u6l4-stu-ok { border-color: #12805a; box-shadow: 0 0 0 3px #cfe9dc; }
+.u6l4-stu .u6l4-stu-st { position: absolute; left: 50%; bottom: 8px; translate: -50% 0; }
+.u6l4-test { background: #fff; border: 2px dashed #d9d3c4; border-radius: 14px; padding: 10px 16px; box-sizing: border-box; text-align: center; }
+.u6l4-test-h { font: 700 17px var(--round); color: var(--muted); }
+.u6l4-test-s { font-size: 25px; margin: 8px 0 6px; }
+.u6l4-test-w { font-size: 20px; color: #c93a33; }
+
+/* brackets or not; left to right */
+.u6l4-lane-h { font-size: 18px; color: var(--ink2); }
+.u6l4-res { display: flex; align-items: center; font-size: 25px; }
+.u6l4-grp { display: inline-flex; align-items: center; gap: 10px; }
+.u6l4-brk { font-size: 1.1em; }
+.u6l4-reader { display: flex; flex-direction: column; align-items: center; translate: -50% 0; color: #1f5bd6; font: 800 22px/1 var(--round); }
+.u6l4-reader span { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+
+/* the complex fraction */
+.u6l4-stack { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 25px; }
+.u6l4-stack > * { flex-shrink: 0; }
+.u6l4-mainbar { width: 320px; height: 5px; background: #1c2230; border-radius: 3px; }
+.u6l4-divtag { font-size: 32px; color: #1f5bd6; }

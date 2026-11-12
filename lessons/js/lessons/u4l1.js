@@ -1,20 +1,15 @@
 /* Math 20-1 · Unit 4 · Lesson 1 — Factoring Review: Common Factors and x² + bx + c (no calculator).
- * Warm-up (The Mind-Reading Trick: n² + 11n + 30 dots always sort into an (n + 5) by (n + 6) rectangle), and the explainers:
+ * New lesson format (2026-11-11): the warm-up is plain markup on the page (no code), and the explainers are
  *   gcf (each term as a strip of factor chips, the shared ones light up, GCF out, divide each term; negative GCF; Example 1),
  *   binomial (the bracket as one parcel: both parcels merge in front, the leftovers go in the second bracket; the hidden 1;
  *     opposite brackets flip with a b = 5 test; Example 2),
  *   grouping (four term cards, pair braces, GCF of each pair, matching brackets; a wrong sign; rearranging; Example 3),
- *   tiles (STAR: algebra tiles for x² + bx + c slide into a rectangle: x² in the corner, x-tiles along two sides, units fill
- *     the corner; zero pairs for c < 0; read the sides as the factors; Example 4 checks),
- *   productSum (the sign rule lights up, factor pairs of c listed in order until the sum is b, then a 2 × 2 expansion box;
- *     two variables; Examples 4 and 5),
+ *   productSum (Ryan's X: c on top, b underneath, the sign rule, the factor pairs listed beside the X and the right one
+ *     circled, the two numbers on the sides, then the brackets and a written check; Examples 4, 5 and 7(a)),
  *   fully (the factoring checklist as a flowchart beside the working; Example 6 and a grouping demo),
- *   ascending (constant first: (7 − x)(5 + x) and −(x − 7)(x + 5) side by side, a flip card and a table of test values),
- *   tryRect (tiles that can't make a rectangle: gaps for every corner shape of 8; and every b for x² + bx + 10; Example 7),
  *   isFactor (factor fully, then slide the candidate binomial along the factor cards; 7 − x counts as x − 7; Example 7),
  *   patio (the area model to scale: sides x + 7 and x + 4, perimeter, then x = 5 with a metre grid; Example 8).
- * Colours: x² tiles blue, x-tiles and b green, unit tiles and c amber, negative tiles red; GCF rose (#a33357);
- * a common bracket purple. */
+ * Colours: b green, c amber, GCF rose (#a33357), a common bracket purple. */
 import {
   h, tex, add, box, Flowchart, stamp, stampIn, mountExplainers, pop, fadeIn, appear, sleep, svgEl, pulse, shake, anim, drawIn, COLORS
 } from '../blocks.js';
@@ -39,62 +34,6 @@ const bin = (v, m, w = '') => `(${v}${term(m, w, false)})`;
 const sn = (k) => (k < 0 ? `-${-k}` : `${k}`);
 const pn = (k) => (k < 0 ? `(-${-k})` : `${k}`);   // a number in a product: (−5)
 const xp = (v, p) => (p <= 0 ? '' : p === 1 ? v : `${v}^{${p}}`);
-
-/* ====================================================================================================
- * Warm-up: The Mind-Reading Trick. n² + 11n + 30 dots: an n × n square, 11 strips of n, 30 singles → (n + 5) × (n + 6).
- * ==================================================================================================== */
-function mountTrick() {
-  const host = document.getElementById('u4l1-dots'), pick = document.getElementById('u4l1-wpick'), calc = document.getElementById('u4l1-wcalc');
-  if (!host || !pick) return;
-  const S = 17, W = 530, bS = document.getElementById('u4l1-wsort'), bU = document.getElementById('u4l1-wunsort');
-  let n = 3, sorted = false, dots = [], labs = [];
-  const btns = [];
-  for (let k = 1; k <= 8; k++) {
-    const b = h('button', 'pill small u4l1-wn', String(k)); b.type = 'button';
-    b.addEventListener('click', () => { n = k; sorted = false; build(); });
-    pick.appendChild(b); btns.push(b);
-  }
-  const pos = (d) => {
-    if (!sorted) {
-      const top = 34, sq = n * S, gx = 22;
-      if (d.k === 'sq') return [10 + d.i * S, top + d.j * S];
-      if (d.k === 'st') return [10 + sq + gx + d.s * (S + 5), top + d.j * S];
-      return [10 + (d.u % 15) * S, top + sq + 22 + Math.floor(d.u / 15) * S];
-    }
-    const x0 = (W - (n + 6) * S) / 2, y0 = 40;
-    if (d.k === 'sq') return [x0 + d.i * S, y0 + d.j * S];
-    if (d.k === 'st') return d.s < 6 ? [x0 + (n + d.s) * S, y0 + d.j * S] : [x0 + d.j * S, y0 + (n + d.s - 6) * S];
-    return [x0 + (n + (d.u % 6)) * S, y0 + (n + Math.floor(d.u / 6)) * S];
-  };
-  const paint = () => {
-    dots.forEach((d) => { const [x, y] = pos(d); d.el.style.transform = `translate(${x}px, ${y}px)`; });
-    const x0 = (W - (n + 6) * S) / 2, y0 = 40;
-    labs.forEach((l) => l.remove()); labs = [];
-    if (sorted) {
-      const L = (html, x, y, cls) => { const e = h('div', 'u4l1-wlab ' + (cls || ''), html); e.style.left = x + 'px'; e.style.top = y + 'px'; host.appendChild(e); labs.push(e); return e; };
-      L(`${T(`n+6=${n + 6}`)}`, x0 + (n + 6) * S / 2, y0 - 26, 'u4l1-wl-top');
-      L(`${T(`n+5=${n + 5}`)}`, x0 - 12, y0 + (n + 5) * S / 2, 'u4l1-wl-left');
-    }
-    host.classList.toggle('u4l1-sorted', sorted);
-    const v = n * n + 11 * n + 30;
-    calc.innerHTML = T(`n=${n}:\\quad ${n}^2+11(${n})+30=${n * n}+${11 * n}+30=\\boldsymbol{${v}}`) +
-      (sorted ? ` <span class="u4l1-wrect">${T(`=${n + 5}\\times${n + 6}`)}</span>` : '');
-    btns.forEach((b, i) => b.classList.toggle('on', i + 1 === n));
-    bS.disabled = sorted; bU.disabled = !sorted;
-  };
-  const build = () => {
-    host.innerHTML = ''; dots = []; labs = [];
-    const mk = (k, o, cls) => { const e = h('div', 'u4l1-dot ' + cls); host.appendChild(e); const d = Object.assign({ k, el: e }, o); dots.push(d); return d; };
-    for (let j = 0; j < n; j++) for (let i = 0; i < n; i++) mk('sq', { i, j }, 'u4l1-d-sq');
-    for (let s = 0; s < 11; s++) for (let j = 0; j < n; j++) mk('st', { s, j }, 'u4l1-d-st');
-    for (let u = 0; u < 30; u++) mk('u', { u }, 'u4l1-d-u');
-    host.classList.add('u4l1-noanim'); paint(); void host.offsetWidth; host.classList.remove('u4l1-noanim');
-    const tag = h('div', 'u4l1-wtag', `${T(`${n}\\times${n}`)} square · 11 strips of ${n} · 30 singles`); host.appendChild(tag);
-  };
-  bS.addEventListener('click', () => { sorted = true; paint(); });
-  bU.addEventListener('click', () => { sorted = false; paint(); });
-  build();
-}
 
 /* =============================== explainer: the GCF as factor chips =============================== */
 const GF = {
@@ -275,80 +214,19 @@ const grouping = {
   }
 };
 
-/* =============================== algebra tiles (shared by tiles and tryRect) =============================== */
-function mkTile(stage, kind, sign, x, y, v, X, U) {
-  const dims = { x2: [X, X], xv: [U, X], xh: [X, U], u: [U, U] }[kind];
-  const lab = kind === 'x2' ? T(v + '^2') : kind === 'u' ? '' : T((sign < 0 ? '-' : '') + v);
-  const cls = 'u4l1-t ' + (kind === 'x2' ? 'u4l1-t-x2' : kind === 'u' ? 'u4l1-t-u' : 'u4l1-t-x') + (sign < 0 ? ' u4l1-neg' : '');
-  return div(stage, cls, lab, x, y, dims[0], dims[1]);
-}
-const mv = (c, el, [x, y, w, hh], ms = 520, delay = 0) => anim(c, el, [{ left: el.style.left, top: el.style.top, width: el.style.width, height: el.style.height }, { left: x + 'px', top: y + 'px', width: w + 'px', height: hh + 'px' }], ms, { delay });
-function rectGeo(RX, RY, M, N, X, U) {
-  return { x2: [RX, RY, X, X], right: (i) => [RX + X + i * U, RY, U, X], bottom: (j) => [RX, RY + X + j * U, X, U],
-    unit: (k) => [RX + X + (k % M) * U, RY + X + Math.floor(k / M) * U, U, U], W: X + M * U, H: X + N * U };
-}
 const sideLab = (stage, html, x, y, pos, cls = '') => { const e = hide(div(stage, 'u4l1-slab ' + cls, html, x, y)); e.style.translate = pos === 'top' ? '-50% -100%' : '-100% -50%'; return e; };
 
-/* =============================== explainer (STAR): tiles make a rectangle =============================== */
-const TL = {
-  t1: { v: 'x', m: 3, n: 1, ans: '(x+1)(x+3)' },
-  t2: { v: 'x', m: 4, n: 2, ans: '(x+2)(x+4)' },
-  t3: { v: 'x', m: -3, n: -2, ans: '(x-2)(x-3)' },
-  t4: { v: 'x', m: -3, n: 2, ans: '(x+2)(x-3)' },
-  e4a: { v: 'n', m: 9, n: 4, ans: '(n+4)(n+9)', label: 'Example 4(a)' },
-  e4c: { v: 'y', m: 7, n: -5, ans: '(y+7)(y-5)', label: '4(c)' }
-};
-const tlTri = (d) => tri(d.v, d.m + d.n, d.m * d.n);
-const tiles = {
-  title: 'Algebra tiles make a rectangle',
-  height: 440, minW: 900, capH: 84,
-  choices: [...['t1', 't2', 't3', 't4'].map((k) => ({ v: k, label: T(tlTri(TL[k])) })), { sep: 'Check:' }, ...['e4a', 'e4c'].map((k) => ({ v: k, label: TL[k].label }))],
-  ask: (v) => `Arrange the tiles for ${T(tlTri(TL[v]))} into one rectangle. What are its side lengths?`,
-  make(stage, v, ex) {
-    const d = TL[v], M = Math.abs(d.m), N = Math.abs(d.n), b = d.m + d.n, c0 = d.m * d.n, sb = Math.sign(b), zp = c0 < 0 ? Math.min(M, N) : 0;
-    const X = 110, U = 26, RY = 66, RX = Math.min(620, ex.W - 28 - (X + M * U)), Rg = rectGeo(RX, RY, M, N, X, U);
-    const pileX = (i) => [150 + i * (U + 4), 26, U, X], pileU = (k) => [20 + (k % 10) * (U + 3), 26 + X + 24 + Math.floor(k / 10) * (U + 3), U, U];
-    const x2 = hide(mkTile(stage, 'x2', 1, 20, 26, d.v, X, U));
-    const xs = [];
-    for (let i = 0; i < Math.abs(b); i++) { const p = pileX(i); const e = hide(mkTile(stage, 'xv', sb, p[0], p[1], d.v, X, U)); e.sg = sb; xs.push(e); }
-    const zps = [];
-    for (let k = 0; k < zp; k++) for (const s of [1, -1]) { const p = pileX(xs.length); const e = hide(mkTile(stage, 'xv', s, p[0], p[1], d.v, X, U)); e.sg = s; e.classList.add('u4l1-zp'); xs.push(e); zps.push(e); }
-    const us = []; for (let k = 0; k < Math.abs(c0); k++) { const p = pileU(k); us.push(hide(mkTile(stage, 'u', Math.sign(c0), p[0], p[1], d.v, X, U))); }
-    // which x-tile goes where
-    const sm = Math.sign(d.m), sN = Math.sign(d.n), pool = xs.slice(), take = (s) => pool.splice(pool.findIndex((e) => e.sg === s), 1)[0];
-    const right = Array.from({ length: M }, () => take(sm)), bottom = Array.from({ length: N }, () => take(sN));
-    const col = (k) => (k < 0 ? NC : BC);
-    const labs = [sideLab(stage, T(d.v), RX + X / 2, RY - 8, 'top'), sideLab(stage, T(`\\textcolor{${col(d.m)}}{${term(d.m, '', false)}}`), RX + X + M * U / 2, RY - 8, 'top'),
-      sideLab(stage, T(d.v), RX - 12, RY + X / 2, 'left'), sideLab(stage, T(`\\textcolor{${col(d.n)}}{${term(d.n, '', false)}}`), RX - 12, RY + X + N * U / 2, 'left')];
-    const frame = hide(div(stage, 'u4l1-rframe', '', RX - 4, RY - 4, Rg.W + 8, Rg.H + 8));
-    const F = hide(panel(stage, 16, 326, RX - 44, 104, '', 'u4l1-fpanel'));
-    F.innerHTML = `<div class="u4l1-fbig">${T(`${tlTri(d)}=${d.ans}`)}</div><div class="u4l1-fsub">${T(`\\text{corner: }${pn(d.m)}\\times${pn(d.n)}=${cC(sn(c0))}\\quad\\text{sides: }${pn(d.m)}+${pn(d.n)}=${cB(sn(b))}`)}</div>`;
-    const st = hide(stamp(stage, 'rectangle!', { x: RX + Rg.W / 2, y: RY + Rg.H + 34 }));
-    const nb = Math.abs(b), nc = Math.abs(c0), red = (k) => (k < 0 ? 'red ' : '');
-    const steps = [
-      { cap: `${T(tlTri(d))}: one ${T(d.v + '^2')} tile, <b>${nb}</b> ${red(b)}${T(d.v)}-tile${nb === 1 ? '' : 's'} and <b>${nc}</b> ${red(c0)}unit tiles.`, run: async (c) => { await pop(c, x2); for (const e of xs) if (!zps.includes(e)) await appear(c, e, 90); for (const e of us) await appear(c, e, 30); } },
-      { cap: `Goal: use <b>every</b> tile to make one rectangle. Start with the ${T(d.v + '^2')} tile in a corner.`, run: (c) => mv(c, x2, Rg.x2, 600) }
-    ];
-    if (zp) steps.push({ cap: `We will need ${M} ${d.m < 0 ? 'red' : 'green'} and ${N} ${d.n < 0 ? 'red' : 'green'} ${T(d.v)}-tiles. Add ${zp} <b>zero pair${zp > 1 ? 's' : ''}</b>: a green and a red ${T(d.v)}-tile add to 0, so nothing changes.`,
-      run: async (c) => { for (const e of zps) await pop(c, e, 260); } });
-    steps.push({ cap: `Line up the ${T(d.v)}-tiles along two sides: <b>${M}</b> down the right, <b>${N}</b> along the bottom.`,
-      run: async (c) => { await Promise.all([...right.map((e, i) => mv(c, e, Rg.right(i), 560, i * 60)), ...bottom.map((e, j) => mv(c, e, Rg.bottom(j), 560, 200 + j * 60))]); } });
-    steps.push({ cap: `The corner is ${M} by ${N}, so it takes exactly ${T(`${M}\\times${N}=${nc}`)} unit tiles${c0 < 0 ? ` (a ${d.m > 0 ? 'green' : 'red'} side times a ${d.n > 0 ? 'green' : 'red'} side gives <b>negative</b> units)` : d.m < 0 ? ' (red times red gives <b>positive</b> units)' : ''}. They fit!`,
-      run: async (c) => { await Promise.all(us.map((e, k) => mv(c, e, Rg.unit(k), 520, k * 18))); frame.style.opacity = 1; await appear(c, frame, 300); } });
-    steps.push({ cap: `Read the side lengths: ${T(bin(d.v, d.m))} across the top, ${T(bin(d.v, d.n))} down the side.`, run: async (c) => { for (const l of labs) await show(c, l); } });
-    steps.push({ cap: `Area = length × width: ${T(`${tlTri(d)}=${d.ans}`)}. The corner <b>multiplies</b> to ${T(cC('c'))}; the sides <b>add</b> to ${T(cB('b'))}.`, run: async (c) => { await show(c, F); await stampIn(c, st); } });
-    return steps;
-  }
-};
-
-/* =============================== explainer: the product–sum hunt =============================== */
+/* =============================== explainer: find the two numbers with Ryan's X =============================== */
+/* Ryan's X (2026-11-11): c goes on top (it is ac, with a = 1), b underneath, the two numbers on the sides; the factor
+ * pairs are listed beside the X and the right pair is circled. */
 const PS = {
   d24: { v: 'x', b: 10, c: 24, label: T('x^2+10x+24') },
   e4a: { v: 'n', b: 13, c: 36, label: 'Example 4(a)' }, e4b: { v: 'x', b: -10, c: 21, label: '4(b)' },
   e4c: { v: 'y', b: 2, c: -35, label: '4(c)' }, e4d: { v: 'p', b: -9, c: -36, label: '4(d)' },
-  e5a: { v: 'x', w: 'y', b: -7, c: 12, label: 'Example 5(a)' }, e5b: { v: 'a', w: 'b', b: 1, c: -20, label: '5(b)' }
+  e5a: { v: 'x', w: 'y', b: -7, c: 12, label: 'Example 5(a)' }, e5b: { v: 'a', w: 'b', b: 1, c: -20, label: '5(b)' },
+  e7a: { v: 'x', b: 5, c: 8, label: 'Example 7(a)' }
 };
-function psPairs(b, c) { // in the order a student lists them; the shown order matches the booklet (c > 0 small first, c < 0 big first)
+function psPairs(b, c) { // in the order a student lists them (c > 0 small first, c < 0 big first), stopping at the right pair
   const out = [], s = b < 0 ? -1 : 1, A = Math.abs(c);
   for (let k = 1; k * k <= A; k++) if (A % k === 0) {
     const pr = c > 0 ? [s * k, s * (A / k)] : [s * (A / k), -s * k];
@@ -356,53 +234,70 @@ function psPairs(b, c) { // in the order a student lists them; the shown order m
   }
   return out;
 }
+/** Ryan's X centred at (cx, cy): top and bottom values, labels above and below, side slots (hidden) */
+function ryanX(stage, svg, cx, cy, r, top, bot, topLab, botLab) {
+  const ln = (x1, y1, x2, y2) => svgEl('line', { x1, y1, x2, y2, stroke: COLORS.blue, 'stroke-width': 5, 'stroke-linecap': 'round' }, svg);
+  const g = svgEl('g', {}, svg); g.style.opacity = 0;
+  g.appendChild(ln(cx - r, cy - r, cx + r, cy + r)); g.appendChild(ln(cx + r, cy - r, cx - r, cy + r));
+  const v = (cls, html, x, y) => centre(hide(div(stage, 'u4l1-xv ' + cls, html, x, y)));
+  return { g, la: v('u4l1-xlab', topLab, cx, cy - r - 18), lb: v('u4l1-xlab', botLab, cx, cy + r + 20),
+    top: v('u4l1-xtop', T(top), cx, cy - r * 0.6), bot: v('u4l1-xbot', T(bot), cx, cy + r * 0.62),
+    L: v('u4l1-xside', '', cx - r * 0.8, cy), R: v('u4l1-xside', '', cx + r * 0.8, cy) };
+}
 const productSum = {
-  title: 'Multiply to c, add to b',
+  title: 'Find the two numbers: the X',
   height: 430, minW: 900, capH: 84,
-  choices: [{ v: 'd24', label: PS.d24.label }, { sep: 'Check:' }, ...['e4a', 'e4b', 'e4c', 'e4d', 'e5a', 'e5b'].map((k) => ({ v: k, label: PS[k].label }))],
-  ask: (v) => { const d = PS[v]; return `Factor ${T(tri(d.v, d.b, d.c, d.w || ''))}.`; },
+  choices: [{ v: 'd24', label: PS.d24.label }, { sep: 'Check:' }, ...['e4a', 'e4b', 'e4c', 'e4d', 'e5a', 'e5b', 'e7a'].map((k) => ({ v: k, label: PS[k].label }))],
+  ask: (v) => { const d = PS[v]; return v === 'e7a' ? `Show that ${T(tri(d.v, d.b, d.c))} does not factor over the integers.` : `Factor ${T(tri(d.v, d.b, d.c, d.w || ''))}.`; },
   make(stage, v, ex) {
-    const d = PS[v], w = d.w || '', pairs = psPairs(d.b, d.c), [m, n] = pairs[pairs.length - 1], W = ex.W;
+    const d = PS[v], w = d.w || '', pairs = psPairs(d.b, d.c), W = ex.W, H = 430;
+    const hit = pairs.findIndex(([p, q]) => p + q === d.b), [m, n] = hit >= 0 ? pairs[hit] : [0, 0];
     const triC = `${d.v}^2${d.b < 0 ? '-' : '+'}${cB(Math.abs(d.b) === 1 ? '' : Math.abs(d.b))}${d.v}${w}${d.c < 0 ? '-' : '+'}${cC(Math.abs(d.c))}${w ? w + '^2' : ''}`;
-    const ans = `${bin(d.v, m, w)}${bin(d.v, n, w)}`;
+    const ans = hit >= 0 ? `${bin(d.v, m, w)}${bin(d.v, n, w)}` : '';
     div(stage, 'u4l1-fbig', T(triC), 20, 8);
     div(stage, 'u4l1-muted', `multiply to ${T(cC(sn(d.c)))}, add to ${T(cB(sn(d.b)))}`, 22, 58);
-    // the pair table
-    const TX = 16, TY = 100, cw = [170, 220, 56], RH = 46;
-    const head = hide(div(stage, 'u4l1-gtr u4l1-gth', '', TX, TY));
-    [`Pairs with product&nbsp;${T(cC(sn(d.c)))}`, `Sum (want&nbsp;${T(cB(sn(d.b)))})`, ''].forEach((t, j) => box(head.appendChild(h('div', 'u4l1-gtc', t)), cw[j], RH));
+    const svg = svgEl('svg', { class: 'u4l1-ov', width: W, height: H }, stage);
+    const sNum = (k, x, y) => hide(div(stage, 'u4l1-sn', String(k), x, y));
+    // left: the X and the pair list
+    const XC = 120, YC = 262, XR = 64;
+    const X = ryanX(stage, svg, XC, YC, XR, sn(d.c), sn(d.b), T(cC('c')), T(cB('b')));
+    const n1 = sNum(1, 14, 112);
+    const RH = pairs.length > 4 ? 40 : 46, LX = 236, LY = YC - (pairs.length * RH) / 2 + 4;
     const rows = pairs.map(([p, q], i) => {
-      const r = hide(div(stage, 'u4l1-gtr', '', TX, TY + (i + 1) * RH)), ok = p + q === d.b;
-      [T(`${sn(p)},\\ ${sn(q)}`), T(`${sn(p)}+${pn(q)}=${ok ? cB(sn(p + q)) : sn(p + q)}`), ok ? '✓' : '✗'].forEach((t, j) => box(r.appendChild(h('div', 'u4l1-gtc' + (j === 2 ? (ok ? ' u4l1-yes' : ' u4l1-no') : ''), t)), cw[j], RH));
-      r.ok = ok; return r;
+      const e = hide(div(stage, 'u4l1-xp', `<span>${T(`${sn(p)}\\times${pn(q)}`)}</span><span class="u4l1-xps">${T(`\\text{sum }${sn(p + q)}`)}</span>`, LX, LY + i * RH, 226, RH - 8));
+      e.ok = p + q === d.b; return e;
     });
-    // the sign rule
+    // right: signs, then the answer and the check
     const SX = 500, SW = W - SX - 16;
-    const sg = panel(stage, SX, 8, SW, 128, 'Signs');
+    const sg = panel(stage, SX + 40, 8, SW - 40, 128, 'Signs');
+    const n2 = sNum(2, SX, 14);
     const r1 = h('div', 'u4l1-rule', `${T('c>0')}: <b>same</b> signs, the sign of ${T('b')}`), r2 = h('div', 'u4l1-rule', `${T('c<0')}: <b>opposite</b> signs; the larger size takes the sign of ${T('b')}`);
     sg.append(r1, r2); const lit = d.c > 0 ? r1 : r2;
-    const signCap = d.c > 0 ? `${T(`c=${d.c}>0`)}: same signs, and ${T(`b=${d.b}`)} is ${d.b > 0 ? 'positive' : 'negative'}, so both are ${d.b > 0 ? 'positive' : 'negative'}.`
+    const signCap = d.c > 0 ? `${T(`c=${d.c}>0`)}: same signs, and ${T(`b=${d.b}`)} is ${d.b > 0 ? 'positive' : 'negative'}, so both numbers are ${d.b > 0 ? 'positive' : 'negative'}.`
       : `${T(`c=${d.c}<0`)}: opposite signs, and ${T(`b=${d.b}`)} is ${d.b > 0 ? 'positive' : 'negative'}, so the larger number is ${d.b > 0 ? 'positive' : 'negative'}.`;
-    // answer and the expansion box
-    const A = hide(div(stage, 'u4l1-fbig', T(`=${ans}`), SX, 146));
-    const BX = SX + 70, BY = 248, bw = 118, bh = 50;
-    const hd = [[d.v, ''], [term(n, w, false), BC]], hr = [[d.v, ''], [term(m, w, false), BC]];
-    const grid = hide(div(stage, 'u4l1-xbox', '', BX - 70, BY - 44, 70 + 2 * bw, 44 + 2 * bh));
-    hd.forEach(([t], j) => { const e = div(grid, 'u4l1-xh', T(t), 70 + j * bw, 0, bw, 40); void e; });
-    hr.forEach(([t], i) => div(grid, 'u4l1-xh', T(t), 0, 44 + i * bh, 66, bh));
-    const cellT = [[`${d.v}^2`, term(n, d.v + w, true)], [term(m, d.v + w, true), term(m * n, w ? w + '^2' : '', true)]];
-    const cells = cellT.map((row, i) => row.map((t, j) => div(grid, 'u4l1-xc' + (i + j === 1 ? ' u4l1-xc-mid' : i === 1 ? ' u4l1-xc-c' : ''), T(t), 70 + j * bw, 44 + i * bh, bw, bh)));
-    cells.flat().forEach(hide);
-    const sumL = hide(div(stage, 'u4l1-line u4l1-ok', T(`${d.v}^2${term(n, d.v + w, false)}${term(m, d.v + w, false)}${term(m * n, w ? w + '^2' : '', false)}=${tri(d.v, d.b, d.c, w)}\\ \\checkmark`), SX, BY + 2 * bh + 14, SW));
-    const miss = rows.filter((r) => !r.ok).length;
-    return [
-      { cap: `Find two integers that <b>multiply</b> to ${T(cC(sn(d.c)))} and <b>add</b> to ${T(cB(sn(d.b)))}.`, run: (c) => show(c, head) },
-      { cap: signCap, run: async (c) => { lit.classList.add('u4l1-rule-on'); await pulse(c, lit, 1.04); } },
-      ...(miss ? [{ cap: `List the factor pairs of ${T(String(Math.abs(d.c)))} in order and check each sum…`, run: async (c) => { for (const r of rows) if (!r.ok) { await show(c, r); r.classList.add('u4l1-gtr-x'); } } }] : []),
-      { cap: `${T(`${sn(m)}`)} and ${T(sn(n))}: product ${T(cC(sn(m * n)))}, sum ${T(cB(sn(m + n)))}. Found it!`, run: async (c) => { const r = rows[rows.length - 1]; await show(c, r); r.classList.add('u4l1-gtr-ok'); await pulse(c, r, 1.04); } },
-      { cap: `So ${T(`${tri(d.v, d.b, d.c, w)}=${ans}`)}.` + (w ? ` Keep the ${T(w)} with each number.` : ''), run: (c) => show(c, A) },
-      { cap: `Check by expanding: the four products add up to ${T(tri(d.v, d.b, d.c, w))}.`, run: async (c) => { await show(c, grid); for (const e of cells.flat()) await appear(c, e, 200); await show(c, sumL); } }
+    const n3 = sNum(3, SX, 168), A = hide(div(stage, 'u4l1-fbig', T(`=${ans}`), SX + 40, 162));
+    const cw = w ? w + '^2' : '';
+    const n4 = sNum(4, SX, 238);
+    const C1 = hide(div(stage, 'u4l1-wl u4l1-ok', T(`\\text{Check: }${ans}`), SX + 40, 232));
+    const C2 = hide(div(stage, 'u4l1-wl u4l1-ok', T(`=${d.v}^2${term(n, d.v + w, false)}${term(m, d.v + w, false)}${term(m * n, cw, false)}`), SX + 40, 276));
+    const C3 = hide(div(stage, 'u4l1-wl u4l1-ok', T(`=${tri(d.v, d.b, d.c, w)}\\ \\checkmark`), SX + 40, 320));
+    const st = hit >= 0 ? hide(stamp(stage, 'factored', { x: SX + SW / 2 + 60, y: 392 })) : hide(stamp(stage, 'does not factor', { ok: false, x: SX + SW / 2 + 20, y: 210, size: 'lg' }));
+    const showX = async (c) => { X.g.style.opacity = 1; await appear(c, X.g, 300); await show(c, n1); await show(c, X.la); await pop(c, X.top); await show(c, X.lb); await pop(c, X.bot); };
+    const steps = [
+      { cap: `Draw the X. ${T(cC(sn(d.c)))} goes on <b>top</b> (it is ${T('ac')}, and here ${T('a=1')}), ${T(cB(sn(d.b)))} goes <b>underneath</b>. The two numbers on the sides must <b>multiply</b> to the top and <b>add</b> to the bottom.`, run: showX },
+      { cap: signCap, run: async (c) => { await show(c, n2); lit.classList.add('u4l1-rule-on'); await pulse(c, lit, 1.04); } },
+      { cap: `List the factor pairs of ${T(String(Math.abs(d.c)))} with those signs, in order, and check each sum.`, run: async (c) => { for (const r of rows) await show(c, r); } }
     ];
+    if (hit < 0) {
+      steps.push({ cap: `No pair adds to ${T(String(d.b))}. ${d.c > 0 ? `(Pairs with the other sign add to ${pairs.map(([p, q]) => T(sn(-(p + q)))).join(' and ')}: no good either.)` : ''} So ${T(tri(d.v, d.b, d.c))} <b>does not factor over the integers</b>.`,
+        run: async (c) => { rows.forEach((r) => r.classList.add('u4l1-xp-no')); await shake(c, X.bot); await stampIn(c, st); } });
+      return steps;
+    }
+    steps.push({ cap: `${T(sn(m))} and ${T(sn(n))}: product ${T(cC(sn(m * n)))}, sum ${T(cB(sn(m + n)))}. <b>Circle</b> that pair and write the two numbers on the sides of the X.`,
+      run: async (c) => { rows.forEach((r) => r.classList.add(r.ok ? 'u4l1-xp-ok' : 'u4l1-xp-no')); await pulse(c, rows[hit], 1.06); X.L.innerHTML = T(sn(m)); X.R.innerHTML = T(sn(n)); await pop(c, X.L); await pop(c, X.R); } });
+    steps.push({ cap: `The two numbers go in the brackets: ${T(`${tri(d.v, d.b, d.c, w)}=${ans}`)}.` + (w ? ` Keep the ${T(w)} with each number.` : ''), run: async (c) => { await show(c, n3); await show(c, A); } });
+    steps.push({ cap: `Check by expanding: ${T(ans)} gives back ${T(tri(d.v, d.b, d.c, w))}.`, run: async (c) => { await show(c, n4); await show(c, C1); await show(c, C2); await show(c, C3); await stampIn(c, st); } });
+    return steps;
   }
 };
 
@@ -463,139 +358,6 @@ const fully = {
       { cap: `Factor ${T(d.start)} fully: work down the checklist.`, run: async (c) => { cur = 'start'; await F.visit(c, 'start'); await show(c, L0); } },
       ...d.steps.map((s, i) => ({ cap: s[1], run: async (c) => { await goTo(c, s[0]); for (const l of ls[i]) await show(c, l); if (s[0] === 'again') await stampIn(c, st); } }))
     ];
-  }
-};
-
-/* =============================== explainer: ascending order, two forms =============================== */
-const AS = {
-  asc: { label: T('35+2x-x^2'), q: '35+2x-x^2', f1: '(7-x)(5+x)', f2: '-(x-7)(x+5)', flipA: '7-x', flipB: '-(x-7)', xs: [1, 3, 10],
-    fs: [(x) => 35 + 2 * x - x * x, (x) => (7 - x) * (5 + x), (x) => -(x - 7) * (x + 5)],
-    steps: [
-      [`Constant first: <b>ascending order</b>. The ${T('x^2')} term is negative.`, null],
-      [`Factor it directly: ${T('(7-x)(5+x)')}. Expand to check: ${T('35+7x-5x-x^2=35+2x-x^2')}.`, '=(7-x)(5+x)'],
-      [`Or take out ${T('-1')} first: ${T('-(x^2-2x-35)')}, product ${T('-35')}, sum ${T('-2')}: ${T('-7')} and ${T('5')}.`, '=-(x^2-2x-35)=-(x-7)(x+5)'],
-      [`Why are they equal? ${T('7-x=-(x-7)')}: the same bracket with its signs flipped.`, 'flip'],
-      [`Test some values of ${T('x')}: all three give the same numbers. Both forms are correct.`, 'table']] },
-  e6c: { label: 'Example 6(c)', q: '-x^2+2x+48', f1: '-(x-8)(x+6)', f2: '(8-x)(x+6)', flipA: '-(x-8)', flipB: '8-x', xs: [1, 2, 10],
-    fs: [(x) => -x * x + 2 * x + 48, (x) => -(x - 8) * (x + 6), (x) => (8 - x) * (x + 6)],
-    steps: [
-      [`The ${T('x^2')} term is negative.`, null],
-      [`Take out ${T('-1')}: every sign flips.`, '=-(x^2-2x-48)'],
-      [`Product ${T('-48')}, sum ${T('-2')}: ${T('-8')} and ${T('6')}.`, '=-(x-8)(x+6)'],
-      [`Move the minus into the first bracket: ${T('-(x-8)=8-x')}.`, 'flip'],
-      [`So ${T('(8-x)(x+6)')} is the same. Test some values of ${T('x')}: all three agree.`, 'table']] }
-};
-const ascending = {
-  title: 'Two correct forms',
-  height: 410, minW: 900,
-  choices: [{ v: 'asc', label: AS.asc.label }, { sep: 'Check:' }, { v: 'e6c', label: AS.e6c.label }],
-  ask: (v) => `Factor ${T(AS[v].q)}. Show two equal forms.`,
-  make(stage, v, ex) {
-    const d = AS[v], W = ex.W, P = panel(stage, 16, 8, 520, 384, 'Working', 'u4l1-work');
-    lineIn(P, T(d.q), 'u4l1-wl').style.opacity = 1;
-    const ls = d.steps.map((s) => (s[1] && s[1] !== 'flip' && s[1] !== 'table' ? lineIn(P, T(s[1]), 'u4l1-wl') : null));
-    const fin = lineIn(P, T(`${d.q}=${d.f1}=${d.f2}`), 'u4l1-wl u4l1-wl-sm u4l1-ok');
-    // flip card
-    const FX = 572, FW = W - FX - 16;
-    const flip = hide(div(stage, 'u4l1-flip', T(d.flipA), FX + (FW - 300) / 2, 26, 300, 70));
-    const fcap = hide(div(stage, 'u4l1-muted u4l1-center', 'flip every sign inside', FX, 104, FW));
-    // test table (expressions down the side, x values across)
-    const rowsT = [['x', d.xs.map(String)], ...[d.q, d.f1, d.f2].map((e, k) => [e, d.xs.map((x) => String(d.fs[k](x)))])];
-    const tb = hide(div(stage, 'u4l1-tt', '', FX, 160));
-    const vals = [];
-    rowsT.forEach((r, i) => {
-      const re = h('div', 'u4l1-gtr' + (i === 0 ? ' u4l1-gth' : '')); tb.appendChild(re);
-      box(re.appendChild(h('div', 'u4l1-gtc', T(r[0]))), 180, 48);
-      r[1].forEach((t) => { const ce = box(re.appendChild(h('div', 'u4l1-gtc', T(t))), 60, 48); if (i > 0) { hide(ce); vals.push(ce); } });
-    });
-    const st = hide(stamp(stage, 'equal', { x: FX + FW / 2, y: 380 }));
-    return d.steps.map((s, i) => ({
-      cap: s[0],
-      run: async (c) => {
-        if (ls[i]) await show(c, ls[i]);
-        if (s[1] === 'flip') {
-          await show(c, flip);
-          await anim(c, flip, [{ transform: 'rotateX(0deg)' }, { transform: 'rotateX(90deg)' }], 280);
-          flip.innerHTML = T(`${d.flipA}=${d.flipB}`); flip.classList.add('u4l1-flip-b');
-          await anim(c, flip, [{ transform: 'rotateX(90deg)' }, { transform: 'rotateX(0deg)' }], 280); await show(c, fcap);
-        }
-        if (s[1] === 'table') { await show(c, tb); for (const e of vals) await appear(c, e, 120); await show(c, fin); await stampIn(c, st); }
-      }
-    }));
-  }
-};
-
-/* =============================== explainer: tiles that can't make a rectangle; every b =============================== */
-const TR = {
-  e7a: { label: 'Example 7(a)', mode: 'none', b: 5, c: 8, tries: [[8, 1], [4, 2]] },
-  e7b: { label: '7(b)', mode: 'findB', c: 10, tries: [[10, 1], [5, 2]] },
-  b14: { label: T('x^2+bx+14'), mode: 'findB', c: 14, tries: [[14, 1], [7, 2]] }
-};
-const tryRect = {
-  title: 'Can the tiles make a rectangle?',
-  height: 440, minW: 900, capH: 84,
-  choices: [{ v: 'b14', label: TR.b14.label }, { sep: 'Check:' }, { v: 'e7a', label: TR.e7a.label }, { v: 'e7b', label: TR.e7b.label }],
-  ask: (v) => (TR[v].mode === 'none' ? `Show that ${T('x^2+5x+8')} does not factor over the integers.` : `Find all integers ${T('b')} so that ${T(`x^2+bx+${TR[v].c}`)} can be factored.`),
-  make(stage, v, ex) {
-    const d = TR[v], X = 100, U = 24, RY = 74, Mmax = d.tries[0][0], RX = Math.min(560, ex.W - 28 - (X + Mmax * U));
-    const pileX = (i) => [140 + i * (U + 4), 26, U, X], pileU = (k) => [20 + (k % 10) * (U + 3), 26 + X + 22 + Math.floor(k / 10) * (U + 3), U, U];
-    const x2 = hide(mkTile(stage, 'x2', 1, 20, 26, 'x', X, U));
-    const us = Array.from({ length: d.c }, (_, k) => { const p = pileU(k); return hide(mkTile(stage, 'u', 1, p[0], p[1], 'x', X, U)); });
-    const xs = d.mode === 'none' ? Array.from({ length: d.b }, (_, i) => { const p = pileX(i); return hide(mkTile(stage, 'xv', 1, p[0], p[1], 'x', X, U)); }) : [];
-    const qbox = d.mode === 'findB' ? hide(div(stage, 'u4l1-qbox', `${T('b')} ${T('x')}-tiles?`, 140, 26, 230, X)) : null;
-    const L = panel(stage, 16, 238, RX - 40, 196, d.mode === 'none' ? 'Corner shapes for 8' : `Corner shapes for ${d.c}`, 'u4l1-tlist');
-    let slots = [], strips = [], labs = [];
-    const clearTry = (c) => { [...slots, ...strips, ...labs].forEach((e) => e.remove()); slots = []; strips = []; labs = []; };
-    const layout = async (c, M, N, neg) => {
-      const G = rectGeo(RX, RY, M, N, X, U);
-      await mv(c, x2, G.x2, 450);
-      await Promise.all(us.map((e, k) => mv(c, e, G.unit(k), 480, k * 14)));
-      const pos = [...Array.from({ length: M }, (_, i) => G.right(i)), ...Array.from({ length: N }, (_, j) => G.bottom(j))];
-      const sg = neg ? -1 : 1, col = neg ? NC : BC;
-      labs = [sideLab(stage, T(`\\textcolor{${col}}{${neg ? '-' : '+'}${M}}`), RX + X + M * U / 2, RY - 8, 'top'), sideLab(stage, T(`\\textcolor{${col}}{${neg ? '-' : '+'}${N}}`), RX - 12, RY + X + N * U / 2, 'left'),
-        sideLab(stage, T('x'), RX + X / 2, RY - 8, 'top'), sideLab(stage, T('x'), RX - 12, RY + X / 2, 'left')];
-      return { G, pos, sg };
-    };
-    const steps = [];
-    if (d.mode === 'none') {
-      steps.push({ cap: `${T('x^2+5x+8')}: one ${T('x^2')} tile, <b>5</b> ${T('x')}-tiles and <b>8</b> unit tiles. Can they make a rectangle?`, run: async (c) => { await pop(c, x2); for (const e of xs) await appear(c, e, 90); for (const e of us) await appear(c, e, 40); } });
-      d.tries.forEach(([M, N], t) => {
-        const need = M + N, gaps = need - d.b;
-        steps.push({ cap: `${t ? 'Try' : 'The 8 units fill the corner:'} ${M} by ${N}. The sides then need ${T(`${M}+${N}=${need}`)} ${T('x')}-tiles, but we have only 5: <b>${gaps} gap${gaps > 1 ? 's' : ''}</b>.`,
-          run: async (c) => {
-            clearTry(c); const { pos } = await layout(c, M, N, false);
-            slots = pos.map((p) => { const s = div(stage, 'u4l1-slot', '', ...p); return s; });
-            await Promise.all(xs.map((e, i) => mv(c, e, pos[i], 520, i * 50)));
-            slots.slice(d.b).forEach((s) => s.classList.add('u4l1-gap'));
-            for (const l of labs) l.style.opacity = 1;
-            const ln = lineIn(L, `${T(`${M}\\times${N}`)}: sides need ${T(`${M}+${N}=${need}`)} <span class="u4l1-no">✗</span>`); await show(c, ln);
-            await Promise.all(slots.slice(d.b).map((s) => pulse(c, s, 1.15)));
-          } });
-      });
-      steps.push({ cap: `8 has no other factor pairs. Red tiles: ${T('(-8)(-1)')} and ${T('(-4)(-2)')} give sums ${T('-9')} and ${T('-6')}. No pair has sum 5.`,
-        run: async (c) => { await show(c, lineIn(L, `${T('-8,\\,-1')} and ${T('-4,\\,-2')}: sums ${T('-9,\\ -6')} <span class="u4l1-no">✗</span>`)); } });
-      const st = hide(stamp(stage, 'does not factor', { ok: false, x: RX + (X + 8 * U) / 2, y: RY + X + 2 * U + 60 }));
-      steps.push({ cap: `No rectangle is possible, so ${T('x^2+5x+8')} <b>does not factor over the integers</b>.`, run: async (c) => { await show(c, lineIn(L, `No sum of 5: <b>does not factor</b>.`, 'u4l1-line-key')); await stampIn(c, st); } });
-      return steps;
-    }
-    const sums = d.tries.map(([M, N]) => M + N);
-    steps.push({ cap: `${T(`x^2+bx+${d.c}`)}: the ${T('x^2')} tile and <b>${d.c}</b> unit tiles. How many ${T('x')}-tiles, ${T('b')}, make a rectangle?`, run: async (c) => { await pop(c, x2); await show(c, qbox); for (const e of us) await appear(c, e, 40); } });
-    const tryStep = (M, N, neg) => async (c) => {
-      clearTry(c); const { pos, sg } = await layout(c, M, N, neg);
-      strips = pos.map((p) => hide(mkTile(stage, p[2] < p[3] ? 'xv' : 'xh', sg, p[0], p[1], 'x', X, U)));
-      for (const e of strips) await appear(c, e, 70);
-      for (const l of labs) l.style.opacity = 1;
-    };
-    d.tries.forEach(([M, N], t) => {
-      steps.push({ cap: `Corner ${M} by ${N}: the sides take ${T(`${M}+${N}=${M + N}`)} ${T('x')}-tiles. So ${T(`b=${M + N}`)}: ${T(`x^2+${M + N}x+${d.c}=(x+${M})(x+${N})`)}.`,
-        run: async (c) => { if (t === 0) qbox.style.opacity = 0.25; await tryStep(M, N, false)(c); await show(c, lineIn(L, `${T(`${M}\\times${N}`)}: ${T(`b=${cB(M + N)}`)}, &nbsp;${T(`(x+${M})(x+${N})`)}`)); } });
-    });
-    const [M2, N2] = d.tries[d.tries.length - 1];
-    steps.push({ cap: `Red ${T('x')}-tiles work too: ${T(`(-${M2})(-${N2})=${d.c}`)} and ${T(`(-${d.tries[0][0]})(-${d.tries[0][1]})=${d.c}`)}, so ${T(`b=-${sums[1]}`)} and ${T(`b=-${sums[0]}`)}.`,
-      run: async (c) => { await tryStep(M2, N2, true)(c); await show(c, lineIn(L, `red: ${T(`b=${cB(-sums[0])},\\ ${cB(-sums[1])}`)}, e.g. ${T(`(x-${M2})(x-${N2})`)}`)); } });
-    const st = hide(stamp(stage, `b = ±${sums[1]} or ±${sums[0]}`, { ok: true, x: RX + (X + M2 * U) / 2 + 30, y: RY + X + N2 * U + 60 }));
-    steps.push({ cap: `Every pair with product ${d.c} gives one ${T('b')}: ${T(`b=\\pm${sums[1]}`)} or ${T(`\\pm${sums[0]}`)}.`, run: async (c) => { await show(c, lineIn(L, `${T(`b=\\pm${sums[1]}\\ \\text{or}\\ \\pm${sums[0]}`)}`, 'u4l1-line-key')); await stampIn(c, st); } });
-    return steps;
   }
 };
 
@@ -735,6 +497,5 @@ standup('u4l1', {
 });
 
 /* =============================== mount =============================== */
-mountTrick();
-export const explainers = mountExplainers({ gcf, binomial, grouping, tiles, productSum, fully, ascending, tryRect, isFactor, patio });
-export const _test = { term, tri, bin, psPairs, GF, BI, GR, TL, PS, FU, AS, TR, IF };
+export const explainers = mountExplainers({ gcf, binomial, grouping, productSum, fully, isFactor, patio });
+export const _test = { term, tri, bin, psPairs, GF, BI, GR, PS, FU, IF };

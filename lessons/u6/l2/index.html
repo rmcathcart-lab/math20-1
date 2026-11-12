@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Simplifying Rational Expressions · Math 20-1 6.2</title>
+<meta name="description" content="Math 20-1 Unit 6 Lesson 2: simplifying rational expressions by factoring. Equivalent forms and simplest form, the non-permissible values from the original denominator, dividing out factors not terms, factoring the numerator and denominator (common factor, difference of squares, trinomials), opposite binomials, two variables, equivalent forms and geometry. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u6l2.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u6l2">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Sam’s Shortcut">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><line x1="0" y1="52" x2="340" y2="52" stroke="#d9d3c4" stroke-width="3" stroke-dasharray="16 12"><animate attributeName="stroke-dashoffset" values="0;-28" dur=".7s" repeatCount="indefinite"/></line><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="34" text-anchor="middle" transform="scale(-1 1)">✏️</text></g><text x="60" y="46" font-size="28" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text><text x="290" y="46" font-size="28" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0.8s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Sam’s Shortcut</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Sam “simplifies” <span class="tex">\dfrac{16}{64}</span> by crossing out the two 6s, and gets <span class="tex">\dfrac{1}{4}</span>.</p><p class="vw-ask">Is Sam’s answer right?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="The fraction 16 over 64 with a pencil crossing out both 6s, then equals 1 over 4 with a question mark"><text x="92" y="96" font-size="80" font-family="Nunito, Arial, sans-serif" font-weight="800" fill="#4a4436" text-anchor="middle">1</text><text x="140" y="96" font-size="80" font-family="Nunito, Arial, sans-serif" font-weight="800" fill="#4a4436" text-anchor="middle">6</text><line x1="62" y1="118" x2="172" y2="118" stroke="#4a4436" stroke-width="6" stroke-linecap="round"/><text x="94" y="204" font-size="80" font-family="Nunito, Arial, sans-serif" font-weight="800" fill="#4a4436" text-anchor="middle">6</text><text x="142" y="204" font-size="80" font-family="Nunito, Arial, sans-serif" font-weight="800" fill="#4a4436" text-anchor="middle">4</text><line x1="122" y1="100" x2="158" y2="42" stroke="#c93a33" stroke-width="7" stroke-linecap="round" stroke-dasharray="68" stroke-dashoffset="68"><animate attributeName="stroke-dashoffset" values="68;68;0;0;68" keyTimes="0;0.15;0.27;.9;1" dur="3.6s" repeatCount="indefinite"/></line><line x1="76" y1="208" x2="112" y2="150" stroke="#c93a33" stroke-width="7" stroke-linecap="round" stroke-dasharray="68" stroke-dashoffset="68"><animate attributeName="stroke-dashoffset" values="68;68;0;0;68" keyTimes="0;0.4;0.52;.9;1" dur="3.6s" repeatCount="indefinite"/></line><g><animateTransform attributeName="transform" type="translate" values="150 30;150 30;178 -28;120 80;150 30" keyTimes="0;.15;.27;.52;1" dur="3.6s" repeatCount="indefinite"/><text x="0" y="60" font-size="40" text-anchor="middle">✏️</text></g><text x="212" y="136" font-size="46" font-family="Nunito, Arial, sans-serif" font-weight="800" fill="#4a4436" text-anchor="middle">=</text><text x="262" y="106" font-size="50" font-family="Nunito, Arial, sans-serif" font-weight="800" fill="#2b55a0" text-anchor="middle">1</text><line x1="240" y1="122" x2="284" y2="122" stroke="#2b55a0" stroke-width="5" stroke-linecap="round"/><text x="262" y="170" font-size="50" font-family="Nunito, Arial, sans-serif" font-weight="800" fill="#2b55a0" text-anchor="middle">4</text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="304" y="92" font-size="44" font-weight="800" fill="#c93a33" text-anchor="middle">?</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.8s" begin="0.3s" repeatCount="indefinite"/><text x="286" y="236" font-size="44" text-anchor="middle">🤔</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Check it. Then hunt for another fraction where crossing out a digit works.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Yes, <span class="tex">\frac{16}{64}</span> really is <span class="tex">\frac{1}{4}</span></b> (<span class="tex">16\times4=64</span>), but only by luck! Crossing out digits is not a real rule: crossing out the 2s in <span class="tex">\frac{12}{24}</span> also gives <span class="tex">\frac{1}{4}</span>, but <span class="tex">\frac{12}{24}=\frac{1}{2}</span>.<br>With two-digit numbers (a fraction less than 1, no zeros) the trick works only <b>four</b> times: <span class="tex">\frac{16}{64}=\frac{1}{4}</span>, <span class="tex">\frac{19}{95}=\frac{1}{5}</span>, <span class="tex">\frac{26}{65}=\frac{2}{5}</span> and <span class="tex">\frac{49}{98}=\frac{4}{8}</span>.</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 6 Rational Expressions and Equations · Lesson 2</div>
+  <h1>Simplifying Rational Expressions by Factoring</h1>
+  <p class="lede">A rational expression is simplified the way a fraction is: <b>factor</b> the top and the bottom, then <b>divide out</b> the common factors. The non-permissible values are stated <b>first</b>, from the original denominator, and they stay with the answer.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>write a rational expression in <b>simplest form</b> by factoring the numerator and the denominator fully</li>
+      <li>state the <b>NPVs</b> from the <b>original</b> denominator and keep them with the simplified expression</li>
+      <li>explain why only <b>factors</b>, not terms, can be divided out, and check a simplification by substituting a number</li>
+      <li>simplify quotients of <b>opposite binomials</b>: <span class="tex">\dfrac{a-b}{b-a}=-1</span></li>
+      <li>simplify expressions in <b>two variables</b>, decide whether two expressions are <b>equivalent</b>, and use rational expressions in <b>geometry</b></li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN4</b> Determine equivalent forms of rational expressions (limited to numerators and denominators that are monomials, binomials or trinomials).<br><span class="muted">Today: simplest form by factoring, the NPVs of the original expression, factors not terms, opposite binomials.</span></div>
+</section>
+
+<!-- ================= 1. Equivalent forms and simplest form ================= -->
+<section class="card" data-ink="s1" data-section="1. Equivalent Forms and Simplest Form">
+  <div class="sec-h"><span class="badge">1</span><h2>Equivalent Forms and Simplest Form</h2></div>
+  <p>A fraction is simplified by dividing out a common factor: <span class="tex">\dfrac{18}{24}=\dfrac{3\cdot6}{4\cdot6}=\dfrac{3}{4}</span>. Rational expressions work the same way. Two expressions are <b>equivalent</b> if they have the same value for every permissible value of the variable. An expression is in <b>simplest form</b> when its numerator and denominator have no common factor other than <span class="tex">1</span> (or <span class="tex">-1</span>).</p>
+  <div class="def amber"><b>To simplify a rational expression</b>
+    <ol class="u6l2-steps">
+      <li><b>Factor</b> the numerator and the denominator fully.</li>
+      <li>State the <b>NPVs</b> from the <b>original</b> denominator.</li>
+      <li><b>Divide out</b> the common factors.</li>
+      <li>Write the result <b>with its NPVs</b>.</li>
+    </ol>
+    <div class="u6l2-note">The simplified expression keeps the NPVs of the original, even when the factor that caused them is gone.</div></div>
+  <p>With monomials, use the exponent laws: <span class="tex">\dfrac{x^5}{x^2}=x^3</span>.</p>
+  <div class="explainer" data-explainer="simp"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Common factors</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{18x^5}{24x^2}</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPV: <span class="tex">x\ne0</span><br><span class="tex">\dfrac{6x^2\cdot3x^3}{6x^2\cdot4}=\boldsymbol{\dfrac{3x^3}{4}},\ x\ne0</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{-10a^2b}{35ab^3}</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPVs: <span class="tex">a\ne0,\ b\ne0</span><br><span class="tex">\dfrac{5ab\cdot(-2a)}{5ab\cdot7b^2}=\boldsymbol{-\dfrac{2a}{7b^2}},\ a\ne0,\ b\ne0</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{6(x-2)}{9(x-2)(x+1)}</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPVs: <span class="tex">x\ne2,\ -1</span><br><span class="tex">\dfrac{3(x-2)\cdot2}{3(x-2)\cdot3(x+1)}=\boldsymbol{\dfrac{2}{3(x+1)}},\ x\ne2,\ -1</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{(m+4)^2}{(m+4)(m-3)}</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPVs: <span class="tex">m\ne-4,\ 3</span><br><span class="tex">\boldsymbol{\dfrac{m+4}{m-3}},\ m\ne-4,\ 3</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Factors, not terms ================= -->
+<section class="card" data-ink="s2" data-section="2. Divide Out Factors, Not Terms">
+  <div class="sec-h"><span class="badge">2</span><h2>Divide Out Factors, Not Terms</h2></div>
+  <div class="def">Only a <b>factor</b> of the whole numerator and of the whole denominator can be divided out. A <b>term</b> (a part joined by <span class="tex">+</span> or <span class="tex">-</span>) cannot. For example, <span class="tex">\dfrac{x+6}{x+2}</span> is not <span class="tex">\dfrac{6}{2}=3</span>: try <span class="tex">x=2</span>, which gives <span class="tex">\dfrac{8}{4}=2</span>, not <span class="tex">3</span>. To check a simplification, <b>substitute a permissible value</b> into the original and the result: they must agree.</div>
+  <div class="explainer" data-explainer="verdict"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check on the calculator.</b> Store a test value in X: <span class="keys"><kbd>3</kbd><kbd>STO→</kbd><kbd>X,T,θ,n</kbd><kbd>ENTER</kbd></span>. Then type the original and your answer with <kbd>X,T,θ,n</kbd> for <span class="tex">x</span>: <span class="tex">(x^2-25)\div(x-5)</span> gives <b>8</b> and <span class="tex">x+5</span> gives <b>8</b> ✓. Same number, so the simplification agrees at <span class="tex">x=3</span>.</div>
+    <div class="u6l2-pcol"><button class="pill" data-keys="3 STO→ X = ( X x² − 25 ) ÷ ( X − 5 ) = X + 5 =">Show me</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Find the error</h3></div>
+  <p class="q">Each simplification is wrong. Explain the error and give the correct simplest form with its NPVs.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x+8}{4}=x+2</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">4</span> is not a factor of the whole numerator; only the term <span class="tex">8</span> was divided. <span class="tex">x+8</span> and <span class="tex">4</span> have no common factor, so <span class="tex">\boldsymbol{\dfrac{x+8}{4}}</span> is already in simplest form (no NPVs).</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{3x+12}{3}=x+12</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3</span> was divided out of only one term. Factor first: <span class="tex">\dfrac{3(x+4)}{3}=\boldsymbol{x+4}</span> (no NPVs).</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{x^2-25}{x-5}=x-5</span> &nbsp;(the squares were “cancelled”)</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2</span> and <span class="tex">25</span> are terms, not factors. <span class="tex">\dfrac{(x-5)(x+5)}{x-5}=\boldsymbol{x+5},\ x\ne5</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{x^2+4x}{x}=x+4</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The working is right but the NPV is missing. <span class="tex">\dfrac{x(x+4)}{x}=\boldsymbol{x+4},\ x\ne0</span></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Factoring the numerator and denominator ================= -->
+<section class="card" data-ink="s3" data-section="3. Factoring the Numerator and the Denominator">
+  <div class="sec-h"><span class="badge">3</span><h2>Factoring the Numerator and the Denominator</h2></div>
+  <div class="def">Use every factoring method from Unit 4: <b>common factor first</b>, then a <b>difference of squares</b> or a <b>trinomial</b> (<span class="tex">x^2+bx+c</span>, or decomposition for <span class="tex">ax^2+bx+c</span>). <b>Factor fully</b> before dividing anything out.</div>
+  <div class="tip"><div class="tip-ic">★</div><div><b>The two numbers: use the X.</b> <span class="tex">ac</span> on top, <span class="tex">b</span> underneath. List the factor pairs of <span class="tex">ac</span>, circle the pair whose sum is <span class="tex">b</span>, and write the two numbers on the sides.</div></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Factor, then divide out</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{4x-20}{x^2-25}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{4(x-5)}{(x-5)(x+5)}</span>; NPVs <span class="tex">x\ne\pm5</span><br><span class="tex">=\boldsymbol{\dfrac{4}{x+5}},\ x\ne\pm5</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x^2+2x-24}{x^2-7x+12}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{(x+6)(x-4)}{(x-3)(x-4)}</span>; NPVs <span class="tex">x\ne3,\ 4</span><br><span class="tex">=\boldsymbol{\dfrac{x+6}{x-3}},\ x\ne3,\ 4</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{3y^2-12y}{6y^2-18y-24}</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{3y(y-4)}{6(y^2-3y-4)}=\dfrac{3y(y-4)}{6(y-4)(y+1)}</span><br>NPVs <span class="tex">y\ne4,\ -1</span><br><span class="tex">=\boldsymbol{\dfrac{y}{2(y+1)}},\ y\ne4,\ -1</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{2x^2+7x-15}{4x^2-9}</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">ac=-30</span>: <span class="tex">10</span> and <span class="tex">-3</span>. <span class="tex">2x^2+10x-3x-15=(2x-3)(x+5)</span><br><span class="tex">\dfrac{(2x-3)(x+5)}{(2x-3)(2x+3)}</span>; NPVs <span class="tex">x\ne\pm\frac{3}{2}</span><br><span class="tex">=\boldsymbol{\dfrac{x+5}{2x+3}},\ x\ne\pm\frac{3}{2}</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Two trinomials, and a common factor first</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{6a^2+13a+6}{3a^2-4a-4}</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{(2a+3)(3a+2)}{(3a+2)(a-2)}</span>; NPVs <span class="tex">a\ne-\frac{2}{3},\ 2</span><br><span class="tex">=\boldsymbol{\dfrac{2a+3}{a-2}},\ a\ne-\frac{2}{3},\ 2</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x^3-4x}{x^3+x^2-6x}</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{x(x-2)(x+2)}{x(x+3)(x-2)}</span>; NPVs <span class="tex">x\ne0,\ 2,\ -3</span><br><span class="tex">=\boldsymbol{\dfrac{x+2}{x+3}},\ x\ne0,\ 2,\ -3</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 2 · Questions 1–5</h2>
+  <p class="pr-t">Factor fully, state the NPVs from the original denominator, then divide out the common factors.</p>
+  <div class="pr-chips n5"><span><b>1</b>Monomials and factored forms</span><span><b>2</b>Explain the error</span><span><b>3</b>Common factors and differences of squares</span><span><b>4</b>Trinomials (the X)</span><span><b>5</b>A common factor first</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u6l2">Open the Practice site</a></div>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u6l2"></section>
+
+<!-- ================= 4. Opposite binomials ================= -->
+<section class="card" data-ink="s4" data-section="4. Opposite Binomials">
+  <div class="sec-h"><span class="badge">4</span><h2>Opposite Binomials</h2></div>
+  <p><span class="tex">a-b</span> and <span class="tex">b-a</span> are <b>opposites</b>: <span class="tex">b-a=-(a-b)</span>. For example, <span class="tex">7-x=-(x-7)</span>. So a quotient of opposites is <span class="tex">-1</span>. To use this, <b>factor <span class="tex">-1</span> out</b> of one of them (also out of a trinomial with a negative <span class="tex">x^2</span> term: <span class="tex">12+x-x^2=-(x^2-x-12)</span>).</p>
+  <div class="def amber u6l2-center"><span class="tex u6l2-big">\dfrac{a-b}{b-a}=\dfrac{a-b}{-(a-b)}=-1,\ \ a\ne b</span>
+    <div class="u6l2-note">But <span class="tex">\dfrac{a+b}{b+a}=1</span>: <span class="tex">3+x</span> and <span class="tex">x+3</span> are the <b>same</b>, not opposites.</div></div>
+  <div class="explainer" data-explainer="opp"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Opposites</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x-7}{7-x}</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPV <span class="tex">x\ne7</span><br><span class="tex">\dfrac{x-7}{-(x-7)}=\boldsymbol{-1},\ x\ne7</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{10-5a}{a^2-4}</span></div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{5(2-a)}{(a-2)(a+2)}=\dfrac{-5(a-2)}{(a-2)(a+2)}</span>; NPVs <span class="tex">a\ne\pm2</span><br><span class="tex">=\boldsymbol{-\dfrac{5}{a+2}},\ a\ne\pm2</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{9-x^2}{x^2+x-12}</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{(3-x)(3+x)}{(x+4)(x-3)}=\dfrac{-(x-3)(x+3)}{(x+4)(x-3)}</span><br>NPVs <span class="tex">x\ne-4,\ 3</span><br><span class="tex">=\boldsymbol{-\dfrac{x+3}{x+4}},\ x\ne-4,\ 3</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{12+x-x^2}{2x^2-7x-4}</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{-(x^2-x-12)}{(2x+1)(x-4)}=\dfrac{-(x-4)(x+3)}{(2x+1)(x-4)}</span><br>NPVs <span class="tex">x\ne-\frac{1}{2},\ 4</span><br><span class="tex">=\boldsymbol{-\dfrac{x+3}{2x+1}},\ x\ne-\frac{1}{2},\ 4</span></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Two variables and equivalent forms ================= -->
+<section class="card" data-ink="s5" data-section="5. Two Variables and Equivalent Forms">
+  <div class="sec-h"><span class="badge">5</span><h2>Two Variables and Equivalent Forms</h2></div>
+  <div class="def">With <b>two variables</b>, factor in the same way and state the NPVs for the variable asked for (for example, <span class="tex">x</span> in terms of <span class="tex">y</span>). To decide whether two expressions are <b>equivalent</b>, simplify both, or rewrite one to match the other. To write an equivalent expression with a <b>new denominator</b>, multiply the numerator and the denominator by the same factor.</div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Two variables</h3></div>
+  <p class="q">Simplify, and state the non-permissible values for <span class="tex">x</span> in terms of <span class="tex">y</span>.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x^2-9y^2}{2x+6y}</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{(x-3y)(x+3y)}{2(x+3y)}</span><br>NPV <span class="tex">x\ne-3y</span><br><span class="tex">=\boldsymbol{\dfrac{x-3y}{2}},\ x\ne-3y</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x^2-xy-6y^2}{3y-x}</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{(x-3y)(x+2y)}{-(x-3y)}</span><br>NPV <span class="tex">x\ne3y</span><br><span class="tex">=\boldsymbol{-(x+2y)},\ x\ne3y</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{2x^2+5xy-3y^2}{4x^2-y^2}</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{(2x-y)(x+3y)}{(2x-y)(2x+y)}</span><br>NPVs <span class="tex">x\ne\pm\frac{y}{2}</span><br><span class="tex">=\boldsymbol{\dfrac{x+3y}{2x+y}},\ x\ne\pm\frac{y}{2}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Equivalent or not?</h3></div>
+  <p class="q">Is each expression equivalent to <span class="tex">\dfrac{x-3}{x+2}</span> (for its permissible values)? Explain.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x^2-9}{x^2+5x+6}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{(x-3)(x+3)}{(x+2)(x+3)}=\dfrac{x-3}{x+2}</span><br><b>Yes</b>, for <span class="tex">x\ne-2,\ -3</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{3-x}{-x-2}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{-(x-3)}{-(x+2)}=\dfrac{x-3}{x+2}</span><br><b>Yes</b>, for <span class="tex">x\ne-2</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{3-x}{x+2}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>No</b>: only the numerator is the opposite, so it is <span class="tex">-\dfrac{x-3}{x+2}</span>. (<span class="tex">x=0</span>: <span class="tex">\frac{3}{2}</span> vs <span class="tex">-\frac{3}{2}</span>.)</div></div></div>
+  </div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(d) Determine the missing numerator: <span class="tex u6l2-nw">\dfrac{x-3}{x+2}=\dfrac{?}{x^2-4}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-4=(x+2)(x-2)</span>, so multiply the numerator and denominator by <span class="tex">(x-2)</span>:<br><span class="tex">?=(x-3)(x-2)=\boldsymbol{x^2-5x+6},\ x\ne\pm2</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\dfrac{x^2+kx-15}{x^2-9}</span> simplifies to <span class="tex">\dfrac{x+5}{x+3}</span>. Determine <span class="tex">k</span>.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-9=(x-3)(x+3)</span>. The factor <span class="tex">(x-3)</span> was divided out, so the numerator is <span class="tex">(x+5)(x-3)=x^2+2x-15</span>. &nbsp;<span class="tex">\boldsymbol{k=2}</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Geometry ================= -->
+<section class="card" data-ink="s6" data-section="6. Rational Expressions in Geometry">
+  <div class="sec-h"><span class="badge">6</span><h2>Rational Expressions in Geometry</h2></div>
+  <div class="def">A missing length is often a quotient: <span class="tex">\text{length}=\dfrac{\text{area}}{\text{width}}</span>. Simplify the quotient by factoring, then use it. In a context, the variable must also keep every length <b>positive</b>.</div>
+  <div class="explainer" data-explainer="geo"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The garden</h3></div>
+  <p class="q">A rectangular garden has an area of <span class="tex">(2x^2+9x-5)\text{ m}^2</span> and a length of <span class="tex">(x+5)</span> m.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Write and simplify an expression for its width.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Width <span class="tex">=\dfrac{2x^2+9x-5}{x+5}</span><br><span class="tex">=\dfrac{(2x-1)(x+5)}{x+5}</span><br><span class="tex">=\boldsymbol{2x-1}</span> m<br>(<span class="tex">x\ne-5</span>; in context <span class="tex">x>\frac{1}{2}</span>)</div></div></div>
+    <div class="part"><div class="pl">(b) For which value of <span class="tex">x</span> is the garden a square? State its side length.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+5=2x-1\Rightarrow \boldsymbol{x=6}</span>. The side is <b>11 m</b> (check: <span class="tex">2(36)+54-5=121=11^2</span>).</div></div></div>
+    <div class="part"><div class="pl">(c) Determine the exact perimeter and area when <span class="tex">x=3+\sqrt{2}</span>.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Length <span class="tex">=8+\sqrt2</span><br>Width <span class="tex">=2(3+\sqrt2)-1=5+2\sqrt2</span><br>Perimeter <span class="tex">=2(13+3\sqrt2)</span><br><span class="tex">=\boldsymbol{26+6\sqrt2}</span> m<br>Area <span class="tex">=(8+\sqrt2)(5+2\sqrt2)</span><br><span class="tex">=40+16\sqrt2+5\sqrt2+4</span><br><span class="tex">=\boldsymbol{44+21\sqrt2}\text{ m}^2</span></div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex9" data-section="Example 9">
+  <div class="ex-head"><span class="ex-tag">Example 9</span><h3>The box</h3></div>
+  <p class="q">A box (rectangular prism) has a square base of side <span class="tex">x</span> cm and a height of <span class="tex">(x+3)</span> cm.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Write the surface area and the volume in factored form.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">SA=2x^2+4x(x+3)</span><br><span class="tex">=6x^2+12x</span><br><span class="tex">=\boldsymbol{6x(x+2)}\text{ cm}^2</span><br><span class="tex">V=\boldsymbol{x^2(x+3)}\text{ cm}^3</span></div></div></div>
+    <div class="part"><div class="pl">(b) Write the ratio <span class="tex">\dfrac{SA}{V}</span> in simplest form and state the NPVs.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{6x(x+2)}{x^2(x+3)}</span><br><span class="tex">=\boldsymbol{\dfrac{6(x+2)}{x(x+3)}},\ x\ne0,\ -3</span><br>(in context <span class="tex">x>0</span>)</div></div></div>
+    <div class="part"><div class="pl">(c) Evaluate the ratio for <span class="tex">x=3</span> and <span class="tex">x=6</span>. What do you notice?</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=3</span>: <span class="tex">\dfrac{6(5)}{3(6)}=\boldsymbol{\dfrac{5}{3}}</span><br><span class="tex">x=6</span>: <span class="tex">\dfrac{6(8)}{6(9)}=\boldsymbol{\dfrac{8}{9}}</span><br>The larger box has less surface area per unit of volume.</div></div></div>
+  </div>
+  <div class="space" id="ex9-space"></div>
+  <button class="more" data-more="ex9-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Four steps.</b> Factor the numerator and the denominator fully; state the NPVs from the <b>original</b> denominator; divide out the common factors; write the result <b>with its NPVs</b>.</div>
+    <div><b>Factors, not terms.</b> Only a factor of the whole numerator and the whole denominator can be divided out: <span class="tex">\dfrac{x+6}{x+2}\ne3</span>. Check by substituting a permissible value into the original and the result.</div>
+    <div><b>Opposites.</b> <span class="tex">\dfrac{a-b}{b-a}=-1</span>: factor <span class="tex">-1</span> out of one of them. But <span class="tex">\dfrac{a+b}{b+a}=1</span>. Two sign flips cancel; one flip gives the opposite.</div>
+    <div><b>Equivalent forms.</b> Simplify both, or multiply the numerator and denominator by the same factor. In geometry, length <span class="tex">=\dfrac{\text{area}}{\text{width}}</span>, and every length must be positive.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u6l2">
+    <div><div class="kicker">Your turn</div><b>Assignment 2 · Questions 6–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l3/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 3 — Multiplying Rational Expressions</b><div class="muted">Factor everything, divide out common factors across the whole product, and keep every NPV.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u6l2.js';
+  boot({ key: 'u6l2', homeHref: '../../', title: '6.2 Simplifying Rational Expressions' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

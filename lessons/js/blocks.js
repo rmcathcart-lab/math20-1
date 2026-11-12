@@ -64,7 +64,7 @@ export function tween(c, ms, fn, ease = easeInOut) {
     const t0 = performance.now();
     const tick = (now) => {
       try { c.check(); } catch (e) { rej(e); return; }
-      const t = Math.min(1, (now - t0) / ms);
+      const t = Math.max(0, Math.min(1, (now - t0) / ms));
       if (fn(ease(t)) === false || t >= 1) res(); else requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
@@ -942,7 +942,7 @@ export function stamp(host, text, o = {}) {
   if (o.x != null) { el.style.position = 'absolute'; at(el, o.x, o.y || 0); el.style.translate = '-50% -50%'; }
   host.appendChild(el); return el;
 }
-export const stampIn = (c, el, ms = 420) => anim(c, el, [{ opacity: 0, transform: `scale(1.9) rotate(${el.rot - 9}deg)` }, { opacity: 1, transform: `scale(1) rotate(${el.rot}deg)` }], ms, { easing: 'cubic-bezier(.2,1.4,.4,1)' });
+export const stampIn = (c, el, ms = 420) => anim(c, el, [{ opacity: 0, transform: `scale(1.9) rotate(${(el.rot ?? 0) - 9}deg)` }, { opacity: 1, transform: `scale(1) rotate(${el.rot ?? 0}deg)` }], ms, { easing: 'cubic-bezier(.2,1.4,.4,1)' });
 /** a substitution check: both sides worked out, then = and a verdict.
  *  o: { at: 'x=2', left, right, values, ok, title, x, y, width, hidden }
  *  left/right: an array of TeX lines, or { tex, sub, f } (f(values) gives the last line). Returns el with el.play(c). */

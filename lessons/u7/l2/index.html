@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Graphing Absolute Value Functions of Linear Functions · Math 20-1 7.2</title>
+<meta name="description" content="Math 20-1 Unit 7 Lesson 2: the graph of y = |x|; graphing y = |f(x)| from y = f(x) by reflecting the part below the x-axis (invariant points); the vertex, intercepts, domain and range of y = |ax + b|; its piecewise form; reasoning with y = |f(x)| and a distance problem. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u7l2.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u7l2">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Distance Game">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><text x="40" font-size="30" text-anchor="middle">❓<animate attributeName="y" values="64;-6" dur="3.2s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.2s" begin="0s" repeatCount="indefinite"/></text><text x="120" font-size="30" text-anchor="middle">🔢<animate attributeName="y" values="64;-6" dur="3.2s" begin="1.1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.2s" begin="1.1s" repeatCount="indefinite"/></text><text x="200" font-size="30" text-anchor="middle">❓<animate attributeName="y" values="64;-6" dur="3.2s" begin="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.2s" begin="2.2s" repeatCount="indefinite"/></text><text x="280" font-size="30" text-anchor="middle">🤔<animate attributeName="y" values="64;-6" dur="3.2s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.2s" begin="0.5s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Distance Game</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">I’m thinking of a whole number from <b>1 to 100</b>. You guess, and I tell you only <b>how far</b> your guess is from my number. Not “higher” or “lower”: just the distance.</p><p class="vw-ask">What is the smallest number of guesses that will <i>always</i> tell you my number for sure?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A genie keeping a secret number says: you are question-mark away. A guess marker wanders along a number line from 1 to 100."><rect x="0" y="0" width="330" height="250" rx="14" fill="#eef4fc"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -8;0 0" dur="2s" begin="0s" repeatCount="indefinite"/><text x="66" y="128" font-size="78" text-anchor="middle">🧞</text></g><rect x="128" y="22" width="186" height="74" rx="18" fill="#fff" stroke="#4a4436" stroke-width="3"/><path d="M140 88 L118 110 L158 92" fill="#fff" stroke="#4a4436" stroke-width="3" stroke-linejoin="round"/><rect x="141" y="86" width="20" height="8" fill="#fff"/><text x="221" y="54" font-size="19" font-weight="700" fill="#4a4436" text-anchor="middle">“You are</text><text x="221" y="82" font-size="22" font-weight="800" fill="#c93a33" text-anchor="middle"><tspan>?<animate attributeName="opacity" values="1;0.1;1" dur="1.2s" begin="0s" repeatCount="indefinite"/></tspan><tspan fill="#4a4436"> away!”</tspan></text><line x1="22" y1="190" x2="308" y2="190" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round"/><line x1="30.0" y1="184" x2="30.0" y2="196" stroke="#4a4436" stroke-width="2.5"/><line x1="40.9" y1="188" x2="40.9" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="54.5" y1="188" x2="54.5" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="68.2" y1="188" x2="68.2" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="81.8" y1="188" x2="81.8" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="95.5" y1="184" x2="95.5" y2="196" stroke="#4a4436" stroke-width="2.5"/><line x1="109.1" y1="188" x2="109.1" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="122.7" y1="188" x2="122.7" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="136.4" y1="188" x2="136.4" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="150.0" y1="188" x2="150.0" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="163.6" y1="184" x2="163.6" y2="196" stroke="#4a4436" stroke-width="2.5"/><line x1="177.3" y1="188" x2="177.3" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="190.9" y1="188" x2="190.9" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="204.5" y1="188" x2="204.5" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="218.2" y1="188" x2="218.2" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="231.8" y1="184" x2="231.8" y2="196" stroke="#4a4436" stroke-width="2.5"/><line x1="245.5" y1="188" x2="245.5" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="259.1" y1="188" x2="259.1" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="272.7" y1="188" x2="272.7" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="286.4" y1="188" x2="286.4" y2="192" stroke="#4a4436" stroke-width="1.5"/><line x1="300.0" y1="184" x2="300.0" y2="196" stroke="#4a4436" stroke-width="2.5"/><text x="30.0" y="218" font-size="17" font-weight="700" fill="#4a4436" text-anchor="middle">1</text><text x="95.5" y="218" font-size="17" font-weight="700" fill="#4a4436" text-anchor="middle">25</text><text x="163.6" y="218" font-size="17" font-weight="700" fill="#4a4436" text-anchor="middle">50</text><text x="231.8" y="218" font-size="17" font-weight="700" fill="#4a4436" text-anchor="middle">75</text><text x="300.0" y="218" font-size="17" font-weight="700" fill="#4a4436" text-anchor="middle">100</text><g><animateTransform attributeName="transform" type="translate" values="111.8 0;182.7 0;152.7 0;87.3 0;125.5 0;111.8 0" keyTimes="0;.2;.4;.6;.8;1" dur="8s" repeatCount="indefinite" calcMode="spline" keySplines=".4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1"/><rect x="4.0" y="140" width="52" height="26" rx="8" fill="#2b55a0"/><text x="30.0" y="159" font-size="16" font-weight="800" fill="#fff" text-anchor="middle">guess</text><path d="M22.0 166 L38.0 166 L30.0 180 Z" fill="#2b55a0"/></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Play it with a partner first. Where would you make your first guess?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Just one!</b> Guess <b>1</b> (or <b>100</b>). If I say “36 away”, my number can only be <b>37</b>: there is nothing below 1, so only one number is 36 away.<br><span class="muted">A guess in the middle is a trap: from 50, “13 away” could be <b>37 or 63</b>, one on each side. (With “higher or lower” you would need up to 7 guesses. Here, one guess tells you the number, and the second one wins.)</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 7 Absolute Value and Reciprocal Functions · Lesson 2</div>
+  <h1>Graphing Absolute Value Functions of Linear Functions</h1>
+  <p class="lede">Put absolute value bars around a whole function and its graph can never go below the <span class="tex">x</span>-axis. The graph of <span class="tex">y=|f(x)|</span> is the graph of <span class="tex">y=f(x)</span> with the part below the axis <b>flipped up</b>; for a line, that makes a <b>V</b>.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>graph <span class="tex">y=|x|</span> and state its vertex, domain and range</li>
+      <li>graph <span class="tex">y=|f(x)|</span> from a table or the graph of <span class="tex">y=f(x)</span> by reflecting the part below the <span class="tex">x</span>-axis, and name the <b>invariant points</b></li>
+      <li>state the vertex, <span class="tex">y</span>-intercept, domain and range of <span class="tex">y=|ax+b|</span> and sketch it without a table</li>
+      <li>write <span class="tex">y=|ax+b|</span> in piecewise form</li>
+      <li>reason about matching points on <span class="tex">y=f(x)</span> and <span class="tex">y=|f(x)|</span>, and solve a distance problem with the graph</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF2</b> Graph and analyze absolute value functions (limited to linear and quadratic functions) to solve problems.<br><span class="muted">Today: the graph of <span class="tex">y=|x|</span>, reflecting the part of a line below the <span class="tex">x</span>-axis, the vertex, intercepts, domain and range of <span class="tex">y=|ax+b|</span>, its piecewise form, and reasoning with <span class="tex">y=|f(x)|</span>.</span></div>
+</section>
+
+<!-- ================= 1. The graph of y = |x| ================= -->
+<section class="card" data-ink="s1" data-section="1. The Graph of y = |x|">
+  <div class="sec-h"><span class="badge">1</span><h2>The Graph of <span class="tex">y=|x|</span></h2></div>
+  <div class="u7l2-s1">
+    <div>
+      <p class="u7l2-p">To graph the <b>absolute value function</b> <span class="tex">y=|x|</span>, compare its table with the table of <span class="tex">y=x</span>.</p>
+      <table class="u7l2-tab u7l2-tab7">
+        <tr><th><span class="tex">x</span></th><td><span class="tex">-3</span></td><td><span class="tex">-2</span></td><td><span class="tex">-1</span></td><td><span class="tex">0</span></td><td><span class="tex">1</span></td><td><span class="tex">2</span></td><td><span class="tex">3</span></td></tr>
+        <tr><th><span class="tex">y=x</span></th><td class="u7l2-neg"><span class="tex">-3</span></td><td class="u7l2-neg"><span class="tex">-2</span></td><td class="u7l2-neg"><span class="tex">-1</span></td><td><span class="tex">0</span></td><td><span class="tex">1</span></td><td><span class="tex">2</span></td><td><span class="tex">3</span></td></tr>
+        <tr><th><span class="tex">y=|x|</span></th><td class="u7l2-pos"><span class="tex">3</span></td><td class="u7l2-pos"><span class="tex">2</span></td><td class="u7l2-pos"><span class="tex">1</span></td><td><span class="tex">0</span></td><td><span class="tex">1</span></td><td><span class="tex">2</span></td><td><span class="tex">3</span></td></tr>
+      </table>
+      <p class="u7l2-p">For <span class="tex">x\ge0</span> the <span class="tex">y</span>-values are the same. For <span class="tex">x&lt;0</span> the <span class="tex">y</span>-values of <span class="tex">y=x</span> are negative and those of <span class="tex">y=|x|</span> are their opposites, so those points are <b>reflected in the <span class="tex">x</span>-axis</b>.</p>
+      <div class="def">The graph of <span class="tex">y=|x|</span> is a V shape with its <b>vertex</b> at <span class="tex">(0,\ 0)</span>. It is made of two half-lines, the two pieces of the definition: <span class="tex">y=x</span> for <span class="tex">x\ge0</span> and <span class="tex">y=-x</span> for <span class="tex">x&lt;0</span>.<br>Domain: <span class="tex">\{x\mid x\in\mathbb{R}\}</span> &nbsp;&nbsp; Range: <span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span></div>
+    </div>
+    <div class="u7l2-fig" data-fig="absx"></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>From a table: <span class="tex">f(x)=2x-4</span></h3></div>
+  <p class="q">Let <span class="tex">f(x)=2x-4</span>.</p>
+  <div class="u7l2-two">
+    <div class="u7l2-col">
+      <div class="part"><div class="pl">(a) Complete the table.</div>
+        <table class="u7l2-tab u7l2-tab7 u7l2-fill">
+          <tr><th><span class="tex">x</span></th><td><span class="tex">-1</span></td><td><span class="tex">0</span></td><td><span class="tex">1</span></td><td><span class="tex">2</span></td><td><span class="tex">3</span></td><td><span class="tex">4</span></td><td><span class="tex">5</span></td></tr>
+          <tr><th><span class="tex">y=f(x)</span></th><td><span data-reveal><span class="tex">-6</span></span></td><td><span data-reveal><span class="tex">-4</span></span></td><td><span data-reveal><span class="tex">-2</span></span></td><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal><span class="tex">2</span></span></td><td><span data-reveal><span class="tex">4</span></span></td><td><span data-reveal><span class="tex">6</span></span></td></tr>
+          <tr><th><span class="tex">y=|f(x)|</span></th><td><span data-reveal><span class="tex">6</span></span></td><td><span data-reveal><span class="tex">4</span></span></td><td><span data-reveal><span class="tex">2</span></span></td><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal><span class="tex">2</span></span></td><td><span data-reveal><span class="tex">4</span></span></td><td><span data-reveal><span class="tex">6</span></span></td></tr>
+        </table>
+        <div class="ansrow"><button class="reveal">Answer</button><div class="ans">The <span class="tex">|f(x)|</span> row is the <span class="tex">f(x)</span> row with every negative value changed to its opposite.</div></div></div>
+      <div class="part"><div class="pl">(c) For which <span class="tex">x</span>-values are the two graphs the same? What happens to the other points?</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">They are the same for <span class="tex">x\ge2</span>, where <span class="tex">f(x)\ge0</span> (the line is on or above the <span class="tex">x</span>-axis).<br>For <span class="tex">x&lt;2</span> the <span class="tex">y</span>-values change sign: those points are reflected in the <span class="tex">x</span>-axis. The point <span class="tex">(2,\ 0)</span> is on both graphs.</div></div></div>
+    </div>
+    <div class="part u7l2-gpart"><div class="pl">(b) Graph <span class="tex">y=f(x)</span> and <span class="tex">y=|f(x)|</span> on the grid.</div><div class="u7l2-fig" data-fig="ex1"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="u7l2-cf">Dashed: <span class="tex">y=f(x)</span></span>. <span class="u7l2-ca">Solid: <span class="tex">y=|f(x)|</span></span>, a V with its vertex at <span class="tex">(2,\ 0)</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Graphing y = |f(x)| from y = f(x) ================= -->
+<section class="card" data-ink="s2" data-section="2. Graphing y = |f(x)|">
+  <div class="sec-h"><span class="badge">2</span><h2>Graphing <span class="tex">y=|f(x)|</span> from the Graph of <span class="tex">y=f(x)</span></h2></div>
+  <p class="u7l2-p">Example 1 shows the rule for any function <span class="tex">y=f(x)</span>.</p>
+  <div class="def amber u7l2-key"><div class="u7l2-keyh">Key idea: to graph <span class="tex">y=|f(x)|</span> from <span class="tex">y=f(x)</span></div>
+    <ul class="u7l2-ul">
+      <li>where the graph of <span class="tex">y=f(x)</span> is on or above the <span class="tex">x</span>-axis (<span class="tex">f(x)\ge0</span>), <b>keep it</b>;</li>
+      <li>where it is below the <span class="tex">x</span>-axis (<span class="tex">f(x)&lt;0</span>), <b>reflect it in the <span class="tex">x</span>-axis</b>: <span class="tex">(x,\ y)\to(x,\ -y)</span>.</li>
+    </ul>
+    The graph of <span class="tex">y=|f(x)|</span> is never below the <span class="tex">x</span>-axis. Points on the <span class="tex">x</span>-axis do not move: the <span class="tex">x</span>-intercepts of <span class="tex">y=f(x)</span> are the <b>invariant points</b>.</div>
+  <p class="u7l2-p">A non-horizontal line <span class="tex">y=ax+b</span> crosses the <span class="tex">x</span>-axis once, so the graph of <span class="tex">y=|ax+b|</span> is a V shape whose <b>vertex</b> is that <span class="tex">x</span>-intercept.</p>
+  <div class="explainer" data-explainer="flap"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check a sketch on the calculator.</b> Graph <b class="u7l2-code">Y1 = abs(2X − 4)</b>: <span class="keys"><kbd>abs(</kbd></span> is in the <span class="keys"><kbd>MATH</kbd></span> menu under <b>NUM</b> (<span class="keys"><kbd>MATH</kbd><kbd>►</kbd><kbd>1</kbd></span>). The table checks Example 1: <span class="keys"><kbd>2nd</kbd><kbd>TBLSET</kbd></span> (TblStart <span class="tex">-1</span>, ΔTbl <span class="tex">1</span>), then <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>.</div>
+    <div class="u7l2-pcol"><button class="pill" data-keys="Y= CLEAR abs( 2 X − 4 ) ZStandard">Graph it</button><button class="pill" data-keys="Y= CLEAR abs( 2 X − 4 ) TBLSET (−) 1 ENTER 1 ENTER TABLE ► ▼">The table</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Flip the part below the axis</h3></div>
+  <p class="q">The graph of <span class="tex">y=f(x)</span> is shown. Sketch the graph of <span class="tex">y=|f(x)|</span> on the same grid and state the invariant point.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">f(x)=x+3</span></div><div class="u7l2-fig" data-fig="e2a"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Invariant point <span class="tex">(-3,\ 0)</span>; the part left of <span class="tex">x=-3</span> is reflected.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">f(x)=-2x+6</span></div><div class="u7l2-fig" data-fig="e2b"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Invariant point <span class="tex">(3,\ 0)</span>; the part right of <span class="tex">x=3</span> is reflected.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">f(x)=\frac12x-2</span></div><div class="u7l2-fig" data-fig="e2c"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Invariant point <span class="tex">(4,\ 0)</span>; the part left of <span class="tex">x=4</span> is reflected.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Without a table; horizontal lines</h3></div>
+  <div class="u7l2-two">
+    <div class="u7l2-col">
+      <div class="part"><div class="pl">(a) Sketch <span class="tex">y=|4-2x|</span> without a table: find the vertex, the <span class="tex">y</span>-intercept and one more point.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex: <span class="tex">4-2x=0\Rightarrow x=2</span>, so <span class="tex">(2,\ 0)</span>.<br><span class="tex">y</span>-intercept: <span class="tex">y=|4-0|=4</span>, so <span class="tex">(0,\ 4)</span>.<br>Another point: <span class="tex">x=5</span>: <span class="tex">y=|4-10|=\lvert -6\rvert=6</span>, so <span class="tex">(5,\ 6)</span>.<br>By symmetry about <span class="tex">x=2</span>, <span class="tex">(4,\ 4)</span> and <span class="tex">(-1,\ 6)</span> are also on the graph.<br>Draw the line <span class="tex">y=4-2x</span>, then reflect the part right of <span class="tex">x=2</span>.</div></div></div>
+      <div class="part"><div class="pl">(b) Let <span class="tex">g(x)=-2</span> and <span class="tex">h(x)=3</span> (horizontal lines). Describe the graphs of <span class="tex">y=|g(x)|</span> and <span class="tex">y=|h(x)|</span>.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">|g(x)|=\lvert -2\rvert=2</span>: the graph is the line <span class="tex">y=2</span>. The whole line <span class="tex">y=-2</span> is reflected; there are no invariant points.<br><span class="tex">|h(x)|=|3|=3</span>: the line <span class="tex">y=3</span> is above the axis, so nothing changes.</div></div></div>
+    </div>
+    <div class="part u7l2-gpart"><div class="pl">(a) <span class="tex">y=|4-2x|</span></div><div class="u7l2-fig" data-fig="e3a"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The V through <span class="tex">(2,\ 0)</span>, <span class="tex">(0,\ 4)</span> and <span class="tex">(5,\ 6)</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Characteristics of y = |ax + b| ================= -->
+<section class="card" data-ink="s3" data-section="3. Characteristics of y = |ax + b|">
+  <div class="sec-h"><span class="badge">3</span><h2>Characteristics of <span class="tex">y=|ax+b|</span></h2></div>
+  <div class="def amber u7l2-key"><div class="u7l2-keyh">Key idea: for <span class="tex">y=|ax+b|</span>, <span class="tex">a\ne0</span></div>
+    <ul class="u7l2-ul">
+      <li><b>vertex</b> (the <span class="tex">x</span>-intercept and invariant point): solve <span class="tex">ax+b=0</span>, giving <span class="tex">\left(-\dfrac ba,\ 0\right)</span></li>
+      <li><span class="tex">y</span>-intercept: <span class="tex">(0,\ |b|)</span></li>
+      <li>domain <span class="tex">\{x\mid x\in\mathbb{R}\}</span>; &nbsp;range <span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span></li>
+      <li>the two arms have slopes <span class="tex">a</span> and <span class="tex">-a</span>; the graph is symmetric about the vertical line through the vertex.</li>
+    </ul></div>
+  <p class="u7l2-p">Compared with the line <span class="tex">y=ax+b</span>: the domain and the <span class="tex">x</span>-intercept stay the same, the range changes from all real numbers to <span class="tex">y\ge0</span>, and the <span class="tex">y</span>-intercept <span class="tex">b</span> becomes <span class="tex">|b|</span>.</p>
+  <div class="explainer" data-explainer="sketch"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Vertex, intercepts, domain and range</h3></div>
+  <div class="u7l2-two">
+    <div class="part"><div class="pl">(a) Let <span class="tex">f(x)=3x-6</span>. Complete the table, then sketch <span class="tex">y=f(x)</span> and <span class="tex">y=|f(x)|</span> on the grid.</div>
+      <table class="u7l2-tab u7l2-ctab">
+        <tr><th></th><th><span class="tex">y=f(x)</span></th><th><span class="tex">y=|f(x)|</span></th></tr>
+        <tr><th>Domain</th><td><span data-reveal><span class="tex">\{x\mid x\in\mathbb{R}\}</span></span></td><td><span data-reveal><span class="tex">\{x\mid x\in\mathbb{R}\}</span></span></td></tr>
+        <tr><th>Range</th><td><span data-reveal><span class="tex">\{y\mid y\in\mathbb{R}\}</span></span></td><td><span data-reveal><span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span></span></td></tr>
+        <tr><th><span class="tex">x</span>-intercept</th><td><span data-reveal><span class="tex">2</span></span></td><td><span data-reveal><span class="tex">2</span></span></td></tr>
+        <tr><th><span class="tex">y</span>-intercept</th><td><span data-reveal><span class="tex">-6</span></span></td><td><span data-reveal><span class="tex">6</span></span></td></tr>
+      </table>
+      <div class="work" style="--h:40px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3x-6=0\Rightarrow x=2</span>. The vertex of <span class="tex">y=|3x-6|</span> is <span class="tex">(2,\ 0)</span>; the arms have slopes <span class="tex">3</span> and <span class="tex">-3</span>.</div></div></div>
+    <div class="part u7l2-gpart"><div class="pl">(a) the grid</div><div class="u7l2-fig" data-fig="e4a"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="u7l2-cf">Dashed: <span class="tex">y=3x-6</span></span>; <span class="u7l2-ca">solid: <span class="tex">y=|3x-6|</span></span>.</div></div></div>
+  </div>
+  <div class="u7l2-two">
+    <div class="part"><div class="pl">(b) For <span class="tex">y=\left|-\frac12x-2\right|</span>, state the vertex, the <span class="tex">y</span>-intercept, the domain and the range, and the slopes of the arms. Sketch the graph.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex: <span class="tex">-\frac12x-2=0\Rightarrow-\frac12x=2\Rightarrow x=-4</span>, so <span class="tex">(-4,\ 0)</span>.<br><span class="tex">y</span>-intercept: <span class="tex">\lvert -2\rvert=2</span>, so <span class="tex">(0,\ 2)</span>.<br>Domain <span class="tex">\{x\mid x\in\mathbb{R}\}</span>; range <span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span>.<br>Slopes: <span class="tex">-\frac12</span> (left arm, <span class="tex">x\le-4</span>) and <span class="tex">\frac12</span> (right arm, <span class="tex">x&gt;-4</span>).</div></div></div>
+    <div class="part u7l2-gpart"><div class="pl">(b) <span class="tex">y=\left|-\frac12x-2\right|</span></div><div class="u7l2-fig" data-fig="e4b"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The V with vertex <span class="tex">(-4,\ 0)</span> through <span class="tex">(0,\ 2)</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 2 · Questions 1–5</h2>
+  <p class="pr-t">Keep what is on or above the <span class="tex">x</span>-axis, flip up what is below it. For <span class="tex">y=|ax+b|</span>: vertex from <span class="tex">ax+b=0</span>, <span class="tex">y</span>-intercept <span class="tex">|b|</span>, range <span class="tex">y\ge0</span>.</p>
+  <div class="pr-chips n5"><span><b>1</b>A table, then both graphs</span><span><b>2</b>Sketch <span class="tex">y=|f(x)|</span>; invariant points</span><span><b>3</b>Sketch without a table</span><span><b>4</b>Vertex, <span class="tex">y</span>-intercept, domain, range</span><span><b>5</b>Compare <span class="tex">f</span> and <span class="tex">|f|</span> in a table</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u7l2">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. Piecewise form ================= -->
+<section class="card" data-ink="s4" data-section="4. Piecewise Form">
+  <div class="sec-h"><span class="badge">4</span><h2>Piecewise Form of <span class="tex">y=|ax+b|</span></h2></div>
+  <p class="u7l2-p">Apply the definition of absolute value to the whole expression <span class="tex">ax+b</span>.</p>
+  <div class="def amber u7l2-key u7l2-keyc"><div><span class="tex">|ax+b|=\begin{cases}\ \ ax+b, &amp; \text{if } ax+b\ge0\\ -(ax+b), &amp; \text{if } ax+b&lt;0\end{cases}</span></div>
+    <div>Solve <span class="tex">ax+b\ge0</span> for <span class="tex">x</span> to see where each piece applies. <b>Dividing by a negative number reverses the inequality sign.</b></div></div>
+  <p class="u7l2-p">The boundary is the <span class="tex">x</span>-coordinate of the vertex. At the vertex both pieces equal <span class="tex">0</span>, so the equal sign can go with either piece; we put it with the first. On the graph, the piece <span class="tex u7l2-cf">ax+b</span> is the original line (above the axis) and the piece <span class="tex u7l2-ca">-(ax+b)</span> is the reflected arm.</p>
+  <div class="explainer" data-explainer="piece"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Write it in piecewise form</h3></div>
+  <p class="q">Write each function in piecewise form.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y=|x+5|</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+5\ge0\Rightarrow x\ge-5</span><br><span class="tex">y=\begin{cases}x+5, &amp; \text{if } x\ge-5\\ -x-5, &amp; \text{if } x&lt;-5\end{cases}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y=|2x-7|</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x-7\ge0\Rightarrow x\ge\frac72</span><br><span class="tex">y=\begin{cases}2x-7, &amp; \text{if } x\ge\frac72\\ -2x+7, &amp; \text{if } x&lt;\frac72\end{cases}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">y=|6-3x|</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">6-3x\ge0\Rightarrow-3x\ge-6\Rightarrow x\le2</span> (sign reversed)<br><span class="tex">y=\begin{cases}6-3x, &amp; \text{if } x\le2\\ 3x-6, &amp; \text{if } x&gt;2\end{cases}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">y=\left|-\frac12x+1\right|</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-\frac12x+1\ge0\Rightarrow-\frac12x\ge-1\Rightarrow x\le2</span><br><span class="tex">y=\begin{cases}-\frac12x+1, &amp; \text{if } x\le2\\ \frac12x-1, &amp; \text{if } x&gt;2\end{cases}</span></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>True or false?</h3></div>
+  <p class="q">True or false? Explain.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">|x-4|=x-4</span> if <span class="tex">x\ge4</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>True:</b> for <span class="tex">x\ge4</span>, <span class="tex">x-4\ge0</span>, so the bars change nothing.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">|3x+6|=3x+6</span> if <span class="tex">x&lt;-2</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>False:</b> for <span class="tex">x&lt;-2</span>, <span class="tex">3x+6&lt;0</span>, so <span class="tex">|3x+6|=-3x-6</span>.<br>(Test <span class="tex">x=-3</span>: <span class="tex">\lvert -3\rvert=3</span>, but <span class="tex">3(-3)+6=-3</span>.)</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">|5-x|=x-5</span> if <span class="tex">x&gt;5</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>True:</b> for <span class="tex">x&gt;5</span>, <span class="tex">5-x&lt;0</span>, so <span class="tex">|5-x|=-(5-x)=x-5</span>.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">|2x-3|=-2x+3</span> if <span class="tex">x\le\frac32</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>True:</b> for <span class="tex">x\le\frac32</span>, <span class="tex">2x-3\le0</span>, so <span class="tex">|2x-3|=-(2x-3)=-2x+3</span>.</div></div></div>
+  </div>
+  <div class="explainer u7l2-exin" data-explainer="tf"></div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u7l2"></section>
+
+<!-- ================= 5. Reasoning with y = |f(x)| ================= -->
+<section class="card" data-ink="s5" data-section="5. Reasoning with y = |f(x)|">
+  <div class="sec-h"><span class="badge">5</span><h2>Reasoning with <span class="tex">y=|f(x)|</span></h2></div>
+  <ul class="u7l2-ul u7l2-big">
+    <li>A point <span class="tex">(x,\ y)</span> on <span class="tex">y=f(x)</span> becomes the point <span class="tex">(x,\ |y|)</span> on <span class="tex">y=|f(x)|</span>.</li>
+    <li>If <span class="tex">(x,\ k)</span> with <span class="tex">k&gt;0</span> is on <span class="tex">y=|f(x)|</span>, then <span class="tex">f(x)=k</span> or <span class="tex">f(x)=-k</span>: the point on <span class="tex">y=f(x)</span> is <span class="tex">(x,\ k)</span> or <span class="tex">(x,\ -k)</span>.</li>
+    <li>For a linear function, the same V comes from two lines: <span class="tex">y=f(x)</span> and its reflection <span class="tex">y=-f(x)</span>.</li>
+    <li><span class="tex">|f(x)|</span> is never negative, so an equation such as <span class="tex">|f(x)|=-4</span> has no solution and <span class="tex">|f(x)|&lt;0</span> is never true.</li>
+  </ul>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Points, and working backwards</h3></div>
+  <div class="u7l2-two">
+    <div class="u7l2-col">
+      <div class="part"><div class="pl">(a) The point <span class="tex">(-4,\ -7)</span> is on the graph of <span class="tex">y=f(x)</span>. State the matching point on <span class="tex">y=|f(x)|</span>.</div><div class="work" style="--h:50px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(-4,\ \lvert -7\rvert)=(-4,\ 7)</span></div></div></div>
+      <div class="part"><div class="pl">(b) The point <span class="tex">(2,\ 5)</span> is on the graph of <span class="tex">y=|g(x)|</span>. State the possible points on <span class="tex">y=g(x)</span>.</div><div class="work" style="--h:50px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(2,\ 5)</span> or <span class="tex">(2,\ -5)</span></div></div></div>
+      <div class="part"><div class="pl">(d) Explain why the equation <span class="tex">|f(x)|=-4</span> has no solution.</div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">An absolute value is never negative, so <span class="tex">|f(x)|</span> can never equal <span class="tex">-4</span>. The graph of <span class="tex">y=|f(x)|</span> never reaches the line <span class="tex">y=-4</span>.</div></div></div>
+    </div>
+    <div class="part u7l2-gpart"><div class="pl">(c) The graph of <span class="tex">y=|f(x)|</span>, where <span class="tex">f</span> is linear, is shown. Sketch the two possible graphs of <span class="tex">y=f(x)</span> and write their equations. Then write <span class="tex">y=|f(x)|</span> in the form <span class="tex">y=|ax+b|</span>.</div><div class="u7l2-fig" data-fig="e7"></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The right arm passes through <span class="tex">(2,\ 0)</span> and <span class="tex">(4,\ 3)</span>: slope <span class="tex">\frac32</span>, so one line is <span class="tex">y=\frac32x-3</span>.<br>Its reflection in the <span class="tex">x</span>-axis is <span class="tex">y=-\frac32x+3</span> (through <span class="tex">(0,\ 3)</span> and <span class="tex">(2,\ 0)</span>).<br><span class="tex">y=\left|\frac32x-3\right|</span> (or, the same function, <span class="tex">y=\left|-\frac32x+3\right|</span>).</div></div></div>
+  </div>
+  <div class="explainer u7l2-exin" data-explainer="unflap"></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The water station</h3></div>
+  <p class="q">A cyclist rides at a constant <span class="tex">0.25</span> km/min along a straight trail toward a water station <span class="tex">5</span> km ahead, rides past it, and keeps going. Her position relative to the station after <span class="tex">t</span> minutes is <span class="tex">p=5-0.25t</span> kilometres (positive before the station, negative after it), and her distance from the station is <span class="tex">d=|5-0.25t|</span>, for <span class="tex">0\le t\le40</span>.</p>
+  <div class="u7l2-two">
+    <div class="u7l2-col">
+      <div class="part"><div class="pl">(a) Complete the table.</div>
+        <table class="u7l2-tab u7l2-tab5">
+          <tr><th><span class="tex">t</span> (min)</th><td><span class="tex">0</span></td><td><span class="tex">10</span></td><td><span class="tex">20</span></td><td><span class="tex">30</span></td><td><span class="tex">40</span></td></tr>
+          <tr><th><span class="tex">p</span> (km)</th><td><span data-reveal><span class="tex">5</span></span></td><td><span data-reveal><span class="tex">2.5</span></span></td><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal><span class="tex">-2.5</span></span></td><td><span data-reveal><span class="tex">-5</span></span></td></tr>
+          <tr><th><span class="tex">d</span> (km)</th><td><span data-reveal><span class="tex">5</span></span></td><td><span data-reveal><span class="tex">2.5</span></span></td><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal><span class="tex">2.5</span></span></td><td><span data-reveal><span class="tex">5</span></span></td></tr>
+        </table>
+        <div class="ansrow"><button class="reveal">Answer</button><div class="ans">The <span class="tex">d</span> row is the <span class="tex">p</span> row without the negative signs.</div></div></div>
+      <div class="part"><div class="pl">(c) When does she reach the station?</div><div class="work" style="--h:56px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">d=0</span> when <span class="tex">5-0.25t=0</span>: <span class="tex">t=20</span> min (the vertex).</div></div></div>
+      <div class="part"><div class="pl">(d) Use the graph to find when she is <span class="tex">2</span> km from the station.</div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The line <span class="tex">d=2</span> meets the V at <span class="tex">t=12</span> and <span class="tex">t=28</span> min.<br>(Check: <span class="tex">|5-3|=2</span> and <span class="tex">|5-7|=2</span>.)</div></div></div>
+      <div class="part"><div class="pl">(e) State the domain and the range of <span class="tex">d</span> in this context.</div><div class="work" style="--h:56px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Domain <span class="tex">\{t\mid 0\le t\le40,\ t\in\mathbb{R}\}</span>; range <span class="tex">\{d\mid 0\le d\le5,\ d\in\mathbb{R}\}</span>.</div></div></div>
+    </div>
+    <div class="part u7l2-gpart"><div class="pl">(b) Graph <span class="tex">p</span> and <span class="tex">d</span> on the grid.</div><div class="u7l2-fig" data-fig="e8"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="u7l2-cf">Dashed: <span class="tex">p=5-0.25t</span></span>; <span class="u7l2-ca">solid: <span class="tex">d=|5-0.25t|</span></span>, with the line <span class="tex">d=2</span> for (d).</div></div></div>
+  </div>
+  <div class="explainer u7l2-exin" data-explainer="ride"></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Flip up what is below.</b> To graph <span class="tex">y=|f(x)|</span>, keep the part of <span class="tex">y=f(x)</span> on or above the <span class="tex">x</span>-axis and reflect the part below it: <span class="tex">(x,\ y)\to(x,\ -y)</span>. The <span class="tex">x</span>-intercepts are the <b>invariant points</b>.</div>
+    <div><b><span class="tex">y=|ax+b|</span> is a V.</b> Vertex <span class="tex">\left(-\frac ba,\ 0\right)</span> from <span class="tex">ax+b=0</span>; <span class="tex">y</span>-intercept <span class="tex">(0,\ |b|)</span>; arms with slopes <span class="tex">a</span> and <span class="tex">-a</span>; domain all real numbers, range <span class="tex">y\ge0</span>.</div>
+    <div><b>Piecewise form.</b> <span class="tex">ax+b</span> where <span class="tex">ax+b\ge0</span>, and <span class="tex">-(ax+b)</span> where <span class="tex">ax+b&lt;0</span>. Solve for <span class="tex">x</span>; dividing by a negative reverses the sign.</div>
+    <div><b>Reasoning.</b> <span class="tex">(x,\ y)</span> on <span class="tex">y=f(x)</span> gives <span class="tex">(x,\ |y|)</span>. A V comes from two lines, <span class="tex">y=f(x)</span> and <span class="tex">y=-f(x)</span>. <span class="tex">|f(x)|</span> is never negative.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u7l2">
+    <div><div class="kicker">Your turn</div><b>Assignment 2 · Questions 6–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l3/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 3 — Graphing Absolute Value Functions of Quadratic Functions</b><div class="muted">The same flip for parabolas: the part below the <span class="tex">x</span>-axis folds up, and the invariant points are the zeros.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u7l2.js';
+  boot({ key: 'u7l2', homeHref: '../../', title: '7.2 Absolute Value Graphs: Lines' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>
