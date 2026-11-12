@@ -525,6 +525,7 @@
         var D2 = z.b * z.b + 4 * z.a * z.c, n2 = D2 > 0 ? 2 : D2 === 0 ? 1 : 0;
         if (n2 !== n) opts.push({ html: lab(n2) + t('b^{2}-4ac=' + D2) + (D2 > 0 ? '>0' : D2 < 0 ? '<0' : '') + '.', why: 'Check the sign of ' + t('-4ac=-4(' + z.a + ')(' + z.c + ')') + '.' });
         [0, 1, 2].filter(function (k) { return k !== n && k !== n2; }).forEach(function (k) { opts.push({ html: lab(k) + (k === 2 ? 'the parabola opens ' + (up ? 'up' : 'down') + ', so it must cross the ' + t('x') + '-axis twice.' : k === 1 ? 'the vertex is on the ' + t('x') + '-axis.' : 'the parabola opens ' + (up ? 'up' : 'down') + ', so it never meets the ' + t('x') + '-axis.'), why: 'Use the discriminant: ' + t('b^{2}-4ac=' + D) + '.' }); });
+        if (n !== 1) opts.push({ html: lab(n) + 'the parabola opens ' + (up ? 'down' : 'up') + ' and its vertex is ' + pos + ' the ' + t('x') + '-axis.', why: 'Check the direction of opening: ' + t('a=' + z.a) + '. (Use the discriminant for the count.)' });
         return Z.mc(r, 'How many ' + t('x') + '-intercepts does the graph of ' + t('y=' + genT(z.a, z.b, z.c)) + ' have? Choose the answer with the right reason.', opts,
           t('b^{2}-4ac=' + par(z.b) + '^{2}-4(' + z.a + ')(' + z.c + ')=' + D) + ': ' + (n === 2 ? 'two' : n === 1 ? 'one' : 'no') + ' real root' + (n === 1 ? '' : 's') + ', so ' + n + ' ' + t('x') + '-intercept' + (n === 1 ? '' : 's') + '. The parabola opens ' + (up ? 'up' : 'down') + ' and its vertex is ' + pos + ' the ' + t('x') + '-axis.',
           ['The number of ' + t('x') + '-intercepts is the number of real roots of ' + t('y=0') + ': use the discriminant.'], 'x-intercepts from the discriminant');
@@ -649,7 +650,7 @@
       }) }] },
     { num: '24', outcome: RF5, parts: [
       { id: '24', level: 'PRG', make: mk(function (r) {
-        var o = pickWhere(function () { return { a: r.pick([2, 3]), h: nz(r, 1, 5), c: nz(r, 1, 8) }; }, function (o) { var b = 2 * o.h, D = b * b - 4 * o.a * o.c, m = D / 4; return D > 0 && m > 1 && !isSq(m) && sqf(m)[0] === 1 && gcd(o.a, o.h) === 1 && b * b + 4 * o.a * o.c > 0 && !(o.a === 2 && o.h === -3 && o.c === 3); });
+        var o = pickWhere(function () { return { a: r.pick([2, 3]), h: nz(r, 1, 5), c: nz(r, 1, 8) }; }, function (o) { var b = 2 * o.h, D = b * b - 4 * o.a * o.c, m = D / 4; return D > 0 && m > 1 && !isSq(m) && sqf(m)[0] === 1 && gcd(o.a, o.h) === 1 && gcd(gcd(o.a, 2 * o.h), o.c) === 1 && b * b + 4 * o.a * o.c > 0 && !(o.a === 2 && o.h === -3 && o.c === 3); });
         var b = 2 * o.h, m = (b * b - 4 * o.a * o.c) / 4, m2 = (b * b + 4 * o.a * o.c) / 4, Ft = function (A2, rad, d) { return t('\\frac{' + A2 + '\\pm\\sqrt{' + rad + '}}{' + d + '}'); };
         var opts = [{ html: Ft(-o.h, m, o.a), right: true }, { html: Ft(o.h, m, o.a), why: 'The formula starts with ' + t('-b') + '.' }, { html: Ft(-b, m, 2 * o.a), why: t('\\sqrt{' + 4 * m + '}=2\\sqrt{' + m + '}') + ', not ' + t('\\sqrt{' + m + '}') + '.' }];
         opts.push(isSq(m2) ? { html: Ft(-o.h, m, 2 * o.a), why: 'Divide every term by the common factor: numerator and denominator.' } : { html: Ft(-o.h, m2, o.a), why: 'Check the sign of ' + t('-4ac') + ': ' + t('b^{2}-4ac=' + b * b + sT(-4 * o.a * o.c)) + '.' });
@@ -772,7 +773,7 @@
     { num: '9', outcome: RF5, parts: [
       { id: 'E9', level: 'BEG', make: mk(function (r) {
         var sign = r.pick([1, -1, 0, -1]), z;
-        if (sign === 0) { var m = r.int(1, 4), n = nz(r, 1, 6); z = { a: m * m, b: -2 * m * n, c: n * n }; }
+        if (sign === 0) { var m = r.int(1, 4), n = nz(r, 1, 6); while (gcd(m, n) !== 1) n = nz(r, 1, 6); z = { a: m * m, b: -2 * m * n, c: n * n }; }
         else z = pickWhere(function () { return { a: r.int(1, 3), b: nz(r, 1, 9), c: nz(r, 1, 12) }; }, function (o) { var D = o.b * o.b - 4 * o.a * o.c; return (sign > 0 ? D > 0 && o.c > 0 : D < 0) && !(o.a === 1 && o.b === -5 && o.c === 7); });
         var D = z.b * z.b - 4 * z.a * z.c, opts = [{ html: 'two distinct real roots', right: D > 0 }, { html: 'two equal real roots', right: D === 0 }, { html: 'no real roots', right: D < 0 }, { html: 'one positive and one negative root', right: false }];
         opts.forEach(function (o) { if (!o.right) o.why = 'Work out ' + t('b^{2}-4ac') + ': positive, zero or negative?'; });
@@ -885,9 +886,9 @@
             hints: ['Exactly one real root: ' + t('b^{2}-4ac=0') + '.', 'With a zero discriminant the formula gives one root, ' + t('x=-\\frac{b}{2a}') + ' (or factor the perfect square).'], text: 'k for one root, and the root' });
       }) }] },
     { num: '18', outcome: RF4, shared: function (r) {
-        return pickWhere(function () { var a = r.pick([3.2, 3.5, 3.6, 4, 4.4, 4.5, 4.8, 5]), b = 10 * r.int(18, 34); return { a: a, b: b, c: 100 * r.int(10, 40), Tl: r.pick([16, 18]), Tu: r.pick([38, 40]), T1: r.int(19, 24), L: 0, Tx: r.pick([5, 8, 10]) }; }, function (o) {
+        return pickWhere(function () { var a = r.pick([3.2, 3.5, 3.6, 3.8, 4.2, 4.4, 4.5, 4.8]), b = 10 * r.int(18, 34); return { a: a, b: b, c: 100 * r.int(10, 40), Tl: r.pick([16, 18]), Tu: r.pick([38, 40]), T1: r.int(19, 24), L: 0, Tx: r.pick([5, 8, 10]) }; }, function (o) {
           var T0 = o.b / (2 * o.a), Am = o.b * o.b / (4 * o.a) - o.c, f = function (T) { return -o.a * T * T + o.b * T - o.c; };
-          if (!(T0 > 26 && T0 < 34 && Am > 900 && Am < 3000 && o.T1 < T0 - 4 && f(o.T1) > 100 && f(o.Tx) < -50 && !(o.a === 4.2 && o.b === 260))) return false;
+          if (!(T0 > 26 && T0 < 34 && !isInt(T0) && Math.abs(T0 - Math.round(T0)) > 0.05 && Am > 900 && Am < 3000 && o.T1 < T0 - 4 && f(o.T1) > 100 && f(o.Tx) < -50 && !(o.a === 4.2 && o.b === 260))) return false;
           o.L = 100 * Math.floor((Am - 150) / 100); if (Am - o.L > 700) return false;
           var D = o.b * o.b - 4 * o.a * (o.c + o.L), t1 = (o.b - Math.sqrt(D)) / (2 * o.a), t2 = (o.b + Math.sqrt(D)) / (2 * o.a);
           return D > 0 && t1 > o.Tl && t2 < o.Tu;

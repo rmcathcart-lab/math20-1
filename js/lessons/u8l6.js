@@ -81,8 +81,7 @@
   function negLeadQ(r, op) {
     var z = intRoots(r, { test: function (q) { return q.a < 0 && q.b > 0; } }), E = P.neg(P.mul(lin(1, -z.a), lin(1, -z.b))), C = U.cof(E);
     op = op || anyOp(r);
-    var show = (r.chance(0.4) ? vt(C[2]) + sgn(C[1]).replace(/^\+/, '+').replace(/1x$/, 'x') + 'x-x^{2}' : tx(E)) + OPS[op] + '0';
-    show = show.replace(/([+-])1x/, '$1x');
+    var show = (r.chance(0.4) && C[1] !== 0 && C[2] !== 0 ? P.seq([P.num(C[2]), M(C[1], 'x', 1), M(C[0], 'x', 2)]) : tx(E)) + OPS[op] + '0';
     return solveP({ show: show, E: E, A: -1, r1: z.a, r2: z.b, op: op, facS: '-' + facT(1, z.a, z.b), rev: true, how: ' using roots and test points',
       pre: 'You may multiply by ' + t('-1') + ' and reverse the sign (' + t(tx(P.neg(E)) + OPS[FLIP[op]] + '0') + '), but the test points can check the original.<br>' });
   }
@@ -194,7 +193,7 @@
       { id: '1b', level: 'BEG', make: function (r, s) { return fromGraph(s, r.pick(['lt', 'le'])); } },
       { id: '1c', level: 'BEG', make: function (r, s) { return fromGraph(s, r.pick(['gt', 'ge'])); } }] },
     { num: '2', shared: function (r) {
-        var z = graphShared(r, [-1, -2, -1]); z.u = pickWhere(function () { return r.int(z.r1, z.r2); }, function (u) { return !near(u, (z.r1 + z.r2) / 2) && u !== z.r1 && u !== z.r2 && (r.chance(0.5) || u === 0); });
+        var z = pickWhere(function () { return graphShared(r, [-1, -2, -1]); }, function (q) { return q.r2 - q.r1 >= 3; }); z.u = pickWhere(function () { return r.int(z.r1, z.r2); }, function (u) { return !near(u, (z.r1 + z.r2) / 2) && u !== z.r1 && u !== z.r2 && (r.chance(0.5) || u === 0); });
         z.L = at(z.E, z.u); z.u2 = z.r1 + z.r2 - z.u; return z;
       }, stem: function (s) { return 'The graph of ' + t('y=' + tx(s.E)) + ' is shown. Use it to solve each inequality.' + fig(graphStem(s.E)); }, parts: [
       { id: '2a', level: 'BEG', make: function (r, s) { return fromGraph(s, r.pick(['gt', 'ge'])); } },
@@ -207,9 +206,9 @@
           ['Draw the horizontal line ' + t('y=' + vt(s.L)) + ' on the graph.', 'Where is the parabola ' + (upOp(op) ? 'above' : 'below') + ' that line? (Or rearrange: ' + t(tx(P.sub(s.E, P.num(s.L))) + OPS[op] + '0') + '.)'], 'compare with a line'));
       } }] },
     { num: '3', stem: 'Write the solution shown on each number line in set notation.', parts: [
-      { id: '3a', level: 'LIM', make: function (r) { var z = intRoots(r, { zero: true }), inc = r.chance(0.35), T = SET.between(z.a, z.b, inc); return fin(AK().setPart(CP, nlFig(T), T, {}, (inc ? 'Closed' : 'Open') + ' dots at ' + t(z.a) + ' and ' + t(z.b) + ', shaded between: ' + t(setTex(T)) + '.', ['Open dot: not included (' + t('<') + '); closed dot: included (' + t('\\le') + ').'], 'set from a number line')); } },
-      { id: '3b', level: 'BEG', make: function (r) { var z = intRoots(r, { zero: true }), inc = r.chance(0.65), T = SET.outside(z.a, z.b, inc); return fin(AK().setPart(CP, nlFig(T), T, {}, (inc ? 'Closed' : 'Open') + ' dots at ' + t(z.a) + ' and ' + t(z.b) + ', shaded outward: two pieces joined by “or”: ' + t(setTex(T)) + '.', ['Two pieces: join them with <b>or</b>.', 'Open dot: not included; closed dot: included.'], 'set from a number line')); } },
-      { id: '3c', level: 'EMG', make: function (r) { var h = r.int(-5, 6), T = SET.ne(h); return fin(AK().setPart(CP, nlFig(T), T, {}, 'Every real number except ' + t(h) + ' (an open dot at ' + t(h) + ', shaded both ways): ' + t(setTex(T)) + '.', ['Which number is left out?', 'Use ' + t('\\ne') + '.'], 'set from a number line')); } }] },
+      { id: '3a', level: 'LIM', make: function (r) { var z = intRoots(r, { zero: true }), inc = r.chance(0.35), T = SET.between(z.a, z.b, inc); return fin(AK().setPart(CP, 'Write this solution in set notation.' + nlFig(T), T, {}, (inc ? 'Closed' : 'Open') + ' dots at ' + t(z.a) + ' and ' + t(z.b) + ', shaded between: ' + t(setTex(T)) + '.', ['Open dot: not included (' + t('<') + '); closed dot: included (' + t('\\le') + ').'], 'set from a number line')); } },
+      { id: '3b', level: 'BEG', make: function (r) { var z = intRoots(r, { zero: true }), inc = r.chance(0.65), T = SET.outside(z.a, z.b, inc); return fin(AK().setPart(CP, 'Write this solution in set notation.' + nlFig(T), T, {}, (inc ? 'Closed' : 'Open') + ' dots at ' + t(z.a) + ' and ' + t(z.b) + ', shaded outward: two pieces joined by “or”: ' + t(setTex(T)) + '.', ['Two pieces: join them with <b>or</b>.', 'Open dot: not included; closed dot: included.'], 'set from a number line')); } },
+      { id: '3c', level: 'EMG', make: function (r) { var h = r.int(-5, 6), T = SET.ne(h); return fin(AK().setPart(CP, 'Write this solution in set notation.' + nlFig(T), T, {}, 'Every real number except ' + t(h) + ' (an open dot at ' + t(h) + ', shaded both ways): ' + t(setTex(T)) + '.', ['Which number is left out?', 'Use ' + t('\\ne') + '.'], 'set from a number line')); } }] },
     { num: '4', stem: 'Solve using roots and test points. Write each solution in set notation.', parts: [
       { id: '4a', level: 'BEG', make: function (r) { return monic(r, 'between', { test: function (z) { return z.a > 0 || z.b < 0; } }); } },
       { id: '4b', level: 'BEG', make: function (r) { return monic(r, 'outside', { test: function (z) { return z.a < 0 && z.b > 0; } }); } },
@@ -271,10 +270,10 @@
         p.bad = ['k=' + S]; return fin(p);
       } }] },
     { num: '10', parts: [{ id: '10', level: 'MAS', make: function (r) {
-      var z = pickWhere(function () { var p = r.int(-8, 4), q = r.int(-2, 10); return { p: p, q: q, two: r.chance(0.3) }; }, function (s) { var sum = s.p + s.q, pr = s.p * s.q; return s.p < s.q && sum % 4 === 0 && sum !== 0 && pr % 4 === 0 && pr !== 0 && Math.abs(sum / 4) <= 3 && Math.abs(pr / 4) <= 9 && !(s.p === -2 && s.q === 6); });
+      var z = pickWhere(function () { var p = r.int(-10, 6), q = r.int(-4, 14); return { p: p, q: q, two: r.chance(0.3) }; }, function (s) { var sum = s.p + s.q, pr = s.p * s.q; return s.p < s.q && sum % 4 === 0 && sum !== 0 && pr % 4 === 0 && pr !== 0 && Math.abs(sum / 4) <= 4 && Math.abs(pr / 4) <= 15 && !(s.p === -2 && s.q === 6); });
       var u = (z.p + z.q) / 4, w = -z.p * z.q / 4, cT = (u > 0 ? '+' : '-') + coefT(Math.abs(u)) + 'm' + sgn(w), T = z.two ? SET.outside(z.p, z.q, false) : SET.between(z.p, z.q, false);
       var Dp = P.add(M(1, 'm', 2), M(-4 * u, 'm', 1), P.num(-4 * w));
-      var sol = (z.two ? 'Two ' + t('x') + '-intercepts: ' + t('b^{2}-4ac>0') : 'No ' + t('x') + '-intercepts: ' + t('b^{2}-4ac<0')) + ': ' + t('m^{2}-4(1)(' + tx(lin(u, w, 'm')) + ')' + (z.two ? '>' : '<') + '0') + ', so ' + t(tx(Dp) + (z.two ? '>' : '<') + '0') + '.<br>' + t(facT(1, z.p, z.q, 'm') + '=0') + ': roots ' + t(z.p) + ' and ' + t(z.q) + '. Test ' + t('m=' + vt((z.p + z.q) / 2)) + ': ' + t(vt(at(Dp, 0) * 0 + P.at(Dp, { m: (z.p + z.q) / 2 }))) + ' < 0.<br>' + t(setTex(T, 'm')) + '.';
+      var sol = (z.two ? 'Two ' + t('x') + '-intercepts: ' + t('b^{2}-4ac>0') : 'No ' + t('x') + '-intercepts: ' + t('b^{2}-4ac<0')) + ': ' + t('m^{2}-4(1)(' + tx(lin(u, w, 'm')) + ')' + (z.two ? '>' : '<') + '0') + ', so ' + t(tx(Dp) + (z.two ? '>' : '<') + '0') + '.<br>' + t(facT(1, z.p, z.q, 'm') + '=0') + ': roots ' + t(z.p) + ' and ' + t(z.q) + '. Test ' + t('m=' + vt((z.p + z.q) / 2)) + ': ' + t(vt(P.at(Dp, { m: (z.p + z.q) / 2 })) + '<0') + ', so the discriminant is negative between the roots.<br>' + t(setTex(T, 'm')) + '.';
       return fin(AK().setPart(CP, 'For what values of ' + t('m') + ' does the graph of ' + t('y=x^{2}+mx' + cT) + ' have ' + (z.two ? 'two' : 'no') + ' ' + t('x') + '-intercepts?', T, { v: 'm', wrongs: [{ parts: SET.pt(z.p).concat(SET.pt(z.q)), code: CP + 'k-tangent', hint: 'Those values make the discriminant ' + t(0) + ' (one ' + t('x') + '-intercept). Write the inequality.' }] }, sol,
         ['The discriminant is ' + t('b^{2}-4ac') + ' with ' + t('b=m') + ' and ' + t('c=' + tx(lin(u, w, 'm'))) + '.', (z.two ? 'Two' : 'No') + ' ' + t('x') + '-intercepts: ' + t('b^{2}-4ac' + (z.two ? '>' : '<') + '0') + '. Solve that quadratic inequality in ' + t('m') + '.'], 'values of m'));
     } }] },
@@ -288,31 +287,28 @@
         var sol = t('n(n+1)' + (s.le ? '\\le ' : '<') + s.N) + ', so ' + t('n^{2}+n-' + s.N + (s.le ? '\\le 0' : '<0')) + '. Roots ' + t('n=\\frac{-1\\pm\\sqrt{' + D + '}}{2}') + (Math.abs(Math.sqrt(D) - Math.round(Math.sqrt(D))) < 1e-9 ? ' ' + t('=' + vt(r1) + ',\\ ' + vt(r2)) : ' ' + t('\\approx ' + r1.toFixed(2) + ',\\ ' + r2.toFixed(2))) + '; test ' + t('n=0') + ': true, so between.<br>' + t('n') + ' is an integer: ' + t(ints.join(',\\ ')) + '.';
         var check = function (resp) {
           var str = String(resp == null ? '' : resp).trim(); if (!str) return form('empty', 'Type your answer first.');
-          var vals = null, vs = K.valueSet(ints, { v: 'n' })(resp);
-          if (vs.v === 'correct') return ok();
-          var pr = HW.sets.parse(String(resp).replace(/\\(operatorname|mathrm|text)\{\s*(or|and)\s*\}/g, ' $2 '));
-          if (pr.ok && pr.set.kind === 'list') vals = pr.set.vals;
-          else if (pr.ok && pr.set.kind === 'int' && pr.set.parts.every(function (q) { return isFinite(q.lo) && isFinite(q.hi); })) { vals = []; pr.set.parts.forEach(function (q) { for (var k = Math.ceil(q.lo); k <= Math.floor(q.hi); k++) if ((k > q.lo || q.lc) && (k < q.hi || q.hc)) vals.push(k); }); }
-          if (!vals) { var m = /n\s*=\s*(.*)/.exec(str); if (!m) return vs; return wrongVals(vs); }
+          var vals = null, list = str.replace(/\\left|\\right|\\[,;: !]|~/g, ' ').replace(/\\(operatorname|mathrm|text)\{\s*(or|and)\s*\}/g, ',').replace(/\b(or|and)\b/g, ',').replace(/\\\{|\\\}|\\lbrace|\\rbrace|[{}]/g, ' ').replace(/n\s*=/g, ' ');
+          var bits = list.split(/[,;]/).map(function (b) { return b.trim(); }).filter(Boolean), nums = bits.map(function (b) { var q = HW.parse.number(b); return q.ok ? q.value : null; });
+          if (bits.length && nums.every(function (v) { return v != null; })) vals = nums;
+          else {
+            var pr = HW.sets.parse(String(resp).replace(/\\(operatorname|mathrm|text)\{\s*(or|and)\s*\}/g, ' $2 '));
+            if (pr.ok && pr.set.kind === 'list') vals = pr.set.vals;
+            else if (pr.ok && pr.set.kind === 'int' && pr.set.parts.every(function (q) { return isFinite(q.lo) && isFinite(q.hi); })) { vals = []; pr.set.parts.forEach(function (q) { for (var k = Math.ceil(q.lo); k <= Math.floor(q.hi); k++) if ((k > q.lo || q.lc) && (k < q.hi || q.hc)) vals.push(k); }); }
+          }
+          if (!vals) return form('unreadable', 'List the integers separated by commas, e.g. ' + t('n=-2,\\ -1,\\ 0,\\ 1') + '.');
+          if (vals.some(function (v) { return Math.abs(v - Math.round(v)) > 1e-9; })) return wrong('value', t('n') + ' is an integer: list whole numbers only.');
           vals = vals.filter(function (v, i, a) { return a.indexOf(v) === i; }).sort(function (a, b) { return a - b; });
           if (vals.join() === ints.join()) return ok();
-          return wrongVals(null, vals);
+          if (vals.every(function (v) { return v >= 0; }) && ints.some(function (v) { return v < 0; })) return wrong(CP + 'ineq-restr', 'Integers can be negative too: the product of two negative consecutive integers is positive. Include the negative ones.');
+          var miss = ints.filter(function (v) { return vals.indexOf(v) < 0; }), extra = vals.filter(function (v) { return ints.indexOf(v) < 0; });
+          if (miss.length + extra.length <= 2) return wrong(CP + 'consec', 'Nearly: check the integers at each end (test their product).');
+          return wrong('value', null);
         };
-        function wrongVals(vs, vals) {
-          if (vals) {
-            var neg = vals.every(function (v) { return v >= 0; }) && ints.some(function (v) { return v < 0; });
-            if (neg) return wrong(CP + 'ineq-restr', 'Integers can be negative too: the product of two negative consecutive integers is positive. Include the negative ones.');
-            var miss = ints.filter(function (v) { return vals.indexOf(v) < 0; }), extra = vals.filter(function (v) { return ints.indexOf(v) < 0; });
-            if (miss.length + extra.length <= 2) return wrong(CP + 'consec', 'Nearly: check the integers at each end (test their product).');
-            return wrong('value', null);
-          }
-          return vs;
-        }
         var p = KP.math('The product of two consecutive integers is ' + (s.le ? 'at most' : 'less than') + ' ' + t(s.N) + '. Determine all possible values of the smaller integer.', check, keyTex, sol, ['Let the integers be ' + t('n') + ' and ' + t('n+1') + '. Write the inequality and solve it.', 'List every integer in the solution (negative ones too).'], 'consecutive integers', { keys: 'solutions', vars: ['n'], placeholder: 'e.g. n = -2, -1, 0, 1' });
         p.bad = ['n=' + ints.filter(function (v) { return v >= 0; }).join(',\\ '), 'n=' + ints.slice(1).join(',\\ ')]; return fin(p);
       } }] },
     { num: '12', parts: [{ id: '12', level: 'EMG', make: function (r) {
-      var z = intRoots(r, { zero: true, test: function (q) { return q.b - q.a >= 2 && q.b - q.a <= 8; } }), out = r.chance(0.6), inc = r.chance(0.6), T = out ? SET.outside(z.a, z.b, inc) : SET.between(z.a, z.b, inc);
+      var z = intRoots(r, { zero: true, test: function (q) { return q.b - q.a >= 2 && q.b - q.a <= 8 && q.a + q.b !== 0; } }), out = r.chance(0.6), inc = r.chance(0.6), T = out ? SET.outside(z.a, z.b, inc) : SET.between(z.a, z.b, inc);
       var op = out ? (inc ? 'ge' : 'gt') : (inc ? 'le' : 'lt'), F = facT(1, z.a, z.b), Fw = facT(1, -z.b, -z.a);
       var opts = [{ html: t(F + OPS[op] + '0'), right: true }, { html: t(F + OPS[FLIP[op]] + '0'), code: 'side', why: out ? 'That is the solution between the roots.' : 'That is the solution outside the roots.' },
         { html: t(Fw + OPS[op] + '0'), code: 'roots', why: 'Those factors have roots ' + t(-z.b) + ' and ' + t(-z.a) + '.' }, { html: t(F + OPS[TOG[op]] + '0'), code: 'ends', why: inc ? 'The dots are closed: the roots are included.' : 'The dots are open: the roots are not included.' }];
@@ -404,7 +400,7 @@
         ['Each endpoint is a root: write a factor for each (clear the fraction).', 'Outside the roots → the product is positive.'], 'write an inequality from its solution'));
     } }] },
     { num: 'C3', parts: [{ id: 'C3', level: 'MAS', make: function (r) {
-      var s = pickWhere(function () { return { m: r.pick([2, 2, 3]), p: r.int(1, 9), q: r.int(1, 8) }; }, function (z) {
+      var s = pickWhere(function () { return { m: r.pick([2, 2, 3, 4]), p: r.int(1, 12), q: r.int(1, 10) }; }, function (z) {
         var A = z.m - 1, B = z.m * z.q - z.p, C = -z.p * z.q, D = B * B - 4 * A * C, sd = Math.round(Math.sqrt(D)); if (sd * sd !== D) return false;
         var rp = (-B + sd) / (2 * A); return Math.abs(rp * 2 - Math.round(rp * 2)) < 1e-9 && rp > z.p / z.m + 1e-9 && !(z.m === 2 && z.p === 3 && z.q === 2) && rp <= 12;
       });

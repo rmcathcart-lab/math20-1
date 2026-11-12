@@ -242,6 +242,7 @@
         return z.r1 < z.r2 && (z.r1 + z.r2) % 2 === 0 && (z.r1 * z.r2) % 2 === 0 && [z.r1, z.r2].every(function (x) { return -0.5 * x * x + z.b1 * x > 0; }) && !(z.r1 === 2 && z.r2 === 4 && z.b1 === 4);
       });
       var P1 = [[-1, 2], z.b1, 0], P2 = [-1, z.b1 + (z.r1 + z.r2) / 2, -z.r1 * z.r2 / 2], o = U.qq(P1, P2);
+      o.pts = U.decPts(o.pts);
       var what = { logo: ['A designer draws a logo with two arcs:', 'centimetres', 'arcs cross'], bridge: ['Two arches of a footbridge sculpture follow', 'metres', 'arches cross'], jets: ['Two water jets in a fountain follow the paths', 'metres', 'jets cross'] }[z.ctx];
       return qqPart(o, what[0] + ' ' + t(eqT(P1, true)) + ' and ' + t(eqT(P2)) + ', in ' + what[1] + '. Determine the points where the ' + what[2] + '.', null, 'context: two arcs', null, true);
     } }] },
@@ -267,8 +268,8 @@
     } }] },
     { num: '13', parts: [{ id: '13', level: 'EMG', make: function (r) {
       var h = nz(r, 1, 4), a = r.pick([1, 1, 2, -1]), q = r.int(-3, 3), V = function (s, hh) { return 'y=' + coefT(s) + '(x' + sg(-hh) + ')^{2}' + (q ? sg(q) : ''); }, Sx = function (Pc) { return eqT(Pc); };
+      if (a === 1 && h === 3 && q === 0) q = 1;
       var right = [V(a, h), Sx([a, -2 * a * h, a * h * h + q])];
-      if (a === 1 && h === 3 && q === 0) right = [V(a, h), Sx([1, -6, 9])];
       var w1 = [Sx([a, -2 * a * h, a * h * h + q]), V(a, -h)], w2 = [Sx([a, 0, a * h * h + q]), V(a, h)], w3 = [V(-a, h), Sx([a, -2 * a * h, a * h * h + q])];
       return KP.mc(r, 'Which system has infinitely many solutions?', [
         { html: t(right[0]) + ' and ' + t(right[1]), right: true },
@@ -295,9 +296,9 @@
     { num: '16', parts: [{ id: '16', level: 'ADV', make: function (r) {
       var z = pickWhere(function () { return { tt: nz(r, 1, 3), b2: r.int(-4, 8), c2: r.int(-4, 8) }; }, function (z) { var k = z.c2 + 2 * z.tt * z.tt; return k > 0 && k <= 99 && Math.abs(z.b2 + 4 * z.tt) <= 10 && !(z.tt === -1 && z.b2 === 8 && z.c2 === 1); });
       // y = x² + bx + k, y = −x² + b2 x + c2: 2x² + (b − b2)x + (k − c2) = 0, b − b2 = 4t, k = c2 + 2t²
-      var b = z.b2 + 4 * z.tt, k = z.c2 + 2 * z.tt * z.tt, o = U.qq([1, b, k], [-1, z.b2, z.c2]);
+      var b = z.b2 + 4 * z.tt, k = z.c2 + 2 * z.tt * z.tt, o = U.qq([1, b, k], [-1, z.b2, z.c2]), kc = z.c2 ? '(k' + sg(-z.c2) + ')' : 'k';
       return KP.nr('The parabolas ' + t('y=' + tx(quad([1, b, 0])) + '+k') + ' and ' + t(eqT([-1, z.b2, z.c2])) + ' touch at exactly one point. The value of ' + t('k') + ' is ____.', k, function (v) { return v === 2 * z.tt * z.tt - z.c2 && v !== k ? { code: CP + 'k-sign', hint: 'The constant term after subtracting is ' + t('k' + sg(-z.c2)) + '.' } : null; },
-        'Subtract: ' + t('2x^{2}' + sg(4 * z.tt) + 'x+(k' + sg(-z.c2) + ')=0') + '. One solution: ' + t('(' + 4 * z.tt + ')^{2}-8(k' + sg(-z.c2) + ')=0') + ', so ' + t('k' + sg(-z.c2) + '=' + 2 * z.tt * z.tt) + ' and ' + t('k=' + k) + '. (They touch at ' + prPairs(o) + '.)', ['Subtract the equations; touching at one point means the discriminant is ' + t('0') + '.'], 'NR: touching parabolas');
+        'Subtract: ' + t('2x^{2}' + sg(4 * z.tt) + 'x+' + kc + '=0') + '. One solution: ' + t('(' + 4 * z.tt + ')^{2}-8' + (z.c2 ? kc : '(k)') + '=0') + ', so ' + t((z.c2 ? 'k' + sg(-z.c2) : 'k') + '=' + 2 * z.tt * z.tt) + ' and ' + t('k=' + k) + '. (They touch at ' + prPairs(o) + '.)', ['Subtract the equations; touching at one point means the discriminant is ' + t('0') + '.'], 'NR: touching parabolas');
     } }] }
   ];
 
@@ -329,7 +330,7 @@
         return U.countMC(r, 'Without solving, state the number of solutions of ' + t(eqT(P1)) + ', ' + t(eqT(P2)) + '.', 1, 'Subtract: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(dtex(o.A, o.B, o.C) + '=0') + '.', { qq: true });
       } },
       { id: 'eA2b', level: 'BEG', make: function (r) {
-        var z = pickWhere(function () { return { c1: r.int(-2, 4), b2: r.int(-4, 4), c2: r.int(0, 6) }; }, function (z) { var B = -z.b2, C = z.c1 - z.c2; return B * B - 8 * C < 0 && !(z.c1 === 1 && z.b2 === 2 && z.c2 === 3); });
+        var z = pickWhere(function () { return { c1: r.int(-2, 4), b2: r.int(-4, 4), c2: r.int(0, 6) }; }, function (z) { var B = -z.b2, C = z.c1 - z.c2; return B * B + 8 * C < 0 && !(z.c1 === 1 && z.b2 === 2 && z.c2 === 3); });
         var P1 = [-1, 0, z.c1], P2 = [1, z.b2, z.c2], o = U.qq(P1, P2);
         return U.countMC(r, 'Without solving, state the number of solutions of ' + t(eqT(P1)) + ', ' + t(eqT(P2)) + '.', 0, 'Subtract: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(dtex(o.A, o.B, o.C) + '=' + (qv(o.B) * qv(o.B) - 4 * qv(o.A) * qv(o.C))) + '.', { qq: true });
       } },
@@ -387,7 +388,7 @@
     { num: 'B4', parts: [{ id: 'eB4', level: 'PRG', make: function (r) {
       var z = pickWhere(function () { return { tt: nz(r, 1, 3), b2: r.int(-2, 8), c2: r.int(-3, 3) }; }, function (z) { return Math.abs(z.b2 + 4 * z.tt) <= 10 && !(z.tt === -2 && z.b2 === 6 && z.c2 === 0); });
       var b1 = z.b2 + 4 * z.tt, k0 = z.c2 + 2 * z.tt * z.tt, o = U.qq([1, b1, k0], [-1, z.b2, z.c2]), p = o.pts[0];
-      var sol = 'Subtract: ' + t('2x^{2}' + sg(4 * z.tt) + 'x+(k' + sg(-z.c2) + ')=0').replace('+(k+0)', '+k').replace('(k+0)', 'k') + '. One solution: ' + t('(' + 4 * z.tt + ')^{2}-8(k' + sg(-z.c2) + ')=0') + ', so ' + t('k=' + k0) + '.<br>' + t(tx(o.E) + '=0') + ': ' + t('x=' + p.xt) + ', ' + t('y=' + p.yt) + '. Solution ' + t(ptT(p)) + '.';
+      var kc = z.c2 ? '(k' + sg(-z.c2) + ')' : 'k', sol = 'Subtract: ' + t('2x^{2}' + sg(4 * z.tt) + 'x+' + kc + '=0') + '. One solution: ' + t('(' + 4 * z.tt + ')^{2}-8' + (z.c2 ? kc : '(k)') + '=0') + ', so ' + t('k=' + k0) + '.<br>' + t(tx(o.E) + '=0') + ': ' + t('x=' + p.xt) + ', ' + t('y=' + p.yt) + '. Solution ' + t(ptT(p)) + '.';
       return U.kPoint(CP, 'Determine ' + t('k') + ' so that the system ' + t('y=' + tx(quad([1, b1, 0])) + '+k') + ' and ' + t(eqT([-1, z.b2, z.c2])) + ' has exactly one solution, and find it.', 'k', k0, p, sol, ['Subtract; one solution means a zero discriminant.'], 'EP: one solution: find k');
     } }] },
     { num: 'B5', parts: [{ id: 'eB5', level: 'ADV', make: function (r) {

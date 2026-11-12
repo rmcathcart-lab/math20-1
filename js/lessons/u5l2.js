@@ -256,7 +256,7 @@
         var rchk = X.subWrap(function (e) { return Z.rangeChk(e[Bv], true, { p: e[A] }); }, envs);
         var R = '\\{y\\mid y\\ge ' + Bv + ',\\ y\\in\\mathbb{R}\\}';
         return X.fields(t('y=(x-' + A + ')^{2}+' + Bv), [{ label: 'Vertex', check: vchk, key: '(' + A + ',' + Bv + ')', ansTex: '(' + A + ',\\ ' + Bv + ')', math: true, placeholder: 'e.g. (h, k)' }, { label: 'Max or min?', mm: 'min' },
-          { label: 'Value', check: valchk, key: Bv, ansTex: Bv, math: true }, { label: 'Axis of symmetry', check: achk, key: 'x=' + A, ansTex: 'x=' + A, math: true }, { label: 'Domain', dom: true }, { label: 'Range', check: rchk, key: R, ansTex: R, math: true }],
+          { label: 'Value', check: valchk, key: Bv, ansTex: Bv, math: true, placeholder: 'e.g. ' + Bv }, { label: 'Axis of symmetry', check: achk, key: 'x=' + A, ansTex: 'x=' + A, math: true, placeholder: 'e.g. x = ' + A }, { label: 'Domain', dom: true }, { label: 'Range', check: rchk, key: R, ansTex: R, math: true, placeholder: 'e.g. {y | y >= ' + Bv + ', y in R}' }],
           { vars: ['x', 'y', A, Bv], sol: 'It is ' + t('y=x^{2}') + ' translated ' + t(A) + ' units horizontally and ' + t(Bv) + ' units vertically: vertex ' + t('(' + A + ',\\ ' + Bv + ')') + ', minimum value ' + t(Bv) + ' (it opens up), axis ' + t('x=' + A) + ', domain ' + t(Z.DOM) + ', range ' + t(R) + '.', hints: ['In ' + t('y=(x-p)^{2}+q') + ' the vertex is ' + t('(p,\\ q)') + '. Here ' + t('p=' + A) + ' and ' + t('q=' + Bv) + '.'], text: 'table: letters' });
       } }] },
 

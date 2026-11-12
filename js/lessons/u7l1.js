@@ -234,7 +234,7 @@
   U.absLinChk = function (a, b, cp) {
     var f = function (x) { return Math.abs(rv(a) * x + rv(b)); }, h0 = -rv(b) / rv(a), xs = [h0 - 3.3, h0 - 1.1, h0 - 0.4, h0 + 0.6, h0 + 2.2, h0 + 4.7, 0];
     return function (resp) {
-      var s = String(resp == null ? '' : resp).replace(/^\s*y\s*=\s*/, '');
+      var s = String(resp == null ? '' : resp).replace(/^\s*y\s*=\s*/, '').replace(/([\dx)}])\s*\\left(\||\\lvert)/g, '$1\\times\\left$2');
       var p = ex.parse(s);
       if (!p.ok) return form(p.code === 'empty' ? 'empty' : 'unreadable', p.code === 'empty' ? 'Type your answer first.' : 'I can’t read that. Use the ' + t('|x|') + ' key for the bars, e.g. ' + t('\\lvert 2x+4\\rvert') + '.');
       var vals = xs.map(function (x) { return ex.value(p.ast, { x: x }); });

@@ -70,8 +70,11 @@
         out.push({ t: 'var', v: c }); i++; continue;
       }
       // a number expression: digits, -, ., \frac{}{}, ^, spaces inside
-      if ((m = /^(-\s*)?(\\frac\{[^{}]*\}\{[^{}]*\}|\\frac\d\d|\d+(\.\d+)?|\.\d+)(\s*\/\s*\d+)?/.exec(s.slice(i)))) {
-        var p = ex.parse(m[0].replace(/\s+/g, '')); if (!p.ok) return null;
+      // MathLive may write \frac{49}8 or \frac1{12} (single-digit groups without braces): accept every mix
+      if ((m = /^(-\s*)?(\\frac(?:\{[^{}]*\}|\d)(?:\{[^{}]*\}|\d)|\d+(\.\d+)?|\.\d+)(\s*\/\s*\d+)?/.exec(s.slice(i)))) {
+        var p = ex.parse(m[0].replace(/\s+/g, '').replace(/\\frac(\{[^{}]*\}|\d)(\{[^{}]*\}|\d)/, function (_, a, b) {
+          return '\\frac' + (a.charAt(0) === '{' ? a : '{' + a + '}') + (b.charAt(0) === '{' ? b : '{' + b + '}'); }));
+        if (!p.ok) return null;
         var v = ex.value(p.ast); if (!isFinite(v)) return null;
         out.push({ t: 'num', v: v }); i += m[0].length; continue;
       }
