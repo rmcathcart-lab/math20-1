@@ -23,6 +23,7 @@ What it does:
 import re, sys, os, importlib.util
 HERE = os.path.dirname(os.path.abspath(__file__)); REPO = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
+import emodraw
 T = lambda x: '<span class="tex">%s</span>' % x
 
 
@@ -135,6 +136,7 @@ def run(key):
         assert m, (key, 'assign card')
         s = s[:m.start()] + m.group(1) + f"Assignment {l} · Questions {pr['rest']}" + m.group(3) + s[m.end():]
 
+    s = emodraw.convert_page(s)  # drawn pictures instead of emoji (2026-11-12)
     open(path, 'w').write(s)
     cards = re.findall(r'<section [^>]*data-section="([^"]*)"', s)
     nex = len(re.findall(r'data-explainer=', s)); was = len(re.findall(r'data-explainer=', open(orig).read()))
