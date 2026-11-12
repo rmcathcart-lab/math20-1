@@ -127,9 +127,9 @@
 .u7l7-read > div { background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 6px 10px; font-size: 19px; text-align: center; }
 .u7l7-vt .bk-td, .u7l7-vt .bk-th { font-size: 17px; }
 .u7l7-vt .u7l7-und { font-size: 12.5px; }
-.u7l7-mfn { position: absolute; display: flex; align-items: center; gap: 10px; background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 6px 12px; font-size: 21px; box-sizing: border-box; }
+.u7l7-mfn { position: absolute; display: flex; flex-wrap: wrap; align-content: center; justify-content: center; align-items: center; gap: 4px 10px; background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 6px 12px; font-size: 21px; box-sizing: border-box; }
 .u7l7-mfn .u7l7-ml { font: 800 18px var(--round); color: var(--muted); min-width: 34px; }
-.u7l7-mfn .u7l7-mres { margin-left: auto; font: 900 24px var(--round); color: #c93a33; }
+.u7l7-mfn .u7l7-mres { flex-basis: 100%; text-align: center; min-height: 30px; font: 900 26px var(--round); color: #c93a33; }
 .u7l7-mfn.on { border-color: #1f5bd6; box-shadow: 0 0 0 3px rgba(31, 91, 214, .18); }
 .u7l7-mg { position: absolute; border: 3px solid transparent; border-radius: 12px; background: #fff; }
 .u7l7-mg.cand { border-color: #e8a01e; }

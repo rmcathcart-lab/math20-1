@@ -255,11 +255,11 @@ function slideCheck(stage, v, ex) {
   const cnt = counter(P); hide(cnt.el);
   const fc = hide(fGraph(G, Q)), rc = hide(rGraph(G, Q)), A = Q.z.map((x) => hide(asym(G, x))), zp = Q.z.map((x) => hide(G.point(x, 0, { color: 'amber', r: 8 })));
   const r1 = row(rows, 1, d.work[0]), r2 = row(rows, 2, d.work[1]);
-  const n = Q.z.length, word = ['None', 'One', 'Two'][n];
+  const n = Q.z.length;
   return [
     { cap: `${T('f(x)=' + d.f)}: ${d.work[0]}. ${n ? `The parabola meets the ${T('x')}-axis ${n === 1 ? 'once, at its vertex' : 'twice'}.` : `The parabola never meets the ${T('x')}-axis.`}`,
       run: async (c) => { await show(c, r1); await drawIn(unhide(fc), 700, c); } },
-    { cap: `${n ? `${d.work[1]}: ` : ''}<b>${word}</b>${n ? `: ${T(d.eqs)}` : ': no vertical asymptote'}. The reciprocal ${n === 2 ? 'has three branches' : n === 1 ? 'has two branches on the same side of the axis' : 'is one unbroken curve'}.`,
+    { cap: `${d.work[1]}, so <b>${['no', 'one', 'two'][n]}</b> vertical asymptote${n === 2 ? 's' : ''}${n ? `: ${T(d.eqs)}` : ''}. The reciprocal ${n === 2 ? 'has three branches' : n === 1 ? 'has two branches on the same side of the axis' : 'is one unbroken curve'}.`,
       run: async (c) => { await show(c, r2); for (const p of zp) await popP(c, p); await Promise.all(A.map((L) => drawIn(unhide(L), 600, c))); await drawIn(unhide(rc), 900, c); cnt.set(n, d.eqs ? T(d.eqs) : ''); await pop(c, unhide(cnt.el), 420); } }
   ];
 }
@@ -307,7 +307,8 @@ const range = {
     if (d.q) {
       const tp = hide(G.point(d.p, d.q, { color: TP, r: 8.5, label: T(`\\left(${tn(d.p)},\\ ${recT(d.q)}\\right)`), pos: (1 / d.q > 0) === up ? 'n' : 's' }));
       const r1 = row(rows, 1, `${T(up ? 'a>0' : 'a<0')}: ${type} point ${T(`\\left(${tn(d.p)},\\ ${recT(d.q)}\\right)`)}`);
-      steps.push({ cap: `<b>1</b> The vertex ${T(`(${tn(d.p)},\\ ${tn(d.q)})`)} becomes ${T(`\\left(${tn(d.p)},\\ \\frac{1}{${tn(d.q)}}\\right)=\\left(${tn(d.p)},\\ ${recT(d.q)}\\right)`)}. ${up ? 'A minimum of the parabola' : 'A maximum of the parabola'} becomes a <b>${type} point</b> of the reciprocal (${T(up ? 'a>0' : 'a<0')}).`,
+      const tpEq = recT(d.q) === `\\frac{1}{${tn(d.q)}}` ? `\\left(${tn(d.p)},\\ ${recT(d.q)}\\right)` : `\\left(${tn(d.p)},\\ \\frac{1}{${tn(d.q)}}\\right)=\\left(${tn(d.p)},\\ ${recT(d.q)}\\right)`;
+      steps.push({ cap: `<b>1</b> The vertex ${T(`(${tn(d.p)},\\ ${tn(d.q)})`)} becomes ${T(tpEq)}. ${up ? 'A minimum of the parabola' : 'A maximum of the parabola'} becomes a <b>${type} point</b> of the reciprocal (${T(up ? 'a>0' : 'a<0')}).`,
         run: async (c) => { await show(c, r1); await pulse(c, vx, 1.3); unhide(tp); await G.move(c, tp, d.p, 1 / d.q, 1100); placeRing(ring, G, d.p, 1 / d.q); } });
     } else {
       const r1 = row(rows, 1, `${T('q=0')}: no turning point; ${T(`x=${tn(d.p)}`)}`);
@@ -322,13 +323,13 @@ const range = {
     steps.push({ cap: `<b>2</b> Domain: every ${T('x')} except the zeros of ${T('f')}. ${Q.z.length ? (d.zw ? `Zeros: ${T(d.zw)}, ${T(d.zt)}` : `The zero is ${T('x=' + tn(d.p))}`) + `, so ${T(domT)}.` : `${T('f')} has no zeros (${up ? 'it opens up from above the axis' : 'it opens down from below the axis'}), so ${T(domT)}.`}`,
       run: async (c) => { placeRing(ring, G, 0, 0, false); await show(c, r2); if (d.q) await Promise.all(A.map((L) => drawIn(unhide(L), 600, c))); await drawIn(unhide(rc), 800, c); for (const s of dom) await drawIn(unhide(s), 400, c); } });
     /* 3: the range of f, split at 0 */
-    const fb = RP.parts.map((pt) => hide(ybar(G, { lo: pt.lo, hi: pt.hi, loS: pt.loS, hiS: pt.hiS }, { color: FC, offset: -13 })));
+    const fb = RP.parts.map((pt) => hide(ybar(G, { lo: pt.lo, hi: pt.hi, loS: pt.loS, hiS: pt.hiS }, { color: FC, offset: -16 })));
     const r3 = row(rows, 3, `range of ${T('f')}: ${T(RP.f)}<br>${RP.parts.map((pt) => T(pt.t)).join(' &nbsp;and&nbsp; ')}`);
     steps.push({ cap: `<b>3</b> The range of ${T('f')} is ${T(RP.f)}${RP.parts.length > 1 ? `. Split it at ${T('0')} (never ${T('f(x)=0')} on the reciprocal): ${RP.parts.map((pt) => T(pt.t)).join(' and ')}.` : d.q ? `: ${T(RP.parts[0].t)} (it never reaches ${T('0')}).` : `, but ${T('f(x)=0')} only at the asymptote: ${T(RP.parts[0].t)}.`}`,
       run: async (c) => { for (const s of dom) s.style.opacity = 0.35; await show(c, r3); for (const b of fb) await drawIn(unhide(b), 600, c); } });
     /* 4: the reciprocal of each part */
     const rbS = RP.parts.map((pt) => ({ lo: pt.lo, hi: pt.hi, loS: pt.loS, hiS: pt.hiS }));
-    const rb = rbS.map((s) => hide(ybar(G, s, { color: AC, offset: 13 })));
+    const rb = rbS.map((s) => hide(ybar(G, s, { color: AC, offset: 16 })));
     const r4 = row(rows, 4, `${RP.parts.map((pt) => T(pt.rt)).join('; ')}<br>range ${T(setT(RP.r))}`);
     const disp = (v, s) => (v === Infinity ? G.win.ymax + 0.6 : v === -Infinity ? G.win.ymin - 0.6 : v);
     steps.push({ cap: `<b>4</b> Take the reciprocal of each part: ${RP.parts.map((pt) => `${T(pt.t)} gives ${T(pt.rt)}`).join('; ')}. Range of ${T('y=\\frac{1}{f(x)}')}: ${T(setT(RP.r))}.`,
@@ -365,7 +366,7 @@ const sketch = {
     const fc = hide(fGraph(G, Q)), L = pm1(G).map(hide);
     const A = Q.z.map((x) => hide(asym(G, x))), hA = hide(G.hline(0, { color: IX, width: 4, dash: '9 7' }));
     const ip = d.inv.map(([x, y, t]) => hide(G.point(x, y, { color: 'amber', r: 7.5, label: T(`(${t},\\ ${y})`), pos: y > 0 ? 'n' : 's' })));
-    const yv = 1 / Q.f(0), yi = hide(G.point(0, yv, { color: AC, r: 7.5 }));
+    const yv = 1 / Q.f(0), yi = hide(G.point(0, yv, { color: AC, r: 7.5 })), same = Math.abs(Q.p) < 1e-9 && d.tp;
     const tp = d.tp ? hide(G.point(Q.p, 1 / Q.q, { color: TP, r: 8.5, label: T(d.tp), pos: 1 / Q.q > 0 ? 'n' : 's' })) : null;
     const B = branches(G, Q).map(hide);
     const n = Q.z.length;
@@ -376,11 +377,11 @@ const sketch = {
     const steps = [
       { cap: `<b>1</b> Graph ${T('y=' + d.f)} and draw the lines ${T('y=1')} and ${T('y=-1')} (dotted).`,
         run: async (c) => { await show(c, r[0]); await drawIn(unhide(fc), 700, c); for (const l of L) await drawIn(unhide(l), 350, c); } },
-      { cap: `<b>2</b> ${n ? `The zeros of ${T('f')} give dashed vertical asymptotes ${T(d.zs)}.` : `${T('f')} has <b>no zeros</b>: no vertical asymptote.`} The horizontal asymptote is ${T('y=0')}.`,
+      { cap: `<b>2</b> ${n ? `The zero${n > 1 ? 's' : ''} of ${T('f')} give${n > 1 ? '' : 's'} ${n > 1 ? 'dashed vertical asymptotes' : 'a dashed vertical asymptote'} ${T(d.zs)}.` : `${T('f')} has <b>no zeros</b>: no vertical asymptote.`} The horizontal asymptote is ${T('y=0')}.`,
         run: async (c) => { await show(c, r[1]); await Promise.all(A.map((a) => drawIn(unhide(a), 600, c))); await drawIn(unhide(hA), 600, c); hA.style.opacity = 0.45; } },
-      { cap: `<b>3</b> Mark the key points: ${d.inv.length ? `the invariant points on ${T('y=\\pm1')}` : `no invariant points (${T('f(x)\\ge2')})`}, the ${T('y')}-intercept ${T(d.yi)}${d.tp ? `, and the turning point ${T(d.tp)}, a <b>${d.tpT}</b>${d.tpNote ? ` (${d.tpNote})` : ''}` : `; no turning point (the vertex is a zero)`}.`,
-        run: async (c) => { await show(c, r[2]); for (const p of ip) await popP(c, p); await pop(c, unhide(yi)); if (tp) await popP(c, tp); } },
-      { cap: `<b>4</b> Draw each branch on the same side of the ${T('x')}-axis as ${T('f')}: it heads to ${T('\\pm\\infty')} beside an asymptote, and toward ${T('y=0')} where ${T('f(x)')} is large.`,
+      { cap: `<b>3</b> Mark the key points: ${d.inv.length ? `the invariant points on ${T('y=\\pm1')}` : `no invariant points (${T('f(x)\\ge2')})`}, the ${T('y')}-intercept ${T(d.yi)}${same ? ` and the turning point: the same point ${T(d.tp)}, a <b>${d.tpT}</b>` : d.tp ? `, and the turning point ${T(d.tp)}, a <b>${d.tpT}</b>${d.tpNote ? ` (${d.tpNote})` : ''}` : `; no turning point (the vertex is a zero)`}.`,
+        run: async (c) => { await show(c, r[2]); for (const p of ip) await popP(c, p); if (!same) await pop(c, unhide(yi)); if (tp) await popP(c, tp); } },
+      { cap: n ? `<b>4</b> Draw each branch on the same side of the ${T('x')}-axis as ${T('f')}: it heads to ${T('\\pm\\infty')} beside an asymptote, and toward ${T('y=0')} where ${T('f(x)')} is large.` : `<b>4</b> Draw the curve on the same side of the ${T('x')}-axis as ${T('f')} (above): highest at the turning point, where ${T('f')} is smallest, and toward ${T('y=0')} where ${T('f(x)')} is large.`,
         run: async (c) => { await show(c, r[3]); for (const b of B) await drawIn(unhide(b), 750, c); } }
     ];
     if (v === 'e5') {
@@ -427,7 +428,7 @@ const back = {
     G.point(-2, 1 / 3, { color: AC, r: 7.5, label: T('\\left(-2,\\ \\frac13\\right)'), pos: 'nw' }); G.point(0, 0.2, { color: AC, r: 7.5, label: T('\\left(0,\\ \\frac15\\right)'), pos: 'se' });
     const vt = hide(G.point(-2, 1 / 3, { color: FC, r: 8.5, label: T('(-2,\\ 3)'), pos: 'w' })), yp = hide(G.point(0, 0.2, { color: FC, r: 8.5, label: T('(0,\\ 5)'), pos: 'e' }));
     const fc = hide(fGraph(G, Q, { width: 4 }));
-    const sp = stamp(P, 'no zeros', { ok: null, size: 'sm' }); hide(sp);
+    const sp = stamp(P, 'no zeros', { ok: null }); sp.style.alignSelf = 'center'; sp.style.marginTop = '10px'; hide(sp);
     const r = [row(rows, 1, `max ${T('\\left(-2,\\ \\frac13\\right)\\to')} vertex ${T('(-2,\\ 3)')}, ${T('a>0')}`), row(rows, 2, `${T('y')}-int ${T('\\frac15\\to f(0)=5')}`), row(rows, 3, `${T('f(x)=a(x+2)^2+3')}<br>${T('5=4a+3')}, ${T('a=\\frac12')}`), row(rows, 4, `${T('f(x)=\\frac12(x+2)^2+3=\\frac12x^2+2x+5')}`), row(rows, 5, `${T('f(x)\\ge3')}: no zeros, no vertical asymptotes`)];
     return [
       { cap: `<b>1</b> A <b>maximum</b> of the reciprocal comes from a <b>minimum</b> of ${T('f')}: the vertex is ${T('\\left(-2,\\ \\frac{1}{1/3}\\right)=(-2,\\ 3)')}, and ${T('a>0')}.`,
@@ -456,28 +457,27 @@ const match = {
   height: 444, minW: 880, capH: 104,
   ask: () => `<b>Example 8:</b> match each function with the graph of its reciprocal ${T('y=\\frac{1}{f(x)}')}. Give one reason for each match.`,
   make(stage, v, ex) {
-    const W = ex.W, GS = 212, gx0 = W - 2 * GS - 14, cards = {}, gr = {};
+    const W = ex.W, GS = 204, gap = Math.floor((W - 4 * GS) / 3), cards = {}, gr = {}, CY = 302, CH = 104;
+    const colX = (j) => j * (GS + gap);
     const svg = svgEl('svg', { class: 'u7l7-msvg', width: W, height: 444, style: 'position:absolute;left:0;top:0;pointer-events:none;overflow:visible' }, stage);
-    const fW = gx0 - 70;
-    MF.forEach((m, i) => {
-      const el = div(stage, 'u7l7-mfn', `<span class="u7l7-ml">${m.n}</span>${T('f(x)=' + m.f)}<span class="u7l7-mres"></span>`, 0, 10 + i * 108, fW, 92);
-      cards[m.ans] = { el, i, m };
-    });
     ['A', 'B', 'C', 'D'].forEach((k, j) => {
-      const x = gx0 + (j % 2) * (GS + 14), y = Math.floor(j / 2) * (GS + 8) + 4;
+      const x = colX(j), y = 0;
       const host = div(stage, 'u7l7-mg', '', x, y, GS, GS);
       div(host, 'u7l7-mgl', k);
       const G = new Graph(host, { width: GS - 6, height: GS - 6, xmin: -3.5, xmax: 3.5, ymin: -3.5, ymax: 3.5, xlabels: 2, ylabels: 2, fontSize: 11 });
       MQ[k].z.forEach((z) => asym(G, z, { color: COLORS.gray, width: 2 })); rGraph(G, MQ[k], { width: 3.5 });
       gr[k] = { host, x, y };
     });
+    MF.forEach((m, i) => {
+      const el = div(stage, 'u7l7-mfn', `<span class="u7l7-ml">${m.n}</span>${T('f(x)=' + m.f)}<span class="u7l7-mres"></span>`, colX(i), CY, GS, CH);
+      cards[m.ans] = { el, i, m };
+    });
     const mark = (ks, cls) => ['A', 'B', 'C', 'D'].forEach((k) => { gr[k].host.classList.remove('cand', 'pick', 'no'); if (cls && ks.includes(k)) gr[k].host.classList.add(cls); });
     const done = [];
     const keep = () => done.forEach((k) => gr[k].host.classList.add('pick'));
     const link = (m) => {
-      const cd = cards[m.ans], g = gr[m.ans], y1 = 10 + cd.i * 108 + 46, x1 = fW + 6, x2 = g.x - 4, y2 = g.y + GS / 2;
-      const ln = svgEl('path', { d: `M${x1} ${y1} C ${x1 + 60} ${y1}, ${x2 - 60} ${y2}, ${x2} ${y2}`, fill: 'none', stroke: COLORS.green, 'stroke-width': 4, 'stroke-linecap': 'round', class: 'bk-stroke' }, svg);
-      return ln;
+      const cd = cards[m.ans], g = gr[m.ans], x1 = colX(cd.i) + GS / 2, y1 = CY - 4, x2 = g.x + GS / 2, y2 = GS + 4;
+      return svgEl('path', { d: `M${x1} ${y1} C ${x1} ${y1 - 50}, ${x2} ${y2 + 50}, ${x2} ${y2}`, fill: 'none', stroke: COLORS.green, 'stroke-width': 4, 'stroke-linecap': 'round', class: 'bk-stroke' }, svg);
     };
     const lines = {}; MF.forEach((m) => { lines[m.ans] = hide(link(m)); });
     const on = (m) => { Object.values(cards).forEach((cd) => cd.el.classList.toggle('on', cd.m === m)); };

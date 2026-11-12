@@ -41,10 +41,10 @@ const PT = {
   e1: { label: 'Example 1: f(x) = x', m: 1, b: 0, fT: 'x', win: [-4.5, 4.5, -4.5, 4.5], x0: 4, lab: [[2.6, 3.9, 'w'], [0.55, 3.4, 'e']],
     rows: [[-4, '-4', '-4', '-\\frac{1}{4}'], [-2, '-2', '-2', '-\\frac{1}{2}'], [-1, '-1', '-1', '-1'], [-0.5, '-\\frac{1}{2}', '-\\frac{1}{2}', '-2'], [-0.25, '-\\frac{1}{4}', '-\\frac{1}{4}', '-4'],
       [0, '0', '0', '\\text{undef.}'], [0.25, '\\frac{1}{4}', '\\frac{1}{4}', '4'], [0.5, '\\frac{1}{2}', '\\frac{1}{2}', '2'], [1, '1', '1', '1'], [2, '2', '2', '\\frac{1}{2}'], [4, '4', '4', '\\frac{1}{4}']] },
-  e2: { label: 'Example 2: f(x) = x − 2', m: 1, b: -2, fT: 'x-2', win: [-2.5, 6.5, -4.5, 4.5], x0: 6, lab: [[5.3, 3.9, 'w'], [2.3, 3.6, 'e']],
+  e2: { label: 'Example 2: f(x) = x − 2', m: 1, b: -2, fT: 'x-2', win: [-2.5, 6.5, -4.5, 4.5], x0: 6, lab: [[4.5, 1.9, 'e'], [2.6, 4.2, 'e']],
     rows: [[-2, '-2', '-4', '-\\frac{1}{4}'], [0, '0', '-2', '-\\frac{1}{2}'], [1, '1', '-1', '-1'], [1.5, '1.5', '-0.5', '-2'], [2, '2', '0', '\\text{undef.}'],
       [2.5, '2.5', '0.5', '2'], [3, '3', '1', '1'], [4, '4', '2', '\\frac{1}{2}'], [6, '6', '4', '\\frac{1}{4}']] },
-  e3: { label: 'Example 3: close to x = 2', m: 1, b: -2, fT: 'x-2', win: [-2.5, 6.5, -4.5, 4.5], x0: 1.5, lab: [[5.3, 3.9, 'w'], [2.3, 3.6, 'e']],
+  e3: { label: 'Example 3: close to x = 2', m: 1, b: -2, fT: 'x-2', win: [-2.5, 6.5, -4.5, 4.5], x0: 1.5, lab: [[4.5, 1.9, 'e'], [2.6, 4.2, 'e']],
     rows: [[1.9, '1.9', '-0.1', '-10'], [1.99, '1.99', '-0.01', '-100'], [1.999, '1.999', '-0.001', '-1000'], [2.001, '2.001', '0.001', '1000'], [2.01, '2.01', '0.01', '100'],
       [2.1, '2.1', '0.1', '10'], [-98, '-98', '-100', '-0.01'], [102, '102', '100', '0.01']] },
   e4: { label: 'A falling line: f(x) = 2 − ½x', m: -0.5, b: 2, fT: '2-\\tfrac{1}{2}x', win: [-3.5, 9.5, -4.5, 4.5], x0: -2, lab: [[-2.9, 3.9, 'e'], [4.3, 3.6, 'e']],
@@ -57,7 +57,7 @@ const partner = {
   ask: (v) => (v === 'e3' ? `Example 3: describe ${T('y=\\dfrac{1}{x-2}')} near its asymptotes.` : `Each point ${T('(x,\\ y)')} on ${T(`y=${PT[v].fT}`)} has a partner ${T('\\left(x,\\ \\tfrac{1}{y}\\right)')}.`),
   make(stage, v, ex) {
     const d = PT[v], W = ex.W, [x0, x1, y0, y1] = d.win, F = (x) => d.m * x + d.b, z = -d.b / d.m;
-    const G = new Graph(stage, { x: 4, y: 4, width: 540, height: 472, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 1, ylabels: 1, fontSize: 15, pad: 18 });
+    const G = new Graph(stage, { x: 4, y: 4, width: 540, height: 472, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 1, ylabels: 1, fontSize: 15, pad: [28, 18, 16, 18] });
     const S = { x: d.x0, lo: d.x0, hi: d.x0, partner: false };
     const L = hide(G.line({ m: d.m, b: d.b }, { color: BL, width: 4 }));
     const gl = guides(G); gl.forEach(hide);
@@ -173,7 +173,7 @@ const partner = {
 
 /* =============================== explainer: sketching from a line (procedure) =============================== */
 const SK = {
-  demo: { label: 'Demo: f(x) = ½x + 2', m: 0.5, b: 2, fT: '\\tfrac{1}{2}x+2', extra: [4, -5] },
+  demo: { label: 'Demo: f(x) = ½x + 1.5', m: 0.5, b: 1.5, fT: '\\tfrac{1}{2}x+1.5', extra: [1, -4] },
   a: { label: 'Example 4(a)', m: 2, b: -4, fT: '2x-4', extra: [3, 1] },
   b: { label: '(b)', m: -0.5, b: -1, fT: '-\\tfrac{1}{2}x-1', extra: [-6, 2] }
 };
@@ -184,22 +184,21 @@ const sketch = {
   ask: (v) => `Sketch ${T('y=\\dfrac{1}{f(x)}')} for ${T(`f(x)=${SK[v].fT}`)}.`,
   make(stage, v, ex) {
     const d = SK[v], W = ex.W, F = (x) => d.m * x + d.b, R = (x) => 1 / F(x), z = -d.b / d.m;
-    const G = new Graph(stage, { x: 4, y: 4, width: 462, height: 462, xmin: -6.5, xmax: 6.5, ymin: -6.5, ymax: 6.5, xlabels: 2, ylabels: 2, fontSize: 15, pad: 16 });
+    const G = new Graph(stage, { x: 4, y: 4, width: 462, height: 462, xmin: -6.5, xmax: 6.5, ymin: -6.5, ymax: 6.5, xlabels: 2, ylabels: 2, fontSize: 15, pad: [28, 16, 16, 16] });
     G.line({ m: d.m, b: d.b }, { color: BL, width: 4 });
     guides(G);
     G.label(-6.3, 1, T('y=1'), { pos: 'ne', color: GN, cls: 'bk-ptlab' }); G.label(-6.3, -1, T('y=-1'), { pos: 'se', color: GN, cls: 'bk-ptlab' });
     const VA = hide(G.vline(z, { color: PU, width: 3 })), HA = hide(G.hline(0, { color: PU, width: 3.5, dash: '10 7' }));
     const zl = hide(G.label(z, 6.2, T(`x=${tn(z)}`), { pos: 'e', color: PU, cls: 'bk-ptlab', dx: 4 }));
     const ix = [(1 - d.b) / d.m, (-1 - d.b) / d.m];
-    const inv = ix.map((x, i) => hide(G.point(x, i ? -1 : 1, { color: GO, r: 8, coords: true, pos: (i ? 1 : 0) ^ (d.m < 0 ? 1 : 0) ? 'nw' : 'se' }))); inv.forEach((p) => hide(p.label));
+    const inv = ix.map((x, i) => hide(G.point(x, i ? -1 : 1, { color: GO, r: 8 })));   // their coordinates are in the panel
     const yIsInv = Math.abs(Math.abs(d.b) - 1) < 1e-9;
     const more = [0, ...d.extra].filter((x, i) => !(i === 0 && yIsInv)).map((x) => { const p = hide(G.point(x, F(x), { color: BL, r: 7 })); p._x = x; return p; });
-    const moreL = more.map((p) => hide(G.label(p._x, R(p._x), T(pt(tn(p._x), frT(R(p._x)))), { pos: 'e', color: OR, cls: 'bk-ptlab', dx: 6 })));
     const left = hide(G.fn(R, { to: z - 1e-6, color: OR, width: 4.5 })), right = hide(G.fn(R, { from: z + 1e-6, color: OR, width: 4.5 }));
     // the steps panel
     const P = div(stage, 'u7l6-panel', '<div class="u7l6-ph">The four steps</div>', 482, 4, W - 486, 462);
     const ftx = (k) => `${d.fT}=${k}`;
-    const yInt = fr(1, d.b);
+    const yInt = frT(1 / d.b);
     const moreTxt = more.map((p) => { const f = F(p._x); return p._x === 0 ? `${T('y')}-intercept ${T(`\\tfrac{1}{${f}}=${yInt}`)}` : `${T(`f(${tn(p._x)})=${frT(f)}`)} ${T('\\to')} ${T(pt(tn(p._x), frT(1 / f)))}`; }).join('; &nbsp;');
     const w1 = wl(P, 1, `${T(ftx(0))} at ${T(`x=${xT(z)}`)}: vertical asymptote ${T(`x=${xT(z)}`)}; horizontal asymptote ${T('y=0')}`);
     const w2 = wl(P, 2, `${T(ftx(1))} at ${T(`x=${xT(ix[0])}`)}; &nbsp;${T(ftx(-1))} at ${T(`x=${xT(ix[1])}`)}: invariant points ${T(pt(xT(ix[0]), 1))}, ${T(pt(xT(ix[1]), -1))}`);
@@ -209,8 +208,8 @@ const sketch = {
     const fly = async (c, p) => { p.style.opacity = 1; await pop(c, p); await sleep(c, 200); const y1 = R(p._x); p.querySelector('circle').setAttribute('fill', OR); await G.move(c, p, p._x, y1, 700); };
     return [
       { cap: `<b>Step 1.</b> The line crosses the ${T('x')}-axis at ${T(`x=${xT(z)}`)}: draw the dashed vertical asymptote there. The ${T('x')}-axis, ${T('y=0')}, is the horizontal asymptote.`, run: async (c) => { await show(c, w1); VA.style.opacity = 1; await G.drawIn(VA, 600, c); await show(c, zl); HA.style.opacity = 1; await G.drawIn(HA, 600, c); } },
-      { cap: `<b>Step 2.</b> Where the line meets the guide lines ${T('y=1')} and ${T('y=-1')}, its reciprocal is the same number: the <b>invariant points</b>.`, run: async (c) => { await show(c, w2); for (const p of inv) { p.style.opacity = 1; await pop(c, p); await show(c, p.label); } } },
-      { cap: `<b>Step 3.</b> A few more points: take a point on the line and move it to the reciprocal of its height (${T('2\\to\\tfrac{1}{2}')}, small ${T('\\to')} big).`, run: async (c) => { await show(c, w3); for (let i = 0; i < more.length; i++) { await fly(c, more[i]); await show(c, moreL[i]); } } },
+      { cap: `<b>Step 2.</b> Where the line meets the guide lines ${T('y=1')} and ${T('y=-1')}, its reciprocal is the same number: the <b>invariant points</b>.`, run: async (c) => { await show(c, w2); for (const p of inv) { p.style.opacity = 1; await pop(c, p); } } },
+      { cap: `<b>Step 3.</b> A few more points: take a point on the line and move it to the reciprocal of its height (${T('2\\to\\tfrac{1}{2}')}, small ${T('\\to')} big).`, run: async (c) => { await show(c, w3); for (const p of more) await fly(c, p); } },
       { cap: `<b>Step 4.</b> Two smooth branches through the points, bending toward both asymptotes, above the ${T('x')}-axis where the line is above it and below where it is below.`, run: async (c) => { await show(c, w4); left.style.opacity = 1; await G.drawIn(left, 900, c); right.style.opacity = 1; await G.drawIn(right, 900, c); await show(c, ans); } }
     ];
   }
@@ -224,14 +223,14 @@ const FT = {
 };
 const features = {
   title: 'Features straight from the equation',
-  height: 470, minW: 940,
+  height: 500, minW: 940,
   choices: Object.keys(FT).map((k) => ({ v: k, label: FT[k].label })),
   ask: (v) => `Find the features of ${T(`y=\\dfrac{1}{${FT[v].den}}`)} without graphing.`,
   make(stage, v, ex) {
     const d = FT[v], W = ex.W, [x0, x1, y0, y1] = d.win, F = (x) => d.a * x + d.b, R = (x) => 1 / F(x), z = -d.b / d.a;
     const zT = fr(-d.b, d.a), i1 = fr(1 - d.b, d.a), i2 = fr(-1 - d.b, d.a), yT = fr(1, d.b);
     const PW = W - 470;
-    const P = div(stage, 'u7l6-panel', '', 4, 4, PW, 462);
+    const P = div(stage, 'u7l6-panel', '', 4, 4, PW, 492);
     div(P, 'u7l6-feq', T(`y=\\dfrac{1}{\\color{${BL}}{${d.den}}}`));
     const slot = (tag, colr, html) => { const s = div(P, 'u7l6-slot', `<b style="--sc:${colr}">${tag}</b><span>${html}</span>`); return hide(s); };
     const s1 = slot('denominator = 0', PU, `${T(`${d.den}=0\\Rightarrow x=${zT}`)}: vertical asymptote ${T(`x=${zT}`)}`);
@@ -241,7 +240,7 @@ const features = {
     const s5 = slot('domain, range', '#3a4254', `${T(`\\{x\\mid x\\ne${zT},\\ x\\in\\mathbb{R}\\}`)}, &nbsp;${T('\\{y\\mid y\\ne0,\\ y\\in\\mathbb{R}\\}')}`);
     const pos = d.a > 0 ? `x>${zT}` : `x<${zT}`;
     const s6 = slot('y > 0 when', GN, `${T(`${d.den}>0`)}: ${T(pos)}; the line ${d.a > 0 ? 'rises' : 'falls'}, so each branch ${d.a > 0 ? 'falls' : 'rises'}`);
-    const G = new Graph(stage, { x: PW + 12, y: 4, width: W - PW - 16, height: 462, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 1, ylabels: 1, fontSize: 14, pad: 16 });
+    const G = new Graph(stage, { x: PW + 12, y: 4, width: W - PW - 16, height: 492, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 1, ylabels: 1, fontSize: 14, pad: [28, 16, 16, 16] });
     guides(G, 2);
     const VA = hide(G.vline(z, { color: PU, width: 3 }));
     const p1 = hide(G.point((1 - d.b) / d.a, 1, { color: GO, r: 7.5 })), p2 = hide(G.point((-1 - d.b) / d.a, -1, { color: GO, r: 7.5 }));
@@ -272,21 +271,21 @@ const backwards = {
   ask: (v) => (v === 'e7' ? `Example 7: asymptote ${T('x=1.5')}, invariant point ${T('(2,\\ 1)')}. Find ${T('f(x)')}.` : `The graph of ${T('y=\\tfrac{1}{f(x)}')} has asymptote ${T('x=1')} and passes through ${T('\\left(3,\\ \\tfrac{1}{2}\\right)')}. Find ${T('f(x)')}.`),
   make(stage, v, ex) {
     const d = BW[v], W = ex.W, [x0, x1, y0, y1] = d.win, F = (x) => d.m * x + d.b, R = (x) => 1 / F(x);
-    const G = new Graph(stage, { x: 4, y: 4, width: 420, height: 462, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 1, ylabels: 1, fontSize: 15, pad: 16 });
+    const G = new Graph(stage, { x: 4, y: 4, width: 420, height: 462, xmin: x0, xmax: x1, ymin: y0, ymax: y1, xlabels: 1, ylabels: 1, fontSize: 15, pad: [28, 16, 16, 16] });
     G.vline(d.z, { color: PU, width: 3 });
     G.fn(R, { to: d.z - 1e-6, color: OR, width: 4.5 }); G.fn(R, { from: d.z + 1e-6, color: OR, width: 4.5 });
     const inv = v === 'e7';
     const [px, py] = d.pt, fy = 1 / py;   // the given point and its partner on the line
     const gp = G.point(px, py, { color: inv ? GO : OR, r: 8, label: inv ? T('(2,\\ 1)') : T('\\left(3,\\ \\tfrac{1}{2}\\right)'), pos: 'e' });
     const zp = hide(G.point(d.z, y1 - 0.3, { color: PU, r: 8 }));
-    const zl = hide(G.label(d.z, 0, T(pt(tn(d.z), 0)), { pos: 'se', color: PU, cls: 'bk-ptlab' }));
+    const zl = hide(G.label(d.z, 0, T(pt(tn(d.z), 0)), { pos: 'nw', color: PU, cls: 'bk-ptlab' }));
     const lp = inv ? null : hide(G.point(px, py, { color: BL, r: 8 }));
     const lpl = inv ? null : hide(G.label(px, fy, T(pt(px, tn(fy))), { pos: 'e', color: BL, cls: 'bk-ptlab', dx: 6 }));
     const L = hide(G.line({ m: d.m, b: d.b }, { color: BL, width: 4 }));
-    const extra = inv ? hide(G.point(1, -1, { color: GO, r: 8, coords: true, pos: 'w' })) : null; if (extra) hide(extra.label);
+    const extra = inv ? hide(G.point(1, -1, { color: GO, r: 8 })) : null;
     const [ax, ay] = [d.z, 0], [bx, by] = [px, fy];
     const run_ = hide(G.segment([ax, ay], [bx, ay], { color: '#3a4254', width: 3 })), rise = hide(G.segment([bx, ay], [bx, by], { color: '#3a4254', width: 3 }));
-    const runL = hide(G.label((ax + bx) / 2, ay, T(`\\text{run } ${tn(bx - ax)}`), { pos: 's', cls: 'bk-ptlab' })), riseL = hide(G.label(bx, by / 2, T(`\\text{rise } ${tn(by)}`), { pos: 'e', cls: 'bk-ptlab', dx: 6 }));
+    const runL = hide(G.label((ax + bx) / 2, ay, T(`\\text{run } ${tn(bx - ax)}`), { pos: 'n', cls: 'bk-ptlab' })), riseL = hide(G.label(bx, by / 2, T(`\\text{rise } ${tn(by)}`), { pos: 'e', cls: 'bk-ptlab', dx: 6 }));
     const yp = hide(G.point(0, 1 / d.b, { color: OR, r: 8, coords: false }));
     const yl = hide(G.label(0, 1 / d.b, T(pt(0, fr(1, d.b))), { pos: 'w', color: OR, cls: 'bk-ptlab', dx: -6 }));
     const P = div(stage, 'u7l6-panel', '<div class="u7l6-ph">Working backwards</div>', 440, 4, W - 444, 462);
@@ -302,7 +301,7 @@ const backwards = {
       { cap: `<b>1.</b> The vertical asymptote is where ${T('f(x)=0')}: the zero of the line. Drop it onto the ${T('x')}-axis: ${T(pt(tn(d.z), 0))}.`, run: async (c) => { await show(c, w1); zp.style.opacity = 1; await pop(c, zp); await G.move(c, zp, d.z, 0, 700); await show(c, zl); } },
       { cap: inv ? `<b>2.</b> An invariant point has ${T('y=\\pm1')}, so it is on both graphs: ${T('(2,\\ 1)')} is on the line too.` : `<b>2.</b> Flip the point: height ${T('\\tfrac{1}{2}')} on the reciprocal means height ${T('2')} on the line. ${T('(3,\\ 2)')} is on the line.`,
         run: async (c) => { await show(c, w2); if (inv) await pulse(c, gp, 1.5); else { lp.style.opacity = 1; await pop(c, lp); await G.move(c, lp, px, fy, 800); await show(c, lpl); } } },
-      { cap: `<b>3.</b> Two points determine the line: draw ${T('y=f(x)')} through them.`, run: async (c) => { await show(c, w3); L.style.opacity = 1; await G.drawIn(L, 800, c); if (extra) { extra.style.opacity = 1; await pop(c, extra); await show(c, extra.label); } } },
+      { cap: `<b>3.</b> Two points determine the line: draw ${T('y=f(x)')} through them.`, run: async (c) => { await show(c, w3); L.style.opacity = 1; await G.drawIn(L, 800, c); if (extra) { extra.style.opacity = 1; await pop(c, extra); } } },
       { cap: `<b>4.</b> Slope from rise over run, then ${T('b')} from the zero: ${T(`f(x)=${fT}`)}.`, run: async (c) => { await show(c, w4); for (const e of [run_, rise]) { e.style.opacity = 1; await G.drawIn(e, 500, c); } await show(c, runL); await show(c, riseL); } },
       { cap: `<b>5.</b> Check with a feature you can see: the reciprocal of the line’s ${T('y')}-intercept ${T(String(d.b))} is ${T(fr(1, d.b))}, right where the graph crosses the ${T('y')}-axis.`, run: async (c) => { await show(c, w5); yp.style.opacity = 1; await pop(c, yp); await show(c, yl); await sIn(c, ok); } }
     ];
@@ -314,13 +313,13 @@ const MG = [{ k: 'A', f: (x) => 1 / (2 * x - 6), z: 3 }, { k: 'B', f: (x) => 1 /
 const EQ = [{ n: '(i)', t: 'y=\\dfrac{1}{x+3}', to: 1 }, { n: '(ii)', t: 'y=\\dfrac{1}{2x-6}', to: 0 }, { n: '(iii)', t: 'y=\\dfrac{1}{x-3}', to: 3 }, { n: '(iv)', t: 'y=\\dfrac{1}{3-x}', to: 2 }];
 const match = {
   title: 'Match each equation with its graph',
-  height: 430, minW: 940,
+  height: 400, minW: 940,
   ask: () => `Example 8: match ${T('\\tfrac{1}{x+3}')}, ${T('\\tfrac{1}{2x-6}')}, ${T('\\tfrac{1}{x-3}')}, ${T('\\tfrac{1}{3-x}')} with graphs A–D.`,
   make(stage, v, ex) {
     const W = ex.W, gap = 12, gw = Math.floor((W - 8 - 3 * gap) / 4), gh = 214;
     const Gs = MG.map((m, i) => {
       const box_ = div(stage, 'u7l6-mg', `<b>${m.k}</b>`, 4 + i * (gw + gap), 4, gw, gh);
-      const G = new Graph(box_, { width: gw - 4, height: gh - 4, xmin: -6.5, xmax: 6.5, ymin: -3.5, ymax: 3.5, xlabels: 3, ylabels: 1, fontSize: 12, pad: 12 });
+      const G = new Graph(box_, { width: gw - 4, height: gh - 4, xmin: -6.5, xmax: 6.5, ymin: -3.5, ymax: 3.5, xlabels: 3, ylabels: 1, fontSize: 12, pad: [22, 12, 10, 12] });
       guides(G, 2); G.fn(m.f, { to: m.z - 1e-6, color: OR, width: 3.5 }); G.fn(m.f, { from: m.z + 1e-6, color: OR, width: 3.5 });
       G.va = hide(G.vline(m.z, { color: PU, width: 2.5 }));
       G.left = hide(G.point(0, m.f(0), { color: m.f(0) > 0 ? GN : '#c93a33', r: 6.5 }));
@@ -328,11 +327,11 @@ const match = {
       return G;
     });
     const slotX = (i) => 4 + i * (gw + gap) + gw / 2;
-    const cards = EQ.map((e, i) => { const cd = div(stage, 'u7l6-card', `<b>${e.n}</b> ${T(e.t)}`); cd.style.position = 'absolute'; cd._home = [40 + i * ((W - 80) / 4), 330]; return cd; });
+    const cards = EQ.map((e, i) => { const cd = div(stage, 'u7l6-card', `<b>${e.n}</b> ${T(e.t)}`); cd.style.position = 'absolute'; cd._home = [40 + i * ((W - 80) / 4), gh + 74]; return cd; });
     const placeCard = (cd, x, y) => { cd.style.left = (x - cd.offsetWidth / 2) + 'px'; cd.style.top = y + 'px'; };
     cards.forEach((cd) => { cd.style.left = cd._home[0] + 'px'; cd.style.top = cd._home[1] + 'px'; });
     const slide = (c, cd, i) => { const x0 = parseFloat(cd.style.left), y0 = parseFloat(cd.style.top), x1 = slotX(i) - cd.offsetWidth / 2, y1 = gh + 16; return tween(c, 700, (t) => { cd.style.left = (x0 + (x1 - x0) * t) + 'px'; cd.style.top = (y0 + (y1 - y0) * t) + 'px'; }).then(() => placeCard(cd, slotX(i), gh + 16)); };
-    const note = div(stage, 'u7l6-ansl', '', 4, 384, W - 8); hide(note);
+    const note = div(stage, 'u7l6-ansl', '', 4, gh + 138, W - 8); hide(note);
     const st = MG.map((m, i) => hide(stamp(stage, '✓', { ok: true, x: 4 + i * (gw + gap) + gw - 46, y: 26, rotate: -8, size: 'sm' })));
     const done = async (c, k) => { const e = EQ[k]; await slide(c, cards[k], e.to); cards[k].classList.add('ok'); await sIn(c, st[e.to]); };
     return [

@@ -285,23 +285,23 @@ const sieve = {
       row(rows, 3, `the right side must be ${T('\\ge0')}: ${T(d.gate)}`), row(rows, 4, `<b class="u7l5-ok">keep</b> ${d.keep}`),
       row(rows, 5, `<b class="u7l5-no">extraneous</b> ${d.rej}`), row(rows, 6, `<b>Solutions:</b> ${T(d.sol)}`)];
     /* the number line with the trapdoor zone */
-    const NY = 92, N = new NumberLine(stage, { x: RX, y: NY, width: RW, height: 96, min: d.min, max: d.max, step: 1, labelStep: 1 });
+    const NY = 50, N = new NumberLine(stage, { x: RX, y: NY, width: RW, height: 96, min: d.min, max: d.max, step: 1, labelStep: 1 });
     const ay = N.ay, za = Math.max(d.zone[0], d.min - 0.4), zb = Math.min(d.zone[1], d.max + 0.4);
     const zx0 = N.toPx(za), zx1 = N.toPx(zb);
     const zg = svgEl('g', { class: 'u7l5-zone' }, N.layers.data); zg.style.opacity = 0;
     svgEl('rect', { x: zx0, y: ay - 9, width: zx1 - zx0, height: 18, fill: 'rgba(201,58,51,.18)', stroke: AC, 'stroke-width': 2.5, 'stroke-dasharray': '7 5' }, zg);
     const flapL = svgEl('line', { x1: zx0, y1: ay, x2: (zx0 + zx1) / 2, y2: ay, stroke: AC, 'stroke-width': 4, 'stroke-linecap': 'round' }, zg);
     const flapR = svgEl('line', { x1: zx1, y1: ay, x2: (zx0 + zx1) / 2, y2: ay, stroke: AC, 'stroke-width': 4, 'stroke-linecap': 'round' }, zg);
-    const zlab = div(stage, 'u7l5-zlab', `${T(d.zoneT)}: trapdoor`, RX + (Math.max(zx0, N.toPx(d.min)) + Math.min(zx1, N.toPx(d.max))) / 2, NY + ay + 30); zlab.style.transform = 'translateX(-50%)'; hide(zlab);
+    const zlab = div(stage, 'u7l5-zlab', `${T(d.zoneT)}: trapdoor`, RX + (Math.max(zx0, N.toPx(d.min)) + Math.min(zx1, N.toPx(d.max))) / 2, NY + ay + 28); zlab.style.transform = 'translateX(-50%)'; hide(zlab);
     /* the candidate balls */
     const balls = d.cand.map(([x, lab, cs]) => {
-      const b = div(stage, 'u7l5-ball c' + cs, T(lab), RX + N.toPx(x), 18); b.style.opacity = 0; b.x = x; b.bad = d.B(x) < 0; return b;
+      const b = div(stage, 'u7l5-ball c' + cs, T(lab), RX + N.toPx(x), 4); b.style.opacity = 0; b.x = x; b.bad = d.B(x) < 0; return b;
     });
     let nb = 0;
-    const tags = balls.map((b) => { const t = div(stage, 'u7l5-tag ' + (b.bad ? 'no' : 'ok'), b.bad ? '✗ extraneous' : '✓ keep', RX + N.toPx(b.x), NY + ay + 58 + (b.bad ? 26 * nb++ : 0)); t.style.opacity = 0; return t; });
-    const drop = NY + ay - 18 - 18; // a ball resting on the line (its top)
+    const tags = balls.map((b) => { const t = div(stage, 'u7l5-tag ' + (b.bad ? 'no' : 'ok'), b.bad ? '✗ extraneous' : '✓ keep', RX + N.toPx(b.x), NY + ay + 54 + (b.bad ? 26 * nb++ : 0)); t.style.opacity = 0; return t; });
+    const drop = NY + ay - 24; // drop - 18: the move that rests a ball (top at y = 4, 36 px tall) on the line
     /* the graph that confirms it */
-    const G = new Graph(stage, Object.assign({ x: RX + 40, y: 222, width: RW - 80, height: 246, fontSize: 13 }, d.gwin));
+    const G = new Graph(stage, Object.assign({ x: RX + 40, y: 236, width: RW - 80, height: 232, fontSize: 13 }, d.gwin));
     const ga = hide(G.fn(d.A, { color: AC, width: 4 })), gb = hide(G.fn(d.B, { color: KC, width: 3.5 }));
     const gaL = hide(G.label(d.gwin.xmin + 0.2, d.gwin.ymax - 0.4, T(d.aT), { cls: 'bk-ptlab', pos: 'se', color: AC }));
     const gbL = hide(G.label(d.gwin.xmax - 0.2, d.gwin.ymax - 0.4, T(d.bT), { cls: 'bk-ptlab', pos: 'sw', color: KC }));
@@ -347,13 +347,13 @@ const tub = {
     const bands = [[-Infinity, -1, S1], [-1, 3, S2], [3, Infinity, S3]].map(([a, b, cl]) => hide(G.shadeX(a, b, { band: true, color: cl, openB: true })));
     const blab = [[-3, 'x<-1', S1], [1.5, '-1\\le x<3', S2], [5, 'x\\ge3', S3]].map(([x, t, cl]) => hide(G.label(x, 12.2, T(t), { cls: 'bk-ptlab', color: cl })));
     const zs = [-1, 3].map((x) => hide(G.point(x, 0, { color: 'amber', r: 7.5, label: T(String(x)), pos: 's' })));
-    const six = hide(G.hline(6, { color: OR, width: 3, dash: false })), sixL = hide(G.label(6.8, 6, T('y=6'), { cls: 'bk-ptlab', pos: 'nw', color: OR }));
+    const six = hide(G.hline(6, { color: OR, width: 3, dash: false })), sixL = hide(G.label(6.8, 6, T('y=6'), { cls: 'bk-ptlab', pos: 'sw', color: OR }));
     const S = { t: [-5, -5, -1, 3] };
     const g = (x) => Math.abs(x - 3) + Math.abs(x + 1);
-    const pieces = [[-5, -1, S1, '-2x+2', -3.6, 'e'], [-1, 3, S2, '4', 1, 'n'], [3, 7, S3, '2x-2', 5.6, 'w']].map(([a, b, cl, lab, lx, pos], i) => {
+    const pieces = [[-5, -1, S1, '-2x+2', -3, 'sw'], [-1, 3, S2, '4', 1, 'n'], [3, 7, S3, '2x-2', 5.6, 'w']].map(([a, b, cl, lab, lx, pos], i) => {
       const o = { from: a, to: a, color: cl, width: 5, arrows: i !== 1 };
       const el = hide(G.fn(g, o)); el.o = o; el.a = a; el.b = b;
-      el.lab = hide(G.label(lx, g(lx), T('y=' + lab), { cls: 'bk-ptlab', pos: pos === 'n' ? 'n' : pos === 'e' ? 'ne' : 'nw', color: cl, dy: pos === 'n' ? -4 : 0 }));
+      el.lab = hide(G.label(lx, g(lx), T('y=' + lab), { cls: 'bk-ptlab', pos: pos === 'n' ? 'n' : pos === 'sw' ? 'sw' : 'nw', color: cl, dy: pos === 'n' ? -4 : 0 }));
       return el;
     });
     const tr = hide(G.point(-5, g(-5), { color: INK, r: 6 }));

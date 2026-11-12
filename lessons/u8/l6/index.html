@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quadratic Inequalities in One Variable: Roots and Test Points · Math 20-1 8.6</title>
+<meta name="description" content="Math 20-1 Unit 8 Lesson 6: solving quadratic inequalities in one variable from a graph (above or below the x-axis or a line), writing the solution in set notation and on a number line, the graphing calculator's zero and intersect with exact answers from the quadratic formula, roots and test points, one or no roots, and problems. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u8l6.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u8l6">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Painted Cube">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="40" y="46" font-size="40" text-anchor="middle">🎨</text></g><text x="115" y="46" font-size="40" text-anchor="middle">🟥<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0.4s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/><text x="190" y="46" font-size="40" text-anchor="middle">🖌️</text></g><text x="265" y="46" font-size="40" text-anchor="middle">🪣<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0.9s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Painted Cube</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">A big wooden cube is painted red on all six of its outside faces. When the paint is dry, the cube is sawed into 27 equal small cubes (3&nbsp;by&nbsp;3&nbsp;by&nbsp;3).</p><p class="vw-ask">How many of the small cubes have red paint on exactly two faces?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A wooden cube being painted red on every face with a brush, then sawed into 3 by 3 by 3 small cubes"><ellipse cx="140" cy="199" rx="100" ry="10" fill="#efe9dc"/><polygon points="140.0,31.0 210.1,71.5 140.0,112.0 69.9,71.5" fill="#f3dcaa" stroke="#4a4436" stroke-width="2.5" stroke-linejoin="round"/><polygon points="210.1,71.5 140.0,112.0 140.0,193.0 210.1,152.5" fill="#d8b277" stroke="#4a4436" stroke-width="2.5" stroke-linejoin="round"/><polygon points="69.9,71.5 140.0,112.0 140.0,193.0 69.9,152.5" fill="#e7c78f" stroke="#4a4436" stroke-width="2.5" stroke-linejoin="round"/><line x1="142.3" y1="37.8" x2="81.5" y2="72.8" stroke="#e2c58c" stroke-width="1.5" stroke-linecap="round"/><line x1="163.4" y1="49.9" x2="102.6" y2="85.0" stroke="#e2c58c" stroke-width="1.5" stroke-linecap="round"/><line x1="184.4" y1="62.1" x2="123.6" y2="97.2" stroke="#e2c58c" stroke-width="1.5" stroke-linecap="round"/><polygon points="140.0,31.0 210.1,71.5 140.0,112.0 69.9,71.5" fill="#e8483f" stroke="#4a4436" stroke-width="2.5" stroke-linejoin="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.1;0.24;0.9;1" dur="9s" repeatCount="indefinite"/></polygon><polygon points="69.9,71.5 140.0,112.0 140.0,193.0 69.9,152.5" fill="#cf3a32" stroke="#4a4436" stroke-width="2.5" stroke-linejoin="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.26;0.42;0.9;1" dur="9s" repeatCount="indefinite"/></polygon><polygon points="210.1,71.5 140.0,112.0 140.0,193.0 210.1,152.5" fill="#a92d27" stroke="#4a4436" stroke-width="2.5" stroke-linejoin="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.44;0.58;0.9;1" dur="9s" repeatCount="indefinite"/></polygon><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.62;0.7;0.9;1" dur="9s" repeatCount="indefinite"/><line x1="163.4" y1="44.5" x2="93.2" y2="85.0" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="116.6" y1="44.5" x2="186.8" y2="85.0" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="93.2" y1="85.0" x2="93.2" y2="166.0" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="69.9" y1="125.5" x2="140.0" y2="166.0" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="186.8" y1="85.0" x2="186.8" y2="166.0" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="210.1" y1="125.5" x2="140.0" y2="166.0" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="186.8" y1="58.0" x2="116.6" y2="98.5" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="93.2" y1="58.0" x2="163.4" y2="98.5" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="116.6" y1="98.5" x2="116.6" y2="179.5" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="69.9" y1="98.5" x2="140.0" y2="139.0" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="163.4" y1="98.5" x2="163.4" y2="179.5" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/><line x1="210.1" y1="98.5" x2="140.0" y2="139.0" stroke="#fffdf6" stroke-width="2.6" stroke-linecap="round"/></g><polygon points="140.0,31.0 210.1,71.5 140.0,112.0 69.9,71.5" fill="none" stroke="#4a4436" stroke-width="2.5" stroke-linejoin="round"/><polygon points="210.1,71.5 140.0,112.0 140.0,193.0 210.1,152.5" fill="none" stroke="#4a4436" stroke-width="2.5" stroke-linejoin="round"/><polygon points="69.9,71.5 140.0,112.0 140.0,193.0 69.9,152.5" fill="none" stroke="#4a4436" stroke-width="2.5" stroke-linejoin="round"/><g opacity="0"><animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.6;0.62;0.72;0.74;1" dur="9s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="40 20;40 20;230 70;230 70" keyTimes="0;.6;.72;1" dur="9s" repeatCount="indefinite"/><text x="0" y="0" font-size="34" text-anchor="middle">🪚</text></g><g><animateTransform attributeName="transform" type="translate" values="146.0 17.1;141.3 27.9;178.7 54.9;113.3 49.5;146.0 73.8;94.6 81.9;127.3 95.4;96.9 118.3;132.0 141.3;202.1 76.5;162.4 99.5;195.1 118.3;160.0 141.3;209.1 80.5;209.1 80.5;146.0 17.1" keyTimes="0;0.1;0.145;0.19;0.24;0.27;0.32;0.37;0.42;0.45;0.49;0.53;0.58;0.64;0.95;1" dur="9s" repeatCount="indefinite"/><text x="0" y="0" font-size="34" text-anchor="middle">🖌️</text></g><circle cx="268" r="4.5" fill="#e8483f"><animate attributeName="cy" values="168;214" dur="1.4s" begin="0.0s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="1.4s" begin="0.0s" repeatCount="indefinite"/></circle><circle cx="290" r="4.5" fill="#e8483f"><animate attributeName="cy" values="168;214" dur="1.4s" begin="0.7s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="1.4s" begin="0.7s" repeatCount="indefinite"/></circle><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.8s" begin="0s" repeatCount="indefinite"/><text x="282" y="226" font-size="58" text-anchor="middle">🪣</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="290" y="70" font-size="46" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Make a guess first. Then count.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>12.</b> A small cube has paint on exactly two faces when it sits in the middle of an edge of the big cube, and a cube has 12 edges.<br>The other 15 cubes: the 8 corner cubes have paint on three faces, the 6 cubes in the centres of the faces have paint on one, and 1 cube, hidden in the very middle, has no paint at all. Check: <span class="tex">8+12+6+1=27</span>.</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 8 Systems and Inequalities · Lesson 6</div>
+  <h1>Quadratic Inequalities in One Variable: Roots and Test Points</h1>
+  <p class="lede">Solving inequalities such as <span class="tex">x^2-x-12&lt;0</span> from a graph and from the roots with a test point in each interval, and writing the solution in set notation and on a number line.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>solve a quadratic inequality <b>from a graph</b>: where the parabola is above or below the <span class="tex">x</span>-axis or a line</li>
+      <li>write the solution in <b>set notation</b> and on a <b>number line</b>, with open and closed dots</li>
+      <li>use the graphing calculator’s <b>zero</b> or <b>intersect</b>, and the quadratic formula for exact answers</li>
+      <li>solve an inequality with <b>roots and test points</b>, rearranging it first when needed</li>
+      <li>solve an inequality whose related equation has a <b>double root</b> or <b>no real roots</b></li>
+      <li>solve problems: values of a parameter from the discriminant, and measurements with restrictions</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF8</b> Solve problems that involve quadratic inequalities in one variable.<br><span class="muted">Today: solving from a graph, set notation and number lines, the graphing calculator, roots and test points, one or no roots, and problems.</span></div>
+</section>
+
+<!-- ================= 1. Quadratic inequalities and their graphs ================= -->
+<section class="card" data-ink="s1" data-section="1. Inequalities and Their Graphs">
+  <div class="sec-h"><span class="badge">1</span><h2>Quadratic Inequalities and Their Graphs</h2></div>
+  <p>A <b>quadratic inequality in one variable</b> has one of the forms <span class="tex">ax^2+bx+c&lt;0</span>, <span class="tex">ax^2+bx+c\le0</span>, <span class="tex">ax^2+bx+c&gt;0</span> or <span class="tex">ax^2+bx+c\ge0</span>, with <span class="tex">a\ne0</span>. Its <b>solution</b> is the set of all <span class="tex">x</span>-values that make it true, usually an interval or two. The graph of the related function <span class="tex">y=ax^2+bx+c</span> shows them: <span class="tex">ax^2+bx+c&gt;0</span> exactly where the graph is <b>above</b> the <span class="tex">x</span>-axis, and <span class="tex">ax^2+bx+c&lt;0</span> where it is <b>below</b>. The <span class="tex">x</span>-intercepts (the roots of <span class="tex">ax^2+bx+c=0</span>) are where it changes from one to the other.</p>
+  <div class="def amber u8l6-key">
+    <div class="u8l6-keyh">From the graph of <span class="tex">y=ax^2+bx+c</span></div>
+    <div class="u8l6-three">
+      <div><b class="u8l6-up">&gt; 0</b>the <span class="tex">x</span>-values where the graph is <b>above</b> the <span class="tex">x</span>-axis</div>
+      <div><b class="u8l6-dn">&lt; 0</b>the <span class="tex">x</span>-values where the graph is <b>below</b> the <span class="tex">x</span>-axis</div>
+      <div><b class="u8l6-eq">≥ or ≤</b>also include the <span class="tex">x</span>-intercepts</div>
+    </div>
+    <div class="u8l6-keyh u8l6-keyh2">Writing the solution</div>
+    <div class="u8l6-two">
+      <div><b>Between the roots</b><span class="tex">\{x\mid -3&lt;x&lt;4,\ x\in\mathbb{R}\}</span>
+        <div class="u8l6-knl" data-bk-numberline='{"width":400,"height":66,"min":-5,"max":6,"fontSize":15,"pad":26,"items":[{"interval":[-3,4,{"openA":true,"openB":true,"color":"green"}]}]}'></div></div>
+      <div><b>Outside the roots</b><span class="tex">\{x\mid x\le-3\ \text{or}\ x\ge4,\ x\in\mathbb{R}\}</span>
+        <div class="u8l6-knl" data-bk-numberline='{"width":400,"height":66,"min":-5,"max":6,"fontSize":15,"pad":26,"items":[{"interval":[-1e9,-3,{"color":"green"}]},{"interval":[4,1e9,{"color":"green"}]}]}'></div></div>
+    </div>
+    <div class="u8l6-keyf">On a number line, an <b>open dot</b> means the endpoint is not included (<span class="tex">&lt;</span>, <span class="tex">&gt;</span>) and a <b>closed dot</b> means it is (<span class="tex">\le</span>, <span class="tex">\ge</span>).</div>
+  </div>
+  <p>Two separate pieces are joined by “or” (an <span class="tex">x</span> cannot be in both). Never write <span class="tex">4&lt;x&lt;-3</span>: it says <span class="tex">x</span> is bigger than <span class="tex">4</span> and less than <span class="tex">-3</span> at once.</p>
+  <div class="explainer" data-explainer="shadow"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Read the solution from the graph</h3></div>
+  <p class="q">The graph of <span class="tex">y=x^2-x-12</span> is shown. Use it to solve each equation or inequality. Show (b) and (c) on a number line.</p>
+  <div class="u8l6-gx">
+    <div class="u8l6-col">
+      <div class="part"><div class="pl">(a) <span class="tex">x^2-x-12=0</span></div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The <span class="tex">x</span>-intercepts: <span class="tex">x=-3</span> or <span class="tex">x=4</span>.</div></div></div>
+      <div class="part"><div class="pl">(b) <span class="tex">x^2-x-12&lt;0</span></div><div class="work" style="--h:70px"></div>
+        <div class="u8l6-nl"><div data-bk-numberline='{"width":540,"height":70,"min":-5,"max":6,"fontSize":15,"pad":28,"items":[]}'></div><div class="u8l6-nla" data-bk-numberline='{"width":540,"height":70,"min":-5,"max":6,"fontSize":15,"pad":28,"items":[{"interval":[-3,4,{"openA":true,"openB":true,"color":"green"}]}]}'></div></div>
+        <div class="ansrow"><button class="reveal">Answer</button><div class="ans">The graph is below the <span class="tex">x</span>-axis between the intercepts: <span class="tex">\{x\mid -3&lt;x&lt;4,\ x\in\mathbb{R}\}</span></div></div></div>
+      <div class="part"><div class="pl">(c) <span class="tex">x^2-x-12\ge0</span></div><div class="work" style="--h:70px"></div>
+        <div class="u8l6-nl"><div data-bk-numberline='{"width":540,"height":70,"min":-5,"max":6,"fontSize":15,"pad":28,"items":[]}'></div><div class="u8l6-nla" data-bk-numberline='{"width":540,"height":70,"min":-5,"max":6,"fontSize":15,"pad":28,"items":[{"interval":[-1e9,-3,{"color":"green"}]},{"interval":[4,1e9,{"color":"green"}]}]}'></div></div>
+        <div class="ansrow"><button class="reveal">Answer</button><div class="ans">On or above the axis, outside the intercepts: <span class="tex">\{x\mid x\le-3\ \text{or}\ x\ge4,\ x\in\mathbb{R}\}</span></div></div></div>
+    </div>
+    <div class="u8l6-fig" data-bk-graph='{"width":340,"height":470,"xmin":-5.5,"xmax":6.5,"ymin":-13.5,"ymax":8.5,"xlabels":2,"ylabels":4,"fontSize":14,"items":[{"fn":["x^2-x-12",{"color":"blue"}]},{"point":[-3,0,{"color":"orange"}]},{"point":[4,0,{"color":"orange"}]},{"label":[4.6,6,"y=x^2-x-12",{"tex":true,"pos":"w","color":"blue","cls":"bk-ptlab"}]}]}'></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>A parabola that opens down, and a line</h3></div>
+  <p class="q">The graph of <span class="tex">y=-x^2+2x+8</span> is shown. Use it to solve each inequality.</p>
+  <div class="u8l6-gx u8l6-ex2">
+    <div class="u8l6-col">
+      <div class="part"><div class="pl">(a) <span class="tex">-x^2+2x+8&gt;0</span></div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">This parabola opens down, so it is above the axis between its intercepts: <span class="tex">\{x\mid -2&lt;x&lt;4,\ x\in\mathbb{R}\}</span></div></div></div>
+      <div class="part"><div class="pl">(b) <span class="tex">-x^2+2x+8\le0</span></div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\{x\mid x\le-2\ \text{or}\ x\ge4,\ x\in\mathbb{R}\}</span></div></div></div>
+      <div class="part u8l6-p2c"><div class="pl">(c) <span class="tex">-x^2+2x+8&gt;5</span> &nbsp;(Draw the line <span class="tex">y=5</span>.)</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The line <span class="tex">y=5</span> meets the graph at <span class="tex">x=-1</span> and <span class="tex">x=3</span> (check: <span class="tex">-1-2+8=5</span>, <span class="tex">-9+6+8=5</span>). The graph is above the line between them: <span class="tex">\{x\mid -1&lt;x&lt;3,\ x\in\mathbb{R}\}</span></div></div></div>
+    </div>
+    <div class="u8l6-fig">
+      <div data-bk-graph='{"width":340,"height":440,"xmin":-3.5,"xmax":5.5,"ymin":-6.5,"ymax":10.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"fn":["-x^2+2*x+8",{"color":"blue"}]},{"point":[-2,0,{"color":"orange"}]},{"point":[4,0,{"color":"orange"}]},{"label":[4.4,-5,"y=-x^2+2x+8",{"tex":true,"pos":"w","color":"blue","cls":"bk-ptlab"}]}]}'></div>
+      <div class="u8l6-ska" data-bk-graph='{"width":340,"height":440,"xmin":-3.5,"xmax":5.5,"ymin":-6.5,"ymax":10.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"fn":["-x^2+2*x+8",{"color":"blue"}]},{"point":[-2,0,{"color":"orange"}]},{"point":[4,0,{"color":"orange"}]},{"label":[4.4,-5,"y=-x^2+2x+8",{"tex":true,"pos":"w","color":"blue","cls":"bk-ptlab"}]},{"line":[{"m":0,"b":5},{"color":"purple","dash":true,"arrows":false}]},{"point":[-1,5,{"color":"purple"}]},{"point":[3,5,{"color":"purple"}]},{"label":[-3.3,5.3,"y=5",{"tex":true,"pos":"ne","color":"purple","cls":"bk-ptlab"}]}]}'></div>
+    </div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Solving with a graphing calculator ================= -->
+<section class="card" data-ink="s2" data-section="2. Solving with a Graphing Calculator">
+  <div class="sec-h"><span class="badge">2</span><h2>Solving with a Graphing Calculator</h2></div>
+  <p>When the roots are not whole numbers, a graphing calculator reads them quickly.</p>
+  <div class="def amber u8l6-key">
+    <div class="u8l6-steps u8l6-s4">
+      <div><b>1</b>Move every term to one side: <span class="tex">ax^2+bx+c\ \square\ 0</span>.</div>
+      <div><b>2</b>Graph <span class="tex">Y_1=ax^2+bx+c</span>.</div>
+      <div><b>3</b>Use <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd></span> <b>zero</b> to find each <span class="tex">x</span>-intercept.</div>
+      <div><b>4</b>Read where the graph is above (<span class="tex">&gt;0</span>) or below (<span class="tex">&lt;0</span>) the <span class="tex">x</span>-axis.</div>
+    </div>
+    <div class="u8l6-keyf">Or, without rearranging: graph <span class="tex">Y_1=</span> left side and <span class="tex">Y_2=</span> right side, use <b>intersect</b>, and read where <span class="tex">Y_1</span> is above or below <span class="tex">Y_2</span>.</div>
+  </div>
+  <p>The quadratic formula gives the same roots exactly: use it when the question asks for exact values.</p>
+  <div class="explainer" data-explainer="calc"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Calculator first, then exact</h3></div>
+  <p class="q">Solve each inequality with a graphing calculator, to the nearest tenth. Then give the exact solution.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">x^2-4x-3&gt;0</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">Y_1=X^2-4X-3</span>; zeros <span class="tex">x\approx-0.6</span> and <span class="tex">x\approx4.6</span>.<br>The parabola opens up: above the axis outside the zeros.<br><span class="tex">\{x\mid x&lt;-0.6\ \text{or}\ x&gt;4.6,\ x\in\mathbb{R}\}</span> (approx.)<br>Exact: <span class="tex">x=\frac{4\pm\sqrt{16+12}}{2}=2\pm\sqrt7</span>, so<br><span class="tex">\{x\mid x&lt;2-\sqrt7\ \text{or}\ x&gt;2+\sqrt7,\ x\in\mathbb{R}\}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2x^2\le5x+4</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x^2-5x-4\le0</span>; <span class="tex">Y_1=2X^2-5X-4</span>.<br>Zeros <span class="tex">x\approx-0.6</span> and <span class="tex">x\approx3.1</span>; on or below the axis between them:<br><span class="tex">\{x\mid -0.6\le x\le3.1,\ x\in\mathbb{R}\}</span> (approx.)<br>Exact: <span class="tex">x=\frac{5\pm\sqrt{25+32}}{4}=\frac{5\pm\sqrt{57}}{4}</span>, so<br><span class="tex">\left\{x\;\middle|\;\frac{5-\sqrt{57}}{4}\le x\le\frac{5+\sqrt{57}}{4},\ x\in\mathbb{R}\right\}</span></div></div></div>
+  </div>
+  <div class="tip calc-tip u8l6-ctip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>On your own calculator.</b> Put the expression in <span class="keys"><kbd>Y=</kbd></span>, press <span class="keys"><kbd>ZOOM</kbd><kbd>6</kbd></span> (ZStandard), then <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd></span> <b>2:zero</b>: a left bound, a right bound and a guess on either side of each <span class="tex">x</span>-intercept. For (b) without rearranging: <span class="tex">Y_1=2X^2</span>, <span class="tex">Y_2=5X+4</span> and <b>5:intersect</b>.</div>
+    <div class="u8l6-pcol"><button class="pill" data-keys="Y= CLEAR X x² − 4 X − 3 ▼ CLEAR ZStandard zero (−) 2 ENTER 0 ENTER (−) 1 ENTER zero 4 ENTER 6 ENTER 5 ENTER">Show (a)</button><button class="pill" data-keys="Y= CLEAR 2 X x² − 5 X − 4 ▼ CLEAR ZStandard zero (−) 2 ENTER 0 ENTER (−) 1 ENTER zero 2 ENTER 4 ENTER 3 ENTER">Show (b)</button><button class="pill" data-keys="Y= CLEAR 2 X x² ▼ CLEAR 5 X + 4 ZStandard intersect ENTER ENTER (−) 1 ENTER">(b) with intersect</button></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Roots and test points ================= -->
+<section class="card" data-ink="s3" data-section="3. Roots and Test Points">
+  <div class="sec-h"><span class="badge">3</span><h2>Roots and Test Points</h2></div>
+  <p>A graph is not needed. The graph of <span class="tex">y=ax^2+bx+c</span> can only cross the <span class="tex">x</span>-axis at a root, so the expression <span class="tex">ax^2+bx+c</span> can only change sign at a root. The roots split the number line into <b>intervals</b>, and on each interval the expression keeps one sign. One <b>test point</b> in each interval tells you that sign.</p>
+  <div class="def amber u8l6-key"><div class="u8l6-keyh">Roots and test points</div>
+    <div class="u8l6-steps u8l6-s5">
+      <div><b>1</b>Write the inequality with <span class="tex">0</span> on one side.</div>
+      <div><b>2</b>Solve the related equation <span class="tex">ax^2+bx+c=0</span> (factor, or use the quadratic formula). These roots are the boundary points.</div>
+      <div><b>3</b>Mark the roots on a number line; they make two or three intervals.</div>
+      <div><b>4</b>Substitute one test point from each interval into the inequality.</div>
+      <div><b>5</b>The solution is every interval whose test point makes it true; include the roots for <span class="tex">\le</span> or <span class="tex">\ge</span>, exclude them for <span class="tex">&lt;</span> or <span class="tex">&gt;</span>.</div>
+    </div></div>
+  <div class="explainer" data-explainer="tests"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>The interval table</h3></div>
+  <p class="q">Solve <span class="tex">x^2-3x-10&gt;0</span> using roots and test points.</p>
+  <div class="part"><div class="pl">Roots</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-3x-10=0\Rightarrow(x-5)(x+2)=0\Rightarrow x=-2</span> or <span class="tex">x=5</span>.</div></div></div>
+  <div class="u8l6-tbl">
+    <div class="u8l6-th">Interval</div><div><span data-reveal><span class="tex">x&lt;-2</span></span></div><div><span data-reveal><span class="tex">-2&lt;x&lt;5</span></span></div><div><span data-reveal><span class="tex">x&gt;5</span></span></div>
+    <div class="u8l6-th">Test point</div><div><span data-reveal><span class="tex">x=-3</span></span></div><div><span data-reveal><span class="tex">x=0</span></span></div><div><span data-reveal><span class="tex">x=6</span></span></div>
+    <div class="u8l6-th">Value of <span class="tex">x^2-3x-10</span></div><div><span data-reveal><span class="tex">9+9-10=8</span></span></div><div><span data-reveal><span class="tex">-10</span></span></div><div><span data-reveal><span class="tex">36-18-10=8</span></span></div>
+    <div class="u8l6-th">Is it <span class="tex">&gt;0</span>?</div><div><span data-reveal><b class="u8l6-ok">yes</b></span></div><div><span data-reveal><b class="u8l6-no">no</b></span></div><div><span data-reveal><b class="u8l6-ok">yes</b></span></div>
+  </div>
+  <div class="part"><div class="pl">Solution</div><div class="work" style="--h:60px"></div>
+    <div class="u8l6-nl"><div data-bk-numberline='{"width":620,"height":70,"min":-4,"max":7,"fontSize":15,"pad":28,"items":[]}'></div><div class="u8l6-nla" data-bk-numberline='{"width":620,"height":70,"min":-4,"max":7,"fontSize":15,"pad":28,"items":[{"interval":[-1e9,-2,{"openB":true,"color":"green"}]},{"interval":[5,1e9,{"openA":true,"color":"green"}]}]}'></div></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\{x\mid x&lt;-2\ \text{or}\ x&gt;5,\ x\in\mathbb{R}\}</span> &nbsp;(the roots are excluded: <span class="tex">&gt;</span>)</div></div></div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Rearrange, factor, test</h3></div>
+  <p class="q">Solve using roots and test points. Show each solution on a number line.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">2x^2+5x\le3</span></div><div class="work" style="--h:250px"></div>
+      <div class="u8l6-nl"><div data-bk-numberline='{"width":440,"height":70,"min":-4,"max":2,"fontSize":15,"pad":28,"items":[]}'></div><div class="u8l6-nla" data-bk-numberline='{"width":440,"height":70,"min":-4,"max":2,"fontSize":15,"pad":28,"items":[{"interval":[-3,0.5,{"color":"green"}]},{"mark":[0.5,"\\tfrac12",{"tex":true,"pos":"n","color":"green"}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x^2+5x-3\le0</span><br><span class="tex">(2x-1)(x+3)=0</span>: roots <span class="tex">-3</span> and <span class="tex">\frac12</span>.<br>Test <span class="tex">x=-4</span>: <span class="tex">32-20-3=9</span>; <span class="tex">9\le0</span>? no.<br>Test <span class="tex">x=0</span>: <span class="tex">-3\le0</span>? yes.<br>Test <span class="tex">x=1</span>: <span class="tex">2+5-3=4\le0</span>? no.<br><span class="tex">\left\{x\;\middle|\;-3\le x\le\frac12,\ x\in\mathbb{R}\right\}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">15+2x-x^2&lt;0</span></div><div class="work" style="--h:250px"></div>
+      <div class="u8l6-nl"><div data-bk-numberline='{"width":440,"height":70,"min":-4,"max":6,"fontSize":15,"pad":28,"items":[]}'></div><div class="u8l6-nla" data-bk-numberline='{"width":440,"height":70,"min":-4,"max":6,"fontSize":15,"pad":28,"items":[{"interval":[-1e9,-3,{"openB":true,"color":"green"}]},{"interval":[5,1e9,{"openA":true,"color":"green"}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">15+2x-x^2=0\Rightarrow x^2-2x-15=0</span><br><span class="tex">(x-5)(x+3)=0</span>: roots <span class="tex">-3</span> and <span class="tex">5</span>.<br>Test <span class="tex">x=-4</span>: <span class="tex">15-8-16=-9&lt;0</span>? yes.<br>Test <span class="tex">x=0</span>: <span class="tex">15&lt;0</span>? no.<br>Test <span class="tex">x=6</span>: <span class="tex">15+12-36=-9&lt;0</span>? yes.<br><span class="tex">\{x\mid x&lt;-3\ \text{or}\ x&gt;5,\ x\in\mathbb{R}\}</span></div></div></div>
+  </div>
+  <p class="u8l6-after">In (b) you could first multiply by <span class="tex">-1</span> to get <span class="tex">x^2-2x-15&gt;0</span> (the sign reverses); the test points still check the original inequality, which is the safest habit.</p>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Expand or rearrange first</h3></div>
+  <p class="q">Expand or rearrange first, then solve.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">x(x+4)\ge5</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+4x-5\ge0</span><br><span class="tex">(x+5)(x-1)=0</span>: roots <span class="tex">-5</span> and <span class="tex">1</span>.<br>Test <span class="tex">-6</span>: <span class="tex">-6(-2)=12\ge5</span> yes; &nbsp;<span class="tex">0</span>: <span class="tex">0\ge5</span> no; &nbsp;<span class="tex">2</span>: <span class="tex">2(6)=12\ge5</span> yes.<br><span class="tex">\{x\mid x\le-5\ \text{or}\ x\ge1,\ x\in\mathbb{R}\}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">(x-2)^2&lt;3x-2</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-4x+4-3x+2&lt;0\Rightarrow x^2-7x+6&lt;0</span><br><span class="tex">(x-1)(x-6)=0</span>: roots <span class="tex">1</span> and <span class="tex">6</span>.<br>Test <span class="tex">0</span>: <span class="tex">4&lt;-2</span> no; &nbsp;<span class="tex">2</span>: <span class="tex">0&lt;4</span> yes; &nbsp;<span class="tex">7</span>: <span class="tex">25&lt;19</span> no.<br><span class="tex">\{x\mid 1&lt;x&lt;6,\ x\in\mathbb{R}\}</span></div></div></div>
+  </div>
+  <p class="u8l6-after muted">Another algebraic method looks at the signs of the factors; Lesson 7 develops it into sign charts.</p>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 6 · Questions 1–6</h2>
+  <p class="pr-t">Solve from a graph, write the solution in set notation, and use roots and test points.</p>
+  <div class="pr-chips n4"><span><b>1–2</b>Solve from a graph</span><span><b>3</b>Number line to set notation</span><span><b>4–5</b>Roots and test points (rearrange first in 5)</span><span><b>6</b>Calculator, then exact</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u8l6">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. One or no roots ================= -->
+<section class="card" data-ink="s4" data-section="4. One or No Roots">
+  <div class="sec-h"><span class="badge">4</span><h2>When There Are One or No Roots</h2></div>
+  <p>If the related equation has a double root, or no real roots (discriminant <span class="tex">b^2-4ac&lt;0</span>), the graph touches the <span class="tex">x</span>-axis once or never. Then the expression has the same sign everywhere (except <span class="tex">0</span> at a double root), and one test point decides everything. The solution can be all real numbers, one number, all real numbers but one, or no real numbers at all.</p>
+  <div class="explainer" data-explainer="oneroot"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>All, one, all but one, or none</h3></div>
+  <p class="q">Solve each inequality.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">x^2-8x+16&gt;0</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x-4)^2&gt;0</span>. A square is positive unless it is <span class="tex">0</span>, which happens only at <span class="tex">x=4</span>.<br><span class="tex">\{x\mid x\ne4,\ x\in\mathbb{R}\}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x^2-8x+16\le0</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(x-4)^2\le0</span>. A square is never negative, so it must equal <span class="tex">0</span>: <span class="tex">x=4</span> only, <span class="tex">\{x\mid x=4\}</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">x^2+2x+5&lt;0</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">b^2-4ac=4-20=-16&lt;0</span>: no roots, so one sign everywhere. Test <span class="tex">x=0</span>: <span class="tex">5&lt;0</span> false.<br>No solution.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">x^2+2x+5&gt;0</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Same expression; test <span class="tex">x=0</span>: <span class="tex">5&gt;0</span> true, so it is true for every <span class="tex">x</span>.<br><span class="tex">\{x\mid x\in\mathbb{R}\}</span> (all real numbers)</div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u8l6"></section>
+
+<!-- ================= 5. Applications ================= -->
+<section class="card" data-ink="s5" data-section="5. Applications">
+  <div class="sec-h"><span class="badge">5</span><h2>Applications</h2></div>
+  <p>Quadratic inequalities answer “for which values” questions: which values of a parameter give two, one or no roots (the discriminant from Unit 5), and which measurements keep a quantity in a range. In a context, also apply the restrictions of the situation (a length is positive, a count is a whole number).</p>
+  <div class="explainer" data-explainer="apps"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>For which values?</h3></div>
+  <div class="part u8l6-solo"><div class="pl">(a) For what values of <span class="tex">k</span> does <span class="tex">x^2+kx+9=0</span> have two distinct real roots? For what values does it have no real roots?</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Two distinct real roots: <span class="tex">b^2-4ac&gt;0\Rightarrow k^2-36&gt;0</span>.<br>Roots of <span class="tex">k^2-36=0</span>: <span class="tex">k=\pm6</span>. Test <span class="tex">k=0</span>: <span class="tex">-36&gt;0</span> false; test <span class="tex">k=\pm7</span>: <span class="tex">13&gt;0</span> true.<br>Two distinct real roots: <span class="tex">\{k\mid k&lt;-6\ \text{or}\ k&gt;6,\ k\in\mathbb{R}\}</span>.<br>No real roots: <span class="tex">k^2-36&lt;0</span>: <span class="tex">\{k\mid -6&lt;k&lt;6,\ k\in\mathbb{R}\}</span>. &nbsp;(At <span class="tex">k=\pm6</span> there is one double root.)</div></div></div>
+  <div class="part u8l6-solo"><div class="pl">(b) The length of a rectangle is <span class="tex">4</span> cm more than its width. For what widths is the area at most <span class="tex">21\text{ cm}^2</span>?</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Width <span class="tex">w</span>, length <span class="tex">w+4</span>: &nbsp;<span class="tex">w(w+4)\le21\Rightarrow w^2+4w-21\le0</span>.<br><span class="tex">(w+7)(w-3)=0</span>: roots <span class="tex">-7</span> and <span class="tex">3</span>. Test <span class="tex">w=0</span>: <span class="tex">-21\le0</span> true, so <span class="tex">-7\le w\le3</span>.<br>A width is positive: <span class="tex">0&lt;w\le3</span>. The width is more than <span class="tex">0</span> cm and at most <span class="tex">3</span> cm.</div></div></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>From the graph.</b> <span class="tex">&gt;0</span>: where the parabola is above the <span class="tex">x</span>-axis; <span class="tex">&lt;0</span>: below. For <span class="tex">\ge</span> or <span class="tex">\le</span>, include the <span class="tex">x</span>-intercepts. Against a line: above or below the line.</div>
+    <div><b>Writing it.</b> Between: <span class="tex">\{x\mid -3&lt;x&lt;4,\ x\in\mathbb{R}\}</span>. Outside: <span class="tex">x\le-3</span> <b>or</b> <span class="tex">x\ge4</span>. Open dot: <span class="tex">&lt;,&gt;</span>; closed dot: <span class="tex">\le,\ge</span>.</div>
+    <div><b>Roots and test points.</b> 0 on one side, find the roots, test one point in each interval, keep the true intervals. Calculator: <b>zero</b> or <b>intersect</b>; exact roots from the quadratic formula.</div>
+    <div><b>One or no roots.</b> One sign everywhere: all real numbers, one value, all but one, or no solution. In problems, also apply the context (a width is positive).</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u8l6">
+    <div><div class="kicker">Your turn</div><b>Assignment 6 · Questions 7–16</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l7/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 7 — Quadratic Inequalities in One Variable: Sign Analysis</b><div class="muted">Solving with the signs of the factors.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u8l6.js';
+  boot({ key: 'u8l6', homeHref: '../../', title: '8.6 Roots and Test Points' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

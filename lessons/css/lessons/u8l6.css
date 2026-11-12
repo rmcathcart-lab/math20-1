@@ -1,0 +1,95 @@
+/* Math 20-1 · Unit 8 · Lesson 6 — Quadratic Inequalities in One Variable: Roots and Test Points (prefix u8l6-).
+ * Colours: the parabola blue, roots / boundary points orange, a comparison line purple, the solution (glow, shadow,
+ * number-line pieces, true test points) green, false test points red, a restriction (crossed out) red hatching. */
+
+.u8l6 .pl .katex { font-size: 1.06em; }
+.u8l6 .ans .katex { font-size: 1.03em; }
+.u8l6 .katex { white-space: nowrap; }
+.u8l6-ok { color: #12805a; }
+.u8l6-no { color: #c93a33; }
+
+/* ---------------- notes ---------------- */
+.u8l6-key { border-left-width: 7px; }
+.u8l6-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 8px; }
+.u8l6-keyh2 { margin-top: 14px; }
+.u8l6-three, .u8l6-two { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.u8l6-two { grid-template-columns: 1fr 1fr; }
+.u8l6-three > div, .u8l6-two > div, .u8l6-steps > div { background: #fff; border-radius: 10px; padding: 8px 14px; font-size: 18px; line-height: 1.35; border: 2px solid #f0d199; }
+.u8l6-three > div > b:first-child, .u8l6-two > div > b:first-child { display: block; font: 800 20px var(--round); margin-bottom: 2px; }
+.u8l6-up { color: #12805a; } .u8l6-dn { color: #1f5bd6; } .u8l6-eq { color: #a26100; }
+.u8l6-two > div > b:first-child { color: #12805a; }
+.u8l6-two .katex { font-size: 1.08em; }
+.u8l6-knl { margin: 4px auto 0; width: 400px; }
+.u8l6-keyf { margin-top: 10px; font-size: 18px; }
+.u8l6-steps { display: grid; gap: 10px; }
+.u8l6-s4 { grid-template-columns: 1.2fr 0.9fr 1.2fr 1.3fr; }
+.u8l6-s5 { grid-template-columns: 0.9fr 1.6fr 1.05fr 1.1fr 1.7fr; }
+.u8l6-steps > div > b:first-child { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 16px var(--round); margin-right: 6px; }
+
+/* ---------------- example cards ---------------- */
+.u8l6-gx { display: grid; grid-template-columns: minmax(0, 1fr) 356px; gap: 16px; align-items: start; }
+.u8l6-col { display: flex; flex-direction: column; gap: 12px; }
+.u8l6-fig { position: relative; background: #fff; border-radius: 12px; padding: 8px; }
+.u8l6-ska { position: absolute; inset: 8px; opacity: 0; pointer-events: none; transition: opacity .35s; }
+.u8l6-ex2:has(.u8l6-p2c.shown) .u8l6-ska { opacity: 1; }
+.u8l6-nl { position: relative; display: flex; justify-content: center; margin: 2px 0 4px; }
+.u8l6-nla { position: absolute; top: 0; left: 50%; transform: translateX(-50%); opacity: 0; pointer-events: none; transition: opacity .35s; }
+.part.shown .u8l6-nla { opacity: 1; }
+.u8l6-tbl { display: grid; grid-template-columns: 230px repeat(3, minmax(0, 1fr)); margin: 12px 0; border: 2px solid #d9d3c4; border-radius: 12px; overflow: hidden; background: #fff; }
+.u8l6-tbl > div { display: grid; place-items: center; min-height: 54px; padding: 4px 8px; font-size: 20px; border-right: 1.5px solid #e6e0d3; border-bottom: 1.5px solid #e6e0d3; text-align: center; }
+.u8l6-tbl > div:nth-child(4n) { border-right: 0; }
+.u8l6-tbl > div:nth-last-child(-n+4) { border-bottom: 0; }
+.u8l6-tbl > .u8l6-th { justify-items: start; text-align: left; background: #f6f2ea; font: 700 18px var(--round); color: var(--ink2); }
+.u8l6-after { margin: 12px 0 4px; font-size: 18.5px; }
+.u8l6-solo { margin: 12px 0; }
+.u8l6-ctip { margin-top: 14px; }
+.u8l6-pcol { display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------------- explainer pieces ---------------- */
+.u8l6-ov { position: absolute; pointer-events: none; z-index: 2; overflow: visible; }
+.u8l6-panel { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; overflow: hidden; }
+.u8l6-ph { font: 800 14.5px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: 6px; }
+.u8l6-blk { border-radius: 12px; padding: 8px 10px; margin-bottom: 10px; background: #faf8f3; border: 2px solid #ece6da; }
+.u8l6-blk.u8l6-old { opacity: .5; }
+.u8l6-ineq { font-size: 23px; }
+.u8l6-ineq b { font: 800 17px var(--round); color: var(--muted); margin-right: 6px; }
+.u8l6-where { display: inline-block; margin: 6px 0 4px; font: 700 16.5px var(--round); color: #0d5c41; background: #e3f5ec; border-radius: 8px; padding: 2px 10px; }
+.u8l6-set { font-size: 20px; color: #0d5c41; margin-top: 4px; }
+.u8l6-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; font-size: 15.5px; color: var(--ink2); }
+.u8l6-rules span { display: flex; align-items: center; gap: 6px; background: #f6f2ea; border-radius: 8px; padding: 3px 8px; }
+.u8l6-rules i { display: inline-block; width: 13px; height: 13px; border-radius: 50%; border: 3px solid #12805a; flex: 0 0 auto; }
+.u8l6-rules i.f { background: #12805a; }
+.u8l6-wl { display: flex; align-items: flex-start; gap: 10px; font-size: 20px; line-height: 1.4; margin: 2px 0 9px; }
+.u8l6-sn { flex: 0 0 auto; display: inline-grid; place-items: center; width: 27px; height: 27px; margin-top: 2px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 15px var(--round); }
+.u8l6-sn.u8l6-snx { background: #12805a; font-size: 13px; width: auto; padding: 0 8px; border-radius: 9px; }
+.u8l6-lt { flex: 1 1 auto; min-width: 0; }
+.u8l6-note { display: inline-block; font: 700 14px var(--round); color: #a26100; background: #fff4dd; border-radius: 7px; padding: 1px 8px; margin-left: 4px; white-space: nowrap; }
+.u8l6-big { font-size: 22px; }
+.u8l6-ans { display: inline-block; background: #e8f5ef; border-radius: 9px; padding: 4px 12px; color: #0d5c41; }
+.u8l6-badge { display: inline-block; font: 800 20px var(--round); border-radius: 12px; padding: 4px 16px; color: #fff; background: #c27a0e; }
+.u8l6-b2 { background: #12805a; } .u8l6-b1 { background: #c27a0e; } .u8l6-b0 { background: #c93a33; }
+.u8l6-kread { font: 800 24px var(--round); color: #7b4fc4; }
+
+/* the test-point table inside the explainer */
+.u8l6-tt { display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); border: 2px solid #d9d3c4; border-radius: 12px; overflow: hidden; background: #fff; }
+.u8l6-tt > div { display: grid; place-items: center; min-height: 50px; padding: 2px 6px; font-size: 19px; border-right: 1.5px solid #e6e0d3; border-bottom: 1.5px solid #e6e0d3; text-align: center; transition: background .3s; }
+.u8l6-tt > div:nth-child(4n) { border-right: 0; }
+.u8l6-tt > div:nth-last-child(-n+4) { border-bottom: 0; }
+.u8l6-tt > .u8l6-th { justify-items: start; text-align: left; background: #f6f2ea; font: 700 15.5px var(--round); color: var(--ink2); line-height: 1.2; }
+.u8l6-tt > .u8l6-cy { background: #e8f5ef; }
+.u8l6-tt > .u8l6-cn { background: #fdecea; }
+.u8l6-yes { font: 800 19px var(--round); color: #12805a; }
+.u8l6-nope { font: 800 19px var(--round); color: #c93a33; }
+.u8l6-pin { display: grid; justify-items: center; font: 800 16px var(--round); color: #1c2230; z-index: 4; line-height: 1; }
+.u8l6-pin::after { content: ''; width: 0; height: 0; border-left: 9px solid transparent; border-right: 9px solid transparent; border-top: 14px solid currentColor; margin-top: 2px; }
+.u8l6-pin.ok { color: #12805a; } .u8l6-pin.no { color: #c93a33; }
+.u8l6-rl { font-size: 19px; color: #b55f08; }
+
+/* the calculator panel */
+.u8l6-y1 { font: 600 17px ui-monospace, Menlo, monospace; background: #1c2230; color: #e9f0ff; border-radius: 8px; padding: 4px 10px; display: inline-block; }
+.u8l6-y1 b { color: #8fb4ff; }
+
+/* the rectangle */
+.u8l6-rbox { position: relative; }
+.u8l6-area { font: 800 21px var(--round); color: #0d5c41; }
+.u8l6-area.u8l6-over { color: #c93a33; }

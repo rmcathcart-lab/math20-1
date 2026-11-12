@@ -241,7 +241,7 @@ const radar = {
     const X0 = v === 'ab' ? -14 : -14, X1 = v === 'ab' ? 12 : -1;
     const set = (x) => {
       const [px, py] = G.toPx(x, x + B); plane.setAttribute('transform', `translate(${px} ${py})`);
-      const isIn = x * x + (x + B) * (x + B) < 100; det.classList.toggle('on', isIn); blip.style.opacity = isIn ? 1 : 0;
+      const isIn = x * x + (x + B) * (x + B) < 100; det.classList.toggle('on', isIn); blip.style.display = isIn ? '' : 'none';
       if (isIn && x > fi.to) { fi.to = x; inside._bkDraw(); }
       set.x = x;
     };
@@ -303,8 +303,8 @@ const twoballs = {
     svgEl('rect', { x: 8, y: y15, width: 74, height: y0 - y15, fill: '#c9b79c', stroke: '#6b5a45', 'stroke-width': 3 }, sc);
     svgEl('rect', { x: 4, y: y15 - 5, width: 92, height: 7, fill: '#6b5a45' }, sc);
     for (let r = 0; r < 4; r++) for (let k = 0; k < 2; k++) svgEl('rect', { x: 20 + k * 30, y: y15 + 16 + r * (y0 - y15 - 30) / 4, width: 18, height: 18, fill: '#eaf3fb', stroke: '#6b5a45', 'stroke-width': 1.5 }, sc);
-    const t1 = svgEl('text', { x: 78, y: y15 - 6, 'font-size': 28, 'text-anchor': 'middle' }, sc); t1.textContent = '🙋‍♀️';
-    const t2 = svgEl('text', { x: 158, y: y0 - 2, 'font-size': 30, 'text-anchor': 'middle' }, sc); t2.textContent = '🙋‍♂️';
+    const t1 = svgEl('text', { x: 78, y: y15 - 6, 'font-size': 28, 'text-anchor': 'middle' }, sc); t1.textContent = '🙋';
+    const t2 = svgEl('text', { x: 158, y: y0 - 2, 'font-size': 30, 'text-anchor': 'middle' }, sc); t2.textContent = '🙋';
     const n1 = svgEl('text', { x: 44, y: y0 + 22, 'font-size': 16, 'font-weight': 800, fill: AV, 'text-anchor': 'middle' }, sc); n1.textContent = 'Ava';
     const n2 = svgEl('text', { x: 158, y: y0 + 22, 'font-size': 16, 'font-weight': 800, fill: '#1546a8', 'text-anchor': 'middle' }, sc); n2.textContent = 'Ben';
     const clock = div(stage, 'u8l3-clock', '', 8, 8);
@@ -445,7 +445,7 @@ const tangent = {
       const [r1, r2] = d.roots(s, sq);
       if (k === 0) { hide(q1); hide(q2); } else { G.moveTo(q1, r1, f(r1)); G.moveTo(q2, r2, f(r2)); unhide(q1); if (k === 2) unhide(q2); else hide(q2); }
       q1.querySelector('circle').setAttribute('fill', k === 1 ? AM : SOL);
-      const [gx, gy] = G.toPx(r1, f(r1)); glow.setAttribute('cx', gx); glow.setAttribute('cy', gy); glow.style.opacity = k === 1 && G.inside(r1, f(r1)) ? 1 : 0;
+      const [gx, gy] = G.toPx(r1, f(r1)); glow.setAttribute('cx', gx); glow.setAttribute('cy', gy); glow.style.display = k === 1 && G.inside(r1, f(r1)) ? '' : 'none';
       eq.innerHTML = T(d.lnT(s));
       inp.value = s; slv.textContent = tn(s).replace('-', '−');
       dbox.innerHTML = `${T(d.DT(s))}<br>${T('=')} <b class="u8l3-dv">${T(tn(D))}</b> ${T(k === 2 ? '>0' : k === 1 ? '=0' : '<0')}`;
@@ -487,7 +487,6 @@ const tangent = {
 /* BEG: a sum and a product → two numbers. PRG: revenue R = −x² + Bx and a linear cost: break-even and maximum profit.
  * MAS: the value of k for which y = mx + k is tangent to a parabola, and the point of tangency. */
 const sg = (v) => (v < 0 ? `-${-v}` : `+${v}`);
-const lin = (m, b) => `${m === 1 ? '' : m === -1 ? '-' : m}x${b ? sg(b) : ''}`;
 standup('u8l3', {
   intro: 'At your whiteboard: define the variables, write the system, solve it, check, and answer in a sentence.',
   levels: {
@@ -521,7 +520,6 @@ standup('u8l3', {
     }
   }
 });
-void lin;
 
 /* =============================== mount =============================== */
 export const explainers = mountExplainers({ dogrun, hill, radar, twoballs, profit, tangent });

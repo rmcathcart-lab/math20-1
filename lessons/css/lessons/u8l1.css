@@ -61,8 +61,8 @@
 .u8l1-fpok { border-color: #12805a; background: #e3f4ec; box-shadow: 0 0 0 2px rgba(18,128,90,.2); }
 
 /* elimination: the stacked equations */
-.u8l1-stk { display: grid; column-gap: 12px; row-gap: 8px; align-items: center; justify-content: start; background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 18px 20px; font-size: 30px; }
-.u8l1-sc { text-align: right; min-height: 44px; display: flex; align-items: center; justify-content: flex-end; position: relative; }
+.u8l1-stk { display: grid; column-gap: 10px; row-gap: 4px; align-items: center; justify-content: start; background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 12px 16px; font-size: 27px; }
+.u8l1-sc { text-align: right; min-height: 40px; display: flex; align-items: center; justify-content: flex-end; position: relative; }
 .u8l1-op { font: 800 34px var(--round); color: #7a1f3d; }
 .u8l1-sy { color: #7b4fc4; font-weight: 700; }
 .u8l1-sy.u8l1-gone::after { content: ''; position: absolute; left: -4px; right: -4px; top: 50%; border-top: 4px solid #c93a33; transform: rotate(-18deg); }
@@ -72,11 +72,11 @@
 
 /* slide and tilt */
 .u8l1-pn { display: flex; flex-direction: column; gap: 6px; }
-.u8l1-eqs { display: flex; justify-content: space-between; gap: 10px; font-size: 21px; flex-wrap: wrap; }
+.u8l1-eqs { display: grid; gap: 2px; font-size: 21px; }
 .u8l1-eqs > div { white-space: nowrap; }
-.u8l1-sls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.u8l1-sls { display: grid; gap: 6px; }
 .u8l1-sl { display: flex; align-items: center; gap: 8px; background: #f6f2fc; border: 2px solid #ddd0f2; border-radius: 14px; padding: 4px 10px; cursor: pointer; }
-.u8l1-sll { font: 700 16px var(--round); white-space: nowrap; }
+.u8l1-sll { font: 700 17px var(--round); white-space: nowrap; min-width: 128px; }
 .u8l1-sl input { flex: 1; min-width: 0; height: 34px; accent-color: #7b4fc4; cursor: pointer; touch-action: none; }
 .u8l1-sl input::-webkit-slider-thumb { width: 32px; height: 32px; }
 .u8l1-slv { font: 800 21px var(--round); min-width: 50px; text-align: right; color: #7b4fc4; }

@@ -45,9 +45,9 @@ const coordTex = (x, y) => {
 const mm = (v) => String(v).replace('-', '−');
 function xBox(ac, b, pairs, right) {
   const [p, q] = pairs[right];
-  const X = `<svg class="u8l1-x" width="128" height="92" viewBox="0 0 128 92" aria-hidden="true"><line x1="30" y1="10" x2="98" y2="82"/><line x1="98" y1="10" x2="30" y2="82"/>`
-    + `<text x="64" y="27" class="u8l1-xt">${mm(ac)}</text><text x="64" y="84" class="u8l1-xt u8l1-xb">${mm(b)}</text>`
-    + `<text x="22" y="54" class="u8l1-xs" text-anchor="end">${mm(p)}</text><text x="106" y="54" class="u8l1-xs" text-anchor="start">${mm(q)}</text></svg>`;
+  const X = `<svg class="u8l1-x" width="150" height="84" viewBox="0 0 150 84" aria-hidden="true"><line x1="44" y1="8" x2="106" y2="76"/><line x1="106" y1="8" x2="44" y2="76"/>`
+    + `<text x="75" y="24" class="u8l1-xt">${mm(ac)}</text><text x="75" y="78" class="u8l1-xt u8l1-xb">${mm(b)}</text>`
+    + `<text x="38" y="49" class="u8l1-xs" text-anchor="end">${mm(p)}</text><text x="112" y="49" class="u8l1-xs" text-anchor="start">${mm(q)}</text></svg>`;
   const L = pairs.map(([u, v], i) => `<span class="u8l1-fp${i === right ? ' u8l1-fpok' : ''}">${T(`${u},\\ ${v}`)}</span>`).join('');
   return `<div class="u8l1-xrow">${X}<div class="u8l1-fps"><span class="u8l1-fph">factor pairs of ${T(String(ac))}</span>${L}</div></div>`;
 }
@@ -195,14 +195,15 @@ const tunnel = {
 const ELIM = {
   a: {
     ask: `Example 5(a): solve the system ${T('y=-x^2+4x+5')} and ${T('y=-2x+10')} by elimination.`,
-    cols: 6, yc: 1, op: '-',
+    cols: 6, yc: 1, op: '-', f: (x) => -x * x + 4 * x + 5, g: (x) => -2 * x + 10, win: { xmin: -1, xmax: 7, ymin: -2, ymax: 10 }, ylabels: 2,
+    pts: [[1, 8, '(1,8)', 'w'], [5, 0, '(5,0)', 'ne']],
     r1: ['', 'y', '=', '-x^2', '+4x', '+5'], r2: ['', 'y', '=', '', '-2x', '+10'], res: ['', '0', '=', '-x^2', '+6x', '-5'],
     rows: [
-      `Line up like terms. Both equations have ${T('y')} alone: the ${T('y')}-terms <b>match</b>, so subtract.`,
-      `Subtract the second equation from the first: ${T('y-y=0')}, so ${T('y')} is eliminated: ${T('0=-x^2+6x-5')}`,
+      `Like terms in columns. The ${T('y')}-terms <b>match</b>: subtract.`,
+      `Subtract the second equation from the first: ${T('y-y=0')}, so ${T('y')} is gone.`,
       `${T('x^2-6x+5=0')}` + xBox(5, -6, [[1, 5], [-1, -5]], 1) + `${T('(x-1)(x-5)=0')}, so ${T('x=1')} or ${T('x=5')}`,
-      `${T('y')} from the simpler equation: ${T('y=-2(1)+10=8')}; &ensp;${T('y=-2(5)+10=0')}`,
-      `Solutions ${T('\\boldsymbol{(1,8)}')} and ${T('\\boldsymbol{(5,0)}')}. Check ${T('(5,0)')}: ${T('-25+20+5=0')} ✓`
+      `${T('y=-2(1)+10=8')}; &ensp;${T('y=-2(5)+10=0')}`,
+      `${T('\\boldsymbol{(1,8)}')} and ${T('\\boldsymbol{(5,0)}')}. Check ${T('(5,0)')}: ${T('-25+20+5=0')} ✓`
     ],
     caps: [
       `<b>Step 1.</b> Write the equations one under the other, like terms in the same column. Both have ${T('+y')} on the left.`,
@@ -214,14 +215,15 @@ const ELIM = {
   },
   b: {
     ask: `Example 5(b): solve the system ${T('x^2+y=7')} and ${T('3x-y=-3')} by elimination.`,
-    cols: 6, yc: 3, op: '+',
+    cols: 6, yc: 3, op: '+', f: (x) => 7 - x * x, g: (x) => 3 * x + 3, win: { xmin: -6, xmax: 3, ymin: -11, ymax: 9 }, ylabels: 4,
+    pts: [[-4, -9, '(-4,-9)', 'e'], [1, 6, '(1,6)', 'ne']],
     r1: ['', 'x^2', '', '+y', '=', '7'], r2: ['', '', '3x', '-y', '=', '-3'], res: ['', 'x^2', '+3x', '', '=', '4'],
     rows: [
-      `Line up like terms. The ${T('y')}-terms are <b>opposites</b> (${T('+y')} and ${T('-y')}), so add.`,
-      `Add the equations: ${T('y+(-y)=0')}, so ${T('y')} is eliminated: ${T('x^2+3x=4')}`,
+      `Like terms in columns. The ${T('y')}-terms are <b>opposites</b>: add.`,
+      `Add the equations: ${T('y+(-y)=0')}, so ${T('y')} is gone.`,
       `${T('x^2+3x-4=0')}` + xBox(-4, 3, [[1, -4], [-1, 4], [2, -2]], 1) + `${T('(x+4)(x-1)=0')}, so ${T('x=-4')} or ${T('x=1')}`,
-      `${T('y')} from the simpler equation, ${T('y=3x+3')}: ${T('y=3(-4)+3=-9')}; &ensp;${T('y=3(1)+3=6')}`,
-      `Solutions ${T('\\boldsymbol{(-4,-9)}')} and ${T('\\boldsymbol{(1,6)}')}. Check: ${T('16+(-9)=7')} ✓, ${T('1+6=7')} ✓`
+      `${T('y=3x+3')}: ${T('y=3(-4)+3=-9')}; &ensp;${T('y=3(1)+3=6')}`,
+      `${T('\\boldsymbol{(-4,-9)}')} and ${T('\\boldsymbol{(1,6)}')}. Check: ${T('16+(-9)=7')} ✓, ${T('1+6=7')} ✓`
     ],
     caps: [
       `<b>Step 1.</b> Stack the equations with like terms in columns. One has ${T('+y')}, the other ${T('-y')}.`,
@@ -234,21 +236,23 @@ const ELIM = {
 };
 const elim = {
   title: 'Elimination, step by step',
-  height: 440, minW: 900, capH: 84,
+  height: 456, minW: 900, capH: 84,
   choices: [{ v: 'a', label: 'Example 5(a): subtract' }, { v: 'b', label: 'Example 5(b): add' }],
   ask: (v) => ELIM[v].ask,
   make(stage, v, ex) {
-    const D = ELIM[v], W = ex.W, SW = 430;
-    const S = div(stage, 'u8l1-stk', '', 0, 10, SW);
+    const D = ELIM[v], W = ex.W, SW = 370;
+    const S = div(stage, 'u8l1-stk', '', 0, 0, SW);
     S.style.gridTemplateColumns = `44px repeat(${D.cols - 1}, auto)`;
-    const mk = (cells, cls) => cells.map((t, i) => { const d = h('div', 'u8l1-sc ' + cls + (i === D.yc ? ' u8l1-sy' : ''), i === 0 ? (t ? `<span class="u8l1-op">${t === '-' ? '−' : t}</span>` : '') : t ? T(t) : ''); S.appendChild(d); return d; });
-    const c1 = mk(D.r1, 'u8l1-s1'), c2 = mk(D.r2, 'u8l1-s2');
+    const mk = (cells, cls, op) => cells.map((t, i) => { const d = h('div', 'u8l1-sc ' + cls + (i === D.yc ? ' u8l1-sy' : ''), i === 0 ? (op ? `<span class="u8l1-op">${op === '-' ? '−' : op}</span>` : '') : t ? T(t) : ''); S.appendChild(d); return d; });
+    const c1 = mk(D.r1, 'u8l1-s1'), c2 = mk(D.r2, 'u8l1-s2', D.op);
     const bar = h('div', 'u8l1-sbar'); bar.style.gridColumn = `1 / span ${D.cols}`; S.appendChild(bar);
     const c3 = mk(D.res, 'u8l1-s3');
     c3.forEach((d) => (d.style.opacity = 0)); bar.style.opacity = 0; c2[0].style.opacity = 0;
-    const R = div(stage, 'u8l1-rows', '', SW + 26, 0, W - SW - 26);
+    const R = div(stage, 'u8l1-rows', '', SW + 22, 0, W - SW - 22);
     const rows = D.rows.map((html, i) => row(R, i + 1, html));
-    const ok = stamp(stage, '✓', { ok: true, x: SW / 2, y: 330, size: 'lg', rotate: -8 }); ok.style.opacity = 0;
+    const G = new Graph(stage, Object.assign({ x: 0, y: 206, width: SW, height: 248, fontSize: 13, ylabels: D.ylabels, xlabels: 1, pad: [24, 14, 14, 14] }, D.win));
+    G.fn(D.f, { color: PB, width: 3 }); G.fn(D.g, { color: LN, width: 3 });
+    const pts = D.pts.map(([x, y, lab, pos]) => hide(G.point(x, y, { color: PT, r: 7, label: T(lab), pos })));
     return D.caps.map((cap, i) => ({
       cap,
       run: async (c) => {
@@ -261,7 +265,8 @@ const elim = {
           await show(c, rows[1]); return;
         }
         await show(c, rows[i]);
-        if (i === 4) { unhide(ok); await stampIn(c, ok); }
+        if (i === 3) await Promise.all(pts.map((p) => popP(c, p)));
+        if (i === 4) await Promise.all(pts.map((p) => pulse(c, p, 1.4)));
       }
     }));
   }
@@ -320,7 +325,7 @@ const tilt = {
     const ring = glowRing(G.layers.top);
     const p1 = G.point(0, 0, { color: PT, r: 8.5, label: '', pos: 'nw' }), p2 = G.point(0, 0, { color: PT, r: 8.5, label: '', pos: 'se' });
     const P = div(stage, 'u8l1-pn', '', PX, 0, PW);
-    const eqs = h('div', 'u8l1-eqs', `<div><span class="u8l1-pb">parabola</span> ${T(`y=${poly(C.A, C.B0, C.C0)}`)}</div><div><span class="u8l1-ln">line</span> <span class="u8l1-leq"></span></div>`);
+    const eqs = h('div', 'u8l1-eqs', `<div><span class="u8l1-pb">parabola</span>&ensp;${T(`y=${poly(C.A, C.B0, C.C0)}`)}</div><div><span class="u8l1-ln">line</span>&ensp;<span class="u8l1-leq"></span></div>`);
     P.appendChild(eqs);
     const leq = eqs.querySelector('.u8l1-leq');
     const mkSl = (name, lo, hi, lab) => {
@@ -328,7 +333,7 @@ const tilt = {
       sl.setAttribute('data-tap', ''); return sl;
     };
     const sls = h('div', 'u8l1-sls'); P.appendChild(sls);
-    const slM = mkSl('the slope m', -6, 6, `slope ${T('m')}`), slK = mkSl('the y-intercept k', -10, 8, `${T('y')}-int ${T('k')}`);
+    const slM = mkSl('the slope m', -6, 6, `slope ${T('m')}`), slK = mkSl('the y-intercept k', -10, 8, `${T('y')}-intercept ${T('k')}`);
     sls.append(slM, slK);
     const inM = slM.querySelector('input'), inK = slK.querySelector('input'), vM = slM.querySelector('.u8l1-slv'), vK = slK.querySelector('.u8l1-slv');
     const dbox = h('div', 'u8l1-dbox', '<div class="u8l1-dl1"></div><div class="u8l1-dl2"></div><div class="u8l1-dl3"></div>'); P.appendChild(dbox);
@@ -357,7 +362,7 @@ const tilt = {
       inM.value = m; inK.value = k; vM.textContent = tn(m).replace('-', '−'); vK.textContent = tn(k).replace('-', '−');
       dl1.innerHTML = T(`${poly(C.A, C.B0, C.C0)}=${lineTex(m, k)}`);
       dl2.innerHTML = T(`${poly(A, B, Cc)}=0`);
-      dl3.innerHTML = `${T(`b^2-4ac=${par(B)}^2-4(${tn(A)})${par(Cc)}=`)}<b class="u8l1-dv">${T(tn(D))}</b>`;
+      dl3.innerHTML = `${T(`b^2-4ac=${par(B)}^2-4(${tn(A)})(${tn(Cc)})=`)}<b class="u8l1-dv">${T(tn(D))}</b>`;
       needle.setAttribute('transform', `translate(${mx(Math.max(Dlo, Math.min(Dhi, D)))} 0)`);
       verd.innerHTML = VERD[kd];
       stage.classList.remove('u8l1-k0', 'u8l1-k1', 'u8l1-k2'); stage.classList.add(KCLS[kd]);
@@ -381,7 +386,7 @@ const circle = {
   ask: `Example 8: the circle ${T('x^2+y^2=20')}, the line ${T('y=2x')} and the line ${T('x+2y=10')}.`,
   make(stage, v, ex) {
     const W = ex.W, GW = 448, R2 = 20, r = Math.sqrt(R2);
-    const S = { c: 0 };
+    const S = { c: 0, on: false };
     const G = new Graph(stage, { x: 0, y: 2, width: GW, height: 448, xmin: -6, xmax: 6, ymin: -6, ymax: 6, fontSize: 14, xlabels: 2, ylabels: 2, pad: [26, 16, 16, 16] });
     const cpts = []; for (let i = 0; i <= 160; i++) { const t = 2 * Math.PI * i / 160; cpts.push([r * Math.cos(t), r * Math.sin(t)]); }
     const circ = G.polyline(cpts, { closed: true, color: PB, width: 4 });
@@ -407,7 +412,8 @@ const circle = {
     const upd = () => {
       const c = S.c, D = 400 - 4 * c * c, kd = kindOf(Math.round(D * 1e6) / 1e6);
       lb._bkDraw();
-      if (kd === 2) { const s = Math.sqrt(D), ya = (4 * c + s) / 10, yb = (4 * c - s) / 10; G.moveTo(q1, c - 2 * ya, ya); G.moveTo(q2, c - 2 * yb, yb); unhide(q1); unhide(q2); }
+      if (!S.on) { hide(q1); hide(q2); }
+      else if (kd === 2) { const s = Math.sqrt(D), ya = (4 * c + s) / 10, yb = (4 * c - s) / 10; G.moveTo(q1, c - 2 * ya, ya); G.moveTo(q2, c - 2 * yb, yb); unhide(q1); unhide(q2); }
       else if (kd === 1) { const y0 = 0.4 * c; G.moveTo(q1, c - 2 * y0, y0); unhide(q1); hide(q2); }
       else { hide(q1); hide(q2); }
       placeRing(ring, G, q1.gx, q1.gy, kd === 1 && lb.style.opacity !== '0');
@@ -423,11 +429,11 @@ const circle = {
       { cap: `<b>(a)</b> Substitute ${T('y=2x')} into the circle: ${T('5x^2=20')}, so ${T('x=\\pm2')}. A line through the centre always meets the circle <b>twice</b>.`,
         run: async (c) => { await Promise.all([show(c, la), show(c, pnl[1])]); [legs, l2, l4, lr].forEach((e) => (e.style.opacity = 0)); await popP(c, P1); } },
       { cap: `<b>(b)</b> The line ${T('x+2y=c')} starts through the centre at ${T('c=0')} and slides out. Its two points move together…`,
-        run: async (c) => { la.style.opacity = 0.25; hide(P1); await Promise.all([show(c, lb), show(c, pnl[2])]); upd(); await go(c, 7, 1400); } },
+        run: async (c) => { la.style.opacity = 0.25; hide(P1); S.on = true; upd(); await Promise.all([show(c, lb), show(c, pnl[2])]); await go(c, 7, 1400); } },
       { cap: `…and <b>merge</b> at ${T('c=10')}: ${T('x+2y=10')} touches the circle only at ${T('(2,4)')}. The resulting equation has discriminant ${T('0')}, so the line is <b>tangent</b>.`,
         run: async (c) => { await go(c, 10, 1300); await show(c, pnl[3]); await pulse(c, P0, 1.3); } },
-      { cap: `A nice extra: the tangent at ${T('(2,4)')} is <b>perpendicular</b> to the radius there. Slide past ${T('c=10')} and the line misses: no points.`,
-        run: async (c) => { await show(c, rm); await go(c, 12.5, 1100); } }
+      { cap: `A nice extra: the tangent at ${T('(2,4)')} is <b>perpendicular</b> to the radius there. Slide past ${T('c=10')} and the line misses (no points), then back to the tangent.`,
+        run: async (c) => { await show(c, rm); await go(c, 12.5, 1100); await go(c, 10, 900); } }
     ];
   }
 };

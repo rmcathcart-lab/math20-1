@@ -1,0 +1,109 @@
+/* Math 20-1 · Unit 8 · Lesson 2 — Solving Quadratic–Quadratic Systems: styles used only on this page (prefix u8l2-).
+ * Colours: first parabola blue #1f5bd6, second red #c93a33, solutions (meeting points) green #12805a,
+ * the difference parabola purple #7b4fc4, its zeros amber #c27a0e. */
+
+.u8l2 .pl .katex { font-size: 1.06em; }
+.u8l2 .ans .katex { font-size: 1.03em; }
+.u8l2 .katex { white-space: nowrap; }
+.u8l2 h2 .katex, .u8l2 h3 .katex { font-size: .95em; }
+.u8l2-cb { color: #1f5bd6; } .u8l2-cr { color: #c93a33; } .u8l2-cp { color: #7b4fc4; }
+.u8l2-c2 { color: #12805a; } .u8l2-c1 { color: #a86a08; } .u8l2-c0 { color: #c93a33; }
+.u8l2-pcol { display: flex; flex-direction: column; gap: 8px; }
+.u8l2-pcol .pill { white-space: nowrap; }
+.u8l2-ul { font-size: 19px; line-height: 1.55; margin: 6px 0 12px; }
+
+/* ---------------- key ideas ---------------- */
+.u8l2-key { border-left-width: 7px; }
+.u8l2-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 6px; }
+.u8l2-steps { margin: 4px 0 0; padding-left: 28px; font-size: 19px; line-height: 1.5; }
+.u8l2-steps li { margin: 2px 0; }
+.u8l2-ktab { width: 100%; border-collapse: collapse; font-size: 18.5px; line-height: 1.35; background: #fff; border-radius: 10px; overflow: hidden; }
+.u8l2-ktab th { text-align: left; font: 800 16px var(--round); color: #a26100; padding: 6px 12px; border-bottom: 2px solid #f0d199; }
+.u8l2-ktab td { padding: 7px 12px; border-bottom: 1px solid #f3e6c8; vertical-align: top; }
+.u8l2-ktab td:first-child { width: 34%; }
+.u8l2-ktab td:last-child { font-weight: 700; width: 18%; }
+.u8l2-ktab tr:last-child td { border-bottom: none; }
+.u8l2-r2 td:first-child { border-left: 6px solid #12805a; }
+.u8l2-r1 td:first-child { border-left: 6px solid #c27a0e; }
+.u8l2-r0 td:first-child { border-left: 6px solid #c93a33; }
+.u8l2-ri td:first-child { border-left: 6px solid #7b4fc4; }
+
+/* ---------------- examples ---------------- */
+.u8l2-ex1 { display: grid; grid-template-columns: minmax(0, 1fr) 390px; gap: 18px; align-items: start; }
+.u8l2-fig { background: #fff; border-radius: 12px; padding: 4px; }
+.u8l2-sk { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 8px 0 10px; }
+.u8l2-sk > div { background: #fff; border-radius: 12px; padding: 6px; display: grid; justify-items: center; }
+.u8l2-skt { font: 700 18px var(--round); margin: 2px 0 2px; }
+.u8l2-ska { margin: 4px 0 10px; }
+.u8l2-ska > div { border: 1.5px solid #ead9d9; }
+
+/* ---------------- explainers: shared ---------------- */
+.u8l2-glow { fill: rgba(18, 128, 90, .16); stroke: #12805a; stroke-width: 4; transform-box: fill-box; transform-origin: center; animation: u8l2-glow 1s ease-in-out infinite; }
+@keyframes u8l2-glow { 0%, 100% { transform: scale(.75); opacity: 1; } 50% { transform: scale(1.35); opacity: .45; } }
+.u8l2-pn { display: flex; flex-direction: column; gap: 10px; }
+.u8l2-pn2 { gap: 8px; }
+.u8l2-eq { font-size: 27px; text-align: center; }
+.u8l2-sl { display: flex; align-items: center; gap: 12px; flex: 1; background: #f3f6fd; border: 2px solid #c9d6f4; border-radius: 14px; padding: 5px 14px; cursor: pointer; }
+.u8l2-sll { font: 800 18px var(--round); color: #c93a33; }
+.u8l2-sl input { flex: 1; min-width: 0; height: 36px; accent-color: #c93a33; cursor: pointer; touch-action: none; }
+.u8l2-sl input::-webkit-slider-thumb { width: 34px; height: 34px; }
+.u8l2-slv { font: 800 23px var(--round); min-width: 54px; text-align: right; color: #c93a33; }
+.u8l2-ctlrow { display: flex; gap: 10px; align-items: stretch; }
+.u8l2-flip { font-size: 19px; white-space: nowrap; }
+.u8l2-cnt { display: grid; justify-items: center; background: #fff; border: 3px solid currentColor; border-radius: 16px; padding: 8px 12px; color: #3a4254; }
+.u8l2-cnt-h { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .06em; color: #6b7280; }
+.u8l2-cnt-v { font: 800 66px/1 var(--round); }
+.u8l2-cnt-s { font: 800 23px var(--round); }
+.u8l2-list { font-size: 22px; line-height: 1.5; text-align: center; min-height: 72px; color: #12805a; }
+.u8l2-cnt.u8l2-k2 { color: #12805a; } .u8l2-cnt.u8l2-k1 { color: #a86a08; } .u8l2-cnt.u8l2-k0 { color: #c93a33; } .u8l2-cnt.u8l2-ki { color: #7b4fc4; }
+.u8l2-dlab { font: 800 14px var(--round); color: #7b4fc4; text-transform: uppercase; letter-spacing: .05em; background: rgba(255,255,255,.85); padding: 1px 6px; border-radius: 6px; }
+.u8l2-rows { display: flex; flex-direction: column; gap: 8px; }
+.u8l2-row { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 7px 12px; font-size: 19px; line-height: 1.55; }
+.u8l2-n { flex: 0 0 auto; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 17px var(--round); margin-top: 1px; }
+.u8l2-rc { min-width: 0; }
+
+/* ---------------- the subtract machine ---------------- */
+.u8l2-mach { background: #2e3442; color: #fff; border-radius: 18px; padding: 8px 16px 10px; box-shadow: inset 0 -6px 0 rgba(0,0,0,.25); display: grid; gap: 3px; }
+.u8l2-mh { display: flex; align-items: center; gap: 10px; font: 800 21px var(--round); }
+.u8l2-mh .u8l2-n { background: #f2c14e; color: #2e3442; }
+.u8l2-gear { margin-left: auto; display: inline-block; font-size: 26px; color: #f2c14e; }
+.u8l2-mr { display: flex; align-items: center; font-size: 23px; padding-left: 8px; }
+.u8l2-mr.u8l2-cb { color: #9cc0ff; } .u8l2-mr.u8l2-cr { color: #ffa59c; } .u8l2-mr.u8l2-cp { color: #d6c2ff; }
+.u8l2-mi { display: inline-block; width: 26px; font: 800 26px var(--round); color: #fff; }
+.u8l2-yy { position: relative; display: inline-block; margin-right: 1px; }
+.u8l2-yy.u8l2-x::after { content: ''; position: absolute; left: -4px; right: -4px; top: 52%; border-top: 3px solid #f2c14e; transform: rotate(-28deg); }
+.u8l2-mline { height: 3px; background: #c9cfdb; border-radius: 2px; margin: 2px 0 2px 34px; }
+.u8l2-zero { display: inline-block; }
+.u8l2-wrong { margin-top: 4px; padding: 3px 10px; border-radius: 10px; background: #fdeceb; color: #c93a33; font-size: 18px; }
+.u8l2-wrong span { color: #7a2a26; }
+
+/* ---------------- x² cancels ---------------- */
+.u8l2-ccol { display: flex; flex-direction: column; gap: 4px; background: #fbf9f5; border: 2px solid var(--line); border-radius: 16px; padding: 8px 10px; box-sizing: border-box; }
+.u8l2-ch { font: 800 22px var(--round); color: #7a1f3d; }
+.u8l2-ce { font-size: 21px; }
+.u8l2-cl { font-size: 19px; min-height: 32px; display: flex; align-items: center; }
+.u8l2-csh { display: flex; align-items: center; gap: 10px; min-height: 48px; }
+.u8l2-csh .bk-stamp { position: static; }
+.u8l2-cun { font-size: 16.5px; line-height: 1.25; color: var(--ink2); }
+
+/* ---------------- count ---------------- */
+.u8l2-eqs { display: flex; justify-content: space-around; gap: 10px; font-size: 22px; }
+.u8l2-meter { display: block; overflow: visible; }
+.u8l2-mt { font: 700 13px var(--round); fill: #6b7280; }
+.u8l2-dv { font-size: 1.25em; }
+.u8l2-verd { display: grid; gap: 2px; text-align: center; background: #fff; border: 2.5px solid currentColor; border-radius: 14px; padding: 6px 12px; color: #3a4254; }
+.u8l2-verd > b { font: 800 24px var(--round); }
+.u8l2-verd > span { font-size: 18px; color: var(--ink); }
+.u8l2-k2 .u8l2-verd, .u8l2-k2 .u8l2-dv { color: #12805a; }
+.u8l2-k1 .u8l2-verd, .u8l2-k1 .u8l2-dv { color: #a86a08; }
+.u8l2-k0 .u8l2-verd, .u8l2-k0 .u8l2-dv { color: #c93a33; }
+.u8l2-ki .u8l2-verd { color: #7b4fc4; }
+.u8l2-sumk { display: flex; justify-content: space-around; font: 800 19px var(--round); }
+
+/* ---------------- fountain ---------------- */
+.u8l2-ground { fill: #e9dcc2; opacity: .8; }
+.u8l2-ped { fill: #9aa0ab; stroke: #3a4254; stroke-width: 2; }
+.u8l2-ug { font: 800 15px var(--round); color: #8a6d3b; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+.u8l2-x2 { display: inline-block; background: #f2c14e; border-radius: 8px; padding: 0 6px; }
+.u8l2-ok { color: #12805a; } .u8l2-no { color: #c93a33; }
+.u8l2-res { background: #e9f6ef; border: 2.5px solid #12805a; border-radius: 14px; padding: 8px 14px; font-size: 20px; line-height: 1.45; color: #0d5c40; }

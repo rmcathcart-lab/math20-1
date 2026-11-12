@@ -557,7 +557,7 @@
       if (astVars(a.ast).length) return form('notnumber', 'Give a number (exact, with a radical).');
       if (!ex.eq(a.val, T, 1e-9)) { var c = o.cands || []; for (var i = 0; i < c.length; i++) if (ex.eq(a.val, c[i][0], 1e-9)) return wrong(c[i][1], c[i][2]); if (!ex.shape(a.ast).roots && Math.abs(a.val - T) < 0.05) return form('decimal-rounded', 'Give the <b>exact</b> value, with a radical, not a decimal.'); return wrong('value', o.valueHint || null); }
       if (!ex.shape(a.ast).roots) return form('decimal-rounded', 'Give the <b>exact</b> value, with a radical, not a decimal.');
-      var s = String(resp).replace(/\\left|\\right|\s|\\[,;: ]/g, '').replace(/\\sqrt(\d)/g, '\\sqrt{$1}').replace(/\\cdot|\\times/g, '');
+      var s = String(resp).replace(/\\left|\\right|\s|\\[,;: ]/g, '').replace(/\\cdot|\\times|[*×·]/g, '').replace(/(\\?sqrt|√)\(?\{?(\d+)\}?\)?/g, '\\sqrt{$2}');
       var ok1 = /^-?\d*\\sqrt\{\d+\}$/.test(s) || /^-?\d+[+-]\d*\\sqrt\{\d+\}$/.test(s) || /^-?\d*\\sqrt\{\d+\}[+-]\d+$/.test(s);
       if (!ok1) return form('u6k-radical', 'Right value — now expand and collect like terms, so it is one number plus one radical term, like ' + t('a+b\\sqrt{' + n + '}') + '.');
       var m = /\\sqrt\{(\d+)\}/.exec(s); if (m && !ex.simplest(Number(m[1]), 2)) return form('u6k-radical', 'Right value — now simplify the radical.');
