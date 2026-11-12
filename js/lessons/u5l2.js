@@ -502,7 +502,23 @@
           return z().fields('The new graph is then reflected in the ' + t('x') + '-axis. Write its equation and state its vertex.', [vfSpec('Equation', -o.a, P1, -Q1, { cands: [{ a: -o.a, p: P1, q: Q1, code: LID + '-reflect-q', hint: 'A reflection in the ' + t('x') + '-axis changes the sign of <b>every</b> ' + t('y') + '-value, so the vertex’s ' + t('y') + '-coordinate changes sign too.' }, { a: o.a, p: P1, q: -Q1, code: LID + '-reflect', hint: 'The reflection makes the parabola open the other way: ' + t('a') + ' changes sign too.' }] }),
             { label: 'Vertex', pt: [P1, -Q1], cands: [[[P1, Q1], LID + '-reflect-q', 'The vertex is not on the ' + t('x') + '-axis, so the reflection moves it: ' + t('(x,\\ y)\\to(x,\\ -y)') + '.'], [[-P1, Q1], LID + '-reflect', 'A reflection in the <b>' + t('x') + '-axis</b> changes the ' + t('y') + '-coordinate, not the ' + t('x') + '-coordinate.']] }],
             { sol: 'Every ' + t('y') + '-value changes sign: ' + t('y=-\\left[' + vf(o.a, P1, Q1, true) + '\\right]') + ', so ' + eqT(-o.a, P1, -Q1) + ', vertex ' + t(ptTex(P1, -Q1)) + '.', hints: ['A reflection in the ' + t('x') + '-axis maps ' + t('(x,\\ y)') + ' to ' + t('(x,\\ -y)') + ': multiply the whole right side by ' + t('-1') + '.'], text: 'reflecting a translated parabola' });
-        } }] }
+        } }] },
+    /* Mastery challenge (added 2026-11-12 at Ryan's request): find a, p and q from two image points (mapping (x, y) -> (x + p, ay + q)) */
+    { num: 'C4', parts: [
+      { id: 'eC4', level: 'MAS', make: function (r) {
+        var o = pickWhere(function () { var x1 = r.pick([-2, -1, 1, 2, 3]), x2 = r.pick([-3, -2, -1, 1, 2, 3, 4]); return { a: r.pick([-3, -2, 2, 3, -0.5, 0.5]), p: nz(r, -5, 5), q: nz(r, -8, 8), x1: x1, x2: x2 }; },
+          function (o) { var d = o.x2 * o.x2 - o.x1 * o.x1, Y1 = o.a * o.x1 * o.x1 + o.q, Y2 = o.a * o.x2 * o.x2 + o.q;
+            return o.x1 < o.x2 && d !== 0 && Number.isInteger(Y1) && Number.isInteger(Y2) && Math.abs(Y1) <= 30 && Math.abs(Y2) <= 30 && o.x1 + o.p !== 0 && o.x2 + o.p !== 0 && !(o.a === -2 && o.p === 3 && o.q === 7 && o.x1 === 1 && o.x2 === 2); });
+        var s1 = o.x1 * o.x1, s2 = o.x2 * o.x2, X1 = o.x1 + o.p, X2 = o.x2 + o.p, Y1 = o.a * s1 + o.q, Y2 = o.a * s2 + o.q;
+        var stem = 'The graph of ' + t('y=x^{2}') + ' is transformed to ' + t('y=a(x-p)^{2}+q') + '. The points ' + t(ptTex(o.x1, s1)) + ' and ' + t(ptTex(o.x2, s2)) + ' on ' + t('y=x^{2}') + ' are mapped to ' + t(ptTex(X1, Y1)) + ' and ' + t(ptTex(X2, Y2)) + '. Determine ' + t('a') + ', ' + t('p') + ' and ' + t('q') + ', and write the equation.';
+        var qWrong = cl(Y1 - s1);
+        return z().fields(stem, [
+          { label: t('a='), name: 'a', ans: o.a, cands: [[-o.a, LID + '-reflect', 'Subtract the two ' + t('y') + '-equations: ' + t(vT(s2) + 'a-' + (s1 < 0 ? '(' + vT(s1) + ')' : vT(s1)) + 'a=' + vT(Y2) + '-' + (Y1 < 0 ? '(' + vT(Y1) + ')' : vT(Y1))) + '. Watch the order.'], [cl((Y2 - Y1) / (o.x2 - o.x1)), LID + '-order', 'The image ' + t('y') + '-values come from ' + t('a') + ' times the <b>' + t('y') + '-values</b> of ' + t('y=x^{2}') + ' (' + t(s1) + ' and ' + t(s2) + '), not the ' + t('x') + '-values.']] },
+          { label: t('p='), name: 'p', ans: o.p, cands: [[-o.p, LID + '-p-sign', t('x+p') + ' is the new ' + t('x') + '-coordinate: ' + t(o.x1 + '+p=' + X1) + '.']] },
+          { label: t('q='), name: 'q', ans: o.q, cands: [[qWrong, LID + '-order', 'Multiply by ' + t('a') + ' first: ' + t(vT(Y1) + '=a(' + s1 + ')+q') + '.']] }],
+          { sol: 'The mapping is ' + t('(x,\\ y)\\to(x+p,\\ ay+q)') + '.<br>' + t('x') + ': ' + t(o.x1 + '+p=' + X1) + ', so ' + t('p=' + vT(o.p)) + ' (and ' + t(o.x2 + sT(o.p) + '=' + X2) + ' ✓).<br>' + t('y') + ': ' + t((s1 === 1 ? '' : s1) + 'a+q=' + vT(Y1)) + ' and ' + t((s2 === 1 ? '' : s2) + 'a+q=' + vT(Y2)) + '. Subtract: ' + t((s2 - s1) + 'a=' + vT(Y2 - Y1)) + ', so ' + t('a=' + vT(o.a)) + '; then ' + t('q=' + vT(Y1) + '-' + (s1 === 1 ? '' : s1) + '(' + vT(o.a) + ')=' + vT(o.q)) + '.<br>' + eqT(o.a, o.p, o.q) + '.',
+            hints: ['Use the mapping ' + t('(x,\\ y)\\to(x+p,\\ ay+q)') + ': the ' + t('x') + '-coordinates give ' + t('p') + ', the ' + t('y') + '-coordinates give two equations in ' + t('a') + ' and ' + t('q') + '.'], text: 'Mastery: a, p and q from two image points' });
+      } }] }
   ];
 
   /* vertex, axis, direction (Extra A3) */

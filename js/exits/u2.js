@@ -4,7 +4,8 @@
  * questions (5–8 minutes): Beginning = the lesson's first-taught skill, Progressing = the typical assignment question,
  * Mastery = one of the lesson's harder assignment / extra-practice items. New numbers every time (the booklet's own
  * example and assignment items are left out of the pools where they would come up often).
- *   2.1  √n → mixed (BEG) · mixed → entire, negative coefficient (PRG) · ∛ / ∜ → mixed (PRG) · order 5 radicals (MAS, L1 #10–12)
+ *   2.1  √n → mixed (BEG) · mixed → entire, negative coefficient (PRG) · ∛ / ∜ → mixed (PRG) · count the n with a√b < √n < c√d,
+ *        or the greatest k with k√b < c√d (MAS, calculator-proof comparing; L1 #10–12)
  *   2.2  restriction of √(ax+b) or an odd root (BEG) · simplest form with variables (PRG) · mixed → entire with a variable
  *        (PRG) · largest / smallest integer allowed by a restriction (MAS, L2 #17, a denominator version from Ex 2d)
  *   2.3  like radicals (BEG) · simplify first, then combine (PRG) · cube / fourth roots (PRG) · width from a perimeter or the
@@ -266,7 +267,8 @@
     'u2x-like-sign': 's', 'u2x-add-rad': 'n', 'u2x-add-coef': 'b', 'u2x-cube-neg': 's', 'u2x-per-half': 'b', 'u2x-per-2w': 's', 'u2x-per-bracket': 's',
     'u2x-mul-addcoef': 'n', 'u2x-mul-addrad': 'n', 'u2x-foil-sq': 'b', 'u2x-foil-mid': 'b', 'u2x-sq-mid': 'n', 'u2x-sq-half': 'b', 'u2x-sq-coef': 's',
     'u2x-diag-noroot': 'b', 'u2x-diag-area': 'n', 'u2x-diag-sides': 'n', 'u2x-div-coef': 's', 'u2x-rat-top': 'b', 'u2x-rat-den': 's', 'u2x-frac-root': 'b',
-    'u2x-cube-sq': 'b', 'u2x-one-term': 'b', 'u2x-conj-coef': 's', 'u2x-conj-add': 'n', 'u2x-conj-sign': 'n', 'u2x-conj-den-add': 'b', 'u2x-frac-add': 'n'
+    'u2x-cube-sq': 'b', 'u2x-one-term': 'b', 'u2x-conj-coef': 's', 'u2x-conj-add': 'n', 'u2x-conj-sign': 'n', 'u2x-conj-den-add': 'b', 'u2x-frac-add': 'n',
+    'u2x-cnt-end': 's', 'u2x-cnt-root': 'b', 'u2x-cnt-strict': 's', 'u2x-cnt-round': 's'
   });
 
   /* ================= small helpers ================= */
@@ -343,42 +345,44 @@
     p.bad = bad;
     return p;
   }
+  /* Mastery (changed 2026-11-12, Ryan: "a question that still challenges them even if they use a calculator"): count the
+   * whole numbers between two mixed radicals, or the greatest whole-number coefficient below one. Both need the entire-radical
+   * idea (a√b = √(a²b)); a calculator alone gives decimals, and the strict inequality / exact endpoints are the trap. */
   function l1q4(r) {
-    var cube = r.chance(0.3), items, sol, first, last;
-    if (!cube) {
-      items = pickWhere(function () {
-        var lo = r.int(40, 95), hi = lo + r.int(24, 34), cand = [];
-        [2, 3, 4, 5, 6, 7].forEach(function (c) { RK.SQF.forEach(function (m) { var N = c * c * m; if (N >= lo && N <= hi) cand.push({ c: c, m: m, N: N }); }); });
-        cand = r.shuffle(cand); var pick = [], used = {};
-        cand.forEach(function (x) { if (pick.length < 4 && !used[x.N]) { used[x.N] = 1; pick.push(x); } });
-        if (pick.length < 4) return null;
-        var extra = range(lo, hi).filter(function (N) { return !used[N] && (RK.isPow(N, 2) || ex.simplest(N, 2)); });
-        if (!extra.length) return null;
-        var e = r.pick(extra); pick.push({ c: 1, m: e, N: e });
-        return pick;
-      }, function (x) { return true; });
-      items.forEach(function (x) { x.tex = x.c === 1 ? (RK.isPow(x.N, 2) ? String(Math.round(Math.sqrt(x.N))) : sq(x.N)) : mixT(x.c, 2, x.m); x.ent = sq(x.N); });
-    } else {
-      items = pickWhere(function () {
-        var cand = [];
-        [2, 3, 4, 5].forEach(function (c) { [2, 3, 4, 5, 6, 7, 9, 10, 11].forEach(function (m) { var N = c * c * c * m; if (N <= 140 && N >= 16) { cand.push({ c: c, m: m, N: N }); cand.push({ c: -c, m: m, N: -N }); } }); });
-        cand = r.shuffle(cand); var pick = [], used = {}, negs = 0;
-        cand.forEach(function (x) { if (pick.length < 5 && !used[x.N] && !used[-x.N] && (x.N > 0 || negs < 2)) { used[x.N] = 1; if (x.N < 0) negs++; pick.push(x); } });
-        return pick.length === 5 && negs === 2 ? pick : null;
-      }, function () { return true; });
-      items.forEach(function (x) { x.tex = mixT(x.c, 3, x.m); x.ent = cb(x.N); });
+    var kind = r.pick(['count', 'count', 'cube', 'great', 'great']);
+    if (kind === 'count' || kind === 'cube') {
+      var n = kind === 'cube' ? 3 : 2, S = n === 3 ? [2, 3, 5, 6, 7] : SQ7;
+      var o = pickWhere(function () { return { a: r.int(2, n === 3 ? 3 : 6), b: r.pick(S), c: r.int(2, n === 3 ? 3 : 7), d: r.pick(S) }; }, function (o) {
+        var L = Math.pow(o.a, n) * o.b, U = Math.pow(o.c, n) * o.d; return U - L >= 4 && U - L <= 30 && U <= (n === 3 ? 200 : 400) && !(o.a === o.c) && o.b !== o.d; });
+      var L = Math.pow(o.a, n) * o.b, U = Math.pow(o.c, n) * o.d, cnt = U - L - 1, rt = function (x) { return n === 3 ? cb(x) : sq(x); };
+      var lo = Math.pow(L, 1 / n), hi = Math.pow(U, 1 / n), rootCnt = Math.floor(hi - 1e-12) - Math.ceil(lo + 1e-12) + 1;
+      var prompt = 'How many whole numbers ' + t('n') + ' make ' + t(mixT(o.a, n, o.b) + '<' + rt('n') + '<' + mixT(o.c, n, o.d)) + ' true?';
+      var sol = 'Write both ends as entire radicals: ' + t(mixT(o.a, n, o.b) + '=' + rt(F(L))) + ' and ' + t(mixT(o.c, n, o.d) + '=' + rt(F(U))) + '. So ' + t(rt(F(L)) + '<' + rt('n') + '<' + rt(F(U))) + ', which means ' + t(F(L) + '<n<' + F(U)) + ': ' + t('n=' + (L + 1) + ',\\ ' + (L + 2) + ',\\ \\dots,\\ ' + (U - 1)) + '. That is ' + t(cnt) + ' whole numbers. (A calculator gives ' + t(lo.toFixed(3) + '<' + rt('n') + '<' + hi.toFixed(3)) + ' — you would still have to ' + (n === 3 ? 'cube' : 'square') + ' back, and rounding can lose an end.)';
+      return P.number(prompt, cnt, function (v) {
+        if (v === cnt + 1 || v === cnt + 2) return { code: 'u2x-cnt-end', hint: 'The inequalities are strict: ' + t('n') + ' can’t equal ' + t(F(L)) + ' or ' + t(F(U)) + '.' };
+        if (v === rootCnt && rootCnt !== cnt) return { code: 'u2x-cnt-root', hint: 'That counts whole numbers between the two <b>radicals</b>. The question asks about ' + t('n') + ', the number <b>under</b> the root: write each end as an entire radical first.' };
+        return null;
+      }, sol, ['Write ' + t(mixT(o.a, n, o.b)) + ' and ' + t(mixT(o.c, n, o.d)) + ' as entire radicals: ' + t(n === 3 ? 'a\\sqrt[3]{b}=\\sqrt[3]{a^{3}b}' : 'a\\sqrt{b}=\\sqrt{a^{2}b}') + '.', 'Then compare radicands: which whole numbers fit strictly between them?'], 'count n between two mixed radicals');
     }
-    var up = r.chance(0.5);
-    items.sort(function (a, b) { return up ? a.N - b.N : b.N - a.N; });
-    first = up ? 'least' : 'greatest'; last = up ? 'greatest' : 'least';
-    var its = items.map(function (x, i) { return { id: 'i' + i, tex: x.tex }; });
-    sol = 'Write each as an entire radical with the same index: ' + items.map(function (x) { return t(x.tex + (x.tex === x.ent ? '' : '=' + x.ent)); }).join(', ') + '. The larger radicand gives the larger number' + (cube ? ' (this works for negative cube roots too)' : '') + '. ' + (up ? 'Least to greatest' : 'Greatest to least') + ': ' + its.map(function (x) { return t(x.tex); }).join(', ') + '.';
-    return P.order(r, 'Without a calculator, arrange the numbers from <b>' + first + '</b> to <b>' + last + '</b>.', its, { first: first, last: last }, sol,
-      ['Write each number as an entire radical: ' + (cube ? t('a\\sqrt[3]{b}=\\sqrt[3]{a^{3}b}') + ' (a negative in front goes inside).' : t('a\\sqrt{b}=\\sqrt{a^{2}b}') + ', and a whole number ' + t('n=\\sqrt{n^{2}}') + '.'), 'Then compare the radicands: the larger radicand is the larger number.'], 'order radicals without a calculator');
+    // the greatest whole number k with k√b < (right side). Half the time the right side is the entire radical √(m²b), so k = m
+    // gives EQUALITY and the answer is m − 1 (a calculator shows exactly m for right ÷ √b: the strict sign is the trap).
+    var exact = r.chance(0.5), g;
+    if (exact) g = pickWhere(function () { return { b: r.pick([2, 3, 5, 6, 7]), m: r.int(3, 9) }; }, function (g) { return g.m * g.m * g.b <= 400; });
+    else g = pickWhere(function () { return { b: r.pick([2, 3, 5, 6, 7]), c: r.int(2, 7), d: r.pick([2, 3, 5, 6, 7]) }; }, function (g) {
+      var kk = Math.sqrt(g.c * g.c * g.d / g.b); return g.b !== g.d && kk >= 2.5 && kk <= 10; });
+    var N2 = exact ? g.m * g.m * g.b : g.c * g.c * g.d, kx = Math.sqrt(N2 / g.b), kAns = exact ? g.m - 1 : Math.floor(kx);
+    var rhs = exact ? sq(N2) : mixT(g.c, 2, g.d);
+    var prompt2 = 'What is the greatest whole number ' + t('k') + ' for which ' + t('k' + sq(g.b) + '<' + rhs) + '?';
+    var sol2 = 'Write the left side as an entire radical: ' + t('k' + sq(g.b) + '=' + sq('' + g.b + 'k^{2}')) + '. ' + (exact ? 'So ' + t(g.b + 'k^{2}<' + N2) + ', i.e. ' + t('k^{2}<' + N2 / g.b + '=' + g.m + '^{2}') + '. At ' + t('k=' + g.m) + ' the two sides are <b>equal</b> (' + t(g.m + sq(g.b) + '=' + sq(N2)) + '), and the question needs <b>less than</b>: the greatest is ' + t('k=' + kAns) + '.' : t(mixT(g.c, 2, g.d) + '=' + sq(N2)) + ', so ' + t(g.b + 'k^{2}<' + N2) + ', i.e. ' + t('k^{2}<' + (N2 % g.b ? '\\frac{' + N2 + '}{' + g.b + '}' : N2 / g.b)) + '. The greatest whole number whose square is that small is ' + t(kAns) + ' (' + t(kAns + '^{2}=' + kAns * kAns) + ', ' + t((kAns + 1) + '^{2}=' + (kAns + 1) * (kAns + 1)) + ').');
+    return P.number(prompt2, kAns, function (v) {
+      if (exact && v === kAns + 1) return { code: 'u2x-cnt-strict', hint: 'Check ' + t('k=' + v) + ': ' + t(v + sq(g.b) + '=' + sq(v * v * g.b)) + ', which is <b>equal</b> to ' + t(rhs) + '. The question needs <b>less than</b>.' };
+      if (!exact && v === kAns + 1) return { code: 'u2x-cnt-round', hint: 'Too big: ' + t(v + sq(g.b) + '=' + sq(v * v * g.b)) + ' is more than ' + t(rhs + '=' + sq(N2)) + '. Round <b>down</b>.' };
+      return null;
+    }, sol2, ['Write both sides as entire radicals, or square both sides: ' + t('(k\\sqrt{b})^{2}=k^{2}b') + '.', 'Is the inequality strict? What happens exactly at the boundary?'], 'greatest whole-number coefficient');
   }
   HW.defineExit({ lesson: 'u2l1', calc: true, outcome: 'AN2',
-    blurb: 'Mixed and entire radicals: a square root and a cube (or fourth) root in simplest mixed form, a mixed radical as an entire radical, and ordering radicals without a calculator.',
-    questions: [Q(1, 'BEG', 'Simplest form.', l1q1), Q(2, 'PRG', 'An entire radical.', l1q2), Q(3, 'PRG', 'A cube or fourth root.', l1q3), Q(4, 'MAS', 'Ordering radicals.', l1q4)] });
+    blurb: 'Mixed and entire radicals: a square root and a cube (or fourth) root in simplest mixed form, a mixed radical as an entire radical, and comparing radicals through their entire forms.',
+    questions: [Q(1, 'BEG', 'Simplest form.', l1q1), Q(2, 'PRG', 'An entire radical.', l1q2), Q(3, 'PRG', 'A cube or fourth root.', l1q3), Q(4, 'MAS', 'Comparing radicals.', l1q4)] });
 
   /* =====================================================================================================
    * Lesson 2 — Radicals with variables and their restrictions
