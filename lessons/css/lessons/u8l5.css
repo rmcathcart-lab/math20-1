@@ -68,8 +68,8 @@
 .u8l5-noter { color: #fff; background: #c93a33; }
 .u8l5-grayl .u8l5-lt { color: #6b7180; }
 .u8l5-finl .u8l5-lt { font-size: 24px; background: #e8f5ef; border: 2px solid #12805a; border-radius: 9px; padding: 3px 12px; color: #0d5c41; }
-.u8l5-inl { font-size: 16px !important; color: #0d5c41 !important; }
-.u8l5-outl { font-size: 16px !important; color: #6b7180 !important; }
+.u8l5-inl { font-size: 16px !important; color: #0d5c41 !important; pointer-events: none; }
+.u8l5-outl { font-size: 16px !important; color: #6b7180 !important; pointer-events: none; }
 .u8l5-dim { font-size: 16px !important; }
 
 /* regions */

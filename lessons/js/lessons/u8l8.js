@@ -395,10 +395,10 @@ standup('u8l8', {
         const b = m - r1 - r2, c = r1 * r2 + d;
         if (Math.abs(b) > 9 || Math.abs(c) > 20) continue;
         const pt = (x) => `(${x},\\ ${m * x + d})`;
-        return { text: 'Solve the system algebraically, and verify.', q: `y=${quad(1, b, c)},\\qquad y=${lin(m, d)}`,
+        return { text: 'Solve the system algebraically, and verify.', q: `y=${quad(1, b, c)},\\quad y=${lin(m, d)}`,
           a: [`${quad(1, b, c)}=${lin(m, d)}`, `${quad(1, -(r1 + r2), r1 * r2)}=0`, `${fac(r1)}${fac(r2)}=0`, `${pt(Math.min(r1, r2))}\\ \\text{and}\\ ${pt(Math.max(r1, r2))}`] };
       }
-      return { text: 'Solve the system algebraically, and verify.', q: 'y=x^2-4x+1,\\qquad y=2x-4', a: ['x^2-4x+1=2x-4', 'x^2-6x+5=0', '(x-1)(x-5)=0', '(1,\\ -2)\\ \\text{and}\\ (5,\\ 6)'] };
+      return { text: 'Solve the system algebraically, and verify.', q: 'y=x^2-4x+1,\\quad y=2x-4', a: ['x^2-4x+1=2x-4', 'x^2-6x+5=0', '(x-1)(x-5)=0', '(1,\\ -2)\\ \\text{and}\\ (5,\\ 6)'] };
     },
     PRG: (r) => {
       for (let t = 0; t < 300; t++) {
@@ -421,11 +421,11 @@ standup('u8l8', {
         const m = b + 2 * s, k = c - s * s;
         if (!m || Math.abs(m) > 8) continue;
         const mx = m === 1 ? 'x' : m === -1 ? '-x' : m + 'x', bm = b - m;
-        return { text: 'Determine <i>k</i> so that the line is tangent to the parabola, and find the point of tangency.', q: `y=${quad(1, b, c)},\\qquad y=${mx}+k`,
+        return { text: 'Determine <i>k</i> so that the line is tangent to the parabola, and find the point of tangency.', q: `y=${quad(1, b, c)},\\quad y=${mx}+k`,
           a: [`${quad(1, b, c)}=${mx}+k`, `${poly([1, bm], ['x^2', 'x'])}+(${c}-k)=0`, `(${bm})^2-4(1)(${c}-k)=0`, `${bm * bm}-${4 * c < 0 ? '(' + 4 * c + ')' : 4 * c}+4k=0\\ \\Rightarrow\\ k=${k}`,
             `${fac(s)}^2=0:\\ x=${s},\\ y=${m * s + k}`, `\\text{point of tangency }(${s},\\ ${m * s + k})`] };
       }
-      return { text: 'Determine <i>k</i> so that the line is tangent to the parabola, and find the point of tangency.', q: 'y=x^2-4x+1,\\qquad y=2x+k', a: ['x^2-6x+(1-k)=0', '36-4(1-k)=0\\ \\Rightarrow\\ k=-8', '(x-3)^2=0:\\ x=3,\\ y=-2', '\\text{point of tangency }(3,\\ -2)'] };
+      return { text: 'Determine <i>k</i> so that the line is tangent to the parabola, and find the point of tangency.', q: 'y=x^2-4x+1,\\quad y=2x+k', a: ['x^2-6x+(1-k)=0', '36-4(1-k)=0\\ \\Rightarrow\\ k=-8', '(x-3)^2=0:\\ x=3,\\ y=-2', '\\text{point of tangency }(3,\\ -2)'] };
     }
   }
 });
