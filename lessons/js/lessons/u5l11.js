@@ -128,6 +128,7 @@ const lab = {
       g.append(minus, val, plus);
       const stepK = (d) => {
         if (busy) return;
+        unhide(cur); unhide(vtx);
         if (key === 'a') { const i = AV.indexOf(S.a); S.a = AV[Math.max(0, Math.min(AV.length - 1, (i < 0 ? 5 : i) + d))]; }
         else S[key] = Math.max(key === 'p' ? -7 : -10, Math.min(key === 'p' ? 7 : 10, S[key] + d));
         update(); hitCheck();

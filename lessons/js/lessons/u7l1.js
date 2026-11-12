@@ -507,7 +507,7 @@ const forkDef = {
     const inEl = F.node('in').querySelector('.bk-fc-in'), yesEl = F.node('yes').querySelector('.bk-fc-in'), noEl = F.node('no').querySelector('.bk-fc-in'), tEl = F.node('test').querySelector('.bk-fc-in');
     const out = div(stage, 'u7l1-fout', '<div class="u7l1-fout-h">results</div>', FW + 14, 8, W - FW - 22, FH - 14);
     const N = new NumberLine(stage, { x: 10, y: FH, width: W - 20, height: 128, axisY: 78, min: D.min, max: D.max, step: 1, labelStep: 1, fontSize: 17 });
-    if (sh) { N.point(4, { color: INK, r: 6 }); N.mark(4, T('4'), { lift: 22 }); }
+    if (sh) N.point(4, { color: INK, r: 6 });
     const tok = hide(div(stage, 'u7l1-tok', ''));
     const at = (id) => { const n = F.node(id).n; return [n.x, n.y]; };
     const move = (c, a, b, ms = 480) => anim(c, tok, [{ transform: `translate(${a[0]}px, ${a[1]}px) translate(-50%, -50%)` }, { transform: `translate(${b[0]}px, ${b[1]}px) translate(-50%, -50%)` }], ms);

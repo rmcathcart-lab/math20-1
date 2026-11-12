@@ -279,7 +279,7 @@ const cases = {
     };
     // Case 1 is the right-hand subdomain, so it sits on the right
     const K2 = mkCase(d.c2, 4, 'u7l4-caseL', 2), K1 = mkCase(d.c1, 4 + PW + 14, 'u7l4-caseR', 1);
-    const sol = hide(div(stage, 'u7l4-ansl u7l4-csol', `Solution: ${T(d.sol)} &nbsp;·&nbsp; Check: ${T(d.chk)}`, 4, 482));
+    const sol = hide(div(stage, 'u7l4-ansl u7l4-csol', `Solution: ${T(d.sol)} &nbsp;·&nbsp; Check: ${T(d.chk)}`, 4, 472));
     const cand = (cs, K) => { const e = div(stage, 'u7l4-cdot ' + (cs.ok ? 'ok' : 'no'), T(`x=${cs.x}`), 0, 0); hide(e); e.K = K; e.cs = cs; return e; };
     const D1 = cand(d.c1, K1), D2 = cand(d.c2, K2);
     const fly = async (c, D) => {
@@ -305,7 +305,7 @@ const cases = {
 
 /* =============================== explainer: the verdict board (STAR) =============================== */
 const VD = {
-  a: { label: 'Example 7(a)', eq: '|3x+1|=x-5', m: 1, A: (x) => 3 * x + 1, B: (x) => x - 5, AT: '3x+1', BT: 'x-5', win: [-6, 4, -10, 10], bl: [2.6, 'se'],
+  a: { label: 'Example 7(a)', eq: '|3x+1|=x-5', m: 1, A: (x) => 3 * x + 1, B: (x) => x - 5, AT: '3x+1', BT: 'x-5', win: [-6, 4, -10, 10], bl: [2, 'nw'],
     rows: [{ lab: 'A=B', solve: ['3x+1=x-5', 'x=-3'], x: -3, L: '|3(-3)+1|=|-8|=8', R: '-3-5=-8', ok: false },
       { lab: 'A=-B', solve: ['3x+1=-(x-5)', '4x=4', 'x=1'], x: 1, L: '|3(1)+1|=|4|=4', R: '1-5=-4', ok: false }],
     end: `Both are extraneous: <b>no solution</b>. The line ${T('y=x-5')} stays below the V.` },

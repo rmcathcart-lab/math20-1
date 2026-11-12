@@ -95,7 +95,7 @@ const flip = {
   ask: (v) => v === 'e1' ? `<b>Example 1:</b> ${T('f(x)=x^2-2x-3')}. Complete the table, plot both graphs, and find which part was reflected.` : `<b>Example 3(${v}):</b> sketch ${T(FL[v].eq)}; label the invariant points and the vertex.`,
   make(stage, v, ex) {
     const W = ex.W, d = FL[v], GW = 430, GH = 444, RX = GW + 24, RW = W - RX;
-    const G = new Graph(stage, Object.assign({ x: 0, y: 0, width: GW, height: GH, fontSize: 15 }, d.win));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 0, width: GW, height: GH, fontSize: 15, pad: [30, 18, 18, 18] }, d.win));
     const fDash = hide(G.fn(d.f, { color: F, width: 2.5, dash: true }));
     const fSolid = hide(G.fn(d.f, { color: F, width: 3.5 }));
     const keeps = d.keeps.map(([a, b]) => hide(G.fn(d.f, { from: inf(a), to: inf(b), color: A, width: 4.5 })));
@@ -190,7 +190,7 @@ const cases = {
     const W = ex.W, demo = v === 'demo', GW = demo ? 430 : 400, GH = 444, RX = GW + 22, RW = W - RX;
     const S = demo ? { a: 1, p: 1, q: -4 } : Object.assign({}, EX4[0]);
     const win = demo ? { xmin: -4, xmax: 6, ymin: -8, ymax: 8 } : { xmin: -6, xmax: 7, ymin: -10, ymax: 20, ystep: 2, ylabels: 4, xlabels: 2 };
-    const G = new Graph(stage, Object.assign({ x: 0, y: 0, width: GW, height: GH, fontSize: 15 }, win));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 0, width: GW, height: GH, fontSize: 15, pad: [30, 18, 18, 18] }, win));
     const f = (x) => S.a * (x - S.p) ** 2 + S.q;
     const fD = G.fn(f, { color: F, width: 2.5, dash: true });
     const fA = G.fn((x) => Math.abs(f(x)), { color: A, width: 4.5 });
@@ -301,7 +301,7 @@ const pieces = {
   ask: (v) => `<b>Example 5(${v === 'a' ? 'a), (d' : v}):</b> write ${T(PC[v].eq)} in piecewise form${v === 'a' ? `, then evaluate it at ${T('x=1')} and ${T('x=5')}` : ''}.`,
   make(stage, v, ex) {
     const W = ex.W, d = PC[v], GW = 430, GH = 344, RX = GW + 24, RW = W - RX;
-    const G = new Graph(stage, Object.assign({ x: 0, y: 0, width: GW, height: GH, fontSize: 14 }, d.win));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 0, width: GW, height: GH, fontSize: 14, pad: [30, 18, 18, 18] }, d.win));
     G.fn(d.f, { color: F, width: 2.5, dash: true });
     const fA = G.fn((x) => Math.abs(d.f(x)), { color: A, width: 4.5 });
     const negPieces = d.segs.filter((s) => s[2] < 0).map(([a, b]) => hide(G.fn((x) => -d.f(x), { from: inf(a), to: inf(b), color: NEG, width: 5 })));
@@ -353,7 +353,7 @@ const backwards = {
     const W = ex.W;
     if (v === 'a') {
       const GW = 420, GH = 318, GX2 = W - GW;
-      const win = { xmin: -3, xmax: 5, ymin: -10, ymax: 10, ystep: 2, ylabels: 4, fontSize: 14 };
+      const win = { xmin: -3, xmax: 5, ymin: -10, ymax: 10, ystep: 2, ylabels: 4, fontSize: 14, pad: [28, 18, 18, 18] };
       const t1 = div(stage, 'u7l3-gt', 'If the <b>middle arc</b> was flipped', 0, 0, GW), t2 = div(stage, 'u7l3-gt', 'If the two <b>arms</b> were flipped', GX2, 0, GW);
       void t1; void t2;
       const G1 = new Graph(stage, Object.assign({ x: 0, y: 30, width: GW, height: GH }, win));
@@ -382,7 +382,7 @@ const backwards = {
     }
     // (b)–(c): slide k
     const GW = 430, GH = 444, RX = GW + 24, RW = W - RX, S = { k: 3 };
-    const G = new Graph(stage, { x: 0, y: 0, width: GW, height: GH, xmin: -3, xmax: 5, ymin: -8, ymax: 8, ylabels: 2, fontSize: 15 });
+    const G = new Graph(stage, { x: 0, y: 0, width: GW, height: GH, xmin: -3, xmax: 5, ymin: -8, ymax: 8, ylabels: 2, fontSize: 15, pad: [30, 18, 18, 18] });
     const g = (x) => -2 * (x - 1) ** 2 + S.k;
     const tgt = hide(G.hline(4, { color: INV, width: 3, dash: '10 6' }));
     const tgl = hide(G.label(4.9, 4, T('y=4'), { pos: 'nw', cls: 'bk-ptlab', color: INV }));
@@ -474,7 +474,7 @@ const coaster = {
       car.setAttribute('transform', `translate(${px} ${py}) rotate(${ang})`);
       bar.setAttribute('x1', px); bar.setAttribute('x2', px); bar.setAttribute('y2', py);
       const dd = Math.abs(hh);
-      dl.innerHTML = T(`d=${tn(Math.round(dd * 10) / 10)}`) + ' m'; dl.style.left = (px + 12) + 'px'; dl.style.top = (hh >= 0 ? (py + gy) / 2 - 14 : gy + 6 + (py - gy) / 2) + 'px';
+      dl.innerHTML = T(`d=${tn(Math.round(dd * 10) / 10)}`) + ' m'; dl.style.left = (x > 16 ? px - 12 - (dl.offsetWidth || 90) : px + 12) + 'px'; dl.style.top = (hh >= 0 ? (py + gy) / 2 - 14 : gy + 6 + (py - gy) / 2) + 'px';
       if (x > fo.to) { fo.to = x; cv._bkDraw(); }
       const [qx, qy] = G.toPx(x, dd); dot.setAttribute('cx', qx); dot.setAttribute('cy', qy);
     };

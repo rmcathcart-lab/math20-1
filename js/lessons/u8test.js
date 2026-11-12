@@ -128,6 +128,9 @@
     W.KEYSETS.u8pairs = function () {
       return [[d(7), d(8), d(9), KY.par, KY.del], [d(4), d(5), d(6), KY.frac, KY.clear], [d(1), d(2), d(3), KY.minus, KY.left, KY.right], [d(0), KY.dot, KY.comma, KY.sqrt, KY.plus, KY.enter], [KY.none, KY.inf]];
     };
+    W.KEYSETS.u8tan = function () {
+      return [[d(7), d(8), d(9), KY.par, KY.del], [d(4), d(5), d(6), KY.frac, KY.clear], [d(1), d(2), d(3), KY.minus, KY.left, KY.right], [d(0), KY.dot, KY.comma, { label: '<i>m</i> =', tex: 'm=', plain: 'm = ' }, { label: '±', tex: '\\pm ', plain: '±' }, KY.enter]];
+    };
     W.KEYSETS.u8set = function (opt) {
       var vs = (opt && opt.vars && opt.vars.length ? opt.vars : ['x']).slice(0, 2).map(function (v) { return { label: '<i>' + v + '</i>', tex: v, plain: v }; });
       return [[d(7), d(8), d(9), KY.lt, KY.le, KY.del], [d(4), d(5), d(6), KY.gt, KY.ge, KY.clear], [d(1), d(2), d(3), KY.minus, KY.left, KY.right],
@@ -140,6 +143,7 @@
     };
     if (W.KEYHELP) {
       W.KEYHELP.u8pairs = ['Press <b>( )</b> for each ordered pair, type ' + HW.k('x') + ' <b>,</b> ' + HW.k('y') + ' inside, press <b>▶</b> to step out, then a comma before the next pair. Use <b>no solution</b> or <b>infinitely many</b> when the graphs don’t meet in points.', 'Type e.g. <code>(3, 10), (-2, -5)</code>, <code>no solution</code> or <code>infinitely many</code>.'];
+      W.KEYHELP.u8tan = ['Slopes: e.g. ' + HW.k('m=4,\\ m=-4') + '. Points: press <b>( )</b> for each ordered pair, type ' + HW.k('x') + ' <b>,</b> ' + HW.k('y') + ' inside and press <b>▶</b> to step out.', 'Type e.g. <code>m = 4, m = -4</code> and <code>(2, 7), (-2, 7)</code>.'];
       W.KEYHELP.u8set = ['Type the solution, e.g. ' + HW.k('\\{x\\mid x<-2\\text{ or }x>3,\\ x\\in\\mathbb{R}\\}') + ' or just ' + HW.k('x<-2\\text{ or }x>3') + '. Use <b>or</b> between two pieces, <b>≠</b> for “every number but one”, ' + HW.k('\\{x\\mid x\\in\\mathbb{R}\\}') + ' for all real numbers, or <b>no solution</b>.', 'Type e.g. <code>{x | x &lt; -2 or x &gt; 3, x in R}</code>, <code>-2 &lt;= x &lt;= 5</code>, <code>x != 4</code> or <code>no solution</code>.'];
       W.KEYHELP.u8ineq = ['Type the whole inequality, e.g. ' + HW.k('y>\\frac{2}{3}x-1') + ' or ' + HW.k('y\\le x^{2}-4x+1') + '. Use <b><sup>a</sup>⁄<sub>b</sub></b> for a fraction and <b>□²</b> for a square.', 'Type e.g. <code>y &gt; 2/3x - 1</code> or <code>y &lt;= x^2 - 4x + 1</code>.'];
     }
@@ -637,7 +641,7 @@
       return wrong(b.code === 'value' ? cp + 'tan-pts' : b.code, '<b>Points:</b> ' + (b.hint || 'Substitute each slope back to find its point of tangency.'));
     };
     var part = { prompt: 'The line ' + t('y=mx' + (s.q ? (s.q > 0 ? '+' : '') + s.q : '')) + ' is tangent to the parabola ' + t('y=' + tx(Qp)) + '. Determine the possible values of ' + t('m') + ' and the point of tangency for each.',
-      input: { type: 'fields', fields: [{ label: 'Values of ' + t('m') + ':', mode: 'math', keys: 'solutions', vars: ['m'], name: 'Slopes', placeholder: 'e.g. m = 4, m = -4' }, { label: 'Points:', mode: 'math', keys: 'u8pairs', name: 'Points', placeholder: 'e.g. (2, 7), (-2, 7)' }] },
+      input: { type: 'fields', fields: [{ label: 'Values of ' + t('m') + ':', mode: 'math', keys: 'u8tan', vars: ['m'], name: 'Slopes', placeholder: 'e.g. m = 4, m = -4' }, { label: 'Points:', mode: 'math', keys: 'u8tan', name: 'Points', placeholder: 'e.g. (2, 7), (-2, 7)' }] },
       check: chk, key: ['m=' + m1 + ',\\ m=' + m2, ptT(p1[0], p1[1]) + ',\\ ' + ptT(p2[0], p2[1])], answer: t('m=' + m1) + ' and ' + t('m=' + m2) + '; points ' + t(ptT(p1[0], p1[1])) + ' and ' + t(ptT(p2[0], p2[1])), solution: sol,
       hints: ['Substitute the line into the parabola. A tangent meets it once, so the discriminant is ' + t('0') + '.', 'Solve for ' + t('m') + ' (two values), then put each back to find its point.'], text: 'tangent slopes' };
     part.bad = [['m=' + m2, ptT(p2[0], p2[1])], ['m=' + m1 + ',\\ m=' + m2, ptT(s.sq, m1 * s.sq + s.q) + ',\\ ' + ptT(-s.sq, m2 * -s.sq + s.q)]];
