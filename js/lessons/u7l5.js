@@ -616,7 +616,7 @@
       return D1 > 0 && D2 > 0 && !isSq(D1) && !isSq(D2) && !(half && z.b === -2 && z.c === -3 && z.k === 4) && !(!half && z.b === -5 && z.c === 2 && z.k === 3) && !(!half && z.b === -2 && z.c === -3);
     });
   }
-  function calcInner(s, half) { return half ? '0.5x^{2}' + (s.b ? sgT(s.b) + 'x' : '') + (s.c ? sgT(s.c) : '') : polyT(1, s.b, s.c); }
+  function calcInner(s, half) { return half ? '0.5x^{2}' + (s.b ? (Math.abs(s.b) === 1 ? (s.b < 0 ? '-' : '+') : sgT(s.b)) + 'x' : '') + (s.c ? sgT(s.c) : '') : polyT(1, s.b, s.c); }
   function calcA(r, s, half) {
     var inner = calcInner(s, half), S = absK(1, s.B2, s.C2, s.K2, 'x', { dec: 1, innerT: half ? 'x^{2}' + sgT(s.B2) + 'x' + (s.C2 ? sgT(s.C2) : '') : null });
     var lo = Math.floor(S.vals[0].v) - 2, hi = Math.ceil(S.vals[S.vals.length - 1].v) + 2;

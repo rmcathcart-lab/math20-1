@@ -71,7 +71,14 @@
       var r = chk(resp); if (r.v !== 'correct') return r;
       var s = String(resp == null ? '' : resp).replace(/\\left|\\right|\s|\\[,;: !]/g, '');
       if (o.yForm && !new RegExp('^' + vs[1] + '(\\\\le|\\\\ge|\\\\leq|\\\\geq|\\\\lt|\\\\gt|<|>|≤|≥)').test(s)) return form(CP + 'yform', 'Right — now write it with ' + t(vs[1]) + ' alone on the left, e.g. ' + t(vs[1] + '\\le 3' + vs[0] + '-4') + '.');
-      if (o.simplest) { var ns = (s.replace(/\\frac\{(\d+)\}\{(\d+)\}/g, ' F ').match(/\d+/g) || []).map(Number).filter(function (n) { return n > 0; }); if (/F/.test(s.replace(/\\frac\{(\d+)\}\{(\d+)\}/g, 'F'))) return form(CP + 'simplest', 'Right — now clear the fractions: use whole-number coefficients.'); var g = ns.reduce(function (a, b) { return gcd(a, b); }, 0); if (g > 1) return form(CP + 'simplest', 'Right — now write it in simplest form: divide every term by ' + t(g) + '.'); }
+      if (o.simplest) {
+        var m = /\\leqslant|\\geqslant|\\leq|\\geq|\\le|\\ge|\\lt|\\gt|<=|>=|≤|≥|<|>/.exec(s), Lp = m && P.read(s.slice(0, m.index)), Rp = m && P.read(s.slice(m.index + m[0].length));
+        if (Lp && Rp && Lp.ok && Rp.ok) {
+          var cs = P.terms(P.sub(Lp.p, Rp.p)).map(function (T) { return T.c; });
+          if (cs.some(function (c) { return c[1] !== 1; })) return form(CP + 'simplest', 'Right — now clear the fractions: use whole-number coefficients.');
+          var g = cs.reduce(function (a, c) { return gcd(a, c[0]); }, 0); if (g > 1) return form(CP + 'simplest', 'Right — now write it in simplest form: divide every term by ' + t(g) + '.');
+        }
+      }
       return r;
     };
   }

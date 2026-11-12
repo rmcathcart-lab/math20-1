@@ -72,8 +72,8 @@
 
   /* ---------------- RF8: a ball thrown from a platform ---------------- */
   function platShared(r) {
-    return pickWhere(function () { var t1 = r.int(1, 3), t2 = r.int(t1 + 2, 7), H0 = r.pick([5, 8, 10, 12, 15, 20]); return { t1: t1, t2: t2, d: t1 + t2, b: 5 * (t1 + t2), H0: H0, Hh: H0 + 5 * t1 * t2 }; },
-      function (z) { var D = z.b * z.b + 20 * z.H0, sd = Math.sqrt(D); return z.b <= 50 && Math.abs(sd - Math.round(sd)) > 1e-6 && !(z.H0 === 10 && z.t1 === 1 && z.t2 === 5); });
+    return pickWhere(function () { var t1 = r.int(1, 3), t2 = r.int(t1 + 2, 7), H0 = r.pick([8, 10, 12, 15, 20, 25]); return { t1: t1, t2: t2, d: t1 + t2, b: 5 * (t1 + t2), H0: H0, Hh: H0 + 5 * t1 * t2 }; },
+      function (z) { var D = z.b * z.b + 20 * z.H0, sd = Math.sqrt(D); return z.b <= 35 && Math.abs(sd - Math.round(sd)) > 1e-6 && !(z.H0 === 10 && z.t1 === 1 && z.t2 === 5); });
   }
 
   /* ---------------- MC: a linear inequality and four points ---------------- */

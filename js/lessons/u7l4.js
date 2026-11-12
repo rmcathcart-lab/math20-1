@@ -331,7 +331,7 @@
     { num: '18', parts: [Pt('18', 'ADV', function (r) {
       var z = linSpec(r, { as: [-2, -3, 2, 3], cs: [3, 4, 2], counts: [1], den: 9, test: function (z) { var x = z.v1 ? z.x1 : z.x2; return x > 0 && x < 100; }, ex: [{ a: -2, b: 5, c: 3, d: 1 }] }), S = L(z), x = S.vals[0], cf = rv(z.a) < 0;
       var inner = linT(z.a, z.b, cf);
-      var p = KP.approx('The solution of ' + t(A(inner) + '=' + S.rhs) + ', to the nearest tenth, is ____.', x, 1, { nr: true, diag: function (v) { return S.extr.some(function (e) { return Math.abs(Math.round(e * 10) / 10 - v) < 1e-9; }) ? { code: CP + 'extr', hint: 'That one makes the right side negative: it is extraneous.' } : null; } }, linSol(z) + '<br>To the nearest tenth: ' + t(String(K.roundTo(x, 1))) + '.', HLIN, 'NR: the solution to the tenth');
+      var p = KP.approx('The solution of ' + t(A(inner) + '=' + S.rhs) + ', to the nearest tenth, is ____.', x, 1, { nr: true, diag: function (v) { return S.extr.some(function (e) { return Math.abs(Math.round(e * 10) / 10 - v) < 1e-9; }) ? { code: CP + 'extr', hint: 'That one makes the right side negative: it is extraneous.' } : null; } }, linSol(z) + '<br>To the nearest tenth: ' + t(K.roundTo(x, 1).toFixed(1)) + '.', HLIN, 'NR: the solution to the tenth');
       return p;
     })] }
   ];

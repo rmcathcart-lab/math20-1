@@ -428,7 +428,7 @@
     if (hz) bad.push(asyT(Q.zs, false)); if (xs.length) bad.push('\\text{none}');
     if (xs.length && !sameSet(xs, xs.map(function (x) { return -x; }))) bad.push(asyT(xs.map(function (x) { return -x; }), hz));
     return { f: { label: hz ? 'Asymptotes' : 'Vertical asymptotes', mode: 'math', keys: 'u7asy', placeholder: hz ? 'e.g. x = 3, y = 0' : 'e.g. x = 3   (or: none)' }, c: c, k: k, a: t(k),
-      s: (o.why || '') + (xs.length ? (o.why ? 'v' : 'V') + 'ertical asymptote' + (xs.length > 1 ? 's' : '') + ' at the zero' + (xs.length > 1 ? 's' : '') + ' of ' + t('f') + ': ' + t(asyT(Q.zs, false)) : t('f') + ' has no zeros: no vertical asymptote') + (hz ? '; horizontal asymptote ' + t('y=0') : '') + '.', bad: bad };
+      s: (o.why || '') + (xs.length ? (o.why && /:\s*$/.test(o.why) ? 'v' : 'V') + 'ertical asymptote' + (xs.length > 1 ? 's' : '') + ' at the zero' + (xs.length > 1 ? 's' : '') + ' of ' + t('f') + ': ' + t(asyT(Q.zs, false)) : t('f') + ' has no zeros: no vertical asymptote') + (hz ? '; horizontal asymptote ' + t('y=0') : '') + '.', bad: bad };
   }
   function sCount(cp, Q) {
     var n = Q.zs.length;
@@ -465,7 +465,7 @@
     var c = Q.cv;
     var vc = valChk(cp, toR(1 / c), [{ v: toR(c), code: cp + 'yint-same', hint: 'That is the ' + t('y') + '-intercept of ' + t('f') + '. The reciprocal’s is its reciprocal.' }, { v: toR(-1 / c), code: cp + 'rpt-neg', hint: 'A number and its reciprocal have the same sign.' }]);
     return { f: { label: t('y') + '-intercept', name: 'y-intercept', mode: 'math', keys: 'fraction', placeholder: 'a number' }, c: vc.check, k: rt(toR(1 / c)), a: t('y') + '-intercept ' + t(rt(toR(1 / c))),
-      s: t('f(0)=' + rt(toR(c))) + ', so the ' + t('y') + '-intercept of the reciprocal is ' + t('\\frac{1}{' + rt(toR(c)) + '}=' + rt(toR(1 / c))) + '.', bad: vc.W.map(function (w) { return rt(w.v); }) };
+      s: t('f(0)=' + rt(toR(c))) + ', so the ' + t('y') + '-intercept of the reciprocal is ' + t('\\frac{1}{' + rt(toR(c)) + '}' + (c < 0 || !Number.isInteger(c) ? '=' + rt(toR(1 / c)) : '')) + '.', bad: vc.W.map(function (w) { return rt(w.v); }) };
   }
   /* the invariant points of y = f(x) and y = 1/f(x) */
   function invData(cp, Q) {
@@ -596,7 +596,7 @@
   function asyTurnSol(z) {
     var T = z.T;
     return 'The asymptotes give the zeros ' + t(z.r1) + ' and ' + t(z.s1) + ' of ' + t('f') + '. The ' + (z.q < 0 ? 'maximum' : 'minimum') + ' point ' + t('\\left(' + z.p + ',\\ ' + rt(toR(1 / z.q)) + '\\right)') + ' gives the vertex ' + t('\\left(' + z.p + ',\\ \\frac{1}{' + rt(toR(1 / z.q)) + '}\\right)=' + pt(z.p, toR(z.q))) + ', a ' + (z.q < 0 ? 'minimum' : 'maximum') + ' of ' + t('f') + '.<br>' +
-      t('f(x)=a(x' + sgT(-z.p) + ')^{2}' + sgT(toR(z.q))) + '; ' + t('f(' + z.s1 + ')=0') + ': ' + t(z.m * z.m + 'a' + sgT(toR(z.q)) + '=0') + ', ' + t('a=' + rt(z.a)) + '.<br>' + t('f(x)=' + T.vtex + '=' + T.tex);
+      t('f(x)=a' + (z.p === 0 ? 'x' : '(x' + sgT(-z.p) + ')') + '^{2}' + sgT(toR(z.q))) + '; ' + t('f(' + z.s1 + ')=0') + ': ' + t(z.m * z.m + 'a' + sgT(toR(z.q)) + '=0') + ', ' + t('a=' + rt(z.a)) + '.<br>' + t('f(x)=' + T.vtex + (T.vtex === T.tex ? '' : '=' + T.tex));
   }
   /* f from the turning point and the y-intercept of y = 1/f(x) (L7 Ex 6b, #8, #18, L8 #11) */
   function turnYSpec(r, o) {
@@ -609,7 +609,7 @@
   function turnYSol(z, kT, cT) {
     var T = z.T, typ = rv(z.a) > 0 ? 'maximum' : 'minimum';
     return 'A ' + typ + ' of the reciprocal comes from a ' + (rv(z.a) > 0 ? 'minimum' : 'maximum') + ' of ' + t('f') + ': vertex ' + t('\\left(' + z.p + ',\\ \\frac{1}{' + kT + '}\\right)=' + pt(z.p, z.q)) + '. The ' + t('y') + '-intercept gives ' + t('f(0)=\\frac{1}{' + cT + '}=' + z.c) + '.<br>' +
-      t('f(x)=a(x' + sgT(-z.p) + ')^{2}' + sgT(z.q)) + ': ' + t(z.c + '=' + z.p * z.p + 'a' + sgT(z.q)) + ', ' + t('a=' + rt(z.a)) + '.<br>' + t('f(x)=' + T.vtex + '=' + T.tex);
+      t('f(x)=a(x' + sgT(-z.p) + ')^{2}' + sgT(z.q)) + ': ' + t(z.c + '=' + (z.p * z.p === 1 ? '' : z.p * z.p) + 'a' + sgT(z.q)) + ', ' + t('a=' + rt(z.a)) + '.<br>' + t('f(x)=' + T.vtex + '=' + T.tex);
   }
   /* one parabola with two zeros for the full analysis (L7 #5, EP07 B1, L8 #10): f = (x − r)(x − s), s − r = 2m */
   function fullSpec(r, o) {
@@ -791,15 +791,15 @@
       Pt('1a', 'BEG', function (r, s) { return tabPart(CP, s); }),
       Pt('1b', 'EMG', function (r, s) { var Q = s.Q; return combo('State the equations of the asymptotes and the coordinates of the turning point of ' + REC + ', and whether it is a maximum or a minimum.', [sAsy(CP, Q, true, { why: t('f(x)=(x' + sgT(-Q.zv[0]) + ')(x' + sgT(-Q.zv[1]) + ')') + ': ' }), sTP(CP, Q), sType(CP, Q)], HINT_ASY.concat(HINT_TP.slice(0, 1)), 'asymptotes and turning point of y = 1/f(x)', null, sAsy(CP, Q, true, { why: t('f(x)=(x' + sgT(-Q.zv[0]) + ')(x' + sgT(-Q.zv[1]) + ')') + ': ' }).s + '<br>' + t('f(x)=' + Q.vtex) + '. ' + sTP(CP, Q).s); }),
       Pt('1c', 'PRG', function (r, s) { return invPart(CP, s.Q, 'State the exact coordinates of the invariant points of the graphs of ' + t('y=f(x)') + ' and ' + REC + '.'); })] },
-    { num: '2', stem: 'State the number of vertical asymptotes of the graph of ' + REC + ' and their equations.', parts: [
+    { num: '2', parts: [
       Pt('2a', 'BEG', function (r) { return vaPart(r, CP, 'two'); }), Pt('2b', 'EMG', function (r) { return vaPart(r, CP, 'sq'); }), Pt('2c', 'EMG', function (r) { return vaPart(r, CP, 'noneD'); }),
       Pt('2d', 'PRG', function (r) { return vaPart(r, CP, 'twoNeg'); }), Pt('2e', 'EMG', function (r) { return vaPart(r, CP, 'rad'); }), Pt('2f', 'BEG', function (r) { return vaPart(r, CP, 'noneV'); })] },
-    { num: '3', stem: 'For each function, state the turning point of ' + REC + ', whether it is a maximum or a minimum, and the domain and range of ' + REC + '.', parts: [
+    { num: '3', parts: [
       Pt('3a', 'PRG', function (r) { var z = pickWhere(function () { return { p: nz(r, 1, 5), q: r.int(2, 9) }; }, function (s) { s.Q = mkV(1, s.p, s.q); return fresh(s.Q) && !(s.p === 1 && s.q === 5) && !(s.p === 2 && s.q === 4); }); return tpdrPart(CP, z.Q, z.Q.vtex, ['tp', 'd', 'r'], 'turning point, domain and range of y = 1/f(x)'); }),
       Pt('3b', 'ADV', function (r) { var z = pickWhere(function () { return { p: nz(r, 1, 5), q: r.pick([2, 3, 5, 6, 7, 8]) }; }, function (s) { s.Q = mkV(-1, s.p, s.q); return fresh(s.Q) && !(s.p === -2 && s.q === 2) && !(s.p === -1 && s.q === 2); }); return tpdrPart(CP, z.Q, z.Q.vtex, ['tp', 'd', 'r'], 'turning point, domain and range of y = 1/f(x)'); }),
       Pt('3c', 'ADV', function (r) { var z = pickWhere(function () { var aq = r.pick([[2, -0.5], [8, -0.5], [2, -2], [0.5, -2], [4, -1], [0.5, -0.5], [3, -3], [0.5, -8], [2, -8]]); return { a: aq[0], q: aq[1], p: nz(r, 1, 5) }; }, function (s) { s.Q = mkV(s.a, s.p, s.q); return fresh(s.Q) && !(s.p === 4 && s.a === 2 && s.q === -0.5) && !(s.p === 3 && s.a === 2 && s.q === -8); }); return tpdrPart(CP, z.Q, z.Q.vtex, ['tp', 'd', 'r'], 'turning point, domain and range of y = 1/f(x)'); }),
       Pt('3d', 'PRG', function (r) { var z = pickWhere(function () { return { a: toR(r.pick([[-1, 2], -2, -1, -3, [-1, 4]])), p: r.chance(0.4) ? 0 : nz(r, 1, 5), q: r.pick([-2, -3, -4, -5, -6, -8]) }; }, function (s) { s.Q = mkV(s.a, s.p, s.q); return fresh(s.Q) && !(s.p === 0 && s.q === -4 && rv(s.a) === -0.5) && !(s.p === -4 && s.q === -3); }); return tpdrPart(CP, z.Q, z.Q.vtex, ['tp', 'd', 'r'], 'turning point, domain and range of y = 1/f(x)'); })] },
-    { num: '4', stem: 'The graph of ' + t('y=f(x)') + ' is shown, with the guide lines ' + t('y=\\pm 1') + '.', parts: [
+    { num: '4', parts: [
       Pt('4a', 'PRG', function (r) {
         var z = pickWhere(function () { return { r1: r.int(-6, 4), m: r.pick([1, 2]) }; }, function (s) { s.Q = mkQ(1, -(2 * s.r1 + 2 * s.m), s.r1 * (s.r1 + 2 * s.m)); return fresh(s.Q) && s.r1 + 2 * s.m <= 6; }), Q = z.Q;
         return combo('Let ' + t('f(x)=' + Q.tex) + '.' + fGraph(Q, [], { y: [-5, 5] }) + 'For the graph of ' + REC + ', state the equations of the asymptotes and the coordinates of the turning point, and whether it is a maximum or a minimum.', [sAsy(CP, Q, true), sTP(CP, Q), sType(CP, Q)], HINT_ASY.concat(HINT_TP.slice(0, 1)), 'asymptotes and turning point from the graph of f');
@@ -883,9 +883,9 @@
   }
   function a5Shared(r) { return pickWhere(function () { return { p: nz(r, 1, 5) }; }, function (s) { s.Q = mkV(1, s.p, -1); return fresh(s.Q); }); }
   var EXTRA = [
-    { num: '1', section: 'A. Skills', stem: 'State the number of vertical asymptotes of the graph of ' + REC + ' and their equations.', parts: [
+    { num: '1', section: 'A. Skills', parts: [
       Pt('E1a', 'BEG', function (r) { return vaPart(r, CP, 'two'); }), Pt('E1b', 'EMG', function (r) { return vaPart(r, CP, 'sq'); }), Pt('E1c', 'BEG', function (r) { return vaPart(r, CP, 'noneNeg'); }), Pt('E1d', 'PRG', function (r) { return vaPart(r, CP, 'twoA'); })] },
-    { num: '2', stem: 'State the turning point of ' + REC + ' and whether it is a maximum or a minimum.', parts: [
+    { num: '2', parts: [
       Pt('E2a', 'BEG', function (r) { var z = pickWhere(function () { return { p: nz(r, 1, 5), q: r.int(2, 9) }; }, function (s) { s.Q = mkV(1, s.p, s.q); return fresh(s.Q) && !(s.p === -3 && s.q === 4); }); return tpPart(CP, z.Q, 'Let ' + t('f(x)=' + z.Q.vtex) + '. State the turning point of ' + REC + ' and its type.'); }),
       Pt('E2b', 'EMG', function (r) { var z = pickWhere(function () { return { a: r.pick([-2, -3, [-1, 2], -4]), p: nz(r, 1, 5), q: -r.pick([2, 3, 4, 5, 6, 8, 10]) }; }, function (s) { s.Q = mkV(toR(s.a), s.p, s.q); return fresh(s.Q) && !(s.p === 1 && s.q === -5); }); return tpPart(CP, z.Q, 'Let ' + t('f(x)=' + z.Q.vtex) + '. State the turning point of ' + REC + ' and its type.'); }),
       Pt('E2c', 'PRG', function (r) { var z = fullSpec(r, { ms: [1, 2, 3] }); return tpPart(CP, z.Q, 'Let ' + t('f(x)=' + z.Q.tex) + '. State the turning point of ' + REC + ' and its type.'); })] },
@@ -893,11 +893,11 @@
       Pt('E3a', 'LIM', function (r) { return decPt(r, CP, true); }),
       Pt('E3b', 'BEG', function (r) { var x = nz(r, 1, 9), y = r.pick([1, -1]); return pointPart(CP, 'The point ' + t(pt(x, y)) + ' is on ' + t('y=f(x)') + '. State the matching point on ' + REC + '.', [x, y], [{ p: [x, -y], code: CP + 'rpt-neg', hint: t('\\frac{1}{' + y + '}=' + y) + ': the reciprocal keeps the sign.' }, { p: [toR(1 / x), y], code: CP + 'rpt-x', hint: 'The ' + t('x') + '-value stays.' }], t('\\frac{1}{' + y + '}=' + y) + ': the point is ' + t(pt(x, y)) + ' itself, an invariant point.', ['Which numbers are their own reciprocals?'], 'invariant points'); }),
       Pt('E3c', 'BEG', function (r) { return decPt(r, CP, false); })] },
-    { num: '4', stem: 'State the domain and range of ' + REC + '.', parts: [
+    { num: '4', parts: [
       Pt('E4a', 'PRG', function (r) { var z = pickWhere(function () { return { p: nz(r, 1, 5), q: r.int(2, 9) }; }, function (s) { s.Q = mkV(1, s.p, s.q); return fresh(s.Q) && !(s.p === 2 && s.q === 5); }); return tpdrPart(CP, z.Q, z.Q.vtex, ['d', 'r'], 'domain and range of y = 1/f(x)'); }),
       Pt('E4b', 'PRG', function (r) { var z = pickWhere(function () { return { a: r.pick([-2, -4, -5, [-1, 2], -1]), p: r.chance(0.5) ? 0 : nz(r, 1, 4), up: r.chance(0.3) }; }, function (s) { s.Q = mkV(toR(s.up ? -rv(s.a) : s.a), s.p, 0); return fresh(s.Q); }); return tpdrPart(CP, z.Q, z.Q.vtex, ['d', 'r'], 'domain and range of y = 1/f(x)'); }),
       Pt('E4c', 'ADV', function (r) { var n = pickWhere(function () { return r.int(2, 8); }, function (x) { return x !== 3; }), Q = mkQ(-1, 0, n * n); return tpdrPart(CP, Q, n * n + '-x^{2}', ['d', 'r'], 'domain and range of y = 1/f(x)'); })] },
-    { num: '5', stem: 'The graph of ' + t('y=f(x)') + ' is shown, with the guide lines ' + t('y=\\pm 1') + '.', parts: [
+    { num: '5', parts: [
       Pt('E5a', 'PRG', function (r) { var z = a5Shared(r), Q = z.Q; return combo('Let ' + t('f(x)=' + Q.tex) + '.' + fGraph(Q, [], { y: [-3, 6] }) + 'For the graph of ' + REC + ', state the equations of the asymptotes and the exact invariant points.', [sAsy(CP, Q, true), sInv(CP, Q)], HINT_ASY.slice(0, 1).concat(['Invariant points are where ' + t('f(x)=\\pm 1') + ': here the vertex is one of them.']), 'asymptotes and invariant points'); }),
       Pt('E5b', 'PRG', function (r) { return oneMC(r, CP); })] },
     { num: '6', section: 'B. Applying', shared: function (r) { return fullSpec(r, { ms: [2, 3] }); }, stem: function (z) { return 'Let ' + t('f(x)=' + z.Q.tex) + '. For ' + REC + ', determine:'; }, parts: [

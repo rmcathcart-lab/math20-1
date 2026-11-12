@@ -148,7 +148,7 @@
   function valOf(x) { return x && x.tex ? x.v : rv(x); }
   function closeTo(a, b, round) { return Math.abs(a - b) < 1e-9 * Math.max(1, Math.abs(b)) || (round && Math.abs(a - b) <= 0.0051); }
   function matchVals(Aa, T, round) { return Aa.length === T.length && T.every(function (b) { return Aa.some(function (a) { return closeTo(a, b, round); }); }); }
-  function rootsT(vals, v) { return vals.length ? vals.map(function (x) { return (v || 'x') + '=' + (x && x.tex ? x.tex : rt(x)); }).join(',\\ ') : '\\text{no solution}'; }
+  function rootsT(vals, v) { return vals.length ? vals.map(function (x) { return (v || 'x') + '=' + (x && x.tex ? x.tex : nt(x)); }).join(',\\ ') : '\\text{no solution}'; }
   /* solutions of an equation. vals: the solutions (numbers, [p,q] or { v, tex }); o.extr: extraneous roots; o.wrongs:
      [{ vals, code, hint }] ([] = "no solution"); o.round: decimals to the hundredth accepted too; o.v the variable;
      o.plain: a bare list of values (no "x =") is the expected form */
@@ -586,8 +586,8 @@
         Pt('9b', 'PRG', function (r, o) { var Q = QR(o.a, o.r, o.r + o.w); return piecePart(CP, 'Write ' + t('y=|f(x)|') + ' in piecewise form, using the equation of ' + t('f') + ' that opens up, ' + t('f(x)=' + Q.vT) + '.', Q, { text: 'piecewise form from the W' }); }),
         Pt('9c', 'MAS', function (r, o) {
           var Q = QR(o.a, o.r, o.r + o.w), g = Q.g, r0 = o.r, s0 = o.r + o.w, w = win(Q), pat = r.pick([[-1, 1, 1], [1, 1, -1], [-1, -1, 1], [1, -1, -1]]);
-          var sig = function (x) { return x < r0 ? pat[0] : x <= s0 ? pat[1] : pat[2]; }, wy = [-Math.max(6, Math.ceil(-Q.q) + 2), Math.max(6, Math.ceil(-Q.q) + 2)];
-          var gr = function (fn) { return mini({ x: w.x, y: wy, labels: w.labels, fns: [crv(fn)], aria: 'a graph' }); };
+          var sig = function (x) { return x < r0 ? pat[0] : x <= s0 ? pat[1] : pat[2]; }, YY = Math.max(6, Math.ceil(-2 * Q.q) + 2), wy = [-YY, YY];
+          var gr = function (fn) { return mini({ x: w.x, y: wy, labels: YY > 8 ? 4 : 2, fns: [crv(fn)], aria: 'a graph' }); };
           var words = function (s) { return s > 0 ? 'above' : 'below'; };
           return mcPart(r, 'Now suppose ' + t('f') + ' is any continuous function, not necessarily quadratic. Which graph of ' + t('y=f(x)') + ' also gives this graph of ' + t('y=|f(x)|') + '?', [
             { html: gr(function (x) { return sig(x) * g(x); }), right: true },
