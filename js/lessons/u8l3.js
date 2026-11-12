@@ -573,7 +573,7 @@
     return pickWhere(function () { return { a: r.int(1, 4), c2: r.int(1, 2), x1: r.int(1, 6), gap: 2 * r.int(2, 6), m: r.int(4, 12) }; }, function (z) { var x2 = z.x1 + z.gap; return x2 <= 16 && !(z.a === 3 && z.c2 === 1 && z.x1 === 2 && x2 === 8); });
   }
   function bakeV(o) { var A0 = o.a + o.c2, x2 = o.x1 + o.gap; return { A0: A0, x2: x2, f: A0 * o.x1 * x2, b: o.m + A0 * (o.x1 + x2), xm: o.x1 + o.gap / 2, Pm: A0 * (o.gap / 2) * (o.gap / 2) }; }
-  function bakeStem(o) { var v = bakeV(o); return 'A bakery’s daily revenue and cost for ' + t('x') + ' hundred loaves are ' + t('R=' + qx(-o.a, v.b, 0)) + ' and ' + t('C=' + qx(o.c2, o.m, v.f)) + ' (in dollars).'; }
+  function bakeStem(o) { var v = bakeV(o); return 'A bakery’s daily revenue and cost for ' + t('x') + ' hundred loaves are ' + t('R=' + qx(-o.a, v.b, 0)) + ' and ' + t('C=' + qx(o.c2, o.m, v.f)) + ' (in hundreds of dollars).'; }
 
   /* EP B5 — values of c with no intersection (multiple choice) */
   function noIntMC(r) {
@@ -700,8 +700,8 @@
       } },
       { id: 'e7b', level: 'ADV', make: function (r, o) {
         var v = bakeV(o), d = v.b - o.m;
-        return numP('Determine the maximum profit.', v.Pm, { before: '\\$', pre: '\\$', cands: [[v.xm, CP + 'be-x', 'That is the number of hundreds of loaves. Substitute it into ' + t('P=R-C') + '.'], [-o.a * v.xm * v.xm + v.b * v.xm, CP + 'be-rev', 'That is the revenue. Profit is ' + t('R-C') + '.']],
-          sol: t('P=R-C=' + qx(-v.A0, d, -v.f)) + ', vertex at ' + t('x=' + v.xm) + ': ' + t('P=' + nT(-v.A0) + '(' + v.xm + ')^{2}+' + d + '(' + v.xm + ')-' + v.f + '=' + v.Pm) + '. A profit of ' + t('\\$' + v.Pm) + ' at ' + t(v.xm * 100) + ' loaves.',
+        return numP('Determine the maximum profit (in hundreds of dollars).', v.Pm, { cands: [[v.xm, CP + 'be-x', 'That is the number of hundreds of loaves. Substitute it into ' + t('P=R-C') + '.'], [-o.a * v.xm * v.xm + v.b * v.xm, CP + 'be-rev', 'That is the revenue. Profit is ' + t('R-C') + '.']],
+          sol: t('P=R-C=' + qx(-v.A0, d, -v.f)) + ', vertex at ' + t('x=' + v.xm) + ': ' + t('P=' + nT(-v.A0) + '(' + v.xm + ')^{2}+' + d + '(' + v.xm + ')-' + v.f + '=' + v.Pm) + '. A profit of ' + t(v.Pm) + ' hundred dollars (' + t('\\$' + v.Pm * 100) + ') at ' + t(v.xm * 100) + ' loaves.',
           hints: ['Profit is ' + t('P=R-C') + '; its maximum is at the vertex, halfway between the break-even values.'], text: 'bakery: maximum profit' });
       } }] },
     { num: '8', parts: [{ id: 'e8', level: 'ADV', make: function (r) {
