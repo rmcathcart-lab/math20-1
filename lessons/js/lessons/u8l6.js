@@ -166,7 +166,7 @@ const shadow = {
     const cv = hide(G.fn(f, { color: BL, width: 4 }));
     const cl = hide(G.label(d.flab[0], d.flab[1], T('y=' + d.ft), { pos: 'w', color: BL, cls: 'bk-ptlab' }));
     const rts = d.roots.map((r) => hide(G.point(r, 0, { color: OR, r: 7 })));
-    const P = div(stage, 'u8l6-panel', '', 580, 4, W - 584, 468);
+    const P = div(stage, 'u8l6-panel u8l6-shp', '', 580, 4, W - 584, 468);
     div(P, 'u8l6-ph', 'Solve from the graph');
     const blks = d.parts.map((p) => block(P, p.tag, p.ineq, p.where, p.set));
     ruleBox(P);
@@ -199,13 +199,13 @@ const CL = {
     z: [2 - Math.sqrt(7), 2 + Math.sqrt(7)], zr: ['-0.6', '4.6'], pieces: 'out',
     cap4: `The parabola opens up and we want ${T('>0')}: it is <b>above</b> the axis <b>outside</b> the zeros.`,
     where: 'above the axis, outside the zeros', approx: `\\{x\\mid x<-0.6\\ \\text{or}\\ x>4.6,\\ x${R}\\}`,
-    qf: 'x=\\frac{4\\pm\\sqrt{16+12}}{2}=2\\pm\\sqrt7', qfs: '2\\pm\\sqrt7', exact: `\\{x\\mid x<2-\\sqrt7\\ \\text{or}\\ x>2+\\sqrt7,\\ x${R}\\}`,
+    qf: 'x=\\dfrac{4\\pm\\sqrt{16+12}}{2}=2\\pm\\sqrt7', qfs: '2\\pm\\sqrt7', exact: `\\{x\\mid x<2-\\sqrt7\\ \\text{or}\\ x>2+\\sqrt7,\\ x${R}\\}`,
     ask: `Example 3(a): solve ${T('x^2-4x-3>0')} with a graphing calculator, to the nearest tenth. Then give the exact solution.` },
   b: { label: '(b)', f: (x) => 2 * x * x - 5 * x - 4, s1: '2x^2-5x-4\\le0', s1n: 'subtract 5x and 4', y1: '2X²−5X−4', y1t: '2X^2-5X-4',
     z: [(5 - Math.sqrt(57)) / 4, (5 + Math.sqrt(57)) / 4], zr: ['-0.6', '3.1'], pieces: 'in',
     cap4: `The parabola opens up and we want ${T('\\le0')}: it is <b>on or below</b> the axis <b>between</b> the zeros.`,
     where: 'on or below the axis, between the zeros', approx: `\\{x\\mid -0.6\\le x\\le3.1,\\ x${R}\\}`,
-    qf: 'x=\\frac{5\\pm\\sqrt{25+32}}{4}=\\frac{5\\pm\\sqrt{57}}{4}', qfs: '\\frac{5\\pm\\sqrt{57}}{4}', exact: `\\left\\{x\\;\\middle|\\;\\tfrac{5-\\sqrt{57}}{4}\\le x\\le\\tfrac{5+\\sqrt{57}}{4},\\ x${R}\\right\\}`,
+    qf: 'x=\\dfrac{5\\pm\\sqrt{25+32}}{4}=\\dfrac{5\\pm\\sqrt{57}}{4}', qfs: '\\frac{5\\pm\\sqrt{57}}{4}', exact: `\\left\\{x\\;\\middle|\\;\\dfrac{5-\\sqrt{57}}{4}\\le x\\le\\dfrac{5+\\sqrt{57}}{4},\\ x${R}\\right\\}`,
     ask: `Example 3(b): solve ${T('2x^2\\le5x+4')} with a graphing calculator, to the nearest tenth. Then give the exact solution.` }
 };
 const calc = {
@@ -215,17 +215,16 @@ const calc = {
   ask: (v) => CL[v].ask,
   make(stage, v, ex) {
     const d = CL[v], W = ex.W;
-    const G = new Graph(stage, { x: 4, y: 30, width: 470, height: 380, xmin: -10, xmax: 10, ymin: -10, ymax: 10, theme: 'calc' });
-    div(stage, 'u8l6-ph', 'ZStandard window: −10 to 10', 8, 6);
+    const G = new Graph(stage, { x: 8, y: 14, width: 466, height: 420, xmin: -10, xmax: 10, ymin: -10, ymax: 10, theme: 'calc' });
     const cv = hide(G.fn(d.f, { width: 3 }));
     const zp = d.z.map((z) => hide(G.point(z, 0, { color: OR, r: 6.5 })));
     const sh = d.pieces === 'out'
       ? [G.shadeX(-Infinity, d.z[0], { openB: true, color: GRN, width: 8, opacity: 0.85 }), G.shadeX(d.z[1], Infinity, { openA: true, color: GRN, width: 8, opacity: 0.85 })]
       : [G.shadeX(d.z[0], d.z[1], { color: GRN, width: 8, opacity: 0.85 })];
     sh.forEach(hide);
-    const P = div(stage, 'u8l6-panel', '', 490, 4, W - 494, 462);
+    const P = div(stage, 'u8l6-panel u8l6-calcp', '', 490, 4, W - 494, 462);
     div(P, 'u8l6-ph', 'Calculator steps');
-    const L1 = wl(P, 1, T(d.s1), d.s1n), L2 = wl(P, 2, `<span class="u8l6-y1"><b>Y₁=</b>${d.y1}</span>`);
+    const L1 = wl(P, 1, T(d.s1), d.s1n), L2 = wl(P, 2, `<span class="u8l6-y1"><b>Y₁=</b>${d.y1}</span> <span class="muted">ZStandard</span>`);
     const L3 = wl(P, 3, `zero: ${T('x\\approx' + d.zr[0])} and ${T('x\\approx' + d.zr[1])}`);
     const L4 = wl(P, 4, `${d.where}:<br>${T(d.approx)} <span class="muted">(approx.)</span>`);
     const L5 = wl(P, 'exact', `Quadratic formula: ${T(d.qf)}<br><span class="u8l6-ans">${T(d.exact)}</span>`);
@@ -258,7 +257,7 @@ const TP = {
     s2: ['15+2x-x^2=0', '\\Rightarrow x^2-2x-15=0', '(x-5)(x+3)=0'], roots: [-3, 5], rl: ['-3', '5'], nl: [-5, 7], tests: [-4, 0, 6],
     sub: ['15-8-16=-9', '15', '15+12-36=-9'], ct: ['15-8-16=-9<0', '15<0', '15+12-36=-9<0'], ok: [1, 0, 1],
     vh: `Value of ${T('15+2x-x^2')}`, qh: `Is it ${T('<0')}?`, op: '<', closed: false, set: `\\{x\\mid x<-3\\ \\text{or}\\ x>5,\\ x${R}\\}`,
-    note: 'The test points go into the original inequality.' },
+    note: 'The test points go into the original inequality' },
   e6a: { label: 'Example 6(a)', ask: `Example 6(a): solve ${T('x(x+4)\\ge5')}.`,
     c1: `Expand and subtract 5: ${T('x^2+4x-5\\ge0')}.`, s1: 'x^2+4x-5\\ge0', s1n: 'expand, subtract 5',
     s2: ['(x+5)(x-1)=0'], roots: [-5, 1], rl: ['-5', '1'], nl: [-7, 3], tests: [-6, 0, 2],
@@ -298,7 +297,7 @@ const tests = {
     const cells = [];
     [['Interval', ivT.map((s) => T(s))], ['Test point', d.tests.map((t) => T(`x=${t}`))], [d.vh, d.sub.map((s) => T(s))],
       [d.qh, d.ok.map((o) => (o ? '<span class="u8l6-yes">yes</span>' : '<span class="u8l6-nope">no</span>'))]].forEach(([head, vals]) => {
-      tb.appendChild(h('div', 'u8l6-th', head)); cells.push(vals.map((x) => { const e = h('div', '', `<span>${x}</span>`); tb.appendChild(e); hide(e.firstChild); return e; }));
+      tb.appendChild(h('div', 'u8l6-th', `<span>${head}</span>`)); cells.push(vals.map((x) => { const e = h('div', '', `<span>${x}</span>`); tb.appendChild(e); hide(e.firstChild); return e; }));
     });
     const sol = hide(div(stage, 'u8l6-panel u8l6-big', `Solution: ${T(d.set)}`, RX, 376, RW));
     // the final pieces on the number line
@@ -423,17 +422,18 @@ function appsK(stage, ex) {
   const cl = hide(G.label(-4.6, 62, T('D=k^2-36'), { pos: 'e', color: BL, cls: 'bk-ptlab' }));
   const rts = [-6, 6].map((r) => hide(G.point(r, 0, { color: OR, r: 7 })));
   const mk = hide(G.point(-10, f(-10), { color: PU, r: 8 }));
-  const P = div(stage, 'u8l6-panel', '', 580, 4, W - 584, 160);
+  const P = div(stage, 'u8l6-panel', '', 580, 4, W - 584, 96);
   const L1 = wl(P, '', `Two distinct real roots: ${T('b^2-4ac>0')}`), L2 = wl(P, '', `${T('k^2-4(1)(9)>0\\Rightarrow k^2-36>0')}`);
-  const L3 = wl(P, '', `Two: <span class="u8l6-ans">${T(`\\{k\\mid k<-6\\ \\text{or}\\ k>6,\\ k${R}\\}`)}</span>`);
-  const L4 = wl(P, '', `None: <span class="u8l6-ans">${T(`\\{k\\mid -6<k<6,\\ k${R}\\}`)}</span>`);
+  const P2 = div(stage, 'u8l6-panel', '', 580, 360, W - 584, 112);
+  const L3 = wl(P2, '', `Two: <span class="u8l6-ans">${T(`\\{k\\mid k<-6\\ \\text{or}\\ k>6,\\ k${R}\\}`)}</span>`);
+  const L4 = wl(P2, '', `None: <span class="u8l6-ans">${T(`\\{k\\mid -6<k<6,\\ k${R}\\}`)}</span>`);
   // the little parabola y = x² + kx + 9, in step with k
-  const M = new Graph(stage, { x: 580, y: 172, width: W - 584, height: 236, xmin: -10, xmax: 10, ymin: -18, ymax: 14, xstep: 1, ystep: 2, xlabels: 5, ylabels: 10, fontSize: 12, pad: [22, 14, 12, 14] });
+  const M = new Graph(stage, { x: 580, y: 106, width: W - 584, height: 206, xmin: -10, xmax: 10, ymin: -18, ymax: 14, xstep: 1, ystep: 2, xlabels: 5, ylabels: 10, fontSize: 12, pad: [22, 14, 12, 14] });
   hide(M.el);
   const mc = M.fn((x) => x * x + st.k * x + 9, { color: PU, width: 3.5 });
-  const mlab = div(stage, 'u8l6-ph', `${T('y=x^2+kx+9')}`, 594, 178);
+  const mlab = div(stage, 'u8l6-mlab', `${T('y=x^2+kx+9')}`, 596, 112);
   hide(mlab);
-  const rd = hide(div(stage, '', '', 580, 416, W - 584, 54)); rd.style.display = 'flex'; rd.style.alignItems = 'center'; rd.style.gap = '16px';
+  const rd = hide(div(stage, '', '', 584, 314, W - 588, 42)); rd.style.display = 'flex'; rd.style.alignItems = 'center'; rd.style.gap = '16px';
   rd.innerHTML = '<span class="u8l6-kread"></span><span class="u8l6-badge"></span>';
   const kr = rd.firstChild, bd = rd.lastChild;
   const setK = (k) => {

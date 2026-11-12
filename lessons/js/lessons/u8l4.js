@@ -331,7 +331,7 @@ const graph4 = {
 /* =============================== explainer: writing the inequality from a graph =============================== */
 const FG = {
   a: { label: 'Example 6(a)', q: { A: -2 / 3, B: 1, C: -1, op: '>' }, pts: [[0, -1, 'nw'], [3, 1, 'nw']], how: 'slope', eqT: 'y=\\tfrac{2}{3}x-1',
-    s1: `Through ${T('(0,\\ -1)')} and ${T('(3,\\ 1)')}: rise 2, run 3, so ${T('m=\\tfrac{2}{3}')}, and ${T('b=-1')}.`,
+    s1: `Through ${T('(0,\\ -1)')} and ${T('(3,\\ 1)')}: rise 2, run 3, so ${T('m=\\tfrac{2}{3}')} and ${T('b=-1')}: ${T('y=\\tfrac{2}{3}x-1')}.`,
     test: [0, 2], lhs: '2', rhs: '\\tfrac{2}{3}(0)-1=-1', L: 2, Rv: -1, fin: 'y\\gt\\tfrac{2}{3}x-1', var: 'y', rest: '\\tfrac{2}{3}x-1' },
   b: { label: '(b)', q: { A: 3, B: 4, C: 12, op: '<=' }, pts: [[4, 0, 'ne'], [0, 3, 'ne']], how: 'int', eqT: '3x+4y=12',
     s1: `Intercepts ${T('(4,\\ 0)')} and ${T('(0,\\ 3)')}: ${T('\\tfrac{x}{4}+\\tfrac{y}{3}=1')}, times 12: ${T('3x+4y=12')}.`,

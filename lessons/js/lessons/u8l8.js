@@ -155,7 +155,7 @@ const meet = mdDef({
       const fA = (x) => x * x + 2, fB = (x) => -x * x + 2 * x;
       const A = hide(G.fn(fA, { color: BL, width: 3.2 })), B = hide(G.fn(fB, { color: PU, width: 3.2 }));
       const la = hide(G.label(-2.1, fA(-2.1), `<span class="u8l8-gl u8l8-bl">${T('y=x^2+2')}</span>`, { pos: 'e', dx: 8 }));
-      const lb = hide(G.label(2.6, fB(2.6), `<span class="u8l8-gl u8l8-pu">${T('y=-x^2+2x')}</span>`, { pos: 'e', dx: 6 }));
+      const lb = hide(G.label(2.9, fB(2.9), `<span class="u8l8-gl u8l8-pu">${T('y=-x^2+2x')}</span>`, { pos: 'w', dx: -10 }));
       const gap = hide(G.segment([0.5, 0.75], [0.5, 2.25], { color: RD, width: 3, ends: ['arrow', 'arrow'] }));
       const gl = hide(G.label(0.5, 1.5, `<span class="u8l8-nope">gap ${T('1.5')}</span>`, { pos: 'e', dx: 10 }));
       const stp = stampAt(stage, 'No solution', false, RW / 2 + 30, 410, -6);
@@ -185,7 +185,7 @@ const meet = mdDef({
       { cap: '<b>Step 2.</b> One side $0$: $-2x^2+50x-200=0$. Divide every term by $-2$: $x^2-25x+100=0$.', run: (c) => show(c, rs[1]) },
       { cap: '<b>Step 3.</b> Factor: $(x-5)(x-20)=0$. (The discriminant $625-400=225$ is positive: two break-even points.)',
         run: async (c) => { await show(c, rs[2]); setMeter(225, null); await show(c, meter); } },
-      { cap: '<b>Step 4.</b> $x=5$: $C=250$; $x=20$: $C=400$. Break even at <b>500 items ($\\$25\\,000$)</b> and <b>2000 items ($\\$40\\,000$)</b>.',
+      { cap: '<b>Step 4.</b> $x=5$: $C=250$; $x=20$: $C=400$. Break even at <b>500 items (&#36;25&#8239;000)</b> and <b>2000 items (&#36;40&#8239;000)</b>.',
         run: async (c) => { await show(c, rs[3]); await popIn(c, pA); await popIn(c, pB); } },
       { cap: '<b>Step 5.</b> Profit where $R\\gt C$: the revenue curve is <b>above</b> the cost line between the break-even points. Dividing by $-2$ reversed the sign: $x^2-25x+100\\lt0$, so $5\\lt x\\lt20$.',
         run: async (c) => { await show(c, rs[4]); reg.style.opacity = ''; await fadeIn(c, reg, 500); await show(c, pl); await drawShow(c, G, sh, 700); await stampShow(c, stp, true); } }
@@ -214,7 +214,7 @@ const signs = mdDef({
   ask: (v) => SG[v].ask,
   make(stage, v, ex) {
     const d = SG[v], W = ex.W, GW = 430, GX = W - GW - 6, RW = GX - 22, w = d.win;
-    const G = new Graph(stage, Object.assign({ x: GX, y: 4, width: GW, height: 300, fontSize: 14 }, w));
+    const G = new Graph(stage, Object.assign({ x: GX, y: 4, width: GW, height: 300, fontSize: 14, pad: [30, 18, 18, 18] }, w));
     const N = new NumberLine(stage, { x: GX, y: 318, width: GW, height: 110, min: w.xmin, max: w.xmax, step: 1, pad: 18, axisY: 52, fontSize: 16 });
     const nlT = div(stage, 'u8l8-nlt', 'solution', GX + 4, 312);
     const ys = d.chart ? [4, 42, 80, 118, 156, 194] : [8, 64, 120, 176];
@@ -301,9 +301,9 @@ const RG = {
     c3: 'Test $x=0$: $0+0-12\\ge0$ is <b>false</b>, so $0$ is <b>not</b> in the solution. A contains $0$: out.',
     c4: '<b>B.</b> $\\{x\\mid x\\le-4\\text{ or }x\\ge3,\\ x\\in\\mathbb{R}\\}$: outside the roots, as for any $a\\gt0$ with $\\ge$.' },
   r5: { label: 'Round 5', ask: 'Round 5: how many solutions does the system $y=x^2-2$, $y=2x-3$ have?', hd: ['Substitute', 'Discriminant'], ans: 1, count: true,
-    opts: [{ b: [[P5, true], [(x) => 2 * x - 6, true, PU]], sub: '0 solutions', out: 't', tag: '✗' },
+    opts: [{ b: [[P5, true], [(x) => 2 * x - 6, true, PU]], sub: '0 solutions', out: 't', tag: 'needs $b^2-4ac\\lt0$ ✗' },
       { b: [[P5, true], [(x) => 2 * x - 3, true, PU]], pts: [[1, -1]], sub: '1 solution' },
-      { b: [[P5, true], [(x) => 2 * x - 1, true, PU]], pts: [[1 - Math.SQRT2, -1 - 2 * Math.SQRT2], [1 + Math.SQRT2, 1 + 2 * Math.SQRT2]], sub: '2 solutions', out: 't', tag: '✗' },
+      { b: [[P5, true], [(x) => 2 * x - 1, true, PU]], pts: [[1 - Math.SQRT2, -1 - 2 * Math.SQRT2], [1 + Math.SQRT2, 1 + 2 * Math.SQRT2]], sub: '2 solutions', out: 't', tag: 'needs $b^2-4ac\\gt0$ ✗' },
       { b: [[P5, true], [P5, true, PU, true]], sub: 'infinitely many', out: 'b', tag: 'never for a line ✗' }],
     b: '$x^2-2=2x-3$: $x^2-2x+1=0$', t: '$b^2-4ac=4-4=0$: one',
     c2: 'Substitute: $x^2-2=2x-3$, so $x^2-2x+1=0$. A line and a parabola are never the same graph: D is out.',
@@ -357,7 +357,7 @@ const regionRound = mdDef({
     const b2 = hide(div(stage, 'u8l8-chk', `<div class="u8l8-chh"><span class="u8l8-cn">2</span>${d.hd[1]}</div><div class="u8l8-chb">${md(d.t)}</div>`, 20 + BW, 266, BW));
     const pa = pans[d.ans], st = stampAt(stage, 'Answer ✓', true, 0, 0, -6);
     if (d.nl) { st.style.left = (W - 150) + 'px'; st.style.top = (6 + d.ans * 62 + 28) + 'px'; }
-    else { st.style.left = (parseFloat(pa.style.left) + 111) + 'px'; st.style.top = '120px'; }
+    else { st.style.left = (parseFloat(pa.style.left) + 111) + 'px'; st.style.top = (d.count ? 206 : 202) + 'px'; }
     const knock = async (c, kind) => {
       const outs = d.opts.map((o, i) => (o.out === kind ? i : -1)).filter((i) => i >= 0);
       for (const i of outs) { pans[i].classList.add('out'); await show(c, tags[i]); await shake(c, tags[i]); }

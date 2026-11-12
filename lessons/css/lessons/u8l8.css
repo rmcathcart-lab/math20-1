@@ -16,7 +16,7 @@
 .u8l8-k0 { color: #c93a33; }
 .u8l8-subnote { font-size: 15.5px; font-weight: 500; margin-left: 6px; }
 .u8l8-pcol { display: flex; align-items: center; }
-.u8l8-wseq { font: 800 24px var(--round); color: #7a1f3d; letter-spacing: .02em; }
+.u8l8 .vw-ctx.u8l8-wseq { font: 800 25px var(--round); color: #7a1f3d; white-space: nowrap; word-spacing: .12em; }
 
 /* ---------------- summary table, key ideas, flips ---------------- */
 .u8l8-mtab { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 17.5px; line-height: 1.38; margin: 4px 0 6px; background: #fff; border: 2px solid #e4ded2; border-radius: 12px; overflow: hidden; }

@@ -55,7 +55,8 @@
 .u8l6-ineq b { font: 800 17px var(--round); color: var(--muted); margin-right: 6px; }
 .u8l6-where { display: inline-block; margin: 6px 0 4px; font: 700 16.5px var(--round); color: #0d5c41; background: #e3f5ec; border-radius: 8px; padding: 2px 10px; }
 .u8l6-set { font-size: 20px; color: #0d5c41; margin-top: 4px; }
-.u8l6-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; font-size: 15.5px; color: var(--ink2); }
+.u8l6-shp { display: flex; flex-direction: column; }
+.u8l6-rules { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; font-size: 15.5px; color: var(--ink2); }
 .u8l6-rules span { display: flex; align-items: center; gap: 6px; background: #f6f2ea; border-radius: 8px; padding: 3px 8px; }
 .u8l6-rules i { display: inline-block; width: 13px; height: 13px; border-radius: 50%; border: 3px solid #12805a; flex: 0 0 auto; }
 .u8l6-rules i.f { background: #12805a; }
@@ -71,11 +72,11 @@
 .u8l6-kread { font: 800 24px var(--round); color: #7b4fc4; }
 
 /* the test-point table inside the explainer */
-.u8l6-tt { display: grid; grid-template-columns: 150px repeat(3, minmax(0, 1fr)); border: 2px solid #d9d3c4; border-radius: 12px; overflow: hidden; background: #fff; }
-.u8l6-tt > div { display: grid; place-items: center; min-height: 50px; padding: 2px 6px; font-size: 19px; border-right: 1.5px solid #e6e0d3; border-bottom: 1.5px solid #e6e0d3; text-align: center; transition: background .3s; }
+.u8l6-tt { display: grid; grid-template-columns: 128px repeat(3, minmax(0, 1fr)); border: 2px solid #d9d3c4; border-radius: 12px; overflow: hidden; background: #fff; }
+.u8l6-tt > div { display: grid; place-items: center; min-height: 50px; padding: 2px 4px; font-size: 17.5px; border-right: 1.5px solid #e6e0d3; border-bottom: 1.5px solid #e6e0d3; text-align: center; transition: background .3s; }
 .u8l6-tt > div:nth-child(4n) { border-right: 0; }
 .u8l6-tt > div:nth-last-child(-n+4) { border-bottom: 0; }
-.u8l6-tt > .u8l6-th { justify-items: start; text-align: left; background: #f6f2ea; font: 700 15.5px var(--round); color: var(--ink2); line-height: 1.2; }
+.u8l6-tt > .u8l6-th { justify-items: start; text-align: left; background: #f6f2ea; font: 700 15px var(--round); color: var(--ink2); line-height: 1.2; }
 .u8l6-tt > .u8l6-cy { background: #e8f5ef; }
 .u8l6-tt > .u8l6-cn { background: #fdecea; }
 .u8l6-yes { font: 800 19px var(--round); color: #12805a; }
@@ -86,6 +87,7 @@
 .u8l6-rl { font-size: 19px; color: #b55f08; }
 
 /* the calculator panel */
+.u8l6-mlab { font-size: 17px; background: rgba(255,255,255,.9); border-radius: 7px; padding: 1px 8px; z-index: 3; }
 .u8l6-y1 { font: 600 17px ui-monospace, Menlo, monospace; background: #1c2230; color: #e9f0ff; border-radius: 8px; padding: 4px 10px; display: inline-block; }
 .u8l6-y1 b { color: #8fb4ff; }
 
@@ -93,3 +95,6 @@
 .u8l6-rbox { position: relative; }
 .u8l6-area { font: 800 21px var(--round); color: #0d5c41; }
 .u8l6-area.u8l6-over { color: #c93a33; }
+
+/* calculator explainer: bigger lines */
+.u8l6-calcp .u8l6-wl { font-size: 21px; margin-bottom: 14px; }
