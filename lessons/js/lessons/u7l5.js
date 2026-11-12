@@ -262,8 +262,8 @@ const SV = {
   a: { eq: '|x^2-4|=3x', min: -5, max: 5, zone: [-Infinity, 0], zoneT: '3x<0', A: (x) => Math.abs(x * x - 4), B: (x) => 3 * x,
     c1: ['x^2-4=3x\\Rightarrow x^2-3x-4=0', '(x-4)(x+1)=0\\Rightarrow x=4,\\ -1'], c2: ['x^2-4=-3x\\Rightarrow x^2+3x-4=0', '(x+4)(x-1)=0\\Rightarrow x=-4,\\ 1'],
     cand: [[4, '4', 1], [-1, '-1', 1], [-4, '-4', 2], [1, '1', 2]], gate: '3x\\ge0\\Rightarrow x\\ge0',
-    keep: `${T('x=4')}: ${T('|12|=12\\ \\checkmark')} &nbsp; ${T('x=1')}: ${T('|-3|=3\\ \\checkmark')}`,
-    rej: `${T('x=-1')}: ${T('|-3|=3\\ne-3')}<br>${T('x=-4')}: ${T('|12|=12\\ne-12')}`, sol: 'x=1\\text{ or }x=4',
+    keep: `${T('x=4')}: ${T('|12|=12\\ \\checkmark')} &nbsp; ${T('x=1')}: ${T('\\lvert -3\\rvert =3\\ \\checkmark')}`,
+    rej: `${T('x=-1')}: ${T('\\lvert -3\\rvert =3\\ne-3')}<br>${T('x=-4')}: ${T('|12|=12\\ne-12')}`, sol: 'x=1\\text{ or }x=4',
     gwin: { xmin: -5, xmax: 5, ymin: -5, ymax: 15, xlabels: 2, ylabels: 5 }, aT: 'y=|x^2-4|', bT: 'y=3x', meet: [[1, 3], [4, 12]] },
   b: { eq: '|2x+1|=x^2-2', min: -4, max: 4, zone: [-Math.SQRT2, Math.SQRT2], zoneT: 'x^2-2<0', A: (x) => Math.abs(2 * x + 1), B: (x) => x * x - 2,
     c1: ['2x+1=x^2-2\\Rightarrow x^2-2x-3=0', '(x-3)(x+1)=0\\Rightarrow x=3,\\ -1'], c2: ['-(2x+1)=x^2-2\\Rightarrow x^2+2x-1=0', 'x=\\frac{-2\\pm\\sqrt8}{2}=-1\\pm\\sqrt2'],
@@ -341,7 +341,7 @@ const tub = {
       row(rows, 2, `<b class="u7l5-s1">${T('x<-1')}</b> ${T('-(x-3)-(x+1)=6')}<br>${T('-2x+2=6\\Rightarrow x=-2')} ${T('\\checkmark')}`),
       row(rows, 3, `<b class="u7l5-s2">${T('-1\\le x<3')}</b> ${T('-(x-3)+(x+1)=6')}<br>${T('4=6')}: false, no solution here`),
       row(rows, 4, `<b class="u7l5-s3">${T('x\\ge3')}</b> ${T('(x-3)+(x+1)=6')}<br>${T('2x-2=6\\Rightarrow x=4')} ${T('\\checkmark')}`),
-      row(rows, 5, `<b>Solutions:</b> ${T('x=-2')} or ${T('x=4')}<br>check: ${T('|-5|+|-1|=6')}, ${T('|1|+|5|=6')}`)];
+      row(rows, 5, `<b>Solutions:</b> ${T('x=-2')} or ${T('x=4')}<br>check: ${T('\\lvert -5\\rvert +\\lvert -1\\rvert =6')}, ${T('|1|+|5|=6')}`)];
     const G = new Graph(stage, { x: RX, y: 2, width: RW, height: 440, xmin: -5, xmax: 7, ymin: -1, ymax: 13, ylabels: 2, fontSize: 15 });
     const bands = [[-Infinity, -1, S1], [-1, 3, S2], [3, Infinity, S3]].map(([a, b, cl]) => hide(G.shadeX(a, b, { band: true, color: cl, openB: true })));
     const blab = [[-3, 'x<-1', S1], [1, '-1\\le x<3', S2], [5, 'x\\ge3', S3]].map(([x, t, cl]) => hide(G.label(x, 12.4, T(t), { cls: 'bk-ptlab', color: cl })));
@@ -367,7 +367,7 @@ const tub = {
         run: async (c) => { await show(c, R[2]); await grow(c, pieces[1]); await show(c, unhide(pieces[1].lab)); await shake(c, pieces[1]); } },
       { cap: `<b>4</b> ${T('x\\ge3')}: both insides are ${T('\\ge0')}: ${T('(x-3)+(x+1)=2x-2')}. ${T('2x-2=6')} gives ${T('x=4')}, and ${T('4\\ge3')} ${T('\\checkmark')}`,
         run: async (c) => { await show(c, R[3]); await grow(c, pieces[2]); await show(c, unhide(pieces[2].lab)); await popP(c, sol[1]); hide(tr); } },
-      { cap: `<b>5</b> Solutions: ${T('x=-2')} or ${T('x=4')}. Check: ${T('|-5|+|-1|=6\\ \\checkmark')} and ${T('|1|+|5|=6\\ \\checkmark')}`,
+      { cap: `<b>5</b> Solutions: ${T('x=-2')} or ${T('x=4')}. Check: ${T('\\lvert -5\\rvert +\\lvert -1\\rvert =6\\ \\checkmark')} and ${T('|1|+|5|=6\\ \\checkmark')}`,
         run: async (c) => { await show(c, R[4]); await Promise.all(sol.map((p) => pulse(c, p, 1.35))); } }
     ];
   }
@@ -377,7 +377,7 @@ const tub = {
 const drone = {
   title: 'The drone and the camera',
   height: 444, minW: 940, capH: 96,
-  ask: `<b>Example 8:</b> ${T('h=-t^2+8t')}, ${T('0\\le t\\le8')}. The camera records within ${T('3')} m of ${T('10')} m. Solve ${T('|-t^2+8t-10|=3')}; when does it record?`,
+  ask: `<b>Example 8:</b> ${T('h=-t^2+8t')}, ${T('0\\le t\\le8')}. The camera records within ${T('3')} m of ${T('10')} m. Solve ${T('\\lvert -t^2+8t-10\\rvert =3')}; when does it record?`,
   make(stage, v, ex) {
     const W = ex.W, SW = 230, GX = SW + 14, GW = 430, PX = GX + GW + 16, PW = W - PX, H = 440;
     const hf = (t) => -t * t + 8 * t;
@@ -415,12 +415,12 @@ const drone = {
     const recs = [[1, 4 - s3], [4 + s3, 7]].map(([a, b]) => hide(G.shadeX(a, b, { color: OK, width: 10 })));
     /* the work */
     const Pn = div(stage, 'u7l5-pn u7l5-pn-s', '', PX, 0, PW), rows = h('div', 'u7l5-rows'); Pn.appendChild(rows);
-    const R = [row(rows, 1, `distance from ${T('10')}:<br>${T('|h-10|=|-t^2+8t-10|=3')}`),
+    const R = [row(rows, 1, `distance from ${T('10')}:<br>${T('|h-10|=\\lvert -t^2+8t-10\\rvert =3')}`),
       row(rows, 2, `${T('h=13')}: ${T('t^2-8t+13=0')}<br>${T('t=4\\pm\\sqrt3')}`), row(rows, 3, `${T('h=7')}: ${T('t^2-8t+7=0')}<br>${T('(t-1)(t-7)=0')}`),
       row(rows, 4, `records: ${T('1\\le t\\le2.27')}<br>and ${T('5.73\\le t\\le7')}`)];
     const tick = (t) => { co.to = t; cur._bkDraw(); setDrone(t); recs.forEach((r, i) => { const [a, b] = [[1, 4 - s3], [4 + s3, 7]][i]; if (t >= a) unhide(r); }); };
     return [
-      { cap: `(a) The camera’s zone is ${T('10\\pm3')}: from ${T('7')} m to ${T('13')} m. The drone’s distance from ${T('10')} m is ${T('|h-10|=|-t^2+8t-10|')}, so “exactly ${T('3')} m from ${T('10')} m” is ${T('|-t^2+8t-10|=3')}.`,
+      { cap: `(a) The camera’s zone is ${T('10\\pm3')}: from ${T('7')} m to ${T('13')} m. The drone’s distance from ${T('10')} m is ${T('|h-10|=\\lvert -t^2+8t-10\\rvert ')}, so “exactly ${T('3')} m from ${T('10')} m” is ${T('\\lvert -t^2+8t-10\\rvert =3')}.`,
         run: async (c) => { await show(c, R[0]); await show(c, zone); await show(c, unhide(band)); await Promise.all([l10, l13, l7].map((l) => drawIn(unhide(l), 500, c))); } },
       { cap: `Case 1, ${T('-t^2+8t-10=3')}: ${T('t^2-8t+13=0')}, so ${T('t=\\frac{8\\pm\\sqrt{12}}{2}=4\\pm\\sqrt3\\approx2.27,\\ 5.73')} s. That is where ${T('h=13')}.`,
         run: async (c) => { await show(c, R[1]); await show(c, unhide(L13)); await Promise.all(pts.slice(0, 2).map((p) => popP(c, p))); } },

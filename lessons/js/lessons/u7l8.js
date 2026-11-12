@@ -93,7 +93,7 @@ const VD = {
     Af: (x) => x * x - 3 * x - 4, Bf: () => 6,
     win: { xmin: -3.5, xmax: 6.5, ymin: -7.5, ymax: 9.5, ylabels: 2 },
     c1: [{ x: -2, xt: '-2', chk: '|4+6-4|=6', pos: 'nw' }, { x: 5, xt: '5', chk: '|25-15-4|=6', pos: 'ne' }],
-    c2: [{ x: 1, xt: '1', chk: '|1-3-4|=|-6|=6', pos: 'sw' }, { x: 2, xt: '2', chk: '|4-6-4|=|-6|=6', pos: 'se' }],
+    c2: [{ x: 1, xt: '1', chk: '|1-3-4|=\\lvert -6\\rvert=6', pos: 'sw' }, { x: 2, xt: '2', chk: '|4-6-4|=\\lvert -6\\rvert=6', pos: 'se' }],
     c1cap: 'The ghost $y=x^2-3x-4$ (the parabola without the bars) crosses $y=6$ at $x=-2$ and $x=5$.',
     c2cap: 'The ghost $y=-(x^2-3x-4)$, the flipped parabola, crosses $y=6$ at $x=1$ and $x=2$.',
     vcap: 'The right side is $6$, a positive constant: every crossing is <b>above</b> the $x$-axis, on the W. All four check: <b>none is extraneous</b>.',
@@ -101,8 +101,8 @@ const VD = {
   e4b: { label: 'Example 4(b) check', ask: 'Example 4(b): solve $|x^2-5|=4x$.', At: 'x^2-5', Bt: '4x',
     Af: (x) => x * x - 5, Bf: (x) => 4 * x,
     win: { xmin: -6.5, xmax: 6.5, ymin: -23, ymax: 23, ystep: 2, ylabels: 4 },
-    c1: [{ x: 5, xt: '5', chk: '|20|=20,\\ \\ 4(5)=20', pos: 'w' }, { x: -1, xt: '-1', chk: '|-4|=4,\\ \\ 4(-1)=-4', pos: 'se' }],
-    c2: [{ x: 1, xt: '1', chk: '|-4|=4,\\ \\ 4(1)=4', pos: 'nw' }, { x: -5, xt: '-5', chk: '|20|=20,\\ \\ 4(-5)=-20', pos: 'e' }],
+    c1: [{ x: 5, xt: '5', chk: '|20|=20,\\ \\ 4(5)=20', pos: 'w' }, { x: -1, xt: '-1', chk: '\\lvert -4\\rvert=4,\\ \\ 4(-1)=-4', pos: 'se' }],
+    c2: [{ x: 1, xt: '1', chk: '\\lvert -4\\rvert=4,\\ \\ 4(1)=4', pos: 'nw' }, { x: -5, xt: '-5', chk: '|20|=20,\\ \\ 4(-5)=-20', pos: 'e' }],
     c1cap: 'The ghost $y=x^2-5$ crosses the line $y=4x$ at $x=5$ and $x=-1$.',
     c2cap: 'The ghost $y=-(x^2-5)$ crosses the line at $x=1$ and $x=-5$.',
     vcap: 'Where $x<0$ the right side $4x$ is negative, so those crossings are <b>below</b> the $x$-axis: $x=-1$ and $x=-5$ are <b>extraneous</b>.',
@@ -115,7 +115,7 @@ const verdict = mdDef({
   ask: (v) => VD[v].ask,
   make(stage, v, ex) {
     const d = VD[v], W = ex.W, GW = 450;
-    const G = new Graph(stage, Object.assign({ x: 4, y: 4, width: GW, height: 420, fontSize: 14 }, d.win));
+    const G = new Graph(stage, Object.assign({ x: 4, y: 10, width: GW, height: 416, fontSize: 14 }, d.win));
     const absA = hcurve(G.fn((x) => Math.abs(d.Af(x)), { color: A, width: 5 }));
     const rhs = hcurve(G.fn(d.Bf, { color: R, width: 3.5 }));
     const g1 = hcurve(G.fn(d.Af, { color: GY, width: 2.5, dash: '8 7' }));
@@ -183,7 +183,7 @@ const recip = mdDef({
   ask: (v) => RC[v].ask,
   make(stage, v, ex) {
     const d = RC[v], W = ex.W, GW = d.gw;
-    const G = new Graph(stage, Object.assign({ x: 4, y: 4, width: GW, height: 422, fontSize: 14 }, d.win));
+    const G = new Graph(stage, Object.assign({ x: 4, y: 10, width: GW, height: 416, fontSize: 14 }, d.win));
     G.fn(d.f, { color: F, width: 3 });
     G.label(d.flab[0], d.flab[1], T('y=' + d.ft), { pos: d.flab[2], cls: 'u7l8-lab', color: F });
     const asy = d.zeros.map((z) => hcurve(G.vline(z, { color: SL, width: 2.5 })));
