@@ -1,0 +1,105 @@
+/* Math 20-1 · Unit 5 · Lesson 2 — Graphing y = a(x − p)² + q: styles used only on this page (prefix u5l2-).
+ * Colours: y = x² grey; the new graph blue; the vertex red; the steps amber; translation arrows purple; stretch green. */
+
+.u5l2 .pl .katex { font-size: 1.06em; }
+.u5l2 .ans .katex { font-size: 1.03em; }
+.u5l2 .katex { white-space: nowrap; }
+.u5l2 h1 .katex, .u5l2 h2 .katex, .u5l2 h3 .katex { font-size: .95em; }
+.u5l2-p { font-size: 19px; line-height: 1.5; margin: 12px 0; }
+.u5l2-ul { font-size: 19px; line-height: 1.5; margin: 6px 0 12px; padding-left: 1.4em; }
+.u5l2-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u5l2-pcol .pill { white-space: nowrap; }
+.u5l2-red { color: var(--red); }
+.u5l2-amb { color: #a86a08; }
+
+/* ---------------- key ideas ---------------- */
+.u5l2-key { border-left-width: 7px; line-height: 1.55; }
+.u5l2-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 6px; }
+.u5l2-key .u5l2-ul { margin: 4px 0 6px; }
+
+/* ---------------- example layouts ---------------- */
+.u5l2-two { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: start; }
+.u5l2-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.u5l2-col > .q { margin: 0; }
+.u5l2-gp { align-items: center; }
+.u5l2-gp .pl, .u5l2-gp .ansrow { align-self: stretch; }
+.u5l2-sp .u5l2-sk { align-self: center; }
+.u5l2-exin { margin-top: 16px; }
+
+/* a grid to sketch on; its answer layer (same window) fades in on top when the part is shown */
+.u5l2-sk { position: relative; display: inline-block; background: #fff; border-radius: 10px; padding: 6px; margin: 4px 0 8px; }
+.u5l2-ska { position: absolute; left: 6px; top: 6px; opacity: 0; pointer-events: none; transition: opacity .35s; }
+.part.shown .u5l2-ska { opacity: 1; }
+
+/* value tables (Examples 1 and 5) */
+.u5l2-vt { border-collapse: collapse; background: #fff; font-size: 20px; margin: 6px 0 4px; }
+.u5l2-vt th, .u5l2-vt td { border: 1.5px solid #ddd6c6; text-align: center; height: 52px; min-width: 62px; padding: 2px 8px; }
+.u5l2-vt th { background: #faf7f0; font-weight: 700; white-space: nowrap; }
+.u5l2-vt5 th { min-width: 112px; }
+.u5l2-feat { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; font-size: 19px; margin: 6px 0 4px; }
+.u5l2-feat > div { min-height: 34px; }
+.u5l2-feat .bk-rv { color: var(--red); }
+.u5l2-wide { grid-column: 1 / -1; }
+
+/* Example 3 table */
+.u5l2-tpart { padding: 8px 10px; }
+.u5l2-tab { width: 100%; border-collapse: collapse; font-size: 19px; line-height: 1.3; background: #fff; margin-bottom: 8px; }
+.u5l2-tab th { font: 800 16px var(--round); color: var(--muted); padding: 6px 8px; border: 1.5px solid #ddd6c6; background: #faf7f0; }
+.u5l2-tab td { border: 1.5px solid #ddd6c6; padding: 8px; height: 56px; text-align: center; vertical-align: middle; color: var(--red); }
+.u5l2-tab td:first-child { color: var(--ink); white-space: nowrap; text-align: left; width: 24%; }
+.u5l2-tab td:nth-child(2) { width: 40%; }
+
+/* ---------------- explainers: shared ---------------- */
+.u5l2-slab { font-size: 19px; font-weight: 800; color: #a86a08; background: rgba(255, 255, 255, .88); border-radius: 7px; padding: 0 4px; }
+.u5l2-pn { display: flex; flex-direction: column; gap: 10px; }
+.u5l2-eqbig { font-size: 30px; text-align: center; background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 6px 10px; min-height: 58px; }
+.u5l2-info { font-size: 20px; text-align: center; line-height: 1.5; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 6px 10px; }
+.u5l2-info:empty { display: none; }
+.u5l2-mtab { margin: 0 auto; border-collapse: collapse; background: #fff; font-size: 20px; }
+.u5l2-mtab th, .u5l2-mtab td { border: 1.5px solid #ddd6c6; padding: 4px 12px; text-align: center; }
+.u5l2-mtab th { background: #faf7f0; }
+.u5l2-mtab tr:last-child td { color: #1f5bd6; font-weight: 700; }
+
+/* steps */
+.u5l2-note { display: flex; flex-direction: column; gap: 12px; }
+.u5l2-nl { display: grid; gap: 4px; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 8px 12px; font-size: 19px; text-align: center; }
+.u5l2-nl > b { font: 800 16px var(--round); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.u5l2-big { font-size: 24px; font-weight: 800; color: #a86a08; }
+.u5l2-nax > .katex { color: #c93a33; font-size: 1.15em; }
+
+/* stretch */
+.u5l2-maps { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; font-size: 20px; text-align: center; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 8px 10px; }
+.u5l2-verd { display: grid; gap: 2px; text-align: center; background: #fff; border: 2.5px solid #1f5bd6; border-radius: 14px; padding: 8px 12px; color: #1f5bd6; }
+.u5l2-verd > b { font: 800 24px var(--round); }
+.u5l2-verd > span { font-size: 18px; color: var(--ink); }
+
+/* play */
+.u5l2-pn-play { gap: 6px; }
+.u5l2-pn-play .u5l2-eqbig { font-size: 30px; min-height: 54px; padding: 2px 10px; display: grid; place-items: center; }
+.u5l2-sl { display: flex; align-items: center; gap: 12px; background: #f3f6fd; border: 2px solid #c9d6f4; border-radius: 14px; padding: 1px 14px; cursor: pointer; }
+.u5l2-sll { font-size: 26px; min-width: 22px; }
+.u5l2-sl input { flex: 1; height: 34px; accent-color: #1f5bd6; cursor: pointer; touch-action: none; }
+.u5l2-sl input::-webkit-slider-thumb { width: 34px; height: 34px; }
+.u5l2-slv { font-size: 22px; min-width: 56px; text-align: right; color: #1f5bd6; font-weight: 700; }
+.u5l2-pinfo { display: grid; grid-template-columns: repeat(4, auto); justify-content: space-between; gap: 4px 12px; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 6px 12px; font-size: 19px; }
+.u5l2-pinfo > div { display: grid; gap: 0; text-align: center; }
+.u5l2-pinfo i { font: 700 13.5px var(--round); font-style: normal; color: var(--muted); text-transform: uppercase; letter-spacing: .03em; }
+.u5l2-pinfo .u5l2-pwide { grid-column: 1 / -1; display: block; border-top: 1.5px solid #eee7d8; padding-top: 4px; }
+.u5l2-pinfo .u5l2-pwide i { margin-right: 8px; }
+.u5l2-desc { font-size: 18px; line-height: 1.35; }
+.u5l2-desc i { font-style: normal; font-weight: 700; color: var(--muted); }
+
+/* race */
+.u5l2-lh { font-size: 19px; text-align: center; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 4px 8px; }
+.u5l2-lh > b { color: #7a1f3d; }
+.u5l2-lrows { display: grid; gap: 4px; }
+.u5l2-lr { font-size: 19px; background: #fff; border-radius: 10px; padding: 3px 10px; }
+.u5l2-lra { display: inline-block; margin-left: 4px; }
+
+/* sketch: numbered procedure rows */
+.u5l2-rows { display: flex; flex-direction: column; gap: 8px; }
+.u5l2-rhead { font-size: 26px; text-align: center; margin-bottom: 2px; }
+.u5l2-row { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 8px 12px; font-size: 19px; line-height: 1.5; }
+.u5l2-n { flex: 0 0 auto; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 17px var(--round); margin-top: 1px; }
+.u5l2-rc { min-width: 0; }
+.u5l2-pinfo .u5l2-pmap { color: #7b4fc4; font-weight: 700; }

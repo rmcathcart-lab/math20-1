@@ -49,7 +49,7 @@ p.u5l7-note { display: block; white-space: normal; font: inherit; font-size: 19p
 .u5l7-wl { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .u5l7-big { font-size: 21px; }
 .u5l7-strong { font-weight: 700; background: #f6e9ef; border-radius: 8px; padding: 4px 8px; }
-.u5l7-eqin { font-size: 25px; margin-bottom: 10px; }
+.u5l7-eqin { font-size: 21px; white-space: nowrap; margin-bottom: 10px; }
 .u5l7-sn { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 16px var(--round); flex: 0 0 auto; letter-spacing: 0; text-transform: none; }
 .u5l7-sn0 { background: transparent; }
 
@@ -64,8 +64,8 @@ p.u5l7-note { display: block; white-space: normal; font: inherit; font-size: 19p
 .u5l7-tray { background: #fff; border: 2.5px solid #5b5470; border-radius: 14px; box-sizing: border-box; padding: 6px 10px; }
 .u5l7-th { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .06em; color: #9a92b5; }
 .u5l7-t5 { display: flex; align-items: center; gap: 8px; font: 800 17px var(--round); color: #1c2230; }
-.u5l7-capsule { margin-top: 4px; background: #f6e9ef; border: 2.5px solid #7a1f3d; border-radius: 26px; padding: 4px 12px; font-size: 21px; text-align: center; }
-.u5l7-dec { font-size: 17px; color: #5b5470; }
+.u5l7-capsule { margin-top: 2px; background: #f6e9ef; border: 2.5px solid #7a1f3d; border-radius: 22px; padding: 2px 10px; font-size: 19px; text-align: center; }
+.u5l7-dec { font-size: 16px; line-height: 1.1; color: #5b5470; }
 
 /* zeros */
 .u5l7-tag0 { font: 800 13px var(--round); text-transform: uppercase; letter-spacing: .05em; color: #fff; background: #3a4254; border-radius: 6px; padding: 2px 8px; }

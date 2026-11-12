@@ -220,7 +220,7 @@
     var W = (wrongs || []).filter(function (w) { return w.pairs && !(w.pairs.length === pairs.length && w.pairs.every(function (q) { return pairs.some(function (p) { return Math.abs(rv(p[0]) - rv(q[0])) < 1e-9 && Math.abs(rv(p[1]) - rv(q[1])) < 1e-9; }); })); })
       .map(function (w) { return { c: w.pairs.length ? K.pairs(w.pairs.map(function (p) { return [rv(p[0]), rv(p[1])]; })) : null, none: !w.pairs.length, code: w.code, hint: w.hint }; });
     return function (resp) {
-      var s = String(resp == null ? '' : resp).replace(/\\left|\\right/g, '');
+      var s = String(resp == null ? '' : resp).replace(/\\left|\\right/g, '').replace(/\\[ ,;:!]|~/g, ' ');
       if (!s.trim()) return form('empty', 'Type your answer first.');
       if (isNone(s)) { if (!pairs.length) return ok(); var wn = W.filter(function (w) { return w.none; })[0]; return wrong(wn ? wn.code : cp + (o.noneCode || 'inv-none'), wn ? wn.hint : o.noneHint || 'There are some: look for the points that are on both graphs.'); }
       if (!/\(/.test(s)) return form(cp + 'pts-fmt', 'Give each one as a point ' + t('(x,\\ y)') + ', separated by commas' + (o.noneOk !== false ? ' (or write none)' : '') + '.');
@@ -235,7 +235,8 @@
   function ptsPart(cp, prompt, pairs, wrongs, sol, hints, text, o) {
     o = o || {};
     var keyTex = ptsT(pairs), part = KP.math(prompt, ptsCheck(cp, pairs, wrongs, o), keyTex, sol, hints, text, { keys: 'u7pts', placeholder: 'e.g. (1, 0), (5, 0)' + (o.noneOk !== false ? '   (or: none)' : '') });
-    part.bad = (wrongs || []).map(function (w) { return ptsT(w.pairs); }).concat(pairs.length && o.noneOk !== false ? ['\\text{none}'] : []).filter(function (b, i, arr) { return arr.indexOf(b) === i && b !== keyTex; });
+    var same = function (L) { return L.length === pairs.length && L.every(function (q) { return pairs.some(function (p) { return Math.abs(rv(p[0]) - rv(q[0])) < 1e-9 && Math.abs(rv(p[1]) - rv(q[1])) < 1e-9; }); }); };
+    part.bad = (wrongs || []).filter(function (w) { return !same(w.pairs); }).map(function (w) { return ptsT(w.pairs); }).concat(pairs.length && o.noneOk !== false ? ['\\text{none}'] : []).filter(function (b, i, arr) { return arr.indexOf(b) === i && b !== keyTex; });
     return part;
   }
 
@@ -389,7 +390,7 @@
       wr.push({ v: [a + b, a], code: cp + 'abs-bracket', hint: 'Take the absolute value of the numerator: ' + t(A(a + b) + '=' + Math.abs(a + b)) + '.' });
       at = t('x=' + a) + ' and ' + t('y=' + b);
     } else {
-      var kk = r.int(2, 5), b2 = pickWhere(function () { return r.int(2, 9); }, function (x) { return a * a - kk * x < 0; }); e = A('x^{2}-' + kk + 'y'); val = kk * b2 - a * a; sub = A(a * a + '-' + kk * b2);
+      a = -r.int(2, 4); var kk = r.int(3, 5), b2 = pickWhere(function () { return r.int(2, 9); }, function (x) { return a * a - kk * x < 0; }); e = A('x^{2}-' + kk + 'y'); val = kk * b2 - a * a; sub = A(a * a + '-' + kk * b2);
       wr.push({ v: a * a - kk * b2, code: cp + 'abs-bracket', hint: 'You found the value inside the bars. Now take its absolute value.' });
       at = t('x=' + a) + ' and ' + t('y=' + b2);
     }
@@ -515,14 +516,13 @@
       else if (form1 === 'sqrt') { prompt = t('\\sqrt{x^{2}}' + sgT(m) + 'x'); target = M(m - 1, 1); wr.push({ is: M(m + 1, 1), code: cp + 'simp-sign', hint: t('\\sqrt{x^{2}}=|x|') + ', and for ' + t('x<0') + ' that is ' + t('-x') + '.' }); sol = t('\\sqrt{x^{2}}=|x|=-x') + ' for ' + t('x<0') + ': ' + t('-x' + sgT(m) + 'x=' + tx(target)); }
       else { prompt = t('\\dfrac{x+|x|}{2}'); target = P.num(0); wr.push({ is: P.parse('x'), code: cp + 'simp-sign', hint: 'For ' + t('x<0') + ', ' + t('|x|=-x') + ', so the numerator is ' + t('x+(-x)') + '.' }); sol = t('\\frac{x+(-x)}{2}=0') + ' for ' + t('x<0'); }
       prompt = 'Simplify ' + prompt + ' for ' + t('x<0') + ', without absolute value symbols.';
-      return KP.poly(prompt, target, { wrong: wr }, sol + '.', ['Use the definition: for ' + t('x<0') + ', ' + t('|x|=-x') + ' (a positive number).', 'Replace each absolute value, then collect like terms.'], 'simplifying without absolute value', { bad: 1 }) && withBad(KP.poly(prompt, target, { wrong: wr }, sol + '.', ['Use the definition: for ' + t('x<0') + ', ' + t('|x|=-x') + ' (a positive number).', 'Replace each absolute value, then collect like terms.'], 'simplifying without absolute value'), wr);
+      return withBad(KP.poly(prompt, target, { wrong: wr }, sol + '.', ['Use the definition: for ' + t('x<0') + ', ' + t('|x|=-x') + ' (a positive number).', 'Replace each absolute value, then collect like terms.'], 'simplifying without absolute value'), wr);
     }
     var s2 = pickWhere(function () { return { a: r.int(-6, 3), w: r.int(2, 8) }; }, function (z) { return z.a !== 0 && z.a + z.w !== 0; }), a = s2.a, b = s2.a + s2.w, iv = r.pick(['lo', 'mid', 'hi']);
     var E = { lo: P.add(M(-2, 1), M(a + b, 0)), mid: P.num(b - a), hi: P.add(M(2, 1), M(-a - b, 0)) };
     target = E[iv];
-    ['lo', 'mid', 'hi'].forEach(function (k2) { if (k2 !== iv) wr.push({ is: E[k2], code: cp + 'simp-case', hint: 'That is the simplified form on a different interval. On ' + ivT[iv] + ', check the sign of each expression inside the bars.' }); });
     var ivT = { lo: t('x<' + a), mid: t(a + '\\le x\\le ' + b), hi: t('x>' + b) };
-    wr.forEach(function (w) { w.hint = 'That is the simplified form on a different interval. On ' + ivT[iv] + ', check the sign of each expression inside the bars.'; });
+    ['lo', 'mid', 'hi'].forEach(function (k2) { if (k2 !== iv) wr.push({ is: E[k2], code: cp + 'simp-case', hint: 'That is the simplified form on a different interval. On ' + ivT[iv] + ', check the sign of each expression inside the bars.' }); });
     if (iv === 'mid') wr.push({ is: P.add(M(2, 1), M(-a - b, 0)), code: cp + 'simp-sign', hint: 'On this interval ' + t(tx(lin(1, -b))) + ' is negative, so ' + t(A(tx(lin(1, -b))) + '=-(' + tx(lin(1, -b)) + ')') + '.' });
     var e1 = tx(lin(1, -a)), e2 = tx(lin(1, -b));
     var signs = { lo: ['-', '-'], mid: ['+', '-'], hi: ['+', '+'] }[iv];
@@ -596,9 +596,8 @@
     var pos = rv(L.a) > 0, E1 = pos ? L.p : P.neg(L.p), E2 = P.neg(E1), h = L.h;
     var fields = [{ label: 'The pieces meet at ' + t('x='), name: 'boundary', mode: 'math', keys: 'poly', vars: ['x'] }, { label: 'For ' + t('x\\ge') + ' that value: ' + t('y='), name: 'piece for x ≥', mode: 'math', keys: 'poly', vars: ['x'] }, { label: 'For ' + t('x<') + ' that value: ' + t('y='), name: 'piece for x <', mode: 'math', keys: 'poly', vars: ['x'] }];
     var kChk = K.value(toR(h)), e1Chk = K.poly(E1, { expanded: false }), e2Chk = K.poly(E2, { expanded: false });
-    var isE1 = polyIs(E1), isE2 = polyIs(E2), partial = P.add(M(-rv(E1.x ? 0 : 0), 0), P.sub(P.neg(P.add(M(P.coef(E1, { x: 1 }), 1))), P.neg(P.num(P.constant(E1))))); // −(a'x) + b' : only the x term negated
-    var negOne = P.add(M(P.coef(E2, { x: 1 }), 1), P.num(P.constant(E1)));
-    void partial;
+    var isE1 = polyIs(E1), isE2 = polyIs(E2);
+    var negOne = P.add(M(P.coef(E2, { x: 1 }), 1), P.num(P.constant(E1))); // the opposite of the x term only
     var keys = [rt(h), tx(E1), tx(E2)];
     var combine = function (resp) {
       var k = numVal(resp[0]); if (k == null) return null;
@@ -625,7 +624,7 @@
     if (kind === 'slopeVertex') {
       var m = nz(r, 2, 5), h = nz(r, 1, 6), yi = Math.abs(-m * h);
       return valPart(cp, 'A line ' + t('y=g(x)') + ' has slope ' + t(m) + ', and the vertex of the graph of ' + t('y=|g(x)|') + ' is ' + t(pt(h, 0)) + '. Determine the ' + t('y') + '-intercept of ' + t('y=|g(x)|') + '.', yi,
-        [{ v: -m * h, code: cp + 'yint-neg', hint: 'That is the ' + t('y') + '-intercept of ' + t('g') + '. The graph of ' + t('y=|g(x)|') + ' is never below the axis.' }, { v: m * h === -m * h ? 999 : Math.abs(m) + Math.abs(h), code: cp + 'back-slope', hint: 'Write the line through ' + t(pt(h, 0)) + ' with slope ' + t(m) + ': ' + t('g(x)=' + m + '(x' + sgT(-h) + ')') + '.' }],
+        [{ v: -m * h, code: cp + 'yint-neg', hint: 'That is the ' + t('y') + '-intercept of ' + t('g') + '. The graph of ' + t('y=|g(x)|') + ' is never below the axis.' }, { v: h, code: cp + 'yint-x', hint: 'That is the ' + t('x') + '-coordinate of the vertex. Write the line: ' + t('g(x)=' + m + '(x' + sgT(-h) + ')') + ', then find ' + t('|g(0)|') + '.' }],
         'The vertex of ' + t('y=|g(x)|') + ' is the zero of ' + t('g') + ': ' + t('g(x)=' + m + '(x' + sgT(-h) + ')=' + tx(lin(m, -m * h))) + '.<br>' + t('g(0)=' + (-m * h)) + ', so the ' + t('y') + '-intercept of ' + t('y=|g(x)|') + ' is ' + t(A(-m * h) + '=' + yi) + '.',
         ['The vertex of the V is the ' + t('x') + '-intercept of the line: ' + t('g(' + h + ')=0') + '.', 'Write ' + t('g(x)=m(x-h)') + ', then take the absolute value of ' + t('g(0)') + '.'], 'y-intercept of y = |g(x)| from the vertex', { exact: false });
     }
@@ -633,7 +632,7 @@
       var s = pickWhere(function () { return { m: nz(r, 2, 4), x1: nz(r, 1, 5), y1: nz(r, 1, 9) }; }, function (z) { var hh = z.x1 - z.y1 / z.m; return hh !== 0 && Math.abs(hh) <= 8 && z.y1 % z.m !== 0 && Math.abs(z.x1 + z.y1 / z.m - hh) > 1e-9; });
       var hh = toR(s.x1 - s.y1 / s.m);
       return valPart(cp, 'A line ' + t('y=f(x)') + ' has slope ' + t(s.m) + ' and passes through ' + t(pt(s.x1, s.y1)) + '. Determine the ' + t('x') + '-coordinate of the point where the graph of ' + t('y=|f(x)|') + ' touches the ' + t('x') + '-axis.', hh,
-        [{ v: s.x1 + s.y1 / s.m, code: cp + 'v-sign', hint: 'Solve ' + t('f(x)=0') + ' again: ' + t(s.y1 + sgT(s.m) + '(x' + sgT(-s.x1) + ')=0') + '.' }, { v: s.y1 / s.m - s.x1 === rv(hh) ? 999 : -(s.x1 - s.y1 / s.m), code: cp + 'v-sign', hint: 'Check the sign: solve ' + t('f(x)=0') + '.' }],
+        [{ v: s.x1 + s.y1 / s.m, code: cp + 'v-sign', hint: 'Solve ' + t('f(x)=0') + ' again: ' + t(s.y1 + sgT(s.m) + '(x' + sgT(-s.x1) + ')=0') + '.' }, { v: s.y1 - s.m * s.x1, code: cp + 'yint-x', hint: 'That is the ' + t('y') + '-intercept of ' + t('f') + '. The graph of ' + t('y=|f(x)|') + ' touches the ' + t('x') + '-axis at the zero of ' + t('f') + '.' }],
         t('f(x)=' + s.y1 + sgT(s.m) + '(x' + sgT(-s.x1) + ')=' + tx(lin(s.m, s.y1 - s.m * s.x1))) + '. The graph of ' + t('y=|f(x)|') + ' touches the axis at the zero of ' + t('f') + ': ' + t(tx(lin(s.m, s.y1 - s.m * s.x1)) + '=0') + ', ' + t('x=' + rt(hh)) + '.',
         ['Write the equation of the line through the point with that slope.', 'The vertex of ' + t('y=|f(x)|') + ' is the zero of ' + t('f') + '.'], 'vertex of y = |f(x)| from a line');
     }
@@ -704,7 +703,7 @@
   B.quadPiece = function (r, cp) {
     var Q = quadOf(quadSpec(r, { as: [1, 1, -1, -1, 2, -2, -4], cmax: 36 })), f = Q.poly, ftex = Q.b === 0 && Q.a < 0 ? P.seq([M(Q.c, 0), M(Q.a, 2)]) : tx(f);
     var up = Q.a > 0, Eo = up ? f : P.neg(f), Ei = P.neg(Eo), isO = polyIs(Eo), isI = polyIs(Ei);
-    var negLead = P.add(M(-Q.a, 2), M(Q.b, 1), M(Q.c, 0)), negLeadIn = up ? negLead : P.add(M(Q.a, 2), M(-Q.b, 1), M(-Q.c, 0));
+    var negLead = P.add(M(-Q.a, 2), M(Q.b, 1), M(Q.c, 0)); // −f with only the x² term's sign changed (the piece that should be −f)
     var fields = [{ label: 'Smaller zero of ' + t('f') + ': ' + t('r='), name: 'r', mode: 'math', keys: 'poly', vars: ['x'] }, { label: 'Larger zero: ' + t('s='), name: 's', mode: 'math', keys: 'poly', vars: ['x'] },
       { label: 'For ' + t('x\\le r') + ' or ' + t('x\\ge s') + ': ' + t('y='), name: 'outer piece', mode: 'math', keys: 'poly', vars: ['x'] }, { label: 'For ' + t('r<x<s') + ': ' + t('y='), name: 'middle piece', mode: 'math', keys: 'poly', vars: ['x'] }];
     var keys = [String(Q.r1), String(Q.s1), tx(Eo), tx(Ei)];
@@ -713,11 +712,11 @@
       var zOK = a === Q.r1 && b === Q.s1, zSwap = a === Q.s1 && b === Q.r1, zNeg = sameSet([a, b], [-Q.r1, -Q.s1]) && !sameSet([a, b], [Q.r1, Q.s1]);
       if ((zOK || zSwap) && isI(resp[2]) && isO(resp[3])) return wrong(cp + 'pw-swap', 'Your two pieces are swapped. ' + (up ? 'The parabola opens up, so it is below the axis <b>between</b> its zeros: that is where the piece is ' + t('-f(x)') + '.' : 'The parabola opens down, so it is below the axis <b>outside</b> its zeros: that is where the piece is ' + t('-f(x)') + '.'));
       if (zNeg && isO(resp[2]) && isI(resp[3])) return wrong(cp + 'pw-bsign', 'The pieces are right. Check the zeros: solve ' + t(ftex + '=0') + ' again.');
-      if ((zOK || zSwap) && isO(resp[2]) && polyIs(up ? negLead : negLeadIn)(resp[3])) return wrong(cp + 'pw-neg', 'The middle piece is the opposite of the <b>whole</b> expression: change the sign of every term.');
+      if ((zOK || zSwap) && (up ? isO(resp[2]) && polyIs(negLead)(resp[3]) : isI(resp[3]) && polyIs(negLead)(resp[2]))) return wrong(cp + 'pw-neg', 'The ' + (up ? 'middle' : 'outer') + ' piece is the opposite of the <b>whole</b> expression: change the sign of every term.');
       if (zSwap && isO(resp[2]) && isI(resp[3])) return wrong(cp + 'pw-bound', 'Put the smaller zero in the first box.');
       return null;
     };
-    var bad = [[keys[0], keys[1], keys[3], keys[2]], [String(-Q.s1), String(-Q.r1), keys[2], keys[3]], [keys[0], keys[1], keys[2], tx(up ? negLead : negLeadIn)]].filter(function (b) { return b.join('|') !== keys.join('|'); });
+    var bad = [[keys[0], keys[1], keys[3], keys[2]], [String(-Q.s1), String(-Q.r1), keys[2], keys[3]], (up ? [keys[0], keys[1], keys[2], tx(negLead)] : [keys[0], keys[1], tx(negLead), keys[3]])].filter(function (b) { return b.join('|') !== keys.join('|'); });
     if (sameSet([-Q.r1, -Q.s1], [Q.r1, Q.s1])) bad.splice(1, 1);
     var cases = 'y=\\begin{cases}' + tx(Eo) + ', & x\\le ' + Q.r1 + '\\text{ or }x\\ge ' + Q.s1 + '\\\\ ' + tx(Ei) + ', & ' + Q.r1 + '<x<' + Q.s1 + '\\end{cases}';
     var fac = (Q.a === 1 ? '' : Q.a === -1 ? '-' : Q.a) + '(x' + sgT(-Q.r1) + ')(x' + sgT(-Q.s1) + ')';
@@ -740,13 +739,12 @@
     if (kind === 'three') {
       var Q = quadOf(quadSpec(r, { as: [1], evenW: true, wmax: 8, cmax: 40 }));
       return valPart(cp, 'The horizontal line ' + t('y=k') + ' meets the graph of ' + t('y=' + A(tx(Q.poly))) + ' at exactly three points. Determine ' + t('k') + '.', -Q.q,
-        [{ v: Q.q, code: cp + 'vtx-noreflect', hint: 'The vertex ' + t(pt(Q.p, Q.q)) + ' is reflected to ' + t(pt(Q.p, -Q.q)) + '; the line ' + t('y=k') + ' must touch the top of that hump.' }, { v: Q.c === -Q.q ? 999 : Math.abs(Q.c), code: cp + 'back-sign', hint: 'Three points happen when the line just touches the top of the reflected hump.' }],
+        [{ v: Q.q, code: cp + 'vtx-noreflect', hint: 'The vertex ' + t(pt(Q.p, Q.q)) + ' is reflected to ' + t(pt(Q.p, -Q.q)) + '; the line ' + t('y=k') + ' must touch the top of that hump.' }, { v: Math.abs(Q.c), code: cp + 'back-sign', hint: 'That is the height of the ' + t('y') + '-intercept. Three points happen when the line just touches the top of the reflected hump.' }],
         t(tx(Q.poly) + '=(x' + sgT(-Q.r1) + ')(x' + sgT(-Q.s1) + ')') + ': axis ' + t('x=' + Q.p) + ', ' + t('f(' + Q.p + ')=' + Q.q) + '. The vertex ' + t(pt(Q.p, Q.q)) + ' reflects to ' + t(pt(Q.p, -Q.q)) + '. The line ' + t('y=' + (-Q.q)) + ' touches the top of the middle arc once and crosses each outer arm once: three points. ' + t('k=' + (-Q.q)) + '.',
         ['Picture the W: two outer arms and a middle arc (the reflected part).', 'A horizontal line meets the W three times only at the height of the top of the middle arc.'], 'the line meeting a W three times', { exact: false });
     }
     if (kind === 'arc') {
-      var Q2 = quadOf(quadSpec(r, { as: [1, -1, 2, -2, [1, 2]].filter(function () { return true; }), evenW: true, cmax: 40 })), c = Q2.c;
-      if (!Number.isInteger(c) || c === 0) Q2 = quadOf({ r1: -2, s1: 4, a: 1 }), c = Q2.c;
+      var Q2 = quadOf(quadSpec(r, { as: [1, -1, 2, -2], evenW: true, cmax: 40 })), c = Q2.c;
       return pointPart(cp, 'A quadratic function ' + t('h') + ' has ' + t('x') + '-intercepts ' + t(Q2.r1) + ' and ' + t(Q2.s1) + ' and ' + t('y') + '-intercept ' + t(c) + '. State the coordinates of the vertex of the middle arc of the graph of ' + t('y=|h(x)|') + '.', [Q2.p, Math.abs(Q2.q)],
         [{ p: [Q2.p, Q2.q], code: cp + 'vtx-noreflect', hint: 'That is the vertex of ' + t('h') + '. Between the zeros ' + t('h') + ' is ' + (Q2.q < 0 ? 'below' : 'above') + ' the axis' + (Q2.q < 0 ? ', so that arc is reflected.' : '.') }, { p: [-Q2.p, Math.abs(Q2.q)], code: cp + 'pt-xchg', hint: 'The axis of symmetry is halfway between the zeros.' }],
         'The axis is halfway between the zeros: ' + t('x=' + rt(Q2.p)) + '. ' + t('h(x)=a(x' + sgT(-Q2.r1) + ')(x' + sgT(-Q2.s1) + ')') + ' and ' + t('h(0)=' + c) + ': ' + t('a(' + (-Q2.r1) + ')(' + (-Q2.s1) + ')=' + c) + ', so ' + t('a=' + rt(Q2.a)) + '.<br>' + t('h(' + rt(Q2.p) + ')=' + rt(Q2.q)) + (Q2.q < 0 ? ', reflected to ' + t(rt(-Q2.q)) : ' (above the axis, it stays)') + ': the middle arc has its vertex at ' + t(pt(Q2.p, Math.abs(Q2.q))) + '.',
@@ -779,8 +777,8 @@
       k = r.pick([2, 3, 4, 5, -2, -3]); d = nz(r, 1, 12);
       if (mode === 'none') { c = -r.int(1, 6); } else if (r.chance(0.12)) c = 0;
       e = k * c + d;
-      eq = (k === -1 ? '-' : k) + A(inner) + sgT(d) + '=' + e;
-      if (r.chance(0.3) && k < 0) eq = d + (k === -1 ? '-' : k < 0 ? '-' + (-k) : '+' + k) + A(inner) + '=' + e;
+      eq = k + A(inner) + sgT(d) + '=' + e;
+      if (r.chance(0.3) && k < 0) eq = d + '-' + (-k) + A(inner) + '=' + e;
       steps = t(k + A(inner) + '=' + (e - d)) + ', so ' + t(A(inner) + '=' + c) + '.<br>';
     }
     var vals = c < 0 ? [] : c === 0 ? [toR([-b, a])] : uniqNums([(c - b) / a, (-c - b) / a]).sort(function (x, y) { return x - y; }).map(function (x) { return toR(x); });
@@ -789,9 +787,7 @@
     if (c < 0) wr.push({ vals: uniqNums([(c - b) / a, (-c - b) / a]).map(toR), code: cp + 'neg-abs', hint: 'After isolating, ' + t(A(inner) + '=' + c) + ': an absolute value is never negative, so there is no solution.' });
     if (mode !== 'plain' && k !== 1) { var w1 = ((e - d) / k - b) / a, w2 = ((-e - d) / k - b) / a; var wv = uniqNums([w1, w2]); if (!sameSet(wv, vals.map(rv))) wr.push({ vals: wv.map(toR), code: cp + 'no-iso', hint: 'Isolate the absolute value <b>before</b> splitting into two cases: ' + t(A(inner) + '=' + c) + '.' }); }
     if (c > 0) wr.push({ vals: [], code: cp + 'nosol-claim', hint: 'The absolute value equals a positive number, so there are two solutions.' });
-    var sol = steps + (c < 0 ? t(A(inner) + '=' + c) + ': an absolute value is never negative, so there is <b>no solution</b>.' : c === 0 ? t(inner + '=0') + ', so ' + t('x=' + rt(vals[0])) + ' (one solution).' : t(inner + '=' + c) + ' or ' + t(inner + '=-' + c) + ', so ' + rootsT(vals).replace(/,\\ /g, ' or ') + '.');
-    sol = sol.replace(/x=([^,]+?) or x=/, 'x=$1\\) or \\(x=');
-    sol = steps + (c < 0 ? t(A(inner) + '=' + c) + ': an absolute value is never negative, so there is <b>no solution</b>.' : c === 0 ? t(inner + '=0') + ', so ' + t('x=' + rt(vals[0])) + ' (one solution).' : t(inner + '=' + c) + ' or ' + t(inner + '=-' + c) + ', so ' + vals.map(function (x) { return t('x=' + rt(x)); }).join(' or ') + '.');
+    var sol = steps + (c < 0 ? t(A(inner) + '=' + c) + ': an absolute value is never negative, so there is <b>no solution</b>.' : c === 0 ? t(inner + '=0') + ', so ' + t('x=' + rt(vals[0])) + ' (one solution).' : t(inner + '=' + c) + ' or ' + t(inner + '=-' + c) + ', so ' + vals.map(function (x) { return t('x=' + rt(x)); }).join(' or ') + '.');
     return rootsPart(cp, 'Solve ' + t(eq) + '.', vals, { wrongs: wr }, sol,
       ['Isolate the absolute value first: undo what is done outside the bars.', t('|A|=c') + ': two solutions if ' + t('c>0') + ' (' + t('A=c') + ' or ' + t('A=-c') + '), one if ' + t('c=0') + ', none if ' + t('c<0') + '.'], 'solving |A| = c');
   };
@@ -816,11 +812,10 @@
     var vals = [], extr = [];
     [[s.x1, s.v1], [s.x2, s.v2]].forEach(function (z) { (z[1] ? vals : extr).push(z[0]); });
     vals.sort(function (x, y) { return rv(x) - rv(y); });
-    var wr = [], xn = toR((s.d - s.b) / (-s.a - s.c)), xn2 = toR((-s.d + s.b) / (s.a + s.c)); // sign slip: −ax + b = cx + d, or ax − b
+    var wr = [], xn = toR((s.d - s.b) / (-s.a - s.c)); // sign slip in case 2: −ax + b = cx + d
     function chk(x) { var L = Math.abs(s.a * rv(x) + s.b), R = s.c * rv(x) + s.d; return 'Check ' + t('x=' + rt(x)) + ': left side ' + t(rt(toR(L))) + ', right side ' + t(rt(toR(R))) + (Math.abs(L - R) < 1e-9 ? ' ✓' : ': the right side is negative, so ' + t('x=' + rt(x)) + ' is extraneous') + '.'; }
     if (xn && !has(vals.map(rv), rv(xn)) && !has(extr.map(rv), rv(xn))) wr.push({ vals: vals.length ? [vals[0], xn] : [xn], code: cp + 'neg-one', hint: 'In the second case the <b>whole</b> right side is negated: ' + t(tx(lin(s.a, s.b)) + '=-(' + rhs + ')') + '.' });
-    void xn2;
-    var iso = s.view === 'iso' ? 'Isolate: ' + t(A(inner) + '=' + rhs) + '.<br>' : s.view === 'coef' ? t(eq) + ' is ' + t(A(tx(lin(s.a, s.b))) + '=' + rhs) + ' (' + t(Math.abs(s.a) + A(inner) + '=' + A(tx(lin(Math.abs(s.a), s.b * Math.abs(s.a) / s.a)))) + ').<br>' : '';
+    var iso = s.view === 'iso' ? 'Isolate: ' + t(A(inner) + '=' + rhs) + '.<br>' : s.view === 'coef' ? t(Math.abs(s.a) + A(inner) + '=' + A(tx(lin(s.a, s.b)))) + ', so the equation is ' + t(A(tx(lin(s.a, s.b))) + '=' + rhs) + '.<br>' : '';
     var Lt = tx(lin(s.a, s.b));
     var sol = iso + 'Case 1: ' + t(Lt + '=' + rhs) + ', so ' + t('x=' + rt(s.x1)) + '.<br>Case 2: ' + t(Lt + '=-(' + rhs + ')') + ', so ' + t('x=' + rt(s.x2)) + '.<br>' + chk(s.x1) + '<br>' + chk(s.x2) + '<br>' + (vals.length ? 'Solution: ' + vals.map(function (x) { return t('x=' + rt(x)); }).join(' or ') + (extr.length ? ' (' + extr.map(function (x) { return t(rt(x)); }).join(', ') + ' extraneous)' : '') : 'Both are extraneous: <b>no solution</b>.') + '.';
     return rootsPart(cp, 'Solve and verify: ' + t(eq) + '. Give only the solutions that check (or write no solution).', vals, { extr: extr, wrongs: wr, rejValid: true, noneHint: 'Check again: ' + (vals.length ? t('x=' + rt(vals[0])) + ' makes both sides equal.' : '') }, sol,
@@ -832,7 +827,7 @@
     o = o || {};
     var mode = r.pick(o.modes || ['gen', 'gen', 'sq', 'iso']), s, ftex, k, c1 = [], c2 = [], eq, A2, B2, C2, steps;
     if (mode === 'sq') {
-      s = pickWhere(function () { return { n: r.int(2, 30), k: r.int(1, 25) }; }, function (z) { return isSq(z.n + z.k) && (isSq(z.n - z.k) || z.n - z.k < 0) && z.n + z.k > 0 && !isSq(z.n) && (o.allow2 !== false || z.n - z.k >= 0); });
+      s = pickWhere(function () { return { n: r.int(2, 45), k: r.int(1, 36) }; }, function (z) { return isSq(z.n + z.k) && (isSq(z.n - z.k) || z.n - z.k < 0) && z.n !== z.k && (z.n - z.k > 0 || r.chance(0.6)); });
       ftex = 'x^{2}-' + s.n; k = s.k; A2 = 1; B2 = 0; C2 = -s.n;
       var u = Math.sqrt(s.n + s.k); c1 = [-u, u]; if (s.n - s.k > 0) { var w = Math.sqrt(s.n - s.k); c2 = [-w, w]; } else if (s.n - s.k === 0) c2 = [0];
       steps = 'Case 1: ' + t('x^{2}-' + s.n + '=' + k) + ', ' + t('x^{2}=' + (s.n + k)) + ', ' + t('x=\\pm ' + u) + '.<br>Case 2: ' + t('x^{2}-' + s.n + '=-' + k) + ', ' + t('x^{2}=' + (s.n - k)) + (s.n - k > 0 ? ', ' + t('x=\\pm ' + Math.sqrt(s.n - k)) : s.n - k === 0 ? ', ' + t('x=0') : ': no real roots') + '.';
@@ -845,7 +840,6 @@
     }
     eq = A(ftex) + '=' + k; var pre = '';
     if (mode === 'iso') { var m = r.pick([2, 3, 4]), d = nz(r, 1, 9); eq = m + A(ftex) + sgT(d) + '=' + (m * k + d); pre = 'Isolate: ' + t(m + A(ftex) + '=' + m * k) + ', so ' + t(A(ftex) + '=' + k) + '.<br>'; }
-    void A2; void B2; void C2;
     var vals = uniqNums(c1.concat(c2)).sort(function (x, y) { return x - y; });
     var wr = [];
     if (c2.length) wr.push({ vals: c1, code: cp + 'one-case', hint: 'Solve the second case too: ' + t(ftex + '=-' + k) + '.' });
@@ -896,8 +890,7 @@
     var c1 = tx(P.sub(quad(1, s.b, s.c), lin(s.m, s.d))), c2 = tx(P.add(quad(1, s.b, s.c), lin(s.m, s.d)));
     var test = s.view === 'quadAbs' ? function (x) { return s.m * x + s.d; } : function (x) { return x * x + s.b * x + s.c; };
     var chk = uniqNums([s.u1, s.u2, s.v1, s.v2]).sort(function (x, y) { return x - y; }).map(function (x) { var R0 = test(x); return t('x=' + x) + ': ' + t(other) + ' is ' + t(R0) + (R0 >= 0 ? ' ✓' : ' (negative: extraneous)'); }).join('<br>');
-    var sol = 'Case 1: ' + t(inA + '=' + other) + ', so ' + t((s.view === 'quadAbs' ? c1 : c1) + '=0') + ', ' + t(fac(s.u1, s.u2) + '=0') + '.<br>Case 2: ' + t(inA + '=-(' + other + ')') + ', so ' + t(c2 + '=0') + ', ' + t(fac(s.v1, s.v2) + '=0') + '.<br>Check (the side without bars, ' + t(other) + ', must not be negative):<br>' + chk + '<br>Solution: ' + vals.map(function (x) { return t('x=' + x); }).join(' or ') + '.';
-    if (s.view === 'linAbs') sol = sol.replace('Case 1: ' + t(inA + '=' + other) + ', so ' + t(c1 + '=0'), 'Case 1: ' + t(inA + '=' + other) + ', so ' + t(tx(P.sub(quad(1, s.b, s.c), lin(s.m, s.d))) + '=0')).replace('Case 2: ' + t(inA + '=-(' + other + ')') + ', so ' + t(c2 + '=0'), 'Case 2: ' + t(inA + '=-(' + other + ')') + ', so ' + t(tx(P.add(quad(1, s.b, s.c), lin(s.m, s.d))) + '=0'));
+    var sol = 'Case 1: ' + t(inA + '=' + other) + ', so ' + t(c1 + '=0') + ', ' + t(fac(s.u1, s.u2) + '=0') + '.<br>Case 2: ' + t(inA + '=-(' + other + ')') + ', so ' + t(c2 + '=0') + ', ' + t(fac(s.v1, s.v2) + '=0') + '.<br>Check (the side without bars, ' + t(other) + ', must not be negative):<br>' + chk + '<br>Solution: ' + vals.map(function (x) { return t('x=' + x); }).join(' or ') + '.';
     return rootsPart(cp, 'Solve and verify: ' + t(eq) + '. Reject any extraneous solutions.', vals, { extr: extr, rejValid: true, wrongs: [{ vals: [], code: cp + 'nosol-claim', hint: 'Check each root again: ' + t('x=' + vals[0]) + ' makes both sides equal.' }] }, sol,
       ['Solve ' + t('A=B') + ' and ' + t('A=-B') + ': each case is a quadratic equation (factor it).', 'Check every root in the original equation: the side without the bars cannot be negative.'], 'solving |A| = B with a quadratic');
   };
@@ -907,10 +900,10 @@
     o = o || {};
     var kind = r.pick(o.kinds || ['dist', 'drone']);
     if (kind === 'dist') {
-      var s = pickWhere(function () { return { h: nz(r, 2, 12), m: r.pick([2, 3, 4, 5, [1, 2], [1, 3]]) }; }, function (z) { var mv = rv(z.m); return Math.abs(mv - 1) > 1e-9; });
+      var s = pickWhere(function () { return { h: nz(r, 2, 12), m: r.pick([2, 3, 4, 5]) }; }, function () { return true; });
       var mv = rv(s.m), x1 = s.h / (1 - mv), x2 = s.h / (1 + mv), good = mv * x1 >= 0 ? x1 : x2, bad = good === x1 ? x2 : x1;
-      var times = { 2: 'twice', 3: 'three times', 4: 'four times', 5: 'five times' }[mv] || (mv === 0.5 ? 'half' : 'one third of');
-      var eq = A('x' + sgT(-s.h)) + '=' + (Number.isInteger(mv) ? mv : rt(s.m)) + 'x';
+      var times = { 2: 'twice', 3: 'three times', 4: 'four times', 5: 'five times' }[mv];
+      var eq = A('x' + sgT(-s.h)) + '=' + mv + 'x';
       var chk = function (x) { return t(A(rt(toR(x)) + sgT(-s.h)) + '=' + rt(toR(Math.abs(x - s.h)))) + ' and ' + t(rt(s.m) + '\\times' + (x < 0 ? '(' + rt(toR(x)) + ')' : rt(toR(x))) + '=' + rt(toR(mv * x))) + (mv * x >= 0 ? ' ✓' : ' ✗ (a distance cannot be negative)'); };
       return valPart(cp, 'The distance between a number and ' + t(s.h) + ' is ' + times + ' the number. Write an absolute value equation and solve it to determine the number.', toR(good),
         [{ v: bad, code: cp + 'extr', hint: 'Check it: ' + t(rt(s.m) + 'x') + ' would be negative there, and a distance is never negative. It is extraneous.' }],
@@ -962,7 +955,7 @@
   /* ======================================================================================================
    * RF11 — reciprocal functions (Lessons 6–7)
    * ====================================================================================================== */
-  function recLinSpec(r) { return pickWhere(function () { return { a: toR(r.pick([1, -1, 2, -2, 3, -3, 4, -4, 5, [1, 2], [-1, 2]])), b: nz(r, 1, 9) }; }, function (z) { var h = -z.b / rv(z.a); return Math.abs(h) <= 9 && toR(h)[1] <= 5 && (rv(z.a) % 1 === 0 || z.b % 2 === 0 || true); }); }
+  function recLinSpec(r) { return pickWhere(function () { return { a: toR(r.pick([1, -1, 2, -2, 3, -3, 4, -4, 5, [1, 2], [-1, 2]])), b: nz(r, 1, 9) }; }, function (z) { var h = -z.b / rv(z.a); return Math.abs(h) <= 9 && toR(h)[1] <= 5; }); }
 
   /* the asymptotes and the y-intercept of y = 1/(ax + b) (L6 Ex 4–5, #3–4, L8 Ex 5a) */
   B.recLinFeat = function (r, cp) {
@@ -1127,7 +1120,7 @@
     o = o || {};
     var kind = r.pick(o.kinds || ['turnY', 'turnY', 'asyTurn']), T, wr = [], prompt, sol;
     if (kind === 'turnY') {
-      var s = pickWhere(function () { return { a: r.pick([1, 2, 3, -1, -2, [1, 2], [-1, 2]]), p: nz(r, 1, 4), q: r.pick([2, 3, 4, 5, -2, -3, -4, -5]) }; }, function (z) { var c = rv(z.a) * z.p * z.p + z.q; return Number.isInteger(c) && c !== 0 && Math.abs(c) <= 30 && Math.abs(c) !== 1 && rv(z.a) * z.q > 0 || (Number.isInteger(rv(z.a) * z.p * z.p + z.q) && rv(z.a) * z.p * z.p + z.q !== 0 && Math.abs(rv(z.a) * z.p * z.p + z.q) <= 30 && Math.abs(rv(z.a) * z.p * z.p + z.q) !== 1 && r.chance(0.3)); });
+      var s = pickWhere(function () { return { a: r.pick([1, 2, 3, -1, -2, [1, 2], [-1, 2]]), p: nz(r, 1, 4), q: r.pick([2, 3, 4, 5, -2, -3, -4, -5]) }; }, function (z) { var c = rv(z.a) * z.p * z.p + z.q; return Number.isInteger(c) && c !== 0 && Math.abs(c) <= 30 && Math.abs(c) !== 1 && (rv(z.a) * z.q > 0 || r.chance(0.3)); });
       var av = rv(s.a), c = av * s.p * s.p + s.q, typ = av > 0 ? 'maximum' : 'minimum', iq = 1 / s.q, iqT = r.chance(0.5) && [2, 4, 5, -2, -4, -5].indexOf(s.q) >= 0 ? dt(iq) : rt(toR(iq));
       T = P.add(P.scale(P.mul(lin(1, -s.p), lin(1, -s.p)), toR(s.a)), P.num(s.q));
       prompt = 'The graph of ' + t('y=\\dfrac{1}{f(x)}') + ', where ' + t('f') + ' is a quadratic function, has a ' + typ + ' point ' + t('(' + s.p + ',\\ ' + iqT + ')') + ' and the ' + t('y') + '-intercept ' + t(rt(toR([1, c]))) + '. Determine ' + t('f(x)') + '.';
@@ -1167,9 +1160,9 @@
     var s = pickWhere(function () { return { b: nz(r, 1, 6), a1: r.int(-7, 6) }; }, function (z) { var a2 = -z.b - z.a1, n = -z.a1 * a2; return a2 !== z.a1 && n >= 2 && n <= 30; });
     var a2 = -s.b - s.a1, nn = -s.a1 * a2, vals = [s.a1, a2].sort(function (x, y) { return x - y; });
     var wrongR = qroots(1, s.b, nn).map(function (x) { return x.v; });
-    return rootsPart(cp, 'Let ' + t('f(x)=x^{2}' + sgT(s.b) + 'x') + '. The point ' + t('\\left(a,\\ \\frac{1}{' + nn + '}\\right)') + ' is on the graph of ' + t('y=\\dfrac{1}{f(x)}') + '. Determine the possible values of ' + t('a') + '.', vals,
+    return rootsPart(cp, 'Let ' + t('f(x)=' + tx(quad(1, s.b, 0))) + '. The point ' + t('\\left(a,\\ \\frac{1}{' + nn + '}\\right)') + ' is on the graph of ' + t('y=\\dfrac{1}{f(x)}') + '. Determine the possible values of ' + t('a') + '.', vals,
       { v: 'a', wrongs: wrongR.length ? [{ vals: wrongR, code: cp + 'rpt-neg', hint: 'Solve ' + t('f(a)=' + nn) + ': the reciprocal of ' + t('\\frac{1}{' + nn + '}') + ' is ' + t(nn) + '.' }] : [] },
-      t('\\frac{1}{f(a)}=\\frac{1}{' + nn + '}') + ', so ' + t('f(a)=' + nn) + ': ' + t('a^{2}' + sgT(s.b) + 'a-' + nn + '=0') + ', ' + t('(a' + sgT(-vals[0]) + ')(a' + sgT(-vals[1]) + ')=0') + ', ' + t('a=' + vals[0]) + ' or ' + t('a=' + vals[1]) + '.',
+      t('\\frac{1}{f(a)}=\\frac{1}{' + nn + '}') + ', so ' + t('f(a)=' + nn) + ': ' + t(tx(quad(1, s.b, -nn)).replace(/x/g, 'a') + '=0') + ', ' + t('(a' + sgT(-vals[0]) + ')(a' + sgT(-vals[1]) + ')=0') + ', ' + t('a=' + vals[0]) + ' or ' + t('a=' + vals[1]) + '.',
       ['To find where the reciprocal equals ' + t('k') + ', solve ' + t('f(x)=\\frac{1}{k}') + '.', 'Write the quadratic equation in standard form and factor it.'], 'points on y = 1/f(x) from a y-value');
   };
 

@@ -65,6 +65,8 @@ async def dump_page(ctx, pid):
     errs = []
     pg.on('pageerror', lambda e: errs.append('PAGEERROR ' + str(e)[:200]))
     pg.on('console', lambda m: errs.append('CONSOLE ' + m.text[:200]) if m.type == 'error' else None)
+    # the Teaching Hub's courses.js lives in another repo (served at <site>/teaching/ in production); stub it locally
+    await pg.route('**/teaching/js/courses.js', lambda r: r.fulfill(status=200, content_type='application/javascript', body=''))
     await pg.goto(BASE + pid + '/')
     await pg.wait_for_timeout(1000)
     res = {'page': pid, 'explainers': [], 'problems': []}
@@ -176,7 +178,7 @@ async def main():
     bad = 0
     async with async_playwright() as p:
         br = await p.chromium.launch()
-        ctx = await br.new_context(viewport={'width': 1180, 'height': 820})
+        ctx = await br.new_context(viewport={'width': 1180, 'height': 820}, service_workers='block')
         await ctx.add_init_script("try{localStorage.setItem('m201/ink:teacher', JSON.stringify('X'));localStorage.removeItem('m201/page:zoom')}catch(e){}")
         for pid in ARGS:
             res = await dump_page(ctx, pid)

@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Solving Absolute Value Equations (Linear) · Math 20-1 7.4</title>
+<meta name="description" content="Math 20-1 Unit 7 Lesson 4: solving absolute value equations with linear expressions. What |A| = c means (two, one or no solutions), the intersection and zero methods on a graphing calculator, isolating the absolute value, solving |A| = B by cases on a number line, solving both equations and rejecting extraneous solutions, and tolerance and distance problems. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u7l4.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u7l4">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Hotel Elevator">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="40" y="46" font-size="34" text-anchor="middle">🧊</text></g><text x="115" y="46" font-size="34" text-anchor="middle">🛎️<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/><text x="190" y="46" font-size="34" text-anchor="middle">🧳</text></g><text x="265" y="46" font-size="34" text-anchor="middle">🔑<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0.8s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Hotel Elevator</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Priya’s hotel has floors 1 to 12. She gets on the elevator, rides 6&nbsp;floors and gets off to fill her ice bucket. Then she gets back on and rides 4&nbsp;floors to her room on floor&nbsp;7.</p><p class="vw-ask">On which floor did she get on the elevator?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A 12-floor hotel with an elevator moving up and down and a floor display showing a question mark"><rect x="70" y="22" width="140" height="204" fill="#fffdf6" stroke="#4a4436" stroke-width="3"/><line x1="70" y1="39" x2="210" y2="39" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="35" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">12</text><rect x="82" y="26" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="26" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="26" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="56" x2="210" y2="56" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="52" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">11</text><rect x="82" y="43" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="43" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="43" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="73" x2="210" y2="73" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="69" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">10</text><rect x="82" y="60" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="60" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="60" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="90" x2="210" y2="90" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="86" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">9</text><rect x="82" y="77" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="77" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="77" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="107" x2="210" y2="107" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="103" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">8</text><rect x="82" y="94" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="94" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="94" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="124" x2="210" y2="124" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="120" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">7</text><rect x="82" y="111" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="111" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="111" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="141" x2="210" y2="141" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="137" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">6</text><rect x="82" y="128" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="128" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="128" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="158" x2="210" y2="158" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="154" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">5</text><rect x="82" y="145" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="145" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="145" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="175" x2="210" y2="175" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="171" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">4</text><rect x="82" y="162" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="162" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="162" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="192" x2="210" y2="192" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="188" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">3</text><rect x="82" y="179" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="179" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="179" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="209" x2="210" y2="209" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="205" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">2</text><rect x="82" y="196" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="196" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="196" width="13" height="9" rx="1.5" fill="#cfe0f5"/><line x1="70" y1="226" x2="210" y2="226" stroke="#d9d3c4" stroke-width="1.5"/><text x="62" y="222" font-size="12.5" font-weight="700" fill="#4a4436" text-anchor="end">1</text><rect x="82" y="213" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="104" y="213" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="126" y="213" width="13" height="9" rx="1.5" fill="#cfe0f5"/><rect x="78" y="109" width="64" height="13" rx="3" fill="#ffe8b0" stroke="#e0a11b" stroke-width="2.5"><animate attributeName="opacity" values="1;0.45;1" dur="2s" begin="0s" repeatCount="indefinite"/></rect><text x="110" y="120" font-size="11.5" font-weight="800" fill="#7a4a00" text-anchor="middle">room</text><rect x="160" y="22" width="40" height="204" fill="#efeae0" stroke="#4a4436" stroke-width="2"/><g><animateTransform attributeName="transform" type="translate" values="0 170;0 68;0 136;0 17;0 102;0 34;0 153;0 170" keyTimes="0.000;0.143;0.286;0.429;0.571;0.714;0.857;1.000" dur="9s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1;.45 0 .55 1"/><rect x="163" y="23" width="34" height="15" rx="2" fill="#c93a33"/><text x="180" y="35" font-size="12" text-anchor="middle">🧍</text></g><path d="M64 22 L216 22" stroke="#4a4436" stroke-width="5"/><text x="140" y="16" font-size="13" font-weight="800" fill="#4a4436" text-anchor="middle">HOTEL</text><line x1="20" y1="226" x2="310" y2="226" stroke="#4a4436" stroke-width="3"/><rect x="232" y="40" width="74" height="58" rx="10" fill="#1c2230"/><text x="269" y="84" font-size="38" font-weight="800" fill="#ffcf4a" text-anchor="middle">?<animate attributeName="opacity" values="1;0.2;1" dur="1.4s" begin="0s" repeatCount="indefinite"/></text><polygon points="252,118 269,104 286,118" fill="#12805a"><animate attributeName="opacity" values="1;0.2;1" dur="1.8s" begin="0s" repeatCount="indefinite"/></polygon><polygon points="252,128 269,142 286,128" fill="#c93a33"><animate attributeName="opacity" values="1;0.2;1" dur="1.8s" begin="0.9s" repeatCount="indefinite"/></polygon><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.8s" begin="0s" repeatCount="indefinite"/><text x="268" y="196" font-size="40" text-anchor="middle">🧊</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Make a guess first. Then test it.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Floor 5 or floor 9!</b> From floor 5: up 6 to the ice machine on 11, then down 4 to 7. From floor 9: down 6 to 3, then up 4 to 7.<br>Working backwards from 7, the ice machine is on 11 or 3, and the start is 6 floors from there: 17, 5, 9 or −3. But floors 17 and −3 aren’t in the building, so they don’t count.</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 7 Absolute Value and Reciprocal Functions · Lesson 4</div>
+  <h1>Solving Absolute Value Equations (Linear)</h1>
+  <p class="lede">Solving equations such as <span class="tex">|2x-5|=9</span> and <span class="tex">|x-4|=3x</span> graphically and algebraically by cases, and rejecting extraneous solutions.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>tell whether <span class="tex">|A|=c</span> has <b>two, one or no</b> solutions</li>
+      <li>solve an absolute value equation <b>graphically</b> with the intersection method or the zero method</li>
+      <li><b>isolate the absolute value</b> first, then solve <span class="tex">A=c</span> or <span class="tex">A=-c</span></li>
+      <li>solve <span class="tex">|A|=B</span> <b>by cases</b>, keeping a solution only if it is in its own subdomain</li>
+      <li>solve <span class="tex">A=B</span> and <span class="tex">A=-B</span>, then <b>verify</b> and reject <b>extraneous</b> solutions</li>
+      <li>write and solve absolute value equations for tolerances and distances</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF2</b> Graph and analyze absolute value functions (limited to linear and quadratic functions) to solve problems.<br><span class="muted">Today: what <span class="tex">|A|=c</span> means, solving graphically, isolating the absolute value, solving by cases, verifying, and problems.</span></div>
+</section>
+
+<!-- ================= 1. What an absolute value equation means ================= -->
+<section class="card" data-ink="s1" data-section="1. What an Absolute Value Equation Means">
+  <div class="sec-h"><span class="badge">1</span><h2>What an Absolute Value Equation Means</h2></div>
+  <p>An <b>absolute value equation</b> has the variable inside absolute value bars, for example <span class="tex">|x-3|=5</span> or <span class="tex">|2x+3|=x+6</span>. Since <span class="tex">|x-3|</span> is the distance between <span class="tex">x</span> and <span class="tex">3</span>, the equation <span class="tex">|x-3|=5</span> asks for the numbers <span class="tex">5</span> units from <span class="tex">3</span>: <span class="tex">x=-2</span> or <span class="tex">x=8</span>.</p>
+  <p>An absolute value is never negative, so the value on the other side decides how many solutions there are.</p>
+  <div class="def amber u7l4-key"><div class="u7l4-keyh">For <span class="tex">|A|=c</span>, where <span class="tex">c</span> is a constant</div>
+    <div class="u7l4-three">
+      <div><b class="u7l4-n2">c &gt; 0</b>two solutions, from <span class="tex">A=c</span> or <span class="tex">A=-c</span></div>
+      <div><b class="u7l4-n1">c = 0</b>one solution, from <span class="tex">A=0</span></div>
+      <div><b class="u7l4-n0">c &lt; 0</b><b>no solution</b></div>
+    </div></div>
+  <div class="explainer" data-explainer="howmany"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Two, one or none</h3></div>
+  <p class="q">Solve.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">|x|=7</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x=7</span> or <span class="tex">x=-7</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">|x-3|=5</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x-3=5</span> or <span class="tex">x-3=-5</span><br><span class="tex">x=8</span> or <span class="tex">x=-2</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">|x+4|=0</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+4=0</span><br><span class="tex">x=-4</span> (one solution)</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">|x-1|=-2</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">No solution: an absolute value cannot equal <span class="tex">-2</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Solving graphically ================= -->
+<section class="card" data-ink="s2" data-section="2. Solving Graphically">
+  <div class="sec-h"><span class="badge">2</span><h2>Solving Graphically</h2></div>
+  <p>A solution of an equation is an <span class="tex">x</span>-value that makes the two sides equal. On a graph these are the <span class="tex">x</span>-coordinates where the graphs of the two sides meet. A graphing calculator gives two ways to find them.</p>
+  <div class="def amber u7l4-key"><div class="u7l4-two">
+    <div><b>Intersection method</b>Graph <span class="tex">y=</span> left side and <span class="tex">y=</span> right side; the solutions are the <span class="tex">x</span>-coordinates of the points of intersection (use <b>intersect</b>).</div>
+    <div><b>Zero method</b>Move every term to one side, so the equation reads <span class="tex">(\dots)=0</span>; graph <span class="tex">y=(\dots)</span>; the solutions are its zeros, the <span class="tex">x</span>-intercepts (use <b>zero</b>).</div>
+  </div>
+  <div class="u7l4-calcl">On the TI-84 Plus CE, type <span class="tex">|2x-4|</span> as <code>abs(2X-4)</code> (<span class="keys"><kbd>MATH</kbd></span> NUM); <b>intersect</b> and <b>zero</b> are in the CALC menu (<span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd></span>).</div></div>
+  <div class="explainer" data-explainer="methods"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Read the solutions from the graphs</h3></div>
+  <p class="q">Use the graphs to solve each equation. Then check each solution in the equation.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">|2x-4|=6</span></div>
+      <div class="u7l4-gw"><div class="u7l4-sk" data-bk-graph='{"width":330,"height":310,"xmin":-3.5,"xmax":7.5,"ymin":-1.5,"ymax":9.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"fn":["abs(2*x-4)",{"color":"blue"}]},{"line":[{"m":0,"b":6},{"color":"orange"}]},{"label":[3.3,1.6,"y=|2x-4|",{"tex":true,"pos":"e","color":"blue","cls":"bk-ptlab"}]},{"label":[2,6.2,"y=6",{"tex":true,"pos":"n","color":"orange","cls":"bk-ptlab"}]}]}'></div><div class="work" style="--h:310px"></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">The graphs meet at <span class="tex">(-1,\ 6)</span> and <span class="tex">(5,\ 6)</span>: <span class="tex">x=-1</span> or <span class="tex">x=5</span>.<br>Check: <span class="tex">|2(-1)-4|=|-6|=6</span> ✓ &nbsp; <span class="tex">|2(5)-4|=|6|=6</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">|x+1|=2x-1</span></div>
+      <div class="u7l4-gw"><div class="u7l4-sk" data-bk-graph='{"width":330,"height":310,"xmin":-4.5,"xmax":5.5,"ymin":-4.5,"ymax":6.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"fn":["abs(x+1)",{"color":"blue"}]},{"segment":[[-1.7,-4.4],[3.7,6.4],{"color":"orange"}]},{"label":[-1.6,4.4,"y=|x+1|",{"tex":true,"pos":"w","color":"blue","cls":"bk-ptlab"}]},{"label":[3.5,4.6,"y=2x-1",{"tex":true,"pos":"e","color":"orange","cls":"bk-ptlab"}]}]}'></div><div class="work" style="--h:310px"></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">The graphs meet only at <span class="tex">(2,\ 3)</span>: <span class="tex">x=2</span>.<br>Check: <span class="tex">|2+1|=3</span> and <span class="tex">2(2)-1=3</span> ✓<br>The left arm of the V never meets the line, so there is only one solution.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>The zero method</h3></div>
+  <div class="u7l4-ex3">
+    <div class="u7l4-col">
+      <div class="part"><div class="pl">(a) Describe how to solve <span class="tex">|3x-6|=x+2</span> with the zero method.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Rearrange: <span class="tex">|3x-6|-x-2=0</span>.<br>Graph <span class="tex">y=|3x-6|-x-2</span> (<code>abs(3X-6)-X-2</code>).<br>Use <b>zero</b> on each <span class="tex">x</span>-intercept.</div></div></div>
+      <div class="part"><div class="pl">(b) The graph from (a) is shown. State the solution and check it.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The zeros are <span class="tex">x=1</span> and <span class="tex">x=4</span>.<br>Check: <span class="tex">|3-6|=3</span> and <span class="tex">1+2=3</span> ✓<br><span class="tex">|12-6|=6</span> and <span class="tex">4+2=6</span> ✓</div></div></div>
+    </div>
+    <div class="u7l4-sk u7l4-skp" data-bk-graph='{"width":340,"height":380,"xmin":-1.5,"xmax":6.5,"ymin":-5.5,"ymax":6.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"fn":["abs(3*x-6)-x-2",{"color":"purple"}]},{"label":[2.4,-4.4,"y=|3x-6|-x-2",{"tex":true,"pos":"e","color":"purple","cls":"bk-ptlab"}]}]}'></div>
+  </div>
+  <div class="tip calc-tip u7l4-ctip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>On your own calculator.</b> Intersection method for Example 2(a): <span class="tex">Y_1=</span> <code>abs(2X-4)</code>, <span class="tex">Y_2=6</span>, then <b>5:intersect</b>, pressing <span class="keys"><kbd>ENTER</kbd></span> twice and typing a guess near each crossing (<span class="tex">-1</span>, then <span class="tex">5</span>). Zero method for Example 3: <span class="tex">Y_1=</span> <code>abs(3X-6)-X-2</code>, then <b>2:zero</b> with a left bound, a right bound and a guess on either side of each <span class="tex">x</span>-intercept.</div>
+    <div class="u7l4-pcol"><button class="pill" data-keys="Y= CLEAR abs( 2 X − 4 ) ▼ CLEAR 6 ZStandard intersect ENTER ENTER (−) 1 ENTER">Show intersect</button><button class="pill" data-keys="Y= CLEAR abs( 3 X − 6 ) − X − 2 ZStandard zero 0 ENTER 2 ENTER 1 ENTER">Show zero</button></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Solving |A| = c algebraically ================= -->
+<section class="card" data-ink="s3" data-section="3. Solving |A| = c Algebraically">
+  <div class="sec-h"><span class="badge">3</span><h2>Solving <span class="tex">|A|=c</span> Algebraically</h2></div>
+  <p>When the other side is a constant, first <b>isolate the absolute value</b> (undo the other operations on the outside of the bars). Then use the key idea from Section 1: <span class="tex">A=c</span> or <span class="tex">A=-c</span>.</p>
+  <div class="explainer" data-explainer="isolate"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Isolate the absolute value first</h3></div>
+  <p class="q">Solve.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">|2x-5|=9</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x-5=9</span> or <span class="tex">2x-5=-9</span><br><span class="tex">2x=14</span> or <span class="tex">2x=-4</span><br><span class="tex">x=7</span> or <span class="tex">x=-2</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">3|x+2|-4=11</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3|x+2|=15\Rightarrow|x+2|=5</span><br><span class="tex">x+2=5</span> or <span class="tex">x+2=-5</span><br><span class="tex">x=3</span> or <span class="tex">x=-7</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">|4-3x|+8=2</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">|4-3x|=-6</span><br>No solution: an absolute value is never negative.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">-2|x-6|+1=1</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-2|x-6|=0\Rightarrow|x-6|=0</span><br><span class="tex">x-6=0</span>, <span class="tex">x=6</span> (one solution)</div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\tfrac{1}{2}|x+3|=4</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">|x+3|=8</span><br><span class="tex">x+3=8</span> or <span class="tex">x+3=-8</span><br><span class="tex">x=5</span> or <span class="tex">x=-11</span></div></div></div>
+  </div>
+  <div class="part u7l4-solo"><div class="pl">(f) A student solved <span class="tex">|x+2|+4=1</span> this way: &nbsp;<span class="tex">x+2+4=1</span> or <span class="tex">x+2+4=-1</span>, &nbsp;so <span class="tex">x=-5</span> or <span class="tex">x=-7</span>. Explain the error and give the correct solution.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The absolute value was not isolated first. <span class="tex">|x+2|=-3</span> has no solution.<br>Check: <span class="tex">|-5+2|+4=7\ne1</span> and <span class="tex">|-7+2|+4=9\ne1</span>. Both “solutions” fail.</div></div></div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 4 · Questions 1–6</h2>
+  <p class="pr-t">Count the solutions, solve on the graphing calculator, and isolate the absolute value before you split.</p>
+  <div class="pr-chips n4"><span><b>1</b>Two, one or no solutions</span><span><b>2–4</b>Intersection and zero methods, sketches</span><span><b>5</b>Isolate, then <span class="tex">A=\pm c</span></span><span><b>6</b>Find the error</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u7l4">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. Solving |A| = B by cases ================= -->
+<section class="card" data-ink="s4" data-section="4. Solving |A| = B by Cases">
+  <div class="sec-h"><span class="badge">4</span><h2>Solving <span class="tex">|A|=B</span> by Cases</h2></div>
+  <p>When the other side contains the variable, the number of solutions is not known in advance. Use the piecewise form of the absolute value (Lesson 2): on each side of the value that makes the inside zero, the bars can be replaced by an ordinary expression.</p>
+  <div class="def amber u7l4-key"><div class="u7l4-keyh">Solving by cases</div>
+    <div class="u7l4-steps">
+      <div><b>1</b>Find the value of <span class="tex">x</span> that makes the expression inside the bars equal to <span class="tex">0</span>.</div>
+      <div><b>2</b>Split the number line there into two subdomains.</div>
+      <div><b>3</b>In each subdomain, replace <span class="tex">|A|</span> by <span class="tex">A</span> (where <span class="tex">A\ge0</span>) or by <span class="tex">-A</span> (where <span class="tex">A&lt;0</span>).</div>
+      <div><b>4</b>Solve the equation in each subdomain.</div>
+      <div><b>5</b>Keep a solution only if it is in its own subdomain; combine the solutions that are kept.</div>
+    </div></div>
+  <div class="explainer" data-explainer="cases"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Two cases, one solution</h3></div>
+  <p class="q">Solve <span class="tex">|x-4|=3x</span> by cases.</p>
+  <div class="u7l4-nl" id="u7l4-ex5nl"></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">Case 1: <span class="tex">x\ge4</span>, so <span class="tex">|x-4|=x-4</span>.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x-4=3x</span><br><span class="tex">-4=2x</span>, &nbsp;<span class="tex">x=-2</span><br>Is <span class="tex">-2\ge4</span>? No: <b class="u7l4-no">reject</b>.</div></div></div>
+    <div class="part"><div class="pl">Case 2: <span class="tex">x&lt;4</span>, so <span class="tex">|x-4|=-(x-4)</span>.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-x+4=3x</span><br><span class="tex">4=4x</span>, &nbsp;<span class="tex">x=1</span><br>Is <span class="tex">1&lt;4</span>? Yes: <b class="u7l4-ok">keep</b>.</div></div></div>
+  </div>
+  <div class="part u7l4-solo"><div class="u7l4-sline">Solution: <span data-reveal><span class="tex">x=1</span></span> <span class="u7l4-gap"></span> Check: <span data-reveal><span class="tex">|1-4|=3</span> and <span class="tex">3(1)=3</span> ✓</span></div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Cases, then the graph</h3></div>
+  <div class="u7l4-ex6">
+    <div class="u7l4-col">
+      <div class="part"><div class="pl">(a) Solve <span class="tex">|2x+3|=x+6</span> by cases.</div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x+3=0</span> at <span class="tex">x=-\tfrac{3}{2}</span>.<br>Case 1: <span class="tex">x\ge-\tfrac{3}{2}</span>: &nbsp;<span class="tex">2x+3=x+6</span>, &nbsp;<span class="tex">x=3</span>. In the subdomain: keep.<br>Case 2: <span class="tex">x&lt;-\tfrac{3}{2}</span>: &nbsp;<span class="tex">-(2x+3)=x+6</span><br><span class="tex">-2x-3=x+6</span>, &nbsp;<span class="tex">-3x=9</span>, &nbsp;<span class="tex">x=-3</span>. In the subdomain: keep.<br>Solution: <span class="tex">x=-3</span> or <span class="tex">x=3</span>.</div></div></div>
+      <div class="part"><div class="pl">(b) Sketch <span class="tex">y=|2x+3|</span> and <span class="tex">y=x+6</span> on the grid to confirm the solution.</div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">They meet at <span class="tex">(-3,\ 3)</span> and <span class="tex">(3,\ 9)</span>.</div></div></div>
+    </div>
+    <div class="part u7l4-gpart"><div class="u7l4-sk">
+      <div data-bk-graph='{"width":360,"height":420,"xmin":-6.5,"xmax":4.5,"ymin":-1.5,"ymax":10.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[]}'></div>
+      <div class="u7l4-ska" data-bk-graph='{"width":360,"height":420,"xmin":-6.5,"xmax":4.5,"ymin":-1.5,"ymax":10.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"fn":["abs(2*x+3)",{"color":"blue"}]},{"line":[{"m":1,"b":6},{"color":"orange"}]},{"point":[-3,3,{"color":"green","coords":true,"pos":"w"}]},{"point":[3,9,{"color":"green","coords":true,"pos":"se"}]}]}'></div>
+    </div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Solving both equations, then verifying ================= -->
+<section class="card" data-ink="s5" data-section="5. Solve Both, Then Verify">
+  <div class="sec-h"><span class="badge">5</span><h2>Solving Both Equations, Then Verifying</h2></div>
+  <p>A shorter method ignores the subdomains: write <span class="tex">A=B</span> and <span class="tex">A=-B</span>, solve both, then <b>check every answer in the original equation</b>. An answer that fails the check is an <b>extraneous solution</b>: it solves one of the two linear equations but not the absolute value equation, usually because it makes the right side negative. Reject it.</p>
+  <div class="def amber u7l4-key"><div class="u7l4-keyh">To solve <span class="tex">|A|=B</span></div>
+    <div class="u7l4-steps u7l4-s3">
+      <div><b>1</b>Isolate the absolute value.</div>
+      <div><b>2</b>Solve <span class="tex">A=B</span> and <span class="tex">A=-B</span>.</div>
+      <div><b>3</b>Substitute each answer into the original equation; reject any that fail (the right side <span class="tex">B</span> must be <span class="tex">\ge0</span>).</div>
+    </div>
+    <div class="u7l4-keyf">There can be two solutions, one solution or no solution.</div></div>
+  <div class="explainer" data-explainer="verdict"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Solve and verify</h3></div>
+  <p class="q">Solve and verify.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">|3x+1|=x-5</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3x+1=x-5\Rightarrow x=-3</span><br><span class="tex">3x+1=-(x-5)\Rightarrow 4x=4\Rightarrow x=1</span><br>Check <span class="tex">x=-3</span>: <span class="tex">|-8|=8</span>, but <span class="tex">-3-5=-8</span> ✗<br>Check <span class="tex">x=1</span>: <span class="tex">|4|=4</span>, but <span class="tex">1-5=-4</span> ✗<br>Both are extraneous: <b>no solution</b>. (The line <span class="tex">y=x-5</span> stays below the V.)</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2|x-3|=x+3</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2(x-3)=x+3\Rightarrow x=9</span><br><span class="tex">-2(x-3)=x+3\Rightarrow -2x+6=x+3\Rightarrow x=1</span><br>Check <span class="tex">x=9</span>: <span class="tex">2|6|=12</span>, <span class="tex">9+3=12</span> ✓<br>Check <span class="tex">x=1</span>: <span class="tex">2|-2|=4</span>, <span class="tex">1+3=4</span> ✓<br><span class="tex">x=1</span> or <span class="tex">x=9</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">|x+5|-2x=1</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Isolate: <span class="tex">|x+5|=2x+1</span><br><span class="tex">x+5=2x+1\Rightarrow x=4</span><br><span class="tex">-(x+5)=2x+1\Rightarrow -3x=6\Rightarrow x=-2</span><br>Check <span class="tex">x=4</span>: <span class="tex">|9|=9</span>, <span class="tex">2(4)+1=9</span> ✓<br>Check <span class="tex">x=-2</span>: <span class="tex">|3|=3</span>, but <span class="tex">2(-2)+1=-3</span> ✗<br><span class="tex">x=4</span> (<span class="tex">x=-2</span> is extraneous)</div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u7l4"></section>
+
+<!-- ================= 6. Problems ================= -->
+<section class="card" data-ink="s6" data-section="6. Problems">
+  <div class="sec-h"><span class="badge">6</span><h2>Problems</h2></div>
+  <p>Absolute value equations describe numbers at a given distance from a target value: <span class="tex">|x-a|=d</span> means “<span class="tex">x</span> is <span class="tex">d</span> units from <span class="tex">a</span>”, so <span class="tex">x=a+d</span> or <span class="tex">x=a-d</span>. Working backwards, two numbers <span class="tex">m</span> and <span class="tex">n</span> are the solutions of <span class="tex">|x-a|=d</span> where <span class="tex">a=\dfrac{m+n}{2}</span> is the midpoint and <span class="tex">d=\dfrac{|m-n|}{2}</span> is half the distance between them.</p>
+  <div class="explainer" data-explainer="target"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Tolerance and distance</h3></div>
+  <div class="part u7l4-solo"><div class="pl">(a) A cereal company fills boxes with a target mass of <span class="tex">750</span> g. A box is rejected if its mass differs from the target by more than <span class="tex">12</span> g. Write and solve an absolute value equation for the least and greatest masses that are accepted.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">m</span> be the mass in grams. <span class="tex">|m-750|=12</span><br><span class="tex">m-750=12</span> or <span class="tex">m-750=-12</span>: <span class="tex">m=762</span> or <span class="tex">m=738</span>. Accepted boxes are from <span class="tex">738</span> g to <span class="tex">762</span> g.</div></div></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(b) Write an absolute value equation, in the form <span class="tex">|x-a|=d</span>, whose solutions are <span class="tex">-3</span> and <span class="tex">11</span>.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Midpoint <span class="tex">a=\tfrac{-3+11}{2}=4</span>; half the distance <span class="tex">d=\tfrac{11-(-3)}{2}=7</span>.<br><span class="tex">|x-4|=7</span><br>Check: <span class="tex">|-3-4|=7</span> ✓ &nbsp;<span class="tex">|11-4|=7</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(c) The distance between a number and <span class="tex">2</span> is twice the number. Write an equation and determine the number.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">|x-2|=2x</span><br><span class="tex">x-2=2x\Rightarrow x=-2</span>: &nbsp;<span class="tex">|-4|=4</span>, but <span class="tex">2(-2)=-4</span> ✗<br><span class="tex">-(x-2)=2x\Rightarrow 2=3x\Rightarrow x=\tfrac{2}{3}</span>: &nbsp;<span class="tex">\left|-\tfrac{4}{3}\right|=\tfrac{4}{3}=2\left(\tfrac{2}{3}\right)</span> ✓<br>The number is <span class="tex">\tfrac{2}{3}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>How many solutions?</b> For <span class="tex">|A|=c</span>: <span class="tex">c&gt;0</span> two (<span class="tex">A=\pm c</span>), <span class="tex">c=0</span> one, <span class="tex">c&lt;0</span> none. An absolute value is never negative.</div>
+    <div><b>Graphically.</b> Intersection method: graph both sides, use <b>intersect</b>. Zero method: move everything to one side, graph it, use <b>zero</b>. Type <span class="tex">|\ |</span> as <code>abs(</code>.</div>
+    <div><b>Isolate first.</b> Undo what is outside the bars, then split: <span class="tex">3|x+2|-4=11\Rightarrow|x+2|=5\Rightarrow x+2=\pm5</span>.</div>
+    <div><b>Variable on the right.</b> By cases (keep a root only in its own subdomain), or solve <span class="tex">A=B</span> and <span class="tex">A=-B</span> and <b>check every root</b>: one that makes the right side negative is <b>extraneous</b>.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u7l4">
+    <div><div class="kicker">Your turn</div><b>Assignment 4 · Questions 7–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l5/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 5 — Solving Absolute Value Equations (Quadratic)</b><div class="muted">The same methods with a quadratic inside the bars.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u7l4.js';
+  boot({ key: 'u7l4', homeHref: '../../', title: '7.4 Absolute Value Equations' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

@@ -61,7 +61,7 @@ function qf(a, b, c, o = {}) {
   q.l1 = `x=\\dfrac{${nbs}\\pm\\sqrt{${col ? cD(D) : D}}}{${den}}`;
   if (Number.isInteger(r)) {
     q.kind = 'rat'; q.r = r; q.l1 += `=\\dfrac{${nbs}\\pm${r}}{${den}}`;
-    const one = (n) => { const raw = `\\tfrac{${n}}{${den}}`, red = fracTex(n, den); return raw === red ? raw : `${raw}=${red}`; };
+    const one = (n) => { const raw = `\\dfrac{${n}}{${den}}`, red = fracTex(n, den).replace('\\tfrac', '\\dfrac'); return raw === red ? raw : `${raw}=${red}`; };
     q.l2 = `x=${one(nb + r)}\\ \\text{or}\\ x=${one(nb - r)}`;
     q.roots = [fracTex(nb + r, den), fracTex(nb - r, den)];
   } else {
@@ -102,7 +102,7 @@ const machine = {
   ask: (v) => `Solve ${T(MC[v].eq)} with the quadratic formula.`,
   make(stage, v, ex) {
     const d = MC[v], q = qf(d.a, d.b, d.c), W = ex.W, H = 440;
-    const LW = 214, RW = 204, MX = LW + 18, MW = W - LW - RW - 36, RX = MX + MW + 22, cx = MX + MW / 2;
+    const LW = 232, RW = 200, MX = LW + 18, MW = W - LW - RW - 36, RX = MX + MW + 22, cx = MX + MW / 2;
     /* input: the equation, rearranged to standard form */
     const inP = panel(stage, 8, 8, LW, 226, `${sn(1)}Standard form`);
     lineIn(inP, T(d.eq), 'u5l7-eqin').style.opacity = 1;
@@ -140,15 +140,15 @@ const machine = {
       if (l2) rC2 = row(0, l2, 'u5l7-big');
     }
     /* output trays */
-    const trays = chY.map((y, i) => div(stage, 'u5l7-tray', `<div class="u5l7-th">${i ? '−' : '+'} root</div>`, RX, y - 14, RW - 8, 112));
+    const trays = chY.map((y, i) => div(stage, 'u5l7-tray', `<div class="u5l7-th">${i ? '−' : '+'} root</div>`, RX, y - 20, RW - 8, 128));
     const head5 = div(stage, 'u5l7-t5', `${sn(5)}Two roots`, RX, 92, RW - 8, 36); hide(head5);
     const caps = [];
     if (q.kind !== 'none') q.roots.forEach((r, i) => {
       const dec = d.dp ? `<div class="u5l7-dec">${T(`x\\approx${fx(q.dec[i], d.dp)}`)}</div>` : '';
       caps.push(hide(div(trays[i], 'u5l7-capsule', `${T(`x=${cR(r.replace(/\\tfrac/g, '\\dfrac'))}`)}${dec}`)));
     });
-    const jam = stampAt(stage, 'NO REAL ROOTS', false, RX + RW / 2 - 4, 236);
-    const okSt = q.kind === 'rat' ? stampAt(stage, `perfect square: ${q.D} = ${q.r}²`, null, cx + 20, H - 112, { rotate: -4 }) : null;
+    const jam = stampAt(stage, 'NO REAL ROOTS', false, W - 140, 236);
+    const okSt = q.kind === 'rat' ? stampAt(stage, `${q.D} = ${q.r}²`, null, 8 + LW / 2, 300, { rotate: -5, size: 'lg' }) : null;
 
     const capPrep = d.prep ? `Expand and collect terms first: ${T(d.prep[d.prep.length - 1][0])}. ` : '';
     const steps = [
@@ -162,7 +162,7 @@ const machine = {
       q.kind === 'none'
         ? { cap: `<b>3. The discriminant first:</b> ${T(`b^2-4ac=${cX(q.D)}`)} is <b>negative</b>. A negative number has no real square root, so there are <b>no real roots</b>.`,
           run: async (c) => { await Promise.all([spin(c, 700), show(c, rB)]); light.setAttribute('fill', NO); await shake(c, svg); await show(c, rX); await stampIn(c, jam); } }
-        : { cap: `<b>3. The discriminant first:</b> ${T(`b^2-4ac=${cD(q.D)}`)}. It is positive, so the green light is on: ${q.kind === 'rat' ? 'and it is a <b>perfect square</b>, so the roots are rational.' : 'two real roots.'}`,
+        : { cap: `<b>3. The discriminant first:</b> ${T(`b^2-4ac=${cD(q.D)}`)}. ${q.kind === 'rat' ? 'It is positive (green light) and a <b>perfect square</b>, so the roots are rational.' : 'It is positive, so the green light is on: two real roots.'}`,
           run: async (c) => { await Promise.all([spin(c, 700), show(c, rB)]); light.setAttribute('fill', OK); await pulse(c, rB, 1.04); } }
     ];
     if (q.kind === 'none') return steps;
@@ -234,7 +234,7 @@ const VD = {
     rows: [
       ['x=\\dfrac{-(-4)\\pm\\sqrt{-4^2-4(2)(-3)}}{2(2)}', 'x=\\dfrac{-(-4)\\pm\\sqrt{(-4)^2-4(2)(-3)}}{2(2)}', 'err', '(−4)² = 16', '<b>Line 1: error.</b> ' + T('-4^2') + ' means ' + T('-(4^2)=-16') + '. Squaring a negative ' + T('b') + ' needs <b>brackets</b>: ' + T('(-4)^2=16') + '.'],
       ['x=\\dfrac{4\\pm\\sqrt{-16+24}}{4}=\\dfrac{4\\pm\\sqrt8}{4}', 'x=\\dfrac{4\\pm\\sqrt{16+24}}{4}=\\dfrac{4\\pm\\sqrt{40}}{4}', 'carry', 'from Line 1', '<b>Line 2</b> carries the error: the discriminant should be ' + T('16+24=40') + ', not ' + T('8') + '.'],
-      ['x=\\dfrac{4\\pm2\\sqrt2}{4}', 'x=\\dfrac{4\\pm2\\sqrt{10}}{4}', 'carry', 'from Line 1', '<b>Line 3:</b> ' + T('\\sqrt8=2\\sqrt2') + ' is right, but it is the wrong radical. With ' + T('\\sqrt{40}=2\\sqrt{10}') + '.'],
+      ['x=\\dfrac{4\\pm2\\sqrt2}{4}', 'x=\\dfrac{4\\pm2\\sqrt{10}}{4}', 'carry', 'from Line 1', '<b>Line 3:</b> ' + T('\\sqrt8=2\\sqrt2') + ' is right, but it is the wrong radical. The correct line uses ' + T('\\sqrt{40}=2\\sqrt{10}') + '.'],
       ['x=1\\pm2\\sqrt2', 'x=\\dfrac{2\\pm\\sqrt{10}}{2}', 'err', 'divide EVERY term', '<b>Line 4: error.</b> Only the ' + T('4') + ' was divided by ' + T('4') + '. Every term of the numerator must be divided (here by the common factor ' + T('2') + ').']],
     final: 'x=\\dfrac{2\\pm\\sqrt{10}}{2}\\approx2.58,\\ -0.58', vcap: 'Two errors: a <b>sign error</b> in Line 1 and <b>only one term divided</b> in Line 4. The correct roots: ' },
   pm: { label: 'Lost the ±', eq: 'x^2+2x-4=0', verdict: 'LOST A SOLUTION',
@@ -276,7 +276,7 @@ const verdict = {
     });
     const fy = y0 + d.rows.length * RH + 6;
     const fin = hide(div(stage, 'u5l7-vfin', `${T(d.final)}`, 28 + PW, fy, PW - 24, 60));
-    const vst = stampAt(stage, d.verdict, false, 8 + PW / 2, 392, { size: 'lg' });
+    const vst = stampAt(stage, d.verdict, false, 8 + PW / 2, 392);
     const steps = d.rows.map((r, i) => ({ cap: r[4], run: async (c) => {
       const o = rows[i];
       scan.style.opacity = 1; await anim(c, scan, [{ top: scan.style.top }, { top: (y0 + i * RH - 4) + 'px' }], 420);
@@ -316,7 +316,7 @@ const race = {
       const run = div(track, 'u5l7-runner', '🏃'); run.style.left = '0px';
       const lines = ln.lines.map((t, k) => hide(div(stage, 'u5l7-rl', `<span>${T(t)}</span>`, x + 12, 100 + k * 76, CW - 24, 66)));
       const stuck = ln.stuck ? hide(div(stage, 'u5l7-rl u5l7-rstuck', `<span>${ln.stuck.replace(/x term/, `${T('x')} term`)}</span>`, x + 12, 100 + ln.lines.length * 76, CW - 24, 66)) : null;
-      const st = ln.stuck ? stampAt(stage, ln.lines.length ? 'STUCK' : "DOESN'T APPLY", false, x + CW / 2, 392) : i === d.win ? stampAt(stage, '🏆 FASTEST', true, x + CW / 2, 392, { size: 'lg' }) : stampAt(stage, 'works, but slower', null, x + CW / 2, 392, { rotate: -4 });
+      const st = ln.stuck ? stampAt(stage, ln.lines.length ? 'STUCK' : "DOESN'T APPLY", false, x + CW / 2, 392) : i === d.win ? stampAt(stage, '🏆 FASTEST', true, x + CW / 2, 392) : stampAt(stage, 'works, but slower', null, x + CW / 2, 392, { rotate: -4 });
       return { ln, track, run, lines, stuck, st, done: false };
     });
     const steps = [{ cap: `Three methods race to solve ${T(d.eq)}. Each tick, every method writes <b>one line</b>.`, run: async (c) => { for (const l of L) await pulse(c, l.run, 1.25); } }];
@@ -359,7 +359,7 @@ function ballSteps(stage, ex) {
   div(sc, 'u5l7-thrower', '🧍', 62, gy - 46);
   const ball = div(sc, 'u5l7-bball', '', 100, yOf(2) - 11, 22, 22);
   const clock = div(stage, 'u5l7-clock', T('t=0.00\\text{ s}'), 30, 14, 130, 36);
-  const G = new Graph(stage, { x: GX, y: 4, width: GW, height: H - 8, xmin: -0.6, xmax: 3.6, ymin: -2, ymax: 15, xstep: 0.5, xlabels: 1, ylabels: 2, xtitle: 't', ytitle: 'h', fontSize: 15 });
+  const G = new Graph(stage, { x: GX, y: 20, width: GW, height: H - 24, xmin: -0.6, xmax: 3.6, ymin: -2, ymax: 15, xstep: 0.5, xlabels: 1, ylabels: 2, xtitle: 't', ytitle: 'h', fontSize: 15 });
   const o = { from: 0, to: 0.0001, color: CR }, cur = G.fn(hB, o);
   const back = hide(G.fn(hB, { from: T0 - 0.02, to: 0, color: NO, dash: true }));
   const dot = G.point(0, 2, { color: CR });
@@ -370,8 +370,8 @@ function ballSteps(stage, ex) {
     lineIn(P, T(`t\\approx${fx(T1, 2)}\\ \\text{or}\\ t\\approx${fx(T0, 2)}`), 'u5l7-strong')];
   const pR = G.point(T1, 0, { color: OK, label: T(`${fx(T1, 2)}`), pos: 'n' }), pN = G.point(T0, 0, { color: NO, label: T(`${fx(T0, 2)}`), pos: 'nw' });
   [pR, pN].forEach((p) => { hide(p); hide(p.label); });
-  const stN = stampAt(stage, 'REJECT: before the throw', false, W - PW / 2 - 6, 300, { rotate: -5 });
-  const stY = stampAt(stage, 'lands after about 3.2 s', true, W - PW / 2 - 6, 372, { rotate: -3 });
+  const stN = stampAt(stage, 'REJECT t < 0', false, W - PW / 2 - 6, 296, { rotate: -5 });
+  const stY = stampAt(stage, 'LANDS AT 3.2 s', true, W - PW / 2 - 6, 370, { rotate: -3 });
   const setT = (t) => { o.to = Math.max(0.0001, t); cur._bkDraw(); G.moveTo(dot, t, hB(t)); ball.style.top = (yOf(Math.max(0, hB(t))) - 11) + 'px'; clock.innerHTML = T(`t=${t.toFixed(2)}\\text{ s}`); };
   return [
     { cap: `The ball starts ${T('2')} m up (${T('t=0')}). Watch the ball and its graph together.`, run: (c) => pulse(c, ball, 1.4) },

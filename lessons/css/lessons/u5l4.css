@@ -1,0 +1,101 @@
+/* Math 20-1 · Unit 5 · Lesson 4 — General Form and Factored Form: styles used only on this page (prefix u5l4-).
+ * Colours: vertex form / the vertex and axis red, general form / the y-intercept green, factored form / the zeros amber,
+ * the curve blue. */
+
+.u5l4 .pl .katex { font-size: 1.06em; }
+.u5l4 .ans .katex { font-size: 1.03em; }
+.u5l4 .katex { white-space: nowrap; }
+.u5l4 h2 .katex, .u5l4 h3 .katex { font-size: .95em; }
+.u5l4-cv { color: #c93a33; }
+.u5l4-cg { color: #12805a; }
+.u5l4-cz { color: #a86a08; }
+.u5l4-p { font-size: 19px; line-height: 1.5; margin: 12px 0; }
+.u5l4-ul { font-size: 19px; line-height: 1.5; margin: 6px 0 14px; padding-left: 1.4em; }
+.u5l4-ul li { margin: 4px 0; }
+.u5l4-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u5l4-pcol .pill { white-space: nowrap; }
+.u5l4-exin { margin-top: 16px; }
+
+/* ---------------- section 1: the forms table ---------------- */
+.u5l4-ftab { width: 100%; border-collapse: collapse; font-size: 19px; line-height: 1.35; background: #fff; border-radius: 12px; overflow: hidden; margin: 6px 0 14px; }
+.u5l4-ftab th { text-align: left; font: 800 16px var(--round); color: var(--muted); padding: 7px 12px; border-bottom: 2px solid #ddd6c6; background: #faf7f0; }
+.u5l4-ftab td { padding: 8px 12px; border-bottom: 1px solid #eee7d8; }
+.u5l4-ftab td:first-child { font-weight: 800; width: 19%; }
+.u5l4-ftab td:nth-child(2) { width: 27%; }
+.u5l4-ftab tr:last-child td { border-bottom: none; }
+.u5l4-rv td:first-child { border-left: 6px solid #c93a33; color: #c93a33; }
+.u5l4-rg td:first-child { border-left: 6px solid #12805a; color: #12805a; }
+.u5l4-rz td:first-child { border-left: 6px solid #c27a0e; color: #a86a08; }
+
+/* ---------------- key ideas ---------------- */
+.u5l4-key { border-left-width: 7px; font-size: 19.5px; line-height: 1.6; }
+.u5l4-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 4px; }
+
+/* ---------------- Example 3 and Example 5: sketch on a grid, the answer overlays the same grid ---------------- */
+.u5l4-ang { display: grid; grid-template-columns: minmax(0, 1fr) 372px; gap: 18px; align-items: start; }
+.u5l4-atab { width: 100%; border-collapse: collapse; font-size: 19px; background: #fff; }
+.u5l4-atab td { border: 1.5px solid #ddd6c6; padding: 8px 12px; height: 50px; vertical-align: middle; }
+.u5l4-atab td:first-child { font-weight: 700; width: 42%; background: #faf7f0; }
+.u5l4-atab td:last-child { color: var(--red); text-align: center; }
+.u5l4-sk { position: relative; background: #fff; border-radius: 12px; }
+.u5l4-ska { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .35s; }
+.part.shown .u5l4-ska { opacity: 1; }
+.u5l4-ex5 { display: grid; grid-template-columns: minmax(0, 1fr) 386px; gap: 16px; align-items: start; }
+.u5l4-col { display: flex; flex-direction: column; gap: 14px; }
+.u5l4-skp { padding: 8px; }
+
+/* ---------------- Example 4 and Example 7 tables ---------------- */
+.u5l4-tpart { padding: 8px 10px; }
+.u5l4-tab { width: 100%; border-collapse: collapse; font-size: 19px; line-height: 1.3; background: #fff; margin-bottom: 8px; }
+.u5l4-tab th { font: 800 16px var(--round); color: var(--muted); padding: 6px 8px; border: 1.5px solid #ddd6c6; background: #faf7f0; }
+.u5l4-tab td { border: 1.5px solid #ddd6c6; padding: 8px; height: 60px; text-align: center; vertical-align: middle; color: var(--red); }
+.u5l4-tab td:first-child { color: var(--ink); white-space: nowrap; text-align: left; }
+.u5l4-tab7 { max-width: 760px; margin-top: 6px; }
+.u5l4-tab7 td:first-child { white-space: normal; font-weight: 700; width: 24%; }
+
+/* ---------------- explainers: shared ---------------- */
+.u5l4-rows { display: flex; flex-direction: column; gap: 8px; }
+.u5l4-row { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 7px 12px; font-size: 19px; line-height: 1.5; }
+.u5l4-n { flex: 0 0 auto; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 17px var(--round); margin-top: 1px; }
+.u5l4-n:empty { visibility: hidden; }
+.u5l4-rc { min-width: 0; }
+.u5l4-rows-s .u5l4-row { font-size: 18px; padding: 5px 10px; }
+.u5l4-neg { display: inline-block; background: #fde9e7; color: #c93a33; font: 800 15px var(--round); border-radius: 8px; padding: 1px 8px; margin-left: 6px; }
+.u5l4-sl { display: flex; align-items: center; gap: 12px; background: #f3f6fd; border: 2px solid #c9d6f4; border-radius: 14px; padding: 6px 14px; cursor: pointer; }
+.u5l4-sll { font-size: 26px; }
+.u5l4-sl input { flex: 1; height: 40px; accent-color: #1f5bd6; cursor: pointer; touch-action: none; }
+.u5l4-sl input::-webkit-slider-thumb { width: 34px; height: 34px; }
+.u5l4-slv { font: 800 24px var(--round); min-width: 56px; text-align: right; color: #1f5bd6; }
+
+/* ---------------- forms ---------------- */
+.u5l4-pn { display: flex; flex-direction: column; gap: 10px; }
+.u5l4-fc { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; text-align: left; background: #fff; border: 2.5px solid var(--line); border-left-width: 9px; border-radius: 14px; padding: 7px 14px; font: inherit; color: var(--ink); cursor: pointer; transition: background .3s, box-shadow .3s; }
+.u5l4-fn { font: 800 16px var(--round); text-transform: uppercase; letter-spacing: .05em; }
+.u5l4-fa { justify-self: end; font-size: 18px; color: #7a1f3d; }
+.u5l4-fe { grid-column: 1 / -1; font-size: 25px; }
+.u5l4-ff { grid-column: 1 / -1; font-size: 16.5px; color: var(--muted); min-height: 22px; }
+.u5l4-fcv { border-left-color: #c93a33; } .u5l4-fcv .u5l4-fn { color: #c93a33; }
+.u5l4-fcg { border-left-color: #12805a; } .u5l4-fcg .u5l4-fn { color: #12805a; }
+.u5l4-fcz { border-left-color: #c27a0e; } .u5l4-fcz .u5l4-fn { color: #a86a08; }
+.u5l4-fcv.on { background: #fdecea; box-shadow: 0 0 0 3px rgba(201,58,51,.25); } .u5l4-fcv.on .u5l4-ff { color: #c93a33; }
+.u5l4-fcg.on { background: #e5f4ec; box-shadow: 0 0 0 3px rgba(18,128,90,.25); } .u5l4-fcg.on .u5l4-ff { color: #12805a; }
+.u5l4-fcz.on { background: #fdf1dc; box-shadow: 0 0 0 3px rgba(194,122,14,.28); } .u5l4-fcz.on .u5l4-ff { color: #a86a08; }
+
+/* ---------------- the X ---------------- */
+.u5l4-x line { stroke: #3a4254; stroke-width: 4; stroke-linecap: round; }
+.u5l4-xl { translate: -50% -50%; font-size: 25px; font-weight: 700; white-space: nowrap; }
+.u5l4-xt { color: #7a1f3d; } .u5l4-xb { color: #1f5bd6; } .u5l4-xs { color: #12805a; }
+.u5l4-pairs { display: grid; gap: 3px; font-size: 18px; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 6px 8px; }
+.u5l4-ph { font: 800 14px var(--round); color: var(--muted); text-transform: uppercase; letter-spacing: .05em; text-align: center; }
+.u5l4-pairs > div:not(.u5l4-ph) { display: flex; justify-content: space-between; gap: 8px; padding: 2px 10px; border: 2.5px solid transparent; border-radius: 16px; }
+.u5l4-pairs > div > i { font-style: normal; color: var(--muted); }
+.u5l4-pairs > div.on { border-color: #12805a; color: #12805a; font-weight: 700; }
+.u5l4-pairs > div.on > i { color: #12805a; }
+
+/* ---------------- pen ---------------- */
+.u5l4-scene { border-radius: 12px; }
+.u5l4-wall { font: 800 16px var(--round); fill: #fff; letter-spacing: .2em; }
+.u5l4-plab { position: absolute; font-size: 17px; color: #6b4a2b; font-weight: 700; background: rgba(255,255,255,.85); border-radius: 8px; padding: 0 6px; white-space: nowrap; }
+.u5l4-live { background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 6px 12px; font-size: 18.5px; line-height: 1.5; text-align: center; }
+.u5l4-nop { display: inline-block; background: #fde9e7; color: #c93a33; font: 800 15px var(--round); border-radius: 8px; padding: 0 8px; }
+.u5l4-fc:not(.on) .u5l4-ff { visibility: hidden; }

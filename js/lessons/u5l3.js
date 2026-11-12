@@ -154,6 +154,8 @@
     var inner = K.line({ x: p }, { wrong: w });
     return function (resp) {
       var s = String(resp == null ? '' : resp).trim();
+      var rhs = s.replace(/^\s*x\s*=\s*/, ''), ra = ex.parse(rhs);
+      if (ra.ok && !Object.keys(ex.shape(ra.ast).vars).length) { var rv = ex.value(ra.ast); if (!same(rv, p) && Math.abs(rv - p) < 0.01 && ex.shape(ra.ast).decimals) return form('decimal-rounded', 'Close, but that decimal isn’t exact. Give the exact value as a fraction.'); }
       if (s && !/=/.test(s)) {
         var a = ex.parse(s);
         if (a.ok && !Object.keys(ex.shape(a.ast).vars).length) { if (same(ex.value(a.ast), p)) return form(LID + '-axis-eq', 'Right value — now write the axis of symmetry as an equation, ' + t('x=\\ldots') + '.'); return inner('x=' + s); }
@@ -260,7 +262,7 @@
         return ok();
       }
       var dec = A.vals.some(function (x) { return ex.shape(x.ast).decimals; });
-      if (spec.irr && dec && vals.length === T.length && vals.every(function (x) { return T.some(function (y) { return Math.abs(x - y) < 0.006; }); })) return form(LID + '-exact', 'Those are rounded decimals. Give the exact values, in simplest radical form (use ' + t('\\pm') + ' and ' + t('\\sqrt{\\ }') + ').');
+      if (dec && vals.length === T.length && vals.every(function (x) { return T.some(function (y) { return Math.abs(x - y) < 0.006; }); })) return form(LID + '-exact', spec.irr ? 'Those are rounded decimals. Give the exact values, in simplest radical form (use ' + t('\\pm') + ' and ' + t('\\sqrt{\\ }') + ').' : 'Close, but a rounded decimal isn’t exact. Give the exact values (fractions where needed).');
       if (vals.length === 1 && T.length === 2 && T.some(function (y) { return same(y, vals[0]); })) return wrong(LID + '-pm', 'Correct so far — but a square has two square roots: ' + t('(x-p)^{2}=k') + ' gives ' + t('x-p=\\pm\\sqrt{k}') + ', so there are two ' + what + '.');
       var miss = T.filter(function (x) { return !vals.some(function (y) { return same(x, y); }); }), extra = vals.filter(function (x) { return !T.some(function (y) { return same(x, y); }); });
       if (miss.length && !extra.length) return wrong('sol-missing', 'Correct so far — but there is another value.');

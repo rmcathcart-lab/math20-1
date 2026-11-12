@@ -49,7 +49,7 @@ export class Explainer {
     if (def.choices) {
       const chips = h('div', 'ex-chips'); this.chipEls = [];
       def.choices.forEach((c) => {
-        if (c && c.sep) { chips.appendChild(h('span', 'ex-sep', c.sep)); return; }
+        if (c && typeof c === 'object' && 'sep' in c) { chips.appendChild(h('span', 'ex-sep', c.sep)); return; }
         const o = typeof c === 'object' ? c : { v: c, label: fmt(c) };
         const b = h('button', 'chip', o.label); b.type = 'button'; b.onclick = () => this.choose(o.v); b.dataset.v = o.v; chips.appendChild(b); this.chipEls.push(b);
       });
@@ -89,7 +89,7 @@ export class Explainer {
       window.addEventListener('resize', this.placeCtl); new ResizeObserver(this.placeCtl).observe(host);
     } else host.append(top, this.hold, this.cap, ctl);
     this.tapToNext();
-    const first = def.choices ? def.choices.find((c) => !(c && typeof c === 'object' && c.sep)) : undefined; // skip { sep } headings
+    const first = def.choices ? def.choices.find((c) => !(c && typeof c === 'object' && 'sep' in c)) : undefined; // skip { sep } headings
     this.value = def.value != null ? def.value : first !== undefined ? (typeof first === 'object' ? first.v : first) : null;
     this.lastW = 0;
     const ro = new ResizeObserver(() => { const w = this.hold.clientWidth; if (w && Math.abs(w - this.lastW) > 2) { const first = !this.lastW; this.lastW = w; this.fitStage(w); if (first) this.build(0); else { this.stop(); this.build(this.k); } } });

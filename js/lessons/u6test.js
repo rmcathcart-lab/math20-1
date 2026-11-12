@@ -380,7 +380,7 @@
       if (r2.code === 'empty') return wrong(cp + 'npv-wrong', h2);
       return { v: 'form', code: r2.code, hint: h2 };
     };
-    var p = { prompt: prompt, input: { type: 'fields', fields: [{ label: 'Simplified:', mode: 'math', keys: 'u6rat', vars: vars, name: 'Simplified' }, { label: 'NPVs:', mode: 'math', keys: 'u6rat', vars: vars, none: true, name: 'NPVs', placeholder: 'e.g. ' + vars[0] + ' ≠ 3, −2' }] },
+    var p = { prompt: big(prompt), input: { type: 'fields', fields: [{ label: 'Simplified:', mode: 'math', keys: 'u6rat', vars: vars, name: 'Simplified', placeholder: 'e.g. (x+3)/(x(x-2))' }, { label: 'NPVs:', mode: 'math', keys: 'u6rat', vars: vars, none: true, name: 'NPVs', placeholder: 'e.g. ' + vars[0] + ' ≠ 3, −2' }] },
       check: check, key: key, answer: t(key[0]) + ', \\(' + key[1] + '\\)', solution: sol, hints: hints || [], text: text };
     var bad = [];
     dl.forEach(function (w) { bad.push([cTex(w.cn), key[1]]); });
@@ -394,14 +394,14 @@
     o = o || {};
     var TP = cPolys(T), vars = vlist(P.vars(TP.N).concat(P.vars(TP.D)).concat(o.vars || []));
     var dl = (o.dl || []).filter(function (w) { return w && w.cn && !cSame(w.cn, T); });
-    var p = KP.math(prompt, ratCheck(TP, { cp: cp, vars: vars, dl: dl.map(function (w) { var q = cPolys(w.cn); return { N: q.N, D: q.D, code: w.code, hint: w.hint }; }) }), cTex(T), sol, hints, text, { keys: 'u6rat', vars: vars, before: o.before, placeholder: 'e.g. (x+3)/(x(x-2))' });
+    var p = KP.math(big(prompt), ratCheck(TP, { cp: cp, vars: vars, dl: dl.map(function (w) { var q = cPolys(w.cn); return { N: q.N, D: q.D, code: w.code, hint: w.hint }; }) }), cTex(T), sol, hints, text, { keys: 'u6rat', vars: vars, before: o.before, placeholder: 'e.g. (x+3)/(x(x-2))' });
     p.bad = dl.map(function (w) { return cTex(w.cn); }).filter(function (b, i, arr) { return arr.indexOf(b) === i; });
     return p;
   }
   function npvPart(cp, prompt, npv, o, sol, hints, text) {
     o = o || {};
     var vs = Object.keys(npv), v = o.v || vs[0] || 'x', nw = (o.nw || []).filter(function (w) { return w && !npvEq(w.vals, npv); });
-    var p = KP.math(prompt, npvCheck(npv, cp, { v: v, wrongs: nw }), npvTex(npv), sol, hints, text, { keys: 'u6npv', vars: vlist([v].concat(vs)), placeholder: 'e.g. ' + v + ' ≠ 3, −2  (or: none)' });
+    var p = KP.math(big(prompt), npvCheck(npv, cp, { v: v, wrongs: nw }), npvTex(npv), sol, hints, text, { keys: 'u6npv', vars: vlist([v].concat(vs)), placeholder: 'e.g. ' + v + ' ≠ 3, −2  (or: none)' });
     p.bad = nw.map(function (w) { return npvTex(w.vals); }).concat(npvTex(npv) === '\\text{none}' ? [v + '\\ne 0'] : ['\\text{none}']).filter(function (b, i, arr) { return arr.indexOf(b) === i && b !== npvTex(npv); });
     return p;
   }
@@ -456,7 +456,7 @@
       return r0;
     };
     var keyTex = o.keyTex || (vals.length ? vals.map(function (x) { return v + '=' + rt(x); }).join(',\\ ') : '\\text{no solution}');
-    var part = KP.math(prompt, check, keyTex, sol, hints, text, { keys: 'u6sol', vars: [v], placeholder: 'e.g. ' + v + ' = 3, ' + v + ' = -5   (or: no solution)' });
+    var part = KP.math(big(prompt), check, keyTex, sol, hints, text, { keys: 'u6sol', vars: [v], placeholder: 'e.g. ' + v + ' = 3, ' + v + ' = -5   (or: no solution)' });
     function setTex(arr) { return arr.length ? arr.map(function (x) { return v + '=' + rt(x); }).join(',\\ ') : '\\text{no solution}'; }
     var bad = [];
     if (extr.length) bad.push(setTex(vals.concat(o.extr.filter(function (e) { return !has(vals, e); }))));
@@ -465,7 +465,7 @@
     part.bad = bad.filter(function (b, i, arr) { return arr.indexOf(b) === i && b !== keyTex; });
     return part;
   }
-  function numPart(prompt, ans, diag, sol, hints, text, inp) { return KP.number(prompt, ans, diag, sol, hints, text, inp); }
+  function big(s) { return String(s).replace(/\\frac\{/g, '\\dfrac{'); } // prompts: fractions at full size (like the booklet's \dfrac)
 
   var B = {};
 
@@ -718,7 +718,7 @@
       return K.value(s.val, { diag: function (val) { if (other && s.x0 < 0 && ex.eq(val, rv(other))) return { code: cp + 'ev-slip', hint: 'Check the signs when you substitute ' + t(v + '=' + s.x0) + ': use brackets, e.g. ' + t('(' + s.x0 + ')^{2}') + '.' }; return null; } })(resp);
     };
     var key = s.undef ? '\\text{undefined}' : rt(s.val);
-    var p = KP.math('Evaluate ' + t(fracE(s.nl, s.dl)) + ' for ' + t(v + '=' + s.x0) + '. If it is undefined, say so.', check, key, sol,
+    var p = KP.math(big('Evaluate ' + t(fracE(s.nl, s.dl)) + ' for ' + t(v + '=' + s.x0) + '. If it is undefined, say so.'), check, key, sol,
       ['Substitute, then work out the numerator and the denominator separately.', 'A denominator of ' + t(0) + ' means the expression is undefined; a numerator of ' + t(0) + ' is fine.'], 'evaluate a rational expression', { keys: 'u6num', placeholder: 'e.g. -7/8  (or: undefined)' });
     p.bad = s.undef ? ['0', rt(s.N0)] : ['\\text{undefined}'].concat(other && s.x0 < 0 && rv(other) !== rv(s.val) ? [rt(other)] : []);
     return p;
@@ -733,7 +733,7 @@
     var k = -(s.a * s.r1 + s.m), q = s.r1 * s.m, other = ex.norm(s.m, s.a);
     var den = coefT(s.a) + v + '^{2}+k' + v + sg(q), Dp = P.add(M(s.a, v, 2), M(k, v, 1), P.num(q));
     var sol = t(v + '=' + s.r1) + ' makes the denominator ' + t(0) + ': ' + t(coefT(s.a) + '(' + s.r1 + ')^{2}+' + par(s.r1) + 'k' + sg(q) + '=0') + ', so ' + t((s.a * s.r1 * s.r1 + q) + (s.r1 === 1 ? '+' : s.r1 === -1 ? '-' : sg(s.r1)) + 'k=0') + ' and ' + t('k=' + k) + '.<br>' + t(tx(Dp) + '=(' + tx(lin(1, -s.r1, v)) + ')(' + tx(lin(s.a, -s.m, v)) + ')') + '. The other NPV is ' + t(v + '=' + rt(other)) + '.';
-    var p = KP.math('The expression ' + t('\\frac{' + s.c0 + '}{' + den + '}') + ' has a non-permissible value of ' + t(v + '=' + s.r1) + '. Determine the other non-permissible value.',
+    var p = KP.math(big('The expression ' + t('\\frac{' + s.c0 + '}{' + den + '}') + ' has a non-permissible value of ' + t(v + '=' + s.r1) + '. Determine the other non-permissible value.'),
       K.value(other, { diag: function (val) { if (ex.eq(val, k)) return { code: cp + 'gave-k', hint: 'That is ' + t('k') + '. Put ' + t('k') + ' back into the denominator, factor it, and find the other value that makes it ' + t(0) + '.' }; if (ex.eq(val, s.r1)) return { code: cp + 'gave-given', hint: 'That NPV was given. Find the other one.' }; if (ex.eq(val, -rv(other))) return { code: cp + 'k-sign', hint: 'Check the sign: the factor ' + t('(' + tx(lin(s.a, -s.m, v)) + ')') + ' is ' + t(0) + ' when ' + t(v + '=' + rt(other)) + '.' }; return null; } }),
       rt(other), sol, ['Substitute ' + t(v + '=' + s.r1) + ' into the denominator: it equals ' + t(0) + '. Solve for ' + t('k') + '.', 'Put ' + t('k') + ' back, factor the denominator, and read the other NPV.'], 'working backwards: the other NPV', { keys: 'u6num', before: v + '=' });
     p.bad = [String(k), String(s.r1)].concat(rv(other) !== 0 ? [rt([-other[0], other[1]])] : []).filter(function (b) { return b !== rt(other); });
@@ -810,7 +810,7 @@
     var numT = coefT(c2) + v + '^{2}+k' + v + sg(c0);
     var kw = s.a * other + s.m;
     var sol = t(tx(Dp) + '=(' + tx(lin(1, s.n, v)) + ')(' + tx(lin(1, other, v)) + ')') + '. The answer keeps ' + t('(' + tx(lin(1, other, v)) + ')') + ', so ' + t('(' + tx(lin(1, s.n, v)) + ')') + ' was divided out: the numerator is ' + t('(' + tx(lin(s.a, s.m, v)) + ')(' + tx(lin(1, s.n, v)) + ')=' + tx(Np)) + '.<br>' + t('k=' + k) + '.';
-    var p = KP.math('The expression ' + t('\\frac{' + numT + '}{' + tx(Dp) + '}') + ' simplifies to ' + t('\\frac{' + tx(lin(s.a, s.m, v)) + '}{' + tx(lin(1, other, v)) + '}') + '. Determine the value of ' + t('k') + '.',
+    var p = KP.math(big('The expression ' + t('\\frac{' + numT + '}{' + tx(Dp) + '}') + ' simplifies to ' + t('\\frac{' + tx(lin(s.a, s.m, v)) + '}{' + tx(lin(1, other, v)) + '}') + '. Determine the value of ' + t('k') + '.'),
       K.value(k, { diag: function (val) { if (val === kw) return { code: cp + 'k-factor', hint: 'The factor that was divided out is the one that is <b>not</b> left in the answer’s denominator: ' + t('(' + tx(lin(1, s.n, v)) + ')') + '.' }; if (val === -k) return { code: cp + 'k-sign', hint: 'Check the signs when you expand ' + t('(' + tx(lin(s.a, s.m, v)) + ')(' + tx(lin(1, s.n, v)) + ')') + '.' }; return null; } }),
       String(k), sol, ['Factor the denominator. Which factor is missing from the simplified answer? That one was divided out.', 'The numerator is the answer’s numerator times that factor. Expand it and read the middle coefficient.'], 'working backwards: k', { keys: 'u6num', before: 'k=' });
     p.bad = [String(kw), String(-k)].filter(function (b) { return b !== String(k); });
@@ -975,7 +975,7 @@
   B.addSame = function (r, cp) {
     var v = pickVar(r), kind = r.pick(['mono', 'bin', 'tri']), terms;
     if (kind === 'mono') {
-      var s = pickWhere(function () { return { c: r.int(2, 6), a1: r.int(1, 9), b1: nz(r, 1, 9), a2: r.int(1, 9), b2: nz(r, 1, 9), sub: r.chance(0.7) }; }, function (z) { var A1 = z.sub ? z.a1 - z.a2 : z.a1 + z.a2, B1 = z.sub ? z.b1 - z.b2 : z.b1 + z.b2; return A1 !== 0 && B1 !== 0 && z.a1 !== z.a2 && (gcd(gcd(A1, B1), z.c) > 1 || r.chance(0.4)); });
+      var s = pickWhere(function () { return { c: r.int(2, 6), a1: r.int(1, 9), b1: nz(r, 1, 9), a2: r.int(1, 9), b2: nz(r, 1, 9), sub: r.chance(0.7) }; }, function (z) { var A1 = z.sub ? z.a1 - z.a2 : z.a1 + z.a2, B1 = z.sub ? z.b1 - z.b2 : z.b1 + z.b2; return A1 !== 0 && B1 !== 0 && z.a1 !== z.a2 && gcd(gcd(z.a1, z.b1), z.c) === 1 && gcd(gcd(z.a2, z.b2), z.c) === 1 && (gcd(gcd(A1, B1), z.c) > 1 || r.chance(0.4)); });
       terms = [T1(1, [A(s.a1, s.b1, v)], [Mo(s.c, v, 1)]), T1(s.sub ? -1 : 1, [A(s.a2, s.b2, v)], [Mo(s.c, v, 1)])];
     } else if (kind === 'bin') {
       var b = pickWhere(function () { return { d: nz(r, 1, 7), k: nz(r, 2, 5), a2: r.int(1, 6), b2: nz(r, 1, 9) }; }, function (z) { return z.b2 !== 0 && z.a2 + z.k !== 0; });
@@ -1002,7 +1002,7 @@
       var s2 = pickWhere(function () { return { a: r.int(2, 6), b: r.int(2, 6), e: r.pick([1, 1, 2]), f: r.pick([1, 1, 2]), p: nz(r, 1, 7), q: nz(r, 1, 7), c1: r.pick([1, 1, 2, 3]), c2: r.pick([1, 1, 2]), sub: r.chance(0.5) }; }, function (z) { return z.a !== z.b && !(z.e === 2 && z.f === 2) && gcd(z.c1, z.p) === 1 && gcd(z.c2, z.q) === 1; });
       terms = [T1(1, [A(s2.c1, s2.p, v)], [Mo(s2.a, v, s2.e)]), T1(s2.sub ? -1 : 1, [A(s2.c2, s2.q, v)], [Mo(s2.b, v, s2.f)])];
     } else {
-      var kind = r.pick(['cf', 'fc', 'vc']), c = r.int(2, 7), p = r.int(1, 9), a = r.pick([1, 1, 2, 3]);
+      var kind = r.pick(['cf', 'fc', 'vc']), c = r.int(2, 7), p = r.int(1, 9), a = r.pick([1, 1, 2, 3]); if (gcd(p, a) > 1) a = 1;
       if (kind === 'cf') terms = [T1(1, [C(c)], []), T1(r.chance(0.5) ? 1 : -1, [C(p)], [Mo(a, v, 1)])];
       else if (kind === 'fc') terms = [T1(1, [C(p)], [Mo(a, v, 1)]), T1(-1, [C(c)], [])];
       else terms = [T1(1, [A(1, nz(r, 1, 5), v)], []), T1(-1, [C(p)], [Mo(1, v, 1)])];
@@ -1021,7 +1021,7 @@
     var prompt = 'Determine the value of ' + t('k') + ' so that ' + t('\\frac{x+k}{' + s.a + 'x}' + op + '\\frac{' + second + '}{' + s.b + 'x}') + ' simplifies to ' + t(rt(c)) + ' (for ' + t('x\\ne 0') + ').';
     var Ac = L / s.a + (s.add ? 1 : -1) * L / s.b, Cc = (L / s.b) * s.m, ka = L / s.a;
     var sol = 'The LCD is ' + t(L + 'x') + ': ' + t('\\frac{' + coefT(ka) + '(x+k)' + op + coefT(L / s.b) + '(' + second + ')}{' + L + 'x}') + '. The numerator is ' + t(tx(lin(Ac, Cc)) + '+' + coefT(ka) + 'k') + '.<br>For the result to be a constant, the constant terms must cancel: ' + t(coefT(ka) + 'k' + sg(Cc) + '=0') + ', so ' + t('k=' + k) + '. Then it is ' + t('\\frac{' + coefT(Ac) + 'x}{' + L + 'x}=' + rt(c)) + '.';
-    var p = KP.math(prompt, K.value(k, { diag: function (val) { if (val === -k) return { code: cp + 'k-sign', hint: 'Check the signs: ' + (s.add ? '' : 'the minus sign changes the sign of every term of the second numerator. ') + 'The constant terms of the numerator must add to ' + t(0) + '.' }; return null; } }),
+    var p = KP.math(big(prompt), K.value(k, { diag: function (val) { if (val === -k) return { code: cp + 'k-sign', hint: 'Check the signs: ' + (s.add ? '' : 'the minus sign changes the sign of every term of the second numerator. ') + 'The constant terms of the numerator must add to ' + t(0) + '.' }; return null; } }),
       String(k), sol, ['Write both fractions over the LCD and combine the numerators (keep ' + t('k') + ' as a letter).', 'The answer has no ' + t('x') + ' left, so the constant terms of the numerator must cancel.'], 'working backwards: k', { keys: 'u6num', before: 'k=' });
     p.bad = [String(-k)];
     return p;
@@ -1039,6 +1039,7 @@
       if (r.chance(0.25)) terms = [T1(1, [C(r.int(2, 4))], []), T1(r.chance(0.5) ? 1 : -1, [A(1, z[2], v)], [A(1, z[3], v)])];
     } else if (mode === 'gcf') {
       var kind = r.pick(['c', 'x', 'dos']), p = nz(r, 1, 7), g = r.int(2, 5), n1 = r.int(1, 7), n2 = r.int(1, 7);
+      if (kind === 'c' && gcd(n1, g) > 1) n1 = 1;
       if (kind === 'c') terms = [T1(1, [C(n1)], [C(g), A(1, p, v)]), T1(r.chance(0.5) ? 1 : -1, [C(n2)], [A(1, p, v)])];
       else if (kind === 'x') terms = [T1(1, [C(n1)], [Mo(1, v, 1), A(1, p, v)]), T1(-1, [C(n2)], [Mo(1, v, 1)])];
       else { var q = r.int(2, 7); terms = [T1(1, [Mo(1, v, 1)], [A(1, -q, v), A(1, q, v)]), T1(-1, [C(1)], [A(1, q, v)])]; }
@@ -1109,6 +1110,7 @@
     }, function (z) {
       if (z.sv === 0 || z.p === 0) return false;
       if (z.m && (z.n % z.m === 0 || z.m % z.n === 0) && r.chance(0.7)) return false;
+      if (z.m && (gcd(z.p, z.m) > 1 || gcd(z.L[1].nf[0].c[0], z.n) > 1)) return false;
       if (z.b && (z.c === z.b)) return false;
       var W = eqWork(z.L, z.R, v); if (W.roots.length !== 1 || W.info.deg !== 1) return false;
       var x0 = R(W.roots[0]); return x0[0] !== 0 && Math.abs(x0[0]) <= 60 && x0[1] <= 6;
@@ -1202,7 +1204,7 @@
     var b = s.r0 + s.r1, k = s.r0 * s.r1;
     var eq = v + '+\\frac{k}{' + v + '}=' + b;
     var sol = 'Substitute ' + t(v + '=' + s.r0) + ': ' + t(s.r0 + '+\\frac{k}{' + s.r0 + '}=' + b) + ', so ' + t('\\frac{k}{' + s.r0 + '}=' + (b - s.r0)) + ' and ' + t('k=' + k) + '.<br>' + t(v + (k < 0 ? '-' : '+') + '\\frac{' + Math.abs(k) + '}{' + v + '}=' + b) + ': multiply by ' + t(v) + ' (' + t(v + '\\ne 0') + '): ' + t(tx(P.add(M(1, v, 2), M(-b, v, 1), P.num(k))) + '=0') + ', ' + t('(' + tx(lin(1, -s.r0, v)) + ')(' + tx(lin(1, -s.r1, v)) + ')=0') + '. The other root is ' + t(v + '=' + s.r1) + '.';
-    var p = KP.math('One root of ' + t(eq) + ' is ' + t(v + '=' + s.r0) + '. Determine the other root.',
+    var p = KP.math(big('One root of ' + t(eq) + ' is ' + t(v + '=' + s.r0) + '. Determine the other root.'),
       K.value(s.r1, { diag: function (val) { if (val === k) return { code: cp + 'gave-k', hint: 'That is ' + t('k') + '. Put it back into the equation and solve for both roots.' }; if (val === s.r0) return { code: cp + 'gave-given', hint: 'That root was given: find the other one.' }; if (val === -s.r1) return { code: cp + 'k-sign', hint: 'Check the sign of the second factor.' }; return null; } }),
       String(s.r1), sol, ['Substitute the given root to find ' + t('k') + '.', 'Put ' + t('k') + ' back, multiply by ' + t(v) + ' and factor the quadratic.'], 'working backwards: k and the other root', { keys: 'u6num', before: v + '=' });
     p.bad = [String(k), String(s.r0), String(-s.r1)].filter(function (x, i, arr) { return x !== String(s.r1) && arr.indexOf(x) === i; });

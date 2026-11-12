@@ -1,0 +1,87 @@
+/* Math 20-1 · Unit 7 · Lesson 2 — Graphing Absolute Value Functions of Linear Functions: styles used only on this page
+ * (prefix u7l2-). Colours (Unit 7): y = f(x) blue; y = |f(x)| red; the flap orange; invariant points amber; a second line purple. */
+
+.u7l2 .pl .katex { font-size: 1.06em; }
+.u7l2 .ans .katex { font-size: 1.03em; }
+.u7l2 .katex { white-space: nowrap; }
+.u7l2 h2 .katex, .u7l2 h3 .katex { font-size: .95em; }
+.u7l2-p { font-size: 19px; line-height: 1.5; margin: 12px 0; }
+.u7l2-cf { color: #1f5bd6; }
+.u7l2-ca { color: #c93a33; }
+.u7l2-cv { color: #a86a08; }
+.u7l2-code { font-family: ui-monospace, Menlo, monospace; font-size: 18px; background: #fff; border: 1.5px solid var(--line); border-radius: 6px; padding: 0 6px; white-space: nowrap; }
+.u7l2-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u7l2-pcol .pill { white-space: nowrap; }
+
+/* ---------------- key ideas ---------------- */
+.u7l2-key { border-left-width: 7px; font-size: 19px; line-height: 1.5; }
+.u7l2-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 4px; }
+.u7l2-keyh .katex { font-size: .95em; }
+.u7l2-ul { margin: 4px 0 8px; padding-left: 26px; font-size: 19px; line-height: 1.5; }
+.u7l2-ul li { margin: 3px 0; }
+.u7l2-big { font-size: 20px; }
+.u7l2-keyc { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; }
+.u7l2-keyc .katex { font-size: 1.12em; }
+
+/* ---------------- tables ---------------- */
+.u7l2-tab { border-collapse: collapse; background: #fff; font-size: 19px; margin: 8px 0; }
+.u7l2-tab th, .u7l2-tab td { border: 1.5px solid #ddd6c6; text-align: center; vertical-align: middle; }
+.u7l2-tab th { background: #faf7f0; font: 700 17px var(--round); padding: 6px 10px; white-space: nowrap; }
+.u7l2-tab td { min-width: 50px; height: 46px; padding: 4px 6px; }
+.u7l2-fill td { color: var(--red); }
+.u7l2-neg { background: #fdeceb; }
+.u7l2-pos { background: #eaf6ef; }
+.u7l2-ctab { width: 100%; }
+.u7l2-ctab td { width: 38%; height: 52px; color: var(--red); font-size: 18px; }
+.u7l2-ctab th:first-child { text-align: left; }
+.u7l2-tab5 td { min-width: 62px; }
+
+/* ---------------- layout ---------------- */
+.u7l2-s1 { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 22px; align-items: start; }
+.u7l2-two { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: start; margin-top: 10px; }
+.u7l2-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.u7l2-gpart { display: flex; flex-direction: column; align-items: center; }
+.u7l2-gpart .pl { align-self: stretch; }
+.u7l2-fig { display: flex; justify-content: center; background: #fff; border-radius: 12px; padding: 4px; }
+.parts .u7l2-fig { margin: 4px 0 6px; }
+.u7l2 .u7l2-ans { transition: opacity .35s; }
+.u7l2 .part:not(.shown) .u7l2-ans { opacity: 0; }
+.u7l2-exin { margin-top: 16px; }
+
+/* ---------------- explainers: shared ---------------- */
+.u7l2-glow { fill: rgba(232, 160, 30, .18); stroke: #e8a01e; stroke-width: 4; transform-box: fill-box; transform-origin: center; animation: u7l2-glow 1s ease-in-out infinite; }
+@keyframes u7l2-glow { 0%, 100% { transform: scale(.75); opacity: 1; } 50% { transform: scale(1.35); opacity: .45; } }
+.u7l2-pn { display: flex; flex-direction: column; gap: 8px; }
+.u7l2-eqbig { font-size: 27px; text-align: center; }
+.u7l2-rows { display: flex; flex-direction: column; gap: 8px; }
+.u7l2-row { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 7px 12px; font-size: 19px; line-height: 1.5; }
+.u7l2-n { flex: 0 0 auto; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 17px var(--round); margin-top: 1px; }
+.u7l2-rc { min-width: 0; }
+.u7l2-flip { display: inline-block; background: #fde9e7; color: #c93a33; font: 800 15px var(--round); border-radius: 8px; padding: 1px 8px; margin-left: 6px; }
+.u7l2-vt .bk-td, .u7l2-vt .bk-th { font-size: 18px; }
+.u7l2-negc { background: #fdeceb !important; color: #c93a33; }
+
+/* ---------------- sketch: your turn ---------------- */
+.u7l2-sl { display: flex; align-items: center; gap: 12px; background: #f3f6fd; border: 2px solid #c9d6f4; border-radius: 14px; padding: 4px 14px; cursor: pointer; }
+.u7l2-sll { font-size: 26px; min-width: 22px; }
+.u7l2-sl input { flex: 1; height: 36px; accent-color: #1f5bd6; cursor: pointer; touch-action: none; }
+.u7l2-sl input::-webkit-slider-thumb { width: 34px; height: 34px; }
+.u7l2-slv { font: 800 24px var(--round); min-width: 56px; text-align: right; color: #1f5bd6; }
+.u7l2-out { display: grid; gap: 6px; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 8px 14px; font-size: 19px; line-height: 1.45; }
+
+/* ---------------- sketch: Example 4(a) comparison ---------------- */
+.u7l2-cmp table { width: 100%; border-collapse: collapse; background: #fff; font-size: 17px; }
+.u7l2-cmp th, .u7l2-cmp td { border: 1.5px solid #ddd6c6; padding: 6px 8px; text-align: center; height: 50px; }
+.u7l2-cmp th { background: #faf7f0; font: 700 16px var(--round); white-space: nowrap; }
+.u7l2-cmp td:nth-child(2) { color: #1f5bd6; }
+.u7l2-cmp .u7l2-c2 { color: #c93a33; }
+.u7l2-cmp .u7l2-chg { background: #fdf3e2; }
+
+/* ---------------- true or false ---------------- */
+.u7l2-claim { display: flex; align-items: baseline; justify-content: center; gap: 14px; font-size: 27px; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 8px 12px; }
+.u7l2-claim > span { font-size: 21px; color: var(--muted); }
+
+/* ---------------- ride ---------------- */
+.u7l2-scene { border-radius: 12px; }
+.u7l2-km { font: 700 13px var(--round); fill: #6b7280; }
+.u7l2-blab { width: 80px; text-align: center; color: #c93a33; font-size: 18px; font-weight: 700; }

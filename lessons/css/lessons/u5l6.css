@@ -1,0 +1,91 @@
+/* Math 20-1 · Unit 5 · Lesson 6 — Completing the Square: styles used only on this page (prefix u5l6-).
+ * Colours: a blue, b amber, the square of half of b purple, the number moved out of the brackets (× a) green,
+ * the vertex / vertex form brand, errors red. */
+
+.u5l6 .ex-cap .katex { font-size: 1.04em; }
+.u5l6 .chip .katex, .u5l6 .ex-sep .katex { font-size: 1em; }
+.u5l6 .pl .katex { font-size: 1.08em; }
+.u5l6 .ans .katex { font-size: 1.04em; }
+.u5l6 .katex { white-space: nowrap; }
+.u5l6 h2 .katex, .u5l6 h3 .katex { font-size: .95em; }
+
+/* ---------------- notes ---------------- */
+.u5l6-pair { display: flex; gap: 48px; justify-content: center; font-size: 22px; margin: 10px 0; }
+.u5l6-key { border-left-width: 7px; }
+.u5l6-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 8px; }
+.u5l6-key > .tex { font-size: 1.05em; }
+.u5l6-steps { display: grid; gap: 10px; margin: 2px 0 4px; }
+.u5l6-steps.n3 { grid-template-columns: repeat(3, 1fr); }
+.u5l6-steps.n4 { grid-template-columns: repeat(4, 1fr); }
+.u5l6-steps > div { background: #fff; border: 2px solid #f0d199; border-radius: 12px; padding: 10px 12px; font-size: 18px; line-height: 1.4; }
+.u5l6-steps > div > b:first-child { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 17px var(--round); margin-bottom: 6px; }
+.u5l6-eg { margin: 10px 0 0; font-size: 19px; }
+.u5l6-pcol { display: flex; flex-direction: column; gap: 8px; align-self: center; }
+.u5l6-pcol .pill { white-space: nowrap; }
+.u5l6-errs { margin: 0 0 14px; padding-left: 1.4em; font-size: 19px; line-height: 1.55; }
+
+/* Example 1: the table to fill in */
+.u5l6-solo { margin: 0 0 12px; }
+.u5l6-ptab { width: 100%; border-collapse: separate; border-spacing: 0; margin: 4px 0 12px; font-size: 20px; background: #fff; border: 2px solid #e4ded2; border-radius: 12px; overflow: hidden; }
+.u5l6-ptab th { text-align: left; background: #f7f4ee; font: 800 16px var(--round); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; padding: 8px 14px; }
+.u5l6-ptab td { padding: 8px 14px; border-top: 1.5px solid #eee8dc; height: 64px; vertical-align: middle; }
+.u5l6-ptab td + td { border-left: 1.5px dashed #e4ded2; }
+.u5l6-ptab td:first-child { width: 220px; } .u5l6-ptab td:nth-child(2) { width: 230px; }
+
+/* Example 7(b): the student's work */
+.u5l6-sw { background: #fffdf3; border: 2px solid #1c2230; border-radius: 6px; padding: 10px 16px; font-size: 19px; display: grid; gap: 6px; margin: 8px 0 10px; }
+.u5l6-swl { font: 700 15px var(--round); color: var(--muted); display: inline-block; min-width: 60px; }
+
+/* ---------------- explainer pieces ---------------- */
+.u5l6-panel { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; }
+.u5l6-ph { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.u5l6-line { font-size: 20px; line-height: 1.4; margin: 4px 0 8px; }
+.u5l6-big { font-size: 22px; }
+.u5l6-strong { font-weight: 700; background: #f6e9ef; border-radius: 8px; padding: 4px 8px; }
+.u5l6-sn { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 17px var(--round); flex: 0 0 auto; letter-spacing: 0; text-transform: none; }
+.u5l6-note { font: 700 17px var(--round); color: #a26100; background: #fff4dd; border-radius: 7px; padding: 1px 8px; white-space: nowrap; }
+.u5l6-note .katex { font-size: 1.08em; font-weight: 400; }
+
+/* half it, square it: the conveyor */
+.u5l6-expr { font-size: 34px; }
+.u5l6-target { font-size: 30px; display: flex; align-items: center; min-height: 58px; }
+.u5l6-chk { font-size: 19px; color: #12805a; font-weight: 700; }
+.u5l6-belt { background: repeating-linear-gradient(90deg, #d9d3c4 0 22px, #cfc8b6 22px 44px); border: 3px solid #5b5470; border-radius: 14px; box-sizing: border-box; }
+.u5l6-stn { background: #efeaf7; border: 3px solid #5b5470; border-radius: 16px; box-sizing: border-box; display: grid; place-items: center; align-content: center; gap: 2px; text-align: center; }
+.u5l6-stn b { font: 800 34px var(--round); color: #3a3352; line-height: 1; }
+.u5l6-stn i { font: 800 14px var(--round); font-style: normal; letter-spacing: .12em; color: #5b5470; display: flex; align-items: center; gap: 6px; }
+.u5l6-tok { display: flex; align-items: center; justify-content: center; background: #fff; border: 3.5px solid; border-radius: 30px; font-size: 30px; box-sizing: border-box; box-shadow: 0 3px 0 rgba(0, 0, 0, .15); white-space: nowrap; }
+.u5l6-tok small { font: 800 15px var(--round); color: var(--muted); margin-right: 6px; }
+
+/* step by step */
+.u5l6-wrow { position: absolute; left: 14px; right: 14px; display: grid; grid-template-columns: 34px 1fr; column-gap: 10px; row-gap: 2px; align-items: center; }
+.u5l6-wrow .u5l6-wt { font-size: 22px; }
+.u5l6-wrow .u5l6-wn { grid-column: 2; justify-self: start; }
+.u5l6-w0 { font-size: 24px; font-weight: 700; }
+.u5l6-vb { background: #f6e9ef; border: 2.5px solid #7a1f3d; border-radius: 12px; padding: 4px 12px; font-size: 19px; white-space: nowrap; }
+
+/* using the vertex form: the ball */
+.u5l6-sky { background: linear-gradient(180deg, #dcecfb, #f4f9ff); border: 2px solid #c9dcef; border-radius: 14px; box-sizing: border-box; overflow: hidden; }
+.u5l6-tick { font: 700 13px var(--round); color: #6b7a90; }
+.u5l6-ground { position: absolute; background: #5aa469; border-top: 4px solid #4a8f58; }
+.u5l6-thrower { font-size: 40px; line-height: 1; }
+.u5l6-bball { border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffd27a, #e8a01e 60%, #b5730c); border: 2px solid #8a560a; box-sizing: border-box; }
+.u5l6-clock { display: grid; place-items: center; background: #1c2230; color: #9ff0b5; border-radius: 10px; font-size: 18px; }
+.u5l6-clock .katex { color: #9ff0b5; }
+
+/* the mistake detector */
+.u5l6-paper { border-radius: 10px; box-sizing: border-box; padding: 8px 14px; }
+.u5l6-stu { background: #fffdf3; border: 2px solid #1c2230; }
+.u5l6-cor { background: #f1faf5; border: 2px solid #a7d8c2; }
+.u5l6-cor .u5l6-ph { color: #12805a; }
+.u5l6-vrow { display: flex; align-items: center; gap: 10px; font-size: 21px; border-radius: 10px; padding: 0 8px; box-sizing: border-box; border: 2.5px solid transparent; }
+.u5l6-vn { font: 800 14px var(--round); color: var(--muted); flex: 0 0 auto; }
+.u5l6-vbad { border-color: #c93a33; background: #fde3e0; }
+.u5l6-vcarry { border-color: #e8a01e; border-style: dashed; background: #fff4dd; }
+.u5l6-vgood { border-color: #a7d8c2; background: #f1faf5; }
+.u5l6-vmk { display: grid; place-items: center; border-radius: 50%; font: 900 24px var(--round); color: #fff; }
+.u5l6-vmk-ok { background: #12805a; } .u5l6-vmk-err { background: #c93a33; } .u5l6-vmk-carry { background: #e8a01e; }
+.u5l6-vtag { font: 800 14px var(--round); border-radius: 8px; padding: 2px 9px; white-space: nowrap; color: #fff; }
+.u5l6-vtag-err { background: #c93a33; } .u5l6-vtag-carry { background: #c27a0e; }
+.u5l6-scan { background: rgba(255, 214, 92, .22); border-top: 3px solid #e8a01e; border-bottom: 3px solid #e8a01e; border-radius: 8px; pointer-events: none; }
+.u5l6-vfin { display: flex; align-items: center; justify-content: center; gap: 12px; background: #e8f5ef; border: 2.5px solid #12805a; border-radius: 12px; font-size: 20px; box-sizing: border-box; }
