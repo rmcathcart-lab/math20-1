@@ -167,11 +167,12 @@
   function trivial(sd) { return !sd.facs.length && sd.co === 1 && !P.monoTex(sd.mono); }
   /* LaTeX of a canon (one fraction, sign in front) */
   function cTex(cn) {
+    if (cn.c[0] === 0) return '0';
     var neg = cn.c[0] < 0, n = side(cn, 1), d = side(cn, -1);
     if (trivial(d)) return neg ? (bare(n) ? '-(' + sideTex(n) + ')' : '-' + sideTex(n)) : sideTex(n);
     return (neg ? '-' : '') + '\\frac{' + sideTex(n) + '}{' + sideTex(d) + '}';
   }
-  function cPolys(cn) { var N = sidePoly(side(cn, 1)), D = sidePoly(side(cn, -1)); if (cn.c[0] < 0) N = P.neg(N); return { N: N, D: D }; }
+  function cPolys(cn) { if (cn.c[0] === 0) return { N: P.num(0), D: P.num(1) }; var N = sidePoly(side(cn, 1)), D = sidePoly(side(cn, -1)); if (cn.c[0] < 0) N = P.neg(N); return { N: N, D: D }; }
   function cNeg(cn) { var o = JSON.parse(JSON.stringify(cn)); o.c = [-o.c[0], o.c[1]]; return o; }
   function cSame(a, b) { var A1 = cPolys(a), B1 = cPolys(b); return P.eq(P.mul(A1.N, B1.D), P.mul(B1.N, A1.D)); }
   /* a list written for the factored step of a solution: −3(m − 4), x(x + 4), (x − 6)(x + 6) */
@@ -233,7 +234,19 @@
   function ratForm(ast, T) {
     if (ex.shape(ast).decimals) return form('u6r-decimal', RH.decimal);
     var top = ast; while (top.t === 'paren' || top.t === 'neg') top = top.a;
-    if (!hasVarDiv(ast)) { if (P.degree(T.D) > 0) return form('u6r-single', RH.single); return polyOK(top) ? null : form('u6r-tidy', RH.tidy); }
+    if (!hasVarDiv(ast)) {
+      if (P.isZero(T.N)) return null;
+      if (P.degree(T.D) > 0) return form('u6r-single', RH.single);
+      if (!polyOK(top)) return form('u6r-tidy', RH.tidy);
+      // one fraction over a number, e.g. (14x - 2)/20: the numerator and the number share no factor
+      var fz0 = ex.factors(top); if (fz0.den.length && fz0.num.concat(fz0.den).every(function (x) { return !hasDiv(x); })) {
+        var N0 = P.num(1), D0 = P.num(1);
+        try { fz0.num.forEach(function (x) { N0 = P.mul(N0, P.read(x).p); }); fz0.den.forEach(function (x) { D0 = P.mul(D0, P.read(x).p); }); } catch (e) { return null; }
+        var cN0 = content(N0), cD0 = content(D0);
+        if (cN0 > 0 && cD0 > 0 && gcd(cN0, cD0) > 1) return form('u6r-reduce', RH.reduce);
+      }
+      return null;
+    }
     var fz = ex.factors(top), all = fz.num.concat(fz.den);
     for (var i = 0; i < all.length; i++) { if (hasDiv(all[i]) && hasVarDiv(all[i])) return form('u6r-single', RH.single); if (all[i].t === 'add' || all[i].t === 'sub') { if (hasVarDiv(all[i])) return form('u6r-single', RH.single); } }
     for (var j = 0; j < all.length; j++) if (!polyOK(all[j])) return form(hasVarDiv(all[j]) ? 'u6r-single' : 'u6r-tidy', hasVarDiv(all[j]) ? RH.single : RH.tidy);
@@ -290,6 +303,7 @@
     if (/^\s*$/.test(s)) return { empty: true };
     if (/^\s*(none|no(ne)?\s*(npvs?|restrictions?|non-?\s*permissible\s*values?|values?)?|nonpvs|\\emptyset|\\varnothing|∅)\s*\.?\s*$/i.test(s.replace(/\s+/g, ' ').trim()) || /^none$/i.test(s.replace(/[\s.]/g, ''))) return { map: {} };
     s = s.replace(/\\neq?(?![a-z])|≠|!=|=\/=|<>/g, '≠').replace(/\b(and|or)\b/gi, ',').replace(/;/g, ',').replace(/\\pm|±/g, '±');
+    s = s.replace(/((?:[a-zA-Z]\s*,\s*)+[a-zA-Z])\s*≠\s*([^,]+)/g, function (all, ls, val) { return ls.split(',').map(function (l) { return l.trim() + '≠' + val; }).join(','); }); // the booklet's "a, b ≠ 0"
     var pieces = s.split(','), map = {}, cur = dv, any = false;
     for (var i = 0; i < pieces.length; i++) {
       var p = pieces[i].replace(/\s+/g, ''); if (!p) continue;
@@ -500,6 +514,8 @@
     return o;
   }
   function cPoly1(cn) { var q = cPolys(cn); return q.N; } // a canon with no denominator
+  /* a + or − outside every bracket (after the first character): the piece must be bracketed after a minus sign */
+  function topSum(s) { var d = 0; for (var i = 0; i < s.length; i++) { var c = s.charAt(i); if (c === '(' || c === '{') d++; else if (c === ')' || c === '}') d--; else if (i > 0 && d === 0 && (c === '+' || c === '-')) return true; } return false; }
   function wrapM(s) { return /^[^()]*[+-]/.test(s.replace(/^-/, '')) ? '(' + s + ')' : s; }
   /* one numerator times its multiplier, written for a solution: 3(x-2), (x+1)(x+4), 2x(x-4), 5 */
   function prodT(numPoly, mult) {
@@ -514,15 +530,14 @@
   function sumOf(terms, v) {
     var lc = lcdOf(terms.map(function (tm) { return tm.df; })), N0 = P.num(0), pieces = [];
     terms.forEach(function (tm, i) {
-      var cd = canon([tm.df]), mc = cDiv(lc, cd), mpoly = cPoly1(mc), np = listPoly(tm.nf), sd = side(mc, 1), mt = (mc.c[0] < 0 ? '-' : '') + sideTex(sd);
-      if (trivial(sd)) mt = mc.c[0] < 0 ? '-1' : '1';
+      var cd = canon([tm.df]), mc = cDiv(lc, cd), mpoly = cPoly1(mc), np = listPoly(tm.nf), sd = side(mc, 1), mt = trivial(sd) ? '1' : sideTex(sd);
       N0 = P.add(N0, P.scale(P.mul(np, mpoly), tm.s));
-      var pt = prodT(np, mt), neg = tm.s < 0;
-      if (mt === '-1') { pt = P.count(np) > 1 ? '(' + tx(np) + ')' : tx(np); neg = !neg; }
-      if (neg && i > 0 && pt.charAt(0) !== '(' && /[+-]/.test(pt.slice(1)) && mt === '1') pt = '(' + pt + ')';
+      var pt = prodT(np, mt), neg = (tm.s < 0) !== (mc.c[0] < 0); // a negative multiplier (an opposite factor) flips the sign
+      if (pt.charAt(0) === '-' && !topSum(pt)) { pt = pt.slice(1); neg = !neg; }
+      if (neg && topSum(pt)) pt = '(' + pt + ')';
       pieces.push({ neg: neg, t: pt });
     });
-    var stepNum = pieces.map(function (pc, i) { return i === 0 ? (pc.neg ? '-' + (pc.t.charAt(0) === '(' || !/[+-]/.test(pc.t.slice(1)) ? pc.t : '(' + pc.t + ')') : pc.t) : (pc.neg ? '-' : '+') + (pc.t.charAt(0) === '-' ? '(' + pc.t + ')' : pc.t); }).join('');
+    var stepNum = pieces.map(function (pc, i) { return i === 0 ? (pc.neg ? '-' : '') + pc.t : (pc.neg ? '-' : '+') + (pc.t.charAt(0) === '-' ? '(' + pc.t + ')' : pc.t); }).join('');
     // reduce N0 / lc
     var N = N0, D = JSON.parse(JSON.stringify(lc)), cut = false;
     Object.keys(D.m).forEach(function (x) { var e = D.m[x]; if (e <= 0) return; var k = Math.min.apply(null, P.terms(N).map(function (tm) { return tm.v[x] || 0; })); k = Math.min(k, e); if (k > 0) { N = divMono(N, x, k); D.m[x] -= k; cut = true; } });
@@ -589,11 +604,11 @@
       list.forEach(function (tm, i) {
         var cd = canon([tm.df]), mc = cDiv(lc, cd), mp = cPoly1(mc), np = listPoly(tm.nf), pr = P.mul(np, mp), sd = side(mc, 1), hasBin = sd.facs.length > 0;
         p = P.add(p, P.scale(pr, tm.s));
-        var mt = (mc.c[0] < 0 ? '-' : '') + sideTex(sd); if (trivial(sd)) mt = mc.c[0] < 0 ? '-1' : '1';
-        var pt = hasBin ? prodT(np, mt) : tx(pr), neg = tm.s < 0;
-        if (!hasBin && pt.charAt(0) === '-') { neg = !neg; pt = tx(P.neg(pr)); }
-        if (mt === '-1' && hasBin) { neg = !neg; pt = P.count(np) > 1 ? '(' + tx(np) + ')' : tx(np); }
-        if (neg && P.count(hasBin ? np : pr) > 1 && pt.charAt(0) !== '(' && !/^\d*[a-z]?\(/.test(pt)) pt = '(' + pt + ')';
+        var mt = trivial(sd) ? '1' : sideTex(sd), neg = (tm.s < 0) !== (mc.c[0] < 0);
+        var pt = hasBin ? prodT(np, mt) : tx(mc.c[0] < 0 ? P.neg(pr) : pr);
+        if (pt.charAt(0) === '-' && !topSum(pt)) { pt = pt.slice(1); neg = !neg; }
+        else if (!hasBin && pt.charAt(0) === '-') { neg = !neg; pt = tx(mc.c[0] < 0 ? pr : P.neg(pr)); }
+        if (neg && topSum(pt)) pt = '(' + pt + ')';
         pcs.push((i === 0 ? (neg ? '-' : '') : (neg ? '-' : '+')) + pt);
       });
       return { p: p, t: pcs.join('') || '0' };

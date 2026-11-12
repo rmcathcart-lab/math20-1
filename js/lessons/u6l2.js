@@ -456,7 +456,7 @@
           var c1 = U.exprCheck(sa, { vars: ['r'], form: U.factForm, dl: [{ fn: function (e) { return 2 * Math.PI * e.r * e.r + 2 * Math.PI * e.r; }, code: 'value', hint: 'Use ' + t('h=r+' + o.k) + ' in ' + t('2\\pi rh') + ', then collect like terms.' }, { fn: function (e) { return 2 * Math.PI * e.r * (e.r + o.k); }, code: 'value', hint: 'Include the two circles, ' + t('2\\pi r^{2}') + ', then collect like terms.' }] });
           var c2 = U.exprCheck(vol, { vars: ['r'], form: U.factForm });
           var k1 = '2\\pi r(2r+' + o.k + ')', k2 = '\\pi r^{2}(r+' + o.k + ')';
-          var p = B.fields('Write the surface area ' + t('SA=2\\pi r^{2}+2\\pi rh') + ' and the volume ' + t('V=\\pi r^{2}h') + ' in factored form.', [{ label: t('SA='), name: 'SA', mode: 'math', keys: 'u6kp', vars: ['r'] }, { label: t('V='), name: 'V', mode: 'math', keys: 'u6kp', vars: ['r'] }], [c1, c2], [k1, k2], t('SA=' + k1) + '<br>' + t('V=' + k2),
+          var p = B.fields('Write the surface area ' + t('SA=2\\pi r^{2}+2\\pi rh') + ' and the volume ' + t('V=\\pi r^{2}h') + ' in factored form.', [{ label: t('SA='), name: 'SA', mode: 'math', keys: 'u6kp', vars: ['r'], placeholder: 'e.g. 2πr(r+4)' }, { label: t('V='), name: 'V', mode: 'math', keys: 'u6kp', vars: ['r'], placeholder: 'e.g. πr^2(r+4)' }], [c1, c2], [k1, k2], t('SA=' + k1) + '<br>' + t('V=' + k2),
             t('SA=2\\pi r^{2}+2\\pi r(r+' + o.k + ')=4\\pi r^{2}+' + 2 * o.k + '\\pi r=' + k1) + '<br>' + t('V=' + k2), ['Substitute ' + t('h=r+' + o.k) + ', collect like terms, then take out the greatest common factor.'], 'cylinder: SA and V factored');
           p.bad = [['4\\pi r^{2}+' + 2 * o.k + '\\pi r', k2], [k1, '\\pi r^{3}+' + o.k + '\\pi r^{2}'], ['2\\pi r(r+' + o.k + ')', k2]];
           return p;

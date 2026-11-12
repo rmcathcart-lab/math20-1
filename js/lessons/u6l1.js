@@ -397,7 +397,7 @@
       plus: { label: '+', tex: '+', plain: '+' }, minus: { label: '−', tex: '-', plain: '-' }, dot: { label: '.', tex: '.', plain: '.' },
       sq: { label: 'x<sup>2</sup>', tex: '^{2}', plain: '^2', title: 'Squared' }, pow: { label: 'x<sup>n</sup>', tex: '#@^{#?}', plain: '^', title: 'Exponent' },
       frac: { label: '<sup>a</sup>⁄<sub>b</sub>', tex: '\\frac{#@}{#?}', plain: '/', title: 'Fraction' }, par: { label: '( )', tex: '\\left(#0\\right)', plain: '(', title: 'Brackets' },
-      comma: { label: ',', tex: ',', plain: ', ' }, ne: { label: '≠', tex: '\\ne ', plain: ' != ', title: 'is not equal to' }, pm: { label: '±', tex: '\\pm ', plain: '±' },
+      comma: { label: ',', tex: ',', plain: ', ' }, ne: { label: '≠', tex: '\\ne ', plain: ' ≠ ', title: 'is not equal to' }, pm: { label: '±', tex: '\\pm ', plain: '±' },
       none: { label: 'none', tex: '\\text{none}', plain: 'none', title: 'There are none' }, undef: { label: 'undefined', tex: '\\text{undefined}', plain: 'undefined', title: 'Undefined (no value)' }
     };
     var vk = function (opt) { return (opt && opt.vars && opt.vars.length ? opt.vars : ['x']).slice(0, 6).map(function (v) { return { label: '<i>' + v + '</i>', tex: v, plain: v }; }); };
@@ -406,7 +406,7 @@
     W.KEYSETS.u6kp = function (opt) { return [vk(opt).concat([{ label: 'π', tex: '\\pi ', plain: 'π' }]), [d(7), d(8), d(9), KY.plus, KY.minus, KY.del], [d(4), d(5), d(6), KY.sq, KY.pow, KY.clear], [d(1), d(2), d(3), KY.frac, KY.left, KY.right], [d(0), KY.par, KY.enter]]; };
     W.KEYSETS.u6kv = function () { return [[d(7), d(8), d(9), KY.frac, KY.del], [d(4), d(5), d(6), KY.minus, KY.clear], [d(1), d(2), d(3), KY.left, KY.right], [d(0), KY.dot, KY.undef, KY.enter]]; };
     if (W.KEYHELP) {
-      W.KEYHELP.u6k = ['Use <b><sup>a</sup>⁄<sub>b</sub></b> for a fraction and <b>( )</b> for factors; press <b>▶</b> to step out of a box. NPVs: <b>≠</b> and commas, e.g. x ≠ 3, −2 or x ≠ ±4.', 'Type fractions with <code>/</code> and brackets, e.g. <code>(x+3)/(2(x-1))</code>. NPVs: <code>x != 3, -2</code>.'];
+      W.KEYHELP.u6k = ['Use <b><sup>a</sup>⁄<sub>b</sub></b> for a fraction and <b>( )</b> for factors; press <b>▶</b> to step out of a box. NPVs: <b>≠</b> and commas, e.g. x ≠ 3, −2 or x ≠ ±4.', 'Type fractions with <code>/</code> and brackets, e.g. <code>(x+3)/(2(x-1))</code>. NPVs: <code>x != 3, -2</code> (or <code>x ≠ 3, -2</code>).'];
       W.KEYHELP.u6kn = ['Write the NPVs with <b>≠</b> and commas, e.g. x ≠ 3, −2 (or x ≠ ±4), or press <b>none</b>.', 'Type e.g. <code>x != 3, -2</code> (or just <code>3, -2</code>), or <code>none</code>.'];
       W.KEYHELP.u6kp = ['Use <b>π</b>, the letters and <b>( )</b> for factors, e.g. 2πr(2r + 5).', 'Type e.g. <code>2πr(2r+5)</code> (or <code>2pi r(2r+5)</code>).'];
       W.KEYHELP.u6kv = ['Type the value (a fraction with <b><sup>a</sup>⁄<sub>b</sub></b>), or press <b>undefined</b> if the expression has no value there.', 'Type a number such as <code>-7/8</code>, or <code>undefined</code>.'];
@@ -449,7 +449,7 @@
       if (r1.v === 'form') return { v: 'form', code: r1.code, hint: h1 };
       return { v: 'form', code: r2.code, hint: h2 };
     };
-    var p = { prompt: prompt, input: { type: 'fields', fields: [{ label: 'Simplified:', mode: 'math', keys: 'u6k', vars: vars, name: 'Simplified' }, { label: 'NPVs:', mode: 'math', keys: 'u6k', vars: vars, none: true, name: 'NPVs', placeholder: 'e.g. ' + v + ' ≠ 3, −2' }] },
+    var p = { prompt: prompt, input: { type: 'fields', fields: [{ label: 'Simplified:', mode: 'math', keys: 'u6k', vars: vars, name: 'Simplified', placeholder: 'e.g. (' + v + '+3)/(2(' + v + '-1))' }, { label: 'NPVs:', mode: 'math', keys: 'u6k', vars: vars, none: true, name: 'NPVs', placeholder: 'e.g. ' + v + ' ≠ 3, −2' }] },
       check: check, key: key, answer: t(key[0]) + ', \\(' + key[1] + '\\)', solution: s.sol, hints: s.hints || [], text: s.text };
     var bad = [];
     (s.dl || []).forEach(function (w) { if (w && w.tex) bad.push([w.tex, key[1]]); });
@@ -481,7 +481,7 @@
     var vars = uniq([v].concat(U.vars(D)));
     var c1 = K.factored(s.fact, { wrong: s.fw }), c2 = U.npvCheck(npv, { cp: cp, v: v, wrongs: nw });
     var key = [s.fact, U.npvTex(npv)];
-    var p = B.fields(prompt, [{ label: 'Factored denominator:', name: 'Factored denominator', mode: 'math', keys: 'u6k', vars: vars }, { label: 'NPVs:', name: 'NPVs', mode: 'math', keys: 'u6k', vars: vars, none: true, placeholder: 'e.g. ' + v + ' ≠ 3, −2' }],
+    var p = B.fields(prompt, [{ label: 'Factored denominator:', name: 'Factored denominator', mode: 'math', keys: 'u6k', vars: vars, placeholder: 'e.g. (' + v + '-4)(' + v + '+3)' }, { label: 'NPVs:', name: 'NPVs', mode: 'math', keys: 'u6k', vars: vars, none: true, placeholder: 'e.g. ' + v + ' ≠ 3, −2' }],
       [c1, c2], key, t(key[0]) + ', \\(' + key[1] + '\\)', s.sol, s.hints, s.text);
     p.bad = dedupe(nw.map(function (w) { return [key[0], U.npvTex(w.vals)]; }).concat([[pt(D), key[1]], [key[0], '\\text{none}']]));
     return p;
@@ -495,7 +495,7 @@
   };
   U.valTable = function (prompt, cells, s) {
     s = s || {};
-    var fields = cells.map(function (c) { return { label: c.label, name: c.name || c.label.replace(/<[^>]*>|\\[()]/g, ''), mode: 'math', keys: 'u6kv' }; });
+    var fields = cells.map(function (c) { return { label: c.label, name: c.name || c.label.replace(/<[^>]*>|\\[()]/g, ''), mode: 'math', keys: 'u6kv', placeholder: 'a number or undefined' }; });
     var checks = cells.map(function (c) { return U.valCheck(c.val, { cp: s.cp, cands: c.cands }); });
     var keys = cells.map(function (c) { return c.val == null ? '\\text{undefined}' : rt(c.val); });
     var p = B.fields(prompt, fields, checks, keys, cells.map(function (c, i) { return c.label + ' ' + t(keys[i]); }).join('<br>'), s.sol, s.hints, s.text);
@@ -903,7 +903,7 @@
           var d = o.s * o.a, n1 = { x: [o.a, -o.a] }, n2 = { x: [-d] };
           var c1 = U.npvCheck(n1, { cp: CP, v: 'x', wrongs: [{ vals: n2, code: CP + 'npv-cancel', hint: 'The NPVs of the first expression come from its own denominator ' + t('x^{2}-' + o.a * o.a + '=(x-' + o.a + ')(x+' + o.a + ')') + ', before anything is divided out.' }, { vals: { x: [0, d] }, code: CP + 'npv-num', hint: 'Only the denominator gives NPVs.' }] });
           var c2 = U.npvCheck(n2, { cp: CP, v: 'x', wrongs: [{ vals: n1, code: CP + 'npv-extra', hint: 'The second expression has only one factor in its denominator: ' + t(pt(lin(1, d))) + '.' }] });
-          var p = B.fields('State the NPVs of each expression.', [{ label: 'First:', name: 'First', mode: 'math', keys: 'u6k', vars: ['x'], none: true }, { label: 'Second:', name: 'Second', mode: 'math', keys: 'u6k', vars: ['x'], none: true }], [c1, c2], [nvT(n1), nvT(n2)], 'First: ' + t(nvT(n1)) + '<br>Second: ' + t(nvT(n2)),
+          var p = B.fields('State the NPVs of each expression.', [{ label: 'First:', name: 'First', mode: 'math', keys: 'u6k', vars: ['x'], none: true, placeholder: 'e.g. x ≠ 3, −2' }, { label: 'Second:', name: 'Second', mode: 'math', keys: 'u6k', vars: ['x'], none: true, placeholder: 'e.g. x ≠ 3, −2' }], [c1, c2], [nvT(n1), nvT(n2)], 'First: ' + t(nvT(n1)) + '<br>Second: ' + t(nvT(n2)),
             t('x^{2}-' + o.a * o.a + '=(x-' + o.a + ')(x+' + o.a + ')') + ': the first has ' + t(nvT(n1)) + '. The second has only ' + t(nvT(n2)) + '.', ['Use each expression’s own denominator, before simplifying.'], 'NPVs of each expression');
           p.bad = [[nvT(n2), nvT(n2)], [nvT(n1), nvT(n1)]];
           return p;

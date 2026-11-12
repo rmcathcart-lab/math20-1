@@ -322,7 +322,7 @@
       } }] },
     { num: '7', shared: function (r) {
         return pickWhere(function () { return { p: r.int(2, 8), q: r.int(1, 6), x0: r.int(3, 14) }; }, function (z) {
-          if (z.p === z.q || z.x0 <= z.p || (z.p === 5 && z.q === 1)) return false;
+          if (z.q >= z.p || z.x0 <= z.p || (z.p === 5 && z.q === 1)) return false;
           var num = z.x0 * (z.x0 + z.q), den = z.x0 - z.p, d0 = den / gcd(num, den); while (d0 % 2 === 0) d0 /= 2; while (d0 % 5 === 0) d0 /= 5; return d0 === 1 && num / den < 500;
         });
       },

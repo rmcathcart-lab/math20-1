@@ -72,13 +72,14 @@ function branches(G, Q, o = {}) {
 /* a vertical bar beside the y-axis whose ends can move (for the range); st = { lo, hi, loS, hiS } with 'closed'|'open'|'arrow' */
 function ybar(G, st, o = {}) {
   return G.curve(() => {
-    const w = G.win, off = o.offset || 0, ax = G.toPx(0, 0)[0] + off;
-    const lo = Math.max(st.lo, w.ymin), hi = Math.min(st.hi, w.ymax);
-    const P = (v) => [ax, G.toPx(0, v)[1]];
-    const a = P(Math.min(lo, hi)), b = P(Math.max(lo, hi)), loTop = lo > hi;
-    const sLo = st.lo < w.ymin ? 'arrow' : st.loS, sHi = st.hi > w.ymax ? 'arrow' : st.hiS;
-    const eA = loTop ? sHi : sLo, eB = loTop ? sLo : sHi;
-    return { subs: [[a, b]], ends: [{ p: a, d: [0, 1], s: eA === 'arrow' && !loTop && st.lo >= w.ymin ? st.loS : eA, k: 0, si: 0, last: false }, { p: b, d: [0, -1], s: eB, k: 1, si: 0, last: true }].filter((e) => e.s) };
+    const w = G.win, ax = G.toPx(0, 0)[0] + (o.offset || 0);
+    const cl = (v) => Math.max(w.ymin, Math.min(w.ymax, Number.isFinite(v) ? v : v > 0 ? w.ymax : w.ymin));
+    const out = (v) => !Number.isFinite(v) || v < w.ymin || v > w.ymax;
+    const pa = [ax, G.toPx(0, cl(st.lo))[1]], pb = [ax, G.toPx(0, cl(st.hi))[1]];
+    const dy = Math.sign(pb[1] - pa[1]) || 1;
+    return { subs: [[pa, pb]], ends: [
+      { p: pa, d: [0, -dy], s: out(st.lo) ? 'arrow' : st.loS, k: 0, si: 0, last: false },
+      { p: pb, d: [0, dy], s: out(st.hi) ? 'arrow' : st.hiS, k: 1, si: 0, last: true }].filter((e) => e.s) };
   }, Object.assign({ width: 9, opacity: 0.75, r: 7.5, cap: 'butt' }, o), 'u7l7-bar', G.layers.data);
 }
 const buildG = (stage, win, o = {}) => new Graph(stage, Object.assign({ x: 0, y: 2, width: 440, height: 440, fontSize: 15, pad: [30, 18, 18, 18] }, win, o));
@@ -133,7 +134,7 @@ const trace = {
     hide(read);
     const rows = h('div', 'u7l7-rows u7l7-rows-s'); P.appendChild(rows);
     const [l1, l2] = pm1(G).map(hide);
-    const fc = hide(fGraph(G, Q)), rc = hide(rGraph(G, Q)), rcO = rc;
+    const fc = hide(fGraph(G, Q)), ro = { color: AC, width: 4.5, breaks: Q.z.slice(), samples: 700, to: G.win.xmin }, rc = hide(G.fn(Q.r, ro));
     const fp = xs.map((x) => hide(G.point(x, Q.f(x), { color: FC, r: 7 })));
     const rp = xs.map((x) => hide(G.point(x, Q.f(x), { color: AC, r: 7 })));
     const a1 = hide(asym(G, -1)), a2 = hide(asym(G, 3));
@@ -160,12 +161,10 @@ const trace = {
         } },
       { cap: `(b) Between the points: a tracer slides across. The <b class="u7l7-ca">red</b> dot is always at ${T('\\frac{1}{f(x)}')}: where ${T('f(x)')} is near ${T('0')}, its reciprocal is <b>huge</b>, and the red dot shoots off the grid.`,
         run: async (c) => {
-          await show(c, r[1]); unhide(read); unhide(tl); unhide(tf); unhide(tr);
-          const o0 = rcO; o0.style.opacity = ''; const path = o0.path, L = { };
-          void L; path.style.clipPath = '';
-          const [x0] = G.toPx(G.win.xmin, 0), [x1] = G.toPx(G.win.xmax, 0);
-          await tween(c, 5200, (t) => { const x = G.win.xmin + (G.win.xmax - G.win.xmin) * t; setT(Math.min(x, G.win.xmax - 1e-3)); const px = x0 + (x1 - x0) * t; o0.style.clipPath = `inset(0 ${Math.max(0, 100 - 100 * (px) / (G.toPx(G.win.xmax, 0)[0] + 30))}% 0 0)`; });
-          o0.style.clipPath = ''; [tf, tr, tl].forEach(hide); hide(read);
+          await show(c, r[1]); unhide(read); unhide(tl); unhide(tf); unhide(tr); unhide(rc);
+          const { xmin, xmax } = G.win;
+          await tween(c, 5200, (t) => { const x = xmin + (xmax - xmin) * t; ro.to = t >= 1 ? undefined : x; rc._bkDraw(); setT(Math.min(x, xmax - 1e-3)); }, (t) => t);
+          ro.to = undefined; rc._bkDraw(); [tf, tr, tl].forEach(hide); hide(read);
         } },
       { cap: `(c) ${T('f(x)=(x+1)(x-3)')}: zeros ${T('-1')} and ${T('3')}. Vertical asymptotes ${T('x=-1')} and ${T('x=3')}; horizontal asymptote ${T('y=0')} (the ${T('x')}-axis).`,
         run: async (c) => { await show(c, r[2]); await Promise.all([drawIn(unhide(a1), 600, c), drawIn(unhide(a2), 600, c)]); } },
@@ -261,18 +260,18 @@ function slideCheck(stage, v, ex) {
     { cap: `${T('f(x)=' + d.f)}: ${d.work[0]}. ${n ? `The parabola meets the ${T('x')}-axis ${n === 1 ? 'once, at its vertex' : 'twice'}.` : `The parabola never meets the ${T('x')}-axis.`}`,
       run: async (c) => { await show(c, r1); await drawIn(unhide(fc), 700, c); } },
     { cap: `${n ? `${d.work[1]}: ` : ''}<b>${word}</b>${n ? `: ${T(d.eqs)}` : ': no vertical asymptote'}. The reciprocal ${n === 2 ? 'has three branches' : n === 1 ? 'has two branches on the same side of the axis' : 'is one unbroken curve'}.`,
-      run: async (c) => { await show(c, r2); for (const p of zp) await popP(c, p); await Promise.all(A.map((L) => drawIn(unhide(L), 600, c))); await drawIn(unhide(rc), 900, c); cnt.set(n, d.eqs ? T(d.eqs) : ''); await stampIn(c, unhide(cnt.el)); } }
+      run: async (c) => { await show(c, r2); for (const p of zp) await popP(c, p); await Promise.all(A.map((L) => drawIn(unhide(L), 600, c))); await drawIn(unhide(rc), 900, c); cnt.set(n, d.eqs ? T(d.eqs) : ''); await pop(c, unhide(cnt.el), 420); } }
   ];
 }
 
 /* =============================== explainer: turning point, domain and range =============================== */
 const RG = {
-  demo: { a: 1, p: 0, q: -2, f: 'x^2-2', win: { xmin: -4.5, xmax: 4.5, ymin: -4.5, ymax: 4.5 }, label: 'range y ≥ −2' },
+  demo: { a: 1, p: 0, q: -2, f: 'x^2-2', win: { xmin: -4.5, xmax: 4.5, ymin: -4.5, ymax: 4.5 }, zw: 'x^2=2', zt: 'x=\\pm\\sqrt2', dom: 'x\\ne\\pm\\sqrt2' },
   e3a: { a: 1, p: 2, q: 4, f: '(x-2)^2+4', win: { xmin: -2.5, xmax: 6.5, ymin: -2.5, ymax: 7.5 }, ex: '(a)' },
-  e3b: { a: -1, p: -1, q: 2, f: '-(x+1)^2+2', win: { xmin: -5.5, xmax: 3.5, ymin: -5.5, ymax: 4.5 }, ex: '(b)', zt: '-1\\pm\\sqrt2', zw: '(x+1)^2=2' },
-  e3c: { a: 2, p: 3, q: -8, f: '2(x-3)^2-8', win: { xmin: -1.5, xmax: 7.5, ymin: -9.5, ymax: 4.5, ylabels: 2 }, ex: '(c)', zt: '1,\\ 5', zw: '(x-3)^2=4' },
+  e3b: { a: -1, p: -1, q: 2, f: '-(x+1)^2+2', win: { xmin: -5.5, xmax: 3.5, ymin: -5.5, ymax: 4.5 }, ex: '(b)', zw: '(x+1)^2=2', zt: 'x=-1\\pm\\sqrt2', dom: 'x\\ne-1\\pm\\sqrt2' },
+  e3c: { a: 2, p: 3, q: -8, f: '2(x-3)^2-8', win: { xmin: -1.5, xmax: 7.5, ymin: -9.5, ymax: 4.5, ylabels: 2 }, ex: '(c)', zw: '(x-3)^2=4', zt: 'x=1\\text{ or }5', dom: 'x\\ne1,\\ x\\ne5' },
   e3d: { a: -0.5, p: -4, q: -3, f: '-\\frac12(x+4)^2-3', win: { xmin: -8.5, xmax: 1.5, ymin: -7.5, ymax: 3.5 }, ex: '(d)' },
-  e3e: { a: -3, p: 1, q: 0, f: '-3(x-1)^2', win: { xmin: -2.5, xmax: 4.5, ymin: -6.5, ymax: 3.5 }, ex: '(e)' }
+  e3e: { a: -3, p: 1, q: 0, f: '-3(x-1)^2', win: { xmin: -2.5, xmax: 4.5, ymin: -6.5, ymax: 3.5 }, ex: '(e)', dom: 'x\\ne1' }
 };
 const setT = (s) => `\\left\\{y\\mid ${s},\\ y\\in\\mathbb{R}\\right\\}`;
 /* the parts of the range of f (split at 0, the zero itself left out) and their reciprocals */
@@ -316,12 +315,11 @@ const range = {
         run: async (c) => { await show(c, r1); await pulse(c, vx, 1.3); await drawIn(unhide(A[0]), 600, c); } });
     }
     /* 2: the domain */
-    const zt = d.zt || Q.z.map((z) => tn(z)).join(',\\ ');
-    const domT = Q.z.length ? `\\{x\\mid x\\ne${Q.z.length === 2 && !d.zt ? Q.z.map(tn).join(',\\ x\\ne') : d.zt && d.zt.includes(',') ? d.zt.replace(',\\ ', ',\\ x\\ne') : zt},\\ x\\in\\mathbb{R}\\}` : '\\{x\\mid x\\in\\mathbb{R}\\}';
+    const domT = d.dom ? `\\{x\\mid ${d.dom},\\ x\\in\\mathbb{R}\\}` : '\\{x\\mid x\\in\\mathbb{R}\\}';
     const cuts = [-Infinity, ...Q.z, Infinity], dom = [];
     for (let i = 0; i < cuts.length - 1; i++) dom.push(hide(G.shadeX(cuts[i], cuts[i + 1], { openA: i > 0, openB: i < cuts.length - 2, color: 'amber' })));
     const r2 = row(rows, 2, `domain ${T(domT)}`);
-    steps.push({ cap: `<b>2</b> Domain: every ${T('x')} except the zeros of ${T('f')}. ${Q.z.length ? (d.zw ? `${T(d.zw)}: ${T('x=' + zt)}` : `Zeros ${T(zt)}`) + `, so ${T(domT)}.` : `${T('f')} has no zeros (${up ? 'it opens up from above the axis' : 'it opens down from below the axis'}), so ${T(domT)}.`}`,
+    steps.push({ cap: `<b>2</b> Domain: every ${T('x')} except the zeros of ${T('f')}. ${Q.z.length ? (d.zw ? `Zeros: ${T(d.zw)}, ${T(d.zt)}` : `The zero is ${T('x=' + tn(d.p))}`) + `, so ${T(domT)}.` : `${T('f')} has no zeros (${up ? 'it opens up from above the axis' : 'it opens down from below the axis'}), so ${T(domT)}.`}`,
       run: async (c) => { placeRing(ring, G, 0, 0, false); await show(c, r2); if (d.q) await Promise.all(A.map((L) => drawIn(unhide(L), 600, c))); await drawIn(unhide(rc), 800, c); for (const s of dom) await drawIn(unhide(s), 400, c); } });
     /* 3: the range of f, split at 0 */
     const fb = RP.parts.map((pt) => hide(ybar(G, { lo: pt.lo, hi: pt.hi, loS: pt.loS, hiS: pt.hiS }, { color: FC, offset: -13 })));
@@ -350,7 +348,7 @@ const range = {
 
 /* =============================== explainer: the sketching steps (procedure) =============================== */
 const SK = {
-  e4a: { Q: F4a, f: 'x^2-4x+3', ex: 'Example 4(a)', win: FIGS.e4a.win, zs: 'x=1,\\ x=3', yi: '\\left(0,\\ \\frac13\\right)', tp: '(2,\\ -1)', tpT: 'maximum', tpNote: 'the vertex is invariant', inv: [[2 - Math.SQRT2, 1, '2-\\sqrt2'], [2 + Math.SQRT2, 1, '2+\\sqrt2'], [2, -1, '2']] },
+  e4a: { Q: F4a, f: 'x^2-4x+3', ex: 'Example 4(a)', win: FIGS.e4a.win, zs: 'x=1,\\ x=3', yi: '\\left(0,\\ \\frac13\\right)', tp: '(2,\\ -1)', tpT: 'maximum', tpNote: 'the vertex is invariant', inv: [[2 - Math.SQRT2, 1, '2-\\sqrt2'], [2 + Math.SQRT2, 1, '2+\\sqrt2']] },
   e4b: { Q: F4b, f: '-(x+2)^2', ex: 'Example 4(b)', win: FIGS.e4b.win, zs: 'x=-2', yi: '\\left(0,\\ -\\frac14\\right)', tp: null, inv: [[-3, -1, '-3'], [-1, -1, '-1']] },
   e4c: { Q: F4c, f: '\\frac12(x-1)^2+2', ex: 'Example 4(c)', win: FIGS.e4c.win, zs: null, yi: '\\left(0,\\ \\frac{1}{2.5}\\right)=(0,\\ 0.4)', tp: '\\left(1,\\ \\frac12\\right)', tpT: 'maximum', inv: [] },
   e5: { Q: F5, f: '2-\\frac12x^2', ex: 'Example 5', win: FIGS.e5.win, zs: 'x=-2,\\ x=2', yi: '\\left(0,\\ \\frac12\\right)', tp: '\\left(0,\\ \\frac12\\right)', tpT: 'minimum', inv: [[-Math.SQRT2, 1, '-\\sqrt2'], [Math.SQRT2, 1, '\\sqrt2'], [-Math.sqrt(6), -1, '-\\sqrt6'], [Math.sqrt(6), -1, '\\sqrt6']] }
@@ -463,9 +461,7 @@ const match = {
     const fW = gx0 - 70;
     MF.forEach((m, i) => {
       const el = div(stage, 'u7l7-mfn', `<span class="u7l7-ml">${m.n}</span>${T('f(x)=' + m.f)}<span class="u7l7-mres"></span>`, 0, 10 + i * 108, fW, 92);
-      const why = h('div', 'u7l7-why'); why.style.position = 'absolute'; why.style.left = '0px'; why.style.top = (10 + i * 108 + 94) + 'px'; why.style.width = fW + 'px';
       cards[m.ans] = { el, i, m };
-      void why;
     });
     ['A', 'B', 'C', 'D'].forEach((k, j) => {
       const x = gx0 + (j % 2) * (GS + 14), y = Math.floor(j / 2) * (GS + 8) + 4;
@@ -480,7 +476,7 @@ const match = {
     const keep = () => done.forEach((k) => gr[k].host.classList.add('pick'));
     const link = (m) => {
       const cd = cards[m.ans], g = gr[m.ans], y1 = 10 + cd.i * 108 + 46, x1 = fW + 6, x2 = g.x - 4, y2 = g.y + GS / 2;
-      const ln = svgEl('path', { d: `M${x1} ${y1} C ${x1 + 60} ${y1}, ${x2 - 60} ${y2}, ${x2} ${y2}`, fill: 'none', stroke: COLORS.green, 'stroke-width': 4, 'stroke-linecap': 'round', class: 'bk-curve' }, svg);
+      const ln = svgEl('path', { d: `M${x1} ${y1} C ${x1 + 60} ${y1}, ${x2 - 60} ${y2}, ${x2} ${y2}`, fill: 'none', stroke: COLORS.green, 'stroke-width': 4, 'stroke-linecap': 'round', class: 'bk-stroke' }, svg);
       return ln;
     };
     const lines = {}; MF.forEach((m) => { lines[m.ans] = hide(link(m)); });
@@ -510,25 +506,29 @@ const polyT = (A, B, C) => {
   return out || '0';
 };
 const vertT = (a, p, q) => `${a === 1 ? '' : a === -1 ? '-' : a}${p ? `(x${p > 0 ? '-' : '+'}${Math.abs(p)})^2` : 'x^2'}${q ? (q > 0 ? '+' : '-') + Math.abs(q) : ''}`;
+const binT = (z) => (z ? `(x${z > 0 ? '-' : '+'}${Math.abs(z)})` : 'x');
+const BEGTXT = 'State the number of vertical asymptotes of the graph of y = 1/f(x) and their equations.';
 standup('u7l7', {
   intro: 'At your whiteboard: zeros give asymptotes, and the vertex (p, q) gives the turning point (p, 1/q).',
   levels: {
     BEG: (r) => {
       const kind = r.pick([2, 2, 1, 0]);
-      if (kind === 2) { const s = r.int(-6, 6), t = r.int(-6, 6); if (s === t) return standupBEG(r); const lo = Math.min(s, t), hi = Math.max(s, t);
-        return { text: 'State the number of vertical asymptotes of the graph of y = 1/f(x) and their equations.', q: `f(x)=${polyT(1, -(s + t), s * t)}`, a: [`${polyT(1, -(s + t), s * t)}=(x${-lo >= 0 ? '+' : '-'}${Math.abs(lo)})(x${-hi >= 0 ? '+' : '-'}${Math.abs(hi)})`.replace(/\(x\+0\)/g, 'x').replace(/\(x-0\)/g, 'x'), `\\text{Two: }x=${lo}\\text{ and }x=${hi}`] }; }
-      if (kind === 1) { const s = r.int(-5, 5) || 3; return { text: 'State the number of vertical asymptotes of the graph of y = 1/f(x) and their equations.', q: `f(x)=${polyT(1, -2 * s, s * s)}`, a: [`${polyT(1, -2 * s, s * s)}=(x${s > 0 ? '-' : '+'}${Math.abs(s)})^2`, `\\text{One: }x=${s}`] }; }
-      const b = r.pick([-4, -2, 2, 4, 6]), c = b * b / 4 + r.int(1, 5);
-      return { text: 'State the number of vertical asymptotes of the graph of y = 1/f(x) and their equations.', q: `f(x)=${polyT(1, b, c)}`, a: [`b^2-4ac=${b * b}-${4 * c}=${b * b - 4 * c}<0`, '\\text{None: no zeros}'] };
+      if (kind === 2) {
+        let s = r.int(-6, 6), t = r.int(-6, 6); if (s === t) t = s + r.pick([2, 3, 5]);
+        const lo = Math.min(s, t), hi = Math.max(s, t), f = polyT(1, -(s + t), s * t);
+        return { text: BEGTXT, q: `f(x)=${f}`, a: [`${f}=${binT(lo)}${binT(hi)}`, `\\text{Two: }x=${lo}\\text{ and }x=${hi}`] };
+      }
+      if (kind === 1) { const s = r.pick([-5, -4, -3, -2, -1, 1, 2, 3, 4, 5]), f = polyT(1, -2 * s, s * s); return { text: BEGTXT, q: `f(x)=${f}`, a: [`${f}=${binT(s)}^2`, `\\text{One: }x=${s}`] }; }
+      const b = r.pick([-4, -2, 2, 4, 6]), c = b * b / 4 + r.int(1, 5), f = polyT(1, b, c);
+      return { text: BEGTXT, q: `f(x)=${f}`, a: [`b^2-4ac=${b * b}-${4 * c}=${b * b - 4 * c}<0`, '\\text{None: no zeros}'] };
     },
     PRG: (r) => {
       const a = r.pick([1, -1, 2, -2]), p = r.int(-4, 4), zeros = r.chance(0.5), dd = r.pick([1, 2, 3]);
-      const q = zeros ? -a * dd * dd : a * r.pick([1, 2, 3, 4, 5]) * (a > 0 ? 1 : 1) / Math.abs(a) * Math.abs(a);
-      const qq = zeros ? q : (a > 0 ? 1 : -1) * r.pick([1, 2, 3, 4, 5]);
-      const up = a > 0, tpY = fr(1, qq), type = up ? '\\text{maximum}' : '\\text{minimum}';
+      const q = zeros ? -a * dd * dd : (a > 0 ? 1 : -1) * r.pick([1, 2, 3, 4, 5]);
+      const up = a > 0, tpY = fr(1, q), type = up ? '\\text{maximum point}' : '\\text{minimum point}';
       const dom = zeros ? `\\{x\\mid x\\ne${p - dd},\\ x\\ne${p + dd},\\ x\\in\\mathbb{R}\\}` : '\\{x\\mid x\\in\\mathbb{R}\\}';
-      const rng = up ? (qq > 0 ? `0<y\\le${tpY}` : `y\\le${tpY}\\text{ or }y>0`) : (qq < 0 ? `${tpY}\\le y<0` : `y<0\\text{ or }y\\ge${tpY}`);
-      return { text: 'State the turning point of y = 1/f(x) (maximum or minimum), its domain and its range.', q: `f(x)=${vertT(a, p, qq)}`,
+      const rng = up ? (q > 0 ? `0<y\\le${tpY}` : `y\\le${tpY}\\text{ or }y>0`) : (q < 0 ? `${tpY}\\le y<0` : `y<0\\text{ or }y\\ge${tpY}`);
+      return { text: 'State the turning point of y = 1/f(x) (maximum or minimum), its domain and its range.', q: `f(x)=${vertT(a, p, q)}`,
         a: [`${type}\\ \\left(${p},\\ ${tpY}\\right)`, `\\text{domain }${dom}`, `\\text{range }\\left\\{y\\mid ${rng},\\ y\\in\\mathbb{R}\\right\\}`] };
     },
     MAS: (r) => {
@@ -536,13 +536,12 @@ standup('u7l7', {
         const p = r.pick([-3, -2, -1, 1, 2, 3]), a = r.pick([1, 2, 3, -1, -2]), q = (a > 0 ? 1 : -1) * r.pick([1, 2, 3, 4, 5]), c = a * p * p + q;
         if (!c) continue;
         const type = a > 0 ? 'maximum' : 'minimum';
-        return { text: `The graph of y = 1/f(x), where f is quadratic, has a ${type} point and a y-intercept as shown. Determine f(x) in vertex form and in general form.`, q: `\\left(${p},\\ ${fr(1, q)}\\right),\\quad y\\text{-intercept } ${fr(1, c)}`,
-          a: [`\\text{vertex }(${p},\\ ${q}),\\ f(0)=${c}`, `${c}=a(${-p})^2${q > 0 ? '+' : '-'}${Math.abs(q)}\\Rightarrow a=${a}`, `f(x)=${vertT(a, p, q)}=${polyT(a, -2 * a * p, c)}`] };
+        return { text: `The graph of y = 1/f(x), where f is quadratic, has the ${type} point and the y-intercept shown. Determine f(x) in vertex form and in general form.`, q: `${type === 'maximum' ? '\\text{max}' : '\\text{min}'}\\ \\left(${p},\\ ${fr(1, q)}\\right),\\quad y\\text{-intercept } ${fr(1, c)}`,
+          a: [`\\text{vertex }(${p},\\ ${q}),\\ f(0)=${c}`, `${c}=a(0${p > 0 ? '-' : '+'}${Math.abs(p)})^2${q > 0 ? '+' : '-'}${Math.abs(q)}\\Rightarrow ${p * p}a=${c - q}\\Rightarrow a=${a}`, `f(x)=${vertT(a, p, q)}=${polyT(a, -2 * a * p, c)}`] };
       }
     }
   }
 });
-function standupBEG(r) { const s = r.int(1, 5); return { text: 'State the number of vertical asymptotes of the graph of y = 1/f(x) and their equations.', q: `f(x)=${polyT(1, 0, -s * s)}`, a: [`x^2=${s * s}`, `\\text{Two: }x=-${s}\\text{ and }x=${s}`] }; }
 
 /* =============================== mount =============================== */
 export const explainers = mountExplainers({ trace, slide, range, sketch, back, match });

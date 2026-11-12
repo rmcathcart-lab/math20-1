@@ -49,7 +49,7 @@ const dotted = (G, y) => G.hline(y, { color: GY, width: 2, dash: '3 6' });
 const FIGS = {
   e2a: { w: 340, h: 420, win: { xmin: -2.5, xmax: 5.5, ymin: -4.5, ymax: 5.5 },
     given: (G) => G.fn('4-2*x', { color: F, width: 3 }),
-    ans: (G) => [G.fn('abs(4-2*x)', { color: A, width: 4.5 }), G.point(2, 0, { color: AM, label: T('(2,\\ 0)'), pos: 'se' })] },
+    ans: (G) => [G.fn('abs(4-2*x)', { color: A, width: 4.5 }), G.point(2, 0, { color: AM, label: T('(2,\\ 0)'), pos: 'ne' })] },
   e2b: { w: 400, h: 400, win: { xmin: -4.5, xmax: 4.5, ymin: -3.5, ymax: 5.5 },
     given: (G) => G.fn('0.5*x^2-2', { color: F, width: 3 }),
     ans: (G) => [G.fn('abs(0.5*x^2-2)', { color: A, width: 4.5 }), G.point(-2, 0, { color: AM }), G.point(2, 0, { color: AM }),
@@ -120,7 +120,7 @@ const verdict = mdDef({
     const rhs = hcurve(G.fn(d.Bf, { color: R, width: 3.5 }));
     const g1 = hcurve(G.fn(d.Af, { color: GY, width: 2.5, dash: '8 7' }));
     const g2 = hcurve(G.fn((x) => -d.Af(x), { color: GY, width: 2.5, dash: '8 7' }));
-    const leg = hide(div(stage, 'u7l8-legend', `<span class="u7l8-lp">${T('y=|' + d.At + '|')}</span><span class="u7l8-lo">${T('y=' + d.Bt)}</span><span class="u7l8-lg">ghosts ${T('y=\\pm(' + d.At + ')')}</span>`, 14, 8));
+    const leg = hide(div(stage, 'u7l8-legend', `<span class="u7l8-lp">${T('y=|' + d.At + '|')}</span><span class="u7l8-lo">${T('y=' + d.Bt)}</span><span class="u7l8-lg">ghosts ${T('y=\\pm(' + d.At + ')')}</span>`, GW + 22, 404));
     const cands = [...d.c1.map((k) => ({ ...k, cs: 1 })), ...d.c2.map((k) => ({ ...k, cs: 2 }))];
     cands.forEach((k) => {
       k.y = d.Bf(k.x); k.ok = k.y >= 0;
@@ -221,13 +221,13 @@ const recip = mdDef({
 /* =============================== explainer (STAR): match the graph, a whole-class round =============================== */
 const recipOf = (f) => (x) => 1 / f(x);
 const MT = {
-  r1: { label: 'Round 1', kind: 'abs', ft: 'f(x)=-x+2', f: (x) => -x + 2, zeros: [2], win: { xmin: -4.5, xmax: 6.5, ymin: -4.5, ymax: 6.5 },
+  r1: { label: 'Round 1', kind: 'abs', labLow: true, ft: 'f(x)=-x+2', f: (x) => -x + 2, zeros: [2], win: { xmin: -4.5, xmax: 6.5, ymin: -4.5, ymax: 6.5 },
     q: 'Which picture is $y=|f(x)|$?', right: 2,
     cands: [{ f: (x) => x - 2, why: 'the whole line was reflected' }, { f: (x) => -Math.abs(x - 2), why: 'the part above was flipped down' },
       { f: (x) => Math.abs(2 - x), why: 'a V at the zero (2, 0)' }, { f: (x) => Math.abs(x) + 2, why: 'its vertex is at the y-intercept, not the zero' }],
     clue: 'The line is below the $x$-axis right of its zero, $x=2$. Only that part flips; $(2,\\ 0)$ stays put.',
     win2: '<b>C</b>: keep the part above the axis, flip the part below. A V with its vertex at the zero $(2,\\ 0)$.' },
-  r2: { label: 'Round 2', kind: 'abs', ft: 'f(x)=x^2-2x-3', f: (x) => x * x - 2 * x - 3, zeros: [-1, 3], clueP: [[1, -4]], win: { xmin: -4.5, xmax: 6.5, ymin: -5.5, ymax: 6.5 },
+  r2: { label: 'Round 2', kind: 'abs', labLow: true, ft: 'f(x)=x^2-2x-3', f: (x) => x * x - 2 * x - 3, zeros: [-1, 3], clueP: [[1, -4]], win: { xmin: -4.5, xmax: 6.5, ymin: -5.5, ymax: 6.5 },
     q: 'Which picture is $y=|f(x)|$?', right: 3,
     cands: [{ f: (x) => -(x * x - 2 * x - 3), why: 'the whole parabola was reflected' }, { f: (x) => (x - 1) * (x - 1), why: 'shifted up 4: the zeros moved' },
       { f: (x) => -Math.abs(x * x - 2 * x - 3), why: 'the wrong parts were flipped' }, { f: (x) => Math.abs(x * x - 2 * x - 3), why: 'only the arc below the axis flips' }],
@@ -239,13 +239,13 @@ const MT = {
       { f: (x) => -1 / (x - 1), asy: [1], why: 'the signs are flipped' }, { f: (x) => Math.abs(1 / (x - 1)), asy: [1], why: 'positive on the left, but f is negative there' }],
     clue: 'The zero $x=1$ gives the asymptote. Left of it $f$ is <b>negative</b>, right of it <b>positive</b>: the reciprocal has the same signs.',
     win2: '<b>A</b>: an asymptote at $x=1$, a negative branch on the left and a positive one on the right, through $(2,\\ 1)$ and $(0,\\ -1)$.' },
-  r4: { label: 'Round 4', kind: 'rec', ft: 'f(x)=x^2-4', f: (x) => x * x - 4, zeros: [-2, 2], clueP: [[0, -4]], win: { xmin: -5.5, xmax: 5.5, ymin: -5.5, ymax: 5.5 },
+  r4: { label: 'Round 4', kind: 'rec', labLow: true, ft: 'f(x)=x^2-4', f: (x) => x * x - 4, zeros: [-2, 2], clueP: [[0, -4]], win: { xmin: -5.5, xmax: 5.5, ymin: -5.5, ymax: 5.5 },
     q: 'Which picture is $y=\\dfrac{1}{f(x)}$?', right: 2,
     cands: [{ f: (x) => 1 / (x * x - 1), asy: [-1, 1], why: 'asymptotes at x = ±1, not at the zeros ±2' }, { f: (x) => -1 / (x * x - 4), asy: [-2, 2], why: 'the signs are flipped' },
       { f: (x) => 1 / (x * x - 4), asy: [-2, 2], why: 'asymptotes x = ±2, max (0, −¼)' }, { f: (x) => 1 / (x * x + 4), why: 'no asymptotes, but f has two zeros' }],
     clue: 'Zeros $\\pm2$: two asymptotes. Between them $f$ is negative, with its minimum $(0,\\ -4)$, so the reciprocal has a <b>maximum</b> $\\left(0,\\ -\\tfrac14\\right)$.',
     win2: '<b>C</b>: asymptotes $x=\\pm2$, positive outside, and a middle branch below the axis with a maximum point $\\left(0,\\ -\\tfrac14\\right)$.' },
-  r5: { label: 'Round 5', kind: 'rec', ft: 'f(x)=(x-1)^2+1', f: (x) => (x - 1) * (x - 1) + 1, zeros: [], clueP: [[1, 1]], win: { xmin: -3.5, xmax: 5.5, ymin: -3.5, ymax: 5.5 },
+  r5: { label: 'Round 5', kind: 'rec', labLow: true, ft: 'f(x)=(x-1)^2+1', f: (x) => (x - 1) * (x - 1) + 1, zeros: [], clueP: [[1, 1]], win: { xmin: -3.5, xmax: 5.5, ymin: -3.5, ymax: 5.5 },
     q: 'Which picture is $y=\\dfrac{1}{f(x)}$?', right: 1,
     cands: [{ f: (x) => (x - 1) * (x - 1) + 1, why: 'that is f itself: only the vertex is invariant' }, { f: (x) => 1 / ((x - 1) * (x - 1) + 1), why: 'no asymptotes, max at (1, 1)' },
       { f: (x) => 1 / ((x - 1) * (x - 1)), asy: [1], why: 'an asymptote, but f has no zeros' }, { f: (x) => -1 / ((x - 1) * (x - 1) + 1), why: 'negative, but f is always positive' }],
@@ -271,7 +271,7 @@ const match = mdDef({
     const mainF = back ? recipOf(d.f) : d.f;
     const main = hcurve(G.fn(mainF, { color: back ? R : F, width: 3.5, breaks: back ? d.zeros : [], samples: 500 }));
     const mainAsy = back ? d.zeros.map((z) => hcurve(G.vline(z, { color: SL, width: 2.5 }))) : [];
-    const lab = hide(div(stage, 'u7l8-mainlab', T(d.ft), 16, 12));
+    const lab = hide(div(stage, 'u7l8-mainlab', T(d.ft), 16, d.labLow ? 372 : 12));
     lab.style.color = back ? R : F;
     // the clue layer
     const below = d.kind === 'abs' ? hcurve(G.fn((x) => (d.f(x) < 0 ? d.f(x) : NaN), { color: RD, width: 7, samples: 400 })) : null;

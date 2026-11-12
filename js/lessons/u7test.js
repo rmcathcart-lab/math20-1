@@ -551,7 +551,7 @@
     var L = linOf(linSpec(r)), cf = rv(L.a) < 0 && r.chance(0.6), f = linT(L.a, L.b, cf), yi = Math.abs(L.b);
     var V = [L.h, 0], vc = pointChk(cp, V, [{ p: [-L.h, 0], code: cp + 'v-sign', hint: 'Solve ' + t(f + '=0') + ' for ' + t('x') + ' carefully: the vertex is at the zero of the line.' }, { p: [0, yi], code: cp + 'v-yint', hint: 'That is the ' + t('y') + '-intercept. The vertex of the V is where the line crosses the ' + t('x') + '-axis: solve ' + t(f + '=0') + '.' }]);
     var yc = K.value(yi, { diag: function (v) { if (v === L.b && L.b < 0) return { code: cp + 'yint-neg', hint: 'At ' + t('x=0') + ', ' + t(A(f) + '=' + A(L.b) + '=' + yi) + ': the graph of ' + t('y=|f(x)|') + ' is never below the ' + t('x') + '-axis.' }; if (Math.abs(v - L.h) < 1e-9) return { code: cp + 'yint-x', hint: 'That is the ' + t('x') + '-coordinate of the vertex. The ' + t('y') + '-intercept is the value at ' + t('x=0') + '.' }; return null; } });
-    var fields = [{ label: 'Vertex', mode: 'math', keys: 'u7pts', placeholder: '(x, y)' }, { label: t('y') + '-intercept', name: 'y-intercept', mode: 'math', keys: 'u7pts' }];
+    var fields = [{ label: 'Vertex', mode: 'math', keys: 'u7pts', placeholder: '(x, y)' }, { label: t('y') + '-intercept', name: 'y-intercept', mode: 'math', keys: 'u7pts', placeholder: 'a number' }];
     var bad = [[pt(-L.h, 0), String(yi)], [pt(L.h, 0), String(L.b)]].filter(function (b) { return !(b[0] === pt(L.h, 0) && b[1] === String(yi)); });
     return fieldsPart('For ' + t('y=' + A(f)) + ', state the coordinates of the vertex and the ' + t('y') + '-intercept.', fields, [vc.check, yc], [pt(L.h, 0), String(yi)], 'vertex ' + t(pt(L.h, 0)) + ', ' + t('y') + '-intercept ' + t(yi),
       'Vertex (the zero of the line, an invariant point): ' + t(f + '=0') + ' gives ' + t('x=' + rt(L.h)) + ', so ' + t(pt(L.h, 0)) + '.<br>' + t('y') + '-intercept: ' + t(A(L.b) + '=' + yi) + '.',
@@ -964,7 +964,7 @@
     var s = recLinSpec(r), cf = rv(s.a) < 0 && r.chance(0.5), den = linT(s.a, s.b, cf), h = toR(-s.b / rv(s.a)), yi = toR([1, s.b]);
     var aC = asyCheck(cp, { xs: [rv(h)], hz: true }, { wrongs: [{ xs: [-s.b], code: cp + 'asy-const', hint: 'The vertical asymptote is where the denominator is 0: solve ' + t(den + '=0') + '.' }] });
     var yC = K.value(yi, { diag: function (v) { if (Math.abs(v - s.b) < 1e-9) return { code: cp + 'yint-same', hint: 'That is the ' + t('y') + '-intercept of the line. The reciprocal’s is ' + t('\\frac{1}{' + s.b + '}') + '.' }; if (Math.abs(v + 1 / s.b) < 1e-9) return { code: cp + 'rpt-neg', hint: 'A number and its reciprocal have the same sign.' }; return null; } });
-    var fields = [{ label: 'Asymptotes', mode: 'math', keys: 'u7asy', placeholder: 'e.g. x = 3, y = 0' }, { label: t('y') + '-intercept', name: 'y-intercept', mode: 'math', keys: 'u7asy' }];
+    var fields = [{ label: 'Asymptotes', mode: 'math', keys: 'u7asy', placeholder: 'e.g. x = 3, y = 0' }, { label: t('y') + '-intercept', name: 'y-intercept', mode: 'math', keys: 'u7asy', placeholder: 'a number' }];
     var keys = [asyT([h], true), rt(yi)];
     var bad = [[asyT([toR(-rv(h))], true), keys[1]], [asyT([h], false), keys[1]], [keys[0], String(s.b)], [asyT([-s.b], true), keys[1]]].filter(function (b) { return b.join('|') !== keys.join('|'); });
     return fieldsPart('For ' + t('y=\\dfrac{1}{' + den + '}') + ', state the equations of the asymptotes and the ' + t('y') + '-intercept.', fields, [aC, yC], keys, t(keys[0]) + '; ' + t('y') + '-intercept ' + t(keys[1]),

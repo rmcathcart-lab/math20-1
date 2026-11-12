@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quadratic Inequalities in Two Variables · Math 20-1 8.5</title>
+<meta name="description" content="Math 20-1 Unit 8 Lesson 5: quadratic inequalities in two variables. Solutions above or below (inside or outside) a parabola, solid and dashed boundaries, graphing the region with one test point, rearranging first (reversing the sign), choosing a test point when (0, 0) is on the parabola, writing the inequality from a graph, shading on a graphing calculator, and a truck in a tunnel arch. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u8l5.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u8l5">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Birthday Bet">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><text x="40" font-size="30" text-anchor="middle">🎈<animate attributeName="y" values="64;-6" dur="3.2s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.2s" begin="0s" repeatCount="indefinite"/></text><text x="110" font-size="30" text-anchor="middle">🎈<animate attributeName="y" values="64;-6" dur="3.6s" begin="1.1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.6s" begin="1.1s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="180" y="46" font-size="34" text-anchor="middle">🎁</text></g><text x="250" font-size="30" text-anchor="middle">🎈<animate attributeName="y" values="64;-6" dur="3.0s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.0s" begin="0.5s" repeatCount="indefinite"/></text><text x="312" y="46" font-size="34" text-anchor="middle">🎉<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0.4s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Birthday Bet</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">There are 30&nbsp;people in a room. I bet you a large pizza that at least two of them have the same birthday (the same day and month, not the same year).</p><p class="vw-ask">Would you take my bet?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A calendar page flipping through the months with a blinking question mark for the date, a birthday cake, balloons and a row of people"><rect x="38" y="44" width="114" height="136" rx="12" fill="#fffdf6" stroke="#4a4436" stroke-width="3"/><path d="M38 56 a12 12 0 0 1 12 -12 h90 a12 12 0 0 1 12 12 v28 h-114 z" fill="#c93a33"/><circle cx="66" cy="44" r="5" fill="#4a4436"/><circle cx="124" cy="44" r="5" fill="#4a4436"/><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">JAN<animate attributeName="opacity" values="1;0;0;0;0;0;0;0;0;0;0;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">FEB<animate attributeName="opacity" values="0;1;0;0;0;0;0;0;0;0;0;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">MAR<animate attributeName="opacity" values="0;0;1;0;0;0;0;0;0;0;0;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">APR<animate attributeName="opacity" values="0;0;0;1;0;0;0;0;0;0;0;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">MAY<animate attributeName="opacity" values="0;0;0;0;1;0;0;0;0;0;0;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">JUN<animate attributeName="opacity" values="0;0;0;0;0;1;0;0;0;0;0;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">JUL<animate attributeName="opacity" values="0;0;0;0;0;0;1;0;0;0;0;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">AUG<animate attributeName="opacity" values="0;0;0;0;0;0;0;1;0;0;0;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">SEP<animate attributeName="opacity" values="0;0;0;0;0;0;0;0;1;0;0;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">OCT<animate attributeName="opacity" values="0;0;0;0;0;0;0;0;0;1;0;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">NOV<animate attributeName="opacity" values="0;0;0;0;0;0;0;0;0;0;1;0" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="74" font-size="22" font-weight="800" fill="#fff" text-anchor="middle" opacity="0">DEC<animate attributeName="opacity" values="0;0;0;0;0;0;0;0;0;0;0;1" dur="9.6s" calcMode="discrete" repeatCount="indefinite"/></text><text x="95" y="158" font-size="62" font-weight="800" fill="#2b55a0" text-anchor="middle">?<animate attributeName="opacity" values="1;0.25;1" dur="1.4s" begin="0s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="2.0s" begin="0s" repeatCount="indefinite"/><text x="250" y="168" font-size="74" text-anchor="middle">🎂</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -9;0 0" dur="1.8s" begin="0.3s" repeatCount="indefinite"/><text x="218" y="74" font-size="44" text-anchor="middle">🎈</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -9;0 0" dur="1.6s" begin="0.9s" repeatCount="indefinite"/><text x="282" y="60" font-size="40" text-anchor="middle">🎈</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.0s" repeatCount="indefinite"/><text x="40" y="238" font-size="30" text-anchor="middle">🧑</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.22s" repeatCount="indefinite"/><text x="90" y="238" font-size="30" text-anchor="middle">👧</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.44s" repeatCount="indefinite"/><text x="140" y="238" font-size="30" text-anchor="middle">🧔</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.66s" repeatCount="indefinite"/><text x="190" y="238" font-size="30" text-anchor="middle">👩</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="0.88s" repeatCount="indefinite"/><text x="240" y="238" font-size="30" text-anchor="middle">🧒</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="1.1s" repeatCount="indefinite"/><text x="290" y="238" font-size="30" text-anchor="middle">👦</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.4s" begin="1.32s" repeatCount="indefinite"/><text x="340" y="238" font-size="30" text-anchor="middle">👱</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Vote first: take the bet, or walk away?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Walk away: you would probably lose the pizza!</b> With 30&nbsp;people the chance that two share a birthday is about <b>71%</b>. With only 23&nbsp;people it is already better than 50%, and with 57&nbsp;people it is 99%.<br>The surprise: it is not about anyone matching <i>your</i> birthday. Thirty people make 435&nbsp;different pairs, and every pair is another chance for a match. (Let’s test it: does anyone in this room share a birthday?)</div></div>
+</section>
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 8 Systems and Inequalities · Lesson 5</div>
+  <h1>Quadratic Inequalities in Two Variables</h1>
+  <p class="lede">Graphing the region above or below a parabola with a solid or dashed boundary and a test point, writing an inequality from its graph, and using the region in a context.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>decide whether a point is a <b>solution</b> of an inequality such as <span class="tex">y\ge x^2-2x-3</span></li>
+      <li>draw the boundary <b>solid or dashed</b> and shade <b>above or below</b> (inside or outside) the parabola</li>
+      <li>graph a solution region: the boundary, <b>one test point</b>, then shade</li>
+      <li>solve for <span class="tex">y</span> first, <b>reversing the sign</b> when I multiply or divide by a negative, and choose another test point when <span class="tex">(0,\ 0)</span> is on the parabola</li>
+      <li><b>write the inequality</b> for a shaded region</li>
+      <li>shade a region on a graphing calculator and use regions to solve problems, such as whether a truck fits through a tunnel</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF7</b> Solve problems that involve linear and quadratic inequalities in two variables.<br><span class="muted">Today: solutions and regions, solid or dashed, graphing with a test point, rearranging, writing the inequality from a graph, the calculator, and a tunnel arch.</span></div>
+</section>
+
+<!-- ================= 1. Solutions ================= -->
+<section class="card" data-ink="s1" data-section="1. Solutions of a Quadratic Inequality">
+  <div class="sec-h"><span class="badge">1</span><h2>Solutions of a Quadratic Inequality in Two Variables</h2></div>
+  <p>A <b>quadratic inequality in two variables</b> has one of the forms</p>
+  <div class="u8l5-forms"><span class="tex">y&lt;ax^2+bx+c</span><span class="tex">y\le ax^2+bx+c</span><span class="tex">y&gt;ax^2+bx+c</span><span class="tex">y\ge ax^2+bx+c</span><span class="u8l5-a0"><span class="tex">a\ne0</span></span></div>
+  <p>A <b>solution</b> is an ordered pair <span class="tex">(x,\ y)</span> that makes the inequality true. There are infinitely many, so we show them as a shaded <b>solution region</b>. As with lines in Lesson 4, the graph of the related equation <span class="tex">y=ax^2+bx+c</span> is the <b>boundary</b>. A parabola splits the plane into two regions: the region <b>inside</b> the parabola (the side it opens toward) and the region <b>outside</b> it. Every point of one region is a solution, and no point of the other is.</p>
+  <div class="explainer" data-explainer="regions"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Which points are solutions?</h3></div>
+  <p class="q">Consider the inequality <span class="tex">y\ge x^2-2x-3</span>. The boundary <span class="tex">y=x^2-2x-3</span> is graphed.</p>
+  <div class="u8l5-ex1">
+    <div class="part u8l5-tpart"><div class="pl">(a) For each point, find <span class="tex">x^2-2x-3</span> and decide whether the point is a solution. Plot the points, marking each solution.</div>
+      <table class="u8l5-tbl">
+        <tr><th>Point</th><th><span class="tex">x^2-2x-3</span></th><th>Is <span class="tex">y\ge x^2-2x-3</span>?</th></tr>
+        <tr><td><span class="tex">(0,\ 0)</span></td><td><span data-reveal><span class="tex">-3</span></span></td><td><span data-reveal>yes: <span class="tex">0\ge-3</span></span></td></tr>
+        <tr><td><span class="tex">(4,\ 1)</span></td><td><span data-reveal><span class="tex">5</span></span></td><td><span data-reveal>no: <span class="tex">1&lt;5</span></span></td></tr>
+        <tr><td><span class="tex">(1,\ -5)</span></td><td><span data-reveal><span class="tex">-4</span></span></td><td><span data-reveal>no: <span class="tex">-5&lt;-4</span></span></td></tr>
+        <tr><td><span class="tex">(-2,\ 5)</span></td><td><span data-reveal><span class="tex">5</span></span></td><td><span data-reveal>yes: <span class="tex">5=5</span></span></td></tr>
+        <tr><td><span class="tex">(2,\ 1)</span></td><td><span data-reveal><span class="tex">-3</span></span></td><td><span data-reveal>yes: <span class="tex">1\ge-3</span></span></td></tr>
+        <tr><td><span class="tex">(0,\ -4)</span></td><td><span data-reveal><span class="tex">-3</span></span></td><td><span data-reveal>no: <span class="tex">-4&lt;-3</span></span></td></tr>
+        <tr><td><span class="tex">(3,\ 0)</span></td><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal>yes: <span class="tex">0=0</span></span></td></tr>
+      </table>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Solutions: <span class="tex">(0,\ 0)</span>, <span class="tex">(-2,\ 5)</span>, <span class="tex">(2,\ 1)</span>, <span class="tex">(3,\ 0)</span> (dots). Not solutions: <span class="tex">(4,\ 1)</span>, <span class="tex">(1,\ -5)</span>, <span class="tex">(0,\ -4)</span> (crosses).</div></div></div>
+    <div class="part u8l5-gpart"><div class="u8l5-sk"><div id="u8l5-e1"></div><div class="u8l5-ska" id="u8l5-e1A"></div></div></div>
+  </div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(b) Describe where the solutions lie.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">All the solutions are on the parabola or inside it (above it). The points that are not solutions are outside it (below it). The whole region on or above the parabola is the solution region (shaded).</div></div></div>
+    <div class="part"><div class="pl">(c) Which of the points are solutions of <span class="tex">y&gt;x^2-2x-3</span>? Explain the difference.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Only <span class="tex">(0,\ 0)</span> and <span class="tex">(2,\ 1)</span>. The points <span class="tex">(-2,\ 5)</span> and <span class="tex">(3,\ 0)</span> are on the boundary: they make <span class="tex">y=x^2-2x-3</span> true, so they satisfy <span class="tex">\ge</span> but not <span class="tex">&gt;</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s1k" data-section="Solid or Dashed, Above or Below">
+  <div class="def amber u8l5-key"><div class="u8l5-keyh">Solid or dashed, above or below</div>
+    <div class="u8l5-two">
+      <div><b>Boundary</b><span class="u8l5-solid"></span><b class="u8l5-in">solid</b> parabola for <span class="tex">\le</span> or <span class="tex">\ge</span> (points on it are solutions)<br><span class="u8l5-dash"></span><b class="u8l5-in">dashed</b> parabola for <span class="tex">&lt;</span> or <span class="tex">&gt;</span> (they are not)</div>
+      <div><b>Region</b> (with <span class="tex">y</span> alone on the left)<br><span class="tex">y&gt;\dots</span> or <span class="tex">y\ge\dots</span> is the region <b>above</b> the parabola<br><span class="tex">y&lt;\dots</span> or <span class="tex">y\le\dots</span> is the region <b>below</b> it</div>
+    </div>
+    <div class="u8l5-keyf">For a parabola that opens up, “above” is inside; for one that opens down, “above” is outside.</div></div>
+</section>
+
+<!-- ================= 2. Graphing the region ================= -->
+<section class="card" data-ink="s2" data-section="2. Graphing the Solution Region">
+  <div class="sec-h"><span class="badge">2</span><h2>Graphing the Solution Region</h2></div>
+  <div class="def amber u8l5-key"><div class="u8l5-keyh">To graph a quadratic inequality in two variables</div>
+    <div class="u8l5-steps">
+      <div><b>1</b>Graph the boundary <span class="tex">y=ax^2+bx+c</span>: find the vertex, the <span class="tex">x</span>-intercepts (factor) and the <span class="tex">y</span>-intercept, and use symmetry. Draw it <b>solid</b> for <span class="tex">\le</span>, <span class="tex">\ge</span> and <b>dashed</b> for <span class="tex">&lt;</span>, <span class="tex">&gt;</span>.</div>
+      <div><b>2</b>Choose a <b>test point</b> that is not on the parabola (<span class="tex">(0,\ 0)</span> is easiest when it is not on it) and substitute it into the inequality.</div>
+      <div><b>3</b>If the test point makes the inequality <b>true</b>, shade the region (inside or outside) that contains it; if <b>false</b>, shade the other region.</div>
+    </div></div>
+  <p>One test point is enough, because every point on the same side of the parabola gives the same answer. Use the test point to check the “above/below” rule, not instead of thinking about it.</p>
+  <div class="explainer" data-explainer="graph3"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Factor, test, shade</h3></div>
+  <p class="q">Graph the solution region of each inequality.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y\le x^2-6x+5</span></div>
+      <div class="u8l5-gw"><div class="u8l5-sk"><div id="u8l5-e2a"></div><div class="u8l5-ska" id="u8l5-e2aA"></div></div><div class="work" style="--h:300px"></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=(x-1)(x-5)</span>: <span class="tex">x</span>-intercepts <span class="tex">1</span> and <span class="tex">5</span>.<br>Axis <span class="tex">x=3</span>; vertex <span class="tex">(3,\ -4)</span>; <span class="tex">y</span>-intercept <span class="tex">5</span>.<br>Solid (the sign is <span class="tex">\le</span>). Test <span class="tex">(0,\ 0)</span>: <span class="tex">0\le5</span> true.<br>Shade the side with <span class="tex">(0,\ 0)</span>: below (outside) the parabola.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y&gt;-x^2-2x+8</span></div>
+      <div class="u8l5-gw"><div class="u8l5-sk"><div id="u8l5-e2b"></div><div class="u8l5-ska" id="u8l5-e2bA"></div></div><div class="work" style="--h:300px"></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=-(x^2+2x-8)=-(x+4)(x-2)</span>: <span class="tex">x</span>-intercepts <span class="tex">-4</span>, <span class="tex">2</span>.<br>Axis <span class="tex">x=-1</span>; vertex <span class="tex">(-1,\ 9)</span>; <span class="tex">y</span>-intercept <span class="tex">8</span>.<br>Dashed (the sign is <span class="tex">&gt;</span>). Test <span class="tex">(0,\ 0)</span>: <span class="tex">0&gt;8</span> false.<br>Shade the side without <span class="tex">(0,\ 0)</span>: above (outside) the parabola.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Use the form you are given</h3></div>
+  <p class="q">Graph the solution region of each inequality. Use the form the equation is given in.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y\ge 2(x-1)^2-8</span></div>
+      <div class="u8l5-gw"><div class="u8l5-sk"><div id="u8l5-e3a"></div><div class="u8l5-ska" id="u8l5-e3aA"></div></div><div class="work" style="--h:300px"></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex <span class="tex">(1,\ -8)</span>, opens up, step pattern <span class="tex">2,\ 6,\ \dots</span><br><span class="tex">x</span>-intercepts: <span class="tex">(x-1)^2=4</span>, <span class="tex">x=-1</span> or <span class="tex">3</span>; <span class="tex">y</span>-intercept <span class="tex">-6</span>.<br>Solid. Test <span class="tex">(0,\ 0)</span>: <span class="tex">0\ge-6</span> true.<br>Shade above (inside) the parabola.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y&lt;-\frac{1}{2}(x+2)(x-4)</span></div>
+      <div class="u8l5-gw"><div class="u8l5-sk"><div id="u8l5-e3b"></div><div class="u8l5-ska" id="u8l5-e3bA"></div></div><div class="work" style="--h:300px"></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x</span>-intercepts <span class="tex">-2</span> and <span class="tex">4</span>; axis <span class="tex">x=1</span>.<br>Vertex: <span class="tex">y=-\frac{1}{2}(3)(-3)=4.5</span>, so <span class="tex">(1,\ 4.5)</span>; <span class="tex">y</span>-intercept <span class="tex">4</span>.<br>Dashed. Test <span class="tex">(0,\ 0)</span>: <span class="tex">0&lt;4</span> true.<br>Shade below (outside) the parabola.</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Rearranging first ================= -->
+<section class="card" data-ink="s3" data-section="3. Rearranging First, and Choosing a Test Point">
+  <div class="sec-h"><span class="badge">3</span><h2>Rearranging First, and Choosing a Test Point</h2></div>
+  <p>If <span class="tex">y</span> is not alone on the left, solve for <span class="tex">y</span> first, as you would solve an equation, with one change: <b>multiplying or dividing both sides by a negative number reverses the inequality sign</b>. For example, <span class="tex">-y&gt;3</span> becomes <span class="tex">y&lt;-3</span>. (Dividing by a positive number keeps the sign.)</p>
+  <p>When <span class="tex">c=0</span> the parabola passes through <span class="tex">(0,\ 0)</span>, so <span class="tex">(0,\ 0)</span> cannot be the test point: it gives an equality, which tells you nothing about the regions. Use a point such as <span class="tex">(1,\ 0)</span>, <span class="tex">(0,\ 1)</span> or a point straight above the vertex.</p>
+  <div class="explainer" data-explainer="flip"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Get <span class="tex">y</span> alone</h3></div>
+  <p class="q">Write each inequality with <span class="tex">y</span> alone on the left. State whether the boundary is solid or dashed and whether the region is above or below the parabola.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">y-3&gt;x^2-4x</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Add <span class="tex">3</span>:<br><span class="tex">y&gt;x^2-4x+3</span><br>Dashed; above.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x^2-y\ge4x</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-y\ge-x^2+4x</span><br>Multiply by <span class="tex">-1</span> (reverse):<br><span class="tex">y\le x^2-4x</span><br>Solid; below.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">4-2y&lt;2x^2+6x</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-2y&lt;2x^2+6x-4</span><br>Divide by <span class="tex">-2</span> (reverse):<br><span class="tex">y&gt;-x^2-3x+2</span><br>Dashed; above.</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>When <span class="tex">(0,\ 0)</span> is on the parabola</h3></div>
+  <div class="u8l5-ex5">
+    <div class="u8l5-col">
+      <div class="part"><div class="pl">(a) Explain why <span class="tex">(0,\ 0)</span> cannot be used as the test point for <span class="tex">y\le x^2-4x</span>, the inequality from Example 4(b).</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(0,\ 0)</span> is on the boundary: <span class="tex">0^2-4(0)=0</span>. It is in neither region, so it cannot tell us which side to shade.</div></div></div>
+      <div class="part"><div class="pl">(b) Graph the solution region of <span class="tex">y\le x^2-4x</span>.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=x(x-4)</span>: <span class="tex">x</span>-intercepts <span class="tex">0</span> and <span class="tex">4</span>; axis <span class="tex">x=2</span>; vertex <span class="tex">(2,\ -4)</span>. Solid.<br>Test <span class="tex">(2,\ 0)</span>, a point above the vertex: is <span class="tex">0\le2^2-4(2)=-4</span>? &nbsp;<span class="tex">0\le-4</span> is false.<br><span class="tex">(2,\ 0)</span> is inside, so shade outside: the region below the parabola.</div></div></div>
+    </div>
+    <div class="part u8l5-gpart"><div class="u8l5-sk"><div id="u8l5-e5"></div><div class="u8l5-ska" id="u8l5-e5A"></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 5 · Questions 1–6</h2>
+  <p class="pr-t">Test points, solid or dashed, above or below, and graphing regions (rearrange first when <span class="tex">y</span> is not alone).</p>
+  <div class="pr-chips n4"><span><b>1</b>Is the point a solution?</span><span><b>2</b>Solid or dashed, above or below</span><span><b>3–4</b>Graph the region</span><span><b>5–6</b>Rearrange first; a new test point</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u8l5">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. Writing an inequality from a graph ================= -->
+<section class="card" data-ink="s4" data-section="4. Writing an Inequality from a Graph">
+  <div class="sec-h"><span class="badge">4</span><h2>Writing an Inequality from a Graph</h2></div>
+  <div class="def amber u8l5-key"><div class="u8l5-keyh">To write the inequality for a shaded region</div>
+    <div class="u8l5-steps u8l5-s3">
+      <div><b>1</b>Write the equation of the boundary parabola: from the vertex <span class="tex">(p,\ q)</span> and a point, use <span class="tex">y=a(x-p)^2+q</span>; from the <span class="tex">x</span>-intercepts <span class="tex">r</span>, <span class="tex">s</span> and a point, use <span class="tex">y=a(x-r)(x-s)</span>. Substitute the point to find <span class="tex">a</span>.</div>
+      <div><b>2</b>Choose the sign: shaded above <span class="tex">\Rightarrow</span> <span class="tex">&gt;</span> or <span class="tex">\ge</span>; shaded below <span class="tex">\Rightarrow</span> <span class="tex">&lt;</span> or <span class="tex">\le</span>; solid <span class="tex">\Rightarrow</span> include “<span class="tex">=</span>”; dashed <span class="tex">\Rightarrow</span> do not.</div>
+      <div><b>3</b>Check with a point in the shaded region.</div>
+    </div></div>
+  <div class="explainer" data-explainer="dial"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Read the graph, write the inequality</h3></div>
+  <p class="q">Write the inequality whose solution region is shown, in general form.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Vertex <span class="tex">(2,\ -3)</span>; the point <span class="tex">(0,\ 1)</span> is on the boundary.</div>
+      <div class="u8l5-gw"><div class="u8l5-sk" id="u8l5-e6a"></div><div class="work" style="--h:300px"></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=a(x-2)^2-3</span>; at <span class="tex">(0,\ 1)</span>: <span class="tex">1=4a-3</span>, <span class="tex">a=1</span>.<br><span class="tex">y=(x-2)^2-3=x^2-4x+1</span>.<br>Dashed, shaded above: <span class="tex">y&gt;x^2-4x+1</span>.<br>Check <span class="tex">(2,\ 0)</span>: <span class="tex">0&gt;4-8+1=-3</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">x</span>-intercepts <span class="tex">-3</span> and <span class="tex">1</span>; <span class="tex">y</span>-intercept <span class="tex">6</span>.</div>
+      <div class="u8l5-gw"><div class="u8l5-sk" id="u8l5-e6b"></div><div class="work" style="--h:300px"></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=a(x+3)(x-1)</span>; at <span class="tex">(0,\ 6)</span>: <span class="tex">6=a(3)(-1)</span>, <span class="tex">a=-2</span>.<br><span class="tex">y=-2(x^2+2x-3)=-2x^2-4x+6</span>.<br>Solid, shaded below: <span class="tex">y\le-2x^2-4x+6</span>.<br>Check <span class="tex">(0,\ 0)</span>: <span class="tex">0\le6</span> ✓</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u8l5"></section>
+
+<!-- ================= 5. Calculator and context ================= -->
+<section class="card" data-ink="s5" data-section="5. Using a Graphing Calculator">
+  <div class="sec-h"><span class="badge">5</span><h2>Using a Graphing Calculator, and Regions in Context</h2></div>
+  <p>A graphing calculator shades a region quickly, which helps when the intercepts are not whole numbers.</p>
+  <div class="def amber u8l5-key"><div class="u8l5-calc">
+    <div class="u8l5-scr" aria-label="The TI-84 Y= screen with the shade-below icon beside Y1"><div class="u8l5-scrh">Plot1 Plot2 Plot3</div><div class="u8l5-scrl"><span class="u8l5-ic">◣</span><span class="u8l5-y1">Y₁</span><span class="u8l5-eqs">=</span><span>−X²+2X+6</span></div><div class="u8l5-scrl u8l5-dim"><span class="u8l5-ic0">\</span><span class="u8l5-y1">Y₂</span><span>=</span></div><div class="u8l5-icons"><span><b>◥</b> shade above</span><span><b>◣</b> shade below</span></div></div>
+    <div class="u8l5-calct"><b>TI-84 Plus CE:</b> put <span class="tex">y</span> alone on the left; in <span class="keys"><kbd>Y=</kbd></span> enter the right side as <span class="tex">Y_1</span>; move the cursor to the far left of <span class="tex">Y_1</span> and press <span class="keys"><kbd>ENTER</kbd></span> until the shade-above icon (for <span class="tex">&gt;</span>, <span class="tex">\ge</span>) or the shade-below icon (for <span class="tex">&lt;</span>, <span class="tex">\le</span>) shows; press <span class="keys"><kbd>GRAPH</kbd></span>. Use <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd></span> <b>zero</b> for the <span class="tex">x</span>-intercepts.<br>(On the Casio, choose the graph type <span class="tex">Y&gt;</span>, <span class="tex">Y&lt;</span>, <span class="tex">Y\ge</span> or <span class="tex">Y\le</span> for the function: <b>F3</b> TYPE in the graph list.)<br><b>The calculator does not show solid or dashed boundaries:</b> decide that yourself when you sketch.</div>
+  </div></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Shade it on the calculator</h3></div>
+  <div class="u8l5-ex5">
+    <div class="part"><div class="pl">Use a graphing calculator to graph <span class="tex">y&lt;-x^2+2x+6</span>. Sketch the region on the grid, and label the intercepts and the vertex (to the nearest tenth).</div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">Y_1=-X^2+2X+6</span> with the shade-below icon.<br>zero: <span class="tex">x\approx-1.6</span> and <span class="tex">x\approx3.6</span> &nbsp;(exactly <span class="tex">1\pm\sqrt{7}</span>, by the quadratic formula).<br><span class="tex">y</span>-intercept <span class="tex">6</span>; vertex <span class="tex">(1,\ 7)</span>.<br>Dashed boundary (the sign is <span class="tex">&lt;</span>); shade below. Check <span class="tex">(0,\ 0)</span>: <span class="tex">0&lt;6</span> ✓</div></div></div>
+    <div class="part u8l5-gpart"><div class="u8l5-sk"><div id="u8l5-e7"></div><div class="u8l5-ska" id="u8l5-e7A"></div></div></div>
+  </div>
+  <div class="tip calc-tip u8l5-ctip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>On your own calculator.</b> <span class="tex">Y_1=</span> <code>-X²+2X+6</code> (with <span class="keys"><kbd>(−)</kbd></span> for the first minus), then <b>2:zero</b> with a left bound, a right bound and a guess around each <span class="tex">x</span>-intercept, and <b>4:maximum</b> for the vertex.</div>
+    <div class="u8l5-pcol"><button class="pill" data-keys="Y= CLEAR (−) X x² + 2 X + 6 ZStandard zero (−) 3 ENTER (−) 1 ENTER (−) 2 ENTER">Show zero</button><button class="pill" data-keys="Y= CLEAR (−) X x² + 2 X + 6 ZStandard maximum 0 ENTER 2 ENTER 1 ENTER">Show maximum</button></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s5b" data-section="Regions in Context">
+  <div class="sec-h"><h2>Regions in Context</h2></div>
+  <p>Regions bounded by parabolas describe real situations: the space under an arch, under the path of a ball or a jet of water, or inside a reflector. A point <span class="tex">(x,\ y)</span> is inside the region when it satisfies the inequality, and an object fits when all its corner points do.</p>
+  <div class="explainer" data-explainer="tunnel"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The tunnel arch</h3></div>
+  <p class="q">The opening of a tunnel is a parabolic arch. With the origin at the centre of the road, the arch is <span class="tex">y=-0.375x^2+6</span>, where <span class="tex">x</span> and <span class="tex">y</span> are in metres.</p>
+  <div class="u8l5-ex5">
+    <div class="u8l5-col">
+      <div class="part"><div class="pl">(a) Write the inequalities for the points on or under the arch and on or above the road. How wide is the road under the arch?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y\le-0.375x^2+6</span> &nbsp;and&nbsp; <span class="tex">y\ge0</span>.<br>Road: <span class="tex">-0.375x^2+6=0\Rightarrow x^2=16\Rightarrow x=\pm4</span>. The road is <span class="tex">8</span> m wide.</div></div></div>
+      <div class="part"><div class="pl">(b) A truck <span class="tex">3.2</span> m wide and <span class="tex">4.5</span> m tall drives along the centre of the road. Will it fit? Show the test.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Its top corners are <span class="tex">(\pm1.6,\ 4.5)</span>. Test <span class="tex">(1.6,\ 4.5)</span>:<br><span class="tex">-0.375(1.6)^2+6=-0.96+6=5.04</span>, and <span class="tex">4.5\le5.04</span> is true.<br>Both corners are under the arch (by symmetry), so it fits, with about <span class="tex">0.5</span> m to spare.</div></div></div>
+      <div class="part"><div class="pl">(c) How tall can a <span class="tex">4</span> m wide truck in the centre be?</div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Corners at <span class="tex">x=\pm2</span>: <span class="tex">y\le-0.375(4)+6=4.5</span>. At most <span class="tex">4.5</span> m tall.</div></div></div>
+    </div>
+    <div class="part u8l5-gpart"><div class="u8l5-sk"><div id="u8l5-e8"></div><div class="u8l5-ska" id="u8l5-e8A"></div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Solid or dashed, above or below.</b> Solid for <span class="tex">\le</span>, <span class="tex">\ge</span>; dashed for <span class="tex">&lt;</span>, <span class="tex">&gt;</span>. With <span class="tex">y</span> alone: <span class="tex">&gt;</span>, <span class="tex">\ge</span> above; <span class="tex">&lt;</span>, <span class="tex">\le</span> below.</div>
+    <div><b>Graph it.</b> (1) the boundary from its vertex and intercepts; (2) one test point not on the parabola; (3) true: shade its side, false: shade the other side.</div>
+    <div><b>Rearrange first.</b> Multiplying or dividing by a negative <b>reverses</b> the sign. If <span class="tex">(0,\ 0)</span> is on the parabola, test another point, such as one above the vertex.</div>
+    <div><b>From a graph, and in context.</b> <span class="tex">y=a(x-p)^2+q</span> or <span class="tex">y=a(x-r)(x-s)</span>; a point gives <span class="tex">a</span>. Then the sign from the shading and the boundary. An object fits when all its corners satisfy the inequality.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u8l5">
+    <div><div class="kicker">Your turn</div><b>Assignment 5 · Questions 7–16</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l6/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 6 — Quadratic Inequalities in One Variable: Roots and Test Points</b><div class="muted">Solving inequalities such as <span class="tex">x^2-x-6&lt;0</span> on a number line.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u8l5.js';
+  boot({ key: 'u8l5', homeHref: '../../', title: '8.5 Quadratic Inequalities' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

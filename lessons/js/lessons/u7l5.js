@@ -121,7 +121,7 @@ const cases = {
   ask: (v) => CS_ASK[v] || `<b>Example ${CS[v].ex}:</b> solve ${T(CS[v].eq)} algebraically.`,
   make(stage, v, ex) {
     const d = CS[v], W = ex.W, GW = 430, PX = GW + 22, PW = W - PX, f = quad(d.q), k = d.k;
-    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15 }, d.win));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 20, width: GW, height: 422, fontSize: 15 }, d.win));
     const P = div(stage, 'u7l5-pn', '', PX, 0, PW), rows = h('div', 'u7l5-rows'); P.appendChild(rows);
     const fT = d.eq.replace(/^2\|/, '|').replace(/\|=.*$/, '').replace(/^\|/, '');
     const fTex = v === 'e2c' ? 'x^2-5x' : fT;
@@ -132,10 +132,11 @@ const cases = {
     const par = G.fn(f, { color: FC, width: 4 });
     const ghost = hide(G.fn(f, { color: FC, width: 2.5, dash: '8 7', arrows: false }));
     const mv = hide(G.fn((x) => { const y = f(x); return y >= 0 ? y : y * (1 - 2 * S.u); }, { color: AC, width: 4.5 }));
-    const xr = d.win.xmax - 0.3, fl = G.label(d.win.xmin + 0.3, Math.min(d.win.ymax - 0.5, f(d.win.xmin + 0.9)), T('y=' + fTex), { cls: 'bk-ptlab', pos: 'e', color: FC, dx: 26 });
+    const xr = d.win.xmax - 0.2, xm = (d.win.xmin + d.win.xmax) / 2, ym = d.win.ymax - 0.4;
+    const fl = G.label(xm, ym, T('y=' + fTex), { cls: 'bk-ptlab', pos: 's', color: FC });
     const lk = hide(G.hline(k, { color: KC, width: 3, dash: false })), lnk = hide(G.hline(-k, { color: KC, width: 3, dash: '9 7' }));
-    const lkL = hide(G.label(xr, k, T('y=' + k), { cls: 'bk-ptlab', pos: 'nw', color: KC })), lnkL = hide(G.label(xr, -k, T('y=-' + k), { cls: 'bk-ptlab', pos: 'sw', color: KC }));
-    const wl = hide(G.label(d.win.xmin + 0.3, Math.min(d.win.ymax - 0.5, f(d.win.xmin + 0.9)), T('y=|' + fTex + '|'), { cls: 'bk-ptlab', pos: 'e', color: AC, dx: 26 }));
+    const lkL = hide(G.label(xr, k, T('y=' + k), { cls: 'bk-ptlab', pos: 'sw', color: KC })), lnkL = hide(G.label(xr, -k, T('y=-' + k), { cls: 'bk-ptlab', pos: 'nw', color: KC }));
+    const wl = hide(G.label(xm, ym, T('y=|' + fTex + '|'), { cls: 'bk-ptlab', pos: 's', color: AC }));
     const mk = (x, y, lab, pos) => hide(G.point(x, y, { color: 'green', r: 7.5, label: T(lab), pos }));
     const p1 = r1.map((x, i) => mk(x, k, (d.L1 || [])[i] || texNum(x), 'n'));
     const p2 = r2.map((x, i) => mk(x, -k, (d.L2 || [])[i] || texNum(x), r2.length === 1 ? 'n' : 's'));
@@ -155,7 +156,7 @@ const cases = {
       { cap: `<b>2</b> ${T('k=' + k)} is positive, so there are <b>two cases</b>: the inside equals ${T(String(k))} or ${T('-' + k)}. On the graph: the lines ${T('y=' + k)} and ${T('y=-' + k)}.`,
         run: async (c) => { await show(c, R[1]); await Promise.all([drawIn(unhide(lk), 600, c), drawIn(unhide(lnk), 600, c)]); await Promise.all([show(c, unhide(lkL)), show(c, unhide(lnkL))]); } },
       { cap: n1 ? `<b>3</b> Case 1, ${T(fTex + '=' + k)}: standard form, then ${/sqrt/.test(d.c1b) ? 'the quadratic formula' : 'solve'}. ${n1 === 2 ? 'Two roots' : 'One root'}: where the parabola meets ${T('y=' + k)}.`
-        : `<b>3</b> Case 1, ${T(fTex + '=' + k)}: ${T(d.c1)} has <b>no real roots</b>. The parabola never comes down to ${T('y=' + k)}.`,
+        : `<b>3</b> Case 1, ${T(fTex + '=' + k)}: ${T(d.c1.split('\\Rightarrow')[1])} has <b>no real roots</b>. The parabola never comes down to ${T('y=' + k)}.`,
         run: async (c) => { await show(c, R[2]); if (!n1) { await shake(c, lk); return; } await Promise.all(p1.map((p) => popP(c, p))); await Promise.all(drops.slice(0, n1).map((s) => drawIn(unhide(s), 400, c))); } },
       { cap: n2_ ? `<b>4</b> Case 2, ${T(fTex + '=-' + k)}: ${word(n2_)}, where the parabola meets ${T('y=-' + k)}${n2_ === 1 ? ' at its vertex' : ''}.`
         : `<b>4</b> Case 2, ${T(fTex + '=-' + k)}: <b>no real roots</b>. The line ${T('y=-' + k)} misses the parabola${below ? ': it is below the vertex' : ''}.`,
@@ -178,7 +179,7 @@ const cases = {
 
 /* =============================== explainer: slide the line y = k (STAR, hands-on) =============================== */
 const SL = {
-  e4: { q: [1, -6, 5], fT: 'x^2-6x+5', top: [3, 4], zeros: '1 and 5', win: { xmin: -1.5, xmax: 7.5, ymin: -3.5, ymax: 9.5 }, k0: 8.5,
+  e4: { q: [1, -6, 5], fT: 'x^2-6x+5', pre: true, top: [3, 4], zeros: '1 and 5', win: { xmin: -1.5, xmax: 7.5, ymin: -3.5, ymax: 9.5 }, k0: 8.5,
     ks: [[-2, '<b>0</b> solutions: the line is <b>below</b> the x-axis, and the W never goes below the axis.'],
       [0, `<b>2</b> solutions: ${T('k=0')} gives the zeros ${T('x=1')} and ${T('x=5')}.`],
       [2, `<b>4</b> solutions: ${T('0<2<4')}, so the line crosses both outer arms and both sides of the hump.`],
@@ -203,15 +204,15 @@ const slide = {
   ask: (v) => SL[v].ask,
   make(stage, v, ex) {
     const d = SL[v], W = ex.W, GW = 500, PX = GW + 22, PW = W - PX, f = quad(d.q), F = (x) => Math.abs(f(x)), win = d.win;
-    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 440, fontSize: 15 }, win));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 20, width: GW, height: 422, fontSize: 15 }, win));
     G.svg.setAttribute('data-tap', ''); G.el.classList.add('u7l5-drag');
     if (!d.above) G.fn(f, { from: roots(...d.q)[0], to: roots(...d.q)[1], color: FC, width: 2.5, dash: '8 7', arrows: false });
     G.fn(F, { color: AC, width: 4.5 });
     const top = G.point(d.top[0], d.top[1], { color: 'amber', r: 8, label: T(`(${d.top[0]},\\ ${d.top[1]})`), pos: d.above ? 'se' : 'n' });
-    G.label(win.xmin + 0.25, win.ymax - 0.6, T('y=|' + d.fT + '|'), { cls: 'bk-ptlab', pos: 'e', color: AC });
+    G.label(d.top[0], win.ymax - 0.3, T('y=|' + d.fT + '|'), { cls: 'bk-ptlab', pos: 's', color: AC });
     const S = { k: d.k0 };
     const line = G.curve(() => { const py = G.toPx(0, S.k)[1], x0 = G.toPx(win.xmin, 0)[0], x1 = G.toPx(win.xmax, 0)[0]; return { subs: [[[x0, py], [x1, py]]] }; }, { color: KC, width: 4 }, 'u7l5-kline', G.layers.data);
-    const hnd = svgEl('g', { class: 'u7l5-hnd' }, G.layers.top);
+    const hndW = svgEl('g', {}, G.layers.top), hnd = svgEl('g', { class: 'u7l5-hnd' }, hndW);
     svgEl('rect', { x: -26, y: -17, width: 52, height: 34, rx: 17, fill: KC }, hnd);
     const ht = svgEl('text', { x: 0, y: 6, 'text-anchor': 'middle', fill: '#fff', 'font-size': 17, 'font-weight': 800 }, hnd); ht.textContent = 'k';
     const dots = [0, 1, 2, 3].map(() => G.point(0, 0, { color: 'green', r: 8 }));
@@ -229,7 +230,7 @@ const slide = {
     let lastEq = null;
     const upd = (k) => {
       S.k = k; line._bkDraw();
-      const [hx, hy] = G.toPx(win.xmax - 0.55, k); hnd.setAttribute('transform', `translate(${hx} ${hy})`);
+      const [hx, hy] = G.toPx(win.xmax - 0.55, k); hndW.setAttribute('transform', `translate(${hx} ${hy})`);
       const sol = solveAbs(d.q, k);
       dots.forEach((p, i) => { if (i < sol.length) { G.moveTo(p, sol[i], k); p.style.opacity = ''; } else p.style.opacity = 0; });
       cb.textContent = sol.length; cw.textContent = sol.length === 1 ? 'solution' : 'solutions'; cnt.dataset.n = sol.length;
@@ -251,8 +252,8 @@ const slide = {
     steps.push(d.above
       ? { cap: `${T('x^2+4')} is never below the ${T('x')}-axis, so there is nothing to reflect: ${T('|x^2+4|=x^2+4')}. Its lowest point is the vertex ${T('(0,\\ 4)')}.`, run: (c) => pulse(c, top, 1.4) }
       : { cap: `The W: zeros ${d.zeros}, and the reflected hump has its top at ${T(`(${d.top[0]},\\ ${d.top[1]})`)}. The purple line is ${T('y=k')}: count where it meets the W.`, run: (c) => pulse(c, top, 1.4) });
-    d.ks.forEach(([k, cap]) => steps.push({ cap: `${T('k=' + k)}: ${cap}`, run: (c) => go(c, k) }));
-    steps.push({ cap: '<b>Your turn:</b> drag the line (or the slider). Where does the count change? It jumps exactly at the x-axis and at the top of the hump.', run: async (c) => { await pulse(c, sl, 1.04); await pulse(c, hnd, 1.3); } });
+    d.ks.forEach(([k, cap]) => steps.push({ cap: d.pre ? `${T('k=' + k)}: ${cap}` : cap, run: (c) => go(c, k) }));
+    steps.push({ cap: `<b>Your turn:</b> drag the line (or the slider). Where does the count change? ${d.above ? `Only at ${T('k=4')}, the height of the vertex.` : `It jumps exactly at the ${T('x')}-axis and at the top of the hump.`}`, run: async (c) => { await pulse(c, sl, 1.04); await pulse(c, hnd, 1.3); } });
     return steps;
   }
 };
@@ -291,13 +292,13 @@ const sieve = {
     svgEl('rect', { x: zx0, y: ay - 9, width: zx1 - zx0, height: 18, fill: 'rgba(201,58,51,.18)', stroke: AC, 'stroke-width': 2.5, 'stroke-dasharray': '7 5' }, zg);
     const flapL = svgEl('line', { x1: zx0, y1: ay, x2: (zx0 + zx1) / 2, y2: ay, stroke: AC, 'stroke-width': 4, 'stroke-linecap': 'round' }, zg);
     const flapR = svgEl('line', { x1: zx1, y1: ay, x2: (zx0 + zx1) / 2, y2: ay, stroke: AC, 'stroke-width': 4, 'stroke-linecap': 'round' }, zg);
-    const zlab = div(stage, 'u7l5-zlab', `${T(d.zoneT)}: trapdoor`, RX + (zx0 + zx1) / 2, NY + ay + 16); zlab.style.transform = 'translateX(-50%)'; hide(zlab);
-    if (v === 'b') { [[-Math.SQRT2, '-\\sqrt2'], [Math.SQRT2, '\\sqrt2']].forEach(([x, l]) => N.mark(x, T(l), { pos: 's', cls: 'u7l5-rt' })); }
+    const zlab = div(stage, 'u7l5-zlab', `${T(d.zoneT)}: trapdoor`, RX + (Math.max(zx0, N.toPx(d.min)) + Math.min(zx1, N.toPx(d.max))) / 2, NY + ay + 30); zlab.style.transform = 'translateX(-50%)'; hide(zlab);
     /* the candidate balls */
     const balls = d.cand.map(([x, lab, cs]) => {
       const b = div(stage, 'u7l5-ball c' + cs, T(lab), RX + N.toPx(x), 18); b.style.opacity = 0; b.x = x; b.bad = d.B(x) < 0; return b;
     });
-    const tags = balls.map((b) => { const t = div(stage, 'u7l5-tag ' + (b.bad ? 'no' : 'ok'), b.bad ? '✗ extraneous' : '✓', RX + N.toPx(b.x), b.bad ? NY + ay + 54 : NY + ay - 52); t.style.opacity = 0; return t; });
+    let nb = 0;
+    const tags = balls.map((b) => { const t = div(stage, 'u7l5-tag ' + (b.bad ? 'no' : 'ok'), b.bad ? '✗ extraneous' : '✓ keep', RX + N.toPx(b.x), NY + ay + 58 + (b.bad ? 26 * nb++ : 0)); t.style.opacity = 0; return t; });
     const drop = NY + ay - 18 - 18; // a ball resting on the line (its top)
     /* the graph that confirms it */
     const G = new Graph(stage, Object.assign({ x: RX + 40, y: 222, width: RW - 80, height: 246, fontSize: 13 }, d.gwin));
@@ -342,21 +343,21 @@ const tub = {
       row(rows, 3, `<b class="u7l5-s2">${T('-1\\le x<3')}</b> ${T('-(x-3)+(x+1)=6')}<br>${T('4=6')}: false, no solution here`),
       row(rows, 4, `<b class="u7l5-s3">${T('x\\ge3')}</b> ${T('(x-3)+(x+1)=6')}<br>${T('2x-2=6\\Rightarrow x=4')} ${T('\\checkmark')}`),
       row(rows, 5, `<b>Solutions:</b> ${T('x=-2')} or ${T('x=4')}<br>check: ${T('\\lvert -5\\rvert +\\lvert -1\\rvert =6')}, ${T('|1|+|5|=6')}`)];
-    const G = new Graph(stage, { x: RX, y: 2, width: RW, height: 440, xmin: -5, xmax: 7, ymin: -1, ymax: 13, ylabels: 2, fontSize: 15 });
+    const G = new Graph(stage, { x: RX, y: 20, width: RW, height: 422, xmin: -5, xmax: 7, ymin: -1, ymax: 13, ylabels: 2, fontSize: 15 });
     const bands = [[-Infinity, -1, S1], [-1, 3, S2], [3, Infinity, S3]].map(([a, b, cl]) => hide(G.shadeX(a, b, { band: true, color: cl, openB: true })));
-    const blab = [[-3, 'x<-1', S1], [1, '-1\\le x<3', S2], [5, 'x\\ge3', S3]].map(([x, t, cl]) => hide(G.label(x, 12.4, T(t), { cls: 'bk-ptlab', color: cl })));
+    const blab = [[-3, 'x<-1', S1], [1.5, '-1\\le x<3', S2], [5, 'x\\ge3', S3]].map(([x, t, cl]) => hide(G.label(x, 12.2, T(t), { cls: 'bk-ptlab', color: cl })));
     const zs = [-1, 3].map((x) => hide(G.point(x, 0, { color: 'amber', r: 7.5, label: T(String(x)), pos: 's' })));
     const six = hide(G.hline(6, { color: OR, width: 3, dash: false })), sixL = hide(G.label(6.8, 6, T('y=6'), { cls: 'bk-ptlab', pos: 'nw', color: OR }));
     const S = { t: [-5, -5, -1, 3] };
     const g = (x) => Math.abs(x - 3) + Math.abs(x + 1);
     const pieces = [[-5, -1, S1, '-2x+2', -3.6, 'e'], [-1, 3, S2, '4', 1, 'n'], [3, 7, S3, '2x-2', 5.6, 'w']].map(([a, b, cl, lab, lx, pos], i) => {
       const o = { from: a, to: a, color: cl, width: 5, arrows: i !== 1 };
-      const el = G.fn(g, o); el.o = o; el.a = a; el.b = b;
+      const el = hide(G.fn(g, o)); el.o = o; el.a = a; el.b = b;
       el.lab = hide(G.label(lx, g(lx), T('y=' + lab), { cls: 'bk-ptlab', pos: pos === 'n' ? 'n' : pos === 'e' ? 'ne' : 'nw', color: cl, dy: pos === 'n' ? -4 : 0 }));
       return el;
     });
     const tr = hide(G.point(-5, g(-5), { color: INK, r: 6 }));
-    const grow = (c, p) => { unhide(tr); return tween(c, 1300, (t) => { const x = p.a + (p.b - p.a) * t; p.o.to = x; p._bkDraw(); G.moveTo(tr, x, g(x)); }, linear); };
+    const grow = (c, p) => { unhide(tr); unhide(p); return tween(c, 1300, (t) => { const x = p.a + (p.b - p.a) * t; p.o.to = x; p._bkDraw(); G.moveTo(tr, x, g(x)); }, linear); };
     const sol = [[-2, 6], [4, 6]].map(([x, y]) => hide(G.point(x, y, { color: 'green', r: 8.5, label: T(`(${x},\\ 6)`), pos: x < 0 ? 'nw' : 'ne' })));
     return [
       { cap: `<b>1</b> The insides are ${T('0')} at ${T('x=3')} and ${T('x=-1')}. They split the number line into three <b>subdomains</b>. We want where the graph of ${T('y=|x-3|+|x+1|')} meets ${T('y=6')}.`,
@@ -401,14 +402,14 @@ const drone = {
     svgEl('line', { x1: -26, y1: 0, x2: 26, y2: 0, stroke: INK, 'stroke-width': 4, 'stroke-linecap': 'round' }, dr);
     svgEl('rect', { x: -12, y: -2, width: 24, height: 13, rx: 5, fill: '#7a1f3d' }, dr);
     [-26, 26].forEach((x) => { svgEl('ellipse', { cx: x, cy: -5, rx: 16, ry: 3.5, fill: 'rgba(58,66,84,.55)', class: 'u7l5-rotor' }, dr); svgEl('line', { x1: x, y1: 0, x2: x, y2: -5, stroke: INK, 'stroke-width': 3 }, dr); });
-    const clock = svgEl('text', { x: 52, y: 32, 'font-size': 16, 'font-weight': 800, fill: INK }, sc);
-    const setDrone = (t) => { const hh = hf(t); dr.setAttribute('transform', `translate(${DX} ${yOf(hh) - 6})`); clock.textContent = `t = ${t.toFixed(1)} s  h = ${hh.toFixed(1)} m`; rec.style.opacity = hh >= 7 - 1e-9 && hh <= 13 + 1e-9 && t > 0 ? 1 : 0.2; };
+    const clock = svgEl('text', { x: 54, y: 26, 'font-size': 15, 'font-weight': 800, fill: INK }, sc), clock2 = svgEl('text', { x: 54, y: 46, 'font-size': 15, 'font-weight': 800, fill: INK }, sc);
+    const setDrone = (t) => { const hh = hf(t); dr.setAttribute('transform', `translate(${DX} ${yOf(hh) - 6})`); clock.textContent = `t = ${t.toFixed(1)} s`; clock2.textContent = `h = ${hh.toFixed(1)} m`; rec.style.opacity = hh >= 7 - 1e-9 && hh <= 13 + 1e-9 && t > 0 ? 1 : 0.2; };
     setDrone(0);
     /* the graph */
-    const G = new Graph(stage, { x: GX, y: 2, width: GW, height: H, xmin: 0, xmax: 8.5, ymin: 0, ymax: 17, ylabels: 2, xtitle: 't', ytitle: 'h', fontSize: 15 });
+    const G = new Graph(stage, { x: GX, y: 20, width: GW, height: H - 18, xmin: 0, xmax: 8.5, ymin: 0, ymax: 17, ylabels: 2, xtitle: 't', ytitle: 'h', fontSize: 15 });
     const band = hide(G.polyline([[0, 7], [8.5, 7], [8.5, 13], [0, 13]], { closed: true, fill: OK, fillOpacity: 0.12, color: OK, width: 1 }));
     const l13 = hide(G.hline(13, { color: KC, width: 2.5, dash: '8 6' })), l7 = hide(G.hline(7, { color: KC, width: 2.5, dash: '8 6' })), l10 = hide(G.hline(10, { color: GR, width: 2, dash: '4 5' }));
-    const L13 = hide(G.label(8.4, 13, T('h=13'), { cls: 'bk-ptlab', pos: 'nw', color: KC })), L7 = hide(G.label(8.4, 7, T('h=7'), { cls: 'bk-ptlab', pos: 'sw', color: KC }));
+    const L13 = hide(G.label(8.4, 13, T('h=13'), { cls: 'bk-ptlab', pos: 'nw', color: KC })), L7 = hide(G.label(8.4, 7, T('h=7'), { cls: 'bk-ptlab', pos: 'nw', color: KC }));
     const co = { from: 0, to: 0, color: FC, width: 4, arrows: false }, cur = G.fn(hf, co);
     const s3 = Math.sqrt(3);
     const pts = [[4 - s3, 13, '2.27'], [4 + s3, 13, '5.73'], [1, 7, '1'], [7, 7, '7']].map(([t, y, l]) => hide(G.point(t, y, { color: 'green', r: 7.5, label: T(l), pos: y === 13 ? 'n' : 's' })));
