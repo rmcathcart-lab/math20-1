@@ -604,7 +604,7 @@
   }
   /* classic wrong factored forms: sign of a, a upside down, zeros' signs */
   function facWrongs(a, fs) {
-    var w = [{ cs: expand(-a, fs), code: LID + '-a-sign', hint: 'Check the sign of ' + t('a') + ': substitute the point again and solve carefully.' }];
+    var w = [{ cs: expand(-a, fs), code: LID + '-a-sign', hint: 'Check the sign of ' + t('a') + ': substitute the known point (or the vertex) again and solve carefully.' }];
     if (!same(Math.abs(a), 1)) w.push({ cs: expand(1 / a, fs), code: LID + '-a-recip', hint: 'Solve for ' + t('a') + ' by <b>dividing</b> the ' + t('y') + '-value by the product of the brackets.' });
     w.push({ cs: expand(a, fs.map(function (f) { f = F1(f); return { f: [f.f[0], -f.f[1]], k: f.k }; })), code: LID + '-sign', hint: 'A zero ' + t('r') + ' gives the factor ' + t('(x-r)') + ': check the signs in your brackets.' });
     if (fs.length === 2 && !same(Math.abs(a), 1)) w.push({ cs: expand(1, fs), code: LID + '-a-sign', hint: 'Every function ' + t('y=a(x-r)(x-s)') + ' has these zeros: use the other point to find ' + t('a') + '.' });

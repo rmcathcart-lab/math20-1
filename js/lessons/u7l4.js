@@ -232,7 +232,7 @@
             t(A(inn) + '=' + c) + ', so ' + t(inn + '=\\pm ' + c) + ': ' + t('x=' + (z.h + c)) + ' or ' + t('x=' + (z.h - c)) + '. Check ' + t('x=' + (z.h - c)) + ': ' + t(A(-c) + '-' + z.d + '=' + z.e) + ' ✓', HCST, 'solving after isolating'); })] },
 
     { num: '7', parts: [
-      Pt('7a', 'PRG', function (r) { return casesPart(r, linSpec(r, { as: [1], cs: [2, 3, 4], counts: [1], test: function (z) { return z.v1; }, ex: EXLIN.concat([{ a: 1, b: 2, c: 3, d: 0 }]), d0: true, bs: [1, 2, 3, 4, 5, -1, -2, -3, -5], dlo: 0, dhi: 0 })); }),
+      Pt('7a', 'PRG', function (r) { return casesPart(r, linSpec(r, { as: [1], cs: [2, 3, 4], counts: [1], test: function (z) { return z.v1; }, ex: EXLIN.concat([{ a: 1, b: 2, c: 3, d: 0 }]), d0: true, bs: [1, 2, 3, 4, 5, 6, 7, 8, 9, -1, -2, -3, -5, -6, -7, -8, -9], dlo: 0, dhi: 0 })); }),
       Pt('7b', 'PRG', function (r) { return casesPart(r, linSpec(r, { as: [2, 3], cs: [1], counts: [2], ex: EXLIN.concat([{ a: 2, b: -6, c: 1, d: 0 }]), d0: true, dlo: 0, dhi: 0 })); }),
       Pt('7c', 'PRG', function (r) { return casesPart(r, linSpec(r, { as: [-1, -2], cs: [2, 3, 1], bs: [3, 4, 5, 6, 7, 8], counts: [1], dlo: -4, dhi: 5, ex: EXLIN.concat([{ a: -1, b: 5, c: 2, d: 1 }]) }), true); }),
       Pt('7d', 'ADV', function (r) { return casesPart(r, linSpec(r, { as: [2, 3, 4], cs: [1], counts: [0], ex: EXLIN.concat([{ a: 3, b: 1, c: 1, d: -3 }]) })); })] },
@@ -364,7 +364,7 @@
   var EXTRA = [
     { num: 'A1', section: 'A. Skills', parts: [Pt('eA1a', 'BEG', cst('shift', [{ h: 8, c: 3 }])), Pt('eA1b', 'BEG', cst('lin')), Pt('eA1c', 'EMG', cst('iso')), Pt('eA1d', 'EMG', cst('isoNone')), Pt('eA1e', 'EMG', negk([1], [1])), Pt('eA1f', 'PRG', cst('fracIn'))] },
     { num: 'A2', parts: [
-      Pt('eA2a', 'PRG', function (r) { return casesPart(r, linSpec(r, { as: [1], cs: [3, 4, 5], counts: [1], test: function (z) { return z.v2; }, d0: true, dlo: 0, dhi: 0, bs: [-2, -3, -4, -5, -6, -7], ex: [{ a: 1, b: -5, c: 4, d: 0 }, { a: 1, b: -4, c: 3, d: 0 }] })); }),
+      Pt('eA2a', 'PRG', function (r) { return casesPart(r, linSpec(r, { as: [1], cs: [3, 4, 5], counts: [1], test: function (z) { return z.v2; }, d0: true, dlo: 0, dhi: 0, bs: [-2, -3, -4, -5, -6, -7, -8, -9, 2, 3, 4, 6, 7, 8, 9], ex: [{ a: 1, b: -5, c: 4, d: 0 }, { a: 1, b: -4, c: 3, d: 0 }] })); }),
       Pt('eA2b', 'PRG', function (r) { return casesPart(r, linSpec(r, { as: [2, 3, 4], cs: [1], counts: [2], ex: [{ a: 3, b: 6, c: 1, d: 10 }].concat(EXLIN) })); })] },
     { num: 'A3', parts: [
       Pt('eA3a', 'PRG', function (r) { return verifyPart(r, linSpec(r, { as: [1], cs: [2, 3], counts: [1], d0: true, dlo: 0, dhi: 0, ex: [{ a: 1, b: 3, c: 2, d: 0 }, { a: 1, b: -4, c: 3, d: 0 }] }), 'std'); }),
