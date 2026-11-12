@@ -180,7 +180,7 @@
         p.bad = [String(s.t2), String(s.t1)].filter(function (b) { return Number(b) !== s.t2 - s.t1; });
         return p;
       } },
-      { id: '14b', level: 'MAS', make: function (r, s) {
+      { id: '14b', sub: 'b', level: 'MAS', make: function (r, s) {
         var D = s.b * s.b + 20 * s.H0, Tl = (s.b + Math.sqrt(D)) / 10, T = [sIv(s.d, Tl, false, true)];
         return U.roundSetPart(CP, 'When is the ball below the platform (until it lands)? Write the times in set notation, to the nearest hundredth of a second.', T, 2, { v: 't', alts: [[sIv(s.d, Tl, false, false)]],
           wrongs: [{ parts: SET.above(s.d, false), code: CP + 'ineq-restr', hint: 'Right inequality, but the ball stops when it lands: find when ' + t('h=0') + '.' }] },

@@ -537,17 +537,17 @@
           ['At a zero, one factor is ' + t('0') + ', so the product is ' + t('0') + '.', 'Elsewhere, multiply the signs: ' + t('(-)(-)=+') + ', ' + t('(-)(+)=-') + ', ' + t('(+)(+)=+') + '.'], 'sign chart: product row');
       } },
       { id: '2a2', sub: 'a ii', level: 'BEG', make: function (r, s) { return solvePart(1, s.f, s.op, exT(1, s.f, s.op), { prompt: 'Use the sign chart to solve ' + t(exT(1, s.f, s.op)) + '.', text: 'solve from the sign chart' }); } },
-      { id: '2b', level: 'BEG', make: function (r) {
+      { id: '2b', sub: 'b', level: 'BEG', make: function (r) {
         var n = pickWhere(function () { return r.int(2, 12); }, function (x) { return x !== 7 && x !== 5; }), f = [[1, -n], [1, n]], op = rndOp(r);
         return solvePart(1, f, op, exT(1, f, op), { prompt: 'Solve ' + t(exT(1, f, op)) + ' with a sign chart.', text: 'difference of squares',
           wrongs: [{ parts: upOp(op) ? SET.above(n, !strictOp(op)) : SET.below(n, !strictOp(op)), code: CP + 'ineq-sqrt', hint: 'Taking the square root loses the negative side. Factor ' + t(facT(1, f)) + ' and use both zeros.' }] });
       } },
-      { id: '2c', level: 'EMG', make: function (r) {
+      { id: '2c', sub: 'c', level: 'EMG', make: function (r) {
         var s = pickWhere(function () { return { k: r.int(2, 6), n: nz(r, 1, 9) }; }, function (z) { return !(z.k === 3 && z.n === 5) && fresh([[1, 0], [1, z.n]]); });
         var f = [[1, 0], [1, s.n]], op = rndOp(r);
         return solvePart(s.k, f, op, exT(s.k, f, op), { prompt: 'Solve ' + t(exT(s.k, f, op)) + ' with a sign chart.', text: 'common factor', pre: 'Common factor: ' + t(facT(s.k, f) + OPS[op] + '0') + ' (the positive constant ' + t(s.k) + ' does not change any sign).<br>' });
       } },
-      { id: '2d', level: 'PRG', make: function (r) {
+      { id: '2d', sub: 'd', level: 'PRG', make: function (r) {
         var f = fracFacs(r, { qs: [2, 3, 2, 3, 4, 5], pmax: 9 }), op = rndOp(r);
         return solvePart(1, f, op, exT(1, f, op), { prompt: 'Solve ' + t(exT(1, f, op)) + ' with a sign chart.', text: 'non-monic, sign chart' });
       } }] },
@@ -656,7 +656,7 @@
         return KP.number('For how long is it more than ' + t(H2) + ' m above the water?', s.t2 - s.t1, function (v) { return near(v, s.t1) || near(v, s.t2) ? { code: CP + 'dur', hint: 'That is one of the times when it is exactly ' + H2 + ' m high. How long is it between them?' } : null; },
           'It is above ' + H2 + ' m for ' + t(s.t1 + '<t<' + s.t2) + ': ' + t(s.t2 + '-' + s.t1 + '=' + (s.t2 - s.t1)) + ' seconds.', ['Subtract the two times from part (b i).'], 'how long above a level', { after: 's' });
       } },
-      { id: '8c', level: 'ADV', make: function (r, s) {
+      { id: '8c', sub: 'c', level: 'ADV', make: function (r, s) {
         var T = [sIv(s.d, s.T, false, false)];
         return U.setPart(CP, 'When is the ' + s.ctx + ' below the top of the cliff but not yet in the water? Write the times in set notation.', T, { v: 't', wrongs: [
             { parts: SET.above(s.d, false), code: CP + 'ineq-restr', hint: 'Right inequality, but after ' + t('t=' + s.T) + ' s the ' + s.ctx + ' is in the lake: the model stops there.' },
@@ -666,7 +666,7 @@
           t('-5t^{2}+' + s.b + 't+' + s.H + '<' + s.H) + ', so ' + t('-5t^{2}+' + s.b + 't<0') + ' and ' + t('5t(t-' + s.d + ')>0') + ': ' + t('t<0') + ' or ' + t('t>' + s.d) + '.<br>It is in the air for ' + t('0\\le t\\le ' + s.T) + ', and at ' + t('t=' + s.T) + ' it reaches the water. So from ' + s.d + ' s until it lands: ' + t(setTexX(T, 't')) + '.',
           ['Below the cliff top: ' + t('h<' + s.H) + '. Solve it.', 'Keep only the times while the ' + s.ctx + ' is still in the air (it lands at ' + t('t=' + s.T) + ').'], 'below the cliff, in context');
       } },
-      { id: '8d', level: 'ADV', make: function (r, s) {
+      { id: '8d', sub: 'd', level: 'ADV', make: function (r, s) {
         var top = s.H + 5 * s.d * s.d / 4, Hn = Math.floor(top) + r.int(1, 4), c = Hn - s.H, D = s.b * s.b - 20 * c;
         var p = KP.number('Show algebraically that the ' + s.ctx + ' never reaches ' + t(Hn) + ' m: rearrange ' + t('h\\ge ' + Hn) + ' as ' + t('5t^{2}-' + s.b + 't+' + c + '\\le 0') + ' and give its discriminant ' + t('b^{2}-4ac') + '.', D,
           function (v) { return near(v, s.b * s.b + 20 * c) || near(v, -s.b * s.b - 20 * c) || near(v, s.b * s.b - 10 * c) ? { code: CP + 'disc', hint: t('b^{2}-4ac=(-' + s.b + ')^{2}-4(5)(' + c + ')') + ': square first, then subtract ' + t('20\\times ' + c) + '.' } : null; },
