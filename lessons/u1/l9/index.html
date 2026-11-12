@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u1l9.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u1l9">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Which One Doesn’t Belong?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="110" y="46" font-size="36" text-anchor="middle">🍎</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.25s" repeatCount="indefinite"/><text x="165" y="46" font-size="36" text-anchor="middle">🍎</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/><text x="220" y="46" font-size="36" text-anchor="middle">🍎</text></g><g><animateTransform attributeName="transform" type="rotate" values="-14 280 46;14 280 46;-14 280 46" dur="1.6s" repeatCount="indefinite"/><text x="280" y="46" font-size="38" text-anchor="middle">🍐</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Which One Doesn’t Belong?</h2>
+  <p class="wf-rule vw-rule">Which one doesn’t belong? Be ready to say why.</p></div>
+  <div class="vw-wodb"><div><b>A</b><span class="tex">3,\ 6,\ 12,\ 24,\ \dots</span></div><div><b>B</b><span class="tex">5,\ 8,\ 11,\ 14,\ \dots</span></div><div><b>C</b><span class="tex">1,\ 4,\ 9,\ 16,\ \dots</span></div><div><b>D</b><span class="tex">32,\ 16,\ 8,\ 4,\ \dots</span></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Can you find a reason for a different one?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Every one of them can be the odd one out.</b> <b>A</b>: the only one where every number is a multiple of 3. <b>B</b>: the only one that adds the same amount each time (+3). <b>C</b>: the only one that neither adds nor multiplies by the same number (the square numbers). <b>D</b>: the only one that gets smaller, and the only one you could add up forever and still get a number: <span class="tex">32+16+8+4+\cdots=64</span>.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -43,42 +54,6 @@
   <div class="outcome"><b>RF9</b> Analyze arithmetic sequences and series to solve problems.<br><b>RF10</b> Analyze geometric sequences and series to solve problems.<br><span class="muted">Today: choosing arithmetic or geometric, and sequence, series or sum to infinity, from the context; mixed practice in the style of the unit test.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: Two Beanstalks" id="wu" style="--wf-side: 340px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Two Beanstalks</h2>
-  <p class="wf-rule">Jack plants two beans. On <b>day 1</b> the <b class="u1l9-ca">Steady</b> beanstalk is <b>30 cm</b> tall and it grows <b>12 cm every day</b>. The <b class="u1l9-cg">Magic</b> beanstalk is only <b>1 cm</b> tall, but its height <b>doubles</b> every day.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u1l9-garden" id="u1l9-garden"></div>
-    <div class="u1l9-wbtns">
-      <button type="button" class="pill" id="u1l9-day">Next day</button>
-      <button type="button" class="pill" id="u1l9-dayback">Back a day</button>
-      <button type="button" class="pill" id="u1l9-wreset">Start over</button>
-    </div>
-    <p class="u1l9-social">Challenge your neighbour: if Steady grew <b>20 cm</b> a day instead, would Magic still catch up? On which day?</p>
-  </div><div class="wf-side">
-    <div class="u1l9-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How tall is <b class="u1l9-ca">Steady</b> on <b>day 4</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l9-wa"><div class="bk-ans"><b>66 cm</b>: <span class="tex">30+12+12+12=66</span></div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How tall is <b class="u1l9-cg">Magic</b> on <b>day 6</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l9-wa"><div class="bk-ans"><b>32 cm</b>: <span class="tex">1,\,2,\,4,\,8,\,16,\,32</span></div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Which one is <b>arithmetic</b>? Which is <b>geometric</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l9-wa"><div class="bk-ans"><b class="u1l9-ca">Steady</b> adds: arithmetic, <span class="tex">d=12</span>. <b class="u1l9-cg">Magic</b> multiplies: geometric, <span class="tex">r=2</span>.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> On which day does <b class="u1l9-cg">Magic</b> first pass <b class="u1l9-ca">Steady</b>? <b>Guess!</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> Day 5</div>
-        <div class="opt right"><b>B</b> Day 8</div>
-        <div class="opt"><b>C</b> Day 12</div>
-        <div class="opt"><b>D</b> Never!</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>B, day 8.</b> Day 7: Steady <span class="tex">102</span>, Magic <span class="tex">64</span>. Day 8: Steady <span class="tex">114</span>, Magic <span class="tex">128</span>. Adding the same amount can never keep up with doubling.<br>
-        <span class="muted"><b>A</b>: on day 5 Magic is only 16 cm (Steady is 78 cm): it looks hopeless right up until it isn’t.</span></div>
-    </div>
-  </div></div>
-</section>
-
 <!-- ================= 1. Unit summary ================= -->
 <section class="card" data-ink="s1" data-section="1. Unit Summary">
   <div class="sec-h"><span class="badge">1</span><h2>Unit Summary</h2></div>
@@ -95,9 +70,6 @@
       <tr><th>Growth / decay</th><td>a fixed <b>amount</b> each time (simple interest, fixed drop)</td><td>a fixed <b>percent</b> each time: <span class="tex">r=1+\text{rate}</span> or <span class="tex">r=1-\text{rate}</span></td></tr>
     </tbody>
   </table>
-  <h3 class="sub">Side by side</h3>
-  <p>Same start, two rules. Watch the <b>terms</b>, the <b>dots</b> <span class="tex">(n,\,t_n)</span> and the running <b>sums</b>.</p>
-  <div class="explainer" data-explainer="sideBySide"></div>
 </section>
 
 <section class="card" data-ink="s1b" data-section="How to choose">
@@ -117,12 +89,6 @@
   <div class="sec-h"><span class="badge">2</span><h2>Choosing the Formula</h2></div>
   <div class="def">Read the story for two clues. <b>Clue 1:</b> is the same <b>amount</b> added each time (<b class="u1l9-ca">arithmetic</b>), or the same <b>percent or multiple</b> (<b class="u1l9-cg">geometric</b>)? <b>Clue 2:</b> does it ask for <b>one value</b> (<span class="tex">t_n</span>), a <b>total</b> (<span class="tex">S_n</span>), or a total <b>forever</b> (<span class="tex">S_\infty</span>)? The two answers point to exactly one formula.</div>
   <div class="explainer u1l9-ask2" data-explainer="whichFormula"></div>
-</section>
-
-<section class="card" data-ink="s2b" data-section="Where does the count start?">
-  <h3 class="sub">Where does the count start?</h3>
-  <p>Growth and decay questions hide a counting trap. If <span class="tex">t_1</span> is the value at <b>time 0</b>, then “after 6 years” is <b>7 terms</b> in: <span class="tex">t_7</span>.</p>
-  <div class="explainer" data-explainer="countTerms"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -147,7 +113,6 @@
 <section class="card" data-ink="s3" data-section="3. Working with Terms">
   <div class="sec-h"><span class="badge">3</span><h2>Working with Terms</h2></div>
   <div class="def">Two terms that are not next to each other? <b>Count the jumps</b> between them. In an arithmetic sequence the gap is (number of jumps) <span class="tex">\times\,d</span>; in a geometric one the later term is the earlier term <span class="tex">\times\,r^{\text{jumps}}</span>. Then step back to <span class="tex">t_1</span>.</div>
-  <div class="explainer" data-explainer="twoTerms"></div>
 </section>
 
 <section class="card example" data-ink="ex2" data-section="Example 2">
@@ -172,12 +137,6 @@
   <button class="more" data-more="ex3-space">+ More space</button>
 </section>
 
-<section class="card" data-ink="s3b" data-section="Three terms in a row">
-  <h3 class="sub">Three terms in a row</h3>
-  <p>For <span class="tex">a,\ b,\ c</span> in a row: <b class="u1l9-ca">arithmetic</b> means the two <b>differences</b> match, <span class="tex">b-a=c-b</span>. <b class="u1l9-cg">Geometric</b> means the two <b>ratios</b> match, <span class="tex">\dfrac{b}{a}=\dfrac{c}{b}</span>, so <span class="tex">b^2=ac</span>.</p>
-  <div class="explainer" data-explainer="threeTerms"></div>
-</section>
-
 <section class="card example" data-ink="ex4" data-section="Example 4">
   <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Expressions as terms</h3></div>
   <div class="parts c2">
@@ -186,12 +145,6 @@
   </div>
   <div class="space" id="ex4-space"></div>
   <button class="more" data-more="ex4-space">+ More space</button>
-</section>
-
-<section class="card" data-ink="s3c" data-section="Terms from a sum formula">
-  <h3 class="sub">Terms from a formula for <span class="tex">S_n</span></h3>
-  <p><span class="tex">S_n</span> is a running total, so each new total is the old total <b>plus one more term</b>: <span class="tex">t_1=S_1</span> and <span class="tex">t_n=S_n-S_{n-1}</span>.</p>
-  <div class="explainer" data-explainer="sumToTerm"></div>
 </section>
 
 <section class="card example" data-ink="ex5" data-section="Example 5">

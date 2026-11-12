@@ -64,7 +64,7 @@ export function tween(c, ms, fn, ease = easeInOut) {
     const t0 = performance.now();
     const tick = (now) => {
       try { c.check(); } catch (e) { rej(e); return; }
-      const t = Math.min(1, (now - t0) / ms);
+      const t = Math.max(0, Math.min(1, (now - t0) / ms));
       if (fn(ease(t)) === false || t >= 1) res(); else requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);

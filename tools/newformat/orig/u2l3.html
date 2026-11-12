@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adding and Subtracting Radicals · Math 20-1 2.3</title>
+<meta name="description" content="Math 20-1 Unit 2 Lesson 3: adding and subtracting radicals. Like radicals have the same index and radicand and combine like like terms (√3 is a unit, like x); √a + √b ≠ √(a + b). Simplify every radical first so that like radicals appear (square roots, cube roots, fourth roots, fractions in front), combine radicals with variable radicands and state the restrictions, find exact perimeters and missing lengths, solve for an unknown radical expression, and work with arithmetic sequences of radical terms. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u2l3.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u2l3">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 2 Radical Expressions · Lesson 3</div>
+  <h1>Adding and Subtracting Radicals</h1>
+  <p class="lede">Radicals add the way like terms do: <b class="u2l3-c3"><span class="tex">\sqrt{3}</span> is a unit</b>, just like <span class="tex">x</span>. Put every radical in <b>simplest form first</b>, then collect the ones with the <b>same index and the same radicand</b>.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>tell <b>like radicals</b> (same index, same radicand) from unlike ones</li>
+      <li>add and subtract like radicals by combining their <b>coefficients</b>, and explain why <span class="tex">\sqrt{a}+\sqrt{b}\ne\sqrt{a+b}</span></li>
+      <li><b>simplify each radical first</b> so that like radicals appear, including cube roots, fourth roots and fractions in front</li>
+      <li>combine radicals with <b>variable radicands</b> and state the restrictions</li>
+      <li>find exact <b>perimeters</b> and <b>missing lengths</b>, solve for an unknown radical expression, and extend an arithmetic sequence of radical terms</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN2</b> Solve problems that involve operations on radicals and radical expressions with numerical and variable radicands.<br><span class="muted">Today: adding and subtracting radicals, with exact answers in simplest form. </span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: Stepping Stones" id="wu" style="--wf-side: 372px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Stepping Stones</h2>
+  <p class="wf-rule">A garden path is made of <b>square</b> stepping stones laid <b>edge to edge</b> in a straight line. Each stone is named by its <b>area</b> in m².</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u2l3-yard" id="u2l3-yard"></div>
+    <div class="u2l3-wbtns">
+      <button type="button" class="pill" id="u2l3-w916">Path: 9 + 16</button>
+      <button type="button" class="pill" id="u2l3-w25">One stone of 25</button>
+      <button type="button" class="pill" id="u2l3-w218">Three 2s vs one 18</button>
+      <button type="button" class="pill" id="u2l3-wtile">Cut up the 18</button>
+      <button type="button" class="pill" id="u2l3-wreset">Start over</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u2l3-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>A stone has area 9 m². How long is each side? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u2l3-wa"><div class="bk-ans"><b>3 m</b>, since <span class="tex">3\times3=9</span>: the side is <span class="tex">\sqrt{9}=3</span>.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Stones of area 9 and 16 are laid side by side. How long is the path? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u2l3-wa"><div class="bk-ans"><span class="tex">\sqrt{9}+\sqrt{16}=3+4=\boldsymbol{7}</span> m.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Is <b>one</b> stone of area 25 (that’s 9 + 16) just as long? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u2l3-wa"><div class="bk-ans"><b>No.</b> <span class="tex">\sqrt{25}=5</span> m: 2 m short. Adding the <b>areas</b> does not add the <b>sides</b>.</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Path A is <b>three</b> stones of area <b>2</b>. Stone B is <b>one</b> stone of area <b>18</b>. Which is longer? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> Path A</div>
+        <div class="opt"><b>B</b> Stone B</div>
+        <div class="opt right"><b>C</b> Exactly equal</div>
+        <div class="opt"><b>D</b> Need a calculator</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>C, exactly equal.</b> Stone B cuts into a <b>3 by 3</b> grid of area-2 stones (<span class="tex">9\times2=18</span>), so its side is <b>three</b> small sides: <span class="tex">\sqrt{18}=3\sqrt{2}</span>. Path A is <span class="tex">\sqrt{2}+\sqrt{2}+\sqrt{2}=3\sqrt{2}</span> too.<br>
+        <span class="muted">No calculator needed: count the <span class="tex">\sqrt{2}</span>’s, the way you count <span class="tex">x</span>’s.</span></div>
+    </div>
+  </div></div>
+  <p class="u2l3-social">Challenge your neighbour: which <b>single</b> square stone is exactly as long as a path of <b>five</b> area-2 stones?</p>
+</section>
+
+<!-- ================= 1. Like radicals ================= -->
+<section class="card" data-ink="s1" data-section="1. Like Radicals">
+  <div class="sec-h"><span class="badge">1</span><h2>Like Radicals</h2></div>
+  <div class="def"><b>Like radicals</b> have the <b>same index</b> and the <b>same radicand</b>. For example, <span class="tex">4\sqrt{7}</span> and <span class="tex">-\sqrt{7}</span> are like radicals; <span class="tex">2\sqrt{3}</span> and <span class="tex">2\sqrt{5}</span> are not (different radicands), and <span class="tex">\sqrt{5}</span> and <span class="tex">\sqrt[3]{5}</span> are not (different indices).</div>
+  <p>Add or subtract like radicals the same way you collect like terms in algebra (<span class="tex">4x+3x=7x</span>): add or subtract the <b>coefficients</b> and keep the radical part.</p>
+  <div class="u2l3-key">
+    <div class="u2l3-key-h">Combining like radicals</div>
+    <div class="u2l3-key-f"><span class="tex">m\sqrt[n]{a}+k\sqrt[n]{a}=(m+k)\sqrt[n]{a}</span></div>
+    <div class="u2l3-key-l">Only like radicals can be combined. <b>Never add or subtract the radicands.</b></div>
+  </div>
+  <h3 class="sub"><span class="tex">\sqrt{7}</span> tiles behave like <span class="tex">x</span> tiles</h3>
+  <p>Think of each radical as a <b>tile</b>. Like radicals go in the <b>same bin</b>; a <b class="u2l3-neg">negative</b> tile cancels a positive one.</p>
+  <div class="explainer" data-explainer="likeTiles"></div>
+  <h3 class="sub">Never add the radicands</h3>
+  <p><span class="tex">\sqrt{9}+\sqrt{16}=3+4=7</span>, but <span class="tex">\sqrt{9+16}=\sqrt{25}=5</span>. So <span class="tex">\sqrt{a}+\sqrt{b}\ne\sqrt{a+b}</span>. Unlike radicals stay as separate terms, just as <span class="tex">2x+5y</span> cannot be combined. <b>Rational terms</b> (numbers with no radical) combine only with other rational terms.</p>
+  <div class="explainer" data-explainer="legsVsHyp"></div>
+  <h3 class="sub">Like or not? Tap to check.</h3>
+  <div class="bk-flips u2l3-flips" style="--bk-cols:4">
+    <div class="bk-flip"><div class="bk-front"><span class="tex">4\sqrt{7}</span> and <span class="tex">-\sqrt{7}</span></div><div class="bk-back"><b>like</b>: same index, same radicand</div></div>
+    <div class="bk-flip"><div class="bk-front"><span class="tex">2\sqrt{3}</span> and <span class="tex">2\sqrt{5}</span></div><div class="bk-back"><b>not like</b>: radicands 3 and 5</div></div>
+    <div class="bk-flip"><div class="bk-front"><span class="tex">\sqrt{5}</span> and <span class="tex">\sqrt[3]{5}</span></div><div class="bk-back"><b>not like</b>: indices 2 and 3</div></div>
+    <div class="bk-flip"><div class="bk-front"><span class="tex">6\sqrt{11}</span> and <span class="tex">6</span></div><div class="bk-back"><b>not like</b>: one is a radical, one is a rational term</div></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Combining like radicals</h3></div>
+  <p class="q">Simplify by combining like radicals.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">6\sqrt{5}+3\sqrt{5}</span></div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(6+3)\sqrt{5}=\boldsymbol{9\sqrt{5}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2\sqrt{13}-8\sqrt{13}+\sqrt{13}</span></div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(2-8+1)\sqrt{13}=\boldsymbol{-5\sqrt{13}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">7\sqrt[3]{6}-10\sqrt[3]{6}</span></div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(7-10)\sqrt[3]{6}=\boldsymbol{-3\sqrt[3]{6}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">5\sqrt{3}+2\sqrt{7}-\sqrt{3}+4\sqrt{7}</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Group like radicals:<br><span class="tex">(5-1)\sqrt{3}+(2+4)\sqrt{7}</span><br><span class="tex">=\boldsymbol{4\sqrt{3}+6\sqrt{7}}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">9-4\sqrt{2}+3\sqrt{2}-5</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Rational terms: <span class="tex">9-5=4</span>.<br>Radicals: <span class="tex">-4\sqrt{2}+3\sqrt{2}=-\sqrt{2}</span>.<br>Answer: <span class="tex">\boldsymbol{4-\sqrt{2}}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">3\sqrt{2}+2\sqrt[3]{2}</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Different indices: <b>not like radicals</b>. It <b>cannot be simplified</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Simplify first ================= -->
+<section class="card" data-ink="s2" data-section="2. Simplify First, Then Combine">
+  <div class="sec-h"><span class="badge">2</span><h2>Simplify First, Then Combine</h2></div>
+  <div class="def">Radicals that <b>look unlike</b> may turn into like radicals once each one is in <b>simplest form</b>.</div>
+  <div class="u2l3-steps">
+    <div class="u2l3-step"><div class="u2l3-stn">Step 1</div>Write every radical as a <b>mixed radical in simplest form</b> (Lesson 1).</div>
+    <div class="u2l3-step"><div class="u2l3-stn">Step 2</div><b>Combine</b> the like radicals.</div>
+    <div class="u2l3-step"><div class="u2l3-stn">Step 3</div>Leave <b>unlike</b> radicals as separate terms.</div>
+  </div>
+  <h3 class="sub">Why <span class="tex">\sqrt{72}=6\sqrt{2}</span>: cut the square</h3>
+  <p>A square of area <span class="tex">A</span> has side <span class="tex">\sqrt{A}</span>. Cut it into small squares of area 2 and count how many small sides fit along one edge.</p>
+  <div class="explainer" data-explainer="squareCut"></div>
+  <h3 class="sub">Simplify, then sort into bins</h3>
+  <p>As written, the radicands look different. In simplest form, they drop into the <b>same bin</b>.</p>
+  <div class="explainer" data-explainer="sortBins"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Simplify first</h3></div>
+  <p class="q">Simplify.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\sqrt{48}+\sqrt{75}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\sqrt{16}\sqrt{3}+\sqrt{25}\sqrt{3}</span><br><span class="tex">=4\sqrt{3}+5\sqrt{3}=\boldsymbol{9\sqrt{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">3\sqrt{8}-\sqrt{50}+\sqrt{18}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=3(2\sqrt{2})-5\sqrt{2}+3\sqrt{2}</span><br><span class="tex">=6\sqrt{2}-5\sqrt{2}+3\sqrt{2}=\boldsymbol{4\sqrt{2}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\sqrt{20}+\sqrt{27}+\sqrt{45}-\sqrt{12}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=2\sqrt{5}+3\sqrt{3}+3\sqrt{5}-2\sqrt{3}</span><br><span class="tex">=\boldsymbol{5\sqrt{5}+\sqrt{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">2\sqrt{72}-3\sqrt{32}+\sqrt{98}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=2(6\sqrt{2})-3(4\sqrt{2})+7\sqrt{2}</span><br><span class="tex">=12\sqrt{2}-12\sqrt{2}+7\sqrt{2}=\boldsymbol{7\sqrt{2}}</span></div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Use the largest perfect-square factor.</b> <span class="tex">\sqrt{72}=\sqrt{4}\sqrt{18}=2\sqrt{18}</span> is not finished: <span class="tex">\sqrt{18}</span> still holds a 9. Going straight to <span class="tex">\sqrt{36}\sqrt{2}=6\sqrt{2}</span> saves a step.</div></div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u2l3"></section>
+
+<!-- ================= 2 (cont). Cube roots and fourth roots ================= -->
+<section class="card" data-ink="s2b" data-section="Cube Roots and Fourth Roots">
+  <h3 class="sub">Cube roots and fourth roots</h3>
+  <p>The same steps work for any index. For a cube root, look for <b>perfect cubes</b>; for a fourth root, <b>perfect fourth powers</b>. The index must match before radicals can combine.</p>
+  <div class="u2l3-pows">
+    <div class="u2l3-pow"><div class="u2l3-pow-h">Perfect cubes</div><span class="tex">8,\ 27,\ 64,\ 125,\ \dots</span><div class="u2l3-pow-s"><span class="tex">2^3,\ 3^3,\ 4^3,\ 5^3</span></div></div>
+    <div class="u2l3-pow"><div class="u2l3-pow-h">Perfect fourth powers</div><span class="tex">16,\ 81,\ 256,\ \dots</span><div class="u2l3-pow-s"><span class="tex">2^4,\ 3^4,\ 4^4</span></div></div>
+    <div class="u2l3-pow"><div class="u2l3-pow-h">Negative radicand, odd index</div><span class="tex">\sqrt[3]{-8}=-2</span><div class="u2l3-pow-s">the sign comes out</div></div>
+  </div>
+  <h3 class="sub">Cut the cube</h3>
+  <p>A cube of volume <span class="tex">V</span> has edge <span class="tex">\sqrt[3]{V}</span>. Cut it into small cubes and count the small edges along one edge.</p>
+  <div class="explainer" data-explainer="cubeCut"></div>
+  <h3 class="sub">Bins by index and radicand</h3>
+  <div class="explainer" data-explainer="indexBins"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Check the index too.</b> <span class="tex">\sqrt{3}</span> and <span class="tex">\sqrt[3]{3}</span> are as different as <span class="tex">x</span> and <span class="tex">x^2</span>: they go in different bins.</div></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Other indices</h3></div>
+  <p class="q">Simplify. Look for perfect cubes (<span class="tex">8,\ 27,\ 64,\ 125,\ \dots</span>) or perfect fourth powers (<span class="tex">16,\ 81,\ 256,\ \dots</span>).</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\sqrt[3]{54}+\sqrt[3]{16}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\sqrt[3]{27}\sqrt[3]{2}+\sqrt[3]{8}\sqrt[3]{2}</span><br><span class="tex">=3\sqrt[3]{2}+2\sqrt[3]{2}=\boldsymbol{5\sqrt[3]{2}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2\sqrt[3]{81}-\sqrt[3]{24}+\sqrt[3]{375}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=2(3\sqrt[3]{3})-2\sqrt[3]{3}+5\sqrt[3]{3}</span><br><span class="tex">=\boldsymbol{9\sqrt[3]{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\sqrt[3]{-40}+3\sqrt[3]{135}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sqrt[3]{-40}=\sqrt[3]{-8}\sqrt[3]{5}=-2\sqrt[3]{5}</span><br><span class="tex">-2\sqrt[3]{5}+3(3\sqrt[3]{5})=\boldsymbol{7\sqrt[3]{5}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\sqrt[4]{48}+\sqrt[4]{243}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\sqrt[4]{16}\sqrt[4]{3}+\sqrt[4]{81}\sqrt[4]{3}</span><br><span class="tex">=2\sqrt[4]{3}+3\sqrt[4]{3}=\boldsymbol{5\sqrt[4]{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\sqrt{12}+\sqrt[3]{24}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\boldsymbol{2\sqrt{3}+2\sqrt[3]{3}}</span><br>Different indices, so this is the simplest form.</div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\sqrt{50}+\sqrt[3]{16}-\sqrt{8}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=5\sqrt{2}+2\sqrt[3]{2}-2\sqrt{2}</span><br><span class="tex">=\boldsymbol{3\sqrt{2}+2\sqrt[3]{2}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 2 (cont). Fractions in front ================= -->
+<section class="card" data-ink="s2c" data-section="Fractions in Front">
+  <h3 class="sub">Fractions in front</h3>
+  <div class="def">A fraction in front of a radical is a <b>coefficient</b>: simplify the radical, then multiply the fraction by the number that came out. <span class="tex">\tfrac{1}{2}\sqrt{48}=\tfrac{1}{2}(4\sqrt{3})=2\sqrt{3}</span>: half of four <span class="tex">\sqrt{3}</span>’s is two <span class="tex">\sqrt{3}</span>’s.</div>
+  <div class="explainer" data-explainer="fracFront"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Fraction coefficients</h3></div>
+  <p class="q">Simplify.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\tfrac{1}{2}\sqrt{48}+\tfrac{2}{3}\sqrt{27}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\tfrac{1}{2}(4\sqrt{3})+\tfrac{2}{3}(3\sqrt{3})</span><br><span class="tex">=2\sqrt{3}+2\sqrt{3}=\boldsymbol{4\sqrt{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\tfrac{3}{4}\sqrt{32}-\tfrac{1}{5}\sqrt{50}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\tfrac{3}{4}(4\sqrt{2})-\tfrac{1}{5}(5\sqrt{2})</span><br><span class="tex">=3\sqrt{2}-\sqrt{2}=\boldsymbol{2\sqrt{2}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\tfrac{2}{3}\sqrt{18}+\tfrac{1}{4}\sqrt{8}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\tfrac{2}{3}(3\sqrt{2})+\tfrac{1}{4}(2\sqrt{2})</span><br><span class="tex">=2\sqrt{2}+\tfrac{1}{2}\sqrt{2}=\boldsymbol{\tfrac{5}{2}\sqrt{2}}</span><br>(or <span class="tex">\tfrac{5\sqrt{2}}{2}</span>)</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Variables ================= -->
+<section class="card" data-ink="s3" data-section="3. Radicals with Variables">
+  <div class="sec-h"><span class="badge">3</span><h2>Radicals with Variables</h2></div>
+  <div class="def">Simplify each radical as in Lesson 2, then combine like radicals. Coefficients that contain variables combine only when they are like terms: <span class="tex">3x\sqrt{2x}+5x\sqrt{2x}=8x\sqrt{2x}</span>. State the <b>restrictions</b>: for an <b>even index</b>, each radicand must be <span class="tex">\ge0</span>. A <b>cube root</b> needs no restriction.</div>
+  <div class="explainer" data-explainer="varBins"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Variable radicands</h3></div>
+  <p class="q">Simplify. State the restrictions on the variable.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\sqrt{9a}+\sqrt{25a}-\sqrt{4a}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=3\sqrt{a}+5\sqrt{a}-2\sqrt{a}=\boldsymbol{6\sqrt{a}}</span>, <span class="tex">\ a\ge0</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\sqrt{12x^3}+x\sqrt{27x}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sqrt{12x^3}=\sqrt{4x^2}\sqrt{3x}=2x\sqrt{3x}</span>; <span class="tex">\ x\sqrt{27x}=3x\sqrt{3x}</span><br>Sum: <span class="tex">\boldsymbol{5x\sqrt{3x}}</span>, <span class="tex">\ x\ge0</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\sqrt[3]{16y^4}-y\sqrt[3]{54y}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sqrt[3]{16y^4}=\sqrt[3]{8y^3}\sqrt[3]{2y}=2y\sqrt[3]{2y}</span>; <span class="tex">\ y\sqrt[3]{54y}=3y\sqrt[3]{2y}</span><br><span class="tex">2y\sqrt[3]{2y}-3y\sqrt[3]{2y}=\boldsymbol{-y\sqrt[3]{2y}}</span>. No restriction (<span class="tex">y\in\mathbb{R}</span>).</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\sqrt{4x-8}+\sqrt{x-2}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Factor: <span class="tex">\sqrt{4(x-2)}=2\sqrt{x-2}</span><br><span class="tex">2\sqrt{x-2}+\sqrt{x-2}=\boldsymbol{3\sqrt{x-2}}</span>, <span class="tex">\ x\ge2</span></div></div></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Factor inside first.</b> <span class="tex">\sqrt{4x-8}</span> is not <span class="tex">2\sqrt{x}-\sqrt{8}</span>. Take out the common factor, <span class="tex">4(x-2)</span>, and then the perfect square 4 comes out as 2.</div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Perimeter ================= -->
+<section class="card" data-ink="s4" data-section="4. Perimeter and Missing Lengths">
+  <div class="sec-h"><span class="badge">4</span><h2>Perimeter and Missing Lengths</h2></div>
+  <div class="def">Exact answers are left in <b>simplest radical form</b>. The length of a slanted segment on a grid comes from the Pythagorean theorem: draw the right triangle under it, then
+    <div class="u2l3-bigf">length <span class="tex">=\sqrt{(\text{run})^2+(\text{rise})^2}</span></div>
+    To find a missing side from a perimeter, <b>subtract the known sides</b> from the perimeter. Put <b>brackets</b> around a side that has two terms before subtracting it.</div>
+  <div class="explainer" data-explainer="gridLengths"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>A triangle on a grid</h3></div>
+  <p class="q">Triangle <span class="tex">ABC</span> has vertices <span class="tex">A(-3,-2)</span>, <span class="tex">B(1,0)</span> and <span class="tex">C(3,-4)</span>.</p>
+  <div class="u2l3-exg">
+    <div class="u2l3-fig" id="u2l3-ex6fig"></div>
+    <div class="parts c1">
+      <div class="part"><div class="pl">(a) Determine the length of each side in simplest form.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">AB</span>: run 4, rise 2: <span class="tex">\sqrt{16+4}=\sqrt{20}=\boldsymbol{2\sqrt{5}}</span><br><span class="tex">BC</span>: run 2, rise 4: <span class="tex">\sqrt{4+16}=\sqrt{20}=\boldsymbol{2\sqrt{5}}</span><br><span class="tex">AC</span>: run 6, rise 2: <span class="tex">\sqrt{36+4}=\sqrt{40}=\boldsymbol{2\sqrt{10}}</span><div class="u2l3-ansfig" id="u2l3-ex6ans"></div></div></div></div>
+      <div class="part"><div class="pl">(b) Determine the perimeter of <span class="tex">\triangle ABC</span> in simplest form.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">P=2\sqrt{5}+2\sqrt{5}+2\sqrt{10}=\boldsymbol{4\sqrt{5}+2\sqrt{10}}</span> units</div></div></div>
+    </div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s4b" data-section="4. Missing Side">
+  <h3 class="sub">A missing side: take the known sides away</h3>
+  <p>Lay the whole perimeter out as tiles. Take away each known side, <b>both of its terms</b>. What is left is the missing side.</p>
+  <div class="explainer" data-explainer="missingSide"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>A missing side</h3></div>
+  <div class="u2l3-exg u2l3-exg7">
+    <div class="parts c1">
+      <div class="part"><div class="pl">The perimeter of the triangle is <span class="tex">7\sqrt{5}+3\sqrt{2}</span> cm. Determine the exact length of side <span class="tex">x</span> in simplest form.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Known sides: <span class="tex">\sqrt{45}=3\sqrt{5}</span> and <span class="tex">\sqrt{8}+\sqrt{20}=2\sqrt{2}+2\sqrt{5}</span>.<br>
+        <span class="tex">\begin{aligned}x&amp;=7\sqrt{5}+3\sqrt{2}-3\sqrt{5}-(2\sqrt{2}+2\sqrt{5})\\&amp;=7\sqrt{5}-3\sqrt{5}-2\sqrt{5}+3\sqrt{2}-2\sqrt{2}\\&amp;=\boldsymbol{2\sqrt{5}+\sqrt{2}}\text{ cm}\end{aligned}</span></div></div></div>
+    </div>
+    <div class="u2l3-fig" id="u2l3-ex7fig"></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Unknowns and sequences ================= -->
+<section class="card" data-ink="s5" data-section="5. Unknowns and Sequences">
+  <div class="sec-h"><span class="badge">5</span><h2>Unknown Radical Expressions and Sequences</h2></div>
+  <div class="def">An equation such as <span class="tex">y+\sqrt{27}=2\sqrt{75}</span> is solved like a linear equation: <b>isolate the unknown</b>, then simplify and combine. Terms with radicals can also form an <b>arithmetic sequence</b> (Unit 1): find <span class="tex">\textcolor{#c27a0e}{d}</span> by subtracting consecutive terms, collecting the <b>rational parts</b> and the <b>radical parts</b> separately.</div>
+  <h3 class="sub">Balance it</h3>
+  <div class="explainer" data-explainer="balanceY"></div>
+  <h3 class="sub">Two parts, two hops</h3>
+  <div class="explainer" data-explainer="radSeq"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>An unknown and a sequence</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) If <span class="tex">y+\sqrt{27}=2\sqrt{75}</span>, determine <span class="tex">y</span> in simplest form, then simplify <span class="tex">y-\sqrt{12}</span>.</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\begin{aligned}y&amp;=2\sqrt{75}-\sqrt{27}\\&amp;=2(5\sqrt{3})-3\sqrt{3}=\boldsymbol{7\sqrt{3}}\end{aligned}</span><br><span class="tex">y-\sqrt{12}=7\sqrt{3}-2\sqrt{3}=\boldsymbol{5\sqrt{3}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) The sequence <span class="tex">3+\sqrt{2},\ 5+4\sqrt{2},\ 7+7\sqrt{2},\ \dots</span> is arithmetic. Determine <span class="tex">d</span>, the next two terms, and <span class="tex">t_{10}</span>.</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">d=(5+4\sqrt{2})-(3+\sqrt{2})=\boldsymbol{2+3\sqrt{2}}</span><br><span class="tex">t_4=\boldsymbol{9+10\sqrt{2}}</span>, <span class="tex">\ t_5=\boldsymbol{11+13\sqrt{2}}</span><br><span class="tex">\begin{aligned}t_{10}&amp;=t_1+9d=3+\sqrt{2}+9(2+3\sqrt{2})\\&amp;=3+\sqrt{2}+18+27\sqrt{2}=\boldsymbol{21+28\sqrt{2}}\end{aligned}</span></div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Like radicals</b> have the same <b>index</b> and the same <b>radicand</b>. Combine them like like terms: <span class="tex">4\sqrt{3}+5\sqrt{3}=9\sqrt{3}</span>, just as <span class="tex">4x+5x=9x</span>.</div>
+    <div><b>Never add the radicands.</b> <span class="tex">\sqrt{9}+\sqrt{16}=7</span> but <span class="tex">\sqrt{25}=5</span>. Unlike radicals, and rational terms, stay as separate terms.</div>
+    <div><b>Simplify first, then combine.</b> Use the largest perfect square (cube, fourth power) factor: <span class="tex">\sqrt{27}-\sqrt{12}=3\sqrt{3}-2\sqrt{3}=\sqrt{3}</span>. A fraction in front multiplies what comes out.</div>
+    <div><b>Variables, lengths, unknowns.</b> State restrictions for even indices (<span class="tex">x\ge0</span>). Lengths: <span class="tex">\sqrt{\text{run}^2+\text{rise}^2}</span>. Missing side: perimeter minus <b>(bracketed)</b> known sides.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u2l3">
+    <div><div class="kicker">Your turn</div><b>Assignment 3 — Adding and Subtracting Radicals</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l4/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 4 — Multiplying Radicals</b><div class="muted">Multiply the coefficients and multiply the radicands, then simplify: <span class="tex">2\sqrt{3}\times5\sqrt{6}=10\sqrt{18}=30\sqrt{2}</span>.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u2l3.js';
+  boot({ key: 'u2l3', homeHref: '../../', title: '2.3 Adding and Subtracting Radicals' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

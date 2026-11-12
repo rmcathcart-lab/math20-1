@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dividing Radicals and Rationalizing Monomial Denominators · Math 20-1 2.5</title>
-<meta name="description" content="Math 20-1 Unit 2 Lesson 5: dividing radicals with the same index (coefficients by coefficients, radicands by radicands), dividing every term of a numerator, the simplest-form checklist, rationalizing a/√b and a/(m√b) by multiplying by a form of 1 (a square of side √b shows √b·√b = b), fractions under a radical, cube- and fourth-root denominators (build a perfect cube), quotients with variables and their restrictions, and measurement problems. Write on it with an Apple Pencil.">
+<meta name="description" content="Math 20-1 Unit 2 Lesson 5: dividing radicals with the same index (coefficients by coefficients, radicands by radicands), dividing every term of a numerator, the simplest-form checklist, rationalizing a/√b and a/(m√b) by multiplying by a form of 1, fractions under a radical, cube- and fourth-root denominators (build a perfect cube), quotients with variables and their restrictions, and measurement problems. Write on it with an Apple Pencil.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="20-1 Lessons">
@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u2l5.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,15 @@
 </head>
 <body>
 <main class="lesson screen u2l5">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Magic Paper">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="0.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="40" text-anchor="middle" transform="scale(-1 1)">📄</text></g></g><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="3s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="0.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="40" text-anchor="middle" transform="scale(-1 1)">📄</text></g></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Magic Paper</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Most of the world uses <b>A4</b> paper, not our letter paper. Fold a sheet of A4 in half, and the half is <b>exactly the same shape</b> as the whole sheet, just smaller.</p><p class="vw-ask">If the short side is 1, how long is the long side?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A sheet of paper folding in half, and the half stood up beside it"><rect x="40" y="125" width="120" height="85" fill="#fffdf6" stroke="#4a4436" stroke-width="3.5"/><g transform="translate(0 125)"><g><animateTransform attributeName="transform" type="scale" values="1 1;1 1;1 -1;1 -1;1 1" keyTimes="0;.2;.45;.75;1" dur="4s" repeatCount="indefinite"/><g transform="translate(0 -125)"><rect x="40" y="40" width="120" height="85" fill="#eef3fb" stroke="#4a4436" stroke-width="3.5"/></g></g></g><line x1="34" y1="125" x2="166" y2="125" stroke="#2b55a0" stroke-width="2.5" stroke-dasharray="7 6"/><text x="100" y="236" font-size="26" font-weight="800" fill="#4a4436" text-anchor="middle">1</text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="18" y="136" font-size="34" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="2.4s" begin="0s" repeatCount="indefinite"/><rect x="208" y="92" width="85" height="120" fill="#eef3fb" stroke="#4a4436" stroke-width="3.5"/><text x="250" y="80" font-size="19" font-weight="700" fill="#12805a" text-anchor="middle">same shape!</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Guess first. Can you prove it?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b><span class="tex">\sqrt2\approx1.414</span></b>. Call the long side <span class="tex">L</span>. The half is <span class="tex">1</span> by <span class="tex">\tfrac L2</span>, and the same shape means long ÷ short is the same: <span class="tex">\dfrac L1=\dfrac{1}{L/2}</span>, so <span class="tex">L^2=2</span> and <span class="tex">L=\sqrt2</span>. Check a real sheet: 297&nbsp;mm by 210&nbsp;mm, and <span class="tex">297\div210\approx1.414</span>. (Letter paper, 11 by 8.5, does <b>not</b> do this: its half is a different shape.)</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -41,41 +51,6 @@
     </ul>
   </div>
   <div class="outcome"><b>AN2</b> Solve problems that involve operations on radicals and radical expressions with numerical and variable radicands.<br><span class="muted">Today: dividing radicals and rationalizing one-term (monomial) denominators. Exact answers.</span></div>
-</section>
-
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: Same Pizza, More Slices" style="--wf-side: 420px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Same Pizza, More Slices</h2>
-  <p class="wf-rule">The pepperoni covers <span class="tex">\tfrac34</span> of the pizza. Cut <b>every</b> slice into pieces: the count changes, but does the amount? <span class="muted">Press a <b>Cut</b> button.</span></p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u2l5-pizza" id="u2l5-pizza"></div>
-    <div class="u2l5-wctl no-ink">
-      <button type="button" class="pill" id="u2l5-cut2">Cut each slice in 2</button>
-      <button type="button" class="pill" id="u2l5-cut3">Cut each slice in 3</button>
-      <button type="button" class="pill" id="u2l5-wreset">Start over</button>
-    </div>
-    <div class="u2l5-wlab" id="u2l5-wlab"></div>
-  </div><div class="wf-side">
-    <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Fill in: <span class="tex">\tfrac34=\tfrac{?}{8}=\tfrac{?}{12}</span> <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-      <div class="bk-ans"><span class="tex">\tfrac68</span> and <span class="tex">\tfrac9{12}</span>: multiply the top and the bottom by the <b>same</b> number (2, then 3).</div></div>
-    <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Is <span class="tex">\tfrac34\times\tfrac22</span> more pizza than <span class="tex">\tfrac34</span>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-      <div class="bk-ans"><b>No, the same.</b> <span class="tex">\tfrac22=1</span>, and multiplying by 1 changes how it <b>looks</b>, not its <b>value</b>.</div></div>
-    <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Write <span class="tex">\tfrac25</span> with a denominator of 15. <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-      <div class="bk-ans"><span class="tex">\tfrac25\times\tfrac33=\tfrac6{15}</span>. Pick the form of 1 that turns the bottom into what you want.</div></div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Which number is <b>equal</b> to <span class="tex">\tfrac{1}{\sqrt2}</span>? <b>Guess first.</b></div></div>
-      <div class="poll-opts c4">
-        <div class="opt right"><b>A</b> <span class="tex">\dfrac{\sqrt2}{2}</span></div>
-        <div class="opt"><b>B</b> <span class="tex">\dfrac{2}{\sqrt2}</span></div>
-        <div class="opt"><b>C</b> <span class="tex">\dfrac12</span></div>
-        <div class="opt"><b>D</b> <span class="tex">\sqrt2</span></div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>A.</b> Multiply by the form of 1 <span class="tex">\tfrac{\sqrt2}{\sqrt2}</span>: <span class="tex">\dfrac{1\cdot\sqrt2}{\sqrt2\cdot\sqrt2}=\dfrac{\sqrt2}{2}</span>. The bottom is now a <b>whole number</b>, because <span class="tex">\sqrt2\cdot\sqrt2=2</span>.
-        <div class="u2l5-traps"><span><b>B?</b> <span class="tex">\tfrac2{\sqrt2}=\sqrt2</span>: twice as big.</span><span><b>C?</b> <span class="tex">\tfrac12</span> is too small: <span class="tex">\sqrt2</span> is less than 2.</span><span><b>D?</b> <span class="tex">\sqrt2</span> is bigger than 1, but <span class="tex">\tfrac1{\sqrt2}</span> is less than 1.</span></div>
-      </div>
-    </div>
-  </div></div>
 </section>
 
 <!-- ================= 1. Dividing radicals ================= -->
@@ -104,7 +79,6 @@
 <section class="card" data-ink="s1b" data-section="1. Radicands That Don't Divide Evenly">
   <h3 class="sub">When the radicands do not divide evenly</h3>
   <p>Either <b>reduce the fraction under the radical</b>, or write <b>each radical in simplest form first</b> and divide out the like radicals (just as <span class="tex">\frac{7x}{3x}=\frac73</span>). Both routes give the same answer.</p>
-  <div class="explainer" data-explainer="twoRoutes"></div>
 </section>
 
 <section class="card example" data-ink="ex2" data-section="Example 2">
@@ -160,8 +134,6 @@
   <div class="u2l5-key u2l5-key2"><div class="u2l5-key-h">Rationalizing a monomial denominator <span class="u2l5-kh2">(<span class="tex">b&gt;0</span>)</span></div><div class="u2l5-key-f"><span class="tex">\dfrac{a}{\sqrt b}\cdot\textcolor{#c27a0e}{\dfrac{\sqrt b}{\sqrt b}}=\dfrac{a\sqrt b}{b}</span></div><div class="u2l5-key-f"><span class="tex">\dfrac{a}{m\sqrt b}\cdot\textcolor{#c27a0e}{\dfrac{\sqrt b}{\sqrt b}}=\dfrac{a\sqrt b}{mb}</span></div></div>
   <div class="explainer" data-explainer="formOfOne"></div>
   <div class="tip watch"><div class="tip-ic">!</div><div><b>Three habits.</b> For <span class="tex">m\sqrt b</span>, multiply by <span class="tex">\sqrt b</span> <b>only</b> (not by <span class="tex">m\sqrt b</span>): the <span class="tex">m</span> is already rational. <b>Simplify</b> a radical in the denominator <b>first</b>: it keeps the numbers small. A <b>fraction under a radical</b> is split first: <span class="tex">\sqrt{\dfrac ab}=\dfrac{\sqrt a}{\sqrt b}</span>.</div></div>
-  <div class="part think"><div class="pl"><span class="think-tag">Think</span> To rationalize <span class="tex">\frac{5}{\sqrt3}</span>, why can't we just multiply the <b>denominator</b> by <span class="tex">\sqrt3</span>?</div><div class="work" style="--h:80px"></div>
-    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">That multiplies the whole fraction by <span class="tex">\frac{1}{\sqrt3}</span> and changes its value. Multiplying the top <b>and</b> the bottom by <span class="tex">\sqrt3</span> multiplies by <span class="tex">\frac{\sqrt3}{\sqrt3}=1</span>.</div></div></div>
 </section>
 
 <section class="card example" data-ink="ex4" data-section="Example 4">
@@ -179,10 +151,18 @@
   <button class="more" data-more="ex4-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 5 · Questions 1–5</h2>
+  <p class="pr-t">Divide radicals, divide every term, and rationalize one-term denominators.</p>
+  <div class="pr-chips n4"><span><b>1</b>Divide radicals</span><span><b>2</b>Radicands that don’t divide evenly</span><span><b>3</b>Divide each term</span><span><b>4–5</b>Rationalize, and no fraction under a radical</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u2l5">Open the Practice site</a></div>
+</section>
+
 <section class="card" data-ink="s3c" data-section="3. Two-Term Numerators">
   <h3 class="sub">When the numerator has two terms</h3>
   <p>Multiply <b>every</b> term of the numerator by the radical. Reduce only by a factor that divides <b>every</b> term of the numerator <b>and</b> the denominator.</p>
-  <div class="explainer" data-explainer="twoTermNum"></div>
 </section>
 
 <section class="card example" data-ink="ex5" data-section="Example 5">
@@ -249,7 +229,6 @@
 <section class="card" data-ink="s6" data-section="6. Problems with Quotients">
   <div class="sec-h"><span class="badge">6</span><h2>Problems with Quotients</h2></div>
   <p>In a measurement problem, dividing by a radical is common: a <b>length</b> is an <b>area divided by another length</b>. Give exact answers in simplest form, with units.</p>
-  <div class="explainer" data-explainer="problems"></div>
 </section>
 
 <section class="card example" data-ink="ex8" data-section="Example 8">
@@ -275,7 +254,7 @@
     <div><b>Cube roots and variables.</b> Multiply by what makes a perfect cube (<span class="tex">\sqrt[3]2\cdot\sqrt[3]4=\sqrt[3]8=2</span>) or fourth power. State restrictions first: an even-index radical in a denominator needs <span class="tex">&gt;0</span>; an odd-index one needs <span class="tex">\ne0</span>.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u2l5">
-    <div><div class="kicker">Your turn</div><b>Assignment 5 — Dividing Radicals and Rationalizing Monomial Denominators</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 5 · Questions 6–19</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l6/">
     <div><div class="kicker">Next lesson</div><b>Lesson 6 — Rationalizing Binomial Denominators with Conjugates</b><div class="muted">A two-term denominator like <span class="tex">3+\sqrt2</span> needs its <b>conjugate</b> <span class="tex">3-\sqrt2</span>: the middle terms cancel and the radical disappears.</div></div><span class="arrow">→</span>

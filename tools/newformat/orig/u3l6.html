@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Cosine Law · Math 20-1 3.6</title>
+<meta name="description" content="Math 20-1 Unit 3 Lesson 6: the cosine law. When the sine law cannot start (SAS and SSS), BC from right triangles, the proof from Pythagoras, the cosine law as Pythagoras with a correction term, finding a side (SAS) and an angle (SSS), negative cosines and obtuse angles, the largest angle, solving a SAS triangle completely, and problems with bearings and parallelograms. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u3l6.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u3l6">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 3 Trigonometry · Lesson 6</div>
+  <h1>The Cosine Law</h1>
+  <p class="lede">The sine law needs an angle and the side opposite it. When you know <b>two sides and the angle between them</b> (SAS) or <b>all three sides</b> (SSS), there is no such pair. Today: one formula that works for both, built from Pythagoras.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>tell when the sine law can’t start: <b>SAS</b> (the angle is between the sides) and <b>SSS</b></li>
+      <li>explain where <span class="tex">a^2=b^2+c^2-2bc\cos A</span> comes from, and why it is <b>Pythagoras with a correction</b></li>
+      <li>find the <b>third side</b> from two sides and the contained angle, multiplying before subtracting</li>
+      <li>find an <b>angle</b> from three sides, and read a <b>negative cosine</b> as an <b>obtuse</b> angle</li>
+      <li>solve a whole triangle, and solve problems with bearings and parallelograms</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>T3</b> Solve problems, using the cosine law and sine law, including the ambiguous case.<br><span class="muted">Today: the cosine law, for SAS (a side) and SSS (an angle).</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Snapping Crocodile" id="wu" style="--wf-side: 400px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Snapping Crocodile</h2>
+  <p class="wf-rule">Clyde the crocodile’s jaws are hinged at the back of his mouth. His lower jaw is <b>30 cm</b> long and his upper jaw is <b>40 cm</b> long. How far apart are the <b>tips</b> of his jaws?</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u3l6-croc" id="u3l6-croc"></div>
+    <div class="u3l6-wbtns">
+      <button type="button" class="pill" data-open="0">Closed</button>
+      <button type="button" class="pill" data-open="30">30°</button>
+      <button type="button" class="pill" data-open="60">60°</button>
+      <button type="button" class="pill" data-open="90">90°</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u3l6-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Clyde’s mouth is <b>closed</b> (0°). How far apart are the tips? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l6-wa"><div class="bk-ans"><b>10 cm.</b> The jaws lie on top of each other, and the upper jaw sticks out <span class="tex">40-30=10</span> cm past the lower one.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>He opens to <b>90°</b>. Now how far apart are the tips? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l6-wa"><div class="bk-ans"><b>50 cm.</b> A right triangle: <span class="tex">\sqrt{30^2+40^2}=\sqrt{2500}=50</span>.</div></div></div>
+    </div>
+    <div class="poll wf-poll" id="u3l6-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> He opens to <b>60°</b>. How far apart are the tips now? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> 50 cm</div>
+        <div class="opt"><b>B</b> 40 cm</div>
+        <div class="opt right"><b>C</b> about 36 cm</div>
+        <div class="opt"><b>D</b> 30 cm</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>C, about 36 cm.</b> It is not a right triangle, so 50 cm is wrong. Split it: the 30 cm jaw’s tip is <span class="tex">30\sin60^\circ\approx26.0</span> cm above the upper jaw, at <span class="tex">30\cos60^\circ=15</span> cm along it, leaving <span class="tex">40-15=25</span> cm. So the gap is <span class="tex">\sqrt{26.0^2+25^2}\approx36.1</span> cm.<br>
+        <span class="muted">Pythagoras only works at <b>90°</b>. Today: a formula that works at <b>any</b> angle.</span></div>
+    </div>
+  </div></div>
+  <p class="u3l6-social">Challenge your neighbour: at what angle is the gap exactly <b>40 cm</b>, as long as the upper jaw? (You’ll be able to find it by the end of today.)</p>
+</section>
+
+<!-- ================= 1. When the sine law cannot start ================= -->
+<section class="card" data-ink="s1" data-section="1. When the Sine Law Cannot Start">
+  <div class="sec-h"><span class="badge">1</span><h2>When the Sine Law Cannot Start</h2></div>
+  <div class="def">The sine law needs a <b>known pair</b>: an angle and the side opposite it. Two cases have no known pair:
+    <ul class="u3l6-ul">
+      <li><b>SAS</b>: two sides and the <b>contained</b> angle (the angle <em>between</em> them);</li>
+      <li><b>SSS</b>: all three sides.</li>
+    </ul>
+    These triangles can be solved by splitting them into right triangles, or in one step with the <b>cosine law</b>.</div>
+  <div class="explainer" data-explainer="cases"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Can the sine law start?</h3></div>
+  <p class="q">Decide whether the sine law can be used as the first step. If not, name the case (SAS or SSS).</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">\angle A</span>, <span class="tex">\angle C</span>, <span class="tex">c</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Yes</b> (<span class="tex">\angle C</span>, <span class="tex">c</span>)</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">b</span>, <span class="tex">c</span>, <span class="tex">\angle A</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>No: SAS</b></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">a</span>, <span class="tex">b</span>, <span class="tex">c</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>No: SSS</b></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\angle B</span>, <span class="tex">b</span>, <span class="tex">a</span> (<span class="tex">b&gt;a</span>)</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Yes</b> (<span class="tex">\angle B</span>, <span class="tex">b</span>)</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Right triangles only</h3></div>
+  <p class="q">In <span class="tex">\triangle ABC</span>, <span class="tex">\angle A=42^\circ</span>, <span class="tex">AC=9.0</span> cm and <span class="tex">AB=13.0</span> cm. The altitude <span class="tex">CD</span> has length <span class="tex">h</span>. Determine <span class="tex">BC</span> to the nearest tenth using right triangles only.</p>
+  <div class="u3l6-two">
+    <div class="u3l6-figc" id="u3l6-fig2"></div>
+    <div class="part"><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">
+      <span class="tex">\triangle ACD</span>: <span class="tex">h=9.0\sin42^\circ\approx6.022</span> cm and <span class="tex">AD=9.0\cos42^\circ\approx6.688</span> cm.<br>
+      <span class="tex">DB=13.0-6.688\approx6.312</span> cm<br>
+      <span class="tex">\triangle BCD</span> (Pythagoras): <span class="tex">BC=\sqrt{h^2+DB^2}=\sqrt{6.022^2+6.312^2}\approx\boldsymbol{8.7}</span> <b>cm</b></div></div></div>
+  </div>
+  <div class="explainer" data-explainer="alt"></div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. The cosine law ================= -->
+<section class="card" data-ink="s2" data-section="2. The Cosine Law">
+  <div class="sec-h"><span class="badge">2</span><h2>The Cosine Law</h2></div>
+  <p>Repeating Example 2 with letters gives a formula. Put <span class="tex">A</span> at the left end of side <span class="tex">c</span>, and let <span class="tex">AD=x</span>, so <span class="tex">DB=c-x</span>.</p>
+  <div class="explainer" data-explainer="derive"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Complete the proof</h3></div>
+  <div class="u3l6-two u3l6-two-p">
+    <div class="u3l6-figc" id="u3l6-fig3"></div>
+    <div class="part u3l6-proof">
+      <div class="u3l6-pr">In <span class="tex">\triangle ACD</span>: &nbsp;<span class="tex">\cos A=\dfrac{x}{b}</span>, so <span class="tex">x=</span> <span data-reveal><span class="tex">b\cos A</span></span>, and <span class="tex">h^2+x^2=</span> <span data-reveal><span class="tex">b^2</span></span>.</div>
+      <div class="u3l6-pr">In <span class="tex">\triangle BCD</span>: &nbsp;<span class="tex">a^2=h^2+(c-x)^2</span></div>
+      <div class="u3l6-pr">Expand: &nbsp;<span class="tex">a^2=h^2+c^2-2cx+x^2</span></div>
+      <div class="u3l6-pr">Regroup: &nbsp;<span class="tex">a^2=(h^2+x^2)+c^2-2cx</span></div>
+      <div class="u3l6-pr">Substitute: &nbsp;<span class="tex">a^2=</span> <span data-reveal><span class="tex">b^2</span></span> <span class="tex">+\,c^2-2c\,\big(</span><span data-reveal><span class="tex">b\cos A</span></span><span class="tex">\big)</span></div>
+      <div class="u3l6-pr">So &nbsp;<span class="tex">a^2=b^2+c^2-2bc\cos A</span></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans u3l6-ans-s">The blanks: <span class="tex">x=b\cos A</span>; <span class="tex">h^2+x^2=b^2</span>; then <span class="tex">b^2</span> and <span class="tex">b\cos A</span> are substituted.</div></div>
+    </div>
+  </div>
+  <div class="def u3l6-law"><b>The Cosine Law.</b> In any <span class="tex">\triangle ABC</span>:
+    <div class="u3l6-forms"><span class="tex">\textcolor{#a33357}{a}^2=\textcolor{#1f5bd6}{b}^2+\textcolor{#1f5bd6}{c}^2-2\textcolor{#1f5bd6}{bc}\cos \textcolor{#a33357}{A}</span><span class="tex">\textcolor{#a33357}{b}^2=\textcolor{#1f5bd6}{a}^2+\textcolor{#1f5bd6}{c}^2-2\textcolor{#1f5bd6}{ac}\cos \textcolor{#a33357}{B}</span><span class="tex">\textcolor{#a33357}{c}^2=\textcolor{#1f5bd6}{a}^2+\textcolor{#1f5bd6}{b}^2-2\textcolor{#1f5bd6}{ab}\cos \textcolor{#a33357}{C}</span></div>
+    The side on the left is <b>opposite</b> the angle on the right; the other two sides are the ones that <b>form</b> that angle. If the angle is <span class="tex">90^\circ</span>, then <span class="tex">\cos90^\circ=0</span> and the law becomes the Pythagorean theorem.</div>
+  <div class="explainer" data-explainer="forms"></div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. Pythagoras with a Correction">
+  <h3 class="sub">Pythagoras with a correction</h3>
+  <p>Hold two sides fixed and open the angle between them like a hinge. At <span class="tex">90^\circ</span> the squares on the sides obey Pythagoras exactly. Close the hinge and <span class="tex">\textcolor{#a33357}{c^2}</span> falls <b>short</b> of <span class="tex">\textcolor{#1f5bd6}{a^2+b^2}</span>; open it past <span class="tex">90^\circ</span> and <span class="tex">\textcolor{#a33357}{c^2}</span> is <b>more</b>. The <span class="u3l6-hc"><b>correction</b></span> <span class="tex">\textcolor{#c27a0e}{-2ab\cos C}</span> is exactly the difference.</p>
+  <div class="explainer" data-explainer="pythag"></div>
+</section>
+
+<!-- ================= 3. Finding a side ================= -->
+<section class="card" data-ink="s3" data-section="3. Finding a Side (SAS)">
+  <div class="sec-h"><span class="badge">3</span><h2>Finding a Side (SAS)</h2></div>
+  <div class="def">Substitute the two sides and the contained angle, then take the square root. <b>Enter the whole expression at once</b>, for example <span class="tex">\sqrt{9^2+13^2-2(9)(13)\cos42^\circ}</span>. When the angle is <b>obtuse</b>, <span class="tex">\cos A&lt;0</span>, so the last term is <b>added</b> and the third side is longer.</div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Multiply before you subtract.</b> Do <b>not</b> subtract <span class="tex">2bc</span> from <span class="tex">b^2+c^2</span> before multiplying by <span class="tex">\cos A</span>: in <span class="tex">b^2+c^2-2bc\cos A</span> the multiplication <span class="tex">2bc\cos A</span> comes first. Working Example 4(a) as <span class="tex">(81+169-234)\cos42^\circ</span> gives about 3.4 cm, which is impossible.</div>
+    <div class="u3l6-pcol"><button class="pill" data-keys="9 x² + 13 x² − 2 × 9 × 13 = Ans cos 42 ) = √ Ans ) =">The trap</button></div></div>
+  <div class="explainer" data-explainer="side"></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> Two sides are 6 and 8. Without calculating: is the third side <b>longer or shorter than 10</b> when the angle between them is <span class="tex">100^\circ</span>? When it is <span class="tex">70^\circ</span>?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">At <span class="tex">90^\circ</span> it would be exactly <span class="tex">\sqrt{36+64}=10</span>. At <span class="tex">100^\circ</span>, <span class="tex">\cos100^\circ&lt;0</span>: the correction is added, so <b>longer</b>. At <span class="tex">70^\circ</span>, <span class="tex">\cos70^\circ&gt;0</span>: it is subtracted, so <b>shorter</b>.</div></div></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Find the third side</h3></div>
+  <p class="q">Determine the third side. Round to the nearest tenth in (a) and (b); give an exact answer in (c).</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\triangle ABC</span> from Example 2: <span class="tex">\angle A=42^\circ</span>, <span class="tex">b=9.0</span> cm, <span class="tex">c=13.0</span> cm</div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a^2=9.0^2+13.0^2-2(9.0)(13.0)\cos42^\circ</span><br><span class="tex">a^2\approx76.10</span><br><span class="tex">a\approx\boldsymbol{8.7}</span> <b>cm</b>, as in Example 2.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\triangle PQR</span>: <span class="tex">\angle Q=128^\circ</span>, <span class="tex">p=7.5</span> m, <span class="tex">r=11.2</span> m</div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">q^2=7.5^2+11.2^2-2(7.5)(11.2)\cos128^\circ</span><br><span class="tex">q^2\approx181.69+103.43=285.12</span><br><span class="tex">q\approx\boldsymbol{16.9}</span> <b>m</b></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\triangle DEF</span>: <span class="tex">\angle E=120^\circ</span>, <span class="tex">d=3</span>, <span class="tex">f=5</span> (exact)</div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">e^2=3^2+5^2-2(3)(5)\cos120^\circ</span><br><span class="tex">e^2=9+25-30\left(-\tfrac{1}{2}\right)=49</span><br><span class="tex">e=\boldsymbol{7}</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Degree mode, all in one line.</b> <span class="keys"><kbd>2nd</kbd><kbd>√</kbd><kbd>9</kbd><kbd>x²</kbd><kbd>+</kbd><kbd>13</kbd><kbd>x²</kbd><kbd>−</kbd><kbd>2</kbd><kbd>×</kbd><kbd>9</kbd><kbd>×</kbd><kbd>13</kbd><kbd>cos</kbd><kbd>42</kbd><kbd>)</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>8.723…</b> The calculator does <span class="tex">2\times9\times13\cos42^\circ</span> before the subtraction, just as it should. In (b) the same keys with 7.5, 11.2 and 128 give <b>16.885…</b></div>
+    <div class="u3l6-pcol"><button class="pill" data-keys="√ 9 x² + 13 x² − 2 × 9 × 13 cos 42 ) ) =">Show (a)</button><button class="pill" data-keys="√ 7.5 x² + 11.2 x² − 2 × 7.5 × 11.2 cos 128 ) ) =">Show (b)</button></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Finding an angle ================= -->
+<section class="card" data-ink="s4" data-section="4. Finding an Angle (SSS)">
+  <div class="sec-h"><span class="badge">4</span><h2>Finding an Angle (SSS)</h2></div>
+  <p>Solve the cosine law for the cosine of the angle.</p>
+  <div class="def amber u3l6-center"><div class="u3l6-forms u3l6-forms-c"><span class="tex">\cos \textcolor{#a33357}{A}=\dfrac{b^2+c^2-\textcolor{#a33357}{a}^2}{2bc}</span><span class="tex">\cos \textcolor{#a33357}{B}=\dfrac{a^2+c^2-\textcolor{#a33357}{b}^2}{2ac}</span><span class="tex">\cos \textcolor{#a33357}{C}=\dfrac{a^2+b^2-\textcolor{#a33357}{c}^2}{2ab}</span></div></div>
+  <ul class="u3l6-ul u3l6-bul">
+    <li>The side <b>subtracted</b> in the numerator is the side <b>opposite</b> the angle you want.</li>
+    <li><span class="tex">\cos^{-1}</span> gives an angle from <span class="tex">0^\circ</span> to <span class="tex">180^\circ</span>. A <b>negative</b> cosine means the angle is <b>obtuse</b>. There is never a second answer, so the cosine law is the safe way to find an angle that might be obtuse.</li>
+    <li>The <b>largest angle</b> is opposite the <b>longest side</b>, and the smallest angle is opposite the shortest side.</li>
+  </ul>
+  <div class="explainer" data-explainer="angle"></div>
+</section>
+
+<section class="card" data-ink="s4b" data-section="4. One Cosine, One Angle">
+  <h3 class="sub">One cosine, one angle</h3>
+  <p>Why there is never a second answer: as an angle opens from <span class="tex">0^\circ</span> to <span class="tex">180^\circ</span>, its cosine slides steadily from <span class="tex">1</span> down to <span class="tex">-1</span>, so every cosine belongs to exactly one angle. The sine goes up and comes back down, so most sines belong to two.</p>
+  <div class="explainer" data-explainer="dial"></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> Can two angles of the same triangle both have <b>negative</b> cosines?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">No. A negative cosine means an obtuse angle, and two obtuse angles already add to more than <span class="tex">180^\circ</span>. A triangle has at most one negative cosine.</div></div></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Find the angle</h3></div>
+  <p class="q">Round angles to the nearest degree.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine <span class="tex">\angle A</span>.</div><div class="u3l6-figc u3l6-fig5" id="u3l6-fig5"></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\cos A=\dfrac{11^2+13^2-8^2}{2(11)(13)}=\dfrac{226}{286}\approx0.7902</span><br><span class="tex">\angle A=\cos^{-1}(0.7902\dots)\approx\boldsymbol{38^\circ}</span></div></div></div>
+    <div class="part"><div class="pl">(b) A triangle has sides 6.5 cm, 9.2 cm and 13.8 cm. Determine its largest angle.</div><div class="work" style="--h:370px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The largest angle <span class="tex">\theta</span> is opposite the longest side, 13.8 cm.<br><span class="tex">\cos\theta=\dfrac{6.5^2+9.2^2-13.8^2}{2(6.5)(9.2)}=\dfrac{-63.55}{119.6}\approx-0.5314</span><br><span class="tex">\theta\approx\boldsymbol{122^\circ}</span> (negative cosine: obtuse)</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Brackets round the top and the bottom.</b> <span class="keys"><kbd>2nd</kbd><kbd>cos⁻¹</kbd><kbd>(</kbd><kbd>11</kbd><kbd>x²</kbd><kbd>+</kbd><kbd>13</kbd><kbd>x²</kbd><kbd>−</kbd><kbd>8</kbd><kbd>x²</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(</kbd><kbd>2</kbd><kbd>×</kbd><kbd>11</kbd><kbd>×</kbd><kbd>13</kbd><kbd>)</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>37.79…</b> In (b) a negative cosine comes straight out as an obtuse angle, <b>122.09…</b> Without the brackets, the calculator divides only <span class="tex">8^2</span> by 2, then multiplies by 11 and 13, and says <b>ERROR: DOMAIN</b>.</div>
+    <div class="u3l6-pcol"><button class="pill" data-keys="cos⁻¹ ( 11 x² + 13 x² − 8 x² ) ÷ ( 2 × 11 × 13 ) ) =">Show (a)</button><button class="pill" data-keys="cos⁻¹ ( 6.5 x² + 9.2 x² − 13.8 x² ) ÷ ( 2 × 6.5 × 9.2 ) ) =">Show (b)</button><button class="pill" data-keys="cos⁻¹ 11 x² + 13 x² − 8 x² ÷ 2 × 11 × 13 ) =">No brackets</button></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u3l6"></section>
+
+<!-- ================= 5. Solving a SAS triangle ================= -->
+<section class="card" data-ink="s5" data-section="5. Solving a SAS Triangle">
+  <div class="sec-h"><span class="badge">5</span><h2>Solving a SAS Triangle Completely</h2></div>
+  <div class="def amber"><b>Solving SAS</b> (two sides and the contained angle)
+    <ol class="u3l6-steps">
+      <li><b>Cosine law</b> for the third side. Now you have a known pair.</li>
+      <li><b>Sine law</b> for the <b>smaller</b> unknown angle, the one opposite the shorter given side. It must be acute, so <span class="tex">\sin^{-1}</span> gives the right answer.</li>
+      <li><b>Angle sum</b> for the last angle: <span class="tex">180^\circ</span> minus the other two.</li>
+    </ol>
+    Keep unrounded values in the calculator until the final answers.</div>
+  <div class="explainer" data-explainer="solve"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Solve the triangle</h3></div>
+  <p class="q">Solve <span class="tex">\triangle XYZ</span> if <span class="tex">\angle Y=37^\circ</span>, <span class="tex">x=15.0</span> cm and <span class="tex">z=22.0</span> cm. Round sides to the nearest tenth and angles to the nearest degree.</p>
+  <div class="u3l6-two">
+    <div class="u3l6-figc" id="u3l6-fig6"></div>
+    <div class="part"><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">
+      SAS: <span class="tex">y^2=15.0^2+22.0^2-2(15.0)(22.0)\cos37^\circ\approx181.90</span>, so <span class="tex">y\approx\boldsymbol{13.5}</span> <b>cm</b>.<br>
+      Next find the <b>smaller</b> unknown angle, <span class="tex">\angle X</span> (opposite the shorter side, 15.0), so it must be acute and the sine law is safe:<br>
+      <span class="tex">\sin X=\dfrac{15.0\sin37^\circ}{13.487\dots}\approx0.6693</span>, so <span class="tex">\angle X\approx\boldsymbol{42^\circ}</span>.<br>
+      <span class="tex">\angle Z\approx180^\circ-37^\circ-42.0^\circ\approx\boldsymbol{101^\circ}</span>.<br>
+      <span class="muted">(Check with the cosine law: <span class="tex">\cos Z=\dfrac{15.0^2+13.487^2-22.0^2}{2(15.0)(13.487)}\approx-0.191</span>, <span class="tex">\angle Z\approx101^\circ</span>.)</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Store <span class="tex">y</span>, never round it.</b> <span class="keys"><kbd>2nd</kbd><kbd>√</kbd><kbd>15</kbd><kbd>x²</kbd><kbd>+</kbd><kbd>22</kbd><kbd>x²</kbd><kbd>−</kbd><kbd>2</kbd><kbd>×</kbd><kbd>15</kbd><kbd>×</kbd><kbd>22</kbd><kbd>cos</kbd><kbd>37</kbd><kbd>)</kbd><kbd>)</kbd><kbd>STO→</kbd><kbd>Y</kbd><kbd>ENTER</kbd></span> (13.487…), then <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd><kbd>15</kbd><kbd>sin</kbd><kbd>37</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>Y</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <span class="tex">\angle X\approx42.0^\circ</span>.</div>
+    <div class="u3l6-pcol"><button class="pill" data-keys="√ 15 x² + 22 x² − 2 × 15 × 22 cos 37 ) ) STO→ Y = sin⁻¹ 15 sin 37 ) ÷ Y ) =">Show me</button></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Problems in context ================= -->
+<section class="card" data-ink="s6" data-section="6. Problems in Context">
+  <div class="sec-h"><span class="badge">6</span><h2>Problems in Context</h2></div>
+  <div class="def">Sketch the situation and look for <b>two sides with the angle between them</b> (SAS) or <b>three sides</b> (SSS). A <b>bearing</b> such as N<span class="tex">25^\circ</span>E means: face north, then turn <span class="tex">25^\circ</span> toward east.</div>
+  <div class="explainer" data-explainer="boats"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Two boats</h3></div>
+  <p class="q">Two boats leave a harbour <span class="tex">H</span> at the same time. One travels 14 km on a bearing of N<span class="tex">25^\circ</span>E. The other travels 19 km on a bearing of S<span class="tex">60^\circ</span>E. How far apart are the boats, to the nearest tenth of a kilometre?</p>
+  <div class="u3l6-two">
+    <div class="u3l6-figc" id="u3l6-fig7"></div>
+    <div class="part"><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">
+      Angle between the paths: from north to the first boat is <span class="tex">25^\circ</span>; from north to the second is <span class="tex">180^\circ-60^\circ=120^\circ</span>. So <span class="tex">\angle H=120^\circ-25^\circ=95^\circ</span>.<br>
+      <span class="tex">d^2=14^2+19^2-2(14)(19)\cos95^\circ\approx603.37</span><br>
+      <span class="tex">d\approx\boldsymbol{24.6}</span> <b>km</b></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The diagonals of a parallelogram</h3></div>
+  <p class="q">Parallelogram <span class="tex">ABCD</span> has <span class="tex">AB=14.0</span> cm, <span class="tex">AD=9.0</span> cm and <span class="tex">\angle DAB=62^\circ</span>. Determine the lengths of both diagonals to the nearest tenth.</p>
+  <div class="u3l6-two">
+    <div class="u3l6-figc" id="u3l6-fig8"></div>
+    <div class="part"><div class="work" style="--h:280px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">
+      <span class="tex">BD</span> is opposite <span class="tex">\angle A=62^\circ</span> in <span class="tex">\triangle ABD</span>:<br>
+      <span class="tex">BD^2=14.0^2+9.0^2-2(14.0)(9.0)\cos62^\circ</span>, so <span class="tex">BD\approx\boldsymbol{12.6}</span> <b>cm</b>.<br>
+      Adjacent angles of a parallelogram add to <span class="tex">180^\circ</span>, so <span class="tex">\angle ABC=118^\circ</span>, and <span class="tex">BC=AD=9.0</span>:<br>
+      <span class="tex">AC^2=14.0^2+9.0^2-2(14.0)(9.0)\cos118^\circ</span>, so <span class="tex">AC\approx\boldsymbol{19.9}</span> <b>cm</b>.</div></div></div>
+  </div>
+  <div class="explainer" data-explainer="para"></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>When to use it.</b> No known pair (an angle with its opposite side): <b>SAS</b> (the angle is between the two sides) or <b>SSS</b>. Then the sine law can’t start, but the cosine law can.</div>
+    <div><b>The law.</b> <span class="tex">a^2=b^2+c^2-2bc\cos A</span>: Pythagoras with a correction. The side on the left is opposite the angle at the end; at <span class="tex">90^\circ</span> the correction is 0.</div>
+    <div><b>Finding a side (SAS).</b> Substitute, enter it all at once, take the square root. Multiply <span class="tex">2bc\cos A</span> <b>before</b> subtracting. An obtuse angle makes the last term positive.</div>
+    <div><b>Finding an angle (SSS).</b> <span class="tex">\cos A=\dfrac{b^2+c^2-a^2}{2bc}</span>. Negative cosine: obtuse, with no second answer. The largest angle is opposite the longest side.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u3l6">
+    <div><div class="kicker">Your turn</div><b>Assignment 6 — The Cosine Law</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l7/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 7 — The Ambiguous Case</b><div class="muted">Two sides and an angle that is not between them: no triangle, one, or two?</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u3l6.js';
+  boot({ key: 'u3l6', homeHref: '../../', title: '3.6 The Cosine Law' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

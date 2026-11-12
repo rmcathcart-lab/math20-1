@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Discriminant · Math 20-1 5.8</title>
+<meta name="description" content="Math 20-1 Unit 5 Lesson 8: the discriminant b² − 4ac of a quadratic equation. The number and nature of the roots (two distinct, two equal, none) and the x-intercepts of the graph; rational or irrational roots; finding an unknown coefficient for a given number of roots (equations and inequalities); showing the roots are always real; is a value ever reached? Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u5l8.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u5l8">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Doughnut Line">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="7s" begin="0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="0.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="36" text-anchor="middle" transform="scale(-1 1)">🍩</text></g></g><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="7s" begin="3.5s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="0.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="36" text-anchor="middle" transform="scale(-1 1)">🍩</text></g></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Doughnut Line</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Draw a doughnut from above: its outline is <b>two circles</b>, one inside the other.</p><p class="vw-ctx">Now lay a ruler anywhere on the drawing and draw one long straight line.</p><p class="vw-ask">How many points can the line share with the outline? Which numbers are possible?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A doughnut seen from above, its outline two circles, with a straight ruler rocking beside it"><rect x="0" y="0" width="330" height="250" rx="14" fill="#fdf3e6"/><ellipse cx="128" cy="136" rx="104" ry="100" fill="#ffffff" stroke="#d9d3c4" stroke-width="3"/><g><animateTransform attributeName="transform" type="rotate" values="0 128 130;360 128 130" dur="24s" repeatCount="indefinite"/><circle cx="128" cy="130" r="80" fill="#d9a066"/><circle cx="128" cy="130" r="51" fill="none" stroke="#f28fb1" stroke-width="44"/><path d="M201 130 q6 12 -2 22 q-6 8 -10 2" fill="#f28fb1"/><path d="M88 192 q2 12 -8 14 q-8 0 -4 -10" fill="#f28fb1"/><rect x="160.0" y="128.0" width="12" height="4" rx="2" fill="#2b55a0" transform="rotate(0 166.0 130.0)"/><rect x="168.8" y="148.2" width="12" height="4" rx="2" fill="#e0a11b" transform="rotate(47 174.8 150.2)"/><rect x="165.9" y="174.6" width="12" height="4" rx="2" fill="#12805a" transform="rotate(94 171.9 176.6)"/><rect x="152.8" y="163.5" width="12" height="4" rx="2" fill="#ffffff" transform="rotate(141 158.8 165.5)"/><rect x="140.1" y="185.2" width="12" height="4" rx="2" fill="#c93a33" transform="rotate(8 146.1 187.2)"/><rect x="117.6" y="170.8" width="12" height="4" rx="2" fill="#7b4fc4" transform="rotate(55 123.6 172.8)"/><rect x="114.0" y="183.4" width="12" height="4" rx="2" fill="#2b55a0" transform="rotate(102 120.0 185.4)"/><rect x="101.6" y="161.2" width="12" height="4" rx="2" fill="#e0a11b" transform="rotate(149 107.6 163.2)"/><rect x="79.5" y="157.9" width="12" height="4" rx="2" fill="#12805a" transform="rotate(16 85.5 159.9)"/><rect x="67.3" y="163.1" width="12" height="4" rx="2" fill="#ffffff" transform="rotate(63 73.3 165.1)"/><rect x="74.6" y="135.8" width="12" height="4" rx="2" fill="#c93a33" transform="rotate(110 80.6 137.8)"/><rect x="62.8" y="113.2" width="12" height="4" rx="2" fill="#7b4fc4" transform="rotate(157 68.8 115.2)"/><rect x="79.8" y="115.6" width="12" height="4" rx="2" fill="#2b55a0" transform="rotate(24 85.8 117.6)"/><rect x="78.2" y="91.6" width="12" height="4" rx="2" fill="#e0a11b" transform="rotate(71 84.2 93.6)"/><rect x="103.9" y="92.3" width="12" height="4" rx="2" fill="#12805a" transform="rotate(118 109.9 94.3)"/><rect x="100.0" y="79.8" width="12" height="4" rx="2" fill="#ffffff" transform="rotate(165 106.0 81.8)"/><rect x="120.6" y="62.0" width="12" height="4" rx="2" fill="#c93a33" transform="rotate(32 126.6 64.0)"/><rect x="140.5" y="82.6" width="12" height="4" rx="2" fill="#7b4fc4" transform="rotate(79 146.5 84.6)"/><rect x="147.8" y="71.6" width="12" height="4" rx="2" fill="#2b55a0" transform="rotate(126 153.8 73.6)"/><rect x="155.4" y="97.8" width="12" height="4" rx="2" fill="#e0a11b" transform="rotate(173 161.4 99.8)"/><rect x="176.9" y="109.4" width="12" height="4" rx="2" fill="#12805a" transform="rotate(40 182.9 111.4)"/><rect x="161.3" y="116.4" width="12" height="4" rx="2" fill="#ffffff" transform="rotate(87 167.3 118.4)"/><circle cx="128" cy="130" r="24" fill="#ffffff"/></g><circle cx="128" cy="130" r="80" fill="none" stroke="#4a4436" stroke-width="3.5"/><circle cx="128" cy="130" r="24" fill="none" stroke="#4a4436" stroke-width="3.5"/><g><animateTransform attributeName="transform" type="rotate" values="-7 282 125;7 282 125;-7 282 125" dur="3s" repeatCount="indefinite"/><rect x="270" y="30" width="24" height="190" rx="4" fill="#ffd866" stroke="#4a4436" stroke-width="3"/><line x1="276" y1="40" x2="292" y2="40" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="55" x2="286" y2="55" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="70" x2="292" y2="70" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="85" x2="286" y2="85" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="100" x2="292" y2="100" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="115" x2="286" y2="115" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="130" x2="292" y2="130" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="145" x2="286" y2="145" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="160" x2="292" y2="160" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="175" x2="286" y2="175" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="190" x2="292" y2="190" stroke="#4a4436" stroke-width="2"/><line x1="276" y1="205" x2="286" y2="205" stroke="#4a4436" stroke-width="2"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="34" y="46" font-size="44" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Sketch a doughnut and try it. Can you get every number from 0 up?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>0, 1, 2, 3 or 4</b>: every number up to 4, but never 5 or more (a line meets a circle at most twice).<br>0: miss the doughnut. 2: cut through the dough only. 4: cut straight through the hole.<br><span class="muted">The sneaky ones are <b>1</b> and <b>3</b>: the line has to <b>just touch</b> a circle without crossing it, grazing the outside edge (1), or crossing the outside and grazing the edge of the hole (3). Most people only find the even numbers!</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 5 Quadratic Functions · Lesson 8</div>
+  <h1>The Discriminant</h1>
+  <p class="lede">The quadratic formula hides a shortcut. The expression under its radical, <span class="tex">b^2-4ac</span>, is the <b>discriminant</b>: its sign tells how many real roots an equation has, and how many times the graph meets the <span class="tex">x</span>-axis, <b>without solving</b> and <b>without graphing</b>.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>use <span class="tex">b^2-4ac</span> to decide whether a quadratic equation has <b class="u5l8-c2">two distinct</b>, <b class="u5l8-c1">two equal</b> or <b class="u5l8-c0">no</b> real roots, and how many <span class="tex">x</span>-intercepts its graph has</li>
+      <li>decide whether the roots are rational or irrational, and factor when they are rational</li>
+      <li>find the values of an unknown coefficient that give a certain number of roots (an equation or an inequality)</li>
+      <li>show that an equation has real roots for every value of a parameter</li>
+      <li>use the discriminant to decide whether a quantity can reach a certain value</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF4</b> Analyze quadratic functions of the form <span class="tex">y=ax^2+bx+c</span> to identify characteristics of the corresponding graph, including vertex, domain and range, direction of opening, axis of symmetry, <span class="tex">x</span>- and <span class="tex">y</span>-intercepts, and to solve problems.<br><b>RF5</b> Solve problems that involve quadratic equations.<br><span class="muted">Today: the discriminant and the number and nature of the roots, the <span class="tex">x</span>-intercepts of the graph, rational or irrational roots, finding <span class="tex">k</span>, and “is it possible?” problems.</span></div>
+</section>
+
+<!-- ================= 1. What the radical tells us ================= -->
+<section class="card" data-ink="s1" data-section="1. What the Radical Tells Us">
+  <div class="sec-h"><span class="badge">1</span><h2>What the Radical in the Formula Tells Us</h2></div>
+  <div class="def">In <span class="tex">x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}</span>, the value under the radical decides what kind of roots there are. If it is <b class="u5l8-c2">positive</b>, the <span class="tex">+</span> and the <span class="tex">-</span> give two different numbers; if it is <b class="u5l8-c1">0</b>, they give the same number; if it is <b class="u5l8-c0">negative</b>, there is no real square root.</div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Three parabolas, three kinds of roots</h3></div>
+  <p class="q">The graphs of <span class="tex">y=x^2-4x+3</span>, <span class="tex">y=x^2-4x+4</span> and <span class="tex">y=x^2-4x+7</span> are shown. Complete the table.</p>
+  <div class="u5l8-g3">
+    <div><div class="u5l8-gt"><span class="tex">y=x^2-4x+3</span></div><div data-bk-graph='{"width":290,"height":270,"xmin":-1,"xmax":5,"ymin":-2,"ymax":6,"fontSize":14,"items":[{"fn":["x^2-4*x+3",{"color":"blue"}]}]}'></div></div>
+    <div><div class="u5l8-gt"><span class="tex">y=x^2-4x+4</span></div><div data-bk-graph='{"width":290,"height":270,"xmin":-1,"xmax":5,"ymin":-2,"ymax":6,"fontSize":14,"items":[{"fn":["x^2-4*x+4",{"color":"blue"}]}]}'></div></div>
+    <div><div class="u5l8-gt"><span class="tex">y=x^2-4x+7</span></div><div data-bk-graph='{"width":290,"height":270,"xmin":-1,"xmax":5,"ymin":-2,"ymax":6,"fontSize":14,"items":[{"fn":["x^2-4*x+7",{"color":"blue"}]}]}'></div></div>
+  </div>
+  <div class="part u5l8-tpart">
+    <table class="u5l8-tab">
+      <tr><th>Equation</th><th><span class="tex">b^2-4ac</span></th><th>Roots from the formula</th><th>Number of real roots</th><th>Number of <span class="tex">x</span>-intercepts</th></tr>
+      <tr><td><span class="tex">x^2-4x+3=0</span></td><td><span data-reveal><span class="tex">16-12=4</span></span></td><td><span data-reveal><span class="tex">\frac{4\pm\sqrt4}{2}=\frac{4\pm2}{2}</span>: <span class="tex">x=3</span> or <span class="tex">x=1</span></span></td><td><span data-reveal>2 (distinct)</span></td><td><span data-reveal>2</span></td></tr>
+      <tr><td><span class="tex">x^2-4x+4=0</span></td><td><span data-reveal><span class="tex">16-16=0</span></span></td><td><span data-reveal><span class="tex">\frac{4\pm\sqrt0}{2}=2</span> (both give <span class="tex">2</span>)</span></td><td><span data-reveal>1 (two equal roots)</span></td><td><span data-reveal>1 (vertex on the axis)</span></td></tr>
+      <tr><td><span class="tex">x^2-4x+7=0</span></td><td><span data-reveal><span class="tex">16-28=-12</span></span></td><td><span data-reveal><span class="tex">\frac{4\pm\sqrt{-12}}{2}</span>: not real</span></td><td><span data-reveal>0</span></td><td><span data-reveal>0</span></td></tr>
+    </table>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">The sign of <span class="tex">b^2-4ac</span> matches the number of <span class="tex">x</span>-intercepts: positive → 2, zero → 1, negative → 0.</div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. The discriminant and the nature of the roots ================= -->
+<section class="card" data-ink="s2" data-section="2. The Discriminant">
+  <div class="sec-h"><span class="badge">2</span><h2>The Discriminant and the Nature of the Roots</h2></div>
+  <div class="def">The expression <span class="tex">b^2-4ac</span> is the <b>discriminant</b> of <span class="tex">ax^2+bx+c=0</span>. It tells the <b>nature of the roots</b> (how many real roots, and whether they are equal) without solving the equation or drawing the graph.</div>
+  <div class="def amber u5l8-key"><div class="u5l8-keyh">Key idea</div>
+    <table class="u5l8-ktab">
+      <tr><th>Discriminant</th><th>Roots of <span class="tex">ax^2+bx+c=0</span></th><th>Graph of <span class="tex">y=ax^2+bx+c</span></th></tr>
+      <tr class="u5l8-r2"><td><span class="tex">b^2-4ac&gt;0</span></td><td>two distinct (unequal) real roots</td><td>two <span class="tex">x</span>-intercepts</td></tr>
+      <tr class="u5l8-r1"><td><span class="tex">b^2-4ac=0</span></td><td>two equal real roots (one distinct root, a double root)</td><td>one <span class="tex">x</span>-intercept: the vertex is on the <span class="tex">x</span>-axis</td></tr>
+      <tr class="u5l8-r0"><td><span class="tex">b^2-4ac&lt;0</span></td><td>no real roots (also called non-real roots)</td><td>no <span class="tex">x</span>-intercepts</td></tr>
+    </table>
+  </div>
+  <div class="explainer" data-explainer="slide"></div>
+  <p class="u5l8-p">Always put the equation in <b>standard form</b> before reading <span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span>. “Real roots” (with no other word) means <span class="tex">b^2-4ac\ge0</span>: two distinct or two equal.</p>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Negative <span class="tex">b</span>? Brackets!</b> The calculator squares before it negates: <span class="keys"><kbd>(−)</kbd></span><span class="tex">5</span><span class="keys"><kbd>x²</kbd></span> gives <span class="tex">-25</span>. For <span class="tex">3x^2-5x-2=0</span>, type <span class="tex">(-5)^2-4(3)(-2)</span> with the brackets: <span class="tex">49</span>.</div>
+    <div class="u5l8-pcol"><button class="pill" data-keys="( (−) 5 ) x² − 4 × 3 × (−) 2 ENTER">Show me</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>The nature of the roots, and the <span class="tex">x</span>-intercepts</h3></div>
+  <p class="q">Without solving or graphing, determine the nature of the roots of each equation, or the number of <span class="tex">x</span>-intercepts of each graph.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">3x^2-5x-2=0</span></div><div class="work" style="--h:76px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(-5)^2-4(3)(-2)=25+24=49&gt;0</span><br>Two distinct real roots.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">4x^2+25=20x</span></div><div class="work" style="--h:76px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">4x^2-20x+25=0</span><br><span class="tex">400-4(4)(25)=0</span><br>Two equal real roots.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">2x^2+3x+4=0</span></div><div class="work" style="--h:76px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">9-4(2)(4)=9-32=-23&lt;0</span><br>No real roots.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">y=2x^2-7x+3</span></div><div class="work" style="--h:76px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">49-24=25&gt;0</span><br>Two <span class="tex">x</span>-intercepts.</div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">y=-3x^2+2x-1</span></div><div class="work" style="--h:76px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">4-4(-3)(-1)=4-12=-8&lt;0</span><br>No <span class="tex">x</span>-intercepts.</div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">y=0.25x^2-3x+9</span></div><div class="work" style="--h:76px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">9-4(0.25)(9)=9-9=0</span><br>One <span class="tex">x</span>-intercept (vertex on the axis).</div></div></div>
+  </div>
+  <div class="part"><div class="pl">(g) Determine the number of zeros of <span class="tex">y=3(x+2)^2+1</span> in two ways: from the vertex and direction of opening, and from the discriminant.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex <span class="tex">(-2,\ 1)</span> is above the <span class="tex">x</span>-axis and the parabola opens up (<span class="tex">a=3&gt;0</span>), so it never reaches the axis: <b>no zeros</b>.<br>General form: <span class="tex">3(x^2+4x+4)+1=3x^2+12x+13</span>; &nbsp; <span class="tex">b^2-4ac=144-156=-12&lt;0</span> ✓</div></div></div>
+  <div class="explainer u5l8-exin" data-explainer="machine"></div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Rational or irrational roots ================= -->
+<section class="card" data-ink="s3" data-section="3. Rational or Irrational Roots">
+  <div class="sec-h"><span class="badge">3</span><h2>Rational or Irrational Roots</h2></div>
+  <div class="def">When <span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> are rational and the discriminant is a <b>perfect square</b> (<span class="tex">0,\ 1,\ 4,\ 9,\ 16,\ \dots</span>), <span class="tex">\sqrt{b^2-4ac}</span> is rational, so the roots are <b>rational</b>; with integer coefficients the trinomial then factors over the integers. When the discriminant is positive but not a perfect square, the roots are <b>irrational</b> and the trinomial does not factor over the integers.</div>
+  <div class="explainer" data-explainer="ratirr"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Perfect square?</b> Take the square root: a whole number means yes. <span class="tex">\sqrt{529}=23</span> (perfect square), but <span class="tex">\sqrt{57}\approx7.55</span> (not).</div>
+    <div class="u5l8-pcol"><button class="pill" data-keys="√ 529 ) ENTER">√529</button><button class="pill" data-keys="√ 57 ) ENTER">√57</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Rational or irrational?</h3></div>
+  <p class="q">Use the discriminant to decide whether the roots are rational or irrational. If they are rational, solve by factoring.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">6x^2+7x-20=0</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">49+480=529=23^2</span>: rational.<br><span class="tex">ac=-120</span>: <span class="tex">15</span> and <span class="tex">-8</span>.<br><span class="tex">(3x-4)(2x+5)=0</span><br><span class="tex">x=\frac43</span> or <span class="tex">x=-\frac52</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">2x^2+5x-4=0</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">25+32=57</span>, not a perfect square: two irrational roots. The trinomial does not factor over the integers.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">9x^2+30x+25=0</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">900-900=0=0^2</span>: one rational (double) root.<br><span class="tex">(3x+5)^2=0</span><br><span class="tex">x=-\frac53</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–4">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 8 · Questions 1–4</h2>
+  <p class="pr-t">Standard form first, then <span class="tex">b^2-4ac</span>: read its sign, and check whether it is a perfect square.</p>
+  <div class="pr-chips"><span><b>1</b>The value of the discriminant</span><span><b>2</b>The nature of the roots</span><span><b>3</b>The number of <span class="tex">x</span>-intercepts</span><span><b>4</b>Rational or irrational; factor if rational</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u5l8">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. Finding an unknown coefficient ================= -->
+<section class="card" data-ink="s4" data-section="4. Finding an Unknown Coefficient">
+  <div class="sec-h"><span class="badge">4</span><h2>Finding an Unknown Coefficient</h2></div>
+  <div class="def">Write the discriminant in terms of the unknown, then use <span class="tex">&gt;0</span> (two distinct real roots), <span class="tex">=0</span> (equal roots), <span class="tex">&lt;0</span> (no real roots) or <span class="tex">\ge0</span> (real roots) and solve. <b>Reverse the inequality sign</b> when you divide by a negative number. If the unknown is in the <span class="tex">x^2</span> coefficient, it cannot make that coefficient <span class="tex">0</span> (the equation would not be quadratic).</div>
+  <div class="explainer" data-explainer="sweep"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>The unknown is <span class="tex">c</span></h3></div>
+  <p class="q">For what values of <span class="tex">k</span> does <span class="tex">2x^2-6x+k=0</span> have</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) two distinct real roots?</div><div class="work" style="--h:92px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">b^2-4ac=36-8k</span><br><span class="tex">36-8k&gt;0</span><br><span class="tex">-8k&gt;-36</span>, so <span class="tex">k&lt;\frac92</span></div></div></div>
+    <div class="part"><div class="pl">(b) two equal real roots?</div><div class="work" style="--h:92px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">36-8k=0</span><br><span class="tex">k=\frac92</span></div></div></div>
+    <div class="part"><div class="pl">(c) no real roots?</div><div class="work" style="--h:92px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">36-8k&lt;0</span><br><span class="tex">k&gt;\frac92</span></div></div></div>
+  </div>
+  <div class="part"><div class="pl">(d) Determine the equal root when <span class="tex">k=\frac92</span>.</div><div class="work" style="--h:64px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x^2-6x+\frac92=0</span>; multiply by <span class="tex">2</span>: <span class="tex">4x^2-12x+9=0\Rightarrow(2x-3)^2=0\Rightarrow x=\frac32</span>. (Or <span class="tex">x=\frac{-b}{2a}=\frac64=\frac32</span>, since the radical is <span class="tex">0</span>.)</div></div></div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s4b" data-section="4. When the Unknown Is b">
+  <h3 class="sub">When the unknown is <span class="tex">b</span></h3>
+  <p class="u5l8-p">When the unknown is <span class="tex">b</span>, the discriminant contains <span class="tex">k^2</span>. For example, <span class="tex">k^2=36</span> when <span class="tex">k=\pm6</span>; <span class="tex">k^2&gt;36</span> when <span class="tex">k&lt;-6</span> or <span class="tex">k&gt;6</span>; and <span class="tex">k^2&lt;36</span> when <span class="tex">-6&lt;k&lt;6</span> (the numbers between <span class="tex">-6</span> and <span class="tex">6</span> are the ones whose squares are less than <span class="tex">36</span>).</p>
+  <div class="u5l8-ksq" data-bk-numberline='{"width":760,"height":96,"min":-10,"max":10,"step":1,"labelStep":2,"items":[{"interval":[-1e9,-6,{"openB":true,"color":"green"}]},{"interval":[-6,6,{"openA":true,"openB":true,"color":"red"}]},{"interval":[6,1e9,{"openA":true,"color":"green"}]},{"point":[-6,{"color":"amber"}]},{"point":[6,{"color":"amber"}]}]}'></div>
+  <div class="u5l8-ksqk"><span class="u5l8-c2"><span class="tex">k^2&gt;36</span>: outside</span><span class="u5l8-c1"><span class="tex">k^2=36</span>: <span class="tex">k=\pm6</span></span><span class="u5l8-c0"><span class="tex">k^2&lt;36</span>: between</span></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>The unknown is <span class="tex">b</span>, or <span class="tex">a</span></h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) For what values of <span class="tex">k</span> does <span class="tex">x^2+kx+9=0</span> have equal roots? Determine the root for each value. For what values of <span class="tex">k</span> are there two distinct real roots? No real roots?</div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">b^2-4ac=k^2-36</span><br>Equal: <span class="tex">k^2=36</span>, <span class="tex">k=\pm6</span>.<br><span class="tex">k=6</span>: <span class="tex">x^2+6x+9=(x+3)^2</span>, root <span class="tex">x=-3</span>.<br><span class="tex">k=-6</span>: <span class="tex">x^2-6x+9=(x-3)^2</span>, root <span class="tex">x=3</span>.<br>Two distinct: <span class="tex">k^2&gt;36</span>, so <span class="tex">k&lt;-6</span> or <span class="tex">k&gt;6</span>.<br>None: <span class="tex">k^2&lt;36</span>, so <span class="tex">-6&lt;k&lt;6</span>.</div></div></div>
+    <div class="u5l8-col">
+      <div class="part"><div class="pl">(b) For what values of <span class="tex">k</span> does <span class="tex">kx^2+6x-3=0</span> have no real roots?</div><div class="work" style="--h:96px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">36-4(k)(-3)=36+12k&lt;0</span><br><span class="tex">12k&lt;-36</span>, so <span class="tex">k&lt;-3</span> (these values are not <span class="tex">0</span>, so the equation stays quadratic).</div></div></div>
+      <div class="part"><div class="pl">(c) For what values of <span class="tex">k</span> does <span class="tex">(k-1)x^2+4x+2=0</span> have real roots?</div><div class="work" style="--h:96px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">16-4(k-1)(2)\ge0</span><br><span class="tex">16-8k+8\ge0\Rightarrow24\ge8k\Rightarrow k\le3</span><br>and <span class="tex">k\ne1</span> (otherwise it is not quadratic): <span class="tex">k\le3</span>, <span class="tex">k\ne1</span>.</div></div></div>
+    </div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u5l8"></section>
+
+<!-- ================= 5. Showing that the roots are always real ================= -->
+<section class="card" data-ink="s5" data-section="5. Roots That Are Always Real">
+  <div class="sec-h"><span class="badge">5</span><h2>Showing That the Roots Are Always Real</h2></div>
+  <div class="def">To show that an equation has real roots for <i>every</i> value of a parameter, write its discriminant and show it can never be negative. A square is never negative: <span class="tex">(k-2)^2\ge0</span>, and <span class="tex">k^2+16&gt;0</span>.</div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>For every value of <span class="tex">k</span></h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Show that <span class="tex">x^2+kx-4=0</span> has two distinct real roots for every real number <span class="tex">k</span>.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">b^2-4ac=k^2-4(1)(-4)=k^2+16</span><br><span class="tex">k^2\ge0</span>, so <span class="tex">k^2+16\ge16&gt;0</span> for every <span class="tex">k</span>.<br>The discriminant is always positive: two distinct real roots.</div></div></div>
+    <div class="part"><div class="pl">(b) Show that the roots of <span class="tex">x^2-(k+2)x+2k=0</span> are real and rational for every integer <span class="tex">k</span>. When are they equal?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">b^2-4ac=(k+2)^2-8k=k^2-4k+4=(k-2)^2</span><br>This is never negative, so the roots are real, and it is a perfect square, so they are rational. (In fact <span class="tex">x=2</span> and <span class="tex">x=k</span>.)<br>Equal when <span class="tex">(k-2)^2=0</span>: <span class="tex">k=2</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Problems: is it possible? ================= -->
+<section class="card" data-ink="s6" data-section="6. Problems: Is It Possible?">
+  <div class="sec-h"><span class="badge">6</span><h2>Problems: Is It Possible?</h2></div>
+  <div class="def">To ask whether a quantity given by a quadratic can reach a certain value, set the expression equal to that value, write the equation in standard form, and look at the discriminant: a <b class="u5l8-c0">negative</b> discriminant means the value is never reached; <b class="u5l8-c1">zero</b> means it is reached exactly once (at the vertex: the maximum or minimum).</div>
+  <div class="explainer" data-explainer="ball"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>A ball thrown upward</h3></div>
+  <p class="q">A ball is thrown upward. Its height after <span class="tex">t</span> seconds is <span class="tex">h=-5t^2+20t+1</span> metres. Use the discriminant to answer each question.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Does the ball reach a height of 25&nbsp;m?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-5t^2+20t+1=25</span><br><span class="tex">-5t^2+20t-24=0</span><br><span class="tex">400-4(-5)(-24)=400-480=-80&lt;0</span><br>No real roots: it never reaches 25&nbsp;m.</div></div></div>
+    <div class="part"><div class="pl">(b) Does it reach 16&nbsp;m? How many times?</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-5t^2+20t-15=0</span><br><span class="tex">400-300=100&gt;0</span><br>Yes, twice (going up and coming down; <span class="tex">t=1</span> s and <span class="tex">t=3</span> s).</div></div></div>
+    <div class="part"><div class="pl">(c) Determine its maximum height.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Height <span class="tex">H</span> is reached when <span class="tex">-5t^2+20t+(1-H)=0</span> has real roots:<br><span class="tex">400+20(1-H)\ge0</span><br><span class="tex">420\ge20H</span>, so <span class="tex">H\le21</span>.<br>Maximum height 21&nbsp;m (equal roots, at <span class="tex">t=2</span> s).</div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>The discriminant <span class="tex">b^2-4ac</span>.</b> <b class="u5l8-c2">Positive</b>: two distinct real roots, two <span class="tex">x</span>-intercepts. <b class="u5l8-c1">Zero</b>: two equal roots, the vertex on the axis. <b class="u5l8-c0">Negative</b>: no real roots, no <span class="tex">x</span>-intercepts.</div>
+    <div><b>Standard form first.</b> Then read <span class="tex">a</span>, <span class="tex">b</span>, <span class="tex">c</span> (brackets for negatives on the calculator). A <b>perfect square</b> discriminant: rational roots, and the trinomial factors.</div>
+    <div><b>Finding <span class="tex">k</span>.</b> Write <span class="tex">b^2-4ac</span> in terms of <span class="tex">k</span>; use <span class="tex">&gt;0</span>, <span class="tex">=0</span>, <span class="tex">&lt;0</span> or <span class="tex">\ge0</span>. Flip the sign when dividing by a negative; <span class="tex">k^2=36</span> gives <span class="tex">\pm6</span>; <span class="tex">k</span> can't make <span class="tex">a=0</span>.</div>
+    <div><b>Always real; is it possible?</b> A discriminant like <span class="tex">k^2+16</span> or <span class="tex">(k-2)^2</span> is never negative. Set a quantity equal to a value: negative means never, zero means once (the maximum or minimum).</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u5l8">
+    <div><div class="kicker">Your turn</div><b>Assignment 8 · Questions 5–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l9/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 9 — Maximum and Minimum Problems: Graphical Approach</b><div class="muted">Quadratic models of real situations: every question (the start, the maximum, the landing, a given height) is a feature of the graph, found on a graphing calculator.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u5l8.js';
+  boot({ key: 'u5l8', homeHref: '../../', title: '5.8 The Discriminant' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

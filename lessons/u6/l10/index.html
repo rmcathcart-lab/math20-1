@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unit 6 Review · Math 20-1 6.10</title>
+<meta name="description" content="Math 20-1 Unit 6 Lesson 10: Unit 6 review of rational expressions and equations. Non-permissible values, simplifying, multiplying and dividing, adding and subtracting with an LCD, solving rational equations and rejecting extraneous roots, and motion and work problems on one page, a spot-the-error round, and mixed review examples. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u6l10.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u6l10">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Vending Machine">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="0 60 30;360 60 30" dur="3s" repeatCount="indefinite"/><text x="60" y="30" font-size="40" text-anchor="middle" dominant-baseline="central">🪙</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="130" y="46" font-size="40" text-anchor="middle">🥨</text></g><g><animateTransform attributeName="transform" type="rotate" values="360 200 30;0 200 30" dur="3.6s" repeatCount="indefinite"/><text x="200" y="30" font-size="40" text-anchor="middle" dominant-baseline="central">🪙</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.7s" repeatCount="indefinite"/><text x="270" y="46" font-size="40" text-anchor="middle">🍫</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Vending Machine</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">A snack costs exactly <b>$1.00</b> and the machine gives no change.</p><p class="vw-ctx">You have plenty of quarters, dimes and nickels.</p><p class="vw-ask">How many different handfuls of coins make exactly $1.00?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A vending machine showing $1.00, with a quarter, a dime and a nickel dropping toward its coin slot"><ellipse cx="190" cy="236" rx="120" ry="9" fill="#e9e3d4"/><rect x="112" y="30" width="148" height="200" rx="12" fill="#7a1f3d"/><rect x="120" y="48" width="78" height="134" rx="6" fill="#f3e6ea"/><rect x="126" y="58" width="64" height="30" rx="4" fill="#fff8ec" stroke="#d9d3c4"/><text x="158" y="82" font-size="22" text-anchor="middle">🍫 🥨</text><rect x="126" y="100" width="64" height="30" rx="4" fill="#fff8ec" stroke="#d9d3c4"/><text x="158" y="124" font-size="22" text-anchor="middle">🍪 🍬</text><rect x="126" y="142" width="64" height="30" rx="4" fill="#fff8ec" stroke="#d9d3c4"/><text x="158" y="166" font-size="22" text-anchor="middle">🥤 🍿</text><rect x="120" y="192" width="78" height="26" rx="5" fill="#3a2a30"/><rect x="206" y="52" width="46" height="26" rx="4" fill="#1c2230"/><text x="229" y="71" font-size="15" font-weight="800" fill="#7dfc9a" text-anchor="middle" font-family="monospace">$1.00<animate attributeName="opacity" values="1;0.25;1" dur="1.2s" begin="0s" repeatCount="indefinite"/></text><rect x="212" y="90" width="34" height="16" rx="3" fill="#cfc7b5"/><rect x="226" y="93" width="6" height="10" rx="2" fill="#3a2a30"/><g fill="#e7dcc4"><rect x="212" y="122" width="12" height="9" rx="2"/><rect x="226" y="122" width="12" height="9" rx="2"/><rect x="240" y="122" width="12" height="9" rx="2"/><rect x="212" y="136" width="12" height="9" rx="2"/><rect x="226" y="136" width="12" height="9" rx="2"/><rect x="240" y="136" width="12" height="9" rx="2"/><rect x="212" y="150" width="12" height="9" rx="2"/><rect x="226" y="150" width="12" height="9" rx="2"/><rect x="240" y="150" width="12" height="9" rx="2"/></g><g opacity="0"><animateTransform attributeName="transform" type="translate" values="0 0;0 0;158 58;158 58" keyTimes="0;.15;.7;1" dur="3.6s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.12;.62;.72;1" dur="3.6s" begin="0s" repeatCount="indefinite"/><circle cx="60" cy="40" r="22" fill="#e0b84a" stroke="#8a6d1f" stroke-width="2.5"/><text x="60" y="45" font-size="16" font-weight="800" fill="#5b4510" text-anchor="middle" font-family="Arial, sans-serif">25¢</text></g><g opacity="0"><animateTransform attributeName="transform" type="translate" values="0 0;0 0;178 -22;178 -22" keyTimes="0;.15;.7;1" dur="3.6s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.12;.62;.72;1" dur="3.6s" begin="1.2s" repeatCount="indefinite"/><circle cx="40" cy="120" r="17" fill="#d9c27a" stroke="#8a6d1f" stroke-width="2.5"/><text x="40" y="125" font-size="13" font-weight="800" fill="#5b4510" text-anchor="middle" font-family="Arial, sans-serif">10¢</text></g><g opacity="0"><animateTransform attributeName="transform" type="translate" values="0 0;0 0;148 -92;148 -92" keyTimes="0;.15;.7;1" dur="3.6s" begin="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.12;.62;.72;1" dur="3.6s" begin="2.4s" repeatCount="indefinite"/><circle cx="70" cy="190" r="19" fill="#cbb26a" stroke="#8a6d1f" stroke-width="2.5"/><text x="70" y="195" font-size="14" font-weight="800" fill="#5b4510" text-anchor="middle" font-family="Arial, sans-serif">5¢</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="292" y="150" font-size="44" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Write down your guess first. How can you be sure you found them all?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>29 ways.</b> Sort them by the number of quarters, then count the dime choices (nickels fill the rest):<br>4 quarters: <b>1</b> · 3 quarters (25¢ left: 0, 1 or 2 dimes): <b>3</b> · 2 quarters (50¢ left: 0 to 5 dimes): <b>6</b> · 1 quarter (75¢ left: 0 to 7 dimes): <b>8</b> · no quarters (0 to 10 dimes): <b>11</b>.<br><span class="tex">1+3+6+8+11=29</span>.<br><span class="muted">Twist: there is a 30th way to pay. Just drop in a loonie!</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 6 Rational Expressions and Equations · Lesson 10</div>
+  <h1>Unit 6 Review</h1>
+  <p class="lede">Non-permissible values, simplifying, the four operations, rational equations and their problems on one page, then mixed examples that combine them. One question runs the whole unit: <b>is there an equals sign?</b> An <b>expression</b> keeps its denominator and lists its <b class="u6l10-npv">NPVs</b>; an <b>equation</b> is multiplied by the <b class="u6l10-lcd">LCD</b> to clear its denominators, and every root is checked against the NPVs.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>state the <b>non-permissible values</b> from the original expression, including a divisor’s numerator</li>
+      <li>simplify, multiply and divide rational expressions by dividing out common <b>factors</b> (never terms)</li>
+      <li>add and subtract rational expressions over the LCD, with brackets when subtracting</li>
+      <li>solve rational equations, reject <b>extraneous</b> roots and verify</li>
+      <li>solve motion and work problems with a table, rejecting inadmissible roots</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN4</b> Determine equivalent forms of rational expressions (limited to numerators and denominators that are monomials, binomials or trinomials).<br><b>AN5</b> Perform operations on rational expressions (limited to numerators and denominators that are monomials, binomials or trinomials).<br><b>AN6</b> Solve problems that involve rational equations (limited to numerators and denominators that are monomials, binomials or trinomials).<br><span class="muted">Today: the whole unit on one page, a spot-the-error round, and mixed examples in the style of the unit test.</span></div>
+</section>
+
+<!-- ================= 1. Unit summary ================= -->
+<section class="card" data-ink="s1" data-section="1. Unit Summary">
+  <div class="sec-h"><span class="badge">1</span><h2>Unit Summary</h2></div>
+  <h3 class="sub">Every skill on one page <span class="muted u6l10-subnote">tap a grey box to check yourself</span></h3>
+  <table class="u6l10-mtab">
+    <tr><th>Skill</th><th>What to do</th><th>Example</th></tr>
+    <tr><th>Non-permissible values (NPVs)</th><td>Factor each denominator; the values that make it <span class="tex">0</span> are NPVs. State them from the <b>original</b> expression.</td>
+      <td><span class="tex">\dfrac{x+1}{x^2-3x-10}</span>: <span data-reveal><span class="tex">(x-5)(x+2)</span></span>, <span data-reveal><span class="tex">x\ne5,\ -2</span></span></td></tr>
+    <tr><th>Simplifying</th><td>Factor, state NPVs, divide out common <b>factors</b> (never terms). <span class="tex">\dfrac{a-b}{b-a}=-1</span>.</td>
+      <td><span class="tex">\dfrac{x^2-2x-8}{x^2-16}=</span> <span data-reveal><span class="tex">\dfrac{(x-4)(x+2)}{(x-4)(x+4)}=\dfrac{x+2}{x+4}</span></span>, <span data-reveal><span class="tex">x\ne\pm4</span></span></td></tr>
+    <tr><th>Multiplying</th><td>Factor everything, state NPVs, divide out factors common to any numerator and any denominator, multiply.</td>
+      <td><span class="tex">\dfrac{x^2-4}{3x}\cdot\dfrac{6x^2}{x+2}=</span> <span data-reveal><span class="tex">2x(x-2)</span></span>, <span data-reveal><span class="tex">x\ne0,\ -2</span></span></td></tr>
+    <tr><th>Dividing</th><td>Multiply by the reciprocal of the divisor. NPVs: all original denominators <b>and</b> the divisor’s numerator.</td>
+      <td><span class="tex">\dfrac{x}{x-1}\div\dfrac{x+3}{x-1}=</span> <span data-reveal><span class="tex">\dfrac{x}{x+3}</span></span>, <span data-reveal><span class="tex">x\ne1,\ -3</span></span></td></tr>
+    <tr><th>Adding and subtracting</th><td>Factor denominators, find the LCD, rewrite each fraction over the LCD, combine numerators (brackets when subtracting), simplify.</td>
+      <td><span class="tex">\dfrac{3}{x}-\dfrac{2}{x+1}=</span> <span data-reveal><span class="tex">\dfrac{3(x+1)-2x}{x(x+1)}=\dfrac{x+3}{x(x+1)}</span></span>, <span data-reveal><span class="tex">x\ne0,\ -1</span></span></td></tr>
+    <tr><th>Solving equations</th><td>State NPVs, multiply every term by the LCD, solve (linear or quadratic), reject any root that is an NPV (<b class="u6l10-no">extraneous</b>), verify.</td>
+      <td><span class="tex">\dfrac{x}{x-2}=\dfrac{2}{x-2}+3</span>, <span class="tex">x\ne2</span>:<br><span data-reveal><span class="tex">x=2+3(x-2)</span> gives <span class="tex">x=2</span></span>, <span data-reveal>an NPV: <b>no solution</b></span></td></tr>
+    <tr><th>Problems</th><td>Table; <span class="tex">t=\dfrac{d}{s}</span>; downstream <span class="tex">s+c</span>, upstream <span class="tex">s-c</span>; work: <span class="tex">\dfrac{t}{a}+\dfrac{t}{b}=1</span>. Reject inadmissible roots.</td>
+      <td>Same time: <span class="tex">\dfrac{d_1}{s_1}=\dfrac{d_2}{s_2}</span><br><span class="tex">k</span> h longer: <span class="tex">t_{\text{long}}-t_{\text{short}}=k</span></td></tr>
+  </table>
+</section>
+
+<section class="card" data-ink="s1b" data-section="Simplest form and equations">
+  <div class="def u6l10-checklist"><div class="u6l10-clh">Simplest form checklist</div>
+    <div class="u6l10-cl4">
+      <div><b>1</b><span>Every numerator and denominator <b>factored fully</b> (GCF first, then trinomial or difference of squares).</span></div>
+      <div><b>2</b><span><b>No factor common</b> to the numerator and the denominator (look for opposites like <span class="tex">3-x</span> and <span class="tex">x-3</span>).</span></div>
+      <div><b>3</b><span>Like denominators <b>combined</b> into one fraction.</span></div>
+      <div><b>4</b><span><b>NPVs stated</b> from the original expression, including any divisor’s numerator.</span></div>
+    </div>
+    <p class="u6l10-clnote">The simplified expression is <b>equivalent</b> to the original for every permissible value.</p>
+  </div>
+  <div class="def amber"><b>Rational equations.</b> An equation is solved when the variable is out of the denominators: multiply <b>every</b> term (including terms with no denominator) by the <b class="u6l10-lcd">LCD</b>. A root that is a non-permissible value would make a denominator <span class="tex">0</span>, so it is <b class="u6l10-no">extraneous</b>; if every root is extraneous, there is <b>no solution</b>.</div>
+  <h3 class="sub">Common errors <span class="muted u6l10-subnote">tap a card to see the fix</span></h3>
+  <div class="bk-flips u6l10-flips" style="--bk-cols:4">
+    <div class="bk-flip"><div class="bk-front"><span class="tex">\dfrac{x+6}{x+3}\ne2</span></div><div class="bk-back">The <span class="tex">x</span>’s are <b>terms</b>, not factors: nothing divides out.</div></div>
+    <div class="bk-flip"><div class="bk-front">NPVs taken from the simplified answer</div><div class="bk-back">They miss the cancelled factors: take NPVs from the <b>original</b>.</div></div>
+    <div class="bk-flip"><div class="bk-front"><span class="tex">\dfrac{a}{b}-\dfrac{c+d}{b}</span></div><div class="bk-back"><span class="tex">=\dfrac{a-c-d}{b}</span>, not <span class="tex">\dfrac{a-c+d}{b}</span></div></div>
+    <div class="bk-flip"><div class="bk-front">Forgetting to multiply a constant term by the LCD</div><div class="bk-back">Multiply <b>every</b> term, including terms with no denominator.</div></div>
+  </div>
+</section>
+
+<!-- ================= 2. Expressions ================= -->
+<section class="card" data-ink="s2" data-section="2. Expressions">
+  <div class="sec-h"><span class="badge">2</span><h2>Expressions</h2></div>
+  <div class="def"><b>Factor first, always.</b> The NPVs come from the original denominators before anything divides out, and only <b>factors</b> divide out. The answer is a fraction with its NPVs beside it.</div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>NPVs and simplifying</h3></div>
+  <p class="q">State the non-permissible values, then simplify.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{5x}{2x^2+7x-4}</span> (NPVs only)</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x^2+7x-4=(2x-1)(x+4)</span><br><span class="tex">\boldsymbol{x\ne\tfrac{1}{2},\ -4}</span> (it is already in simplest form)</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{3x^2-12x}{x^2-x-12}</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{3x(x-4)}{(x-4)(x+3)}=\boldsymbol{\dfrac{3x}{x+3}}</span>, <span class="tex">\boldsymbol{x\ne4,\ -3}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{10-5x}{x^2-4}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{-5(x-2)}{(x-2)(x+2)}=\boldsymbol{-\dfrac{5}{x+2}}</span>, <span class="tex">\boldsymbol{x\ne\pm2}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{x^2-9y^2}{x^2+xy-6y^2}</span> (NPVs in terms of <span class="tex">y</span>)</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{(x-3y)(x+3y)}{(x+3y)(x-2y)}=\boldsymbol{\dfrac{x-3y}{x-2y}}</span>, <span class="tex">\boldsymbol{x\ne-3y,\ 2y}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Multiplying and dividing</h3></div>
+  <p class="q">Simplify and state the non-permissible values.</p>
+  <div class="parts c1">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x^2-25}{4x+8}\cdot\dfrac{x^2+2x}{x^2-3x-10}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{(x-5)(x+5)}{4(x+2)}\cdot\dfrac{x(x+2)}{(x-5)(x+2)}=\boldsymbol{\dfrac{x(x+5)}{4(x+2)}}</span>, <span class="tex">\boldsymbol{x\ne-2,\ 5}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{2x^2+5x-3}{x^2-9}\div\dfrac{4x^2-1}{x^2-3x}</span></div><div class="work" style="--h:180px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{(2x-1)(x+3)}{(x-3)(x+3)}\cdot\dfrac{x(x-3)}{(2x-1)(2x+1)}=\boldsymbol{\dfrac{x}{2x+1}}</span><br>NPVs: <span class="tex">x\ne\pm3</span> (first denominator), <span class="tex">x\ne0,\ 3</span> (second denominator), <span class="tex">x\ne\pm\frac{1}{2}</span> (the divisor’s numerator). So <span class="tex">\boldsymbol{x\ne-3,\ 0,\ 3,\ -\frac{1}{2},\ \frac{1}{2}}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="Every denominator, even after the flip">
+  <h3 class="sub">Every denominator, even after the flip</h3>
+  <p>Dividing is where NPVs go missing. Collect them <b>before</b> anything divides out: the zeros of every original denominator, then the zeros of the divisor’s <b class="u6l10-dn">numerator</b>, which becomes a denominator when the divisor flips.</p>
+  <div class="explainer" data-explainer="npvNet"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Adding and subtracting</h3></div>
+  <p class="q">Simplify and state the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{5}{6x^2}-\dfrac{3}{4x}+\dfrac{1}{3}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">LCD <span class="tex">=12x^2</span>, <span class="tex">x\ne0</span><br><span class="tex">=\dfrac{10}{12x^2}-\dfrac{9x}{12x^2}+\dfrac{4x^2}{12x^2}</span><br><span class="tex">=\boldsymbol{\dfrac{4x^2-9x+10}{12x^2}}</span>, <span class="tex">\boldsymbol{x\ne0}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{2x}{x^2-4}-\dfrac{1}{x-2}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">LCD <span class="tex">=(x-2)(x+2)</span>, <span class="tex">x\ne\pm2</span><br><span class="tex">=\dfrac{2x-(x+2)}{(x-2)(x+2)}=\dfrac{x-2}{(x-2)(x+2)}</span><br><span class="tex">=\boldsymbol{\dfrac{1}{x+2}}</span>, <span class="tex">\boldsymbol{x\ne\pm2}</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Mixed operations and a rectangle</h3></div>
+  <div class="part"><div class="pl">(a) Simplify <span class="tex">\left(\dfrac{1}{x}+\dfrac{1}{2}\right)\div\dfrac{x+2}{x^2}</span> and state the non-permissible values.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{2+x}{2x}\cdot\dfrac{x^2}{x+2}=\boldsymbol{\dfrac{x}{2}}</span>, <span class="tex">\boldsymbol{x\ne0}</span> (denominators) and <span class="tex">\boldsymbol{x\ne-2}</span> (the divisor’s numerator)</div></div></div>
+  <div class="u6l10-ex4b">
+    <div class="part"><div class="pl">(b) A rectangle has area <span class="tex">\dfrac{3x^2+10x-8}{x^2-4}</span> and length <span class="tex">\dfrac{3x-2}{x-2}</span>. Write its width in simplest form, then find the length and width when <span class="tex">x=6</span>.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Width <span class="tex">=</span> area <span class="tex">\div</span> length <span class="tex">=\dfrac{(3x-2)(x+4)}{(x-2)(x+2)}\cdot\dfrac{x-2}{3x-2}=\boldsymbol{\dfrac{x+4}{x+2}}</span>, <span class="tex">x\ne\pm2,\ \frac{2}{3}</span><br><span class="tex">x=6</span>: length <span class="tex">=\frac{16}{4}=\boldsymbol{4}</span>, width <span class="tex">=\frac{10}{8}=\boldsymbol{\frac{5}{4}}</span>. (Check: area <span class="tex">=\frac{160}{32}=5=4\times\frac{5}{4}</span> ✓)</div></div></div>
+    <figure class="u6l10-rect" aria-label="A rectangle with its area inside, its length along the top and its width unknown">
+      <div class="u6l10-rbox"><span class="u6l10-rarea">Area <span class="tex">\dfrac{3x^2+10x-8}{x^2-4}</span></span></div>
+      <span class="u6l10-rlen">length <span class="tex">\dfrac{3x-2}{x-2}</span></span>
+      <span class="u6l10-rwid">width <b>?</b></span>
+    </figure>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u6l10"></section>
+
+<!-- ================= 3. Equations and problems ================= -->
+<section class="card" data-ink="s3" data-section="3. Equations and Problems">
+  <div class="sec-h"><span class="badge">3</span><h2>Equations and Problems</h2></div>
+  <div class="def"><b>Five steps.</b> <span class="u6l10-st"><b>1</b> State the <b class="u6l10-npv">NPVs</b>.</span> <span class="u6l10-st"><b>2</b> Multiply every term by the <b class="u6l10-lcd">LCD</b>.</span> <span class="u6l10-st"><b>3</b> Solve (linear or quadratic).</span> <span class="u6l10-st"><b>4</b> Reject any root that is an NPV (<b class="u6l10-no">extraneous</b>).</span> <span class="u6l10-st"><b>5</b> Verify in the original equation.</span></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Solve and verify</h3></div>
+  <p class="q">State the non-permissible values, solve and verify.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{3}{x+2}=\dfrac{5}{2x-1}</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne-2,\ \frac{1}{2}</span><br><span class="tex">3(2x-1)=5(x+2)</span><br><span class="tex">6x-3=5x+10</span><br><span class="tex">\boldsymbol{x=13}</span><br>Verify: <span class="tex">\frac{3}{15}=\frac{1}{5}</span> and <span class="tex">\frac{5}{25}=\frac{1}{5}</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x}{x-3}-\dfrac{18}{x^2-9}=\dfrac{4}{x+3}</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne\pm3</span>; LCD <span class="tex">(x-3)(x+3)</span><br><span class="tex">x(x+3)-18=4(x-3)</span><br><span class="tex">x^2+3x-18=4x-12\Rightarrow x^2-x-6=0</span><br><span class="tex">(x-3)(x+2)=0</span><br><span class="tex">x=3</span> is an NPV (extraneous); <span class="tex">\boldsymbol{x=-2}</span><br>Verify: <span class="tex">\frac{-2}{-5}-\frac{18}{-5}=4</span> and <span class="tex">\frac{4}{1}=4</span> ✓</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Verify on the calculator.</b> Store the root in X: <span class="keys"><kbd>(−)</kbd><kbd>2</kbd><kbd>STO→</kbd><kbd>X,T,θ,n</kbd><kbd>ENTER</kbd></span>. Then type each side with <kbd>X,T,θ,n</kbd> for <span class="tex">x</span> and brackets around every denominator: the left side gives <b>4</b> and the right side gives <b>4</b> ✓.</div>
+    <div class="u6l10-pcol"><button class="pill" data-keys="(−) 2 STO→ X = X ÷ ( X − 3 ) − 18 ÷ ( X x² − 9 ) = 4 ÷ ( X + 3 ) =">Show me</button></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>No solution, and why it happens</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Show that <span class="tex">\dfrac{2x}{x-4}=3+\dfrac{8}{x-4}</span> has no solution.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne4</span>. Multiply by <span class="tex">x-4</span>: <span class="tex">2x=3(x-4)+8\Rightarrow2x=3x-4\Rightarrow x=4</span>.<br>The only root is the non-permissible value, so it is extraneous: the equation has <b>no solution</b>.</div></div></div>
+    <div class="part"><div class="pl">(b) Explain why a root of the equation you get after multiplying by the LCD may not be a root of the original equation.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Multiplying by the LCD removes the denominators, so the new equation is defined even where the original is not. A root that makes the LCD <span class="tex">0</span> satisfies the new equation but makes the original undefined (division by <span class="tex">0</span>).</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="Keep it or reject it?">
+  <h3 class="sub">Keep it or reject it? <span class="muted u6l10-subnote">each side of the equation is a graph</span></h3>
+  <p>A solution is an <span class="tex">x</span> where the graphs of the left side and the right side <b>meet</b>. An extraneous root is a place where they don’t.</p>
+  <div class="explainer" data-explainer="verdict"></div>
+</section>
+
+<section class="card" data-ink="s3c" data-section="Problems: table first">
+  <h3 class="sub">Problems: the table first</h3>
+  <p>Put what you know in a table, write the unknown in each row, and let the sentence that compares them give the equation: <b>same time</b>, <b>so many hours longer</b>, or for a job, the <b>parts done add up to 1</b>. A negative speed or time is inadmissible.</p>
+  <div class="explainer" data-explainer="race"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>The train and the bus</h3></div>
+  <p class="q">A train travels <span class="tex">540</span> km. A bus that is <span class="tex">30</span> km/h slower takes <span class="tex">1.5</span> h longer to cover the same distance. Determine both speeds and both times.</p>
+  <div class="part u6l10-solo"><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Train <span class="tex">s</span>, bus <span class="tex">s-30</span>: <span class="tex">\dfrac{540}{s-30}-\dfrac{540}{s}=\dfrac{3}{2}</span>, <span class="tex">s\ne0,\ 30</span>.<br>Multiply by <span class="tex">2s(s-30)</span>: <span class="tex">1080s-1080(s-30)=3s(s-30)\Rightarrow32\,400=3s^2-90s\Rightarrow s^2-30s-10\,800=0</span><br><span class="tex">(s-120)(s+90)=0</span>; <span class="tex">s=120</span> (<span class="tex">-90</span> rejected)<br>Train <b>120 km/h for 4.5 h</b>; bus <b>90 km/h for 6 h</b>.</div></div></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Two snowplows</h3></div>
+  <p class="q">Working alone, one snowplow takes <span class="tex">4</span> h longer than another to clear a parking lot. Together they clear it in <span class="tex">4</span> h <span class="tex">48</span> min. How long does each take alone?</p>
+  <div class="part u6l10-solo"><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">4</span> h <span class="tex">48</span> min <span class="tex">=4.8</span> h. Faster <span class="tex">x</span>, slower <span class="tex">x+4</span>: <span class="tex">\dfrac{4.8}{x}+\dfrac{4.8}{x+4}=1</span>, <span class="tex">x\ne0,\ -4</span>.<br><span class="tex">4.8(x+4)+4.8x=x(x+4)\Rightarrow x^2-5.6x-19.2=0\Rightarrow5x^2-28x-96=0\Rightarrow(x-8)(5x+12)=0</span><br><span class="tex">x=8</span> (<span class="tex">-\frac{12}{5}</span> rejected). The plows take <b>8 h</b> and <b>12 h</b>. Check: <span class="tex">0.6+0.4=1</span> ✓</div></div></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Spot the error (whole-class round) ================= -->
+<section class="card" data-ink="s4" data-section="4. Spot the Error">
+  <div class="sec-h"><span class="badge">4</span><h2>Spot the Error</h2></div>
+  <p>Seven students, seven pieces of work, <b>one mistake each</b>. Vote for the wrong line with your fingers before the test number gives it away. Then say how to fix it.</p>
+  <div class="explainer" data-explainer="spot"></div>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>NPVs.</b> Factor every denominator of the <b>original</b> expression; each zero is an NPV. When dividing, the divisor’s numerator gives NPVs too. NPVs go beside every answer.</div>
+    <div><b>Simplify, multiply, divide.</b> Factor everything, divide out common <b>factors</b> (never terms; <span class="tex">\frac{a-b}{b-a}=-1</span>), and multiply by the reciprocal to divide.</div>
+    <div><b>Add and subtract.</b> Factor the denominators, build the LCD, rewrite each fraction over it, combine the numerators with <b>brackets</b> when subtracting, then simplify.</div>
+    <div><b>Equations and problems.</b> NPVs, multiply <b>every</b> term by the LCD, solve, reject extraneous roots (NPVs) and inadmissible ones (negative speeds or times), verify.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u6l10">
+    <div><div class="kicker">Your turn</div><b>Assignment 10 — Unit 6 Review</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <div class="u6l10-review">
+    <div class="u6l10-review-h"><span class="kicker">Up next</span><b>Unit 6 test.</b> <span class="muted">Shaky on an idea today? Go back to its lesson.</span></div>
+    <div class="u6l10-review-grid">
+      <a href="../l1/"><span class="rn">6.1</span>Rational expressions and NPVs <small>Example 1(a)</small></a>
+      <a href="../l2/"><span class="rn">6.2</span>Simplifying by factoring <small>Example 1(b)–(d)</small></a>
+      <a href="../l3/"><span class="rn">6.3</span>Multiplying <small>Example 2(a)</small></a>
+      <a href="../l4/"><span class="rn">6.4</span>Dividing <small>Examples 2(b), 4</small></a>
+      <a href="../l5/"><span class="rn">6.5</span>Monomial denominators <small>Example 3(a)</small></a>
+      <a href="../l6/"><span class="rn">6.6</span>Binomial and trinomial denominators <small>Example 3(b)</small></a>
+      <a href="../l7/"><span class="rn">6.7</span>Solving rational equations <small>Examples 5(a), 6</small></a>
+      <a href="../l8/"><span class="rn">6.8</span>Equations that lead to quadratics <small>Example 5(b)</small></a>
+      <a href="../l9/"><span class="rn">6.9</span>Problems: work, motion, numbers <small>Examples 7, 8</small></a>
+      <div class="test"><span class="rn">Test</span>Unit 6 test: AN4, AN5, AN6 <small>calculator allowed · NPVs beside every answer</small></div>
+    </div>
+  </div>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u6l10.js';
+  boot({ key: 'u6l10', homeHref: '../../', title: '6.10 Unit 6 Review' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

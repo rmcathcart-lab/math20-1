@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u4l5.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,15 @@
 </head>
 <body>
 <main class="lesson screen u4l5">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Who Are We?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="-10 150 46;10 150 46;-10 150 46" dur="2.4s" repeatCount="indefinite"/><text x="150" y="46" font-size="40" text-anchor="middle">🃏</text></g><text x="205" y="46" font-size="32" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="rotate" values="-10 260 46;10 260 46;-10 260 46" dur="2.4s" repeatCount="indefinite"/><text x="260" y="46" font-size="40" text-anchor="middle">🃏</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Who Are We?</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">We are two secret numbers.</p><p class="vw-ctx">Multiply us and you get <b>0</b>. Add us and you get <b>7</b>.</p><p class="vw-ask">Who are we?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Two face-down cards with question marks, and the clues: multiply to 0, add to 7"><g><animateTransform attributeName="transform" type="rotate" values="-7 107 105;7 107 105;-7 107 105" dur="2.4s" begin="0s" repeatCount="indefinite"/><rect x="62" y="40" width="90" height="130" rx="12" fill="#2b55a0" stroke="#4a4436" stroke-width="3.5"/><rect x="71" y="49" width="72" height="112" rx="8" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="6 5"/><text x="107" y="123" font-size="52" font-weight="800" fill="#fff" text-anchor="middle">?</text></g><g><animateTransform attributeName="transform" type="rotate" values="-7 223 105;7 223 105;-7 223 105" dur="2.4s" begin="1.2s" repeatCount="indefinite"/><rect x="178" y="40" width="90" height="130" rx="12" fill="#2b55a0" stroke="#4a4436" stroke-width="3.5"/><rect x="187" y="49" width="72" height="112" rx="8" fill="none" stroke="#fff" stroke-width="2.5" stroke-dasharray="6 5"/><text x="223" y="123" font-size="52" font-weight="800" fill="#fff" text-anchor="middle">?</text></g><g><rect x="40" y="192" width="120" height="44" rx="22" fill="#fffdf6" stroke="#c93a33" stroke-width="3"/><text x="100" y="223" font-size="26" font-weight="800" fill="#c93a33" text-anchor="middle">× → 0</text><animate attributeName="opacity" values="1;0.45;1" dur="2.4s" begin="0s" repeatCount="indefinite"/></g><g><rect x="170" y="192" width="120" height="44" rx="22" fill="#fffdf6" stroke="#12805a" stroke-width="3"/><text x="230" y="223" font-size="26" font-weight="800" fill="#12805a" text-anchor="middle">+ → 7</text><animate attributeName="opacity" values="1;0.45;1" dur="2.4s" begin="1.2s" repeatCount="indefinite"/></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>How do you know there’s no other pair?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>0 and 7.</b> The only way two numbers multiply to 0 is if one of them <b>is</b> 0. Then the other one must be 7, since <span class="tex">0+7=7</span>. No other pair works.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -44,47 +54,12 @@
   <div class="outcome"><b>RF5</b> Solve problems that involve quadratic equations.<br><span class="muted">Today: solving quadratic equations by factoring, roots and <span class="tex">x</span>-intercepts, equations from their roots, and problems that lead to a quadratic.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: Mystery Cards" id="wu" style="--wf-side: 392px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Mystery Cards</h2>
-  <p class="wf-rule">Two cards lie <b>face down</b>. All you know is what their numbers <b>multiply</b> to.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u4l5-table" id="u4l5-table"></div>
-    <div class="u4l5-wbtns">
-      <button type="button" class="pill" id="u4l5-flipA">Flip pair A</button>
-      <button type="button" class="pill" id="u4l5-flipB">Flip pair B</button>
-      <button type="button" class="pill" id="u4l5-deal">Deal again</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u4l5-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div><span class="tex">7\times\boxed{\phantom{0}}=0</span>. What number is on the card? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l5-wa"><div class="bk-ans"><b>0.</b> Seven times any other number is not 0.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div><span class="tex">\left(\boxed{\phantom{0}}-2\right)\times5=0</span>. What number is on the card? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l5-wa"><div class="bk-ans"><b>2.</b> The 5 can’t be 0, so the bracket must be: <span class="tex">2-2=0</span>.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Pair A multiplies to <b>0</b>. Pair B multiplies to <b>12</b>. For which pair can you say <b>for sure</b> what one of the cards is? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt right"><b>A</b> Pair A only</div>
-        <div class="opt"><b>B</b> Pair B only</div>
-        <div class="opt"><b>C</b> Both pairs</div>
-        <div class="opt"><b>D</b> Neither pair</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>A.</b> The only way to multiply to 0 is for a card to <b>be</b> 0. Twelve has endless pairs: <span class="tex">3\times4</span>, <span class="tex">2\times6</span>, <span class="tex">-1\times(-12)</span>, <span class="tex">\tfrac12\times24</span>, … Deal pair B a few times.<br>
-        <span class="muted">That’s today’s big idea: get <b>0</b> on one side, and then each factor takes its turn being 0.</span></div>
-    </div>
-  </div></div>
-  <p class="u4l5-social">Challenge your neighbour: three cards multiply to 0 and one of them is 5. What do you know about the other two?</p>
-</section>
-
 <!-- ================= 1. Zero product property ================= -->
 <section class="card" data-ink="s1" data-section="1. The Zero Product Property">
   <div class="sec-h"><span class="badge">1</span><h2>The Zero Product Property</h2></div>
   <p>If a product of numbers is zero, at least one of the numbers must be zero. This is the <b>zero product property</b>.</p>
   <div class="def amber u4l5-center"><b>Zero product property:</b> &nbsp; if <span class="tex">ab=0</span>, then <span class="tex">a=0</span> or <span class="tex">b=0</span>.</div>
   <p>So when one side of an equation is a product of factors and the other side is <span class="tex">0</span>, set each factor equal to <span class="tex">0</span> and solve. The values that make the equation true are its <b class="u4l5-cr">roots</b> (or solutions). A constant factor such as <span class="tex">5</span> or <span class="tex">-2</span> can never be <span class="tex">0</span>, so it gives no root.</p>
-  <div class="explainer" data-explainer="zpp"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -168,6 +143,15 @@
   <button class="more" data-more="ex4-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 5 · Questions 1–5</h2>
+  <p class="pr-t">Get 0 on one side, factor fully, then set each factor equal to 0.</p>
+  <div class="pr-chips n3"><span><b>1</b>Already factored</span><span><b>2–3</b>Factor, then solve</span><span><b>4–5</b>Standard form first</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u4l5">Open the Practice site</a></div>
+</section>
+
 <!-- ================= 3. Roots, zeros, x-intercepts ================= -->
 <section class="card" data-ink="s3" data-section="3. Roots, Zeros and x-Intercepts">
   <div class="sec-h"><span class="badge">3</span><h2>Roots, Zeros and <span class="tex">x</span>-Intercepts</h2></div>
@@ -202,7 +186,6 @@
   <p>Work backwards: a root <span class="tex">r</span> comes from the factor <span class="tex">(x-r)</span>. A fractional root <span class="tex">x=\tfrac{p}{q}</span> comes from the factor <span class="tex">(qx-p)</span>, which keeps the coefficients integers.</p>
   <div class="def amber u4l5-center">If the roots are <span class="tex">r_1</span> and <span class="tex">r_2</span>, an equation is <span class="tex">(x-r_1)(x-r_2)=0</span>.<br>Root <span class="tex">x=\tfrac{2}{3}\ \Rightarrow\ </span>factor <span class="tex">(3x-2)</span>; &nbsp; root <span class="tex">x=-\tfrac{1}{4}\ \Rightarrow\ </span>factor <span class="tex">(4x+1)</span>.</div>
   <p>Multiplying the equation by any non-zero constant gives an equation with the same roots, so there are many correct answers; give the one with the <b>smallest integer coefficients</b>.</p>
-  <div class="explainer" data-explainer="fromRoots"></div>
 </section>
 
 <section class="card example" data-ink="ex6" data-section="Example 6">
@@ -263,7 +246,6 @@
 <section class="card" data-ink="s5b" data-section="5. Height and Time">
   <h3 class="sub">Height and time: which answers make sense?</h3>
   <p>A height formula <span class="tex">h</span> in terms of the time <span class="tex">t</span> gives a parabola. The ground is <span class="tex">h=0</span>; a given height is a horizontal line. A time before the throw (<span class="tex">t&lt;0</span>) is rejected, but two positive times can both be right: one on the way up, one on the way down.</p>
-  <div class="explainer" data-explainer="ball"></div>
 </section>
 
 <section class="card example" data-ink="ex9" data-section="Example 9">
@@ -287,7 +269,7 @@
     <div><b>Problems.</b> Let a variable stand for an unknown, write and solve the equation, then <b>reject inadmissible roots</b> (negative lengths, areas or times; non-whole counts). Answer with units.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u4l5">
-    <div><div class="kicker">Your turn</div><b>Assignment 5 — Solving Quadratic Equations by Factoring</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 5 · Questions 6–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l6/">
     <div><div class="kicker">Next lesson</div><b>Lesson 6 — Solving Radical Equations and Checking for Extraneous Roots</b><div class="muted">Square both sides to free the <span class="tex">x</span>, then check: squaring can sneak in a root that doesn’t work.</div></div><span class="arrow">→</span>

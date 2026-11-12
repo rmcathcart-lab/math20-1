@@ -1,17 +1,11 @@
 /* Math 20-1 · Unit 1 · Lesson 8 — Infinite Geometric Series.
- * Warm-up (The Last Piece: a chocolate bar shared by three friends, the leftover quartered every round → 1/3 each),
- * static figures (Example 1 partial-sum grid, Example 6 ball path) and the explainers:
+ * Static figures (Example 1 partial-sum grid, Example 6 ball path) and the explainers (2026-11-11 class format: the old
+ * warm-up and the partials / powers / gap / solve / ceiling explainers were removed):
  *   fill (STAR: a unit square shaded half, then half of what is left… beside the partial sums creeping toward S∞ on a
- *     number line; thirds; the warm-up's quarters; a divergent 1/2 + 1 + 2 + … that overflows and runs off the line),
- *   partials (dot plot of (n, S_n): Example 1 Series A levels off at 9, Series B runs off the grid, a zig-zag that
- *     still converges, 4 − 4 + 4 … that jumps forever),
- *   powers (bars of r^n for r = 0.5, −0.5, 0.9, 1, 1.5, −1.5, then what that does to S_n = t1(1 − r^n)/(1 − r)),
+ *     number line; thirds; a divergent 1/2 + 1 + 2 + … that overflows and runs off the line),
  *   gate (the −1 < r < 1 gate on a number line; Example 2 (a)–(f) checks),
- *   gap (S∞ − S_n = 160(0.75)^n, bars climbing to the S∞ line, then a zoom; Example 3 check),
- *   solve (substitute into S∞ = t1/(1 − r) and solve, then the gate check; Example 4 (a)–(d) checks),
  *   decimal (a repeating decimal split into blocks, stacked like column addition; Example 5 checks),
  *   bounce (a ball bouncing, its down and up distances added on a tape; Example 6 check),
- *   ceiling (weekly downloads shrinking while the running total fills toward 80 000; Example 7 check),
  *   xrange (x on one line, r = x/2 on another, the gate pulled back to −2 < x < 2; Example 8 check).
  * Colours (Unit 1): common ratio r amber, first term t1 teal, partial sums blue, S∞ green, divergent red. */
 import {
@@ -53,59 +47,8 @@ function slider(N, v, color = SC, r = 10) {
   return g;
 }
 
-/* ====================================================================================================
- * Warm-up: The Last Piece. The leftover square (bottom right) is quartered every round:
- * top left → Ava, top right → Ben, bottom left → Cy, bottom right → the next round.
- * ==================================================================================================== */
+/* the three friends' colours (fill: the quarters demo is gone with the old warm-up; kept for the quad mode) */
 const FRIEND = [{ name: 'Ava', col: '#1f5bd6', soft: '#d5e2fb' }, { name: 'Ben', col: '#c27a0e', soft: '#fbe8c6' }, { name: 'Cy', col: '#12805a', soft: '#cdeedd' }];
-function mountChoc() {
-  const host = document.getElementById('u1l8-choc'); if (!host) return;
-  const S = 340, P = 10;
-  host.style.position = 'relative';
-  const svg = svgEl('svg', { width: S + 2 * P, height: S + 2 * P, viewBox: `0 0 ${S + 2 * P} ${S + 2 * P}`, class: 'u1l8-chocsvg' }, host);
-  const defs = svgEl('defs', {}, svg);
-  const pat = svgEl('pattern', { id: 'u1l8-chocpat', width: 25, height: 25, patternUnits: 'userSpaceOnUse' }, defs);
-  svgEl('rect', { width: 25, height: 25, fill: '#6b3f22' }, pat);
-  svgEl('rect', { x: 2, y: 2, width: 21, height: 21, rx: 2, fill: '#7d4a28', stroke: '#5a3219', 'stroke-width': 1 }, pat);
-  const piecesL = svgEl('g', {}, svg), labsL = h('div', 'u1l8-choclabs'); host.appendChild(labsL);
-  const board = h('div', 'u1l8-chocboard'); host.appendChild(board);
-  board.style.left = (S + 2 * P + 14) + 'px';
-  const st = { k: 0, busy: false };
-  const paint = () => {
-    piecesL.innerHTML = ''; labsL.innerHTML = '';
-    let x = P, y = P, s = S;
-    for (let i = 0; i < st.k; i++) {
-      const hs = s / 2, quads = [[x, y], [x + hs, y], [x, y + hs]];
-      quads.forEach(([qx, qy], j) => {
-        svgEl('rect', { x: qx, y: qy, width: hs, height: hs, fill: j === 0 ? FRIEND[0].col : FRIEND[j].soft, stroke: '#fff', 'stroke-width': Math.max(0.6, 2.5 - i * 0.4) }, piecesL);
-        if (hs >= 22) {
-          const d = h('div', 'u1l8-chocl' + (j === 0 ? ' u1l8-chocl-a' : ''), FRIEND[j].name[0]);
-          d.style.color = j === 0 ? '#fff' : FRIEND[j].col; d.style.fontSize = Math.min(40, hs * 0.42) + 'px';
-          labsL.appendChild(place(d, qx + hs / 2, qy + hs / 2, 'c'));
-        }
-      });
-      x += hs; y += hs; s = hs;
-    }
-    svgEl('rect', { x, y, width: s, height: s, fill: 'url(#u1l8-chocpat)', stroke: '#3f2312', 'stroke-width': 1.2 }, piecesL);
-    svgEl('rect', { x: P, y: P, width: S, height: S, fill: 'none', stroke: '#3f2312', 'stroke-width': 2.5, rx: 3 }, piecesL);
-    const k = st.k, den = Math.pow(4, k), ava = (den - 1) / 3; // Ava = (4^k − 1)/(3·4^k)
-    board.innerHTML = `<div class="u1l8-cbh">After round <b>${k}</b></div>` +
-      FRIEND.map((f, j) => `<div class="u1l8-cbr"><span class="u1l8-cbdot" style="background:${f.col}"></span><b style="color:${f.col}">${f.name}</b>${k ? T(fr(ava, den, true)) : T('0')}</div>`).join('') +
-      `<div class="u1l8-cbr u1l8-cbleft"><span class="u1l8-cbdot" style="background:#6b3f22"></span><b>left</b>${T(k ? fr(1, den, true) : '1')}</div>` +
-      (k ? `<div class="u1l8-cbdec">Ava ≈ ${hn(ava / den, 6)}</div>` : '');
-  };
-  const bS = document.getElementById('u1l8-share'), b5 = document.getElementById('u1l8-share5'), bR = document.getElementById('u1l8-wreset');
-  const go = async (n) => {
-    if (st.busy) return; st.busy = true; const c = liveCtx();
-    for (let i = 0; i < n && st.k < 10; i++) { st.k++; paint(); await sleep(c, 320); }
-    bS.disabled = b5.disabled = st.k >= 10; st.busy = false;
-  };
-  bS.addEventListener('click', () => go(1));
-  b5.addEventListener('click', () => go(5));
-  bR.addEventListener('click', () => { if (st.busy) return; st.k = 0; bS.disabled = b5.disabled = false; paint(); });
-  paint();
-}
-
 /* ====================================================================================================
  * Static figures
  * ==================================================================================================== */
@@ -155,7 +98,6 @@ function mountFigures() {
 const FILL = {
   halves: { label: 'Halves', mode: 'strip', k: 2, m: 1, t1: [1, 2], r: [1, 2], n: 8, max: 1, step: 0.25, labs: [[0, '0'], [0.25, '\\tfrac14'], [0.5, '\\tfrac12'], [0.75, '\\tfrac34'], [1, '1']] },
   thirds: { label: 'Thirds', mode: 'strip', k: 3, m: 2, t1: [2, 3], r: [1, 3], n: 6, max: 1, step: 1 / 3, labs: [[0, '0'], [1 / 3, '\\tfrac13'], [2 / 3, '\\tfrac23'], [1, '1']] },
-  choc: { label: 'Warm-up: quarters', mode: 'quad', t1: [1, 4], r: [1, 4], n: 6, max: 0.5, step: 1 / 16, labs: [[0, '0'], [0.25, '\\tfrac14'], [0.5, '\\tfrac12']] },
   run: { label: 'Runs away: ½ + 1 + 2 + …', mode: 'grid', t1: [1, 2], r: [2, 1], n: 6, max: 16, step: 1, labs: [0, 4, 8, 12, 16].map((v) => [v, String(v)]) }
 };
 const PIECE = ['#1f5bd6', '#6f9cf3'];
@@ -299,106 +241,6 @@ const fill = {
 function at2(el, x, y) { el.style.left = x + 'px'; el.style.top = y + 'px'; return el; }
 
 /* ====================================================================================================
- * explainer: partials — the dot plot (n, S_n)
- * ==================================================================================================== */
-const PS = {
-  A: { label: 'Example 1 check: Series A', note: [350, 300], t1: 6, r: 1 / 3, rT: '\\tfrac13', n: 8, win: { ymin: 0, ymax: 10, ystep: 1 }, ylab: 2, lim: 9, sT: '6+2+\\tfrac23+\\tfrac29+\\dots' },
-  B: { label: 'Series B', note: [350, 300], t1: 5, r: 2, rT: '2', n: 6, win: { ymin: 0, ymax: 40, ystep: 5 }, ylab: 10, zoom: { ymin: 0, ymax: 330, ystep: 50 }, zlab: 50, sT: '5+10+20+40+\\dots' },
-  Z: { label: 'Zig-zag: ' + T('r=-0.8'), note: [350, 330], t1: 20, r: -0.8, rT: '-0.8', n: 10, win: { ymin: 0, ymax: 22, ystep: 2 }, ylab: 4, lim: 100 / 9, limT: '11.11', sT: '20-16+12.8-\\dots' },
-  J: { label: 'Jumping: ' + T('r=-1'), note: [350, 30], t1: 4, r: -1, rT: '-1', n: 8, win: { ymin: -1, ymax: 6, ystep: 1 }, ylab: 1, sT: '4-4+4-4+\\dots' }
-};
-const partials = {
-  title: 'Settle down, or run away?',
-  height: 470,
-  minW: 940,
-  choices: Object.keys(PS).map((k) => ({ v: k, label: PS[k].label })),
-  intro: (k) => `${T(PS[k].sT)}: plot each partial sum as a <b>separate dot</b> ${T('(n,\\ S_n)')}. Press <b>Next</b>.`,
-  make(stage, k, ex) {
-    const d = PS[k], W = ex.W;
-    const t = [], S = []; let s = 0;
-    for (let i = 0; i < d.n; i++) { const v = d.t1 * Math.pow(d.r, i); t.push(v); s += v; S.push(s); }
-    const G = new Graph(stage, Object.assign({ x: 10, y: 6, width: 560, height: 456, xmin: 0, xmax: d.n + 1, xstep: 1, xlabels: 1, ylabels: d.ylab, xtitle: 'n', ytitle: 'S_n', fontSize: 16 }, d.win));
-    const PX = 590, P = panel(stage, PX, 8, W - PX - 12, 454, `${T(d.sT)}`);
-    const tb = h('table', 'u1l8-ptab'); P.appendChild(tb);
-    tb.innerHTML = `<tr><th>${T('n')}</th><th>${T('t_n')}</th><th>${T(cS('S_n'))}</th></tr>`;
-    const dp = k === 'A' ? 4 : 2;
-    const trs = S.map((v, i) => { const tr = h('tr', '', `<td>${i + 1}</td><td>${hn(t[i], dp)}</td><td class="u1l8-sv">${hn(v, dp, k === 'A' && !Number.isInteger(v))}</td>`); tb.appendChild(tr); return hide(tr); });
-    const pts = S.map((v, i) => hide(G.point(i + 1, v, { color: SC, r: 7 })));
-    const plot = async (c, a, b) => { for (let i = a; i < b; i++) { await show(c, trs[i]); await pop(c, pts[i], 260); pts[i].style.opacity = 1; } };
-    const note = hide(add(stage, h('div', 'u1l8-pnote'), d.note[0], d.note[1]));
-    const steps = [{ cap: `${T(cR('r=' + d.rT))}. ${T(cS('S_1') + '=' + tn(S[0]))}, ${T(cS('S_2') + '=' + tn(S[1], dp))}, ${T(cS('S_3') + '=' + tn(S[2], dp))}: each one adds the next term.`, run: (c) => plot(c, 0, 3) }];
-    if (k === 'A') {
-      steps.push({ cap: `${T(cS('S_4') + '\\approx8.8889')}, ${T(cS('S_5') + '\\approx8.9630')}, ${T(cS('S_6') + '\\approx8.9877')}: the dots <b>level off</b>.`, run: (c) => plot(c, 3, 6) });
-      steps.push({ cap: `They get closer and closer to <b>9</b>, but never pass it. <b>Convergent</b>: ${T(cG('S_\\infty=9'))}. Check: ${T('\\dfrac{6}{1-\\frac13}=\\dfrac{6}{\\frac23}=9')}.`,
-        run: async (c) => { await plot(c, 6, 8); const L = G.hline(9, { color: GC, width: 3 }); await G.drawIn(L, 600, c); await show(c, G.label(d.n + 1, 9, T(cG('9')), { pos: 'n', gap: 4, cls: 'bk-ptlab', clip: false })); note.innerHTML = `<b class="u1l8-cs">Convergent</b><br>${T(cG('S_\\infty=9'))}`; await show(c, note); } });
-    } else if (k === 'B') {
-      steps.push({ cap: `${T(cS('S_4') + '=75')} is already off the top of the grid…`, run: async (c) => { await show(c, trs[3]); } });
-      steps.push({ cap: `Zoom out: ${T(cS('S_5') + '=155')}, ${T(cS('S_6') + '=315')}. They never level off; zooming out only shows them racing away.`,
-        run: async (c) => { G.o.ylabels = d.zlab; await G.setWindow(Object.assign({}, d.zoom), c, 900); await plot(c, 3, 6); } });
-      steps.push({ cap: `The partial sums grow <b>without limit</b>. <b>Divergent</b>: there is no ${T('S_\\infty')}.`,
-        run: async (c) => { note.innerHTML = `<b class="u1l8-cx">Divergent</b><br>no ${T('S_\\infty')}`; await show(c, note); } });
-    } else if (k === 'Z') {
-      steps.push({ cap: `The signs alternate, so the dots <b>zig-zag</b>: up, down, up… but each swing is ${T('0.8')} of the last.`, run: (c) => plot(c, 3, 7) });
-      steps.push({ cap: `The zig-zag closes in on one value. <b>Convergent</b>: ${T(cG('S_\\infty=\\dfrac{20}{1-(-0.8)}=\\dfrac{20}{1.8}\\approx11.11'))} (Example 2(b)).`,
-        run: async (c) => { await plot(c, 7, d.n); const L = G.hline(d.lim, { color: GC, width: 3 }); await G.drawIn(L, 600, c); note.innerHTML = `<b class="u1l8-cs">Convergent</b><br>${T(cG('S_\\infty\\approx11.11'))}`; await show(c, note); } });
-    } else {
-      steps.push({ cap: `${T(cS('S_4') + '=0')}, ${T(cS('S_5') + '=4')}, ${T(cS('S_6') + '=0')}: the partial sums <b>keep jumping</b> between 4 and 0.`, run: (c) => plot(c, 3, 6) });
-      steps.push({ cap: `They never settle on <b>one</b> number. <b>Divergent</b> (Example 2(d)): with ${T(cR('r=-1'))} the terms never shrink.`,
-        run: async (c) => { await plot(c, 6, d.n); note.innerHTML = `<b class="u1l8-cx">Divergent</b><br>no ${T('S_\\infty')}`; await show(c, note); } });
-    }
-    return steps;
-  }
-};
-
-/* ====================================================================================================
- * explainer: powers — bars of r^n, and what that does to S_n
- * ==================================================================================================== */
-const PW = {
-  h: { label: 'r = 0.5', r: 0.5, win: [-1.25, 1.25, 0.25], ylab: 0.5 },
-  nh: { label: 'r = −0.5', r: -0.5, win: [-1.25, 1.25, 0.25], ylab: 0.5 },
-  n9: { label: 'r = 0.9', r: 0.9, win: [-1.25, 1.25, 0.25], ylab: 0.5 },
-  one: { label: 'r = 1', r: 1, win: [-1.25, 1.25, 0.25], ylab: 0.5 },
-  g: { label: 'r = 1.5', r: 1.5, win: [-140, 140, 20], ylab: 40 },
-  ng: { label: 'r = −1.5', r: -1.5, win: [-140, 140, 20], ylab: 40 }
-};
-const powers = {
-  title: 'What happens to rⁿ?',
-  height: 460,
-  minW: 940,
-  choices: Object.keys(PW).map((k) => ({ v: k, label: PW[k].label })),
-  intro: 'Bars for the powers ' + T('r^1,\\ r^2,\\ r^3,\\ \\dots') + '. Press <b>Next</b>.',
-  make(stage, k, ex) {
-    const d = PW[k], r = d.r, W = ex.W, N = 12, rS = tn(r, 2);
-    const G = new Graph(stage, { x: 8, y: 16, width: 560, height: 440, xmin: 0, xmax: 13, ymin: d.win[0], ymax: d.win[1], xstep: 1, ystep: d.win[2], xlabels: 2, ylabels: d.ylab, xtitle: 'n', ytitle: 'r^n', fontSize: 16 });
-    const bars = [];
-    for (let n = 1; n <= N; n++) {
-      const v = Math.pow(r, n), rect = svgEl('rect', { fill: v >= 0 ? RC : '#e0a64a', stroke: '#8a560a', 'stroke-width': 1 }, G.layers.data);
-      G.track(rect, () => { const [x0, y0] = G.toPx(n - 0.32, Math.max(0, v)), [x1, y1] = G.toPx(n + 0.32, Math.min(0, v)); rect.setAttribute('x', x0); rect.setAttribute('y', y0); rect.setAttribute('width', x1 - x0); rect.setAttribute('height', Math.max(1.5, y1 - y0)); });
-      bars.push(hide(rect));
-    }
-    const vl = (n) => { const v = Math.pow(r, n); return Math.abs(v) < 0.001 ? tn(v, 5) : tn(v, 4); };
-    const PX = 590, P = panel(stage, PX, 8, W - PX - 12, 444, T(cR('r=' + rS)));
-    const tb = h('div', 'u1l8-pwv'); P.appendChild(tb);
-    const rowsI = [1, 2, 3, 4, 12].map((n) => hide(line(tb, T(`${cR(rS.startsWith('-') ? `(${rS})` : rS)}^{${n}}=${vl(n)}`))));
-    const conv = Math.abs(r) < 1;
-    const f1 = hidLine(P, T(`S_n=\\dfrac{${cT('t_1')}(1-${cR('r')}^n)}{1-${cR('r')}}`), 'u1l8-big');
-    const f2 = hidLine(P, conv ? `${T(cR('r^n') + '\\to 0')}, so` : `${T(cR('r^n'))} ${Math.abs(r) === 1 ? 'never shrinks' : 'grows in size'}, so`, 'u1l8-mid');
-    const f3 = hidLine(P, conv ? T(`S_n\\to\\dfrac{${cT('t_1')}(1-0)}{1-${cR('r')}}=${cG(`\\dfrac{${cT('t_1')}}{1-${cR('r')}}`)}`) : `${T('S_n')} never settles on one number.`, 'u1l8-big');
-    const verdict = hide(h('div', 'u1l8-verd2 ' + (conv ? 'u1l8-verd-ok' : 'u1l8-verd-no'), conv ? '<b>Convergent</b>' : '<b>Divergent</b>')); P.appendChild(verdict);
-    const trend = { h: `each power is <b>half</b> the last: <b>shrinking to 0</b>`, nh: `the sign flips every time, but the size still <b>shrinks to 0</b>`, n9: `slowly, but ${T('0.9^n')} still <b>shrinks to 0</b>`,
-      one: `${T('1^n=1')} every time: it <b>never shrinks</b>`, g: `each power is 1.5 times the last: it <b>grows without limit</b>`, ng: `the sign keeps switching and the size <b>grows without limit</b>` }[k];
-    const bIn = async (c, a, b) => { for (let i = a; i < b; i++) await appear(c, bars[i], 140); };
-    return [
-      { cap: `${T(cR('r=' + rS))}: ${T('r^1=' + vl(1))}, ${T('r^2=' + vl(2))}, ${T('r^3=' + vl(3))}, ${T('r^4=' + vl(4))}.`, run: async (c) => { await bIn(c, 0, 4); for (let i = 0; i < 4; i++) await show(c, rowsI[i]); } },
-      { cap: `Up to ${T('n=12')}: ${trend}. ${T('r^{12}=' + vl(12))}.`, run: async (c) => { await bIn(c, 4, N); await show(c, rowsI[4]); } },
-      { cap: `In the sum formula, ${T('r^n')} is the only part that changes as ${T('n')} grows.`, run: (c) => show(c, f1) },
-      { cap: conv ? `${T('r^n\\to0')}, so ${T('S_n')} settles on ${T('\\dfrac{t_1}{1-r}')}: <b>convergent</b>. This works for every ${T('r')} with ${T('-1<r<1')}.` : `${T('r^n')} does not go to 0, so ${T('S_n')} has no one value to settle on: <b>divergent</b>.`,
-        run: async (c) => { await show(c, f2); await show(c, f3); await pop(c, verdict); verdict.style.opacity = 1; } }
-    ];
-  }
-};
-
-/* ====================================================================================================
  * explainer: gate — −1 < r < 1 on a number line; Example 2 checks
  * ==================================================================================================== */
 const GS = {
@@ -455,119 +297,6 @@ const gate = {
   }
 };
 const G2 = (c, el) => drawIn(el, 600, c).then(() => { el.style.opacity = 1; });
-
-/* ====================================================================================================
- * explainer: gap — S∞ − S_n = S∞·r^n; how many terms to get within a target
- * ==================================================================================================== */
-const GP = {
-  ex3: { label: 'Example 3 check', t1: 40, r: 0.75, rT: '0.75', S: 160, tol: 1, tolT: '1', dp: 2, win: { xmax: 19.5, ymax: 180, ystep: 20 }, ylab: 40, zoom: { ymin: 150, ymax: 162, ystep: 2 }, zlab: 2,
-    show: [[1, 4], [5, 10], [11, 17], [18, 18]], key: 10 },
-  A: { label: 'Series A: within 0.01 of 9', t1: 6, r: 1 / 3, rT: '\\tfrac13', S: 9, tol: 0.01, tolT: '0.01', dp: 4, win: { xmax: 8.5, ymax: 10, ystep: 1 }, ylab: 2, zoom: { ymin: 8.95, ymax: 9.01, ystep: 0.01 }, zlab: 0.01,
-    show: [[1, 3], [4, 5], [6, 6], [7, 7]], key: null }
-};
-const gap = {
-  title: 'How many terms to get close?',
-  height: 470,
-  minW: 940,
-  choices: Object.keys(GP).map((k) => ({ v: k, label: GP[k].label })),
-  intro: (k) => `How many terms until ${T('S_n')} is within ${T(GP[k].tolT)} of ${T('S_\\infty')}? Press <b>Next</b>.`,
-  make(stage, k, ex) {
-    const d = GP[k], W = ex.W, nMax = d.show[3][1];
-    const Sn = (n) => d.S * (1 - Math.pow(d.r, n)), gp = (n) => d.S * Math.pow(d.r, n);
-    const G = new Graph(stage, Object.assign({ x: 8, y: 6, width: 560, height: 452, xmin: 0, ymin: 0, xstep: 1, xlabels: k === 'ex3' ? 2 : 1, ylabels: d.ylab, xtitle: 'n', ytitle: 'S_n', fontSize: 16 }, d.win));
-    const lim = G.hline(d.S, { color: GC, width: 3 });
-    const limL = G.label(0.15, d.S, T(cG('S_\\infty=' + d.S)), { pos: 'ne', gap: 4, cls: 'bk-ptlab', clip: false });
-    hide(lim); hide(limL);
-    const bars = [];
-    for (let n = 1; n <= nMax; n++) {
-      const v = Sn(n), rect = svgEl('rect', { fill: SC, 'fill-opacity': 0.8, stroke: '#123c8f', 'stroke-width': 1 }, G.layers.data);
-      const gl = svgEl('line', { stroke: RED, 'stroke-width': 4 }, G.layers.data);
-      G.track(rect, () => {
-        const [x0, y0] = G.toPx(n - 0.34, v), [x1, y1] = G.toPx(n + 0.34, Math.max(0, G.win.ymin - 1));
-        rect.setAttribute('x', x0); rect.setAttribute('y', y0); rect.setAttribute('width', x1 - x0); rect.setAttribute('height', Math.max(0, y1 - y0));
-        const [gx, ga] = G.toPx(n, v), [, gb] = G.toPx(n, d.S); gl.setAttribute('x1', gx); gl.setAttribute('x2', gx); gl.setAttribute('y1', ga); gl.setAttribute('y2', gb);
-      });
-      bars.push({ rect: hide(rect), gl: hide(gl) });
-    }
-    const PX = 590, P = panel(stage, PX, 8, W - PX - 12, 450, `${T(`${cT(tn(d.t1))}+\\dots,\\ ${cR('r=' + d.rT)}`)}`);
-    const f1 = hidLine(P, T(`S_n=${d.S}(1-(${d.rT})^n)`) + '<br>' + T(`\\phantom{S_n}=${d.S}-${cX(`${d.S}(${d.rT})^n`)}`), 'u1l8-mid');
-    const f2 = hidLine(P, `${T(cX('\\text{gap}'))} ${T(`=S_\\infty-S_n=${cX(`${d.S}(${d.rT})^n`)}`)}`, 'u1l8-mid');
-    const tb = h('table', 'u1l8-ptab u1l8-gtab'); P.appendChild(tb);
-    tb.innerHTML = `<tr><th>${T('n')}</th><th>${T(cS('S_n'))}</th><th>${T(cX('\\text{gap}'))}</th></tr>`;
-    const rowFor = (n, cls = '') => { const tr = h('tr', cls, `<td>${n}</td><td>${hn(Sn(n), d.dp, true)}</td><td class="u1l8-gx">${hn(gp(n), d.dp, true)}</td>`); tb.appendChild(tr); return hide(tr); };
-    const keyRows = {};
-    const rowsAt = (ns, cls) => ns.map((n) => (keyRows[n] = rowFor(n, cls)));
-    const [s1, s2, s3, s4] = d.show, a1 = [], a2 = [];
-    for (let n = s1[0]; n <= s1[1]; n++) a1.push(n);
-    const r1 = rowsAt(a1), rKey = d.key ? rowsAt([d.key], 'u1l8-hl') : [], r3 = rowsAt([s3[1]], 'u1l8-no'), r4 = rowsAt([s4[1]], 'u1l8-yes');
-    const res = hide(h('div', 'u1l8-gres')); P.appendChild(res);
-    const barsIn = async (c, a, b) => { for (let n = a; n <= b; n++) { await appear(c, bars[n - 1].rect, 90); } };
-    const nA = s3[1], nB = s4[1];
-    const gapLab = (n, pos) => hide(G.label(n + (pos === 'e' ? 0.3 : -0.3), d.S - gp(n) / 2, T(cX(tn(gp(n), d.dp, true))), { pos, gap: 2, cls: 'bk-ptlab', clip: false }));
-    const steps = [
-      { cap: `${T(cG('S_\\infty=' + d.S))}. Each ${T(cS('S_n'))} falls short of it by a ${T(cX('\\text{gap}'))}: ${T(`S_\\infty-S_n=${d.S}(${d.rT})^n`)}.`,
-        run: async (c) => { await G2(c, lim); await show(c, limL); await show(c, f1); await show(c, f2); } },
-      { cap: `${a1.map((n) => T(`S_{${n}}=${tn(Sn(n), d.dp)}`)).slice(0, 3).join(', ')}, …: big gaps at first.`,
-        run: async (c) => { await barsIn(c, s1[0], s1[1]); for (const n of a1) { await appear(c, bars[n - 1].gl, 120); } for (const r of r1) await show(c, r); } }
-    ];
-    if (d.key) steps.push({ cap: `${T(`S_{10}\\approx${tn(Sn(10), 2, true)}`)} (Example 3(b)): still ${T(cX(tn(gp(10), 2, true)))} short.`,
-      run: async (c) => { await barsIn(c, s2[0], s2[1]); await appear(c, bars[9].gl, 120); for (const r of rKey) await show(c, r); } });
-    else steps.push({ cap: `${T(`S_{${s2[1]}}\\approx${tn(Sn(s2[1]), d.dp, true)}`)}: the gap is ${T(cX(tn(gp(s2[1]), d.dp, true)))}.`, run: async (c) => { await barsIn(c, s2[0], s2[1]); await appear(c, bars[s2[1] - 1].gl, 120); } });
-    steps.push({ cap: `Zoom in near the top. ${T(`n=${nA}`)}: the gap is ${T(cX(tn(gp(nA), d.dp, true)))}, more than ${T(d.tolT)}. Not yet.`,
-      run: async (c) => { await barsIn(c, s3[0], s3[1]); bars.forEach((b) => { b.gl.style.opacity = 0; }); G.o.ylabels = d.zlab; await G.setWindow(Object.assign({}, d.zoom), c, 900); await appear(c, bars[nA - 1].gl, 150); await show(c, gapLab(nA, 'w')); for (const r of r3) await show(c, r); } });
-    steps.push({ cap: `${T(`n=${nB}`)}: the gap is ${T(cX(tn(gp(nB), d.dp, true)))}, less than ${T(d.tolT)} ✓. The first <b>${nB} terms</b> are needed (${T(`S_{${nB}}\\approx${tn(Sn(nB), d.dp, true)}`)}).`,
-      run: async (c) => { await barsIn(c, nB, nB); await appear(c, bars[nB - 1].gl, 150); await show(c, gapLab(nB, 'e')); for (const r of r4) await show(c, r); res.innerHTML = `<b>${nB} terms</b>`; await pop(c, res); res.style.opacity = 1; } });
-    return steps;
-  }
-};
-
-/* ====================================================================================================
- * explainer: solve — substitute into S∞ = t1/(1 − r) and solve; then check r in the gate
- * ==================================================================================================== */
-const SV = {
-  a: { label: 'Example 4(a)', ask: `${T('S_\\infty=50')} and ${T('r=0.3')}. Find ${T('t_1')}.`, lines: [
-    ['50=\\dfrac{' + cT('t_1') + '}{1-' + cR('0.3') + '}', `Substitute ${T('S_\\infty=50')} and ${T(cR('r=0.3'))}.`],
-    ['50=\\dfrac{' + cT('t_1') + '}{0.7}', `Simplify the bottom: ${T('1-0.3=0.7')}.`],
-    [cT('t_1') + '=50(0.7)=' + cT('35'), `Multiply both sides by ${T('0.7')}: ${T(cT('t_1=35'))}.`]], r: [0.3], check: `Check: ${T('\\dfrac{35}{1-0.3}=\\dfrac{35}{0.7}=50')} ✓` },
-  b: { label: 'Example 4(b)', ask: `${T('t_1=12')} and ${T('S_\\infty=8')}. Find ${T('r')}.`, lines: [
-    ['8=\\dfrac{' + cT('12') + '}{1-' + cR('r') + '}', `Substitute ${T(cT('t_1=12'))} and ${T('S_\\infty=8')}.`],
-    ['8(1-' + cR('r') + ')=12', `Multiply both sides by ${T('(1-r)')}.`],
-    ['1-' + cR('r') + '=1.5', `Divide both sides by 8: ${T('1-r=1.5')}.`],
-    [cR('r=-0.5'), `So ${T(cR('r=-0.5'))}.`]], r: [-0.5], check: `${T('r=-0.5')} is between ${T('-1')} and ${T('1')}, so it is <b>valid</b>.` },
-  c: { label: 'Example 4(c)', ask: `${T('t_1=64')} and ${T('t_3=16')}. Find ${T('S_\\infty')} for each possible series.`, lines: [
-    [cT('t_1') + cR('r') + '^2=t_3\\ \\Rightarrow\\ 64' + cR('r') + '^2=16', `Two terms apart: ${T('t_3=t_1r^2')}.`],
-    [cR('r') + '^2=\\tfrac14\\ \\Rightarrow\\ ' + cR('r=\\pm\\tfrac12'), `${T('r^2=\\tfrac{16}{64}=\\tfrac14')}, so ${T(cR('r=\\tfrac12'))} <b>or</b> ${T(cR('r=-\\tfrac12'))}: two series.`],
-    [cR('r=\\tfrac12') + ':\\ S_\\infty=\\dfrac{64}{1-\\frac12}=\\dfrac{64}{\\frac12}=' + cG('128'), `${T('r=\\tfrac12')}: ${T('64+32+16+\\dots')}, ${T(cG('S_\\infty=128'))}.`],
-    [cR('r=-\\tfrac12') + ':\\ S_\\infty=\\dfrac{64}{1+\\frac12}=\\dfrac{64}{\\frac32}=' + cG('\\tfrac{128}{3}') + '\\approx42.67', `${T('r=-\\tfrac12')}: ${T('64-32+16-\\dots')}, ${T(cG('S_\\infty=\\tfrac{128}{3}\\approx42.67'))}.`]], r: [0.5, -0.5], check: `Both ratios are inside the gate: <b>two</b> valid series.` },
-  d: { label: 'Example 4(d)', ask: `Is there a series with ${T('t_1=10')} and ${T('S_\\infty=4')}?`, lines: [
-    ['4=\\dfrac{' + cT('10') + '}{1-' + cR('r') + '}', `Substitute ${T(cT('t_1=10'))} and ${T('S_\\infty=4')}.`],
-    ['4(1-' + cR('r') + ')=10\\ \\Rightarrow\\ 1-' + cR('r') + '=2.5', `Multiply by ${T('(1-r)')}, then divide by 4.`],
-    [cR('r=-1.5'), `So ${T(cR('r=-1.5'))}…`]], r: [-1.5], check: `…but ${T('-1.5')} is <b>outside</b> the gate: the series would diverge. <b>No such series exists.</b>` }
-};
-const solve = {
-  title: 'Working backwards from S∞',
-  height: 450,
-  minW: 940,
-  choices: Object.keys(SV).map((k) => ({ v: k, label: SV[k].label })),
-  ask: (k) => SV[k].ask,
-  intro: 'Substitute, solve, then check the gate. Press <b>Next</b>.',
-  make(stage, k, ex) {
-    const d = SV[k], W = ex.W;
-    const L = panel(stage, 10, 8, 560, 434, '', 'u1l8-solp');
-    const f0 = line(L, T(`S_\\infty=\\dfrac{${cT('t_1')}}{1-${cR('r')}}`), 'u1l8-big u1l8-f0');
-    const ls = d.lines.map(([s]) => hidLine(L, T(s), 'u1l8-sl'));
-    const PX = 590, PWd = W - PX - 12;
-    const P = panel(stage, PX, 8, PWd, 434, 'Check the gate');
-    const N = new NumberLine(P, { width: PWd - 20, height: 120, min: -2, max: 2, step: 0.5, labelStep: 1, axisY: 80, pad: 26 });
-    N.interval(-1, 1, { openA: true, openB: true, color: GC, width: 8 });
-    N.interval(-Infinity, -1, { color: RED, width: 8 }); N.interval(1, Infinity, { color: RED, width: 8 });
-    const pins = d.r.map((v) => { const g = svgEl('g', {}, N.layers.top), ok = Math.abs(v) < 1, px = N.toPx(v); svgEl('line', { x1: px, x2: px, y1: N.ay - 28, y2: N.ay, stroke: ok ? GC : RED, 'stroke-width': 3 }, g); svgEl('circle', { cx: px, cy: N.ay, r: 8, fill: ok ? GC : RED, stroke: '#fff', 'stroke-width': 2 }, g); const lb = N.hlabel(px, N.ay - 28, T(tn(v)), { pos: 'n', gap: 2, cls: 'u1l8-pinlab' + (ok ? '' : ' u1l8-pinno') }); hide(lb); return [hide(g), lb]; });
-    const chk = hide(h('div', 'u1l8-chk ' + (d.r.every((v) => Math.abs(v) < 1) ? 'u1l8-verd-ok' : 'u1l8-verd-no'), d.check)); P.appendChild(chk);
-    const steps = d.lines.map(([, cap], i) => ({ cap, run: (c) => show(c, ls[i]) }));
-    steps.push({ cap: d.check, run: async (c) => { for (const [g, lb] of pins) { await appear(c, g, 300); await show(c, lb); } await show(c, chk); if (k === 'd') { const s = stamp(stage, 'No such series', { ok: false, x: PX + 30, y: 330, rotate: -6 }); await stampIn(c, s); } } });
-    return steps;
-  }
-};
 
 /* ====================================================================================================
  * explainer: decimal — repeating decimal → blocks → S∞
@@ -696,55 +425,6 @@ const bounce = {
 };
 
 /* ====================================================================================================
- * explainer: ceiling — weekly downloads shrink; the running total fills toward S∞
- * ==================================================================================================== */
-const CL = {
-  ex7: { label: 'Example 7 check', r: 0.85, rT: '0.85', pct: '85\\%', Sinf: 80000, tankMax: 90000, tick: 20000 },
-  p95: { label: 'What if it were 95%?', r: 0.95, rT: '0.95', pct: '95\\%', Sinf: 240000, tankMax: 260000, tick: 40000 }
-};
-const ceiling = {
-  title: 'The ceiling on the total',
-  height: 470,
-  minW: 940,
-  choices: Object.keys(CL).map((k) => ({ v: k, label: CL[k].label })),
-  intro: (k) => `${T('12\\,000')} downloads in week 1, then ${T(CL[k].pct)} of the week before. Press <b>Next</b>.`,
-  make(stage, k, ex) {
-    const d = CL[k], W = ex.W, t1 = 12000, NW = 30;
-    const tn_ = (n) => t1 * Math.pow(d.r, n - 1), Sn = (n) => t1 * (1 - Math.pow(d.r, n)) / (1 - d.r);
-    const G = new Graph(stage, { x: 8, y: 6, width: 520, height: 456, xmin: 0, xmax: NW + 1, ymin: 0, ymax: 13, xstep: 1, ystep: 1, xlabels: 5, ylabels: 2, xtitle: '\\text{week}', ytitle: '\\text{downloads (thousands)}', fontSize: 16 });
-    const bars = [];
-    for (let n = 1; n <= NW; n++) {
-      const v = tn_(n) / 1000, rect = svgEl('rect', { fill: TC, 'fill-opacity': 0.85, stroke: '#0a5357', 'stroke-width': 0.8 }, G.layers.data);
-      G.track(rect, () => { const [x0, y0] = G.toPx(n - 0.38, v), [x1, y1] = G.toPx(n + 0.38, 0); rect.setAttribute('x', x0); rect.setAttribute('y', y0); rect.setAttribute('width', x1 - x0); rect.setAttribute('height', y1 - y0); });
-      bars.push(hide(rect));
-    }
-    // the tank
-    const TX = 600, TW = 120, TY0 = 24, TH = 400, ty = (v) => TY0 + TH - TH * v / d.tankMax;
-    const tk = svgEl('svg', { width: 340, height: 470, viewBox: '0 0 340 470', class: 'u1l8-abs' }, stage); tk.style.left = TX - 70 + 'px'; tk.style.top = '0px';
-    const ox = 70;
-    svgEl('rect', { x: ox, y: TY0, width: TW, height: TH, fill: '#f4f1ea', stroke: INK, 'stroke-width': 2.5, rx: 6 }, tk);
-    const water = svgEl('rect', { x: ox + 2, y: TY0 + TH, width: TW - 4, height: 0, fill: SC, 'fill-opacity': 0.75, rx: 4 }, tk);
-    for (let v = 0; v <= d.tankMax; v += d.tick) { svgEl('line', { x1: ox - 8, x2: ox, y1: ty(v), y2: ty(v), stroke: INK, 'stroke-width': 1.5 }, tk); const t = svgEl('text', { x: ox - 12, y: ty(v) + 6, 'text-anchor': 'end', class: 'u1l8-tapen' }, tk); t.textContent = hn(v, 0); }
-    const ceil = svgEl('line', { x1: ox - 4, x2: ox + TW + 10, y1: ty(d.Sinf), y2: ty(d.Sinf), stroke: GC, 'stroke-width': 3.5, 'stroke-dasharray': '8 5' }, tk); hide(ceil);
-    const ceilL = hide(add(stage, h('div', 'u1l8-ceil', T(cG(`S_\\infty=${tn(d.Sinf, 0)}`))), TX + TW + 6, ty(d.Sinf) - 18));
-    const totL = add(stage, h('div', 'u1l8-tankl', `total: <b class="u1l8-tankv">0</b>`), TX - 40, 432);
-    const tv = totL.querySelector('.u1l8-tankv');
-    const fillTo = (c, a, b) => tween(c, 600, (t) => { const v = a + (b - a) * t; water.setAttribute('y', ty(v)); water.setAttribute('height', TY0 + TH - ty(v)); tv.textContent = hn(Math.round(v), 0); });
-    const note = hide(add(stage, box(h('div', 'u1l8-cnote'), 210, null), TX + TW + 6, 300));
-    const barsIn = async (c, a, b) => { for (let n = a; n <= b; n++) await appear(c, bars[n - 1], 70); };
-    const t5 = tn_(5), S10 = Sn(10), S30 = Sn(30);
-    return [
-      { cap: `Week 1: ${T(cT('t_1=12\\,000'))} downloads. The total so far is ${T('12\\,000')}.`, run: async (c) => { await barsIn(c, 1, 1); await fillTo(c, 0, t1); } },
-      { cap: `Each week is ${T(cR(d.pct))} of the last. Week 5: ${T(`t_5=12\\,000(${d.rT})^4\\approx${tn(Math.round(t5), 0)}`)}.`, run: async (c) => { await barsIn(c, 2, 5); await fillTo(c, t1, Sn(5)); } },
-      { cap: `First 10 weeks: ${T(`S_{10}=\\dfrac{12\\,000(1-${d.rT}^{10})}{1-${d.rT}}\\approx${tn(Math.round(S10), 0)}`)}.`, run: async (c) => { await barsIn(c, 6, 10); await fillTo(c, Sn(5), S10); } },
-      { cap: `Weeks 11 to 30: the bars shrink, the tank fills more and more slowly (${T(`S_{30}\\approx${tn(Math.round(S30), 0)}`)}).`, run: async (c) => { await barsIn(c, 11, NW); await fillTo(c, S10, S30); } },
-      { cap: `The ceiling: ${T(`S_\\infty=\\dfrac{12\\,000}{1-${d.rT}}=\\dfrac{12\\,000}{${tn(1 - d.r, 2)}}=${cG(tn(d.Sinf, 0))}`)} downloads. The total can never reach more.`,
-        run: async (c) => { await appear(c, ceil, 300); await show(c, ceilL); note.innerHTML = k === 'ex7' ? 'Real life: an update or an ad would change the pattern.' : `A slower fade (${T('r')} closer to 1) gives a <b>much</b> higher ceiling.`; await show(c, note); } }
-    ];
-  }
-};
-
-/* ====================================================================================================
  * explainer: xrange — x on one line, r on another; pull the gate back to x
  * ==================================================================================================== */
 const XR = {
@@ -855,7 +535,6 @@ standup('u1l8', {
 });
 
 /* =============================== mount =============================== */
-mountChoc();
 mountFigures();
-export const explainers = mountExplainers({ fill, partials, powers, gate, gap, solve, decimal, bounce, ceiling, xrange });
-export const _test = { tn, fr, FILL, PS, PW, GS, GP, SV, DC, BB, CL, XR };
+export const explainers = mountExplainers({ fill, gate, decimal, bounce, xrange });
+export const _test = { tn, fr, FILL, GS, DC, BB, XR };

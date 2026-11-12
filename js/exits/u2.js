@@ -1,5 +1,5 @@
 /* Math 20-1 · Unit 2 (Radical Expressions) — exit slips for Lessons 1–7 (u2l1x … u2l7x), written in test mode at the end
- * of class. Outcome AN2 on every question; NO calculator (the unit is exact answers only). There are no older exit slips
+ * of class. Outcome AN2 on every question; calculator allowed, but every answer is exact (simplest radical form). There are no older exit slips
  * for this course: each slip is written from Ryan's Unit 2 booklet (m201book/unit2/u2_lXX.tex and u2_epXX.tex), 3–4 short
  * questions (5–8 minutes): Beginning = the lesson's first-taught skill, Progressing = the typical assignment question,
  * Mastery = one of the lesson's harder assignment / extra-practice items. New numbers every time (the booklet's own
@@ -119,7 +119,7 @@
       out.push({ s: sign, a: a }); return out;
     }
     var H = {
-      decimal: 'That’s a decimal. Give the <b>exact</b> answer with radicals — no calculator in this unit.',
+      decimal: 'That’s a decimal (a calculator’s answer is only an approximation). Give the <b>exact</b> answer with radicals, in simplest form.',
       expand: 'Right value — now multiply out the brackets and simplify, so the answer is a sum of simplified terms.',
       oneroot: 'Right value, but one term still has two radicals multiplied together. Multiply them into one radical and simplify it.',
       fracunder: 'Right value, but there is a fraction under a radical. Write it as a radical over a radical, then rationalize the denominator.',

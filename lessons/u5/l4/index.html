@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>General Form and Factored Form · Math 20-1 5.4</title>
+<meta name="description" content="Math 20-1 Unit 5 Lesson 4: general form y = ax² + bx + c and factored form y = a(x − r)(x − s). The three forms of a quadratic function; zeros, the axis of symmetry as the midpoint of the zeros, the vertex and the y-intercept from factored form; the y-intercept, the axis x = −b/2a and the vertex from general form; zeros that are not integers; choosing the best form; unknown coefficients. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u5l4.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u5l4">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Three Switches">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><text x="300" y="46" font-size="38" text-anchor="middle">💡<animate attributeName="opacity" values="1;0.15;1" dur="2.2s" begin="0s" repeatCount="indefinite"/></text><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;250 0" dur="6s" begin="0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="0.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="36" text-anchor="middle" transform="scale(-1 1)">🚶</text></g></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Three Switches</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Three light switches are downstairs. <b>One</b> of them turns on a lamp in a closed room upstairs; the other two do nothing. From downstairs you can't see the room.</p><p class="vw-ctx">Flip the switches as much as you like, then walk upstairs <b>once</b>.</p><p class="vw-ask">How can you tell which switch works the lamp?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A house cut open: three switches flicking downstairs, stairs up to a closed door with a question mark"><rect x="0" y="0" width="330" height="250" rx="14" fill="#eef3fb"/><path d="M20 112 L165 22 L310 112 Z" fill="#c9a27a" stroke="#4a4436" stroke-width="3"/><rect x="34" y="112" width="262" height="124" fill="#fffdf6" stroke="#4a4436" stroke-width="3"/><line x1="34" y1="174" x2="296" y2="174" stroke="#4a4436" stroke-width="3"/><rect x="214" y="122" width="34" height="52" rx="3" fill="#9c6b3f" stroke="#4a4436" stroke-width="2.5"/><circle cx="242" cy="150" r="2.6" fill="#e0a11b"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="231" y="114" font-size="34" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g><path d="M150 236 h22 v-12 h22 v-12 h22 v-12 h22 v-12 h22 v-14" fill="none" stroke="#4a4436" stroke-width="3" stroke-linejoin="round"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -3;0 0" dur="0.6s" repeatCount="indefinite"/><text x="128" y="230" font-size="30" text-anchor="middle">🚶</text></g><rect x="50" y="186" width="72" height="40" rx="6" fill="#ffffff" stroke="#4a4436" stroke-width="2.5"/><g fill="#d9d3c4" stroke="#4a4436" stroke-width="1.5"><rect x="58" y="192" width="14" height="28" rx="3"/><rect x="79" y="192" width="14" height="28" rx="3"/><rect x="100" y="192" width="14" height="28" rx="3"/></g><rect x="60" y="194" width="10" height="12" rx="2" fill="#c93a33"><animate attributeName="y" values="194;206;206;194" keyTimes="0;.25;.75;1" dur="2.4s" repeatCount="indefinite"/></rect><rect x="81" y="194" width="10" height="12" rx="2" fill="#2b55a0"><animate attributeName="y" values="206;194;194;206" keyTimes="0;.3;.6;1" dur="3s" repeatCount="indefinite"/></rect><rect x="102" y="194" width="10" height="12" rx="2" fill="#12805a"><animate attributeName="y" values="194;194;206;194" keyTimes="0;.4;.7;1" dur="3.6s" repeatCount="indefinite"/></rect><text x="65" y="183" font-size="13" font-weight="800" fill="#4a4436" text-anchor="middle">A</text><text x="86" y="183" font-size="13" font-weight="800" fill="#4a4436" text-anchor="middle">B</text><text x="107" y="183" font-size="13" font-weight="800" fill="#4a4436" text-anchor="middle">C</text><rect x="60" y="126" width="56" height="34" rx="4" fill="#cfe3f6" stroke="#4a4436" stroke-width="2.5"/><line x1="88" y1="126" x2="88" y2="160" stroke="#4a4436" stroke-width="2"/></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>One trip up, no coming back down. Can you be sure?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans">Turn switch <b>A</b> on and wait ten minutes. Then turn A <b>off</b>, turn <b>B</b> on, and go upstairs.<br>Lamp <b>on</b>: it's B. &nbsp;Lamp off but <b>warm</b>: it's A (it was on long enough to heat up). &nbsp;Off and <b>cold</b>: it's C.<br><span class="muted">The twist: a lamp tells you more than “on or off”. It can also be warm, so one trip gives three different clues for three switches. (Use an old-style bulb: an LED barely warms up!)</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 5 Quadratic Functions · Lesson 4</div>
+  <h1>General Form and Factored Form: Intercepts, Axis and Vertex</h1>
+  <p class="lede">The same parabola can be written three ways. Each form hands you some features for free: <b class="u5l4-cv">vertex form</b> the vertex, <b class="u5l4-cg">general form</b> the <span class="tex">y</span>-intercept, <b class="u5l4-cz">factored form</b> the zeros. Today: how to find the rest from each form.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>change factored form and vertex form into general form</li>
+      <li>find the zeros, the axis of symmetry (halfway between the zeros), the vertex and the <span class="tex">y</span>-intercept from <span class="tex">y=a(x-r)(x-s)</span></li>
+      <li>find the <span class="tex">y</span>-intercept, the axis <span class="tex">x=-\frac{b}{2a}</span>, the vertex and the maximum or minimum value from <span class="tex">y=ax^2+bx+c</span></li>
+      <li>find <span class="tex">x</span>-intercepts that are not integers, exactly and with the calculator</li>
+      <li>choose the best form for a feature, and find an unknown coefficient</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF4</b> Analyze quadratic functions of the form <span class="tex">y=ax^2+bx+c</span> to identify characteristics of the corresponding graph, including vertex, domain and range, direction of opening, axis of symmetry, <span class="tex">x</span>- and <span class="tex">y</span>-intercepts, and to solve problems.<br><span class="muted">Today: general form and factored form, the zeros, the axis as the midpoint and <span class="tex">x=-\frac{b}{2a}</span>, the vertex and the <span class="tex">y</span>-intercept, zeros that are not integers, and the best form for each feature.</span></div>
+</section>
+
+<!-- ================= 1. Three forms ================= -->
+<section class="card" data-ink="s1" data-section="1. Three Forms">
+  <div class="sec-h"><span class="badge">1</span><h2>Three Forms of a Quadratic Function</h2></div>
+  <p class="u5l4-p">The same parabola can be written in three forms. Each form shows some features directly; the others take a little work.</p>
+  <table class="u5l4-ftab">
+    <tr><th>Form</th><th>Equation</th><th>Read directly</th></tr>
+    <tr class="u5l4-rv"><td>Vertex form</td><td><span class="tex">y=a(x-p)^2+q</span></td><td>vertex <span class="tex">(p,\ q)</span>, axis <span class="tex">x=p</span>, max/min value <span class="tex">q</span></td></tr>
+    <tr class="u5l4-rg"><td>General form</td><td><span class="tex">y=ax^2+bx+c</span></td><td><span class="tex">y</span>-intercept <span class="tex">c</span></td></tr>
+    <tr class="u5l4-rz"><td>Factored form</td><td><span class="tex">y=a(x-r)(x-s)</span></td><td>zeros <span class="tex">r</span> and <span class="tex">s</span> (the <span class="tex">x</span>-intercepts)</td></tr>
+  </table>
+  <div class="explainer" data-explainer="forms"></div>
+  <div class="def">In all three forms <span class="tex">a</span> is the <b>same number</b>: it gives the direction of opening and the shape. To change vertex form or factored form into general form, <b>expand and collect like terms</b>.</div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Into general form</h3></div>
+  <p class="q">Write each function in general form and state <span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y=2(x-3)(x+1)</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=2(x^2-2x-3)</span><br><span class="tex">y=2x^2-4x-6</span>; &nbsp;<span class="tex">a=2</span>, <span class="tex">b=-4</span>, <span class="tex">c=-6</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y=-(x+4)(x-2)</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=-(x^2+2x-8)</span><br><span class="tex">y=-x^2-2x+8</span>; &nbsp;<span class="tex">a=-1</span>, <span class="tex">b=-2</span>, <span class="tex">c=8</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">y=\frac12(x-6)(x+2)</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=\frac12(x^2-4x-12)</span><br><span class="tex">y=\frac12x^2-2x-6</span>; &nbsp;<span class="tex">a=\frac12</span>, <span class="tex">b=-2</span>, <span class="tex">c=-6</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">y=3(x-1)^2-5</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=3(x^2-2x+1)-5</span><br><span class="tex">y=3x^2-6x-2</span>; &nbsp;<span class="tex">a=3</span>, <span class="tex">b=-6</span>, <span class="tex">c=-2</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Factored form ================= -->
+<section class="card" data-ink="s2" data-section="2. Factored Form">
+  <div class="sec-h"><span class="badge">2</span><h2>Factored Form: Zeros, Axis of Symmetry and Vertex</h2></div>
+  <p class="u5l4-p">In <span class="tex">y=a(x-r)(x-s)</span>, the zero product property gives the <b class="u5l4-cz">zeros</b> <span class="tex">r</span> and <span class="tex">s</span>. The two <span class="tex">x</span>-intercepts are mirror images, so the <b class="u5l4-cv">axis of symmetry</b> is halfway between them. The vertex lies on the axis: substitute that <span class="tex">x</span>-value to get its <span class="tex">y</span>-coordinate.</p>
+  <div class="def amber u5l4-key"><div class="u5l4-keyh">Key idea</div>
+    <span class="tex">y=a(x-r)(x-s)</span>: &nbsp;zeros <span class="tex">r</span> and <span class="tex">s</span>; &nbsp;axis <span class="tex">x=\dfrac{r+s}{2}</span>; &nbsp;vertex: substitute <span class="tex">x=\dfrac{r+s}{2}</span>; &nbsp;<span class="tex">y</span>-intercept: substitute <span class="tex">x=0</span>.</div>
+  <p class="u5l4-p">A factor such as <span class="tex">(2x+3)</span> gives the zero <span class="tex">x=-\frac32</span> (set the factor equal to <span class="tex">0</span>).</p>
+  <div class="explainer" data-explainer="midpt"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Everything from factored form</h3></div>
+  <p class="q">For each function, state the zeros, the equation of the axis of symmetry, the vertex, the <span class="tex">y</span>-intercept and the maximum or minimum value.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y=(x-2)(x+6)</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zeros <span class="tex">2</span> and <span class="tex">-6</span><br>Axis <span class="tex">x=\frac{2+(-6)}{2}=-2</span><br><span class="tex">y=(-2-2)(-2+6)=(-4)(4)=-16</span>: vertex <span class="tex">(-2,\ -16)</span><br><span class="tex">y</span>-int: <span class="tex">(-2)(6)=-12</span><br><span class="tex">a&gt;0</span>: minimum value <span class="tex">-16</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y=-3(x+1)(x-7)</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zeros <span class="tex">-1</span> and <span class="tex">7</span><br>Axis <span class="tex">x=\frac{-1+7}{2}=3</span><br><span class="tex">y=-3(4)(-4)=48</span>: vertex <span class="tex">(3,\ 48)</span><br><span class="tex">y</span>-int: <span class="tex">-3(1)(-7)=21</span><br><span class="tex">a&lt;0</span>: maximum value <span class="tex">48</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">y=2x(x-5)</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zeros <span class="tex">0</span> and <span class="tex">5</span><br>Axis <span class="tex">x=2.5</span><br><span class="tex">y=2(2.5)(-2.5)=-12.5</span>: vertex <span class="tex">(2.5,\ -12.5)</span><br><span class="tex">y</span>-int <span class="tex">0</span>; minimum value <span class="tex">-12.5</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">y=(2x+3)(x-2)</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x+3=0\Rightarrow x=-\frac32</span>; zeros <span class="tex">-\frac32</span> and <span class="tex">2</span><br>Axis <span class="tex">x=\frac{-1.5+2}{2}=\frac14</span><br><span class="tex">y=(3.5)(-1.75)=-6.125=-\frac{49}{8}</span>: vertex <span class="tex">\left(\frac14,\ -\frac{49}{8}\right)</span><br><span class="tex">y</span>-int <span class="tex">(3)(-2)=-6</span>; minimum <span class="tex">-\frac{49}{8}</span></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Analyze, then sketch</h3></div>
+  <p class="q">Analyze <span class="tex">y=-\frac12(x+1)(x-5)</span>, then sketch its graph.</p>
+  <div class="part u5l4-an">
+    <div class="u5l4-ang">
+      <table class="u5l4-atab">
+        <tr><td>Zeros</td><td><span data-reveal><span class="tex">-1</span> and <span class="tex">5</span></span></td></tr>
+        <tr><td>Axis of symmetry</td><td><span data-reveal><span class="tex">x=2</span></span></td></tr>
+        <tr><td>Vertex</td><td><span data-reveal><span class="tex">(2,\ 4.5)</span></span></td></tr>
+        <tr><td><span class="tex">y</span>-intercept</td><td><span data-reveal><span class="tex">2.5</span></span></td></tr>
+        <tr><td>Domain</td><td><span data-reveal><span class="tex">\{x\mid x\in\mathbb{R}\}</span></span></td></tr>
+        <tr><td>Range</td><td><span data-reveal><span class="tex">\{y\mid y\le4.5,\ y\in\mathbb{R}\}</span></span></td></tr>
+      </table>
+      <div class="u5l4-sk">
+        <div data-bk-graph='{"width":360,"height":360,"xmin":-3,"xmax":7,"ymin":-4,"ymax":6,"fontSize":14}'></div>
+        <div class="u5l4-ska" data-bk-graph='{"width":360,"height":360,"xmin":-3,"xmax":7,"ymin":-4,"ymax":6,"fontSize":14,"items":[{"vline":[2,{"color":"red"}]},{"fn":["-0.5*(x+1)*(x-5)",{"color":"blue","from":-1.9,"to":5.9}]},{"point":[-1,0,{"color":"amber"}]},{"point":[5,0,{"color":"amber"}]},{"point":[2,4.5,{"color":"red"}]},{"point":[0,2.5,{"color":"green"}]},{"point":[4,2.5,{"color":"green","open":true}]}]}'></div>
+      </div>
+    </div>
+    <div class="work" style="--h:70px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Axis: <span class="tex">x=\frac{-1+5}{2}=2</span>. &nbsp;Vertex: <span class="tex">y=-\frac12(3)(-3)=4.5</span>; <span class="tex">a&lt;0</span>, so <span class="tex">4.5</span> is the maximum.<br><span class="tex">y</span>-int: <span class="tex">-\frac12(1)(-5)=2.5</span>; mirror point <span class="tex">(4,\ 2.5)</span>.</div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. General form ================= -->
+<section class="card" data-ink="s3" data-section="3. General Form">
+  <div class="sec-h"><span class="badge">3</span><h2>General Form: the <span class="tex">y</span>-Intercept and the Axis <span class="tex">x=-\frac{b}{2a}</span></h2></div>
+  <p class="u5l4-p">In <span class="tex">y=ax^2+bx+c</span>, substituting <span class="tex">x=0</span> gives <span class="tex">y=c</span>, so the <b class="u5l4-cg"><span class="tex">y</span>-intercept is <span class="tex">c</span></b>. For the axis of symmetry, compare with <span class="tex">y=ax^2+bx</span>: it is the same parabola moved <span class="tex">c</span> units up or down, so it has the same axis. Its zeros come from <span class="tex">x(ax+b)=0</span>: <span class="tex">x=0</span> and <span class="tex">x=-\frac{b}{a}</span>. The axis is halfway between them.</p>
+  <div class="def amber u5l4-key"><div class="u5l4-keyh">Key idea</div>
+    <span class="tex">y=ax^2+bx+c</span>: &nbsp;<span class="tex">y</span>-intercept <span class="tex">c</span>; &nbsp;axis of symmetry <span class="tex">x=-\dfrac{b}{2a}</span>; &nbsp;vertex: substitute <span class="tex">x=-\dfrac{b}{2a}</span> into the equation; &nbsp;<span class="tex">a&gt;0</span>: minimum, <span class="tex">a&lt;0</span>: maximum.</div>
+  <div class="explainer" data-explainer="genf"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Two signs to watch.</b> The formula starts with a <b>negative</b>: <span class="tex">-\frac{b}{2a}</span>, so a negative <span class="tex">b</span> gives a positive <span class="tex">x</span>. And when you substitute a negative <span class="tex">x</span>, square it in brackets: <span class="tex">(-3)^2=9</span>.</div></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Everything from general form</h3></div>
+  <p class="q">Complete the table.</p>
+  <div class="part u5l4-tpart">
+    <table class="u5l4-tab">
+      <tr><th>Function</th><th>Axis of symmetry</th><th>Vertex</th><th>Max or min value</th><th><span class="tex">y</span>-intercept</th></tr>
+      <tr><td>(a) <span class="tex">y=x^2-8x+10</span></td><td><span data-reveal><span class="tex">x=4</span></span></td><td><span data-reveal><span class="tex">(4,\ -6)</span></span></td><td><span data-reveal>minimum <span class="tex">-6</span></span></td><td><span data-reveal><span class="tex">10</span></span></td></tr>
+      <tr><td>(b) <span class="tex">y=2x^2+12x+7</span></td><td><span data-reveal><span class="tex">x=-3</span></span></td><td><span data-reveal><span class="tex">(-3,\ -11)</span></span></td><td><span data-reveal>minimum <span class="tex">-11</span></span></td><td><span data-reveal><span class="tex">7</span></span></td></tr>
+      <tr><td>(c) <span class="tex">y=-3x^2+12x+1</span></td><td><span data-reveal><span class="tex">x=2</span></span></td><td><span data-reveal><span class="tex">(2,\ 13)</span></span></td><td><span data-reveal>maximum <span class="tex">13</span></span></td><td><span data-reveal><span class="tex">1</span></span></td></tr>
+      <tr><td>(d) <span class="tex">y=-x^2-5x</span></td><td><span data-reveal><span class="tex">x=-\frac52</span></span></td><td><span data-reveal><span class="tex">\left(-\frac52,\ \frac{25}{4}\right)</span></span></td><td><span data-reveal>maximum <span class="tex">\frac{25}{4}</span></span></td><td><span data-reveal><span class="tex">0</span></span></td></tr>
+    </table>
+    <div class="work" style="--h:90px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">(a) <span class="tex">x=-\frac{-8}{2(1)}=4</span>; <span class="tex">y=16-32+10=-6</span>. &nbsp; (b) <span class="tex">x=-\frac{12}{4}=-3</span>; <span class="tex">y=18-36+7=-11</span>.<br>(c) <span class="tex">x=-\frac{12}{-6}=2</span>; <span class="tex">y=-12+24+1=13</span>. &nbsp; (d) <span class="tex">x=-\frac{-5}{-2}=-\frac52</span>; <span class="tex">y=-\frac{25}{4}+\frac{25}{2}=\frac{25}{4}</span>.</div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>General form, then factored form</h3></div>
+  <p class="q">Consider <span class="tex">y=-x^2+2x+8</span>.</p>
+  <div class="u5l4-ex5">
+    <div class="u5l4-col">
+      <div class="part"><div class="pl">(a) State the <span class="tex">y</span>-intercept, the axis of symmetry and the vertex.</div><div class="work" style="--h:84px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y</span>-int <span class="tex">8</span>. Axis <span class="tex">x=-\frac{2}{2(-1)}=1</span>.<br><span class="tex">y=-1+2+8=9</span>: vertex <span class="tex">(1,\ 9)</span>, maximum value <span class="tex">9</span>.</div></div></div>
+      <div class="part"><div class="pl">(b) Write the function in factored form and state its zeros.</div><div class="work" style="--h:84px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=-(x^2-2x-8)=-(x-4)(x+2)</span><br>Zeros <span class="tex">4</span> and <span class="tex">-2</span> (midpoint <span class="tex">1</span> ✓).</div></div></div>
+      <div class="part"><div class="pl">(c) State the range, then sketch the graph.</div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">R: <span class="tex">\{y\mid y\le9,\ y\in\mathbb{R}\}</span>. Mirror of <span class="tex">(0,\ 8)</span> is <span class="tex">(2,\ 8)</span>.</div></div></div>
+    </div>
+    <div class="part u5l4-skp">
+      <div class="u5l4-sk">
+        <div data-bk-graph='{"width":360,"height":420,"xmin":-4,"xmax":6,"ymin":-2,"ymax":10,"fontSize":14}'></div>
+        <div class="u5l4-ska" data-bk-graph='{"width":360,"height":420,"xmin":-4,"xmax":6,"ymin":-2,"ymax":10,"fontSize":14,"items":[{"fn":["-x^2+2*x+8",{"color":"blue","from":-2.6,"to":4.6}]},{"point":[-2,0,{"color":"amber"}]},{"point":[4,0,{"color":"amber"}]},{"point":[1,9,{"color":"red"}]},{"point":[0,8,{"color":"green"}]},{"point":[2,8,{"color":"green","open":true}]}]}'></div>
+      </div>
+    </div>
+  </div>
+  <div class="explainer u5l4-exin" data-explainer="xfac"></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 4 · Questions 1–6</h2>
+  <p class="pr-t">Factored form: zeros first, then the midpoint. General form: <span class="tex">c</span>, then <span class="tex">x=-\frac{b}{2a}</span>. Substitute for the vertex every time.</p>
+  <div class="pr-chips"><span><b>1</b>Into general form</span><span><b>2–3</b>Everything from factored form, and a sketch</span><span><b>4</b>Everything from general form</span><span><b>5–6</b>Factor with the X, then the zeros and the vertex</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u5l4">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. Zeros that are not integers ================= -->
+<section class="card" data-ink="s4" data-section="4. Zeros That Are Not Integers">
+  <div class="sec-h"><span class="badge">4</span><h2>When the Zeros Are Not Integers</h2></div>
+  <p class="u5l4-p">Many general-form functions do not factor. Two ways to find the <span class="tex">x</span>-intercepts:</p>
+  <ul class="u5l4-ul">
+    <li><b>Graphing calculator:</b> graph the function and use the <b>zero</b> feature (once for each <span class="tex">x</span>-intercept). This gives decimal answers.</li>
+    <li><b>Exact values:</b> find the vertex <span class="tex">(p,\ q)</span> with <span class="tex">x=-\frac{b}{2a}</span>. Since <span class="tex">a</span> is the same in every form, the function is <span class="tex">y=a(x-p)^2+q</span>. Then solve <span class="tex">a(x-p)^2+q=0</span> with square roots, as in Lesson 3. (Lesson 6 shows another way to reach vertex form: completing the square.)</li>
+  </ul>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>The zero feature.</b> Put the function in <span class="keys"><kbd>Y=</kbd></span>, graph it, then <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd><kbd>2</kbd></span> (zero): give a left bound, a right bound and a guess around <b>one</b> <span class="tex">x</span>-intercept. Do it again for the other one. For <span class="tex">y=2x^2-4x-5</span> (Example 6):</div>
+    <div class="u5l4-pcol"><button class="pill" data-keys="Y= CLEAR 2 X x² − 4 X − 5 ZStandard zero 2 ENTER 4 ENTER 3 ENTER">Right zero</button><button class="pill" data-keys="Y= CLEAR 2 X x² − 4 X − 5 ZStandard zero (−) 2 ENTER 0 ENTER (−) 1 ENTER">Left zero</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Exact zeros through vertex form</h3></div>
+  <p class="q">Consider <span class="tex">y=2x^2-4x-5</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine the vertex and write the function in vertex form. Check by expanding.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Axis <span class="tex">x=-\frac{-4}{2(2)}=1</span>; <span class="tex">y=2-4-5=-7</span>.<br>Vertex <span class="tex">(1,\ -7)</span>, and <span class="tex">a=2</span>: <span class="tex">y=2(x-1)^2-7</span>.<br>Check: <span class="tex">2(x^2-2x+1)-7=2x^2-4x-5</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) Determine the <span class="tex">x</span>-intercepts exactly and to the nearest hundredth. Check with the calculator's zero feature.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2(x-1)^2=7\Rightarrow(x-1)^2=\frac72</span><br><span class="tex">x=1\pm\sqrt{\frac72}=1\pm\frac{\sqrt{14}}{2}</span><br><span class="tex">x\approx2.87</span> or <span class="tex">x\approx-0.87</span> (the zero feature gives the same).</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Using the best form ================= -->
+<section class="card" data-ink="s5" data-section="5. Using the Best Form">
+  <div class="sec-h"><span class="badge">5</span><h2>Using the Best Form</h2></div>
+  <div class="def">Choose the form that shows what you need: <b class="u5l4-cv">vertex form</b> for the vertex and range, <b class="u5l4-cg">general form</b> for the <span class="tex">y</span>-intercept, <b class="u5l4-cz">factored form</b> for the zeros. When an unknown coefficient is involved, use the formula for the axis or substitute a known point.</div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>One function, three equations</h3></div>
+  <p class="q">The equations <span class="tex">y=2(x-1)^2-8</span>, &nbsp;<span class="tex">y=2x^2-4x-6</span> &nbsp;and &nbsp;<span class="tex">y=2(x+1)(x-3)</span> are given.</p>
+  <div class="part"><div class="pl">(a) Show that all three describe the same function.</div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2(x-1)^2-8=2(x^2-2x+1)-8=2x^2-4x-6</span><br><span class="tex">2(x+1)(x-3)=2(x^2-2x-3)=2x^2-4x-6</span> ✓</div></div></div>
+  <div class="part"><div class="pl">(b) Complete the table, naming the form that shows each feature most directly.</div>
+    <table class="u5l4-tab u5l4-tab7">
+      <tr><th>Feature</th><th>Value</th><th>Best form</th></tr>
+      <tr><td>Vertex</td><td><span data-reveal><span class="tex">(1,\ -8)</span></span></td><td><span data-reveal>vertex form</span></td></tr>
+      <tr><td><span class="tex">y</span>-intercept</td><td><span data-reveal><span class="tex">-6</span></span></td><td><span data-reveal>general form</span></td></tr>
+      <tr><td>Zeros</td><td><span data-reveal><span class="tex">-1</span> and <span class="tex">3</span></span></td><td><span data-reveal>factored form</span></td></tr>
+      <tr><td>Range</td><td><span data-reveal><span class="tex">\{y\mid y\ge-8,\ y\in\mathbb{R}\}</span></span></td><td><span data-reveal>vertex form</span></td></tr>
+    </table>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex <span class="tex">(1,\ -8)</span> and range <span class="tex">\{y\mid y\ge-8,\ y\in\mathbb{R}\}</span> from vertex form; <span class="tex">y</span>-intercept <span class="tex">-6</span> from general form; zeros <span class="tex">-1</span> and <span class="tex">3</span> from factored form.</div></div></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u5l4"></section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>An unknown coefficient</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) The graph of <span class="tex">y=x^2+bx+11</span> has axis of symmetry <span class="tex">x=3</span>. Determine <span class="tex">b</span> and the vertex.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-\frac{b}{2(1)}=3\Rightarrow b=-6</span><br><span class="tex">y=9-18+11=2</span><br>Vertex <span class="tex">(3,\ 2)</span></div></div></div>
+    <div class="part"><div class="pl">(b) The function <span class="tex">y=-2x^2+8x+c</span> has a maximum value of <span class="tex">5</span>. Determine <span class="tex">c</span>.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Axis <span class="tex">x=-\frac{8}{2(-2)}=2</span>, so the vertex is <span class="tex">(2,\ 5)</span>.<br><span class="tex">5=-2(4)+8(2)+c=8+c</span><br><span class="tex">c=-3</span></div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex9" data-section="Example 9">
+  <div class="ex-head"><span class="ex-tag">Example 9</span><h3>A pen against the barn</h3></div>
+  <p class="q">A farmer uses <span class="tex">40</span> m of fencing to make a rectangular pen against a long barn wall (no fence along the wall). If each side touching the wall is <span class="tex">x</span> m long, the area in square metres is <span class="tex">A=x(40-2x)</span>.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Write <span class="tex">A</span> in the form <span class="tex">a(x-r)(x-s)</span> and state the zeros. What do they mean?</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">A=x(-2)(x-20)=-2x(x-20)</span><br>Zeros <span class="tex">0</span> and <span class="tex">20</span>: with <span class="tex">x=0</span> or <span class="tex">x=20</span> there is no pen (the area is <span class="tex">0</span>).</div></div></div>
+    <div class="part"><div class="pl">(b) Determine the maximum area and the dimensions that give it.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Axis <span class="tex">x=\frac{0+20}{2}=10</span><br><span class="tex">A=10(40-20)=200</span><br>Maximum area <span class="tex">200\text{ m}^2</span>: <span class="tex">10</span> m by <span class="tex">20</span> m (the <span class="tex">20</span> m side along the wall).</div></div></div>
+    <div class="part"><div class="pl">(c) State the domain and range of <span class="tex">A</span> in this context.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">D: <span class="tex">\{x\mid 0&lt;x&lt;20,\ x\in\mathbb{R}\}</span><br>R: <span class="tex">\{A\mid 0&lt;A\le200,\ A\in\mathbb{R}\}</span></div></div></div>
+  </div>
+  <div class="explainer u5l4-exin" data-explainer="pen"></div>
+  <div class="space" id="ex9-space"></div>
+  <button class="more" data-more="ex9-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Three forms, one <span class="tex">a</span>.</b> <b class="u5l4-cv">Vertex form</b> <span class="tex">a(x-p)^2+q</span>, <b class="u5l4-cg">general form</b> <span class="tex">ax^2+bx+c</span>, <b class="u5l4-cz">factored form</b> <span class="tex">a(x-r)(x-s)</span>. To reach general form, expand and collect like terms.</div>
+    <div><b>Factored form.</b> Zeros <span class="tex">r</span> and <span class="tex">s</span>; axis <span class="tex">x=\frac{r+s}{2}</span> (halfway between them); substitute it for the vertex; <span class="tex">x=0</span> for the <span class="tex">y</span>-intercept.</div>
+    <div><b>General form.</b> <span class="tex">y</span>-intercept <span class="tex">c</span>; axis <span class="tex">x=-\frac{b}{2a}</span>; substitute it for the vertex; <span class="tex">a&gt;0</span> minimum, <span class="tex">a&lt;0</span> maximum. Zeros that aren't integers: vertex form and square roots (exact), or the calculator's zero.</div>
+    <div><b>The best form.</b> Vertex form for the vertex and range, general form for the <span class="tex">y</span>-intercept, factored form for the zeros. An unknown coefficient: the axis formula or a known point.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u5l4">
+    <div><div class="kicker">Your turn</div><b>Assignment 4 · Questions 7–17</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l5/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 5 — Writing a Quadratic Equation from Its Vertex and a Point</b><div class="muted">Working backwards: from the vertex (or the zeros) and one more point to the equation, by finding <span class="tex">a</span>; arches and flight paths.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u5l4.js';
+  boot({ key: 'u5l4', homeHref: '../../', title: '5.4 General and Factored Form' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

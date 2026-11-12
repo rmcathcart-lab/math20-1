@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dividing Rational Expressions · Math 20-1 6.4</title>
+<meta name="description" content="Math 20-1 Unit 6 Lesson 4: dividing rational expressions by multiplying by the reciprocal of the divisor. Non-permissible values from both denominators and from the divisor's numerator, polynomials and two variables, mixed multiplication and division from left to right, complex fractions and area problems. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u6l4.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u6l4">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Mystery Machine">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="0 140 30;360 140 30" dur="4s" repeatCount="indefinite"/><text x="140" y="30" font-size="40" text-anchor="middle" dominant-baseline="central">⚙️</text></g><g><animateTransform attributeName="transform" type="rotate" values="360 196 30;0 196 30" dur="4s" repeatCount="indefinite"/><text x="196" y="30" font-size="40" text-anchor="middle" dominant-baseline="central">⚙️</text></g><text x="250" y="46" font-size="40" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Mystery Machine</h2>
+  <p class="wf-rule vw-rule">A number goes in, the machine does something to it, and a new number comes out. What comes out when <b>0.4</b> goes in?</p></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><div class="vw-mach u6l4-mach"><div><span class="u6l4-mi"><span class="tex">4</span></span><i>→</i><span class="u6l4-mo"><span class="tex">\dfrac{1}{4}</span></span></div><div><span class="u6l4-mi"><span class="tex">\dfrac{2}{3}</span></span><i>→</i><span class="u6l4-mo"><span class="tex">\dfrac{3}{2}</span></span></div><div><span class="u6l4-mi"><span class="tex">\dfrac{1}{5}</span></span><i>→</i><span class="u6l4-mo"><span class="tex">5</span></span></div><div><span class="u6l4-mi"><span class="tex">-\dfrac{3}{7}</span></span><i>→</i><span class="u6l4-mo"><span class="tex">-\dfrac{7}{3}</span></span></div><div><span class="u6l4-mi"><span class="tex">0.4</span></span><i>→</i><span class="u6l4-mo q">?</span></div></div></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="a number machine with spinning gears; a card goes in the top and a card comes out the side"><polygon points="118,30 212,30 192,74 138,74" fill="#f3e4ea" stroke="#4a4436" stroke-width="3.5" stroke-linejoin="round"/><rect x="62" y="72" width="206" height="128" rx="16" fill="#eef1f8" stroke="#4a4436" stroke-width="3.5"/><rect x="262" y="168" width="44" height="18" rx="4" fill="#d9d3c4" stroke="#4a4436" stroke-width="3"/><rect x="84" y="208" width="22" height="22" rx="4" fill="#4a4436"/><rect x="224" y="208" width="22" height="22" rx="4" fill="#4a4436"/><circle cx="86" cy="92" r="7" fill="#c93a33"><animate attributeName="opacity" values="1;0.2;1" dur="1.2s" begin="0.0s" repeatCount="indefinite"/></circle><circle cx="108" cy="92" r="7" fill="#e0a11b"><animate attributeName="opacity" values="1;0.2;1" dur="1.2s" begin="0.4s" repeatCount="indefinite"/></circle><circle cx="130" cy="92" r="7" fill="#12805a"><animate attributeName="opacity" values="1;0.2;1" dur="1.2s" begin="0.8s" repeatCount="indefinite"/></circle><g><animateTransform attributeName="transform" type="rotate" values="0 128 146;360 128 146" dur="4s" repeatCount="indefinite"/><text x="128" y="146" font-size="62" text-anchor="middle" dominant-baseline="central">⚙️</text></g><g><animateTransform attributeName="transform" type="rotate" values="360 196 156;0 196 156" dur="4s" repeatCount="indefinite"/><text x="196" y="156" font-size="50" text-anchor="middle" dominant-baseline="central">⚙️</text></g><g><animateTransform attributeName="transform" type="translate" values="0 -40;0 -40;0 34;0 34" dur="2.6s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.15;.55;.7;1" dur="2.6s" begin="0s" repeatCount="indefinite"/><rect x="142" y="8" width="46" height="32" rx="6" fill="#fffdf6" stroke="#2b55a0" stroke-width="3"/><text x="165" y="31" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle">in</text></g><g><animateTransform attributeName="transform" type="translate" values="-30 0;-30 0;24 0;24 0" dur="2.6s" begin="1.3s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.2;.35;.85;1" dur="2.6s" begin="1.3s" repeatCount="indefinite"/><rect x="262" y="128" width="46" height="32" rx="6" fill="#fffdf6" stroke="#c93a33" stroke-width="3"/><text x="285" y="151" font-size="19" font-weight="800" fill="#c93a33" text-anchor="middle">out</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="296" y="226" font-size="34" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>What is the machine doing to each number?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>2.5</b> (that is <span class="tex">\tfrac{5}{2}</span>). The machine turns every number <b>upside down</b>: it gives the <b>reciprocal</b>. <span class="tex">0.4=\tfrac{2}{5}</span>, so out comes <span class="tex">\tfrac{5}{2}=2.5</span>. <b>The twist:</b> feed it <b>0</b> and the machine <b>jams</b>. <span class="tex">\tfrac{0}{1}</span> would turn into <span class="tex">\tfrac{1}{0}</span>, and no number times 0 makes 1, so 0 has no reciprocal. (Only <span class="tex">1</span> and <span class="tex">-1</span> come out the same as they went in.)</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 6 Rational Expressions and Equations · Lesson 4</div>
+  <h1>Dividing Rational Expressions</h1>
+  <p class="lede">To divide, <b>keep</b> the first expression, <b>change</b> <span class="tex">\div</span> to <span class="tex">\times</span> and <b>flip</b> the divisor. Then it is a multiplication, as in Lesson 3. The new part is the non-permissible values: the divisor’s <b>numerator</b> cannot be 0 either.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>divide by multiplying by the <b>reciprocal</b> of the divisor (only the expression right after <span class="tex">\div</span> flips)</li>
+      <li>state the <b>NPVs</b> of a division from both denominators <b>and the divisor’s numerator</b>, before I flip</li>
+      <li>divide rational expressions with <b>polynomials</b> and with <b>two variables</b>, leaving the answer in factored form</li>
+      <li>simplify <b>mixed</b> multiplication and division from <b>left to right</b></li>
+      <li>rewrite a <b>complex fraction</b> as a division and use division to solve problems</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN5</b> Perform operations on rational expressions (limited to numerators and denominators that are monomials, binomials or trinomials).<br><span class="muted">Today: dividing by multiplying by the reciprocal, the NPVs of a division, mixed multiplication and division, and complex fractions. </span></div>
+</section>
+
+<!-- ================= 1. Dividing by a fraction ================= -->
+<section class="card" data-ink="s1" data-section="1. Dividing by a Fraction">
+  <div class="sec-h"><span class="badge">1</span><h2>Dividing by a Fraction</h2></div>
+  <p>Dividing by a number is the same as multiplying by its <b>reciprocal</b>: <span class="tex">\div\dfrac{3}{4}</span> is the same as <span class="tex">\times\dfrac{4}{3}</span>. Only the expression right after the <span class="tex">\div</span> sign (the <b>divisor</b>) is turned upside down. After that, it is a multiplication, done as in Lesson 3.</p>
+  <div class="u6l4-key">
+    <div class="u6l4-key-f"><span class="tex">\dfrac{A}{B}\div\dfrac{\textcolor{#1f5bd6}{C}}{\textcolor{#1f5bd6}{D}}=\dfrac{A}{B}\cdot\dfrac{\textcolor{#1f5bd6}{D}}{\textcolor{#1f5bd6}{C}}</span></div>
+    <div class="u6l4-key-l"><b>Keep</b> the first expression, <b>change</b> <span class="tex">\div</span> to <span class="tex">\times</span>, <b>flip</b> the divisor.</div>
+  </div>
+  <div class="explainer" data-explainer="flipOnly"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Fractions first</h3></div>
+  <p class="q">Divide. Write each answer in lowest terms.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{8}{15}\div\dfrac{12}{25}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{8}{15}\times\dfrac{25}{12}</span><br><span class="tex">=\dfrac{2\cdot4}{3\cdot5}\times\dfrac{5\cdot5}{3\cdot4}=\boldsymbol{\dfrac{10}{9}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">-\dfrac{9}{14}\div6</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=-\dfrac{9}{14}\times\dfrac{1}{6}</span><br><span class="tex">=\boldsymbol{-\dfrac{3}{28}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{4}{9}\div\dfrac{2}{3}\times\dfrac{5}{8}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Flip only <span class="tex">\tfrac{2}{3}</span>:<br><span class="tex">=\dfrac{4}{9}\times\dfrac{3}{2}\times\dfrac{5}{8}=\dfrac{60}{144}=\boldsymbol{\dfrac{5}{12}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. NPVs in a division ================= -->
+<section class="card" data-ink="s2" data-section="2. Non-Permissible Values in a Division">
+  <div class="sec-h"><span class="badge">2</span><h2>Non-Permissible Values in a Division</h2></div>
+  <p>In <span class="tex">\dfrac{A}{B}\div\dfrac{C}{D}</span>, the denominators <span class="tex">B</span> and <span class="tex">D</span> cannot be <span class="tex">0</span>. The divisor <span class="tex">\dfrac{C}{D}</span> cannot be <span class="tex">0</span> either, because division by zero is undefined; this happens when <span class="tex">C=0</span>. After flipping, <span class="tex">C</span> is in a denominator, which is another way to see it.</p>
+  <div class="def"><b>NPVs of <span class="tex">\dfrac{A}{B}\div\dfrac{C}{D}</span>:</b> every value that makes <span class="tex">B=0</span>, <span class="tex">D=0</span> <b>or</b> <span class="tex">\textcolor{#c27a0e}{C=0}</span> (the <b>numerator of the divisor</b>). Find them all from the <b>original</b> expression, <b>before you flip</b>.</div>
+  <div class="explainer" data-explainer="lostStamp"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Monomials</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{12a^3}{5b^2}\div\dfrac{18a}{25b^5}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{12a^3}{5b^2}\cdot\dfrac{25b^5}{18a}=\dfrac{300a^3b^5}{90ab^2}=\boldsymbol{\dfrac{10a^2b^3}{3}}</span><br><span class="tex">\boldsymbol{b\ne0}</span> (denominators) and <span class="tex">\boldsymbol{a\ne0}</span> (the divisor’s numerator <span class="tex">18a</span>)</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{-14x^2y}{9z^3}\div\dfrac{21xy^4}{6z}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{-14x^2y}{9z^3}\cdot\dfrac{6z}{21xy^4}=\dfrac{-84x^2yz}{189xy^4z^3}=\boldsymbol{-\dfrac{4x}{9y^3z^2}}</span><br><span class="tex">\boldsymbol{x\ne0,\ y\ne0,\ z\ne0}</span></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>NPVs only</h3></div>
+  <p class="q">State the non-permissible values. Do not simplify.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x+2}{x-5}\div\dfrac{x+7}{x}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Denominators: <span class="tex">x\ne5,\ x\ne0</span><br>Divisor’s numerator: <span class="tex">x\ne-7</span><br>NPVs: <span class="tex">\boldsymbol{x\ne5,0,-7}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x^2-9}{x^2+4x}\div\dfrac{x^2-x-6}{2x-1}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Denominators: <span class="tex">x(x+4)</span> and <span class="tex">2x-1</span>: <span class="tex">x\ne0,-4,\tfrac{1}{2}</span><br>Divisor’s numerator: <span class="tex">(x-3)(x+2)</span>: <span class="tex">x\ne3,-2</span><br>NPVs: <span class="tex">\boldsymbol{x\ne0,-4,\tfrac{1}{2},3,-2}</span> (five values)</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Polynomials ================= -->
+<section class="card" data-ink="s3" data-section="3. Dividing with Polynomials">
+  <div class="sec-h"><span class="badge">3</span><h2>Dividing Rational Expressions with Polynomials</h2></div>
+  <div class="u6l4-steps">
+    <div class="u6l4-step"><span class="u6l4-sn">1</span><b>Factor</b> every numerator and denominator.</div>
+    <div class="u6l4-step"><span class="u6l4-sn">2</span>State the <b>NPVs</b> (both denominators <b>and</b> the divisor’s numerator).</div>
+    <div class="u6l4-step"><span class="u6l4-sn">3</span><b>Multiply by the reciprocal</b> of the divisor.</div>
+    <div class="u6l4-step"><span class="u6l4-sn">4</span><b>Divide out</b> common factors and multiply. Leave the answer in <b>factored form</b>.</div>
+  </div>
+  <p>A polynomial divisor such as <span class="tex">x^2+3x-10</span> is <span class="tex">\dfrac{x^2+3x-10}{1}</span>, so its reciprocal is <span class="tex">\dfrac{1}{x^2+3x-10}</span>.</p>
+  <div class="explainer" data-explainer="npvCatch"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Factor, NPVs, flip</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x+4}{x^2-2x}\div\dfrac{3x+12}{x^2-4}</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPVs: <span class="tex">x\ne0,2</span>; <span class="tex">x\ne\pm2</span>; <span class="tex">x\ne-4</span>, i.e. <span class="tex">\boldsymbol{x\ne0,2,-2,-4}</span><br><span class="tex">=\dfrac{x+4}{x(x-2)}\cdot\dfrac{(x-2)(x+2)}{3(x+4)}</span><br><span class="tex">=\boldsymbol{\dfrac{x+2}{3x}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{5y^2}{y^2-36}\div\dfrac{10y}{y+6}</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">NPVs: <span class="tex">\boldsymbol{y\ne6,-6,0}</span><br><span class="tex">=\dfrac{5y^2}{(y-6)(y+6)}\cdot\dfrac{y+6}{10y}</span><br><span class="tex">=\dfrac{5y^2}{10y(y-6)}=\boldsymbol{\dfrac{y}{2(y-6)}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{x^2-25}{4x}\div(x^2+3x-10)</span></div><div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+3x-10=(x+5)(x-2)</span><br>NPVs: <span class="tex">\boldsymbol{x\ne0,-5,2}</span><br><span class="tex">=\dfrac{(x-5)(x+5)}{4x}\cdot\dfrac{1}{(x+5)(x-2)}</span><br><span class="tex">=\boldsymbol{\dfrac{x-5}{4x(x-2)}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Trinomials and two variables</h3></div>
+  <p class="q">Simplify. State the non-permissible values (restrictions).</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x^2+x-12}{x^2-x-2}\div\dfrac{x^2+6x+8}{x^2-1}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{(x+4)(x-3)}{(x-2)(x+1)}\div\dfrac{(x+2)(x+4)}{(x-1)(x+1)}</span><br>NPVs: <span class="tex">\boldsymbol{x\ne2,-1,1,-2,-4}</span><br><span class="tex">=\dfrac{(x+4)(x-3)}{(x-2)(x+1)}\cdot\dfrac{(x-1)(x+1)}{(x+2)(x+4)}=\boldsymbol{\dfrac{(x-3)(x-1)}{(x-2)(x+2)}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{2a^2-a-6}{a^2-9}\div\dfrac{4a^2-9}{6-2a}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{(2a+3)(a-2)}{(a-3)(a+3)}\div\dfrac{(2a-3)(2a+3)}{-2(a-3)}</span><br>NPVs: <span class="tex">\boldsymbol{a\ne3,-3,\tfrac{3}{2},-\tfrac{3}{2}}</span><br><span class="tex">=\dfrac{(2a+3)(a-2)}{(a-3)(a+3)}\cdot\dfrac{-2(a-3)}{(2a-3)(2a+3)}=\boldsymbol{-\dfrac{2(a-2)}{(a+3)(2a-3)}}</span></div></div></div>
+    <div class="part u6l4-wide"><div class="pl">(c) <span class="tex">\dfrac{x^2-y^2}{x^2+4xy+3y^2}\div\dfrac{2x^2-2xy}{x+3y}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{(x-y)(x+y)}{(x+y)(x+3y)}\cdot\dfrac{x+3y}{2x(x-y)}=\boldsymbol{\dfrac{1}{2x}}</span><br>Restrictions: <span class="tex">\boldsymbol{x\ne-y,\ x\ne-3y}</span> (denominators); <span class="tex">\boldsymbol{x\ne0,\ x\ne y}</span> (the divisor’s numerator <span class="tex">2x(x-y)</span>)</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 4 · Questions 1–6</h2>
+  <p class="pr-t">Flip the divisor, state every NPV (the divisor’s numerator too), then factor and divide out.</p>
+  <div class="pr-chips n5"><span><b>1</b>Fractions</span><span><b>2</b>Monomials</span><span><b>3</b>NPVs only</span><span><b>4–5</b>Polynomials</span><span><b>6</b>Two variables</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u6l4">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 4. Mixed multiplication and division ================= -->
+<section class="card" data-ink="s4" data-section="4. Mixed Multiplication and Division">
+  <div class="sec-h"><span class="badge">4</span><h2>Mixed Multiplication and Division</h2></div>
+  <p>Multiplication and division have equal priority, so work from <b>left to right</b>. The safe method: change each <span class="tex">\div</span> into <span class="tex">\times</span> by flipping <b>only the expression right after it</b>, then simplify the whole product at once.</p>
+  <div class="tip watch"><div class="tip-ic">!</div><div><span class="tex">\dfrac{4}{9}\div\dfrac{2}{3}\times\dfrac{5}{8}=\dfrac{5}{12}</span>, but <span class="tex">\dfrac{4}{9}\div\left(\dfrac{2}{3}\times\dfrac{5}{8}\right)=\dfrac{16}{15}</span>. Do <b>not</b> group the last two unless there are brackets. The NPVs come from <b>every denominator</b> and from the <b>numerator of every divisor</b>.</div></div>
+  <div class="explainer" data-explainer="leftRight"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Left to right</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x^2-4x}{x+3}\div\dfrac{x^2-16}{x^2+3x}\cdot\dfrac{x+4}{2x}</span></div><div class="work" style="--h:290px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{x(x-4)}{x+3}\cdot\dfrac{x(x+3)}{(x-4)(x+4)}\cdot\dfrac{x+4}{2x}</span><br>NPVs: <span class="tex">\boldsymbol{x\ne-3,\ x\ne0}</span> (denominators); <span class="tex">\boldsymbol{x\ne4,-4}</span> (divisor’s numerator)<br><span class="tex">=\dfrac{x^2}{2x}=\boldsymbol{\dfrac{x}{2}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{m^2+m-6}{m^2-4}\cdot\dfrac{m^2+5m+6}{m^2+6m+9}\div\dfrac{m+2}{3m}</span></div><div class="work" style="--h:290px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{(m+3)(m-2)}{(m-2)(m+2)}\cdot\dfrac{(m+2)(m+3)}{(m+3)^2}\cdot\dfrac{3m}{m+2}</span><br>NPVs: <span class="tex">\boldsymbol{m\ne2,-2,-3}</span> (denominators); <span class="tex">\boldsymbol{m\ne0}</span> (<span class="tex">3m</span> is a denominator); <span class="tex">\boldsymbol{m\ne-2}</span> (divisor’s numerator)<br><span class="tex">=\boldsymbol{\dfrac{3m}{m+2}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u6l4"></section>
+
+<!-- ================= 5. Complex fractions and problems ================= -->
+<section class="card" data-ink="s5" data-section="5. Complex Fractions and Problems">
+  <div class="sec-h"><span class="badge">5</span><h2>Complex Fractions and Problems</h2></div>
+  <p>A <b>complex fraction</b> has a fraction in its numerator, its denominator or both. The main fraction bar means divide.</p>
+  <div class="u6l4-key">
+    <div class="u6l4-key-f"><span class="tex">\dfrac{\;\dfrac{A}{B}\;}{\;\dfrac{\textcolor{#c27a0e}{C}}{D}\;}=\dfrac{A}{B}\div\dfrac{\textcolor{#c27a0e}{C}}{D}</span></div>
+    <div class="u6l4-key-l">NPVs: <span class="tex">B=0</span>, <span class="tex">D=0</span> or <span class="tex">\textcolor{#c27a0e}{C=0}</span>.</div>
+  </div>
+  <p>(Complex fractions with sums or differences inside them need the adding and subtracting skills of Lessons 5 and 6.) In problems, division answers questions such as “width <span class="tex">=</span> area <span class="tex">\div</span> length” and “how many times larger”.</p>
+  <div class="explainer" data-explainer="complexFrac"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>A complex fraction</h3></div>
+  <p class="q">Simplify <span class="tex">\dfrac{\;\dfrac{x^2-9}{6x}\;}{\;\dfrac{x^2+x-12}{4x^2}\;}</span>. State the non-permissible values.</p>
+  <div class="part u6l4-solo"><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=\dfrac{(x-3)(x+3)}{6x}\div\dfrac{(x+4)(x-3)}{4x^2}</span> &nbsp; NPVs: <span class="tex">\boldsymbol{x\ne0}</span> (denominators); <span class="tex">\boldsymbol{x\ne-4,3}</span> (the numerator of the bottom fraction)<br><span class="tex">=\dfrac{(x-3)(x+3)}{6x}\cdot\dfrac{4x^2}{(x+4)(x-3)}=\dfrac{4x^2(x+3)}{6x(x+4)}=\boldsymbol{\dfrac{2x(x+3)}{3(x+4)}}</span></div></div></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The rectangle</h3></div>
+  <div class="u6l4-exg">
+    <div>
+      <p class="q">A rectangle has area <span class="tex">\dfrac{x^2+5x}{x-2}</span> square centimetres and length <span class="tex">\dfrac{x^2-25}{x^2-4}</span> centimetres, where <span class="tex">x&gt;5</span>.</p>
+      <div class="parts c2">
+        <div class="part"><div class="pl">(a) Write and simplify an expression for its width.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">width <span class="tex">=</span> area <span class="tex">\div</span> length<br><span class="tex">=\dfrac{x(x+5)}{x-2}\cdot\dfrac{(x-2)(x+2)}{(x-5)(x+5)}</span><br><span class="tex">=\boldsymbol{\dfrac{x(x+2)}{x-5}}</span> centimetres</div></div></div>
+        <div class="part"><div class="pl">(b) Determine the width when <span class="tex">x=8</span>, to the nearest tenth.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{8(10)}{3}=\dfrac{80}{3}\approx\boldsymbol{26.7}</span> cm<br><span class="muted">(Check: length <span class="tex">=\tfrac{39}{60}=0.65</span>, area <span class="tex">=\tfrac{104}{6}</span>, and <span class="tex">\tfrac{104}{6}\div0.65\approx26.7</span>.)</span></div></div></div>
+      </div>
+    </div>
+    <div class="u6l4-rect" id="u6l4-rect"></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Evaluate on the TI-84.</b> Put brackets around the numerator and the denominator: <span class="keys"><kbd>8</kbd><kbd>×</kbd><kbd>(</kbd><kbd>8</kbd><kbd>+</kbd><kbd>2</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(</kbd><kbd>8</kbd><kbd>−</kbd><kbd>5</kbd><kbd>)</kbd><kbd>ENTER</kbd></span>.
+      <div class="u6l4-ckpills"><button class="chip" data-keys="8 × ( 8 + 2 ) ÷ ( 8 − 5 ) =">(b) width at <span class="tex">x=8</span></button></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Keep, change, flip.</b> <span class="tex">\dfrac{A}{B}\div\dfrac{C}{D}=\dfrac{A}{B}\cdot\dfrac{D}{C}</span>. Only the expression right after <span class="tex">\div</span> flips; a polynomial divisor is over 1.</div>
+    <div><b>NPVs before you flip.</b> Every denominator <b>and</b> the divisor’s numerator: <span class="tex">B=0</span>, <span class="tex">D=0</span> or <span class="tex">C=0</span>. The simplified answer can hide them.</div>
+    <div><b>Polynomials.</b> Factor, state the NPVs, multiply by the reciprocal, divide out common factors. Leave the answer in factored form.</div>
+    <div><b>Left to right.</b> In a mixed product, flip only what follows each <span class="tex">\div</span>. A complex fraction’s main bar means <span class="tex">\div</span>: its bottom numerator gives NPVs too.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u6l4">
+    <div><div class="kicker">Your turn</div><b>Assignment 4 · Questions 7–15</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l5/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 5 — Adding and Subtracting with Monomial Denominators</b><div class="muted">Find a common denominator, then add or subtract the numerators.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u6l4.js';
+  boot({ key: 'u6l4', homeHref: '../../', title: '6.4 Dividing Rational Expressions' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

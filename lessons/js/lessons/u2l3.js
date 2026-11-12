@@ -1,4 +1,6 @@
 /* Math 20-1 · Unit 2 · Lesson 3 — Adding and Subtracting Radicals.
+ * New lesson format (2026-11-11, tools/newformat/specs/u2l3.py): the page no longer has the old warm-up or the explainers legsVsHyp, squareCut, cubeCut, indexBins, fracFront, varBins, missingSide, radSeq;
+ * their code below is unused (each mount is skipped when its element is missing).
  * Warm-up (Stepping Stones: square stones by area laid edge to edge; 9 + 16 is a 7 m path but one 25 stone is 5 m;
  * three area-2 stones match one area-18 stone exactly, because the 18 cuts into a 3 by 3 grid of 2s), and the explainers:
  *   likeTiles (radical tiles in bins: √7 tiles behave like x tiles, negative tiles cancel in zero pairs; Example 1 checks),

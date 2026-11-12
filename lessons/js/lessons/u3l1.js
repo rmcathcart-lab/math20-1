@@ -751,7 +751,7 @@ const four = {
         { cap: `Flip it across the ${YA} into quadrant 2. Still ${T(cR(dg(r)))} from the ${XA}: ${T(cA(`\\theta=${FROM[2](r)}`))}.`, run: (c) => flip(c, 1, 2) },
         { cap: `Flip across the ${XA} into quadrant 3: ${T(cA(`\\theta=${FROM[3](r)}`))}.`, run: (c) => flip(c, 2, 3) },
         { cap: `Flip across the ${YA} into quadrant 4: ${T(cA(`\\theta=${FROM[4](r)}`))}.`, run: (c) => flip(c, 3, 4) },
-        { cap: `Four angles from ${TD(0)} to ${TD(360)}, one reference angle: ${T(`${dg(r)},\\ ${dg(180 - r)},\\ ${dg(180 + r)},\\ ${dg(360 - r)}`)}.${r === 30 ? ' (The four Ferris wheel turns!)' : ''}`, run: async (c) => { rot.set(0, 0); await show(c, sum); } }
+        { cap: `Four angles from ${TD(0)} to ${TD(360)}, one reference angle: ${T(`${dg(r)},\\ ${dg(180 - r)},\\ ${dg(180 + r)},\\ ${dg(360 - r)}`)}.`, run: async (c) => { rot.set(0, 0); await show(c, sum); } }
       ];
     }
     const info = refOf(given), order = q0 === 2 ? [[2, 1], [2, 3], [3, 4]] : [[4, 1], [1, 2], [2, 3]];

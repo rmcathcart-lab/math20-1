@@ -1,0 +1,101 @@
+/* Math 20-1 · Unit 6 · Lesson 1 — Rational Expressions and Non-Permissible Values: styles used only on this page
+ * (prefix u6l1-). Unit colours: numerator green #12805a, denominator blue #1f5bd6, NPVs / holes / ERROR red #c93a33. */
+
+.u6l1 .ex-cap .katex { font-size: 1.04em; }
+.u6l1 .chip .katex { font-size: 1em; }
+.u6l1 .pl .katex { font-size: 1.08em; }
+.u6l1 .ans .katex { font-size: 1.04em; }
+.u6l1 .katex { white-space: nowrap; }
+.u6l1 h1 .katex, .u6l1 h2 .katex, .u6l1 h3 .katex { font-size: .95em; }
+.u6l1-n { color: #12805a; font-weight: 700; } .u6l1-d { color: #1f5bd6; font-weight: 700; }
+.u6l1-key { font-size: 19px; }
+.u6l1-und { font: 700 15px var(--round); color: #c93a33; }
+
+/* ---------------- static tables, Example 3 figure ---------------- */
+.u6l1-tbl { border-collapse: collapse; margin: 8px 0 6px; font-size: 18px; }
+.u6l1-tbl th, .u6l1-tbl td { border: 2px solid #c9c3b4; padding: 6px 10px; text-align: center; min-width: 64px; height: 48px; }
+.u6l1-tbl th { background: #f3f0e8; font-weight: 700; }
+.u6l1-tbl7 td { min-width: 86px; }
+.u6l1-ex3 { display: grid; grid-template-columns: 1fr 312px; gap: 18px; align-items: start; }
+.u6l1-fig { margin: 0; text-align: center; }
+.u6l1-fig figcaption { font-size: 16px; color: var(--ink2); margin-top: 4px; }
+.u6l1-pcol { display: flex; flex-direction: column; gap: 8px; }
+
+/* ---------------- the value machine ---------------- */
+.u6l1-mach { box-sizing: border-box; }
+.u6l1-msvg { position: absolute; left: 0; top: 0; overflow: visible; }
+.u6l1-mbody { transition: fill .25s, stroke .25s; }
+.u6l1-mbody.u6l1-err { fill: #fbe4e1; stroke: #c93a33; }
+.u6l1-gear { transform-box: fill-box; transform-origin: center; }
+.u6l1-mx, .u6l1-mw { position: absolute; left: 0; width: 100%; text-align: center; white-space: nowrap; }
+.u6l1-mx { font-size: 30px; }
+.u6l1-mw { font-size: 25px; }
+.u6l1-mach-sm .u6l1-mx { font-size: 23px; }
+.u6l1-mach-sm .u6l1-mw { font-size: 19px; }
+.u6l1-lcd { position: absolute; left: 26px; right: 26px; bottom: 18px; box-sizing: border-box; border-radius: 10px; background: #23392d; border: 3px solid #3a4254;
+  color: #d4f7dc; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; }
+.u6l1-lcd .katex { color: #d4f7dc; }
+.u6l1-lcd-err { background: #4b1717; color: #ffc2b8; font: 800 22px ui-monospace, Menlo, monospace; letter-spacing: .04em; }
+.u6l1-mach-sm .u6l1-lcd { left: 18px; right: 18px; bottom: 10px; font-size: 21px; }
+.u6l1-mach-sm .u6l1-lcd-err { font-size: 16px; }
+.u6l1-in { position: absolute; left: 50%; top: 0; transform: translate(-50%, 0); background: #fff4dd; border: 2.5px solid #c27a0e; border-radius: 999px;
+  padding: 1px 14px; font-size: 22px; white-space: nowrap; z-index: 3; }
+.u6l1-mach-sm .u6l1-in { font-size: 18px; padding: 0 10px; }
+.u6l1 .bk-th.u6l1-thd { font-size: 19px; }
+
+/* ---------------- why ÷ 0 ---------------- */
+.u6l1-zl { font-size: 27px; white-space: nowrap; display: flex; align-items: center; gap: 12px; }
+.u6l1-zb { font: 700 17px var(--round); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.u6l1-ok, .u6l1-yes { color: #12805a; font-weight: 800; } .u6l1-no { color: #c93a33; font-weight: 800; }
+.u6l1-zh { font: 800 16px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); text-align: center; }
+.u6l1-zr { box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; background: #fff; border: 2px solid #e4ded2;
+  border-radius: 12px; padding: 0 16px; font-size: 23px; white-space: nowrap; }
+.u6l1-zm { font-size: 21px; }
+.u6l1-off { font: 800 17px var(--round); color: #1f5bd6; background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 4px; white-space: nowrap; }
+
+/* ---------------- Ryan's X ---------------- */
+.u6l1-ov { left: 0; top: 0; pointer-events: none; overflow: visible; }
+.u6l1-xv { font-size: 25px; font-weight: 700; white-space: nowrap; }
+.u6l1-xv.u6l1-xtop { color: #a33357; } .u6l1-xv.u6l1-xbot { color: #12805a; }
+.u6l1-xv.u6l1-xside { color: #1f5bd6; font-size: 25px; }
+.u6l1-xp { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 12px; box-sizing: border-box; font-size: 19px;
+  border: 3px solid transparent; border-radius: 999px; white-space: nowrap; }
+.u6l1-xps { font-size: 15px; color: var(--ink2); }
+.u6l1-xp.u6l1-xp-ok { border-color: #12805a; background: #e9f6ef; }
+.u6l1-xp.u6l1-xp-no { color: var(--muted); opacity: .55; }
+
+/* ---------------- NPV steps, holes ---------------- */
+.u6l1-row { display: flex; align-items: center; gap: 14px; white-space: nowrap; }
+.u6l1-sn { flex: none; width: 34px; height: 34px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 18px var(--round);
+  display: flex; align-items: center; justify-content: center; }
+.u6l1-rt { font-size: 26px; white-space: nowrap; }
+.u6l1-ans { background: #fdecea; border: 2px solid #c93a33; border-radius: 10px; padding: 2px 12px; }
+.u6l1-nlv { font-size: 22px; color: var(--ink2); }
+.u6l1-holelab { color: #c93a33; font-weight: 700; font-size: 20px; margin-top: -4px; }
+.u6l1-punch { filter: drop-shadow(0 3px 2px rgba(0, 0, 0, .18)); }
+
+/* ---------------- twins ---------------- */
+.u6l1-cmp { box-sizing: border-box; border-radius: 50%; border: 4px solid #9aa0ab; background: #fff; color: #6b7280; font: 900 34px var(--round);
+  display: flex; align-items: center; justify-content: center; }
+.u6l1-cmp-ok { border-color: #12805a; color: #12805a; background: #e9f6ef; }
+.u6l1-cmp-no { border-color: #c93a33; color: #c93a33; background: #fdecea; }
+.u6l1-twtag { font-size: 25px; }
+.u6l1-twans { font-size: 24px; background: #fdecea; border: 2px solid #c93a33; border-radius: 10px; padding: 2px 12px; white-space: nowrap; }
+
+/* ---------------- build ---------------- */
+.u6l1-tile { background: #fff; border: 2.5px solid #1f5bd6; border-radius: 10px; padding: 2px 10px; font-size: 24px; white-space: nowrap; }
+.u6l1-snb { position: absolute; }
+.u6l1-fr { display: inline-flex; flex-direction: column; align-items: center; font-size: 30px; }
+.u6l1-frn { padding: 0 10px 4px; }
+.u6l1-frd { border-top: 3px solid #1c2230; padding: 6px 4px 0; display: flex; gap: 2px; white-space: nowrap; }
+.u6l1-slot { display: inline-block; color: #1f5bd6; }
+.u6l1-exp { font-size: 28px; }
+.u6l1-chk { font-size: 21px; color: var(--ink2); white-space: nowrap; }
+.u6l1-ghost { position: absolute; pointer-events: none; z-index: 6; white-space: nowrap; }
+
+/* ---------------- boat ---------------- */
+.u6l1-blab { font-size: 20px; font-weight: 700; color: #3a4254; white-space: nowrap; }
+.u6l1-blab.u6l1-cur { font-size: 17px; color: #1f5bd6; }
+.u6l1-blab.u6l1-sm { font: 700 15px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.u6l1-binfo { font-size: 22px; white-space: nowrap; }
+.u6l1-b2 { font-size: 23px; background: #fff; border: 2px solid #e4ded2; border-radius: 12px; padding: 8px 12px; box-sizing: border-box; }

@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Sine Law · Math 20-1 3.5</title>
+<meta name="description" content="Math 20-1 Unit 3 Lesson 5: the sine law. Labelling a triangle (side a opposite angle A), a right-triangle review, splitting an oblique triangle with an altitude, the proof of the sine law (the same height h written two ways), sin(180° − θ) = sin θ, finding a side (AAS, ASA), finding an angle when only one triangle is possible, and problems with bearings and a river's width. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u3l5.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u3l5">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 3 Trigonometry · Lesson 5</div>
+  <h1>The Sine Law</h1>
+  <p class="lede">SOH CAH TOA only works in right triangles. The <b>sine law</b> works in <b>every</b> triangle: each side divided by the sine of the angle <b>opposite</b> it gives the same number. Today: why it is true, and how to use it to find sides and angles.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>label a triangle: side <span class="tex">\textcolor{#1f5bd6}{a}</span> is opposite <span class="tex">\textcolor{#1f5bd6}{\angle A}</span>, <span class="tex">\textcolor{#12805a}{b}</span> opposite <span class="tex">\textcolor{#12805a}{\angle B}</span>, <span class="tex">\textcolor{#7b4fc4}{c}</span> opposite <span class="tex">\textcolor{#7b4fc4}{\angle C}</span></li>
+      <li>split an oblique triangle into two right triangles with an <b class="u3l5-hc">altitude</b></li>
+      <li>explain the sine law: the same height <span class="tex">\textcolor{#a33357}{h}</span> written two ways</li>
+      <li>use <span class="tex">\sin(180^\circ-\theta)=\sin\theta</span> for obtuse angles</li>
+      <li>find a side from two angles and a side (AAS or ASA) using a <b class="u3l5-kp">known pair</b></li>
+      <li>find an angle when only one triangle is possible, and solve problems with bearings</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>T3</b> Solve problems, using the cosine law and sine law, including the ambiguous case.<br><span class="muted">Today: the sine law <span class="tex">\tfrac{a}{\sin A}=\tfrac{b}{\sin B}=\tfrac{c}{\sin C}</span>, its proof, and finding sides and angles (one triangle only).</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Shade Sail" id="wu" style="--wf-side: 400px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Shade Sail</h2>
+  <p class="wf-rule">A triangular shade sail is tied to three posts. <b>Tap a corner</b> to see the edge it does <b>not</b> touch.</p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u3l5-sail" id="u3l5-sail"></div>
+    <div class="u3l5-wbtns">
+      <button type="button" class="pill" data-sail="1">Sail 1</button>
+      <button type="button" class="pill" data-sail="2">Sail 2</button>
+      <button type="button" class="pill" data-sail="3">Sail 3</button>
+      <button type="button" class="pill" id="u3l5-edges">Show edges</button>
+    </div>
+  </div><div class="wf-side">
+    <div class="u3l5-wqs">
+      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div><b>Sail 1</b> has corners of <b>60°, 40° and 80°</b>. Which edge is the <b>longest</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l5-wa"><div class="bk-ans">The edge <b>across from the 80° corner</b> (7.7 m). The widest corner opens up the longest edge across from it.</div></div></div>
+      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div><b>Sail 3</b> has corners of <b>25°, 35° and 120°</b>. Which edge is the <b>shortest</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+        <div class="u3l5-wa"><div class="bk-ans">The edge <b>across from the 25° corner</b> (4.0 m). The 120° corner faces the longest edge (8.2 m).</div></div></div>
+    </div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> <b>Sail 2</b> has corners of <b>30°, 60° and 90°</b>. The edge across from the 30° corner is <b>5 m</b>. How long is the edge across from the <b>60°</b> corner? <b>Guess first.</b></div></div>
+      <div class="poll-opts c2">
+        <div class="opt"><b>A</b> 10 m</div>
+        <div class="opt right"><b>B</b> about 8.7 m</div>
+        <div class="opt"><b>C</b> 7.5 m</div>
+        <div class="opt"><b>D</b> 6 m</div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>B, about 8.7 m.</b> It is the 30-60-90 triangle from Lesson 4: sides <span class="tex">1:\sqrt3:2</span>, so <span class="tex">5:5\sqrt3:10</span>. Doubling the angle does <b>not</b> double the edge.<br>
+        <span class="muted">Each edge goes with the <b>sine</b> of the corner across from it: <span class="tex">\tfrac{5}{\sin30^\circ}=\tfrac{8.66}{\sin60^\circ}=\tfrac{10}{\sin90^\circ}=10</span>. That is today’s <b>sine law</b>.</span></div>
+    </div>
+  </div></div>
+  <p class="u3l5-social">Challenge your neighbour: the 90° corner is <b>three times</b> the 30° corner. Is the edge across from it three times 5 m?</p>
+</section>
+
+<!-- ================= 1. Labelling ================= -->
+<section class="card" data-ink="s1" data-section="1. Labelling Triangles">
+  <div class="sec-h"><span class="badge">1</span><h2>Labelling Triangles and a Right-Triangle Review</h2></div>
+  <div class="def">From now on a triangle is not always a right triangle. Name the vertices with capital letters: in <span class="tex">\triangle ABC</span> the angles are <span class="tex">\angle A</span>, <span class="tex">\angle B</span> and <span class="tex">\angle C</span>, and the side <b>opposite</b> each angle (the side it does not touch) gets the matching <b>lowercase</b> letter: <span class="tex">\textcolor{#1f5bd6}{a}</span> is opposite <span class="tex">\textcolor{#1f5bd6}{\angle A}</span>, <span class="tex">\textcolor{#12805a}{b}</span> is opposite <span class="tex">\textcolor{#12805a}{\angle B}</span>, <span class="tex">\textcolor{#7b4fc4}{c}</span> is opposite <span class="tex">\textcolor{#7b4fc4}{\angle C}</span>. The three angles always add to <span class="tex">180^\circ</span>.</div>
+  <div class="explainer" data-explainer="label"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Degree mode first.</b> <span class="keys"><kbd>MODE</kbd></span>, <span class="keys"><kbd>▼</kbd><kbd>▼</kbd></span> to the RADIAN DEGREE row, <span class="keys"><kbd>►</kbd></span> or <span class="keys"><kbd>◄</kbd></span> onto <b>DEGREE</b> if it isn’t already highlighted, <span class="keys"><kbd>ENTER</kbd></span>. (Casio: <b>SHIFT MENU</b>, Angle: Deg.) Quick check: <span class="keys"><kbd>sin</kbd><kbd>30</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> must give <b>0.5</b>.</div>
+    <div class="u3l5-pcol"><button class="pill" data-keys="MODE ▼ ▼ ENTER">Show MODE</button><button class="pill" data-keys="sin 30 ) =">Check sin 30</button></div>
+  </div>
+  <p>In a right triangle, the primary ratios connect an acute angle <span class="tex">\theta</span> to two sides.</p>
+  <div class="def amber u3l5-center"><span class="tex">\sin\theta=\dfrac{\text{opposite}}{\text{hypotenuse}}</span> &nbsp;&nbsp; <span class="tex">\cos\theta=\dfrac{\text{adjacent}}{\text{hypotenuse}}</span> &nbsp;&nbsp; <span class="tex">\tan\theta=\dfrac{\text{opposite}}{\text{adjacent}}</span> &nbsp;&nbsp; <b>(SOH CAH TOA)</b></div>
+  <div class="explainer" data-explainer="soh"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Right-triangle warm-up</h3></div>
+  <p class="q">Round sides to the nearest tenth and angles to the nearest degree.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine <span class="tex">x</span>.</div><div class="u3l5-sfig" data-fig="ex1a"></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x</span> is opposite <span class="tex">34^\circ</span> and <span class="tex">15.0</span> is the hypotenuse:<br><span class="tex">\sin34^\circ=\dfrac{x}{15.0}</span>, so <span class="tex">x=15.0\sin34^\circ\approx\boldsymbol{8.4}</span> cm</div></div></div>
+    <div class="part"><div class="pl">(b) Determine <span class="tex">\theta</span>.</div><div class="u3l5-sfig" data-fig="ex1b"></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">7.0</span> is opposite <span class="tex">\theta</span> and <span class="tex">11.0</span> is adjacent:<br><span class="tex">\tan\theta=\dfrac{7.0}{11.0}</span>, so <span class="tex">\theta=\tan^{-1}\!\left(\dfrac{7.0}{11.0}\right)\approx\boldsymbol{32^\circ}</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Side, then angle.</b> (a) <span class="keys"><kbd>15</kbd><kbd>sin</kbd><kbd>34</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>8.3878…</b> (b) The inverse key undoes tan: <span class="keys"><kbd>2nd</kbd><kbd>tan⁻¹</kbd><kbd>7</kbd><kbd>÷</kbd><kbd>11</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>32.471…</b></div>
+    <div class="u3l5-pcol"><button class="pill" data-keys="15 sin 34 ) =">Show (a)</button><button class="pill" data-keys="tan⁻¹ 7 ÷ 11 ) =">Show (b)</button></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Splitting with an altitude ================= -->
+<section class="card" data-ink="s2" data-section="2. Splitting a Triangle">
+  <div class="sec-h"><span class="badge">2</span><h2>Splitting a Triangle into Right Triangles</h2></div>
+  <div class="def">A triangle with no right angle is an <b>oblique</b> triangle; SOH CAH TOA does not apply to it directly. Drawing an <b class="u3l5-hc">altitude</b> (a height, perpendicular to a side) splits it into <b>two right triangles</b> that SOH CAH TOA can solve.</div>
+  <div class="explainer" data-explainer="split"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Two right triangles inside one</h3></div>
+  <p class="q">In <span class="tex">\triangle ABC</span>, <span class="tex">\angle A=38^\circ</span>, <span class="tex">\angle B=67^\circ</span> and <span class="tex">AC=14.0</span> cm. The altitude <span class="tex">CD</span> has length <span class="tex">h</span>.</p>
+  <div class="u3l5-exgrid">
+    <div class="u3l5-sfig u3l5-sfig-l" data-fig="ex2"></div>
+    <div>
+      <div class="part"><div class="pl">(a) Use <span class="tex">\triangle ACD</span> to determine <span class="tex">h</span> to the nearest hundredth.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sin38^\circ=\dfrac{h}{14.0}</span>, so <span class="tex">h=14.0\sin38^\circ\approx\boldsymbol{8.62}</span> cm<br><span class="muted">(keep <span class="tex">8.6193\dots</span> in the calculator)</span></div></div></div>
+      <div class="part"><div class="pl">(b) Use <span class="tex">\triangle BCD</span> to determine <span class="tex">BC</span> to the nearest tenth.</div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sin67^\circ=\dfrac{h}{BC}</span>, so <span class="tex">BC=\dfrac{h}{\sin67^\circ}=\dfrac{8.6193\dots}{\sin67^\circ}\approx\boldsymbol{9.4}</span> cm</div></div></div>
+    </div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Keep h in the calculator.</b> <span class="keys"><kbd>14</kbd><kbd>sin</kbd><kbd>38</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>8.6192…</b>, then <span class="keys"><kbd>2nd</kbd><kbd>Ans</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>67</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> uses all its decimals: <b>9.3636…</b></div>
+    <div class="u3l5-pcol"><button class="pill" data-keys="14 sin 38 ) = Ans ÷ sin 67 ) =">Show me</button></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. The sine law ================= -->
+<section class="card" data-ink="s3" data-section="3. The Sine Law">
+  <div class="sec-h"><span class="badge">3</span><h2>The Sine Law</h2></div>
+  <p>Example 2 wrote the same altitude two ways. Doing this for <b>any</b> triangle gives a rule that skips the altitude.</p>
+  <div class="explainer" data-explainer="proof"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Complete the proof</h3></div>
+  <p class="q"><span class="tex">CD</span> is the altitude from <span class="tex">C</span>, with length <span class="tex">h</span>. Tap each blank to check it.</p>
+  <div class="u3l5-exgrid u3l5-exgrid-3">
+    <div class="u3l5-sfig u3l5-sfig-l" data-fig="ex3"></div>
+    <div class="part u3l5-proof">
+      <div class="u3l5-pl">In <span class="tex">\triangle ACD</span>: &nbsp; <span class="tex">\sin A=</span> <span class="u3l5-blank" data-reveal><span class="tex">\dfrac{h}{b}</span></span>, &nbsp;so &nbsp;<span class="tex">h=</span> <span class="u3l5-blank" data-reveal><span class="tex">b\sin A</span></span>.</div>
+      <div class="u3l5-pl">In <span class="tex">\triangle BCD</span>: &nbsp; <span class="tex">\sin B=</span> <span class="u3l5-blank" data-reveal><span class="tex">\dfrac{h}{a}</span></span>, &nbsp;so &nbsp;<span class="tex">h=</span> <span class="u3l5-blank" data-reveal><span class="tex">a\sin B</span></span>.</div>
+      <div class="u3l5-pl">Both equal <span class="tex">h</span>, so &nbsp;<span class="u3l5-blank" data-reveal><span class="tex">a\sin B</span></span> <span class="tex">=</span> <span class="u3l5-blank" data-reveal><span class="tex">b\sin A</span></span>.</div>
+      <div class="u3l5-pl">Divide both sides by <span class="tex">\sin A\sin B</span>: &nbsp; <span class="u3l5-blank u3l5-blank-w" data-reveal><span class="tex">\dfrac{a}{\sin A}=\dfrac{b}{\sin B}</span></span></div>
+      <div class="work" style="--h:70px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sin A=\dfrac{h}{b},\ h=b\sin A</span>; &nbsp; <span class="tex">\sin B=\dfrac{h}{a},\ h=a\sin B</span>; &nbsp; <span class="tex">a\sin B=b\sin A</span>; &nbsp; <span class="tex">\boldsymbol{\dfrac{a}{\sin A}=\dfrac{b}{\sin B}}</span></div></div>
+    </div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="3. Obtuse Angles">
+  <h3 class="sub">Obtuse angles: <span class="tex">\sin(180^\circ-\theta)=\sin\theta</span></h3>
+  <p>An altitude from <span class="tex">A</span> gives <span class="tex">\dfrac{b}{\sin B}=\dfrac{c}{\sin C}</span> in the same way. If an angle is <b>obtuse</b>, the altitude falls outside the triangle, and the proof uses <span class="tex">\sin(180^\circ-\theta)=\sin\theta</span>: the two angles have the same reference angle and sine is positive in quadrant II (Lesson 3). For example, <span class="tex">\sin130^\circ=\sin50^\circ\approx0.766</span>. The law holds in <b>every</b> triangle.</p>
+  <div class="explainer" data-explainer="supp"></div>
+  <div class="def amber u3l5-law">
+    <div><b>The Sine Law.</b> In any <span class="tex">\triangle ABC</span>: &nbsp; <span class="tex u3l5-bigf">\dfrac{\textcolor{#1f5bd6}{a}}{\sin \textcolor{#1f5bd6}{A}}=\dfrac{\textcolor{#12805a}{b}}{\sin \textcolor{#12805a}{B}}=\dfrac{\textcolor{#7b4fc4}{c}}{\sin \textcolor{#7b4fc4}{C}}</span> &nbsp; or &nbsp; <span class="tex u3l5-bigf">\dfrac{\sin \textcolor{#1f5bd6}{A}}{\textcolor{#1f5bd6}{a}}=\dfrac{\sin \textcolor{#12805a}{B}}{\textcolor{#12805a}{b}}=\dfrac{\sin \textcolor{#7b4fc4}{C}}{\textcolor{#7b4fc4}{c}}</span></div>
+    <div class="u3l5-legend">Use <b>two</b> of the ratios at a time. One of them must be a <b class="u3l5-kp">known pair</b>: an angle and its opposite side. Put the unknown on top: <b>sides on top to find a side</b>, <b>sines on top to find an angle</b>.</div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Example 2 again, in one step</h3></div>
+  <p class="q">Use the sine law in the triangle from Example 2 (<span class="tex">\angle A=38^\circ</span>, <span class="tex">\angle B=67^\circ</span>, <span class="tex">b=14.0</span> cm). Round to the nearest tenth.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine <span class="tex">a=BC</span>. Compare with Example 2.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Known pair: <span class="tex">\angle B=67^\circ</span> and <span class="tex">b=14.0</span>.<br><span class="tex">\dfrac{a}{\sin38^\circ}=\dfrac{14.0}{\sin67^\circ}</span><br><span class="tex">a=\dfrac{14.0\sin38^\circ}{\sin67^\circ}\approx\boldsymbol{9.4}</span> cm, the same answer in one step.</div></div></div>
+    <div class="part"><div class="pl">(b) Determine <span class="tex">c=AB</span>.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\angle C=180^\circ-38^\circ-67^\circ=75^\circ</span><br><span class="tex">\dfrac{c}{\sin75^\circ}=\dfrac{14.0}{\sin67^\circ}</span><br><span class="tex">c=\dfrac{14.0\sin75^\circ}{\sin67^\circ}\approx\boldsymbol{14.7}</span> cm</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>One line for a side.</b> The TI-84 opens the bracket after <b>sin(</b>, so close it each time: <span class="keys"><kbd>14</kbd><kbd>sin</kbd><kbd>38</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>67</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>9.3636…</b> and <span class="keys"><kbd>14</kbd><kbd>sin</kbd><kbd>75</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>67</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>14.690…</b></div>
+    <div class="u3l5-pcol"><button class="pill" data-keys="14 sin 38 ) ÷ sin 67 ) =">Show (a)</button><button class="pill" data-keys="14 sin 75 ) ÷ sin 67 ) =">Show (b)</button></div>
+  </div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Close the brackets.</b> <span class="keys"><kbd>14</kbd><kbd>sin</kbd><kbd>38</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>67</kbd><kbd>)</kbd></span> without the first <kbd>)</kbd> works out <span class="tex">14\sin\left(\tfrac{38}{\sin67^\circ}\right)</span>, a wrong answer with no warning.</div></div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Finding a side ================= -->
+<section class="card" data-ink="s4" data-section="4. Finding a Side">
+  <div class="sec-h"><span class="badge">4</span><h2>Finding a Side</h2></div>
+  <p>When two angles and any side are known (<b>AAS</b> or <b>ASA</b>), the sine law finds the other sides.</p>
+  <ol class="u3l5-steps">
+    <li>If the known side is not opposite a known angle, find the third angle first (<span class="tex">180^\circ</span> minus the other two). Now there is a <b class="u3l5-kp">known pair</b>.</li>
+    <li>Write <span class="tex">\dfrac{\text{unknown side}}{\sin(\text{its opposite angle})}=\dfrac{\text{known side}}{\sin(\text{its opposite angle})}</span> and multiply to isolate the side.</li>
+    <li>Keep unrounded values in the calculator and round only the final answer.</li>
+  </ol>
+  <div class="explainer" data-explainer="pairHunt"></div>
+  <div class="explainer" data-explainer="findSide"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Finding sides</h3></div>
+  <p class="q">Round sides to the nearest tenth.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) In <span class="tex">\triangle PQR</span>, <span class="tex">\angle P=52^\circ</span>, <span class="tex">\angle Q=46^\circ</span> and <span class="tex">p=23.5</span> m. Determine <span class="tex">q</span>.</div><div class="u3l5-sfig" data-fig="ex5a"></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Known pair: <span class="tex">\angle P</span> and <span class="tex">p</span>.<br><span class="tex">\dfrac{q}{\sin46^\circ}=\dfrac{23.5}{\sin52^\circ}</span><br><span class="tex">q=\dfrac{23.5\sin46^\circ}{\sin52^\circ}\approx\boldsymbol{21.5}</span> m</div></div></div>
+    <div class="part"><div class="pl">(b) In <span class="tex">\triangle DEF</span>, <span class="tex">\angle D=33^\circ</span>, <span class="tex">\angle E=109^\circ</span> and <span class="tex">DE=18.0</span> cm. Determine <span class="tex">d</span> and <span class="tex">e</span>.</div><div class="u3l5-sfig" data-fig="ex5b"></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">DE=f</span> is opposite <span class="tex">\angle F=180^\circ-33^\circ-109^\circ=38^\circ</span>.<br><span class="tex">e=\dfrac{18.0\sin109^\circ}{\sin38^\circ}\approx\boldsymbol{27.6}</span> cm &nbsp;<span class="muted">(opposite the obtuse angle: longest)</span><br><span class="tex">d=\dfrac{18.0\sin33^\circ}{\sin38^\circ}\approx\boldsymbol{15.9}</span> cm</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Same pattern every time</b>: known side × sin(unknown’s angle) ÷ sin(known side’s angle). (a) <span class="keys"><kbd>23.5</kbd><kbd>sin</kbd><kbd>46</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>52</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>21.452…</b> (b) <span class="keys"><kbd>18</kbd><kbd>sin</kbd><kbd>109</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>38</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>27.643…</b></div>
+    <div class="u3l5-pcol"><button class="pill" data-keys="23.5 sin 46 ) ÷ sin 52 ) =">Show (a)</button><button class="pill" data-keys="18 sin 109 ) ÷ sin 38 ) = 18 sin 33 ) ÷ sin 38 ) =">Show (b)</button></div>
+  </div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> In (b), how can you tell <b>before calculating</b> that <span class="tex">e</span> must be the longest side?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">e</span> is opposite <span class="tex">\angle E=109^\circ</span>, the largest angle. The longest side is always opposite the largest angle (and <span class="tex">\sin109^\circ\approx0.946</span> is the biggest of the three sines).</div></div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u3l5"></section>
+
+<!-- ================= 5. Finding an angle ================= -->
+<section class="card" data-ink="s5" data-section="5. Finding an Angle">
+  <div class="sec-h"><span class="badge">5</span><h2>Finding an Angle</h2></div>
+  <p>To find an angle, put the <b>sines on top</b>: <span class="tex">\dfrac{\sin B}{b}=\dfrac{\sin A}{a}</span> gives <span class="tex">\sin B=\dfrac{b\sin A}{a}</span>, then <span class="tex">\angle B=\sin^{-1}\!\left(\dfrac{b\sin A}{a}\right)</span> <span class="muted">(TI-84: <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd></span>)</span>.</p>
+  <div class="def">The inverse sine key only gives an angle from <span class="tex">0^\circ</span> to <span class="tex">90^\circ</span>. Since <span class="tex">\sin(180^\circ-B)=\sin B</span>, an obtuse angle has the same sine, so we must <b>know the angle is acute</b>. In this lesson every question tells you why it is:
+    <ul class="u3l5-ul">
+      <li>the triangle is <b>acute</b> (all its angles are less than <span class="tex">90^\circ</span>), or</li>
+      <li>the known angle is opposite the <b>longer</b> of the two given sides. The larger side is opposite the larger angle, so the unknown angle is smaller than the known angle; a triangle has at most one angle of <span class="tex">90^\circ</span> or more, so the unknown angle is acute.</li>
+    </ul></div>
+  <p>When neither is true there may be two triangles: that is the <b>ambiguous case</b> (Lesson 7). <b>Solving a triangle</b> means finding all of its unknown sides and angles.</p>
+  <div class="explainer" data-explainer="findAngle"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Finding an angle, then solving</h3></div>
+  <p class="q">Round sides to the nearest tenth and angles to the nearest degree.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) In <span class="tex">\triangle ABC</span>, <span class="tex">\angle A=64^\circ</span>, <span class="tex">a=12.5</span> cm and <span class="tex">b=9.2</span> cm. Determine <span class="tex">\angle B</span>, <span class="tex">\angle C</span> and <span class="tex">c</span>.</div><div class="u3l5-sfig" data-fig="ex6a"></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a&gt;b</span>, so <span class="tex">\angle B&lt;\angle A</span> and <span class="tex">\angle B</span> is acute.<br><span class="tex">\sin B=\dfrac{9.2\sin64^\circ}{12.5}\approx0.6615</span><br><span class="tex">\angle B=\sin^{-1}(0.6615\dots)\approx41.4^\circ\approx\boldsymbol{41^\circ}</span><br><span class="tex">\angle C\approx180^\circ-64^\circ-41.4^\circ=74.6^\circ\approx\boldsymbol{75^\circ}</span><br><span class="tex">c=\dfrac{12.5\sin74.6^\circ}{\sin64^\circ}\approx\boldsymbol{13.4}</span> cm</div></div></div>
+    <div class="part"><div class="pl">(b) In <span class="tex">\triangle XYZ</span>, <span class="tex">\angle Z=127^\circ</span>, <span class="tex">z=20.0</span> m and <span class="tex">x=14.0</span> m. Solve the triangle.</div><div class="u3l5-sfig" data-fig="ex6b"></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\angle Z</span> is obtuse, so <span class="tex">\angle X</span> must be acute.<br><span class="tex">\sin X=\dfrac{14.0\sin127^\circ}{20.0}\approx0.5590</span><br><span class="tex">\angle X\approx34.0^\circ\approx\boldsymbol{34^\circ}</span><br><span class="tex">\angle Y\approx180^\circ-127^\circ-34.0^\circ=19.0^\circ\approx\boldsymbol{19^\circ}</span><br><span class="tex">y=\dfrac{20.0\sin19.0^\circ}{\sin127^\circ}\approx\boldsymbol{8.2}</span> m</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>An angle with <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd></span>, then keep going with <span class="keys"><kbd>2nd</kbd><kbd>Ans</kbd></span>.</b> (a) <span class="keys"><kbd>2nd</kbd><kbd>sin⁻¹</kbd><kbd>9.2</kbd><kbd>sin</kbd><kbd>64</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>12.5</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>41.415…</b>; <span class="keys"><kbd>180</kbd><kbd>−</kbd><kbd>64</kbd><kbd>−</kbd><kbd>Ans</kbd><kbd>ENTER</kbd></span> gives <span class="tex">\angle C</span>, <b>74.584…</b>; <span class="keys"><kbd>12.5</kbd><kbd>sin</kbd><kbd>Ans</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>64</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <span class="tex">c</span>, <b>13.407…</b></div>
+    <div class="u3l5-pcol"><button class="pill" data-keys="sin⁻¹ 9.2 sin 64 ) ÷ 12.5 ) = 180 − 64 − Ans = 12.5 sin Ans ) ÷ sin 64 ) =">Show (a)</button><button class="pill" data-keys="sin⁻¹ 14 sin 127 ) ÷ 20 ) = 180 − 127 − Ans = 20 sin Ans ) ÷ sin 127 ) =">Show (b)</button></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Problems in context ================= -->
+<section class="card" data-ink="s6" data-section="6. Problems in Context">
+  <div class="sec-h"><span class="badge">6</span><h2>Problems in Context</h2></div>
+  <p>Sketch the situation, label what is known, and look for a triangle with a <b class="u3l5-kp">known pair</b> (or one you can complete with the angle sum). Some problems need a second step with SOH CAH TOA. Two kinds of angles appear often:</p>
+  <div class="u3l5-two">
+    <div class="u3l5-way u3l5-way-b"><div class="u3l5-wayh">Bearing</div>A <b>bearing</b> such as N<span class="tex">52^\circ</span>E means: face <b>north</b>, then turn <span class="tex">52^\circ</span> toward the <b>east</b>.</div>
+    <div class="u3l5-way u3l5-way-e"><div class="u3l5-wayh">Angle of elevation</div>An <b>angle of elevation</b> is measured <b>up from the horizontal</b> to the line of sight.</div>
+  </div>
+  <div class="explainer" data-explainer="bearing"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Fire lookout towers</h3></div>
+  <div class="u3l5-exgrid">
+    <div class="u3l5-sfig u3l5-sfig-l" data-fig="ex7"></div>
+    <div>
+      <p class="q">Fire lookout tower <span class="tex">B</span> is 12.0 km due east of tower <span class="tex">A</span>. A fire <span class="tex">F</span> is spotted on a bearing of N<span class="tex">52^\circ</span>E from <span class="tex">A</span> and N<span class="tex">28^\circ</span>W from <span class="tex">B</span>. How far is the fire from each tower, to the nearest tenth of a kilometre?</p>
+      <div class="part u3l5-solo"><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">At <span class="tex">A</span>: <span class="tex">\angle FAB=90^\circ-52^\circ=38^\circ</span>. At <span class="tex">B</span>: <span class="tex">\angle FBA=90^\circ-28^\circ=62^\circ</span>.<br><span class="tex">\angle F=180^\circ-38^\circ-62^\circ=80^\circ</span>, opposite <span class="tex">AB=12.0</span> km.<br><span class="tex">AF=\dfrac{12.0\sin62^\circ}{\sin80^\circ}\approx\boldsymbol{10.8}</span> km &nbsp;&nbsp; <span class="tex">BF=\dfrac{12.0\sin38^\circ}{\sin80^\circ}\approx\boldsymbol{7.5}</span> km</div></div></div>
+    </div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Both distances use the known pair</b> <span class="tex">\angle F=80^\circ</span>, <span class="tex">AB=12.0</span>: <span class="keys"><kbd>12</kbd><kbd>sin</kbd><kbd>62</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>80</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>10.758…</b> and <span class="keys"><kbd>12</kbd><kbd>sin</kbd><kbd>38</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>80</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>7.5019…</b></div>
+    <div class="u3l5-pcol"><button class="pill" data-keys="12 sin 62 ) ÷ sin 80 ) = 12 sin 38 ) ÷ sin 80 ) =">Show me</button></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s6b" data-section="6. A Second Step">
+  <h3 class="sub">A second step: the sine law, then SOH CAH TOA</h3>
+  <p>Some distances can’t be measured directly, like the width of a river. Measure a <b>baseline</b> on your side and two angles, use the sine law to get a side of the big triangle, then use a <b>right triangle</b> inside it for the distance straight across.</p>
+  <div class="explainer" data-explainer="river"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>How wide is the river?</h3></div>
+  <p class="q">To find the width of a river, a surveyor marks points <span class="tex">P</span> and <span class="tex">Q</span>, 250 m apart, along one straight bank. A tree <span class="tex">T</span> stands on the far bank. She measures <span class="tex">\angle TPQ=57^\circ</span> and <span class="tex">\angle TQP=68^\circ</span>.</p>
+  <div class="u3l5-exgrid">
+    <div class="u3l5-sfig u3l5-sfig-l" data-fig="ex8"></div>
+    <div>
+      <div class="part"><div class="pl">(a) Determine <span class="tex">PT</span> to the nearest tenth of a metre.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\angle T=180^\circ-57^\circ-68^\circ=55^\circ</span>, opposite <span class="tex">PQ=250</span>.<br><span class="tex">PT=\dfrac{250\sin68^\circ}{\sin55^\circ}\approx\boldsymbol{283.0}</span> m</div></div></div>
+      <div class="part"><div class="pl">(b) Determine the width of the river to the nearest tenth of a metre.</div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The width <span class="tex">w</span> is the altitude from <span class="tex">T</span>. In the right triangle with hypotenuse <span class="tex">PT</span>:<br><span class="tex">w=PT\sin57^\circ\approx282.97\sin57^\circ\approx\boldsymbol{237.3}</span> m</div></div></div>
+      <div class="part"><div class="pl">(c) Determine the area of <span class="tex">\triangle PQT</span> to the nearest square metre.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\text{Area}=\tfrac{1}{2}(\text{base})(\text{height})=\tfrac{1}{2}(250)(237.32\dots)\approx\boldsymbol{29\,665}</span> m<sup>2</sup></div></div></div>
+    </div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Chain it with Ans.</b> <span class="keys"><kbd>250</kbd><kbd>sin</kbd><kbd>68</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>sin</kbd><kbd>55</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <span class="tex">PT</span>, <b>282.97…</b>; <span class="keys"><kbd>Ans</kbd><kbd>sin</kbd><kbd>57</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <span class="tex">w</span>, <b>237.31…</b>; <span class="keys"><kbd>.5</kbd><kbd>×</kbd><kbd>250</kbd><kbd>×</kbd><kbd>Ans</kbd><kbd>ENTER</kbd></span> gives the area, <b>29&#8239;664.8…</b></div>
+    <div class="u3l5-pcol"><button class="pill" data-keys="250 sin 68 ) ÷ sin 55 ) = Ans sin 57 ) = .5 × 250 × Ans =">Show me</button></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Labels.</b> Side <span class="tex">a</span> is opposite <span class="tex">\angle A</span> (the side <span class="tex">A</span> does not touch). The angles add to <span class="tex">180^\circ</span>. The longest side is opposite the largest angle. Degree mode!</div>
+    <div><b>The sine law.</b> <span class="tex">\dfrac{a}{\sin A}=\dfrac{b}{\sin B}=\dfrac{c}{\sin C}</span> in every triangle: the altitude <span class="tex">h=b\sin A=a\sin B</span>. Obtuse angles work too: <span class="tex">\sin(180^\circ-\theta)=\sin\theta</span>.</div>
+    <div><b>Finding a side.</b> Get a <b>known pair</b> (use <span class="tex">180^\circ</span> for the third angle if needed). Side on top: <span class="tex">x=\dfrac{(\text{known side})\sin(\text{opp. }x)}{\sin(\text{opp. known side})}</span>.</div>
+    <div><b>Finding an angle.</b> Sines on top, then <span class="tex">\sin^{-1}</span>. It only gives <span class="tex">0^\circ</span>–<span class="tex">90^\circ</span>, so know why the angle is acute (an acute triangle, or the known angle is opposite the longer side).</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u3l5">
+    <div><div class="kicker">Your turn</div><b>Assignment 5 — The Sine Law</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l6/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 6 — The Cosine Law</b><div class="muted">Two sides and the angle between them (or three sides) have no known pair: a new law for those triangles.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u3l5.js';
+  boot({ key: 'u3l5', homeHref: '../../', title: '3.5 The Sine Law' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

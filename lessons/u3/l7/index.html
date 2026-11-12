@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u3l7.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u3l7">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Which One Doesn’t Belong?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="-14 120 46;14 120 46;-14 120 46" dur="2.4s" repeatCount="indefinite"/><text x="120" y="46" font-size="40" text-anchor="middle">📐</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/><text x="190" y="46" font-size="38" text-anchor="middle">🤔</text></g><g><animateTransform attributeName="transform" type="rotate" values="-12 260 46;12 260 46;-12 260 46" dur="2.0s" repeatCount="indefinite"/><text x="260" y="46" font-size="36" text-anchor="middle">🔺</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Which One Doesn’t Belong?</h2>
+  <p class="wf-rule vw-rule">Which triangle doesn’t belong? Be ready to say why.</p></div>
+  <div class="vw-wodb"><div><b>A</b><svg viewBox="0 0 210 124" style="width:100%;max-width:270px;height:auto"><polygon points="77.0,79.0 133.0,79.0 77.0,37.0" fill="#f6eef1" stroke="#4a4436" stroke-width="3.5" stroke-linejoin="round"/><text x="64.0" y="58.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">3</text><text x="105.0" y="92.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">4</text><text x="119.0" y="48.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">5</text></svg></div><div><b>B</b><svg viewBox="0 0 210 124" style="width:100%;max-width:270px;height:auto"><polygon points="49.0,100.0 161.0,100.0 49.0,16.0" fill="#f6eef1" stroke="#4a4436" stroke-width="3.5" stroke-linejoin="round"/><text x="36.0" y="58.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">6</text><text x="105.0" y="113.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">8</text><text x="119.0" y="48.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">10</text></svg></div><div><b>C</b><svg viewBox="0 0 210 124" style="width:100%;max-width:270px;height:auto"><polygon points="21.0,93.0 189.0,93.0 21.0,23.0" fill="#f6eef1" stroke="#4a4436" stroke-width="3.5" stroke-linejoin="round"/><text x="8.0" y="58.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">5</text><text x="105.0" y="106.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">12</text><text x="119.0" y="48.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">13</text></svg></div><div><b>D</b><svg viewBox="0 0 210 124" style="width:100%;max-width:270px;height:auto"><polygon points="77.0,82.2 133.0,82.2 105.0,33.8" fill="#f6eef1" stroke="#4a4436" stroke-width="3.5" stroke-linejoin="round"/><text x="105.0" y="95.2" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">4</text><text x="77.0" y="54.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">4</text><text x="133.0" y="54.0" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle" dominant-baseline="central">4</text></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Can you find a reason for a different one?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans">Every one of them can be the odd one out. <b>A</b> has the smallest area (6). <b>B</b> is the only one with all even sides (it is A, twice as big). <b>C</b> has the biggest area (30) and the longest perimeter. <b>D</b> is the only one with no right angle.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -43,46 +54,11 @@
   <div class="outcome"><b>T3</b> Solve problems, using the cosine law and sine law, including the ambiguous case.<br><span class="muted">Today: the ambiguous case (SSA): counting the triangles with <span class="tex">h=b\sin A</span>, then solving every one of them.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: Gus the Goat" id="wu" style="--wf-side: 400px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Gus the Goat</h2>
-  <p class="wf-rule">Gus is tied to a post <b>5 m</b> from a long, straight fence. Dandelions grow all along the fence.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u3l7-field" id="u3l7-field"></div>
-    <div class="u3l7-wbtns">
-      <button type="button" class="pill" data-rope="4">Rope 4 m</button>
-      <button type="button" class="pill" data-rope="5">Rope 5 m</button>
-      <button type="button" class="pill" data-rope="7">Rope 7 m</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u3l7-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>The rope is <b>4 m</b>. Can Gus reach the fence? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l7-wa"><div class="bk-ans"><b>No.</b> The closest point of the fence is straight across, <b>5 m</b> away. A 4 m rope falls 1 m short.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>The rope is <b>5 m</b>. At how many spots can he just touch the fence? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l7-wa"><div class="bk-ans"><b>One</b>, straight across. The tight rope meets the fence at a <b>right angle</b>.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> The rope is <b>7 m</b>. Pulled tight, at how many spots does Gus’s nose touch the fence? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> None</div>
-        <div class="opt"><b>B</b> One</div>
-        <div class="opt right"><b>C</b> Two</div>
-        <div class="opt"><b>D</b> Seven</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>C, two.</b> The 7 m circle crosses the fence twice, <span class="tex">\sqrt{7^2-5^2}=\sqrt{24}\approx4.9</span> m on each side of the closest point. He can eat every dandelion between them.<br>
-        <span class="muted">The 5 m line straight across decides it: a shorter rope gives <b>none</b>, an equal rope <b>one</b>, a longer rope <b>two</b>. Today that line is the <b>height</b> <span class="tex">h</span>.</span></div>
-    </div>
-  </div></div>
-  <p class="u3l7-social">Challenge your neighbour: how long must the rope be so that the two spots are exactly <b>24 m</b> apart?</p>
-</section>
-
 <!-- ================= 1. Which measurements fix a triangle? ================= -->
 <section class="card" data-ink="s1" data-section="1. Which Measurements Fix a Triangle?">
   <div class="sec-h"><span class="badge">1</span><h2>Which Measurements Fix a Triangle?</h2></div>
   <div class="def">Three measurements, at least one of them a side, describe a triangle. With <b>SSS</b>, <b>SAS</b> (the angle is <em>between</em> the two sides), <b>ASA</b> and <b>AAS</b>, every triangle drawn from the measurements is congruent to every other: there is <b>exactly one</b> triangle.</div>
   <div class="def amber">With <b>SSA</b> (two sides and an angle that is <em>not</em> between them) this is not guaranteed. There may be no triangle, one triangle or two different triangles. SSA is called the <b>ambiguous case</b>.</div>
-  <div class="explainer" data-explainer="fixers"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -103,7 +79,6 @@
   <p>The sine law gives the <b>sine</b> of the unknown angle, and two angles between <span class="tex">0^\circ</span> and <span class="tex">180^\circ</span> have the same sine (sine is positive in quadrants I and II). The calculator’s <span class="keys"><kbd>sin⁻¹</kbd></span> key gives only the <b class="u3l7-g1">acute</b> one.</p>
   <div class="def amber u3l7-center">For <span class="tex">0^\circ&lt;\theta&lt;180^\circ</span>: &nbsp; <span class="tex u3l7-bigf">\sin\theta=\sin(180^\circ-\theta)</span>
     <div class="u3l7-legend">If <span class="tex">\sin B=k</span> with <span class="tex">0&lt;k&lt;1</span>, then <span class="tex">\textcolor{#12805a}{B=\sin^{-1}k}</span> (acute) <b>or</b> <span class="tex">\textcolor{#7b4fc4}{B=180^\circ-\sin^{-1}k}</span> (obtuse).<br>Each one gives a triangle only if the angles still add to less than <span class="tex">180^\circ</span>.</div></div>
-  <div class="explainer" data-explainer="supp"></div>
 </section>
 
 <section class="card example" data-ink="ex2" data-section="Example 2">
@@ -131,7 +106,6 @@
   </div>
   <div class="def amber u3l7-center"><span class="tex u3l7-bigf">\textcolor{#c27a0e}{h}=b\sin A</span><div class="u3l7-legend">Compare <span class="tex">\textcolor{#a33357}{a}</span> (the side opposite the given angle) with <span class="tex">\textcolor{#c27a0e}{h}</span> and with <span class="tex">\textcolor{#1f5bd6}{b}</span>.</div></div>
   <div class="explainer" data-explainer="swing"></div>
-  <div class="part think"><div class="pl"><span class="think-tag">Think</span> Why can an <b>obtuse</b> <span class="tex">\angle A</span> never give two triangles?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">C</span> leans back over the extension of the arm, so the near landing spot is always <b>behind</b> <span class="tex">A</span>. Only the far one can be on the arm, and only when <span class="tex">a&gt;b</span>. (A triangle can’t have two obtuse angles anyway.)</div></div></div>
 </section>
 
 <section class="card example" data-ink="ex3" data-section="Example 3">
@@ -148,15 +122,8 @@
       <tr><td>obtuse or right</td><td><span class="tex">a&gt;b</span></td><td><span data-reveal>1</span></td></tr>
     </table>
     <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Quick check:</b> if the side opposite the given angle is the <em>longer</em> of the two given sides (<span class="tex">a\ge b</span>), there is exactly one triangle (or none if <span class="tex">a=b</span> with <span class="tex">A</span> obtuse or right). Only an <b>acute</b> <span class="tex">A</span> with <span class="tex">a&lt;b</span> can give two.</div></div></div>
-  <div class="explainer" data-explainer="six"></div>
   <div class="space" id="ex3-space"></div>
   <button class="more" data-more="ex3-space">+ More space</button>
-</section>
-
-<section class="card" data-ink="s2b" data-section="2. Counting Triangles: a Decision Chart">
-  <h3 class="sub">Counting the triangles in three questions</h3>
-  <p>The summary as a decision chart: first look at the angle, then compare <span class="tex">a</span> with <span class="tex">b</span>, and only then (acute angle, <span class="tex">a&lt;b</span>) work out <span class="tex">h</span>.</p>
-  <div class="explainer" data-explainer="decide"></div>
 </section>
 
 <section class="card example" data-ink="ex4" data-section="Example 4">
@@ -173,6 +140,15 @@
   </div>
   <div class="space" id="ex4-space"></div>
   <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 7 · Questions 1–5</h2>
+  <p class="pr-t">What SSA means, then count the triangles with the height <span class="tex">h</span>.</p>
+  <div class="pr-chips n3"><span><b>1–2</b>SSA and the other cases</span><span><b>3–4</b>The height and the count</span><span><b>5</b>Count without the sine law</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u3l7">Open the Practice site</a></div>
 </section>
 
 <!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
@@ -282,7 +258,7 @@
     <div><b>Solve every triangle.</b> For each <span class="tex">B</span>: <span class="tex">C=180^\circ-A-B</span>, then <span class="tex">c</span> by the sine law. Keep unrounded values. In word problems, sketch both positions and check each makes sense.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u3l7">
-    <div><div class="kicker">Your turn</div><b>Assignment 7 — The Ambiguous Case</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 7 · Questions 6–17</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l8/">
     <div><div class="kicker">Next lesson</div><b>Lesson 8 — Choosing the Sine Law or the Cosine Law</b><div class="muted">Look at what you are given, pick the law that fits, then solve.</div></div><span class="arrow">→</span>

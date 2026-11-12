@@ -1,16 +1,12 @@
 /* Math 20-1 · Unit 3 · Lesson 8 — Choosing the Sine Law or the Cosine Law.
- * Warm-up (The Treasure Map: 10 paces on 060°, 10 paces on 180°: how far from the palm tree? an equilateral triangle),
- * and the explainers:
+ * The warm-up (The Bear Walk) is plain markup with an SVG picture (tools/newformat/specs/u3l8.py). Explainers:
  *   chooser (the decision chart walked node by node for each part of Example 1, the triangle's known parts marked),
- *   clock (clock hands from 12 like bearings, the angle between them, the tips joined: SAS → cosine law; Example 2),
- *   bearingForms (a compass rose: three-digit bearings ↔ N/S…E/W form, and a back bearing; Example 3 checks),
  *   route (STAR: a compass-rose bearing builder: two legs drawn from their bearings and distances, a new north line at
  *     the turn, the back bearing, the angle inside the triangle, cosine law, sine law, return bearing; Examples 4, 5),
  *   plus a live "Build a route" card (± bearings and distances, the working updates),
  *   mast (elevation from two points: △ABT first with the sine law, then right △BFT; Example 6),
- *   plot (a quadrilateral split by a diagonal: SAS, then a full pair; Example 7),
  *   circle (isosceles radii, central = 2 × inscribed with C sliding along the arc, chord bisector, tangents; Example 8),
- *   area (the height a sin C, ½ab sin C, SSS → cosine law first, the plot as two triangles; Example 9).
+ *   area (½ab sin C, SSS → cosine law first, the plot as two triangles; Example 9).
  * Colours (Unit 3): known full pair amber, the angle inside the triangle rose (course accent), leg 1 / known parts
  * blue, leg 2 green, back bearing purple, the unknown red. */
 import {
@@ -136,56 +132,6 @@ const panel = (stage, x, y, w, hh, title) => { const d = h('div', 'u3l8-panel', 
 const lineIn = (p, html, cls = '') => { const d = h('div', 'u3l8-line ' + cls, html); p.appendChild(d); d.style.opacity = 0; return d; };
 
 /* ====================================================================================================
- * Warm-up: The Treasure Map. 10 paces on 060°, then 10 paces on 180°.
- * ==================================================================================================== */
-function mountMap() {
-  const host = document.getElementById('u3l8-map'); if (!host) return;
-  const W = 560, H = 360, F = new Fig(host, { width: W, height: H }), L0 = F.L0;
-  const wob = (cx, cy, rx, ry, n, amp, seed) => { const pts = []; for (let i = 0; i < n; i++) { const a = (i / n) * Math.PI * 2, k = 1 + amp * Math.sin(i * 2.3 + seed) * Math.cos(i * 1.7 + seed * 0.5); pts.push([cx + rx * k * Math.cos(a), cy + ry * k * Math.sin(a)]); } return pts; };
-  svgEl('rect', { x: 3, y: 3, width: W - 6, height: H - 6, rx: 18, fill: '#f2e2bb', stroke: '#b38b52', 'stroke-width': 3 }, L0);
-  svgEl('rect', { x: 16, y: 16, width: W - 32, height: H - 32, rx: 12, fill: '#cfe2df', stroke: '#9fbfbb', 'stroke-width': 2 }, L0);
-  [[60, 60], [120, 330], [470, 335], [80, 190], [520, 200]].forEach(([x, y]) => svgEl('path', { d: `M${x} ${y}q8 -7 16 0t16 0`, fill: 'none', stroke: '#86aba6', 'stroke-width': 2.4, 'stroke-linecap': 'round' }, L0));
-  svgEl('path', { d: ptsD(wob(300, 226, 238, 132, 28, 0.07, 1.3), true), fill: '#ecd7a3', stroke: '#b9955c', 'stroke-width': 3, 'stroke-linejoin': 'round' }, L0);
-  svgEl('path', { d: ptsD(wob(372, 268, 64, 30, 14, 0.12, 4), true), fill: '#9cc27a', 'fill-opacity': 0.55, stroke: 'none' }, L0);
-  // compass rose (sea, top right)
-  const RC = [486, 72];
-  for (let k = 0; k < 8; k++) { const a = rad(k * 45 - 90), L = k % 2 ? 22 : 40, w = k % 2 ? 6 : 9, tip = addP(RC, uv(a), L), l = addP(RC, uv(a + Math.PI / 2), w), r = addP(RC, uv(a - Math.PI / 2), w);
-    svgEl('path', { d: ptsD([tip, l, RC, r], true), fill: k === 0 ? '#c93a33' : k % 2 ? '#c9b07a' : '#6b5330', stroke: '#4d3a1f', 'stroke-width': 1 }, L0); }
-  svgEl('circle', { cx: RC[0], cy: RC[1], r: 4, fill: '#4d3a1f' }, L0);
-  F.lab([RC[0], RC[1] - 42], '<b>N</b>', { pos: 'n', cls: 'u3l8-mapn', gap: 0 });
-  // palm tree at the start
-  const S = [178, 246], u = 168, TU = addP(S, [sn(60), -cs(60)], u), X = addP(TU, [0, 1], u);
-  const tr = svgEl('g', { transform: 'translate(-34 4)' }, L0);
-  svgEl('path', { d: `M${S[0] - 4} ${S[1] + 6}C${S[0] - 10} ${S[1] - 18} ${S[0] - 2} ${S[1] - 40} ${S[0] + 8} ${S[1] - 58}`, fill: 'none', stroke: '#7a5228', 'stroke-width': 7, 'stroke-linecap': 'round' }, tr);
-  const top = [S[0] + 8, S[1] - 58];
-  [[-150, 34], [-110, 30], [-40, 32], [10, 34], [-75, 26]].forEach(([a, L]) => { const e = addP(top, uv(rad(a)), L), m = addP(mid(top, e), uv(rad(a - 90)), 9); svgEl('path', { d: `M${f1(top[0])} ${f1(top[1])}Q${f1(m[0])} ${f1(m[1])} ${f1(e[0])} ${f1(e[1])}`, fill: 'none', stroke: '#2f7d32', 'stroke-width': 7, 'stroke-linecap': 'round' }, tr); });
-  svgEl('circle', { cx: S[0], cy: S[1], r: 6, fill: '#7a5228' }, F.L3);
-  F.lab([S[0] - 30, S[1] + 14], 'palm tree', { pos: 'sw', cls: 'u3l8-mapl' });
-  // the walk
-  const n0 = northLine(F, S, { hide: true, up: 70 }), a0 = bArc(F, S, 0, 60, 40, { color: L1, hide: true, label: T('060^\\circ'), lr: 22 });
-  const w1 = F.pathD(ptsD([S, TU]), { color: '#5a3d1e', width: 5, dash: '2 13', hide: true });
-  const nT = northLine(F, TU, { hide: true, up: 56 }), aT = bArc(F, TU, 0, 180, 30, { color: L2, hide: true, label: T('180^\\circ'), lr: 20, at: 0.5 });
-  const w2 = F.pathD(ptsD([TU, X]), { color: '#5a3d1e', width: 5, dash: '2 13', hide: true });
-  const turn = F.dot(TU, { color: '#5a3d1e', r: 5, hide: true });
-  const xg = F.grp({ hide: true, layer: F.L3 });
-  F.pathD(`M${X[0] - 13} ${X[1] - 13}L${X[0] + 13} ${X[1] + 13}M${X[0] + 13} ${X[1] - 13}L${X[0] - 13} ${X[1] + 13}`, { color: '#c93a33', width: 6, layer: xg });
-  const home = F.pathD(ptsD([X, S]), { color: '#c93a33', width: 3.5, dash: true, hide: true });
-  const q = F.lab(mid(S, X), T('?'), { cls: 'u3l8-mapq', hide: true });
-  const l1 = F.lab(addP(mid(S, TU, 0.62), unit([TU[1] - S[1], -(TU[0] - S[0])]), -24), '10 paces', { cls: 'u3l8-mapl', hide: true }), l2 = F.lab(mid(TU, X, 0.62), '10 paces', { cls: 'u3l8-mapl', hide: true, pos: 'e', gap: 12 });
-  const info = F.lab([30, 30], '', { pos: 'se', cls: 'u3l8-mapinfo', gap: 0 });
-  const msgs = ['Start at the palm tree, facing north.', 'Leg 1: 10 paces on a bearing of 060°.', 'Leg 2: 10 paces on a bearing of 180°. Dig!', 'How far is the treasure from the tree?'];
-  const bs = ['u3l8-m1', 'u3l8-m2', 'u3l8-m3', 'u3l8-m0'].map((id) => document.getElementById(id));
-  let k = 0, busy = false;
-  const paint = () => { info.innerHTML = msgs[k]; bs[0].disabled = k !== 0; bs[1].disabled = k !== 1; bs[2].disabled = k !== 2; };
-  const run = async (fn) => { if (busy) return; busy = true; try { await fn(liveCtx()); } finally { busy = false; paint(); } };
-  bs[0].addEventListener('click', () => run(async (c) => { k = 1; paint(); await drawOn(c, n0, 400); await drawOn(c, a0, 600); await drawOn(c, w1, 900); await show(c, l1); await popIn(c, turn); }));
-  bs[1].addEventListener('click', () => run(async (c) => { k = 2; paint(); await drawOn(c, nT, 400); await drawOn(c, aT, 600); await drawOn(c, w2, 900); await show(c, l2); xg.style.opacity = 1; await pop(c, xg, 420); }));
-  bs[2].addEventListener('click', () => run(async (c) => { k = 3; paint(); await drawOn(c, home, 700); await popIn(c, q); }));
-  bs[3].addEventListener('click', () => { if (busy) return; k = 0; [n0, n0.lab, a0, a0.lab, w1, nT, nT.lab, aT, aT.lab, w2, turn, xg, home, q, l1, l2].forEach((e) => { if (e) e.style.opacity = 0; }); paint(); });
-  paint();
-}
-
-/* ====================================================================================================
  * explainer: choosing a method (decision chart walked for each part of Example 1)
  * ==================================================================================================== */
 const CHN = {
@@ -278,143 +224,6 @@ const chooser = {
     return steps;
   }
 };
-
-/* =============================== explainer: clock hands =============================== */
-const CK = { demo: { lab: 'Try 9:45', H: 9, M: 45 }, a: { lab: 'Example 2(a) check', H: 4, M: 0 }, b: { lab: 'Example 2(b) check', H: 2, M: 30 } };
-const clockG = (d) => { const mA = 6 * d.M, hA = 30 * (d.H % 12) + 0.5 * d.M, diff = Math.abs(hA - mA), ang = diff > 180 ? 360 - diff : diff, d2 = 81 + 36 - 108 * cs(ang); return { mA, hA, diff, ang, d2, dd: Math.sqrt(d2) }; };
-const tm = (d) => `${d.H}{:}${String(d.M).padStart(2, '0')}`;
-const clock = {
-  title: 'Clock hands make a triangle',
-  height: 420, minW: 940,
-  choices: Object.keys(CK).map((k) => ({ v: k, label: CK[k].lab })),
-  ask: (v) => `At ${T(tm(CK[v]))}, find the angle between the hands (minute hand 9 cm, hour hand 6 cm) and the distance between their tips.`,
-  make(stage, v, ex) {
-    const d = CK[v], g = clockG(d), O = [212, 210], R = 196, MH = 150, HH = 100;
-    const F = new Fig(stage, { x: 6, y: 0, width: 424, height: 420 });
-    svgEl('circle', { cx: O[0], cy: O[1], r: R, fill: '#fff', stroke: INK, 'stroke-width': 4 }, F.L0);
-    for (let i = 0; i < 60; i++) { const a = rad(i * 6 - 90), big = i % 5 === 0; F.pathD(ptsD([addP(O, uv(a), big ? R - 18 : R - 9), addP(O, uv(a), R - 3)]), { color: big ? INK : GRAY, width: big ? 4 : 2, layer: F.L0 }); }
-    for (let k = 1; k <= 12; k++) F.lab(addP(O, uv(rad(k * 30 - 90)), R - 38), String(k), { cls: 'u3l8-cnum' });
-    const mH = F.pathD('', { color: L1, width: 7 }), hH = F.pathD('', { color: L2, width: 9 });
-    const setH = (p, L, a) => { const e = addP(O, uv(sa(a)), L); p.setAttribute('d', ptsD([O, e])); };
-    setH(mH, MH, 0); setH(hH, HH, 0); F.dot(O, { r: 8 });
-    const mTip = addP(O, uv(sa(g.mA)), MH), hTip = addP(O, uv(sa(g.hA)), HH);
-    const am = g.mA > 0 ? bArc(F, O, 0, g.mA, 122, { color: L1, hide: true, label: T(`${g.mA}^\\circ`), lr: -24, occ: [g.hA, 0, g.mA] }) : null;
-    const ah = bArc(F, O, 0, g.hA, 46, { color: L2, hide: true, label: T(dg(g.hA)), lr: 20, occ: [g.mA, 0, g.hA] });
-    const w = angMark(F, O, mTip, hTip, { r: 84, color: AC, fo: 0.16, label: T(cA(dg(g.ang))), hide: true, ld: 108 });
-    if (g.ang < 40) { const st = n360(sweepBetween(O, mTip, hTip) > 0 ? g.mA : g.hA), L = addP(O, uv(sa(st - 24)), 78); w.lab.style.left = L[0] + 'px'; w.lab.style.top = L[1] + 'px'; }
-    const dl = F.pathD(ptsD([mTip, hTip]), { color: UNK, width: 4, dash: true, hide: true });
-    const G = cen([O, mTip, hTip]);
-    const tipLab = (tip, other, html, color) => { const n = unit([-(tip[1] - O[1]), tip[0] - O[0]]), M = mid(O, tip, 0.78), sg = (M[0] - other[0]) * n[0] + (M[1] - other[1]) * n[1] >= 0 ? 1 : -1; return F.lab(addP(M, n, 20 * sg), html, { color, hide: true, cls: 'u3l8-lsm u3l8-halo' }); };
-    const lm = tipLab(mTip, hTip, T('9\\text{ cm}'), L1), lh = tipLab(hTip, mTip, T('6\\text{ cm}'), L2);
-    const ld = F.lab(away(mid(mTip, hTip), G, 18), T(cU('d')), { hide: true });
-    const pn = panel(stage, 446, 10, ex.W - 458, 400, `The hands at ${T(tm(d))}`);
-    const mTxt = d.M === 0 ? `\\text{at the 12: }0^\\circ` : `\\text{at the ${d.M / 5}: }${d.M / 5}\\times30^\\circ=${g.mA}^\\circ`;
-    const hTxt = d.M === 0 ? `\\text{at the ${d.H}: }${d.H}\\times30^\\circ=${g.hA}^\\circ` : `${d.H}\\times30^\\circ+${d.M}\\times0.5^\\circ=${dg(g.hA)}`;
-    const hi = Math.max(g.hA, g.mA), lo = Math.min(g.hA, g.mA);
-    const aTxt = g.diff > 180 ? `360^\\circ-(${dg(hi)}-${dg(lo)})=${dg(g.ang)}` : `${dg(hi)}-${dg(lo)}=${cA(dg(g.ang))}`;
-    const ln = [
-      lineIn(pn, `<span class="u3l8-lk">minute</span>${T(mTxt)}`), lineIn(pn, `<span class="u3l8-lk">hour</span>${T(hTxt)}`),
-      lineIn(pn, `<span class="u3l8-lk">angle</span>${T(aTxt)}`), lineIn(pn, `<span class="u3l8-lk">SAS</span>${T(`d^2=9^2+6^2-2(9)(6)\\cos ${dg(g.ang)}`)}`),
-      lineIn(pn, T(`d^2${sq(g.d2, 2)},\\quad d\\approx${nt(g.dd, 1, true)}\\text{ cm}`), 'u3l8-line-ans')
-    ];
-    return [
-      { cap: d.M === 0 ? `The minute hand points at the 12. Clock angles are measured <b>clockwise from 12</b>, like bearings.` : `The minute hand moves ${T('30^\\circ')} per number: at the ${d.M / 5}, it is ${T(`${g.mA}^\\circ`)} clockwise from 12.`,
-        run: async (c) => { await tween(c, 900, (t) => setH(mH, MH, g.mA * t)); if (am) await drawOn(c, am, 500); await show(c, ln[0]); } },
-      { cap: d.M === 0 ? `The hour hand points at the ${d.H}: ${T(`${d.H}\\times30^\\circ=${g.hA}^\\circ`)}.` : `The hour hand moves ${T('0.5^\\circ')} each minute, so at ${T(tm(d))} it is <b>past</b> the ${d.H}: ${T(`${d.H}(30^\\circ)+${d.M}(0.5^\\circ)=${dg(g.hA)}`)}.`,
-        run: async (c) => { await tween(c, 1000, (t) => setH(hH, HH, g.hA * t)); await drawOn(c, ah, 500); await show(c, ln[1]); } },
-      { cap: `The angle between the hands: ${T(aTxt)}.`, run: async (c) => { dim(am, ah); await drawOn(c, w, 500); await show(c, ln[2]); } },
-      { cap: `Join the tips. Two sides (9 cm and 6 cm) and the angle <b>between</b> them: <b>SAS</b>, so the <b>cosine law</b>.`,
-        run: async (c) => { await Promise.all([show(c, lm), show(c, lh)]); await drawOn(c, dl, 600); await show(c, ld); await show(c, ln[3]); } },
-      { cap: `${T(`d^2=81+36-108\\cos ${dg(g.ang)}${sq(g.d2, 2)}`)}, so the tips are about <b>${nt(g.dd, 1, true)} cm</b> apart.`, run: (c) => show(c, ln[4]) }
-    ];
-  }
-};
-
-/* =============================== explainer: bearing forms (compass rose) =============================== */
-const BF = {
-  n140: { lab: 'Notes: ' + T('140^\\circ'), b: 140, ask: `Write the bearing ${T('140^\\circ')} in N/S…E/W form.` },
-  a: { lab: '(a) ' + T('065^\\circ'), b: 65 }, b: { lab: '(b) ' + T('250^\\circ'), b: 250 }, c: { lab: '(c) ' + T('310^\\circ'), b: 310 }, d: { lab: '(d) ' + T('165^\\circ'), b: 165 },
-  e: { lab: '(e) ' + T(qT('S', 15, 'W')), q: ['S', 15, 'W'] }, f: { lab: '(f) ' + T(qT('N', 20, 'W')), q: ['N', 20, 'W'] }, g: { lab: '(g) ' + T(qT('S', 62, 'E')), q: ['S', 62, 'E'] },
-  h: { lab: '(h) back', back: 300, ask: `Example 3(h): ${T('B')} is on a bearing of ${T('300^\\circ')} from ${T('A')}. Find the bearing of ${T('A')} from ${T('B')}.` }
-};
-const qToB = (ns, a, ew) => (ns === 'N' ? (ew === 'E' ? a : 360 - a) : (ew === 'E' ? 180 - a : 180 + a));
-const ROWS = [['N', 'E', '\\theta'], ['S', 'E', '180^\\circ-\\theta'], ['S', 'W', '180^\\circ+\\theta'], ['N', 'W', '360^\\circ-\\theta']];
-const bearingForms = {
-  title: 'Two ways to write a direction',
-  height: 420, minW: 940,
-  choices: [{ v: 'n140', label: BF.n140.lab }, { sep: 'Example 3' }, ...'abcdefgh'.split('').map((k) => ({ v: k, label: BF[k].lab }))],
-  ask: (v) => BF[v].ask || (BF[v].q ? `Example 3${BF[v].lab.slice(0, 3)}: write ${T(qT(...BF[v].q))} as a three-digit bearing.` : `Example 3${BF[v].lab.slice(0, 3)}: write ${T(bT(BF[v].b))} in N/S…E/W form.`),
-  make(stage, v, ex) {
-    const d = BF[v];
-    const pn = panel(stage, 470, 10, ex.W - 482, 400, 'N/S…E/W form ↔ bearing');
-    if (d.back != null) return backSteps(stage, ex, d, pn);
-    const O = [228, 214], R = 166, F = new Fig(stage, { x: 4, y: 0, width: 460, height: 420 });
-    svgEl('circle', { cx: O[0], cy: O[1], r: R, fill: '#fff', stroke: '#c9c3b4', 'stroke-width': 2.5 }, F.L0);
-    for (let i = 0; i < 36; i++) { const a = rad(i * 10 - 90), big = i % 3 === 0; F.pathD(ptsD([addP(O, uv(a), big ? R - 14 : R - 7), addP(O, uv(a), R)]), { color: big ? '#8a8f99' : '#c0c4cb', width: big ? 2.6 : 1.6, layer: F.L0 }); }
-    F.pathD(ptsD([[O[0], O[1] - R], [O[0], O[1] + R]]), { color: '#b4b9c2', width: 2, layer: F.L0 }); F.pathD(ptsD([[O[0] - R, O[1]], [O[0] + R, O[1]]]), { color: '#b4b9c2', width: 2, layer: F.L0 });
-    [['N', 0], ['E', 90], ['S', 180], ['W', 270]].forEach(([t, b]) => F.lab(addP(O, uv(sa(b)), R + 16), `<b>${t}</b>`, { cls: 'u3l8-rosel' }));
-    [['000', [O[0] + 14, O[1] - R - 16], 'e'], ['090', [O[0] + R + 24, O[1] + 14], 's'], ['180', [O[0] + 14, O[1] + R + 16], 'e'], ['270', [O[0] - R - 24, O[1] + 14], 's']].forEach(([t, p, pos]) => F.lab(p, T(`${t}^\\circ`), { pos, cls: 'u3l8-rosen', gap: 2 }));
-    F.dot(O, { r: 6 });
-    const halfN = F.pathD(ptsD([O, [O[0], O[1] - R]]), { color: L1, width: 6, hide: true }), halfS = F.pathD(ptsD([O, [O[0], O[1] + R]]), { color: PAIR, width: 6, hide: true });
-    const halfNa = F.pathD(ptsD([O, [O[0], O[1] - R]]), { color: PAIR, width: 6, hide: true });
-    const ray = F.pathD('', { color: INK, width: 4.5, hide: true }), rayH = arrowHead(F.L3, 0, 0, 1, 0, { color: INK, width: 4 }); rayH.style.opacity = 0;
-    const setRay = (b) => { const e = addP(O, uv(sa(b)), R - 10); ray.setAttribute('d', ptsD([O, e])); rayH.setAttribute('points', [[e[0], e[1]], addP(addP(e, uv(sa(b)), -17), uv(sa(b) + Math.PI / 2), 8), addP(addP(e, uv(sa(b)), -17), uv(sa(b) - Math.PI / 2), 8)].map((p) => f1(p[0]) + ',' + f1(p[1])).join(' ')); };
-    const bArcEl = F.pathD('', { color: L1, width: 3.2, hide: true }), qArcEl = F.pathD('', { color: PAIR, width: 3.2, hide: true });
-    const bLab = F.lab([0, 0], '', { color: L1, hide: true, cls: 'u3l8-big' }), qLab = F.lab([0, 0], '', { color: PAIR, hide: true, cls: 'u3l8-big' });
-    const setArc = (el, lab, from, sw, r, txt) => { el.setAttribute('d', Math.abs(sw) < 0.01 ? 'M0 0' : arcD(O, sa(from), rad(sw), r)); lab.innerHTML = txt; const p = addP(O, uv(sa(from + sw / 2)), r + 26); lab.style.left = p[0] + 'px'; lab.style.top = p[1] + 'px'; };
-    // the rule table
-    const tb = h('table', 'u3l8-rule'); tb.innerHTML = `<tr><th>N/S…E/W</th><th>bearing</th></tr>` + ROWS.map(([ns, ew, f]) => `<tr><td>${T(`\\text{${ns}}\\,\\theta\\,\\text{${ew}}`)}</td><td>${T(f)}</td></tr>`).join('');
-    pn.appendChild(tb);
-    const rowEl = (ns, ew) => tb.rows[1 + ROWS.findIndex((r) => r[0] === ns && r[1] === ew)];
-    if (d.b != null) {
-      const b = d.b, [ns, a, ew] = quad(b), from = ns === 'N' ? 0 : 180, sw = (ns === 'N') === (ew === 'E') ? a : -a;
-      const fTxt = ns === 'N' ? (ew === 'E' ? `${b}^\\circ` : `360^\\circ-${b}^\\circ=${a}^\\circ`) : (ew === 'E' ? `180^\\circ-${b}^\\circ=${a}^\\circ` : `${b}^\\circ-180^\\circ=${a}^\\circ`);
-      const r1 = lineIn(pn, `<span class="u3l8-lk">angle</span>${T(`\\theta=${fTxt}`)}`), r2 = lineIn(pn, T(`${bT(b)}=${qT(ns, a, ew)}`), 'u3l8-line-ans u3l8-big');
-      return [
-        { cap: `Face <b>north</b>. A bearing turns <b>clockwise from north</b>.`, run: (c) => drawOn(c, halfN, 450) },
-        { cap: `Turn clockwise ${T(`${b}^\\circ`)}: the bearing ${T(bT(b))}.`, run: async (c) => { ray.style.opacity = 1; rayH.style.opacity = 1; bArcEl.style.opacity = 1; bLab.style.opacity = 1;
-          await tween(c, 1100, (t) => { setRay(b * t); setArc(bArcEl, bLab, 0, b * t, 56, T(bT(Math.round(b * t)))); }); } },
-        { cap: `The arrow is ${ns === 'N' ? 'above' : 'below'} the east–west line, so start from <b>${ns === 'N' ? 'north' : 'south'}</b>.`, run: (c) => drawOn(c, ns === 'N' ? halfNa : halfS, 450) },
-        { cap: `Then turn toward <b>${ew === 'E' ? 'east' : 'west'}</b>: ${T(`\\theta=${fTxt}`)}.`,
-          run: async (c) => { qArcEl.style.opacity = 1; qLab.style.opacity = 1; await tween(c, 800, (t) => setArc(qArcEl, qLab, from, sw * t, 112, T(`${fx(a * t, 0)}^\\circ`))); rowEl(ns, ew).classList.add('on'); await show(c, r1); } },
-        { cap: `${T(bT(b))} is ${T(qT(ns, a, ew))}.`, run: (c) => show(c, r2) }
-      ];
-    }
-    const [ns, a, ew] = d.q, b = qToB(ns, a, ew), from = ns === 'N' ? 0 : 180, sw = (ns === 'N') === (ew === 'E') ? a : -a;
-    const fTxt = ROWS.find((r) => r[0] === ns && r[1] === ew)[2].replace('\\theta', `${a}^\\circ`) + (ns === 'N' && ew === 'E' ? '' : `=${b}^\\circ`);
-    const r1 = lineIn(pn, `<span class="u3l8-lk">bearing</span>${T(fTxt)}`), r2 = lineIn(pn, T(`${qT(ns, a, ew)}=${bT(b)}`), 'u3l8-line-ans u3l8-big');
-    return [
-      { cap: `${T(qT(ns, a, ew))}: face <b>${ns === 'N' ? 'north' : 'south'}</b>…`, run: (c) => drawOn(c, ns === 'N' ? halfNa : halfS, 450) },
-      { cap: `…and turn ${T(`${a}^\\circ`)} toward <b>${ew === 'E' ? 'east' : 'west'}</b>.`, run: async (c) => { ray.style.opacity = 1; rayH.style.opacity = 1; qArcEl.style.opacity = 1; qLab.style.opacity = 1;
-        await tween(c, 800, (t) => { setRay(from + sw * t); setArc(qArcEl, qLab, from, sw * t, 112, T(`${fx(a * t, 0)}^\\circ`)); }); } },
-      { cap: `Now measure from <b>north, clockwise</b>, all the way round to the arrow: ${T(fTxt)}.`, run: async (c) => { await drawOn(c, halfN, 300); bArcEl.style.opacity = 1; bLab.style.opacity = 1;
-        await tween(c, 1100, (t) => setArc(bArcEl, bLab, 0, b * t, 56, T(bT(Math.round(b * t))))); rowEl(ns, ew).classList.add('on'); await show(c, r1); } },
-      { cap: `${T(qT(ns, a, ew))} is the bearing ${T(bT(b))}.`, run: (c) => show(c, r2) }
-    ];
-  }
-};
-function backSteps(stage, ex, d, pn) {
-  const F = new Fig(stage, { x: 4, y: 0, width: 460, height: 420 }), A = [352, 318], L = 270, B = addP(A, uv(sa(d.back)), L), bb = n360(d.back - 180);
-  const nA = northLine(F, A, { up: 96 }), nB = northLine(F, B, { up: 96, down: 70, hide: true });
-  F.dot(A, { r: 7 }); F.lab([A[0] + 10, A[1] + 6], `<b>A</b>`, { pos: 'se', cls: 'u3l8-vname' });
-  const aA = bArc(F, A, 0, d.back, 46, { color: L1, hide: true, label: T(bT(d.back)), lr: 24, at: 0.62 });
-  const ab = leg(F, A, B, { color: L1, hide: true }), dB = F.dot(B, { r: 7, hide: true }), nmB = F.lab([B[0] - 8, B[1] + 8], '<b>B</b>', { pos: 'sw', cls: 'u3l8-vname', hide: true });
-  const nrm = unit([-(A[1] - B[1]), A[0] - B[0]]), off = (p) => addP(p, nrm, 13), back = leg(F, off(addP(B, unit(sub(A, B)), 14)), off(addP(A, unit(sub(B, A)), 40)), { color: BK, width: 3, dash: '9 7', hide: true });
-  const aB = bArc(F, B, 0, bb, 40, { color: BK, hide: true, label: T(bT(bb)), lr: 22 });
-  const r0 = lineIn(pn, `<span class="u3l8-lk">at A</span>${T(`\\text{bearing of }B=${bT(d.back)}`)}`);
-  const r1 = lineIn(pn, `<span class="u3l8-lk">turn</span>${T(`${bT(d.back)}${d.back >= 180 ? '-' : '+'}180^\\circ=${bT(bb)}`)}`);
-  const r2 = lineIn(pn, T(`\\text{bearing of }A\\text{ from }B=${bT(bb)}`), 'u3l8-line-ans');
-  const r3 = lineIn(pn, 'Back bearing: <b>add</b> 180° to a bearing under 180°, <b>subtract</b> 180° from one of 180° or more.', 'u3l8-line-sm');
-  pn.querySelector('.u3l8-ph').innerHTML = 'Back bearings';
-  return [
-    { cap: `${T('B')} is on a bearing of ${T(bT(d.back))} <b>from</b> ${T('A')}: the angle is measured <b>at</b> ${T('A')}, clockwise from north.`,
-      run: async (c) => { await drawOn(c, aA, 700); await drawOn(c, ab, 700); await Promise.all([popIn(c, dB), show(c, nmB)]); await show(c, r0); } },
-    { cap: `At ${T('B')}, draw a <b>new north line</b>. North lines are <b>parallel</b>.`, run: (c) => drawOn(c, nB, 500) },
-    { cap: `To look back at ${T('A')}, turn around: the direction changes by ${T('180^\\circ')}.`, run: (c) => drawOn(c, back, 700) },
-    { cap: `${T(`${bT(d.back)}-180^\\circ=${bT(bb)}`)}, measured at ${T('B')}, clockwise from north.`, run: async (c) => { await drawOn(c, aB, 700); await show(c, r1); } },
-    { cap: `The bearing of ${T('A')} from ${T('B')} is ${T(bT(bb))}: the <b>back bearing</b>.`, run: async (c) => { await show(c, r2); await show(c, r3); } }
-  ];
-}
 
 /* ====================================================================================================
  * STAR explainer: a compass-rose bearing builder (two legs from bearings and distances)
@@ -635,40 +444,6 @@ const PL = {
   ex7: { lab: 'Example 7 check', AB: 7, BC: 9.5, B: 112, CD: 6, D: 80, labs: ['7.0', '9.5', '6.0'], u: 'm' },
   demo: { lab: 'Try another plot', AB: 8, BC: 11, B: 95, CD: 7, D: 70, labs: ['8.0', '11.0', '7.0'], u: 'm' }
 };
-const plotAsk = (d) => `Plot ${T('ABCD')}: ${T(`AB=${d.labs[0]}`)} m, ${T(`BC=${d.labs[1]}`)} m, ${T(`\\angle ABC=${d.B}^\\circ`)}, ${T(`CD=${d.labs[2]}`)} m, ${T(`\\angle ADC=${d.D}^\\circ`)}. Find ${T('AC')}, ${T('AD')} and the perimeter.`;
-const plot = {
-  title: 'A quadrilateral split into two triangles',
-  height: 420, minW: 960,
-  choices: Object.keys(PL).map((k) => ({ v: k, label: PL[k].lab })),
-  ask: (v) => plotAsk(PL[v]),
-  make(stage, v, ex) {
-    const d = PL[v], p = plotGeom(d), fw = 470, Q = plotFig(stage, { x: 4, y: 0, width: fw, height: 420 }, d, p), F = Q.F;
-    const acL = F.line([Q.A, Q.C], { color: UNK, width: 4.5, hide: true }), tAC = F.lab(mid(Q.A, Q.C, 0.42), T(cU(`${nt(p.AC, 2, true)}`)), { hide: true, cls: 'u3l8-halo' });
-    const aCAD = angMark(F, Q.A, Q.C, Q.D, { r: 46, color: AC, label: T(cA(dg(p.CAD))), hide: true, ld: 78 }), aACD = angMark(F, Q.C, Q.D, Q.A, { r: 34, color: AC, label: T(cA(dg(p.ACD))), hide: true, ld: 60 });
-    const adL = F.line([Q.A, Q.D], { color: UNK, width: 5, hide: true }), tAD = F.lab(sideAt(Q.A, Q.D, Q.G, 24), T(cU(`${nt(p.AD, 2, true)}`)), { hide: true });
-    const per = F.line([Q.A, Q.B, Q.C, Q.D], { closed: true, color: COLORS.green, width: 7, hide: true });
-    const pn = panel(stage, fw + 14, 10, ex.W - fw - 26, 400, 'Working');
-    const ACr = Math.round(p.AC * 100) / 100, ACDr = Math.round(p.ACD * 10) / 10;
-    const ln = [
-      lineIn(pn, `<span class="u3l8-lk">△ABC</span>${T(`AC^2=${d.AB}^2+${d.BC}^2-2(${d.AB})(${d.BC})\\cos ${d.B}^\\circ`)}`, 'u3l8-line-sm'),
-      lineIn(pn, T(`AC^2\\approx${nt(p.AC * p.AC, 2)},\\ \\ AC\\approx${nt(p.AC, 2, true)}\\text{ ${d.u}}`)),
-      lineIn(pn, `<span class="u3l8-lk">△ACD</span>${T(`\\sin\\angle CAD=\\frac{${d.labs[2]}\\sin ${d.D}^\\circ}{${nt(ACr, 2, true)}}\\approx${fx(p.sinA, 4, true)}`)}`, 'u3l8-line-sm'),
-      lineIn(pn, T(`\\angle CAD\\approx${dg(p.CAD)}\\ \\ \\text{(acute: }CD<AC)`)),
-      lineIn(pn, T(`\\angle ACD\\approx180^\\circ-${d.D}^\\circ-${dg(p.CAD)}=${dg(p.ACD)}`)),
-      lineIn(pn, `<span class="u3l8-lk">sine law</span>${T(`AD=\\frac{${nt(ACr, 2, true)}\\sin ${dg(ACDr)}}{\\sin ${d.D}^\\circ}\\approx${nt(p.AD, 1, true)}\\text{ ${d.u}}`)}`, 'u3l8-line-sm'),
-      lineIn(pn, T(`P\\approx${d.labs[0]}+${d.labs[1]}+${d.labs[2]}+${nt(p.AD, 2, true)}\\approx${nt(p.per, 1, true)}\\text{ ${d.u}}`), 'u3l8-line-ans')
-    ];
-    return [
-      { cap: `${T('\\triangle ACD')} has only ${T('CD')} and ${T('\\angle D')}: not enough yet. ${T('\\triangle ABC')} has two sides and the angle <b>between</b> them.`, run: (c) => show(c, Q.t1) },
-      { cap: `${T('\\triangle ABC')} is <b>SAS</b>: cosine law. ${T(`AC\\approx${nt(p.AC, 2, true)}`)} m, the side the two triangles <b>share</b>.`, run: async (c) => { await drawOn(c, acL, 500); await show(c, tAC); await show(c, ln[0]); await show(c, ln[1]); } },
-      { cap: `In ${T('\\triangle ACD')}, ${T(`\\angle D=${d.D}^\\circ`)} and ${T('AC')} (opposite it) are a <b>full pair</b>: sine law for ${T('\\angle CAD')}. Only acute, since ${T('CD')} is shorter than ${T('AC')}.`,
-        run: async (c) => { Q.t1.style.opacity = 0.3; await show(c, Q.t2); Q.aD.lab.style.color = PAIR; Q.aD.lab.classList.add('u3l8-lpair'); tAC.innerHTML = T(cP(nt(p.AC, 2, true))); tAC.classList.add('u3l8-lpair'); await drawOn(c, aCAD, 500); await show(c, ln[2]); await show(c, ln[3]); } },
-      { cap: `Angles in ${T('\\triangle ACD')}: ${T(`\\angle ACD\\approx${dg(p.ACD)}`)}.`, run: async (c) => { await drawOn(c, aACD, 500); await show(c, ln[4]); } },
-      { cap: `Sine law again: ${T(`AD\\approx${nt(p.AD, 1, true)}`)} m.`, run: async (c) => { await drawOn(c, adL, 500); await show(c, tAD); await show(c, ln[5]); } },
-      { cap: `The <b>perimeter</b> goes around the <b>outside</b> (not along ${T('AC')}): about <b>${nt(p.per, 1, true)} m</b>.`, run: async (c) => { await drawOn(c, per, 1200); await show(c, ln[6]); } }
-    ];
-  }
-};
 
 /* =============================== explainer: triangles in circles =============================== */
 function circGeom(d) { const cosO = (2 * d.r * d.r - d.c * d.c) / (2 * d.r * d.r), O = deg(Math.acos(cosO)); return { cosO, O, ins: O / 2, dist: Math.sqrt(d.r * d.r - d.c * d.c / 4), ATB: 180 - O, TA: d.r * Math.tan(rad(O / 2)), OT: d.r / cs(O / 2) }; }
@@ -751,7 +526,6 @@ function areaFig(host, o, d) {
   return { F, A, B, C, H, G, la, lb, lc, aC };
 }
 const AR = {
-  why: { lab: 'Why ½ab sin C?', a: 8, b: 11, C: 50, ask: `Where does ${T('\\text{Area}=\\tfrac12ab\\sin C')} come from?` },
   a: { lab: 'Example 9(a) check', a: 42, b: 55, C: 74, ta: '42\\text{ m}', tb: '55\\text{ m}', tc: 'c', tcColor: UNK, ask: 'Example 9(a): sides 42 m and 55 m with 74° between them. Find the area and the perimeter.' },
   b: { lab: 'Example 9(b) check', a: 7, b: 9, C: angC(7, 9, 12), Ck: 'u', ta: '7', tb: '9', tc: '12', ask: 'Example 9(b): find the area of a triangle with sides 7 cm, 9 cm and 12 cm.' },
   c: { lab: 'Example 9(c) check', plot: true, ask: 'Example 9(c): find the area of the garden plot in Example 7.' }
@@ -771,17 +545,6 @@ const area = {
     const tH = F.lab(mid(Z.B, Z.H), T(cA('h')), { pos: obt ? 'w' : 'e', gap: 10, hide: true });
     const rt2 = F.tint([Z.B, Z.C, Z.H], { color: AC, fo: 0.16, hide: true });
     const pn = panel(stage, fw + 14, 10, ex.W - fw - 26, 400, 'Working');
-    if (v === 'why') {
-      const ln = [lineIn(pn, T('\\text{Area}=\\tfrac12(\\text{base})(\\text{height})=\\tfrac12\\,b\\,h')), lineIn(pn, T('\\sin C=\\frac{h}{a}\\ \\Rightarrow\\ h=a\\sin C')),
-        lineIn(pn, T('\\text{Area}=\\tfrac12\\,b\\,(a\\sin C)=\\tfrac12ab\\sin C'), 'u3l8-line-ans u3l8-big'), lineIn(pn, T('=\\tfrac12bc\\sin A=\\tfrac12ac\\sin B'), 'u3l8-line-sm')];
-      return [
-        { cap: `Area ${T('=\\tfrac12(\\text{base})(\\text{height})')}. Use side ${T('b')} as the <b>base</b>.`, run: async (c) => { await drawOn(c, base, 500); await show(c, ln[0]); } },
-        { cap: `The <b>height</b> ${T('h')} drops from ${T('B')} at right angles to the base.`, run: async (c) => { await drawOn(c, alt, 600); await show(c, tH); } },
-        { cap: `In the right triangle with hypotenuse ${T('a')}: ${T('\\sin C=\\frac{h}{a}')}, so ${T('h=a\\sin C')}.`, run: async (c) => { await show(c, rt2); await show(c, ln[1]); } },
-        { cap: `Area ${T('=\\tfrac12\\,b\\,(a\\sin C)=\\tfrac12ab\\sin C')}: two sides and the angle <b>between</b> them (SAS).`, run: (c) => show(c, ln[2]) },
-        { cap: `Any two sides with their contained angle work: ${T('\\tfrac12bc\\sin A')} or ${T('\\tfrac12ac\\sin B')}.`, run: (c) => show(c, ln[3]) }
-      ];
-    }
     if (v === 'a') {
       const ar = 0.5 * 42 * 55 * sn(74), c2 = lawC(42, 55, 74);
       const ln = [lineIn(pn, `<span class="u3l8-lk">area</span>${T(`\\tfrac12(42)(55)\\sin 74^\\circ\\approx${nt(ar, 0)}\\text{ m}^2`)}`, 'u3l8-line-ans'),
@@ -868,8 +631,7 @@ standup('u3l8', {
 });
 
 /* =============================== mount =============================== */
-mountMap();
 mountBuilder();
 mountFigs();
-export const explainers = mountExplainers({ chooser, clock, bearingForms, route, mast, plot, circle, area });
-export const _test = { routeGeom, mastGeom, plotGeom, circGeom, clockG, quad, qf, bT };
+export const explainers = mountExplainers({ chooser, route, mast, circle, area });
+export const _test = { routeGeom, mastGeom, plotGeom, circGeom, quad, qf, bT };

@@ -1,0 +1,115 @@
+/* Math 20-1 · Unit 5 · Lesson 10 — Maximum and Minimum Problems: Algebraic Approach: styles used only on this page
+ * (prefix u5l10-). Colours: function blue, vertex / maximum or minimum amber, zeros purple, the chosen length x green,
+ * the other side burgundy, a given value red. Revenue: price burgundy, number sold green. */
+
+.u5l10 .ex-cap .katex { font-size: 1.04em; }
+.u5l10 .chip .katex { font-size: 1em; }
+.u5l10 .pl .katex { font-size: 1.06em; }
+.u5l10 .ans .katex { font-size: 1.04em; }
+.u5l10 .katex { white-space: nowrap; }
+.u5l10-cv { color: #c27a0e; }
+.u5l10-cz { color: #7b4fc4; }
+.u5l10-co, .u5l10-cp { color: #a33357; font-weight: 700; }
+.u5l10-cn { color: #12805a; font-weight: 700; }
+.u5l10-cr { color: #c93a33; }
+
+/* ---------------- notes ---------------- */
+.u5l10-forms { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 10px 0 12px; }
+.u5l10-forms > div { display: flex; flex-direction: column; gap: 4px; background: #fff; border: 3px solid #f0d199; border-radius: 12px; padding: 8px 14px; font-size: 17.5px; line-height: 1.35; }
+.u5l10-forms > div > b { font: 800 20px var(--round); color: #a26100; }
+.u5l10-forms > div > .tex { font-size: 21px; }
+.u5l10-maxmin { margin: 0 0 10px; }
+.u5l10-vf { margin: 6px 0 14px; }
+.u5l10-steps6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 8px; }
+.u5l10-steps6 > div { background: #fff; border-radius: 10px; padding: 8px 12px; font-size: 17.5px; line-height: 1.32; border: 2px solid #b9dccb; }
+.u5l10-steps6 > div > b:first-child { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #12805a; color: #fff; font: 800 16px var(--round); margin-right: 7px; }
+.u5l10-qfig { display: grid; grid-template-columns: 1fr 300px; gap: 18px; align-items: start; margin-bottom: 12px; }
+.u5l10-qfig .part { margin-bottom: 0; }
+.u5l10-fig { width: 300px; height: 200px; background: #fff; border-radius: 12px; }
+.u5l10-ft { font: 700 17px var(--sans, system-ui); fill: #1c2230; }
+.u5l10-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u5l10-pcol .pill { white-space: nowrap; }
+
+/* ---------------- explainer pieces ---------------- */
+.u5l10-panel { background: #fbfaf6; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+.u5l10-ph { font: 800 17px var(--round); color: var(--muted); }
+.u5l10-sl { display: flex; align-items: center; gap: 10px; font-size: 20px; line-height: 1.25; min-height: 38px; }
+.u5l10-n { flex: 0 0 auto; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 15px var(--round); }
+.u5l10-n0 { flex: 0 0 28px; }
+.u5l10-lt { flex: 0 1 auto; }
+.u5l10-note { margin-left: auto; font-size: 15.5px; color: var(--muted); font-style: italic; white-space: nowrap; padding-left: 8px; }
+.u5l10-res .u5l10-lt { background: #fff4dc; border: 2px solid #f0d199; border-radius: 8px; padding: 2px 8px; }
+.u5l10-an { font-size: 18.5px; min-height: 32px; }
+.u5l10-an .u5l10-n0 { flex-basis: 4px; }
+.u5l10-roads { display: flex; flex-direction: column; gap: 10px; }
+.u5l10-road { background: #fbfaf6; border: 2px solid #e4ded2; border-radius: 14px; padding: 6px 12px 8px; transition: border-color .3s, background .3s; }
+.u5l10-road.on { border-color: #c27a0e; background: #fffaf0; }
+.u5l10-rh { display: flex; align-items: baseline; gap: 12px; font-size: 19px; margin-bottom: 2px; }
+.u5l10-rh b { font: 800 18px var(--round); color: #a26100; }
+.u5l10-one .u5l10-road { padding: 12px 16px 14px; }
+.u5l10-one .u5l10-sl { font-size: 22px; min-height: 52px; }
+.u5l10-one .u5l10-rh { font-size: 22px; margin-bottom: 8px; }
+.u5l10-scene { overflow: visible; }
+.u5l10-rul { font: 700 13px var(--round); fill: #6b7280; }
+.u5l10-rv { font: 700 15px var(--round); fill: #2b55a0; }
+.u5l10-ro { white-space: nowrap; background: rgba(255, 255, 255, .92); border: 2px solid #c9d8f5; border-radius: 10px; padding: 2px 10px; font-size: 17px; text-align: center; }
+.u5l10-rej { color: #9aa0ab; font-size: 16px; }
+.u5l10-lay { pointer-events: none; }
+.u5l10-slab { position: absolute; white-space: nowrap; font-size: 18px; line-height: 1.1; }
+.u5l10-big { font-size: 22px; }
+.u5l10-bt { font-size: 16.5px; color: var(--ink2); }
+.u5l10-bl { font-size: 17px; }
+.u5l10-shro { display: flex; gap: 6px; justify-content: center; align-items: center; font-size: 20px; background: #fbfaf6; border: 2px solid #e4ded2; border-radius: 12px; padding: 8px 10px; }
+.u5l10-area { padding: 1px 8px; border-radius: 8px; transition: background .2s; }
+.u5l10-area.on { background: #fbe3a6; }
+.u5l10-shp { gap: 2px; padding: 6px 10px; }
+.u5l10-shp .u5l10-sl { font-size: 17.5px; min-height: 29px; }
+.u5l10-shp .u5l10-n { width: 24px; height: 24px; font-size: 13.5px; background: #12805a; }
+.u5l10-shp .u5l10-note { font-size: 14px; }
+.u5l10-slider { -webkit-appearance: none; appearance: none; background: transparent; margin: 0; padding: 0; cursor: pointer; touch-action: none; }
+.u5l10-slider:focus { outline: none; }
+.u5l10-slider::-webkit-slider-runnable-track { height: 10px; background: #d9e9df; border-radius: 6px; }
+.u5l10-slider::-moz-range-track { height: 10px; background: #d9e9df; border-radius: 6px; }
+.u5l10-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 34px; height: 34px; margin-top: -12px; border-radius: 50%; background: #12805a; border: 4px solid #fff; box-shadow: 0 1px 6px rgba(0, 0, 0, .35); }
+.u5l10-slider::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #12805a; border: 4px solid #fff; box-shadow: 0 1px 6px rgba(0, 0, 0, .35); }
+.u5l10-hpan ~ .u5l10-slider::-webkit-slider-runnable-track { background: #f6d3d0; }
+.u5l10-hpan ~ .u5l10-slider::-moz-range-track { background: #f6d3d0; }
+.u5l10-hpan ~ .u5l10-slider::-webkit-slider-thumb { background: #c93a33; }
+.u5l10-hpan ~ .u5l10-slider::-moz-range-thumb { background: #c93a33; }
+.u5l10-yn { font: 600 15px var(--round); color: #3a4254; }
+
+/* revenue */
+.u5l10-bar { fill: #c9d8f5; stroke: #1f5bd6; stroke-width: 1.5; }
+.u5l10-bar.now { fill: #d6d9df; stroke: #6b7280; }
+.u5l10-bar.max { fill: #fbe3a6; stroke: #c27a0e; stroke-width: 2.5; }
+.u5l10-booth { background: #fbfaf6; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; display: flex; flex-direction: column; gap: 10px; font-size: 18px; }
+.u5l10-bf { font-size: 18.5px; text-align: center; background: #fff; border-radius: 10px; padding: 6px 4px; }
+.u5l10-bx { font-size: 20px; }
+.u5l10-bx .muted { font-size: 15.5px; }
+.u5l10-tag, .u5l10-crowd { position: relative; background: #fff; border: 2px solid #e4ded2; border-radius: 12px; padding: 6px 12px; display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 4px 10px; }
+.u5l10-tag { border-color: #e7b9c8; }
+.u5l10-crowd { border-color: #b9dccb; }
+.u5l10-tagk { font: 700 15px var(--round); color: var(--muted); }
+.u5l10-tp { font: 900 34px var(--round); color: #a33357; }
+.u5l10-tn { font: 900 34px var(--round); color: #12805a; }
+.u5l10-tf { font-size: 16px; }
+.u5l10-ppl { grid-column: 1 / -1; width: 100%; height: 64px; }
+.u5l10-ppl g { transition: opacity .2s; }
+.u5l10-rev { font-size: 19px; text-align: center; background: #eef3fd; border-radius: 10px; padding: 6px 4px; }
+.u5l10-bd { font-size: 17px; text-align: center; color: var(--ink2); }
+
+/* the height line */
+.u5l10-hl, .u5l10-tl { font-size: 17px; }
+.u5l10-ud { font-size: 16px; color: #6b6f7a; }
+.u5l10-hpan { gap: 12px; padding: 12px 14px; }
+.u5l10-hr { font-size: 20px; line-height: 1.3; background: #fff; border-radius: 10px; padding: 6px 10px; border: 2px solid #ece7dc; }
+.u5l10-hk { display: block; font: 700 14.5px var(--round); color: var(--muted); }
+.u5l10-hr.pos { border-color: #a7d8c2; } .u5l10-hr.zero { border-color: #f0d199; } .u5l10-hr.neg { border-color: #f1b7b2; }
+.u5l10-hr.r3.pos { color: #0d6b4a; } .u5l10-hr.r3.zero { color: #a26100; } .u5l10-hr.r3.neg { color: #b3302a; }
+.u5l10-hsl { font: 700 15px var(--round); color: #b3302a; }
+
+/* ---------------- Math History: Dido ---------------- */
+.u5l10-hsea { font: italic 700 18px Georgia, serif; fill: #2b55a0; }
+.u5l10-hcap { font: 600 15px Georgia, serif; fill: #4a2c14; }
+.u5l10-hbig { font: 700 20px Georgia, serif; fill: #4a2c14; }
+.u5l10-hgold { fill: #8a5a00; }

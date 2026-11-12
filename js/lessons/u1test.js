@@ -1,10 +1,19 @@
 /* Math 20-1 · Unit 1 Test (RF9, RF10) — Sequences and Series. Also holds the Unit 1 assessment kit HW.u1kit (answer
  * checkers and question builders) that js/exits/u1.js uses for the exit slips, so load this file before it.
  * Written in test mode from Ryan's Math 20-1 booklet (unit1/u1_l01–u1_l09.tex and u1_ep01–u1_ep09.tex; Lesson 9's
- * assignment and extra practice are the practice tests that set the style and difficulty). One 75-minute class,
- * scientific calculator allowed. Two outcomes, as the booklet tags them: RF9 (arithmetic sequences and series,
- * Lessons 1–4) and RF10 (geometric sequences and series, Lessons 5–8). 22 questions / 35 parts:
- * Beginning 8 questions / 13 parts (RF9 6, RF10 7), Progressing 8 / 15 (RF9 8, RF10 7), Mastery 6 / 7 (RF9 3, RF10 4).
+ * assignment and extra practice are the practice tests that set the style and difficulty). One 75-minute class
+ * (about 73 minutes by tests/short_report.js), scientific calculator allowed. Two outcomes, as the booklet tags them:
+ * RF9 (arithmetic sequences and series, Lessons 1–4) and RF10 (geometric sequences and series, Lessons 5–8).
+ * 20 questions / 26 parts:
+ *   RF9   Beginning 4 questions / 5 parts, Progressing 4 / 6, Mastery 2 / 2
+ *   RF10  Beginning 4 / 5,                Progressing 4 / 5, Mastery 2 / 3
+ * (Cut from 22 questions / 35 parts, ~100 min, on 2026-11-11: the full test ran long. Dropped the sum from the first and
+ * last terms (kept the sum from t1, d, n), the r-only part of the geometric sequence (its general term needs r anyway),
+ * one of the two growth factors (one part now picks an increase, a decrease, a rebound or a fraction), the number of
+ * terms (repeats "is V a term?"), the salary in year k (kept the first year past an amount), the geometric number of
+ * terms (the sum to a last term finds it), the bounce height (repeats compound growth and the bouncing-ball Mastery
+ * item), and two Mastery items: straight-line depreciation from two later years (repeats the salary) and the two
+ * possible later terms. Their builders stay in the kit; the exit slips use several of them.)
  * Every part is a generator (new numbers for each student; never the booklet's own numbers), with the key built from
  * the generated values, a worked solution in the booklet's method, hints, and `bad` answers with u1t- codes
  * (labels and partial-credit decisions in the kit below).
@@ -12,24 +21,24 @@
  * How each box is pitched:
  *   Beginning  — each lesson's core skill as first taught: classify a sequence (MC) and evaluate a term from a formula
  *                (L1); a term of an arithmetic sequence from its first terms (L2); d from two terms (L3); an
- *                arithmetic sum from the first and last terms and from t1, d, n (L4); r and the general term of a
- *                geometric sequence (L5); growth factors for a percent increase and decrease (L6); a geometric sum
- *                from t1, r, n (L7); a sum to infinity, and which series converges (MC) (L8).
+ *                arithmetic sum from t1, d, n (L4); the general term of a geometric sequence (L5); the growth factor
+ *                for a percent increase or decrease, a rebound or a fraction kept (L6); a geometric sum from t1, r, n
+ *                (L7); a sum to infinity, and which series converges (MC) (L8).
  *   Progressing — the typical assignment question: the general term in simplest form and "is V a term?" (L1–L2,
- *                "none" possible); the number of terms and arithmetic means (L2); a salary with a yearly raise and
- *                the first year it passes an amount (L3); an arithmetic sum up to a last term and a term from a
- *                formula for S_n (L4); the general term from two terms and the number of terms (L5); compound
- *                interest and a bounce height, rounded (L6); a geometric sum up to a last term and a term from S_n
- *                (L7); a repeating decimal as a fraction (L8).
+ *                "none" possible); arithmetic means (L2); a salary with a yearly raise: the first year it passes an
+ *                amount (L3); an arithmetic sum up to a last term and a term from a formula for S_n (L4); the general
+ *                term from two terms (L5); compound interest, rounded (L6); a geometric sum up to a last term and a
+ *                term from S_n (L7); a repeating decimal as a fraction (L8).
  *   Mastery    — the hardest assignment / extra-practice items: three expressions as consecutive arithmetic terms
- *                (x and d, L2 #12); the number of terms for a given sum (a quadratic, L4 #6); straight-line
- *                depreciation from two later years — the first year below an amount (L3 Ex, EP03); the two possible
- *                values of a later term when the gap between known terms is even (L5 #10); the total distance of a
+ *                (x and d, L2 #12); the number of terms for a given sum (a quadratic, L4 #6); the total distance of a
  *                bouncing ball at its kth landing (L7 #13); a series with a variable ratio — where it converges and
  *                the x that gives a stated sum (L8 #13, L9 #24).
- * Coverage: L1 Q1, Q9b · L2 Q2, Q9a, Q10, Q17 · L3 Q3, Q11, Q19 · L4 Q4, Q12, Q18 · L5 Q5, Q13, Q20 · L6 Q6, Q14 ·
- *           L7 Q7, Q15, Q21 · L8 Q8, Q16, Q22 · L9 (review) the whole test is in its style (Q2, Q10, Q12a, Q13, Q14a,
- *           Q21 follow its practice-test items).
+ * Coverage: L1 Q1, Q9b · L2 Q2, Q9a, Q10, Q17 · L3 Q3, Q11 · L4 Q4, Q12, Q18 · L5 Q5, Q13 · L6 Q6, Q14 ·
+ *           L7 Q7, Q15, Q19 · L8 Q8, Q16, Q20 · L9 (review) the whole test is in its style (Q2, Q12a, Q13, Q14, Q19
+ *           follow its practice-test items).
+ * Short version (def.short): Q1b, Q3, Q4, Q5, Q8a (Beginning: RF9 3, RF10 2 parts), Q9, Q12a, Q13, Q15a, Q16
+ * (Progressing: 3 each), Q18, Q19 (Mastery: 1 each) — 12 questions / 13 parts, about half the working time (~36 of
+ * ~73 min by tests/short_report.js); every outcome keeps all three boxes.
  * Answers: numbers as exact values (fractions or exact decimals) unless the question names a rounding; general terms
  * as any expression in n equal to the key at n = 1…8 ("simplest form" for an arithmetic sequence means expanded:
  * t_n = 4n − 1, a bracket left in is a format nudge); "is it a term" and "no sum" take the word none (the none key);
@@ -901,38 +910,35 @@
     { num: '1', outcome: 'RF9', parts: [pt('1a', 'RF9', 'BEG', Bt.classify), pt('1b', 'RF9', 'BEG', Bt.termFromFormula)] },
     one(2, 'RF9', 'BEG', Bt.arithTk),
     one(3, 'RF9', 'BEG', Bt.dFromTwo),
-    { num: '4', outcome: 'RF9', parts: [pt('4a', 'RF9', 'BEG', Bt.arithSnEnds), pt('4b', 'RF9', 'BEG', Bt.arithSn)] },
-    { num: '5', outcome: 'RF10', shared: Bt.geoShared, stem: Bt.geoStem, parts: [pt('5a', 'RF10', 'BEG', Bt.geoR), pt('5b', 'RF10', 'BEG', Bt.geoGT)] },
-    { num: '6', outcome: 'RF10', parts: [pt('6a', 'RF10', 'BEG', function (r, cp) { return Bt.gfactor(r, cp, { kind: 'up' }); }), pt('6b', 'RF10', 'BEG', function (r, cp) { return Bt.gfactor(r, cp, { kind: r.pick(['down', 'down', 'rebound', 'frac']) }); })] },
+    one(4, 'RF9', 'BEG', Bt.arithSn),
+    { num: '5', outcome: 'RF10', shared: Bt.geoShared, stem: Bt.geoStem, parts: [pt('5', 'RF10', 'BEG', Bt.geoGT)] },
+    one(6, 'RF10', 'BEG', function (r, cp) { return Bt.gfactor(r, cp, { kind: 'any' }); }),
     one(7, 'RF10', 'BEG', Bt.geoSn),
     { num: '8', outcome: 'RF10', parts: [pt('8a', 'RF10', 'BEG', Bt.infSum), pt('8b', 'RF10', 'BEG', Bt.whichConv)] },
     /* ---------------- Progressing ---------------- */
     { num: '9', outcome: 'RF9', parts: [pt('9a', 'RF9', 'PRG', Bt.arithGT), pt('9b', 'RF9', 'PRG', function (r, cp) { return Bt.isTerm(r, cp, {}); })] },
-    { num: '10', outcome: 'RF9', parts: [pt('10a', 'RF9', 'PRG', Bt.numTerms), pt('10b', 'RF9', 'PRG', Bt.means)] },
-    { num: '11', outcome: 'RF9', shared: Bt.salaryShared, stem: Bt.salaryStem, parts: [pt('11a', 'RF9', 'PRG', Bt.salaryK), pt('11b', 'RF9', 'PRG', Bt.salaryFirst)] },
+    one(10, 'RF9', 'PRG', Bt.means),
+    { num: '11', outcome: 'RF9', shared: Bt.salaryShared, stem: Bt.salaryStem, parts: [pt('11', 'RF9', 'PRG', Bt.salaryFirst)] },
     { num: '12', outcome: 'RF9', parts: [pt('12a', 'RF9', 'PRG', Bt.arithSumToL), pt('12b', 'RF9', 'PRG', Bt.snToTk)] },
-    { num: '13', outcome: 'RF10', parts: [pt('13a', 'RF10', 'PRG', Bt.geoGTFromTwo), pt('13b', 'RF10', 'PRG', Bt.geoNumTerms)] },
-    { num: '14', outcome: 'RF10', parts: [pt('14a', 'RF10', 'PRG', Bt.compound), pt('14b', 'RF10', 'PRG', Bt.bounceK)] },
+    one(13, 'RF10', 'PRG', Bt.geoGTFromTwo),
+    one(14, 'RF10', 'PRG', Bt.compound),
     { num: '15', outcome: 'RF10', parts: [pt('15a', 'RF10', 'PRG', Bt.geoSumToL), pt('15b', 'RF10', 'PRG', Bt.geoSnToTk)] },
     one(16, 'RF10', 'PRG', Bt.repDec),
     /* ---------------- Mastery ---------------- */
     one(17, 'RF9', 'MAS', Bt.exprArith),
     one(18, 'RF9', 'MAS', Bt.arithNForSum),
-    one(19, 'RF9', 'MAS', Bt.depYear),
-    one(20, 'RF10', 'MAS', Bt.geoTwoValues),
-    one(21, 'RF10', 'MAS', Bt.ballTotal),
-    { num: '22', outcome: 'RF10', shared: Bt.varShared, stem: Bt.varStem, parts: [pt('22a', 'RF10', 'MAS', Bt.varBounds), pt('22b', 'RF10', 'MAS', Bt.varX)] }
+    one(19, 'RF10', 'MAS', Bt.ballTotal),
+    { num: '20', outcome: 'RF10', shared: Bt.varShared, stem: Bt.varStem, parts: [pt('20a', 'RF10', 'MAS', Bt.varBounds), pt('20b', 'RF10', 'MAS', Bt.varX)] }
   ];
 
   HW.defineTest({
     id: 'u1test', unit: 1, title: 'Unit 1 Test', calc: true,
     blurb: 'The Unit 1 outcomes-based test on RF9 (arithmetic sequences and series) and RF10 (geometric sequences and series): classifying sequences, general terms, terms and number of terms, two known terms, arithmetic and geometric sums, growth and decay, sums to infinity and repeating decimals — in Beginning, Progressing and Mastery boxes. Scientific calculator allowed.',
-    // Short version (~half, 14 questions / 18 parts): every outcome keeps its three boxes. Beginning: the formula term,
-    // d from two terms, an arithmetic sum, r and the geometric general term, a sum to infinity; Progressing: general
-    // term + is it a term, the salary, the arithmetic sum to a last term, the geometric general term from two terms,
-    // compound interest and a bounce, the geometric sum to a last term, the repeating decimal; Mastery: the terms
-    // needed for a sum (RF9) and the bouncing ball (RF10).
-    short: ['1b', '3', '4b', '5', '8a', '9', '11', '12a', '13a', '14', '15a', '16', '18', '21'],
+    // Short version (~half the working time, 12 questions / 13 parts): every outcome keeps its three boxes. Beginning:
+    // the formula term, d from two terms, an arithmetic sum, the geometric general term, a sum to infinity; Progressing:
+    // general term + is it a term, the arithmetic sum to a last term, the geometric general term from two terms, the
+    // geometric sum to a last term, the repeating decimal; Mastery: the terms needed for a sum (RF9) and the bouncing ball (RF10).
+    short: ['1b', '3', '4', '5', '8a', '9', '12a', '13', '15a', '16', '18', '19'],
     questions: QUESTIONS
   });
 })(window);

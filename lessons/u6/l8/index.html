@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rational Equations That Lead to Quadratics · Math 20-1 6.8</title>
+<meta name="description" content="Math 20-1 Unit 6 Lesson 8: rational equations that lead to quadratic equations. State the NPVs, multiply by the LCD, write the quadratic in standard form, solve by factoring (the X) or the quadratic formula, then compare every root with the NPVs: keep it or reject it (one, both or neither), see on a graph why an extraneous root appears, give exact answers in simplest radical form and rounded ones, and solve a resistors-in-parallel problem. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u6l8.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u6l8">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Proof That 2 = 1">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="34" text-anchor="middle" transform="scale(-1 1)">🔍</text></g><text x="300" y="46" font-size="30" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text><text x="50" y="46" font-size="30" text-anchor="middle">❗<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0.8s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Proof That 2 = 1</h2></div>
+  <div class="vw-seq has-art u6l8-wseq"><div class="vw-txt"><p class="vw-ctx">Here is a “proof” that <b>2 = 1</b>. Every step looks legal.</p><ol class="u6l8-proof"><li><b>1</b><span class="tex">a=b</span><small>two equal numbers</small></li><li><b>2</b><span class="tex">a^2=ab</span><small>multiply both sides by <i>a</i></small></li><li><b>3</b><span class="tex">a^2-b^2=ab-b^2</span><small>subtract <i>b</i>²</small></li><li><b>4</b><span class="tex">(a+b)(a-b)=b(a-b)</span><small>factor both sides</small></li><li><b>5</b><span class="tex">a+b=b</span><small>divide both sides by <i>a</i> − <i>b</i></small></li><li><b>6</b><span class="tex">b+b=b</span><small>replace <i>a</i> with <i>b</i></small></li><li><b>7</b><span class="tex">2b=b</span><small>collect like terms</small></li><li><b>8</b><span class="tex">2=1</span><small>divide both sides by <i>b</i></small></li></ol><p class="vw-ask">But 2 is not 1. Which step is the mistake?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A chalkboard that says 2 = 1 with a magnifying glass searching it"><rect x="20" y="22" width="290" height="176" rx="10" fill="#8a6440"/><rect x="32" y="34" width="266" height="152" rx="6" fill="#2f4a3a"/><text x="150" y="132" font-size="64" font-weight="700" fill="#f4f1e6" text-anchor="middle" font-family="Georgia, serif">2 = 1</text><text x="252" y="122" font-size="54" font-weight="800" fill="#e0a11b" text-anchor="middle">?!<animate attributeName="opacity" values="1;0.25;1" dur="1.2s" begin="0s" repeatCount="indefinite"/></text><rect x="150" y="186" width="34" height="8" rx="3" fill="#f4f1e6"/><rect x="60" y="198" width="210" height="10" rx="4" fill="#6e4f31"/><g><animateTransform attributeName="transform" type="translate" values="0 0;150 -20;60 30;0 0" keyTimes="0;.4;.75;1" dur="5s" repeatCount="indefinite"/><circle cx="80" cy="90" r="30" fill="#ffffff" fill-opacity=".18" stroke="#4a4436" stroke-width="7"/><line x1="101" y1="111" x2="132" y2="142" stroke="#4a4436" stroke-width="11" stroke-linecap="round"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="292" y="236" font-size="40" text-anchor="middle">🧐</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Point to the step, then say why.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Step 5.</b> Since <span class="tex">a=b</span>, the number <span class="tex">a-b</span> is <b>0</b>. Step 4 is true (<span class="tex">0=0</span>), but “dividing both sides by <span class="tex">a-b</span>” divides by <b>0</b>, which is never allowed. Cancel a factor that is 0 and you can “prove” anything.</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 6 Rational Expressions and Equations · Lesson 8</div>
+  <h1>Rational Equations That Lead to Quadratics</h1>
+  <p class="lede">Multiply by the LCD and sometimes the <span class="tex">x^2</span> terms don't cancel: out comes a <b>quadratic</b>. Solve it and you get up to <b>two</b> roots, and each one is compared with the NPVs: <b class="u6l8-ok">keep</b> it, or <b class="u6l8-no">reject</b> it.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>state the NPVs, multiply every term by the LCD and write the quadratic in standard form</li>
+      <li>solve the quadratic by factoring or with the quadratic formula</li>
+      <li>compare every root with the NPVs, reject an <b class="u6l8-no">extraneous</b> root, and explain why it appeared</li>
+      <li>recognize when both roots work, and when both are rejected (no solution)</li>
+      <li>give exact roots in simplest radical form, then round</li>
+      <li>solve a problem with a formula such as resistors in parallel, rejecting a root that is not reasonable</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN6</b> Solve problems that involve rational equations (limited to numerators and denominators that are monomials, binomials or trinomials).<br><b>RF5</b> Solve problems that involve quadratic equations.<br><span class="muted">Today: LCD → quadratic → factor or formula, the keep-or-reject verdict for every root, where an extraneous root comes from, exact and rounded answers, and resistors in parallel.</span></div>
+</section>
+
+<!-- ================= 1. When the LCD gives a quadratic ================= -->
+<section class="card" data-ink="s1" data-section="1. When the LCD Gives a Quadratic">
+  <div class="sec-h"><span class="badge">1</span><h2>When the LCD Gives a Quadratic Equation</h2></div>
+  <p>Often, after multiplying by the LCD, the <span class="tex">x^2</span> terms do not cancel and the result is a <b>quadratic equation</b>. Write it in standard form <span class="tex">ax^2+bx+c=0</span>, then solve it by factoring (or by the quadratic formula). A quadratic gives up to two roots, and <b>each one</b> must be compared with the NPVs and checked.</p>
+  <div class="def amber u6l8-key"><div class="u6l8-keyh">Key idea</div>
+    <div class="u6l8-steps6"><div><b>1</b>Factor the denominators; state the <b class="u6l8-no">NPVs</b>.</div><div><b>2</b>Multiply every term by the <b class="u6l8-lcd">LCD</b>.</div><div><b>3</b>Write the quadratic in standard form.</div><div><b>4</b>Solve by factoring or the quadratic formula.</div><div><b>5</b><b class="u6l8-no">Reject</b> any root that is an NPV.</div><div><b>6</b>Verify the remaining roots.</div></div></div>
+  <div class="explainer" data-explainer="solve"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>State the NPVs, solve and verify</h3></div>
+  <p class="q">State the NPVs, solve and verify.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">x+\dfrac{6}{x}=5</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0</span>. Multiply by <span class="tex">x</span>:<br><span class="tex">x^2+6=5x</span><br><span class="tex">x^2-5x+6=0</span><br><span class="tex">(x-2)(x-3)=0</span><br><span class="tex">\boldsymbol{x=2}</span> or <span class="tex">\boldsymbol{x=3}</span><br>Verify <span class="tex">x=2</span>: <span class="tex">2+3=5</span> ✓<br>Verify <span class="tex">x=3</span>: <span class="tex">3+2=5</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x}{x-2}=\dfrac{8}{x}</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne2,\ 0</span><br><span class="tex">x^2=8(x-2)</span><br><span class="tex">x^2-8x+16=0</span><br><span class="tex">(x-4)^2=0</span><br><span class="tex">\boldsymbol{x=4}</span> (a double root)<br>Verify: LS <span class="tex">=\tfrac{4}{2}=2</span>, RS <span class="tex">=\tfrac{8}{4}=2</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{3}{x}+\dfrac{x}{x+2}=2</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0,\ -2</span>. LCD <span class="tex">x(x+2)</span><br><span class="tex">3(x+2)+x^2=2x(x+2)</span><br><span class="tex">x^2+3x+6=2x^2+4x</span><br><span class="tex">0=x^2+x-6</span><br><span class="tex">0=(x+3)(x-2)</span><br><span class="tex">\boldsymbol{x=-3}</span> or <span class="tex">\boldsymbol{x=2}</span><br><span class="tex">x=-3</span>: <span class="tex">-1+\tfrac{-3}{-1}=2</span> ✓<br><span class="tex">x=2</span>: <span class="tex">\tfrac{3}{2}+\tfrac{2}{4}=2</span> ✓</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Rejecting a non-permissible root ================= -->
+<section class="card" data-ink="s2" data-section="2. Rejecting a Non-Permissible Root">
+  <div class="sec-h"><span class="badge">2</span><h2>Rejecting a Non-Permissible Root</h2></div>
+  <p>When one root of the quadratic is an NPV, it is <b class="u6l8-no">extraneous</b>: it solves the polynomial equation but makes a denominator of the original equation <span class="tex">0</span>. Reject it and keep the other root. If both roots are rejected, the equation has <b>no solution</b>.</p>
+  <div class="explainer" data-explainer="verdict"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>An extra root from cross-multiplying</h3></div>
+  <p class="q">Consider the equation <span class="tex">\dfrac{x^2-2x-15}{x-5}=2x</span>.</p>
+  <div class="part u6l8-solo"><div class="pl">(a) State the NPV and solve by cross-multiplying.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne5</span><br><span class="tex">x^2-2x-15=2x(x-5)</span><br><span class="tex">x^2-2x-15=2x^2-10x</span><br><span class="tex">0=x^2-8x+15=(x-3)(x-5)</span><br><span class="tex">x=3</span> or <span class="tex">x=5</span>. Reject <span class="tex">x=5</span> (NPV). The solution is <span class="tex">\boldsymbol{x=3}</span>.</div></div></div>
+  <div class="part u6l8-solo"><div class="pl">(b) Explain why <span class="tex">x=5</span> does not satisfy the original equation, even though it solves the quadratic.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">At <span class="tex">x=5</span> the left side is <span class="tex">\tfrac{0}{0}</span>, which is undefined. Cross-multiplying multiplied both sides by <span class="tex">x-5</span>, which is <span class="tex">0</span> when <span class="tex">x=5</span>, so it created this extra root.<br>(Another view: for <span class="tex">x\ne5</span>, the left side simplifies to <span class="tex">\tfrac{(x-5)(x+3)}{x-5}=x+3</span>, and <span class="tex">x+3=2x</span> gives only <span class="tex">x=3</span>.)</div></div></div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. Why the Extra Root Appears">
+  <h3 class="sub">Why the extra root appears: the graphs</h3>
+  <p>Multiplying both sides by the LCD also multiplies the <b>gap</b> between the two sides by the LCD. At an NPV the LCD is <span class="tex">0</span>, so the gap becomes <span class="tex">0</span> there: the new equation has a meeting point that the original equation never had.</p>
+  <div class="explainer" data-explainer="hole"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>State the NPVs and solve</h3></div>
+  <p class="q">State the NPVs and solve.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x}{x-3}-\dfrac{2}{x+1}=\dfrac{8}{x^2-2x-3}</span></div><div class="work" style="--h:320px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-2x-3=(x-3)(x+1)</span>: <span class="tex">x\ne3,\ -1</span><br><span class="tex">x(x+1)-2(x-3)=8</span><br><span class="tex">x^2+x-2x+6=8</span><br><span class="tex">x^2-x-2=0</span><br><span class="tex">(x-2)(x+1)=0</span><br><span class="tex">x=2</span> or <span class="tex">x=-1</span>. Reject <span class="tex">x=-1</span> (NPV).<br>The solution is <span class="tex">\boldsymbol{x=2}</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x+1}{x-4}=\dfrac{5}{4-x}+x</span></div><div class="work" style="--h:320px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne4</span>. <span class="tex">\tfrac{5}{4-x}=-\tfrac{5}{x-4}</span>; multiply by <span class="tex">x-4</span>:<br><span class="tex">x+1=-5+x(x-4)</span><br><span class="tex">x+1=-5+x^2-4x</span><br><span class="tex">0=x^2-5x-6=(x-6)(x+1)</span><br><span class="tex">\boldsymbol{x=6}</span> or <span class="tex">\boldsymbol{x=-1}</span> (both permissible)<br><span class="tex">x=6</span>: LS <span class="tex">=\tfrac{7}{2}</span>, RS <span class="tex">=-\tfrac{5}{2}+6=\tfrac{7}{2}</span> ✓<br><span class="tex">x=-1</span>: LS <span class="tex">=0</span>, RS <span class="tex">=1-1=0</span> ✓</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u6l8"></section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Both roots rejected</h3></div>
+  <p class="q">Show that <span class="tex">\dfrac{x}{x-3}-\dfrac{3}{x}=\dfrac{9}{x^2-3x}</span> has no solution.</p>
+  <div class="part u6l8-solo"><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-3x=x(x-3)</span>: NPVs <span class="tex">x\ne0,\ 3</span>. LCD <span class="tex">x(x-3)</span><br><span class="tex">x^2-3(x-3)=9\Rightarrow x^2-3x+9=9\Rightarrow x^2-3x=0\Rightarrow x(x-3)=0</span><br><span class="tex">x=0</span> or <span class="tex">x=3</span>: both are NPVs and are rejected. The equation has <b>no solution</b>.</div></div></div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 8 · Questions 1–5</h2>
+  <p class="pr-t">NPVs first, clear the denominators, factor, then give every root its verdict.</p>
+  <div class="pr-chips n3"><span><b>1–2</b>Solve and verify</span><span><b>3–4</b>Reject an extraneous root</span><span><b>5</b>No solution</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u6l8">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 3. The quadratic formula ================= -->
+<section class="card" data-ink="s3" data-section="3. Using the Quadratic Formula">
+  <div class="sec-h"><span class="badge">3</span><h2>Using the Quadratic Formula</h2></div>
+  <p>If the quadratic does not factor, use the quadratic formula. Give exact roots in simplest radical form unless the question asks for a rounded answer. A graphing calculator (graph both sides and use intersect) confirms the decimal values.</p>
+  <div class="def amber u6l8-key"><div class="u6l8-keyh">Key idea</div>
+    <div class="u6l8-qf">For <span class="tex">ax^2+bx+c=0</span>: <span class="tex">x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}</span></div>
+    <p class="u6l8-keyp">If <span class="tex">b^2-4ac&lt;0</span>, there are no real roots, so the rational equation has no real solution.</p></div>
+  <div class="explainer" data-explainer="formula"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Confirm the decimals: graph both sides and intersect.</b> Example 5(b): <span class="tex">Y_1=</span> <code>1/(X−1)+1/(X+1)</code>, <span class="tex">Y_2=1</span>. Brackets around each denominator. Then <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd></span> <b>5: intersect</b>, <span class="keys"><kbd>ENTER</kbd><kbd>ENTER</kbd></span>, and type a guess near the crossing before the last <span class="keys"><kbd>ENTER</kbd></span>.
+      <div class="u6l8-ckpills"><button class="chip" type="button" data-keys="Y= CLEAR 1 ÷ ( X − 1 ) + 1 ÷ ( X + 1 ) ▼ CLEAR 1 ZStandard intersect ENTER ENTER 2 ENTER">Right crossing (guess 2)</button><button class="chip" type="button" data-keys="Y= CLEAR 1 ÷ ( X − 1 ) + 1 ÷ ( X + 1 ) ▼ CLEAR 1 ZStandard intersect ENTER ENTER (−) .5 ENTER">Left crossing (guess −0.5)</button></div></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Exact, then rounded</h3></div>
+  <p class="q">Solve. Give exact answers, then round to the nearest hundredth.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{2}{x}+1=\dfrac{x}{3}</span> <span class="muted u6l8-pnote">(solved graphically in Lesson 7)</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0</span>. LCD <span class="tex">3x</span>:<br><span class="tex">6+3x=x^2</span><br><span class="tex">x^2-3x-6=0</span><br><span class="tex">x=\dfrac{3\pm\sqrt{9-4(1)(-6)}}{2}=\boldsymbol{\dfrac{3\pm\sqrt{33}}{2}}</span><br><span class="tex">x\approx\boldsymbol{4.37}</span> or <span class="tex">x\approx\boldsymbol{-1.37}</span> (matches the graph)</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{1}{x-1}+\dfrac{1}{x+1}=1</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne1,\ -1</span>. LCD <span class="tex">(x-1)(x+1)</span>:<br><span class="tex">(x+1)+(x-1)=x^2-1</span><br><span class="tex">x^2-2x-1=0</span><br><span class="tex">x=\dfrac{2\pm\sqrt{4+4}}{2}=\dfrac{2\pm2\sqrt{2}}{2}=\boldsymbol{1\pm\sqrt{2}}</span><br><span class="tex">x\approx\boldsymbol{2.41}</span> or <span class="tex">x\approx\boldsymbol{-0.41}</span></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Solve</h3></div>
+  <p class="q">Solve.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x+2}{x-1}=\dfrac{2x+1}{x+1}</span></div><div class="work" style="--h:290px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne1,\ -1</span><br><span class="tex">(x+2)(x+1)=(2x+1)(x-1)</span><br><span class="tex">x^2+3x+2=2x^2-x-1</span><br><span class="tex">0=x^2-4x-3</span><br><span class="tex">x=\dfrac{4\pm\sqrt{16+12}}{2}=\dfrac{4\pm2\sqrt{7}}{2}=\boldsymbol{2\pm\sqrt{7}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x+4}{2x-1}=\dfrac{x+1}{x-1}</span></div><div class="work" style="--h:290px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne\tfrac{1}{2},\ 1</span><br><span class="tex">(x+4)(x-1)=(x+1)(2x-1)</span><br><span class="tex">x^2+3x-4=2x^2+x-1</span><br><span class="tex">0=x^2-2x+3</span><br><span class="tex">b^2-4ac=4-12=-8&lt;0</span><br>No real roots, so the equation has <b>no real solution</b>. (The graphs of the two sides never meet.)</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Formulas ================= -->
+<section class="card" data-ink="s4" data-section="4. Rational Equations in Formulas">
+  <div class="sec-h"><span class="badge">4</span><h2>Rational Equations in Formulas</h2></div>
+  <p>Many science formulas contain reciprocals. When two resistors <span class="tex">R_1</span> and <span class="tex">R_2</span> (in ohms, <span class="tex">\Omega</span>) are connected in parallel, the combined resistance <span class="tex">R</span> satisfies</p>
+  <div class="def amber u6l8-key u6l8-keyc"><span class="tex">\dfrac{1}{R}=\dfrac{1}{R_1}+\dfrac{1}{R_2}</span></div>
+  <p>Substituting the given information often gives a rational equation that leads to a quadratic. Reject a root that is not reasonable (a resistance is positive).</p>
+  <div class="explainer" data-explainer="resist"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Resistors in parallel</h3></div>
+  <div class="u6l8-ex7">
+    <p class="q">Two resistors are connected in parallel. One has a resistance <span class="tex">5\ \Omega</span> greater than the other, and their combined resistance is <span class="tex">6\ \Omega</span>. Determine the resistance of each.</p>
+    <div class="u6l8-circ" id="u6l8-circ"></div>
+  </div>
+  <div class="part u6l8-solo"><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let the smaller resistance be <span class="tex">R</span>; the other is <span class="tex">R+5</span>.<br>
+    <span class="tex">\dfrac{1}{6}=\dfrac{1}{R}+\dfrac{1}{R+5}</span> (<span class="tex">R\ne0,\ -5</span>). LCD <span class="tex">6R(R+5)</span>:<br>
+    <span class="tex">R(R+5)=6(R+5)+6R</span><br>
+    <span class="tex">R^2+5R=12R+30\Rightarrow R^2-7R-30=0\Rightarrow(R-10)(R+3)=0</span><br>
+    <span class="tex">R=10</span> or <span class="tex">R=-3</span> (reject: a resistance is positive). The resistances are <b><span class="tex">10\ \Omega</span> and <span class="tex">15\ \Omega</span></b>.<br>
+    Check: <span class="tex">\tfrac{1}{10}+\tfrac{1}{15}=\tfrac{3+2}{30}=\tfrac{1}{6}</span> ✓</div></div></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Clear the denominators.</b> Factor them and state the NPVs <b>first</b>. Multiply every term by the LCD, then write the quadratic in standard form <span class="tex">ax^2+bx+c=0</span>.</div>
+    <div><b>Factor, or use the formula.</b> Find the two numbers with the X. If it won't factor: <span class="tex">x=\tfrac{-b\pm\sqrt{b^2-4ac}}{2a}</span>. If <span class="tex">b^2-4ac&lt;0</span>, there is no real solution.</div>
+    <div><b>Every root gets a verdict.</b> A root that is an NPV is <b class="u6l8-no">extraneous</b>: reject it. It appears because the LCD is <span class="tex">0</span> there. One root, both, or neither can survive (both rejected: no solution).</div>
+    <div><b>Exact, then rounded; does it make sense?</b> Simplest radical form first (<span class="tex">1\pm\sqrt{2}</span>), then decimals. In a formula problem, reject a root that is not reasonable: a resistance is positive.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u6l8">
+    <div><div class="kicker">Your turn</div><b>Assignment 8 · Questions 6–16</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l9/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 9 — Problems Involving Rational Equations (work, motion, numbers)</b><div class="muted">Work, motion and number problems that lead to rational equations.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u6l8.js';
+  boot({ key: 'u6l8', homeHref: '../../', title: '6.8 Rational to Quadratic' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

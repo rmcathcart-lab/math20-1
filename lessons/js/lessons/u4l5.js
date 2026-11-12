@@ -1,17 +1,13 @@
 /* Math 20-1 · Unit 4 · Lesson 5 — Solving Quadratic Equations by Factoring.
- * Warm-up (Mystery Cards: two face-down cards multiply to 0 or to 12; only the 0 tells you a card), and the explainers:
- *   zpp (either–or switches: factor boxes with live values as a probe slides along x; a factor hits 0 → product 0;
- *     "why 0?" pairs for 12 vs 0; Example 1 checks),
+ * New format (2026-11-11): the warm-up is plain markup on the page (no code). Explainers:
  *   pipeline (the five steps lit one at a time beside the working; Example 2 and 3 checks),
  *   lostRoot (dividing by x vs factoring it out, beside graphs of both sides crossing twice; Examples 2(c), 4(c)),
  *   notZero ((x + 2)(x − 5) = 8: "each factor = 8" fails, the right side must be 0; Example 4(a), 4(b) checks),
  *   rootsGraph (STAR: y = (x − r1)(x − r2) with draggable roots; the parabola's x-intercepts follow and the equation
  *     rewrites in factored and standard form, with integer coefficients for fractional roots; double root touches;
  *     Example 5, 3(c), 6(b) checks and free play),
- *   fromRoots (root → factor → multiply in a grid → standard form; Example 6 checks),
  *   admissible (to-scale garden and frame, consecutive odd integers on a number line; reject the impossible root;
- *     Example 7(a), 8(a), 8(b)),
- *   ball (the height parabola meets the ground and the 40 m line; t = −1 rejected; Example 9).
+ *     Example 7(a), 8(a), 8(b)).
  * Colours: first factor / root blue, second factor / root amber, zero / admissible green, rejected red, roots rose. */
 import {
   h, tex, add, box, Graph, NumberLine, stamp, stampIn, checkCard, mountExplainers, pop, fadeIn, appear, sleep, tween,
@@ -57,140 +53,6 @@ function prodTex(a, b, ca = null, cb = null) {
   if (a === b) return (ca ? tc(ca, `(${a})^2`) : `(${a})^2`);
   if (b === 'x') return wrap(b, cb) + wrap(a, ca);
   return wrap(a, ca) + wrap(b, cb);
-}
-
-/* ====================================================================================================
- * Warm-up: Mystery Cards — pair A multiplies to 0, pair B to 12; flip them, deal again.
- * ==================================================================================================== */
-const POOL0 = [[0, 7], [-3, 0], [0, 0], [0, -5], [9, 0], [0, 0.5], [-8, 0]];
-const POOL12 = [[3, 4], [2, 6], [-1, -12], [0.5, 24], [-4, -3], [1, 12], [-2, -6], [1.5, 8], [6, 2]];
-const cardTxt = (v) => (v === 0.5 ? '½' : v === 1.5 ? '1.5' : String(v).replace('-', '−'));
-function mountCards() {
-  const host = document.getElementById('u4l5-table'); if (!host) return;
-  host.innerHTML = '';
-  const mkPair = (name, prod, x) => {
-    const g = div(host, 'u4l5-pair', '', x, 18, 250, 300);
-    div(g, 'u4l5-pname', `Pair ${name}`, 0, 0, 250);
-    const cards = [0, 1].map((k) => {
-      const c = div(g, 'u4l5-card', '<div class="u4l5-cin"><div class="u4l5-cback"><span>?</span></div><div class="u4l5-cface"></div></div>', 8 + k * 132, 40, 102, 142);
-      c.setAttribute('data-tap', ''); return c;
-    });
-    div(g, 'u4l5-ctimes', '×', 110, 92, 30);
-    div(g, 'u4l5-csign', `<span class="u4l5-cs-eq">product</span> = <b>${prod}</b>`, 0, 202, 250);
-    return { g, cards, up: false, i: 0 };
-  };
-  const A = mkPair('A', 0, 18), B = mkPair('B', 12, 290);
-  const paint = (P, pool) => { const pr = pool[P.i % pool.length]; P.cards.forEach((c, k) => { c.querySelector('.u4l5-cface').textContent = cardTxt(pr[k]); c.classList.toggle('u4l5-up', P.up); c.classList.toggle('u4l5-zero', P.up && pr[k] === 0); }); };
-  const flip = (P, pool) => { P.up = !P.up; paint(P, pool); };
-  A.cards.forEach((c) => c.addEventListener('click', () => flip(A, POOL0)));
-  B.cards.forEach((c) => c.addEventListener('click', () => flip(B, POOL12)));
-  document.getElementById('u4l5-flipA').addEventListener('click', () => flip(A, POOL0));
-  document.getElementById('u4l5-flipB').addEventListener('click', () => flip(B, POOL12));
-  document.getElementById('u4l5-deal').addEventListener('click', () => {
-    [[A, POOL0], [B, POOL12]].forEach(([P, pool]) => { P.up = false; paint(P, pool); });
-    setTimeout(() => { A.i++; B.i++; [[A, POOL0], [B, POOL12]].forEach(([P, pool]) => { P.up = true; paint(P, pool); }); }, 420);
-  });
-  paint(A, POOL0); paint(B, POOL12);
-}
-
-/* =============================== explainer: the zero product property =============================== */
-const ZP = {
-  why: { label: 'Why must it be 0?', ask: 'Two numbers multiply to 12. Two numbers multiply to 0. What can you say about them?' },
-  e1a: { label: 'Example 1(a) check', ask: 'Example 1(a): solve (x + 6)(x − 4) = 0.', min: -8, max: 8, x0: 1,
-    fs: [{ t: 'x+6', f: (x) => x + 6, r: -6, sol: ['x+6=0', 'x=-6'] }, { t: 'x-4', f: (x) => x - 4, r: 4, sol: ['x-4=0', 'x=4'] }] },
-  e1b: { label: 'Example 1(b) check', ask: 'Example 1(b): solve 4x(x − 9) = 0.', min: -3, max: 11, x0: 3,
-    fs: [{ t: '4x', f: (x) => 4 * x, r: 0, sol: ['4x=0', 'x=0'], bare: true }, { t: 'x-9', f: (x) => x - 9, r: 9, sol: ['x-9=0', 'x=9'] }] },
-  e1c: { label: 'Example 1(c) check', ask: 'Example 1(c): solve (2x − 7)(3x + 4) = 0.', min: -3, max: 5, x0: 1,
-    fs: [{ t: '2x-7', f: (x) => 2 * x - 7, r: 7 / 2, sol: ['2x-7=0', '2x=7', 'x=\\tfrac{7}{2}'] }, { t: '3x+4', f: (x) => 3 * x + 4, r: -4 / 3, sol: ['3x+4=0', '3x=-4', 'x=-\\tfrac{4}{3}'] }] },
-  e1d: { label: 'Example 1(d) check', ask: 'Example 1(d): solve −5(x + 1)(x − 8) = 0.', min: -3, max: 10, x0: 3, k: -5,
-    fs: [{ t: 'x+1', f: (x) => x + 1, r: -1, sol: ['x+1=0', 'x=-1'] }, { t: 'x-8', f: (x) => x - 8, r: 8, sol: ['x-8=0', 'x=8'] }] }
-};
-const zpp = {
-  title: 'Zero product: either–or switches',
-  height: 430, minW: 920,
-  choices: Object.keys(ZP).map((k) => ({ v: k, label: ZP[k].label })),
-  ask: (v) => ZP[v].ask,
-  make(stage, v, ex) {
-    if (v === 'why') return zppWhy(stage, ex);
-    const d = ZP[v], W = ex.W, cols = [F1, F2];
-    const facs = d.fs.map((f, i) => Object.assign({ col: cols[i] }, f));
-    const eqT = (d.k ? String(d.k) : '') + facs.map((f) => (f.bare ? tc(f.col, f.t) : tc(f.col, `(${f.t})`))).join('') + '=0';
-    const eq = div(stage, 'u4l5-zeq', T(eqT), 0, 6, W);
-    // boxes: [constant] factor × factor = product
-    const BW = 200, BH = 112, XW = 40, PW = 170, items = (d.k ? 1 : 0) + facs.length;
-    const total = items * BW + (items - 1) * XW + XW + PW; let x = Math.round((W - total) / 2);
-    const Y = 76, boxes = [];
-    let kBox = null;
-    const mkBox = (html, cls) => { const b = div(stage, 'u4l5-zbox ' + cls, html, x, Y, BW, BH); x += BW; return b; };
-    const times = () => { div(stage, 'u4l5-zop', '×', x, Y + 30, XW); x += XW; };
-    if (d.k) { kBox = mkBox(`<div class="u4l5-zt">${T(String(d.k))}</div><div class="u4l5-zv">${T('=' + d.k)}</div>`, 'u4l5-zk'); times(); }
-    facs.forEach((f, i) => { const b = mkBox(`<div class="u4l5-zt">${T(tc(f.col, f.t))}</div><div class="u4l5-zv"></div>`, ''); b.style.borderColor = f.col; boxes.push(b); if (i < facs.length - 1) times(); });
-    div(stage, 'u4l5-zop', '=', x, Y + 30, XW); x += XW;
-    const pBox = div(stage, 'u4l5-zbox u4l5-zprod', '<div class="u4l5-zt">product</div><div class="u4l5-zv"></div>', x, Y, PW, BH);
-    const kTag = d.k ? hide(div(kBox, 'u4l5-ztag', 'never 0', 0, BH + 6, BW)) : null;
-    // solving lines under each factor box
-    const sols = facs.map((f, i) => { const s = hide(div(stage, 'u4l5-zsol', f.sol.map((l, j) => `<div>${T(j === f.sol.length - 1 ? tc(f.col, l) : l)}</div>`).join(''), parseFloat(boxes[i].style.left), Y + BH + 12, BW)); return s; });
-    // number line with a probe
-    const NLY = 268, N = new NumberLine(stage, { x: 14, y: NLY, width: W - 28, height: 112, min: d.min, max: d.max, step: 1, axisY: 54, fontSize: 18 });
-    const probe = div(stage, 'u4l5-probe', '', 0, 0); probe.innerHTML = '<div class="u4l5-pbub"></div><div class="u4l5-pstem"></div>';
-    const bub = probe.querySelector('.u4l5-pbub');
-    const st = { x: d.x0 };
-    const val = (xx) => facs.reduce((p, f) => p * f.f(xx), d.k || 1);
-    const setProbe = (xx, exact) => {
-      st.x = xx; const px = 14 + N.toPx(xx); probe.style.left = px + 'px'; probe.style.top = (NLY + 54) + 'px';
-      bub.innerHTML = T('x=' + (exact ? frT(xx) : (Math.round(xx * 10) / 10).toString()));
-      facs.forEach((f, i) => {
-        const fv = f.f(xx), z = exact && Math.abs(fv) < 1e-9;
-        boxes[i].querySelector('.u4l5-zv').innerHTML = exact ? T('=' + frT(fv)) : '…';
-        boxes[i].classList.toggle('u4l5-zon', z);
-      });
-      const pv = val(xx), pz = exact && Math.abs(pv) < 1e-9;
-      pBox.querySelector('.u4l5-zv').innerHTML = exact ? T(frT(pv)) : '…';
-      pBox.classList.toggle('u4l5-zon', pz);
-    };
-    hide(probe); setProbe(d.x0, true);
-    const moveTo = async (c, x1) => { const x0 = st.x; await tween(c, 900, (t) => setProbe(x0 + (x1 - x0) * t, t >= 1)); setProbe(x1, true); };
-    const marks = facs.map((f) => { const m = N.point(f.r, { color: OK, label: T(tc(OK, frT(f.r))), r: 9 }); hide(m); hide(m.label); return m; });
-    const prodAt = (xx) => `${d.k ? `(${d.k})` : ''}${facs.map((f) => `(${frT(f.f(xx))})`).join('')}=${frT(val(xx))}`;
-    const ansT = `x=${frT(facs[0].r)}\\ \\text{or}\\ x=${frT(facs[1].r)}`;
-    const steps = [
-      { cap: `${['', '', 'Two', 'Three'][facs.length + (d.k ? 1 : 0)]} factors multiply to give <b>0</b>. Slide ${T('x')} along and watch each factor’s value.`, run: async (c) => { await show(c, probe); await pulse(c, eq, 1.05); } },
-      { cap: `Try ${T('x=' + d.x0)}: ${T(prodAt(d.x0))}. Not 0.`, run: (c) => pulse(c, pBox, 1.08) }
-    ];
-    if (d.k) steps.push({ cap: `${T(String(d.k))} is a constant: it is <b>never 0</b>, so it gives no root. The roots must come from the other factors.`, run: async (c) => { await show(c, kTag); await shake(c, kBox); } });
-    facs.forEach((f, i) => steps.push({
-      cap: `${T('x=' + frT(f.r))} makes ${T(tc(f.col, f.t) + '=0')}, so the product is <b>0</b>, ${i ? 'again' : 'whatever the other factor is'}. ✓`,
-      run: async (c) => { await moveTo(c, f.r); await pop(c, boxes[i], 360); marks[i].style.opacity = 1; await Promise.all([pop(c, marks[i], 360), show(c, marks[i].label)]); }
-    }));
-    steps.push({ cap: `So set <b>each factor with a variable equal to 0</b> and solve: ${T(ansT)}.`,
-      run: async (c) => { await anim(c, probe, [{ opacity: 1 }, { opacity: 0 }], 300); for (const s of sols) await show(c, s); eq.innerHTML = T(eqT + '\\quad\\Rightarrow\\quad ' + tc(RT, ansT)); await pop(c, eq, 380); } });
-    return steps;
-  }
-};
-function zppWhy(stage, ex) {
-  const W = ex.W, BW = 170, BH = 120, Y = 70, x0 = Math.round((W - (2 * BW + 40 + 40 + 170)) / 2);
-  const bA = div(stage, 'u4l5-zbox', '<div class="u4l5-zt">' + T(tc(F1, 'a')) + '</div><div class="u4l5-zv u4l5-zbig">?</div>', x0, Y, BW, BH); bA.style.borderColor = F1;
-  div(stage, 'u4l5-zop', '×', x0 + BW, Y + 34, 40);
-  const bB = div(stage, 'u4l5-zbox', '<div class="u4l5-zt">' + T(tc(F2, 'b')) + '</div><div class="u4l5-zv u4l5-zbig">?</div>', x0 + BW + 40, Y, BW, BH); bB.style.borderColor = F2;
-  div(stage, 'u4l5-zop', '=', x0 + 2 * BW + 40, Y + 34, 40);
-  const bP = div(stage, 'u4l5-zbox u4l5-zprod', '<div class="u4l5-zt">product</div><div class="u4l5-zv u4l5-zbig">12</div>', x0 + 2 * BW + 80, Y, 170, BH);
-  const vA = bA.querySelector('.u4l5-zv'), vB = bB.querySelector('.u4l5-zv'), vP = bP.querySelector('.u4l5-zv');
-  const tray = div(stage, 'u4l5-tray', '', 20, 222, W - 40, 60);
-  const tray0 = div(stage, 'u4l5-tray', '', 20, 290, W - 40, 60);
-  const key = hide(div(stage, 'u4l5-keybox', `<b>Zero product property:</b> if ${T('ab=0')}, then ${T('a=0')} or ${T('b=0')}.`, W / 2, 366)); key.style.translate = '-50% 0';
-  const P12 = [[3, 4], [2, 6], [-1, -12], [0.5, 24], [-4, -3]], P0 = [[0, 7], [-3, 0], [0, 0], [0, -5]];
-  const chip = (host, a, b, zero) => { const nb = b < 0 ? `(${frT(b)})` : frT(b), s = h('span', 'u4l5-pchip' + (zero ? ' u4l5-pchip0' : ''), T(`${zero && a === 0 ? tc(OK, '0') : frT(a)}\\times${zero && b === 0 ? tc(OK, '0') : nb}`)); host.appendChild(s); hide(s); return s; };
-  const setPair = (a, b) => { vA.innerHTML = T(a === 0 ? tc(OK, '0') : frT(a)); vB.innerHTML = T(b === 0 ? tc(OK, '0') : frT(b)); bA.classList.toggle('u4l5-zon', a === 0); bB.classList.toggle('u4l5-zon', b === 0); };
-  const c12 = P12.map(([a, b]) => chip(tray, a, b, false)), c0 = P0.map(([a, b]) => chip(tray0, a, b, true));
-  const lab12 = hide(div(tray, 'u4l5-trayl', 'product 12:', 0, 0)), lab0 = hide(div(tray0, 'u4l5-trayl', 'product 0:', 0, 0));
-  lab12.style.position = lab0.style.position = 'static'; tray.prepend(lab12); tray0.prepend(lab0);
-  const run = async (c, pairs, chips) => { for (let i = 0; i < pairs.length; i++) { setPair(...pairs[i]); await Promise.all([pop(c, bA, 300), pop(c, bB, 300), show(c, chips[i])]); await sleep(c, 260); } };
-  return [
-    { cap: `${T('ab=12')}. What are ${T('a')} and ${T('b')}?`, run: (c) => pulse(c, bP, 1.08) },
-    { cap: `${T('3\\times4')}? ${T('2\\times6')}? ${T('(-1)(-12)')}? ${T('\\tfrac12\\times24')}? <b>Endless</b> pairs: we can’t name either number.`, run: async (c) => { await show(c, lab12); await run(c, P12, c12); } },
-    { cap: `Now ${T('ab=0')}. Every pair that works has a <b>0</b> in it: one of the numbers <b>must</b> be 0.`, run: async (c) => { vP.innerHTML = T(tc(OK, '0')); bP.classList.add('u4l5-zon'); await pop(c, bP, 360); await show(c, lab0); await run(c, P0, c0); } },
-    { cap: `That’s the <b>zero product property</b>. It only works with <b>0</b> on one side.`, run: (c) => show(c, key) }
-  ];
 }
 
 /* =============================== explainer: the five steps =============================== */
@@ -470,79 +332,6 @@ const rootsGraph = {
   }
 };
 
-/* =============================== explainer: equation from roots =============================== */
-const FR = {
-  e6a: { label: 'Example 6(a) check', r: [5, -3], ask: 'Example 6(a): roots 5 and −3.' },
-  e6b: { label: 'Example 6(b) check', r: [-0.5, 4], ask: 'Example 6(b): roots −½ and 4.' },
-  e6c: { label: 'Example 6(c) check', r: [0, -7 / 3], ask: 'Example 6(c): roots 0 and −7⁄3.' },
-  e6d: { label: 'Example 6(d) check', r: [0.6, 0.6], ask: 'Example 6(d): a double root of 3⁄5.' }
-};
-/** the lines that turn a root into its factor */
-function rootLines(r) {
-  const [p, q] = rat(r);
-  if (p === 0) return ['x=0', `\\text{factor }x`];
-  if (q === 1) return [`x=${p}`, `x${p > 0 ? '-' : '+'}${Math.abs(p)}=0`];
-  return [`x=${frT(r)}`, `${q}x=${p}`, `${q}x${p > 0 ? '-' : '+'}${Math.abs(p)}=0`];
-}
-const mono = (c, pw) => { if (pw === 0) return frT(c); const a = Math.abs(c); return (c < 0 ? '-' : '') + (a === 1 ? '' : frT(a)) + 'x' + (pw > 1 ? '^' + pw : ''); };
-const fromRoots = {
-  title: 'Work backwards: root → factor → equation',
-  height: 430, minW: 940,
-  choices: Object.keys(FR).map((k) => ({ v: k, label: FR[k].label })),
-  ask: (v) => FR[v].ask,
-  make(stage, v, ex) {
-    const d = FR[v], W = ex.W, [r1, r2] = d.r, dbl = r1 === r2, cols = [F1, F2];
-    const f = [facInt(r1), facInt(r2)], co = [facCo(r1), facCo(r2)];
-    // two transform columns
-    const CWd = 230, cols2 = [0, 1].map((i) => {
-      const P = panel(stage, 14 + i * (CWd + 12), 8, CWd, 250, `${dbl ? 'root' : 'root ' + (i + 1)}`, 'u4l5-rootcol');
-      P.style.borderColor = cols[i];
-      const ls = rootLines(d.r[i]).map((l, j) => lineIn(P, (j ? '<span class="u4l5-dn">↓</span>' : '') + T(j === 0 ? tc(cols[i], l) : l), 'u4l5-rl'));
-      const fbox = lineIn(P, '<span class="u4l5-dn">↓</span>' + `<span class="u4l5-fbox" style="border-color:${cols[i]}">${T(tc(cols[i], f[i] === 'x' ? 'x' : `(${f[i]})`))}</span>`, 'u4l5-rl');
-      return { P, ls, fbox };
-    });
-    const eqT = prodTex(f[0], f[1], F1, dbl ? F1 : F2) + '=0';
-    const eq = hide(div(stage, 'u4l5-feq', T(eqT), 14, 272, 2 * CWd + 12));
-    // multiplication grid
-    const terms = (c) => [[c[0], 1], [c[1], 0]].filter(([k]) => k !== 0);
-    const tA = terms(co[0]), tB = terms(co[1]), GX = 14 + 2 * (CWd + 12) + 20, CW = 120, CH = 54;
-    const grid = div(stage, 'u4l5-grid', '', GX, 14, CW * (tA.length + 1), CH * (tB.length + 1));
-    const cell = (r, c, html, cls) => div(grid, 'u4l5-gc ' + cls, html, c * CW, r * CH, CW, CH);
-    cell(0, 0, T('\\times'), 'u4l5-gh0');
-    tA.forEach(([k, pw], j) => cell(0, j + 1, T(tc(F1, mono(k, pw))), 'u4l5-gh'));
-    tB.forEach(([k, pw], i) => cell(i + 1, 0, T(tc(dbl ? F1 : F2, mono(k, pw))), 'u4l5-gh'));
-    const prods = [];
-    tB.forEach(([kb, pb], i) => tA.forEach(([ka, pa], j) => { const pw = pa + pb, el = cell(i + 1, j + 1, T(mono(ka * kb, pw)), 'u4l5-gp' + (pw === 1 ? ' u4l5-gx' : '')); hide(el); prods.push({ el, k: ka * kb, pw }); }));
-    hide(grid);
-    const A = co[0][0] * co[1][0], B = co[0][0] * co[1][1] + co[0][1] * co[1][0], C = co[0][1] * co[1][1];
-    const raw = prods.map((p, i) => { const m = mono(p.k, p.pw); return (i && p.k >= 0 ? '+' : '') + (p.pw === 1 ? tc(F2, m) : m); }).join('');
-    const coll = hide(div(stage, 'u4l5-coll', T(raw + '=0'), GX, 14 + CH * (tB.length + 1) + 18, W - GX - 14));
-    const std = polyTex([A, B, C]) + '=0';
-    const res = hide(div(stage, 'u4l5-fres', T(tc(RT, std)), GX, 14 + CH * (tB.length + 1) + 78));
-    const note = hide(div(stage, 'u4l5-fnote', '', 14, 346, W - 28, 76));
-    const nTxt = {
-      e6a: `Any non-zero multiple has the same roots: ${T('2x^2-4x-30=0')} works too. Give the smallest integer coefficients: ${T('x^2-2x-15=0')}.`,
-      e6b: `Why not ${T('\\left(x+\\tfrac12\\right)')}? It is 0 at ${T('-\\tfrac12')} too, but ${T('(2x+1)')} keeps the coefficients integers.`,
-      e6c: `The root 0 gives the factor ${T('x')} (that is, ${T('x-0')}). No constant term: ${T('3x^2+7x=0')}.`,
-      e6d: `A double root: the same factor <b>twice</b>, ${T('(5x-3)^2=0')}. Its graph would just touch the <i>x</i>-axis at ${T('\\tfrac35')}.`
-    }[v];
-    note.innerHTML = nTxt;
-    const colIn = async (c, i) => { for (const e of cols2[i].ls) await show(c, e); await show(c, cols2[i].fbox); await pop(c, cols2[i].fbox, 300); };
-    const fx = (i) => (f[i] === 'x' ? 'x' : `(${f[i]})`);
-    const steps = [];
-    const rl = (i) => rootLines(d.r[i]);
-    const undo = (i) => (d.r[i] === 0 ? `the factor is ${T('x')} (that is, ${T('x-0')})` : `undo it: ${T(rl(i).slice(1).join(',\\ '))}, so the factor is ${T(fx(i))}`);
-    steps.push({ cap: `Root ${T(frT(r1))}: which factor is 0 when ${T('x=' + frT(r1))}? ${undo(0).replace(/^./, (m) => m.toUpperCase())}.`, run: (c) => colIn(c, 0) });
-    if (dbl) steps.push({ cap: `A <b>double</b> root: the same factor comes twice. Factor ${T(fx(1))} again.`, run: (c) => colIn(c, 1) });
-    else steps.push({ cap: `Root ${T(frT(r2))}: ${undo(1)}.`, run: (c) => colIn(c, 1) });
-    steps.push({ cap: `The equation: ${T(prodTex(f[0], f[1]) + '=0')}. ${dbl ? `Its only root is ${T(frT(r1))} (a double root).` : `Its roots are exactly ${T(frT(r1))} and ${T(frT(r2))}.`}`, run: async (c) => { eq.style.opacity = 1; await pop(c, eq, 380); } });
-    steps.push({ cap: `Multiply: <b>every term by every term</b>.`, run: async (c) => { await show(c, grid); for (const p of prods) { p.el.style.opacity = 1; await pop(c, p.el, 260); } } });
-    steps.push({ cap: `Collect like terms: ${T(std)}. Standard form, integer coefficients.`, run: async (c) => { await show(c, coll); res.style.opacity = 1; await pop(c, res, 420); } });
-    steps.push({ cap: nTxt, run: (c) => show(c, note) });
-    return steps;
-  }
-};
-
 /* =============================== explainer: reject the impossible root =============================== */
 const AD = {
   e7a: { label: 'Example 7(a) check', ask: 'Example 7(a): the product of two consecutive odd integers is 143. Determine the integers.' },
@@ -638,58 +427,6 @@ const admissible = {
 };
 function at2(el, x, y) { el.style.left = x + 'px'; el.style.top = y + 'px'; }
 
-/* =============================== explainer: the ball =============================== */
-const BL = {
-  e9a: { label: 'Example 9(a) check', ask: 'Example 9(a): h = −5t² + 20t + 25. When does the ball hit the ground?' },
-  e9b: { label: 'Example 9(b) check', ask: 'Example 9(b): h = −5t² + 20t + 25. When is the ball 40 m above the ground?' }
-};
-const ball = {
-  title: 'Height and time: read the parabola',
-  height: 440, minW: 960,
-  choices: Object.keys(BL).map((k) => ({ v: k, label: BL[k].label })),
-  ask: (v) => BL[v].ask,
-  make(stage, v, ex) {
-    const W = ex.W, GW = 560, hf = (t) => -5 * t * t + 20 * t + 25;
-    const G = new Graph(stage, { x: 6, y: 4, width: GW, height: 432, xmin: -2, xmax: 6.5, ymin: -10, ymax: 50, xstep: 1, ystep: 5, xlabels: 1, ylabels: 10, fontSize: 15, xtitle: 't', ytitle: 'h', pad: [30, 18, 18, 18] });
-    // the ground strip
-    const [gx0, gy] = G.toPx(-2, 0), [gx1, gy1] = G.toPx(6.5, -10);
-    svgEl('rect', { x: gx0, y: gy, width: gx1 - gx0, height: gy1 - gy, fill: '#8a6440', 'fill-opacity': 0.12 }, G.layers.bg);
-    const pre = hide(G.fn(hf, { from: -1.15, to: 0, color: GRAY, width: 2.6, dash: '7 7', arrows: false }));
-    const real = hide(G.fn(hf, { from: 0, to: 5, color: F1, width: 3.6, arrows: false }));
-    const start = G.point(0, 25, { color: F1, r: 8, label: 'balcony, 25 m', pos: 'e' }); hide(start); hide(start.label);
-    const preLab = hide(G.label(-1.05, 30, 'before the throw', { pos: 'n', cls: 'u4l5-glab u4l5-gray' }));
-    const P = panel(stage, GW + 20, 8, W - GW - 28, 424, '', 'u4l5-alg');
-    const L = (s, cls) => lineIn(P, s, cls);
-    const ptIn = async (c, p) => { p.style.opacity = 1; await Promise.all([pop(c, p, 340), show(c, p.label)]); };
-    const base = [
-      { cap: `${T('t=0')}: the ball leaves the balcony at ${T('h=25')} m. It rises, then falls.`, run: async (c) => { real.style.opacity = 1; await G.drawIn(real, 1000, c); await ptIn(c, start); } }
-    ];
-    if (v === 'e9a') {
-      const ls = [L(`The ground is ${T('h=0')}.`), L(T('-5t^2+20t+25=0')), L(`Divide by ${T('-5')}: ${T('t^2-4t-5=0')}`), L(T('(t-5)(t+1)=0')), L(`${T(tc(OK, 't=5'))} or ${T(tc(NO, 't=-1'))} <b class="u4l5-rej">reject</b>`), L('It lands after <b>5 s</b>.', 'u4l5-aok')];
-      const p5 = G.point(5, 0, { color: OK, r: 9, label: T('t=5'), pos: 'ne' }), pm = G.point(-1, 0, { color: NO, r: 9, label: T('t=-1'), pos: 'nw' });
-      [p5, pm].forEach((p) => { hide(p); hide(p.label); });
-      const sR = hide(stamp(stage, 'reject', { ok: false, x: G.toPx(-1, 0)[0] + 16, y: G.toPx(-1, 0)[1] + 44, size: 'sm' }));
-      return base.concat([
-        { cap: `The ground is ${T('h=0')}: solve ${T('-5t^2+20t+25=0')}.`, run: async (c) => { await show(c, ls[0]); await show(c, ls[1]); } },
-        { cap: `Divide by the common factor ${T('-5')}: ${T('t^2-4t-5=0')}, so ${T('(t-5)(t+1)=0')}.`, run: async (c) => { await show(c, ls[2]); await show(c, ls[3]); } },
-        { cap: `${T('t=5')} or ${T('t=-1')}. The parabola meets ${T('h=0')} at both, but…`, run: async (c) => { pre.style.opacity = 1; await G.drawIn(pre, 600, c); await show(c, preLab); await ptIn(c, pm); await ptIn(c, p5); } },
-        { cap: `${T('t=-1')} is a second <b>before</b> the throw. Time after the throw can’t be negative: <b>reject</b> it. It lands after <b>5 s</b>.`, run: async (c) => { await stampIn(c, sR); await show(c, ls[4]); await show(c, ls[5]); } }
-      ]);
-    }
-    const ls = [L(T('-5t^2+20t+25=40')), L(T('-5t^2+20t-15=0')), L(T('t^2-4t+3=0')), L(T('(t-1)(t-3)=0')), L(`${T(tc(OK, 't=1'))} s (up) and ${T(tc(OK, 't=3'))} s (down)`), L('Both are admissible.', 'u4l5-aok')];
-    const hl = hide(G.hline(40, { color: F2, width: 2.6 }));
-    const hlab = hide(G.label(-1.95, 40, T(tc(F2, 'h=40')), { pos: 'ne', cls: 'u4l5-glab' }));
-    const p1 = G.point(1, 40, { color: OK, r: 9, label: 'on the way up', pos: 'nw' }), p3 = G.point(3, 40, { color: OK, r: 9, label: 'on the way down', pos: 'ne' });
-    [p1, p3].forEach((p) => { hide(p); hide(p.label); });
-    return base.concat([
-      { cap: `40 m above the ground: the horizontal line ${T('h=40')}. Set ${T('-5t^2+20t+25=40')}.`, run: async (c) => { hl.style.opacity = 1; await G.drawIn(hl, 600, c); await show(c, hlab); await show(c, ls[0]); } },
-      { cap: `Subtract 40: ${T('-5t^2+20t-15=0')}. Divide by ${T('-5')}: ${T('t^2-4t+3=0')}.`, run: async (c) => { await show(c, ls[1]); await show(c, ls[2]); } },
-      { cap: `${T('(t-1)(t-3)=0')}, so ${T('t=1')} or ${T('t=3')}.`, run: async (c) => { await show(c, ls[3]); await show(c, ls[4]); } },
-      { cap: `The line crosses the parabola <b>twice</b>: at 1 s on the way up and at 3 s on the way down. Both times are positive: <b>both are admissible</b>.`, run: async (c) => { await ptIn(c, p1); await ptIn(c, p3); await show(c, ls[5]); } }
-    ]);
-  }
-};
-
 /* =============================== Example 5 figure =============================== */
 function mountEx5() {
   const host = document.getElementById('u4l5-ex5fig'); if (!host) return;
@@ -733,7 +470,6 @@ standup('u4l5', {
 });
 
 /* =============================== mount =============================== */
-mountCards();
 mountEx5();
-export const explainers = mountExplainers({ zpp, pipeline, lostRoot, notZero, rootsGraph, fromRoots, admissible, ball });
-export const _test = { rat, frT, polyTex, facInt, facMon, prodTex, ZP, PL, LR, RG, FR, AD, BL };
+export const explainers = mountExplainers({ pipeline, lostRoot, notZero, rootsGraph, admissible });
+export const _test = { rat, frT, polyTex, facInt, facMon, prodTex, PL, LR, RG, AD };

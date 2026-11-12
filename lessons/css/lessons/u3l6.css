@@ -36,25 +36,6 @@
 .u3l6-pr .bk-rv { min-width: 64px; }
 .u3l6-ans-s { min-height: 1.4em; }
 
-/* ---------------- warm-up: the snapping crocodile ---------------- */
-.u3l6-croc { position: relative; width: 560px; height: 340px; }
-.u3l6-crocsvg { display: block; }
-.u3l6-ctag { font: 800 17px var(--round); background: rgba(255, 255, 255, .9); border-radius: 7px; padding: 1px 7px; white-space: nowrap; }
-.u3l6-ctag-b { color: #3f6b28; }
-.u3l6-ctag-a { color: #a33357; background: rgba(255, 255, 255, .8); }
-.u3l6-ctag-g { color: #a33357; border: 2px solid #e2a9bb; font-size: 18px; }
-.u3l6-wbtns { display: flex; gap: 10px; flex-wrap: wrap; margin: 8px 0 2px; }
-.u3l6-wbtns .pill { font-size: 15px; padding: 6px 14px; }
-.u3l6-wbtns .pill.on { background: #7a1f3d; color: #fff; }
-.wf .u3l6-wqs .q-line { font-size: 17px; margin: 4px 0 2px; gap: 10px; }
-.wf .u3l6-wqs .q-line .pill.small { padding: 2px 10px; }
-.u3l6-wa { margin: 0 0 6px 40px; }
-.wf .u3l6-wqs .bk-ans { font-size: 15.5px; line-height: 1.32; margin-top: 2px; }
-.wf .wf-poll { margin-top: 8px; }
-.wf .wf-poll .poll-opts.c2 { grid-template-columns: 1fr 1fr; gap: 6px; }
-.wf .wf-poll .poll-opts.c2 .opt { padding: 6px 10px; }
-.wf .wf-poll .poll-ans { font-size: 15.5px; line-height: 1.35; }
-.u3l6-social { font-style: italic; color: var(--ink2); font-size: 19px; text-align: center; margin: 12px 0 0; }
 
 /* ---------------- figures ---------------- */
 .u3l6-fig { position: relative; }

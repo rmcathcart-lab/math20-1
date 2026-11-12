@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u3l9.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u3l9">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Two Truths and a Lie">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="120" y="46" font-size="38" text-anchor="middle">🤥</text></g><text x="180" y="46" font-size="34" text-anchor="middle">❓<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0.2s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.6s" repeatCount="indefinite"/><text x="240" y="46" font-size="34" text-anchor="middle">✅</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Two Truths and a Lie</h2>
+  <p class="wf-rule vw-rule">Two of these are true and one is a lie. Which one is the lie?</p></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><div class="vw-tiles u3l9-ttl" style="--n:1;--fs:25px"><div class="lab"><b>A</b>Walk once around the outside of any triangle and you turn a total of 360°.</div><div class="lab"><b>B</b>You can build a triangle from sticks 3&nbsp;cm, 4&nbsp;cm and 8&nbsp;cm long.</div><div class="lab"><b>C</b>Every triangle has at least two acute angles.</div></div></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="An arrow walking around the outside of a triangle"><path d="M60 200 L280 200 L120 50 Z" fill="#f6eef1" stroke="#4a4436" stroke-width="4" stroke-linejoin="round"/><g><animateMotion path="M60 200 L280 200 L120 50 Z" dur="7s" repeatCount="indefinite" rotate="auto"/><polygon points="16,0 -10,-11 -4,0 -10,11" fill="#c93a33" stroke="#4a4436" stroke-width="2" stroke-linejoin="round" transform="translate(0 14)"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="286" y="70" font-size="40" font-weight="800" fill="#2b55a0" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>How could you prove it?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>B is the lie.</b> The two short sticks together are only 3 + 4 = 7&nbsp;cm, so they can’t reach across 8&nbsp;cm. <b>A</b> is true: you turn at each corner, and after one lap you face the way you started, a full 360°. <b>C</b> is true: the angles add to 180°, so two of them can’t both be 90° or more.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -41,44 +52,6 @@
     </ul>
   </div>
   <div class="outcome"><b>T1</b> Demonstrate an understanding of angles in standard position [0° to 360°].<br><b>T2</b> Solve problems, using the three primary trigonometric ratios for angles from 0° to 360° in standard position.<br><b>T3</b> Solve problems, using the cosine law and sine law, including the ambiguous case.<br><span class="muted">Today: the whole unit on one page, choosing the right tool, and mixed practice in the style of the unit test.</span></div>
-</section>
-
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Mystery Triangle" id="wu" style="--wf-side: 360px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Mystery Triangle</h2>
-  <p class="wf-rule">A triangle <span class="tex">ABC</span> is hiding. Tap the clues one at a time: when can you draw <b>exactly one</b> triangle?</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u3l9-clues">
-      <button type="button" class="u3l9-clue"><span>Clue 1</span><b class="tex">\angle A=30^\circ</b></button>
-      <button type="button" class="u3l9-clue"><span>Clue 2</span><b class="tex">b=10\text{ cm}</b></button>
-      <button type="button" class="u3l9-clue"><span>Clue 3</span><b class="tex">a=12\text{ cm}</b></button>
-    </div>
-    <div class="u3l9-myst" id="u3l9-myst"></div>
-    <div class="u3l9-wbtns"><span class="u3l9-try">Try side <span class="tex">a</span>:</span>
-      <button type="button" class="pill" data-u3l9-a="4">4 cm</button><button type="button" class="pill" data-u3l9-a="5">5 cm</button><button type="button" class="pill" data-u3l9-a="7">7 cm</button><button type="button" class="pill" data-u3l9-a="12">12 cm</button>
-      <button type="button" class="pill" id="u3l9-wreset">Start over</button></div>
-    <p class="u3l9-social">Challenge your neighbour: which lengths of <span class="tex">a</span> give <b>exactly one</b> triangle?</p>
-  </div><div class="wf-side">
-    <div class="u3l9-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Clue 1 only: how many triangles have <span class="tex">\angle A=30^\circ</span>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l9-wa"><div class="bk-ans"><b>Infinitely many</b>: any lengths will do.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Add clue 2. How close does the ray get to <span class="tex">C</span>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l9-wa"><div class="bk-ans"><span class="tex">h=10\sin30^\circ=10\left(\tfrac12\right)=5</span> cm.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Add clue 3, <span class="tex">a=12</span>. How many triangles now? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l9-wa"><div class="bk-ans"><b>One</b>: 12 cm swings past the ray once in front of <span class="tex">A</span> (the other crossing is behind <span class="tex">A</span>).</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> If clue 3 were <span class="tex">a=7</span> cm, how many triangles? <b>Guess!</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> none</div>
-        <div class="opt"><b>B</b> exactly one</div>
-        <div class="opt right"><b>C</b> two</div>
-        <div class="opt"><b>D</b> endless</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>C, two.</b> 7 is longer than <span class="tex">h=5</span> but shorter than <span class="tex">b=10</span>, so side <span class="tex">a</span> swings down and hits the ray <b>twice</b> (tap “7 cm”). Two sides and an angle that isn’t between them (SSA) can be ambiguous.<br><span class="muted">Challenge: <span class="tex">a=5</span> (a right triangle) or <span class="tex">a\ge10</span>.</span></div>
-    </div>
-  </div></div>
 </section>
 
 <!-- ================= 1. Unit summary ================= -->
@@ -106,7 +79,6 @@
     <tr><th class="tex">\tan\theta</th><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal><span class="tex">\frac{\sqrt3}{3}</span></span></td><td><span data-reveal><span class="tex">1</span></span></td><td><span data-reveal><span class="tex">\sqrt3</span></span></td><td><span data-reveal>undef.</span></td><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal>undef.</span></td></tr>
   </table>
   <div class="def"><b>Solving <span class="tex">\sin\theta=a</span>, <span class="tex">\cos\theta=a</span>, <span class="tex">\tan\theta=a</span></b> for <span class="tex">0^\circ\le\theta&lt;360^\circ</span>: <b>1.</b> Find <span class="tex">\theta_R</span>: the inverse key with <span class="tex">|a|</span> (or a special triangle). <b>2.</b> Use the sign of <span class="tex">a</span> and CAST to pick the two quadrants. <b>3.</b> Place <span class="tex">\theta_R</span> in each quadrant. <span class="tex">|a|&gt;1</span> for sin or cos: no solution. <span class="tex">\pm1</span> or <span class="tex">0</span>: quadrantal answers.</div>
-  <div class="explainer" data-explainer="exactTable"></div>
 </section>
 
 <section class="card" data-ink="s1c" data-section="Sine law, cosine law, area">
@@ -116,7 +88,6 @@
     <div class="u3l9-law u3l9-lcos"><div class="u3l9-lawh">Cosine law</div><span class="tex">a^2=b^2+c^2-2bc\cos A</span><br><span class="tex">\cos A=\dfrac{b^2+c^2-a^2}{2bc}</span></div>
     <div class="u3l9-law u3l9-larea"><div class="u3l9-lawh">Area</div><span class="tex">\text{Area}=\dfrac{1}{2}ab\sin C</span><div class="u3l9-lawn">two sides and the angle between them</div></div>
   </div>
-  <div class="explainer" data-explainer="lawsRecap"></div>
 </section>
 
 <section class="card" data-ink="s1d" data-section="The ambiguous case">
@@ -134,7 +105,6 @@
 <section class="card" data-ink="s1e" data-section="Which law?">
   <h3 class="sub">Choosing</h3>
   <div class="def"><b>Right triangle:</b> SOH CAH TOA. <b>A side and its opposite angle known</b> (AAS, ASA after finding the third angle, SSA): the <b class="u3l9-cs">sine law</b>. <b>Otherwise</b> (SAS, SSS): the <b class="u3l9-cc">cosine law</b>. A negative cosine means an obtuse angle.</div>
-  <div class="explainer u3l9-ask2" data-explainer="whichLaw"></div>
   <div class="tip watch"><div class="tip-ic">!</div><div><b>Good habits.</b> Calculator in <b>Degree mode</b>. Sketch every problem and label sides with the lowercase letter of the opposite angle. Keep full calculator values between steps and round only the final answer. A <b>bearing</b> is measured clockwise from north, written with three digits (e.g. 062°). <b>Common errors:</b> <span class="tex">\theta_R</span> is measured to the <span class="tex">x</span>-axis, never the <span class="tex">y</span>-axis; the inverse key gives only one angle; in the cosine law, do the multiplication <span class="tex">2bc\cos A</span> before subtracting.</div></div>
 </section>
 
@@ -142,7 +112,6 @@
 <section class="card" data-ink="s2" data-section="2. Angles, Points and Ratios">
   <div class="sec-h"><span class="badge">2</span><h2>Angles, Points and Ratios</h2></div>
   <div class="def">From a point: drop a line to the <span class="tex">x</span>-axis to make the <b>reference triangle</b>. Its legs are <span class="tex">|x|</span> and <span class="tex">|y|</span>, its hypotenuse is <span class="tex">r</span> (always positive). The <b>signs</b> of <span class="tex">x</span> and <span class="tex">y</span> give the signs of the ratios; <span class="tex">\tan^{-1}\left|\frac{y}{x}\right|</span> gives <span class="tex">\theta_R</span>; the quadrant turns <span class="tex">\theta_R</span> into <span class="tex">\theta</span>.</div>
-  <div class="explainer" data-explainer="pointRatios"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -240,6 +209,15 @@
   <button class="more" data-more="ex5-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–7">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 9 · Questions 1–7</h2>
+  <p class="pr-t">Angles in standard position, points, exact values and solving for θ.</p>
+  <div class="pr-chips n3"><span><b>1–2</b>Reference angles and points</span><span><b>3–4</b>Ratios and exact values</span><span><b>5–7</b>Solving for θ</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u3l9">Open the Practice site</a></div>
+</section>
+
 <!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
 <section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u3l9"></section>
 
@@ -292,7 +270,6 @@
 <section class="card" data-ink="s5" data-section="5. Problem Solving">
   <div class="sec-h"><span class="badge">5</span><h2>Problem Solving</h2></div>
   <div class="def">Sketch it, then find a triangle with <b>enough</b> information to start. A side found in one triangle becomes a <b>given</b> in the next. For bearings, draw a north line at every turning point; the angle between two paths from one point is the <b>difference</b> of their bearings.</div>
-  <div class="explainer" data-explainer="problemSolve"></div>
 </section>
 
 <section class="card example" data-ink="ex8" data-section="Example 8">
@@ -322,7 +299,7 @@
     <div><b>Which tool?</b> Right angle: SOH CAH TOA. A full pair: sine law (SSA: compare <span class="tex">a</span> with <span class="tex">h=b\sin A</span> and <span class="tex">b</span>). SAS or SSS: cosine law. Area <span class="tex">=\frac12ab\sin C</span>.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u3l9">
-    <div><div class="kicker">Your turn</div><b>Assignment 9 — Unit 3 Review</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 9 · Questions 8–27</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <div class="u3l9-review">
     <div class="u3l9-review-h"><span class="kicker">Up next</span><b>Unit 3 test.</b> <span class="muted">Shaky on an idea today? Go back to its lesson.</span></div>

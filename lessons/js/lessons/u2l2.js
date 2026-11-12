@@ -1,4 +1,6 @@
 /* Math 20-1 · Unit 2 · Lesson 2 — Radicals with Variables and Their Restrictions.
+ * New lesson format (2026-11-11, tools/newformat/specs/u2l2.py): the page no longer has the old warm-up or the explainers flip, radgraph, abs, allowed7, shapes;
+ * their code below is unused (each mount is skipped when its element is missing).
  * Warm-up (The Root Machine: numbered balls dropped into √(x − 6); some jam it. Flip the switch to ∛(x − 6): none do.)
  * and the explainers:
  *   allowed (STAR: solve the radicand's inequality, shade the allowed x-values on a number line, then a probe that turns
@@ -249,7 +251,7 @@ function allowedDef(keys, title) {
         steps.push({ cap: R.ok ? `Test ${T('x=' + x)}: ${T(R.full)} ✓ It is in the shading.` : `Test ${T('x=' + x)}: ${T(R.full)}: <b class="u2l2-cno">${R.why}</b> ✗ It is outside the shading.`,
           run: (c) => moveP(c, x) });
       });
-      steps.push({ cap: `Restriction: ${T(cG(d.solT))}. <b>Drag the probe</b>: it turns <b class="u2l2-cno">red</b> ${d.odd ? 'nowhere: an odd root never jams' : 'everywhere outside the shading'}.`,
+      steps.push({ cap: `Restriction: ${T(cG(d.solT))}. <b>Drag the probe</b>: it turns <b class="u2l2-cno">red</b> ${d.odd ? 'nowhere: an odd root is real for every x' : 'everywhere outside the shading'}.`,
         run: async (c) => { await show(c, verdict); handle.style.display = ''; bub.classList.add('u2l2-pdrag'); await pulse(c, verdict, 1.06); } });
       return steps;
     }
@@ -257,7 +259,7 @@ function allowedDef(keys, title) {
 }
 const allowed = allowedDef(['a', 'b', 'c', 'd', 'e', 'f', 'den'], 'Which x-values are allowed?');
 allowed.choices = [{ sep: 'Example 1 check:' }, ...['a', 'b', 'c', 'd', 'e', 'f'].map((k) => ({ v: k, label: AL[k].label })), { sep: 'Example 2:' }, { v: 'den', label: '(d)' }];
-const allowed7 = allowedDef(['ex7'], 'Example 7: allowed, or jammed?');
+const allowed7 = allowedDef(['ex7'], 'Example 7: allowed, or not real?');
 
 /* ====================================================================================================
  * explainer: flip — why the inequality sign reverses

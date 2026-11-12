@@ -1,15 +1,10 @@
 /* Math 20-1 · Unit 2 · Lesson 6 — Rationalizing Binomial Denominators with Conjugates.
- * Warm-up (The Mental Math Trick: a 21 × 19 tile floor whose strip is turned on its side → 20² − 1²) and the explainers:
- *   square   (a big square with a small square cut from its corner; the L-shape re-cut into (A + B)(A − B)),
+ * The warm-up is plain markup in the page (tools/newformat/specs/u2l6.py). Explainers:
  *   conj     (the conjugate grid: binomial × conjugate, cross terms cancel; Example 1 checks; a same-sign contrast),
  *   detect   (a "radical detector" scans the denominator after ×√3/√3, after × the conjugate, and for one term),
  *   machine  (STAR, the conjugate machine: denominator × conjugate in a 2×2 grid where the cross terms cancel, the
  *            same factor on the numerator, then a simplest-form checklist that ticks off; Example 2 checks),
- *   machine2 (the same machine with a two-term numerator: a second grid; Example 3 checks),
- *   reduce   (a factor of every term: test the factors of the smallest coefficient; Examples 2(a), 3(c), 4(a), a trap),
- *   machine3 (simplify radicals first vs later; Example 4 checks),
  *   restrict (restrictions on a number line / in the ab-plane; Example 5 checks),
- *   combine  (rationalize each piece, then collect like radicals as tiles in two bins; Example 6 checks),
  *   golden   (the golden ratio's reciprocal and a rectangle's length and perimeter; Example 7 checks).
  * Colours: denominator blue, conjugate amber, numerator purple, rational result green, cancelling terms red. */
 import {
@@ -76,128 +71,6 @@ function rationalize(num0, den0, first = true) {
   const fin = nCol.map((u) => t(u.c * sg / g, u.r)), fd = Math.abs(dVal) / g;
   return { pre, num, den, conj, dGrid, dVal, nGrid, nRaw, nSimp, conv, nCol, grp, g, sg, fin, fd, finT: fracT(fin, fd) };
 }
-
-/* ====================================================================================================
- * Warm-up: The Mental Math Trick. (n + k) × (n − k) tiles: the k-wide strip turns on its side → n × n minus k × k.
- * ==================================================================================================== */
-function mountTiles() {
-  const host = document.getElementById('u2l6-tiles'); if (!host) return;
-  const st = { n: 20, k: 1, t: 0, busy: false };
-  const H = 280;
-  host.style.position = 'relative';
-  const svg = svgEl('svg', { class: 'u2l6-tsvg', height: H }, host);
-  const labs = h('div', 'u2l6-tlabs'); host.appendChild(labs);
-  const board = h('div', 'u2l6-tboard'); host.appendChild(board);
-  const lab = (x, y, s, pos, cls = '') => labs.appendChild(place(h('div', 'u2l6-tlab ' + cls, T(s)), x, y, pos, 6));
-  const paint = () => {
-    const Wd = Math.max(420, host.clientWidth || 600), FW = Wd - 200;
-    svg.setAttribute('width', FW); svg.setAttribute('viewBox', `0 0 ${FW} ${H}`); board.style.left = (FW + 12) + 'px';
-    svg.innerHTML = ''; labs.innerHTML = '';
-    const { n, k } = st, m = n - k, u = Math.min((FW - 50) / (n + k), (H - 46) / n), x0 = 34, yb = H - 6;
-    const grid = (g, x, y, w, hh, cols, rows) => {
-      for (let i = 1; i < cols; i++) svgEl('line', { x1: x + i * u, x2: x + i * u, y1: y, y2: y + hh, class: 'u2l6-tgl' }, g);
-      for (let j = 1; j < rows; j++) svgEl('line', { x1: x, x2: x + w, y1: y + j * u, y2: y + j * u, class: 'u2l6-tgl' }, g);
-    };
-    const tt = st.t;
-    // the missing corner (only once the strip has moved)
-    if (tt > 0.999) svgEl('rect', { x: x0 + m * u, y: yb - n * u, width: k * u, height: k * u, class: 'u2l6-tmiss' }, svg);
-    const main = svgEl('g', {}, svg);
-    svgEl('rect', { x: x0, y: yb - m * u, width: n * u, height: m * u, class: 'u2l6-tmain' }, main);
-    grid(main, x0, yb - m * u, n * u, m * u, n, m);
-    const sg = svgEl('g', {}, svg);
-    const sx = x0 + n * u, sy = yb - m * u, cx = sx + k * u / 2, cy = yb - m * u / 2;
-    const tx = x0 + m * u / 2, ty = yb - m * u - k * u / 2;
-    svgEl('rect', { x: sx, y: sy, width: k * u, height: m * u, class: 'u2l6-tstrip' }, sg);
-    grid(sg, sx, sy, k * u, m * u, k, m);
-    sg.setAttribute('transform', `translate(${((tx - cx) * tt).toFixed(2)} ${((ty - cy) * tt).toFixed(2)}) rotate(${(-90 * tt).toFixed(2)} ${cx.toFixed(2)} ${cy.toFixed(2)})`);
-    if (tt < 0.001) {
-      lab(x0 + (n + k) * u / 2, yb - m * u, String(n + k), 'n');
-      lab(x0, yb - m * u / 2, String(m), 'w');
-      lab(x0 + (n + k) * u, yb - m * u / 2, String(k), 'e', 'u2l6-ta');
-    } else if (tt > 0.999) {
-      lab(x0 + n * u / 2, yb - n * u, String(n), 'n');
-      lab(x0, yb - n * u / 2, String(n), 'w');
-      lab(x0 + n * u, yb - n * u + k * u / 2, `${k}\\times${k}`, 'e', 'u2l6-tr');
-    }
-    const big = (v) => (v >= 1000 ? String(v).replace(/(\d)(\d{3})$/, '$1\\,$2') : String(v));
-    board.innerHTML = tt > 0.999
-      ? `<div class="u2l6-tbl1">${T(`${n + k}\\times${m}`)}</div><div>${T(`=${n}^2-${k}^2`)}</div><div>${T(`=${big(n * n)}-${k * k}`)}</div><div class="u2l6-tbl2">${T('=' + big(n * n - k * k))}</div>`
-      : `<div class="u2l6-tbl1">${T(`${n + k}\\times${m}`)}</div><div class="u2l6-muted">tiles = ?</div>`;
-  };
-  const mv = document.getElementById('u2l6-wmove');
-  const go = async () => {
-    if (st.busy) return; st.busy = true;
-    const c = liveCtx(), from = st.t, to = st.t > 0.5 ? 0 : 1;
-    await tween(c, 900, (e) => { st.t = from + (to - from) * e; paint(); });
-    st.t = to; paint(); mv.textContent = to ? 'Put it back' : 'Move the strip'; st.busy = false;
-  };
-  if (mv) mv.addEventListener('click', go);
-  document.querySelectorAll('.u2l6-wp').forEach((b) => b.addEventListener('click', () => {
-    if (st.busy) return;
-    const [n, k] = b.dataset.wp.split(',').map(Number); st.n = n; st.k = k; st.t = 0; if (mv) mv.textContent = 'Move the strip';
-    document.querySelectorAll('.u2l6-wp').forEach((x) => x.classList.toggle('on', x === b)); paint();
-  }));
-  paint();
-  if (window.ResizeObserver) { let w0 = host.clientWidth; new ResizeObserver(() => { if (Math.abs(host.clientWidth - w0) > 2) { w0 = host.clientWidth; paint(); } }).observe(host); }
-}
-
-/* ====================================================================================================
- * explainer: square — difference of squares as area
- * ==================================================================================================== */
-const SQ = {
-  w: { label: 'Warm-up: 7 + √5', A: 7, B: Math.sqrt(5), AT: '7', BT: '\\sqrt5', A2T: '7^2=49', B2T: '(\\sqrt5)^2=5', A2: 49, B2: 5 },
-  b: { label: 'Example 1(b): √7 − √2', A: Math.sqrt(7), B: Math.sqrt(2), AT: '\\sqrt7', BT: '\\sqrt2', A2T: '(\\sqrt7)^2=7', B2T: '(\\sqrt2)^2=2', A2: 7, B2: 2 },
-  c: { label: 'Example 1(c): 2√5 + 3', A: 2 * Math.sqrt(5), B: 3, AT: '2\\sqrt5', BT: '3', A2T: '(2\\sqrt5)^2=20', B2T: '3^2=9', A2: 20, B2: 9 }
-};
-const square = {
-  title: 'Why the radicals disappear',
-  height: 440,
-  minW: 860,
-  choices: Object.keys(SQ).map((k) => ({ v: k, label: SQ[k].label })),
-  intro: 'A big square, a small square cut from its corner, and one piece that moves. Press <b>Next</b>.',
-  make(stage, k, ex) {
-    const d = SQ[k], W = ex.W, A = d.A, B = d.B, res = d.A2 - d.B2;
-    const s = Math.min(400 / (A + B), 340 / A), x0 = 125, y0 = 40, As = A * s, Bs = B * s, Ms = (A - B) * s;
-    const svg = svgEl('svg', { width: 540, height: 440, viewBox: '0 0 540 440', class: 'u2l6-abs' }, stage);
-    svg.style.left = '0px'; svg.style.top = '0px';
-    const defs = svgEl('defs', {}, svg), pat = svgEl('pattern', { id: 'u2l6-hatch-' + k, width: 10, height: 10, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, defs);
-    svgEl('rect', { width: 10, height: 10, fill: '#fff' }, pat); svgEl('line', { x1: 0, x2: 0, y1: 0, y2: 10, stroke: '#eab3ae', 'stroke-width': 4 }, pat);
-    const bot = svgEl('rect', { x: x0, y: y0 + Bs, width: As, height: Ms, fill: '#d5e2fb', stroke: 'none' }, svg);
-    const topG = svgEl('g', {}, svg);
-    const top = svgEl('rect', { x: x0, y: y0, width: Ms, height: Bs, fill: '#d5e2fb', stroke: 'none' }, topG);
-    const cut = svgEl('rect', { x: x0 + Ms, y: y0, width: Bs, height: Bs, fill: '#d5e2fb', stroke: 'none' }, svg);
-    const outline = svgEl('rect', { x: x0, y: y0, width: As, height: As, fill: 'none', stroke: DB, 'stroke-width': 3 }, svg);
-    const labs = add(stage, h('div', 'u2l6-abs u2l6-sqlabs'), 0, 0);
-    const L = (x, y, s2, pos, cls = '') => hide(labs.appendChild(place(h('div', 'u2l6-sqlab ' + cls, T(s2)), x, y, pos, 6)));
-    const lTop = L(x0 + As / 2, y0, d.AT, 'n'), lLeft = L(x0, y0 + As / 2, d.AT, 'w');
-    const lCut = L(x0 + Ms + Bs / 2, y0 + Bs / 2, String(d.B2), 'c', 'u2l6-sqcut'), lCutS = L(x0 + Ms + Bs / 2, y0, d.BT, 'n', 'u2l6-sqred');
-    const lPw = L(x0 + Ms / 2, y0 + Bs / 2, `${d.AT}-${d.BT}`, 'c', 'u2l6-sqp'), lPh = L(x0 + Ms, y0 + Bs / 2, d.BT, 'w', 'u2l6-sqp u2l6-sqin');
-    const lBot = L(x0 + (As + Bs) / 2, y0 + As, `${d.AT}+${d.BT}`, 's'), lSide = L(x0, y0 + Bs + Ms / 2, `${d.AT}-${d.BT}`, 'w');
-    const lArea = L(x0 + (As + Bs) / 2, y0 + Bs + Ms / 2, `\\text{area}=${res}`, 'c', 'u2l6-sqarea');
-    // right: the algebra
-    const P = panel(stage, 560, 30, W - 572, 380, 'Area');
-    const p1 = hidLine(P, `Big square: ${T(d.A2T)}`), p2 = hidLine(P, `Cut out: ${T(cX(d.B2T))}`), p3 = hidLine(P, `Left: ${T(`${d.A2}-${d.B2}=${res}`)}`);
-    const p4 = hidLine(P, `Rectangle: ${T(`(${d.AT}+${d.BT})(${d.AT}-${d.BT})`)}`, 'u2l6-sqgap'), p5 = hidLine(P, T(cG(`=${d.A2}-${d.B2}=${res}`)), 'u2l6-big');
-    const p6 = hidLine(P, `<b class="u2l6-cg">No radical left!</b>`);
-    [bot, topG, cut, outline].forEach(hide);
-    const cxT = x0 + Ms / 2, cyT = y0 + Bs / 2, txT = x0 + As + Bs / 2, tyT = y0 + Bs + Ms / 2;
-    return [
-      { cap: `A square with side ${T(d.AT)}: its area is ${T(d.A2T)}.`, run: async (c) => { for (const e of [bot, topG, cut, outline]) appear(c, e, 300); await sleep(c, 320); await show(c, lTop); await show(c, lLeft); await show(c, p1); } },
-      { cap: `Cut a small square with side ${T(d.BT)} from the corner: area ${T(d.B2T)}. What is left: ${T(`${d.A2}-${d.B2}=${res}`)}.`,
-        run: async (c) => { cut.setAttribute('fill', `url(#u2l6-hatch-${k})`); cut.setAttribute('stroke', RD); cut.setAttribute('stroke-width', 2.5); cut.setAttribute('stroke-dasharray', '7 5'); outline.style.opacity = 0; await show(c, lCutS); await show(c, lCut); await show(c, p2); await show(c, p3); } },
-      { cap: `Slice the L-shape into two rectangles. The <b class="u2l6-cn">top piece</b> is ${T(d.BT)} tall and ${T(`${d.AT}-${d.BT}`)} wide.`,
-        run: async (c) => { top.setAttribute('fill', '#e6dcf8'); top.setAttribute('stroke', NP); top.setAttribute('stroke-width', 2.5); bot.setAttribute('stroke', DB); bot.setAttribute('stroke-width', 2.5); lLeft.style.opacity = 0; await show(c, lPw); await show(c, lPh); } },
-      { cap: `Turn the top piece on its side and slide it to the right end of the bottom piece.`,
-        run: async (c) => {
-          [lTop, lPw, lPh, lCut, lCutS].forEach((e) => (e.style.opacity = 0));
-          await tween(c, 1100, (e) => topG.setAttribute('transform', `translate(${((txT - cxT) * e).toFixed(2)} ${((tyT - cyT) * e).toFixed(2)}) rotate(${(90 * e).toFixed(2)} ${cxT} ${cyT})`));
-          cut.style.opacity = 0.25;
-        } },
-      { cap: `A rectangle ${T(`${d.AT}+${d.BT}`)} long and ${T(`${d.AT}-${d.BT}`)} wide, with the same area: ${T(`(${d.AT}+${d.BT})(${d.AT}-${d.BT})=${res}`)}. <b>No radical!</b>`,
-        run: async (c) => { cut.style.opacity = 0; outline.setAttribute('stroke', '#9aa0ab'); outline.setAttribute('stroke-width', 2); outline.setAttribute('stroke-dasharray', '6 6'); outline.style.opacity = 1; await show(c, lBot); await show(c, lSide); await pop(c, lArea); await show(c, p4); await show(c, p5); await show(c, p6); } }
-    ];
-  }
-};
 
 /* ====================================================================================================
  * a multiplication grid (rows × cols), HTML cells inside a host
@@ -415,86 +288,7 @@ const M2 = {
   c: { label: '(c)', num: [t(1, 3)], den: [t(2, 3), t(-3)] },
   d: { label: '(d)', num: [t(4)], den: [t(1, 6), t(-2, 2)] }
 };
-const M3 = {
-  try: { label: 'Try: (√2 + 1) ÷ (√2 − 1)', num: [t(1, 2), t(1)], den: [t(1, 2), t(-1)] },
-  a: { label: 'Example 3 check: (a)', num: [t(1, 5), t(1)], den: [t(1, 5), t(-1)] },
-  b: { label: '(b)', num: [t(2, 3), t(-1, 2)], den: [t(1, 3), t(1, 2)] },
-  c: { label: '(c)', num: [t(1, 6), t(3)], den: [t(1, 6), t(-2)] }
-};
-const M4 = {
-  af: { label: 'Example 4(a): simplify first', num: [t(1, 6)], den: [t(1, 18), t(1, 12)] },
-  al: { label: 'Example 4(a): simplify at the end', num: [t(1, 6)], den: [t(1, 18), t(1, 12)], first: false },
-  b: { label: 'Example 4(b) check', num: [t(6), t(-1, 12)], den: [t(1, 3), t(-1)] }
-};
 const machine = machineDef('The conjugate machine', M2, 'Feed in a fraction: the machine multiplies by the <b>conjugate</b>, then works through the <b>simplest form</b> checklist. Press <b>Next</b>.');
-const machine2 = machineDef('The conjugate machine: two terms on top', M3, 'Two terms on top means a second grid for the numerator. Press <b>Next</b>.');
-const machine3 = machineDef('The conjugate machine: simplify first?', M4, 'Compare simplifying the radicals <b>first</b> with simplifying them <b>at the end</b>. Press <b>Next</b>.');
-
-/* ====================================================================================================
- * explainer: reduce — a factor of every term
- * ==================================================================================================== */
-const RDC = {
-  a: { label: 'Example 2(a) check', top: [t(18), t(6, 5)], d: 4 },
-  c3: { label: 'Example 3(c) check', top: [t(12), t(5, 6)], d: 2 },
-  e4: { label: 'Example 4(a) check', top: [t(6, 3), t(-6, 2)], d: 6 },
-  trap: { label: 'The trap: (6 + 2√5) ÷ 4', top: [t(6), t(2, 5)], d: 4, trap: true }
-};
-const coefT = (u, lead) => { const a = Math.abs(u.c), s = u.c < 0 ? '-' : lead ? '' : '+'; return `${s}${cC(String(a))}${u.r > 1 ? `\\sqrt{${u.r}}` : ''}`; };
-const reduce = {
-  title: 'A factor of every term',
-  height: 420,
-  minW: 860,
-  choices: Object.keys(RDC).map((k) => ({ v: k, label: RDC[k].label })),
-  intro: 'To reduce, a factor must divide <b>every</b> term on top <b>and</b> the denominator. Press <b>Next</b>.',
-  make(stage, k, ex) {
-    const d = RDC[k], W = ex.W, all = [...d.top.map((u) => Math.abs(u.c)), d.d];
-    const mn = Math.min(...all), cands = []; for (let f = 2; f <= mn; f++) if (mn % f === 0) cands.push(f);
-    const g = all.reduce(gcd), fin = d.top.map((u) => t(u.c / g, u.r)), fd = d.d / g, finT = fracT(fin, fd);
-    const FX = 30, TW = 430;
-    // the tiles
-    const topRow = add(stage, box(h('div', 'u2l6-rrow'), TW, 74), FX, 40);
-    const tiles = d.top.map((u, i) => { const e = h('div', 'u2l6-rtile', T(coefT(u, i === 0))); topRow.appendChild(e); return e; });
-    add(stage, box(h('div', 'u2l6-rbar'), TW - 60, 4), FX + 30, 126);
-    const botRow = add(stage, box(h('div', 'u2l6-rrow'), TW, 74), FX, 140);
-    const dt = h('div', 'u2l6-rtile', T(cC(String(d.d)))); botRow.appendChild(dt);
-    const out = hide(add(stage, box(h('div', 'u2l6-rout'), TW + 20, 90), FX - 10, 240));
-    const wrong = d.trap ? hide(add(stage, box(h('div', 'u2l6-rwrong'), TW + 20, 80), FX - 10, 320)) : null;
-    if (wrong) wrong.innerHTML = `Not: ${T(cX('\\dfrac{6+\\sqrt5}{2}'))}`;
-    const wst = d.trap ? hide(stamp(stage, '✗', { ok: false, x: FX + 360, y: 360, size: 'sm' })) : null;
-    // the factor test table
-    const P = panel(stage, 490, 20, W - 500, 380, 'Does it divide?');
-    const tb = h('table', 'u2l6-rtab'); P.appendChild(tb);
-    tb.innerHTML = `<tr><th>factor</th>${d.top.map((u, i) => `<th>${T(tT(u, i === 0))}</th>`).join('')}<th>${T(String(d.d))}</th></tr>`;
-    const rowsE = cands.map((f) => { const tr = h('tr', ''); tr.innerHTML = `<td>${T(String(f))}</td>` + all.map((v) => `<td class="${v % f === 0 ? 'u2l6-yes' : 'u2l6-no'}">${v % f === 0 ? '✓' : '✗'}</td>`).join(''); tb.appendChild(tr); return hide(tr); });
-    const best = cands.filter((f) => all.every((v) => v % f === 0)).pop();
-    const note = hidLine(P, best ? `Biggest factor of every term: <b>${best}</b>` : '<b>No factor of every term.</b>', 'u2l6-rnote');
-    const ok = hide(stamp(stage, g > 1 ? `÷ ${g}` : 'simplest ✓', { ok: g > 1 ? null : true, x: FX + TW - 50, y: 285, size: 'sm' }));
-    const listT = all.map((v) => T(cC(String(v)))).join(', ');
-    const steps = [];
-    if (d.trap) {
-      steps.push({ cap: `Tempting: divide ${T('2\\sqrt5')} and the ${T('4')} by 2 and stop…`, run: async (c) => { await show(c, wrong); } });
-      steps.push({ cap: `…but the ${T('6')} was not divided. Split the fraction: ${T('\\tfrac64+\\tfrac{2\\sqrt5}{4}')}. <b>Both</b> pieces must be divided.`, run: async (c) => { await stampIn(c, wst); } });
-    }
-    steps.push({ cap: `Look at the number in front of every term, top and bottom: ${listT}. (The radical is not a factor to cancel.)`,
-      run: async (c) => { for (const e of [...tiles, dt]) { e.classList.add('u2l6-rhi'); await pulse(c, e, 1.08, 300); } } });
-    steps.push({ cap: `Only a factor of the smallest number, ${T(String(mn))}, can divide them all.${cands.length ? ` Test ${cands.map((f) => T(String(f))).join(' and ')}.` : ''}`,
-      run: async (c) => { for (const r of rowsE) await show(c, r); } });
-    if (g > 1) {
-      steps.push({ cap: `${T(String(g))} divides every term, so it is the factor to use.`, run: async (c) => { rowsE[cands.indexOf(best)].classList.add('u2l6-rbest'); await show(c, note); } });
-      steps.push({ cap: `Divide every term, top and bottom, by ${T(String(g))}: ${T(cG(finT))}.${fd === 1 ? ' A denominator of 1 is not written.' : ''}`,
-        run: async (c) => {
-          await stampIn(c, ok);
-          tiles.forEach((e, i) => { e.innerHTML = T(tT(fin[i], i === 0)); e.classList.remove('u2l6-rhi'); }); dt.innerHTML = T(String(fd)); dt.classList.remove('u2l6-rhi');
-          for (const e of [...tiles, dt]) await pop(c, e, 300);
-          out.innerHTML = T(`\\dfrac{${eT(d.top)}}{${d.d}}=${cG(finT)}`); await show(c, out);
-        } });
-    } else {
-      steps.push({ cap: `${T('2')} divides ${T('12')} and ${T('2')}, but <b>not</b> ${T('5')}. No factor divides every term: ${T(cG(finT))} is already reduced.`,
-        run: async (c) => { await show(c, note); out.innerHTML = T(cG(finT)); await show(c, out); await stampIn(c, ok); } });
-    }
-    return steps;
-  }
-};
 
 /* ====================================================================================================
  * explainer: restrict — restrictions with variables (Example 5)
@@ -558,58 +352,6 @@ function restrictAB(stage, W) {
       run: async (c) => { await drawIn(diag, 700, c); diag.style.opacity = 1; await show(c, dl); await show(c, b3); } }
   ];
 }
-
-/* ====================================================================================================
- * explainer: combine — rationalize each piece, then collect like radicals in two bins (Example 6)
- * ==================================================================================================== */
-const CB = {
-  a: { label: 'Example 6 check: (a)', expr: `${cN('(2\\sqrt3-1)(\\sqrt3+4)')}-${cD('\\dfrac{6}{\\sqrt3}')}`, rad: '\\sqrt3',
-    p1: ['\\text{FOIL: }(2\\sqrt3-1)(\\sqrt3+4)', '=6+8\\sqrt3-\\sqrt3-4'], p2: ['-\\dfrac{6}{\\sqrt3}\\cdot\\dfrac{\\sqrt3}{\\sqrt3}', '=-\\dfrac{6\\sqrt3}{3}=-2\\sqrt3'],
-    nums: ['+6', '-4'], rads: ['+8\\sqrt3', '-\\sqrt3', '-2\\sqrt3'], nsum: '2', rsum: '5\\sqrt3', ans: '2+5\\sqrt3',
-    cap1: 'Order of operations: the <b class="u2l6-cn">product</b> and the <b class="u2l6-cd">division</b> first, then subtract.' },
-  b: { label: '(b)', expr: `${cN('\\dfrac{1}{2+\\sqrt3}')}+${cD('\\dfrac{1}{2-\\sqrt3}')}`, rad: '\\sqrt3',
-    p1: [`\\dfrac{1}{2+\\sqrt3}\\cdot\\dfrac{${cC('2-\\sqrt3')}}{${cC('2-\\sqrt3')}}`, '=\\dfrac{2-\\sqrt3}{4-3}=2-\\sqrt3'], p2: [`\\dfrac{1}{2-\\sqrt3}\\cdot\\dfrac{${cC('2+\\sqrt3')}}{${cC('2+\\sqrt3')}}`, '=\\dfrac{2+\\sqrt3}{4-3}=2+\\sqrt3'],
-    nums: ['+2', '+2'], rads: ['-\\sqrt3', '+\\sqrt3'], nsum: '4', rsum: '0', ans: '4', cancel: true,
-    cap1: 'Two fractions with binomial denominators: rationalize <b>each one first</b>, each with its own conjugate.' },
-  c: { label: '(c)', expr: `${cN('\\dfrac{3}{\\sqrt5}')}-${cD('\\dfrac{2}{\\sqrt5+1}')}`, rad: '\\sqrt5', over: 10,
-    p1: ['\\dfrac{3}{\\sqrt5}\\cdot\\dfrac{\\sqrt5}{\\sqrt5}', '=\\dfrac{3\\sqrt5}{5}=\\dfrac{6\\sqrt5}{10}'], p2: [`-\\dfrac{2}{\\sqrt5+1}\\cdot\\dfrac{${cC('\\sqrt5-1')}}{${cC('\\sqrt5-1')}}`, '=-\\dfrac{2(\\sqrt5-1)}{4}=-\\dfrac{\\sqrt5-1}{2}', '=-\\dfrac{5\\sqrt5-5}{10}'],
-    nums: ['+5'], rads: ['+6\\sqrt5', '-5\\sqrt5'], nsum: '5', rsum: '\\sqrt5', ans: '\\dfrac{\\sqrt5+5}{10}', capC: `Collect on top: ${T('6\\sqrt5-5\\sqrt5=\\sqrt5')}, and the ${T('+5')} stays. Keep the denominator ${T('10')}.`,
-    cap1: 'A one-term denominator and a two-term one: rationalize each, then use a <b>common denominator</b>.' }
-};
-const combine = {
-  title: 'Rationalize, then collect',
-  height: 492,
-  minW: 880,
-  choices: Object.keys(CB).map((k) => ({ v: k, label: CB[k].label })),
-  intro: 'Each piece gets rationalized on its own; then like radicals are collected, just like like terms. Press <b>Next</b>.',
-  make(stage, k, ex) {
-    const d = CB[k], W = ex.W, CW = (W - 30) / 2;
-    const bar = add(stage, box(h('div', 'u2l6-bar u2l6-cbar'), W - 20, 70), 10, 4); bar.innerHTML = `<div class="u2l6-barl">${T(d.expr)}</div>`;
-    const c1 = panel(stage, 10, 84, CW, 186, '', 'u2l6-cpiece u2l6-cp1'), c2 = panel(stage, 20 + CW, 84, CW, 186, '', 'u2l6-cpiece u2l6-cp2');
-    const p1 = d.p1.map((s) => hidLine(c1, T(s), 'u2l6-cl')), p2 = d.p2.map((s) => hidLine(c2, T(s), 'u2l6-cl'));
-    [...p1, ...p2].forEach((e) => fit(e, CW - 30, 13));
-    const tray = panel(stage, 10, 280, W - 20, 204, d.over ? `Collect (everything over ${d.over})` : 'Collect like terms', 'u2l6-tray');
-    const binW = (W - 220) / 2;
-    const bN = add(tray, box(h('div', 'u2l6-bin'), binW, 150), 12, 40), bR = add(tray, box(h('div', 'u2l6-bin u2l6-binr'), binW, 150), 24 + binW, 40);
-    bN.innerHTML = '<div class="u2l6-binh">numbers</div>'; bR.innerHTML = `<div class="u2l6-binh">${T(d.rad)}’s</div>`;
-    const tn = d.nums.map((s) => hide(bN.appendChild(h('div', 'u2l6-tile', T(s))))), tr = d.rads.map((s) => hide(bR.appendChild(h('div', 'u2l6-tile u2l6-tiler', T(s)))));
-    const sN = hide(bN.appendChild(h('div', 'u2l6-binsum', T('=' + d.nsum)))), sR = hide(bR.appendChild(h('div', 'u2l6-binsum', T('=' + d.rsum))));
-    const ans = hide(add(tray, box(h('div', 'u2l6-cans'), 150, 150), W - 20 - 176, 40)); ans.innerHTML = `<div class="u2l6-binh">answer</div>${T(cG(d.ans))}`;
-    const st = d.cancel ? hide(stamp(stage, 'rational!', { ok: true, x: W - 100, y: 456, size: 'sm' })) : null;
-    const steps = [{ cap: d.cap1, run: (c) => pulse(c, bar, 1.03) }];
-    steps.push({ cap: k === 'a' ? `First piece: FOIL gives ${T('6+8\\sqrt3-\\sqrt3-4')}.` : k === 'b' ? `First fraction × ${T(cC('\\tfrac{2-\\sqrt3}{2-\\sqrt3}'))}: the bottom is ${T('4-3=1')}.` : `First fraction, one term: × ${T('\\tfrac{\\sqrt5}{\\sqrt5}')} gives ${T('\\tfrac{3\\sqrt5}{5}')}.`,
-      run: async (c) => { for (const e of p1) await show(c, e); } });
-    steps.push({ cap: k === 'a' ? `Second piece, one term (Lesson 5): ${T('\\tfrac{6}{\\sqrt3}=\\tfrac{6\\sqrt3}{3}=2\\sqrt3')}.` : k === 'b' ? `Second fraction × ${T(cC('\\tfrac{2+\\sqrt3}{2+\\sqrt3}'))}: the bottom is 1 again.` : `Second fraction × ${T(cC('\\tfrac{\\sqrt5-1}{\\sqrt5-1}'))}: the bottom is ${T('5-1=4')}, then reduce by 2.`,
-      run: async (c) => { for (const e of p2.slice(0, 2)) await show(c, e); } });
-    if (d.over) steps.push({ cap: `Common denominator ${T('10')}: ${T('\\tfrac{3\\sqrt5}{5}=\\tfrac{6\\sqrt5}{10}')} and ${T('\\tfrac{\\sqrt5-1}{2}=\\tfrac{5\\sqrt5-5}{10}')}.`, run: (c) => show(c, p2[2]) });
-    steps.push({ cap: `Sort the terms${d.over ? ' on top' : ''}: numbers in one bin, ${T(d.rad)}’s in the other. ${T(d.rad)} works like a variable.`, run: async (c) => { for (const e of [...tn, ...tr]) await pop(c, e, 280); } });
-    steps.push({ cap: d.capC ? d.capC : d.cancel ? `${T('-\\sqrt3+\\sqrt3=0')}: the radicals <b>cancel</b>, and ${T('2+2=4')}.` : `Collect: ${T(d.nums.join('').replace(/^\+/, '') + '=' + d.nsum)} and ${T(d.rads.join('').replace(/^\+/, '') + '=' + d.rsum)}.`,
-      run: async (c) => { if (d.cancel) { tr.forEach((e) => e.classList.add('u2l6-tilex')); await shake(c, bR); } await show(c, sN); await show(c, sR); } });
-    steps.push({ cap: d.cancel ? `The answer is ${T(cG('4'))}: a <b>rational</b> number, even though both fractions had radicals.` : `Answer: ${T(cG(d.ans))}.`,
-      run: async (c) => { await pop(c, ans); ans.style.opacity = 1; if (st) await stampIn(c, st); } });
-    return steps;
-  }
-};
 
 /* ====================================================================================================
  * explainer: golden — Example 7
@@ -714,6 +456,5 @@ standup('u2l6', {
 });
 
 /* =============================== mount =============================== */
-mountTiles();
-export const explainers = mountExplainers({ square, conj, detect, machine, machine2, reduce, machine3, restrict, combine, golden });
-export const _test = { rationalize, eT, diffSq, sqf, M2, M3, M4 };
+export const explainers = mountExplainers({ conj, detect, machine, restrict, golden });
+export const _test = { rationalize, eT, diffSq, sqf, M2 };

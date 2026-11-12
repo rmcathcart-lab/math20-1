@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u1l3.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u1l3">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Two Truths and a Lie">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><line x1="0" y1="54" x2="340" y2="54" stroke="#d9d3c4" stroke-width="3" stroke-dasharray="16 12"><animate attributeName="stroke-dashoffset" values="0;-28" dur=".7s" repeatCount="indefinite"/></line><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="8s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="34" text-anchor="middle" transform="scale(-1 1)">🚶</text></g><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="5s" begin="-2s" repeatCount="indefinite"/><text x="0" y="46" font-size="34" text-anchor="middle" transform="scale(-1 1)">🏃</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="312" y="46" font-size="30" text-anchor="middle">🐷</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Two Truths and a Lie</h2>
+  <p class="wf-rule vw-rule">Two of these are true. One is a lie. Which one is the lie?</p></div>
+  <div class="vw-tiles" style="--n:3;--fs:23px"><div class="lab"><b>A</b><span style="font-size:44px;line-height:1.1">💇</span><span>Hair grows about <b>1.25 cm</b> a month. In <b>2 years</b> it grows about <b>30 cm</b>.</span></div><div class="lab"><b>B</b><span style="font-size:44px;line-height:1.1">🐷</span><span>Put <b>$5</b> in a piggy bank every week. After <b>4 years</b> it holds more than <b>$1000</b>.</span></div><div class="lab"><b>C</b><span style="font-size:44px;line-height:1.1">🗼</span><span>The CN Tower stair climb has <b>1776 steps</b>. At <b>10 steps a minute</b> you’d reach the top in under <b>2 hours</b>.</span></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Which one can you check fastest?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>C is the lie.</b> <span class="tex">1776\div10\approx178</span> minutes is almost <b>3 hours</b>. A is true (<span class="tex">1.25\times24=30</span> cm) and B is true (<span class="tex">5\times52\times4=1040</span> dollars).</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -43,42 +54,6 @@
   <div class="outcome"><b>RF9</b> Analyze arithmetic sequences and series to solve problems.<br><span class="muted">Today: two known terms, growth and decay in context, and the link between arithmetic sequences and linear functions.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: Kangaroo Tracks" id="wu" style="--wf-side: 360px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Kangaroo Tracks</h2>
-  <p class="wf-rule">A kangaroo hopped along the beach, every hop <b>exactly the same length</b>. A wave washed most of its footprints away. Only print <b>#3</b> (at the <b>10 m</b> mark) and print <b>#8</b> (at the <b>30 m</b> mark) are left.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u1l3-beach" id="u1l3-beach"></div>
-    <div class="u1l3-wbtns">
-      <button type="button" class="pill" id="u1l3-wjumps">Count the hops</button>
-      <button type="button" class="pill" id="u1l3-wprints">Bring the prints back</button>
-      <button type="button" class="pill" id="u1l3-wreset">Start over</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u1l3-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How many <b>hops</b> are there from print #3 to print #8? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l3-wa"><div class="bk-ans"><b>5 hops</b> (<span class="tex">8-3</span>). Count the <b>gaps</b>, not the prints: 6 prints, but only 5 hops.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How long is <b>one hop</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l3-wa"><div class="bk-ans"><span class="tex">30-10=20</span> m over 5 hops: <span class="tex">20\div5=</span> <b>4 m</b> per hop.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Where is print <b>#10</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l3-wa"><div class="bk-ans">Two more hops after #8: <span class="tex">30+2(4)=</span> <b>38 m</b>.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Where is print <b>#1</b>? <b>Guess first.</b></div></div>
-      <div class="poll-opts u1l3-p4">
-        <div class="opt"><b>A</b> 0 m</div>
-        <div class="opt right"><b>B</b> 2 m</div>
-        <div class="opt"><b>C</b> 4 m</div>
-        <div class="opt"><b>D</b> 6 m</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>B, 2 m.</b> Print #1 is <b>2 hops</b> before print #3: <span class="tex">10-2(4)=2</span>. Prints: 2, 6, <b>10</b>, 14, 18, 22, 26, <b>30</b> m…<br>
-        <span class="muted"><b>A</b>: the first print doesn’t have to sit on the 0 line. The kangaroo was <b>standing</b> at <span class="tex">-2</span> m, one hop <b>before</b> print #1. “One step before the first term” comes back today.</span></div>
-    </div>
-  </div></div>
-  <p class="u1l3-social">Challenge your neighbour: where is print <b>#20</b>? Can you write a rule for print <b>#<span class="tex">n</span></b>?</p>
-</section>
-
 <!-- ================= 1. Two terms ================= -->
 <section class="card" data-ink="s1" data-section="1. Two Terms That Are Not Consecutive">
   <div class="sec-h"><span class="badge">1</span><h2>Two Terms That Are Not Consecutive</h2></div>
@@ -91,7 +66,6 @@
   <div class="tip watch"><div class="tip-ic">!</div><div><b>Count jumps, not terms.</b> From <span class="tex">t_4</span> to <span class="tex">t_{11}</span> there are 8 terms but only <span class="tex">11-4=7</span> jumps. Dividing by 8 is the most common slip.</div></div>
   <h3 class="sub">A second method: a system of equations</h3>
   <div class="def">Write both known terms with the general term formula. This gives a <b>system of two linear equations</b> in <span class="tex">\textcolor{#0e7c7b}{t_1}</span> and <span class="tex">\textcolor{#c27a0e}{d}</span>. Subtract one equation from the other to eliminate <span class="tex">\textcolor{#0e7c7b}{t_1}</span>.</div>
-  <div class="explainer" data-explainer="system"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -140,6 +114,15 @@
   <button class="more" data-more="ex3-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 3 · Questions 1–5</h2>
+  <p class="pr-t">Two terms known: find d, the first term and the general term, then use them.</p>
+  <div class="pr-chips n3"><span><b>1–2</b>d, t₁ and the general term</span><span><b>3–4</b>Terms in between; is it a term?</span><span><b>5</b>The can display</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u1l3">Open the Practice site</a></div>
+</section>
+
 <!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
 <section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u1l3"></section>
 
@@ -180,7 +163,6 @@
 <section class="card" data-ink="s2b" data-section="2. A fee plus a rate">
   <h3 class="sub">A fixed fee plus a rate</h3>
   <p>When each job costs the same amount more than the last, <span class="tex">\textcolor{#c27a0e}{d}</span> is the <b>rate</b>. The fixed fee is what is left when you take one rate off <span class="tex">\textcolor{#0e7c7b}{t_1}</span>: the cost of a “0-hour job”.</p>
-  <div class="explainer" data-explainer="feeRate"></div>
 </section>
 
 <section class="card example" data-ink="ex5" data-section="Example 5">
@@ -192,7 +174,6 @@
     <div class="part"><div class="pl">(c) What does an 8-hour job cost?</div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">t_8=45(8)+70=\boldsymbol{\$430}</span></div></div></div>
     <div class="part"><div class="pl">(d) A customer has $600. What is the longest job, in whole hours, they can pay for?</div><div class="work" style="--h:100px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">45n+70\le600\ \Rightarrow\ n\le11.8</span><br><b>11 hours</b> ($565; 12 hours would be $610).</div></div></div>
   </div>
-  <div class="part think"><div class="pl"><span class="think-tag">Think</span> In (d), <span class="tex">n\le11.8</span> rounds to 12 by the usual rule. Why is the answer 11?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">12 hours costs <span class="tex">45(12)+70=\$610</span>, more than the $600 they have. “At most $600” means round <b>down</b>; “first more than” means round <b>up</b>. The question decides, not the decimal.</div></div></div>
   <div class="space" id="ex5-space"></div>
   <button class="more" data-more="ex5-space">+ More space</button>
 </section>
@@ -203,7 +184,6 @@
   <div class="def">A quantity shows <b>arithmetic decay</b> when it <b>decreases</b> by the same amount every period, so <span class="tex">\textcolor{#c27a0e}{d}</span> is <b>negative</b>. Examples: equipment losing the same dollar value each year (<b>straight-line depreciation</b>), air temperature falling as altitude increases, and a candle burning down. The same care applies: state what <span class="tex">\textcolor{#0e7c7b}{t_1}</span> means, and match the position to the time asked for.</div>
   <h3 class="sub">Years are positions too</h3>
   <p>When <span class="tex">t_1</span> is a year, every other year has a position: count from <span class="tex">t_1</span>.</p>
-  <div class="explainer" data-explainer="truck"></div>
 </section>
 
 <section class="card example" data-ink="ex6" data-section="Example 6">
@@ -279,7 +259,7 @@
     <div><b>It’s a line, in dots.</b> <span class="tex">t_n=dn+(t_1-d)</span>: slope <span class="tex">d</span>, intercept <span class="tex">t_1-d</span> (not a term). The domain is <span class="tex">n=1,2,3,\dots</span>, so the points are not joined.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u1l3">
-    <div><div class="kicker">Your turn</div><b>Assignment 3 — Arithmetic Sequences in Context</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 3 · Questions 6–15</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l4/">
     <div><div class="kicker">Next lesson</div><b>Lesson 4 — Arithmetic Series</b><div class="muted">Add the terms up: Gauss’s trick of pairing the first and last terms gives <span class="tex">S_n</span> without adding them one by one.</div></div><span class="arrow">→</span>

@@ -1,17 +1,13 @@
 /* Math 20-1 · Unit 3 · Lesson 9 — Unit 3 Review.
- * Warm-up (The Mystery Triangle: clue cards ∠A = 30°, b = 10 cm, then a; h = 10 sin 30° = 5 decides whether a fixes
- * no, one or two triangles; the big one: a = 7 gives two), and the explainers:
+ * The warm-up (Two Truths and a Lie) is plain markup with an SVG picture (tools/newformat/specs/u3l9.py). Explainers:
  *   castRecap (terminal arm sweeping round, reference angle wedge, CAST letters and sign stickers; Example 1(a), 1(b),
- *     1(c) and 4(a) checks), exactTable (the two special triangles fill the exact-value table; Example 4(b) check),
- *   lawsRecap (sine law with matching side–angle pairs, cosine law for SSS, area as ½ab sin C with the outside height;
- *     Example 6 checks), ambiguous (side a swings from C and hits the base ray 0, 1 or 2 times, compared with
- *     h = b sin A, with the table lighting up; Example 7 checks and a review question),
- *   whichLaw (the "which law?" decision chart lights its path; a small sketch of the givens and the first equation),
- *   pointRatios (point P, reference triangle, r, signs, θ_R and θ; Example 2 and 3 checks),
+ *     1(c) and 4(a) checks),
+ *   ambiguous (side a swings from C and hits the base ray 0, 1 or 2 times, compared with h = b sin A, with the table
+ *     lighting up; Example 7 checks and a review question),
  *   solveTrig (unit circle: a height, a sideways distance or a slope meets the circle twice; θ_R from the inverse key or
  *     a special triangle, quadrants from CAST; Examples 4(c) and 5 checks),
  *   toolSorter (star: triangle cards with their given parts highlighted are dealt and dropped into four bins: primary
- *     ratios, sine law, cosine law, ambiguous with the triangle count), problemSolve (Example 8: two triangles; bearings).
+ *     ratios, sine law, cosine law, ambiguous with the triangle count).
  * Colours: θ and the terminal arm in the course burgundy, θ_R amber, sine law blue, cosine law green, primary ratios
  * purple, the ambiguous case orange; a known side–angle pair blue, the pair being found teal (#a33357). */
 import {
@@ -192,61 +188,6 @@ function triPts(names, sides, flip = false) {
 const sas = (b, c, A) => Math.sqrt(b * b + c * c - 2 * b * c * cosD(A));
 const sssAng = (a, b, c) => acosD((b * b + c * c - a * a) / (2 * b * c));
 
-/* =============================== warm-up: The Mystery Triangle =============================== */
-/* Three clue cards: ∠A = 30°, b = 10 cm, a = ? The closest the ray gets to C is h = 10 sin 30° = 5 cm, so
- * a = 4 gives no triangle, a = 5 one (right), a = 7 two, a = 12 one. */
-function mountMystery() {
-  const host = document.getElementById('u3l9-myst'); if (!host) return;
-  const W = Math.max(540, Math.min(640, host.clientWidth || 600)), H = 224, s = 24, A = 30, b = 10;
-  const B = new Box(host, {}, 'u3l9-mbox', W, H);
-  const Ap = [64, 196], P = (x, y) => [Ap[0] + x * s, Ap[1] - y * s], Cx = b * cosD(A), hh = b * sinD(A), Cp = P(Cx, hh);
-  svgEl('rect', { x: 0, y: 0, width: W, height: H, rx: 16, fill: '#fbf7ef' }, B.svg);
-  const g1 = svgEl('g', {}, B.svg), g2 = svgEl('g', {}, B.svg), gT = svgEl('g', {}, B.svg), g3 = svgEl('g', {}, B.svg);
-  // clue 1: the angle and the ray
-  svgEl('line', { x1: Ap[0], y1: Ap[1], x2: W - 16, y2: Ap[1], stroke: INK, 'stroke-width': 3 }, g1); arrowHead(g1, W - 12, Ap[1], 1, 0, { color: INK, width: 3 });
-  svgEl('line', { x1: Ap[0], y1: Ap[1], x2: P(13, 13 * Math.tan(rad(A)))[0], y2: P(13, 13 * Math.tan(rad(A)))[1], stroke: '#c9c3b5', 'stroke-width': 2.5, 'stroke-dasharray': '7 6' }, g1);
-  angleArc(g1, Ap, P(5, 0), Cp, 46, { color: CR, width: 3 });
-  lab(B, Ap[0] + 74, Ap[1] - 18, T(cR('30^\\circ')), 'u3l9-al'); lab(B, Ap[0] - 4, Ap[1] + 20, T('A'), 'u3l9-vl');
-  // clue 2: side b and C, with the height
-  svgEl('path', { d: `M${Ap.join(' ')}L${Cp.join(' ')}`, stroke: CT, 'stroke-width': 4, fill: 'none', 'stroke-linecap': 'round' }, g2);
-  svgEl('circle', { cx: Cp[0], cy: Cp[1], r: 6, fill: CT }, g2);
-  lab(B, Cp[0] - 4, Cp[1] - 20, T('C'), 'u3l9-vl'); lab(B, (Ap[0] + Cp[0]) / 2 - 18, (Ap[1] + Cp[1]) / 2 - 16, T('b=10'), 'u3l9-sl');
-  const Fp = P(Cx, 0);
-  svgEl('path', { d: `M${Cp.join(' ')}L${Fp.join(' ')}`, stroke: CR, 'stroke-width': 2.4, 'stroke-dasharray': '6 5', fill: 'none' }, g2);
-  rightMark(g2, Fp, Cp, P(20, 0), 11, { color: CR });
-  lab(B, Fp[0] + 8, (Cp[1] + Fp[1]) / 2, T(cR('h=5')), 'u3l9-sl', 'e');
-  const els = [g1, g2, g3, gT]; const lab1 = [...B.html.children];
-  const set2 = lab1.slice(2, 5); const set1 = lab1.slice(0, 2);
-  const msg = lab(B, W - 18, 22, '', 'u3l9-mmsg', 'w'), qm = lab(B, W / 2, H / 2, '?', 'u3l9-mq0');
-  let step = 0, curA = null;
-  const c = liveCtx();
-  const showA = async (a) => {
-    curA = a; g3.innerHTML = ''; gT.innerHTML = '';
-    const disc = a * a - hh * hh, sq = disc > 1e-9 ? Math.sqrt(disc) : 0, tangent = Math.abs(disc) < 1e-9, reach = disc > -1e-9;
-    const ph = reach ? (tangent ? 0 : acosD(hh / a)) : 40, R = a * s;
-    const arc = svgEl('path', { class: 'bk-stroke', d: arcD(Cp[0], Cp[1], R, -90 - Math.min(ph + 12, 80), -90 + Math.min(ph + 12, 80)), stroke: PK, 'stroke-width': 2.4, 'stroke-dasharray': '6 6', fill: 'none' }, g3);
-    const hits = reach ? (tangent ? [Cx] : [Cx + sq, Cx - sq].filter((x) => x > 1e-6)) : [];
-    hits.forEach((x, i) => {
-      const p = P(x, 0);
-      svgEl('path', { d: `M${Ap.join(' ')}L${p.join(' ')}L${Cp.join(' ')}Z`, fill: i ? '#f6dccb' : '#cfe0fb', 'fill-opacity': 0.6 }, gT);
-      svgEl('path', { d: `M${Cp.join(' ')}L${p.join(' ')}`, stroke: PK, 'stroke-width': 3.5, fill: 'none', 'stroke-dasharray': i ? '9 6' : '' }, g3);
-      svgEl('circle', { cx: p[0], cy: p[1], r: 7, fill: PK, stroke: '#fff', 'stroke-width': 2 }, g3);
-    });
-    if (!reach) { const e = [Cp[0] + R * sinD(18), Cp[1] + R * cosD(18)]; svgEl('path', { d: `M${Cp.join(' ')}L${e.join(' ')}`, stroke: PK, 'stroke-width': 3.5, fill: 'none' }, g3); }
-    const n = hits.length;
-    msg.innerHTML = `${T(cK('a=' + a))}: <b>${n === 0 ? 'no triangle' : n === 1 ? (tangent ? 'one (right) triangle' : 'one triangle') : 'two triangles!'}</b>`;
-    document.querySelectorAll('[data-u3l9-a]').forEach((btn) => btn.classList.toggle('on', Number(btn.dataset.u3l9A) === a));
-    await drawIn(arc, 700, c);
-  };
-  const vis = (k) => { step = k; g1.style.opacity = k >= 1 ? 1 : 0; set1.forEach((e) => { e.style.opacity = k >= 1 ? 1 : 0; }); g2.style.opacity = k >= 2 ? 1 : 0; set2.forEach((e) => { e.style.opacity = k >= 2 ? 1 : 0; });
-    document.querySelectorAll('.u3l9-clue').forEach((cd, i) => cd.classList.toggle('open', i < k)); qm.style.opacity = k ? 0 : 1; };
-  const reset = () => { curA = null; g3.innerHTML = ''; gT.innerHTML = ''; msg.innerHTML = ''; document.querySelectorAll('[data-u3l9-a]').forEach((b2) => b2.classList.remove('on')); vis(0); };
-  reset(); void els;
-  document.querySelectorAll('.u3l9-clue').forEach((cd, i) => cd.addEventListener('click', () => { if (i < 2) vis(Math.max(step, i + 1)); else { vis(2); showA(12); } }));
-  document.querySelectorAll('[data-u3l9-a]').forEach((btn) => btn.addEventListener('click', () => { vis(2); showA(Number(btn.dataset.u3l9A)); }));
-  const r = document.getElementById('u3l9-wreset'); if (r) r.addEventListener('click', reset);
-}
-
 /* =============================== explainer: reference angles and CAST =============================== */
 const CR_CH = {
   cast: { label: 'CAST' },
@@ -359,145 +300,6 @@ const castRecap = {
   }
 };
 
-/* =============================== explainer: the exact-value table =============================== */
-const XT_COLS = [0, 30, 45, 60, 90, 180, 270];
-const XT_VAL = {
-  sin: ['0', '\\frac{1}{2}', '\\frac{\\sqrt2}{2}', '\\frac{\\sqrt3}{2}', '1', '0', '-1'],
-  cos: ['1', '\\frac{\\sqrt3}{2}', '\\frac{\\sqrt2}{2}', '\\frac{1}{2}', '0', '-1', '0'],
-  tan: ['0', '\\frac{\\sqrt3}{3}', '1', '\\sqrt3', '\\text{undef.}', '0', '\\text{undef.}']
-};
-function xTable(stage, x, y, w) {
-  const t = add(stage, h('table', 'u3l9-xt'), x, y); t.style.width = w + 'px';
-  t.innerHTML = `<tr><th>${T('\\theta')}</th>${XT_COLS.map((a) => `<th>${T(a + '^\\circ')}</th>`).join('')}</tr>` +
-    ['sin', 'cos', 'tan'].map((f) => `<tr><th>${T('\\' + f + '\\theta')}</th>${XT_VAL[f].map((v, j) => `<td data-f="${f}" data-j="${j}"><span class="u3l9-cv">${T(v)}</span></td>`).join('')}</tr>`).join('');
-  const cell = (f, a) => t.querySelector(`td[data-f="${f}"][data-j="${XT_COLS.indexOf(a)}"]`);
-  return { t, cell, hideAll() { t.querySelectorAll('.u3l9-cv').forEach(hide); },
-    async col(c, a) { for (const f of ['sin', 'cos', 'tan']) { const cv = cell(f, a).firstChild; await show(c, cv); } },
-    hl(f, a, on = true) { const td = cell(f, a); td.classList.toggle('hl', on); return td; } };
-}
-const exactTable = {
-  title: 'Exact values from the special triangles',
-  height: 430,
-  minW: 960,
-  choices: [{ v: 'build', label: 'Build the table' }, { v: 'ex4b', label: 'Example 4(b) check' }],
-  intro: 'Two triangles hold every exact value. Press <b>Next</b>.',
-  make(stage, k, ex) {
-    const W = ex.W, TX = 372, TW = W - TX - 2, XT = xTable(stage, TX, 6, TW);
-    // left: the two triangles
-    const B1 = new Box(stage, { x: 0, y: 0 }, 'u3l9-stbox', 356, 200), B2 = new Box(stage, { x: 0, y: 214 }, 'u3l9-stbox', 356, 214);
-    const sq = 132, x0 = 70, y0 = 176, sqG = svgEl('g', {}, B1.svg);
-    svgEl('rect', { x: x0, y: y0 - sq, width: sq, height: sq, fill: 'none', stroke: '#c9c3b5', 'stroke-width': 2.5, 'stroke-dasharray': '7 6' }, sqG);
-    const t45 = svgEl('path', { d: `M${x0} ${y0}L${x0 + sq} ${y0}L${x0 + sq} ${y0 - sq}Z`, fill: '#f6eef1', stroke: INK, 'stroke-width': 3.2, 'stroke-linejoin': 'round' }, B1.svg);
-    rightMark(B1.svg, [x0 + sq, y0], [x0, y0], [x0 + sq, y0 - sq], 13, { color: INK });
-    const g45 = [lab(B1, x0 + sq / 2, y0 + 16, T('1'), 'u3l9-stl'), lab(B1, x0 + sq + 16, y0 - sq / 2, T('1'), 'u3l9-stl'), lab(B1, x0 + sq / 2 - 20, y0 - sq / 2 - 14, T(cK('\\sqrt2')), 'u3l9-stl'),
-      lab(B1, x0 + 40, y0 - 13, T(cR('45^\\circ')), 'u3l9-stl'), lab(B1, x0 + sq - 14, y0 - sq + 42, T(cR('45^\\circ')), 'u3l9-stl')];
-    angleArc(B1.svg, [x0, y0], [x0 + sq, y0], [x0 + sq, y0 - sq], 24, { color: CR }); angleArc(B1.svg, [x0 + sq, y0 - sq], [x0, y0], [x0 + sq, y0], 24, { color: CR });
-    lab(B1, 268, 30, '<b>45°–45°–90°</b>', 'u3l9-stt');
-    const s2 = 78, bx = 40, by = 184, hgt = 2 * s2 * Math.sqrt(3) / 2, apex = [bx + 2 * s2 / 2 + s2 / 2 * 0, by - hgt];
-    const eq = svgEl('path', { d: `M${bx} ${by}L${bx + 2 * s2} ${by}L${bx + s2} ${by - hgt}Z`, fill: 'none', stroke: '#c9c3b5', 'stroke-width': 2.5, 'stroke-dasharray': '7 6' }, B2.svg);
-    const t30 = svgEl('path', { d: `M${bx + s2} ${by}L${bx + 2 * s2} ${by}L${bx + s2} ${by - hgt}Z`, fill: '#f6eef1', stroke: INK, 'stroke-width': 3.2, 'stroke-linejoin': 'round' }, B2.svg);
-    rightMark(B2.svg, [bx + s2, by], [bx + 2 * s2, by], [bx + s2, by - hgt], 12, { color: INK });
-    angleArc(B2.svg, [bx + 2 * s2, by], [bx + s2, by], [bx + s2, by - hgt], 24, { color: CR }); angleArc(B2.svg, [bx + s2, by - hgt], [bx + s2, by], [bx + 2 * s2, by], 30, { color: CR });
-    const g30 = [lab(B2, bx + 1.5 * s2, by + 15, T('1'), 'u3l9-stl'), lab(B2, bx + 1.5 * s2 + 22, by - hgt / 2 - 6, T('2'), 'u3l9-stl'), lab(B2, bx + s2 - 22, by - hgt / 2, T(cK('\\sqrt3')), 'u3l9-stl'),
-      lab(B2, bx + 2 * s2 - 40, by - 14, T(cR('60^\\circ')), 'u3l9-stl'), lab(B2, bx + s2 + 13, by - hgt + 48, T(cR('30^\\circ')), 'u3l9-stl'), lab(B2, bx + s2 / 2 - 4, by - hgt / 2 - 8, T('2'), 'u3l9-stl u3l9-stg'), lab(B2, bx + s2 / 2, by + 15, T('1'), 'u3l9-stl u3l9-stg')];
-    lab(B2, 280, 30, '<b>30°–60°–90°</b>', 'u3l9-stt');
-    // under the table: the quadrantal points / the work
-    const PY = 214, Pn = panel(stage, TX, PY, TW, 214, '', 'u3l9-xwork');
-    if (k === 'build') {
-      XT.hideAll(); [t45, sqG, t30, eq].forEach(hide); g45.concat(g30).forEach(hide);
-      [...B1.svg.querySelectorAll('.bk-arc, .bk-rmark')].concat([...B2.svg.querySelectorAll('.bk-arc, .bk-rmark')]).forEach(hide);
-      const Q = new Plane(Pn, { x: 6, y: 6, size: 200, unit: 70, R: 90, letters: false, degs: false });
-      const qd = [[1, 0, '(1,\\,0)', 'e', 0], [0, 1, '(0,\\,1)', 'e', 90], [-1, 0, '(-1,\\,0)', 'w', 180], [0, -1, '(0,\\,-1)', 'e', 270]].map(([x, y, t, p]) => { const d = Q.dot(x, y, T(t), { r: 6, pos: p, dx: p === 'w' ? -6 : 8, dy: y > 0 ? 12 : y < 0 ? -12 : -14 }); hide(d); hide(d.label); return d; });
-      svgEl('circle', { cx: 100, cy: 100, r: 70, fill: 'none', stroke: '#c9c3b5', 'stroke-width': 2, 'stroke-dasharray': '5 5' }, Q.gRot);
-      const ql = hide(add(Pn, h('div', 'u3l9-xq', `${T('r=1')}: ${T('\\sin\\theta=y')}, ${T('\\cos\\theta=x')}, ${T('\\tan\\theta=\\frac{y}{x}')}<br>${T('x=0')} at ${T('90^\\circ')}, ${T('270^\\circ')}: ${T('\\tan')} is <b>undefined</b>`), 222, 30));
-      const S = (els) => (c) => Promise.all(els.map((e) => show(c, e)));
-      return [
-        { cap: `A square with sides 1, cut along its diagonal: two ${T('45^\\circ')}–${T('45^\\circ')}–${T('90^\\circ')} triangles. The diagonal is ${T(cK('\\sqrt{1^2+1^2}=\\sqrt2'))}.`, run: async (c) => { await show(c, sqG); await show(c, t45); await S(g45.concat([...B1.svg.querySelectorAll('.bk-arc, .bk-rmark')]))(c); } },
-        { cap: `Read ${T('45^\\circ')}: ${T('\\sin45^\\circ=\\frac{1}{\\sqrt2}=\\frac{\\sqrt2}{2}')}, ${T('\\cos45^\\circ=\\frac{\\sqrt2}{2}')}, ${T('\\tan45^\\circ=\\frac{1}{1}=1')}.`, run: (c) => XT.col(c, 45) },
-        { cap: `An equilateral triangle with sides 2 (every angle ${T('60^\\circ')}), cut in half: sides 1, 2 and ${T(cK('\\sqrt{2^2-1^2}=\\sqrt3'))}.`, run: async (c) => { await show(c, eq); await show(c, t30); await S(g30.concat([...B2.svg.querySelectorAll('.bk-arc, .bk-rmark')]))(c); } },
-        { cap: `From ${T('30^\\circ')}: opposite 1, adjacent ${T('\\sqrt3')}, hypotenuse 2. ${T('\\sin30^\\circ=\\frac12')}, ${T('\\cos30^\\circ=\\frac{\\sqrt3}{2}')}, ${T('\\tan30^\\circ=\\frac{1}{\\sqrt3}=\\frac{\\sqrt3}{3}')}.`, run: (c) => XT.col(c, 30) },
-        { cap: `From ${T('60^\\circ')}: opposite ${T('\\sqrt3')}, adjacent 1. ${T('\\sin60^\\circ=\\frac{\\sqrt3}{2}')}, ${T('\\cos60^\\circ=\\frac12')}, ${T('\\tan60^\\circ=\\sqrt3')}.`, run: (c) => XT.col(c, 60) },
-        { cap: `Quadrantal angles: the points ${T('(1,0)')}, ${T('(0,1)')}, ${T('(-1,0)')}, ${T('(0,-1)')} with ${T('r=1')}. ${T('\\tan=\\frac{y}{x}')} is undefined when ${T('x=0')}.`, run: async (c) => { for (const d of qd) { await pop(c, d); show(c, d.label); } await show(c, ql); for (const a of [0, 90, 180, 270]) await XT.col(c, a); } }
-      ];
-    }
-    // Example 4(b)
-    const L = [line(Pn, T('2\\sin150^\\circ-\\tan^2225^\\circ+\\cos180^\\circ'), 'u3l9-x4h'),
-      line(Pn, `${T('2\\sin150^\\circ')}: QII, ${T(cR('\\theta_R=30^\\circ'))}, sin + ${T('\\Rightarrow 2\\left(\\frac12\\right)=1')}`),
-      line(Pn, `${T('\\tan^2225^\\circ=(\\tan225^\\circ)^2')}: QIII, ${T(cR('\\theta_R=45^\\circ'))}, tan + ${T('\\Rightarrow(1)^2=1')}`),
-      line(Pn, `${T('\\cos180^\\circ')}: the point ${T('(-1,\\,0)')} ${T('\\Rightarrow -1')}`),
-      line(Pn, T('=1-1+(-1)=\\boldsymbol{-1}'), 'u3l9-x4a')];
-    L.slice(1).forEach(hide);
-    const stp = hide(stamp(stage, '✓', { x: W - 70, y: 380 }));
-    return [
-      { cap: `${T('2\\sin150^\\circ')}: ${T('150^\\circ')} is in QII with ${T(cR('\\theta_R=30^\\circ'))}, and sin is positive there (<b>S</b>). ${T('\\sin150^\\circ=\\sin30^\\circ=\\frac12')}, so ${T('2\\left(\\frac12\\right)=1')}.`, run: async (c) => { XT.hl('sin', 30); await show(c, L[1]); } },
-      { cap: `${T('\\tan^2225^\\circ')} means ${T('(\\tan225^\\circ)^2')}. QIII, ${T(cR('\\theta_R=45^\\circ'))}, tan positive (<b>T</b>): ${T('\\tan225^\\circ=1')}, squared: 1.`, run: async (c) => { XT.hl('tan', 45); await show(c, L[2]); } },
-      { cap: `${T('\\cos180^\\circ')}: quadrantal, the point ${T('(-1,\\,0)')} with ${T('r=1')}: ${T('\\cos180^\\circ=-1')}.`, run: async (c) => { XT.hl('cos', 180); await show(c, L[3]); } },
-      { cap: `Put it together: ${T('1-1+(-1)=-1')}.`, run: async (c) => { await show(c, L[4]); stp.style.opacity = 1; await stampIn(c, stp); } }
-    ];
-  }
-};
-
-/* =============================== explainer: sine law, cosine law, area =============================== */
-const lawsRecap = {
-  title: 'Sine law, cosine law, area',
-  height: 420,
-  minW: 940,
-  capH: 84,
-  choices: [{ v: 'sin', label: 'Sine law: Example 6(a)' }, { v: 'cos', label: 'Cosine law: 6(b)' }, { v: 'area', label: 'Area: 6(c)' }],
-  ask: (k) => ({ sin: `(a) In ${T('\\triangle PQR')}, ${T('\\angle P=48^\\circ')}, ${T('\\angle Q=71^\\circ')} and ${T('p=15.2')} cm. Determine ${T('r')}.`, cos: '(b) A triangle has sides 7 m, 9 m and 13 m. Determine its largest angle.', area: '(c) Determine the area of the triangle in (b) to the nearest square metre.' }[k]),
-  make(stage, k, ex) {
-    const W = ex.W, FW = 520, PX = FW + 16, Pn = panel(stage, PX, 2, W - PX - 2, 414, 'Work', 'u3l9-work');
-    const steps = [];
-    if (k === 'sin') {
-      const R = 180 - 48 - 71, p = 15.2, q = p * sinD(71) / sinD(48), r = p * sinD(R) / sinD(48);
-      const F = new TriFig(stage, { x: 0, y: 2, width: FW, height: 414, pts: triPts(['P', 'Q', 'R'], { p, q, r }), pad: 52 });
-      const sp = hide(F.sideLab('p', T('p=15.2'))), sr = hide(F.sideLab('r', T('r=\\ ?'))), aP = F.ang('P', T('48^\\circ')), aQ = F.ang('Q', T('71^\\circ')), aR = F.ang('R', T('61^\\circ'));
-      [aP, aQ, aR].forEach((a) => { hide(a); hide(a.label); });
-      const L = [line(Pn, `${T('\\angle R=180^\\circ-48^\\circ-71^\\circ=61^\\circ')}`), line(Pn, `Full pair: ${T(cS('p'))} and ${T(cS('\\angle P'))}: <b>sine law</b>`),
-        line(Pn, T(`\\dfrac{${cK('r')}}{\\sin ${cK('61^\\circ')}}=\\dfrac{${cS('15.2')}}{\\sin ${cS('48^\\circ')}}`), 'u3l9-big'), line(Pn, T('r=\\dfrac{15.2\\sin61^\\circ}{\\sin48^\\circ}'), 'u3l9-big'), line(Pn, T(`r\\approx${fx(r)}\\text{ cm}`), 'u3l9-wans')].map(hide);
-      const stp = hide(stamp(stage, '✓', { x: W - 70, y: 370 }));
-      steps.push({ cap: `Mark what is given: ${T('\\angle P=48^\\circ')}, ${T('\\angle Q=71^\\circ')} and the side ${T('p=15.2')} cm (opposite ${T('P')}). We want ${T('r')}.`, run: async (c) => { for (const a of [aP, aQ]) { await show(c, a); await show(c, a.label); } await show(c, sp); await show(c, sr); } });
-      steps.push({ cap: `Two angles known, so the third is free: ${T('\\angle R=180^\\circ-48^\\circ-71^\\circ=61^\\circ')}.`, run: async (c) => { await show(c, aR); await show(c, aR.label); await show(c, L[0]); } });
-      steps.push({ cap: `${T(cS('p'))} and ${T(cS('\\angle P'))} are opposite each other: a <b>full pair</b>. A full pair means the <b>sine law</b>.`, run: async (c) => { F.paint('p', CS); F.paintAng('P', CS); await pulse(c, sp, 1.2); await show(c, L[1]); } });
-      steps.push({ cap: `The side we want, ${T(cK('r'))}, pairs with ${T(cK('\\angle R=61^\\circ'))}: ${T(`\\dfrac{${cK('r')}}{\\sin61^\\circ}=\\dfrac{${cS('15.2')}}{\\sin48^\\circ}`)}.`, run: async (c) => { F.paint('r', PK); F.paintAng('R', PK); await show(c, L[2]); } });
-      steps.push({ cap: `Multiply both sides by ${T('\\sin61^\\circ')}: ${T('r=\\dfrac{15.2\\sin61^\\circ}{\\sin48^\\circ}\\approx' + fx(r))} cm.`, run: async (c) => { await show(c, L[3]); await show(c, L[4]); sr.innerHTML = T(cK('r\\approx' + fx(r))); await pop(c, sr); stp.style.opacity = 1; await stampIn(c, stp); } });
-      return steps;
-    }
-    // the 7-9-13 triangle: C at the origin, B on the x-axis (a = CB = 7), A up-left (b = CA = 9)
-    const a = 7, b = 9, cc = 13, Cang = sssAng(cc, a, b), cosC = (a * a + b * b - cc * cc) / (2 * a * b);
-    const pts = { A: [b * cosD(Cang), b * sinD(Cang)], B: [a, 0], C: [0, 0] };
-    const F = new TriFig(stage, { x: 0, y: 2, width: FW, height: 414, pts, extra: [[b * cosD(Cang), 0]], pad: 54, padB: 60 });
-    const sa = F.sideLab('a', T('7')), sb = F.sideLab('b', T('9')), sc = F.sideLab('c', T('13'));
-    if (k === 'cos') {
-      const aC = F.ang('C', T('C=\\ ?')); hide(aC); hide(aC.label);
-      const L = [line(Pn, 'SSS: no full pair, so the <b>cosine law</b>'), line(Pn, 'largest angle: opposite the longest side, 13 m'),
-        line(Pn, T('\\cos C=\\dfrac{7^2+9^2-13^2}{2(7)(9)}'), 'u3l9-big'), line(Pn, T('=\\dfrac{-39}{126}\\approx' + fx(cosC, 4)), 'u3l9-big'), line(Pn, T('C\\approx108^\\circ\\ \\text{(obtuse)}'), 'u3l9-wans')].map(hide);
-      const stp = hide(stamp(stage, '✓', { x: W - 70, y: 370 }));
-      steps.push({ cap: `Three sides and <b>no</b> angles (SSS): there is no full pair, so the sine law can’t start. Use the <b>cosine law</b>.`, run: async (c) => { await pulse(c, F.el, 1.02); await show(c, L[0]); } });
-      steps.push({ cap: `The largest angle is opposite the <b>longest side</b>, 13 m. Call that angle ${T('C')}, so ${T('c=13')}.`, run: async (c) => { F.paint('c', PK); await show(c, aC); await show(c, aC.label); await show(c, L[1]); } });
-      steps.push({ cap: `${T('\\cos C=\\dfrac{a^2+b^2-c^2}{2ab}=\\dfrac{7^2+9^2-13^2}{2(7)(9)}=\\dfrac{-39}{126}\\approx' + fx(cosC, 4))}.`, run: async (c) => { await show(c, L[2]); await show(c, L[3]); } });
-      steps.push({ cap: `A <b>negative</b> cosine means an <b>obtuse</b> angle: ${T('C=\\cos^{-1}(' + fx(cosC, 4) + ')\\approx108^\\circ')}. (${T(cosC.toFixed(4))} is ${T('\\cos108^\\circ')}, not ${T('\\cos72^\\circ')}.)`, run: async (c) => { await show(c, L[4]); aC.label.innerHTML = T(cK('C\\approx108^\\circ')); await pop(c, aC.label); stp.style.opacity = 1; await stampIn(c, stp); } });
-      return steps;
-    }
-    // area
-    const aC = F.ang('C', T('108.03^\\circ'), { color: CC });
-    const Ap = F.V.A, foot = F.P(b * cosD(Cang), 0), Cp = F.V.C, Bp = F.V.B;
-    const ext = hide(svgEl('path', { d: `M${Cp[0]} ${Cp[1]}L${foot[0]} ${foot[1]}`, stroke: GRAY, 'stroke-width': 2.5, 'stroke-dasharray': '7 6', fill: 'none' }, F.gExtra));
-    const alt = hide(svgEl('path', { d: `M${Ap[0]} ${Ap[1]}L${foot[0]} ${foot[1]}`, stroke: CC, 'stroke-width': 3, 'stroke-dasharray': '8 6', fill: 'none' }, F.gExtra));
-    const rm = hide(rightMark(F.gExtra, foot, Cp, Ap, 13, { color: CC }));
-    const hl = hide(lab(F, foot[0] - 34, (Ap[1] + foot[1]) / 2, T(cC('h')), 'u3l9-sl'));
-    const hh = b * sinD(Cang), area = 0.5 * a * b * sinD(Cang);
-    const L = [line(Pn, `two sides ${T('a=7')}, ${T('b=9')} and the angle between them, ${T('C\\approx108.03^\\circ')} (unrounded)`), line(Pn, T(`h=9\\sin C\\approx${fx(hh, 2)}`)),
-      line(Pn, T('\\text{Area}=\\tfrac12(\\text{base})(h)=\\tfrac12(7)(9\\sin C)'), ''), line(Pn, T('=\\tfrac12ab\\sin C'), 'u3l9-big'), line(Pn, T(`\\approx\\tfrac12(63)(${sinD(Cang).toFixed(4)})\\approx30\\text{ m}^2`), 'u3l9-wans')].map(hide);
-    const stp = hide(stamp(stage, '✓', { x: W - 70, y: 370 }));
-    steps.push({ cap: `Area needs <b>two sides and the angle between them</b>: ${T('a=7')}, ${T('b=9')} and ${T(cC('C\\approx108.03^\\circ'))} from (b). Keep the unrounded ${T('C')}.`, run: async (c) => { F.paint('a', CC); F.paint('b', CC); await pulse(c, aC.label, 1.2); await show(c, L[0]); } });
-    steps.push({ cap: `The height from ${T('A')} to side ${T('a')}: ${T(cC('h=9\\sin C\\approx' + fx(hh, 2)))}. ${T('C')} is obtuse, so the height lands <b>outside</b>, on side ${T('a')} extended.`, run: async (c) => { await show(c, ext); await drawIn(alt, 700, c); alt.style.opacity = 1; await show(c, rm); await show(c, hl); await show(c, L[1]); } });
-    steps.push({ cap: `${T('\\text{Area}=\\tfrac12(\\text{base})(\\text{height})=\\tfrac12(7)(9\\sin C)')}: that is ${T('\\tfrac12ab\\sin C')}.`, run: async (c) => { F.fillEl.setAttribute('fill', '#dcefe6'); await pulse(c, F.fillEl, 1); await show(c, L[2]); await show(c, L[3]); } });
-    steps.push({ cap: `${T(`\\tfrac12(7)(9)\\sin C\\approx\\tfrac12(63)(${sinD(Cang).toFixed(4)})\\approx${fx(area, 2)}`)}: about <b>30 m²</b>.`, run: async (c) => { await show(c, L[4]); stp.style.opacity = 1; await stampIn(c, stp); } });
-    return steps;
-  }
-};
-
 /* =============================== explainer: the ambiguous case =============================== */
 const AM = {
   two: { label: `Example 7: ${T('a=9')}`, A: 38, a: 9, b: 12, solve: true },
@@ -591,140 +393,6 @@ const ambiguous = {
       } else {
         steps.push({ cap: `Both are real: ${T(`\\sin B\\approx${sB.toFixed(4)}`)} gives ${T(`B\\approx${B1}^\\circ`)} or ${T(`${B2}^\\circ`)}, and ${T(`${A}^\\circ+${B2}^\\circ<180^\\circ`)} leaves room for ${T('C')}.`, run: async (c) => { for (const e of sl) await show(c, e); } });
       }
-    }
-    return steps;
-  }
-};
-
-/* =============================== explainer: which law? (decision chart) =============================== */
-const WL_NODES = {
-  q1: { x: 300, y: 32, w: 330, h: 54, html: '<b>Right triangle?</b>a 90° angle you can use', cls: 'bk-diamond' },
-  rt: { x: 92, y: 128, w: 170, h: 60, html: '<b>SOH CAH TOA</b>or Pythagoras', color: CP },
-  q2: { x: 380, y: 128, w: 360, h: 62, html: '<b>A full pair?</b>a side and its opposite angle', cls: 'bk-diamond' },
-  sl: { x: 250, y: 232, w: 190, h: 58, html: '<b>Sine law</b>', color: CS },
-  cl: { x: 500, y: 232, w: 200, h: 66, html: '<b>Cosine law</b>SAS or SSS', color: CC },
-  q3: { x: 250, y: 322, w: 330, h: 56, html: '<b>SSA?</b>the angle is not between the sides', cls: 'bk-diamond' },
-  amb: { x: 140, y: 400, w: 200, h: 46, html: '<b>count the triangles</b>', color: CA },
-  go: { x: 380, y: 400, w: 160, h: 46, html: '<b>solve</b>', color: CS }
-};
-const WL_EDGES = [
-  { from: 'q1', to: 'rt', label: 'yes' }, { from: 'q1', to: 'q2', label: 'no' },
-  { from: 'q2', to: 'sl', label: 'yes' }, { from: 'q2', to: 'cl', label: 'no' },
-  { from: 'sl', to: 'q3' }, { from: 'q3', to: 'amb', label: 'yes' }, { from: 'q3', to: 'go', label: 'no' }
-];
-const WL = {
-  e6a: { label: 'Example 6(a)', ask: `In ${T('\\triangle PQR')}, ${T('\\angle P=48^\\circ')}, ${T('\\angle Q=71^\\circ')}, ${T('p=15.2')} cm. Find ${T('r')}.`,
-    path: ['q1', 'q2', 'sl', 'q3', 'go'], c1: 'No right angle.', c2: `Two angles given, so ${T('\\angle R=61^\\circ')} too. ${T('p')} is opposite ${T('\\angle P')}: a full pair.`, c3: 'Two angles and a side (AAS): not SSA.',
-    eq: `\\dfrac{r}{\\sin61^\\circ}=\\dfrac{15.2}{\\sin48^\\circ}`, tri: { names: ['P', 'Q', 'R'], sides: { p: 15.2, q: 15.2 * sinD(71) / sinD(48), r: 15.2 * sinD(61) / sinD(48) }, sl: { p: '15.2', r: '?' }, al: { P: '48^\\circ', Q: '71^\\circ' } } },
-  e6b: { label: '6(b)', ask: 'A triangle has sides 7 m, 9 m and 13 m. Find its largest angle.', path: ['q1', 'q2', 'cl'], c1: `No right angle (${T('7^2+9^2\\ne13^2')}).`, c2: 'Three sides, no angles: no full pair. SSS.',
-    eq: `\\cos C=\\dfrac{7^2+9^2-13^2}{2(7)(9)}`, tri: { names: ['A', 'B', 'C'], sides: { a: 7, b: 9, c: 13 }, sl: { a: '7', b: '9', c: '13' }, al: { C: '?' } } },
-  e7: { label: '7', ask: `${T('\\angle A=38^\\circ')}, ${T('a=9')} cm, ${T('b=12')} cm. Solve the triangle.`, path: ['q1', 'q2', 'sl', 'q3', 'amb'], c1: 'No right angle.', c2: `${T('a')} is opposite ${T('\\angle A')}: a full pair.`, c3: `${T('\\angle A')} is not between ${T('a')} and ${T('b')}: SSA.`,
-    eq: `h=12\\sin38^\\circ\\approx7.39`, tri: { names: ['A', 'B', 'C'], sides: { a: 9, b: 12, c: 9 * sinD(87) / sinD(38) }, sl: { a: '9', b: '12' }, al: { A: '38^\\circ' } } },
-  e8a1: { label: '8(a): △ABT', ask: `${T('\\triangle ABT')}: ${T('AB=120')} m, ${T('\\angle A=31^\\circ')}, ${T('\\angle ABT=128^\\circ')}. Find ${T('BT')}.`, path: ['q1', 'q2', 'sl', 'q3', 'go'], c1: 'No right angle.', c2: `Third angle ${T('\\angle T=21^\\circ')} is opposite ${T('AB=120')}: a full pair.`, c3: 'Two angles and a side (ASA): not SSA.',
-    eq: `\\dfrac{BT}{\\sin31^\\circ}=\\dfrac{120}{\\sin21^\\circ}`, tri: { names: ['A', 'B', 'T'], sides: { t: 120, a: 120 * sinD(31) / sinD(21), b: 120 * sinD(128) / sinD(21) }, sl: { t: '120', a: '?' }, al: { A: '31^\\circ', B: '128^\\circ' } } },
-  e8a2: { label: '8(a): △BFT', ask: `Right ${T('\\triangle BFT')}: ${T('BT\\approx172.46')} m, ${T('\\angle B=52^\\circ')}. Find ${T('TF')}.`, path: ['q1', 'rt'], c1: `${T('\\angle F=90^\\circ')}: a right triangle. ${T('TF')} is opposite ${T('52^\\circ')}, ${T('BT')} is the hypotenuse: SOH.`,
-    eq: `TF=172.46\\sin52^\\circ`, tri: { names: ['B', 'F', 'T'], sides: { b: 172.46 * sinD(52), f: 172.46, t: 172.46 * cosD(52) }, right: 'F', sl: { f: '172.46', b: '?' }, al: { B: '52^\\circ' } } },
-  e8b: { label: '8(b)', ask: `Boats: 21 km and 27 km from the dock, ${T('115^\\circ')} apart. Find the distance ${T('d')} between them.`, path: ['q1', 'q2', 'cl'], c1: 'No right angle.', c2: `${T('d')} is opposite the ${T('115^\\circ')} angle, but ${T('d')} is unknown: no full pair. SAS.`,
-    eq: `d^2=21^2+27^2-2(21)(27)\\cos115^\\circ`, tri: { names: ['O', 'P', 'Q'], sides: { o: sas(21, 27, 115), p: 27, q: 21 }, sl: { p: '27', q: '21', o: '?d' }, al: { O: '115^\\circ' } } },
-  sep: { sep: 'Review:' },
-  surv: { label: 'Surveyor', ask: 'A triangular lot has sides 85 m and 62 m with an angle of 71° between them. Find the third side.', path: ['q1', 'q2', 'cl'], c1: 'No right angle.', c2: `The ${T('71^\\circ')} angle is opposite the unknown side: no full pair. SAS.`,
-    eq: `x^2=85^2+62^2-2(85)(62)\\cos71^\\circ`, tri: { names: ['A', 'B', 'C'], sides: { a: sas(85, 62, 71), b: 85, c: 62 }, sl: { b: '85', c: '62', a: '?x' }, al: { A: '71^\\circ' } } },
-  obt: { label: 'Obtuse SSA', ask: `In ${T('\\triangle XYZ')}, ${T('\\angle X=112^\\circ')}, ${T('x=11.4')} m and ${T('z=8.7')} m. Find ${T('\\angle Z')}.`, path: ['q1', 'q2', 'sl', 'q3', 'amb'], c1: 'No right angle.', c2: `${T('x')} is opposite ${T('\\angle X')}: a full pair.`, c3: `${T('\\angle X')} is not between ${T('x')} and ${T('z')}: SSA. Obtuse and ${T('x>z')}: one triangle.`,
-    eq: `\\dfrac{\\sin Z}{8.7}=\\dfrac{\\sin112^\\circ}{11.4}`, tri: { names: ['X', 'Y', 'Z'], sides: { x: 11.4, z: 8.7, y: 11.4 * sinD(180 - 112 - asinD(8.7 * sinD(112) / 11.4)) / sinD(112) }, sl: { x: '11.4', z: '8.7' }, al: { X: '112^\\circ', Z: '?' } } }
-};
-function sketch(host, x, y, w, hh, t, o = {}) {
-  const F = new TriFig(host, { x, y, width: w, height: hh, pts: triPts(t.names, t.sides, o.flip), pad: o.pad || 40 });
-  for (const k in t.sl) { const v = t.sl[k], unk = v[0] === '?'; F.sideLab(k, unk ? `<span class="u3l9-unk">${v.length > 1 ? T(v.slice(1)) : '?'}</span>` : T(v), { cls: unk ? '' : 'u3l9-given' }); if (!unk) F.paint(k, CT); }
-  for (const v in t.al) { const val = t.al[v]; F.ang(v, val === '?' ? '<span class="u3l9-unk">?</span>' : T(val), { color: val === '?' ? GRAY : CT, cls: val === '?' ? '' : 'u3l9-given' }); }
-  if (t.right) F.ang(t.right, null, { right: true, color: INK });
-  return F;
-}
-const whichLaw = {
-  title: 'Which law?',
-  height: 430,
-  minW: 960,
-  capH: 84,
-  choices: Object.keys(WL).map((k) => (WL[k].sep ? WL[k] : { v: k, label: WL[k].label.replace('△', '△') })),
-  ask: (k) => WL[k].ask,
-  make(stage, k, ex) {
-    const d = WL[k], W = ex.W;
-    const F = new Flowchart(stage, { x: 0, y: 2, width: 600, height: 428, nodes: WL_NODES, edges: WL_EDGES, cls: 'u3l9-fc' });
-    const PX = 616, Pn = panel(stage, PX, 2, W - PX - 2, 426, 'Given', 'u3l9-work');
-    sketch(Pn, null, null, W - PX - 36, 178, d.tri);
-    const cl = [d.c1, d.c2, d.c3].filter(Boolean).map((c) => hide(line(Pn, c, 'u3l9-wlc')));
-    const eq = hide(line(Pn, T(d.eq), 'u3l9-wf ' + (d.path.includes('cl') ? 'u3l9-wfc' : d.path.includes('rt') ? 'u3l9-wfp' : 'u3l9-wfs')));
-    const steps = []; const p = d.path;
-    steps.push({ cap: `<b>Right triangle?</b> ${d.c1}`, run: async (c) => { await F.visit(c, 'q1'); await show(c, cl[0]); } });
-    if (p[1] === 'rt') {
-      steps.push({ cap: `Use the primary ratios: ${T(d.eq)}.`, run: async (c) => { await F.go(c, 'q1', 'rt'); await F.visit(c, 'rt'); await show(c, eq); } });
-      return steps;
-    }
-    steps.push({ cap: `<b>A full pair?</b> ${d.c2}`, run: async (c) => { await F.go(c, 'q1', 'q2'); await F.visit(c, 'q2'); await show(c, cl[1]); } });
-    if (p[2] === 'cl') {
-      steps.push({ cap: `No full pair: the <b>cosine law</b>. ${T(d.eq)}`, run: async (c) => { await F.go(c, 'q2', 'cl'); await F.visit(c, 'cl'); await show(c, eq); } });
-      return steps;
-    }
-    steps.push({ cap: `A full pair: the <b>sine law</b>. But first: is it SSA?`, run: async (c) => { await F.go(c, 'q2', 'sl'); await F.visit(c, 'sl'); } });
-    steps.push({ cap: `<b>SSA?</b> ${d.c3}`, run: async (c) => { await F.go(c, 'sl', 'q3'); await F.visit(c, 'q3'); await show(c, cl[2]); } });
-    const leaf = p[4];
-    steps.push({ cap: leaf === 'amb' ? `SSA: <b>count the triangles</b> before solving. ${T(d.eq)}` : `Not SSA: one triangle. Solve with the sine law: ${T(d.eq)}.`, run: async (c) => { await F.go(c, 'q3', leaf); await F.visit(c, leaf); await show(c, eq); } });
-    return steps;
-  }
-};
-
-/* =============================== explainer: a point on the terminal arm =============================== */
-const PR = {
-  a: { label: 'Example 2(a)', x: -8, y: -15, unit: 21, num: 2, origin: [330, 60], r: '17', rHow: '\\sqrt{64+225}=17', sin: '-\\dfrac{15}{17}', cos: '-\\dfrac{8}{17}', tan: '\\dfrac{15}{8}', tR: 'tan^{-1}', refHow: '\\tan^{-1}\\!\\left(\\frac{15}{8}\\right)', thHow: '180^\\circ+61.9^\\circ=241.9^\\circ' },
-  b: { label: '2(b)', x: 4, y: -6, unit: 44, num: 1, origin: [120, 100], r: '2\\sqrt{13}', rHow: '\\sqrt{16+36}=\\sqrt{52}=2\\sqrt{13}', sin: '\\dfrac{-6}{2\\sqrt{13}}=-\\dfrac{3\\sqrt{13}}{13}', cos: '\\dfrac{2\\sqrt{13}}{13}', tan: '-\\dfrac{3}{2}', refHow: '\\tan^{-1}(1.5)', thHow: '360^\\circ-56.3^\\circ=303.7^\\circ' },
-  c: { label: '2(c)', x: -5, y: 0, unit: 52, num: 1, origin: [340, 220], r: '5', rHow: '5', sin: '\\dfrac{0}{5}=0', cos: '\\dfrac{-5}{5}=-1', tan: '\\dfrac{0}{-5}=0', thHow: '180^\\circ' },
-  e3: { label: 'Example 3', x: -Math.sqrt(21), y: -2, unit: 38, num: 1 }
-};
-const pointRatios = {
-  title: 'A point on the terminal arm',
-  height: 444,
-  minW: 940,
-  capH: 84,
-  choices: Object.keys(PR).map((k) => ({ v: k, label: PR[k].label })),
-  ask: (k) => (k === 'e3' ? `Given ${T('\\sin\\theta=-\\frac{2}{5}')} and ${T('\\tan\\theta>0')}, find the exact values of ${T('\\cos\\theta')} and ${T('\\tan\\theta')}.` : `${T(`P(${PR[k].x},\\,${PR[k].y})`)} is on the terminal arm. Find the exact ratios and ${T('\\theta')}.`),
-  make(stage, k, ex) {
-    const d = PR[k], W = ex.W;
-    const Pl = new Plane(stage, { x: 0, y: 2, size: 440, unit: d.unit, R: 210, grid: true, numStep: d.num, letters: k === 'e3', degs: false, origin: d.origin });
-    const PX = 456, Pn = panel(stage, PX, 2, W - PX - 2, 440, '', 'u3l9-work');
-    const [Px, Py] = Pl.px(d.x, d.y), [Fx, Fy] = Pl.px(d.x, 0), O = Pl.O;
-    const th = (deg(Math.atan2(d.y, d.x)) + 360) % 360, ref = refOf(th), q = quadOf(th);
-    const arm = Pl.arm({ len: Math.hypot(Px - O[0], Py - O[1]), thLab: (t) => T(cT('\\theta')), refLab: () => T(cR('\\theta_R')), rotR: 30, refR: 58 });
-    arm.els.forEach(hide);
-    const rLab = hide(lab(Pl, (O[0] + Px) / 2 + (d.y < 0 ? 18 : -18) * (d.x < 0 ? -1 : 1), (O[1] + Py) / 2 - 12, T(cT('r')), 'u3l9-leg'));
-    const drop = hide(svgEl('path', { d: `M${Px} ${Py}L${Fx} ${Fy}`, stroke: GRAY, 'stroke-width': 2.5, 'stroke-dasharray': '6 5', fill: 'none' }, Pl.gTop));
-    const steps = [];
-    if (k === 'e3') {
-      const circ = hide(svgEl('circle', { cx: O[0], cy: O[1], r: 5 * d.unit, fill: 'none', stroke: CT, 'stroke-width': 2, 'stroke-dasharray': '6 6' }, Pl.gRot));
-      const yl = hide(svgEl('line', { x1: 10, y1: Pl.px(0, -2)[1], x2: Pl.S - 10, y2: Pl.px(0, -2)[1], stroke: CR, 'stroke-width': 2.2, 'stroke-dasharray': '8 6' }, Pl.gRot));
-      const ghost = hide(Pl.dot(Math.sqrt(21), -2, '', { color: '#c9c3b5' }));
-      const P = hide(Pl.dot(d.x, d.y, T('(-\\sqrt{21},\\,-2)'), { dx: 44, dy: 24, pos: 'c' })); hide(P.label);
-      const legs = [hide(lab(Pl, (O[0] + Fx) / 2, O[1] - 14, T('x'), 'u3l9-leg')), hide(lab(Pl, Fx - 14, (Fy + Py) / 2, T('2'), 'u3l9-leg', 'w'))];
-      const L = [line(Pn, `${T('\\sin<0')}: QIII or QIV. ${T('\\tan>0')}: QI or QIII. <b>Both: QIII.</b>`), line(Pn, `${T('\\sin\\theta=\\frac{y}{r}=\\frac{-2}{5}')}: ${T('y=-2')}, ${T('r=5')}`), line(Pn, T('x^2+(-2)^2=5^2\\Rightarrow x^2=21')), line(Pn, `${T('x=-\\sqrt{21}')} (negative in QIII)`),
-        line(Pn, T('\\cos\\theta=-\\dfrac{\\sqrt{21}}{5}'), 'u3l9-big'), line(Pn, T('\\tan\\theta=\\dfrac{-2}{-\\sqrt{21}}=\\dfrac{2}{\\sqrt{21}}=\\dfrac{2\\sqrt{21}}{21}'), 'u3l9-big')].map(hide);
-      steps.push({ cap: `${T('\\sin\\theta<0')}: QIII or QIV. ${T('\\tan\\theta>0')}: QI or QIII. Only <b>QIII</b> is on both lists (<b>T</b> in CAST).`, run: async (c) => { Pl.lightQ(3); await show(c, L[0]); } });
-      steps.push({ cap: `${T('\\sin\\theta=\\frac{y}{r}=\\frac{-2}{5}')}: use ${T('y=-2')} and ${T('r=5')}. The arm meets the circle of radius 5 at height ${T('-2')}: in QIII or QIV.`, run: async (c) => { await show(c, circ); await show(c, yl); await show(c, ghost); await show(c, L[1]); } });
-      steps.push({ cap: `Pythagoras: ${T('x^2+(-2)^2=5^2')}, so ${T('x^2=21')} and ${T('x=-\\sqrt{21}')} (QIII: ${T('x')} is negative). The QIV point is the wrong one.`, run: async (c) => { await show(c, L[2]); await pop(c, P); await show(c, P.label); arm.els.forEach((e) => { e.style.opacity = 1; }); await arm.to(c, th, 700); await show(c, drop); legs.forEach((l) => show(c, l)); await show(c, L[3]); } });
-      steps.push({ cap: `${T('\\cos\\theta=\\frac{x}{r}=-\\frac{\\sqrt{21}}{5}')} and ${T('\\tan\\theta=\\frac{y}{x}=\\frac{-2}{-\\sqrt{21}}=\\frac{2\\sqrt{21}}{21}')} (rationalized).`, run: async (c) => { await show(c, L[4]); await show(c, L[5]); } });
-      return steps;
-    }
-    const Pd = hide(Pl.dot(d.x, d.y, T(`P(${d.x},\\,${d.y})`), d.y === 0 ? { dx: 0, dy: -22, pos: 'c' } : {})); hide(Pd.label);
-    const legs = d.y === 0 ? [] : [hide(lab(Pl, (O[0] + Fx) / 2, O[1] + (d.y < 0 ? -14 : 14), T(String(Math.abs(d.x))), 'u3l9-leg')), hide(lab(Pl, Fx + (d.x < 0 ? -14 : 14), (Fy + Py) / 2, T(String(Math.abs(d.y))), 'u3l9-leg', d.x < 0 ? 'w' : 'e'))];
-    const qName = q ? `<b>${QN[q]}</b>: ${T(d.x < 0 ? 'x<0' : 'x>0')} and ${T(d.y < 0 ? 'y<0' : 'y>0')}` : 'on the <b>negative x-axis</b>: a quadrantal angle';
-    const L = [line(Pn, T(`r=${d.rHow}`)), line(Pn, T(`\\sin\\theta=${d.sin}`), 'u3l9-big'), line(Pn, T(`\\cos\\theta=${d.cos}`), 'u3l9-big'), line(Pn, T(`\\tan\\theta=${d.tan}`), 'u3l9-big'),
-      line(Pn, q ? T(`\\theta_R=${d.refHow}\\approx${fx(ref)}^\\circ`) : ''), line(Pn, T(`\\theta=${d.thHow}`), 'u3l9-wans')].map(hide);
-    steps.push({ cap: `Plot ${T(`P(${d.x},\\,${d.y})`)}. It is ${qName}.`, run: async (c) => { await pop(c, Pd); await show(c, Pd.label); if (q) Pl.lightQ(q); } });
-    if (q) steps.push({ cap: `Drop to the ${T('x')}-axis: the reference triangle has legs ${T(String(Math.abs(d.x)))} and ${T(String(Math.abs(d.y)))}.`, run: async (c) => { await show(c, drop); for (const l of legs) await show(c, l); } });
-    steps.push({ cap: `${T('r=\\sqrt{x^2+y^2}=' + d.rHow)}. ${T('r')} is a distance: always positive.`, run: async (c) => { arm.els.forEach((e) => { if (e.tagName === 'line') e.style.opacity = 1; }); arm.st.rot = false; arm.st.ref = false; await arm.to(c, th, 700); await show(c, rLab); await show(c, L[0]); } });
-    steps.push({ cap: `Keep the signs of ${T('x')} and ${T('y')}: ${T(`\\sin\\theta=\\tfrac{y}{r}=${d.sin.replace(/dfrac/g, 'tfrac')}`)}, ${T(`\\cos\\theta=${d.cos.replace(/dfrac/g, 'tfrac')}`)}, ${T(`\\tan\\theta=${d.tan.replace(/dfrac/g, 'tfrac')}`)}.`, run: async (c) => { for (const l of L.slice(1, 4)) await show(c, l); } });
-    if (q) {
-      steps.push({ cap: `The reference angle is at the origin, to the ${T('x')}-axis: ${T(cR(`\\theta_R=${d.refHow}\\approx${fx(ref)}^\\circ`))} (use the positive ratio).`, run: async (c) => { arm.st.ref = true; arm.set(th); arm.els.forEach((e) => { e.style.opacity = 1; }); arm.st.rot = false; arm.set(th); await show(c, L[4]); } });
-      steps.push({ cap: `${QN[q]}: ${T(cT(`\\theta=${d.thHow}`))}.`, run: async (c) => { arm.st.rot = true; arm.set(th); await show(c, L[5]); } });
-    } else {
-      steps.push({ cap: `${T('P')} is on the negative ${T('x')}-axis, so ${T(cT('\\theta=180^\\circ'))}, a quadrantal angle: no reference triangle needed.`, run: async (c) => { arm.st.rot = true; arm.els.forEach((e) => { e.style.opacity = 1; }); arm.set(th); await show(c, L[5]); } });
     }
     return steps;
   }
@@ -941,74 +609,6 @@ const toolSorter = {
   }
 };
 
-/* =============================== explainer: problem solving (Example 8) =============================== */
-const problemSolve = {
-  title: 'Two triangles, and bearings',
-  height: 430,
-  minW: 940,
-  capH: 84,
-  choices: [{ v: 'bld', label: 'Example 8(a): the building' }, { v: 'boat', label: '8(b): two boats' }],
-  ask: (k) => (k === 'bld' ? `${T('A')} and ${T('B')} are 120 m apart in line with the base ${T('F')}. Elevations of the top ${T('T')}: ${T('31^\\circ')} from ${T('A')}, ${T('52^\\circ')} from ${T('B')}. Find ${T('TF')}.` : `Boats: 14 km/h on ${T('030^\\circ')} and 18 km/h on ${T('145^\\circ')}. How far apart after 1.5 h?`),
-  make(stage, k, ex) {
-    const W = ex.W, FW = 590, PX = FW + 14, Pn = panel(stage, PX, 2, W - PX - 2, 426, 'Work', 'u3l9-work');
-    const B = new Box(stage, { x: 0, y: 2 }, 'u3l9-psbox', FW, 426);
-    const stp = hide(stamp(stage, '✓', { x: W - 70, y: 370 }));
-    if (k === 'bld') {
-      const BT = 120 * sinD(31) / sinD(21), TF = BT * sinD(52), BF = BT * cosD(52), AF = 120 + BF;
-      const s = 2.4, Fp = [FW - 40, 380], P = (x, y) => [Fp[0] + x * s, Fp[1] - y * s];
-      const Ap = P(-AF, 0), Bp = P(-BF, 0), Tp = P(0, TF);
-      svgEl('rect', { x: 6, y: Fp[1], width: FW - 12, height: 30, fill: '#e8e2d6' }, B.svg);
-      svgEl('rect', { x: Fp[0] - 2, y: Tp[1], width: 30, height: Fp[1] - Tp[1], fill: '#d9d3c6', stroke: '#9e978a', 'stroke-width': 2 }, B.svg);
-      const tABT = hide(svgEl('path', { d: `M${Ap.join(' ')}L${Bp.join(' ')}L${Tp.join(' ')}Z`, fill: '#cfe0fb', 'fill-opacity': 0.8 }, B.svg));
-      const tBFT = hide(svgEl('path', { d: `M${Bp.join(' ')}L${Fp.join(' ')}L${Tp.join(' ')}Z`, fill: '#e3d7f6', 'fill-opacity': 0.85 }, B.svg));
-      const seg = (p, q, col = INK, w = 3) => svgEl('path', { d: `M${p.join(' ')}L${q.join(' ')}`, stroke: col, 'stroke-width': w, fill: 'none', 'stroke-linecap': 'round' }, B.svg);
-      seg(Ap, Fp); seg(Fp, Tp); seg(Ap, Tp); const sBT = seg(Bp, Tp);
-      rightMark(B.svg, Fp, Ap, Tp, 13, { color: INK });
-      angleArc(B.svg, Ap, Fp, Tp, 46, { color: CR, width: 2.6 }); angleArc(B.svg, Bp, Fp, Tp, 34, { color: CR, width: 2.6 });
-      const a128 = hide(angleArc(B.svg, Bp, Tp, Ap, 26, { color: CS, width: 2.6 })), a21 = hide(angleArc(B.svg, Tp, Ap, Bp, 70, { color: CS, width: 2.6 }));
-      lab(B, Ap[0] + 66, Ap[1] - 16, T(cR('31^\\circ')), 'u3l9-al'); lab(B, Bp[0] + 52, Bp[1] - 20, T(cR('52^\\circ')), 'u3l9-al');
-      const l128 = hide(lab(B, Bp[0] - 16, Bp[1] - 34, T(cS('128^\\circ')), 'u3l9-al')), l21 = hide(lab(B, Tp[0] - 60, Tp[1] + 92, T(cS('21^\\circ')), 'u3l9-al'));
-      [['A', Ap, 0, 18], ['B', Bp, 0, 18], ['F', Fp, 10, 18], ['T', Tp, 18, -12]].forEach(([n, p, dx, dy]) => lab(B, p[0] + dx, p[1] + dy, T(n), 'u3l9-vl'));
-      lab(B, (Ap[0] + Bp[0]) / 2, Ap[1] + 18, T('120\\text{ m}'), 'u3l9-sl');
-      const lBT = hide(lab(B, (Bp[0] + Tp[0]) / 2 - 34, (Bp[1] + Tp[1]) / 2 - 6, T(cS('BT')), 'u3l9-sl')), lTF = hide(lab(B, Tp[0] - 16, (Tp[1] + Fp[1]) / 2 + 30, T(cK('TF')), 'u3l9-sl', 'w'));
-      const L = [line(Pn, `${T('\\angle ABT=180^\\circ-52^\\circ=128^\\circ')}`), line(Pn, T('\\angle ATB=180^\\circ-31^\\circ-128^\\circ=21^\\circ')),
-        line(Pn, T('BT=\\dfrac{120\\sin31^\\circ}{\\sin21^\\circ}\\approx' + BT.toFixed(2)), 'u3l9-big'), line(Pn, T('TF=BT\\sin52^\\circ\\approx' + fx(TF) + '\\text{ m}'), 'u3l9-wans')].map(hide);
-      return [
-        { cap: `Sketch it: ${T('A')} and ${T('B')} are 120 m apart, and both sight lines go to the top ${T('T')}. We want the height ${T('TF')}.`, run: (c) => pulse(c, B.el, 1.01) },
-        { cap: `Neither right triangle has a known side yet. But ${T('\\triangle ABT')} has ${T('AB=120')} m: <b>start there</b>.`, run: (c) => show(c, tABT) },
-        { cap: `At ${T('B')}, a straight line: ${T(cS('\\angle ABT=180^\\circ-52^\\circ=128^\\circ'))}. Then ${T(cS('\\angle ATB=180^\\circ-31^\\circ-128^\\circ=21^\\circ'))}.`, run: async (c) => { await show(c, a128); await show(c, l128); await show(c, L[0]); await show(c, a21); await show(c, l21); await show(c, L[1]); } },
-        { cap: `${T('AB=120')} is opposite ${T('\\angle ATB=21^\\circ')}: a full pair, so the <b>sine law</b>. ${T('BT')} is opposite ${T('31^\\circ')}: ${T('BT=\\dfrac{120\\sin31^\\circ}{\\sin21^\\circ}\\approx' + BT.toFixed(2))} m.`, run: async (c) => { sBT.setAttribute('stroke', CS); sBT.setAttribute('stroke-width', 4.5); await show(c, lBT); await show(c, L[2]); } },
-        { cap: `Now right ${T('\\triangle BFT')} has a known hypotenuse ${T('BT')}. ${T('TF')} is opposite ${T('52^\\circ')}: SOH, ${T('TF=BT\\sin52^\\circ\\approx' + fx(TF))} m.`, run: async (c) => { tABT.style.opacity = 0.25; await show(c, tBFT); await show(c, lTF); await show(c, L[3]); stp.style.opacity = 1; await stampIn(c, stp); } }
-      ];
-    }
-    // boats
-    const d1 = 21, d2 = 27, dd = sas(d1, d2, 115), s = 9.2, O = [190, 200], P = (x, y) => [O[0] + x * s, O[1] - y * s];
-    const Pp = P(d1 * sinD(30), d1 * cosD(30)), Qp = P(d2 * sinD(145), d2 * cosD(145));
-    const g = svgEl('g', {}, B.svg);
-    svgEl('line', { x1: O[0], y1: O[1], x2: O[0], y2: O[1] - 160, stroke: '#6b5532', 'stroke-width': 2.2, 'stroke-dasharray': '4 4' }, g); arrowHead(g, O[0], O[1] - 163, 0, -1, { color: '#6b5532', width: 2.2 });
-    lab(B, O[0] - 16, O[1] - 160, '<b>N</b>', 'u3l9-vl');
-    const p1 = svgEl('path', { class: 'bk-stroke', d: `M${O.join(' ')}L${Pp.join(' ')}`, stroke: INK, 'stroke-width': 3.5, fill: 'none' }, g);
-    const p2 = svgEl('path', { class: 'bk-stroke', d: `M${O.join(' ')}L${Qp.join(' ')}`, stroke: INK, 'stroke-width': 3.5, fill: 'none' }, g);
-    const dl = hide(svgEl('path', { d: `M${Pp.join(' ')}L${Qp.join(' ')}`, stroke: CC, 'stroke-width': 3.5, 'stroke-dasharray': '10 7', fill: 'none' }, g));
-    const b1 = hide(svgEl('path', { d: arcD(O[0], O[1], 44, 60, 90), stroke: CT, 'stroke-width': 2.6, fill: 'none' }, g)), b2 = hide(svgEl('path', { d: arcD(O[0], O[1], 64, -55, 90), stroke: CT, 'stroke-width': 2.6, fill: 'none' }, g));
-    const ab = hide(svgEl('path', { d: arcD(O[0], O[1], 30, -55, 60), stroke: CC, 'stroke-width': 3, fill: 'none' }, g));
-    const lb1 = hide(lab(B, O[0] + 14, O[1] - 60, T(cT('030^\\circ')), 'u3l9-al')), lb2 = hide(lab(B, O[0] + 92, O[1] + 4, T(cT('145^\\circ')), 'u3l9-al')), lab115 = hide(lab(B, O[0] + 52, O[1] + 2 - 2, T(cC('115^\\circ')), 'u3l9-al'));
-    lab115.style.top = (O[1] - 2) + 'px'; lab115.style.left = (O[0] + 40) + 'px';
-    lab(B, O[0] - 30, O[1] + 4, 'dock', 'u3l9-vl');
-    const l21 = hide(lab(B, (O[0] + Pp[0]) / 2 + 14, (O[1] + Pp[1]) / 2 + 8, T('21'), 'u3l9-sl', 'e')), l27 = hide(lab(B, (O[0] + Qp[0]) / 2 - 16, (O[1] + Qp[1]) / 2 + 8, T('27'), 'u3l9-sl', 'w')), ld = hide(lab(B, (Pp[0] + Qp[0]) / 2 + 18, (Pp[1] + Qp[1]) / 2, T(cC('d')), 'u3l9-sl', 'e'));
-    const L = [line(Pn, T('14(1.5)=21\\text{ km},\\quad 18(1.5)=27\\text{ km}')), line(Pn, T('145^\\circ-30^\\circ=115^\\circ')), line(Pn, 'SAS: <b>cosine law</b>'),
-      line(Pn, T('d^2=21^2+27^2-2(21)(27)\\cos115^\\circ'), 'u3l9-big'), line(Pn, T('\\approx1170+479.25=1649.25'), 'u3l9-big'), line(Pn, T('d\\approx' + fx(dd) + '\\text{ km}'), 'u3l9-wans')].map(hide);
-    [p1, p2].forEach(hide);
-    return [
-      { cap: `Distance = speed × time: ${T('14(1.5)=21')} km and ${T('18(1.5)=27')} km.`, run: async (c) => { p1.style.opacity = 1; p2.style.opacity = 1; await drawIn(p1, 600, c); await drawIn(p2, 600, c); await show(c, l21); await show(c, l27); await show(c, L[0]); } },
-      { cap: `Bearings are measured <b>clockwise from north</b>: ${T('030^\\circ')} and ${T('145^\\circ')}.`, run: async (c) => { await show(c, b1); await show(c, lb1); await show(c, b2); await show(c, lb2); } },
-      { cap: `Both paths start at the dock, so the angle between them is the difference: ${T(cC('145^\\circ-30^\\circ=115^\\circ'))}.`, run: async (c) => { b1.style.opacity = 0.3; b2.style.opacity = 0.3; await show(c, ab); await show(c, lab115); await show(c, L[1]); } },
-      { cap: `Two sides and the angle <b>between</b> them (SAS): the <b>cosine law</b>. ${T('d^2=21^2+27^2-2(21)(27)\\cos115^\\circ')}.`, run: async (c) => { await show(c, dl); await show(c, ld); await show(c, L[2]); await show(c, L[3]); } },
-      { cap: `${T('\\cos115^\\circ')} is negative, so subtracting it <b>adds</b>: ${T('d^2\\approx1170+479.25=1649.25')} and ${T('d\\approx' + fx(dd))} km.`, run: async (c) => { await show(c, L[4]); await show(c, L[5]); stp.style.opacity = 1; await stampIn(c, stp); } }
-    ];
-  }
-};
-
 /* =============================== static figures on the example cards =============================== */
 function staticFigs() {
   const f7 = document.getElementById('u3l9-fig7');
@@ -1087,7 +687,6 @@ standup('u3l9', {
 });
 
 /* =============================== mount =============================== */
-mountMystery();
 staticFigs();
-export const explainers = mountExplainers({ castRecap, exactTable, lawsRecap, ambiguous, whichLaw, pointRatios, solveTrig, toolSorter, problemSolve });
-export const _test = { CR_CH, AM, WL, PR, ST, SORT, triPts, refOf, quadOf };
+export const explainers = mountExplainers({ castRecap, ambiguous, solveTrig, toolSorter });
+export const _test = { CR_CH, AM, ST, SORT, triPts, refOf, quadOf };

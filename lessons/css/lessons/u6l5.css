@@ -1,0 +1,87 @@
+/* Math 20-1 · Unit 6 · Lesson 5 — Adding and Subtracting with Monomial Denominators: styles used only on this page
+ * (prefix u6l5-). Colours: multipliers amber (#c27a0e on #fff4dd), minus/brackets and errors red (#c93a33), NPVs
+ * purple (#7b4fc4), answers green (#12805a), first variable blue (#1f5bd6), second variable purple. */
+
+.u6l5 .ex-cap .katex { font-size: 1.04em; }
+.u6l5 .chip .katex { font-size: 1em; }
+.u6l5 .pl .katex { font-size: 1.08em; }
+.u6l5 .ans .katex { font-size: 1.04em; }
+.u6l5 .katex { white-space: nowrap; }
+.u6l5 .vw-ctx .katex, .u6l5 .bk-ans .katex { font-size: 1.1em; }
+
+/* ---------------- notes ---------------- */
+.u6l5-steps { margin: 6px 0 0 4px; padding-left: 26px; font-size: 19px; line-height: 1.6; }
+.u6l5-center { text-align: center; }
+.u6l5-bigf { font-size: 1.3em; }
+.u6l5-legend { font-size: 17.5px; color: var(--ink2); margin-top: 6px; }
+.u6l5-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+.u6l5-pcol .pill { white-space: nowrap; }
+.u6l5-errs { margin: 4px 0 0; padding-left: 22px; line-height: 1.75; }
+.u6l5-q2 { margin-top: 18px; }
+.u6l5-kayla { margin: 10px 0 0; padding: 8px 14px; background: #fdf1f0; border: 1.5px dashed #e3a9a4; border-radius: 10px; display: table; font-weight: 400; }
+
+/* ---------------- rows of working (sameDen, monoAdd) ---------------- */
+.u6l5-row { display: flex; align-items: center; gap: 12px; font-size: 25px; white-space: nowrap; }
+.u6l5-num { flex: 0 0 34px; height: 34px; border-radius: 50%; background: var(--brand); color: #fff; font: 800 18px var(--round, system-ui); display: grid; place-items: center; }
+.u6l5-ans .u6l5-num { background: #12805a; }
+.u6l5-lab { flex: 0 0 104px; font: 700 17px var(--round, system-ui); color: var(--ink2); text-transform: uppercase; letter-spacing: .03em; }
+.u6l5-m { display: inline-flex; align-items: center; }
+.u6l5-ans .u6l5-m { background: #e3f4ea; border: 2px solid #12805a; border-radius: 10px; padding: 2px 12px; }
+.u6l5-note { font-size: 17px; color: var(--ink2); margin-left: 8px; }
+.u6l5-npvj { display: inline-block; color: #7b4fc4; }
+/* a fraction built from tokens (so single terms can flip) */
+.u6l5-fr { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; margin: 0 2px; }
+.u6l5-ft { display: inline-flex; align-items: baseline; padding: 0 4px 3px; border-bottom: 1.6px solid currentColor; }
+.u6l5-fb { padding-top: 3px; }
+.u6l5-tk { display: inline-block; perspective: 300px; }
+.u6l5-tk + .u6l5-tk { margin-left: 2px; }
+/* the pinned NPV */
+.u6l5-pin { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 8px 16px 10px; background: #f3eefc; border: 2px solid #7b4fc4; border-radius: 12px; font-size: 26px; box-shadow: 0 3px 8px rgba(0, 0, 0, .08); }
+.u6l5-pin-h { font: 800 15px var(--round, system-ui); color: #7b4fc4; letter-spacing: .04em; }
+
+/* ---------------- the LCD builder ---------------- */
+.u6l5-band { background: rgba(122, 31, 61, .035); border-radius: 10px; }
+.u6l5-colh { text-align: center; font: 700 16px var(--round, system-ui); color: var(--ink2); }
+.u6l5-tlab { display: flex; align-items: center; justify-content: flex-end; padding-right: 12px; font-size: 25px; }
+.u6l5-lcdlab { font: 800 20px var(--round, system-ui); color: var(--brand); letter-spacing: .05em; }
+.u6l5-tile { display: grid; place-items: center; border-radius: 9px; font-size: 24px; border: 2px solid; }
+.u6l5-tn { background: #eef0f4; border-color: #8f96a3; color: #3a4254; }
+.u6l5-tv1 { background: #e8f0ff; border-color: #1f5bd6; color: #1f5bd6; }
+.u6l5-tv2 { background: #f3eefc; border-color: #7b4fc4; color: #7b4fc4; }
+.u6l5-lt { box-shadow: 0 0 0 3px rgba(122, 31, 61, .25); }
+.u6l5-put { background: #fff4dd; border: 2.5px dashed #c27a0e; color: #c27a0e; }
+.u6l5-hot { box-shadow: 0 0 0 4px #e8a01e; }
+.u6l5-sep { background: #d9d3c4; }
+.u6l5-mult { font-size: 25px; padding: 4px 12px; background: #fff4dd; border-radius: 10px; color: #8a5609; font-weight: 700; white-space: nowrap; }
+.u6l5-lcdout { font-size: 28px; padding: 2px 14px; background: color-mix(in srgb, var(--brand) 8%, #fff); border: 2px solid var(--brand); border-radius: 10px; white-space: nowrap; }
+.u6l5-eqband { display: flex; justify-content: space-around; align-items: center; font-size: 26px; background: #fffaf0; border: 1.5px solid #f0d9a6; border-radius: 12px; }
+
+/* ---------------- the substitution test ---------------- */
+.u6l5-col { background: #fff; border: 2px solid #ddd5c6; border-radius: 14px; }
+.u6l5-col1 { border-color: #e3a9a4; background: #fffafa; }
+.u6l5-col2 { border-color: #9fd3b8; background: #f7fcf9; }
+.u6l5-colhd { text-align: center; font: 800 18px var(--round, system-ui); color: var(--ink2); text-transform: uppercase; letter-spacing: .04em; }
+.u6l5-cole { display: grid; place-items: center; font-size: 28px; }
+.u6l5-at { font-size: 18px; padding: 1px 10px; border-radius: 999px; background: #f3eefc; color: #7b4fc4; font-weight: 700; }
+.u6l5-colt { display: flex; justify-content: center; align-items: center; gap: 4px; font-size: 22px; white-space: nowrap; }
+.u6l5-val { display: inline-block; font-size: 1.1em; }
+
+/* ---------------- the hike ---------------- */
+.u6l5-trail { font: 700 18px var(--round, system-ui); padding: 3px 10px; border-radius: 8px; background: #fff; white-space: nowrap; }
+.u6l5-tu { color: #8a5609; border: 2px solid #c27a0e; }
+.u6l5-td { color: #1f5bd6; border: 2px solid #1f5bd6; }
+.u6l5-walker { font-size: 44px; line-height: 1; transform: scaleX(-1); }
+.u6l5-clock { font: 600 24px var(--round, system-ui); padding: 4px 14px; background: #fff; border: 2px solid var(--ink2); border-radius: 12px; }
+.u6l5-hl { display: flex; align-items: center; gap: 4px; font-size: 20px; white-space: nowrap; padding-left: 10px; border-left: 5px solid #ddd5c6; }
+.u6l5-hu { border-left-color: #c27a0e; }
+.u6l5-hd { border-left-color: #1f5bd6; }
+.u6l5-ht { border-left-color: #12805a; }
+.u6l5-hf { border-left-color: #c93a33; }
+.u6l5-small { font-size: 15px; color: var(--ink2); margin-left: 4px; }
+.u6l5-bar { border-radius: 6px; }
+.u6l5-bu { background: #e8a01e; }
+.u6l5-bd { background: #1f5bd6; }
+.u6l5-bf { background: repeating-linear-gradient(45deg, #c93a33 0 6px, #e98b84 6px 12px); }
+.u6l5-axis { background: #8f96a3; }
+.u6l5-tick { text-align: center; font-size: 14px; color: var(--ink2); }
+.u6l5-blab { font-size: 14px; color: var(--ink2); }

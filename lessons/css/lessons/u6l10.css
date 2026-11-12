@@ -1,0 +1,125 @@
+/* Math 20-1 · Unit 6 · Lesson 10 — Unit 6 Review: styles used only on this page (prefix u6l10-).
+ * Colours (Unit 6): NPVs purple, the divisor's numerator teal, the LCD amber, kept / correct green, errors red;
+ * on graphs LS blue, RS red. */
+
+.u6l10 .ex-cap .katex { font-size: 1.04em; }
+.u6l10 .chip .katex { font-size: 1em; }
+.u6l10 .pl .katex { font-size: 1.08em; }
+.u6l10 .ans .katex { font-size: 1.04em; }
+.u6l10 .katex { white-space: nowrap; }
+.u6l10-npv { color: #7b4fc4; }
+.u6l10-lcd { color: #a26100; }
+.u6l10-dn { color: #0e7c86; }
+.u6l10-no { color: #c93a33; }
+.u6l10-subnote { font-size: 15.5px; font-weight: 500; margin-left: 6px; }
+.u6l10-solo { margin: 0 0 12px; }
+.u6l10-pcol { display: flex; align-items: center; }
+
+/* ---------------- summary table, checklist, flips ---------------- */
+.u6l10-mtab { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 18px; line-height: 1.38; margin: 4px 0 6px; background: #fff; border: 2px solid #e4ded2; border-radius: 12px; overflow: hidden; }
+.u6l10-mtab th, .u6l10-mtab td { padding: 7px 12px; border-bottom: 1px solid #ece7dc; text-align: left; vertical-align: middle; }
+.u6l10-mtab tr:last-child th, .u6l10-mtab tr:last-child td { border-bottom: 0; }
+.u6l10-mtab tr:first-child th { background: #f3efe6; font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+.u6l10-mtab tr:not(:first-child) th { width: 150px; color: #7a1f3d; font-weight: 800; }
+.u6l10-mtab td:last-child { width: 470px; }
+.u6l10-checklist { border-left-color: #12805a; background: #eaf6f0; }
+.u6l10-clh { font: 800 20px var(--round); color: #12805a; margin-bottom: 6px; }
+.u6l10-cl4 { display: grid; grid-template-columns: 1.25fr 1.35fr .8fr 1.2fr; gap: 10px; }
+.u6l10-cl4 > div { display: flex; gap: 8px; align-items: flex-start; background: #fff; border-radius: 10px; padding: 8px 10px; font-size: 17.5px; line-height: 1.32; border: 2px solid #a7d8c2; }
+.u6l10-cl4 > div > b:first-child { display: inline-grid; place-items: center; flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; background: #12805a; color: #fff; font: 800 16px var(--round); }
+.u6l10-clnote { margin: 8px 0 0; font-size: 17px; color: var(--ink2); }
+.u6l10-flips .bk-flip { min-height: 104px; }
+.u6l10-flips .bk-front, .u6l10-flips .bk-back { font-size: 17.5px; line-height: 1.32; padding: 10px 12px; display: grid; place-items: center; text-align: center; }
+.u6l10-flips .bk-front { background: #fff1ef; color: #1c2230; border: 2px solid #f1b5b0; }
+.u6l10-flips .bk-back { background: #e8f5ef; border: 2px solid #a7d8c2; }
+.u6l10-st { display: inline-block; margin-right: 10px; white-space: nowrap; }
+.u6l10-st > b:first-child { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 14px var(--round); margin-right: 4px; }
+
+/* Example 4(b): the rectangle */
+.u6l10-ex4b { display: grid; grid-template-columns: 1fr 300px; gap: 18px; align-items: start; margin-top: 14px; }
+.u6l10-rect { position: relative; margin: 0; height: 230px; }
+.u6l10-rbox { position: absolute; left: 24px; top: 56px; width: 250px; height: 140px; border: 3px solid #7a1f3d; background: #fbf3f6; border-radius: 4px; display: grid; place-items: center; }
+.u6l10-rarea { font-size: 17px; color: #7a1f3d; font-weight: 700; text-align: center; }
+.u6l10-rlen { position: absolute; left: 24px; width: 256px; top: 0; text-align: center; font-size: 17px; color: var(--ink2); }
+.u6l10-rwid { position: absolute; left: 282px; top: 112px; font-size: 17px; color: var(--ink2); writing-mode: vertical-rl; }
+.u6l10-rwid b { color: #c93a33; }
+
+/* ---------------- explainer pieces ---------------- */
+.u6l10-row { display: flex; align-items: center; gap: 12px; font-size: 21px; line-height: 1.35; box-sizing: border-box; }
+.u6l10-row.u6l10-sm { font-size: 19px; }
+.u6l10-row.u6l10-big { font-size: 26px; }
+.u6l10-num { flex: 0 0 auto; display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 18px var(--round); }
+.u6l10-rt { min-width: 0; }
+.u6l10-rt > b:first-child { display: inline-block; font: 800 16px var(--round); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-right: 4px; }
+.u6l10-big .u6l10-rt > b:first-child { font-size: 26px; text-transform: none; letter-spacing: 0; color: #12805a; }
+.u6l10-big .u6l10-rt > b.u6l10-no:first-child { color: #c93a33; }
+
+/* npvNet */
+.u6l10-fc { font-size: 27px; background: #fff; border: 2.5px solid #d9d0bf; border-radius: 14px; padding: 10px 16px; white-space: nowrap; backface-visibility: hidden; }
+.u6l10-op { font-size: 34px; color: #1c2230; }
+.u6l10-hl { font-size: 17px; font-weight: 700; }
+.u6l10-ans { font-size: 30px; background: #e8f5ef; border: 2px solid #a7d8c2; border-radius: 14px; padding: 10px 18px; box-sizing: border-box; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+.u6l10-ansn { font-size: 24px; }
+
+/* verdict */
+.u6l10-gl { font-size: 15px; font-weight: 700; background: rgba(255, 255, 255, .9); border-radius: 6px; padding: 0 4px; }
+.u6l10-gl .katex { font-size: 1.02em; }
+.u6l10-pu { color: #7b4fc4; } .u6l10-am { color: #a26100; } .u6l10-gr { color: #12805a; }
+.u6l10-nope { font-size: 15px; font-weight: 700; color: #c93a33; background: #fff1ef; border-radius: 6px; padding: 1px 6px; }
+.u6l10-legend { display: flex; gap: 16px; font: 700 15px var(--round); background: rgba(255, 255, 255, .92); border-radius: 8px; padding: 4px 8px; }
+.u6l10-lb { color: #1f5bd6; } .u6l10-lr { color: #c93a33; }
+
+/* race */
+.u6l10-scene { background: #f6f2e8; border: 2px solid #e4ded2; border-radius: 14px; box-sizing: border-box; overflow: hidden; }
+.u6l10-scene > div { position: absolute; }
+.u6l10-rail { height: 0; border-top: 3px solid #8f897b; border-bottom: 3px solid #8f897b; padding-top: 6px; }
+.u6l10-road { height: 14px; background: #8f897b; border-radius: 7px; }
+.u6l10-line { background: #cfc7b5; }
+.u6l10-line.u6l10-fin { background: #1c2230; }
+.u6l10-flag { font-size: 30px; }
+.u6l10-dist { font: 800 17px var(--round); color: var(--ink2); background: #fff; border-radius: 8px; padding: 1px 10px; }
+.u6l10-veh { font-size: 42px; line-height: 1; }
+.u6l10-flip { transform: scaleX(-1); }
+.u6l10-clock { font: 800 22px var(--round); color: #7a1f3d; background: #fff; border: 2px solid #e4c9d3; border-radius: 10px; padding: 4px 8px; text-align: center; box-sizing: border-box; white-space: nowrap; }
+.u6l10-tag { font: 800 17px var(--round); color: #1c2230; background: #fff; border: 2px solid #d9d0bf; border-radius: 8px; padding: 1px 8px; white-space: nowrap; }
+.u6l10-okt { color: #12805a; border-color: #a7d8c2; background: #e8f5ef; }
+.u6l10-lot { background: #eef4fa; border: 2px dashed #a9c3dc; border-radius: 8px; box-sizing: border-box; font-size: 22px; letter-spacing: 14px; display: grid; place-items: center; overflow: hidden; color: #9bb7d4; }
+.u6l10-clr { background: #6b6f78; border-radius: 6px; }
+.u6l10-tbw { background: #fff; border: 2px solid #e4ded2; border-radius: 12px; overflow: hidden; }
+.u6l10-tb { width: 100%; border-collapse: collapse; font-size: 19px; }
+.u6l10-tb th, .u6l10-tb td { padding: 6px 8px; border-bottom: 1px solid #ece7dc; text-align: center; height: 50px; }
+.u6l10-tb tr:first-child th { height: auto; background: #f3efe6; font: 800 13.5px var(--round); text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+.u6l10-tb tr:not(:first-child) th { font: 800 16px var(--round); color: #7a1f3d; text-align: left; white-space: nowrap; }
+.u6l10-tb tr:last-child th, .u6l10-tb tr:last-child td { border-bottom: 0; }
+.u6l10-fin2 { background: #eef8f2; }
+
+/* spot the error */
+.u6l10-work { background: #fffdf6; border: 2px solid #e4ded2; border-radius: 14px; box-sizing: border-box; background-image: repeating-linear-gradient(#fffdf6 0 35px, #e9eef6 35px 37px); }
+.u6l10-who { position: absolute; left: 14px; top: 12px; font: 800 19px var(--round); color: #7a1f3d; background: #fff; border: 2px solid #e4c9d3; border-radius: 10px; padding: 3px 12px; }
+.u6l10-wl { display: flex; align-items: center; gap: 14px; font-size: 25px; padding: 6px 10px; border-radius: 10px; box-sizing: border-box; border: 2px solid transparent; }
+.u6l10-wl.bad { background: #fff1ef; border-color: #f1b5b0; }
+.u6l10-wl.bad .u6l10-wn { background: #c93a33; }
+.u6l10-wn { flex: 0 0 auto; display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #4f5f80; color: #fff; font: 800 18px var(--round); }
+.u6l10-test, .u6l10-fix { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; }
+.u6l10-th, .u6l10-fh { font: 800 17px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: 6px; }
+.u6l10-th .katex { text-transform: none; }
+.u6l10-tr { font-size: 21px; margin: 4px 0 8px; display: flex; align-items: center; gap: 10px; }
+.u6l10-tl { flex: 0 0 auto; min-width: 128px; font: 700 16px var(--round); color: var(--ink2); }
+.u6l10-tv { font-size: 22px; font-weight: 700; border-radius: 10px; padding: 4px 10px; display: inline-block; }
+.u6l10-tv.no { color: #c93a33; background: #fff1ef; }
+.u6l10-tv.ok { color: #12805a; background: #e8f5ef; }
+.u6l10-fix { border-color: #a7d8c2; background: #f2faf6; }
+.u6l10-fh { color: #12805a; }
+.u6l10-fl { font-size: 22px; margin: 4px 0 6px; }
+.u6l10-fn { font-size: 16.5px; color: var(--ink2); }
+
+/* ---------------- review grid ---------------- */
+.u6l10-review { margin-top: 16px; border: 2px dashed #cfc7b5; border-radius: 14px; padding: 12px 16px 14px; }
+.u6l10-review-h { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; margin-bottom: 10px; font-size: 19px; }
+.u6l10-review-h .muted { font-size: 16px; }
+.u6l10-review-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.u6l10-review-grid a { display: block; text-decoration: none; color: var(--ink); background: #f6f5f1; border-radius: 10px; padding: 8px 12px; font-size: 16px; font-weight: 600; line-height: 1.3; }
+.u6l10-review-grid .rn { display: block; font-weight: 800; color: var(--brand2); font-size: 14px; }
+.u6l10-review-grid small { display: block; color: var(--muted); font-weight: 500; font-size: 14px; }
+.u6l10-review-grid .test { display: block; background: #fff8e6; border: 1.5px solid #e9cf8f; border-radius: 10px; padding: 8px 12px; font-size: 16px; font-weight: 600; line-height: 1.3; }
+.u6l10-review-grid .test .rn { color: var(--amber); }

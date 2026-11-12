@@ -1,0 +1,80 @@
+/* Math 20-1 · Unit 6 · Lesson 3 — Multiplying Rational Expressions: styles used only on this page (prefix u6l3-).
+ * Colours: NPVs / restrictions red (#c93a33); each matching pair of factor tiles its own colour (--pc). */
+
+.u6l3 .ex-cap .katex { font-size: 1.04em; }
+.u6l3 .ans .katex { font-size: 1.04em; }
+.u6l3 .pl .katex { font-size: 1.06em; }
+.u6l3 .katex { white-space: nowrap; }
+.u6l3-npvc { color: #c93a33; }
+.u6l3-center { text-align: center; font-size: 21px; }
+.u6l3-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+
+/* ---------------- notes ---------------- */
+.u6l3-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 8px 0 4px; }
+.u6l3-step { background: #fff; border-radius: 12px; padding: 8px 12px; font-size: 18px; line-height: 1.4; border-top: 6px solid #3a4254; }
+.u6l3-step:nth-child(2) { border-color: #c93a33; } .u6l3-step:nth-child(3) { border-color: #1f5bd6; } .u6l3-step:nth-child(4) { border-color: #12805a; }
+.u6l3-stepn { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+
+/* Example 3(c): Ryan's X beside the answer */
+.u6l3-ans3c { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: center; }
+.u6l3-xwrap { display: flex; align-items: center; gap: 10px; }
+.u6l3-xsvg { width: 132px; height: auto; }
+.u6l3-xsvg line { stroke: #1f5bd6; stroke-width: 5; stroke-linecap: round; }
+.u6l3-xsvg text { font: 700 19px var(--round); text-anchor: middle; fill: #1c2230; }
+.u6l3-xsvg .u6l3-xt { fill: #a33357; } .u6l3-xsvg .u6l3-xb { fill: #12805a; } .u6l3-xsvg .u6l3-xs { fill: #1f5bd6; }
+.u6l3-xpairs { display: grid; gap: 4px; font-size: 16px; color: var(--muted); }
+.u6l3-xpairs > span { padding: 2px 8px; border-radius: 999px; border: 2px solid transparent; white-space: nowrap; }
+.u6l3-xpairs > .u6l3-xok { border-color: #12805a; color: #1c2230; }
+
+/* Example 6: the rectangle */
+.u6l3-ex6 { display: grid; grid-template-columns: 1fr 330px; gap: 20px; align-items: center; }
+.u6l3-rect { position: relative; width: 300px; height: 150px; margin: 34px 0 6px; }
+.u6l3-rbox { position: absolute; left: 0; top: 18px; width: 190px; height: 100px; background: #eceae4; border: 2.5px solid #1c2230; }
+.u6l3-rl { position: absolute; left: 95px; top: -30px; translate: -50% 0; font-size: 17px; }
+.u6l3-rw { position: absolute; left: 200px; top: 46px; font-size: 17px; }
+
+/* ---------------- factor tiles (explainers) ---------------- */
+.u6l3-badge { font: 800 14px var(--round); text-transform: uppercase; letter-spacing: .04em; color: #3a4254; background: #f1ece2; border-radius: 8px; padding: 5px 6px; text-align: center; box-sizing: border-box; }
+.u6l3-prod { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.u6l3-bigw { display: flex; align-items: center; justify-content: center; }
+.u6l3-op { font-size: 28px; }
+.u6l3-fr { display: inline-flex; flex-direction: column; align-items: stretch; }
+.u6l3-row { display: flex; gap: 6px; justify-content: center; align-items: center; min-height: 48px; padding: 3px 2px; }
+.u6l3-bar { height: 3px; background: #1c2230; border-radius: 2px; margin: 2px 0; }
+.u6l3-orig { font-size: 27px; display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 8px; }
+.u6l3-tile { display: inline-flex; align-items: center; justify-content: center; min-width: 38px; height: 46px; padding: 0 9px; box-sizing: border-box;
+  border: 2.5px solid #cfc6b4; border-radius: 11px; background: #fff; font-size: 23px; white-space: nowrap; }
+.u6l3-num { background: #fff6df; border-color: #e3c98a; }
+.u6l3-mono { background: #f2f1ee; border-color: #c9c5bb; }
+.u6l3-bin { background: #eef2fa; border-color: #a9b8d8; }
+.u6l3-neg { background: #fdeceb; border-color: #e3a19c; color: #c93a33; }
+.u6l3-one { background: transparent; border-color: transparent; }
+.u6l3-flip { background: #fdeceb; border-color: #e3a19c; }
+.u6l3-lit { border-color: var(--pc); background: color-mix(in srgb, var(--pc) 16%, #fff); box-shadow: 0 0 0 3px color-mix(in srgb, var(--pc) 30%, transparent); }
+.u6l3-npvsrc { border-color: #c93a33; }
+.u6l3-dim { opacity: .42; }
+.u6l3-ghost { position: absolute; z-index: 6; pointer-events: none; margin: 0; }
+.u6l3-tray { display: flex; align-items: center; gap: 2px; font-size: 24px; color: #c93a33; padding: 6px 16px; border: 2px dashed #e7aaa5; border-radius: 12px; background: #fff6f5; white-space: nowrap; }
+.u6l3-trl { font: 800 18px var(--round); margin-right: 8px; }
+.u6l3-trh { margin-right: 4px; opacity: 0; }
+.u6l3-slot { display: inline-block; }
+.u6l3-ans { display: flex; justify-content: center; font-size: 28px; }
+
+/* ---------------- the rectangle explainer ---------------- */
+.u6l3-arect { background: #eef2fa; border: 2.5px solid #1c2230; box-sizing: border-box; }
+.u6l3-alab { font-size: 19px; white-space: nowrap; }
+.u6l3-alab-l { translate: -50% 0; }
+.u6l3-alab b { color: #1f5bd6; }
+.u6l3-agone { font-size: 20px; line-height: 1.4; color: #c93a33; background: #fff6f5; border: 2px dashed #e7aaa5; border-radius: 12px; padding: 10px 14px; }
+.u6l3-bad { color: #c93a33; }
+.u6l3-ok { color: #12805a; font-weight: 800; }
+.u6l3-apanel { display: grid; gap: 10px; }
+.u6l3-aln { font-size: 20px; }
+.u6l3-aln-key { font-size: 24px; background: #fff4dd; border-radius: 10px; padding: 6px 12px; display: flex; gap: 16px; align-items: center; }
+.u6l3-amut { color: #c93a33; font-size: 19px; }
+.u6l3-aln-ex { font-size: 21px; background: #eaf5ef; border-radius: 10px; padding: 6px 12px; }
+.u6l3-ard { display: grid; gap: 6px; font-size: 20px; background: #fff; border: 2px solid #e4ded2; border-radius: 12px; padding: 10px 14px; }
+.u6l3-ax { font-size: 22px; }
+.u6l3-aslide { display: flex; align-items: center; gap: 14px; font-size: 22px; background: #f6f3ec; border-radius: 12px; padding: 8px 14px; box-sizing: border-box; }
+.u6l3-aslide input { flex: 1; height: 34px; accent-color: #7a1f3d; }
+.u6l3-aslide b { min-width: 64px; text-align: right; }

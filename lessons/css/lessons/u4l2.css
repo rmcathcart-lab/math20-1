@@ -122,3 +122,15 @@
 .u4l2-psw { font-size: 23px; }
 .u4l2-psn { font-size: 21px; color: #7b4fc4; }
 .u4l2-psm { font-size: 30px; font-weight: 900; text-align: center; }
+
+/* Ryan's X (new format, 2026-11-11): ac on top, b underneath, the two numbers on the sides, the pairs beside it */
+.u4l2-xv { font-size: 27px; font-weight: 700; white-space: nowrap; }
+.u4l2-xv.u4l2-xlab { font-size: 19px; }
+.u4l2-xv.u4l2-xtop { color: #a33357; } .u4l2-xv.u4l2-xbot { color: #12805a; }
+.u4l2-xv.u4l2-xside { color: #1f5bd6; font-size: 28px; }
+.u4l2-xp { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 14px; box-sizing: border-box; font-size: 21px; border: 3px solid transparent; border-radius: 999px; white-space: nowrap; }
+.u4l2-xp.u4l2-xp-sm { font-size: 18px; padding: 0 10px; }
+.u4l2-xps { font-size: 15.5px; color: var(--ink2); }
+.u4l2-xp.u4l2-xp-ok { border-color: #12805a; background: #e9f6ef; }
+.u4l2-xp.u4l2-xp-no { color: var(--muted); opacity: .55; }
+.u4l2-ok { color: #0d6b4b; }

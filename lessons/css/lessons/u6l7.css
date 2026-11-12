@@ -1,0 +1,86 @@
+/* Math 20-1 · Unit 6 · Lesson 7 — Solving Rational Equations: styles used only on this page (prefix u6l7-).
+ * Colours: NPVs purple, the LCD amber, kept / correct green, rejected red; on graphs LS blue, RS red. */
+
+.u6l7 .ex-cap .katex { font-size: 1.04em; }
+.u6l7 .chip .katex { font-size: 1em; }
+.u6l7 .pl .katex { font-size: 1.08em; }
+.u6l7 .ans .katex { font-size: 1.04em; }
+.u6l7 .katex { white-space: nowrap; }
+.u6l7-npv { color: #7b4fc4; }
+.u6l7-lcd { color: #a26100; }
+.u6l7-no { color: #c93a33; }
+
+/* ---------------- notes ---------------- */
+.u6l7-steps { margin: 6px 0 0; padding-left: 28px; font-size: 19px; line-height: 1.5; }
+.u6l7-center { text-align: center; }
+.u6l7-bigf { font-size: 23px; }
+.u6l7-bigf .katex { font-size: 1.12em; }
+.u6l7-solo { margin: 0 0 12px; }
+.u6l7-meth { font-size: 19px; line-height: 1.5; }
+.u6l7-meth + .u6l7-meth { margin-top: 4px; }
+.u6l7-code { font: 600 .95em ui-monospace, Menlo, Consolas, monospace; background: #f3efe6; border-radius: 6px; padding: 1px 6px; }
+.u6l7-ex8 { display: grid; grid-template-columns: 1fr 356px; gap: 18px; align-items: start; }
+.u6l7-ex8 .part { margin-bottom: 12px; }
+.u6l7-fig { margin: 0; background: #fff; border-radius: 12px; padding: 8px; text-align: center; }
+.u6l7-fig figcaption { font-size: 16px; margin-top: 4px; }
+.u6l7-k1 { color: #1f5bd6; font-weight: 700; } .u6l7-k2 { color: #c93a33; font-weight: 700; }
+.u6l7-ckpills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+
+/* ---------------- explainer pieces ---------------- */
+.u6l7-band { display: flex; align-items: center; justify-content: center; gap: 18px; font-size: 36px; box-sizing: border-box; }
+.u6l7-term, .u6l7-op { display: inline-block; }
+.u6l7-op { color: var(--ink2); }
+.u6l7-term.u6l7-done { color: #12805a; }
+.u6l7-term2, .u6l7-op2 { font-size: 30px; white-space: nowrap; }
+.u6l7-row { display: flex; align-items: center; gap: 12px; font-size: 22px; line-height: 1.35; box-sizing: border-box; }
+.u6l7-row.u6l7-two { align-items: flex-start; }
+.u6l7-row.u6l7-sm { font-size: 20px; }
+.u6l7-row.u6l7-big { font-size: 27px; }
+.u6l7-num { flex: 0 0 auto; display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 18px var(--round); }
+.u6l7-rt { min-width: 0; }
+.u6l7-rt > b:first-child { display: inline-block; min-width: 76px; font: 800 17px var(--round); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.u6l7-two .u6l7-rt { line-height: 1.55; }
+.u6l7-two .u6l7-rt > b:first-child { vertical-align: top; }
+.u6l7-big .u6l7-rt > b:first-child { font-size: 27px; text-transform: none; letter-spacing: 0; color: inherit; }
+.u6l7-big .u6l7-rt > b.u6l7-no:first-child { color: #c93a33; }
+.u6l7-poly { margin-left: 10px; color: #12805a; }
+.u6l7-okc { color: #12805a; font-weight: 800; }
+
+/* cross-multiplying */
+.u6l7-crossp { position: absolute; }
+.u6l7-xsvg { position: absolute; left: 0; top: 0; }
+.u6l7-fp { font-size: 40px; white-space: nowrap; z-index: 2; }
+.u6l7-eqs { z-index: 1; }
+.u6l7-xov { z-index: 3; pointer-events: none; }
+.u6l7-arr { opacity: .9; }
+.u6l7-fp.u6l7-pu { color: #7b4fc4; }
+.u6l7-p1, .u6l7-p2 { display: inline-block; }
+
+/* factor tiles */
+.u6l7-tile { font-size: 20px; padding: 4px 10px; border-radius: 10px; border: 2.5px solid; white-space: nowrap; background: #fff; z-index: 2; backface-visibility: hidden; }
+.u6l7-k0 { border-color: #1f5bd6; background: #e3ecfc; }
+.u6l7-k1 { border-color: #12805a; background: #e2f3ea; }
+.u6l7-k2 { border-color: #a33357; background: #f8e3ea; }
+.u6l7-kt { border-color: #9aa0ab; background: #f1f1ee; }
+.u6l7-tile.u6l7-gone { opacity: .35 !important; text-decoration: line-through; text-decoration-color: #c93a33; text-decoration-thickness: 3px; }
+.u6l7-tray { border: 3px dashed #c27a0e; border-radius: 14px; background: #fff7e6; box-sizing: border-box; }
+.u6l7-trl { position: absolute; left: 12px; top: 50%; translate: 0 -50%; font: 800 18px var(--round); color: #a26100; }
+.u6l7-res { font-size: 28px; white-space: nowrap; }
+
+/* graphs */
+.u6l7-gl { font: 700 15px var(--round); background: rgba(255, 255, 255, .92); border-radius: 6px; padding: 0 5px; white-space: nowrap; }
+.u6l7-gl.u6l7-pu { color: #7b4fc4; } .u6l7-gl.u6l7-am { color: #a26100; } .u6l7-gl.u6l7-gr { color: #12805a; }
+.u6l7-nope { font: 800 16px var(--round); color: #c93a33; background: rgba(255, 255, 255, .92); border: 2px solid #f1b5b0; border-radius: 8px; padding: 1px 7px; white-space: nowrap; }
+.u6l7-legend { display: flex; flex-direction: column; gap: 2px; font: 700 15px var(--round); background: rgba(255, 255, 255, .92); border-radius: 8px; padding: 3px 8px; z-index: 4; }
+.u6l7-lb { color: #1f5bd6; } .u6l7-lr { color: #c93a33; }
+
+/* calculator panel */
+.u6l7-calcp { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 10px 14px; box-sizing: border-box; }
+.u6l7-ks { min-height: 40px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 17px; margin-bottom: 8px; }
+.u6l7-kh { font: 800 13px var(--round); text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin-right: 4px; }
+.u6l7-cl { margin: 0 0 10px; font-size: 19px; line-height: 1.4; }
+.u6l7-ti { background: #dfe9d0; border: 2px solid #9fb08a; border-radius: 8px; padding: 6px 12px; font: 600 20px/1.45 ui-monospace, Menlo, Consolas, monospace; color: #1c2230; }
+.u6l7-ti1 { color: #1f5bd6; } .u6l7-ti2 { color: #c93a33; }
+.u6l7-tiw { display: grid; grid-template-columns: 1fr 1fr; font-size: 17px; }
+.u6l7-tiw > div:first-child { grid-column: 1 / -1; font-weight: 800; }
+.u6l7-res2 { font-size: 20px; color: #12805a; font-weight: 600; }

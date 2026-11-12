@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Binomial and Trinomial Denominators · Math 20-1 6.6</title>
+<meta name="description" content="Math 20-1 Unit 6 Lesson 6: adding and subtracting rational expressions with binomial and trinomial denominators. The LCD of binomials with no common factor, brackets when subtracting a binomial numerator, factoring first, trinomial denominators, opposite factors such as 5 − x, simplifying fully, checking by substitution or with the calculator TABLE, a river-current problem and complex fractions. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u6l6.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u6l6">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The 17 Camels">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="8s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="36" text-anchor="middle" transform="scale(-1 1)">🐫</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="150" y="46" font-size="34" text-anchor="middle">🌵</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.6s" repeatCount="indefinite"/><text x="250" y="46" font-size="30" text-anchor="middle">🌵</text></g><text x="312" y="46" font-size="30" text-anchor="middle">☀️<animate attributeName="opacity" values="1;0.15;1" dur="2.4s" begin="0s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The 17 Camels</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">A farmer leaves <b>17 camels</b>: <span class="tex">\tfrac{1}{2}</span> to one child, <span class="tex">\tfrac{1}{3}</span> to another and <span class="tex">\tfrac{1}{9}</span> to the third.</p><p class="vw-ctx">A traveller lends them <b>her camel</b>. From the 18, they take <b>9</b>, <b>6</b> and <b>2</b>, and she rides off on her own camel.</p><p class="vw-ask">Everyone got their share. Where did the extra camel come from?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A herd of seventeen camels in the desert, and one borrowed camel walking up beside them"><rect x="0" y="0" width="330" height="250" rx="16" fill="#fdf3dc"/><path d="M0 196 Q80 176 160 192 T330 186 V250 H0Z" fill="#ecc98a"/><g><animate attributeName="opacity" values="1;0.55;1" dur="3s" begin="0s" repeatCount="indefinite"/><circle cx="292" cy="38" r="20" fill="#f5b83d"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.3s" begin="0.0s" repeatCount="indefinite"/><text x="30" y="92" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.5s" begin="0.17s" repeatCount="indefinite"/><text x="64" y="92" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.7000000000000002s" begin="0.34s" repeatCount="indefinite"/><text x="98" y="92" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.3s" begin="0.51s" repeatCount="indefinite"/><text x="132" y="92" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.5s" begin="0.68s" repeatCount="indefinite"/><text x="166" y="92" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.7000000000000002s" begin="0.8500000000000001s" repeatCount="indefinite"/><text x="200" y="92" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.3s" begin="0.3s" repeatCount="indefinite"/><text x="47" y="138" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.5s" begin="0.47s" repeatCount="indefinite"/><text x="81" y="138" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.7000000000000002s" begin="0.64s" repeatCount="indefinite"/><text x="115" y="138" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.3s" begin="0.81s" repeatCount="indefinite"/><text x="149" y="138" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.5s" begin="0.98s" repeatCount="indefinite"/><text x="183" y="138" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.7000000000000002s" begin="1.1500000000000001s" repeatCount="indefinite"/><text x="217" y="138" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.3s" begin="0.6s" repeatCount="indefinite"/><text x="30" y="184" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.5s" begin="0.77s" repeatCount="indefinite"/><text x="64" y="184" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.7000000000000002s" begin="0.94s" repeatCount="indefinite"/><text x="98" y="184" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.3s" begin="1.1099999999999999s" repeatCount="indefinite"/><text x="132" y="184" font-size="34" text-anchor="middle">🐪</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.5s" begin="0.08000000000000007s" repeatCount="indefinite"/><text x="166" y="184" font-size="34" text-anchor="middle">🐪</text></g><text x="118" y="236" font-size="21" font-weight="800" fill="#7a1f3d" text-anchor="middle">17 camels</text><line x1="232" y1="60" x2="232" y2="232" stroke="#d9c39a" stroke-width="2.5" stroke-dasharray="6 6"/><g><animateTransform attributeName="transform" type="translate" values="40 0;0 0;0 0;40 0" keyTimes="0;.3;.8;1" dur="6s" repeatCount="indefinite"/><text x="282" y="170" font-size="62" text-anchor="middle">🐫</text></g><text x="276" y="236" font-size="16" font-weight="800" fill="#2b55a0" text-anchor="middle">+1 borrowed</text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="282" y="96" font-size="40" font-weight="800" fill="#c93a33" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Did each child get exactly the share in the will?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>The farmer never gave away the whole herd!</b> <span class="tex">\tfrac{1}{2}+\tfrac{1}{3}+\tfrac{1}{9}=\tfrac{9}{18}+\tfrac{6}{18}+\tfrac{2}{18}=\tfrac{17}{18}</span>, so <span class="tex">\tfrac{1}{18}</span> of the herd was left to nobody. With 18 camels, <span class="tex">\tfrac{1}{18}</span> of the herd is exactly one camel: the borrowed one goes home. And every child got a little <b>more</b> than the will said: <span class="tex">9&gt;8.5</span>, <span class="tex">6&gt;5.\overline{6}</span>, <span class="tex">2&gt;1.\overline{8}</span>.</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 6 Rational Expressions and Equations · Lesson 6</div>
+  <h1>Adding and Subtracting with Binomial and Trinomial Denominators</h1>
+  <p class="lede">Same method as Lesson 5, bigger denominators: <b>factor</b> every denominator, build the <b class="u6l6-bl">LCD</b> from the factors, give each numerator its <b class="u6l6-am">missing factor</b>, combine, and <b>factor the numerator</b> to see whether anything cancels. When a whole product is subtracted, the <b class="u6l6-rd">minus sign</b> reaches every term.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>add and subtract with binomial denominators that have no common factor (the LCD is their product, left factored)</li>
+      <li>subtract a binomial numerator correctly: expand it <b>inside brackets</b>, then change <b>every</b> sign</li>
+      <li>factor denominators first, build the LCD from the different factors, and simplify the result fully</li>
+      <li>work with trinomial denominators and opposite factors such as <span class="tex">5-x=-(x-5)</span></li>
+      <li>state the non-permissible values from the <em>original</em> denominators, and check an answer by substitution or with the calculator TABLE</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN5</b> Perform operations on rational expressions (limited to numerators and denominators that are monomials, binomials or trinomials).<br><span class="muted">Today: binomial and trinomial denominators, brackets when subtracting, factoring first, opposite factors, checking with the TABLE, and a river-current problem.</span></div>
+</section>
+
+<!-- ================= 1. Binomial denominators ================= -->
+<section class="card" data-ink="s1" data-section="1. Binomial Denominators with No Common Factor">
+  <div class="sec-h"><span class="badge">1</span><h2>Binomial Denominators with No Common Factor</h2></div>
+  <div class="def">The method is the same as for monomial denominators. When the denominators have no common factor, the LCD is their <b>product</b>. Leave the LCD in <b>factored form</b>: it shows the NPVs and makes the final check for common factors easy.</div>
+  <div class="def amber u6l6-key"><div class="u6l6-keyh">Key idea</div><div class="u6l6-keyrow"><span class="tex">\dfrac{a}{x+p}+\dfrac{b}{x+q}=\dfrac{a\textcolor{#c27a0e}{(x+q)}+b\textcolor{#c27a0e}{(x+p)}}{\textcolor{#1f5bd6}{(x+p)(x+q)}}</span><span>Expand the numerator, collect like terms, then factor it to see whether anything cancels.</span></div></div>
+  <div class="explainer" data-explainer="lcd"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>No common factor</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{3}{x+2}+\dfrac{5}{x-4}</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne-2,\ 4</span><br><span class="tex">\dfrac{3(x-4)+5(x+2)}{(x+2)(x-4)}</span><br><span class="tex">=\dfrac{3x-12+5x+10}{(x+2)(x-4)}</span><br><span class="tex">=\dfrac{8x-2}{(x+2)(x-4)}=\boldsymbol{\dfrac{2(4x-1)}{(x+2)(x-4)}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{4}{a-3}-\dfrac{1}{2a+1}</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a\ne3,\ -\tfrac{1}{2}</span><br><span class="tex">\dfrac{4(2a+1)-(a-3)}{(a-3)(2a+1)}</span><br><span class="tex">=\dfrac{8a+4-a+3}{(a-3)(2a+1)}</span><br><span class="tex">=\boldsymbol{\dfrac{7(a+1)}{(a-3)(2a+1)}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{2}{x}-\dfrac{3}{x+5}</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0,\ -5</span><br><span class="tex">\dfrac{2(x+5)-3x}{x(x+5)}</span><br><span class="tex">=\dfrac{2x+10-3x}{x(x+5)}</span><br><span class="tex">=\boldsymbol{\dfrac{10-x}{x(x+5)}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s1b" data-section="1. Binomial Numerators">
+  <h3 class="sub">Binomial numerators: the minus sign meets the bracket</h3>
+  <p>With binomial numerators, each product is a binomial times a binomial. <b>Expand the product being subtracted inside brackets first</b>, then remove the brackets, changing <b class="u6l6-rd">every</b> sign.</p>
+  <div class="explainer" data-explainer="minus"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Binomial numerators</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x+1}{x-2}-\dfrac{x-3}{x+4}</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne2,\ -4</span><br><span class="tex">\dfrac{(x+1)(x+4)-(x-3)(x-2)}{(x-2)(x+4)}</span><br><span class="tex">=\dfrac{x^2+5x+4-(x^2-5x+6)}{(x-2)(x+4)}</span><br><span class="tex">=\dfrac{10x-2}{(x-2)(x+4)}=\boldsymbol{\dfrac{2(5x-1)}{(x-2)(x+4)}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{2y}{y+3}+\dfrac{y-1}{y-2}</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y\ne-3,\ 2</span><br><span class="tex">\dfrac{2y(y-2)+(y-1)(y+3)}{(y+3)(y-2)}</span><br><span class="tex">=\dfrac{2y^2-4y+y^2+2y-3}{(y+3)(y-2)}</span><br><span class="tex">=\boldsymbol{\dfrac{3y^2-2y-3}{(y+3)(y-2)}}</span> (does not factor)</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">2-\dfrac{x+1}{x+3}</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne-3</span><br><span class="tex">\dfrac{2(x+3)-(x+1)}{x+3}</span><br><span class="tex">=\dfrac{2x+6-x-1}{x+3}</span><br><span class="tex">=\boldsymbol{\dfrac{x+5}{x+3}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Factor first ================= -->
+<section class="card" data-ink="s2" data-section="2. Factor First">
+  <div class="sec-h"><span class="badge">2</span><h2>Factor First: Denominators with a Common Factor</h2></div>
+  <div class="def">If the denominators share a factor, multiplying them gives a common denominator that is too big, and the answer then needs extra simplifying. <b>Factor every denominator first.</b></div>
+  <div class="def amber u6l6-key"><div class="u6l6-keyh">LCD of polynomials</div>Factor each denominator fully. The LCD is the product of every <b>different</b> factor, each used the greatest number of times it appears in any one denominator. &nbsp; e.g. <span class="tex">x^2-4x=x(x-4)</span> and <span class="tex">x</span>: &nbsp;LCD <span class="tex">=x(x-4)</span>.</div>
+  <p><b>Always factor the numerator of the result.</b> It may share a factor with the denominator, and the answer is not in simplest form until that factor is cancelled.</p>
+  <div class="explainer" data-explainer="build"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Factor the denominators first</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{5}{2x+6}-\dfrac{1}{x+3}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{5}{2(x+3)}-\dfrac{1}{x+3}</span>; &nbsp;<span class="tex">x\ne-3</span><br>LCD <span class="tex">2(x+3)</span><br><span class="tex">\dfrac{5-2}{2(x+3)}=\boldsymbol{\dfrac{3}{2(x+3)}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{3}{x^2-4x}+\dfrac{2}{x}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{3}{x(x-4)}+\dfrac{2}{x}</span>; &nbsp;<span class="tex">x\ne0,\ 4</span><br>LCD <span class="tex">x(x-4)</span><br><span class="tex">\dfrac{3+2(x-4)}{x(x-4)}=\boldsymbol{\dfrac{2x-5}{x(x-4)}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{4}{3a-6}-\dfrac{5}{4a-8}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{4}{3(a-2)}-\dfrac{5}{4(a-2)}</span>; &nbsp;<span class="tex">a\ne2</span><br>LCD <span class="tex">12(a-2)</span><br><span class="tex">\dfrac{16-15}{12(a-2)}=\boldsymbol{\dfrac{1}{12(a-2)}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Answers that reduce further</h3></div>
+  <p class="q">Simplify fully. State the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{2}{x-1}-\dfrac{4}{x^2-1}</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{2}{x-1}-\dfrac{4}{(x-1)(x+1)}</span>; &nbsp;<span class="tex">x\ne\pm1</span><br><span class="tex">\dfrac{2(x+1)-4}{(x-1)(x+1)}=\dfrac{2x-2}{(x-1)(x+1)}</span><br><span class="tex">=\dfrac{2(x-1)}{(x-1)(x+1)}=\boldsymbol{\dfrac{2}{x+1}},\ x\ne\pm1</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{x}{x-5}-\dfrac{25}{x^2-5x}</span></div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{x}{x-5}-\dfrac{25}{x(x-5)}</span>; &nbsp;<span class="tex">x\ne0,\ 5</span><br><span class="tex">\dfrac{x\cdot x-25}{x(x-5)}=\dfrac{x^2-25}{x(x-5)}</span><br><span class="tex">=\dfrac{(x-5)(x+5)}{x(x-5)}=\boldsymbol{\dfrac{x+5}{x}},\ x\ne0,\ 5</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–3">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 6 · Questions 1–3</h2>
+  <p class="pr-t">Factor first, build the LCD, bracket whatever is subtracted, and factor the numerator at the end.</p>
+  <div class="pr-chips n3"><span><b>1</b>No common factor</span><span><b>2</b>Binomial numerators: brackets!</span><span><b>3</b>Factor the denominators first</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 3.</span><a class="pill" href="../../../#/lesson/u6l6">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 3. Trinomial denominators ================= -->
+<section class="card" data-ink="s3" data-section="3. Trinomial Denominators">
+  <div class="sec-h"><span class="badge">3</span><h2>Trinomial Denominators</h2></div>
+  <div class="def">Factor each trinomial (Unit 4), then build the LCD from the factors. Most trinomial questions <b>share one factor</b>, so the LCD has <b>three</b> factors, not four.</div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Trinomial denominators</h3></div>
+  <p class="q">Simplify fully. State the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{3}{x^2+5x+6}+\dfrac{2}{x^2-x-6}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{3}{(x+2)(x+3)}+\dfrac{2}{(x-3)(x+2)}</span><br><span class="tex">x\ne-2,\ \pm3</span>; &nbsp;LCD <span class="tex">(x+2)(x+3)(x-3)</span><br><span class="tex">\dfrac{3(x-3)+2(x+3)}{(x+2)(x+3)(x-3)}</span><br><span class="tex">=\boldsymbol{\dfrac{5x-3}{(x+2)(x+3)(x-3)}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{3}{x^2-2x-8}-\dfrac{1}{x^2-6x+8}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{3}{(x-4)(x+2)}-\dfrac{1}{(x-4)(x-2)}</span><br><span class="tex">x\ne4,\ \pm2</span>; &nbsp;LCD <span class="tex">(x-4)(x+2)(x-2)</span><br><span class="tex">\dfrac{3(x-2)-(x+2)}{(x-4)(x+2)(x-2)}=\dfrac{2x-8}{(x-4)(x+2)(x-2)}</span><br><span class="tex">=\dfrac{2(x-4)}{(x-4)(x+2)(x-2)}=\boldsymbol{\dfrac{2}{(x+2)(x-2)}}</span></div></div></div>
+  </div>
+  <div class="part u6l6-solo"><div class="pl">(c) <span class="tex">\dfrac{2}{2x^2+5x-3}+\dfrac{1}{x^2+3x}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">
+    <div class="u6l6-x"><svg viewBox="0 0 130 120" width="130" height="120" aria-label="The X: −6 on top, 5 underneath, 6 and −1 on the sides"><line x1="30" y1="22" x2="100" y2="108" stroke="#1f5bd6" stroke-width="4" stroke-linecap="round"/><line x1="100" y1="22" x2="30" y2="108" stroke="#1f5bd6" stroke-width="4" stroke-linecap="round"/><text x="65" y="44" font-size="18" font-weight="700" fill="#a33357" text-anchor="middle">−6</text><text x="65" y="106" font-size="18" font-weight="700" fill="#12805a" text-anchor="middle">5</text><text x="20" y="72" font-size="20" font-weight="700" fill="#1f5bd6" text-anchor="middle">6</text><text x="112" y="72" font-size="20" font-weight="700" fill="#1f5bd6" text-anchor="middle">−1</text></svg>
+      <div class="u6l6-xpair"><span class="tex">ac=2(-3)=-6</span> on top, <span class="tex">b=5</span> underneath<br><span class="tex">1\times(-6)</span>: sum <span class="tex">-5</span> &nbsp; <span class="u6l6-xon"><span class="tex">-1\times6</span>: sum <span class="tex">5</span></span><br><span class="tex">2\times(-3)</span>: sum <span class="tex">-1</span> &nbsp; <span class="tex">-2\times3</span>: sum <span class="tex">1</span></div></div>
+    <span class="tex">2x^2+5x-3=(2x-1)(x+3)</span> (decomposition: <span class="tex">6</span> and <span class="tex">-1</span>); &nbsp;<span class="tex">x^2+3x=x(x+3)</span><br><span class="tex">x\ne0,\ \tfrac{1}{2},\ -3</span>; &nbsp;LCD <span class="tex">x(2x-1)(x+3)</span><br><span class="tex">\dfrac{2x+(2x-1)}{x(2x-1)(x+3)}=\boldsymbol{\dfrac{4x-1}{x(2x-1)(x+3)}}</span></div></div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u6l6"></section>
+
+<!-- ================= 4. Opposite factors ================= -->
+<section class="card" data-ink="s4" data-section="4. Opposite Factors">
+  <div class="sec-h"><span class="badge">4</span><h2>Opposite Factors and Simplifying Each Term First</h2></div>
+  <div class="def">Factors such as <span class="tex">x-5</span> and <span class="tex">5-x</span> are <b>opposites</b>: <span class="tex">5-x=-(x-5)</span>. Rewrite the opposite factor and move its negative sign to the <b>front of the fraction</b> (this changes <span class="tex">+</span> to <span class="tex">-</span> or <span class="tex">-</span> to <span class="tex">+</span>).</div>
+  <div class="def amber u6l6-key"><div class="u6l6-keyh">Key idea</div><span class="tex">\dfrac{b}{a-x}=\dfrac{b}{-(x-a)}=-\dfrac{b}{x-a}</span> &nbsp;&nbsp; e.g. <span class="tex">9-a^2=-(a^2-9)=-(a-3)(a+3)</span></div>
+  <p>If one of the expressions can be simplified on its own, simplify it first, but take the NPVs from the <b>original</b> denominators.</p>
+  <div class="explainer" data-explainer="opposite"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Opposites and simplifying first</h3></div>
+  <p class="q">Simplify fully. State the non-permissible values.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{6}{x-5}+\dfrac{2}{5-x}</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne5</span><br><span class="tex">\dfrac{6}{x-5}-\dfrac{2}{x-5}</span><br><span class="tex">=\boldsymbol{\dfrac{4}{x-5}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{3x}{x^2-16}-\dfrac{2}{4-x}</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne\pm4</span><br><span class="tex">\dfrac{3x}{(x-4)(x+4)}+\dfrac{2}{x-4}</span><br><span class="tex">=\dfrac{3x+2(x+4)}{(x-4)(x+4)}</span><br><span class="tex">=\boldsymbol{\dfrac{5x+8}{(x-4)(x+4)}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{a+2}{a^2-a-6}+\dfrac{2}{9-a^2}</span></div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a\ne3,\ -2,\ -3</span><br><span class="tex">\dfrac{a+2}{(a-3)(a+2)}=\dfrac{1}{a-3}</span><br><span class="tex">\dfrac{1}{a-3}-\dfrac{2}{(a-3)(a+3)}</span><br><span class="tex">=\dfrac{a+3-2}{(a-3)(a+3)}=\boldsymbol{\dfrac{a+1}{(a-3)(a+3)}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Problems, checking, extension ================= -->
+<section class="card" data-ink="s5" data-section="5. Checking an Answer">
+  <div class="sec-h"><span class="badge">5</span><h2>Problems, Checking and an Extension</h2></div>
+  <div class="def">To <b>check</b> an answer, substitute a value that is not an NPV (such as <span class="tex">x=1</span>) into the question and the answer, or enter the question as <span class="tex">Y_1</span> and the answer as <span class="tex">Y_2</span> on a graphing calculator and compare the <b>TABLE</b> values. In a problem, also state the values of the variable that make sense in the context.</div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Example 2(a) on the TI-84.</b> <span class="keys"><kbd>Y=</kbd></span> <span class="tex">Y_1=(X+1)\div(X-2)-(X-3)\div(X+4)</span> and <span class="tex">Y_2=2(5X-1)\div((X-2)(X+4))</span>: brackets around <b>every</b> numerator and denominator. Then <span class="keys"><kbd>2nd</kbd><kbd>TBLSET</kbd></span> TblStart = −5, ΔTbl = 1 and <span class="keys"><kbd>2nd</kbd><kbd>TABLE</kbd></span>: the two columns match, and ERROR appears at the NPVs. Or substitute <span class="tex">x=1</span> on the home screen: both give <span class="tex">-1.6</span>.</div>
+    <div class="u6l6-pcol"><button class="pill" data-keys="Y= CLEAR ( X + 1 ) ÷ ( X − 2 ) − ( X − 3 ) ÷ ( X + 4 ) ▼ CLEAR 2 ( 5 X − 1 ) ÷ ( ( X − 2 ) ( X + 4 ) ) TBLSET (−) 5 ENTER 1 ENTER TABLE ►">Show the table</button><button class="pill" data-keys="( 1 + 1 ) ÷ ( 1 − 2 ) − ( 1 − 3 ) ÷ ( 1 + 4 ) = 2 ( 5 − 1 ) ÷ ( ( 1 − 2 ) ( 1 + 4 ) ) =">Substitute x = 1</button></div>
+  </div>
+  <div class="explainer" data-explainer="table"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Up the river and back</h3></div>
+  <p class="q">A boat travels <span class="tex">36</span> km up a river and <span class="tex">36</span> km back. Its speed in still water is <span class="tex">12</span> km/h and the current flows at <span class="tex">c</span> km/h, so the boat moves at <span class="tex">12-c</span> km/h upstream and <span class="tex">12+c</span> km/h downstream.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Write the total travel time as a single rational expression in simplest form. What values of <span class="tex">c</span> make sense?</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{36}{12-c}+\dfrac{36}{12+c}</span><br><span class="tex">=\dfrac{36(12+c)+36(12-c)}{(12-c)(12+c)}</span><br><span class="tex">=\dfrac{432+36c+432-36c}{(12-c)(12+c)}</span><br><span class="tex">=\boldsymbol{\dfrac{864}{(12-c)(12+c)}}</span> hours<br>In context <span class="tex">0\le c&lt;12</span> (the boat must be able to go upstream).</div></div></div>
+    <div class="part"><div class="pl">(b) Determine the total time when the current is <span class="tex">3</span> km/h, and check with the original expression.</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{864}{(9)(15)}=\dfrac{864}{135}=\boldsymbol{6.4}</span> h<br>Check: <span class="tex">\dfrac{36}{9}+\dfrac{36}{15}=4+2.4=6.4</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(c) How much longer does the upstream trip take than the downstream trip? Write a simplified expression and evaluate it for <span class="tex">c=3</span>.</div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{36(12+c)-36(12-c)}{(12-c)(12+c)}</span><br><span class="tex">=\boldsymbol{\dfrac{72c}{(12-c)(12+c)}}</span> hours<br><span class="tex">c=3</span>: <span class="tex">\dfrac{216}{135}=1.6</span> h <br>(<span class="tex">4-2.4=1.6</span> ✓)</div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s5b" data-section="5. The Current and the Total Time">
+  <h3 class="sub">What the current does to the total time</h3>
+  <p>The current helps on the way down and slows the boat on the way up. The two effects do <b>not</b> cancel: the slow leg always costs more time than the fast leg saves.</p>
+  <div class="explainer" data-explainer="boat"></div>
+</section>
+
+<section class="card" data-ink="s5c" data-section="5. Extension: Complex Fractions">
+  <h3 class="sub">Extension: complex fractions</h3>
+  <p>A <b>complex fraction</b> has a fraction in its numerator or denominator. Simplify the top and the bottom into single fractions, then divide (multiply by the reciprocal, Lesson 4). The NPVs come from <b>every</b> denominator, and the whole divisor cannot be <span class="tex">0</span>.</p>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>A complex fraction</h3></div>
+  <p class="q">Simplify <span class="tex">\dfrac{1+\dfrac{1}{x}}{1-\dfrac{1}{x^2}}</span>. State the non-permissible values.</p>
+  <div class="part u6l6-solo"><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Top: <span class="tex">\dfrac{x+1}{x}</span>. &nbsp;Bottom: <span class="tex">\dfrac{x^2-1}{x^2}=\dfrac{(x-1)(x+1)}{x^2}</span>.<br><span class="tex">\dfrac{x+1}{x}\div\dfrac{(x-1)(x+1)}{x^2}=\dfrac{x+1}{x}\times\dfrac{x^2}{(x-1)(x+1)}=\boldsymbol{\dfrac{x}{x-1}}</span><br>NPVs: <span class="tex">x\ne0</span> (inner denominators) and <span class="tex">x\ne\pm1</span> (the bottom cannot be <span class="tex">0</span>).</div></div></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>No common factor.</b> The LCD is the product, left factored: <span class="tex">(x+p)(x+q)</span>. Give each numerator the factor it is missing, expand, collect, then factor the numerator.</div>
+    <div><b>The minus sign meets the bracket.</b> Expand the subtracted product inside brackets, then change <b>every</b> sign: <span class="tex">-(x^2-5x+6)=-x^2+5x-6</span>.</div>
+    <div><b>Factor first.</b> Factor every denominator; the LCD uses each different factor the greatest number of times it appears. Factor the result’s numerator and cancel. Opposites: <span class="tex">5-x=-(x-5)</span>, so the sign in front flips.</div>
+    <div><b>NPVs and checks.</b> NPVs come from the <em>original</em> denominators. Check with a value such as <span class="tex">x=1</span>, or with <span class="tex">Y_1</span> (question) and <span class="tex">Y_2</span> (answer) in the TABLE: ERROR rows are NPVs.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u6l6">
+    <div><div class="kicker">Your turn</div><b>Assignment 6 · Questions 4–17</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l7/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 7 — Solving Rational Equations</b><div class="muted">Multiply both sides by the LCD, solve, and reject any root that is an NPV.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u6l6.js';
+  boot({ key: 'u6l6', homeHref: '../../', title: '6.6 Binomial and Trinomial Denominators' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

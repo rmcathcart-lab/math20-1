@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u4l4.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u4l4">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Two Truths and a Lie">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="-12 50 46;12 50 46;-12 50 46" dur="2.2s" repeatCount="indefinite"/><text x="50" y="46" font-size="44" text-anchor="middle">🤥</text></g><text x="150" font-size="30" text-anchor="middle">❓<animate attributeName="y" values="64;-6" dur="3s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3s" begin="0s" repeatCount="indefinite"/></text><text x="225" font-size="30" text-anchor="middle">❓<animate attributeName="y" values="64;-6" dur="3.4s" begin="1.1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.4s" begin="1.1s" repeatCount="indefinite"/></text><text x="300" font-size="30" text-anchor="middle">❓<animate attributeName="y" values="64;-6" dur="3.8s" begin="2.2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.8s" begin="2.2s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Two Truths and a Lie</h2>
+  <p class="wf-rule vw-rule">Two of these are true. One is a lie. Which one? <b>No calculator!</b></p></div>
+  <div class="vw-tiles" style="--n:3;--fs:34px"><div><b>A</b><span class="tex">20\times20=400</span></div><div><b>B</b><span class="tex">19\times21=399</span></div><div><b>C</b><span class="tex">18\times22=397</span></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>How can you tell without multiplying it all out?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>C is the lie:</b> <span class="tex">18\times22=396</span>. A and B are true. Moving 1 away from 20 on each side loses <span class="tex">1</span>; moving 2 away loses <span class="tex">4</span>; moving 3 away (<span class="tex">17\times23</span>) would lose <span class="tex">9</span>.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -45,58 +56,17 @@
   <div class="outcome"><b>RF1</b> Factor polynomial expressions of the form <span class="tex">ax^2+bx+c</span>, <span class="tex">a^2x^2-b^2y^2</span>, <span class="tex">a(f(x))^2+b(f(x))+c</span> and <span class="tex">a^2(f(x))^2-b^2(g(y))^2</span> (<span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> rational).<br><span class="muted">Today: differences of squares, with fractions, higher powers and squares of binomials, and a checklist for choosing a method. </span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Chocolate Trade" id="wu" style="--wf-side: 386px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Chocolate Trade</h2>
-  <p class="wf-rule">You have a <b>square</b> chocolate bar. A friend offers a trade: a bar that is a few rows <b>shorter</b> but the same number of columns <b>longer</b>.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u4l4-choc" id="u4l4-choc"></div>
-    <div class="u4l4-wbtns">
-      <button type="button" class="pill" id="u4l4-wsmall">4 by 4 bar</button>
-      <button type="button" class="pill" id="u4l4-wbig">20 by 20 bar</button>
-      <button type="button" class="pill" id="u4l4-wtrade">Make the trade</button>
-      <button type="button" class="pill" id="u4l4-wreset">Start over</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u4l4-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How many pieces are in a <b>4 by 4</b> bar? In a <b>3 by 5</b> bar? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l4-wa"><div class="bk-ans"><b>16</b> and <b>15</b>. One row shorter and one column longer, but one piece <b>fewer</b>.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Press <b>Make the trade</b> on the 4 by 4 bar. The top row turns to become the new column. What is <b>left over</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l4-wa"><div class="bk-ans"><b>One piece</b>, in the corner: <span class="tex">4^2-1^2=3\times5</span>.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Trade your <b>20 by 20</b> bar for a <b>17 by 23</b> bar. How many pieces do you <b>lose</b>? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> None: 3 less, 3 more</div>
-        <div class="opt"><b>B</b> 3 pieces</div>
-        <div class="opt"><b>C</b> 6 pieces</div>
-        <div class="opt right"><b>D</b> 9 pieces</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>D, 9 pieces.</b> <span class="tex">20\times20=400</span> but <span class="tex">17\times23=391</span>. Cut the top 3 rows off and turn them into 3 new columns: a <b>3 by 3</b> square is left in the corner. <span class="tex">20^2-3^2=(20-3)(20+3)</span>.<br>
-        <span class="muted">You always lose a <b>square</b> of chocolate: a square minus a square is a rectangle. That is today’s lesson.</span></div>
-    </div>
-  </div></div>
-  <p class="u4l4-social">Challenge your neighbour: trade a 30 by 30 bar for a 25 by 35 bar. How many pieces do you lose? No multiplying allowed!</p>
-</section>
-
 <!-- ================= 1. The pattern ================= -->
 <section class="card" data-ink="s1" data-section="1. The Difference of Squares Pattern">
   <div class="sec-h"><span class="badge">1</span><h2>The Difference of Squares Pattern</h2></div>
   <p>Multiply two binomials that differ <b>only in the sign</b> between their terms:</p>
   <div class="u4l4-bigf"><span class="tex">(A-B)(A+B)=A^2+AB-AB-B^2=A^2-B^2</span></div>
   <p>The middle terms cancel. Read backwards, this is a factoring pattern.</p>
-  <div class="explainer" data-explainer="foilCancel"></div>
   <div class="u4l4-key">
     <div class="u4l4-key-h">Difference of squares</div>
     <div class="u4l4-key-f"><span class="tex">\textcolor{#a33357}{A}^2-\textcolor{#c27a0e}{B}^2=(\textcolor{#a33357}{A}-\textcolor{#c27a0e}{B})(\textcolor{#a33357}{A}+\textcolor{#c27a0e}{B})</span></div>
     <div class="u4l4-key-l">It applies when there are <b>two terms</b>, both are <b>perfect squares</b>, and they are <b>subtracted</b>. Find <span class="tex">A</span> and <span class="tex">B</span> by taking the square root of each term: <span class="tex">49x^2=(7x)^2</span>, <span class="tex">25y^2=(5y)^2</span>, so <span class="tex">49x^2-25y^2=(7x-5y)(7x+5y)</span>.</div>
   </div>
-  <h3 class="sub">Why it works: cut a square out of a square</h3>
-  <p>Take a square of side <span class="tex">\textcolor{#a33357}{A}</span> and cut a square of side <span class="tex">\textcolor{#c27a0e}{B}</span> out of its corner. The area left is <span class="tex">A^2-B^2</span>. Cut that L shape in two and slide one piece round: it becomes a <b>rectangle</b>.</p>
-  <div class="explainer" data-explainer="cutSlide"></div>
-  <div class="part think"><div class="pl"><span class="think-tag">Think</span> In Unit 2 you multiplied conjugates: <span class="tex">(3-\sqrt{2})(3+\sqrt{2})</span>. Why does the answer have no radical in it?</div><div class="work" style="--h:80px"></div>
-    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Conjugates are <span class="tex">(A-B)(A+B)</span> with <span class="tex">A=3</span>, <span class="tex">B=\sqrt{2}</span>. The middle terms cancel and only the squares are left: <span class="tex">3^2-(\sqrt{2})^2=9-2=\boldsymbol{7}</span>.</div></div></div>
 </section>
 
 <section class="card" data-ink="s1b" data-section="1. Sums of Squares">
@@ -127,7 +97,6 @@
 <section class="card" data-ink="s2" data-section="2. Common Factor First">
   <div class="sec-h"><span class="badge">2</span><h2>Common Factor First</h2></div>
   <div class="def">Always look for a <b>GCF</b> first. Numbers like 12 and 27 are not perfect squares, but after removing the common factor 3 the binomial is <span class="tex">4x^2-9y^2</span>. If the first term is negative, taking out a <b>negative</b> common factor makes the pattern easier to see.</div>
-  <div class="explainer" data-explainer="gcfFirst"></div>
 </section>
 
 <section class="card example" data-ink="ex2" data-section="Example 2">
@@ -143,10 +112,13 @@
   <button class="more" data-more="ex2-space">+ More space</button>
 </section>
 
-<section class="card" data-ink="s2b" data-section="2. Dimensions from an Area">
-  <h3 class="sub">Dimensions from a factored area</h3>
-  <p>If the area of a rectangle factors into two binomials, they can be its length and width. In the perimeter the <b>opposite terms cancel</b>, which often hands you one variable straight away.</p>
-  <div class="explainer" data-explainer="banner"></div>
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–3">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 4 · Questions 1–3</h2>
+  <p class="pr-t">Recognize a difference of squares, take out a GCF first, and spot a sum that does not factor.</p>
+  <div class="pr-chips n3"><span><b>1</b>Factor, if possible</span><span><b>2</b>GCF first</span><span><b>3</b>Trigonometric expressions</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 3.</span><a class="pill" href="../../../#/lesson/u4l4">Open the Practice site</a></div>
 </section>
 
 <section class="card example" data-ink="ex3" data-section="Example 3">
@@ -226,12 +198,6 @@
   <button class="more" data-more="ex6-space">+ More space</button>
 </section>
 
-<section class="card" data-ink="s5b" data-section="5. The Patio">
-  <h3 class="sub">The patio: the square cut from a square, with binomial sides</h3>
-  <p>The picture from Section 1 works with binomial sides too. Here <span class="tex">\textcolor{#a33357}{A}=2x+5</span> and <span class="tex">\textcolor{#c27a0e}{B}=x+1</span>.</p>
-  <div class="explainer" data-explainer="cutSlide2"></div>
-</section>
-
 <section class="card example" data-ink="ex7" data-section="Example 7">
   <div class="ex-head"><span class="ex-tag">Example 7</span><h3>The patio</h3></div>
   <p class="q">A square patio has side length <span class="tex">(2x+5)</span> m. A square planter with side length <span class="tex">(x+1)</span> m is cut out of it.</p>
@@ -305,7 +271,7 @@
     <div><b>Binomials inside.</b> Keep the brackets: <span class="tex">\big[(x+3)-5\big]\big[(x+3)+5\big]</span>; the minus hits every term of <span class="tex">B</span>. Simplify, take out a GCF, use the checklist, then check.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u4l4">
-    <div><div class="kicker">Your turn</div><b>Assignment 4 — Differences of Squares</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 4 · Questions 4–16</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l5/">
     <div><div class="kicker">Next lesson</div><b>Lesson 5 — Solving Quadratic Equations by Factoring</b><div class="muted">Factor, then use the zero product property: if <span class="tex">AB=0</span>, then <span class="tex">A=0</span> or <span class="tex">B=0</span>.</div></div><span class="arrow">→</span>

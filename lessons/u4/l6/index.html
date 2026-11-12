@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u4l6.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,16 @@
 </head>
 <body>
 <main class="lesson screen u4l6">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Which One Doesn’t Belong?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="-10 120 46;10 120 46;-10 120 46" dur="2.2s" repeatCount="indefinite"/><text x="120" y="46" font-size="40" text-anchor="middle">🤔</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="190" y="46" font-size="30" text-anchor="middle">🟦</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/><text x="235" y="46" font-size="30" text-anchor="middle">🟨</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.6s" repeatCount="indefinite"/><text x="280" y="46" font-size="30" text-anchor="middle">🟥</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Which One Doesn’t Belong?</h2>
+  <p class="wf-rule vw-rule">Which number doesn’t belong with the others? Give a reason.</p></div>
+  <div class="vw-tiles" style="--n:4;--fs:64px"><div><b>A</b>9</div><div><b>B</b>16</div><div><b>C</b>25</div><div><b>D</b>43</div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Can you find a reason for a different one?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Every one of them can be the odd one out.</b><br><b>A, 9:</b> the only one-digit number. &nbsp; <b>B, 16:</b> the only even number. &nbsp; <b>C, 25:</b> the only multiple of 5. &nbsp; <b>D, 43:</b> the only one that isn’t a perfect square (<span class="tex">\sqrt9=3,\ \sqrt{16}=4,\ \sqrt{25}=5</span>, but <span class="tex">\sqrt{43}</span> isn’t a whole number).</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -44,39 +55,6 @@
   <div class="outcome"><b>AN3</b> Solve problems that involve radical equations (limited to square roots).<br><span class="muted">Today: restrictions, isolate–square–solve–verify, extraneous roots, a radical on each side, and formulas with a square root.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Wishing Well" id="wu" style="--wf-side: 420px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Wishing Well</h2>
-  <p class="wf-rule">A coin dropped down a well falls <span class="tex">d=5t^2</span> metres in <span class="tex">t</span> seconds. Turned around, the time to fall <span class="tex">d</span> metres is <span class="tex">t=\sqrt{\tfrac{d}{5}}</span>.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u4l6-well" id="u4l6-well"></div>
-    <div class="u4l6-wbtns">
-      <button type="button" class="pill" id="u4l6-drop">Drop the coin</button>
-      <button type="button" class="pill" id="u4l6-wreset">Reset</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u4l6-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How far does the coin fall in the first <b>2 seconds</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l6-wa"><div class="bk-ans"><span class="tex">d=5(2)^2=5(4)=20</span> m.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>How long does it take to fall <b>45 m</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l6-wa"><div class="bk-ans"><span class="tex">t=\sqrt{\tfrac{45}{5}}=\sqrt{9}=3</span> seconds.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> You drop a coin and hear the splash after <b>4 seconds</b>. How deep is the well? <b>Guess first.</b></div></div>
-      <div class="poll-opts c2">
-        <div class="opt"><b>A</b> 20 m</div>
-        <div class="opt"><b>B</b> 40 m</div>
-        <div class="opt right"><b>C</b> 80 m</div>
-        <div class="opt"><b>D</b> 160 m</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal id="u4l6-wreveal">Reveal</button>
-      <div class="poll-ans"><b>C, 80 m.</b> <span class="tex">4=\sqrt{\tfrac{d}{5}}</span>. <b>Square both sides</b> to undo the root: <span class="tex">16=\tfrac{d}{5}</span>, so <span class="tex">d=80</span>.<br>
-        <span class="muted"><b>A</b> just multiplies <span class="tex">4\times5</span>. <b>B</b> doubles the 2-second answer, but twice the time is <b>four</b> times the depth.</span></div>
-    </div>
-  </div></div>
-  <p class="u4l6-social">Ask your neighbour: could <span class="tex">\sqrt{\tfrac{d}{5}}</span> ever come out to <span class="tex">-4</span> seconds? What would that even mean?</p>
-</section>
-
 <!-- ================= 1. Restrictions ================= -->
 <section class="card" data-ink="s1" data-section="1. Restrictions on the Variable">
   <div class="sec-h"><span class="badge">1</span><h2>Restrictions on the Variable</h2></div>
@@ -89,7 +67,6 @@
       <div class="u4l6-gfig"><div data-bk-graph='{"width":270,"height":190,"xmin":-4,"xmax":4,"ymin":-1,"ymax":3,"fontSize":15,"items":[{"fn":["sqrt(3-x)",{"to":3,"color":"purple"}]},{"point":[3,0,{"color":"purple"}]}]}'></div><div class="u4l6-gcap"><span class="tex">y=\sqrt{3-x},\ x\le3</span></div></div>
     </div>
   </div>
-  <div class="explainer" data-explainer="restrict"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -112,7 +89,6 @@
   <div class="def">Squaring undoes a square root: <span class="tex">\left(\sqrt{A}\right)^2=A</span> when <span class="tex">A\ge0</span>. Square both <b>sides</b>, not each term: get the radical <b>alone</b> first. If there is a number in front of the radical, divide by it first (or square it too: <span class="tex">\left(2\sqrt{A}\right)^2=4A</span>).</div>
   <div class="def amber u4l6-key"><div class="u4l6-keyh">Solving a radical equation</div>
     <div class="u4l6-steps5"><div><b>1</b> State the restriction</div><div><b>2</b> Isolate the radical</div><div><b>3</b> Square both sides</div><div><b>4</b> Solve</div><div><b>5</b> <b>Verify</b> each answer in the <em>original</em> equation (left side = right side)</div></div></div>
-  <div class="explainer" data-explainer="eachTerm"></div>
   <div class="explainer" data-explainer="steps"></div>
 </section>
 
@@ -137,7 +113,6 @@
   <div class="def amber u4l6-key"><div class="u4l6-keyh">Key idea</div>After isolating: if <span class="tex">\sqrt{A}</span> equals a <b>negative number</b>, there is <b>no solution</b> (squaring would produce an extraneous root). A value that breaks a <b>restriction</b> is also extraneous.</div>
   <div class="explainer" data-explainer="balance"></div>
   <div class="tip watch"><div class="tip-ic">!</div><div><b>A negative root is fine.</b> What can't be negative is the <b>value of the square root</b>, not <span class="tex">x</span>. In <span class="tex">\sqrt{1-x}=3</span>, squaring gives <span class="tex">1-x=9</span>, so <span class="tex">x=-8</span>, and it checks: <span class="tex">\sqrt{1-(-8)}=\sqrt{9}=3</span> ✓.</div></div>
-  <div class="explainer" data-explainer="noMeet"></div>
 </section>
 
 <section class="card example" data-ink="ex3" data-section="Example 3">
@@ -154,11 +129,19 @@
   <button class="more" data-more="ex3-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–4">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 6 · Questions 1–4</h2>
+  <p class="pr-t">Restriction first, then isolate, square and verify every answer.</p>
+  <div class="pr-chips n3"><span><b>1</b>Restrictions</span><span><b>2–3</b>Isolate, square, verify</span><span><b>4</b>Catch the extraneous root</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u4l6">Open the Practice site</a></div>
+</section>
+
 <!-- ================= 4. A radical on each side ================= -->
 <section class="card" data-ink="s4" data-section="4. A Radical on Each Side">
   <div class="sec-h"><span class="badge">4</span><h2>A Radical on Each Side</h2></div>
   <div class="def">When each side is a single radical, square both sides at once: <span class="tex">\left(\sqrt{A}\right)^2=\left(\sqrt{B}\right)^2</span> gives <span class="tex">A=B</span>. A <b>coefficient</b> in front of a radical is squared too. Both radicands must be non-negative, so check the answer in <b>both</b> radicands: a value that makes either one negative is extraneous.</div>
-  <div class="explainer" data-explainer="twoRad"></div>
 </section>
 
 <section class="card example" data-ink="ex4" data-section="Example 4">
@@ -240,7 +223,7 @@
     <div><b>Graphs and formulas.</b> Roots are where <span class="tex">Y_1</span> and <span class="tex">Y_2</span> meet; no meeting, no solution. In a formula, substitute, isolate the root, square, solve, and round at the end.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u4l6">
-    <div><div class="kicker">Your turn</div><b>Assignment 6 — Solving Radical Equations and Checking for Extraneous Roots</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 6 · Questions 5–16</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l7/">
     <div><div class="kicker">Next lesson</div><b>Lesson 7 — Radical Equations That Lead to Quadratics</b><div class="muted">Squaring gives an <span class="tex">x^2</span>: factor, find two roots, and check both.</div></div><span class="arrow">→</span>

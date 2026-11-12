@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dividing Radicals and Rationalizing Monomial Denominators · Math 20-1 2.5</title>
+<meta name="description" content="Math 20-1 Unit 2 Lesson 5: dividing radicals with the same index (coefficients by coefficients, radicands by radicands), dividing every term of a numerator, the simplest-form checklist, rationalizing a/√b and a/(m√b) by multiplying by a form of 1 (a square of side √b shows √b·√b = b), fractions under a radical, cube- and fourth-root denominators (build a perfect cube), quotients with variables and their restrictions, and measurement problems. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u2l5.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u2l5">
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 2 Radical Expressions · Lesson 5</div>
+  <h1>Dividing Radicals and Rationalizing Monomial Denominators</h1>
+  <p class="lede">Last lesson radicals were <b>multiplied</b>: <span class="tex">\sqrt a\cdot\sqrt b=\sqrt{ab}</span>. Today that rule runs <b>backward</b> to divide them. Then we clear radicals out of denominators by multiplying by a clever <b class="u2l5-am">form of 1</b>, like <span class="tex">\textcolor{#c27a0e}{\tfrac{\sqrt3}{\sqrt3}}</span>.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>divide radicals with the same index: coefficients by coefficients, radicands by radicands, then write the result in <b>simplest form</b></li>
+      <li>divide <b>every</b> term of a numerator by a one-term (monomial) denominator</li>
+      <li><b>rationalize the denominator</b> of <span class="tex">\frac{a}{\sqrt b}</span> and <span class="tex">\frac{a}{m\sqrt b}</span>, and rewrite a fraction under a radical</li>
+      <li>rationalize <b>cube-root</b> and <b>fourth-root</b> denominators by building a perfect cube (or fourth power)</li>
+      <li>simplify quotients with <b>variables</b> and state the restrictions, and solve problems with exact answers</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN2</b> Solve problems that involve operations on radicals and radical expressions with numerical and variable radicands.<br><span class="muted">Today: dividing radicals and rationalizing one-term (monomial) denominators. Exact answers.</span></div>
+</section>
+
+<!-- ================= warm-up ================= -->
+<section class="card warm wf" data-ink="warm" data-section="Warm-up: Same Pizza, More Slices" style="--wf-side: 420px">
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Same Pizza, More Slices</h2>
+  <p class="wf-rule">The pepperoni covers <span class="tex">\tfrac34</span> of the pizza. Cut <b>every</b> slice into pieces: the count changes, but does the amount? <span class="muted">Press a <b>Cut</b> button.</span></p></div>
+  <div class="wf-grid"><div class="wf-main">
+    <div class="u2l5-pizza" id="u2l5-pizza"></div>
+    <div class="u2l5-wctl no-ink">
+      <button type="button" class="pill" id="u2l5-cut2">Cut each slice in 2</button>
+      <button type="button" class="pill" id="u2l5-cut3">Cut each slice in 3</button>
+      <button type="button" class="pill" id="u2l5-wreset">Start over</button>
+    </div>
+    <div class="u2l5-wlab" id="u2l5-wlab"></div>
+  </div><div class="wf-side">
+    <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Fill in: <span class="tex">\tfrac34=\tfrac{?}{8}=\tfrac{?}{12}</span> <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+      <div class="bk-ans"><span class="tex">\tfrac68</span> and <span class="tex">\tfrac9{12}</span>: multiply the top and the bottom by the <b>same</b> number (2, then 3).</div></div>
+    <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Is <span class="tex">\tfrac34\times\tfrac22</span> more pizza than <span class="tex">\tfrac34</span>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+      <div class="bk-ans"><b>No, the same.</b> <span class="tex">\tfrac22=1</span>, and multiplying by 1 changes how it <b>looks</b>, not its <b>value</b>.</div></div>
+    <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Write <span class="tex">\tfrac25</span> with a denominator of 15. <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
+      <div class="bk-ans"><span class="tex">\tfrac25\times\tfrac33=\tfrac6{15}</span>. Pick the form of 1 that turns the bottom into what you want.</div></div>
+    <div class="poll wf-poll">
+      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> Which number is <b>equal</b> to <span class="tex">\tfrac{1}{\sqrt2}</span>? <b>Guess first.</b></div></div>
+      <div class="poll-opts c4">
+        <div class="opt right"><b>A</b> <span class="tex">\dfrac{\sqrt2}{2}</span></div>
+        <div class="opt"><b>B</b> <span class="tex">\dfrac{2}{\sqrt2}</span></div>
+        <div class="opt"><b>C</b> <span class="tex">\dfrac12</span></div>
+        <div class="opt"><b>D</b> <span class="tex">\sqrt2</span></div>
+      </div>
+      <button class="pill" type="button" data-poll-reveal>Reveal</button>
+      <div class="poll-ans"><b>A.</b> Multiply by the form of 1 <span class="tex">\tfrac{\sqrt2}{\sqrt2}</span>: <span class="tex">\dfrac{1\cdot\sqrt2}{\sqrt2\cdot\sqrt2}=\dfrac{\sqrt2}{2}</span>. The bottom is now a <b>whole number</b>, because <span class="tex">\sqrt2\cdot\sqrt2=2</span>.
+        <div class="u2l5-traps"><span><b>B?</b> <span class="tex">\tfrac2{\sqrt2}=\sqrt2</span>: twice as big.</span><span><b>C?</b> <span class="tex">\tfrac12</span> is too small: <span class="tex">\sqrt2</span> is less than 2.</span><span><b>D?</b> <span class="tex">\sqrt2</span> is bigger than 1, but <span class="tex">\tfrac1{\sqrt2}</span> is less than 1.</span></div>
+      </div>
+    </div>
+  </div></div>
+</section>
+
+<!-- ================= 1. Dividing radicals ================= -->
+<section class="card" data-ink="s1" data-section="1. Dividing Radicals">
+  <div class="sec-h"><span class="badge">1</span><h2>Dividing Radicals</h2></div>
+  <div class="def">Radicals with the <b>same index</b> can be divided: divide the <b>coefficients</b>, divide the <b>radicands</b>, then write the result in simplest form. This is the multiplication rule <span class="tex">\sqrt a\cdot\sqrt b=\sqrt{ab}</span> from Lesson 4 run <b>backward</b>.</div>
+  <div class="u2l5-key"><div class="u2l5-key-h">Dividing radicals</div><div class="u2l5-key-f"><span class="tex">\dfrac{\textcolor{#a33357}{m}\sqrt[n]{\textcolor{#1f5bd6}{a}}}{\textcolor{#a33357}{k}\sqrt[n]{\textcolor{#1f5bd6}{b}}}=\dfrac{\textcolor{#a33357}{m}}{\textcolor{#a33357}{k}}\sqrt[n]{\dfrac{\textcolor{#1f5bd6}{a}}{\textcolor{#1f5bd6}{b}}}</span></div><div class="u2l5-key-eg"><span class="tex">k\ne0</span>, <span class="tex">b\ne0</span>; when <span class="tex">n</span> is even, <span class="tex">a\ge0</span> and <span class="tex">b&gt;0</span></div></div>
+  <div class="explainer" data-explainer="divideRule"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Divide</h3></div>
+  <p class="q">Divide and write in simplest form.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{\sqrt{48}}{\sqrt{3}}</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sqrt{\dfrac{48}{3}}=\sqrt{16}=4</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{12\sqrt{42}}{4\sqrt{6}}</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{12}{4}\sqrt{\dfrac{42}{6}}=3\sqrt7</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{10\sqrt{54}}{5\sqrt{3}}</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2\sqrt{18}=2(3\sqrt2)=6\sqrt2</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{\sqrt[3]{250}}{\sqrt[3]{2}}</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sqrt[3]{125}=5</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\dfrac{-18\sqrt[3]{80}}{6\sqrt[3]{5}}</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-3\sqrt[3]{16}=-3(2\sqrt[3]{2})=-6\sqrt[3]{2}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\dfrac{6\sqrt{35}}{9\sqrt{5}}</span></div><div class="work" style="--h:120px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{6}{9}\sqrt{7}=\dfrac{2\sqrt7}{3}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s1b" data-section="1. Radicands That Don't Divide Evenly">
+  <h3 class="sub">When the radicands do not divide evenly</h3>
+  <p>Either <b>reduce the fraction under the radical</b>, or write <b>each radical in simplest form first</b> and divide out the like radicals (just as <span class="tex">\frac{7x}{3x}=\frac73</span>). Both routes give the same answer.</p>
+  <div class="explainer" data-explainer="twoRoutes"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Radicands that don't divide evenly</h3></div>
+  <p class="q">Simplify.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{\sqrt{98}}{\sqrt{18}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\sqrt{\dfrac{98}{18}}=\sqrt{\dfrac{49}{9}}=\dfrac73</span> &nbsp;(or <span class="tex">\dfrac{7\sqrt2}{3\sqrt2}=\dfrac73</span>)</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{4\sqrt{90}}{3\sqrt{40}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{4(3\sqrt{10})}{3(2\sqrt{10})}=\dfrac{12\sqrt{10}}{6\sqrt{10}}=2</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{15\sqrt{72}}{10\sqrt{50}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{15(6\sqrt2)}{10(5\sqrt2)}=\dfrac{90}{50}=\dfrac95</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{6\sqrt[3]{54}}{\sqrt[3]{16}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{6(3\sqrt[3]{2})}{2\sqrt[3]{2}}=\dfrac{18}{2}=9</span></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Dividing each term ================= -->
+<section class="card" data-ink="s2" data-section="2. Dividing Each Term of a Numerator">
+  <div class="sec-h"><span class="badge">2</span><h2>Dividing Each Term of a Numerator</h2></div>
+  <div class="def">A fraction bar <b>groups the whole numerator</b>, so a one-term (<b>monomial</b>) denominator divides <b>every</b> term of the numerator: <span class="tex">\dfrac{a+b}{c}=\dfrac{a}{c}+\dfrac{b}{c}</span>.</div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Divide every term.</b> Dividing only one of the terms is a common error: <span class="tex">\frac{6+4}{2}</span> is <span class="tex">3+2=5</span>, not <span class="tex">3+4</span>.</div></div>
+  <div class="explainer" data-explainer="splitBar"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Divide each term</h3></div>
+  <p class="q">Divide each term of the numerator by the denominator, and simplify.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{\sqrt{70}-\sqrt{42}}{\sqrt{7}}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{\sqrt{70}}{\sqrt7}-\dfrac{\sqrt{42}}{\sqrt7}=\sqrt{10}-\sqrt6</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{12\sqrt{15}+8\sqrt{6}}{4\sqrt{3}}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{12\sqrt{15}}{4\sqrt3}+\dfrac{8\sqrt6}{4\sqrt3}=3\sqrt5+2\sqrt2</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{6\sqrt{40}-9\sqrt{24}}{3\sqrt{2}}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2\sqrt{20}-3\sqrt{12}</span><br><span class="tex">=2(2\sqrt5)-3(2\sqrt3)</span><br><span class="tex">=4\sqrt5-6\sqrt3</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Rationalizing ================= -->
+<section class="card" data-ink="s3" data-section="3. Simplest Form">
+  <div class="sec-h"><span class="badge">3</span><h2>Rationalizing a Monomial Denominator</h2></div>
+  <div class="def">A radical expression is in <b>simplest form</b> when
+    <ol class="u2l5-check">
+      <li>no radicand has a perfect-square (or perfect-cube, …) factor,</li>
+      <li><b>no radical is in a denominator</b>,</li>
+      <li><b>no fraction is under a radical</b>,</li>
+      <li>like radicals are combined, and</li>
+      <li>the fraction is reduced.</li>
+    </ol></div>
+  <div class="explainer" data-explainer="simplestStamp"></div>
+</section>
+
+<section class="card" data-ink="s3b" data-section="3. Multiply by a Form of 1">
+  <h3 class="sub">Rationalizing the denominator: multiply by a form of 1</h3>
+  <p>Removing the radical from a denominator is called <b>rationalizing the denominator</b>. Multiply the numerator <b>and</b> the denominator by the radical in the denominator: this multiplies by <b>1</b>, so the value does not change.</p>
+  <div class="u2l5-key u2l5-key2"><div class="u2l5-key-h">Rationalizing a monomial denominator <span class="u2l5-kh2">(<span class="tex">b&gt;0</span>)</span></div><div class="u2l5-key-f"><span class="tex">\dfrac{a}{\sqrt b}\cdot\textcolor{#c27a0e}{\dfrac{\sqrt b}{\sqrt b}}=\dfrac{a\sqrt b}{b}</span></div><div class="u2l5-key-f"><span class="tex">\dfrac{a}{m\sqrt b}\cdot\textcolor{#c27a0e}{\dfrac{\sqrt b}{\sqrt b}}=\dfrac{a\sqrt b}{mb}</span></div></div>
+  <div class="explainer" data-explainer="formOfOne"></div>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Three habits.</b> For <span class="tex">m\sqrt b</span>, multiply by <span class="tex">\sqrt b</span> <b>only</b> (not by <span class="tex">m\sqrt b</span>): the <span class="tex">m</span> is already rational. <b>Simplify</b> a radical in the denominator <b>first</b>: it keeps the numbers small. A <b>fraction under a radical</b> is split first: <span class="tex">\sqrt{\dfrac ab}=\dfrac{\sqrt a}{\sqrt b}</span>.</div></div>
+  <div class="part think"><div class="pl"><span class="think-tag">Think</span> To rationalize <span class="tex">\frac{5}{\sqrt3}</span>, why can't we just multiply the <b>denominator</b> by <span class="tex">\sqrt3</span>?</div><div class="work" style="--h:80px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">That multiplies the whole fraction by <span class="tex">\frac{1}{\sqrt3}</span> and changes its value. Multiplying the top <b>and</b> the bottom by <span class="tex">\sqrt3</span> multiplies by <span class="tex">\frac{\sqrt3}{\sqrt3}=1</span>.</div></div></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Rationalize the denominator</h3></div>
+  <p class="q">Rationalize the denominator and simplify.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{5}{\sqrt{3}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{5}{\sqrt{3}}\cdot\dfrac{\sqrt{3}}{\sqrt{3}}=\dfrac{5\sqrt{3}}{3}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{\sqrt{2}}{\sqrt{7}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{\sqrt{2}}{\sqrt{7}}\cdot\dfrac{\sqrt{7}}{\sqrt{7}}=\dfrac{\sqrt{14}}{7}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{14}{3\sqrt{7}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{14\sqrt{7}}{3(7)}=\dfrac{14\sqrt{7}}{21}=\dfrac{2\sqrt{7}}{3}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{10}{\sqrt{20}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{10}{2\sqrt{5}}=\dfrac{5}{\sqrt{5}}=\dfrac{5\sqrt{5}}{5}=\sqrt{5}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\dfrac{-9}{2\sqrt{6}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{-9\sqrt{6}}{2(6)}=\dfrac{-9\sqrt{6}}{12}=-\dfrac{3\sqrt{6}}{4}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\sqrt{\dfrac{5}{8}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{\sqrt{5}}{\sqrt{8}}=\dfrac{\sqrt{5}}{2\sqrt{2}}\cdot\dfrac{\sqrt{2}}{\sqrt{2}}=\dfrac{\sqrt{10}}{4}</span></div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3c" data-section="3. Two-Term Numerators">
+  <h3 class="sub">When the numerator has two terms</h3>
+  <p>Multiply <b>every</b> term of the numerator by the radical. Reduce only by a factor that divides <b>every</b> term of the numerator <b>and</b> the denominator.</p>
+  <div class="explainer" data-explainer="twoTermNum"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Two-term numerators</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Simplify <span class="tex">\dfrac{8\sqrt{15}-4\sqrt{6}}{2\sqrt{3}}</span> by dividing each term.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{8\sqrt{15}}{2\sqrt3}-\dfrac{4\sqrt6}{2\sqrt3}=4\sqrt5-2\sqrt2</span></div></div></div>
+    <div class="part"><div class="pl">(b) Simplify the same expression by rationalizing first.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{(8\sqrt{15}-4\sqrt6)\sqrt3}{2(3)}=\dfrac{8\sqrt{45}-4\sqrt{18}}{6}=\dfrac{24\sqrt5-12\sqrt2}{6}</span><br><span class="tex">=4\sqrt5-2\sqrt2</span> &nbsp;(the same answer)</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{4+\sqrt{6}}{\sqrt{2}}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{(4+\sqrt6)\sqrt2}{2}=\dfrac{4\sqrt2+\sqrt{12}}{2}=\dfrac{4\sqrt2+2\sqrt3}{2}=2\sqrt2+\sqrt3</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{3\sqrt{5}-10}{2\sqrt{5}}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{(3\sqrt5-10)\sqrt5}{2(5)}=\dfrac{15-10\sqrt5}{10}=\dfrac{3-2\sqrt5}{2}</span><br>(5 divides every term)</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u2l5"></section>
+
+<!-- ================= 4. Cube roots and higher ================= -->
+<section class="card" data-ink="s4" data-section="4. Cube-Root and Higher-Index Denominators">
+  <div class="sec-h"><span class="badge">4</span><h2>Cube-Root and Higher-Index Denominators</h2></div>
+  <div class="def">To rationalize <span class="tex">\sqrt[3]{b}</span>, multiply by the cube root that makes the radicand a <b>perfect cube</b>. Multiplying by <span class="tex">\sqrt[3]{b}</span> itself is not enough: <span class="tex">\sqrt[3]{2}\cdot\sqrt[3]{2}=\sqrt[3]{4}</span> is still irrational, but <span class="tex">\sqrt[3]{2}\cdot\sqrt[3]{4}=\sqrt[3]{8}=2</span>. For a fourth root, make a perfect <b>fourth power</b>.</div>
+  <div class="u2l5-key"><div class="u2l5-key-h">Build a perfect cube</div><div class="u2l5-key-f"><span class="tex">\dfrac{5}{\sqrt[3]{2}}\cdot\textcolor{#c27a0e}{\dfrac{\sqrt[3]{4}}{\sqrt[3]{4}}}=\dfrac{5\sqrt[3]{4}}{\sqrt[3]{8}}=\dfrac{5\sqrt[3]{4}}{2}</span></div><div class="u2l5-key-eg">Ask: “what times the radicand makes a perfect cube?”</div></div>
+  <div class="explainer" data-explainer="cubeFill"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Cube-root and fourth-root denominators</h3></div>
+  <p class="q">Rationalize the denominator and simplify.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{4}{\sqrt[3]{3}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{4}{\sqrt[3]{3}}\cdot\dfrac{\sqrt[3]{9}}{\sqrt[3]{9}}=\dfrac{4\sqrt[3]{9}}{3}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{10}{\sqrt[3]{25}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{10\sqrt[3]{5}}{\sqrt[3]{125}}=\dfrac{10\sqrt[3]{5}}{5}=2\sqrt[3]{5}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{9}{2\sqrt[3]{6}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{9\sqrt[3]{36}}{2\sqrt[3]{216}}=\dfrac{9\sqrt[3]{36}}{12}=\dfrac{3\sqrt[3]{36}}{4}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\sqrt[3]{\dfrac{3}{4}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{\sqrt[3]{3}}{\sqrt[3]{4}}\cdot\dfrac{\sqrt[3]{2}}{\sqrt[3]{2}}=\dfrac{\sqrt[3]{6}}{2}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\dfrac{12}{\sqrt[3]{18}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">18\times12=216=6^3</span>: <span class="tex">\dfrac{12\sqrt[3]{12}}{\sqrt[3]{216}}=\dfrac{12\sqrt[3]{12}}{6}=2\sqrt[3]{12}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\dfrac{6}{\sqrt[4]{27}}</span></div><div class="work" style="--h:140px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">27\times3=81=3^4</span>: <span class="tex">\dfrac{6\sqrt[4]{3}}{\sqrt[4]{81}}=\dfrac{6\sqrt[4]{3}}{3}=2\sqrt[4]{3}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Variables ================= -->
+<section class="card" data-ink="s5" data-section="5. Quotients with Variables">
+  <div class="sec-h"><span class="badge">5</span><h2>Quotients with Variables</h2></div>
+  <div class="def"><b>State the restrictions first.</b> An even-index radical needs a radicand <span class="tex">\ge0</span>, and a denominator cannot be 0, so a variable radicand in a denominator must be <span class="tex">&gt;0</span> (even index) or <span class="tex">\ne0</span> (odd index). Then divide or rationalize exactly as with numbers.</div>
+  <div class="explainer" data-explainer="restrictions"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Variables and restrictions</h3></div>
+  <p class="q">Simplify. State the restrictions on the variable.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{\sqrt{45x^5}}{\sqrt{5x}}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x&gt;0</span><br><span class="tex">\sqrt{\dfrac{45x^5}{5x}}=\sqrt{9x^4}=3x^2</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{\sqrt{14a^3}+\sqrt{21a}}{\sqrt{7a}}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a&gt;0</span><br><span class="tex">\sqrt{2a^2}+\sqrt3=a\sqrt2+\sqrt3</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{6}{\sqrt{x}}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x&gt;0</span><br><span class="tex">\dfrac{6}{\sqrt{x}}\cdot\dfrac{\sqrt{x}}{\sqrt{x}}=\dfrac{6\sqrt{x}}{x}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{3x}{\sqrt{6x}}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x&gt;0</span><br><span class="tex">\dfrac{3x\sqrt{6x}}{6x}=\dfrac{\sqrt{6x}}{2}</span></div></div></div>
+    <div class="part"><div class="pl">(e) <span class="tex">\sqrt{\dfrac{5}{8y}}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y&gt;0</span><br><span class="tex">\dfrac{\sqrt{5}}{2\sqrt{2y}}\cdot\dfrac{\sqrt{2y}}{\sqrt{2y}}=\dfrac{\sqrt{10y}}{2(2y)}=\dfrac{\sqrt{10y}}{4y}</span></div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\dfrac{4}{\sqrt[3]{2m}}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">m\ne0</span>. Multiply by <span class="tex">\sqrt[3]{4m^2}</span>:<br><span class="tex">\dfrac{4\sqrt[3]{4m^2}}{\sqrt[3]{8m^3}}=\dfrac{4\sqrt[3]{4m^2}}{2m}=\dfrac{2\sqrt[3]{4m^2}}{m}</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 6. Problems ================= -->
+<section class="card" data-ink="s6" data-section="6. Problems with Quotients">
+  <div class="sec-h"><span class="badge">6</span><h2>Problems with Quotients</h2></div>
+  <p>In a measurement problem, dividing by a radical is common: a <b>length</b> is an <b>area divided by another length</b>. Give exact answers in simplest form, with units.</p>
+  <div class="explainer" data-explainer="problems"></div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Exact answers in problems</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) The diagonal of a square is <span class="tex">\sqrt2</span> times its side. A square has a diagonal of 12&nbsp;cm. Determine the exact side length and the area.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">s=\dfrac{12}{\sqrt2}\cdot\dfrac{\sqrt2}{\sqrt2}=\dfrac{12\sqrt2}{2}=6\sqrt2</span> cm<br><span class="tex">A=(6\sqrt2)^2=36(2)=72</span> cm<span class="tex">^2</span></div></div></div>
+    <div class="part"><div class="pl">(b) A rectangular banner has an area of <span class="tex">(6\sqrt{30}+9\sqrt{10})</span>&nbsp;m<span class="tex">^2</span> and a height of <span class="tex">3\sqrt5</span>&nbsp;m. Determine its length and its perimeter.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\ell=\dfrac{6\sqrt{30}+9\sqrt{10}}{3\sqrt5}=2\sqrt6+3\sqrt2</span> m<br><span class="tex">P=2(2\sqrt6+3\sqrt2)+2(3\sqrt5)</span><br><span class="tex">=4\sqrt6+6\sqrt2+6\sqrt5</span> m</div></div></div>
+  </div>
+  <div class="parts c1 u2l5-p8c">
+    <div class="part"><div class="pl">(c) Solve <span class="tex">x\sqrt{6}+\sqrt{8}=\sqrt{50}</span>. Write <span class="tex">x</span> in simplest form.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\sqrt6=\sqrt{50}-\sqrt8=5\sqrt2-2\sqrt2=3\sqrt2</span><br><span class="tex">x=\dfrac{3\sqrt2}{\sqrt6}=\dfrac{3}{\sqrt3}=\dfrac{3\sqrt3}{3}=\sqrt3</span></div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Divide radicals (same index).</b> Coefficients by coefficients, radicands by radicands: <span class="tex">\dfrac{m\sqrt a}{k\sqrt b}=\dfrac mk\sqrt{\dfrac ab}</span>. Then simplest form. If the radicands don't divide evenly, reduce inside or simplify each radical first.</div>
+    <div><b>One-term denominator: divide every term.</b> <span class="tex">\dfrac{a+b}{c}=\dfrac ac+\dfrac bc</span>. Reduce only by a factor that divides <b>every</b> term, top and bottom.</div>
+    <div><b>Rationalize: multiply by a form of 1.</b> <span class="tex">\dfrac{a}{m\sqrt b}\cdot\dfrac{\sqrt b}{\sqrt b}=\dfrac{a\sqrt b}{mb}</span>, because <span class="tex">\sqrt b\cdot\sqrt b=b</span>. Simplify the denominator first; split a fraction under a radical.</div>
+    <div><b>Cube roots and variables.</b> Multiply by what makes a perfect cube (<span class="tex">\sqrt[3]2\cdot\sqrt[3]4=\sqrt[3]8=2</span>) or fourth power. State restrictions first: an even-index radical in a denominator needs <span class="tex">&gt;0</span>; an odd-index one needs <span class="tex">\ne0</span>.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u2l5">
+    <div><div class="kicker">Your turn</div><b>Assignment 5 — Dividing Radicals and Rationalizing Monomial Denominators</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l6/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 6 — Rationalizing Binomial Denominators with Conjugates</b><div class="muted">A two-term denominator like <span class="tex">3+\sqrt2</span> needs its <b>conjugate</b> <span class="tex">3-\sqrt2</span>: the middle terms cancel and the radical disappears.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u2l5.js';
+  boot({ key: 'u2l5', homeHref: '../../', title: '2.5 Dividing and Rationalizing' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u1l1.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,15 @@
 </head>
 <body>
 <main class="lesson screen u1l1">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Pizza Cuts">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="0 210 30;360 210 30" dur="6s" repeatCount="indefinite"/><text x="210" y="30" font-size="36" text-anchor="middle" dominant-baseline="central">🍕</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="270" y="46" font-size="32" text-anchor="middle">🧀</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/><text x="320" y="46" font-size="30" text-anchor="middle">🍕</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Pizza Cuts</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Put dots on the crust of a pizza, then make a straight cut between <b>every pair</b> of dots. Count the pieces.</p><p class="vw-ctx">1&nbsp;dot: <b>1</b>&nbsp;piece. 2&nbsp;dots: <b>2</b>. 3&nbsp;dots: <b>4</b>. 4&nbsp;dots: <b>8</b>. 5&nbsp;dots: <b>16</b>.</p><p class="vw-ask">How many pieces will 6 dots make?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A pizza with five dots on the crust; straight cuts join every pair of dots"><circle cx="150" cy="128" r="104" fill="#d99a4e"/><circle cx="150" cy="128" r="92" fill="#f6d27a"/><circle cx="118" cy="92" r="9" fill="#c0503c" opacity=".85"/><circle cx="182" cy="100" r="9" fill="#c0503c" opacity=".85"/><circle cx="150" cy="150" r="9" fill="#c0503c" opacity=".85"/><circle cx="110" cy="160" r="9" fill="#c0503c" opacity=".85"/><circle cx="196" cy="162" r="9" fill="#c0503c" opacity=".85"/><circle cx="156" cy="70" r="9" fill="#c0503c" opacity=".85"/><line x1="150.0" y1="32.0" x2="241.3" y2="98.3" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.05;0.10;.94;1" dur="8s" repeatCount="indefinite"/></line><line x1="150.0" y1="32.0" x2="206.4" y2="205.7" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.12;0.17;.94;1" dur="8s" repeatCount="indefinite"/></line><line x1="150.0" y1="32.0" x2="93.6" y2="205.7" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.19;0.24;.94;1" dur="8s" repeatCount="indefinite"/></line><line x1="150.0" y1="32.0" x2="58.7" y2="98.3" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.26;0.31;.94;1" dur="8s" repeatCount="indefinite"/></line><line x1="241.3" y1="98.3" x2="206.4" y2="205.7" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.33;0.38;.94;1" dur="8s" repeatCount="indefinite"/></line><line x1="241.3" y1="98.3" x2="93.6" y2="205.7" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.40;0.45;.94;1" dur="8s" repeatCount="indefinite"/></line><line x1="241.3" y1="98.3" x2="58.7" y2="98.3" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.47;0.52;.94;1" dur="8s" repeatCount="indefinite"/></line><line x1="206.4" y1="205.7" x2="93.6" y2="205.7" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.54;0.59;.94;1" dur="8s" repeatCount="indefinite"/></line><line x1="206.4" y1="205.7" x2="58.7" y2="98.3" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.61;0.66;.94;1" dur="8s" repeatCount="indefinite"/></line><line x1="93.6" y1="205.7" x2="58.7" y2="98.3" stroke="#4a4436" stroke-width="3.5" stroke-linecap="round" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.68;0.73;.94;1" dur="8s" repeatCount="indefinite"/></line><circle cx="150.0" cy="32.0" r="7.5" fill="#2b55a0" stroke="#fff" stroke-width="2.5"/><circle cx="241.3" cy="98.3" r="7.5" fill="#2b55a0" stroke="#fff" stroke-width="2.5"/><circle cx="206.4" cy="205.7" r="7.5" fill="#2b55a0" stroke="#fff" stroke-width="2.5"/><circle cx="93.6" cy="205.7" r="7.5" fill="#2b55a0" stroke="#fff" stroke-width="2.5"/><circle cx="58.7" cy="98.3" r="7.5" fill="#2b55a0" stroke="#fff" stroke-width="2.5"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="292" y="70" font-size="46" font-weight="800" fill="#c93a33" text-anchor="middle">?</text></g><text x="292" y="238" font-size="20" font-weight="800" fill="#2b55a0" text-anchor="middle">6 dots?</text></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Guess first. Then sketch it and count.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>31, not 32!</b> It looked like doubling, but the pattern breaks. (Space the 6 dots evenly and three cuts meet in the middle: only <b>30</b>.) A few terms can’t prove a pattern: we need a rule.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -41,42 +51,6 @@
     </ul>
   </div>
   <div class="outcome"><b>RF9</b> Analyze arithmetic sequences and series to solve problems.<br><span class="muted">Today: what a sequence is, its general term <span class="tex">t_n</span>, and how to sort sequences as arithmetic, geometric or neither.</span></div>
-</section>
-
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: Toothpick Houses" id="wu" style="--wf-side: 340px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Toothpick Houses</h2>
-  <p class="wf-rule">A row of houses is built from toothpicks. Neighbouring houses <b>share a wall</b>. Here are <b>3 houses</b>.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u1l1-street" id="u1l1-street"></div>
-    <div class="u1l1-wbtns">
-      <button type="button" class="pill" id="u1l1-add">+ Add a house</button>
-      <button type="button" class="pill" id="u1l1-sub">− Take one away</button>
-      <button type="button" class="pill" id="u1l1-count">Count them</button>
-      <button type="button" class="pill" id="u1l1-wreset">Start over</button>
-    </div>
-    <div class="u1l1-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>How many toothpicks make the <b>3-house</b> row? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l1-wa"><div class="bk-ans"><b>13.</b> The first house takes 5; each of the other two adds 4.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Each new house needs how many <b>more</b> toothpicks? Why not 5? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l1-wa"><div class="bk-ans"><b>4 more:</b> a floor, a wall and two roof picks. Its left wall is already there.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>How many toothpicks for <b>10 houses</b>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u1l1-wa"><div class="bk-ans"><b>41:</b> 5 for the first house, then <span class="tex">9\times4=36</span> more.</div></div></div>
-    </div>
-  </div><div class="wf-side">
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> A box holds exactly <b>100 toothpicks</b>. Can you build one row of houses that uses <b>all 100</b>? <b>Guess first.</b></div></div>
-      <div class="poll-opts">
-        <div class="opt"><b>A</b> Yes, 20 houses</div>
-        <div class="opt"><b>B</b> Yes, 24 houses</div>
-        <div class="opt"><b>C</b> Yes, 25 houses</div>
-        <div class="opt right"><b>D</b> It can’t be done</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>D.</b> 24 houses use <span class="tex">5+23\times4=97</span> and 25 houses use <b>101</b>. 100 falls in the gap. <span class="muted">(A: <span class="tex">100\div5=20</span> forgets the shared walls.)</span> Today you’ll prove it with one line of algebra.</div>
-    </div>
-  </div></div>
-  <p class="u1l1-social">Challenge your neighbour: name a box size between 50 and 80 toothpicks that <b>does</b> work exactly.</p>
 </section>
 
 <!-- ================= 1. Sequences and terms ================= -->
@@ -101,8 +75,6 @@
   <h3 class="sub">The sequence machine</h3>
   <p>Feed in a position <span class="tex">n</span>; the formula turns it into the term <span class="tex">t_n</span>. Each term drops into the row <b>and</b> onto a graph as the point <span class="tex">(n,\ t_n)</span>.</p>
   <div class="explainer" data-explainer="machine"></div>
-  <h3 class="sub">Rule or formula: which is faster?</h3>
-  <div class="explainer" data-explainer="twoWays"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -123,11 +95,6 @@
   </div>
   <div class="space" id="ex1-space"></div>
   <button class="more" data-more="ex1-space">+ More space</button>
-</section>
-
-<section class="card" data-ink="s1b" data-section="Check Example 1: the cup tower">
-  <h3 class="sub">Check Example 1: where does the 2 cm come from?</h3>
-  <div class="explainer" data-explainer="cups"></div>
 </section>
 
 <!-- ================= 2. Arithmetic, geometric or neither ================= -->
@@ -159,12 +126,6 @@
   <button class="more" data-more="ex2-space">+ More space</button>
 </section>
 
-<section class="card" data-ink="s2b" data-section="Patterns that are neither">
-  <h3 class="sub">Patterns that are neither (but still patterns)</h3>
-  <p>“Neither” doesn’t mean “no pattern”. These grow by a rule, just not by adding or multiplying the <b>same</b> number every time.</p>
-  <div class="explainer" data-explainer="shapes"></div>
-</section>
-
 <!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
 <section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u1l1"></section>
 
@@ -175,7 +136,6 @@
     <div class="u1l1-tbox"><div class="u1l1-tbh">Finite</div><div class="u1l1-tbig"><span class="tex">4,\ 7,\ 10,\ \dots,\ 31</span></div><div>A <b>finite sequence</b> has a <b>last term</b>. The dots in the <b>middle</b> stand for the terms we skipped writing.</div></div>
     <div class="u1l1-tbox"><div class="u1l1-tbh">Infinite</div><div class="u1l1-tbig"><span class="tex">4,\ 7,\ 10,\ \dots</span></div><div>An <b>infinite sequence</b> goes on forever: three dots at the <b>end</b> and no last term.</div></div>
   </div>
-  <div class="explainer" data-explainer="finite"></div>
 </section>
 
 <!-- ================= 4. Using a formula ================= -->
@@ -224,6 +184,15 @@
   <button class="more" data-more="ex4-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 2–7">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 1 · Questions 2–7</h2>
+  <p class="pr-t">Classify, finite or infinite, and use a general term. Question 1 waits for the end of the lesson (its last part is about the graph).</p>
+  <div class="pr-chips n3"><span><b>2–3</b>Arithmetic, geometric or neither</span><span><b>4–5</b>Finite or infinite; the next two terms</span><span><b>6–7</b>Using a general term</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 6.</span><a class="pill" href="../../../#/lesson/u1l1">Open the Practice site</a></div>
+</section>
+
 <!-- ================= 5. A sequence is a function ================= -->
 <section class="card" data-ink="s5" data-section="5. A Sequence Is a Function">
   <div class="sec-h"><span class="badge">5</span><h2>A Sequence Is a Function</h2></div>
@@ -233,7 +202,6 @@
     <div class="u1l1-tbox"><div class="u1l1-tbh">Geometric → non-linear</div>With <span class="tex">r\ne1</span> it <b>multiplies</b> each step, so its points <b>curve</b>: a <b>non-linear</b> (exponential) function.</div>
   </div>
   <div class="explainer" data-explainer="dots"></div>
-  <div class="part think"><div class="pl"><span class="think-tag">Think</span> The constant sequence <span class="tex">7,\ 7,\ 7,\ 7,\ \dots</span> from Example 2(f) is geometric with <span class="tex">r=1</span>. Are its points linear or non-linear?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><b>Linear:</b> the points <span class="tex">(1,7),\ (2,7),\ (3,7),\ \dots</span> lie on a horizontal line. It is also arithmetic with <span class="tex">d=0</span>, which is why the rule says <span class="tex">r\ne1</span>.</div></div></div>
 </section>
 
 <section class="card example" data-ink="ex5" data-section="Example 5">
@@ -257,7 +225,7 @@
     <div><b>A sequence is a function.</b> Graph separate points <span class="tex">(n,\ t_n)</span>, never joined. Arithmetic points lie on a line (<b>linear</b>); geometric points curve (<b>non-linear</b>).</div>
   </div>
   <a class="assign" href="../../../#/lesson/u1l1">
-    <div><div class="kicker">Your turn</div><b>Assignment 1 — Patterns, Sequences and the General Term</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 1 · Questions 1 and 8–14</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l2/">
     <div><div class="kicker">Next lesson</div><b>Lesson 2 — Arithmetic Sequences</b><div class="muted">Build the formula <span class="tex">t_n</span> for any arithmetic sequence from its first term and its common difference.</div></div><span class="arrow">→</span>

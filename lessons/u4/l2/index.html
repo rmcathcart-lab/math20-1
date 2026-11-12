@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u4l2.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,15 @@
 </head>
 <body>
 <main class="lesson screen u4l2">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Who Am I?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="8s" begin="0s" repeatCount="indefinite"/><text x="0" y="46" font-size="36" text-anchor="middle" transform="scale(-1 1)">🕵️</text></g><text x="250" font-size="30" text-anchor="middle">❔<animate attributeName="y" values="64;-6" dur="3.2s" begin="0s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.2s" begin="0s" repeatCount="indefinite"/></text><text x="300" font-size="26" text-anchor="middle">❔<animate attributeName="y" values="64;-6" dur="3.6s" begin="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.15;.8;1" dur="3.6s" begin="1.6s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Who Am I?</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">I am a two-digit number. Multiply my two digits and you get <b>24</b>. Add them and you get <b>10</b>.</p><p class="vw-ask">Who am I?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Two mystery digit cards and a magnifying glass"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -8;0 0" dur="1.8s" begin="0s" repeatCount="indefinite"/><rect x="60" y="62" width="96" height="128" rx="16" fill="#fffdf6" stroke="#4a4436" stroke-width="4"/><text x="108" y="150" font-size="76" font-weight="800" fill="#2b55a0" text-anchor="middle">?<animate attributeName="opacity" values="1;0.3;1" dur="1.8s" begin="0s" repeatCount="indefinite"/></text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -8;0 0" dur="1.8s" begin="0.9s" repeatCount="indefinite"/><rect x="174" y="62" width="96" height="128" rx="16" fill="#fffdf6" stroke="#4a4436" stroke-width="4"/><text x="222" y="150" font-size="76" font-weight="800" fill="#2b55a0" text-anchor="middle">?<animate attributeName="opacity" values="1;0.3;1" dur="1.8s" begin="0.9s" repeatCount="indefinite"/></text></g><g><animateTransform attributeName="transform" type="translate" values="40 0;190 0;40 0" dur="5s" repeatCount="indefinite"/><circle cx="40" cy="196" r="30" fill="#dfeefe" fill-opacity=".55" stroke="#4a4436" stroke-width="5"/><line x1="62" y1="218" x2="90" y2="244" stroke="#e0a11b" stroke-width="11" stroke-linecap="round"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="300" y="50" font-size="34" font-weight="800" fill="#c93a33" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>How do you know?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>46</b>, or <b>64</b>! The digits must be 4 and 6: <span class="tex">4\times6=24</span> and <span class="tex">4+6=10</span>. (3 and 8 multiply to 24 but add to 11; 2 and 12 is not two digits.) Two numbers fit the riddle, depending on which digit comes first.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -44,48 +54,10 @@
   <div class="outcome"><b>RF1</b> Factor polynomial expressions of the form <span class="tex">ax^2+bx+c</span>, <span class="tex">a^2x^2-b^2y^2</span>, <span class="tex">a(f(x))^2+b(f(x))+c</span> and <span class="tex">a^2(f(x))^2-b^2(g(y))^2</span> (<span class="tex">a</span>, <span class="tex">b</span> and <span class="tex">c</span> rational).<br><span class="muted">Today: <span class="tex">ax^2+bx+c</span> by decomposition, including negative and fraction coefficients, two variables and perfect squares.</span></div>
 </section>
 
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Stained-Glass Window" id="wu" style="--wf-side: 440px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Stained-Glass Window</h2>
-  <p class="wf-rule">Two straight <b>lead lines</b> cut a rectangular window into <b>four panes</b> of coloured glass.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u4l2-win" id="u4l2-win"></div>
-    <div class="u4l2-wout" id="u4l2-wout"></div>
-    <div class="u4l2-wbtns">
-      <button type="button" class="pill" id="u4l2-wa">Window A</button>
-      <button type="button" class="pill" id="u4l2-wm">The mystery window</button>
-      <button type="button" class="pill" id="u4l2-wd">Multiply the diagonals</button>
-    </div>
-    <p class="u4l2-social">Challenge your neighbour: the top panes are 6 and 9 dm², the bottom-left pane is 10 dm². What is the fourth pane?</p>
-  </div><div class="wf-side">
-    <div class="u4l2-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Window A is 7 dm by 5 dm. Which pane has the biggest area? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l2-wa2"><div class="bk-ans">Top right: <span class="tex">5\times3=</span> <b>15 dm²</b> (the others are 6, 4 and 10).</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>Multiply the <b>diagonal</b> pairs: top-left × bottom-right, and top-right × bottom-left. <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l2-wa2"><div class="bk-ans"><span class="tex">6\times10=60</span> and <span class="tex">15\times4=60</span>. The <b>same</b>!</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">3</div><div>Drag a lead line. Are the diagonal products still equal? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u4l2-wa2"><div class="bk-ans"><b>Always.</b> Each product is (left width)(right width)(top height)(bottom height).</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> In the <b>mystery window</b>, three panes are 8, 12 and 18 dm². What is the fourth pane? <b>Guess first.</b></div></div>
-      <div class="poll-opts c4">
-        <div class="opt"><b>A</b> 22</div>
-        <div class="opt"><b>B</b> 24</div>
-        <div class="opt right"><b>C</b> 27</div>
-        <div class="opt"><b>D</b> 30</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>C, 27 dm².</b> The diagonals match: <span class="tex">8\times{?}=12\times18=216</span>, so <span class="tex">?=27</span>. (The panes are 2 and 3 dm wide, 4 and 9 dm tall.)<br>
-        <span class="muted">Today’s secret: in the area model of a trinomial, the two <b>middle</b> cells multiply to the same as the two <b>corners</b>.</span></div>
-    </div>
-  </div></div>
-</section>
-
 <!-- ================= 1. Decomposition ================= -->
 <section class="card" data-ink="s1" data-section="1. The Method of Decomposition">
   <div class="sec-h"><span class="badge">1</span><h2>The Method of Decomposition</h2></div>
   <p>When two binomials are expanded, the two middle products combine into the <span class="tex">x</span>-term. In <span class="tex">(2x+3)(x+4)</span> the four parts of the area model are <span class="tex">2x^2</span>, <span class="tex">\textcolor{#1f5bd6}{8x}</span>, <span class="tex">\textcolor{#c27a0e}{3x}</span> and <span class="tex">12</span>, so the trinomial is <span class="tex">2x^2+11x+12</span>. The two middle parts multiply to <span class="tex">8x\cdot3x=24x^2</span>, and <span class="tex">(2x^2)(12)=24x^2</span> too. So the middle numbers 8 and 3 multiply to <span class="tex">ac=2\times12=24</span> and add to <span class="tex">b=11</span>.</p>
-  <div class="explainer" data-explainer="areaWhy"></div>
   <p>This is always true, so to factor <span class="tex">ax^2+bx+c</span> we <b>decompose</b> (split) the middle term using two numbers with product <span class="tex">ac</span> and sum <span class="tex">b</span>, then factor by grouping.</p>
   <div class="def amber"><b>Decomposition</b> for <span class="tex">ax^2+bx+c</span>
     <div class="u4l2-steps">
@@ -109,7 +81,7 @@
 
 <section class="card" data-ink="s1b" data-section="1. The Product–Sum Hunt">
   <h3 class="sub">The product–sum hunt</h3>
-  <p>List the factor pairs of <span class="tex">ac</span> and check their sums until one is <span class="tex">b</span>. Then split, group and factor out the common bracket.</p>
+  <p>Draw the X: <span class="tex">ac</span> on top, <span class="tex">b</span> underneath. List the factor pairs of <span class="tex">ac</span> and check their sums until one is <span class="tex">b</span>, and circle it. Then split, group and factor out the common bracket.</p>
   <div class="explainer" data-explainer="hunt"></div>
 </section>
 
@@ -135,7 +107,6 @@
     <div class="bk-flip"><div class="bk-front"><span class="tex">ac&lt;0,\ b&gt;0</span></div><div class="bk-back"><b>opposite signs</b>, the bigger one positive<br><span class="tex">2x^2+5x-3</span>: <span class="tex">6,\ -1</span></div></div>
     <div class="bk-flip"><div class="bk-front"><span class="tex">ac&lt;0,\ b&lt;0</span></div><div class="bk-back"><b>opposite signs</b>, the bigger one negative<br><span class="tex">2x^2-5x-3</span>: <span class="tex">-6,\ 1</span></div></div>
   </div>
-  <div class="explainer" data-explainer="huntNeg"></div>
 </section>
 
 <section class="card example" data-ink="ex3" data-section="Example 3">
@@ -162,6 +133,15 @@
   <div class="part u4l2-solo"><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">First terms must be <span class="tex">3x</span> and <span class="tex">x</span>: <span class="tex">(3x\quad)(x\quad)</span>. The last terms multiply to <span class="tex">-6</span>.<br>Try <span class="tex">(3x-2)(x+3)</span>: middle term <span class="tex">9x-2x=7x</span>. Right size, wrong sign: switch the signs.<br>Try <span class="tex">(3x+2)(x-3)</span>: middle term <span class="tex">-9x+2x=-7x</span> ✓ &nbsp; <span class="tex">3x^2-7x-6=\boldsymbol{(3x+2)(x-3)}</span></div></div></div>
   <div class="space" id="ex4-space"></div>
   <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 2 · Questions 1–5</h2>
+  <p class="pr-t">Decomposition, with and without negative terms, then guess and check.</p>
+  <div class="pr-chips n4"><span><b>1</b>Decomposition</span><span><b>2–3</b>Negative terms</span><span><b>4</b>Guess and check</span><span><b>5</b>Check a student’s answer</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u4l2">Open the Practice site</a></div>
 </section>
 
 <!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
@@ -191,7 +171,6 @@
 <section class="card" data-ink="s4" data-section="4. Two Variables">
   <div class="sec-h"><span class="badge">4</span><h2>Two Variables and Rational Coefficients</h2></div>
   <div class="def">For <span class="tex">ax^2+bxy+cy^2</span>, decompose exactly as before; each binomial has an <span class="tex">x</span>-term and a <span class="tex">y</span>-term.</div>
-  <div class="explainer" data-explainer="boxMethod"></div>
 </section>
 
 <section class="card example" data-ink="ex6" data-section="Example 6">
@@ -229,7 +208,6 @@
   <div class="sec-h"><span class="badge">5</span><h2>Perfect-Square Trinomials</h2></div>
   <p>Squaring a binomial gives a <b>perfect-square trinomial</b>:</p>
   <div class="def amber u4l2-key"><div class="u4l2-key2"><span class="tex">A^2+2AB+B^2=(A+B)^2</span><span class="tex">A^2-2AB+B^2=(A-B)^2</span></div><span class="muted">Test: the first and last terms are perfect squares (<span class="tex">A^2</span> and <span class="tex">B^2</span>, both positive), and the middle term is <span class="tex">\pm2AB</span>.</span></div>
-  <div class="explainer" data-explainer="squareModel"></div>
   <p>Decomposition also works on these, but recognizing the pattern is faster. A trinomial like <span class="tex">x^2+6x-9</span> is <b>not</b> a perfect square: its last term is negative.</p>
   <div class="explainer" data-explainer="psTest"></div>
 </section>
@@ -273,7 +251,7 @@
     <div><b>Patterns.</b> Two variables: each bracket has an <span class="tex">x</span>- and a <span class="tex">y</span>-term. Perfect squares: <span class="tex">A^2\pm2AB+B^2=(A\pm B)^2</span>; the last term must be positive.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u4l2">
-    <div><div class="kicker">Your turn</div><b>Assignment 2 — Factoring <span class="tex">ax^2+bx+c</span></b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 2 · Questions 6–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l3/">
     <div><div class="kicker">Next lesson</div><b>Lesson 3 — Factoring by Substitution: <span class="tex">a(f(x))^2+b(f(x))+c</span></b><div class="muted">Replace a repeated expression with one letter, factor, then put it back.</div></div><span class="arrow">→</span>

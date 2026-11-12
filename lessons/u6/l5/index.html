@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Adding and Subtracting with Monomial Denominators · Math 20-1 6.5</title>
+<meta name="description" content="Math 20-1 Unit 6 Lesson 5: adding and subtracting rational expressions with monomial denominators. Fraction review with the lowest common denominator, numerical denominators (brackets when subtracting), the same denominator (non-permissible values stay), the LCD of monomials, different monomial denominators including two variables, whole-number terms, and common errors caught by substituting a number. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u6l5.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u6l5">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Would You Rather?">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="70" y="46" font-size="36" text-anchor="middle">🍴</text></g><g><animateTransform attributeName="transform" type="rotate" values="-10 170 46;10 170 46;-10 170 46" dur="2.2s" repeatCount="indefinite"/><text x="170" y="46" font-size="40" text-anchor="middle">🎂</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.7s" repeatCount="indefinite"/><text x="270" y="46" font-size="36" text-anchor="middle">🍴</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Would You Rather?</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx"><b>Plate A:</b> <span class="tex">\tfrac{1}{2}</span> of a cake, then <span class="tex">\tfrac{1}{3}</span> of the same cake, then <span class="tex">\tfrac{1}{6}</span> more.</p><p class="vw-ctx"><b>Plate B:</b> <span class="tex">\tfrac{1}{2}</span> of a cake, then <span class="tex">\tfrac{1}{4}</span>, then <span class="tex">\tfrac{1}{8}</span>, then <span class="tex">\tfrac{1}{16}</span>, … Every piece is half the one before, and the pieces never stop coming.</p><p class="vw-ask">Would you rather have Plate A or Plate B?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Two plates of cake, A and B, bobbing, with a question mark between them"><ellipse cx="80" cy="196" rx="64" ry="16" fill="#fffdf6" stroke="#4a4436" stroke-width="3"/><ellipse cx="250" cy="196" rx="64" ry="16" fill="#fffdf6" stroke="#4a4436" stroke-width="3"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -8;0 0" dur="1.6s" begin="0s" repeatCount="indefinite"/><text x="80" y="186" font-size="70" text-anchor="middle">🍰</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -8;0 0" dur="1.6s" begin="0.8s" repeatCount="indefinite"/><text x="250" y="186" font-size="70" text-anchor="middle">🍰</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.8s" begin="0s" repeatCount="indefinite"/><text x="80" y="60" font-size="40" font-weight="800" fill="#2b55a0" text-anchor="middle">A</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.8s" begin="0.9s" repeatCount="indefinite"/><text x="250" y="60" font-size="40" font-weight="800" fill="#2b55a0" text-anchor="middle">B</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.4s" begin="0s" repeatCount="indefinite"/><text x="165" y="130" font-size="46" font-weight="800" fill="#c93a33" text-anchor="middle">?</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Pick one, then convince the person beside you.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>It’s a tie: exactly one cake each.</b> Plate A: <span class="tex">\tfrac{1}{2}+\tfrac{1}{3}+\tfrac{1}{6}=\tfrac{3}{6}+\tfrac{2}{6}+\tfrac{1}{6}=1</span>. Plate B creeps up on 1: <span class="tex">\tfrac{1}{2},\ \tfrac{3}{4},\ \tfrac{7}{8},\ \tfrac{15}{16},\ \dots</span> Each piece fills half of the gap that is left, so it never <i>passes</i> 1, and forever adds up to exactly 1. That is Unit 1’s infinite geometric series: <span class="tex">S_\infty=\dfrac{a}{1-r}=\dfrac{1/2}{1-1/2}=1</span>. (Plate A is still faster to eat.)</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 6 Rational Expressions and Equations · Lesson 5</div>
+  <h1>Adding and Subtracting with Monomial Denominators</h1>
+  <p class="lede">Rational expressions add and subtract just like fractions: find the <b>lowest common denominator</b>, rewrite each term over it, then combine the numerators. Put each numerator in <b>brackets</b> when you subtract, and keep the <b>non-permissible values</b> with the answer.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>add and subtract fractions using the <b>LCD</b>, and do the same when the numerators contain a variable</li>
+      <li>combine expressions with the <b>same denominator</b>, using brackets when subtracting and keeping the NPVs</li>
+      <li>find the <b>LCD of monomials</b>, such as <span class="tex">6x^2y</span> and <span class="tex">4xy^3</span>, and rewrite each expression over it</li>
+      <li>add and subtract expressions with <b>different monomial denominators</b>, including two variables and whole-number terms</li>
+      <li>catch <b>common errors</b> by substituting a number into the question and into my answer</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN5</b> Perform operations on rational expressions (limited to numerators and denominators that are monomials, binomials or trinomials).<br><span class="muted">Today: adding and subtracting rational expressions with monomial denominators.</span></div>
+</section>
+
+<!-- ================= 1. Fraction review ================= -->
+<section class="card" data-ink="s1" data-section="1. Review: Adding and Subtracting Fractions">
+  <div class="sec-h"><span class="badge">1</span><h2>Review: Adding and Subtracting Fractions</h2></div>
+  <p>Fractions can be added or subtracted only when their denominators are the same. The smallest denominator that works is the <b>lowest common denominator (LCD)</b>: the lowest common multiple of the denominators.</p>
+  <div class="def amber"><b>To add or subtract fractions:</b>
+    <ol class="u6l5-steps">
+      <li>Find the LCD.</li>
+      <li>Write each fraction as an equivalent fraction with the LCD as its denominator (multiply its numerator <b>and</b> denominator by the same number).</li>
+      <li>Add or subtract the numerators and keep the denominator.</li>
+      <li>Simplify.</li>
+    </ol></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>The calculator can check these answers</b>, but it is the steps that carry over to rational expressions. For (a): <span class="keys"><kbd>5</kbd><kbd>÷</kbd><kbd>6</kbd><kbd>+</kbd><kbd>3</kbd><kbd>÷</kbd><kbd>8</kbd><kbd>ENTER</kbd></span>, then <span class="keys"><kbd>MATH</kbd><kbd>1</kbd><kbd>ENTER</kbd></span> (►Frac) gives <b>29/24</b>.</div>
+    <div class="u6l5-pcol"><button class="pill" data-keys="5 ÷ 6 + 3 ÷ 8 = ►Frac =">Show (a)</button><button class="pill" data-keys="4 ÷ 9 − 7 ÷ 6 = ►Frac =">Show (d)</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Fractions first</h3></div>
+  <p class="q">Simplify.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{5}{6}+\dfrac{3}{8}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">LCD 24<br><span class="tex">\dfrac{20}{24}+\dfrac{9}{24}=\boldsymbol{\dfrac{29}{24}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{7}{10}-\dfrac{4}{15}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">LCD 30<br><span class="tex">\dfrac{21}{30}-\dfrac{8}{30}=\boldsymbol{\dfrac{13}{30}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{2}{3}-\dfrac{5}{12}+\dfrac{3}{4}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">LCD 12<br><span class="tex">\dfrac{8}{12}-\dfrac{5}{12}+\dfrac{9}{12}</span><br><span class="tex">=\dfrac{12}{12}=\boldsymbol{1}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{4}{9}-\dfrac{7}{6}</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">LCD 18<br><span class="tex">\dfrac{8}{18}-\dfrac{21}{18}=\boldsymbol{-\dfrac{13}{18}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Numerical denominators ================= -->
+<section class="card" data-ink="s2" data-section="2. Numerical Denominators">
+  <div class="sec-h"><span class="badge">2</span><h2>Numerical Denominators</h2></div>
+  <p>The same steps work when the numerators contain a variable. Multiply the <b>whole</b> numerator by the factor (use brackets), then expand and collect like terms. When subtracting, the minus sign applies to <b>every term</b> of the numerator that follows it.</p>
+  <div class="def amber u6l5-center"><span class="tex u6l5-bigf">\dfrac{a}{c}-\dfrac{b+d}{c}=\dfrac{a\textcolor{#c93a33}{-(b+d)}}{c}=\dfrac{a\textcolor{#c93a33}{-b-d}}{c}</span><div class="u6l5-legend">Put each numerator in brackets before you subtract.</div></div>
+  <p>These denominators are numbers, never <span class="tex">0</span>, so there are no non-permissible values.</p>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Brackets around every numerator</h3></div>
+  <p class="q">Simplify.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x+3}{4}+\dfrac{2x-1}{6}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">LCD 12<br><span class="tex">\dfrac{3(x+3)+2(2x-1)}{12}</span><br><span class="tex">=\dfrac{3x+9+4x-2}{12}</span><br><span class="tex">=\dfrac{7x+7}{12}=\boldsymbol{\dfrac{7(x+1)}{12}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{3a+2}{5}-\dfrac{a-4}{10}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">LCD 10<br><span class="tex">\dfrac{2(3a+2)-(a-4)}{10}</span><br><span class="tex">=\dfrac{6a+4-a+4}{10}</span><br><span class="tex">=\boldsymbol{\dfrac{5a+8}{10}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{y-2}{3}-\dfrac{2y+5}{4}+\dfrac{y}{6}</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">LCD 12<br><span class="tex">\dfrac{4(y-2)-3(2y+5)+2y}{12}</span><br><span class="tex">=\dfrac{4y-8-6y-15+2y}{12}</span><br><span class="tex">=\boldsymbol{-\dfrac{23}{12}}</span> (the <span class="tex">y</span>-terms cancel)</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Same denominator ================= -->
+<section class="card" data-ink="s3" data-section="3. Expressions with the Same Denominator">
+  <div class="sec-h"><span class="badge">3</span><h2>Expressions with the Same Denominator</h2></div>
+  <div class="def">When the denominators are already the same, add or subtract the numerators and keep the denominator. State the <b>non-permissible values (NPVs)</b> from the denominator first. Then simplify: factor the numerator and cancel common <b>factors</b>. The NPVs <b>stay with the answer</b>, even if the factor that caused them cancels.</div>
+  <div class="explainer" data-explainer="sameDen"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Same denominator</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{7}{2x}+\dfrac{3}{2x}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0</span><br><span class="tex">\dfrac{10}{2x}=\boldsymbol{\dfrac{5}{x}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{4a+1}{3a}-\dfrac{a-5}{3a}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a\ne0</span><br><span class="tex">\dfrac{4a+1-(a-5)}{3a}</span><br><span class="tex">=\dfrac{3a+6}{3a}=\dfrac{3(a+2)}{3a}</span><br><span class="tex">=\boldsymbol{\dfrac{a+2}{a}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{5m-2}{m+4}-\dfrac{2m-14}{m+4}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">m\ne-4</span><br><span class="tex">\dfrac{5m-2-2m+14}{m+4}</span><br><span class="tex">=\dfrac{3m+12}{m+4}=\dfrac{3(m+4)}{m+4}</span><br><span class="tex">=\boldsymbol{3},\ m\ne-4</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{x^2}{x-3}-\dfrac{9}{x-3}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne3</span><br><span class="tex">\dfrac{x^2-9}{x-3}=\dfrac{(x-3)(x+3)}{x-3}</span><br><span class="tex">=\boldsymbol{x+3},\ x\ne3</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 4. LCD of monomials ================= -->
+<section class="card" data-ink="s4" data-section="4. The LCD of Monomials">
+  <div class="sec-h"><span class="badge">4</span><h2>The LCD of Monomials</h2></div>
+  <p>For monomial denominators, build the LCD one piece at a time.</p>
+  <div class="def amber"><b>LCD of monomials:</b> the lowest common multiple of the coefficients, times each variable raised to the <b>highest</b> power that appears. &nbsp; e.g. <span class="tex">6x^2y</span> and <span class="tex">4xy^3</span>: &nbsp; LCD <span class="tex">=12x^2y^3</span>.</div>
+  <p>To rewrite an expression over the LCD, ask “what do I multiply my denominator by to get the LCD?” and multiply the numerator <b>and</b> the denominator by that monomial.</p>
+  <div class="explainer" data-explainer="lcdBuild"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Build the LCD</h3></div>
+  <p class="q">Determine the LCD.</p>
+  <div class="parts c4">
+    <div class="part"><div class="pl">(a) <span class="tex">5x</span> and <span class="tex">3x^2</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{15x^2}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">8a</span> and <span class="tex">12b</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{24ab}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">6m^2n</span> and <span class="tex">9mn^3</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{18m^2n^3}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">2x</span>, <span class="tex">4</span> and <span class="tex">x^3</span></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{4x^3}</span></div></div></div>
+  </div>
+  <p class="q u6l5-q2">Fill in the missing numerator.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(e) <span class="tex">\dfrac{5}{6x^2y}=\dfrac{\boxed{\phantom{000}}}{12x^2y^3}</span></div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{10y^2}</span>: &nbsp;<span class="tex">6x^2y\times2y^2=12x^2y^3</span>, so multiply the numerator by <span class="tex">2y^2</span>.</div></div></div>
+    <div class="part"><div class="pl">(f) <span class="tex">\dfrac{3}{4xy^3}=\dfrac{\boxed{\phantom{000}}}{12x^2y^3}</span></div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{9x}</span>: &nbsp;<span class="tex">4xy^3\times3x=12x^2y^3</span>, so multiply by <span class="tex">3x</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–4">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 5 · Questions 1–4</h2>
+  <p class="pr-t">LCD first, brackets when you subtract, and NPVs from the denominator.</p>
+  <div class="pr-chips n4"><span><b>1</b>Fraction review</span><span><b>2</b>Numerical denominators</span><span><b>3</b>Same denominator</span><span><b>4</b>LCD of monomials</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 3.</span><a class="pill" href="../../../#/lesson/u6l5">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 5. Different monomial denominators ================= -->
+<section class="card" data-ink="s5" data-section="5. Different Monomial Denominators">
+  <div class="sec-h"><span class="badge">5</span><h2>Different Monomial Denominators</h2></div>
+  <div class="def amber"><b>To add or subtract rational expressions:</b>
+    <ol class="u6l5-steps">
+      <li>State the NPVs (each variable in a monomial denominator <span class="tex">\ne0</span>).</li>
+      <li>Find the LCD.</li>
+      <li>Rewrite each expression over the LCD.</li>
+      <li>Combine the numerators (brackets when subtracting), expand and collect like terms.</li>
+      <li>Simplify: factor the numerator if possible and cancel common factors.</li>
+    </ol></div>
+  <div class="explainer" data-explainer="monoAdd"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Different monomial denominators</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{2}{3x}+\dfrac{5}{6x}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0</span>; LCD <span class="tex">6x</span><br><span class="tex">\dfrac{4}{6x}+\dfrac{5}{6x}=\dfrac{9}{6x}=\boldsymbol{\dfrac{3}{2x}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{4}{a}-\dfrac{3}{a^2}</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a\ne0</span>; LCD <span class="tex">a^2</span><br><span class="tex">\dfrac{4a}{a^2}-\dfrac{3}{a^2}=\boldsymbol{\dfrac{4a-3}{a^2}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{5}{6m^2n}-\dfrac{7}{9mn^3}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">m\ne0,\ n\ne0</span>; LCD <span class="tex">18m^2n^3</span><br><span class="tex">\dfrac{5(3n^2)}{18m^2n^3}-\dfrac{7(2m)}{18m^2n^3}</span><br><span class="tex">=\boldsymbol{\dfrac{15n^2-14m}{18m^2n^3}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{1}{x}+\dfrac{2}{3x^2}-\dfrac{1}{2x^3}</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0</span>; LCD <span class="tex">6x^3</span><br><span class="tex">\dfrac{6x^2}{6x^3}+\dfrac{4x}{6x^3}-\dfrac{3}{6x^3}</span><br><span class="tex">=\boldsymbol{\dfrac{6x^2+4x-3}{6x^3}}</span></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Binomial numerators</h3></div>
+  <p class="q">Simplify. State the non-permissible values.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\dfrac{x+2}{3x}+\dfrac{x-4}{2x}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0</span>; LCD <span class="tex">6x</span><br><span class="tex">\dfrac{2(x+2)+3(x-4)}{6x}=\dfrac{2x+4+3x-12}{6x}</span><br><span class="tex">=\boldsymbol{\dfrac{5x-8}{6x}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\dfrac{2y-1}{4y}-\dfrac{y-3}{6y^2}</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y\ne0</span>; LCD <span class="tex">12y^2</span><br><span class="tex">\dfrac{3y(2y-1)-2(y-3)}{12y^2}=\dfrac{6y^2-3y-2y+6}{12y^2}</span><br><span class="tex">=\boldsymbol{\dfrac{6y^2-5y+6}{12y^2}}</span> (the numerator does not factor)</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\dfrac{3a-b}{a^2b}-\dfrac{a-2b}{ab^2}</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">a\ne0,\ b\ne0</span>; LCD <span class="tex">a^2b^2</span><br><span class="tex">\dfrac{b(3a-b)-a(a-2b)}{a^2b^2}=\dfrac{3ab-b^2-a^2+2ab}{a^2b^2}</span><br><span class="tex">=\boldsymbol{\dfrac{-a^2+5ab-b^2}{a^2b^2}}</span></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">\dfrac{x+6}{2x}-\dfrac{x+9}{3x}</span></div><div class="work" style="--h:210px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0</span>; LCD <span class="tex">6x</span><br><span class="tex">\dfrac{3(x+6)-2(x+9)}{6x}=\dfrac{3x+18-2x-18}{6x}</span><br><span class="tex">=\dfrac{x}{6x}=\boldsymbol{\dfrac{1}{6}},\ x\ne0</span><br>The answer has no variable, but the original is undefined at <span class="tex">x=0</span>, so the restriction stays.</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u6l5"></section>
+
+<!-- ================= 6. Whole numbers, errors, problems ================= -->
+<section class="card" data-ink="s6" data-section="6. Whole-Number Terms and Common Errors">
+  <div class="sec-h"><span class="badge">6</span><h2>Whole-Number Terms, Common Errors and Problems</h2></div>
+  <p>A term with no denominator has denominator <span class="tex">1</span>: &nbsp;<span class="tex">3=\dfrac{3}{1}</span>, so it is rewritten over the LCD like any other term.</p>
+  <div class="tip watch"><div class="tip-ic">!</div><div><b>Three common errors.</b>
+    <ul class="u6l5-errs">
+      <li>Adding the denominators: &nbsp;<span class="tex">\dfrac{2}{x}+\dfrac{3}{y}\ne\dfrac{5}{x+y}</span></li>
+      <li>Forgetting the brackets when subtracting.</li>
+      <li>Cancelling <b>terms</b> instead of factors.</li>
+    </ul></div></div>
+  <div class="def"><b>A quick test for an answer:</b> substitute a number (not an NPV) into the question and into the answer. If the values differ, there is an error. (Equal values do not prove the answer is right, but they catch most mistakes.)</div>
+  <div class="explainer" data-explainer="subCheck"></div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Let the calculator substitute.</b> Store the number in X, then type the question with X: <span class="keys"><kbd>1</kbd><kbd>STO→</kbd><kbd>X,T,θ,n</kbd><kbd>ENTER</kbd></span>, then <span class="keys"><kbd>5</kbd><kbd>÷</kbd><kbd>(</kbd><kbd>2</kbd><kbd>X,T,θ,n</kbd><kbd>)</kbd><kbd>−</kbd><kbd>(</kbd><kbd>X,T,θ,n</kbd><kbd>−</kbd><kbd>3</kbd><kbd>)</kbd><kbd>÷</kbd><kbd>(</kbd><kbd>2</kbd><kbd>X,T,θ,n</kbd><kbd>)</kbd><kbd>ENTER</kbd></span> gives <b>3.5</b>. Type your answer the same way and compare.</div>
+    <div class="u6l5-pcol"><button class="pill" data-keys="1 STO→ X = 5 ÷ ( 2 X ) − ( X − 3 ) ÷ ( 2 X ) =">Show me</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Whole numbers and errors</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Simplify <span class="tex">3-\dfrac{2}{x}</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0</span>; LCD <span class="tex">x</span><br><span class="tex">\dfrac{3x}{x}-\dfrac{2}{x}=\boldsymbol{\dfrac{3x-2}{x}}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Simplify <span class="tex">\dfrac{x}{4}-\dfrac{3}{x}+1</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x\ne0</span>; LCD <span class="tex">4x</span><br><span class="tex">\dfrac{x^2-12+4x}{4x}=\dfrac{x^2+4x-12}{4x}</span><br><span class="tex">=\boldsymbol{\dfrac{(x+6)(x-2)}{4x}}</span></div></div></div>
+    <div class="part"><div class="pl">(c) Kayla’s work is shown. Find her error and correct it.<div class="u6l5-kayla"><span class="tex">\dfrac{5}{2x}-\dfrac{x-3}{2x}=\dfrac{5-x-3}{2x}=\dfrac{2-x}{2x}</span></div></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The minus sign was not applied to <span class="tex">-3</span>: &nbsp;<span class="tex">5-(x-3)=5-x+3</span>.<br>Correct: <span class="tex">\boldsymbol{\dfrac{8-x}{2x}},\ x\ne0</span>.<br>Test <span class="tex">x=1</span>: &nbsp;<span class="tex">\dfrac{5}{2}-\dfrac{-2}{2}=\dfrac{7}{2}</span>; &nbsp;<span class="tex">\dfrac{8-1}{2}=\dfrac{7}{2}</span> ✓; Kayla’s gives <span class="tex">\dfrac{1}{2}</span>.</div></div></div>
+    <div class="part"><div class="pl">(d) Diego wrote <span class="tex">\dfrac{2}{x}+\dfrac{3}{y}=\dfrac{5}{x+y}</span>. Show that this is wrong by substituting <span class="tex">x=1</span> and <span class="tex">y=1</span>, then simplify correctly.</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Left side: <span class="tex">2+3=5</span>. Right side: <span class="tex">\dfrac{5}{2}</span>. Not equal.<br>Correct: LCD <span class="tex">xy</span>, &nbsp;<span class="tex">\dfrac{2y}{xy}+\dfrac{3x}{xy}=\boldsymbol{\dfrac{3x+2y}{xy}}</span>, &nbsp;<span class="tex">x\ne0,\ y\ne0</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Up and down the mountain</h3></div>
+  <p class="q">A hiker climbs a <span class="tex">9</span> km trail at an average speed of <span class="tex">v</span> km/h and comes down a longer <span class="tex">15</span> km trail at <span class="tex">2v</span> km/h. (Time <span class="tex">=\dfrac{\text{distance}}{\text{speed}}</span>.)</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Write the total time as a single rational expression in simplest form.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{9}{v}+\dfrac{15}{2v}=\dfrac{18}{2v}+\dfrac{15}{2v}</span><br><span class="tex">=\boldsymbol{\dfrac{33}{2v}}</span> hours, &nbsp;<span class="tex">v&gt;0</span> (a speed is positive).</div></div></div>
+    <div class="part"><div class="pl">(b) Determine the total time when <span class="tex">v=3</span> km/h.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{33}{2(3)}=\boldsymbol{5.5}</span> h.<br>Check: <span class="tex">\dfrac{9}{3}+\dfrac{15}{6}=3+2.5=5.5</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(c) Write a simplified expression for how much longer the climb takes than the descent, and evaluate it for <span class="tex">v=3</span> km/h.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\dfrac{9}{v}-\dfrac{15}{2v}=\dfrac{18-15}{2v}=\boldsymbol{\dfrac{3}{2v}}</span> hours.<br>When <span class="tex">v=3</span>: <span class="tex">\dfrac{3}{6}=0.5</span> h, or <b>30 min</b>.</div></div></div>
+  </div>
+  <div class="explainer" data-explainer="hike"></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Same denominator.</b> Combine the numerators and keep the denominator. NPVs first, and they <b>stay</b>: <span class="tex">\dfrac{3(m+4)}{m+4}=3,\ m\ne-4</span>.</div>
+    <div><b>LCD of monomials.</b> LCM of the coefficients times the <b>highest power</b> of each variable: <span class="tex">6x^2y</span>, <span class="tex">4xy^3</span> → <span class="tex">12x^2y^3</span>. Multiply each term’s top and bottom by what its denominator is missing.</div>
+    <div><b>Brackets when subtracting.</b> The minus hits every term: <span class="tex">5-(x-3)=5-x+3</span>. A whole number has denominator 1: <span class="tex">3=\dfrac{3x}{x}</span>.</div>
+    <div><b>Test your answer.</b> Substitute a number that is not an NPV into the question and the answer. Different values mean an error. Never add denominators or cancel terms.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u6l5">
+    <div><div class="kicker">Your turn</div><b>Assignment 5 · Questions 5–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l6/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 6 — Adding and Subtracting with Binomial and Trinomial Denominators</b><div class="muted">The same steps, with denominators like <span class="tex">x+2</span> and <span class="tex">x^2-4</span>: factor them first to find the LCD.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u6l5.js';
+  boot({ key: 'u6l5', homeHref: '../../', title: '6.5 Monomial Denominators' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

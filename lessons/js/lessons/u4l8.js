@@ -1,28 +1,16 @@
 /* Math 20-1 · Unit 4 · Lesson 8 — Unit 4 Review (no calculator).
- * Warm-up (The Mystery Box: a box drawn to scale whose label says V = x³ + 6x² + 8x; try x = 1, 2, …, read the edges;
- * the big one: the edges are x, x + 2, x + 4 — GCF first, then product 8 and sum 6), and the explainers:
+ * New format (2026-11-11): the warm-up is plain markup on the page (no code). Explainers:
  *   machine (STAR: the factoring checklist as a sorting machine. An expression drops from the hopper onto a belt, the
  *     GCF gate pulls out a common factor, the terms gate counts the terms, a chute routes it to one of seven stations
  *     (difference of squares, x² + bx + c, decomposition, perfect square, substitution, grouping, does not factor),
  *     the factors land in the tray, any factor that still factors goes round again, then the factored form is expanded
  *     back and stamped. The summary table's examples, Example 1 checks and three review questions),
- *   solveRecap (one side = 0, divide out a number GCF, factor, zero product "either–or" switches, and the roots as the
- *     graph's x-intercepts; x² = 5x and the lost root; Example 4 checks and a review question),
- *   radRecap (the six-step rail beside the working, with a verify card and stamp for every candidate: √x = −3,
- *     √(x + 2) = x, Example 7 checks, a review question),
- *   errors (the five common errors: the wrong work, a test that catches it, the fix and the rule),
- *   subDos (box the repeated chunk, wrap it as A (and B), factor, unwrap in brackets, simplify, factor again;
- *     Example 2 checks),
  *   kHunt (Example 3: the factor cards with the candidate binomial sliding over them; the factor pairs of −12 giving
  *     every k on a number line; the (3x ± 7)² area square giving k = ±42),
- *   rootsGraph (zeros of y = 2x² − x − 6 as x-intercepts, a double root that touches, and roots → factors → equation
- *     with its graph through the roots; Example 5 and 4(d) checks),
  *   frame (Example 6 to scale: the frame grows around the photo with a live area readout, the equation, −29
  *     inadmissible, 28 × 38 = 1 064 ✓),
  *   radGraph (each side of a radical equation as a graph: they meet at the root; the mirror graph meets at the
- *     extraneous root; Example 7(b) and 8 and two more),
- *   twoRad (two radicals: restrictions on a number line, isolate, square a binomial, isolate again (a new
- *     restriction), square again, solve, verify; Example 8(c) and a review question).
+ *     extraneous root; Example 7(b) and 8 and two more).
  * Colours: GCF rose (#a33357), chunk A / squaring amber, B blue, roots / zero product blue, radicals purple,
  *   checks and admissible green, extraneous / inadmissible / errors red. No calculator in Unit 4. */
 import {
@@ -55,54 +43,6 @@ const gcd = (a, b) => { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b,
 const poly = (cs, vs) => { let out = ''; cs.forEach((k, i) => { if (!k) return; const m = Math.abs(k), v = vs[i]; out += (k < 0 ? '-' : out ? '+' : '') + (v ? (m === 1 ? '' : m) + v : m); }); return out || '0'; };
 const lin = (a, b, v = 'x') => poly([a, b], [v, '']);
 const frac = (n, d) => { if (d < 0) { n = -n; d = -d; } const g = gcd(n, d) || 1; n /= g; d /= g; return d === 1 ? String(n) : `${n < 0 ? '-' : ''}\\frac{${Math.abs(n)}}{${d}}`; };
-
-/* ====================================================================================================
- * Warm-up: The Mystery Box. Edges x + 4 (along the right-down axis), x + 2 (left-down) and x (up), 22 px per cm.
- * ==================================================================================================== */
-function mountBox() {
-  const host = document.getElementById('u4l8-box'); if (!host) return;
-  const W = 560, H = 360, S = 21, C = Math.cos(Math.PI / 6);
-  const svg = svgEl('svg', { width: W, height: H, viewBox: `0 0 ${W} ${H}`, class: 'u4l8-boxsvg' }, host);
-  const labs = [0, 1, 2].map(() => { const d = h('div', 'u4l8-blab'); host.appendChild(d); return d; });
-  const read = h('div', 'u4l8-bread'); host.appendChild(read);
-  let x = 1, edges = false, alg = false;
-  function draw() {
-    svg.innerHTML = '';
-    const L = x + 4, D = x + 2, U = x;
-    const P = (a, b, u) => [(a - b) * C * S, (a + b) * 0.5 * S - u * S];
-    const corners = [[0, 0, 0], [L, 0, 0], [0, D, 0], [L, D, 0], [0, 0, U], [L, 0, U], [0, D, U], [L, D, U]].map((q) => P(...q));
-    const xs = corners.map((p) => p[0]), ys = corners.map((p) => p[1]);
-    const ox = W / 2 - (Math.min(...xs) + Math.max(...xs)) / 2, oy = H / 2 - (Math.min(...ys) + Math.max(...ys)) / 2;
-    const Q = (a, b, u) => { const p = P(a, b, u); return [p[0] + ox, p[1] + oy]; };
-    const poly4 = (pts, fill) => svgEl('polygon', { points: pts.map((p) => p.map((v) => v.toFixed(1)).join(',')).join(' '), fill, stroke: '#7a5233', 'stroke-width': 2.5, 'stroke-linejoin': 'round' }, svg);
-    const seg = (p, q) => svgEl('line', { x1: p[0], y1: p[1], x2: q[0], y2: q[1], stroke: 'rgba(122,82,51,.32)', 'stroke-width': 1.3 }, svg);
-    poly4([Q(0, 0, U), Q(L, 0, U), Q(L, D, U), Q(0, D, U)], '#ebcf9b');
-    poly4([Q(0, D, 0), Q(L, D, 0), Q(L, D, U), Q(0, D, U)], '#d7af70');
-    poly4([Q(L, 0, 0), Q(L, D, 0), Q(L, D, U), Q(L, 0, U)], '#c39457');
-    for (let i = 1; i < L; i++) { seg(Q(i, 0, U), Q(i, D, U)); seg(Q(i, D, 0), Q(i, D, U)); }
-    for (let j = 1; j < D; j++) { seg(Q(0, j, U), Q(L, j, U)); seg(Q(L, j, 0), Q(L, j, U)); }
-    for (let k = 1; k < U; k++) { seg(Q(0, D, k), Q(L, D, k)); seg(Q(L, 0, k), Q(L, D, k)); }
-    // packing tape across the top
-    const tw = 0.35;
-    svgEl('polygon', { points: [Q(0, D / 2 - tw, U), Q(L, D / 2 - tw, U), Q(L, D / 2 + tw, U), Q(0, D / 2 + tw, U)].map((p) => p.join(',')).join(' '), fill: 'rgba(255,255,255,.45)' }, svg);
-    // edge labels: length under the left-front face, depth under the right-front face, height up the left edge
-    const mid = (p, q) => [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2];
-    const put = (d, p, dx, dy, txt) => { d.innerHTML = txt; d.style.left = (p[0] + dx) + 'px'; d.style.top = (p[1] + dy) + 'px'; };
-    const e = (expr, val) => (!edges ? '?' : alg ? T(`${expr}=${val}`) : T(String(val)));
-    put(labs[0], mid(Q(0, D, 0), Q(L, D, 0)), -26, 16, e('x+4', L));
-    put(labs[1], mid(Q(L, D, 0), Q(L, 0, 0)), 26, 16, e('x+2', D));
-    put(labs[2], mid(Q(0, D, 0), Q(0, D, U)), -30, 0, e('x', U));
-    labs.forEach((d) => d.classList.toggle('q', !edges));
-    const V = U ** 3 + 6 * U * U + 8 * U;
-    read.innerHTML = T(`x=${x}:\\quad V=${x}^3+6(${x})^2+8(${x})=${V}`) + (edges ? ` &nbsp; ${T(`${U}\\times${D}\\times${L}=${U * D * L}`)} <b class="u4l8-ok">✓</b>` : '');
-  }
-  const set = (v) => { x = Math.max(1, Math.min(6, v)); draw(); };
-  const b = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener('click', fn); return el; };
-  b('u4l8-xdn', () => set(x - 1)); b('u4l8-xup', () => set(x + 1));
-  const eb = b('u4l8-edges', () => { edges = !edges; if (eb) eb.textContent = edges ? 'Hide the edges' : 'Show the edges'; draw(); });
-  b('u4l8-wreveal', () => { edges = true; alg = true; if (eb) eb.textContent = 'Hide the edges'; draw(); });
-  draw();
-}
 
 /* ====================================================================================================
  * STAR: the factoring machine
@@ -276,261 +216,6 @@ const machine = {
 };
 
 /* ====================================================================================================
- * Solving by factoring: one side = 0, factor, either–or switches, roots on the graph
- * ==================================================================================================== */
-const SR = {
-  lost: { label: T('x^2=5x'), eq: 'x^2=5x', std: 'x^2-5x=0', fac: 'x(x-5)=0', fs: ['x', 'x-5'], sols: ['x=0', 'x=5'],
-    roots: [[0, '0', 'nw'], [5, '5', 'ne']], f: (x) => x * x - 5 * x, ft: 'x^2-5x', win: { xmin: -2, xmax: 7, ymin: -8, ymax: 8, ylabels: 2 }, lost: true },
-  a: { label: '(a)', eq: '6x^2=7x+3', std: '6x^2-7x-3=0', hunt: 'ac=-18:\\ -9+2=-7', more: ['3x(2x-3)+(2x-3)=0'], fac: '(2x-3)(3x+1)=0',
-    fs: ['2x-3', '3x+1'], sols: ['x=\\frac{3}{2}', 'x=-\\frac{1}{3}'], roots: [[1.5, '\\frac{3}{2}', 'ne'], [-1 / 3, '-\\frac{1}{3}', 'nw']],
-    f: (x) => 6 * x * x - 7 * x - 3, ft: '6x^2-7x-3', win: { xmin: -2, xmax: 3, ymin: -6, ymax: 6, xstep: 0.5, xlabels: 1, ylabels: 2 } },
-  b: { label: '(b)', eq: '(x-4)(x+1)=6', pre: 'x^2-3x-4=6', std: 'x^2-3x-10=0', fac: '(x-5)(x+2)=0', fs: ['x-5', 'x+2'], sols: ['x=5', 'x=-2'],
-    roots: [[5, '5', 'ne'], [-2, '-2', 'nw']], f: (x) => x * x - 3 * x - 10, ft: 'x^2-3x-10', win: { xmin: -4, xmax: 7, ymin: -14, ymax: 6, ystep: 2, ylabels: 4 } },
-  c: { label: '(c)', eq: '3x^2-48=0', dv: '3(x^2-16)=0', dk: 3, fac: '3(x-4)(x+4)=0', fs: ['x-4', 'x+4'], sols: ['x=4', 'x=-4'],
-    roots: [[4, '4', 'ne'], [-4, '-4', 'nw']], f: (x) => 3 * x * x - 48, ft: '3x^2-48', win: { xmin: -6, xmax: 6, ymin: -50, ymax: 20, ystep: 10, ylabels: 10 } },
-  d: { label: '(d)', eq: '4x^2+20x+25=0', hunt: '(2x)^2+2(2x)(5)+5^2', fac: '(2x+5)^2=0', fs: ['2x+5', '2x+5'], sols: ['x=-\\frac{5}{2}'], double: true,
-    roots: [[-2.5, '-\\frac{5}{2}', 'ne']], f: (x) => 4 * x * x + 20 * x + 25, ft: '4x^2+20x+25', win: { xmin: -5, xmax: 1, ymin: -2, ymax: 10, xstep: 0.5, xlabels: 1, ylabels: 2 } },
-  rev: { label: T('2x^2+6x=20'), eq: '2x^2+6x=20', std: '2x^2+6x-20=0', dv: '2(x^2+3x-10)=0', dk: 2, hunt: '(5)(-2)=-10,\\ 5+(-2)=3', fac: '2(x+5)(x-2)=0', fs: ['x+5', 'x-2'],
-    sols: ['x=-5', 'x=2'], roots: [[-5, '-5', 'nw'], [2, '2', 'ne']], f: (x) => 2 * x * x + 6 * x - 20, ft: '2x^2+6x-20', win: { xmin: -7, xmax: 4, ymin: -26, ymax: 10, ystep: 2, ylabels: 4 } }
-};
-const solveRecap = {
-  title: 'Solving by factoring: 0, factor, switch',
-  height: 420, minW: 960,
-  choices: [{ sep: 'Concept:' }, { v: 'lost', label: SR.lost.label }, { sep: 'Example 4 check:' }, ...['a', 'b', 'c', 'd'].map((v) => ({ v, label: SR[v].label })), { sep: 'Review:' }, { v: 'rev', label: SR.rev.label }],
-  ask: (v) => `${'abcd'.includes(v) && v.length === 1 ? `Example 4${SR[v].label}: s` : 'S'}olve by factoring: ${T(SR[v].eq)}`,
-  make(stage, v, ex) {
-    const d = SR[v], W = ex.W, GW = 400, PW = W - GW - 20;
-    const P = panel(stage, 0, 4, PW, 410, '', 'u4l8-big');
-    lineIn(P, T(d.eq), 'u4l8-eq0').style.opacity = 1;
-    const Lpre = d.pre ? lineIn(P, `${T(d.pre)}<span class="u4l8-tag">expand first</span>`, 'u4l8-wl') : null;
-    const Lstd = d.std ? lineIn(P, `${T(d.std)}<span class="u4l8-tag">one side = 0</span>`, 'u4l8-wl') : null;
-    const Ldv = d.dv ? lineIn(P, `${T(d.dv)}<span class="u4l8-tag">common factor ${d.dk}</span>`, 'u4l8-wl') : null;
-    const Lh = d.hunt ? lineIn(P, T(d.hunt), 'u4l8-note') : null;
-    const Lm = (d.more || []).map((t) => lineIn(P, T(t)));
-    const Lf = lineIn(P, `${T(d.fac)}<span class="u4l8-tag">factor</span>`, 'u4l8-wl');
-    const sw = h('div', 'u4l8-sws'); P.appendChild(sw); hide(sw);
-    const fsU = d.double ? [d.fs[0]] : d.fs;
-    const sws = fsU.map((f, i) => {
-      const e = h('div', 'u4l8-sw', `<span class="u4l8-swk"><i></i></span><span class="u4l8-swf">${T(f + '=0')}</span><span class="u4l8-swa">${T(d.sols[i])}</span>`);
-      if (i) sw.appendChild(h('div', 'u4l8-or', 'or'));
-      sw.appendChild(e); hide(e.querySelector('.u4l8-swa')); return e;
-    });
-    const Lr = lineIn(P, '', 'u4l8-rootsl');
-    Lr.innerHTML = d.double ? `One root, twice: <b>${T(d.sols[0])}</b> (a double root)` : `Roots: <b>${T(d.sols.join('\\ \\text{ or }\\ '))}</b>`;
-    const Llost = d.lost ? lineIn(P, `<span class="u4l8-xr">${T('\\cancel{\\dfrac{x^2}{x}=\\dfrac{5x}{x}}\\ \\Rightarrow\\ x=5')}</span> <span class="u4l8-xr">only: the root 0 is lost!</span>`, 'u4l8-lostl') : null;
-    const G = new Graph(stage, Object.assign({ x: W - GW, y: 6, width: GW, height: GW, fontSize: 15 }, d.win));
-    const cv = G.fn(d.f, { color: BLU, width: 4 }); cv.style.opacity = 0;
-    const lab = G.label(d.win.xmin + 0.04 * (d.win.xmax - d.win.xmin), d.win.ymax - 0.04 * (d.win.ymax - d.win.ymin), T(`y=${d.ft}`), { pos: 'se', cls: 'u4l8-glab' }); hide(lab);
-    const pts = d.roots.map(([x, t, pos]) => hideP(G.point(x, 0, { label: T(`(${t},\\,0)`), pos, color: GCF })));
-    const steps = [];
-    if (d.pre) steps.push({ cap: `<b>0 on one side first.</b> ${T('(x-4)(x+1)=6')} does <b>not</b> mean a factor is 6. Expand, then subtract 6: ${T(d.std)}.`, run: async (c) => { await show(c, Lpre); await show(c, Lstd); } });
-    else if (d.std) steps.push({ cap: `<b>Move every term to one side:</b> ${T(d.std)}.`, run: (c) => show(c, Lstd) });
-    if (d.dv) steps.push({ cap: `<b>Divide out the common factor ${d.dk}</b>: a number, which can never be 0. (Never divide by ${T('x')}.)`, run: (c) => show(c, Ldv) });
-    steps.push({ cap: `<b>Factor:</b> ${T(d.fac)}.${d.double ? ' A <b>perfect square</b>.' : ''}`,
-      run: async (c) => { if (Lh) await show(c, Lh); for (const l of Lm) await show(c, l); await show(c, Lf); } });
-    steps.push({ cap: d.double ? `<b>Zero product property:</b> both factors are ${T('2x+5')}, so there is only one switch: ${T(d.sols[0])}.`
-      : `<b>Zero product property:</b> if ${T('AB=0')}, then ${T('A=0')} <b>or</b> ${T('B=0')}. Flip each switch: ${T(d.sols.join(',\\ '))}.`,
-      run: async (c) => { await show(c, sw); for (const e of sws) { e.classList.add('on'); await anim(c, e.querySelector('i'), [{ transform: 'translateX(0)' }, { transform: 'translateX(24px)' }], 300); await show(c, e.querySelector('.u4l8-swa')); } await show(c, Lr); } });
-    steps.push({ cap: d.double ? `On the graph of ${T(`y=${d.ft}`)} the root is the vertex: the parabola <b>touches</b> the ${T('x')}-axis at ${T(`(${d.roots[0][1]},\\,0)`)}.`
-      : `The roots are the <b>zeros</b> of ${T(`y=${d.ft}`)}: where its graph crosses the ${T('x')}-axis.`,
-      run: async (c) => { await show(c, lab); await drawOn(c, G, cv, 900); for (const p of pts) await popP(c, p); } });
-    if (d.lost) steps.push({ cap: `<b>Why not divide by ${T('x')}?</b> It assumes ${T('x\\ne0')}, so the root ${T('x=0')} is lost, though the graph crosses there too.`,
-      run: async (c) => { await show(c, Llost); await pulse(c, pts[0], 1.6); } });
-    return steps;
-  }
-};
-
-/* ====================================================================================================
- * Radical equations: the six-step rail
- * ==================================================================================================== */
-const RAIL = ['Restrictions', 'Isolate', 'Square', 'Radical left?', 'Solve', 'Verify'];
-const RR = {
-  neg: { label: T('\\sqrt{x}=-3'), eq: '\\sqrt{x}=-3', R: ['x\\ge0'], isoCap: 'The radical is already alone, and it equals a <b>negative</b> number. A square root is never negative: there can be no solution. Watch what squaring does anyway.',
-    sq: ['x=9'], sqCap: `${T('(\\sqrt{x})^2=x')} and ${T('(-3)^2=9')}.`, solve: [], solveCap: `Squaring gave ${T('x=9')} directly.`,
-    cands: [{ x: '9', L: ['\\sqrt{9}', '3'], R: ['-3'], ok: false }], fin: '\\text{no solution}', finCap: `Squaring turned ${T('-3')} into ${T('9=3^2')}: it can’t tell ${T('3')} from ${T('-3')}. <b>No solution.</b>` },
-  two: { label: T('\\sqrt{x+2}=x'), eq: '\\sqrt{x+2}=x', R: ['x+2\\ge0\\Rightarrow x\\ge-2', 'x\\ge0\\ \\text{(the other side)}'], rCap: `the radicand ${T('x+2\\ge0')}, and the side opposite the radical is ${T('\\ge0')}: so ${T('x\\ge0')}`,
-    isoCap: 'The radical is already alone.', sq: ['x+2=x^2'], solve: ['0=x^2-x-2', '0=(x-2)(x+1)', 'x=2\\ \\text{or}\\ x=-1'], solveCap: `A quadratic: factor. ${T('x=2')} or ${T('x=-1')}.`,
-    cands: [{ x: '2', L: ['\\sqrt{4}', '2'], R: ['2'], ok: true }, { x: '-1', L: ['\\sqrt{1}', '1'], R: ['-1'], ok: false, note: `It also breaks the restriction ${T('x\\ge0')}.` }], fin: 'x=2' },
-  a: { label: '(a)', eq: '3\\sqrt{2x-1}-2=7', R: ['2x-1\\ge0\\Rightarrow x\\ge\\frac{1}{2}'], iso: [['3\\sqrt{2x-1}=9', '+ 2'], ['\\sqrt{2x-1}=3', '÷ 3']],
-    isoCap: `Undo what is outside the root, outside in: add 2, then divide by 3.`, sq: ['2x-1=9'], solve: ['2x=10\\Rightarrow x=5'], solveCap: `${T('x=5')}, which meets ${T('x\\ge\\frac12')}.`,
-    cands: [{ x: '5', L: ['3\\sqrt{9}-2', '3(3)-2', '7'], R: ['7'], ok: true }], fin: 'x=5' },
-  b: { label: '(b)', eq: '\\sqrt{x+8}+4=x', R: ['x+8\\ge0\\Rightarrow x\\ge-8'], iso: [['\\sqrt{x+8}=x-4', '− 4'], ['x-4\\ge0\\Rightarrow x\\ge4', 'other side ≥ 0', 'u4l8-rl']],
-    isoCap: `Subtract 4. Now the side opposite the radical must be ${T('\\ge0')} too: ${T('x\\ge4')}.`, sq: ['x+8=(x-4)^2', 'x+8=x^2-8x+16'],
-    sqCap: `Square the binomial side as ${T('(a-b)^2=a^2-2ab+b^2')}: ${T('(x-4)^2=x^2-8x+16')}, not ${T('x^2+16')}.`,
-    solve: ['0=x^2-9x+8', '0=(x-1)(x-8)', 'x=1\\ \\text{or}\\ x=8'], solveCap: `Product 8, sum ${T('-9')}: ${T('x=1')} or ${T('x=8')}.`,
-    cands: [{ x: '8', L: ['\\sqrt{16}+4', '8'], R: ['8'], ok: true }, { x: '1', L: ['\\sqrt{9}+4', '7'], R: ['1'], ok: false, note: `(It also breaks ${T('x\\ge4')}.)` }], fin: 'x=8' },
-  rev: { label: T('\\sqrt{x+7}=x+1'), eq: '\\sqrt{x+7}=x+1', R: ['x+7\\ge0\\Rightarrow x\\ge-7', 'x+1\\ge0\\Rightarrow x\\ge-1'], rCap: `${T('x\\ge-7')} from the radicand and ${T('x\\ge-1')} from the other side: ${T('x\\ge-1')}`,
-    isoCap: 'The radical is already alone.', sq: ['x+7=(x+1)^2', 'x+7=x^2+2x+1'], sqCap: `${T('(x+1)^2=x^2+2x+1')}: keep the middle term.`,
-    solve: ['0=x^2+x-6', '0=(x+3)(x-2)', 'x=-3\\ \\text{or}\\ x=2'], solveCap: `${T('x=-3')} or ${T('x=2')}.`,
-    cands: [{ x: '2', L: ['\\sqrt{9}', '3'], R: ['3'], ok: true }, { x: '-3', L: ['\\sqrt{4}', '2'], R: ['-2'], ok: false, note: `(It also breaks ${T('x\\ge-1')}.)` }], fin: 'x=2' }
-};
-function rail(stage, x, y, w, labels) {
-  const r = div(stage, 'u4l8-rail', '', x, y, w);
-  const pills = labels.map((t, i) => { const p = h('div', 'u4l8-rstep', `<b>${i + 1}</b>${t}`); r.appendChild(p); return p; });
-  const on = (i) => pills.forEach((p, j) => { p.classList.toggle('on', j === i); p.classList.toggle('done', j < i); });
-  /* light step i and nudge its pill (every step then animates, even one with no new working) */
-  const go = (c, i) => { on(i); return pulse(c, pills[i], 1.04); };
-  return { el: r, on, go, pills };
-}
-const workLine = (p, t, note, cls = '') => lineIn(p, `<span class="u4l8-lt">${T(t)}</span>${note ? `<span class="u4l8-tag">${note}</span>` : ''}`, 'u4l8-wl ' + cls);
-function verifySteps(stage, cands, VX, VW, y0, gap, okTxt = '✓ root') {
-  let y = y0;
-  return cands.map((k, i) => {
-    const card = checkCard(stage, { title: 'Verify', at: `x=${k.x}`, left: k.L, right: k.R, ok: k.ok, x: VX, y, width: VW, hidden: true, cls: 'u4l8-ck' });
-    const cy = y; y += card.offsetHeight ? card.offsetHeight + 14 : gap;
-    const st = stampAt(stage, k.ok ? okTxt : '✗ extraneous', k.ok, VX + VW / 2, cy + 180, { size: 'sm' });
-    /* the stamp takes the place of the card's verdict row */
-    st.place = () => { st.style.top = (cy + card.offsetHeight - 22) + 'px'; card.verdict.style.visibility = 'hidden'; };
-    return { k, card, st };
-  });
-}
-const radRecap = {
-  title: 'Radical equations: six steps, then check every root',
-  height: 430, minW: 980, capH: 84,
-  choices: [{ sep: 'Concept:' }, { v: 'neg', label: RR.neg.label }, { v: 'two', label: RR.two.label }, { sep: 'Example 7 check:' }, { v: 'a', label: '(a)' }, { v: 'b', label: '(b)' }, { sep: 'Review:' }, { v: 'rev', label: RR.rev.label }],
-  ask: (v) => `${v.length === 1 ? `Example 7(${v}): s` : 'S'}olve and verify ${T(RR[v].eq)}.`,
-  make(stage, v, ex) {
-    const d = RR[v], W = ex.W, VW = 300, VX = W - VW, PX = 196, PW = VX - PX - 14;
-    const R = rail(stage, 0, 4, 182, RAIL);
-    const P = panel(stage, PX, 4, PW, 420, '', 'u4l8-big2');
-    lineIn(P, T(d.eq), 'u4l8-eq0').style.opacity = 1;
-    const lR = d.R.map((t) => workLine(P, t, '', 'u4l8-rl'));
-    const lI = (d.iso || []).map(([t, n, cls]) => workLine(P, t, n, cls || ''));
-    const lS = d.sq.map((t, i) => workLine(P, t, i === 0 ? 'square both sides' : ''));
-    const lV = d.solve.map((t) => workLine(P, t, ''));
-    const lF = lineIn(P, `<b>Answer:</b> ${T(d.fin)}`, 'u4l8-ansl');
-    const vs = verifySteps(stage, d.cands, VX, VW, 4, 212);
-    const steps = [
-      { cap: `<b>1. Restrictions:</b> ${d.rCap || `the radicand must be ${T('\\ge0')}: ${T(d.R[d.R.length - 1])}`}.`, run: async (c) => { await R.go(c, 0); for (const l of lR) await show(c, l); } },
-      { cap: `<b>2. Isolate.</b> ${d.isoCap}`, run: async (c) => { await R.go(c, 1); for (const l of lI) await show(c, l); } },
-      { cap: `<b>3. Square both sides.</b> ${d.sqCap || 'Squaring undoes the square root.'}`, run: async (c) => { await R.go(c, 2); for (const l of lS) await show(c, l); } },
-      { cap: '<b>4. A radical left?</b> No: skip to solving.', run: async (c) => { await R.go(c, 3); } },
-      { cap: `<b>5. Solve.</b> ${d.solveCap}`, run: async (c) => { await R.go(c, 4); for (const l of lV) await show(c, l); } }
-    ];
-    vs.forEach(({ k, card, st }, i) => steps.push({
-      cap: `<b>6. Verify ${T('x=' + k.x)}</b> in the <b>original</b> equation: ${k.ok ? `both sides are ${T(k.R[k.R.length - 1])}. A root ✓` : `left side ${T(k.L[k.L.length - 1])}, right side ${T(k.R[k.R.length - 1])}. Not equal: <b class="u4l8-xr">extraneous</b>. ${k.note || ''}`}`,
-      run: async (c) => { await R.go(c, 5); await card.play(c); st.place(); await stampIn(c, st); if (i === vs.length - 1) R.pills[5].classList.add('done'); } }));
-    steps.push({ cap: d.finCap || `<b>Answer:</b> ${T(d.fin)}. Only the roots that pass the check count.`, run: (c) => show(c, lF) });
-    return steps;
-  }
-};
-
-/* ====================================================================================================
- * Common errors
- * ==================================================================================================== */
-const ER = {
-  sq: { label: T('(x-2)^2'), ask: `Expand ${T('(x-2)^2')}.`, wrong: ['(x-2)^2', '=x^2+4'], test: ['x=3:\\quad(3-2)^2=1', '3^2+4=13\\ne1'],
-    tcap: `Test it with ${T('x=3')}: ${T('(3-2)^2=1')} but ${T('9+4=13')}. Wrong!`, fix: ['(x-2)^2=(x-2)(x-2)', '=x^2-2x-2x+4', '=x^2-4x+4'],
-    fcap: 'Write it as a product of two brackets and multiply every term.', rule: `Square a binomial as ${T('(a-b)^2=a^2-2ab+b^2')}: the middle term ${T('-2ab')} is the one that gets lost.` },
-  full: { label: 'not fully factored', ask: `Ava factored ${T('2x^2-8')} as ${T('(2x-4)(x+2)')}.`, wrong: ['2x^2-8', '=(2x-4)(x+2)'], test: ['(2x-4)(x+2)=2x^2-8\\ \\checkmark', '2x-4=2(x-2)\\ \\text{still factors!}'],
-    tcap: `Expanding gives ${T('2x^2-8')}, so the product is right, but ${T('2x-4')} still has a common factor of 2: <b>not fully factored</b>.`, fix: ['2x^2-8=2(x^2-4)', '=2(x-2)(x+2)'],
-    fcap: 'Take out the GCF <b>first</b>, then factor what is left.', rule: '<b>GCF first</b>, then check every factor: none may factor again.' },
-  sum: { label: T('x^2+9'), ask: `Factor ${T('x^2+9')}.`, wrong: ['x^2+9', '=(x+3)(x-3)'], test: ['(x+3)(x-3)=x^2-9\\ne x^2+9', '(x+3)^2=x^2+6x+9\\ne x^2+9'],
-    tcap: `Expand: ${T('(x+3)(x-3)=x^2-9')}, and ${T('(x+3)^2')} has a middle term. Nothing works.`, fix: ['\\text{product }9,\\ \\text{sum }0:\\ \\text{no pair}', 'x^2+9\\ \\text{does not factor}'],
-    fcap: 'For two numbers with product +9 and sum 0, they would need opposite signs (sum 0) and the same sign (product +9). Impossible.', rule: `A <b>sum</b> of squares ${T('A^2+B^2')} does not factor. Only a <b>difference</b> does.` },
-  div: { label: 'dividing by x', ask: `Ben solved ${T('x^2=5x')} by dividing both sides by ${T('x')}.`, wrong: ['x^2=5x', '\\dfrac{x^2}{x}=\\dfrac{5x}{x}', 'x=5'], test: ['x=0:\\quad0^2=5(0)\\ \\checkmark', '\\text{but }x=0\\text{ is gone!}'],
-    tcap: `Try ${T('x=0')}: ${T('0^2=5(0)')}. It is a root, and Ben’s answer lost it.`, fix: ['x^2-5x=0', 'x(x-5)=0', 'x=0\\ \\text{or}\\ x=5'],
-    fcap: 'Move every term to one side and factor out the x instead.', rule: 'Never divide both sides by an expression containing the variable: it assumes it is not 0, and a root is lost.' },
-  ext: { label: 'extraneous', ask: `Solve ${T('\\sqrt{x}=x-2')}.`, wrong: ['\\sqrt{x}=x-2', 'x=x^2-4x+4', '0=(x-1)(x-4)', 'x=1\\ \\text{or}\\ x=4'], test: ['x=1:\\quad\\sqrt{1}=1', '1-2=-1\\ne1'],
-    tcap: `Both are roots of the <b>squared</b> equation, but check ${T('x=1')} in the original: ${T('\\sqrt{1}=1')} and ${T('1-2=-1')}.`, fix: ['x=4:\\ \\sqrt{4}=2=4-2\\ \\checkmark', 'x=1\\ \\text{is extraneous}', '\\text{Root: }x=4'],
-    fcap: `${T('x=4')} passes the check; ${T('x=1')} does not.`, rule: '<b>Verify every root</b> in the original equation: squaring can add a root that does not work.' }
-};
-const errors = {
-  title: 'Common errors: spot it, test it, fix it',
-  height: 392, minW: 940,
-  choices: Object.keys(ER).map((v) => ({ v, label: ER[v].label })),
-  ask: (v) => ER[v].ask,
-  make(stage, v, ex) {
-    const d = ER[v], W = ex.W, HW = (W - 16) / 2;
-    const A = panel(stage, 0, 4, HW, 236, 'Looks right?', 'u4l8-bad u4l8-big3');
-    const B = panel(stage, HW + 16, 4, HW, 236, 'Fixed', 'u4l8-good u4l8-big3');
-    const lw = d.wrong.map((t) => lineIn(A, T(t)));
-    const lf = d.fix.map((t) => lineIn(B, T(t)));
-    const tb = panel(stage, 0, 252, HW, 136, 'Test it', 'u4l8-testp');
-    const lt = d.test.map((t) => lineIn(tb, T(t)));
-    const rb = div(stage, 'u4l8-rule', `<b>Rule.</b> ${d.rule}`, HW + 16, 252, HW, 136); hide(rb);
-    const xs = stampAt(stage, '✗', false, HW - 50, 50, { size: 'lg' }), ok = stampAt(stage, '✓', true, W - 50, 50, { size: 'lg' });
-    return [
-      { cap: '<b>Is this right?</b> Look for the error before the next step.', run: async (c) => { for (const l of lw) await show(c, l); } },
-      { cap: `<b>Test it.</b> ${d.tcap}`, run: async (c) => { for (const l of lt) await show(c, l); await stampIn(c, xs); } },
-      { cap: `<b>Fix it.</b> ${d.fcap}`, run: async (c) => { for (const l of lf) await show(c, l); await stampIn(c, ok); } },
-      { cap: `<b>The rule:</b> ${d.rule}`, run: (c) => show(c, rb) }
-    ];
-  }
-};
-
-/* ====================================================================================================
- * Box it, wrap it, factor, unwrap: substitution and differences of squares with chunks (Example 2)
- * ==================================================================================================== */
-const DOSF = `${cA()}^2-${cB()}^2=(${cA()}-${cB()})(${cA()}+${cB()})`;
-const SD = {
-  a: { e: '3(x-1)^2+4(x-1)-4', steps: [
-    { cap: `<b>Spot the chunk:</b> ${T('(x-1)')} appears twice, once squared.`, t: `=3${bA('(x-1)')}^2+4${bA('(x-1)')}-4` },
-    { cap: `<b>Wrap it:</b> let ${T(cA() + '=x-1')}. Now it is an ordinary trinomial in ${T(cA())}.`, t: `${cA()}=x-1:\\quad 3${cA()}^2+4${cA()}-4`, plain: true },
-    { cap: `<b>Factor in ${T(cA())}:</b> product ${T('ac=-12')} and sum ${T('4')}: ${T('6')} and ${T('-2')}.`, t: `=(3${cA()}-2)(${cA()}+2)`, note: 'ac=-12:\\ 6+(-2)=4' },
-    { cap: `<b>Unwrap in brackets:</b> ${T('(x-1)')} goes back wherever ${T(cA())} was.`, t: `=[3${bA('(x-1)')}-2][${bA('(x-1)')}+2]` },
-    { cap: `<b>Simplify each factor:</b> ${T('3x-3-2=3x-5')} and ${T('x-1+2=x+1')}.`, t: '=(3x-3-2)(x-1+2)=(3x-5)(x+1)' }],
-    facs: ['3x-5', 'x+1'], again: [], doneCap: 'Both factors are linear.', fin: '(3x-5)(x+1)' },
-  b: { e: '9x^4-37x^2+4', steps: [
-    { cap: `<b>Spot the chunk:</b> ${T('x^4=(x^2)^2')}, so the chunk is ${T('x^2')}.`, t: `=9\\left(${bA('x^2')}\\right)^2-37${bA('x^2')}+4` },
-    { cap: `<b>Wrap it:</b> let ${T(cA() + '=x^2')}.`, t: `${cA()}=x^2:\\quad 9${cA()}^2-37${cA()}+4`, plain: true },
-    { cap: `<b>Factor in ${T(cA())}:</b> product ${T('ac=36')} and sum ${T('-37')}: ${T('-36')} and ${T('-1')}.`, t: `=(9${cA()}-1)(${cA()}-4)`, note: 'ac=36:\\ (-36)+(-1)=-37' },
-    { cap: `<b>Unwrap:</b> ${T('x^2')} goes back in.`, t: `=(9${bA('x^2')}-1)(${bA('x^2')}-4)=(9x^2-1)(x^2-4)` }],
-    facs: ['9x^2-1', 'x^2-4'], again: [{ of: '9x^2-1', res: ['3x-1', '3x+1'], cap: `${T('9x^2-1=(3x)^2-1^2')}: a difference of squares.` },
-      { of: 'x^2-4', res: ['x-2', 'x+2'], cap: `${T('x^2-4=x^2-2^2')}: another one.` }], fin: '(3x-1)(3x+1)(x-2)(x+2)' },
-  c: { e: '16x^4-81y^4', steps: [
-    { cap: `<b>Two terms, subtracted, both squares:</b> ${T('16x^4=(4x^2)^2')} and ${T('81y^4=(9y^2)^2')}.`, t: `=\\left(${bA('4x^2')}\\right)^2-\\left(${bB('9y^2')}\\right)^2` },
-    { cap: `<b>The pattern:</b> ${T(DOSF)}.`, t: DOSF, plain: true },
-    { cap: `<b>Unwrap:</b> ${T(cA() + '=4x^2')}, ${T(cB() + '=9y^2')}.`, t: `=\\left(${bA('4x^2')}-${bB('9y^2')}\\right)\\left(${bA('4x^2')}+${bB('9y^2')}\\right)` }],
-    facs: ['4x^2-9y^2', '4x^2+9y^2'], again: [{ of: '4x^2-9y^2', res: ['2x-3y', '2x+3y'], cap: `${T('4x^2-9y^2=(2x)^2-(3y)^2')}: a difference of squares again.` },
-      { of: '4x^2+9y^2', keep: true, cap: `${T('4x^2+9y^2')} is a <b>sum</b> of squares: it does not factor.` }], fin: '(2x-3y)(2x+3y)(4x^2+9y^2)' },
-  d: { e: '25(x+1)^2-4(x-2)^2', steps: [
-    { cap: `<b>Two squares of chunks:</b> ${T('25(x+1)^2=[5(x+1)]^2')} and ${T('4(x-2)^2=[2(x-2)]^2')}.`, t: `=\\left[${bA('5(x+1)')}\\right]^2-\\left[${bB('2(x-2)')}\\right]^2` },
-    { cap: `<b>The pattern:</b> ${T(DOSF)}, with ${T(cA() + '=5(x+1)')} and ${T(cB() + '=2(x-2)')}.`, t: DOSF, plain: true },
-    { cap: '<b>Unwrap in brackets:</b> keep each chunk whole.', t: `=\\left[${bA('5(x+1)')}-${bB('2(x-2)')}\\right]\\left[${bA('5(x+1)')}+${bB('2(x-2)')}\\right]` },
-    { cap: `<b>Simplify each factor.</b> The minus reaches <b>every</b> term of ${T(cB())}: ${T('-2(x-2)=-2x+4')}.`, t: '=(5x+5-2x+4)(5x+5+2x-4)' },
-    { cap: `Collect like terms: ${T('(3x+9)(7x+1)')}.`, t: '=(3x+9)(7x+1)' }],
-    facs: ['3x+9', '7x+1'], again: [{ of: '3x+9', res: ['3', 'x+3'], cap: `${T('3x+9')} has a <b>GCF of 3</b>: ${T('3(x+3)')}. Simplifying uncovered it.`, gcf: true }], fin: '3(x+3)(7x+1)' },
-  e: { e: '\\dfrac{x^2}{9}-\\dfrac{y^2}{4}', steps: [
-    { cap: `<b>Root the top and the bottom:</b> ${T('\\frac{x^2}{9}=\\left(\\frac{x}{3}\\right)^2')} and ${T('\\frac{y^2}{4}=\\left(\\frac{y}{2}\\right)^2')}.`, t: `=\\left(${bA('\\frac{x}{3}')}\\right)^2-\\left(${bB('\\frac{y}{2}')}\\right)^2` },
-    { cap: `<b>The pattern:</b> ${T(DOSF)}.`, t: DOSF, plain: true },
-    { cap: '<b>Unwrap:</b> the fractions go straight in.', t: `=\\left(${bA('\\frac{x}{3}')}-${bB('\\frac{y}{2}')}\\right)\\left(${bA('\\frac{x}{3}')}+${bB('\\frac{y}{2}')}\\right)` }],
-    facs: ['\\frac{x}{3}-\\frac{y}{2}', '\\frac{x}{3}+\\frac{y}{2}'], again: [], doneCap: 'Both factors are linear.', fin: '\\left(\\frac{x}{3}-\\frac{y}{2}\\right)\\left(\\frac{x}{3}+\\frac{y}{2}\\right)' }
-};
-const subDos = {
-  title: 'Box it, wrap it, factor it, unwrap it',
-  height: 430, minW: 980,
-  choices: [{ sep: 'Example 2 check:' }, ...'abcde'.split('').map((v) => ({ v, label: `(${v})` }))],
-  ask: (v) => `Example 2(${v}): factor fully ${T(SD[v].e)}.`,
-  make(stage, v, ex) {
-    const d = SD[v], W = ex.W, RW = 270, PW = W - RW - 16;
-    const P = panel(stage, 0, 4, PW, 420, '', 'u4l8-big4');
-    lineIn(P, T(d.e), 'u4l8-eq0').style.opacity = 1;
-    const ls = d.steps.map((s) => lineIn(P, `<span class="u4l8-lt">${T(s.t)}</span>${s.note ? `<span class="u4l8-tag">${T(s.note)}</span>` : ''}`, 'u4l8-wl' + (s.plain ? ' u4l8-plainl' : '')));
-    const R = panel(stage, W - RW, 4, RW, 420, 'Factor again?', 'u4l8-fa');
-    const list = h('div', 'u4l8-falist'); R.appendChild(list);
-    const fin = h('div', 'u4l8-fafin', `<div class="u4l8-ph">Factored fully</div>${T(d.fin)}`); R.appendChild(fin); hide(fin);
-    const cards = [];
-    const mk = (t, before) => { const el = h('div', 'u4l8-fchip', T(t)); if (before) list.insertBefore(el, before); else list.appendChild(el); hide(el); const o = { t, el }; cards.push(o); return el; };
-    const steps = d.steps.map((s, i) => ({ cap: s.cap, run: (c) => show(c, ls[i]) }));
-    steps.push({ cap: `<b>Factor again?</b> Check each factor.${d.again.length ? '' : ' ' + d.doneCap}`,
-      run: async (c) => { for (const t of d.facs) await pop(c, mk(t)); if (!d.again.length) cards.forEach((q) => { q.el.insertAdjacentHTML('beforeend', '<em>✓</em>'); q.el.classList.add('u4l8-done'); }); } });
-    d.again.forEach((a) => steps.push({ cap: a.cap,
-      run: async (c) => {
-        const o = cards.find((q) => q.t === a.of);
-        if (a.keep) { o.el.insertAdjacentHTML('beforeend', '<em class="u4l8-stay">stays</em>'); o.el.classList.add('u4l8-done'); await pulse(c, o.el, 1.1); return; }
-        o.el.classList.add('u4l8-again'); await pulse(c, o.el, 1.1);
-        const news = a.res.map((t, j) => mk(t, o.el)); if (a.gcf) news[0].classList.add('u4l8-gcf');
-        o.el.remove(); cards.splice(cards.indexOf(o), 1);
-        for (const e of news) await pop(c, e);
-      } }));
-    steps.push({ cap: `<b>Factored fully:</b> ${T(d.fin)}.`,
-      run: async (c) => { cards.forEach((q) => { if (!q.el.querySelector('em')) q.el.insertAdjacentHTML('beforeend', '<em>✓</em>'); q.el.classList.add('u4l8-done'); }); await show(c, fin); } });
-    return steps;
-  }
-};
-
-/* ====================================================================================================
  * Example 3: is it a factor? every k; the perfect-square k
  * ==================================================================================================== */
 const KH = {
@@ -606,62 +291,6 @@ const kHunt = {
       { cap: `The four pieces: ${T('9x^2')}, two rectangles of ${T('21x')}, and ${T('49')}.`, run: async (c) => { for (const e of inT) await pop(c, e); await show(c, ls[1]); } },
       { cap: `The middle term is ${T('21x+21x=42x')} (that is ${T('2AB=2(3x)(7)')}), so ${T('k=42')}.`, run: async (c) => { await pulse(c, inT[1], 1.3); await pulse(c, inT[2], 1.3); await show(c, ls[2]); } },
       { cap: `${T('(3x-7)^2')} works too: the two rectangles are ${T('-21x')} each, so ${T('k=-42')}.`, run: async (c) => { inT[1].innerHTML = T('-21x'); inT[2].innerHTML = T('-21x'); inT[1].classList.add('u4l8-xr'); inT[2].classList.add('u4l8-xr'); sideT[1].innerHTML = T('-7'); sideT[3].innerHTML = T('-7'); await show(c, ls[3]); await show(c, fin); } }
-    ];
-  }
-};
-
-/* ====================================================================================================
- * Roots, zeros, x-intercepts (Example 5) and equations from roots
- * ==================================================================================================== */
-const RG = {
-  a: { label: '5(a)', ask: `Example 5(a): the zeros of ${T('y=2x^2-x-6')} and the ${T('x')}-intercepts.`, mode: 'zeros', f: (x) => 2 * x * x - x - 6, ft: '2x^2-x-6',
-    lines: ['2x^2-x-6=0', '#ac=-12:\\ -4+3=-1', '2x(x-2)+3(x-2)=0', '(x-2)(2x+3)=0'], roots: [[2, '2', 'ne'], [-1.5, '-\\frac{3}{2}', 'nw']],
-    win: { xmin: -4, xmax: 4, ymin: -8, ymax: 8, ylabels: 2 } },
-  d: { label: '4(d) double root', ask: `Example 4(d): ${T('4x^2+20x+25=0')} on a graph.`, mode: 'zeros', f: (x) => 4 * x * x + 20 * x + 25, ft: '4x^2+20x+25',
-    lines: ['4x^2+20x+25=0', '#(2x)^2+2(2x)(5)+5^2', '(2x+5)^2=0'], roots: [[-2.5, '-\\frac{5}{2}', 'se']], double: true,
-    win: { xmin: -5, xmax: 1, ymin: -2, ymax: 10, xstep: 0.5, xlabels: 1, ylabels: 2 } },
-  b: { label: '5(b)', ask: `Example 5(b): an equation with integer coefficients whose roots are ${T('\\frac{2}{3}')} and ${T('-5')}.`, mode: 'from', roots: [[2 / 3, '\\frac{2}{3}', 'ne'], [-5, '-5', 'nw']],
-    facs: ['x=\\frac{2}{3}\\Rightarrow3x=2\\Rightarrow3x-2=0', 'x=-5\\Rightarrow x+5=0'], prod: ['(3x-2)(x+5)=0', '3x^2+15x-2x-10=0', '3x^2+13x-10=0'],
-    f: (x) => 3 * x * x + 13 * x - 10, ft: '3x^2+13x-10', fcap: `${T('x=\\frac{2}{3}')}: multiply by 3 to clear the fraction, then move it over: the factor is ${T('(3x-2)')}. And ${T('x=-5')} gives ${T('(x+5)')}.`,
-    win: { xmin: -7, xmax: 3, ymin: -26, ymax: 10, ystep: 2, ylabels: 4 } },
-  c: { label: T('\\text{roots }\\tfrac12,\\ 4'), ask: `Write a quadratic equation with integer coefficients whose roots are ${T('\\frac{1}{2}')} and ${T('4')}.`, mode: 'from', roots: [[0.5, '\\frac{1}{2}', 'nw'], [4, '4', 'ne']],
-    facs: ['x=\\frac{1}{2}\\Rightarrow2x=1\\Rightarrow2x-1=0', 'x=4\\Rightarrow x-4=0'], prod: ['(2x-1)(x-4)=0', '2x^2-8x-x+4=0', '2x^2-9x+4=0'],
-    f: (x) => 2 * x * x - 9 * x + 4, ft: '2x^2-9x+4', fcap: `${T('x=\\frac{1}{2}')} gives ${T('(2x-1)')} (a root ${T('\\frac{p}{q}')} gives ${T('(qx-p)')}); ${T('x=4')} gives ${T('(x-4)')}.`,
-    win: { xmin: -2, xmax: 6, ymin: -8, ymax: 8, ylabels: 2 } }
-};
-const rootsGraph = {
-  title: 'Roots = zeros = x-intercepts',
-  height: 420, minW: 960,
-  choices: [{ sep: 'Check:' }, ...['a', 'b', 'd'].map((v) => ({ v, label: RG[v].label })), { sep: 'Review:' }, { v: 'c', label: RG.c.label }],
-  ask: (v) => RG[v].ask,
-  make(stage, v, ex) {
-    const d = RG[v], W = ex.W, GW = 440;
-    const G = new Graph(stage, Object.assign({ x: 0, y: 6, width: GW, height: 408, fontSize: 15 }, d.win));
-    const cv = G.fn(d.f, { color: BLU, width: 4 }); cv.style.opacity = 0;
-    const glab = G.label(d.win.xmin + 0.04 * (d.win.xmax - d.win.xmin), d.win.ymax - 0.04 * (d.win.ymax - d.win.ymin), T(`y=${d.ft}`), { pos: 'se', cls: 'u4l8-glab' }); hide(glab);
-    const pts = d.roots.map(([x, t, pos]) => hideP(G.point(x, 0, { label: T(`(${t},\\,0)`), pos, color: GCF })));
-    const P = panel(stage, GW + 24, 4, W - GW - 24, 410, '', 'u4l8-big');
-    const names = h('div', 'u4l8-names'); hide(names);
-    const rts = d.roots.map((r) => r[1]).join(',\\ ');
-    names.innerHTML = `<div><b>roots</b> of ${T(`${d.ft}=0`)}: ${T(rts)}</div><div><b>zeros</b> of ${T(`y=${d.ft}`)}: ${T(rts)}</div><div><b>${T('x')}-intercepts</b>: ${d.roots.map((r) => T(`(${r[1]},\\,0)`)).join(' and ')}</div>`;
-    if (d.mode === 'zeros') {
-      const ls = d.lines.map((t) => mline(P, t)); P.appendChild(names);
-      return [
-        { cap: `The graph of ${T(`y=${d.ft}`)}. Where does it meet the ${T('x')}-axis? Set ${T('y=0')} and solve.`, run: async (c) => { await show(c, glab); await drawOn(c, G, cv, 900); } },
-        { cap: d.double ? `A <b>perfect square</b>: ${T('(2x+5)^2=0')}, one root ${T('x=-\\frac{5}{2}')}.` : `Decomposition: product ${T('-12')}, sum ${T('-1')}: ${T('-4')} and ${T('3')}. So ${T('x=2')} or ${T('x=-\\frac{3}{2}')}.`,
-          run: async (c) => { for (const l of ls) await show(c, l); } },
-        { cap: d.double ? `A double root: the vertex sits <b>on</b> the ${T('x')}-axis, so the graph <b>touches</b> at ${T('(-\\frac{5}{2},\\,0)')} without crossing.`
-          : `The same two numbers, three names: <b>roots</b>, <b>zeros</b>, <b>${T('x')}-intercepts</b> ${T('(2,\\,0)')} and ${T('\\left(-\\frac{3}{2},\\,0\\right)')}.`,
-          run: async (c) => { for (const p of pts) await popP(c, p); await show(c, names); } }
-      ];
-    }
-    const lf = d.facs.map((t) => lineIn(P, T(t))), lp = d.prod.map((t, i) => lineIn(P, T(t), i === d.prod.length - 1 ? 'u4l8-ansl' : ''));
-    P.appendChild(names);
-    return [
-      { cap: `Start from the roots: ${d.roots.map((r) => T(r[1])).join(' and ')} on the ${T('x')}-axis.`, run: async (c) => { for (const p of pts) await popP(c, p); } },
-      { cap: `<b>Root → factor.</b> ${d.fcap}`, run: async (c) => { for (const l of lf) await show(c, l); } },
-      { cap: `<b>Multiply the factors</b> and set the product to 0: ${T(`${d.ft}=0`)}.`, run: async (c) => { for (const l of lp) await show(c, l); } },
-      { cap: `Its graph crosses the ${T('x')}-axis at exactly those roots. (Any multiple of the equation has the same roots.)`, run: async (c) => { await show(c, glab); await drawOn(c, G, cv, 900); await show(c, names); } }
     ];
   }
 };
@@ -770,63 +399,6 @@ const radGraph = {
 };
 
 /* ====================================================================================================
- * Two radicals: square twice (Example 8(c))
- * ==================================================================================================== */
-const RAIL2 = ['Restrictions', 'Isolate one', 'Square', 'Isolate again', 'Square again', 'Solve', 'Verify'];
-const TR = {
-  e8: { label: '8(c)', eq: '\\sqrt{2x+1}-\\sqrt{x+4}=1', nl: { min: -6, max: 14 }, R: [[-4, 'x\\ge-4', GRAY, 0], [-0.5, 'x\\ge-\\frac{1}{2}', GRN, 16]], R2: [4, 'x\\ge4', AMB, 32],
-    rcap: `${T('2x+1\\ge0\\Rightarrow x\\ge-\\frac12')} and ${T('x+4\\ge0\\Rightarrow x\\ge-4')}. Both hold when ${T('x\\ge-\\frac12')}.`,
-    iso: '\\sqrt{2x+1}=1+\\sqrt{x+4}', sq: ['2x+1=\\left(1+\\sqrt{x+4}\\right)^2', `2x+1=1+${K(AMB, '2\\sqrt{x+4}')}+x+4`],
-    sqcap: `The right side is a <b>binomial</b>: ${T('(1+\\sqrt{x+4})^2=1+2\\sqrt{x+4}+(x+4)')}. The middle term still has a radical.`,
-    iso2: 'x-4=2\\sqrt{x+4}', i2cap: `Collect: ${T('x-4=2\\sqrt{x+4}')}. The side opposite must be ${T('\\ge0')}, so ${T('x\\ge4')} too.`,
-    sq2: ['x^2-8x+16=4(x+4)=4x+16'], s2cap: `Square again, coefficient too: ${T('(2\\sqrt{x+4})^2=4(x+4)')}.`,
-    solve: ['x^2-12x=0\\Rightarrow x(x-12)=0', 'x=0\\ \\text{or}\\ x=12'], scap: `${T('x(x-12)=0')}: ${T('x=0')} or ${T('x=12')}.`,
-    cands: [{ x: '12', L: ['\\sqrt{25}-\\sqrt{16}', '1'], R: ['1'], ok: true }, { x: '0', L: ['\\sqrt{1}-\\sqrt{4}', '-1'], R: ['1'], ok: false, note: `(It also breaks ${T('x\\ge4')}.)` }], fin: 'x=12' },
-  rev: { label: T('\\sqrt{x+5}-\\sqrt{x}=1'), eq: '\\sqrt{x+5}-\\sqrt{x}=1', nl: { min: -7, max: 7 }, R: [[-5, 'x\\ge-5', GRAY, 0], [0, 'x\\ge0', GRN, 16]], R2: null,
-    rcap: `${T('x+5\\ge0')} and ${T('x\\ge0')}: both hold when ${T('x\\ge0')}.`,
-    iso: '\\sqrt{x+5}=1+\\sqrt{x}', sq: ['x+5=\\left(1+\\sqrt{x}\\right)^2', `x+5=1+${K(AMB, '2\\sqrt{x}')}+x`], sqcap: `${T('(1+\\sqrt{x})^2=1+2\\sqrt{x}+x')}: the middle term keeps a radical.`,
-    iso2: '4=2\\sqrt{x}\\Rightarrow\\sqrt{x}=2', i2cap: `The ${T('x')} terms cancel: ${T('4=2\\sqrt{x}')}, so ${T('\\sqrt{x}=2')}.`,
-    sq2: ['x=4'], s2cap: `Square again: ${T('x=4')}.`, solve: [], scap: 'Nothing left to solve.',
-    cands: [{ x: '4', L: ['\\sqrt{9}-\\sqrt{4}', '3-2', '1'], R: ['1'], ok: true }], fin: 'x=4' }
-};
-const twoRad = {
-  title: 'Square, isolate, square again',
-  height: 430, minW: 980, capH: 84,
-  choices: [{ sep: 'Check:' }, { v: 'e8', label: 'Example 8(c)' }, { sep: 'Review:' }, { v: 'rev', label: TR.rev.label }],
-  ask: (v) => `Solve and verify ${T(TR[v].eq)}.`,
-  make(stage, v, ex) {
-    const d = TR[v], W = ex.W, VW = 290, VX = W - VW, PX = 186, PW = VX - PX - 12;
-    const R = rail(stage, 0, 4, 172, RAIL2);
-    R.el.classList.add('u4l8-rail7');
-    const N = new NumberLine(stage, { x: PX, y: 0, width: PW, height: 114, min: d.nl.min, max: d.nl.max, step: 1, labelStep: 2, axisY: 78 });
-    const ivs = [...d.R, ...(d.R2 ? [d.R2] : [])].map(([a, t, col, lift]) => {
-      const iv = N.interval(a, Infinity, { color: col, lift: lift + 8, width: 6 }); iv.style.opacity = 0;
-      const lb = N.mark(a, T(t), { lift: lift + 4, color: col, cls: 'u4l8-nlab', pos: 'n' }); lb.style.top = (N.ay - lift - 8) + 'px'; lb.style.translate = 'calc(-100% - 12px) -50%'; hide(lb); return { iv, lb };
-    });
-    const P = panel(stage, PX, 114, PW, 312, '', 'u4l8-big6');
-    lineIn(P, T(d.eq), 'u4l8-eq0').style.opacity = 1;
-    const li = workLine(P, d.iso, 'isolate'), ls = d.sq.map((t, i) => workLine(P, t, i ? '' : 'square'));
-    const li2 = workLine(P, d.iso2, 'isolate'), ls2 = d.sq2.map((t, i) => workLine(P, t, i ? '' : 'square again'));
-    const lv = d.solve.map((t) => workLine(P, t, ''));
-    const vs = verifySteps(stage, d.cands, VX, VW, 4, 212);
-    const ivShow = async (c, k) => { ivs[k].iv.style.opacity = ''; await N.drawIn(ivs[k].iv, 500, c); await show(c, ivs[k].lb); };
-    const steps = [
-      { cap: `<b>1. Restrictions.</b> ${d.rcap}`, run: async (c) => { await R.go(c, 0); await ivShow(c, 0); await ivShow(c, 1); } },
-      { cap: '<b>2. Isolate one radical:</b> move the other to the right side.', run: async (c) => { await R.go(c, 1); await show(c, li); } },
-      { cap: `<b>3. Square both sides.</b> ${d.sqcap}`, run: async (c) => { await R.go(c, 2); for (const l of ls) await show(c, l); } },
-      { cap: `<b>4. Isolate the radical that is left.</b> ${d.i2cap}`, run: async (c) => { await R.go(c, 3); await show(c, li2); if (d.R2) await ivShow(c, 2); } },
-      { cap: `<b>5. Square again.</b> ${d.s2cap}`, run: async (c) => { await R.go(c, 4); for (const l of ls2) await show(c, l); } },
-      { cap: `<b>6. Solve.</b> ${d.scap}`, run: async (c) => { await R.go(c, 5); for (const l of lv) await show(c, l); } }
-    ];
-    vs.forEach(({ k, card, st }, i) => steps.push({
-      cap: `<b>7. Verify ${T('x=' + k.x)}:</b> ${k.ok ? `${T(k.L[0] + '=' + k.L[k.L.length - 1])} ✓ A root.` : `${T(k.L[0] + '=' + k.L[k.L.length - 1] + '\\ne1')}. <b class="u4l8-xr">Extraneous.</b> ${k.note || ''}`}`,
-      run: async (c) => { await R.go(c, 6); await card.play(c); st.place(); await stampIn(c, st); if (i === vs.length - 1) R.pills[6].classList.add('done'); } }));
-    steps.push({ cap: `<b>The root is ${T(d.fin)}.</b>`, run: async (c) => { await pulse(c, vs[0].card, 1.03); } });
-    return steps;
-  }
-};
-
-/* ====================================================================================================
  * Stand Up Break
  * ==================================================================================================== */
 standup('u4l8', {
@@ -869,6 +441,5 @@ standup('u4l8', {
 });
 
 /* =============================== mount =============================== */
-mountBox();
-export const explainers = mountExplainers({ machine, solveRecap, radRecap, errors, subDos, kHunt, rootsGraph, frame, radGraph, twoRad });
-export const _test = { MC, SR, RR, ER, SD, KH, RG, RGR, TR, poly, lin, frac };
+export const explainers = mountExplainers({ machine, kHunt, frame, radGraph });
+export const _test = { MC, KH, RGR, poly, lin, frac };

@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="../../css/site.css">
 <link rel="stylesheet" href="../../css/calc.css">
 <link rel="stylesheet" href="../../css/lessons/u3l1.css">
+<link rel="stylesheet" href="../../css/format.css">
 <script src="../../../js/ns.js"></script>
 <script src="../../../assets/katex/katex.min.js"></script>
 <script src="../../../js/calc84.js"></script>
@@ -24,6 +25,15 @@
 </head>
 <body>
 <main class="lesson screen u3l1">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: Clock Hands">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="rotate" values="-12 70 46;12 70 46;-12 70 46" dur="2.2s" repeatCount="indefinite"/><text x="70" y="46" font-size="44" text-anchor="middle">⏰</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.2s" repeatCount="indefinite"/><text x="160" y="46" font-size="40" text-anchor="middle">🕒</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/><text x="230" y="46" font-size="40" text-anchor="middle">🕘</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.8s" repeatCount="indefinite"/><text x="300" y="46" font-size="40" text-anchor="middle">🕛</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>Clock Hands</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">At 3:00, the minute hand and the hour hand of a clock make a <b>right angle</b>.</p><p class="vw-ask">How many times in one whole day (24 hours) do the hands make a right angle?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A clock with its hands racing round"><circle cx="165" cy="125" r="108" fill="#fffdf6" stroke="#4a4436" stroke-width="6"/><line x1="165" y1="26" x2="165" y2="42" stroke="#4a4436" stroke-width="5" stroke-linecap="round" transform="rotate(0 165 125)"/><line x1="165" y1="26" x2="165" y2="35" stroke="#4a4436" stroke-width="3" stroke-linecap="round" transform="rotate(30 165 125)"/><line x1="165" y1="26" x2="165" y2="35" stroke="#4a4436" stroke-width="3" stroke-linecap="round" transform="rotate(60 165 125)"/><line x1="165" y1="26" x2="165" y2="42" stroke="#4a4436" stroke-width="5" stroke-linecap="round" transform="rotate(90 165 125)"/><line x1="165" y1="26" x2="165" y2="35" stroke="#4a4436" stroke-width="3" stroke-linecap="round" transform="rotate(120 165 125)"/><line x1="165" y1="26" x2="165" y2="35" stroke="#4a4436" stroke-width="3" stroke-linecap="round" transform="rotate(150 165 125)"/><line x1="165" y1="26" x2="165" y2="42" stroke="#4a4436" stroke-width="5" stroke-linecap="round" transform="rotate(180 165 125)"/><line x1="165" y1="26" x2="165" y2="35" stroke="#4a4436" stroke-width="3" stroke-linecap="round" transform="rotate(210 165 125)"/><line x1="165" y1="26" x2="165" y2="35" stroke="#4a4436" stroke-width="3" stroke-linecap="round" transform="rotate(240 165 125)"/><line x1="165" y1="26" x2="165" y2="42" stroke="#4a4436" stroke-width="5" stroke-linecap="round" transform="rotate(270 165 125)"/><line x1="165" y1="26" x2="165" y2="35" stroke="#4a4436" stroke-width="3" stroke-linecap="round" transform="rotate(300 165 125)"/><line x1="165" y1="26" x2="165" y2="35" stroke="#4a4436" stroke-width="3" stroke-linecap="round" transform="rotate(330 165 125)"/><text x="165" y="59" font-size="24" font-weight="800" fill="#4a4436" text-anchor="middle" dominant-baseline="central">12</text><text x="233" y="125" font-size="24" font-weight="800" fill="#4a4436" text-anchor="middle" dominant-baseline="central">3</text><text x="165" y="193" font-size="24" font-weight="800" fill="#4a4436" text-anchor="middle" dominant-baseline="central">6</text><text x="97" y="125" font-size="24" font-weight="800" fill="#4a4436" text-anchor="middle" dominant-baseline="central">9</text><line x1="165" y1="135" x2="165" y2="67" stroke="#4a4436" stroke-width="10" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="90 165 125;450 165 125" dur="48s" repeatCount="indefinite"/></line><line x1="165" y1="135" x2="165" y2="37" stroke="#2b55a0" stroke-width="6" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="0 165 125;360 165 125" dur="4s" repeatCount="indefinite"/></line><circle cx="165" cy="125" r="7" fill="#c93a33"/></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>How did you count?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>44 times</b>, not 48. In 12 hours the minute hand laps the hour hand only <b>11</b> times (not 12), and every lap has 2 right angles: <span class="tex">11\times2=22</span> right angles every 12 hours, so 44 in a day.</div></div>
+</section>
 
 <!-- ================= title ================= -->
 <section class="card hero" data-ink="hero" data-section="Start">
@@ -42,40 +52,6 @@
     </ul>
   </div>
   <div class="outcome"><b>T1</b> Demonstrate an understanding of angles in standard position [0° to 360°].<br><span class="muted">Today: standard position, quadrants and quadrantal angles, reference angles and the four angles that share one.</span></div>
-</section>
-
-<!-- ================= warm-up ================= -->
-<section class="card warm wf" data-ink="warm" data-section="Warm-up: The Ferris Wheel" id="wu" style="--wf-side: 450px">
-  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Ferris Wheel</h2>
-  <p class="wf-rule">A Ferris wheel has a radius of <b>20 m</b>. Your seat starts <b>level with the hub</b>, on the right, and the wheel turns <b>counterclockwise</b>.</p></div>
-  <div class="wf-grid"><div class="wf-main">
-    <div class="u3l1-wheel" id="u3l1-wheel"></div>
-    <div class="u3l1-wbtns">
-      <button type="button" class="pill" id="u3l1-wback">◂ Back 15°</button>
-      <button type="button" class="pill" id="u3l1-wfwd">Turn 15° ▸</button>
-      <button type="button" class="pill" id="u3l1-wreset">Back to the start</button>
-    </div>
-  </div><div class="wf-side">
-    <div class="u3l1-wqs">
-      <div class="bk-wq"><div class="q-line"><div class="q-num">1</div><div>Where is your seat after the wheel turns <span class="tex">90^\circ</span>? After <span class="tex">180^\circ</span>? <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l1-wa"><div class="bk-ans"><span class="tex">90^\circ</span>: at the <b>top</b>, 20 m above the hub. <span class="tex">180^\circ</span>: level with the hub again, on the <b>left</b>.</div></div></div>
-      <div class="bk-wq"><div class="q-line"><div class="q-num">2</div><div>After <span class="tex">30^\circ</span> your seat is <b>10 m above</b> the hub. Find another turn, less than <span class="tex">180^\circ</span>, that puts you 10 m above the hub. <button class="pill small" type="button" data-bk-toggle>Answer</button></div></div>
-        <div class="u3l1-wa"><div class="bk-ans"><b><span class="tex">150^\circ</span></b>: <span class="tex">30^\circ</span> short of <span class="tex">180^\circ</span>, the mirror image of <span class="tex">30^\circ</span> on the other side.</div></div></div>
-    </div>
-    <div class="poll wf-poll">
-      <div class="q-line"><div class="q-num big-one">!</div><div><b>The big one.</b> In one full turn (<span class="tex">0^\circ</span> to <span class="tex">360^\circ</span>), how many times is your seat <b>exactly 10 m</b> from hub height, above <b>or</b> below? <b>Guess first.</b></div></div>
-      <div class="poll-opts c4">
-        <div class="opt"><b>A</b> 1</div>
-        <div class="opt"><b>B</b> 2</div>
-        <div class="opt"><b>C</b> 3</div>
-        <div class="opt right"><b>D</b> 4</div>
-      </div>
-      <button class="pill" type="button" data-poll-reveal>Reveal</button>
-      <div class="poll-ans"><b>D, four times:</b> <span class="tex">30^\circ</span>, <span class="tex">150^\circ</span>, <span class="tex">210^\circ</span> and <span class="tex">330^\circ</span>. Each one is <b><span class="tex">30^\circ</span> away from the horizontal line</b> through the hub. That <span class="tex">30^\circ</span> is the <b class="u3l1-rc">reference angle</b>: today’s big idea.<br>
-        <span class="muted"><b>B</b> forgets the bottom half: <span class="tex">210^\circ=180^\circ+30^\circ</span> and <span class="tex">330^\circ=360^\circ-30^\circ</span> are 10 m <em>below</em> the hub.</span></div>
-    </div>
-  </div></div>
-  <p class="u3l1-social">Challenge your neighbour: pick a turn, like <span class="tex">70^\circ</span>. Your neighbour names the three other turns that put the seat just as far from hub height.</p>
 </section>
 
 <!-- ================= 1. Standard position ================= -->
@@ -106,7 +82,6 @@
     </div>
     <div class="u3l1-fig" data-fig="quads"></div>
   </div>
-  <div class="explainer" data-explainer="quadrants"></div>
 </section>
 
 <section class="card example" data-ink="ex1" data-section="Example 1">
@@ -136,7 +111,6 @@
 <section class="card" data-ink="s2b" data-section="2. A Point on the Terminal Arm">
   <h3 class="sub">A point on the terminal arm</h3>
   <p>If a point <span class="tex">P(x,\ y)</span> lies on the terminal arm, the terminal arm runs from the origin through <span class="tex">P</span>. The <b>signs</b> of <span class="tex">x</span> and <span class="tex">y</span> tell you the quadrant: right of the <span class="tex">y</span>-axis <span class="tex">x&gt;0</span>, left <span class="tex">x&lt;0</span>; above the <span class="tex">x</span>-axis <span class="tex">y&gt;0</span>, below <span class="tex">y&lt;0</span>.</p>
-  <div class="explainer" data-explainer="points"></div>
 </section>
 
 <section class="card example" data-ink="ex3" data-section="Example 3">
@@ -184,7 +158,6 @@
 <section class="card" data-ink="s3b" data-section="3. Working Backwards">
   <h3 class="sub">Working backwards: from <span class="tex">\theta_R</span> to <span class="tex">\theta</span></h3>
   <p>Knowing the reference angle <b>and</b> where the terminal arm lies fixes the rotation angle. Find where that quadrant meets the <span class="tex">x</span>-axis (<span class="tex">0^\circ</span>, <span class="tex">180^\circ</span> or <span class="tex">360^\circ</span>), turn <span class="tex">\theta_R</span> from there into the quadrant, then read <span class="tex">\theta</span> from the positive <span class="tex">x</span>-axis.</p>
-  <div class="explainer" data-explainer="backwards"></div>
 </section>
 
 <section class="card example" data-ink="ex5" data-section="Example 5">
@@ -206,6 +179,15 @@
   <button class="more" data-more="ex5-space">+ More space</button>
 </section>
 
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 1 · Questions 1–6</h2>
+  <p class="pr-t">Sketch the angle, name where it lands, and find reference angles both ways.</p>
+  <div class="pr-chips n4"><span><b>1–2</b>Sketch it, name the quadrant</span><span><b>3–4</b>Reference angles</span><span><b>5</b>Clockwise and past 360°</span><span><b>6</b>Work backwards</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u3l1">Open the Practice site</a></div>
+</section>
+
 <!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
 <section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u3l1"></section>
 
@@ -216,7 +198,6 @@
   <div class="def amber u3l1-center">For a reference angle <span class="tex">\textcolor{#c27a0e}{\theta_R}</span>, the angles from <span class="tex">0^\circ</span> to <span class="tex">360^\circ</span> are<br>
     <span class="u3l1-four"><span class="tex">\theta_R</span> (Q1) &nbsp;·&nbsp; <span class="tex">180^\circ-\theta_R</span> (Q2) &nbsp;·&nbsp; <span class="tex">180^\circ+\theta_R</span> (Q3) &nbsp;·&nbsp; <span class="tex">360^\circ-\theta_R</span> (Q4)</span></div>
   <div class="explainer" data-explainer="four"></div>
-  <div class="part think"><div class="pl"><span class="think-tag">Think</span> Every reference angle between <span class="tex">0^\circ</span> and <span class="tex">90^\circ</span> gives exactly four angles. What happens when <span class="tex">\theta_R=0^\circ</span> or <span class="tex">\theta_R=90^\circ</span>?</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The copies land <b>on the axes</b> and overlap. <span class="tex">\theta_R=0^\circ</span>: the arm is on the <span class="tex">x</span>-axis, so <span class="tex">0^\circ</span>, <span class="tex">180^\circ</span>, <span class="tex">360^\circ</span>. <span class="tex">\theta_R=90^\circ</span>: on the <span class="tex">y</span>-axis, so <span class="tex">90^\circ</span> and <span class="tex">270^\circ</span>.</div></div></div>
 </section>
 
 <section class="card example" data-ink="ex6" data-section="Example 6">
@@ -241,7 +222,6 @@
       <tr><td>reflect in the <span class="tex">x</span>-axis:</td><td><span class="tex">(a,\ -b)</span></td><td>on the arm of <span class="tex">360^\circ-\theta</span> (Q4)</td></tr>
     </table>
   </div>
-  <div class="explainer" data-explainer="reflect"></div>
 </section>
 
 <section class="card example" data-ink="ex7" data-section="Example 7">
@@ -286,7 +266,7 @@
     <div><b>One <span class="tex">\theta_R</span>, four angles:</b> <span class="tex">\theta_R</span>, <span class="tex">180^\circ-\theta_R</span>, <span class="tex">180^\circ+\theta_R</span>, <span class="tex">360^\circ-\theta_R</span>. Reflecting <span class="tex">P(a,\ b)</span> in the <span class="tex">y</span>-axis, both axes or the <span class="tex">x</span>-axis gives those Q2, Q3, Q4 angles.</div>
   </div>
   <a class="assign" href="../../../#/lesson/u3l1">
-    <div><div class="kicker">Your turn</div><b>Assignment 1 — Angles in Standard Position and Reference Angles</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+    <div><div class="kicker">Your turn</div><b>Assignment 1 · Questions 7–18</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
   </a>
   <a class="assign next-l" href="../l2/">
     <div><div class="kicker">Next lesson</div><b>Lesson 2 — Trigonometric Ratios from a Point on the Terminal Arm</b><div class="muted">Put a point <span class="tex">P(x,\ y)</span> on the terminal arm and find <span class="tex">r</span>, <span class="tex">\sin\theta</span>, <span class="tex">\cos\theta</span> and <span class="tex">\tan\theta</span>.</div></div><span class="arrow">→</span>
