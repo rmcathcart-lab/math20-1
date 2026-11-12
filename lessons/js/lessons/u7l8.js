@@ -85,7 +85,7 @@ const VD = {
     win: { xmin: -6.5, xmax: 4.5, ymin: -8.5, ymax: 10.5, ylabels: 2 },
     c1: [{ x: 3, xt: '3', chk: '|7|=7,\\ \\ 3(3)-2=7', pos: 'nw' }],
     c2: [{ x: -0.5, xt: '-\\tfrac12', chk: '\\left|\\tfrac72\\right|=\\tfrac72,\\ \\ 3\\left(-\\tfrac12\\right)-2=-\\tfrac72', pos: 'se' }],
-    c1cap: 'The ghost $y=x+4$ is the right arm of the V, carried on. It crosses the line at $x=3$.',
+    negB: '-(3x-2)', c1cap: 'The ghost $y=x+4$ is the right arm of the V, carried on. It crosses the line at $x=3$.',
     c2cap: 'The ghost $y=-(x+4)$ is the left arm, carried on <b>below the axis</b>. It crosses the line at $x=-\\tfrac12$.',
     vcap: 'At $x=3$ both sides are $7$: <b>keep</b>. At $x=-\\tfrac12$ the right side is $-\\tfrac72$, below the $x$-axis, where $|x+4|$ never goes: <b>extraneous</b>.',
     res: 'x=3', resNote: '(x=-\\tfrac12\\text{ is extraneous})' },
@@ -94,7 +94,7 @@ const VD = {
     win: { xmin: -3.5, xmax: 6.5, ymin: -7.5, ymax: 9.5, ylabels: 2 },
     c1: [{ x: -2, xt: '-2', chk: '|4+6-4|=6', pos: 'nw' }, { x: 5, xt: '5', chk: '|25-15-4|=6', pos: 'ne' }],
     c2: [{ x: 1, xt: '1', chk: '|1-3-4|=\\lvert -6\\rvert=6', pos: 'sw' }, { x: 2, xt: '2', chk: '|4-6-4|=\\lvert -6\\rvert=6', pos: 'se' }],
-    c1cap: 'The ghost $y=x^2-3x-4$ (the parabola without the bars) crosses $y=6$ at $x=-2$ and $x=5$.',
+    negB: '-6', c1cap: 'The ghost $y=x^2-3x-4$ (the parabola without the bars) crosses $y=6$ at $x=-2$ and $x=5$.',
     c2cap: 'The ghost $y=-(x^2-3x-4)$, the flipped parabola, crosses $y=6$ at $x=1$ and $x=2$.',
     vcap: 'The right side is $6$, a positive constant: every crossing is <b>above</b> the $x$-axis, on the W. All four check: <b>none is extraneous</b>.',
     res: 'x=-2,\\ 1,\\ 2,\\ 5', resNote: '' },
@@ -103,7 +103,7 @@ const VD = {
     win: { xmin: -6.5, xmax: 6.5, ymin: -23, ymax: 23, ystep: 2, ylabels: 4 },
     c1: [{ x: 5, xt: '5', chk: '|20|=20,\\ \\ 4(5)=20', pos: 'w' }, { x: -1, xt: '-1', chk: '\\lvert -4\\rvert=4,\\ \\ 4(-1)=-4', pos: 'se' }],
     c2: [{ x: 1, xt: '1', chk: '\\lvert -4\\rvert=4,\\ \\ 4(1)=4', pos: 'nw' }, { x: -5, xt: '-5', chk: '|20|=20,\\ \\ 4(-5)=-20', pos: 'e' }],
-    c1cap: 'The ghost $y=x^2-5$ crosses the line $y=4x$ at $x=5$ and $x=-1$.',
+    negB: '-4x', c1cap: 'The ghost $y=x^2-5$ crosses the line $y=4x$ at $x=5$ and $x=-1$.',
     c2cap: 'The ghost $y=-(x^2-5)$ crosses the line at $x=1$ and $x=-5$.',
     vcap: 'Where $x<0$ the right side $4x$ is negative, so those crossings are <b>below</b> the $x$-axis: $x=-1$ and $x=-5$ are <b>extraneous</b>.',
     res: 'x=1\\ \\text{or}\\ x=5', resNote: '(x=-1,\\ -5\\text{ are extraneous})' }
@@ -120,28 +120,28 @@ const verdict = mdDef({
     const rhs = hcurve(G.fn(d.Bf, { color: R, width: 3.5 }));
     const g1 = hcurve(G.fn(d.Af, { color: GY, width: 2.5, dash: '8 7' }));
     const g2 = hcurve(G.fn((x) => -d.Af(x), { color: GY, width: 2.5, dash: '8 7' }));
-    const leg = hide(div(stage, 'u7l8-legend', `<span class="u7l8-lp">${T('y=|' + d.At + '|')}</span><span class="u7l8-lo">${T('y=' + d.Bt)}</span><span class="u7l8-lg">ghosts ${T('y=\\pm(' + d.At + ')')}</span>`, GW + 22, 404));
+    const leg = hide(div(stage, 'u7l8-legend', `<span class="u7l8-lp">${T('y=|' + d.At + '|')}</span><span class="u7l8-lo">${T('y=' + d.Bt)}</span><span class="u7l8-lg">ghosts ${T('y=\\pm(' + d.At + ')')}</span>`, GW + 22, 394));
     const cands = [...d.c1.map((k) => ({ ...k, cs: 1 })), ...d.c2.map((k) => ({ ...k, cs: 2 }))];
     cands.forEach((k) => {
       k.y = d.Bf(k.x); k.ok = k.y >= 0;
       k.pt = hpt(G, k.x, k.y, { color: AM, r: 7, label: T('x=' + k.xt), pos: k.pos });
       if (k.pt.label) k.pt.label.classList.add('u7l8-lab');
     });
-    const BX = GW + 18, BW = W - BX - 4, n = cands.length, RH = n > 2 ? 70 : 92;
-    const board = div(stage, 'u7l8-board', `<div class="u7l8-bh">Candidates · verify in ${T('|' + d.At + '|=' + d.Bt)}</div>`, BX, 4, BW, 330);
+    const BX = GW + 18, BW = W - BX - 4, n = cands.length, RH = n > 2 ? 62 : 90, BH = 40 + n * (RH + 4);
+    const board = div(stage, 'u7l8-board', `<div class="u7l8-bh">Candidates · verify in ${T('|' + d.At + '|=' + d.Bt)}</div>`, BX, 4, BW, BH);
     cands.forEach((k, i) => {
       k.row = hide(div(board, 'u7l8-cand', `<div class="u7l8-ch"><span class="u7l8-cs">Case ${k.cs}</span>${T('x=' + k.xt)}</div><div class="u7l8-cv">${T(k.chk)}</div>`, 10, 36 + i * (RH + 4), BW - 24, RH));
       k.cv = hide(k.row.querySelector('.u7l8-cv'));
       k.st = stampAt(board, k.ok ? 'keep' : 'extraneous!', k.ok, BW - (k.ok ? 92 : 150), 36 + i * (RH + 4) + 2, k.ok ? -5 : -8);
     });
-    const ans = hide(div(stage, 'u7l8-ansbox', `Solution: ${T('\\boldsymbol{' + d.res + '}')} ${d.resNote ? `<span class="u7l8-cv">${T(d.resNote)}</span>` : ''}`, BX, 346, BW));
+    const ans = hide(div(stage, 'u7l8-ansbox', `Solution: ${T('\\boldsymbol{' + d.res + '}')} ${d.resNote ? `<span class="u7l8-cv">${T(d.resNote)}</span>` : ''}`, BX, BH + 14, BW));
     const step = async (c, list) => { for (const k of list) { await show(c, k.row); await showPt(c, G, k.pt); } };
     return [
       { cap: `Graph both sides: the left side $y=|${d.At}|$ in purple, the right side $y=${d.Bt}$ in orange. A solution is an $x$ where they <b>meet</b>.`,
         run: async (c) => { await show(c, leg); await drawCurve(c, G, absA, 900); await drawCurve(c, G, rhs, 700); } },
       { cap: `<b>Case 1:</b> $${d.At}=${d.Bt}$. ${d.c1cap}`,
         run: async (c) => { await drawCurve(c, G, g1, 800); await step(c, cands.filter((k) => k.cs === 1)); } },
-      { cap: `<b>Case 2:</b> $${d.At}=-(${d.Bt})$, the same as $-(${d.At})=${d.Bt}$. ${d.c2cap}`,
+      { cap: `<b>Case 2:</b> $${d.At}=${d.negB}$, the same as $-(${d.At})=${d.Bt}$. ${d.c2cap}`,
         run: async (c) => { await drawCurve(c, G, g2, 800); await step(c, cands.filter((k) => k.cs === 2)); } },
       { cap: `<b>Verify</b> each one in the original equation. ${d.vcap}`,
         run: async (c) => {

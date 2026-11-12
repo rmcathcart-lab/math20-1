@@ -57,7 +57,7 @@
 /* verdict board */
 .u7l8-board { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; box-sizing: border-box; padding: 8px 12px; }
 .u7l8-bh { font: 800 16px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
-.u7l8-cand { display: flex; flex-direction: column; gap: 2px; padding: 6px 10px; border-radius: 10px; border: 2px solid #ece7dc; box-sizing: border-box; background: #fffdf6; }
+.u7l8-cand { display: flex; flex-direction: column; gap: 1px; padding: 4px 10px; border-radius: 10px; border: 2px solid #ece7dc; box-sizing: border-box; background: #fffdf6; }
 .u7l8-cand.ok { border-color: #a7d8c2; background: #f2faf6; }
 .u7l8-cand.bad { border-color: #f1b5b0; background: #fff6f4; }
 .u7l8-ch { font-size: 20px; display: flex; align-items: baseline; gap: 10px; }

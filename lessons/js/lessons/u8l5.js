@@ -203,9 +203,9 @@ const graph3 = {
     const L4 = wl(Rp, d.origin ? 0 : 2, `Test ${T(pt(...tp))}: &nbsp;${T(d.sub)} &nbsp;<b class="${d.ok ? 'u8l5-ok' : 'u8l5-no'}">${d.ok ? 'true' : 'false'}</b>`, 'test point');
     const L5 = wl(Rp, 3, `${d.ok ? 'True' : 'False'}: shade the side ${d.ok ? 'with' : 'without'} ${T(pt(...tp))}: <b>${d.where}</b>`, 'shade');
     const T0 = d.origin ? hide(G.point(0, 0, { color: GG, r: 8 })) : null;
-    const TPt = hide(G.point(tp[0], tp[1], { color: TP, r: 8.5, label: 'test', pos: tp[0] === 0 && tp[1] === 0 && d.side === 'above' ? 'se' : 'ne' }));
+    const TPt = hide(G.point(tp[0], tp[1], { color: TP, r: 8.5, label: 'test', pos: 'se' }));
     const [mpx, mpy] = G.toPx(tp[0], tp[1]);
-    const mark = hide(div(G.html, 'u8l5-vm ' + (d.ok ? 'u8l5-vok' : 'u8l5-vno'), d.ok ? '✓' : '✗', mpx - 46, mpy - 18));
+    const mark = hide(div(G.html, 'u8l5-vm ' + (d.ok ? 'u8l5-vok' : 'u8l5-vno'), d.ok ? '✓' : '✗', mpx - 17, mpy - 60));
     const where = d.side === 'above' ? 'above' : 'below';
     const steps = [
       { cap: `<b>Step 1:</b> the boundary ${T(d.eq.replace(/\\le|\\ge|<|>/, '='))}. ${d.capB}`, run: async (c) => { unhide(L1); await show(c, L1); unhide(L2); await show(c, L2); for (const p of kp) { p.style.opacity = 1; await pop(c, p, 260); } } },
@@ -364,7 +364,7 @@ const tunnel = {
     const road = G.polyline([[-5.6, 0], [5.6, 0], [5.6, -0.7], [-5.6, -0.7]], { closed: true, fill: '#4a4f5a', fillOpacity: 0.85, color: '#4a4f5a', width: 1 });
     const lit = region(G, ARCH, 'below', { from: -4, to: 4, edge: 0, color: GOLD, op: 0.42 }); hide(lit);
     const A = G.fn(ARCH, { from: -4, to: 4, color: BL, width: 4.5, arrows: false }); hide(A);
-    const al = hide(G.label(-3.9, 5.4, T('y=-0.375x^2+6'), { pos: 'e', color: BL, cls: 'bk-ptlab' }));
+    const al = hide(G.label(-5.4, 7.0, T('y=-0.375x^2+6'), { pos: 'e', color: BL, cls: 'bk-ptlab' }));
     hide(rock); hide(road);
     const ends = [-4, 4].map((x) => hide(G.point(x, 0, { color: BL, r: 6.5, label: T(x < 0 ? '-4' : '4'), pos: x < 0 ? 'nw' : 'ne' })));
     const dim = hide(G.segment([-4, 0.45], [4, 0.45], { color: INK, width: 2.5, ends: ['arrow', 'arrow'] }));
@@ -392,7 +392,7 @@ const tunnel = {
     const topH = d.grow || d.h, archAt = ARCH(hx);
     const rul = [-1, 1].map((k) => hide(G.segment([k * hx, d.h], [k * hx, archAt], { color: TP, width: 3, dash: '6 5' })));
     const am = [-1, 1].map((k) => hide(G.point(k * hx, archAt, { color: BL, r: 5.5, label: k > 0 ? T(num(archAt)) : undefined, pos: 'ne' })));
-    const fits = !(d.h > archAt + 1e-9), stp = stampOn(stage, v === 'c' ? 'just fits' : fits ? 'fits' : 'scrapes', v === 'c' ? true : fits, GW / 2 + 4, 120);
+    const fits = !(d.h > archAt + 1e-9), stp = stampOn(stage, v === 'c' ? 'just fits' : fits ? 'fits' : 'scrapes', v === 'c' ? true : fits, GW - 96, 92);
     const spare = hide(G.label(hx + 0.12, (d.h + archAt) / 2, `${num(Math.round((archAt - d.h) * 100) / 100)} m`, { pos: 'e', cls: 'bk-pill u8l5-dim' }));
     const sparks = [-1, 1].map((k) => { const [px, py] = G.toPx(k * hx, Math.min(d.h, 7.4)); return hide(div(G.html, 'u8l5-spark', '💥', px - 18, py - 22)); });
     // the work panel
@@ -461,8 +461,9 @@ const W7 = [-3.5, 5.5, -4.5, 8.5], F7 = (x) => -x * x + 2 * x + 6, r7 = Math.sqr
 sketch('u8l5-e7', { win: W7, w: 330, h: 400 });
 sketch('u8l5-e7A', { win: W7, f: F7, side: 'below', dash: true, w: 330, h: 400, pts: [[1 - r7, 0, '-1.6', 'nw'], [1 + r7, 0, '3.6', 'ne'], [0, 6], [1, 7, '(1,\\ 7)', 'e']] });
 const W8 = [-5.5, 5.5, -0.5, 7.5];
-sketch('u8l5-e8', { win: W8, f: ARCH, from: -4.3, to: 4.3, side: 'below', rfrom: -4, rto: 4, edge: 0, given: true, w: 380, h: 300 });
-sketch('u8l5-e8A', { win: W8, w: 380, h: 300, extra: (G) => {
+const S8 = { win: W8, f: ARCH, from: -4.3, to: 4.3, side: 'below', rfrom: -4, rto: 4, edge: 0, given: true, w: 330, h: 270 };
+sketch('u8l5-e8', S8);
+sketch('u8l5-e8A', { ...S8, extra: (G) => {
   G.polyline([[-1.6, 0], [1.6, 0], [1.6, 4.5], [-1.6, 4.5]], { closed: true, color: BL, width: 3, fill: BL, fillOpacity: 0.08 });
   [-1.6, 1.6].forEach((x) => G.point(x, 4.5, { color: OK, r: 6, label: x > 0 ? T('(1.6,\\ 4.5)') : undefined, pos: 'e' }));
 } });
@@ -475,9 +476,9 @@ const poly = (a, b, c) => { // a x² + b x + c as TeX
   if (c) s += sgn(c);
   return s;
 };
-const REL = ['<', '\\le', '>', '\\ge'], FLIP = { '<': '>', '\\le': '\\ge', '>': '<', '\\ge': '\\le' };
-const holds = (rel, l, r) => (rel === '<' ? l < r : rel === '\\le' ? l <= r : rel === '>' ? l > r : l >= r);
-const relWord = (rel) => `${rel === '<' || rel === '>' ? '\\text{dashed}' : '\\text{solid}'};\\ ${rel === '>' || rel === '\\ge' ? '\\text{above}' : '\\text{below}'}`;
+const REL = ['<', '\\le ', '>', '\\ge '], FLIP = { '<': '>', '\\le ': '\\ge ', '>': '<', '\\ge ': '\\le ' };
+const holds = (rel, l, r) => (rel === '<' ? l < r : rel === '\\le ' ? l <= r : rel === '>' ? l > r : l >= r);
+const relWord = (rel) => `${rel === '<' || rel === '>' ? '\\text{dashed}' : '\\text{solid}'};\\ ${rel === '>' || rel === '\\ge ' ? '\\text{above}' : '\\text{below}'}`;
 standup('u8l5', {
   intro: 'At your whiteboard: substitute carefully, get y alone (reverse the sign when you multiply or divide by a negative), and say solid or dashed, above or below.',
   levels: {
@@ -486,7 +487,7 @@ standup('u8l5', {
       const y = r.chance(0.25) ? v : v + r.pick([-3, -2, -1, 1, 2, 4]), ok = holds(rel, y, v);
       return { text: 'Is the point a solution of the inequality? Show the substitution.', q: `(${x},\\ ${y});\\qquad y${rel}${poly(a, b, c)}`,
         a: [`${a === 1 ? '' : a === -1 ? '-' : a}(${x})^2${b ? (b < 0 ? '-' : '+') + Math.abs(b) + `(${x})` : ''}${c ? sgn(c) : ''}=${v}`,
-          `${y}${rel}${v}\\ \\text{is ${ok ? 'true' : 'false'}: ${ok ? 'yes, a solution' : 'no, not a solution'}}${y === v ? '\\ (\\text{on the boundary})' : ''}`] };
+          `${y}${rel}${v}\\ \\text{ is ${ok ? 'true: a solution' : 'false: not a solution'}}`, ...(y === v ? ['\\text{(the point is on the boundary)}'] : [])] };
     },
     PRG: (r) => { // get y alone (often a negative coefficient), then solid/dashed, above/below
       const A = r.pick([1, -1, 2, -2, 3]), B = r.int(-5, 5), C = r.int(-6, 6), rel = r.pick(REL);
@@ -503,7 +504,7 @@ standup('u8l5', {
     },
     MAS: (r) => { // write the inequality from the vertex, a point and the picture
       const p = r.int(-4, 4), q = r.int(-6, 6), a = r.pick([1, -1, 2, -2, 3, -3]), dx = r.pick([-2, -1, 1, 2]), x1 = p + dx, y1 = a * dx * dx + q;
-      const rel = r.pick(REL), above = rel === '>' || rel === '\\ge', solid = rel === '\\le' || rel === '\\ge';
+      const rel = r.pick(REL), above = rel === '>' || rel === '\\ge ', solid = rel === '\\le ' || rel === '\\ge ';
       const xp = p > 0 ? `(x-${p})` : p < 0 ? `(x+${-p})` : 'x', B = -2 * a * p, C = a * p * p + q;
       return { text: `A boundary parabola has vertex (${num(p)}, ${num(q)}) and passes through (${num(x1)}, ${num(y1)}). The region is shaded <b>${above ? 'above' : 'below'}</b> it, and the boundary is <b>${solid ? 'solid' : 'dashed'}</b>. Write the inequality in general form.`,
         q: '', a: [`y=a${xp}^2${q ? sgn(q) : ''}`, `${y1}=a(${x1}${p > 0 ? `-${p}` : p < 0 ? `+${-p}` : ''})^2${q ? sgn(q) : ''}\\ \\Rightarrow\\ ${dx * dx === 1 ? '' : dx * dx}a=${y1 - q}\\ \\Rightarrow\\ a=${a}`,

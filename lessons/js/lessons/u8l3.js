@@ -269,7 +269,7 @@ const radar = {
     } else {
       const near = hide(G.segment([0, 0], [-7.5, 7.5], { color: '#3a4254', width: 2.5, dash: '5 5' }));
       const nL = hide(G.label(-3.75, 3.75, T('\\approx10.6'), { pos: 'ne', cls: 'bk-ptlab', gap: 6 }));
-      const no = hide(stamp(stage, 'Not detected ✗', { ok: false, x: G.toPx(5.5, 0)[0], y: G.toPx(0, -11)[1], size: 'sm' }));
+      const no = hide(stamp(stage, 'Not detected ✗', { ok: false, x: G.toPx(-6, 0)[0], y: G.toPx(0, -11.5)[1], size: 'sm' }));
       const Lc = [wl(P, T('x^2+(x+15)^2=100'), { tag: '(c)' }), wl(P, T('x^2+x^2+30x+225=100'), { tag: '' }), wl(P, T('2x^2+30x+125=0'), { tag: '' }),
         wl(P, T('b^2-4ac=30^2-4(2)(125)'), { tag: '' }), wl(P, T('=900-1000=-100'), { tag: '' }), wl(P, `${T('-100<0')}: <b>no solution</b>`, { tag: '' })];
       steps.push(
@@ -425,7 +425,7 @@ const tangent = {
     const d = TG[v], W = ex.W, GW = 430, S = { s: d.start };
     const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 436, xstep: 1, ystep: 1, xlabels: 1, ylabels: v === 'a' ? 4 : 2, fontSize: 14, arrows: false, fnArrows: false }, d.win));
     G.fn(d.par, { color: QU, width: 4 });
-    G.label(v === 'a' ? 3.3 : 4.3, v === 'a' ? 9 : 5, T(d.parT), { pos: 'e', cls: 'bk-ptlab', color: QU, gap: 10 });
+    G.label(v === 'a' ? 0.35 : 4.3, v === 'a' ? 16.5 : 5, T(d.parT), { pos: 'e', cls: 'bk-ptlab', color: QU, gap: 10 });
     const ghosts = [], ln = G.fn((x) => d.ln(S.s)(x), { color: LI, width: 4 });
     if (v === 'a') G.point(0, -3, { color: 'ink', r: 5, label: T('(0,\\ -3)'), pos: 'e', gap: 8 });
     const q1 = G.point(0, 0, { color: 'purple', r: 7.5 }), q2 = G.point(0, 0, { color: 'purple', r: 7.5 });

@@ -373,7 +373,7 @@ const count = {
           run: async (c) => { await go(c, 2, 1600); await pulse(c, verd, 1.06); } },
         { cap: `${T('k=3.5')}: ${T('16-8(3.5)=-12')}, negative: <b>no solution</b>. The difference parabola never reaches ${T('0')}.`,
           run: (c) => go(c, 3.5, 1200) },
-        { cap: `So ${T('16-8k>0')}: <b>two</b> when ${T('k<2')}; <b>one</b> when ${T('k=2')}; <b>none</b> when ${T('k>2')}. <b>Your turn:</b> drag the slider.`,
+        { cap: `${T('16-8k')} is positive when ${T('k<2')} (<b>two</b>), zero when ${T('k=2')} (<b>one</b>), negative when ${T('k>2')} (<b>none</b>). <b>Your turn:</b> drag the slider.`,
           run: async (c) => { await go(c, 0.5, 900); await show(c, unhide(sumK)); await pulse(c, sl.el, 1.04); } }
       ];
     }
@@ -386,7 +386,7 @@ const count = {
         : st.disc == null ? `<b>No solution.</b> The red parabola is the blue one moved ${T(tn(st.d[2]))} units up: a vertical translation.`
           : `<b>No solution.</b> The difference parabola never reaches ${T('0')}: the parabolas do not meet.`;
     return [
-      { cap: `Subtract the equations: ${T(`0=${dT}`)}. Its graph, the difference parabola, is drawn underneath.`,
+      { cap: st.disc == null ? `Subtract the equations: ${T(`0=${dT}`)}. The difference is drawn underneath: a horizontal line, not a parabola.` : `Subtract the equations: ${T(`0=${dT}`)}. Its graph, the difference parabola, is drawn underneath.`,
         run: async (c) => { await show(c, unhide(r1)); await show(c, unhide(Z.dl)); unhide(dc); await G2.drawIn(dc, 900, c); } },
       { cap: cap2, run: async (c) => { await show(c, unhide(r2)); if (st.disc != null) await show(c, unhide(M)); } },
       { cap: cap3, run: async (c) => { await show(c, unhide(verd)); showPts(true); await Promise.all(pts.concat(zs).slice(0).filter((p) => p.style.opacity !== '0').map((p) => pulse(c, p, 1.4))); } }

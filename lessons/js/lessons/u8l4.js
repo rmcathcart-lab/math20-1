@@ -413,11 +413,11 @@ const tickets = {
     };
     const go = (c, a1, s1, ms) => { const a0 = st.a, s0 = st.s; return tween(c, ms, (t) => set(a0 + (a1 - a0) * t, s0 + (s1 - s0) * t)); };
     const say = (html, ok) => { verdict.innerHTML = html; verdict.className = 'u8l4-bv ' + (ok == null ? '' : ok ? 'ok' : 'no'); };
-    set(0, 0);
+    set(0, 0, false);
     const lat = svgEl('g', { class: 'u8l4-lat' }, G.layers.top);
     return [
       { cap: `Let ${T('a')} = adult tickets and ${T('s')} = student tickets. The money is ${T('15a+10s')}, and it must be <b>at least</b> $1500. Tickets can’t be negative, and they come in whole numbers.`, run: async (c) => {
-        P0.style.opacity = 1; await pop(c, P0); await pop(c, ineq); } },
+        P0.style.opacity = 1; set(0, 0); await pop(c, P0); await pop(c, ineq); } },
       { cap: `Boundary ${T('15a+10s=1500')}. Only adults: ${T('15a=1500')}, ${T('a=100')}. Only students: ${T('s=150')}. ${T('\\ge')}: <b>solid</b> (exactly $1500 is enough).`, run: async (c) => {
         await go(c, 100, 0, 1300); set(100, 0, false); ip[0].style.opacity = 1; await G.reveal(ip[0], c); say('Exactly $1500 ✓', true); await go(c, 0, 150, 1500); set(0, 150, false); ip[1].style.opacity = 1; await G.reveal(ip[1], c);
         line.style.opacity = 1; await G.drawIn(line, 800, c); say(''); } },

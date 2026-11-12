@@ -88,10 +88,10 @@
   /* wrong values of a when solving y1 = a(x1 − p)² + q */
   P5.aWrong = function (p, q, x1, y1) {
     var d = cl(x1 - p), k = cl(y1 - q), out = [];
-    if (Math.abs(d) !== 1) out.push([cl(k / d), LID + '-nosq', 'Square the bracket: ' + t('(' + vT(x1) + sT(-p) + ')^{2}=' + vT(d) + '^{2}=' + vT(cl(d * d))) + '.']);
-    if (!same(Math.abs(k), d * d)) out.push([cl(d * d / k), LID + '-inv', 'Solve ' + t(vT(k) + '=' + vT(cl(d * d)) + 'a') + ' by dividing both sides by ' + t(vT(cl(d * d))) + '.']);
-    if (!same(p, 0) && !same(x1 + p, 0) && !same((x1 + p) * (x1 + p), d * d)) out.push([cl(k / ((x1 + p) * (x1 + p))), LID + '-p-sub', 'Substitute carefully: the bracket is ' + t('(x-p)') + ' with ' + t('p=' + vT(p)) + ', so it is ' + t('(' + vT(x1) + sT(-p) + ')=' + vT(d)) + '.']);
-    if (!same(q, 0)) out.push([cl((y1 + q) / (d * d)), LID + '-q-move', 'Move ' + t('q') + ' to the other side by subtracting it: ' + t(vT(y1) + sT(-q) + '=' + vT(k)) + '.']);
+    if (Math.abs(d) !== 1) out.push([k / d, LID + '-nosq', 'Square the bracket: ' + t('(' + vT(x1) + sT(-p) + ')^{2}=' + vT(d) + '^{2}=' + vT(cl(d * d))) + '.']);
+    if (!same(Math.abs(k), d * d)) out.push([d * d / k, LID + '-inv', 'Solve ' + t(vT(k) + '=' + vT(cl(d * d)) + 'a') + ' by dividing both sides by ' + t(vT(cl(d * d))) + '.']);
+    if (!same(p, 0) && !same(x1 + p, 0) && !same((x1 + p) * (x1 + p), d * d)) out.push([k / ((x1 + p) * (x1 + p)), LID + '-p-sub', 'Substitute carefully: the bracket is ' + t('(x-p)') + ' with ' + t('p=' + vT(p)) + ', so it is ' + t('(' + vT(x1) + sT(-p) + ')=' + vT(d)) + '.']);
+    if (!same(q, 0)) out.push([(y1 + q) / (d * d), LID + '-q-move', 'Move ' + t('q') + ' to the other side by subtracting it: ' + t(vT(y1) + sT(-q) + '=' + vT(k)) + '.']);
     return out;
   };
   /* "y1 = a(x1 − p)² + q, …, a = …" */
@@ -150,7 +150,7 @@
   function vpGen(r, s) {
     return pickWhere(function () {
       var p = s.p0 ? 0 : nz(r, -7, 7), q = s.q0 ? 0 : nz(r, -9, 9), d = s.yint ? -p : r.pick(s.dset || [-3, -2, -1, 1, 2, 3]), a;
-      if (s.frac) a = cl(nz(r, -12, 12) / (d * d)); else a = r.pick(s.aSet);
+      if (s.frac) a = nz(r, -12, 12) / (d * d); else a = r.pick(s.aSet);
       return { a: a, p: p, q: q, d: d, x1: p + d, y1: cl(a * d * d + q) };
     }, function (o) {
       if (o.d === 0 || !AV(o.a, o.p, o.q) || Math.abs(o.y1) > 30) return false;
@@ -171,7 +171,7 @@
   function facT(k, r, s) { return z().ffTex(k, [1, -r], [1, -s], 'x', true); }
   function facFields(k, r, s, o) {
     o = o || {};
-    var h = cl((r + s) / 2), v = cl(k * (h - r) * (h - s)), w = [];
+    var h = cl((r + s) / 2), v = k * (h - r) * (h - s), w = [];
     if (r !== 0 || s !== 0) w.push({ is: facT(k, -r, -s), code: LID + '-zero-sign', hint: 'The zeros are ' + t(vT(r)) + ' and ' + t(vT(s)) + ': the factors are ' + t('(x-r)(x-s)') + ', so a zero of ' + t(vT(r < 0 ? r : s)) + ' gives ' + t('(' + z().binTex('x', r < 0 ? r : s) + ')') + '.' });
     if (!same(Math.abs(k), 1)) w.push({ is: facT(cl(1 / k), r, s), code: LID + '-inv', hint: 'Solve for ' + t('a') + ' by dividing by the product of the brackets.' });
     w.push({ is: facT(-k, r, s), code: 'sign', hint: 'Check the sign of ' + t('a') + ': substitute the point to check.' });
@@ -179,7 +179,7 @@
       { label: 'Vertex', pt: [h, v], cands: [[[h, -v], 'sign', 'Multiply by ' + t('a=' + vT(k)) + ' too (check the sign).'], [[-h, v], 'u5l3-p-sign', 'The axis is halfway between the zeros: ' + t('x=\\frac{' + vT(r) + '+' + P(s) + '}{2}') + '.']] }];
   }
   function facSol(k, r, s, x0, y0) {
-    var h = cl((r + s) / 2), v = cl(k * (h - r) * (h - s)), br = function (x) { return '(' + (r === 0 ? vT(x) : vT(x) + sT(-r)) + ')(' + vT(x) + sT(-s) + ')'; };
+    var h = cl((r + s) / 2), v = k * (h - r) * (h - s), br = function (x) { return '(' + (r === 0 ? vT(x) : vT(x) + sT(-r)) + ')(' + vT(x) + sT(-s) + ')'; };
     var prod = cl((x0 - r) * (x0 - s));
     return eqy('a' + (r === 0 ? 'x' : '(' + z().binTex('x', r) + ')') + '(' + z().binTex('x', s) + ')') + '<br>' + t(vT(y0) + '=a' + br(x0) + '=' + vT(prod) + 'a') + ', so ' + t('a=' + rT(k)) + ': ' + eqy(facT(k, r, s)) +
       '<br>Axis ' + t('x=\\frac{' + vT(r) + '+' + P(s) + '}{2}=' + vT(h)) + '; ' + t('y=' + aTex(k, true) + '(' + vT(cl(h - r)) + ')(' + vT(cl(h - s)) + ')=' + rT(v)) + ': vertex ' + t('\\left(' + rT(h) + ',\\ ' + rT(v) + '\\right)') + '.';
@@ -199,7 +199,7 @@
           return z().fields('Determine the ' + t('x') + '- and ' + t('y') + '-intercepts of the graph of ' + eqy(vfTex(o.a, o.p, o.q)) + '. Give the ' + t('x') + '-intercepts to the nearest hundredth.', [
             { label: t('y') + '-intercept', name: 'y-intercept', ans: c, cands: [[o.q, LID + '-yint-q', t('q') + ' is the ' + t('y') + '-value of the vertex. The ' + t('y') + '-intercept is the value at ' + t('x=0') + ' (the constant ' + t('c') + ' in general form).'], [o.a * (-o.p) + o.q, 'u5l3-yint-nosq', 'Square the bracket: ' + t('(0' + sT(-o.p) + ')^{2}=' + o.p * o.p) + '.']] },
             { label: t('x\\approx'), name: 'Smaller x-intercept', dp: 2, ans: R[0] }, { label: 'and ' + t('x\\approx'), name: 'Larger x-intercept', dp: 2, ans: R[1] }],
-            { swap: [[1, 2]], sol: t('y') + '-intercept: ' + t('y=' + vfTex(o.a, o.p, o.q).replace(/x/g, '(0)') + '=' + c) + '.<br>' + t(aTex(o.a) + '(' + z().binTex('x', o.p) + ')^{2}=' + (-o.q)) + ', so ' + t('(' + z().binTex('x', o.p) + ')^{2}=' + rT(m)) + ' and ' + t('x=' + o.p + '\\pm\\sqrt{' + rT(m) + '}') + '.<br>' + t('x\\approx ' + R[0].toFixed(2)) + ' and ' + t('x\\approx ' + R[1].toFixed(2)) + ' (check with the calculator’s zero feature).', hints: ['The ' + t('y') + '-intercept is where ' + t('x=0') + '.', 'For the ' + t('x') + '-intercepts set ' + t('y=0') + ', isolate the square and take the square root of both sides (' + t('\\pm') + ').'], text: 'intercepts, x to the nearest hundredth' });
+            { swap: [[1, 2]], sol: t('y') + '-intercept: ' + t('y=' + aTex(o.a) + '(0' + sT(-o.p) + ')^{2}' + sT(o.q) + '=' + c) + '.<br>' + t(aTex(o.a) + '(' + z().binTex('x', o.p) + ')^{2}=' + (-o.q)) + ', so ' + t('(' + z().binTex('x', o.p) + ')^{2}=' + rT(m)) + ' and ' + t('x=' + o.p + '\\pm\\sqrt{' + rT(m) + '}') + '.<br>' + t('x\\approx ' + R[0].toFixed(2)) + ' and ' + t('x\\approx ' + R[1].toFixed(2)) + ' (check with the calculator’s zero feature).', hints: ['The ' + t('y') + '-intercept is where ' + t('x=0') + '.', 'For the ' + t('x') + '-intercepts set ' + t('y=0') + ', isolate the square and take the square root of both sides (' + t('\\pm') + ').'], text: 'intercepts, x to the nearest hundredth' });
         } }] },
 
     { num: '2', stem: 'Write an equation in vertex form for the parabola with the given vertex that passes through the given point.', parts: [
@@ -286,12 +286,12 @@
         return z().fields('zeros ' + t(o.r) + ' and ' + t(o.s) + ', passing through ' + t(ptTex(h, y0)), facFields(o.k, o.r, o.s), { sol: facSol(o.k, o.r, o.s, h, y0) + '<br>(The given point is on the axis: it is the vertex.)', hints: HFAC, text: 'zeros + point: factored form, vertex' });
       } },
       { id: '9b', level: 'PRG', make: function (r) {
-        var o = pickWhere(function () { var s = r.pick([-10, -8, -6, -4, 4, 6, 8, 10]), x0 = nz(r, -4, 12), pr = x0 * (x0 - s), y0 = nz(r, -15, 15); return { s: s, x0: x0, y0: y0, k: cl(y0 / pr) }; },
+        var o = pickWhere(function () { var s = r.pick([-10, -8, -6, -4, 4, 6, 8, 10]), x0 = nz(r, -4, 12), pr = x0 * (x0 - s), y0 = nz(r, -15, 15); return { s: s, x0: x0, y0: y0, k: y0 / pr, pr: pr }; },
           function (o) { return o.x0 !== o.s && o.x0 * 2 !== o.s && !isInt(o.k) && z().toFrac(o.k)[1] <= 6 && Math.abs(o.k) < 3 && !(o.s === 8 && o.k === 0.5); });
         return z().fields('zeros ' + t(0) + ' and ' + t(o.s) + ', passing through ' + t(ptTex(o.x0, o.y0)), facFields(o.k, 0, o.s), { sol: facSol(o.k, 0, o.s, o.x0, o.y0), hints: HFAC.concat(['A zero of ' + t('0') + ' gives the factor ' + t('(x-0)=x') + '.']), text: 'zero at 0 + point: factored form, vertex' });
       } },
       { id: '9c', level: 'PRG', make: function (r) {
-        var o = pickWhere(function () { var rr = -r.int(1, 8), s = r.int(1, 8), c = nz(r, -12, 12); return { r: rr, s: s, c: c, k: cl(c / (rr * s)) }; },
+        var o = pickWhere(function () { var rr = -r.int(1, 8), s = r.int(1, 8), c = nz(r, -12, 12); return { r: rr, s: s, c: c, k: c / (rr * s) }; },
           function (o) { return !isInt(o.k) && z().toFrac(o.k)[1] <= 12 && (o.r + o.s) !== 0 && !(o.r === -5 && o.s === 3) && Math.abs(o.k) < 3; });
         return z().fields('zeros ' + t(o.r) + ' and ' + t(o.s) + ', ' + t('y') + '-intercept ' + t(o.c), facFields(o.k, o.r, o.s), { sol: 'The ' + t('y') + '-intercept is the point ' + t(ptTex(0, o.c)) + '.<br>' + facSol(o.k, o.r, o.s, 0, o.c), hints: HFAC, text: 'zeros + y-intercept: factored form, vertex' });
       } }] },
@@ -308,21 +308,21 @@
 
     { num: '11', shared: function (r) {
       return pickWhere(function () { var s = r.pick([10, 12, 15, 16, 18, 20, 24, 25, 30]), H = r.int(6, 20); return { s: s, H: H, d: r.int(2, s - 2), u: r.int(2, s - 2), what: r.pick(['A road bridge', 'A footbridge', 'A railway bridge']) }; },
-        function (o) { var hc = o.H - o.H * o.u * o.u / (o.s * o.s); return !(o.s === 20 && o.H === 10) && terminates(hc, 2) && hc > 0.5 && o.d !== o.s - o.u && o.u !== o.s - o.d && !isInt(o.H / (o.s * o.s) * 1000) === false && terminates(o.H / (o.s * o.s), 4); });
+        function (o) { var hc = o.H - o.H * o.u * o.u / (o.s * o.s); return !(o.s === 20 && o.H === 10) && terminates(hc, 2) && hc > 0.5 && o.d !== o.s - o.u && terminates(o.H / (o.s * o.s), 4); });
     },
       stem: function (o) { return o.what + ' is supported by a parabolic arch that spans ' + t(2 * o.s) + ' m at its base and rises to ' + t(o.H) + ' m at its centre.' + P5.arch({ origin: 'mid', wLab: 2 * o.s + ' m', hLab: o.H + ' m' }); },
       parts: [
-        { id: '11a', level: 'PRG', make: function (r, o) { var a = cl(-o.H / (o.s * o.s)); return P5.vfPart('Place the origin on the base, directly below the top of the arch. Determine the equation of the arch.', a, 0, o.H, { frac: false, aw: P5.aWrong(0, o.H, o.s, 0).concat([[cl(-o.H / (4 * o.s * o.s)), LID + '-width-half', 'The arch spans ' + 2 * o.s + ' m, so the zeros are ' + t('\\pm ' + o.s) + ', not ' + t('\\pm ' + 2 * o.s) + '.']]), sol: 'Vertex ' + t(ptTex(0, o.H)) + ', zero ' + t(ptTex(o.s, 0)) + ': ' + t('0=' + o.s * o.s + 'a+' + o.H) + ', so ' + t('a=-\\frac{' + o.H + '}{' + o.s * o.s + '}=' + vT(a)) + '.<br>' + eqy(vfTex(a, 0, o.H, 'x', false)), hints: ['The top of the arch is the vertex ' + t('(0,\\ ' + o.H + ')') + '; each end of the base is a zero, half the span from the centre.'], text: 'arch: equation (origin under the top)' }); } },
+        { id: '11a', level: 'PRG', make: function (r, o) { var a = -o.H / (o.s * o.s); return P5.vfPart('Place the origin on the base, directly below the top of the arch. Determine the equation of the arch.', a, 0, o.H, { frac: false, aw: P5.aWrong(0, o.H, o.s, 0).concat([[cl(-o.H / (4 * o.s * o.s)), LID + '-width-half', 'The arch spans ' + 2 * o.s + ' m, so the zeros are ' + t('\\pm ' + o.s) + ', not ' + t('\\pm ' + 2 * o.s) + '.']]), sol: 'Vertex ' + t(ptTex(0, o.H)) + ', zero ' + t(ptTex(o.s, 0)) + ': ' + t('0=' + o.s * o.s + 'a+' + o.H) + ', so ' + t('a=-\\frac{' + o.H + '}{' + o.s * o.s + '}=' + vT(a)) + '.<br>' + eqy(vfTex(a, 0, o.H, 'x', false)), hints: ['The top of the arch is the vertex ' + t('(0,\\ ' + o.H + ')') + '; each end of the base is a zero, half the span from the centre.'], text: 'arch: equation (origin under the top)' }); } },
         { id: '11b', level: 'PRG', make: function (r, o) { var a = -o.H / (o.s * o.s), x = o.s - o.d, y = a * x * x + o.H; return z().apx('The arch is ' + eqy(vfTex(cl(a), 0, o.H, 'x', false)) + '. How high is it ' + t(o.d) + ' m in from one end of the base? Answer to the nearest tenth of a metre.', y, 1, { after: 'm', unit: 'm', cands: [[a * o.d * o.d + o.H, LID + '-end', 'The origin is under the top, so the ends are at ' + t('x=\\pm ' + o.s) + ': ' + o.d + ' m in from an end is ' + t('x=' + o.s + '-' + o.d + '=' + x) + '.']], sol: t('x=' + o.s + '-' + o.d + '=' + x) + ': ' + t('y=' + vT(cl(a)) + '(' + x + ')^{2}+' + o.H + '\\approx ' + K.roundTo(y, 1).toFixed(1)) + ' m', hints: ['Where is a point ' + o.d + ' m in from the end, measured from the centre?'], text: 'arch: height near an end' }); } },
         { id: '11c', level: 'ADV', make: function (r, o) { var a = -o.H / (o.s * o.s), hc = cl(o.H + a * o.u * o.u); return z().num('The arch is ' + eqy(vfTex(cl(a), 0, o.H, 'x', false)) + '. How wide is the arch at a height of ' + t(vT(hc)) + ' m?', 2 * o.u, { after: 'm', unit: 'm', cands: [[o.u, LID + '-width-half', 'Solving gives ' + t('x=\\pm ' + o.u) + ': the width is the distance between them.']], sol: t(vT(hc) + '=' + vT(cl(a)) + 'x^{2}+' + o.H) + ', so ' + t('x^{2}=' + o.u * o.u) + ' and ' + t('x=\\pm ' + o.u) + '. It is ' + t(2 * o.u) + ' m wide there.', hints: ['Set ' + t('y=' + vT(hc)) + ' and solve for ' + t('x') + ' (two values).'], text: 'arch: width at a height' }); } }] },
 
     { num: '12', shared: function (r) {
       return pickWhere(function () { var X = r.pick([40, 45, 50, 55, 70, 75, 80, 90]), H = r.int(12, 40); return { X: X, H: H, D: X + 5 * r.int(1, X / 5 - 1), what: r.pick(['golf ball', 'baseball', 'football']) }; },
-        function (o) { return o.D < 2 * o.X && o.D !== o.X; });
+        function (o) { var f = z().toFrac(o.H / (o.X * o.X)); return o.D < 2 * o.X && o.D !== o.X && f && f[1] <= 1000; });
     },
       stem: function (o) { return 'A ' + o.what + ' is hit from the ground. Its path is a parabola that reaches a greatest height of ' + t(o.H) + ' m at a horizontal distance of ' + t(o.X) + ' m from where it was hit.'; },
       parts: [
-        { id: '12a', level: 'PRG', make: function (r, o) { var a = cl(-o.H / (o.X * o.X)); return P5.vfPart('Using the starting point as the origin, determine the equation of the path.', a, o.X, o.H, { aw: P5.aWrong(o.X, o.H, 0, 0), sol: 'Vertex ' + t(ptTex(o.X, o.H)) + ', point ' + t('(0,\\ 0)') + ': ' + t('0=' + o.X * o.X + 'a+' + o.H) + ', so ' + t('a=' + rT(a)) + '.<br>' + eqy(vfTex(a, o.X, o.H)), hints: ['The highest point is the vertex; the origin ' + t('(0,\\ 0)') + ' is on the path.'], text: 'ball: equation from the origin' }); } },
+        { id: '12a', level: 'PRG', make: function (r, o) { var a = -o.H / (o.X * o.X); return P5.vfPart('Using the starting point as the origin, determine the equation of the path.', a, o.X, o.H, { aw: P5.aWrong(o.X, o.H, 0, 0), sol: 'Vertex ' + t(ptTex(o.X, o.H)) + ', point ' + t('(0,\\ 0)') + ': ' + t('0=' + o.X * o.X + 'a+' + o.H) + ', so ' + t('a=' + rT(a)) + '.<br>' + eqy(vfTex(a, o.X, o.H)), hints: ['The highest point is the vertex; the origin ' + t('(0,\\ 0)') + ' is on the path.'], text: 'ball: equation from the origin' }); } },
         { id: '12b', level: 'PRG', make: function (r, o) { var a = -o.H / (o.X * o.X), y = a * Math.pow(o.D - o.X, 2) + o.H; return z().apx('The path is ' + eqy(vfTex(cl(a), o.X, o.H)) + '. How high is the ball when it is ' + t(o.D) + ' m away horizontally? Answer to the nearest tenth.', y, 1, { after: 'm', unit: 'm', cands: [[a * o.D * o.D + o.H, LID + '-p-sub', 'Substitute into the bracket: ' + t('(' + o.D + '-' + o.X + ')^{2}') + '.']], sol: t('y=' + rT(cl(a)) + '(' + o.D + '-' + o.X + ')^{2}+' + o.H + '=' + rT(cl(a)) + '(' + (o.D - o.X) * (o.D - o.X) + ')+' + o.H + '\\approx ' + K.roundTo(y, 1).toFixed(1)) + ' m', hints: ['Substitute ' + t('x=' + o.D) + '.'], text: 'ball: height at a distance' }); } },
         { id: '12c', level: 'EMG', make: function (r, o) { return z().num('How far away horizontally does it land?', 2 * o.X, { after: 'm', unit: 'm', cands: [[o.X, 'u5l3-half', 'That is where it is highest. It lands as far again past the vertex.']], sol: 'By symmetry, the other zero is ' + t('2(' + o.X + ')-0=' + 2 * o.X) + ' m from the start.', hints: ['The path is symmetric about the vertex, and it starts at the zero ' + t('x=0') + '.'], text: 'ball: landing distance' }); } }] },
 
@@ -341,10 +341,10 @@
 
     { num: '14', parts: [
       { id: '14', level: 'PRG', make: function (r) {
-        var o = pickWhere(function () { var h = r.pick([-3, -2, -1, 1, 2, 3]), a = r.pick([1, 2, 3]), m = nz(r, -9, 9); return { h: h, a: a, m: m, y0: a * h * h + m, x: r.pick([1, -1]) }; },
+        var o = pickWhere(function () { var h = r.pick([-3, -2, 2, 3]), a = r.pick([2, 3, 4]), m = nz(r, -9, 9); return { h: h, a: a, m: m, y0: a * h * h + m, x: r.pick([1, -1]) }; },
           function (o) { return !(o.h === -2 && o.m === -5 && o.a === 2) && o.x !== o.h && o.x !== 2 * o.h; });
         var k = o.a * Math.pow(o.x - o.h, 2) + o.m, kA = o.a * Math.pow(o.x + o.h, 2) + o.m, aB = (o.h * o.h) / (o.y0 - o.m), kB = aB * Math.pow(o.x - o.h, 2) + o.m, aD = (o.y0 - o.m) / Math.abs(o.h), kD = aD * Math.pow(o.x - o.h, 2) + o.m;
-        return z().mc(r, 'A quadratic function has a minimum value of ' + t(o.m) + ' at ' + t('x=' + o.h) + ', and its graph passes through ' + t(ptTex(0, o.y0)) + ' and ' + t(ptTex(o.x, 'k').replace('k', 'k')) + '. The value of ' + t('k') + ' is', [
+        return z().mc(r, 'A quadratic function has a minimum value of ' + t(o.m) + ' at ' + t('x=' + o.h) + ', and its graph passes through ' + t(ptTex(0, o.y0)) + ' and ' + t('(' + o.x + ',\\ k)') + '. The value of ' + t('k') + ' is', [
           { html: t(rT(cl(k))), right: true }, { html: t(rT(cl(kA))), why: 'The vertex is at ' + t('x=' + o.h) + ': the bracket is ' + t('(' + z().binTex('x', o.h) + ')') + '.', code: 'u5l3-p-sign' },
           { html: t(rT(cl(kB))), why: 'Solve ' + t(vT(o.y0 - o.m) + '=' + o.h * o.h + 'a') + ' by dividing by ' + t(o.h * o.h) + '.', code: LID + '-inv' }, { html: t(rT(cl(kD))), why: 'Square the bracket when you substitute ' + t('(0,\\ ' + o.y0 + ')') + ': ' + t('(0' + sT(-o.h) + ')^{2}=' + o.h * o.h) + '.', code: LID + '-nosq' }],
           eqy('a(' + z().binTex('x', o.h) + ')^{2}' + sT(o.m)) + '; ' + t(o.y0 + '=' + o.h * o.h + 'a' + sT(o.m) + '\\Rightarrow a=' + o.a) + '.<br>' + t('k=' + o.a + '(' + o.x + sT(-o.h) + ')^{2}' + sT(o.m) + '=' + k) + '.', ['The minimum value and where it occurs give the vertex. Use ' + t('(0,\\ ' + o.y0 + ')') + ' to find ' + t('a') + ', then substitute ' + t('x=' + o.x) + '.'], 'MC: k from the vertex and a point');
@@ -461,7 +461,7 @@
     },
       stem: function (o) { return 'The entrance to a tunnel is a parabola ' + t(o.W) + ' m wide at the road and ' + t(o.H) + ' m high at its centre.'; },
       parts: [
-        { id: 'eB3a', level: 'PRG', make: function (r, o) { var p = o.W / 2, a = cl(-o.H / (p * p)); return P5.vfPart('With the origin at the left edge of the road, determine the equation of the entrance.', a, p, o.H, { aw: P5.aWrong(p, o.H, 0, 0).concat([[cl(-o.H / (o.W * o.W)), LID + '-width-half', 'From the edge to the centre is half the width, ' + t(p) + ' m.']]), fw: [[a, 0, o.H, 'value', 'With the origin at the left edge, the vertex is at the centre, ' + t(ptTex(p, o.H)) + '.']], sol: 'Zeros ' + t(0) + ' and ' + t(o.W) + ', vertex ' + t(ptTex(p, o.H)) + ': ' + t('0=' + p * p + 'a+' + o.H) + ', so ' + t('a=' + rT(a)) + '.<br>' + eqy(vfTex(a, p, o.H)), hints: ['The vertex is halfway along the road, at the top; the left edge ' + t('(0,\\ 0)') + ' is on the parabola.'], text: 'tunnel: equation (origin at the edge)' }); } },
+        { id: 'eB3a', level: 'PRG', make: function (r, o) { var p = o.W / 2, a = -o.H / (p * p); return P5.vfPart('With the origin at the left edge of the road, determine the equation of the entrance.', a, p, o.H, { aw: P5.aWrong(p, o.H, 0, 0).concat([[cl(-o.H / (o.W * o.W)), LID + '-width-half', 'From the edge to the centre is half the width, ' + t(p) + ' m.']]), fw: [[a, 0, o.H, 'value', 'With the origin at the left edge, the vertex is at the centre, ' + t(ptTex(p, o.H)) + '.']], sol: 'Zeros ' + t(0) + ' and ' + t(o.W) + ', vertex ' + t(ptTex(p, o.H)) + ': ' + t('0=' + p * p + 'a+' + o.H) + ', so ' + t('a=' + rT(a)) + '.<br>' + eqy(vfTex(a, p, o.H)), hints: ['The vertex is halfway along the road, at the top; the left edge ' + t('(0,\\ 0)') + ' is on the parabola.'], text: 'tunnel: equation (origin at the edge)' }); } },
         { id: 'eB3b', level: 'ADV', make: function (r, o) {
           var p = o.W / 2, a = -o.H / (p * p), x = o.w / 2, fits = o.ht > o.h, f2 = function (v) { return t(K.roundTo(v, 2).toFixed(2)); };
           var wrongX = a * Math.pow(o.w / 2 - p, 2) + o.H, hAtW = a * o.w * o.w + o.H;
@@ -477,7 +477,7 @@
     },
       stem: function (o) { return 'A soccer ball is kicked from the ground and follows a parabolic path. It reaches a greatest height of ' + t(o.H) + ' m at a horizontal distance of ' + t(o.X) + ' m. Use the kicking point as the origin.'; },
       parts: [
-        { id: 'eB4a', level: 'PRG', make: function (r, o) { var a = cl(-o.H / (o.X * o.X)); return P5.vfPart('Determine the equation of the path.', a, o.X, o.H, { aw: P5.aWrong(o.X, o.H, 0, 0), sol: 'Vertex ' + t(ptTex(o.X, o.H)) + ', point ' + t('(0,\\ 0)') + ': ' + t('0=' + o.X * o.X + 'a+' + o.H) + ', so ' + t('a=' + rT(a)) + '.<br>' + eqy(vfTex(a, o.X, o.H)), hints: ['The highest point is the vertex; the kicking point ' + t('(0,\\ 0)') + ' is on the path.'], text: 'soccer: equation' }); } },
+        { id: 'eB4a', level: 'PRG', make: function (r, o) { var a = -o.H / (o.X * o.X); return P5.vfPart('Determine the equation of the path.', a, o.X, o.H, { aw: P5.aWrong(o.X, o.H, 0, 0), sol: 'Vertex ' + t(ptTex(o.X, o.H)) + ', point ' + t('(0,\\ 0)') + ': ' + t('0=' + o.X * o.X + 'a+' + o.H) + ', so ' + t('a=' + rT(a)) + '.<br>' + eqy(vfTex(a, o.X, o.H)), hints: ['The highest point is the vertex; the kicking point ' + t('(0,\\ 0)') + ' is on the path.'], text: 'soccer: equation' }); } },
         { id: 'eB4b', level: 'PRG', make: function (r, o) { var a = -o.H / (o.X * o.X), y = a * Math.pow(o.D - o.X, 2) + o.H; return z().apx('Using ' + eqy(vfTex(cl(a), o.X, o.H)) + ', how high is the ball at a horizontal distance of ' + t(o.D) + ' m? Answer to the nearest tenth of a metre.', y, 1, { after: 'm', unit: 'm', cands: [[a * o.D * o.D + o.H, LID + '-p-sub', 'Substitute into the bracket: ' + t('(' + o.D + '-' + o.X + ')^{2}') + '.']], sol: t('y=' + rT(cl(a)) + '(' + (o.D - o.X) + ')^{2}+' + o.H + '\\approx ' + K.roundTo(y, 1).toFixed(1)) + ' m', hints: ['Substitute ' + t('x=' + o.D) + '.'], text: 'soccer: height' }); } },
         { id: 'eB4c', level: 'EMG', make: function (r, o) { return z().num('Where does the ball land?', 2 * o.X, { after: 'm from the kicking point', unit: 'm', cands: [[o.X, 'u5l3-half', 'That is where it is highest.']], sol: 'By symmetry it lands ' + t('2(' + o.X + ')=' + 2 * o.X) + ' m away.', hints: ['Use symmetry: it starts at the zero ' + t('x=0') + '.'], text: 'soccer: landing' }); } }] },
     { num: 'B5', parts: [
@@ -518,7 +518,7 @@
     },
       stem: function (o) { return 'The main cable of a suspension bridge hangs in a parabola between two towers ' + t(o.T) + ' m apart. The cable is attached ' + t(o.H) + ' m above the road at each tower, and its lowest point is ' + t(o.L) + ' m above the road, halfway between the towers. Use the road below the lowest point as the origin.' + P5.arch({ cable: true, origin: 'mid', wLab: o.T + ' m', hLab: o.L + ' m', tLab: o.H + ' m' }); },
       parts: [
-        { id: 'eC3a', level: 'ADV', make: function (r, o) { var s = o.T / 2, a = cl((o.H - o.L) / (s * s)); return P5.vfPart('Determine the equation of the cable.', a, 0, o.L, { frac: false, aw: P5.aWrong(0, o.L, s, o.H).concat([[cl((o.H - o.L) / (o.T * o.T)), LID + '-width-half', 'Each tower is half the distance, ' + t(s) + ' m, from the lowest point.']]), sol: 'Vertex ' + t(ptTex(0, o.L)) + ', point ' + t(ptTex(s, o.H)) + ': ' + t(o.H + '=' + s * s + 'a+' + o.L) + ', so ' + t('a=' + vT(a)) + '.<br>' + eqy(vfTex(a, 0, o.L, 'x', false)), hints: ['The lowest point is the vertex ' + t('(0,\\ ' + o.L + ')') + '; the top of a tower is ' + t('(' + s + ',\\ ' + o.H + ')') + '.'], text: 'suspension cable: equation' }); } },
+        { id: 'eC3a', level: 'ADV', make: function (r, o) { var s = o.T / 2, a = (o.H - o.L) / (s * s); return P5.vfPart('Determine the equation of the cable.', a, 0, o.L, { frac: false, aw: P5.aWrong(0, o.L, s, o.H).concat([[cl((o.H - o.L) / (o.T * o.T)), LID + '-width-half', 'Each tower is half the distance, ' + t(s) + ' m, from the lowest point.']]), sol: 'Vertex ' + t(ptTex(0, o.L)) + ', point ' + t(ptTex(s, o.H)) + ': ' + t(o.H + '=' + s * s + 'a+' + o.L) + ', so ' + t('a=' + vT(a)) + '.<br>' + eqy(vfTex(a, 0, o.L, 'x', false)), hints: ['The lowest point is the vertex ' + t('(0,\\ ' + o.L + ')') + '; the top of a tower is ' + t('(' + s + ',\\ ' + o.H + ')') + '.'], text: 'suspension cable: equation' }); } },
         { id: 'eC3b', level: 'MAS', make: function (r, o) { var s = o.T / 2, a = (o.H - o.L) / (s * s), x = s - o.d, y = a * x * x + o.L; return z().apx('The cable is ' + eqy(vfTex(cl(a), 0, o.L, 'x', false)) + '. How high is the cable ' + t(o.d) + ' m from a tower? Answer to the nearest tenth of a metre.', y, 1, { after: 'm', unit: 'm', cands: [[a * o.d * o.d + o.L, LID + '-end', 'The origin is below the lowest point: ' + o.d + ' m from a tower is ' + t('x=' + s + '-' + o.d + '=' + x) + '.']], sol: t('x=' + s + '-' + o.d + '=' + x) + ': ' + t('y=' + vT(cl(a)) + '(' + x + ')^{2}+' + o.L + '\\approx ' + K.roundTo(y, 1).toFixed(1)) + ' m.', hints: ['How far from the centre is a point ' + o.d + ' m from a tower?'], text: 'suspension cable: height near a tower' }); } }] }
   ];
 

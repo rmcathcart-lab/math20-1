@@ -357,8 +357,8 @@ const oneroot = {
     const S = new Scene(stage, { x: 4, y: 4, w: 560, gh: 362, win: d.win, yl: 2, fs: 15 }), G = S.G;
     const cv = hide(G.fn(f, { color: BL, width: 4 }));
     const vp = hide(G.point(d.vx, d.vy, { color: OR, r: 7 }));
-    const lx = d.vx + 2.6;
-    const cl = hide(G.label(lx, f0(lx), T('y=' + d.ft), { pos: 'e', color: BL, cls: 'bk-ptlab' }));
+    const lx = d.vx + (v === 'a' ? 2.9 : 2.5);
+    const cl = hide(G.label(lx, f0(lx) + 0.3, T('y=' + d.ft), { pos: 'w', color: BL, cls: 'bk-ptlab' }));
     const P = div(stage, 'u8l6-panel', '', 580, 4, W - 584, 468);
     const disc = v === 'a' ? 'b^2-4ac=64-64=0' : 'b^2-4ac=4-20=-16';
     const top = hide(div(P, 'u8l6-wl', `<span class="u8l6-lt">${T(disc)} &nbsp;<span class="u8l6-badge"></span></span>`));
@@ -390,7 +390,7 @@ const oneroot = {
     } else {
       const bC = block(P, '(c)', 'x^2+2x+5<0', 'below the x-axis: nothing', '\\text{No solution}');
       const bD = block(P, '(d)', 'x^2+2x+5>0', 'above the x-axis: all of it', `\\{x\\mid x${R}\\}`);
-      const tp = hide(G.point(0, 5, { color: GRN, r: 7, label: T('(0,\\ 5)'), pos: 'e' }));
+      const tp = hide(G.point(0, 5, { color: GRN, r: 7, label: T('(0,\\ 5)'), pos: 'e' })); hide(tp.label);
       stp = hide(stamp(stage, 'No solution', { ok: false, x: 4 + 280, y: 4 + S.ay - 6, rotate: -6 }));
       const pD = [{ a: -Infinity, b: Infinity }];
       steps = [
@@ -420,7 +420,7 @@ function appsK(stage, ex) {
   const W = ex.W, f = (k) => k * k - 36, st = { k: -10 };
   const S = new Scene(stage, { x: 4, y: 4, w: 560, gh: 362, win: [-10.5, 10.5, -45, 75], xl: 2, ystep: 5, yl: 20, fs: 14, xtitle: 'k', ytitle: 'D' }), G = S.G;
   const cv = hide(G.fn(f, { color: BL, width: 4 }));
-  const cl = hide(G.label(-9.6, 64, T('D=k^2-36'), { pos: 'e', color: BL, cls: 'bk-ptlab' }));
+  const cl = hide(G.label(-4.6, 62, T('D=k^2-36'), { pos: 'e', color: BL, cls: 'bk-ptlab' }));
   const rts = [-6, 6].map((r) => hide(G.point(r, 0, { color: OR, r: 7 })));
   const mk = hide(G.point(-10, f(-10), { color: PU, r: 8 }));
   const P = div(stage, 'u8l6-panel', '', 580, 4, W - 584, 160);
@@ -461,7 +461,7 @@ function appsW(stage, ex) {
   const W = ex.W, f = (w) => w * w + 4 * w - 21, st = { w: 2 };
   const S = new Scene(stage, { x: 4, y: 4, w: 560, gh: 362, win: [-8.5, 4.5, -27, 12], xl: 1, ystep: 3, yl: 6, fs: 14, xtitle: 'w', ytitle: 'y' }), G = S.G;
   const cv = hide(G.fn(f, { color: BL, width: 4 }));
-  const cl = hide(G.label(-8.2, 9.5, T('y=w^2+4w-21'), { pos: 'e', color: BL, cls: 'bk-ptlab' }));
+  const cl = hide(G.label(-1.2, 6.5, T('y=w^2+4w-21'), { pos: 'w', color: BL, cls: 'bk-ptlab' }));
   const rts = [-7, 3].map((r) => hide(G.point(r, 0, { color: OR, r: 7 })));
   const mk = hide(G.point(2, f(2), { color: PU, r: 8 }));
   const P = div(stage, 'u8l6-panel', '', 580, 4, W - 584, 196);
@@ -474,12 +474,12 @@ function appsW(stage, ex) {
   const rs = svgEl('svg', { width: W - 588, height: 214, viewBox: `0 0 ${W - 588} 214` }, RB); rs.style.position = 'absolute'; rs.style.left = '0'; rs.style.top = '0';
   const U = 20, X0 = 24, Y0 = 196;
   const rect = svgEl('rect', { x: X0, fill: '#eef3ff', stroke: BL, 'stroke-width': 3 }, rs);
-  const tW = svgEl('text', { 'font-size': 16, 'font-weight': 700, fill: BL, 'text-anchor': 'end' }, rs), tL = svgEl('text', { 'font-size': 16, 'font-weight': 700, fill: BL, 'text-anchor': 'middle' }, rs);
+  const tW = svgEl('text', { 'font-size': 16, 'font-weight': 700, fill: BL, 'text-anchor': 'start' }, rs), tL = svgEl('text', { 'font-size': 16, 'font-weight': 700, fill: BL, 'text-anchor': 'middle' }, rs);
   const ar = div(RB, 'u8l6-area', '', 14, 214, W - 620);
   const setW = (w) => {
     st.w = w; const L = (w + 4) * U, Hh = w * U;
     rect.setAttribute('y', Y0 - Hh); rect.setAttribute('width', L); rect.setAttribute('height', Hh);
-    tW.setAttribute('x', X0 - 4); tW.setAttribute('y', Y0 - Hh / 2 + 6); tW.textContent = num(Math.round(w * 10) / 10);
+    tW.setAttribute('x', X0 + L + 6); tW.setAttribute('y', Y0 - Hh / 2 + 6); tW.textContent = num(Math.round(w * 10) / 10) + ' cm';
     tL.setAttribute('x', X0 + L / 2); tL.setAttribute('y', Y0 - Hh - 6); tL.textContent = num(Math.round((w + 4) * 10) / 10) + ' cm';
     const A = w * (w + 4), over = A > 21 + 1e-6;
     rect.setAttribute('stroke', over ? RD : BL); rect.setAttribute('fill', over ? '#fdecea' : '#eef3ff');
