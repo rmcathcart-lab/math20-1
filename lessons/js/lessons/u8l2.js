@@ -1,7 +1,7 @@
 /* Math 20-1 · Unit 8 · Lesson 2 — Solving Quadratic–Quadratic Systems.
  * New lesson format (2026-11-11): the warm-up ("The Marble Race") is plain markup on the page (no code). Explainers:
  *   meet     (STAR, hands-on: y = x² − 2 stays put while the red parabola slides up and down (a slider) and flips
- *             (a button); the meeting points light up green and a counter reads 2, 1, 0 or ∞: two crossings, the
+ *             (a button); the meeting points light up and a counter reads 2, 1, 0 or ∞: two crossings, the
  *             touch, apart, a vertical translation that never meets, and the same parabola (every point glows)),
  *   machine  (the procedure, numbered 1–4, beside the "subtract machine": the two equations go in, y − y cancels,
  *             0 = (difference) comes out and the DIFFERENCE PARABOLA is drawn under the two parabolas on the same
@@ -16,8 +16,9 @@
  *   fountain (Example 8(b): water droplets fly along the two jets; set equal, clear the decimal (× −2), the formula;
  *             the crossing at (0.54, 2.93) lights up, then the window zooms down to show the equations' other
  *             meeting point underground at (7.46, −10.93): rejected).
- * Colours for the lesson: first parabola blue, second red, solutions (meeting points) green, the difference purple,
- * its zeros amber. Calculator allowed. */
+ * Colours for the lesson: first parabola blue, second red, solutions (meeting points) amber as in Lesson 1, the
+ * difference parabola purple (its zeros amber too: they are the solutions' x-coordinates); the verdicts green / amber /
+ * red as b² − 4ac > 0, = 0, < 0. Calculator allowed. */
 import {
   h, tex, add, box, Graph, stamp, stampIn, mountExplainers, pop, fadeIn, anim, sleep, tween, svgEl, pulse, shake,
   linear, COLORS, texNum, liveCtx
@@ -25,7 +26,7 @@ import {
 import { standup } from '../standup.js';
 
 const T = (s) => tex(s);
-const P1 = COLORS.blue, P2 = COLORS.red, SOL = COLORS.green, DIF = COLORS.purple, ZER = COLORS.amber, INK = COLORS.ink;
+const P1 = COLORS.blue, P2 = COLORS.red, SOL = COLORS.amber, DIF = COLORS.purple, ZER = COLORS.amber, INK = COLORS.ink;
 const show = (c, el, ms = 320) => fadeIn(c, el, ms);
 const hide = (el) => { if (el) el.style.opacity = 0; if (el && el.label) el.label.style.opacity = 0; return el; };
 const unhide = (el) => { if (el) el.style.opacity = ''; if (el && el.label) el.label.style.opacity = ''; return el; };

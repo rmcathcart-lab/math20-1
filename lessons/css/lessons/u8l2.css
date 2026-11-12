@@ -1,6 +1,6 @@
 /* Math 20-1 · Unit 8 · Lesson 2 — Solving Quadratic–Quadratic Systems: styles used only on this page (prefix u8l2-).
- * Colours: first parabola blue #1f5bd6, second red #c93a33, solutions (meeting points) green #12805a,
- * the difference parabola purple #7b4fc4, its zeros amber #c27a0e. */
+ * Colours: first parabola blue #1f5bd6, second red #c93a33, solutions (meeting points) amber #c27a0e (as in Lesson 1),
+ * the difference parabola purple #7b4fc4 (its zeros amber); verdicts green / amber / red. */
 
 .u8l2 .pl .katex { font-size: 1.06em; }
 .u8l2 .ans .katex { font-size: 1.03em; }
@@ -38,7 +38,7 @@
 .u8l2-ska > div { border: 1.5px solid #ead9d9; }
 
 /* ---------------- explainers: shared ---------------- */
-.u8l2-glow { fill: rgba(18, 128, 90, .16); stroke: #12805a; stroke-width: 4; transform-box: fill-box; transform-origin: center; animation: u8l2-glow 1s ease-in-out infinite; }
+.u8l2-glow { fill: rgba(232, 160, 30, .18); stroke: #e8a01e; stroke-width: 4; transform-box: fill-box; transform-origin: center; animation: u8l2-glow 1s ease-in-out infinite; }
 @keyframes u8l2-glow { 0%, 100% { transform: scale(.75); opacity: 1; } 50% { transform: scale(1.35); opacity: .45; } }
 .u8l2-pn { display: flex; flex-direction: column; gap: 10px; }
 .u8l2-pn2 { gap: 8px; }
@@ -54,7 +54,7 @@
 .u8l2-cnt-h { font: 800 15px var(--round); text-transform: uppercase; letter-spacing: .06em; color: #6b7280; }
 .u8l2-cnt-v { font: 800 66px/1 var(--round); }
 .u8l2-cnt-s { font: 800 23px var(--round); }
-.u8l2-list { font-size: 22px; line-height: 1.5; text-align: center; min-height: 72px; color: #12805a; }
+.u8l2-list { font-size: 22px; line-height: 1.5; text-align: center; min-height: 72px; color: #a86a08; }
 .u8l2-cnt.u8l2-k2 { color: #12805a; } .u8l2-cnt.u8l2-k1 { color: #a86a08; } .u8l2-cnt.u8l2-k0 { color: #c93a33; } .u8l2-cnt.u8l2-ki { color: #7b4fc4; }
 .u8l2-dlab { font: 800 14px var(--round); color: #7b4fc4; text-transform: uppercase; letter-spacing: .05em; background: rgba(255,255,255,.85); padding: 1px 6px; border-radius: 6px; }
 .u8l2-rows { display: flex; flex-direction: column; gap: 8px; }
