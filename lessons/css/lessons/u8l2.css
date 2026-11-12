@@ -58,7 +58,7 @@
 .u8l2-cnt.u8l2-k2 { color: #12805a; } .u8l2-cnt.u8l2-k1 { color: #a86a08; } .u8l2-cnt.u8l2-k0 { color: #c93a33; } .u8l2-cnt.u8l2-ki { color: #7b4fc4; }
 .u8l2-dlab { font: 800 14px var(--round); color: #7b4fc4; text-transform: uppercase; letter-spacing: .05em; background: rgba(255,255,255,.85); padding: 1px 6px; border-radius: 6px; }
 .u8l2-rows { display: flex; flex-direction: column; gap: 8px; }
-.u8l2-row { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 7px 12px; font-size: 19px; line-height: 1.55; }
+.u8l2-row { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 5px 12px; font-size: 18.5px; line-height: 1.5; }
 .u8l2-n { flex: 0 0 auto; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 17px var(--round); margin-top: 1px; }
 .u8l2-rc { min-width: 0; }
 
@@ -81,7 +81,7 @@
 .u8l2-ccol { display: flex; flex-direction: column; gap: 4px; background: #fbf9f5; border: 2px solid var(--line); border-radius: 16px; padding: 8px 10px; box-sizing: border-box; }
 .u8l2-ch { font: 800 22px var(--round); color: #7a1f3d; }
 .u8l2-ce { font-size: 21px; }
-.u8l2-cl { font-size: 19px; min-height: 32px; display: flex; align-items: center; }
+.u8l2-cl { font-size: 17.5px; min-height: 30px; display: flex; align-items: center; }
 .u8l2-csh { display: flex; align-items: center; gap: 10px; min-height: 48px; }
 .u8l2-csh .bk-stamp { position: static; }
 .u8l2-cun { font-size: 16.5px; line-height: 1.25; color: var(--ink2); }
@@ -103,7 +103,8 @@
 /* ---------------- fountain ---------------- */
 .u8l2-ground { fill: #e9dcc2; opacity: .8; }
 .u8l2-ped { fill: #9aa0ab; stroke: #3a4254; stroke-width: 2; }
-.u8l2-ug { font: 800 15px var(--round); color: #8a6d3b; text-transform: uppercase; letter-spacing: .05em; white-space: nowrap; }
+.u8l2-ug { font: 800 16px var(--round); color: #8a6d3b; white-space: nowrap; }
 .u8l2-x2 { display: inline-block; background: #f2c14e; border-radius: 8px; padding: 0 6px; }
 .u8l2-ok { color: #12805a; } .u8l2-no { color: #c93a33; }
 .u8l2-res { background: #e9f6ef; border: 2.5px solid #12805a; border-radius: 14px; padding: 8px 14px; font-size: 20px; line-height: 1.45; color: #0d5c40; }
+.u8l2-slb { background: #eef3fe; } .u8l2-slb .u8l2-sll, .u8l2-slb .u8l2-slv { color: #1f5bd6; } .u8l2-slb input { accent-color: #1f5bd6; }

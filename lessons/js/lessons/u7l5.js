@@ -62,13 +62,14 @@ const FIGS = {
   ex3: { w: 330, h: 300, win: { xmin: -3.5, xmax: 5.5, ymin: -1.5, ymax: 6.5 }, draw(G) {
     G.fn((x) => Math.abs(W1(x)), { color: INK, width: 4 });
   }, ans: (G) => [G.hline(2, { color: KC, width: 3, dash: false }), G.hline(4, { color: KC, width: 3, dash: false }),
-    G.label(-3.3, 2, T('y=2'), { cls: 'bk-ptlab', pos: 'ne', color: KC }), G.label(-3.3, 4, T('y=4'), { cls: 'bk-ptlab', pos: 'ne', color: KC })] }
+    G.label(-3.4, 2, T('y=2'), { cls: 'bk-ptlab', pos: 'se', color: KC }), G.label(-3.4, 4, T('y=4'), { cls: 'bk-ptlab', pos: 'se', color: KC })] }
 };
 function buildFigs() {
   document.querySelectorAll('.u7l5 [data-fig]').forEach((el) => {
     if (el.dataset.built) return; el.dataset.built = '1';
     if (el.dataset.fig === 'ex7') {
-      const N = new NumberLine(el, { width: 620, height: 104, min: -4, max: 6, step: 1, numbers: false, labels: [{ v: -1, html: T('-1') }, { v: 3, html: T('3') }] });
+      const N = new NumberLine(el, { width: 620, height: 104, min: -4, max: 6, step: 1, numbers: false });
+      N.mark(-1, T('-1'), { pos: 's' }); N.mark(3, T('3'), { pos: 's' });
       N.point(-1, { color: INK }); N.point(3, { color: INK });
       N.mark(-2.6, T('x<-1'), { lift: 4 }); N.mark(1, T('-1\\le x<3'), { lift: 4 }); N.mark(4.6, T('x\\ge3'), { lift: 4 });
       return;

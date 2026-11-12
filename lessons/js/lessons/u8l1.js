@@ -158,7 +158,7 @@ const tunnel = {
     const ground = G.segment([-6, 0], [5, 0], { color: '#6b5432', width: 5 });
     G.fn(f, { from: -4, to: 4, color: PB, width: 4.5, arrows: false });
     G.segment([-2, 0], [x1, y1], { color: LN, width: 4, dash: '12 8' });
-    G.label(0, 4.25, 'arch', { pos: 'n', cls: 'u8l1-glab' }); G.label(-5.2, 0.05, 'ground', { pos: 'n', cls: 'u8l1-glab' });
+    G.label(1.7, 3.5, 'arch', { pos: 'ne', cls: 'u8l1-glab' }); G.label(-5.2, 0.05, 'ground', { pos: 'n', cls: 'u8l1-glab' });
     const extL = G.fn(f, { from: -6, to: -4, color: PB, width: 2.5, dash: '6 6', arrows: false }), extR = G.fn(f, { from: 4, to: 5, color: PB, width: 2.5, dash: '6 6', arrows: false });
     const extB = G.fn(g, { from: -6, to: 5, color: LN, width: 2.5, dash: '4 7', arrows: false });
     [extL, extR, extB].forEach((e) => (e.style.opacity = 0));

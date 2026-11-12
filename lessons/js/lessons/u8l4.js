@@ -28,7 +28,7 @@ const hide = (el) => { if (el) { el.style.opacity = 0; if (el.label) el.label.st
 const div = (host, cls, html, x, y, w, hh) => { const d = h('div', cls, html); if (w != null || hh != null) box(d, w, hh); if (x != null) d.style.position = 'absolute'; return add(host, d, x, y); };
 const stampOn = (host, text, ok, x, y, size) => hide(stamp(host, text, { ok, x, y, rotate: -8, size }));
 const sIn = async (c, el) => { el.style.opacity = 1; await stampIn(c, el); };
-const P = (v) => (v < 0 ? `(${v})` : String(v));   // a substituted value: 2(−3), 2(4)
+const P = (v) => `(${v})`;   // a substituted value: 2(−3), 2(4)
 const pt = (x, y) => `(${x},\\ ${y})`;
 const mark = (ok) => `<b class="${ok ? 'u8l4-ok' : 'u8l4-no'}">${ok ? '✓' : '✗'}</b>`;
 /* a step heading with its number (n) */
@@ -131,29 +131,29 @@ const OV = {
     lines: [['3-2x-8\\ge7', 'expand'], ['-2x-5\\ge7', 'collect'], ['-2x\\ge12', '+5 both sides']],
     s0: '\\ge', s1: '\\le', post: '-6', div: '-2',
     tests: [{ x: -7, sub: '3-2(-7+4)=9', cmp: '9\\ge7', ok: true }, { x: 0, sub: '3-2(0+4)=-5', cmp: '-5\\ge7', ok: false }],
-    nl: [-10, -2], end: -6, open: false, dir: -1, solT: 'x\\le-6', setT: '\\{x\\mid x\\le-6,\\ x\\in\\mathbb{R}\\}' },
+    nl: [-10, 1], end: -6, open: false, dir: -1, solT: 'x\\le-6', setT: '\\{x\\mid x\\le-6,\\ x\\in\\mathbb{R}\\}' },
   b: { label: '(b)', q: '\\dfrac{x-1}{3}\\lt\\dfrac{2x+5}{4}',
-    lines: [['4(x-1)\\lt3(2x+5)', '×12 (positive: no change)'], ['4x-4\\lt6x+15', 'expand'], ['-2x\\lt19', '−6x, +4']],
+    lines: [['4(x-1)\\lt3(2x+5)', '×12 (positive)'], ['4x-4\\lt6x+15', 'expand'], ['-2x\\lt19', '−6x, +4']],
     s0: '\\lt', s1: '\\gt', post: '-\\tfrac{19}{2}', div: '-2',
     tests: [{ x: 0, sub: '\\tfrac{0-1}{3}=-\\tfrac{1}{3},\\ \\ \\tfrac{0+5}{4}=\\tfrac{5}{4}', cmp: '-\\tfrac{1}{3}\\lt\\tfrac{5}{4}', ok: true },
       { x: -10, sub: '\\tfrac{-11}{3}\\approx-3.67,\\ \\ \\tfrac{-15}{4}=-3.75', cmp: '-3.67\\lt-3.75', ok: false }],
-    nl: [-12, -4], end: -9.5, open: true, dir: 1, solT: 'x\\gt-9.5', setT: '\\{x\\mid x\\gt-9.5,\\ x\\in\\mathbb{R}\\}' }
+    nl: [-12, 1], end: -9.5, open: true, dir: 1, solT: 'x\\gt-9.5', setT: '\\{x\\mid x\\gt-9.5,\\ x\\in\\mathbb{R}\\}' }
 };
 const onevar = {
   title: 'Solve, test, graph, set notation',
-  height: 430, minW: 940,
+  height: 410, minW: 940,
   choices: Object.keys(OV).map((k) => ({ v: k, label: OV[k].label })),
   ask: (v) => `Example 1: solve ${T(OV[v].q)}.`,
   make(stage, v, ex) {
-    const d = OV[v], W = ex.W, LW = 470;
-    const L = div(stage, 'u8l4-panel', '', 0, 0, LW, 430);
+    const d = OV[v], W = ex.W, LW = 430;
+    const L = div(stage, 'u8l4-panel', '', 0, 0, LW, 410);
     const h1 = stepH(L, 1, '<b>Solve</b> like an equation');
     const rows = d.lines.map(([t, n]) => hide(div(L, 'u8l4-wl', `<span class="u8l4-lt">${T(t)}</span><span class="u8l4-note">${n}</span>`)));
     const last = hide(div(L, 'u8l4-wl u8l4-wlx', `<span class="u8l4-lt">${T('x')}<span class="u8l4-flip">${T(d.s0)}</span>${T(d.post)}</span><span class="u8l4-note u8l4-noteR">÷ ${T(d.div)}: reverse!</span>`));
     const flip = last.querySelector('.u8l4-flip'), noteR = last.querySelector('.u8l4-noteR'); hide(noteR);
-    const R = div(stage, 'u8l4-panel', '', LW + 14, 0, W - LW - 14, 430);
+    const R = div(stage, 'u8l4-panel', '', LW + 14, 0, W - LW - 14, 410);
     const h2 = stepH(R, 2, '<b>Test values</b> in the original inequality');
-    const trows = d.tests.map((t) => hide(div(R, 'u8l4-trow', `${T(`x=${t.x}:`)}&ensp;${T(t.sub)}&ensp;→&ensp;${T(t.cmp)} ${mark(t.ok)}<span class="u8l4-tw">${t.ok ? 'true' : 'false'}</span>`)));
+    const trows = d.tests.map((t) => hide(div(R, 'u8l4-trow', `${T(`x=${t.x}:`)}&ensp;${T(t.sub)}<br>→&ensp;${T(t.cmp)} ${mark(t.ok)}<span class="u8l4-tw">${t.ok ? 'true' : 'false'}</span>`)));
     const h3 = stepH(R, 3, '<b>Graph</b> on the number line');
     const NL = new NumberLine(R, { width: W - LW - 14 - 28, height: 96, min: d.nl[0], max: d.nl[1], step: 1, fontSize: 16, pad: 24, axisY: 52 });
     NL.el.classList.add('u8l4-nl');
@@ -199,7 +199,7 @@ const dropper = {
   ask: (v) => `Which points are solutions of ${T(DR[v].tx)}?`,
   make(stage, v, ex) {
     const d = DR[v], q = d.q, W = ex.W, GS = 466;
-    const G = new Graph(stage, { x: 2, y: 2, width: GS, height: GS, xmin: -7, xmax: 7, ymin: -7, ymax: 7, xlabels: 2, ylabels: 2, fontSize: 14 });
+    const G = new Graph(stage, { x: 2, y: 2, width: GS, height: GS, xmin: -7, xmax: 7, ymin: -7, ymax: 7, xlabels: 2, ylabels: 2, fontSize: 14, pad: [30, 18, 18, 18] });
     G.el.setAttribute('data-tap', ''); G.el.classList.add('u8l4-tapg');
     const reg = region(G, [q], { color: BL, op: 0.2, t: 0 }); hide(reg);
     const line = bline(G, q, { width: 4 }); hide(line);
@@ -263,7 +263,7 @@ const G4 = {
     test: [0, 0], testT: '0\\lt2(0)-1', testV: '0\\lt-1', side: 'below', short: `${T('y\\lt2x-1')} is solved for ${T('y')} with ${T('\\lt')}: <b>below</b> the line ✓` },
   e3b: { label: '(b)', tx: 'y\\ge-\\tfrac{2}{3}x+3', q: { A: 2 / 3, B: 1, C: 3, op: '>=' }, how: 'si', b: 3, rise: -2, run: 3, eqT: 'y=-\\tfrac{2}{3}x+3',
     s1: `Slope ${T('-\\tfrac{2}{3}')}, ${T('y')}-intercept ${T('3')}: start at ${T('(0,\\ 3)')}, down 2, right 3.`,
-    test: [0, 0], testT: '0\\ge-\\tfrac{2}{3}(0)+3', testV: '0\\ge3', side: 'above', short: `${T('y\\ge\\dots')} : <b>above</b> the line ✓` },
+    test: [0, 0], testT: '0\\ge-\\tfrac{2}{3}(0)+3', testV: '0\\ge3', side: 'above', short: `${T('y\\ge-\\tfrac{2}{3}x+3')} is solved for ${T('y')} with ${T('\\ge')}: <b>above</b> the line ✓` },
   e4a: { label: 'Example 4(a)', tx: '4x-3y\\ge12', q: { A: 4, B: -3, C: 12, op: '>=' }, how: 'int', ints: [[3, 0], [0, -4]], eqT: '4x-3y=12',
     s1: `Intercepts: ${T('y=0')} gives ${T('x=3')}; ${T('x=0')} gives ${T('y=-4')}.`,
     test: [0, 0], testT: '4(0)-3(0)\\ge12', testV: '0\\ge12', side: 'below', short: `Solve for ${T('y')}: ${T('-3y\\ge-4x+12\\Rightarrow y\\le\\tfrac{4}{3}x-4')} (÷ −3 reverses): <b>below</b> ✓` },
@@ -287,7 +287,7 @@ const graph4 = {
   ask: (v) => `Graph ${T(G4[v].tx)}.`,
   make(stage, v, ex) {
     const d = G4[v], q = d.q, W = ex.W, GS = 452, dash = isDashed(q), [tx, ty] = d.test, ok = holds(q, tx, ty);
-    const G = new Graph(stage, { x: 2, y: 2, width: GS, height: GS, xmin: -7, xmax: 7, ymin: -7, ymax: 7, xlabels: 2, ylabels: 2, fontSize: 14 });
+    const G = new Graph(stage, { x: 2, y: 2, width: GS, height: GS, xmin: -7, xmax: 7, ymin: -7, ymax: 7, xlabels: 2, ylabels: 2, fontSize: 14, pad: [30, 18, 18, 18] });
     const reg = region(G, [q], { color: BL, op: 0.22, t: 0 }); hide(reg);
     const pencil = bline(G, q, { color: GR, width: 2.5, dash: false }); hide(pencil);
     const line = bline(G, q, { width: 4.5 }); hide(line);
@@ -305,14 +305,12 @@ const graph4 = {
     const tp = hide(G.point(tx, ty, { color: GO, r: 8.5 })), tpl = hide(G.label(tx, ty, T(pt(tx, ty)), { pos: ty > 0 ? 'nw' : 'sw', color: '#8a6a00', cls: 'bk-ptlab' }));
     // the steps panel
     const R = div(stage, 'u8l4-panel u8l4-g4R', '', GS + 16, 2, W - GS - 18, GS);
-    const s = [
-      stepH(R, 1, `<b>Boundary:</b> ${T(d.eqT)}`),
-      stepH(R, 2, `${T(OPT[q.op])} &nbsp;→&nbsp; <b>${dash ? 'dashed' : 'solid'}</b> line`),
-      stepH(R, 3, `<b>Test</b> ${T(pt(tx, ty))}: &nbsp;${T(d.testT)}`),
-      stepH(R, 4, `<b>Shade</b> ${ok ? 'the side with' : 'the side without'} the test point`)
-    ];
-    const s1n = hide(div(R, 'u8l4-sub', d.s1)), onO = d.onO ? hide(div(R, 'u8l4-sub', `${T('(0,\\ 0)')} is <b>on</b> the line, so it can’t be the test point. Use ${T('(0,\\ 1)')}.`)) : null;
+    const s = [], s1n = (s.push(stepH(R, 1, `<b>Boundary:</b> ${T(d.eqT)}`)), hide(div(R, 'u8l4-sub', d.s1)));
+    s.push(stepH(R, 2, `${T(OPT[q.op])} &nbsp;→&nbsp; <b>${dash ? 'dashed' : 'solid'}</b> line`));
+    s.push(stepH(R, 3, `<b>Test</b> ${T(pt(tx, ty))}: &nbsp;${T(d.testT)}`));
+    const onO = d.onO ? hide(div(R, 'u8l4-sub', `${T('(0,\\ 0)')} is <b>on</b> the line, so use ${T('(0,\\ 1)')}.`)) : null;
     const tv = hide(div(R, 'u8l4-sub u8l4-tv', `${T(d.testV)} &nbsp;is <b class="${ok ? 'u8l4-ok' : 'u8l4-no'}">${ok ? 'true ✓' : 'false ✗'}</b>`));
+    s.push(stepH(R, 4, `<b>Shade</b> ${ok ? 'the side with' : 'the side without'} the test point`));
     const sc = hide(div(R, 'u8l4-short', `<b>Shortcut check.</b> ${d.short}`));
     const shadeCap = ok ? `True, so shade the side <b>with</b> ${T(pt(tx, ty))}: ${d.side}.` : `False, so shade the <b>other</b> side, away from ${T(pt(tx, ty))}: ${d.side}.`;
     return [
@@ -332,10 +330,10 @@ const graph4 = {
 
 /* =============================== explainer: writing the inequality from a graph =============================== */
 const FG = {
-  a: { label: 'Example 6(a)', q: { A: -2 / 3, B: 1, C: -1, op: '>' }, pts: [[0, -1], [3, 1]], how: 'slope', eqT: 'y=\\tfrac{2}{3}x-1',
+  a: { label: 'Example 6(a)', q: { A: -2 / 3, B: 1, C: -1, op: '>' }, pts: [[0, -1, 'nw'], [3, 1, 'nw']], how: 'slope', eqT: 'y=\\tfrac{2}{3}x-1',
     s1: `Through ${T('(0,\\ -1)')} and ${T('(3,\\ 1)')}: rise 2, run 3, so ${T('m=\\tfrac{2}{3}')}, and ${T('b=-1')}.`,
     test: [0, 2], lhs: '2', rhs: '\\tfrac{2}{3}(0)-1=-1', L: 2, Rv: -1, fin: 'y\\gt\\tfrac{2}{3}x-1', var: 'y', rest: '\\tfrac{2}{3}x-1' },
-  b: { label: '(b)', q: { A: 3, B: 4, C: 12, op: '<=' }, pts: [[4, 0], [0, 3]], how: 'int', eqT: '3x+4y=12',
+  b: { label: '(b)', q: { A: 3, B: 4, C: 12, op: '<=' }, pts: [[4, 0, 'ne'], [0, 3, 'ne']], how: 'int', eqT: '3x+4y=12',
     s1: `Intercepts ${T('(4,\\ 0)')} and ${T('(0,\\ 3)')}: ${T('\\tfrac{x}{4}+\\tfrac{y}{3}=1')}, times 12: ${T('3x+4y=12')}.`,
     test: [0, 0], lhs: '3(0)+4(0)=0', rhs: '12', L: 0, Rv: 12, fin: '3x+4y\\le12', alt: 'y\\le-\\tfrac{3}{4}x+3', var: '3x+4y', rest: '12' },
   c: { label: '(c)', q: { A: 1, B: 0, C: 3, op: '<' }, pts: [], how: 'v', eqT: 'x=3',
@@ -349,12 +347,12 @@ const fromgraph = {
   ask: (v) => `Example 6${v === 'a' ? '(a)' : FG[v].label}: write the inequality whose solution region is shown.`,
   make(stage, v, ex) {
     const d = FG[v], q = d.q, W = ex.W, GS = 452, dash = isDashed(q), [tx, ty] = d.test;
-    const G = new Graph(stage, { x: 2, y: 2, width: GS, height: GS, xmin: -7, xmax: 7, ymin: -7, ymax: 7, xlabels: 2, ylabels: 2, fontSize: 14 });
+    const G = new Graph(stage, { x: 2, y: 2, width: GS, height: GS, xmin: -7, xmax: 7, ymin: -7, ymax: 7, xlabels: 2, ylabels: 2, fontSize: 14, pad: [30, 18, 18, 18] });
     region(G, [q], { color: GR, op: 0.3 }); bline(G, q, { color: INK, width: 4 });
-    d.pts.forEach(([x, y]) => G.point(x, y, { color: INK, r: 6.5, coords: true, pos: x ? 'se' : 'nw' }));
+    d.pts.forEach(([x, y, pos]) => G.point(x, y, { color: INK, r: 6.5, coords: true, pos }));
     const tri = [];
     if (d.how === 'slope') { const [[x0, y0], [x1, y1]] = d.pts; tri.push(hide(G.segment([x0, y0], [x1, y0], { color: GO, width: 3.5 })), hide(G.segment([x1, y0], [x1, y1], { color: GO, width: 3.5 })));
-      tri.push(hide(G.label((x0 + x1) / 2, y0, 'run 3', { pos: 's', color: '#8a6a00', cls: 'bk-ptlab' })), hide(G.label(x1, (y0 + y1) / 2, 'rise 2', { pos: 'e', color: '#8a6a00', cls: 'bk-ptlab' }))); }
+      tri.push(hide(G.label((x0 + x1) / 2, y0, 'run 3', { pos: 's', color: '#8a6a00', cls: 'bk-ptlab' })), hide(G.label(x1, (y0 + y1) / 2, 'rise 2', { pos: 'e', color: '#8a6a00', cls: 'bk-ptlab', dx: 4 }))); }
     const tp = hide(G.point(tx, ty, { color: GO, r: 8.5 })), tpl = hide(G.label(tx, ty, T(pt(tx, ty)), { pos: 'ne', color: '#8a6a00', cls: 'bk-ptlab' }));
     const R = div(stage, 'u8l4-panel u8l4-fgR', '', GS + 16, 2, W - GS - 18, GS);
     const s = [stepH(R, 1, `<b>Boundary line:</b> ${T(d.eqT)}`), stepH(R, 2, `<b>${dash ? 'Dashed' : 'Solid'}</b> line`), stepH(R, 3, `<b>Test</b> a shaded point, ${T(pt(tx, ty))}`)];
@@ -389,7 +387,7 @@ const tickets = {
   ask: 'Adult tickets $15, student tickets $10, and the play needs at least $1500.',
   make(stage, v, ex) {
     const W = ex.W, GS = 470, q = { A: 15, B: 10, C: 1500, op: '>=' };
-    const G = new Graph(stage, { x: 2, y: 2, width: GS, height: 466, xmin: 0, xmax: 135, ymin: 0, ymax: 175, xstep: 10, ystep: 10, xlabels: 20, ylabels: 20, xtitle: 'a', ytitle: 's', fontSize: 14 });
+    const G = new Graph(stage, { x: 2, y: 2, width: GS, height: 466, xmin: 0, xmax: 135, ymin: 0, ymax: 175, xstep: 10, ystep: 10, xlabels: 20, ylabels: 20, xtitle: 'a', ytitle: 's', fontSize: 14, pad: [30, 22, 34, 46] });
     const reg = region(G, [q, { A: 1, B: 0, C: 0, op: '>=' }, { A: 0, B: 1, C: 0, op: '>=' }], { color: BL, op: 0.2, t: 0 }); hide(reg);
     const line = bline(G, q, { width: 4.5 }); hide(line);
     const ip = [hide(G.point(100, 0, { color: BL, r: 7, coords: true, pos: 'n' })), hide(G.point(0, 150, { color: BL, r: 7, coords: true, pos: 'e' }))];
@@ -421,7 +419,7 @@ const tickets = {
       { cap: `Let ${T('a')} = adult tickets and ${T('s')} = student tickets. The money is ${T('15a+10s')}, and it must be <b>at least</b> $1500. Tickets can’t be negative, and they come in whole numbers.`, run: async (c) => {
         P0.style.opacity = 1; await pop(c, P0); await pop(c, ineq); } },
       { cap: `Boundary ${T('15a+10s=1500')}. Only adults: ${T('15a=1500')}, ${T('a=100')}. Only students: ${T('s=150')}. ${T('\\ge')}: <b>solid</b> (exactly $1500 is enough).`, run: async (c) => {
-        await go(c, 100, 0, 1300); ip[0].style.opacity = 1; await G.reveal(ip[0], c); say('Exactly $1500 ✓', true); await go(c, 0, 150, 1500); ip[1].style.opacity = 1; await G.reveal(ip[1], c);
+        await go(c, 100, 0, 1300); set(100, 0, false); ip[0].style.opacity = 1; await G.reveal(ip[0], c); say('Exactly $1500 ✓', true); await go(c, 0, 150, 1500); set(0, 150, false); ip[1].style.opacity = 1; await G.reveal(ip[1], c);
         line.style.opacity = 1; await G.drawIn(line, 800, c); say(''); } },
       { cap: `Test ${T('(0,\\ 0)')}: ${T('0\\ge1500')} is false, so shade <b>away</b> from the origin, and only in the <b>first quadrant</b>.`, run: async (c) => {
         await go(c, 0, 0, 1000); say('$0 ≥ $1500? false ✗', false); await flood(c, reg, 1100); } },
@@ -448,12 +446,12 @@ const overlap = {
   make(stage, v, ex) {
     const W = ex.W, GS = 466;
     const qH = { A: 1, B: 1, C: 20, op: '<=' }, qM = { A: 20, B: 15, C: 330, op: '>=' }, X0 = { A: 1, B: 0, C: 0, op: '>=' }, Y0 = { A: 0, B: 1, C: 0, op: '>=' };
-    const G = new Graph(stage, { x: 2, y: 2, width: GS, height: GS, xmin: 0, xmax: 23, ymin: 0, ymax: 23, xstep: 1, ystep: 1, xlabels: 4, ylabels: 4, fontSize: 14 });
+    const G = new Graph(stage, { x: 2, y: 2, width: GS, height: GS, xmin: 0, xmax: 23, ymin: 0, ymax: 23, xstep: 1, ystep: 1, xlabels: 4, ylabels: 4, fontSize: 14, pad: [30, 22, 34, 42] });
     const rH = region(G, [qH, X0, Y0], { color: BL, op: 0.2, t: 0 }), rM = region(G, [qM, X0, Y0], { color: OR, op: 0.2, t: 0 });
     hide(rH); hide(rM);
     const rB = region(G, [qH, qM, X0, Y0], { color: PU, op: 0.42, top: true }); hide(rB);
     const lH = bline(G, qH, { color: BL, width: 4.5 }), lM = bline(G, qM, { color: OR, width: 4.5 }); hide(lH); hide(lM);
-    const iH = [hide(G.point(20, 0, { color: BL, r: 6.5, coords: true, pos: 'n' })), hide(G.point(0, 20, { color: BL, r: 6.5, coords: true, pos: 'e' }))];
+    const iH = [hide(G.point(20, 0, { color: BL, r: 6.5, coords: true, pos: 'ne' })), hide(G.point(0, 20, { color: BL, r: 6.5, coords: true, pos: 'e' }))];
     const iM = [hide(G.point(16.5, 0, { color: OR, r: 6.5, label: '(16.5,\\ 0)', tex: true, pos: 'nw' })), hide(G.point(0, 22, { color: OR, r: 6.5, coords: true, pos: 'e' }))];
     const corner = hide(G.point(6, 14, { color: PU, r: 8.5 })), cl = hide(G.label(6, 14, '?', { pos: 'ne', color: PU, cls: 'bk-ptlab u8l4-big' }));
     const tst = hide(G.point(10, 8, { color: NO, r: 8.5, coords: true, pos: 'sw' }));

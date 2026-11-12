@@ -28,7 +28,7 @@
 .u7l5-two { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px; align-items: start; margin-top: 6px; }
 .u7l5-col { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .u7l5-col > .q { margin: 0; }
-.u7l5-gpart { display: flex; flex-direction: column; align-items: center; }
+.u7l5-gpart { display: flex; flex-direction: column; align-items: center; width: 370px; }
 .u7l5-gpart .pl { align-self: stretch; }
 .u7l5-fig { display: flex; justify-content: center; background: #fff; border-radius: 12px; padding: 4px; }
 .u7l5-nlfig { margin: 8px 0 4px; }

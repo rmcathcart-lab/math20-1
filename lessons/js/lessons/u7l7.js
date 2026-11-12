@@ -461,10 +461,10 @@ const match = {
     const colX = (j) => j * (GS + gap);
     const svg = svgEl('svg', { class: 'u7l7-msvg', width: W, height: 444, style: 'position:absolute;left:0;top:0;pointer-events:none;overflow:visible' }, stage);
     ['A', 'B', 'C', 'D'].forEach((k, j) => {
-      const x = colX(j), y = 0;
+      const x = colX(j), y = 6;
       const host = div(stage, 'u7l7-mg', '', x, y, GS, GS);
       div(host, 'u7l7-mgl', k);
-      const G = new Graph(host, { width: GS - 6, height: GS - 6, xmin: -3.5, xmax: 3.5, ymin: -3.5, ymax: 3.5, xlabels: 2, ylabels: 2, fontSize: 11 });
+      const G = new Graph(host, { width: GS - 6, height: GS - 6, xmin: -3.5, xmax: 3.5, ymin: -3.5, ymax: 3.5, xlabels: 2, ylabels: 2, fontSize: 11, pad: [24, 10, 10, 10] });
       MQ[k].z.forEach((z) => asym(G, z, { color: COLORS.gray, width: 2 })); rGraph(G, MQ[k], { width: 3.5 });
       gr[k] = { host, x, y };
     });
@@ -476,7 +476,7 @@ const match = {
     const done = [];
     const keep = () => done.forEach((k) => gr[k].host.classList.add('pick'));
     const link = (m) => {
-      const cd = cards[m.ans], g = gr[m.ans], x1 = colX(cd.i) + GS / 2, y1 = CY - 4, x2 = g.x + GS / 2, y2 = GS + 4;
+      const cd = cards[m.ans], g = gr[m.ans], x1 = colX(cd.i) + GS / 2, y1 = CY - 4, x2 = g.x + GS / 2, y2 = GS + 10;
       return svgEl('path', { d: `M${x1} ${y1} C ${x1} ${y1 - 50}, ${x2} ${y2 + 50}, ${x2} ${y2}`, fill: 'none', stroke: COLORS.green, 'stroke-width': 4, 'stroke-linecap': 'round', class: 'bk-stroke' }, svg);
     };
     const lines = {}; MF.forEach((m) => { lines[m.ans] = hide(link(m)); });

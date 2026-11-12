@@ -151,32 +151,32 @@ const MCH = {
     solve: ['2x^2-6x-8=0', 'x^2-3x-4=0', '(x-4)(x+1)=0'], xs: [4, -1], xT: ['4', '-1'], sol2: `${T('x=4')} or ${T('x=-1')}`,
     subEq: 'y=x^2-2x-4', subFrom: 'f', subs: ['x=4:\\ y=16-8-4=4', 'x=-1:\\ y=1+2-4=-1'],
     wrong: '2(4)^2-6(4)-8=0', chk: '(4,\\ 4):\\ -16+16+4=4\\ \\checkmark', chkIn: 'y=-x^2+4x+4',
-    ans: `${T('(4,\\ 4)')} and ${T('(-1,\\ -1)')}` },
+    ans: `${T('(4,\\ 4)')} and ${T('(-1,\\ -1)')}`, pos: ['e', 'se'] },
   b: { f: [3, 2, -1], g: [1, -3, 2], w1: { xmin: -4, xmax: 2, ymin: -4, ymax: 22, ylabels: 4, ystep: 2 }, w2: { xmin: -4, xmax: 2, ymin: -8, ymax: 16, ylabels: 4, ystep: 2 },
     q: `${T('y=3x^2+2x-1')} and ${T('y=x^2-3x+2')}`,
     solve: ['2x^2+5x-3=0', '(2x-1)(x+3)=0'], xs: [0.5, -3], xT: ['\\tfrac{1}{2}', '-3'], sol2: `${T('x=\\tfrac{1}{2}')} or ${T('x=-3')}`,
     subEq: 'y=x^2-3x+2', subFrom: 'g', subs: ['x=\\tfrac{1}{2}:\\ y=\\tfrac{1}{4}-\\tfrac{3}{2}+2=\\tfrac{3}{4}', 'x=-3:\\ y=9+9+2=20'],
     chk: '(-3,\\ 20):\\ 27-6-1=20\\ \\checkmark', chkIn: 'y=3x^2+2x-1',
-    ans: `${T('\\left(\\tfrac{1}{2},\\ \\tfrac{3}{4}\\right)')} and ${T('(-3,\\ 20)')}` },
-  c: { f: [1, 0, -3], g: [-2, 6, 1], w1: { xmin: -3, xmax: 5, ymin: -6, ymax: 8, ylabels: 2 }, w2: { xmin: -3, xmax: 5, ymin: -8, ymax: 10, ylabels: 4, ystep: 2 },
+    ans: `${T('\\left(\\tfrac{1}{2},\\ \\tfrac{3}{4}\\right)')} and ${T('(-3,\\ 20)')}`, pos: ['se', 'e'] },
+  c: { f: [1, 0, -3], g: [-2, 6, 1], w1: { xmin: -4, xmax: 5, ymin: -6, ymax: 8, ylabels: 2 }, w2: { xmin: -4, xmax: 5, ymin: -8, ymax: 10, ylabels: 4, ystep: 2 },
     q: `${T('y=x^2-3')} and ${T('y=-2x^2+6x+1')}, exactly`,
     solve: ['3x^2-6x-4=0', 'x=\\tfrac{6\\pm\\sqrt{36+48}}{6}=\\tfrac{3\\pm\\sqrt{21}}{3}'], xs: [(3 + S3) / 3, (3 - S3) / 3], xT: ['2.53', '-0.53'], approx: true,
     sol2: `${T('x=\\frac{3\\pm\\sqrt{21}}{3}')}, about ${T('2.53')} and ${T('-0.53')}`,
     subEq: 'y=x^2-3', subFrom: 'f', subs: ['y=\\tfrac{9\\pm6\\sqrt{21}+21}{9}-3=\\tfrac{1\\pm2\\sqrt{21}}{3}'],
     chk: '\\left(\\tfrac{3+\\sqrt{21}}{3},\\ \\tfrac{1+2\\sqrt{21}}{3}\\right),\\ \\left(\\tfrac{3-\\sqrt{21}}{3},\\ \\tfrac{1-2\\sqrt{21}}{3}\\right)',
-    ans: `${T('\\approx(2.5,\\ 3.4)')} and ${T('\\approx(-0.5,\\ -2.7)')}` }
+    ans: `${T('\\approx(2.5,\\ 3.4)')} and ${T('\\approx(-0.5,\\ -2.7)')}`, pos: ['e', 'nw'] }
 };
 const machine = {
-  title: 'The subtract machine', height: 500, minW: 920, capH: 96,
+  title: 'The subtract machine', height: 520, minW: 920, capH: 96,
   choices: [{ sep: 'Example 3' }, { v: 'a', label: '(a)' }, { v: 'b', label: '(b)' }, { sep: 'Example 4' }, { v: 'c', label: '(b) exact' }],
   ask: (v) => `Solve the system ${MCH[v].q}.`,
   make(stage, v, ex) {
-    const D = MCH[v], W = ex.W, LW = 420, H1 = 290, H2 = 196, GAP = 10, PX = LW + 26, PW = W - PX;
+    const D = MCH[v], W = ex.W, LW = 420, H1 = 300, H2 = 210, GAP = 10, PX = LW + 26, PW = W - PX;
     const d = sub3(D.f, D.g), fF = ev(D.f), gF = ev(D.g), dF = ev(d), dT = poly(d);
     const Z = twin(stage, 0, 0, LW, H1, H2, GAP, D.w1, D.w2), { G1, G2 } = Z;
     G1.fn(fF, { color: P1, width: 4 }); G1.fn(gF, { color: P2, width: 4 });
     const dc = G2.fn(dF, { color: DIF, width: 4 }); hide(dc); hide(Z.dl);
-    const pts = D.xs.map((x, i) => G1.point(x, fF(x), { color: SOL, r: 8.5, label: T(D.approx ? `\\approx${pairT(x, fF(x))}` : pairT(D.xs[i], fF(x)).replace(tn(0.5), '\\tfrac{1}{2}').replace(tn(0.75), '\\tfrac{3}{4}')), pos: x === Math.max(...D.xs) ? 'se' : 'nw' }));
+    const pts = D.xs.map((x, i) => G1.point(x, fF(x), { color: SOL, r: 8.5, label: T(D.approx ? `\\approx${pairT(x, fF(x))}` : pairT(D.xs[i], fF(x)).replace(tn(0.5), '\\tfrac{1}{2}').replace(tn(0.75), '\\tfrac{3}{4}')), pos: D.pos[i] }));
     const rings = D.xs.map((x) => { const r = svgEl('circle', { r: 11, fill: 'none', stroke: SOL, 'stroke-width': 3, 'stroke-dasharray': '4 4' }, G1.layers.top); const [px, py] = G1.toPx(x, fF(x)); r.setAttribute('cx', px); r.setAttribute('cy', py); r.style.opacity = 0; return r; });
     const zs = D.xs.map((x, i) => G2.point(x, 0, { color: ZER, r: 8, label: T(`x=${D.xT[i]}`), pos: x === Math.max(...D.xs) ? 'ne' : 'nw' }));
     pts.forEach(hide); zs.forEach(hide);
@@ -191,7 +191,7 @@ const machine = {
     const gear = M.querySelector('.u8l2-gear'), yy = [...M.querySelectorAll('.u8l2-yy')], mout = M.querySelector('.u8l2-mout'), minus = M.querySelectorAll('.u8l2-mi')[1], mline = M.querySelector('.u8l2-mline');
     hide(mout); hide(minus); hide(mline);
     const rows = h('div', 'u8l2-rows'); P.appendChild(rows);
-    const r2 = row(rows, 2, `<b>Solve</b> &nbsp;${D.solve.map((s) => T(s)).join(' &ensp; ')}<br>${D.sol2}`);
+    const r2 = row(rows, 2, `<b>Solve</b> &nbsp;${D.solve.map((s) => T(s)).join(', &ensp;')}<br>${D.sol2}`);
     const r3 = row(rows, 3, `<b>Substitute</b> into an original: ${T(D.subEq)}<br>${D.subs.map((s) => T(s)).join('<br>')}${D.wrong ? `<div class="u8l2-wrong">${T('y=' + D.wrong)} <b>✗</b> <span>that is the difference, not ${T('y')}</span></div>` : ''}`);
     const wrong = r3.querySelector('.u8l2-wrong'); if (wrong) hide(wrong);
     const r4 = row(rows, 4, D.chkIn ? `<b>Verify</b> in ${T(D.chkIn)}: ${T(D.chk)}<br>Solutions: <b>${D.ans}</b>` : `<b>Write the pairs:</b> ${T(D.chk)}<br>${D.ans}, as on the calculator`);
@@ -234,7 +234,7 @@ const CN = [
     l1: '0=\\cancel{2x^2}\\cancel{-3x}+1\\cancel{-2x^2}\\cancel{+3x}+4', l2: '0=5\\quad\\text{false}', st: 'No solution', ok: false, under: '5 units down: a vertical translation',
     win: { xmin: -2, xmax: 3.5, ymin: -7, ymax: 7, ylabels: 2 }, shift: true },
   { k: '(c)', f: 'y=2(x-1)^2+3', g: 'y=2x^2-4x+5', fF: (x) => 2 * (x - 1) * (x - 1) + 3, gF: (x) => 2 * x * x - 4 * x + 5,
-    l1: '2(x^2-2x+1)+3=2x^2-4x+5', l2: '0=0\\quad\\text{true}', st: 'Infinitely many', ok: null, under: 'the same parabola',
+    l1: '2(x-1)^2+3=2(x^2-2x+1)+3', l2: '=2x^2-4x+5\\ \\ \\text{(identical)}', l3: '0=0\\quad\\text{true}', st: 'Infinitely many', ok: null, under: 'the same parabola',
     win: { xmin: -1.5, xmax: 3.5, ymin: -1, ymax: 13, ylabels: 4, ystep: 2 }, same: true }
 ];
 const cancel = {
@@ -277,7 +277,7 @@ const cancel = {
       { cap: `(b) Subtract: <b>every</b> ${T('x')}-term cancels and ${T('0=5')} is left. That is false for every ${T('x')}: <b>no solution</b>. The red parabola is the blue one moved ${T('5')} units down.`,
         run: async (c) => { await show(c, unhide(B.l1)); await show(c, unhide(B.l2)); await stampIn(c, unhide(B.st)); await show(c, unhide(B.un)); await graph(c, B); await show(c, unhide(B.arr)); } },
       { cap: `(c) Expand first: ${T('2(x-1)^2+3=2x^2-4x+5')}, the same equation. Subtracting leaves ${T('0=0')}, true for every ${T('x')}: <b>infinitely many solutions</b>.`,
-        run: async (c) => { await show(c, unhide(C.l1)); await show(c, unhide(C.l2)); await stampIn(c, unhide(C.st)); await show(c, unhide(C.un)); unhide(C.glow); await graph(c, C); } },
+        run: async (c) => { await show(c, unhide(C.l1)); await show(c, unhide(C.l2)); await show(c, unhide(C.l3)); await stampIn(c, unhide(C.st)); await show(c, unhide(C.un)); unhide(C.glow); await graph(c, C); } },
       { cap: `Same ${T('x^2')}-coefficient: the leftover is linear. ${T('mx=n')} gives <b>one</b> solution, a false ${T('0=n')} <b>none</b>, a true ${T('0=0')} <b>infinitely many</b>.`,
         run: async (c) => { await Promise.all(cols.map((o) => pulse(c, o.st, 1.12))); } }
     ];
@@ -313,7 +313,7 @@ const count = {
     const eqs = h('div', 'u8l2-eqs', `<div class="u8l2-eq2 u8l2-cb"></div><div class="u8l2-eq2 u8l2-cr">${T(D.gT)}</div>`); P.appendChild(eqs);
     const ef = eqs.firstChild;
     let sl = null;
-    if (D.k) { sl = slider(T('k'), -4, 5, 0.25, 'the value of k'); P.appendChild(sl.el); }
+    if (D.k) { sl = slider(T('k'), -4, 5, 0.25, 'the value of k'); sl.el.classList.add('u8l2-slb'); P.appendChild(sl.el); }
     const r1 = row(P, 1, ''), r2 = row(P, 2, '');
     const MW = PW, MH = 54, Dlo = -30, Dhi = 50, mx = (x) => 16 + (x - Dlo) / (Dhi - Dlo) * (MW - 32);
     const M = svgEl('svg', { width: MW, height: MH, viewBox: `0 0 ${MW} ${MH}`, class: 'u8l2-meter' }, P);
@@ -403,7 +403,7 @@ const fountain = {
     const xa = 4 - 2 * Math.sqrt(3), xb = 4 + 2 * Math.sqrt(3), ha = f1(xa), hb = f1(xb);
     const G = new Graph(stage, { x: 0, y: 0, width: GW, height: 470, xmin: -0.5, xmax: 8.5, ymin: -1, ymax: 10, ylabels: 2, fontSize: 15, fnArrows: false, ytitle: 'h', pad: [30, 18, 18, 18] });
     // the ground (h < 0) and the pedestal under the second jet
-    const ground = svgEl('rect', { class: 'u8l2-ground' }, G.layers.bg);
+    const ground = svgEl('rect', { class: 'u8l2-ground' }); G.layers.data.insertBefore(ground, G.layers.data.firstChild);
     G.track(ground, () => { const [x0, y0] = G.toPx(G.win.xmin, 0), [x1, y1] = G.toPx(G.win.xmax, G.win.ymin); ground.setAttribute('x', x0); ground.setAttribute('y', y0); ground.setAttribute('width', x1 - x0); ground.setAttribute('height', Math.max(0, y1 - y0)); });
     const ped = svgEl('rect', { class: 'u8l2-ped' }, G.layers.data);
     G.track(ped, () => { const [x0, y0] = G.toPx(-0.16, 2), [x1, y1] = G.toPx(0.16, 0); ped.setAttribute('x', x0); ped.setAttribute('y', y0); ped.setAttribute('width', x1 - x0); ped.setAttribute('height', y1 - y0); });
@@ -423,7 +423,7 @@ const fountain = {
     const va = G.vline(xa, { color: ZER }), vb = G.vline(xb, { color: ZER }); hide(va); hide(vb);
     const pa = G.point(xa, ha, { color: SOL, r: 9, label: T('\\approx(0.54,\\ 2.93)'), pos: 'ne' }); hide(pa);
     const pb = G.point(xb, hb, { color: COLORS.red, r: 9, label: T('\\approx(7.46,\\ -10.93)'), pos: 'w' }); hide(pb);
-    const ug = div(stage, 'u8l2-ug', 'underground: h < 0', 0, 0); hide(ug);
+    const ug = div(stage, 'u8l2-ug', `underground: ${T('h<0')}`, 0, 0); hide(ug);
     const P = div(stage, 'u8l2-pn u8l2-pn2', '', PX, 0, PW);
     const rows = h('div', 'u8l2-rows'); P.appendChild(rows);
     const r1 = row(rows, 1, `<b>Set equal</b> ${T('-x^2+6x=-0.5x^2+2x+2')}<br>${T('-0.5x^2+4x-2=0')}`);
@@ -433,7 +433,7 @@ const fountain = {
     const res = h('div', 'u8l2-res', `The jets cross at about ${T('(0.54,\\ 2.93)')}:<br><b>0.54 m out and 2.93 m up.</b>`); P.appendChild(res); hide(res);
     const r4b = r4.querySelector('.u8l2-no'); hide(r4b);
     const rej = stamp(stage, 'Rejected', { ok: false, x: 0, y: 0, rotate: -8 }); hide(rej);
-    const placeUnder = () => { const [px, py] = G.toPx(0.4, -1.4); ug.style.left = px + 'px'; ug.style.top = py + 'px'; const [qx, qy] = G.toPx(xb, hb); rej.style.left = (qx - 120) + 'px'; rej.style.top = (qy - 50) + 'px'; };
+    const placeUnder = () => { const [px, py] = G.toPx(0.4, -1.4); ug.style.left = px + 'px'; ug.style.top = py + 'px'; const [qx, qy] = G.toPx(xb, hb); rej.style.left = (qx - 150) + 'px'; rej.style.top = (qy - 70) + 'px'; };
     return [
       { cap: `Both heights are ${T('h')}: set them equal and collect every term on one side: ${T('-0.5x^2+4x-2=0')}.`, run: (c) => show(c, unhide(r1)) },
       { cap: `<b>Clear the decimal:</b> multiply by ${T('-2')} so every coefficient is an integer (and ${T('a')} is positive): ${T('x^2-8x+4=0')}.`,

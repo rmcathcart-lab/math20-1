@@ -1,0 +1,112 @@
+/* Math 20-1 · Unit 8 · Lesson 5 — Quadratic Inequalities in Two Variables: styles used only on this page (prefix u8l5-).
+ * Colours: the boundary parabola blue, the solution region green, a given graph ink/gray, test points amber,
+ * solutions green, not solutions red, the dial family purple, the tunnel's lit region gold. */
+
+.u8l5 .ex-cap .katex { font-size: 1.04em; }
+.u8l5 .pl .katex { font-size: 1.06em; }
+.u8l5 .ans .katex { font-size: 1.04em; }
+.u8l5 .katex { white-space: nowrap; }
+.u8l5 code { font: 600 0.92em ui-monospace, Menlo, monospace; background: #f1ede4; border-radius: 6px; padding: 1px 6px; }
+.u8l5-ok { color: #12805a; }
+.u8l5-no { color: #c93a33; }
+
+/* ---------------- notes ---------------- */
+.u8l5-forms { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px 30px; font-size: 22px; margin: 4px 0 14px; padding: 12px 18px; background: #fff; border: 2px solid var(--line); border-radius: 14px; }
+.u8l5-a0 { color: var(--muted); }
+.u8l5-key { border-left-width: 7px; }
+.u8l5-keyh { font: 800 20px var(--round); color: #a26100; margin-bottom: 8px; }
+.u8l5-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.u8l5-two > div, .u8l5-steps > div { background: #fff; border-radius: 10px; padding: 8px 14px; font-size: 18px; line-height: 1.5; border: 2px solid #f0d199; }
+.u8l5-two > div > b:first-child { display: block; font: 800 20px var(--round); color: #1f5bd6; margin-bottom: 2px; }
+.u8l5-keyf { margin-top: 10px; font-size: 18px; }
+.u8l5-steps { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 10px; }
+.u8l5-steps.u8l5-s3 { grid-template-columns: 1.6fr 1.3fr 0.7fr; }
+.u8l5-steps > div > b:first-child { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 16px var(--round); margin-right: 6px; }
+.u8l5-solid, .u8l5-dash { display: inline-block; width: 34px; height: 0; border-top: 4px solid #1f5bd6; vertical-align: middle; margin-right: 7px; }
+.u8l5-dash { border-top-style: dashed; }
+.u8l5-in { margin-right: 4px; }
+
+/* calculator */
+.u8l5-calc { display: grid; grid-template-columns: 300px 1fr; gap: 18px; align-items: start; }
+.u8l5-scr { background: #1c2230; color: #e9f0ff; border-radius: 12px; padding: 10px 14px 12px; font: 600 19px ui-monospace, Menlo, monospace; }
+.u8l5-scrh { font-size: 14px; color: #9aa3b0; margin-bottom: 6px; }
+.u8l5-scrl { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+.u8l5-scrdim { opacity: .55; }
+.u8l5-ic { display: inline-grid; place-items: center; width: 24px; height: 24px; background: #ffcf4a; color: #1c2230; border-radius: 4px; font-size: 18px; animation: u8l5-blink 1.4s steps(2) infinite; }
+.u8l5-ic0 { display: inline-grid; place-items: center; width: 24px; color: #9aa3b0; }
+.u8l5-y1 { color: #6ab0ff; }
+.u8l5-eqs { background: #3d7be0; color: #fff; padding: 0 3px; border-radius: 3px; }
+.u8l5-icons { display: flex; gap: 16px; margin-top: 10px; font: 600 15px var(--font); color: #cfd6e2; }
+.u8l5-icons b { color: #ffcf4a; font-size: 18px; }
+.u8l5-calct { font-size: 18px; line-height: 1.5; }
+@keyframes u8l5-blink { 50% { background: #e8e8e8; } }
+
+/* ---------------- example cards ---------------- */
+.u8l5-ex1 { display: grid; grid-template-columns: minmax(0, 1fr) 356px; gap: 16px; align-items: start; margin-bottom: 14px; }
+.u8l5-ex5 { display: grid; grid-template-columns: minmax(0, 1fr) 356px; gap: 16px; align-items: start; }
+.u8l5-col { display: flex; flex-direction: column; gap: 14px; }
+.u8l5-gpart { padding: 10px; }
+.u8l5-tbl { border-collapse: collapse; margin: 10px 0 6px; font-size: 19px; }
+.u8l5-tbl th, .u8l5-tbl td { border: 2px solid #d9d3c4; padding: 6px 14px; text-align: center; background: #fff; }
+.u8l5-tbl th { background: #f6f2e8; font: 700 17px var(--round); }
+.u8l5-tbl td { min-width: 120px; height: 34px; }
+.u8l5-gw { display: grid; grid-template-columns: 300px 1fr; gap: 12px; align-items: start; }
+.u8l5-sk { position: relative; background: #fff; border-radius: 12px; }
+.u8l5-ska { position: absolute; inset: 0; opacity: 0; pointer-events: none; transition: opacity .35s; }
+.part.shown .u8l5-ska { opacity: 1; }
+.u8l5-ctip { margin-top: 14px; }
+.u8l5-pcol { display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------------- explainer pieces ---------------- */
+.u8l5-panel { background: #fff; border: 2px solid #e4ded2; border-radius: 14px; padding: 12px 16px; box-sizing: border-box; overflow: hidden; }
+.u8l5-ph { font: 800 14.5px var(--round); text-transform: uppercase; letter-spacing: .04em; color: var(--muted); margin-bottom: 6px; }
+.u8l5-wl { display: flex; align-items: center; gap: 10px; font-size: 20px; line-height: 1.35; margin: 3px 0 10px; }
+.u8l5-sn { flex: 0 0 auto; display: inline-grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; background: #c27a0e; color: #fff; font: 800 15px var(--round); }
+.u8l5-sn0 { background: transparent; }
+.u8l5-lt { flex: 0 1 auto; }
+.u8l5-note { font: 700 14.5px var(--round); color: #a26100; background: #fff4dd; border-radius: 7px; padding: 1px 8px; white-space: nowrap; }
+.u8l5-noter { color: #fff; background: #c93a33; }
+.u8l5-grayl .u8l5-lt { color: #6b7180; }
+.u8l5-finl .u8l5-lt { font-size: 24px; background: #e8f5ef; border: 2px solid #12805a; border-radius: 9px; padding: 3px 12px; color: #0d5c41; }
+.u8l5-inl { font-size: 16px !important; color: #0d5c41 !important; }
+.u8l5-outl { font-size: 16px !important; color: #6b7180 !important; }
+.u8l5-dim { font-size: 16px !important; }
+
+/* regions */
+.u8l5-etbl { border-collapse: collapse; width: 100%; font-size: 19px; }
+.u8l5-etbl th, .u8l5-etbl td { border-bottom: 2px solid #ece6da; padding: 7px 8px; text-align: center; }
+.u8l5-etbl th { font: 700 16px var(--round); color: var(--muted); }
+.u8l5-etbl td { height: 36px; }
+.u8l5-c2 { font-weight: 700; }
+.u8l5-chk { padding-top: 10px; }
+.u8l5-chkq { font-size: 23px; margin: 14px 0 12px; }
+.u8l5-chkv { font-size: 25px; min-height: 40px; }
+.u8l5-chkv b { font: 800 22px var(--round); margin-left: 8px; }
+.u8l5-chkf { margin-top: 36px; font-size: 17px; color: var(--muted); line-height: 1.5; }
+
+/* graph3 */
+.u8l5-vm { position: absolute; font: 800 26px var(--round); width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; color: #fff; }
+.u8l5-vok { background: #12805a; } .u8l5-vno { background: #c93a33; }
+
+/* flip */
+.u8l5-flp { display: flex; flex-direction: column; gap: 4px; }
+.u8l5-fline { display: flex; align-items: center; gap: 12px; font-size: 26px; margin: 4px 0 8px; perspective: 400px; }
+.u8l5-forig { font-size: 28px; }
+.u8l5-sg { display: inline-grid; place-items: center; min-width: 48px; height: 46px; border-radius: 10px; background: #eef3ff; color: #1f5bd6; font-size: 30px; }
+.u8l5-sgr { background: #fdecea; color: #c93a33; box-shadow: 0 0 0 2px #c93a33 inset; }
+.u8l5-badges { display: flex; gap: 10px; margin: 6px 0 12px; }
+.u8l5-bdg { font: 800 20px var(--round); background: #eef3ff; color: #1f5bd6; border-radius: 10px; padding: 5px 14px; display: inline-flex; align-items: center; }
+.u8l5-chkl { font-size: 18.5px; border-radius: 10px; padding: 7px 12px; margin-top: 8px; line-height: 1.45; }
+.u8l5-okl { background: #e8f5ef; color: #0d5c41; }
+.u8l5-nol { background: #fdecea; color: #8f2620; }
+
+/* dial */
+.u8l5-aread { position: absolute; right: 16px; top: 12px; font-size: 24px; background: #f3eefc; color: #7b4fc4; border-radius: 10px; padding: 4px 14px; }
+.u8l5-aread b { font: 800 26px var(--round); display: inline-block; min-width: 56px; }
+.u8l5-steps3 { position: absolute; }
+
+/* tunnel */
+.u8l5-tnp { display: flex; flex-direction: column; gap: 12px; }
+.u8l5-tl { font-size: 20px; line-height: 1.55; border-bottom: 2px solid #f0ebe0; padding-bottom: 8px; }
+.u8l5-tl b { font-family: var(--round); }
+.u8l5-spark { position: absolute; font-size: 34px; pointer-events: none; }

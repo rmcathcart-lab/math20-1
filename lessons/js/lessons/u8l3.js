@@ -46,9 +46,9 @@ const showAll = async (c, els, gap = 160) => { for (const e of els) { await show
 
 /* a ball drawn in SVG; g.at(x, y) places its centre */
 function ballEl(svg, r = 9, stroke = '#c93a33') {
-  const g = svgEl('g', {}, svg);
-  svgEl('circle', { r, fill: '#fffdf6', stroke, 'stroke-width': 3 }, g);
-  svgEl('path', { d: `M${-r * 0.7} ${-r * 0.55} q${r * 0.7} ${r * 0.55} 0 ${r * 1.1} M${r * 0.7} ${-r * 0.55} q${-r * 0.7} ${r * 0.55} 0 ${r * 1.1}`, fill: 'none', stroke, 'stroke-width': 1.5 }, g);
+  const g = svgEl('g', {}, svg), in_ = svgEl('g', {}, g); g.inner = in_;   // animate g.inner (CSS transforms), place g
+  svgEl('circle', { r, fill: '#fffdf6', stroke, 'stroke-width': 3 }, in_);
+  svgEl('path', { d: `M${-r * 0.7} ${-r * 0.55} q${r * 0.7} ${r * 0.55} 0 ${r * 1.1} M${r * 0.7} ${-r * 0.55} q${-r * 0.7} ${r * 0.55} 0 ${r * 1.1}`, fill: 'none', stroke, 'stroke-width': 1.5 }, in_);
   g.at = (x, y) => g.setAttribute('transform', `translate(${x} ${y})`);
   return g;
 }
@@ -57,13 +57,13 @@ function ballEl(svg, r = 9, stroke = '#c93a33') {
 const AREA = (x) => 20 * x - 2 * x * x;
 const dogrun = {
   title: 'The five steps: the dog run',
-  height: 440, minW: 820, capH: 92,
+  height: 440, minW: 900, capH: 92,
   choices: [{ sep: 'Example 2:' }, { v: 'b', label: `(b) area ${T('48\\text{ m}^2')}` }, { v: 'c', label: `(c) area ${T('60\\text{ m}^2')}` }],
   ask: (v) => (v === 'b'
     ? `<b>Example 2(b)</b>: 20 m of fence on three sides, against a garage wall. The area must be ${T('48\\text{ m}^2')}: what are the possible dimensions?`
     : `<b>Example 2(c)</b>: the same 20 m of fence. Could the run have an area of ${T('60\\text{ m}^2')}?`),
   make(stage, v, ex) {
-    const W = ex.W, K = v === 'b' ? 48 : 60, SW = 290, SH = 250, KX = 13, WY = 32, CX = SW / 2;
+    const W = ex.W, K = v === 'b' ? 48 : 60, SW = 260, SH = 196, KX = 12, WY = 32, CX = SW / 2;
     // the yard, seen from above: the wall along the top, the fence hanging down from it
     const sc = absSvg(stage, SW, SH, 0, 0, 'u8l3-yard');
     svgEl('rect', { x: 0, y: 0, width: SW, height: SH, rx: 12, fill: '#e4f1d6' }, sc);
@@ -76,12 +76,12 @@ const dogrun = {
     const rd = div(stage, 'u8l3-read', '', 6, SH + 10, SW - 12);
     const chk = div(stage, 'u8l3-chk', '', 6, SH + 62, SW - 12);
     // the graph of the area
-    const GX = SW + 10, GW = 350, G = new Graph(stage, { x: GX, y: 18, width: GW, height: 420, xmin: 0, xmax: 11, ymin: 0, ymax: 70, xstep: 1, ystep: 10, xlabels: 2, ylabels: 10,
+    const GX = SW + 10, GW = 330, G = new Graph(stage, { x: GX, y: 18, width: GW, height: 420, xmin: 0, xmax: 11.5, ymin: 0, ymax: 70, xstep: 1, ystep: 10, xlabels: 2, ylabels: 10,
       arrows: false, fnArrows: false, xtitle: 'x\\text{ (m)}', ytitle: 'y\\text{ (m}^2)', fontSize: 15 });
     const fo = { from: 0, to: 0, color: QU, width: 4 }, cv = G.fn(AREA, fo);
     const dot = hide(G.point(3, AREA(3), { color: 'blue', r: 6 }));
-    const line = hide(G.line([0, K], [11, K], { color: LI, width: 3.5, arrows: false }));
-    const lineLab = hide(G.label(10.9, K, T(`y=${K}`), { pos: 'nw', cls: 'bk-ptlab', color: LI }));
+    const line = hide(G.line([0, K], [11.5, K], { color: LI, width: 3.5, arrows: false }));
+    const lineLab = hide(G.label(0.2, K, T(`y=${K}`), { pos: 'ne', cls: 'bk-ptlab', color: LI }));
     const p4 = hide(G.point(4, 48, { color: 'purple', label: T('(4,\\ 48)'), pos: 'nw' })), p6 = hide(G.point(6, 48, { color: 'purple', label: T('(6,\\ 48)'), pos: 'ne' }));
     const pV = hide(G.point(5, 50, { color: 'red', label: T('(5,\\ 50)'), pos: 's', gap: 10 }));
     const miss = hide(stamp(stage, 'No solution ✗', { ok: false, x: GX + G.toPx(5.5, 0)[0], y: 18 + G.toPx(0, 30)[1], size: 'sm' }));
@@ -91,7 +91,7 @@ const dogrun = {
       fence.setAttribute('points', pts); pen.setAttribute('points', pts);
       dog.setAttribute('x', CX); dog.setAttribute('y', WY + D / 2 + 11); dog.style.opacity = D > 34 && L > 40 ? 1 : 0;
       lx.innerHTML = T(`x=${fx(x, 1)}`); lx.style.left = Math.max(2, x0 - 72) + 'px'; lx.style.top = (WY + D / 2 - 14) + 'px';
-      lL.innerHTML = T(`20-2x=${fx(20 - 2 * x, 1)}`); lL.style.left = (CX - 66) + 'px'; lL.style.top = (yb + 4) + 'px';
+      lL.innerHTML = T(`20-2x=${fx(20 - 2 * x, 1)}`); lL.style.left = (CX - 62) + 'px'; lL.style.top = (yb + 4) + 'px';
       rd.innerHTML = `area ${T(`y=${fx(x, 1)}(${fx(20 - 2 * x, 1)})=${fx(AREA(x), 1)}`)} m²`;
       G.moveTo(dot, x, AREA(x)); if (trace && x > fo.to) { fo.to = x; cv._bkDraw(); }
       set.x = x;
@@ -100,7 +100,7 @@ const dogrun = {
     const go = (c, x1, ms, ease = linear) => { const x0 = set.x; return tween(c, ms, (u) => set(x0 + (x1 - x0) * u), ease); };
     // the working, with step numbers
     const PX = GX + GW + 14, P = panel(stage, PX, 0, W - PX);
-    const L1 = [wl(P, `${T('x')} = width out from the wall (m)`, { n: 1 }), wl(P, `${T('y')} = area (m²)`, { n: 0 })];
+    const L1 = [wl(P, `${T('x')} = width from the wall (m)`, { n: 1 }), wl(P, `${T('y')} = area (m²)`, { n: 0 })];
     const L2 = [wl(P, T('y=x(20-2x)=20x-2x^2'), { n: 2 }), wl(P, T(`y=${K}`), { n: 0 })];
     const L3 = v === 'b'
       ? [wl(P, T('20x-2x^2=48'), { n: 3 }), wl(P, T('x^2-10x+24=0'), { n: 0 }), wl(P, T('(x-4)(x-6)=0'), { n: 0 }), wl(P, `${T('x=4')} or ${T('x=6')}`, { n: 0 })]
@@ -145,10 +145,10 @@ const dogrun = {
 const BALL = (x) => -0.05 * x * x + 2 * x, HILL = (x) => 0.5 * x, GAP = (x) => BALL(x) - HILL(x);
 const hill = {
   title: 'The golf ball and the hillside',
-  height: 440, minW: 840, capH: 92,
+  height: 440, minW: 900, capH: 92,
   ask: () => `<b>Example 3</b>: the ball's path is ${T('y=-0.05x^2+2x')} and the hillside is ${T('y=0.5x')}. Where does it land, how far up the slope is that, and how high above the hill does it get?`,
   make(stage, v, ex) {
-    const W = ex.W, GW = 600, GH = 436;
+    const W = ex.W, GW = 570, GH = 436;
     const G = new Graph(stage, { x: 0, y: 2, width: GW, height: GH, xmin: -2, xmax: 36, ymin: -2, ymax: 24, xstep: 2, ystep: 2, xlabels: 10, ylabels: 10,
       arrows: false, fnArrows: false, fontSize: 15, xtitle: 'x\\text{ (m)}', ytitle: 'y\\text{ (m)}' });
     // sky and hill, drawn from the actual line
@@ -157,7 +157,7 @@ const hill = {
     svgEl('polygon', { points: P2([[-2, 0], [0, 0], [36, 18], [36, -2], [-2, -2]]), fill: '#bfe0a8' }, G.layers.bg);
     G.label(-1.2, 0, '<span class="u8l3-emo">🏌️</span>', { pos: 'n', gap: 0 });
     const hl = hide(G.fn(HILL, { from: 0, to: 36, color: LI, width: 4 }));
-    const hlLab = hide(G.label(34, 17, T('y=0.5x'), { pos: 'se', cls: 'bk-ptlab', color: LI }));
+    const hlLab = hide(G.label(24, 12, T('y=0.5x'), { pos: 'se', cls: 'bk-ptlab', color: LI }));
     const fo = { from: 0, to: 0, color: QU, width: 3.5 }, cv = G.fn(BALL, fo);
     const ball = ballEl(G.layers.top, 8);
     const set = (x) => { const [px, py] = G.toPx(x, BALL(x)); ball.at(px, py - 8); if (x > fo.to) { fo.to = x; cv._bkDraw(); } };
@@ -191,7 +191,7 @@ const hill = {
       { cap: `The hillside is a <b>line</b>, ${T('y=0.5x')}: it rises 0.5 m for every metre across.`,
         run: async (c) => { await drawOn(c, G, hl, 900); await show(c, unhide(hlLab)); } },
       { cap: `<b>Fore!</b> The ball follows the <b>parabola</b> ${T('y=-0.05x^2+2x')} until it comes down on the hillside.`,
-        run: async (c) => { await tween(c, 2800, (u) => set(30 * u), linear); await shake(c, ball); } },
+        run: async (c) => { await tween(c, 2800, (u) => set(30 * u), linear); await shake(c, ball.inner); } },
       { cap: `(a) Where they meet, the heights are equal. Factor: ${T('x=0')} is the tee, and ${T('x=30')} gives ${T('y=0.5(30)=15')}. The ball lands at <b>${T('(30,\\ 15)')}</b>.`,
         run: async (c) => { await showAll(c, La); await popP(c, pT); await popP(c, pL); } },
       { cap: `(b) Up the slope is the <b>distance</b> from ${T('(0,\\ 0)')} to ${T('(30,\\ 15)')}: a right triangle with legs 30 and 15, so ${T('d=\\sqrt{1125}\\approx33.5')} m.`,
@@ -210,7 +210,7 @@ const hill = {
 /* =============================== explainer: the radar and the plane =============================== */
 const radar = {
   title: 'The radar and the plane',
-  height: 440, minW: 820, capH: 92,
+  height: 440, minW: 900, capH: 92,
   choices: [{ sep: 'Example 4:' }, { v: 'ab', label: `(a)–(b) ${T('y=x+2')}` }, { v: 'c', label: `(c) ${T('y=x+15')}` }],
   ask: (v) => (v === 'ab'
     ? `<b>Example 4(a)–(b)</b>: the radar range is ${T('x^2+y^2=100')} (km). Where does a plane on ${T('y=x+2')} enter and leave the range, and how far does it fly inside?`
@@ -227,18 +227,18 @@ const radar = {
     sweep.style.transformBox = 'view-box'; sweep.style.transformOrigin = `${ox}px ${oy}px`;
     const N = 120, ring = G.polyline(Array.from({ length: N + 1 }, (_, i) => [10 * Math.cos(2 * Math.PI * i / N), 10 * Math.sin(2 * Math.PI * i / N)]), { color: OK, width: 3.5 });
     [disc, sweep, ring].forEach(hide);
-    const cLab = hide(G.label(-7.1, -7.1, T('x^2+y^2=100'), { pos: 'sw', cls: 'bk-ptlab', color: OK }));
+    const cLab = hide(G.label(7.1, -7.1, T('x^2+y^2=100'), { pos: 'se', cls: 'bk-ptlab', color: OK }));
     G.label(0, 0, '<span class="u8l3-emo">📡</span>', { pos: 'c' });
     // the route and the plane
     const route = hide(G.line([0, B], [1, B + 1], { color: GR, width: 2.5, dash: '8 6', arrows: false }));
-    const rLab = hide(G.label(v === 'ab' ? 11 : -12, (v === 'ab' ? 11 : -12) + B, T(`y=x+${B}`), { pos: v === 'ab' ? 'nw' : 'se', cls: 'bk-ptlab', color: '#3a4254', gap: 10 }));
+    const rLab = hide(G.label(v === 'ab' ? 11 : -13, (v === 'ab' ? 11 : -13) + B, T(`y=x+${B}`), { pos: v === 'ab' ? 'nw' : 'e', cls: 'bk-ptlab', color: '#3a4254', gap: 10 }));
     const fi = { from: -8, to: -8, color: SOL, width: 6 }, inside = G.fn((x) => x + B, fi);
     const plane = svgEl('g', {}, G.layers.top), pg = svgEl('g', { transform: 'rotate(-45)' }, plane);
     const blip = svgEl('circle', { r: 20, fill: 'none', stroke: OK, 'stroke-width': 3, class: 'u8l3-blip' }, pg);
     svgEl('path', { d: 'M17 0 L8 -2.6 L-11 -2.6 L-16 -8.5 L-19 -8.5 L-16.5 0 L-19 8.5 L-16 8.5 L-11 2.6 L8 2.6 Z', fill: '#3a4254' }, pg);
     svgEl('path', { d: 'M5 -2 L-4 -15 L-9 -15 L-5 -2 Z M5 2 L-4 15 L-9 15 L-5 2 Z', fill: '#3a4254' }, pg);
     const det = div(stage, 'u8l3-det', '● DETECTED', 10, 10);
-    const X0 = v === 'ab' ? -14 : -14, X1 = v === 'ab' ? 12 : -1;
+    const X0 = -14, X1 = v === 'ab' ? 11 : -2;
     const set = (x) => {
       const [px, py] = G.toPx(x, x + B); plane.setAttribute('transform', `translate(${px} ${py})`);
       const isIn = x * x + (x + B) * (x + B) < 100; det.classList.toggle('on', isIn); blip.style.display = isIn ? '' : 'none';
@@ -252,7 +252,7 @@ const radar = {
     ];
     const PX = GS + 18, P = panel(stage, PX, 0, W - PX);
     if (v === 'ab') {
-      const pE = hide(G.point(-8, -6, { color: 'purple', label: `enters ${T('(-8,\\ -6)')}`, pos: 'se', gap: 8 })), pX = hide(G.point(6, 8, { color: 'purple', label: `leaves ${T('(6,\\ 8)')}`, pos: 'nw', gap: 8 }));
+      const pE = hide(G.point(-8, -6, { color: 'purple', label: `enters ${T('(-8,\\ -6)')}`, pos: 'nw', gap: 8 })), pX = hide(G.point(6, 8, { color: 'purple', label: `leaves ${T('(6,\\ 8)')}`, pos: 'nw', gap: 8 }));
       const lg1 = hide(G.segment([-8, -6], [6, -6], { color: '#3a4254', width: 2.5, dash: '7 5' })), lg2 = hide(G.segment([6, -6], [6, 8], { color: '#3a4254', width: 2.5, dash: '7 5' }));
       const l1 = hide(G.label(-1, -6, T('14'), { pos: 's', cls: 'bk-ptlab' })), l2 = hide(G.label(6, 1, T('14'), { pos: 'e', cls: 'bk-ptlab' }));
       const La = [wl(P, T('x^2+(x+2)^2=100'), { tag: '(a)' }), wl(P, T('2x^2+4x+4=100'), { tag: '' }), wl(P, T('x^2+2x-48=0'), { tag: '' }), wl(P, T('(x+8)(x-6)=0'), { tag: '' }),
@@ -268,7 +268,7 @@ const radar = {
       );
     } else {
       const near = hide(G.segment([0, 0], [-7.5, 7.5], { color: '#3a4254', width: 2.5, dash: '5 5' }));
-      const nL = hide(G.label(-3.75, 3.75, T('\\approx10.6'), { pos: 'sw', cls: 'bk-ptlab', gap: 6 }));
+      const nL = hide(G.label(-3.75, 3.75, T('\\approx10.6'), { pos: 'ne', cls: 'bk-ptlab', gap: 6 }));
       const no = hide(stamp(stage, 'Not detected ✗', { ok: false, x: G.toPx(5.5, 0)[0], y: G.toPx(0, -11)[1], size: 'sm' }));
       const Lc = [wl(P, T('x^2+(x+15)^2=100'), { tag: '(c)' }), wl(P, T('x^2+x^2+30x+225=100'), { tag: '' }), wl(P, T('2x^2+30x+125=0'), { tag: '' }),
         wl(P, T('b^2-4ac=30^2-4(2)(125)'), { tag: '' }), wl(P, T('=900-1000=-100'), { tag: '' }), wl(P, `${T('-100<0')}: <b>no solution</b>`, { tag: '' })];
@@ -289,10 +289,10 @@ const radar = {
 const AVA = (t) => -5 * t * t + 10 * t + 15, BEN = (t) => -5 * t * t + 20 * t;
 const twoballs = {
   title: 'Two balls, one moment',
-  height: 436, minW: 820, capH: 92,
+  height: 436, minW: 900, capH: 92,
   ask: () => `<b>Example 5</b>: at the same moment, Ava throws from a balcony, ${T('h=-5t^2+10t+15')}, and Ben from the ground, ${T('h=-5t^2+20t')}. When are they level, and who lands first?`,
   make(stage, v, ex) {
-    const W = ex.W, SW = 200, GY = 4, GX = SW + 6, GW = 410;
+    const W = ex.W, SW = 200, GY = 4, GX = SW + 6, GW = 380;
     const G = new Graph(stage, { x: GX, y: GY, width: GW, height: 428, xmin: 0, xmax: 4.5, ymin: 0, ymax: 24, xstep: 0.5, ystep: 2, xlabels: 1, ylabels: 4,
       arrows: false, fnArrows: false, xtitle: 't\\text{ (s)}', ytitle: 'h\\text{ (m)}', fontSize: 15 });
     const py = (hh) => GY + G.toPx(0, hh)[1], gx = (t) => GX + G.toPx(t, 0)[0];
@@ -355,7 +355,7 @@ const twoballs = {
 const REV = (x) => -2 * x * x + 60 * x, COST = (x) => x * x + 6 * x + 135, PROF = (x) => REV(x) - COST(x);
 const profit = {
   title: 'Revenue, cost and the profit gap',
-  height: 436, minW: 820, capH: 92,
+  height: 436, minW: 900, capH: 92,
   ask: () => `<b>Example 6</b>: ${T('R=-2x^2+60x')} and ${T('C=x^2+6x+135')} (${T('x')} hundred cases; hundreds of dollars). Break-even, the profit interval, the greatest profit.`,
   make(stage, v, ex) {
     const W = ex.W, GW = 560;
@@ -373,7 +373,7 @@ const profit = {
       bar.setAttribute('x1', px); bar.setAttribute('x2', px); bar.setAttribute('y1', a); bar.setAttribute('y2', b); bar.setAttribute('stroke', k === 2 ? OK : k === 0 ? NO : AM);
       bL.className = 'u8l3-bar ' + (k === 2 ? 'u8l3-bp' : k === 0 ? 'u8l3-bl' : 'u8l3-b0');
       bL.innerHTML = k === 1 ? 'break even' : `${k === 2 ? 'profit' : 'loss'} ${fx(Math.abs(p), 0)}`;
-      bL.style.left = (px + 10) + 'px'; bL.style.top = (Math.min(a, b) - 30) + 'px'; setB.x = x;
+      bL.style.left = (px + (x > 14 ? -10 : 10)) + 'px'; bL.style.transform = x > 14 ? 'translateX(-100%)' : ''; bL.style.top = (Math.min(a, b) - 30) + 'px'; setB.x = x;
     };
     setB(0);
     const goB = (c, x1, ms) => { const x0 = setB.x; return tween(c, ms, (u) => setB(x0 + (x1 - x0) * u), linear); };
@@ -407,7 +407,7 @@ const VERD = { 2: '<b>2 solutions</b>: the line crosses twice', 1: '<b>1 solutio
 const tn = (v) => fx(v, 2);
 const coefX = (k) => (k === 1 ? 'x' : k === -1 ? '-x' : k === 0 ? '' : `${tn(k)}x`);
 const TG = {
-  a: { lo: -6, hi: 6, start: 1, name: 'k', win: { xmin: -5, xmax: 5, ymin: -5, ymax: 13 }, par: (x) => x * x + 1, parT: 'y=x^2+1',
+  a: { lo: -6, hi: 6, start: 1, name: 'k', win: { xmin: -5, xmax: 5, ymin: -5, ymax: 19 }, par: (x) => x * x + 1, parT: 'y=x^2+1',
     ln: (s) => (x) => s * x - 3, lnT: (s) => `y=${coefX(s) || '0x'}-3`, sub: 'x^2+1=kx-3\\Rightarrow x^2-kx+4=0', D: (s) => s * s - 16, DT: (s) => `b^2-4ac=k^2-16=(${tn(s)})^2-16`,
     roots: (s, sq) => [(s - sq) / 2, (s + sq) / 2] },
   b: { lo: -6, hi: 5, start: -5, name: 'n', win: { xmin: -2, xmax: 7, ymin: -6, ymax: 14 }, par: (x) => x * x - 4 * x + 7, parT: 'y=x^2-4x+7',
@@ -416,16 +416,16 @@ const TG = {
 };
 const tangent = {
   title: 'Turn the line: how many meeting points?',
-  height: 440, minW: 800, capH: 92,
+  height: 440, minW: 900, capH: 92,
   choices: [{ sep: 'Example 7:' }, { v: 'a', label: `(a) turn ${T('y=kx-3')}` }, { v: 'b', label: `(b) slide ${T('y=2x+n')}` }],
   ask: (v) => (v === 'a'
     ? `<b>Example 7(a)</b>: for which values of ${T('k')} is the line ${T('y=kx-3')} tangent to the parabola ${T('y=x^2+1')}? Where does it touch?`
     : `<b>Example 7(b)</b>: for which values of ${T('n')} does the system ${T('y=x^2-4x+7')}, ${T('y=2x+n')} have two solutions?`),
   make(stage, v, ex) {
     const d = TG[v], W = ex.W, GW = 430, S = { s: d.start };
-    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 436, xstep: 1, ystep: 1, xlabels: v === 'a' ? 1 : 1, ylabels: 2, fontSize: 14, arrows: false, fnArrows: false }, d.win));
+    const G = new Graph(stage, Object.assign({ x: 0, y: 2, width: GW, height: 436, xstep: 1, ystep: 1, xlabels: 1, ylabels: v === 'a' ? 4 : 2, fontSize: 14, arrows: false, fnArrows: false }, d.win));
     G.fn(d.par, { color: QU, width: 4 });
-    G.label(v === 'a' ? -3.1 : 5.9, v === 'a' ? 10.6 : d.par(5.9), T(d.parT), { pos: v === 'a' ? 'w' : 'e', cls: 'bk-ptlab', color: QU, gap: 10 });
+    G.label(v === 'a' ? 3.3 : 4.3, v === 'a' ? 9 : 5, T(d.parT), { pos: 'e', cls: 'bk-ptlab', color: QU, gap: 10 });
     const ghosts = [], ln = G.fn((x) => d.ln(S.s)(x), { color: LI, width: 4 });
     if (v === 'a') G.point(0, -3, { color: 'ink', r: 5, label: T('(0,\\ -3)'), pos: 'e', gap: 8 });
     const q1 = G.point(0, 0, { color: 'purple', r: 7.5 }), q2 = G.point(0, 0, { color: 'purple', r: 7.5 });
@@ -460,8 +460,8 @@ const tangent = {
       return [
         { cap: `Substitute the line into the parabola: ${T('x^2+1=kx-3')}, so ${T('x^2-kx+4=0')} and ${T('b^2-4ac=k^2-16')}. With ${T('k=1')}: ${T('1-16=-15<0')}, <b>no solution</b>.`,
           run: async (c) => { await pulse(c, dbox, 1.05); } },
-        { cap: `Turn the line steeper. At ${T('k=6')}: ${T('36-16=20>0')}, <b>two solutions</b>: the line crosses the parabola twice.`,
-          run: (c) => go(c, 6, 1800) },
+        { cap: `Turn the line steeper. At ${T('k=5')}: ${T('25-16=9>0')}, <b>two solutions</b>: the line crosses the parabola twice, at ${T('(1,\\ 2)')} and ${T('(4,\\ 17)')}.`,
+          run: (c) => go(c, 5, 1600) },
         { cap: `<b>Tangent</b> means exactly one solution: ${T('b^2-4ac=0')}, so ${T('k^2=16')} and ${T('k=\\pm4')}. At ${T('k=4')}: ${T('x^2-4x+4=0')}, ${T('x=2')}, ${T('y=5')}: it just touches at <b>${T('(2,\\ 5)')}</b>.`,
           run: async (c) => { await go(c, 4, 1200); const [g, p] = ghost(4, 2); hide(g); hide(p); await drawOn(c, G, g, 400); await popP(c, p); } },
         { cap: `At ${T('k=-4')}: ${T('x^2+4x+4=0')}, ${T('x=-2')}, ${T('y=5')}: tangent at <b>${T('(-2,\\ 5)')}</b>. Two tangent lines pass through ${T('(0,\\ -3)')}.`,
