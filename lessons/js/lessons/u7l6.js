@@ -13,8 +13,7 @@
  *   match     (equation cards slide to the graphs A–D as each clue rules graphs out, and get stamped; Example 8).
  * Colours: the line blue, the reciprocal orange, invariant points gold, the vertical asymptote purple (dashed), the guide
  *   lines y = ±1 green (dotted), y > 0 green. */
-import { h, tex, add, box, mountExplainers, pop, fadeIn, tween, svgEl, pulse, shake, sleep, linear, COLORS,
-  Graph, stamp, stampIn, num, place } from '../blocks.js';
+import { h, tex, add, box, mountExplainers, pop, fadeIn, tween, pulse, sleep, Graph, stamp, stampIn, num, place } from '../blocks.js';
 import { standup } from '../standup.js';
 
 const T = (s) => tex(s);
@@ -289,13 +288,12 @@ const backwards = {
     const yp = hide(G.point(0, 1 / d.b, { color: OR, r: 8, coords: false }));
     const yl = hide(G.label(0, 1 / d.b, T(pt(0, fr(1, d.b))), { pos: 'w', color: OR, cls: 'bk-ptlab', dx: -6 }));
     const P = div(stage, 'u7l6-panel', '<div class="u7l6-ph">Working backwards</div>', 440, 4, W - 444, 462);
-    const bT = d.b < 0 ? `-${-d.b}` : `+${d.b}`, fT = `${d.m === 1 ? '' : d.m}x${d.b < 0 ? `-${-d.b}` : `+${d.b}`}`;
+    const fT = `${d.m === 1 ? '' : d.m}x${d.b < 0 ? `-${-d.b}` : `+${d.b}`}`;
     const w1 = wl(P, 1, `Asymptote ${T(`x=${tn(d.z)}`)}: ${T(`f(${tn(d.z)})=0`)}, so ${T(pt(tn(d.z), 0))} is on the line.`);
     const w2 = wl(P, 2, inv ? `${T('(2,\\ 1)')} is an invariant point: it is on <b>both</b> graphs.` : `${T('\\left(3,\\ \\tfrac{1}{2}\\right)')} on the reciprocal: ${T('f(3)=\\tfrac{1}{1/2}=2')}, so ${T('(3,\\ 2)')} is on the line.`);
     const w3 = wl(P, 3, `Draw the line through the two points${inv ? ` (it also passes through the other invariant point ${T('(1,\\ -1)')})` : ''}.`);
     const w4 = wl(P, 4, `Slope ${T(`a=\\dfrac{${tn(by)}-0}{${tn(bx)}-${tn(ax)}}=${d.m}`)}; &nbsp;${T(`0=${d.m}(${tn(d.z)})+b\\Rightarrow b=${d.b}`)}. &nbsp;${T(`f(x)=${fT}`)}`);
     const w5 = wl(P, 5, `Check: the reciprocal’s ${T('y')}-intercept is ${T(`\\tfrac{1}{${d.b}}=${fr(1, d.b)}`)}, and the graph passes through ${T(pt(0, fr(1, d.b)))} ✓`);
-    void bT;
     const ok = hide(stamp(G.html, '✓ matches', { ok: true, x: 236, y: 330, rotate: -8, size: 'sm' }));
     return [
       { cap: `<b>1.</b> The vertical asymptote is where ${T('f(x)=0')}: the zero of the line. Drop it onto the ${T('x')}-axis: ${T(pt(tn(d.z), 0))}.`, run: async (c) => { await show(c, w1); zp.style.opacity = 1; await pop(c, zp); await G.move(c, zp, d.z, 0, 700); await show(c, zl); } },
@@ -373,4 +371,3 @@ standup('u7l6', {
 /* =============================== mount =============================== */
 export const explainers = mountExplainers({ partner, sketch, features, backwards, match });
 export const _test = { PT, SK, FT, BW };
-void [shake, linear, svgEl, COLORS];

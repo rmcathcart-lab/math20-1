@@ -21,8 +21,8 @@ import { standup } from '../standup.js';
 const T = (s) => tex(s);
 const BL = COLORS.blue, OK = COLORS.green, NO = COLORS.red, TP = '#c27a0e', RG = '#1a9a64', GG = '#8d93a0', INK = '#1c2230', PU = COLORS.purple, GOLD = '#f2c230';
 const show = (c, el) => fadeIn(c, el, 320);
-const hide = (el) => { if (el) el.style.opacity = 0; return el; };
-const unhide = (...els) => els.flat().forEach((e) => { if (e) e.style.opacity = 1; });
+const hide = (el) => { if (el) { el.style.opacity = 0; if (el.label) el.label.style.opacity = 0; } return el; };
+const unhide = (...els) => els.flat().forEach((e) => { if (e) { e.style.opacity = 1; if (e.label) e.label.style.opacity = 1; } });
 const div = (host, cls, html, x, y, w, hh) => { const d = h('div', cls, html); if (w != null || hh != null) box(d, w, hh); if (x != null) d.style.position = 'absolute'; return add(host, d, x, y); };
 const pt = (x, y) => `(${num(x)},\\ ${num(y)})`.replace(/−/g, '-');
 /* a work line with its step number (n) beside it, and an optional note on the right */
@@ -96,7 +96,7 @@ const regions = {
     const inL = hide(G.label(1, 4.6, 'inside', { cls: 'bk-pill u8l5-inl' })), outL = hide(G.label(-2.2, -3.6, 'outside', { cls: 'bk-pill u8l5-outl' }));
     const Rp = div(stage, 'u8l5-panel', '', 460, 4, W - 464, 462);
     // the table of the seven points
-    const rows = P1.map(([x, y]) => { const fv = F1(x), yes = strict ? y > fv : y >= fv, on = y === fv; return { x, y, fv, yes, on, verdict: `${yes ? 'yes' : 'no'}: ${T(`${num(y)}${on ? '=' : y > fv ? '>' : '<'}${num(fv)}`.replace(/−/g, '-'))}` }; });
+    const rows = P1.map(([x, y]) => { const fv = F1(x), yes = strict ? y > fv : y >= fv, on = y === fv; return { x, y, fv, yes, on, verdict: `${yes ? 'yes' : 'no'}: ${T(`${num(y)}${on ? '=' : y > fv ? rel : '<'}${num(fv)}`.replace(/−/g, '-'))}` }; });
     const tb = h('table', 'u8l5-etbl', `<tr><th>Point</th><th>${T('x^2-2x-3')}</th><th>Is ${T(`y${rel}x^2-2x-3`)}?</th></tr>` + rows.map((r) => `<tr><td>${T(pt(r.x, r.y))}</td><td class="u8l5-c1">${T(num(r.fv).replace('−', '-'))}</td><td class="u8l5-c2 ${r.yes ? 'u8l5-ok' : 'u8l5-no'}">${r.verdict}</td></tr>`).join(''));
     if (v !== 'tap') Rp.appendChild(tb);
     const cells = [...tb.querySelectorAll('tr')].slice(1).map((tr) => [tr.children[1], tr.children[2]]);

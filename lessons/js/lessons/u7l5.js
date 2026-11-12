@@ -299,7 +299,7 @@ const sieve = {
       const b = div(stage, 'u7l5-ball c' + cs, T(lab), RX + N.toPx(x), 4); b.style.opacity = 0; b.x = x; b.bad = d.B(x) < 0; return b;
     });
     let nb = 0;
-    const tags = balls.map((b) => { const t = div(stage, 'u7l5-tag ' + (b.bad ? 'no' : 'ok'), b.bad ? '✗ extraneous' : '✓ keep', RX + N.toPx(b.x), NY + ay + 54 + (b.bad ? 26 * nb++ : 0)); t.style.opacity = 0; return t; });
+    const tags = balls.map((b) => { const t = div(stage, 'u7l5-tag ' + (b.bad ? 'no' : 'ok'), b.bad ? '✗ extraneous' : '✓ keep', Math.min(RX + N.toPx(b.x), W - 46), NY + ay + 54 + (b.bad ? 26 * nb++ : 0)); t.style.opacity = 0; return t; });
     const drop = NY + ay - 24; // drop - 18: the move that rests a ball (top at y = 4, 36 px tall) on the line
     /* the graph that confirms it */
     const G = new Graph(stage, Object.assign({ x: RX + 40, y: 236, width: RW - 80, height: 232, fontSize: 13 }, d.gwin));
@@ -351,10 +351,10 @@ const tub = {
     const six = hide(G.hline(6, { color: OR, width: 3, dash: false })), sixL = hide(G.label(6.8, 6, T('y=6'), { cls: 'bk-ptlab', pos: 'sw', color: OR }));
     const S = { t: [-5, -5, -1, 3] };
     const g = (x) => Math.abs(x - 3) + Math.abs(x + 1);
-    const pieces = [[-5, -1, S1, '-2x+2', -3, 'sw'], [-1, 3, S2, '4', 1, 'n'], [3, 7, S3, '2x-2', 5.6, 'w']].map(([a, b, cl, lab, lx, pos], i) => {
+    const pieces = [[-5, -1, S1, '-2x+2', -3.8, 'e'], [-1, 3, S2, '4', 1, 'n'], [3, 7, S3, '2x-2', 5.6, 'w']].map(([a, b, cl, lab, lx, pos], i) => {
       const o = { from: a, to: a, color: cl, width: 5, arrows: i !== 1 };
       const el = hide(G.fn(g, o)); el.o = o; el.a = a; el.b = b;
-      el.lab = hide(G.label(lx, g(lx), T('y=' + lab), { cls: 'bk-ptlab', pos: pos === 'n' ? 'n' : pos === 'sw' ? 'sw' : 'nw', color: cl, dy: pos === 'n' ? -4 : 0 }));
+      el.lab = hide(G.label(lx, g(lx), T('y=' + lab), { cls: 'bk-ptlab', pos: pos === 'n' ? 'n' : pos === 'e' ? 'e' : 'nw', dx: pos === 'e' ? 8 : 0, color: cl, dy: pos === 'n' ? -4 : 0 }));
       return el;
     });
     const tr = hide(G.point(-5, g(-5), { color: INK, r: 6 }));

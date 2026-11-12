@@ -141,17 +141,17 @@ const OV = {
 };
 const onevar = {
   title: 'Solve, test, graph, set notation',
-  height: 410, minW: 940,
+  height: 450, minW: 940,
   choices: Object.keys(OV).map((k) => ({ v: k, label: OV[k].label })),
   ask: (v) => `Example 1: solve ${T(OV[v].q)}.`,
   make(stage, v, ex) {
     const d = OV[v], W = ex.W, LW = 430;
-    const L = div(stage, 'u8l4-panel', '', 0, 0, LW, 410);
+    const L = div(stage, 'u8l4-panel', '', 0, 0, LW, 450);
     const h1 = stepH(L, 1, '<b>Solve</b> like an equation');
     const rows = d.lines.map(([t, n]) => hide(div(L, 'u8l4-wl', `<span class="u8l4-lt">${T(t)}</span><span class="u8l4-note">${n}</span>`)));
     const last = hide(div(L, 'u8l4-wl u8l4-wlx', `<span class="u8l4-lt">${T('x')}<span class="u8l4-flip">${T(d.s0)}</span>${T(d.post)}</span><span class="u8l4-note u8l4-noteR">÷ ${T(d.div)}: reverse!</span>`));
     const flip = last.querySelector('.u8l4-flip'), noteR = last.querySelector('.u8l4-noteR'); hide(noteR);
-    const R = div(stage, 'u8l4-panel', '', LW + 14, 0, W - LW - 14, 410);
+    const R = div(stage, 'u8l4-panel', '', LW + 14, 0, W - LW - 14, 450);
     const h2 = stepH(R, 2, '<b>Test values</b> in the original inequality');
     const trows = d.tests.map((t) => hide(div(R, 'u8l4-trow', `${T(`x=${t.x}:`)}&ensp;${T(t.sub)}<br>→&ensp;${T(t.cmp)} ${mark(t.ok)}<span class="u8l4-tw">${t.ok ? 'true' : 'false'}</span>`)));
     const h3 = stepH(R, 3, '<b>Graph</b> on the number line');

@@ -252,9 +252,9 @@ const radar = {
     ];
     const PX = GS + 18, P = panel(stage, PX, 0, W - PX);
     if (v === 'ab') {
-      const pE = hide(G.point(-8, -6, { color: 'purple', label: `enters ${T('(-8,\\ -6)')}`, pos: 'nw', gap: 8 })), pX = hide(G.point(6, 8, { color: 'purple', label: `leaves ${T('(6,\\ 8)')}`, pos: 'nw', gap: 8 }));
+      const pE = hide(G.point(-8, -6, { color: 'purple', label: `enters ${T('(-8,\\ -6)')}`, pos: 'se', gap: 8 })), pX = hide(G.point(6, 8, { color: 'purple', label: `leaves ${T('(6,\\ 8)')}`, pos: 'nw', gap: 8 }));
       const lg1 = hide(G.segment([-8, -6], [6, -6], { color: '#3a4254', width: 2.5, dash: '7 5' })), lg2 = hide(G.segment([6, -6], [6, 8], { color: '#3a4254', width: 2.5, dash: '7 5' }));
-      const l1 = hide(G.label(-1, -6, T('14'), { pos: 's', cls: 'bk-ptlab' })), l2 = hide(G.label(6, 1, T('14'), { pos: 'e', cls: 'bk-ptlab' }));
+      const l1 = hide(G.label(-1, -6, T('14'), { pos: 'n', cls: 'bk-ptlab' })), l2 = hide(G.label(6, 1, T('14'), { pos: 'e', cls: 'bk-ptlab' }));
       const La = [wl(P, T('x^2+(x+2)^2=100'), { tag: '(a)' }), wl(P, T('2x^2+4x+4=100'), { tag: '' }), wl(P, T('x^2+2x-48=0'), { tag: '' }), wl(P, T('(x+8)(x-6)=0'), { tag: '' }),
         wl(P, `${T('x=-8')}: ${T('y=-6')}; &nbsp;${T('x=6')}: ${T('y=8')}`, { tag: '' })];
       const Lb = [wl(P, T('d=\\sqrt{14^2+14^2}'), { tag: '(b)' }), wl(P, `${T('=\\sqrt{392}\\approx19.8')} km`, { tag: '' })];

@@ -101,7 +101,7 @@
 .u8l2-sumk { display: flex; justify-content: space-around; font: 800 19px var(--round); }
 
 /* ---------------- fountain ---------------- */
-.u8l2-ground { fill: #e9dcc2; opacity: .8; }
+.u8l2-ground { fill: #e2cfa8; opacity: .42; }
 .u8l2-ped { fill: #9aa0ab; stroke: #3a4254; stroke-width: 2; }
 .u8l2-ug { font: 800 16px var(--round); color: #8a6d3b; white-space: nowrap; }
 .u8l2-x2 { display: inline-block; background: #f2c14e; border-radius: 8px; padding: 0 6px; }
