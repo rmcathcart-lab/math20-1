@@ -228,10 +228,10 @@ const machine = {
 /* ======================= explainer: when the x²-terms cancel (Example 5, a verdict comparison) ======================= */
 const CN = [
   { k: '(a)', f: 'y=x^2+4x+1', g: 'y=x^2-2x+7', fF: (x) => x * x + 4 * x + 1, gF: (x) => x * x - 2 * x + 7,
-    l1: '0=\\cancel{x^2}+4x+1\\,\\cancel{-x^2}+2x-7', l2: '0=6x-6', l3: 'x=1,\\ \\ y=1+4+1=6', st: 'One solution', ok: true, under: T('(1,\\ 6)'),
+    l1: '0=\\cancel{x^2}+4x+1\\ \\cancel{-\\,x^2}+2x-7', l2: '0=6x-6', l3: 'x=1,\\ \\ y=1+4+1=6', st: 'One solution', ok: true, under: T('(1,\\ 6)'),
     win: { xmin: -3, xmax: 4, ymin: -2, ymax: 13, ylabels: 4, ystep: 2 }, pt: [1, 6] },
   { k: '(b)', f: 'y=2x^2-3x+1', g: 'y=2x^2-3x-4', fF: (x) => 2 * x * x - 3 * x + 1, gF: (x) => 2 * x * x - 3 * x - 4,
-    l1: '0=\\cancel{2x^2}\\,\\cancel{-3x}+1\\,\\cancel{-2x^2}\\,\\cancel{+3x}+4', l2: '0=5\\quad\\text{false}', st: 'No solution', ok: false, under: '5 units down: a vertical translation',
+    l1: '0=\\cancel{2x^2}\\ \\cancel{-\\,3x}\\ +1\\ \\cancel{-\\,2x^2}\\ \\cancel{+\\,3x}\\ +4', l2: '0=5\\quad\\text{false}', st: 'No solution', ok: false, under: '5 units down: a vertical translation',
     win: { xmin: -2, xmax: 3.5, ymin: -7, ymax: 7, ylabels: 2 }, shift: true },
   { k: '(c)', f: 'y=2(x-1)^2+3', g: 'y=2x^2-4x+5', fF: (x) => 2 * (x - 1) * (x - 1) + 3, gF: (x) => 2 * x * x - 4 * x + 5,
     l1: '2(x-1)^2+3=2(x^2-2x+1)+3', l2: '=2x^2-4x+5\\ \\ \\text{(identical)}', l3: '0=0\\quad\\text{true}', st: 'Infinitely many', ok: null, under: 'the same parabola',
