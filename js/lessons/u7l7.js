@@ -510,7 +510,7 @@
   function sVform(cp, T, wr) {
     var c = vformChk(cp, T.poly), W = (wr || []).filter(function (w) { return !P.eq(w.is, T.poly); });
     var cc = function (resp) { var r = c(resp); if (r.v === 'correct' || r.v === 'form') return r; var rd = K.read(resp); if (!rd.res) { var rr = P.read(rd.ast); if (rr.ok) for (var i = 0; i < W.length; i++) if (P.eq(rr.p, W[i].is)) return wrong(W[i].code, W[i].hint); } return r; };
-    return { f: { label: 'Vertex form: ' + t('f(x)='), name: 'vertex form', mode: 'math', keys: 'poly', vars: ['x'] }, c: cc, k: T.vtex, a: t('f(x)=' + T.vtex), s: '', bad: W.map(function (w) { return tx(w.is); }).concat([T.tex]) };
+    return { f: { label: 'Vertex form: ' + t('f(x)='), name: 'vertex form', mode: 'math', keys: 'poly', vars: ['x'] }, c: cc, k: T.vtex, a: t('f(x)=' + T.vtex), s: '', bad: W.map(function (w) { return tx(w.is); }).concat(T.p === 0 ? [] : [T.tex]) };
   }
   function sGform(cp, T, wr) {
     var W = (wr || []).filter(function (w) { return !P.eq(w.is, T.poly); });

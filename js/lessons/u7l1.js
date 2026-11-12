@@ -29,17 +29,21 @@
  *                                                                    o.keys); wrongs [{ v, code, hint, tex }]; o.noAbs,
  *                                                                    o.exact (rounded-decimal nudge), o.money ($ allowed)
  *                approx(prompt, x, dp, wrongs, sol, hints, text)    a rounded value
- *                vals(prompt, vals, wrongs, sol, hints, text, o)     a list of values in any order ({ vals: [...], code })
+ *                vals(prompt, vals, wrongs, sol, hints, text, o)     a list of values in any order ({ vals: [...], code });
+ *                                                                    o.v the letter (null: bare numbers), o.dec decimals in the key
  *                point(prompt, target, wrongs, sol, hints, text)     one point (x, y)
  *                pts(prompt, pairs, wrongs, sol, hints, text, o)     a set of points, or "none" ({ pairs: [...], code })
  *                setChk(targetTex, o)                                K.set (domain / range / inequality answers)
+ *                icptChk(axis, v, wrongs)                            an intercept typed as a number or a point ('x' | 'y')
+ *                ptsCheck(pairs, wrongs, o) / isNone(s) / ptsT(list)  point-set checker with "none"; numVal(s)
  *                fields(prompt, fields, checkers, keys, answer, sol, hints, text, bad, combine)
  *                poly(prompt, target, wrongs, sol, hints, text, o)   an expression in x ({ is: poly, code, hint })
  *                mc(r, prompt, opts, sol, hints, text, keepOrder)    multiple choice (K.P.mc)
  *                piece(cp, a, b, o)                                  piecewise form of y = |ax + b| (three boxes:
  *                                                                    boundary, right piece, left piece) with pw-swap,
  *                                                                    pw-bsign, pw-neg, pw-bound diagnoses (codes from
- *                                                                    U.PIECE_CODES)
+ *                                                                    U.PIECE_CODES; o.cf constant first, o.short the
+ *                                                                    prompt is just y = |…| under a question stem)
  *                absLinChk(a, b, cp)                                 a typed |ax + b| (bars needed; same values; the
  *                                                                    opposite inside accepted)
  *   graphs       G(o), mini(o), crv(f, o) (HW.graph wrappers); vPad(a, b, o) → { input, key, wrongs } a graph pad for

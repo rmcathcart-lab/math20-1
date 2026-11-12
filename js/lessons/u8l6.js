@@ -42,7 +42,7 @@
     var v = o.v || 'x', T = quadSet(o.A, o.r1, o.r2, o.op), pos = o.A > 0 ? upOp(o.op) : !upOp(o.op);
     var sol = (o.pre || '') + 'Roots: ' + t(o.facS + '=0') + ', so ' + t(v + '=' + vt(o.r1)) + ' or ' + t(v + '=' + vt(o.r2)) + '.<br>' + testLine(o.E, o.r1, o.r2, o.op, v) + '<br>' +
       'The solution is ' + (pos ? 'outside' : 'between') + ' the roots, ' + (strictOp(o.op) ? 'not including them' : 'including them') + ': ' + t(setTex(T, v)) + '.' + fig(nlSvg(T));
-    var p = AK().setPart(CP, o.prompt || ('Solve ' + t(o.show) + (o.how || '') + '. Write the solution in set notation.'), T, { v: v, wrongs: o.wrongs, rev: o.rev, sideHint: 'Right roots, but test a value in each interval: ' + testLine(o.E, o.r1, o.r2, o.op, v).replace(/^Test /, '') }, sol, o.hints || hintsSolve(o.hint1), o.text || 'solve a quadratic inequality');
+    var p = AK().setPart(CP, o.prompt || ('Solve ' + t(o.show) + (o.how || '') + '.' + (o.tail != null ? o.tail : ' Write the solution in set notation.')), T, { v: v, wrongs: o.wrongs, rev: o.rev, sideHint: 'Right roots, but test a value in each interval: ' + testLine(o.E, o.r1, o.r2, o.op, v).replace(/^Test /, '') }, sol, o.hints || hintsSolve(o.hint1), o.text || 'solve a quadratic inequality');
     return fin(p);
   }
   /* integer roots a < b of (x − a)(x − b) */
@@ -54,17 +54,17 @@
     o = o || {};
     var z = intRoots(r, o), E = P.mul(lin(1, -z.a), lin(1, -z.b)), op = dir === 'between' ? r.pick(['lt', 'le']) : dir === 'outside' ? r.pick(['gt', 'ge']) : anyOp(r);
     if (o.op) op = o.op;
-    return solveP({ show: tx(E) + OPS[op] + '0', E: E, A: 1, r1: z.a, r2: z.b, op: op, facS: facT(1, z.a, z.b), how: o.how });
+    return solveP({ show: tx(E) + OPS[op] + '0', E: E, A: 1, r1: z.a, r2: z.b, op: op, facS: facT(1, z.a, z.b), tail: '' });
   }
   function gcfQ(r, kList) {
     var s = pickWhere(function () { return { k: r.pick(kList), n: nz(r, 2, 9) }; }, function (z) { return FRESH(P.scale(quad(1, -z.n, 0), z.k)); });
     var E = P.scale(quad(1, -s.n, 0), s.k), op = anyOp(r), r1 = Math.min(0, s.n), r2 = Math.max(0, s.n);
-    return solveP({ show: tx(E) + OPS[op] + '0', E: E, A: s.k, r1: r1, r2: r2, op: op, facS: coefT(s.k) + 'x' + br(lin(1, -s.n)), how: ' using roots and test points' });
+    return solveP({ show: tx(E) + OPS[op] + '0', E: E, A: s.k, r1: r1, r2: r2, op: op, facS: coefT(s.k) + 'x' + br(lin(1, -s.n)), tail: '' });
   }
   function dosQ(r) {
     var s = pickWhere(function () { return { m: r.pick([2, 3, 4, 5, 1]), n: r.int(1, 9) }; }, function (z) { return ex.gcd(z.m, z.n) === 1 && FRESH(quad(z.m * z.m, 0, -z.n * z.n)) && !(z.m === 1 && z.n < 3); });
     var E = quad(s.m * s.m, 0, -s.n * s.n), op = anyOp(r), a = s.n / s.m, pos = upOp(op), inc = !strictOp(op);
-    return solveP({ show: tx(E) + OPS[op] + '0', E: E, A: s.m * s.m, r1: -a, r2: a, op: op, facS: s.m === 1 ? '(x-' + s.n + ')(x+' + s.n + ')' : '(' + s.m + 'x-' + s.n + ')(' + s.m + 'x+' + s.n + ')', how: ' using roots and test points',
+    return solveP({ show: tx(E) + OPS[op] + '0', E: E, A: s.m * s.m, r1: -a, r2: a, op: op, facS: s.m === 1 ? '(x-' + s.n + ')(x+' + s.n + ')' : '(' + s.m + 'x-' + s.n + ')(' + s.m + 'x+' + s.n + ')', tail: '',
       wrongs: [{ parts: pos ? SET.above(a, inc) : SET.below(a, inc), code: CP + 'ineq-sqrt', hint: 'Taking the square root loses the negative side: find both roots, ' + t('\\pm ' + vt(a)) + ', and test.' }] });
   }
   /* (q x − p)(x − s)·k with a fractional root p/q */
@@ -76,13 +76,13 @@
     o = o || {};
     var z = fracRoot(r, o.qList || [2, 3, 5]), E = P.mul(lin(z.q, -z.p), lin(1, -z.s)), rs = [z.p / z.q, z.s].sort(function (a, b) { return a - b; });
     op = op || anyOp(r);
-    return solveP({ show: tx(E) + OPS[op] + '0', E: E, A: z.q, r1: rs[0], r2: rs[1], op: op, facS: br(lin(z.q, -z.p)) + br(lin(1, -z.s)), how: ' using roots and test points' });
+    return solveP({ show: tx(E) + OPS[op] + '0', E: E, A: z.q, r1: rs[0], r2: rs[1], op: op, facS: br(lin(z.q, -z.p)) + br(lin(1, -z.s)), tail: '' });
   }
   function negLeadQ(r, op) {
     var z = intRoots(r, { test: function (q) { return q.a < 0 && q.b > 0; } }), E = P.neg(P.mul(lin(1, -z.a), lin(1, -z.b))), C = U.cof(E);
     op = op || anyOp(r);
     var show = (r.chance(0.4) && C[1] !== 0 && C[2] !== 0 ? P.seq([P.num(C[2]), M(C[1], 'x', 1), M(C[0], 'x', 2)]) : tx(E)) + OPS[op] + '0';
-    return solveP({ show: show, E: E, A: -1, r1: z.a, r2: z.b, op: op, facS: '-' + facT(1, z.a, z.b), rev: true, how: ' using roots and test points',
+    return solveP({ show: show, E: E, A: -1, r1: z.a, r2: z.b, op: op, facS: '-' + facT(1, z.a, z.b), rev: true, tail: '',
       pre: 'You may multiply by ' + t('-1') + ' and reverse the sign (' + t(tx(P.neg(E)) + OPS[FLIP[op]] + '0') + '), but the test points can check the original.<br>' });
   }
 
@@ -343,7 +343,7 @@
     { num: 'A1', section: 'A. Skills', shared: function (r) { return graphShared(r, [1]); }, stem: function (s) { return 'The graph of ' + t('y=' + tx(s.E)) + ' is shown. Use it to solve each inequality.' + fig(graphStem(s.E)); }, parts: [
       { id: 'A1a', level: 'BEG', make: function (r, s) { return fromGraph(s, r.pick(['lt', 'le'])); } },
       { id: 'A1b', level: 'BEG', make: function (r, s) { return fromGraph(s, r.pick(['gt', 'ge'])); } }] },
-    { num: 'A2', stem: 'Solve using roots and test points.', parts: [
+    { num: 'A2', stem: 'Solve using roots and test points. Write each solution in set notation.', parts: [
       { id: 'A2a', level: 'BEG', make: function (r) { return monic(r, 'outside', { test: function (z) { return z.a < 0 && z.b > 0; } }); } },
       { id: 'A2b', level: 'BEG', make: function (r) { return monic(r, 'between', { hi: -1, hi2: -1, test: function (z) { return z.b < 0; } }); } },
       { id: 'A2c', level: 'EMG', make: function (r) { return gcfQ(r, [2, 3, 4, 5]); } },

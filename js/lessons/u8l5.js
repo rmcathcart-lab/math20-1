@@ -192,7 +192,7 @@
     o = o || {};
     var dp = o.dp == null ? 1 : o.dp, rd = function (x) { return K.roundTo(x, dp); };
     var T = quadSet(A, rd(r1), rd(r2), op), Tx = quadSet(A, r1, r2, op);
-    var p = AK().setPart(cp, prompt, T, { v: o.v, wrongs: o.wrongs, rev: o.rev, sideHint: o.sideHint }, sol, hints, text);
+    var p = AK().setPart(cp, prompt, T, { v: o.v, wrongs: o.wrongs, rev: o.rev, sideHint: o.sideHint, dec: true }, sol, hints, text);
     var base = p.check;
     p.check = function (resp) {
       var res = base(resp); if (res.v === 'correct') return res;
@@ -216,7 +216,7 @@
   }
   function readExactSet(resp, V) {
     var s = orFix(resp).replace(/\\left|\\right/g, '').replace(/\\[,;: !]|~/g, ' ').trim();
-    s = s.replace(/^\\\{|^\\lbrace|^\{/, '').replace(/\\\}$|\\rbrace$|\}$/, '').trim();
+    var ob = /^(\\\{|\\lbrace|\{)/.exec(s); if (ob) s = s.slice(ob[0].length).replace(/(\\\}|\\rbrace|\})$/, '').trim();
     var mid = s.split(/\\mid|\|/); if (mid.length === 2 && mid[0].trim() === V) s = mid[1];
     s = s.replace(new RegExp(',?\\s*' + V + '\\s*(\\\\in|∈|in)\\s*(\\\\mathbb\\{R\\}|ℝ|R)\\s*$'), '').trim();
     if (!s) return { why: 'empty' };
@@ -369,7 +369,7 @@
   U.yAlonePart = function (cp, prompt, f, op, o, sol, hints, text) {
     o = o || {};
     var keyTex = 'y' + OPS[op] + (o.keyRhs || tx(f));
-    var p = AK().ineqPart(cp, prompt, P.sub(Y(), f), op, keyTex, Object.assign({ ph: 'y > x^2 - 4', example: 'y>x^{2}-4' }, o), sol, hints, text);
+    var p = AK().ineqPart(cp, prompt, P.sub(Y(), f), op, keyTex, Object.assign({ ph: 'y > x^2 - 4', example: 'y>x^{2}-4', boundHint: 'Check your rearranging: do the same thing to every term on both sides, and solve for ' + t('y') + '.' }, o), sol, hints, text);
     var base = p.check;
     p.check = function (resp) {
       var res = base(resp); if (res.v !== 'correct') return res;
@@ -464,7 +464,7 @@
   function g3(r, kind) {
     var info, show, op = anyOp(r), o = {};
     if (kind === 'up' || kind === 'down') {
-      info = intPara(r, [kind === 'up' ? 1 : -1]); show = showY(op, tx(info.Q));
+      info = intPara(r, [kind === 'up' ? 1 : -1], { test: function (q) { return (q.r1 + q.r2) % 2 === 0; } }); show = showY(op, tx(info.Q));
       if (kind === 'down') o.facS = 'Factor: ' + t('y=-(' + tx(P.neg(info.Q)) + ')=' + facT(-1, info.r1, info.r2));
     } else if (kind === 'sym') {
       var s = pickWhere(function () { return { a: r.pick([1, 1, 1, 2, -1, -1, -1]), m: r.int(1, 4), cfirst: r.chance(0.7) }; }, function (z) { return z.a * z.m * z.m <= 18 && !(z.a === -1 && z.m === 3) && !(z.a === 1 && z.m === 2); });

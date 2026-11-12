@@ -423,7 +423,7 @@
   /* ---- several boxes. spec: { label, name, chk, key, ans (tex), mode ('math' | 'text' | number), keys, vars, placeholder, before, after } ---- */
   Z.fields = function (prompt, specs, o) {
     o = o || {};
-    var fields = specs.map(function (s) { return { label: s.label, name: s.name || String(s.label || '').replace(/<[^>]+>|\\\(|\\\)/g, ''), before: s.before, after: s.after, mode: s.mode, keys: s.mode === 'math' ? (s.keys || 'p57') : undefined, vars: s.vars || ['x'], placeholder: s.placeholder, wide: s.mode === 'math' }; });
+    var fields = specs.map(function (s) { return { label: s.label, name: s.name || String(s.label || '').replace(/<[^>]+>|\\\(|\\\)/g, '').replace(/:\s*$/, ''), before: s.before, after: s.after, mode: s.mode, keys: s.mode === 'math' ? (s.keys || 'p57') : undefined, vars: s.vars || ['x'], placeholder: s.placeholder, wide: s.mode === 'math' }; });
     var p = B.fields(prompt, fields, specs.map(function (s) { return s.chk; }), specs.map(function (s) { return s.key; }), specs.map(function (s) { return (s.label ? s.label + ' ' : '') + (s.ansHtml || t(dfr(s.ans != null ? s.ans : s.key))); }).join('<br>'), o.sol, o.hints || [], o.text);
     (o.swap || []).forEach(function (sw) {
       var i = sw[0], j = sw[1], inner = p.check;
@@ -657,7 +657,7 @@
       { id: '9a', level: 'EMG', make: function (r) {
         var o = pickWhere(function () { return { p: r.int(1, 7), q: r.int(1, 6), s: r.int(1, 9) }; }, function (o) { var Q = qf(1, -(o.p + o.q), o.s); return Q.irr && AV(1, Q.b, Q.c) && !(o.p === 4 && o.q === 3 && o.s === 5); });
         var b = -(o.p + o.q), c = o.s;
-        return stdFields('' + t('x(x-' + o.p + ')=' + o.q + 'x-' + o.s), 'x^2-' + o.p + 'x', o.q + 'x-' + o.s, [1, b, c], { pre: t('x^{2}-' + o.p + 'x=' + o.q + 'x-' + o.s) + ', so ' + t(eqT(1, b, c)), text: 'standard form: x(x − p) = qx − s', wrongs: [{ vals: rootsOf(1, -o.p, 0), code: CP + 'std', hint: 'Put the equation in standard form first (every term on one side, 0 on the other).' }] });
+        return stdFields('' + t('x(x-' + o.p + ')=' + polyT([o.q, -o.s])), polyT([1, -o.p, 0]), polyT([o.q, -o.s]), [1, b, c], { pre: t(polyT([1, -o.p, 0]) + '=' + polyT([o.q, -o.s])) + ', so ' + t(eqT(1, b, c)), text: 'standard form: x(x − p) = qx − s', wrongs: [{ vals: rootsOf(1, -o.p, 0), code: CP + 'std', hint: 'Put the equation in standard form first (every term on one side, 0 on the other).' }] });
       } },
       { id: '9b', level: 'PRG', make: function (r) {
         var o = pickWhere(function () { return { h: nz(r, -5, 5), m: r.int(1, 6), n: r.int(-9, 12) }; }, function (o) { var b = 2 * o.h - o.m, c = o.h * o.h - o.n, Q = qf(1, b, c); return Q.irr && c !== 0 && b !== 0 && AV(1, b, c) && !(o.h === 3 && o.m === 2 && o.n === 10); });
@@ -834,7 +834,7 @@
         p.outcome = OUT; return p;
       } }] },
     { num: 'B3', shared: function (r) {
-        return pickWhere(function () { return { a: -r.int(1, 2), b: 2 * r.int(1, 4), c: r.int(1, 7) }; }, function (o) { var Dw = o.b * o.b - 4 * Math.abs(o.a) * o.c, Q = qf(o.a, o.b, o.c); return Dw > 0 && sqf(Dw)[0] >= 2 && Q.irr && !(o.a === -1 && o.b === 4 && o.c === 2) && AV(o.a, o.b, o.c); });
+        return pickWhere(function () { return { a: -r.int(1, 2), b: 2 * r.int(1, 4), c: r.int(1, 7) }; }, function (o) { var Dw = o.b * o.b - 4 * Math.abs(o.a) * o.c, Q = qf(o.a, o.b, o.c); return Dw > 0 && sqf(Dw)[0] >= 2 && sqf(Dw)[1] > 1 && Q.irr && !(o.a === -1 && o.b === 4 && o.c === 2) && AV(o.a, o.b, o.c); });
       }, stem: function (o) { var Dw = o.b * o.b - 4 * Math.abs(o.a) * o.c, s = sqf(Dw); var g = gcd(gcd(o.b, s[0]), 2 * o.a), wN = -o.b / g, wK = s[0] / g, wD = 2 * o.a / g; if (wD < 0) { wN = -wN; wD = -wD; }
         return 'A student solved ' + t(eqT(o.a, o.b, o.c)) + ' and wrote:<br>' + Z.work(['x=\\dfrac{' + nT(-o.b) + '\\pm\\sqrt{' + o.b * o.b + '-' + 4 * Math.abs(o.a) * o.c + '}}{' + 2 * o.a + '}=\\dfrac{' + nT(-o.b) + '\\pm ' + radT(s[0], s[1]) + '}{' + 2 * o.a + '}=' + (wD === 1 ? (wN ? nT(wN) : '') + '\\pm ' + radT(wK, s[1]) : '\\dfrac{' + nT(wN) + '\\pm ' + radT(wK, s[1]) + '}{' + wD + '}')]); }, parts: [
       { id: 'eB3a', level: 'PRG', make: function (r, o) {
@@ -908,8 +908,8 @@
         var f1 = function (a) { return a * (N + Kc * Math.sqrt(s[1])) / Den; }, f2 = function (a) { return a * (N - Kc * Math.sqrt(s[1])) / Den; };
         var eq = 'x^{2}' + (o.p > 0 ? '+' : '-') + Math.abs(o.p) + 'ax' + (o.q > 0 ? '+' : '-') + (Math.abs(o.q) === 1 ? '' : Math.abs(o.q)) + 'a^{2}=0';
         var p = B.math('Solve ' + t(eq) + ' for ' + t('x') + ' in terms of ' + t('a') + ', where ' + t('a>0') + '. Give the answer in simplest form.', prChk(CP, [f1, f2], { p: 'a', pos: true, cands: [[[function (a) { return -f1(a); }, function (a) { return -f2(a); }], CP + 'negb', 'The formula starts with ' + t('-b') + '.'], [[function (a) { return a * (-o.p + s[0] * Math.sqrt(s[1])); }, function (a) { return a * (-o.p - s[0] * Math.sqrt(s[1])); }], CP + 'half', 'Divide every term of the numerator by ' + t('2a=2') + '.'], [[function (a) { return a * (-o.p / 2 + s[0] * Math.sqrt(s[1])); }, function (a) { return a * (-o.p / 2 - s[0] * Math.sqrt(s[1])); }], CP + 'half', 'Divide <b>every</b> term of the numerator by ' + t('2') + ', the radical term too.']] }), key,
-          'The coefficients are ' + t('1') + ', ' + t(nT(o.p) + 'a') + ' and ' + t(nT(o.q) + 'a^{2}') + ':<br>' + t('x=\\frac{' + nT(-o.p) + 'a\\pm\\sqrt{' + o.p * o.p + 'a^{2}' + (o.q > 0 ? '-' : '+') + Math.abs(4 * o.q) + 'a^{2}}}{2}=\\frac{' + nT(-o.p) + 'a\\pm\\sqrt{' + D + 'a^{2}}}{2}=\\frac{' + nT(-o.p) + 'a\\pm ' + (s[0] === 1 ? '' : s[0]) + 'a\\sqrt{' + s[1] + '}}{2}=a\\left(' + inner + '\\right)') + ' (' + t('\\sqrt{a^{2}}=a') + ' since ' + t('a>0') + ')',
-          ['Here ' + t('b=' + nT(o.p) + 'a') + ' and ' + t('c=' + nT(o.q) + 'a^{2}') + '. Substitute into the formula.', t('\\sqrt{' + D + 'a^{2}}=a\\sqrt{' + D + '}') + ' since ' + t('a>0') + '; then simplify.'], 'roots in terms of a', { keys: 'p57', vars: ['x', 'a'], placeholder: 'e.g. x = a(1 ± sqrt(2))' });
+          'The coefficients are ' + t('1') + ', ' + t((o.p === 1 ? '' : o.p === -1 ? '-' : nT(o.p)) + 'a') + ' and ' + t((o.q === 1 ? '' : o.q === -1 ? '-' : nT(o.q)) + 'a^{2}') + ':<br>' + t('x=\\frac{' + nT(-o.p) + 'a\\pm\\sqrt{' + o.p * o.p + 'a^{2}' + (o.q > 0 ? '-' : '+') + Math.abs(4 * o.q) + 'a^{2}}}{2}=\\frac{' + nT(-o.p) + 'a\\pm\\sqrt{' + D + 'a^{2}}}{2}=\\frac{' + nT(-o.p) + 'a\\pm ' + (s[0] === 1 ? '' : s[0]) + 'a\\sqrt{' + s[1] + '}}{2}=a\\left(' + inner + '\\right)') + ' (' + t('\\sqrt{a^{2}}=a') + ' since ' + t('a>0') + ')',
+          ['Here ' + t('b=' + (o.p === 1 ? '' : o.p === -1 ? '-' : nT(o.p)) + 'a') + ' and ' + t('c=' + (o.q === 1 ? '' : o.q === -1 ? '-' : nT(o.q)) + 'a^{2}') + '. Substitute into the formula.', t('\\sqrt{' + D + 'a^{2}}=a\\sqrt{' + D + '}') + ' since ' + t('a>0') + '; then simplify.'], 'roots in terms of a', { keys: 'p57', vars: ['x', 'a'], placeholder: 'e.g. x = a(1 ± sqrt(2))' });
         p.outcome = OUT; p.good = ['x=' + nT(N) + 'a\\pm ' + (Kc === 1 ? '' : Kc) + 'a\\sqrt{' + s[1] + '}'].filter(function () { return Den === 1; }); p.bad = ['x=a\\left(' + nT(-N) + '\\pm\\sqrt{' + s[1] + '}\\right)', 'x=\\frac{' + nT(-o.p) + 'a\\pm\\sqrt{' + D + 'a^{2}}}{2}'];
         return p;
       } }] },
