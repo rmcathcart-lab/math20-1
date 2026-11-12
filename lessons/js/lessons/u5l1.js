@@ -227,7 +227,7 @@ const factor = {
     }
     if (v === 'e3a') {
       const wbox = div(stage, 'u5l1-why', `<div class="u5l1-whyh">Why make one side ${T('0')} first?</div>${T('x(x-5)=14')} does <b>not</b> mean ${T('x=14')} or ${T('x-5=14')}.<br>Try ${T('x=14')}: ${T('14(14-5)=14\\cdot9=126\\ne14')}`, RX, 326, RW); hide(wbox);
-      const st = stamp(stage, 'Only 0 works!', { ok: false, x: RX + RW - 120, y: 300 }); st.style.opacity = 0;
+      const st = stamp(stage, 'Only 0 works!', { ok: false, size: 'sm', x: RX + RW - 130, y: 318 }); st.style.opacity = 0;
       steps.push({ cap: `Why move the ${T('14')} first? ${T('x(x-5)=14')} has no shortcut: ${T('x=14')} gives ${T('126')}, not ${T('14')}. Only a product equal to <b>${T('0')}</b> tells us a factor is ${T('0')}.`,
         run: async (c) => { unhide(wbox); await show(c, wbox); st.style.opacity = ''; await stampIn(c, st); } });
     }

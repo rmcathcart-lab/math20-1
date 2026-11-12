@@ -404,6 +404,7 @@
     if (!mp && P.count(numPoly) === 1) return nt + '(' + mt.replace(/^\((.*)\)$/, '$1') + ')';
     return (mp ? (mt === '-1' ? '-' : mt) : wrapM(mt)) + (P.count(numPoly) > 1 || mp ? '(' + nt + ')' : nt);
   }
+  function topSum(s) { var d = 0; for (var i = 0; i < s.length; i++) { var c = s.charAt(i); if (c === '(' || c === '{') d++; else if (c === ')' || c === '}') d--; else if (d === 0 && i > 0 && (c === '+' || c === '-')) return true; } return false; }
   /* terms: [{ s: ±1, nf: atoms, df: atoms }] → { lcd, N0 (numerator over the LCD), T (reduced canon), steps } */
   function sumOf(terms, v) {
     var lc = lcdOf(terms.map(function (tm) { return tm.df; })), N0 = P.num(0), pieces = [];
@@ -413,7 +414,7 @@
       N0 = P.add(N0, P.scale(P.mul(np, mpoly), tm.s));
       var pt = prodT(np, mt), neg = tm.s < 0;
       if (mt === '-1') { pt = P.count(np) > 1 ? '(' + tx(np) + ')' : tx(np); neg = !neg; }
-      if (neg && i > 0 && pt.charAt(0) !== '(' && /[+-]/.test(pt.slice(1)) && mt === '1') pt = '(' + pt + ')';
+      if (neg && i > 0 && topSum(pt)) pt = '(' + pt + ')'; // p65: any subtracted sum goes in brackets (x+9-(x-7), y-(y-6))
       pieces.push({ neg: neg, t: pt });
     });
     var stepNum = pieces.map(function (pc, i) { return i === 0 ? (pc.neg ? '-' + (pc.t.charAt(0) === '(' || !/[+-]/.test(pc.t.slice(1)) ? pc.t : '(' + pc.t + ')') : pc.t) : (pc.neg ? '-' : '+') + (pc.t.charAt(0) === '-' ? '(' + pc.t + ')' : pc.t); }).join('');
@@ -905,7 +906,7 @@
   }
   function errWorkTex(s) {
     var n = tx(P.add(lin(s.a - 1, s.b - s.d, s.v))), st = '\\frac{' + n + '}{' + s.c + s.v + '}', k = sumKey(s.SB);
-    return t(termsTex(s.terms) + '=' + st + (k !== st ? '=' + k : ''));
+    return t(termsTex(s.terms)) + ' ' + t('=' + st) + (k !== st ? ' ' + t('=' + k) : '');
   }
 
   /* ---------- false statements (#9) ---------- */

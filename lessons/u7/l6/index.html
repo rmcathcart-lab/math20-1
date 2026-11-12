@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reciprocal Functions of Linear Functions · Math 20-1 7.6</title>
+<meta name="description" content="Math 20-1 Unit 7 Lesson 6: reciprocal functions of linear functions. Reciprocals and the graph of y = 1/x, comparing y = f(x) and y = 1/f(x) (invariant points on y = ±1, the vertical asymptote at the zero of f, the horizontal asymptote y = 0), sketching y = 1/f(x) from a line, characteristics from the equation y = 1/(ax + b), working backwards and matching. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u7l6.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u7l6">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Gas Upgrade">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><line x1="0" y1="52" x2="340" y2="52" stroke="#d9d3c4" stroke-width="3" stroke-dasharray="16 12"><animate attributeName="stroke-dashoffset" values="0;-28" dur=".7s" repeatCount="indefinite"/></line><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="6.5s" begin="0s" repeatCount="indefinite"/><text x="0" y="44" font-size="38" text-anchor="middle" transform="scale(-1 1)">🛻</text></g><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="4.6s" begin="2.2s" repeatCount="indefinite"/><text x="0" y="44" font-size="34" text-anchor="middle" transform="scale(-1 1)">🚗</text></g><text x="312" y="40" font-size="30" text-anchor="middle">⛽<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Gas Upgrade</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Your family can upgrade ONE vehicle. The old farm truck would go from 5&nbsp;km per litre to 10&nbsp;km per litre. The hybrid car would go from 20&nbsp;km per litre to 40&nbsp;km per litre. Each one drives 1000&nbsp;km a month.</p><p class="vw-ask">Which upgrade saves more gas each month?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A farm truck and a hybrid car driving, each with a fuel gauge whose needle drops, and their old and new kilometres per litre"><rect x="8" y="10" width="314" height="108" rx="14" fill="#f4efe4"/><rect x="8" y="128" width="314" height="108" rx="14" fill="#eef3fb"/><line x1="22" y1="96" x2="196" y2="96" stroke="#d9d3c4" stroke-width="3" stroke-dasharray="14 10"><animate attributeName="stroke-dashoffset" values="0;-24" dur=".6s" repeatCount="indefinite"/></line><line x1="22" y1="214" x2="196" y2="214" stroke="#d9d3c4" stroke-width="3" stroke-dasharray="14 10"><animate attributeName="stroke-dashoffset" values="0;-24" dur=".45s" repeatCount="indefinite"/></line><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="0.9s" begin="0s" repeatCount="indefinite"/><text x="0" y="0" font-size="66" text-anchor="middle" transform="translate(82 88) scale(-1 1)">🛻</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="0.9s" begin="0.3s" repeatCount="indefinite"/><text x="0" y="0" font-size="66" text-anchor="middle" transform="translate(82 206) scale(-1 1)">🚗</text></g><rect x="150" y="22" width="124" height="30" rx="15" fill="#fff" stroke="#8a5a14" stroke-width="2.5"/><text x="212.0" y="43" font-size="17" font-weight="800" fill="#8a5a14" text-anchor="middle">5 → 10 km/L</text><rect x="150" y="140" width="136" height="30" rx="15" fill="#fff" stroke="#2b55a0" stroke-width="2.5"/><text x="218.0" y="161" font-size="17" font-weight="800" fill="#2b55a0" text-anchor="middle">20 → 40 km/L</text><path d="M226 100 A36 36 0 0 1 298 100" fill="#fffdf6" stroke="#4a4436" stroke-width="3.5"/><path d="M231 100 A31 31 0 0 1 239.7 74.1" fill="none" stroke="#c93a33" stroke-width="6"/><text x="236" y="94" font-size="13" font-weight="800" fill="#c93a33">E</text><text x="279" y="94" font-size="13" font-weight="800" fill="#12805a">F</text><line x1="262" y1="100" x2="262" y2="73" stroke="#4a4436" stroke-width="4" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="62 262 100;-62 262 100;62 262 100" keyTimes="0;.85;1" dur="5s" begin="0s" repeatCount="indefinite"/></line><circle cx="262" cy="100" r="5" fill="#4a4436"/><path d="M226 218 A36 36 0 0 1 298 218" fill="#fffdf6" stroke="#4a4436" stroke-width="3.5"/><path d="M231 218 A31 31 0 0 1 239.7 192.1" fill="none" stroke="#c93a33" stroke-width="6"/><text x="236" y="212" font-size="13" font-weight="800" fill="#c93a33">E</text><text x="279" y="212" font-size="13" font-weight="800" fill="#12805a">F</text><line x1="262" y1="218" x2="262" y2="191" stroke="#4a4436" stroke-width="4" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="62 262 218;-62 262 218;62 262 218" keyTimes="0;.85;1" dur="5s" begin="1.2s" repeatCount="indefinite"/></line><circle cx="262" cy="218" r="5" fill="#4a4436"/></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Make a guess first. Then work it out.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>The truck, by a lot!</b> Truck: <span class="tex">1000\div5=200</span> L a month becomes <span class="tex">1000\div10=100</span> L, a saving of <b>100 L</b>. Hybrid: <span class="tex">1000\div20=50</span> L becomes <span class="tex">1000\div40=25</span> L, a saving of only <b>25 L</b>.<br>Both numbers doubled, but the gas used is <span class="tex">1000\div(\text{km per litre})</span>: doubling a small number saves far more than doubling a big one. That is one reason Canada rates cars in litres per 100&nbsp;km instead.</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 7 Absolute Value and Reciprocal Functions · Lesson 6</div>
+  <h1>Reciprocal Functions of Linear Functions</h1>
+  <p class="lede">Graphing <span class="tex">y=\dfrac{1}{f(x)}</span> from a line <span class="tex">y=f(x)</span> using its asymptotes and invariant points, and stating its domain and range.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>find reciprocals and describe the graph of <span class="tex">y=\dfrac{1}{x}</span></li>
+      <li>compare <span class="tex">y=f(x)</span> and <span class="tex">y=\dfrac{1}{f(x)}</span>: <b>invariant points</b>, <b>asymptotes</b>, signs, big and small values</li>
+      <li><b>sketch</b> <span class="tex">y=\dfrac{1}{f(x)}</span> from the graph of a line, using the guide lines <span class="tex">y=\pm1</span></li>
+      <li>find the asymptotes, invariant points, <span class="tex">y</span>-intercept, domain and range from the equation <span class="tex">y=\dfrac{1}{ax+b}</span></li>
+      <li><b>work backwards</b> from a reciprocal graph to the line, and match equations with graphs</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF11</b> Graph and analyze reciprocal functions (limited to the reciprocal of linear and quadratic functions).<br><span class="muted">Today: reciprocals, the graph of <span class="tex">y=\tfrac{1}{x}</span>, comparing a line with its reciprocal, sketching, features from the equation, and working backwards.</span></div>
+</section>
+
+<!-- ================= 1. Reciprocals and y = 1/x ================= -->
+<section class="card" data-ink="s1" data-section="1. Reciprocals and y = 1/x">
+  <div class="sec-h"><span class="badge">1</span><h2>Reciprocals and the Graph of <span class="tex">y=\dfrac{1}{x}</span></h2></div>
+  <p>The <b>reciprocal</b> of a non-zero number <span class="tex">a</span> is <span class="tex">\dfrac{1}{a}</span>. A number and its reciprocal have the <b>same sign</b>; the reciprocal of a large number is close to <span class="tex">0</span>, the reciprocal of a number close to <span class="tex">0</span> is large, <span class="tex">1</span> and <span class="tex">-1</span> are their own reciprocals, and <span class="tex">0</span> has no reciprocal.</p>
+  <div class="def">The <b>reciprocal function</b> of <span class="tex">y=f(x)</span> is <span class="tex">y=\dfrac{1}{f(x)}</span>. For example, the reciprocal of <span class="tex">f(x)=x</span> is <span class="tex">y=\dfrac{1}{x}</span>, and the reciprocal of <span class="tex">f(x)=2x+5</span> is <span class="tex">y=\dfrac{1}{2x+5}</span>.</div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>The graph of <span class="tex">y=\tfrac{1}{x}</span></h3></div>
+  <div class="part"><div class="pl">(a) Complete the table for <span class="tex">y=\dfrac{1}{x}</span>.</div>
+    <table class="u7l6-tab u7l6-fill">
+      <tr><th><span class="tex">x</span></th><td><span class="tex">-4</span></td><td><span class="tex">-2</span></td><td><span class="tex">-1</span></td><td><span class="tex">-\frac{1}{2}</span></td><td><span class="tex">-\frac{1}{4}</span></td><td><span class="tex">0</span></td><td><span class="tex">\frac{1}{4}</span></td><td><span class="tex">\frac{1}{2}</span></td><td><span class="tex">1</span></td><td><span class="tex">2</span></td><td><span class="tex">4</span></td></tr>
+      <tr><th><span class="tex">\frac{1}{x}</span></th><td><span data-reveal><span class="tex">-\frac{1}{4}</span></span></td><td><span data-reveal><span class="tex">-\frac{1}{2}</span></span></td><td><span data-reveal><span class="tex">-1</span></span></td><td><span data-reveal><span class="tex">-2</span></span></td><td><span data-reveal><span class="tex">-4</span></span></td><td><span data-reveal><span class="u7l6-und">undef.</span></span></td><td><span data-reveal><span class="tex">4</span></span></td><td><span data-reveal><span class="tex">2</span></span></td><td><span data-reveal><span class="tex">1</span></span></td><td><span data-reveal><span class="tex">\frac{1}{2}</span></span></td><td><span data-reveal><span class="tex">\frac{1}{4}</span></span></td></tr>
+    </table>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Each value flips: <span class="tex">4\to\tfrac{1}{4}</span>, <span class="tex">\tfrac{1}{4}\to4</span>. <span class="tex">\tfrac{1}{0}</span> is undefined.</div></div></div>
+  <div class="u7l6-gw2">
+    <div class="part"><div class="pl">(b) The line <span class="tex">y=x</span> is drawn. Sketch <span class="tex">y=\dfrac{1}{x}</span> on the same grid.</div>
+      <div class="u7l6-sk"><div data-bk-graph='{"width":340,"height":340,"xmin":-4.5,"xmax":4.5,"ymin":-4.5,"ymax":4.5,"fontSize":14,"items":[{"line":[{"m":1,"b":0},{"color":"#1f5bd6"}]},{"label":[2.6,3.9,"y=x",{"tex":true,"pos":"w","color":"#1f5bd6","cls":"bk-ptlab"}]}]}'></div>
+        <div class="u7l6-ska" data-bk-graph='{"width":340,"height":340,"xmin":-4.5,"xmax":4.5,"ymin":-4.5,"ymax":4.5,"fontSize":14,"items":[{"line":[{"m":1,"b":0},{"color":"#1f5bd6"}]},{"label":[2.6,3.9,"y=x",{"tex":true,"pos":"w","color":"#1f5bd6","cls":"bk-ptlab"}]},{"fn":["1/x",{"color":"#d9730d","width":4}]},{"point":[1,1,{"color":"#c99a06","coords":true,"pos":"se"}]},{"point":[-1,-1,{"color":"#c99a06","coords":true,"pos":"nw"}]},{"label":[0.5,3.4,"y=\\tfrac{1}{x}",{"tex":true,"pos":"e","color":"#d9730d","cls":"bk-ptlab"}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Two branches: one in the first quadrant, one in the third.</div></div></div>
+    <div class="part"><div class="pl">(c) State the points where the two graphs meet, the asymptotes of <span class="tex">y=\dfrac{1}{x}</span>, and its domain and range.</div><div class="work" style="--h:250px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">They meet at <span class="tex">(1,\ 1)</span> and <span class="tex">(-1,\ -1)</span>, where <span class="tex">x=\tfrac{1}{x}</span>.<br>The graph never touches the <span class="tex">y</span>-axis (<span class="tex">x=0</span> is not allowed) and gets closer and closer to it: the <b>vertical asymptote</b> is <span class="tex">x=0</span>.<br>As <span class="tex">x</span> gets large (positive or negative), <span class="tex">\tfrac{1}{x}</span> gets close to <span class="tex">0</span> but is never <span class="tex">0</span>: the <b>horizontal asymptote</b> is <span class="tex">y=0</span>.<br>Domain <span class="tex">\{x\mid x\ne0,\ x\in\mathbb{R}\}</span>; range <span class="tex">\{y\mid y\ne0,\ y\in\mathbb{R}\}</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Comparing f and 1/f ================= -->
+<section class="card" data-ink="s2" data-section="2. Comparing y = f(x) and y = 1/f(x)">
+  <div class="sec-h"><span class="badge">2</span><h2>Comparing <span class="tex">y=f(x)</span> and <span class="tex">y=\dfrac{1}{f(x)}</span></h2></div>
+  <p>Each <span class="tex">y</span>-value of <span class="tex">y=\dfrac{1}{f(x)}</span> is the reciprocal of the <span class="tex">y</span>-value of <span class="tex">y=f(x)</span> at the same <span class="tex">x</span>, so a point <span class="tex">(x,\ y)</span> on <span class="tex">y=f(x)</span> becomes <span class="tex">\left(x,\ \dfrac{1}{y}\right)</span> (when <span class="tex">y\ne0</span>).</p>
+  <div class="explainer" data-explainer="partner"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>A line and its reciprocal</h3></div>
+  <p class="q">Let <span class="tex">f(x)=x-2</span>.</p>
+  <div class="part"><div class="pl">(a) Complete the table.</div>
+    <table class="u7l6-tab u7l6-fill">
+      <tr><th><span class="tex">x</span></th><td><span class="tex">-2</span></td><td><span class="tex">0</span></td><td><span class="tex">1</span></td><td><span class="tex">1.5</span></td><td><span class="tex">2</span></td><td><span class="tex">2.5</span></td><td><span class="tex">3</span></td><td><span class="tex">4</span></td><td><span class="tex">6</span></td></tr>
+      <tr><th><span class="tex">f(x)</span></th><td><span data-reveal><span class="tex">-4</span></span></td><td><span data-reveal><span class="tex">-2</span></span></td><td><span data-reveal><span class="tex">-1</span></span></td><td><span data-reveal><span class="tex">-0.5</span></span></td><td><span data-reveal><span class="tex">0</span></span></td><td><span data-reveal><span class="tex">0.5</span></span></td><td><span data-reveal><span class="tex">1</span></span></td><td><span data-reveal><span class="tex">2</span></span></td><td><span data-reveal><span class="tex">4</span></span></td></tr>
+      <tr><th><span class="tex">\frac{1}{f(x)}</span></th><td><span data-reveal><span class="tex">-\frac{1}{4}</span></span></td><td><span data-reveal><span class="tex">-\frac{1}{2}</span></span></td><td><span data-reveal><span class="tex">-1</span></span></td><td><span data-reveal><span class="tex">-2</span></span></td><td><span data-reveal><span class="u7l6-und">undef.</span></span></td><td><span data-reveal><span class="tex">2</span></span></td><td><span data-reveal><span class="tex">1</span></span></td><td><span data-reveal><span class="tex">\frac{1}{2}</span></span></td><td><span data-reveal><span class="tex">\frac{1}{4}</span></span></td></tr>
+    </table>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">The second row is <span class="tex">x-2</span>; the third row is its reciprocal (undefined where <span class="tex">f(x)=0</span>).</div></div></div>
+  <div class="u7l6-gw2">
+    <div class="part"><div class="pl">(b) Sketch <span class="tex">y=\dfrac{1}{f(x)}</span> on the grid with <span class="tex">y=f(x)</span>.</div>
+      <div class="u7l6-sk"><div data-bk-graph='{"width":340,"height":340,"xmin":-2.5,"xmax":6.5,"ymin":-4.5,"ymax":4.5,"fontSize":14,"items":[{"line":[{"m":1,"b":-2},{"color":"#1f5bd6"}]},{"label":[5.2,3.9,"y=f(x)",{"tex":true,"pos":"w","color":"#1f5bd6","cls":"bk-ptlab"}]}]}'></div>
+        <div class="u7l6-ska" data-bk-graph='{"width":340,"height":340,"xmin":-2.5,"xmax":6.5,"ymin":-4.5,"ymax":4.5,"fontSize":14,"items":[{"line":[{"m":1,"b":-2},{"color":"#1f5bd6"}]},{"label":[5.2,3.9,"y=f(x)",{"tex":true,"pos":"w","color":"#1f5bd6","cls":"bk-ptlab"}]},{"vline":[2,{"color":"#7b4fc4"}]},{"fn":["1/(x-2)",{"color":"#d9730d","width":4}]},{"point":[3,1,{"color":"#c99a06","coords":true,"pos":"se"}]},{"point":[1,-1,{"color":"#c99a06","coords":true,"pos":"nw"}]}]}'></div></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Two branches, one on each side of the dashed line <span class="tex">x=2</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) Complete the statements.</div>
+      <div class="u7l6-stm">
+        <div><span class="tex">y</span>-intercept of <span class="tex">y=f(x)</span>: <span data-reveal><span class="tex">-2</span></span></div><div>of <span class="tex">y=\frac{1}{f(x)}</span>: <span data-reveal><span class="tex">-\frac{1}{2}</span></span></div>
+        <div><span class="tex">x</span>-intercept of <span class="tex">y=f(x)</span>: <span data-reveal><span class="tex">2</span></span></div><div>vertical asymptote: <span data-reveal><span class="tex">x=2</span></span></div>
+        <div>invariant points: <span data-reveal><span class="tex">(3,\ 1)</span>, <span class="tex">(1,\ -1)</span></span></div><div>horizontal asymptote: <span data-reveal><span class="tex">y=0</span></span></div>
+      </div>
+      <div class="work" style="--h:120px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">The zero of <span class="tex">f</span> becomes the vertical asymptote; the points at height <span class="tex">\pm1</span> stay put.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Close to the asymptotes</h3></div>
+  <div class="part"><div class="pl">Use <span class="tex">y=\dfrac{1}{x-2}</span> from Example 2 to describe the graph near its asymptotes.</div>
+    <table class="u7l6-tab u7l6-fill u7l6-tab8">
+      <tr><th><span class="tex">x</span></th><td><span class="tex">1.9</span></td><td><span class="tex">1.99</span></td><td><span class="tex">1.999</span></td><td><span class="tex">2.001</span></td><td><span class="tex">2.01</span></td><td><span class="tex">2.1</span></td><td><span class="tex">-98</span></td><td><span class="tex">102</span></td></tr>
+      <tr><th><span class="tex">\frac{1}{x-2}</span></th><td><span data-reveal><span class="tex">-10</span></span></td><td><span data-reveal><span class="tex">-100</span></span></td><td><span data-reveal><span class="tex">-1000</span></span></td><td><span data-reveal><span class="tex">1000</span></span></td><td><span data-reveal><span class="tex">100</span></span></td><td><span data-reveal><span class="tex">10</span></span></td><td><span data-reveal><span class="tex">-0.01</span></span></td><td><span data-reveal><span class="tex">0.01</span></span></td></tr>
+    </table>
+    <div class="work" style="--h:150px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">As <span class="tex">x</span> approaches <span class="tex">2</span> from the left, <span class="tex">x-2</span> is a small negative number, so <span class="tex">y\to-\infty</span> (the graph falls along the asymptote <span class="tex">x=2</span>).<br>As <span class="tex">x</span> approaches <span class="tex">2</span> from the right, <span class="tex">y\to+\infty</span> (the graph rises along <span class="tex">x=2</span>).<br>As <span class="tex">x\to\pm\infty</span>, <span class="tex">x-2</span> is large and <span class="tex">y</span> gets close to <span class="tex">0</span>: the graph approaches <span class="tex">y=0</span> but never reaches it.</div></div></div>
+  <p class="u7l6-p">These examples show what happens for any function.</p>
+  <div class="def amber u7l6-key"><div class="u7l6-keyh">Properties of <span class="tex">y=\dfrac{1}{f(x)}</span></div>
+    <ul class="u7l6-ul">
+      <li>Where <span class="tex">f(x)=0</span>, the reciprocal is undefined: a <b>vertical asymptote</b> (for a line, at its <span class="tex">x</span>-intercept).</li>
+      <li>Where <span class="tex">f(x)=1</span> or <span class="tex">f(x)=-1</span>, the reciprocal is the same number: the <b>invariant points</b> lie on the lines <span class="tex">y=1</span> and <span class="tex">y=-1</span>.</li>
+      <li><span class="tex">\dfrac{1}{f(x)}</span> has the <b>same sign</b> as <span class="tex">f(x)</span>: both graphs are above the <span class="tex">x</span>-axis, or both are below, at each <span class="tex">x</span>.</li>
+      <li>Where <span class="tex">f(x)</span> increases, <span class="tex">\dfrac{1}{f(x)}</span> decreases, and the other way around.</li>
+      <li>Where <span class="tex">|f(x)|</span> is large, <span class="tex">\dfrac{1}{f(x)}</span> is near <span class="tex">0</span>: the <b>horizontal asymptote</b> is <span class="tex">y=0</span>. A reciprocal is never <span class="tex">0</span>, so the graph has no <span class="tex">x</span>-intercept.</li>
+      <li>Where <span class="tex">f(x)</span> is near <span class="tex">0</span>, <span class="tex">\left|\dfrac{1}{f(x)}\right|</span> is large: the graph runs along the vertical asymptote.</li>
+      <li>The <span class="tex">y</span>-intercept of <span class="tex">y=\dfrac{1}{f(x)}</span> is the reciprocal of the <span class="tex">y</span>-intercept of <span class="tex">y=f(x)</span>; a point where <span class="tex">f(x)=2</span> becomes a point where <span class="tex">y=\tfrac{1}{2}</span>, and so on.</li>
+    </ul></div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Sketching from a line ================= -->
+<section class="card" data-ink="s3" data-section="3. Sketching 1/f(x) from a Line">
+  <div class="sec-h"><span class="badge">3</span><h2>Sketching <span class="tex">y=\dfrac{1}{f(x)}</span> from the Graph of a Line</h2></div>
+  <div class="def amber u7l6-key"><div class="u7l6-keyh">To sketch <span class="tex">y=\dfrac{1}{f(x)}</span> from the line <span class="tex">y=f(x)</span></div>
+    <div class="u7l6-steps">
+      <div><b>1</b>Draw the <b>vertical asymptote</b> (dashed) through the <span class="tex">x</span>-intercept, and the horizontal asymptote <span class="tex">y=0</span>.</div>
+      <div><b>2</b>Mark the <b>invariant points</b> where the line meets <span class="tex">y=1</span> and <span class="tex">y=-1</span>.</div>
+      <div><b>3</b>Mark a few more points, such as the reciprocal of the <span class="tex">y</span>-intercept, or <span class="tex">y=\tfrac{1}{2}</span> where <span class="tex">f(x)=2</span>.</div>
+      <div><b>4</b>Draw <b>two smooth branches</b>, one on each side of the vertical asymptote, on the same side of the <span class="tex">x</span>-axis as the line, approaching both asymptotes.</div>
+    </div></div>
+  <p class="u7l6-p">The graph of the reciprocal of a non-horizontal line always has two branches in diagonally opposite regions, like <span class="tex">y=\dfrac{1}{x}</span>.</p>
+  <div class="explainer" data-explainer="sketch"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Sketch with the guide lines <span class="tex">y=\pm1</span></h3></div>
+  <p class="q">The graph of <span class="tex">y=f(x)</span> and the guide lines <span class="tex">y=\pm1</span> are shown. Sketch <span class="tex">y=\dfrac{1}{f(x)}</span>. State the equation of the vertical asymptote, the invariant points and the <span class="tex">y</span>-intercept of the reciprocal graph.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">f(x)=2x-4</span></div>
+      <div class="u7l6-sk u7l6-skc"><div data-bk-graph='{"width":380,"height":380,"xmin":-6.5,"xmax":6.5,"ymin":-6.5,"ymax":6.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"line":[{"m":0,"b":1},{"color":"#12805a","dash":"3 7","width":2.5,"arrows":false}]},{"line":[{"m":0,"b":-1},{"color":"#12805a","dash":"3 7","width":2.5,"arrows":false}]},{"line":[{"m":2,"b":-4},{"color":"#1f5bd6"}]}]}'></div>
+        <div class="u7l6-ska" data-bk-graph='{"width":380,"height":380,"xmin":-6.5,"xmax":6.5,"ymin":-6.5,"ymax":6.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"line":[{"m":0,"b":1},{"color":"#12805a","dash":"3 7","width":2.5,"arrows":false}]},{"line":[{"m":0,"b":-1},{"color":"#12805a","dash":"3 7","width":2.5,"arrows":false}]},{"line":[{"m":2,"b":-4},{"color":"#1f5bd6"}]},{"vline":[2,{"color":"#7b4fc4"}]},{"fn":["1/(2*x-4)",{"color":"#d9730d","width":4}]},{"point":[2.5,1,{"color":"#c99a06"}]},{"point":[1.5,-1,{"color":"#c99a06"}]},{"point":[0,-0.25,{"color":"#d9730d"}]}]}'></div></div>
+      <div class="work" style="--h:110px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x</span>-intercept <span class="tex">2</span>: vertical asymptote <span class="tex">x=2</span>.<br><span class="tex">2x-4=1\Rightarrow x=2.5</span>; &nbsp;<span class="tex">2x-4=-1\Rightarrow x=1.5</span>: invariant points <span class="tex">(2.5,\ 1)</span>, <span class="tex">(1.5,\ -1)</span>.<br><span class="tex">y</span>-intercept <span class="tex">\frac{1}{-4}=-\frac{1}{4}</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">f(x)=-\tfrac{1}{2}x-1</span></div>
+      <div class="u7l6-sk u7l6-skc"><div data-bk-graph='{"width":380,"height":380,"xmin":-6.5,"xmax":6.5,"ymin":-6.5,"ymax":6.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"line":[{"m":0,"b":1},{"color":"#12805a","dash":"3 7","width":2.5,"arrows":false}]},{"line":[{"m":0,"b":-1},{"color":"#12805a","dash":"3 7","width":2.5,"arrows":false}]},{"line":[{"m":-0.5,"b":-1},{"color":"#1f5bd6"}]}]}'></div>
+        <div class="u7l6-ska" data-bk-graph='{"width":380,"height":380,"xmin":-6.5,"xmax":6.5,"ymin":-6.5,"ymax":6.5,"xlabels":2,"ylabels":2,"fontSize":14,"items":[{"line":[{"m":0,"b":1},{"color":"#12805a","dash":"3 7","width":2.5,"arrows":false}]},{"line":[{"m":0,"b":-1},{"color":"#12805a","dash":"3 7","width":2.5,"arrows":false}]},{"line":[{"m":-0.5,"b":-1},{"color":"#1f5bd6"}]},{"vline":[-2,{"color":"#7b4fc4"}]},{"fn":["1/(-0.5*x-1)",{"color":"#d9730d","width":4}]},{"point":[-4,1,{"color":"#c99a06"}]},{"point":[0,-1,{"color":"#c99a06"}]}]}'></div></div>
+      <div class="work" style="--h:110px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x</span>-intercept <span class="tex">-2</span>: vertical asymptote <span class="tex">x=-2</span>.<br><span class="tex">f(x)=1</span> at <span class="tex">x=-4</span>, <span class="tex">f(x)=-1</span> at <span class="tex">x=0</span>: invariant points <span class="tex">(-4,\ 1)</span>, <span class="tex">(0,\ -1)</span>.<br><span class="tex">y</span>-intercept <span class="tex">\frac{1}{-1}=-1</span> (here also an invariant point).</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= 4. Characteristics from the equation ================= -->
+<section class="card" data-ink="s4" data-section="4. Characteristics from the Equation">
+  <div class="sec-h"><span class="badge">4</span><h2>Characteristics from the Equation</h2></div>
+  <p>For <span class="tex">y=\dfrac{1}{ax+b}</span>, <span class="tex">a\ne0</span>, find each feature without graphing.</p>
+  <div class="def amber u7l6-key"><div class="u7l6-two">
+    <div><b>Vertical asymptote</b>solve <span class="tex">ax+b=0</span>: &nbsp;<span class="tex">x=-\dfrac{b}{a}</span></div>
+    <div><b>Horizontal asymptote</b><span class="tex">y=0</span></div>
+    <div><b>Invariant points</b>solve <span class="tex">ax+b=1</span> and <span class="tex">ax+b=-1</span></div>
+    <div><b><span class="tex">y</span>-intercept</b><span class="tex">\dfrac{1}{b}</span> &nbsp;(if <span class="tex">b\ne0</span>)</div>
+  </div>
+  <div class="u7l6-dr">Domain <span class="tex">\left\{x\mid x\ne-\dfrac{b}{a},\ x\in\mathbb{R}\right\}</span>; &nbsp;range <span class="tex">\{y\mid y\ne0,\ y\in\mathbb{R}\}</span></div></div>
+  <div class="explainer" data-explainer="features"></div>
+  <div class="tip calc-tip u7l6-ctip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>To check on a graphing calculator</b>, enter <code>Y1 = 1/(3X−6)</code> with <b>brackets around the whole denominator</b>. Without them, <code>1/3X−6</code> means <span class="tex">\tfrac{1}{3}x-6</span>, and the calculator draws a line.</div>
+    <div class="u7l6-pcol"><button class="pill" data-keys="Y= CLEAR 1 ÷ ( 3 X − 6 ) ZStandard">Show me</button><button class="pill" data-keys="Y= CLEAR 1 ÷ 3 X − 6 ZStandard">Without brackets</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Features without graphing</h3></div>
+  <div class="part"><div class="pl">Complete the table.</div>
+    <table class="u7l6-tab u7l6-ctab">
+      <tr><th></th><th>(a) <span class="tex">y=\dfrac{1}{x+4}</span></th><th>(b) <span class="tex">y=\dfrac{1}{3x-6}</span></th><th>(c) <span class="tex">y=\dfrac{1}{5-2x}</span></th></tr>
+      <tr><th>Vertical asymptote</th><td><span data-reveal><span class="tex">x=-4</span></span></td><td><span data-reveal><span class="tex">x=2</span></span></td><td><span data-reveal><span class="tex">x=\frac{5}{2}</span></span></td></tr>
+      <tr><th><span class="tex">y</span>-intercept</th><td><span data-reveal><span class="tex">\frac{1}{4}</span></span></td><td><span data-reveal><span class="tex">-\frac{1}{6}</span></span></td><td><span data-reveal><span class="tex">\frac{1}{5}</span></span></td></tr>
+      <tr><th>Invariant points</th><td><span data-reveal><span class="tex">(-3,\ 1)</span>, <span class="tex">(-5,\ -1)</span></span></td><td><span data-reveal><span class="tex">\left(\frac{7}{3},\ 1\right)</span>, <span class="tex">\left(\frac{5}{3},\ -1\right)</span></span></td><td><span data-reveal><span class="tex">(2,\ 1)</span>, <span class="tex">(3,\ -1)</span></span></td></tr>
+      <tr><th>Domain</th><td><span data-reveal><span class="tex">\{x\mid x\ne-4,\ x\in\mathbb{R}\}</span></span></td><td><span data-reveal><span class="tex">\{x\mid x\ne2,\ x\in\mathbb{R}\}</span></span></td><td><span data-reveal><span class="tex">\left\{x\mid x\ne\frac{5}{2},\ x\in\mathbb{R}\right\}</span></span></td></tr>
+      <tr><th>Range</th><td><span data-reveal><span class="tex">\{y\mid y\ne0,\ y\in\mathbb{R}\}</span></span></td><td><span data-reveal><span class="tex">\{y\mid y\ne0,\ y\in\mathbb{R}\}</span></span></td><td><span data-reveal><span class="tex">\{y\mid y\ne0,\ y\in\mathbb{R}\}</span></span></td></tr>
+      <tr><th><span class="tex">y&gt;0</span> when</th><td><span data-reveal><span class="tex">x&gt;-4</span></span></td><td><span data-reveal><span class="tex">x&gt;2</span></span></td><td><span data-reveal><span class="tex">x&lt;\frac{5}{2}</span></span></td></tr>
+    </table>
+    <div class="work" style="--h:110px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">(b) <span class="tex">3x-6=1\Rightarrow x=\frac{7}{3}</span>; &nbsp;<span class="tex">3x-6=-1\Rightarrow x=\frac{5}{3}</span>. &nbsp; (c) <span class="tex">5-2x=1\Rightarrow x=2</span>; &nbsp;<span class="tex">5-2x=-1\Rightarrow x=3</span>.<br>In (a) and (b) the line rises, so each branch of the reciprocal falls; in (c) the line falls (<span class="tex">a=-2</span>), so each branch rises.</div></div></div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Points both ways</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) The graph of <span class="tex">y=f(x)</span> passes through <span class="tex">(5,\ -4)</span>. Which point with <span class="tex">x=5</span> is on the graph of <span class="tex">y=\dfrac{1}{f(x)}</span>?</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\frac{1}{-4}=-\frac{1}{4}</span>: the point <span class="tex">\left(5,\ -\frac{1}{4}\right)</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) The graph of <span class="tex">y=\dfrac{1}{f(x)}</span> passes through <span class="tex">(-3,\ 0.2)</span>. Which point with <span class="tex">x=-3</span> is on the graph of <span class="tex">y=f(x)</span>?</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">f(-3)=\frac{1}{0.2}=5</span>: the point <span class="tex">(-3,\ 5)</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) For <span class="tex">f(x)=\frac{1}{2}x+1</span>, determine the point on <span class="tex">y=\dfrac{1}{f(x)}</span> where <span class="tex">y=4</span>.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\frac{1}{f(x)}=4\Rightarrow f(x)=\frac{1}{4}</span><br><span class="tex">\frac{1}{2}x+1=\frac{1}{4}\Rightarrow\frac{1}{2}x=-\frac{3}{4}\Rightarrow x=-\frac{3}{2}</span><br>The point is <span class="tex">\left(-\frac{3}{2},\ 4\right)</span>.</div></div></div>
+    <div class="part"><div class="pl">(d) Can the graph of <span class="tex">y=\dfrac{1}{f(x)}</span> ever have <span class="tex">y=0</span>? Explain.</div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">No. A fraction <span class="tex">\frac{1}{f(x)}</span> with numerator <span class="tex">1</span> is never <span class="tex">0</span>, however large <span class="tex">f(x)</span> is. That is why <span class="tex">y=0</span> is an asymptote and <span class="tex">0</span> is not in the range.</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 6 · Questions 1–6</h2>
+  <p class="pr-t">Flip values, sketch reciprocals of lines with the guide lines <span class="tex">y=\pm1</span>, and read the features straight from the equation.</p>
+  <div class="pr-chips n4"><span><b>1–2</b>Tables of reciprocals and a first sketch</span><span><b>3</b>Sketch <span class="tex">\tfrac{1}{f(x)}</span> from the line</span><span><b>4–5</b>Features from the equation, close to the asymptote</span><span><b>6</b>Points both ways</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u7l6">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 5. Working backwards and matching ================= -->
+<section class="card" data-ink="s5" data-section="5. Working Backwards and Matching">
+  <div class="sec-h"><span class="badge">5</span><h2>Working Backwards and Matching</h2></div>
+  <p>The features go both ways: a vertical asymptote <span class="tex">x=a</span> of <span class="tex">y=\dfrac{1}{f(x)}</span> is a zero of <span class="tex">f</span>, an invariant point is on both graphs, and a point <span class="tex">\left(x,\ \dfrac{1}{y}\right)</span> on the reciprocal gives <span class="tex">(x,\ y)</span> on the line. Two points determine the line <span class="tex">y=f(x)</span>.</p>
+  <div class="explainer" data-explainer="backwards"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>From the reciprocal back to the line</h3></div>
+  <p class="q">The graph of <span class="tex">y=\dfrac{1}{f(x)}</span>, where <span class="tex">f(x)</span> is a linear function, is shown. It has the vertical asymptote <span class="tex">x=1.5</span> and passes through the invariant point <span class="tex">(2,\ 1)</span>.</p>
+  <div class="part u7l6-ex7">
+    <div class="u7l6-col">
+      <div class="pl">(a) Sketch the graph of <span class="tex">y=f(x)</span> on the grid.</div><div class="work" style="--h:150px"></div>
+      <div class="ansrow"><button class="reveal">Answer</button><div class="ans">The zero of <span class="tex">f</span> is <span class="tex">1.5</span>, so <span class="tex">(1.5,\ 0)</span> is on the line; <span class="tex">(2,\ 1)</span> is on it too. Draw the line through these points (it also passes through <span class="tex">(1,\ -1)</span>).</div></div>
+    </div>
+    <div class="u7l6-sk"><div data-bk-graph='{"width":320,"height":400,"xmin":-2.5,"xmax":4.5,"ymin":-4.5,"ymax":4.5,"fontSize":14,"items":[{"vline":[1.5,{"color":"#7b4fc4"}]},{"fn":["1/(2*x-3)",{"color":"#d9730d","width":4}]},{"point":[2,1,{"color":"#c99a06","coords":true,"pos":"e"}]}]}'></div>
+      <div class="u7l6-ska" data-bk-graph='{"width":320,"height":400,"xmin":-2.5,"xmax":4.5,"ymin":-4.5,"ymax":4.5,"fontSize":14,"items":[{"vline":[1.5,{"color":"#7b4fc4"}]},{"fn":["1/(2*x-3)",{"color":"#d9730d","width":4}]},{"line":[{"m":2,"b":-3},{"color":"#1f5bd6"}]},{"point":[2,1,{"color":"#c99a06","coords":true,"pos":"e"}]},{"point":[1.5,0,{"color":"#7b4fc4"}]},{"point":[1,-1,{"color":"#c99a06","coords":true,"pos":"w"}]}]}'></div></div>
+  </div>
+  <div class="part"><div class="pl">(b) Determine the equation of <span class="tex">f(x)</span> in the form <span class="tex">f(x)=ax+b</span>, and the <span class="tex">y</span>-intercept of <span class="tex">y=\dfrac{1}{f(x)}</span>.</div><div class="work" style="--h:150px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">Slope <span class="tex">a=\frac{1-0}{2-1.5}=2</span>; &nbsp;<span class="tex">0=2(1.5)+b\Rightarrow b=-3</span><br><span class="tex">f(x)=2x-3</span><br><span class="tex">y</span>-intercept of the reciprocal: <span class="tex">\frac{1}{-3}=-\frac{1}{3}</span> (matches the graph)</div></div></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u7l6"></section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Match each equation with its graph</h3></div>
+  <p class="q">Match each equation with its graph. Explain how you decided.</p>
+  <div class="u7l6-eqs"><span>(i) <span class="tex">y=\dfrac{1}{x+3}</span></span><span>(ii) <span class="tex">y=\dfrac{1}{2x-6}</span></span><span>(iii) <span class="tex">y=\dfrac{1}{x-3}</span></span><span>(iv) <span class="tex">y=\dfrac{1}{3-x}</span></span></div>
+  <div class="u7l6-four">
+    <div><b>A</b><div data-bk-graph='{"width":228,"height":180,"xmin":-6.5,"xmax":6.5,"ymin":-3.5,"ymax":3.5,"xlabels":3,"ylabels":1,"fontSize":12,"items":[{"line":[{"m":0,"b":1},{"color":"#12805a","dash":"3 6","width":2,"arrows":false}]},{"line":[{"m":0,"b":-1},{"color":"#12805a","dash":"3 6","width":2,"arrows":false}]},{"fn":["1/(2*x-6)",{"color":"#d9730d","width":3.5}]}]}'></div></div>
+    <div><b>B</b><div data-bk-graph='{"width":228,"height":180,"xmin":-6.5,"xmax":6.5,"ymin":-3.5,"ymax":3.5,"xlabels":3,"ylabels":1,"fontSize":12,"items":[{"line":[{"m":0,"b":1},{"color":"#12805a","dash":"3 6","width":2,"arrows":false}]},{"line":[{"m":0,"b":-1},{"color":"#12805a","dash":"3 6","width":2,"arrows":false}]},{"fn":["1/(x+3)",{"color":"#d9730d","width":3.5}]}]}'></div></div>
+    <div><b>C</b><div data-bk-graph='{"width":228,"height":180,"xmin":-6.5,"xmax":6.5,"ymin":-3.5,"ymax":3.5,"xlabels":3,"ylabels":1,"fontSize":12,"items":[{"line":[{"m":0,"b":1},{"color":"#12805a","dash":"3 6","width":2,"arrows":false}]},{"line":[{"m":0,"b":-1},{"color":"#12805a","dash":"3 6","width":2,"arrows":false}]},{"fn":["1/(3-x)",{"color":"#d9730d","width":3.5}]}]}'></div></div>
+    <div><b>D</b><div data-bk-graph='{"width":228,"height":180,"xmin":-6.5,"xmax":6.5,"ymin":-3.5,"ymax":3.5,"xlabels":3,"ylabels":1,"fontSize":12,"items":[{"line":[{"m":0,"b":1},{"color":"#12805a","dash":"3 6","width":2,"arrows":false}]},{"line":[{"m":0,"b":-1},{"color":"#12805a","dash":"3 6","width":2,"arrows":false}]},{"fn":["1/(x-3)",{"color":"#d9730d","width":3.5}]}]}'></div></div>
+  </div>
+  <div class="part"><div class="work" style="--h:170px"></div>
+    <div class="ansrow"><button class="reveal">Answer</button><div class="ans">(i) has its vertical asymptote at <span class="tex">x=-3</span>: graph <b>B</b>. The other three have <span class="tex">x=3</span>.<br>(iv): <span class="tex">3-x</span> is positive for <span class="tex">x&lt;3</span>, so the left branch is above the <span class="tex">x</span>-axis: graph <b>C</b>.<br>(ii) and (iii) both have the left branch below the axis. Invariant points: (iii) <span class="tex">x-3=1</span> at <span class="tex">x=4</span>; (ii) <span class="tex">2x-6=1</span> at <span class="tex">x=3.5</span>, closer to the asymptote. So (iii) is <b>D</b> (passes through <span class="tex">(4,\ 1)</span>) and (ii) is <b>A</b> (passes through <span class="tex">(3.5,\ 1)</span>, hugs the axes more closely).</div></div></div>
+  <div class="explainer" data-explainer="match"></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Partner points.</b> <span class="tex">(x,\ y)</span> on the line becomes <span class="tex">\left(x,\ \tfrac{1}{y}\right)</span>: same sign, big ↔ small, and <span class="tex">\pm1</span> stay put (the <b>invariant points</b>, on <span class="tex">y=\pm1</span>).</div>
+    <div><b>Asymptotes.</b> A <b>vertical asymptote</b> at the zero of <span class="tex">f</span> (the line’s <span class="tex">x</span>-intercept), and the <b>horizontal asymptote</b> <span class="tex">y=0</span>: the reciprocal is never <span class="tex">0</span>.</div>
+    <div><b>Sketching.</b> Asymptotes, invariant points on <span class="tex">y=\pm1</span>, a few more points, then two branches on the same side of the <span class="tex">x</span>-axis as the line.</div>
+    <div><b>From the equation.</b> For <span class="tex">y=\tfrac{1}{ax+b}</span>: <span class="tex">ax+b=0</span> gives the asymptote, <span class="tex">ax+b=\pm1</span> the invariant points, <span class="tex">\tfrac{1}{b}</span> the <span class="tex">y</span>-intercept; range <span class="tex">\{y\mid y\ne0\}</span>.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u7l6">
+    <div><div class="kicker">Your turn</div><b>Assignment 6 · Questions 7–17</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l7/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 7 — Reciprocal Functions of Quadratic Functions</b><div class="muted">The same ideas when <span class="tex">f</span> is a parabola: zero, one or two vertical asymptotes.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u7l6.js';
+  boot({ key: 'u7l6', homeHref: '../../', title: '7.6 Reciprocals of Lines' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

@@ -57,7 +57,7 @@
 .u7l3-n { flex: 0 0 auto; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #7a1f3d; color: #fff; font: 800 17px var(--round); margin-top: 1px; }
 .u7l3-n:empty { display: none; }
 .u7l3-rc { min-width: 0; }
-.u7l3-rowb { font-size: 18px; padding: 6px 12px; }
+.u7l3-rowb { font-size: 17.5px; line-height: 1.4; padding: 5px 12px; }
 .u7l3-negcell { background: #fde9e7 !important; }
 .u7l3-flipcell { background: #efe8fb !important; color: #7b4fc4 !important; font-weight: 700; }
 .u7l3-pn { display: flex; flex-direction: column; gap: 8px; }
@@ -106,3 +106,4 @@
 .u7l3-gl { font: 700 13px var(--round); fill: #2f5a22; }
 .u7l3-dlab { font-size: 17px; font-weight: 700; color: #a86a08; background: rgba(255,255,255,.9); border-radius: 8px; padding: 0 6px; white-space: nowrap; pointer-events: none; }
 .u7l3-dl10 { color: #7b4fc4; }
+.u7l3-sm { font-size: 14.5px; font-weight: 400; }

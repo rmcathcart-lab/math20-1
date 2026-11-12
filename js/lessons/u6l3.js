@@ -473,7 +473,7 @@
     }
 
     /* ---------- the operation builder: e1 op e2 op e3 …  (op 'mul' | 'div')
-       es: [{ n: atoms, d: atoms, an, ad (ascending), fac (shown factored) }]
+       es: [{ n: atoms, d: atoms, an, ad (ascending), fac (shown factored), fn / fd (only the numerator / denominator factored) }]
        o: { opp: true (an opposite pair), flip: [bools] custom, divN: [atom lists] custom, show: tex custom, complex: true,
             restr: true (two variables: restrictions), vars: [v, w], dl, nw, prompt, hints, text, noNpv: true (one box) } */
     var OPS = { mul: '\\cdot ', div: '\\div ', times: '\\times ' };
@@ -482,7 +482,7 @@
     function exprShow(e) {
       if (e.fac) return e.d.length ? fracF(e.n, e.d) : wrapM(facTex(e.n));
       if (!e.d.length) { var p = listPoly(e.n); return P.count(p) > 1 ? '(' + (e.an ? txa(p) : tx(p)) + ')' : tx(p); }
-      return '\\frac{' + polyT(e.n, e.an) + '}{' + polyT(e.d, e.ad) + '}';
+      return '\\frac{' + (e.fn ? facTex(e.n) : polyT(e.n, e.an)) + '}{' + (e.fd ? facTex(e.d) : polyT(e.d, e.ad)) + '}';
     }
     function exprFac(e) { return e.d.length ? fracF(e.n, e.d) : wrapM(facTex(e.n)); }
     function exprFlip(e) { return fracF(e.d.length ? e.d : [C(1)], e.n); }
@@ -520,7 +520,7 @@
         nw.push({ list: rC, code: cp + 'npv-cancel', hint: 'State the restrictions from every <b>original</b> denominator' + (anyDiv ? ' (and the divisor’s numerator)' : '') + ' before dividing out: a divided-out factor still cannot be ' + t(0) + '.' });
       } else {
         var nD = npvOf(I.dens);
-        if (anyDiv && I.divN.length && !npvEq(nD, I.npv)) nw.push({ vals: nD, code: cp + 'npv-div', hint: 'In a division the divisor cannot be ' + t(0) + ' either: the zeros of its numerator are NPVs too (it becomes a denominator when you flip it).' });
+        if (anyDiv && !o.flip && I.divN.length && !npvEq(nD, I.npv)) nw.push({ vals: nD, code: cp + 'npv-div', hint: 'In a division the divisor cannot be ' + t(0) + ' either: the zeros of its numerator are NPVs too (it becomes a denominator when you flip it).' });
         if (anyDiv && !o.flip) {
           var after = npvOf(es.map(function (e, i) { return I.mask[i] ? e.n : e.d; }));
           if (!npvEq(after, I.npv)) nw.push({ vals: after, code: cp + 'npv-flip', hint: 'Find the NPVs <b>before</b> you flip: the divisor’s original denominator cannot be ' + t(0) + ' either, even though it is in a numerator after flipping.' });

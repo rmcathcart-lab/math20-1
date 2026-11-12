@@ -93,7 +93,7 @@
     'ineq-incl': ['Roots included/excluded wrong', 's'], 'ineq-side': ['Between the roots instead of outside (or the reverse)', 'b'], 'ineq-rev': ['Multiplied by a negative without reversing the sign', 'b'],
     'ineq-roots': ['Roots with the wrong signs', 'b'], 'ineq-case': ['Case analysis: only the case with both factors positive', 'b'], 'ineq-and': ['Joined the two pieces with “and”', 'b'],
     'ineq-none': ['Said “no solution” when there are solutions', 'n'], 'ineq-claim': ['Gave solutions when there are none', 'n'], 'ineq-all': ['Said all real numbers', 'n'],
-    'ineq-sq': ['A perfect square: confused x ≠ h, x = h, all real numbers and no solution', 'b'], 'ineq-restr': ['Ignored the restriction of the context', 's'], 'ineq-sqrt': ['Took the square root and lost the negative side', 'b'],
+    'ineq-sq': ['A perfect square: confused x ≠ h, x = h, all real numbers and no solution', 'b'], 'ineq-restr': ['Ignored the restriction of the context', 's'], 'ineq-sqrt': ['Took the square root and lost the negative side', 'b'], 'ineq-half': ['Gave only one of the two intervals', 'b'],
     'ineq-time': ['Gave the times instead of how long', 'b'], 'count-ends': ['Counted the integers with the endpoints wrong', 's'],
     'sign-row': ['Sign chart: product row wrong', 'n'],
     'exact': ['Decimals instead of exact values (format)', ''], 'xs-only': ['Gave x-values instead of ordered pairs (format)', ''], 'gen-form': ['Inequality not in general form (format)', ''],
@@ -340,6 +340,8 @@
     return function (resp) {
       var s0 = String(resp == null ? '' : resp).trim(), A;
       if (!s0) return form('empty', 'Type your answer first.');
+      // "or" / "and" typed as letters in the math box (x<-2orx>3) or as \operatorname{or}
+      resp = s0.replace(/\\(operatorname|mathrm|textrm|text)\{\s*(or|and)\s*\}/g, ' $2 ').replace(/([0-9}\)\]])\s*(or|and)\s*(?=[a-zA-Z\\(\[\-])/g, '$1 $2 ');
       if (isNone(resp)) A = [];
       else {
         var pr = HW.sets.parse(resp);
@@ -354,6 +356,7 @@
       if (!T.length) return wrong(cp + 'ineq-claim', o.claimHint || 'Test a value in the original inequality: no real number makes it true, so there is no solution.');
       if (!A.length) return wrong(cp + 'ineq-none', o.noneHint || 'There are values that work: test ' + t(V + '=0') + ' (or another value) in the original inequality.');
       if (isAll(A)) return wrong(cp + 'ineq-all', 'Not every real number works: test a few values in the original inequality.');
+      if (T.length === 2 && A.length === 1 && T.some(function (q) { return partsEq(A, [q], tol, true); })) return wrong(cp + 'ineq-half', 'One piece is right, but the solution has another interval: test a value on the other side of the roots too.');
       if (partsEq(A, T, tol, true)) return wrong(cp + 'ineq-incl', o.inclHint || 'Right intervals: now check the endpoints. ' + t('\\le') + ' and ' + t('\\ge') + ' include the roots (closed dots); ' + t('<') + ' and ' + t('>') + ' leave them out (open dots).');
       if (comp.length && partsEq(A, comp, tol, true)) return wrong(cp + (o.rev ? 'ineq-rev' : 'ineq-side'), o.rev ? (o.revHint || 'Multiplying or dividing by a negative number reverses the inequality sign. Test a value in the <b>original</b> inequality.') : (o.sideHint || 'Right roots, wrong intervals: test a value from each interval in the original inequality.'));
       if (partsEq(A, neg, tol, true) || (comp.length && partsEq(A, complement(neg), tol, true))) return wrong(cp + 'ineq-roots', 'Check the signs of the roots: ' + t('(' + V + '-3)=0') + ' gives ' + t(V + '=3') + ', not ' + t('-3') + '.');

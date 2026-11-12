@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Unit 7 Review · Math 20-1 7.8</title>
+<meta name="description" content="Math 20-1 Unit 7 Lesson 8: Unit 7 review of absolute value and reciprocal functions. Absolute value of numbers, graphs of y = |f(x)| and their piecewise form, absolute value equations with extraneous solutions, and reciprocal functions of linear and quadratic functions on one page, a match-the-graph round, and mixed review examples. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u7l8.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u7l8">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Night Bridge">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="40" y="46" font-size="40" text-anchor="middle">🌙</text></g><text x="110" y="46" font-size="40" text-anchor="middle">✨<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0.3s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="rotate" values="-12 180 46;12 180 46;-12 180 46" dur="2.2s" repeatCount="indefinite"/><text x="180" y="46" font-size="44" text-anchor="middle">🔦</text></g><text x="250" y="46" font-size="40" text-anchor="middle">⭐<animate attributeName="opacity" values="1;0.15;1" dur="1.6s" begin="0.8s" repeatCount="indefinite"/></text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0.5s" repeatCount="indefinite"/><text x="310" y="46" font-size="40" text-anchor="middle">🦉</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Night Bridge</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Four friends must cross a rickety rope bridge at night. They have <b>one flashlight</b>, and nobody can be on the bridge without it. The bridge holds <b>two people</b> at a time, and two people walk together at the slower one’s pace.</p><p class="vw-ctx">Alone, they cross in <b>1, 2, 5</b> and <b>10</b> minutes.</p><p class="vw-ask">What is the shortest time to get all four across?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A rope bridge over a canyon at night: four friends wait on one cliff with their crossing times 1, 2, 5 and 10 minutes, and one walker carries the flashlight across"><rect x="0" y="0" width="330" height="250" rx="14" fill="#1c2547"/><circle cx="30" cy="22" r="2" fill="#fff8d6"><animate attributeName="opacity" values="1;0.15;1" dur="1.4s" begin="0.0s" repeatCount="indefinite"/></circle><circle cx="70" cy="48" r="1.6" fill="#fff8d6"><animate attributeName="opacity" values="1;0.15;1" dur="1.7s" begin="0.37s" repeatCount="indefinite"/></circle><circle cx="118" cy="18" r="2.2" fill="#fff8d6"><animate attributeName="opacity" values="1;0.15;1" dur="2.0s" begin="0.74s" repeatCount="indefinite"/></circle><circle cx="160" cy="56" r="1.5" fill="#fff8d6"><animate attributeName="opacity" values="1;0.15;1" dur="2.3s" begin="1.1099999999999999s" repeatCount="indefinite"/></circle><circle cx="205" cy="26" r="2" fill="#fff8d6"><animate attributeName="opacity" values="1;0.15;1" dur="2.5999999999999996s" begin="1.48s" repeatCount="indefinite"/></circle><circle cx="236" cy="70" r="1.4" fill="#fff8d6"><animate attributeName="opacity" values="1;0.15;1" dur="2.9s" begin="1.85s" repeatCount="indefinite"/></circle><circle cx="130" cy="86" r="1.4" fill="#fff8d6"><animate attributeName="opacity" values="1;0.15;1" dur="3.1999999999999997s" begin="2.2199999999999998s" repeatCount="indefinite"/></circle><circle cx="20" cy="90" r="1.6" fill="#fff8d6"><animate attributeName="opacity" values="1;0.15;1" dur="3.5s" begin="2.59s" repeatCount="indefinite"/></circle><circle cx="312" cy="96" r="1.6" fill="#fff8d6"><animate attributeName="opacity" values="1;0.15;1" dur="3.8s" begin="2.96s" repeatCount="indefinite"/></circle><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="3s" begin="0s" repeatCount="indefinite"/><circle cx="282" cy="40" r="19" fill="#fff3c4"/><circle cx="291" cy="34" r="16" fill="#1c2547"/></g><path d="M96 238 Q165 228 234 238 L234 250 L96 250 Z" fill="#2b55a0" opacity=".75"><animate attributeName="opacity" values=".75;.45;.75" dur="2.4s" repeatCount="indefinite"/></path><polygon points="0,140 80,140 96,250 0,250" fill="#3b3326"/><polygon points="250,140 330,140 330,250 234,250" fill="#3b3326"/><rect x="0" y="136" width="80" height="6" fill="#4f7a3a"/><rect x="250" y="136" width="80" height="6" fill="#4f7a3a"/><path d="M78 142 Q165 192 252 142" fill="none" stroke="#c9a36a" stroke-width="3"/><line x1="90.4" y1="148.6" x2="90.4" y2="155.6" stroke="#a37b45" stroke-width="5"/><line x1="102.9" y1="154.2" x2="102.9" y2="161.2" stroke="#a37b45" stroke-width="5"/><line x1="115.3" y1="158.8" x2="115.3" y2="165.8" stroke="#a37b45" stroke-width="5"/><line x1="127.7" y1="162.4" x2="127.7" y2="169.4" stroke="#a37b45" stroke-width="5"/><line x1="140.1" y1="165.0" x2="140.1" y2="172.0" stroke="#a37b45" stroke-width="5"/><line x1="152.6" y1="166.5" x2="152.6" y2="173.5" stroke="#a37b45" stroke-width="5"/><line x1="165.0" y1="167.0" x2="165.0" y2="174.0" stroke="#a37b45" stroke-width="5"/><line x1="177.4" y1="166.5" x2="177.4" y2="173.5" stroke="#a37b45" stroke-width="5"/><line x1="189.9" y1="165.0" x2="189.9" y2="172.0" stroke="#a37b45" stroke-width="5"/><line x1="202.3" y1="162.4" x2="202.3" y2="169.4" stroke="#a37b45" stroke-width="5"/><line x1="214.7" y1="158.8" x2="214.7" y2="165.8" stroke="#a37b45" stroke-width="5"/><line x1="227.1" y1="154.2" x2="227.1" y2="161.2" stroke="#a37b45" stroke-width="5"/><line x1="239.6" y1="148.6" x2="239.6" y2="155.6" stroke="#a37b45" stroke-width="5"/><path d="M78 120 Q165 170 252 120" fill="none" stroke="#c9a36a" stroke-width="2.5"/><line x1="78" y1="112" x2="78" y2="144" stroke="#7a5a30" stroke-width="5"/><line x1="252" y1="112" x2="252" y2="144" stroke="#7a5a30" stroke-width="5"/><path d="M78 112 L168 145 M252 112 L162 145" stroke="none"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.3s" begin="0.0s" repeatCount="indefinite"/><text x="12" y="134" font-size="19" text-anchor="middle">🧒</text></g><text x="12" y="160" font-size="12.5" font-weight="800" fill="#fff3c4" text-anchor="middle" font-family="Arial, sans-serif">1</text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.5s" begin="0.3s" repeatCount="indefinite"/><text x="31" y="134" font-size="19" text-anchor="middle">🧑</text></g><text x="31" y="160" font-size="12.5" font-weight="800" fill="#fff3c4" text-anchor="middle" font-family="Arial, sans-serif">2</text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.7000000000000002s" begin="0.6s" repeatCount="indefinite"/><text x="50" y="134" font-size="19" text-anchor="middle">👩</text></g><text x="50" y="160" font-size="12.5" font-weight="800" fill="#fff3c4" text-anchor="middle" font-family="Arial, sans-serif">5</text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="1.9000000000000001s" begin="0.8999999999999999s" repeatCount="indefinite"/><text x="69" y="134" font-size="19" text-anchor="middle">🧓</text></g><text x="69" y="160" font-size="12.5" font-weight="800" fill="#fff3c4" text-anchor="middle" font-family="Arial, sans-serif">10</text><text x="40" y="176" font-size="11" font-weight="700" fill="#e6dcc0" text-anchor="middle" font-family="Arial, sans-serif">minutes</text><g><animateTransform attributeName="transform" type="translate" values="-66.1 10.6;-34.8 21.0;0.0 25.0;34.8 21.0;66.1 10.6;66.1 10.6;34.8 21.0;0.0 25.0;-34.8 21.0;-66.1 10.6;-66.1 10.6" keyTimes="0;.1;.2;.3;.4;.5;.6;.7;.8;.9;1" dur="8s" repeatCount="indefinite"/><polygon points="172,124 222,104 222,150" fill="#ffe27a" opacity=".45"><animate attributeName="opacity" values=".45;.2;.45" dur=".9s" repeatCount="indefinite"/></polygon><text x="165" y="140" font-size="26" text-anchor="middle">🚶</text><text x="176" y="126" font-size="13" text-anchor="middle">🔦</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -5;0 0" dur="1.6s" begin="0s" repeatCount="indefinite"/><text x="292" y="122" font-size="30" text-anchor="middle">⏱️</text></g><text x="292" y="168" font-size="26" font-weight="800" fill="#ffcf4a" text-anchor="middle">?<animate attributeName="opacity" values="1;0.25;1" dur="1.4s" begin="0s" repeatCount="indefinite"/></text></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Write down your best time. Then try to beat it.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>17 minutes.</b> Most people let the fastest friend walk everyone across: <span class="tex">10+1+5+1+2=19</span> minutes.<br>Better: 1 and 2 cross (<b>2</b>), 1 brings the light back (<b>1</b>), <b>5 and 10 cross together</b> (<b>10</b>), 2 brings it back (<b>2</b>), 1 and 2 cross (<b>2</b>). <span class="tex">2+1+10+2+2=17</span>.<br><span class="muted">Twist: the two slowest walk together, so the 5-minute walk hides inside the 10-minute one.</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 7 Absolute Value and Reciprocal Functions · Lesson 8</div>
+  <h1>Unit 7 Review</h1>
+  <p class="lede">Absolute value, graphs of <span class="tex">y=|f(x)|</span>, absolute value equations and reciprocal functions on one page, then mixed examples that combine them. Two questions run the whole unit: what happens to the part of a graph <b class="u7l8-abs">below the <span class="tex">x</span>-axis</b> (the absolute value flips it up), and what happens at the <b class="u7l8-rec">zeros</b> (the reciprocal has asymptotes there).</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>evaluate absolute value expressions and find the <b>distance</b> between two numbers</li>
+      <li>sketch <span class="tex">y=|f(x)|</span> for linear and quadratic <span class="tex">f</span>, state its invariant points and range, and write it in <b>piecewise form</b></li>
+      <li>solve absolute value equations and reject <b>extraneous</b> solutions</li>
+      <li>sketch <span class="tex">y=\dfrac{1}{f(x)}</span> with its <b>asymptotes</b>, invariant points and turning point, and state its domain and range</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>AN1</b> Demonstrate an understanding of the absolute value of real numbers.<br><b>RF2</b> Graph and analyze absolute value functions (limited to linear and quadratic functions) to solve problems.<br><b>RF11</b> Graph and analyze reciprocal functions (limited to the reciprocal of linear and quadratic functions).<br><span class="muted">Today: the whole unit on one page, mixed examples in the style of the unit test, and a match-the-graph round.</span></div>
+</section>
+
+<!-- ================= 1. Unit summary ================= -->
+<section class="card" data-ink="s1" data-section="1. Unit Summary">
+  <div class="sec-h"><span class="badge">1</span><h2>Unit Summary</h2></div>
+  <h3 class="sub">Every skill on one page <span class="muted u7l8-subnote">tap a grey box to check yourself</span></h3>
+  <table class="u7l8-mtab">
+    <tr><th>Topic</th><th>Key facts</th><th>Example</th></tr>
+    <tr><th>Absolute value of a number</th><td><span class="tex">|a|</span> is the distance from <span class="tex">a</span> to <span class="tex">0</span>, so <span class="tex">|a|\ge0</span>. <span class="tex">|a|=a</span> if <span class="tex">a\ge0</span> and <span class="tex">|a|=-a</span> if <span class="tex">a&lt;0</span>. The bars are grouping symbols: simplify inside first. The distance between <span class="tex">a</span> and <span class="tex">b</span> is <span class="tex">|a-b|</span>.</td>
+      <td><span class="tex">|3-8|-|-2|=</span> <span data-reveal><span class="tex">5-2=3</span></span><br>Distance from <span class="tex">-4</span> to <span class="tex">7</span>: <span data-reveal><span class="tex">|-4-7|=11</span></span></td></tr>
+    <tr><th>Graph of <span class="tex">y=|f(x)|</span></th><td>Keep the part of <span class="tex">y=f(x)</span> on or above the <span class="tex">x</span>-axis; <b>reflect</b> the part below it in the <span class="tex">x</span>-axis. The <span class="tex">x</span>-intercepts are <b>invariant points</b>. Same domain; the range has no negative values. A line gives a V with its vertex at the zero; for a parabola, the part between or outside the zeros is reflected.</td>
+      <td><span class="tex">y=|x^2-4|</span>: the part for <span data-reveal><span class="tex">-2&lt;x&lt;2</span></span> is reflected; the vertex <span class="tex">(0,\ -4)</span> becomes a local maximum <span data-reveal><span class="tex">(0,\ 4)</span></span>; range <span data-reveal><span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span></span></td></tr>
+    <tr><th>Piecewise form</th><td><span class="tex">|A|=A</span> where <span class="tex">A\ge0</span> and <span class="tex">|A|=-A</span> where <span class="tex">A&lt;0</span>. Solve <span class="tex">A\ge0</span> to find where each piece applies.</td>
+      <td><span class="tex">|2x-6|=</span> <span data-reveal><span class="tex">\begin{cases}2x-6, &amp; \text{if } x\ge3\\ -2x+6, &amp; \text{if } x&lt;3\end{cases}</span></span></td></tr>
+    <tr><th>Absolute value equations</th><td><b>Isolate</b> the absolute value. <span class="tex">|A|=</span> a negative number has no solution. Otherwise solve <span class="tex">A=B</span> and <span class="tex">A=-B</span> (or use the cases), then <b>verify</b> every answer in the original equation and reject <b class="u7l8-no">extraneous</b> ones. Graphically: the <span class="tex">x</span>-coordinates of the intersection points.</td>
+      <td><span class="tex">|x-1|=2x+4</span>:<br><span class="tex">x-1=2x+4</span> gives <span data-reveal><span class="tex">x=-5</span> (<span class="tex">|-6|=6\ne-6</span>: reject)</span><br><span class="tex">x-1=-(2x+4)</span> gives <span data-reveal><span class="tex">x=-1</span> (<span class="tex">2=2</span> ✓)</span></td></tr>
+  </table>
+</section>
+
+<section class="card" data-ink="s1b" data-section="Reciprocal functions and common errors">
+  <div class="def u7l8-key"><div class="u7l8-kh">Reciprocal functions <span class="tex">y=\dfrac{1}{f(x)}</span></div>
+    <div class="u7l8-k3">
+      <div><b>Every reciprocal.</b> A point <span class="tex">(x,\ y)</span> becomes <span class="tex">\left(x,\ \frac{1}{y}\right)</span>. Zeros of <span class="tex">f</span> <span class="tex">\to</span> <b>vertical asymptotes</b>; the horizontal asymptote is <span class="tex">y=0</span>. Invariant points where <span class="tex">f(x)=\pm1</span>. Same sign as <span class="tex">f</span>. Where <span class="tex">f</span> increases, the reciprocal decreases (and the other way). <span class="tex">y</span>-intercept <span class="tex">c\to\frac{1}{c}</span>. Domain: all real numbers except the zeros of <span class="tex">f</span>; <span class="tex">y=0</span> is never in the range.</div>
+      <div><b>Linear <span class="tex">f</span>.</b> One vertical asymptote, two branches in opposite regions; range <span class="tex">\{y\mid y\ne0,\ y\in\mathbb{R}\}</span>.</div>
+      <div><b>Quadratic <span class="tex">f</span> with vertex <span class="tex">(p,\ q)</span>.</b> Two, one or no vertical asymptotes (two, one or no zeros). If <span class="tex">q\ne0</span>, the turning point is <span class="tex">\left(p,\ \frac{1}{q}\right)</span>: a <b>maximum</b> point if <span class="tex">a&gt;0</span>, a <b>minimum</b> point if <span class="tex">a&lt;0</span>. Range: reciprocals of the range of <span class="tex">f</span>, e.g. <span class="tex">f(x)\ge-4</span> gives <span class="tex">y\le-\frac{1}{4}</span> or <span class="tex">y&gt;0</span>.</div>
+    </div>
+  </div>
+  <h3 class="sub">Common errors <span class="muted u7l8-subnote">tap a card to see the fix</span></h3>
+  <div class="bk-flips u7l8-flips" style="--bk-cols:4">
+    <div class="bk-flip"><div class="bk-front"><span class="tex">|a+b|=|a|+|b|</span>?</div><div class="bk-back">Not in general: <span class="tex">|3+(-5)|=2</span> but <span class="tex">|3|+|-5|=8</span>.</div></div>
+    <div class="bk-flip"><div class="bk-front"><span class="tex">-|5|=5</span>?</div><div class="bk-back"><span class="tex">-|5|=-5</span>: the minus is <b>outside</b> the bars.</div></div>
+    <div class="bk-flip"><div class="bk-front">Splitting into cases before isolating</div><div class="bk-back"><b>Isolate</b> the absolute value first, then split.</div></div>
+    <div class="bk-flip"><div class="bk-front">Not checking the answers</div><div class="bk-back">When the other side contains <span class="tex">x</span>, <b>verify</b> each one: some are extraneous.</div></div>
+    <div class="bk-flip"><div class="bk-front">Reflecting the whole parabola</div><div class="bk-back">Reflect <b>only</b> the part below the <span class="tex">x</span>-axis.</div></div>
+    <div class="bk-flip"><div class="bk-front">The reciprocal of a minimum is a minimum?</div><div class="bk-back">It turns into a <b>maximum</b> (and a maximum into a minimum).</div></div>
+    <div class="bk-flip"><div class="bk-front">A reciprocal graph crossing the <span class="tex">x</span>-axis or an asymptote</div><div class="bk-back">It never does: <span class="tex">\frac{1}{f(x)}\ne0</span>, and it is undefined at the zeros of <span class="tex">f</span>.</div></div>
+  </div>
+</section>
+
+<!-- ================= 2. Absolute value and its graphs ================= -->
+<section class="card" data-ink="s2" data-section="2. Absolute Value and Its Graphs">
+  <div class="sec-h"><span class="badge">2</span><h2>Absolute Value and Its Graphs</h2></div>
+  <div class="def"><b>Distance from zero.</b> Simplify inside the bars first; an absolute value is never negative. For a graph, everything below the <span class="tex">x</span>-axis is reflected up, and the zeros stay put.</div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Numbers and piecewise form</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Evaluate <span class="tex">|-8|-|3-10|+|\sqrt[3]{-27}|</span>.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">=8-|-7|+|-3|=8-7+3=\boldsymbol{4}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Order from least to greatest: <span class="tex">|-2.5|</span>, <span class="tex">-|-4|</span>, <span class="tex">|\sqrt{2}-3|</span>, <span class="tex">-|1-2|</span></div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Values: <span class="tex">2.5</span>, <span class="tex">-4</span>, <span class="tex">3-\sqrt{2}\approx1.59</span>, <span class="tex">-1</span><br><span class="tex">\boldsymbol{-|-4|&lt;-|1-2|&lt;|\sqrt{2}-3|&lt;|-2.5|}</span></div></div></div>
+    <div class="part"><div class="pl">(c) Find the distance between <span class="tex">-6.5</span> and <span class="tex">2.3</span> on a number line.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">|-6.5-2.3|=|-8.8|=\boldsymbol{8.8}</span></div></div></div>
+    <div class="part"><div class="pl">(d) Write <span class="tex">y=|5-2x|</span> in piecewise form.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">5-2x\ge0\Rightarrow x\le\frac{5}{2}</span><br><span class="tex">y=\begin{cases}5-2x, &amp; \text{if } x\le\frac{5}{2}\\ 2x-5, &amp; \text{if } x&gt;\frac{5}{2}\end{cases}</span></div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Sketch <span class="tex">y=|f(x)|</span></h3></div>
+  <p class="q">The graph of <span class="tex">y=f(x)</span> is shown. Sketch <span class="tex">y=|f(x)|</span> on the same grid. State the invariant points and the range of <span class="tex">y=|f(x)|</span>, and write <span class="tex">y=|f(x)|</span> in piecewise form.</p>
+  <div class="parts c2">
+    <div class="part u7l8-gpart"><div class="pl">(a) <span class="tex">f(x)=4-2x</span></div><div class="u7l8-fig" data-fig="e2a"></div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Invariant point <span class="tex">(2,\ 0)</span>; the part for <span class="tex">x&gt;2</span> is reflected.<br>Range <span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span><br><span class="tex">y=\begin{cases}4-2x, &amp; \text{if } x\le2\\ 2x-4, &amp; \text{if } x&gt;2\end{cases}</span></div></div></div>
+    <div class="part u7l8-gpart"><div class="pl">(b) <span class="tex">f(x)=\frac{1}{2}x^2-2</span></div><div class="u7l8-fig" data-fig="e2b"></div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Invariant points <span class="tex">(-2,\ 0)</span>, <span class="tex">(2,\ 0)</span>; the vertex <span class="tex">(0,\ -2)</span> becomes a local maximum <span class="tex">(0,\ 2)</span>.<br>Range <span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span><br><span class="tex">y=\begin{cases}\frac{1}{2}x^2-2, &amp; \text{if } x\le-2 \text{ or } x\ge2\\ -\frac{1}{2}x^2+2, &amp; \text{if } -2&lt;x&lt;2\end{cases}</span></div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Absolute value equations ================= -->
+<section class="card" data-ink="s3" data-section="3. Absolute Value Equations">
+  <div class="sec-h"><span class="badge">3</span><h2>Absolute Value Equations</h2></div>
+  <div class="def"><b>Isolate, split, verify.</b> <span class="u7l8-st"><b>1</b> Isolate <span class="tex">|A|</span>. If it equals a negative number: no solution.</span> <span class="u7l8-st"><b>2</b> Solve <span class="tex">A=B</span> and <span class="tex">A=-B</span>.</span> <span class="u7l8-st"><b>3</b> Verify each answer in the <b>original</b> equation; reject the <b class="u7l8-no">extraneous</b> ones.</span></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Linear absolute value equations</h3></div>
+  <p class="q">Solve algebraically and verify.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">3|x+2|-4=11</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">3|x+2|=15\Rightarrow|x+2|=5</span><br><span class="tex">x+2=5</span> or <span class="tex">x+2=-5</span><br><span class="tex">\boldsymbol{x=3}</span> or <span class="tex">\boldsymbol{x=-7}</span>. Check: <span class="tex">3(5)-4=11</span> ✓, <span class="tex">3|-5|-4=11</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">|3x-1|+6=2</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">|3x-1|=-4</span><br>An absolute value is never negative: <b>no solution</b>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">|x+4|=3x-2</span></div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+4=3x-2\Rightarrow x=3</span>; check: <span class="tex">|7|=7</span>, <span class="tex">3(3)-2=7</span> ✓<br><span class="tex">x+4=-(3x-2)\Rightarrow4x=-2\Rightarrow x=-\frac{1}{2}</span>; check: <span class="tex">\left|\frac{7}{2}\right|=\frac{7}{2}</span> but <span class="tex">3\left(-\frac{1}{2}\right)-2=-\frac{7}{2}</span> (<b class="u7l8-no">extraneous</b>)<br>Solution: <span class="tex">\boldsymbol{x=3}</span></div></div></div>
+    <div class="part"><div class="pl">(d) A greenhouse is kept within <span class="tex">3.5^\circ\text{C}</span> of <span class="tex">24^\circ\text{C}</span>. Write and solve an absolute value equation for the lowest and highest allowed temperatures.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">|T-24|=3.5</span><br><span class="tex">T-24=3.5</span> or <span class="tex">T-24=-3.5</span><br><span class="tex">T=\boldsymbol{27.5^\circ\text{C}}</span> (highest) or <span class="tex">T=\boldsymbol{20.5^\circ\text{C}}</span> (lowest)</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Quadratic absolute value equations</h3></div>
+  <p class="q">Solve algebraically. Verify where needed.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">|x^2-3x-4|=6</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-3x-4=6\Rightarrow x^2-3x-10=0\Rightarrow(x-5)(x+2)=0</span><br><span class="tex">x^2-3x-4=-6\Rightarrow x^2-3x+2=0\Rightarrow(x-1)(x-2)=0</span><br><span class="tex">\boldsymbol{x=-2,\ 1,\ 2,\ 5}</span> (the right side is a positive constant, so none is extraneous)</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">|x^2-5|=4x</span></div><div class="work" style="--h:240px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-5=4x\Rightarrow x^2-4x-5=0\Rightarrow(x-5)(x+1)=0</span><br><span class="tex">x^2-5=-4x\Rightarrow x^2+4x-5=0\Rightarrow(x+5)(x-1)=0</span><br>Check: <span class="tex">x=5</span>: <span class="tex">20=20</span> ✓; <span class="tex">x=1</span>: <span class="tex">|-4|=4</span> ✓;<br><span class="tex">x=-1</span> and <span class="tex">x=-5</span> make <span class="tex">4x&lt;0</span> (<b class="u7l8-no">extraneous</b>).<br>Solutions: <span class="tex">\boldsymbol{x=1}</span> or <span class="tex">\boldsymbol{x=5}</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check on the calculator.</b> Graph <span class="tex">Y_1=</span> <code>abs(X²-3X-4)</code> and <span class="tex">Y_2=6</span>, then <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd></span> <b>5:intersect</b>: press <span class="keys"><kbd>ENTER</kbd></span> twice and type a guess near each crossing. The four crossings are at <span class="tex">x=-2,\ 1,\ 2,\ 5</span>.</div>
+    <div class="u7l8-pcol"><button class="pill" data-keys="Y= CLEAR abs( X x² − 3 X − 4 ) ▼ CLEAR 6 ZStandard intersect ENTER ENTER (−) 2 ENTER">Show me</button></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="Keep it or extraneous?">
+  <h3 class="sub">Keep it or extraneous? <span class="muted u7l8-subnote">each side of the equation is a graph</span></h3>
+  <p>Each case solves the equation with a <b>ghost</b> of the left side: <span class="tex">y=A</span> or <span class="tex">y=-A</span>. A crossing with a ghost is only a solution if it sits on the real graph <span class="tex">y=|A|</span>, which is never below the <span class="tex">x</span>-axis.</p>
+  <div class="explainer" data-explainer="verdict"></div>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u7l8"></section>
+
+<!-- ================= 4. Reciprocal functions ================= -->
+<section class="card" data-ink="s4" data-section="4. Reciprocal Functions">
+  <div class="sec-h"><span class="badge">4</span><h2>Reciprocal Functions</h2></div>
+  <div class="def"><b>Start from <span class="tex">f</span>.</b> Its zeros give the vertical asymptotes, the lines <span class="tex">y=\pm1</span> give the invariant points, and its vertex gives the turning point. Then each branch has the <b>same sign</b> as <span class="tex">f</span> and heads toward the asymptotes.</div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>The reciprocal of a linear function</h3></div>
+  <div class="u7l8-ex5">
+    <div>
+      <p class="q">Let <span class="tex">f(x)=2x-4</span>.</p>
+      <div class="part"><div class="pl">(a) Write the equation of the reciprocal function and state its asymptotes, its invariant points and its <span class="tex">y</span>-intercept.</div><div class="work" style="--h:160px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">y=\dfrac{1}{2x-4}</span>. Asymptotes <span class="tex">x=2</span> and <span class="tex">y=0</span>.<br><span class="tex">2x-4=1</span>: <span class="tex">x=\frac{5}{2}</span>; <span class="tex">2x-4=-1</span>: <span class="tex">x=\frac{3}{2}</span>. Invariant points <span class="tex">\left(\frac{5}{2},\ 1\right)</span>, <span class="tex">\left(\frac{3}{2},\ -1\right)</span>.<br><span class="tex">y</span>-intercept <span class="tex">-\frac{1}{4}</span>.</div></div></div>
+      <div class="part u7l8-ans5b"><div class="pl">(b) Sketch <span class="tex">y=f(x)</span> and its reciprocal on the grid, and state the domain and range of the reciprocal.</div><div class="work" style="--h:90px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Domain <span class="tex">\{x\mid x\ne2,\ x\in\mathbb{R}\}</span>; range <span class="tex">\{y\mid y\ne0,\ y\in\mathbb{R}\}</span></div></div></div>
+    </div>
+    <div class="u7l8-fig" data-fig="e5"></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>One quadratic, both transformations</h3></div>
+  <p class="q">Let <span class="tex">f(x)=-x^2+6x-5</span>. Its graph is shown on both grids.</p>
+  <div class="parts c2">
+    <div class="part u7l8-gpart"><div class="pl">(a) Sketch <span class="tex">y=|f(x)|</span>. State its invariant points and its range.</div><div class="u7l8-fig" data-fig="e6a"></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">f(x)=-(x-1)(x-5)=-(x-3)^2+4</span>. The parts for <span class="tex">x&lt;1</span> and <span class="tex">x&gt;5</span> are reflected.<br>Invariant points <span class="tex">(1,\ 0)</span>, <span class="tex">(5,\ 0)</span>; range <span class="tex">\{y\mid y\ge0,\ y\in\mathbb{R}\}</span>.</div></div></div>
+    <div class="part u7l8-gpart"><div class="pl">(b) Sketch <span class="tex">y=\dfrac{1}{f(x)}</span>. State the asymptotes, the turning point, the exact invariant points, the domain and the range.</div><div class="u7l8-fig" data-fig="e6b"></div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Asymptotes <span class="tex">x=1</span>, <span class="tex">x=5</span>, <span class="tex">y=0</span>. Vertex <span class="tex">(3,\ 4)</span>, <span class="tex">a&lt;0</span>: minimum point <span class="tex">\left(3,\ \frac{1}{4}\right)</span>.<br><span class="tex">f(x)=1</span>: <span class="tex">x^2-6x+6=0</span>, <span class="tex">x=3\pm\sqrt{3}</span>; <span class="tex">f(x)=-1</span>: <span class="tex">x^2-6x+4=0</span>, <span class="tex">x=3\pm\sqrt{5}</span>.<br>Invariant points <span class="tex">(3\pm\sqrt{3},\ 1)</span>, <span class="tex">(3\pm\sqrt{5},\ -1)</span>. Domain <span class="tex">\{x\mid x\ne1,\ x\ne5,\ x\in\mathbb{R}\}</span><br>Range <span class="tex">\left\{y\mid y&lt;0 \text{ or } y\ge\frac{1}{4},\ y\in\mathbb{R}\right\}</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s4b" data-section="Building the reciprocal">
+  <h3 class="sub">Building the reciprocal, one feature at a time</h3>
+  <p>The same five steps for a line and for a parabola. Each feature of <span class="tex">y=\dfrac{1}{f(x)}</span> comes from a feature of <span class="tex">y=f(x)</span>.</p>
+  <div class="explainer" data-explainer="recip"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Points, intervals and working backwards</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) The point <span class="tex">(-4,\ -3)</span> is on <span class="tex">y=f(x)</span>. State the matching points on <span class="tex">y=|f(x)|</span> and on <span class="tex">y=\dfrac{1}{f(x)}</span>.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{(-4,\ 3)}</span> and <span class="tex">\boldsymbol{\left(-4,\ -\frac{1}{3}\right)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Which of the points <span class="tex">(2,\ 1)</span>, <span class="tex">(5,\ -1)</span>, <span class="tex">(0,\ 0)</span>, <span class="tex">(3,\ 4)</span> on <span class="tex">y=f(x)</span> must also be on both <span class="tex">y=|f(x)|</span> and <span class="tex">y=\dfrac{1}{f(x)}</span>? Explain.</div><div class="work" style="--h:110px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Only <span class="tex">\boldsymbol{(2,\ 1)}</span>: <span class="tex">|1|=1</span> and <span class="tex">\frac{1}{1}=1</span>. (<span class="tex">(5,\ -1)</span> is invariant for the reciprocal but becomes <span class="tex">(5,\ 1)</span> on <span class="tex">y=|f(x)|</span>; <span class="tex">\frac{1}{0}</span> is undefined; <span class="tex">\frac{1}{4}\ne4</span>.)</div></div></div>
+    <div class="part"><div class="pl">(c) A function <span class="tex">f</span> is positive and decreasing on the interval <span class="tex">0&lt;x&lt;5</span>. Describe <span class="tex">y=|f(x)|</span> and <span class="tex">y=\dfrac{1}{f(x)}</span> on that interval.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">|f(x)|=f(x)</span> there (no reflection), so it is also <b>positive and decreasing</b>. The reciprocal is <b>positive and increasing</b>.</div></div></div>
+    <div class="part"><div class="pl">(d) The graph of <span class="tex">y=\dfrac{1}{f(x)}</span>, where <span class="tex">f</span> is quadratic, has a minimum point <span class="tex">(2,\ -0.2)</span> and no vertical asymptotes. It passes through <span class="tex">\left(0,\ -\frac{1}{9}\right)</span>. Determine <span class="tex">f(x)</span>.</div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertex of <span class="tex">f</span>: <span class="tex">(2,\ -5)</span>, a maximum (<span class="tex">a&lt;0</span>). <span class="tex">f(0)=-9</span>.<br><span class="tex">f(x)=a(x-2)^2-5</span>: <span class="tex">-9=4a-5</span>, <span class="tex">a=-1</span>. <span class="tex">\boldsymbol{f(x)=-(x-2)^2-5=-x^2+4x-9}</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Match the graph (whole-class round) ================= -->
+<section class="card" data-ink="s5" data-section="5. Match the Graph">
+  <div class="sec-h"><span class="badge">5</span><h2>Match the Graph</h2></div>
+  <p>Six rounds. Each round shows one graph and four pictures, and <b>only one</b> picture matches. Vote with your fingers (1 for A, 2 for B, 3 for C, 4 for D) before the clue, then again after it.</p>
+  <div class="explainer" data-explainer="match"></div>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Absolute value.</b> A distance, so never negative. Simplify inside the bars first; the distance between <span class="tex">a</span> and <span class="tex">b</span> is <span class="tex">|a-b|</span>.</div>
+    <div><b><span class="tex">y=|f(x)|</span>.</b> Keep what is on or above the <span class="tex">x</span>-axis, reflect what is below. The zeros are invariant; the range has no negatives. Piecewise: <span class="tex">A</span> where <span class="tex">A\ge0</span>, <span class="tex">-A</span> where <span class="tex">A&lt;0</span>.</div>
+    <div><b>Equations.</b> Isolate <span class="tex">|A|</span>, solve <span class="tex">A=B</span> and <span class="tex">A=-B</span>, then verify every answer. When <span class="tex">B</span> contains <span class="tex">x</span>, some answers can be <b>extraneous</b>.</div>
+    <div><b><span class="tex">y=\dfrac{1}{f(x)}</span>.</b> Zeros become vertical asymptotes, <span class="tex">y=0</span> is the horizontal asymptote, <span class="tex">f=\pm1</span> gives invariant points, a vertex <span class="tex">(p,\ q)</span> gives <span class="tex">\left(p,\ \frac{1}{q}\right)</span> (max and min swap), same sign as <span class="tex">f</span>.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u7l8">
+    <div><div class="kicker">Your turn</div><b>Assignment 8 — Unit 7 Review</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <div class="u7l8-review">
+    <div class="u7l8-review-h"><span class="kicker">Up next</span><b>Unit 7 test.</b> <span class="muted">Shaky on an idea today? Go back to its lesson.</span></div>
+    <div class="u7l8-review-grid">
+      <a href="../l1/"><span class="rn">7.1</span>Absolute value of real numbers <small>Example 1(a)–(c)</small></a>
+      <a href="../l2/"><span class="rn">7.2</span>Absolute value of linear functions <small>Examples 1(d), 2(a)</small></a>
+      <a href="../l3/"><span class="rn">7.3</span>Absolute value of quadratic functions <small>Examples 2(b), 6(a)</small></a>
+      <a href="../l4/"><span class="rn">7.4</span>Absolute value equations (linear) <small>Example 3</small></a>
+      <a href="../l5/"><span class="rn">7.5</span>Absolute value equations (quadratic) <small>Example 4</small></a>
+      <a href="../l6/"><span class="rn">7.6</span>Reciprocals of linear functions <small>Example 5</small></a>
+      <a href="../l7/"><span class="rn">7.7</span>Reciprocals of quadratic functions <small>Examples 6(b), 7</small></a>
+      <div class="test"><span class="rn">Test</span>Unit 7 test: AN1, RF2, RF11 <small>calculator allowed · verify every answer</small></div>
+    </div>
+  </div>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u7l8.js';
+  boot({ key: 'u7l8', homeHref: '../../', title: '7.8 Unit 7 Review' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

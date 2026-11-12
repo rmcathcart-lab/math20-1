@@ -81,11 +81,11 @@ const FL = {
       `<b>3</b> It opens down, so the parts below the axis are the two <b class="u7l3-cn">arms</b> outside ${T('-6')} and ${T('2')}. Flip both up.`,
       `<b>4</b> Invariant points ${T('(-6,\\ 0)')} and ${T('(2,\\ 0)')}; the vertex of the graph is still ${T('(-2,\\ 8)')}; ${T('y')}-intercept ${T('|6|=6')}.`],
     r: [`vertex ${T('(-2,\\ 8)')}, opens down<br>zeros ${T('-6')}, ${T('2')}; ${T('y')}-int ${T('6')}`, `keep ${T('-6\\le x\\le2')}`, `flip the arms ${T('x<-6')}, ${T('x>2')}`, `invariant points ${T('(-6,\\ 0)')}, ${T('(2,\\ 0)')}<br>vertex of the graph ${T('(-2,\\ 8)')}`] },
-  c: { eq: 'y=|-(x-1)^2-2|', f: (x) => -((x - 1) ** 2) - 2, win: { xmin: -2, xmax: 4, ymin: -8, ymax: 8, ylabels: 2 }, negs: [[-Infinity, Infinity]], keeps: [], zeros: [], vx: [1, -2], yi: -3, arrows: [-0.5, 1, 2.5],
+  c: { eq: 'y=\\left|-(x-1)^2-2\\right|', f: (x) => -((x - 1) ** 2) - 2, win: { xmin: -2, xmax: 4, ymin: -8, ymax: 8, ylabels: 2 }, negs: [[-Infinity, Infinity]], keeps: [], zeros: [], vx: [1, -2], yi: -3, arrows: [-0.5, 1, 2.5],
     c: [`<b>1</b> Sketch ${T('y=f(x)')}: vertex ${T('(1,\\ -2)')} and it opens down, so the whole parabola is below the axis. ${T('y')}-intercept ${T('-(1)-2=-3')}.`,
       `<b>2</b> Nothing is on or above the ${T('x')}-axis: there is nothing to keep, and there are no zeros.`,
       `<b>3</b> Flip the <b class="u7l3-cn">whole parabola</b> up: ${T('y=(x-1)^2+2')}, vertex ${T('(1,\\ -2)\\to(1,\\ 2)')}, now opening up.`,
-      `<b>4</b> No invariant points. Vertex of the graph ${T('(1,\\ 2)')}; ${T('y')}-intercept ${T('|-3|=3')}.`],
+      `<b>4</b> No invariant points. Vertex of the graph ${T('(1,\\ 2)')}; ${T('y')}-intercept ${T('\\left|-3\\right|=3')}.`],
     r: [`vertex ${T('(1,\\ -2)')}, opens down<br>no zeros; ${T('y')}-int ${T('-3')}`, 'nothing to keep', `flip everything:<br>${T('y=(x-1)^2+2')}`, `no invariant points<br>vertex of the graph ${T('(1,\\ 2)')}`] }
 };
 const flip = {
@@ -117,7 +117,7 @@ const flip = {
       const fp = xs.map((x) => hide(G.point(x, d.f(x), { color: F, r: 5.5 })));
       xs.forEach((x, i) => { if (d.f(x) < 0) FP.movers.push({ pt: fp[i], x, y: d.f(x), recolor: true }); });
       const vlab = hide(G.label(1, -4, T('(1,\\ -4)'), { pos: 'se', cls: 'bk-ptlab', color: NEG }));
-      const tags = [hide(G.label(1.1, 5.3, T('y=|f(x)|'), { pos: 'e', cls: 'bk-ptlab', color: A })), hide(G.label(4.05, 2.2, T('y=f(x)'), { pos: 'w', cls: 'bk-ptlab', color: F }))];
+      const tags = [hide(G.label(1.1, 5.3, T('y=|f(x)|'), { pos: 'e', cls: 'bk-ptlab', color: A })), hide(G.label(1.5, -4.3, T('y=f(x)'), { pos: 'e', cls: 'bk-ptlab', color: F }))];
       const negRows = rows.map((r, i) => (r[1] < 0 ? i : -1)).filter((i) => i >= 0);
       steps.push(
         { cap: `<b>(a)</b> Substitute each ${T('x')} into ${T('f(x)=x^2-2x-3')}: for example ${T('f(-2)=4+4-3=5')} and ${T('f(1)=1-2-3=-4')}.`,
@@ -168,18 +168,18 @@ const zerosOf = (a, p, q) => { if (Math.abs(a) < 1e-9) return []; const r = -q /
 const zt = (z) => (Math.abs(z - Math.round(z)) < 1e-6 ? tn(Math.round(z)) : '\\approx' + tn(Math.round(z * 100) / 100));
 const EX4 = [
   { a: 1, p: -1, q: -9, lab: '(a)', eq: 'y=|x^2+2x-8|', inv: '(-4,\\ 0),\\ (2,\\ 0)', yi: '8', v: '(-1,\\ 9)', rg: '\\{y\\mid y\\ge0,\\ y\\in\\mathbb{R}\\}',
-    cap: `(a) ${T('x^2+2x-8=(x+4)(x-2)')}, axis ${T('x=-1')}, ${T('f(-1)=1-2-8=-9')}: opens up with the vertex below the axis, so it <b>crosses</b>. Invariant points ${T('(-4,\\ 0)')}, ${T('(2,\\ 0)')}; ${T('y')}-intercept ${T('|-8|=8')}; vertex ${T('(-1,\\ 9)')}; range ${T('y\\ge0')}.` },
+    cap: `(a) ${T('x^2+2x-8=(x+4)(x-2)')}, axis ${T('x=-1')}, ${T('f(-1)=1-2-8=-9')}: opens up with the vertex below the axis, so it <b>crosses</b>. Invariant points ${T('(-4,\\ 0)')}, ${T('(2,\\ 0)')}; ${T('y')}-intercept ${T('\\left|-8\\right|=8')}; vertex ${T('(-1,\\ 9)')}; range ${T('y\\ge0')}.` },
   { a: 2, p: 3, q: 1, lab: '(b)', eq: 'y=|2(x-3)^2+1|', inv: '\\text{none}', yi: '19', v: '(3,\\ 1)', rg: '\\{y\\mid y\\ge1,\\ y\\in\\mathbb{R}\\}',
     cap: `(b) Opens up, vertex ${T('(3,\\ 1)')} <b>above</b> the axis: nothing changes. No invariant points; ${T('y')}-intercept ${T('2(9)+1=19')}; vertex ${T('(3,\\ 1)')}; range ${T('y\\ge1')}.` },
-  { a: -3, p: -1, q: -6, lab: '(c)', eq: 'y=|-3(x+1)^2-6|', inv: '\\text{none}', yi: '9', v: '(-1,\\ 6)', rg: '\\{y\\mid y\\ge6,\\ y\\in\\mathbb{R}\\}',
-    cap: `(c) Opens down, vertex ${T('(-1,\\ -6)')} <b>below</b> the axis: all of it flips. No invariant points; ${T('y')}-intercept ${T('|-3-6|=9')}; vertex ${T('(-1,\\ 6)')}; range ${T('y\\ge6')}.` },
-  { a: -1, p: 2, q: 9, lab: '(d)', eq: 'y=|-(x-2)^2+9|', inv: '(-1,\\ 0),\\ (5,\\ 0)', yi: '5', v: '(2,\\ 9)', rg: '\\{y\\mid y\\ge0,\\ y\\in\\mathbb{R}\\}',
-    cap: `(d) Opens down, vertex ${T('(2,\\ 9)')} above the axis, so it <b>crosses</b>: ${T('(x-2)^2=9')}, ${T('x=-1')} or ${T('5')}. The arms flip, the vertex stays; ${T('y')}-intercept ${T('|-4+9|=5')}; range ${T('y\\ge0')}. Every domain: ${T('\\{x\\mid x\\in\\mathbb{R}\\}')}.` }
+  { a: -3, p: -1, q: -6, lab: '(c)', eq: 'y=\\left|-3(x+1)^2-6\\right|', inv: '\\text{none}', yi: '9', v: '(-1,\\ 6)', rg: '\\{y\\mid y\\ge6,\\ y\\in\\mathbb{R}\\}',
+    cap: `(c) Opens down, vertex ${T('(-1,\\ -6)')} <b>below</b> the axis: all of it flips. No invariant points; ${T('y')}-intercept ${T('\\left|-3-6\\right|=9')}; vertex ${T('(-1,\\ 6)')}; range ${T('y\\ge6')}.` },
+  { a: -1, p: 2, q: 9, lab: '(d)', eq: 'y=\\left|-(x-2)^2+9\\right|', inv: '(-1,\\ 0),\\ (5,\\ 0)', yi: '5', v: '(2,\\ 9)', rg: '\\{y\\mid y\\ge0,\\ y\\in\\mathbb{R}\\}',
+    cap: `(d) Opens down, vertex ${T('(2,\\ 9)')} above the axis, so it <b>crosses</b>: ${T('(x-2)^2=9')}, ${T('x=-1')} or ${T('5')}. The arms flip, the vertex stays; ${T('y')}-intercept ${T('\\left|-4+9\\right|=5')}; range ${T('y\\ge0')}. Every domain: ${T('\\{x\\mid x\\in\\mathbb{R}\\}')}.` }
 ];
 const CASES = [
   { name: `crosses or touches the ${T('x')}-axis`, inv: `the ${T('x')}-intercepts`, rg: T('\\{y\\mid y\\ge0,\\ y\\in\\mathbb{R}\\}') },
-  { name: `entirely above (${T('a>0,\\ q>0')})`, inv: 'none', rg: `${T('\\{y\\mid y\\ge q,\\ y\\in\\mathbb{R}\\}')}` },
-  { name: `entirely below (${T('a<0,\\ q<0')})`, inv: 'none', rg: `${T('\\{y\\mid y\\ge -q,\\ y\\in\\mathbb{R}\\}')}` }
+  { name: `entirely above<br><span class="u7l3-sm">${T('a>0,\\ q>0')}</span>`, inv: 'none', rg: `${T('\\{y\\mid y\\ge q,\\ y\\in\\mathbb{R}\\}')}` },
+  { name: `entirely below<br><span class="u7l3-sm">${T('a<0,\\ q<0')}</span>`, inv: 'none', rg: `${T('\\{y\\mid y\\ge -q,\\ y\\in\\mathbb{R}\\}')}` }
 ];
 const cases = {
   title: 'Where does the parabola sit?',
@@ -331,7 +331,7 @@ const pieces = {
       const tr = hide(G.point(1, 12, { color: INK, r: 7, label: T('(1,\\ 12)'), pos: 'ne' }));
       const p5 = hide(G.point(5, 8, { color: INK, r: 7, label: T('(5,\\ 8)'), pos: 'e' }));
       steps.push(
-        { cap: `<b>(d)</b> ${T('x=1')} is between ${T('-3')} and ${T('4')}: use the <b class="u7l3-cn">middle piece</b>, ${T('y=-(1)^2+1+12=12')}. Check with the bars: ${T('|1-1-12|=|-12|=12')} ✓`,
+        { cap: `<b>(d)</b> ${T('x=1')} is between ${T('-3')} and ${T('4')}: use the <b class="u7l3-cn">middle piece</b>, ${T('y=-(1)^2+1+12=12')}. Check with the bars: ${T('|1-1-12|=\\left|-12\\right|=12')} ✓`,
           run: async (c) => { await show(c, R4); await popP(c, tr); await pulse(c, tr, 1.5); } },
         { cap: `${T('x=5\\ge4')}: use the <b class="u7l3-ca">first piece</b>, ${T('y=25-5-12=8')}. Check: ${T('|25-5-12|=|8|=8')} ✓`,
           run: async (c) => { await show(c, R5); await popP(c, p5); await pulse(c, p5, 1.5); } }
@@ -352,7 +352,7 @@ const backwards = {
   make(stage, v, ex) {
     const W = ex.W;
     if (v === 'a') {
-      const GW = 420, GH = 318, GX2 = W - GW;
+      const GW = 420, GH = 300, GX2 = W - GW;
       const win = { xmin: -3, xmax: 5, ymin: -10, ymax: 10, ystep: 2, ylabels: 4, fontSize: 14, pad: [28, 18, 18, 18] };
       const t1 = div(stage, 'u7l3-gt', 'If the <b>middle arc</b> was flipped', 0, 0, GW), t2 = div(stage, 'u7l3-gt', 'If the two <b>arms</b> were flipped', GX2, 0, GW);
       void t1; void t2;
@@ -366,8 +366,8 @@ const backwards = {
       const inv = [G1, G2].map((G) => [-2, 4].map((z) => G.point(z, 0, { color: INV, r: 7 })));
       const v1 = G1.point(1, 9, { color: INK, r: 7, label: T('(1,\\ 9)'), pos: 'n' }), v2 = G2.point(1, 9, { color: INK, r: 7, label: T('(1,\\ 9)'), pos: 'n' });
       FP1.movers.push({ pt: v1, x: 1, y: 9, recolor: true, lab: true });
-      const r1 = div(stage, 'u7l3-row u7l3-rowb', `${T('f(x)=a(x+2)(x-4)')}, ${T('f(1)=a(3)(-3)=-9')}<br>${T('a=1')}: <b class="u7l3-cf">${T('f(x)=(x+2)(x-4)')}</b>`, 0, GH + 36, GW); r1.style.opacity = 0;
-      const r2 = div(stage, 'u7l3-row u7l3-rowb', `opens down, vertex ${T('(1,\\ 9)')}<br><b class="u7l3-cg">${T('f(x)=-(x+2)(x-4)')}</b>`, GX2, GH + 36, GW); r2.style.opacity = 0;
+      const r1 = div(stage, 'u7l3-row u7l3-rowb', `<div class="u7l3-rc">${T('f(x)=a(x+2)(x-4)')}<br>${T('f(1)=a(3)(-3)=-9')}, so ${T('a=1')}<br><b class="u7l3-cf">${T('f(x)=(x+2)(x-4)')}</b></div>`, 0, GH + 36, GW); r1.style.opacity = 0;
+      const r2 = div(stage, 'u7l3-row u7l3-rowb', `<div class="u7l3-rc">opens down, vertex ${T('(1,\\ 9)')}<br>${T('a=-1')}<br><b class="u7l3-cg">${T('f(x)=-(x+2)(x-4)')}</b></div>`, GX2, GH + 36, GW); r2.style.opacity = 0;
       const st = stamp(stage, 'Same |f(x)|!', { ok: true, x: W / 2, y: 150 }); st.style.opacity = 0;
       return [
         { cap: `The graph shows the invariant points ${T('(-2,\\ 0)')} and ${T('(4,\\ 0)')}, and the middle arc's vertex ${T('(1,\\ 9)')}. Either the middle arc or the two arms came from below the axis: <b>two possibilities</b>.`,
@@ -399,7 +399,7 @@ const backwards = {
     const KW = RW, KH = 92, kmin = -7, kmax = 6, kx = (k) => 18 + (k - kmin) / (kmax - kmin) * (KW - 36);
     const ksv = svgEl('svg', { width: KW, height: KH, viewBox: `0 0 ${KW} ${KH}`, class: 'u7l3-ksv' }, P);
     svgEl('line', { x1: 10, x2: KW - 10, y1: 40, y2: 40, class: 'u7l3-sax' }, ksv);
-    for (let k = kmin; k <= kmax; k++) { svgEl('line', { x1: kx(k), x2: kx(k), y1: 34, y2: 46, class: 'u7l3-stk2' }, ksv); if (k % 2 === 0 || k === -7) { const e = svgEl('text', { x: kx(k), y: 64, 'text-anchor': 'middle', class: 'u7l3-ktx' }, ksv); e.textContent = String(k).replace('-', '−'); } }
+    for (let k = kmin; k <= kmax; k++) { svgEl('line', { x1: kx(k), x2: kx(k), y1: 34, y2: 46, class: 'u7l3-stk2' }, ksv); if (k % 2 === 0) { const e = svgEl('text', { x: kx(k), y: 64, 'text-anchor': 'middle', class: 'u7l3-ktx' }, ksv); e.textContent = String(k).replace('-', '−'); } }
     const pNeg = svgEl('rect', { x: kx(kmin), y: 30, width: 0, height: 20, rx: 5, fill: INV, opacity: 0.85 }, ksv);
     const pPos = svgEl('rect', { x: kx(0), y: 30, width: 0, height: 20, rx: 5, fill: A, opacity: 0.85 }, ksv);
     const kmark = svgEl('path', { d: 'M0 28 l-8 -14 h16 z', fill: INK }, ksv);
@@ -440,7 +440,7 @@ const coaster = {
   make(stage, v, ex) {
     const W = ex.W, SH = 168, GY = SH + 6, GH = 446 - GY;
     const G = new Graph(stage, { x: 0, y: GY, width: W, height: GH, xmin: -1, xmax: 21, ymin: -3, ymax: 8, xlabels: 5, ylabels: 2, fontSize: 14, xtitle: 'x\\text{ (m)}', ytitle: 'y\\text{ (m)}', pad: [16, 30, 18, 18] });
-    const sx = (x) => G.toPx(x, 0)[0], gy = 98, sc = 10.5, sy = (hh) => gy - sc * hh;
+    const sx = (x) => G.toPx(x, 0)[0], gy = 120, sc = 10, sy = (hh) => gy - sc * hh;
     // the scene: sky, the ground, the track, the tunnel
     const sv = absSvg(stage, W, SH, 0, 0, 'u7l3-scene');
     svgEl('rect', { x: 0, y: 0, width: W, height: gy, fill: '#eaf4fb', rx: 10 }, sv);
@@ -456,9 +456,9 @@ const coaster = {
     svgEl('text', { x: sx(20.4), y: gy + 4, class: 'u7l3-gl', 'text-anchor': 'start' }, sv).textContent = 'ground';
     const bar = svgEl('line', { x1: 0, x2: 0, y1: gy, y2: gy, stroke: INV, 'stroke-width': 4, 'stroke-dasharray': '7 4' }, sv);
     const car = svgEl('g', {}, sv);
-    svgEl('rect', { x: -17, y: -22, width: 34, height: 16, rx: 5, fill: NEG, stroke: '#7a1f1f', 'stroke-width': 2 }, car);
+    svgEl('rect', { x: -16, y: -18, width: 32, height: 13, rx: 5, fill: NEG, stroke: '#7a1f1f', 'stroke-width': 2 }, car);
     svgEl('circle', { cx: -9, cy: -4, r: 4, fill: '#2e3442' }, car); svgEl('circle', { cx: 9, cy: -4, r: 4, fill: '#2e3442' }, car);
-    svgEl('text', { x: 0, y: -24, 'font-size': 18, 'text-anchor': 'middle' }, car).textContent = '🙌';
+    svgEl('text', { x: 0, y: -19, 'font-size': 14, 'text-anchor': 'middle' }, car).textContent = '🙌';
     const dl = div(stage, 'u7l3-dlab', '', 0, 0);
     const g10 = svgEl('g', {}, sv); g10.style.opacity = 0;
     svgEl('line', { x1: sx(10), x2: sx(10), y1: gy, y2: sy(HC(10)), stroke: A, 'stroke-width': 3, 'stroke-dasharray': '5 4' }, g10);

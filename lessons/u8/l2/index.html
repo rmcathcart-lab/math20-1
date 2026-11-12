@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Solving Quadratic–Quadratic Systems · Math 20-1 8.2</title>
+<meta name="description" content="Math 20-1 Unit 8 Lesson 2: quadratic–quadratic systems with 0, 1, 2 or infinitely many solutions, solving by subtracting the equations, when the x²-terms cancel, the number of solutions, and fractional and decimal coefficients. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u8l2.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u8l2">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Marble Race">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><circle cx="60" cy="30" r="27" fill="#fffdf6" stroke="#4a4436" stroke-width="3.5"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(0 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(30 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(60 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(90 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(120 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(150 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(180 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(210 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(240 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(270 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(300 60 30)"/><line x1="60" y1="6" x2="60" y2="10" stroke="#4a4436" stroke-width="2.5" transform="rotate(330 60 30)"/><line x1="60" y1="30" x2="60" y2="16" stroke="#4a4436" stroke-width="4.5" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="0 60 30;360 60 30" dur="48s" repeatCount="indefinite"/></line><line x1="60" y1="30" x2="60" y2="8" stroke="#4a4436" stroke-width="3" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" values="0 60 30;360 60 30" dur="4s" repeatCount="indefinite"/></line><circle cx="60" cy="30" r="3" fill="#c93a33"/><g><animateTransform attributeName="transform" type="rotate" values="-14 170 46;14 170 46;-14 170 46" dur="1.6s" repeatCount="indefinite"/><text x="170" y="46" font-size="40" text-anchor="middle">🏁</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -7;0 0" dur="1.5s" begin="0s" repeatCount="indefinite"/><text x="270" y="46" font-size="38" text-anchor="middle">🤔</text></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Marble Race</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">Two marbles are let go at the same moment, from the same height. Marble <b>A</b> rolls down a <b>straight</b> ramp: the shortest path to the finish. Marble <b>B</b> rolls down a <b>curved</b> ramp that dips first: a longer path.</p><p class="vw-ask">Which marble reaches the finish first?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Two marble ramps side by side: ramp A is a straight slope, ramp B is a curve that dips down first; both marbles wait at the top behind a gate, and finish flags wave at the bottom"><rect x="0" y="222" width="330" height="28" fill="#dcebc8"/><line x1="8" y1="58" x2="322" y2="58" stroke="#d9d3c4" stroke-width="2" stroke-dasharray="6 6"/><line x1="8" y1="205" x2="322" y2="205" stroke="#d9d3c4" stroke-width="2" stroke-dasharray="6 6"/><g stroke="#8a6d3b" stroke-width="4"><line x1="22" y1="62" x2="22" y2="222"/><line x1="85" y1="134" x2="85" y2="222"/><line x1="150" y1="208" x2="150" y2="222"/><line x1="182" y1="62" x2="182" y2="222"/><line x1="220" y1="194" x2="220" y2="222"/><line x1="310" y1="208" x2="310" y2="222"/></g><line x1="20" y1="60" x2="150" y2="207" stroke="#2b55a0" stroke-width="7" stroke-linecap="round"/><path d="M180 60 Q 196 252 310 207" fill="none" stroke="#c93a33" stroke-width="7" stroke-linecap="round"/><rect x="34" y="34" width="5" height="26" rx="2" fill="#4a4436"/><rect x="194" y="34" width="5" height="26" rx="2" fill="#4a4436"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="0.9s" begin="0s" repeatCount="indefinite"/><circle cx="25" cy="46" r="11" fill="#5b8def" stroke="#4a4436" stroke-width="2.5"/><circle cx="21.5" cy="42.5" r="3" fill="#fff" opacity=".8"/></g><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -4;0 0" dur="0.9s" begin="0.45s" repeatCount="indefinite"/><circle cx="185" cy="46" r="11" fill="#ef6b5b" stroke="#4a4436" stroke-width="2.5"/><circle cx="181.5" cy="42.5" r="3" fill="#fff" opacity=".8"/></g><g font-family="system-ui, sans-serif" font-weight="800" text-anchor="middle"><text x="70" y="30" font-size="26" fill="#2b55a0">A</text><text x="248" y="30" font-size="26" fill="#c93a33">B</text><text x="165" y="22" font-size="14" fill="#4a4436">READY…<animate attributeName="opacity" values="1;0.1;1" dur="1.2s" begin="0s" repeatCount="indefinite"/></text></g><g><animateTransform attributeName="transform" type="rotate" values="-8 150 205;8 150 205;-8 150 205" dur="1.8s" repeatCount="indefinite"/><text x="158" y="200" font-size="26" text-anchor="middle">🏁</text></g><g><animateTransform attributeName="transform" type="rotate" values="8 310 205;-8 310 205;8 310 205" dur="1.8s" repeatCount="indefinite"/><text x="316" y="200" font-size="26" text-anchor="middle">🏁</text></g><g font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#7a6f5a" text-anchor="middle"><text x="165" y="72">same start height</text><text x="232" y="241">same finish height</text></g></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Vote first: A, B, or a tie?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Marble B wins, and not by a little.</b> Its ramp drops steeply right at the start, so B picks up speed immediately and covers most of its longer path fast. A speeds up slowly the whole way down its gentle slope. A longer path can be the quicker one! The fastest ramp of all is a curve called a <b>cycloid</b>, the <i>brachistochrone</i> (“shortest time” in Greek): Johann Bernoulli posed it as a challenge in 1696, and Isaac Newton solved it overnight. <b>The twist:</b> on a cycloid ramp, a marble let go from <i>any</i> starting point takes exactly the same time to reach the bottom, so a marble started halfway down ties one started at the top.</div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 8 Systems and Inequalities · Lesson 2</div>
+  <h1>Solving Quadratic–Quadratic Systems</h1>
+  <p class="lede">A <b>quadratic–quadratic system</b> is a pair of quadratic equations. Its solutions are the points where the two <b>parabolas meet</b>: two points, one point, no points, or, if both equations describe the same parabola, infinitely many.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>recognize and sketch systems with <b>0, 1, 2 or infinitely many</b> solutions</li>
+      <li>solve a system <b>algebraically</b>: subtract, solve for <span class="tex">x</span>, substitute into an <b>original</b> equation, verify</li>
+      <li>tell what the leftover equation means when the <span class="tex">x^2</span>-<b>terms cancel</b></li>
+      <li>determine the <b>number of solutions</b> without solving, and find a parameter <span class="tex">k</span></li>
+      <li>solve systems with <b>fractional and decimal coefficients</b>, and check solutions in a context</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF6</b> Solve, algebraically and graphically, problems that involve systems of linear-quadratic and quadratic-quadratic equations in two variables.<br><span class="muted">Today: where two parabolas meet, solving by subtracting the equations, and counting the solutions.</span></div>
+</section>
+
+<!-- ================= 1. Quadratic–quadratic systems ================= -->
+<section class="card" data-ink="s1" data-section="1. Quadratic–Quadratic Systems">
+  <div class="sec-h"><span class="badge">1</span><h2>Quadratic–Quadratic Systems</h2></div>
+  <p>A <b>quadratic–quadratic system</b> is a pair of quadratic equations, such as <span class="tex">y=a_1x^2+b_1x+c_1</span> and <span class="tex">y=a_2x^2+b_2x+c_2</span>. Its solutions are the points of intersection of the two parabolas. Two different parabolas meet in <b>two points</b>, <b>one point</b> or <b>no points</b>. If the two equations describe the <b>same</b> parabola (they may look different, as <span class="tex">y=(x-1)^2</span> and <span class="tex">y=x^2-2x+1</span> do), every point on it is a solution: the system has <b>infinitely many</b> solutions.</p>
+  <div class="explainer" data-explainer="meet"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Read the solutions from the graph</h3></div>
+  <div class="u8l2-ex1">
+    <div>
+      <p class="q">The graphs of <span class="tex">y=x^2-1</span> and <span class="tex">y=-x^2+2x+3</span> are shown.</p>
+      <div class="part"><div class="pl">(a) State the solutions of the system.</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\boldsymbol{(-1,\ 0)}</span> and <span class="tex">\boldsymbol{(2,\ 3)}</span></div></div></div>
+      <div class="part"><div class="pl">(b) Verify each solution in both equations.</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">(-1,\ 0)</span>: <span class="tex">(-1)^2-1=0\ \checkmark</span>; &ensp;<span class="tex">-1-2+3=0\ \checkmark</span><br><span class="tex">(2,\ 3)</span>: <span class="tex">4-1=3\ \checkmark</span>; &ensp;<span class="tex">-4+4+3=3\ \checkmark</span></div></div></div>
+    </div>
+    <div class="u8l2-fig" data-bk-graph='{"width":380,"height":420,"xmin":-3,"xmax":4,"ymin":-3,"ymax":5,"fontSize":15,"items":[{"fn":["x^2-1",{"color":"#1f5bd6","width":3.5,"from":-2.6,"to":2.6}]},{"fn":["-x^2+2*x+3",{"color":"#c93a33","width":3.5,"from":-1.6,"to":3.6}]},{"label":[-2.3,4.4,"y=x^2-1",{"tex":true,"color":"#1f5bd6","cls":"bk-ptlab","pos":"w"}]},{"label":[3.2,-1.6,"y=-x^2+2x+3",{"tex":true,"color":"#c93a33","cls":"bk-ptlab","pos":"e","dx":-60}]}]}'></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Sketch each case</h3></div>
+  <p class="q">On each set of axes, sketch two parabolas that form a system with the given number of solutions. Write a pair of equations for (d).</p>
+  <div class="u8l2-sk">
+    <div><div class="u8l2-skt">(a) no solution</div><div data-bk-graph='{"width":220,"height":220,"xmin":-4,"xmax":4,"ymin":-4,"ymax":4,"numbers":false,"grid":false,"fontSize":15}'></div></div>
+    <div><div class="u8l2-skt">(b) one solution</div><div data-bk-graph='{"width":220,"height":220,"xmin":-4,"xmax":4,"ymin":-4,"ymax":4,"numbers":false,"grid":false,"fontSize":15}'></div></div>
+    <div><div class="u8l2-skt">(c) two solutions</div><div data-bk-graph='{"width":220,"height":220,"xmin":-4,"xmax":4,"ymin":-4,"ymax":4,"numbers":false,"grid":false,"fontSize":15}'></div></div>
+    <div><div class="u8l2-skt">(d) infinitely many</div><div data-bk-graph='{"width":220,"height":220,"xmin":-4,"xmax":4,"ymin":-4,"ymax":4,"numbers":false,"grid":false,"fontSize":15}'></div></div>
+  </div>
+  <div class="part u8l2-skp"><div class="pl">Equations for (d):</div><div class="work" style="--h:70px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">
+    <div class="u8l2-sk u8l2-ska">
+      <div><div data-bk-graph='{"width":200,"height":200,"xmin":-4,"xmax":4,"ymin":-4,"ymax":4,"numbers":false,"grid":false,"xtitle":"","ytitle":"","items":[{"fn":["0.5*x^2+1",{"color":"#c93a33","width":3.5}]},{"fn":["-0.5*x^2-1",{"color":"#c93a33","width":3.5}]}]}'></div></div>
+      <div><div data-bk-graph='{"width":200,"height":200,"xmin":-4,"xmax":4,"ymin":-4,"ymax":4,"numbers":false,"grid":false,"xtitle":"","ytitle":"","items":[{"fn":["0.5*x^2",{"color":"#c93a33","width":3.5}]},{"fn":["-0.5*x^2",{"color":"#c93a33","width":3.5}]}]}'></div></div>
+      <div><div data-bk-graph='{"width":200,"height":200,"xmin":-4,"xmax":4,"ymin":-4,"ymax":4,"numbers":false,"grid":false,"xtitle":"","ytitle":"","items":[{"fn":["x^2-3",{"color":"#c93a33","width":3.5}]},{"fn":["-x^2+3",{"color":"#c93a33","width":3.5}]}]}'></div></div>
+      <div><div data-bk-graph='{"width":200,"height":200,"xmin":-4,"xmax":4,"ymin":-4,"ymax":4,"numbers":false,"grid":false,"xtitle":"","ytitle":"","items":[{"fn":["(x-1)^2-2",{"color":"#c93a33","width":3.5}]}]}'></div></div>
+    </div>
+    Sample answers. (b) The parabolas touch at one point, here the origin. (d) Both equations describe one parabola, e.g. <span class="tex">\boldsymbol{y=(x-1)^2-2}</span> and <span class="tex">\boldsymbol{y=x^2-2x-1}</span>.</div></div></div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Solving algebraically ================= -->
+<section class="card" data-ink="s2" data-section="2. Solving Algebraically">
+  <div class="sec-h"><span class="badge">2</span><h2>Solving Algebraically</h2></div>
+  <p>Write both equations as <span class="tex">y=\dots</span> Setting the right sides equal (<b>substitution</b>) is the same as subtracting one equation from the other (<b>elimination</b>): <span class="tex">y</span> is eliminated and one equation in <span class="tex">x</span> is left.</p>
+  <div class="def amber u8l2-key"><div class="u8l2-keyh">To solve <span class="tex">y=a_1x^2+b_1x+c_1</span>, &nbsp;<span class="tex">y=a_2x^2+b_2x+c_2</span></div>
+    <ol class="u8l2-steps">
+      <li>Set the right sides equal (or <b>subtract</b> the equations).</li>
+      <li>Collect all terms on one side and <b>solve for <span class="tex">x</span></b> (factor, or use the quadratic formula).</li>
+      <li><b>Substitute</b> each <span class="tex">x</span> into the simpler <b>original</b> equation to find <span class="tex">y</span>.</li>
+      <li><b>Verify</b> in the <b>other</b> equation and write the ordered pairs.</li>
+    </ol></div>
+  <div class="explainer" data-explainer="machine"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Solve and verify</h3></div>
+  <p class="q">Solve each system algebraically and verify one solution.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">\begin{aligned}y&amp;=x^2-2x-4\\ y&amp;=-x^2+4x+4\end{aligned}</span></div><div class="work" style="--h:360px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-2x-4=-x^2+4x+4</span><br><span class="tex">2x^2-6x-8=0</span><br><span class="tex">x^2-3x-4=0</span><br><span class="tex">(x-4)(x+1)=0</span>, so <span class="tex">x=4</span> or <span class="tex">x=-1</span><br><span class="tex">x=4</span>: <span class="tex">y=16-8-4=4</span><br><span class="tex">x=-1</span>: <span class="tex">y=1+2-4=-1</span><br>Solutions: <span class="tex">\boldsymbol{(4,\ 4)}</span> and <span class="tex">\boldsymbol{(-1,\ -1)}</span><br>Check <span class="tex">(4,\ 4)</span>: <span class="tex">-16+16+4=4\ \checkmark</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\begin{aligned}y&amp;=3x^2+2x-1\\ y&amp;=x^2-3x+2\end{aligned}</span></div><div class="work" style="--h:360px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Subtract: <span class="tex">2x^2+5x-3=0</span><br><span class="tex">(2x-1)(x+3)=0</span>, so <span class="tex">x=\frac{1}{2}</span> or <span class="tex">x=-3</span><br><span class="tex">x=\frac{1}{2}</span>: <span class="tex">y=\frac{1}{4}-\frac{3}{2}+2=\frac{3}{4}</span><br><span class="tex">x=-3</span>: <span class="tex">y=9+9+2=20</span><br>Solutions: <span class="tex">\boldsymbol{\left(\tfrac{1}{2},\ \tfrac{3}{4}\right)}</span> and <span class="tex">\boldsymbol{(-3,\ 20)}</span><br>Check <span class="tex">(-3,\ 20)</span>: <span class="tex">27-6-1=20\ \checkmark</span></div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Calculator, then exact</h3></div>
+  <p class="q">Consider the system <span class="tex">y=x^2-3</span> and <span class="tex">y=-2x^2+6x+1</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Use a graphing calculator to solve the system, to the nearest tenth. State a window that shows both points.</div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">Y_1=X^2-3</span>, &ensp;<span class="tex">Y_2=-2X^2+6X+1</span><br>Window: <span class="tex">x</span> from <span class="tex">-3</span> to <span class="tex">5</span>, <span class="tex">y</span> from <span class="tex">-6</span> to <span class="tex">8</span>.<br>2nd [CALC] 5:intersect, once near each point:<br><span class="tex">\boldsymbol{(-0.5,\ -2.7)}</span> and <span class="tex">\boldsymbol{(2.5,\ 3.4)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Solve the system algebraically to get the exact solutions.</div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-3=-2x^2+6x+1\Rightarrow 3x^2-6x-4=0</span><br><span class="tex">x=\dfrac{6\pm\sqrt{36+48}}{6}=\dfrac{6\pm2\sqrt{21}}{6}=\dfrac{3\pm\sqrt{21}}{3}</span><br><span class="tex">y=x^2-3=\dfrac{9\pm6\sqrt{21}+21}{9}-3=\dfrac{3\pm6\sqrt{21}}{9}=\dfrac{1\pm2\sqrt{21}}{3}</span><br><span class="tex">\boldsymbol{\left(\tfrac{3+\sqrt{21}}{3},\ \tfrac{1+2\sqrt{21}}{3}\right)}</span>, <span class="tex">\boldsymbol{\left(\tfrac{3-\sqrt{21}}{3},\ \tfrac{1-2\sqrt{21}}{3}\right)}</span></div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Where two parabolas meet, on the calculator.</b> Enter the right sides in <span class="keys"><kbd>Y=</kbd></span> as <span class="tex">Y_1</span> and <span class="tex">Y_2</span>, set the <span class="keys"><kbd>WINDOW</kbd></span>, then <span class="keys"><kbd>2nd</kbd><kbd>CALC</kbd><kbd>5</kbd></span> (intersect): <span class="keys"><kbd>ENTER</kbd><kbd>ENTER</kbd></span> to pick the two curves, then type a guess near one crossing and <span class="keys"><kbd>ENTER</kbd></span>. Repeat with a guess near the other crossing. <span class="muted">(Casio: G-SOLV, INTSECT.)</span></div>
+    <div class="u8l2-pcol"><button class="pill" data-keys="Y= CLEAR X x² − 3 ▼ CLEAR (−) 2 X x² + 6 X + 1 WINDOW (−) 3 ENTER 5 ENTER 1 ENTER (−) 6 ENTER 8 ENTER 1 ENTER GRAPH intersect ENTER ENTER (−) 1 ENTER">Left crossing</button><button class="pill" data-keys="Y= CLEAR X x² − 3 ▼ CLEAR (−) 2 X x² + 6 X + 1 WINDOW (−) 3 ENTER 5 ENTER 1 ENTER (−) 6 ENTER 8 ENTER 1 ENTER GRAPH intersect ENTER ENTER 3 ENTER">Right crossing</button></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–5">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 2 · Questions 1–5</h2>
+  <p class="pr-t">Read solutions from a graph, sketch the four cases, then solve systems algebraically and on the calculator.</p>
+  <div class="pr-chips n4"><span><b>1</b>Read the graph, then confirm algebraically</span><span><b>2</b>Sketch 0, 1, 2 or infinitely many</span><span><b>3–4</b>Subtract, solve, substitute, verify</span><span><b>5</b>Intersect on the calculator, then exact</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u8l2">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 3. When the x²-terms cancel ================= -->
+<section class="card" data-ink="s3" data-section="3. When the x²-Terms Cancel">
+  <div class="sec-h"><span class="badge">3</span><h2>When the <span class="tex">x^2</span>-Terms Cancel</h2></div>
+  <p>If the two equations have the same <span class="tex">x^2</span>-coefficient, eliminating <span class="tex">y</span> also eliminates <span class="tex">x^2</span>, and what is left is <b>linear</b>:</p>
+  <ul class="u8l2-ul">
+    <li>a linear equation <span class="tex">mx=n</span> with <span class="tex">m\ne0</span>: exactly <b>one</b> solution;</li>
+    <li>a false statement such as <span class="tex">0=5</span>: <b>no</b> solution (one parabola is a vertical translation of the other);</li>
+    <li>a true statement <span class="tex">0=0</span>: <b>infinitely many</b> solutions (the equations describe the same parabola).</li>
+  </ul>
+  <div class="explainer" data-explainer="cancel"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>One, none or infinitely many?</h3></div>
+  <p class="q">Solve each system, or explain why it has no solution or infinitely many solutions.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) <span class="tex">\begin{aligned}y&amp;=x^2+4x+1\\ y&amp;=x^2-2x+7\end{aligned}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Subtract: <span class="tex">6x-6=0</span><br><span class="tex">x=1</span><br><span class="tex">y=1+4+1=6</span><br>One solution: <span class="tex">\boldsymbol{(1,\ 6)}</span><br>Check: <span class="tex">1-2+7=6\ \checkmark</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">\begin{aligned}y&amp;=2x^2-3x+1\\ y&amp;=2x^2-3x-4\end{aligned}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Subtract: <span class="tex">0=5</span>, false.<br><b>No solution</b>: the second parabola is the first one translated <span class="tex">5</span> units down.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">\begin{aligned}y&amp;=2(x-1)^2+3\\ y&amp;=2x^2-4x+5\end{aligned}</span></div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Expand: <span class="tex">2(x^2-2x+1)+3=2x^2-4x+5</span><br>The equations are identical (subtracting gives <span class="tex">0=0</span>): <b>infinitely many solutions</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= 4. The number of solutions ================= -->
+<section class="card" data-ink="s4" data-section="4. The Number of Solutions">
+  <div class="sec-h"><span class="badge">4</span><h2>The Number of Solutions</h2></div>
+  <p>When the <span class="tex">x^2</span>-terms do not cancel, the equation left after eliminating <span class="tex">y</span> is quadratic, and its discriminant counts the solutions.</p>
+  <div class="def amber u8l2-key"><div class="u8l2-keyh">Key idea</div>
+    <table class="u8l2-ktab">
+      <tr><th>After eliminating <span class="tex">y</span></th><th>The two parabolas</th><th>Solutions</th></tr>
+      <tr class="u8l2-r2"><td>quadratic, <span class="tex">b^2-4ac&gt;0</span></td><td>cross at two points</td><td>two</td></tr>
+      <tr class="u8l2-r1"><td>quadratic, <span class="tex">b^2-4ac=0</span></td><td>touch at one point</td><td>one</td></tr>
+      <tr class="u8l2-r0"><td>quadratic, <span class="tex">b^2-4ac&lt;0</span></td><td>do not meet</td><td>none</td></tr>
+      <tr class="u8l2-r1"><td>linear, <span class="tex">mx=n</span> (<span class="tex">m\ne0</span>)</td><td>cross at one point</td><td>one</td></tr>
+      <tr class="u8l2-r0"><td><span class="tex">0=n</span> (<span class="tex">n\ne0</span>)</td><td>are vertical translations of each other</td><td>none</td></tr>
+      <tr class="u8l2-ri"><td><span class="tex">0=0</span></td><td>are the same parabola</td><td>infinitely many</td></tr>
+    </table></div>
+  <div class="explainer" data-explainer="count"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>How many solutions?</h3></div>
+  <p class="q">Without solving, determine the number of solutions of each system.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">y=x^2+2x+3</span>, &ensp;<span class="tex">y=-x^2-2x+1</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x^2+4x+2=0</span>: &ensp;<span class="tex">16-4(2)(2)=0</span><br><b>One solution</b> (the parabolas touch).</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">y=x^2+1</span>, &ensp;<span class="tex">y=-x^2+2x-2</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">2x^2-2x+3=0</span>: &ensp;<span class="tex">4-4(2)(3)=-20&lt;0</span><br><b>No solution.</b></div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">y=2x^2-5</span>, &ensp;<span class="tex">y=x^2+x+1</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-x-6=0</span>: &ensp;<span class="tex">1+24=25&gt;0</span><br><b>Two solutions.</b></div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">y=-x^2+5x</span>, &ensp;<span class="tex">y=-x^2+5x+2</span></div><div class="work" style="--h:130px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Subtract: <span class="tex">0=2</span>, false.<br><b>No solution</b> (vertical translation).</div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Choosing <span class="tex">k</span></h3></div>
+  <div class="part"><div class="pl">For which values of <span class="tex">k</span> does the system <span class="tex">y=x^2+k</span> and <span class="tex">y=-x^2+4x</span> have exactly one solution? two solutions? no solution? Determine the solution in the one-solution case.</div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+k=-x^2+4x\Rightarrow 2x^2-4x+k=0</span><br>Discriminant: <span class="tex">(-4)^2-4(2)(k)=16-8k</span><br>One: <span class="tex">16-8k=0\Rightarrow \boldsymbol{k=2}</span>. &ensp;Two: <span class="tex">16-8k&gt;0\Rightarrow \boldsymbol{k&lt;2}</span>. &ensp;None: <span class="tex">\boldsymbol{k&gt;2}</span>.<br>When <span class="tex">k=2</span>: <span class="tex">2x^2-4x+2=0\Rightarrow (x-1)^2=0</span>, <span class="tex">x=1</span>, <span class="tex">y=1+2=3</span>. The solution is <span class="tex">\boldsymbol{(1,\ 3)}</span>.</div></div></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u8l2"></section>
+
+<!-- ================= 5. Fractional and decimal coefficients ================= -->
+<section class="card" data-ink="s5" data-section="5. Fractional and Decimal Coefficients">
+  <div class="sec-h"><span class="badge">5</span><h2>Fractional and Decimal Coefficients</h2></div>
+  <p>Clear fractions or decimals <b>after</b> eliminating <span class="tex">y</span>: multiply the resulting equation by a number that makes every coefficient an integer. Then factor or use the formula as usual. In a context, check that each solution makes sense.</p>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>Clear them, then solve</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Solve <span class="tex">y=\frac{1}{2}x^2-2x+1</span> and <span class="tex">y=-\frac{1}{4}x^2+x+10</span>.</div><div class="work" style="--h:340px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">\frac{1}{2}x^2-2x+1=-\frac{1}{4}x^2+x+10</span><br><span class="tex">\frac{3}{4}x^2-3x-9=0</span><br>Multiply by <span class="tex">\frac{4}{3}</span>: <span class="tex">x^2-4x-12=0</span><br><span class="tex">(x-6)(x+2)=0</span><br><span class="tex">x=6</span>: <span class="tex">y=18-12+1=7</span><br><span class="tex">x=-2</span>: <span class="tex">y=2+4+1=7</span><br>Solutions: <span class="tex">\boldsymbol{(6,\ 7)}</span> and <span class="tex">\boldsymbol{(-2,\ 7)}</span></div></div></div>
+    <div class="part"><div class="pl">(b) Two water jets in a fountain follow the paths <span class="tex">h=-x^2+6x</span> and <span class="tex">h=-0.5x^2+2x+2</span>, where <span class="tex">x</span> is the horizontal distance and <span class="tex">h\ge0</span> the height, both in metres. Where do the jets cross? Answer to the nearest hundredth.</div><div class="work" style="--h:280px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-x^2+6x=-0.5x^2+2x+2</span><br><span class="tex">-0.5x^2+4x-2=0</span>; multiply by <span class="tex">-2</span>: <span class="tex">x^2-8x+4=0</span><br><span class="tex">x=\dfrac{8\pm\sqrt{64-16}}{2}=4\pm2\sqrt{3}</span><br><span class="tex">x\approx0.54</span>: <span class="tex">h\approx2.93</span>; &ensp;<span class="tex">x\approx7.46</span>: <span class="tex">h\approx-10.93</span><br>Reject the second point: the height is negative (the first jet lands at <span class="tex">x=6</span>). The jets cross at about <span class="tex">\boldsymbol{(0.54,\ 2.93)}</span>: <b>0.54 m out and 2.93 m up</b>.</div></div></div>
+  </div>
+  <div class="explainer" data-explainer="fountain"></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Where parabolas meet.</b> The solutions are the intersection points: two, one or none for different parabolas, and infinitely many when both equations describe the same parabola.</div>
+    <div><b>Subtract, solve, substitute, verify.</b> Eliminate <span class="tex">y</span>, solve the equation in <span class="tex">x</span>, substitute each <span class="tex">x</span> into an <b>original</b> equation, and verify in the other one.</div>
+    <div><b>Count the solutions.</b> A quadratic left over: <span class="tex">b^2-4ac</span> says two, one or none. Same <span class="tex">x^2</span>-coefficient: <span class="tex">mx=n</span> gives one, <span class="tex">0=n</span> none, <span class="tex">0=0</span> infinitely many.</div>
+    <div><b>Fractions and decimals.</b> After eliminating <span class="tex">y</span>, multiply to make every coefficient an integer, then solve. In a context, reject solutions that make no sense.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u8l2">
+    <div><div class="kicker">Your turn</div><b>Assignment 2 · Questions 6–16</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l3/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 3 — Problems Involving Systems</b><div class="muted">Model situations with linear–quadratic and quadratic–quadratic systems, solve them, and interpret the solutions.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u8l2.js';
+  boot({ key: 'u8l2', homeHref: '../../', title: '8.2 Quadratic–Quadratic Systems' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

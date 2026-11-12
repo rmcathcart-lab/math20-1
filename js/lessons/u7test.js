@@ -119,7 +119,7 @@
   function uniqNums(a) { var out = []; a.forEach(function (x) { if (!has(out, x)) out.push(x); }); return out; }
   function sameSet(A, B) { A = uniqNums(A); B = uniqNums(B); return A.length === B.length && A.every(function (x) { return has(B, x); }); }
   function isSq(n) { if (n < 0) return false; var s = Math.round(Math.sqrt(n)); return s * s === n; }
-  function A(s) { return '\\left|' + s + '\\right|'; }
+  function A(s) { return '\\left\\lvert ' + s + '\\right\\rvert '; }
   function M(c, e) { return e ? P.mono(toR(c), { x: e }) : P.num(toR(c)); }
   function lin(a, b) { return P.add(M(a, 1), M(b, 0)); }
   function quad(a, b, c) { return P.add(M(a, 2), M(b, 1), M(c, 0)); }
@@ -166,9 +166,10 @@
     if (!s.trim()) return { empty: true };
     var out = [], dec = false, pieces = splitTop(s);
     for (var i = 0; i < pieces.length; i++) {
-      var p = pieces[i].trim(); if (!p) continue;
+      var p = pieces[i].trim().replace(/\\approx|≈|\\doteq/g, '='); if (!p) continue;
       var m = /^([a-zA-Z])\s*=\s*([\s\S]*)$/.exec(p); if (m) { if (v && m[1] !== v) return { letter: m[1] }; p = m[2].trim(); }
       if (!p || /=/.test(p)) return { bad: true };
+      if (!/sqrt|√/.test(p) && (/\\times|\\cdot|[×*+]/.test(p) || /[0-9a-zA-Z})]\s*[-−]/.test(p))) return { unsimp: true };
       var alts = /\\pm|±/.test(p) ? [p.replace(/\\pm|±/g, '+'), p.replace(/\\pm|±/g, '-')] : [p];
       for (var j = 0; j < alts.length; j++) { var val = numVal(alts[j]); if (val == null) return { bad: true }; out.push(val); }
       if (/\d\.\d/.test(p)) dec = true;
@@ -182,13 +183,14 @@
   function rootsPart(cp, prompt, vals, o, sol, hints, text) {
     o = o || {};
     var v = o.v || 'x', T = uniqNums(vals.map(valOf)), extr = uniqNums((o.extr || []).map(valOf)).filter(function (e) { return !has(T, e); }), round = !!o.round;
-    var wrongs = (o.wrongs || []).map(function (w) { return { vals: uniqNums(w.vals.map(valOf)), none: !w.vals.length, code: w.code, hint: w.hint }; }).filter(function (w) { return !(w.none ? !T.length : sameSet(w.vals, T)); });
+    var wrongs = (o.wrongs || []).map(function (w) { return { vals: uniqNums(w.vals.map(valOf)), orig: w.vals, none: !w.vals.length, code: w.code, hint: w.hint }; }).filter(function (w) { return !(w.none ? !T.length : sameSet(w.vals, T)); });
     var extrHint = o.extrHint || 'Check every answer in the <b>original</b> equation: ' + (extr.length ? t(v + '=' + rt(toR(extr[0]) || extr[0])) + ' makes the side without bars negative, so it is extraneous' : 'one of yours does not check') + '.';
     var check = function (resp) {
       if (isNone(resp)) { if (!T.length) return ok(); var wn = wrongs.filter(function (w) { return w.none; })[0]; return wrong(wn ? wn.code : cp + 'nosol-claim', wn ? wn.hint : o.noneHint || 'There is a solution: solve both cases, then check each answer in the original equation.'); }
       var L = readVals(resp, v);
       if (L.empty) return form('empty', 'Type your answer first.');
       if (L.letter) return form('sol-letter', 'Use the variable ' + t(v) + ' here (you wrote ' + t(L.letter + '=') + ').');
+      if (L.unsimp) return form('simplify', 'Simplify each solution to a single number (no ' + t('\\times') + ', + or − between numbers).');
       if (L.bad) return form('unreadable', 'Write each solution separated by commas, e.g. ' + t(v + '=3,\\ ' + v + '=-5') + ' (or: no solution).');
       var Aa = uniqNums(L.vals);
       if (T.length && matchVals(Aa, T, round)) return ok();
@@ -205,7 +207,7 @@
     var bad = [];
     function setT(arr) { return rootsT(arr.map(function (x) { return x && x.tex ? x : toR(x) || x; }), v); }
     if (extr.length) bad.push(setT(T.concat(extr)));
-    wrongs.forEach(function (w) { bad.push(w.none ? '\\text{no solution}' : setT(w.vals)); });
+    wrongs.forEach(function (w) { bad.push(w.none ? '\\text{no solution}' : setT(w.orig)); });
     if (T.length) bad.push('\\text{no solution}');
     part.bad = bad.filter(function (b, i, arr) { return arr.indexOf(b) === i && b !== keyTex; });
     if (o.answer) part.answer = o.answer;
@@ -334,10 +336,10 @@
       steps = t('-' + A('-' + m) + '+' + A(a - b) + '=-' + m + '+' + Math.abs(a - b) + '=' + val);
     } else if (kind === 'nest') {
       var s2 = pickWhere(function () { return { a: nz(r, 2, 9), b: nz(r, 3, 15) }; }, function (z) { return Math.abs(z.a) < Math.abs(z.b) && z.a * z.b < 0; });
-      e = '\\bigl|\\,' + A(s2.a) + '-' + A(s2.b) + '\\,\\bigr|'; val = Math.abs(Math.abs(s2.a) - Math.abs(s2.b));
+      e = '\\bigl\\lvert\\,' + A(s2.a) + '-' + A(s2.b) + '\\,\\bigr\\rvert '; val = Math.abs(Math.abs(s2.a) - Math.abs(s2.b));
       wr.push({ v: Math.abs(s2.a) - Math.abs(s2.b), code: cp + 'abs-bracket', hint: 'Work from the inside out: ' + t(A(s2.a) + '-' + A(s2.b) + '=' + (Math.abs(s2.a) - Math.abs(s2.b))) + ', and then the outer bars make it positive.' });
       wr.push({ v: Math.abs(s2.a - s2.b), code: cp + 'abs-split', hint: 'Take each inner absolute value first: ' + t(A(s2.a) + '=' + Math.abs(s2.a)) + ' and ' + t(A(s2.b) + '=' + Math.abs(s2.b)) + '. Bars cannot be merged over a difference.' });
-      steps = t('\\bigl|\\,' + A(s2.a) + '-' + A(s2.b) + '\\,\\bigr|=' + A(Math.abs(s2.a) + '-' + Math.abs(s2.b)) + '=' + A(Math.abs(s2.a) - Math.abs(s2.b)) + '=' + val);
+      steps = t('\\bigl\\lvert\\,' + A(s2.a) + '-' + A(s2.b) + '\\,\\bigr\\rvert=' + A(Math.abs(s2.a) + '-' + Math.abs(s2.b)) + '=' + A(Math.abs(s2.a) - Math.abs(s2.b)) + '=' + val);
     } else if (kind === 'sq') {
       var k = r.int(2, 4), a3 = r.int(-3, 4), b3 = pickWhere(function () { return r.int(2, 9); }, function (x) { return a3 - x < 0; }), c3 = r.int(2, 4);
       e = '-' + k + A(a3 + '-' + b3) + '+' + A('-' + c3) + '^{2}'; val = -k * Math.abs(a3 - b3) + c3 * c3;
@@ -360,7 +362,7 @@
     var W = wr.filter(function (w) { return w.v !== val; });
     var p = KP.number('Evaluate ' + t(e) + '.', val, function (v) { for (var i = 0; i < W.length; i++) if (v === W[i].v) return { code: W[i].code, hint: W[i].hint }; return null; },
       'Simplify inside each pair of bars, take the absolute value, then finish with the order of operations:<br>' + steps + '.',
-      ['Absolute value bars are grouping symbols: simplify inside them first, then take the absolute value.', 'A negative sign outside the bars stays: ' + t('-|-6|=-6') + '.'], 'evaluating absolute values');
+      ['Absolute value bars are grouping symbols: simplify inside them first, then take the absolute value.', 'A negative sign outside the bars stays: ' + t('-\\lvert -6\\rvert=-6') + '.'], 'evaluating absolute values');
     p.bad = W.map(function (w) { return String(w.v); });
     return p;
   };
@@ -448,7 +450,7 @@
     items.sort(function (x, y) { return x.val - y.val; }); items.forEach(function (x, i) { x.id = 'e' + i; });
     var p = KP.order(r, 'Arrange in order from least to greatest.', items, { first: 'least', last: 'greatest' },
       'Evaluate each one: ' + items.map(function (x) { return x.why; }).join(', ') + '.<br>Least to greatest: ' + items.map(function (x) { return t(x.tex); }).join(' &lt; ') + '.',
-      ['Evaluate each expression first (a decimal approximation is fine for ordering).', 'A negative sign outside the bars makes the value negative: ' + t('-|-5|=-5') + '.'], 'ordering absolute values');
+      ['Evaluate each expression first (a decimal approximation is fine for ordering).', 'A negative sign outside the bars makes the value negative: ' + t('-\\lvert -5\\rvert=-5') + '.'], 'ordering absolute values');
     p.bad = [items.map(function (x) { return x.id; }).reverse()];
     return p;
   };
@@ -667,7 +669,7 @@
     } else if (kind === 'touch') {
       var p0 = nz(r, 1, 5), aa = r.pick([1, 2, 3]); ftex = r.chance(0.5) ? vtxT(aa, p0, 0) : tx(quad(aa, -2 * aa * p0, aa * p0 * p0)); pairs = [[p0, 0]];
       wr.push({ pairs: [[-p0, 0]], code: cp + 'inv-sign', hint: 'Solve ' + t(ftex + '=0') + ' again.' }, { pairs: [], code: cp + 'inv-none', hint: 'The parabola touches the ' + t('x') + '-axis at its vertex: that point is on both graphs.' }, { pairs: [[p0, 0], [-p0, 0]], code: cp + 'inv-extra', hint: 'A perfect square ' + t('(x-p)^{2}') + ' has only one zero.' });
-      sol = t(ftex + '=' + (aa === 1 ? '' : aa) + '(x' + sgT(-p0) + ')^{2}') + ' is never negative and touches the axis at ' + t('x=' + p0) + ': the graph does not change, and the one invariant point is ' + t(pt(p0, 0)) + '.';
+      sol = (/\(/.test(ftex) ? t(ftex) : t(ftex + '=' + (aa === 1 ? '' : aa) + '(x' + sgT(-p0) + ')^{2}')) + ' is never negative and touches the axis at ' + t('x=' + p0) + ': the graph does not change, and the one invariant point is ' + t(pt(p0, 0)) + '.';
     } else {
       var pq = pickWhere(function () { return { a: r.pick([1, 2, -1, -2, [1, 2], [-1, 2]]), p: nz(r, 1, 5), q: r.int(1, 8) }; }, function () { return true; }), sgn = rv(pq.a) > 0 ? 1 : -1;
       ftex = vtxT(pq.a, pq.p, sgn * pq.q); pairs = [];
@@ -832,7 +834,7 @@
       var u = Math.sqrt(s.n + s.k); c1 = [-u, u]; if (s.n - s.k > 0) { var w = Math.sqrt(s.n - s.k); c2 = [-w, w]; } else if (s.n - s.k === 0) c2 = [0];
       steps = 'Case 1: ' + t('x^{2}-' + s.n + '=' + k) + ', ' + t('x^{2}=' + (s.n + k)) + ', ' + t('x=\\pm ' + u) + '.<br>Case 2: ' + t('x^{2}-' + s.n + '=-' + k) + ', ' + t('x^{2}=' + (s.n - k)) + (s.n - k > 0 ? ', ' + t('x=\\pm ' + Math.sqrt(s.n - k)) : s.n - k === 0 ? ', ' + t('x=0') : ': no real roots') + '.';
     } else {
-      s = pickWhere(function () { return { r1: r.int(-7, 3), w: r.int(1, 8), k: r.int(1, 16) }; }, function (z) { var w2 = z.w * z.w, D1 = w2 + 4 * z.k, D2 = w2 - 4 * z.k; return isSq(D1) && (isSq(D2) || D2 < 0) && z.r1 + z.w <= 7 && Math.abs(z.r1 * (z.r1 + z.w)) <= 30 && z.r1 * (z.r1 + z.w) !== 0 && (z.r1 + z.r1 + z.w) !== 0; });
+      s = pickWhere(function () { return { r1: r.int(-7, 3), w: r.int(1, 8), k: r.int(1, 16) }; }, function (z) { var w2 = z.w * z.w, D1 = w2 + 4 * z.k, D2 = w2 - 4 * z.k; return isSq(D1) && (isSq(D2) || (D2 < 0 && r.chance(0.3))) && z.r1 + z.w <= 7 && Math.abs(z.r1 * (z.r1 + z.w)) <= 30 && z.r1 * (z.r1 + z.w) !== 0 && (z.r1 + z.r1 + z.w) !== 0; });
       var r1 = s.r1, s1 = s.r1 + s.w, bb = -(r1 + s1), cc = r1 * s1; k = s.k; A2 = 1; B2 = bb; C2 = cc; ftex = tx(quad(1, bb, cc));
       c1 = qroots(1, bb, cc - k).map(function (x) { return x.v; }); c2 = qroots(1, bb, cc + k).map(function (x) { return x.v; });
       var fct = function (cst) { var rs = qroots(1, bb, cst); return rs.length === 0 ? ': no real roots (' + t('b^{2}-4ac<0') + ')' : rs.length === 1 || Math.abs(rs[0].v - rs[1].v) < 1e-9 ? ', ' + t('(x' + sgT(-rs[0].v) + ')^{2}=0') + ', ' + t('x=' + rs[0].tex) : ', ' + t('(x' + sgT(-rs[0].v) + ')(x' + sgT(-rs[1].v) + ')=0') + ', ' + t('x=' + rs[0].tex) + ' or ' + t('x=' + rs[1].tex); };
@@ -1159,7 +1161,7 @@
     }
     var s = pickWhere(function () { return { b: nz(r, 1, 6), a1: r.int(-7, 6) }; }, function (z) { var a2 = -z.b - z.a1, n = -z.a1 * a2; return a2 !== z.a1 && n >= 2 && n <= 30; });
     var a2 = -s.b - s.a1, nn = -s.a1 * a2, vals = [s.a1, a2].sort(function (x, y) { return x - y; });
-    var wrongR = qroots(1, s.b, nn).map(function (x) { return x.v; });
+    var wrongR = qroots(1, s.b, nn);
     return rootsPart(cp, 'Let ' + t('f(x)=' + tx(quad(1, s.b, 0))) + '. The point ' + t('\\left(a,\\ \\frac{1}{' + nn + '}\\right)') + ' is on the graph of ' + t('y=\\dfrac{1}{f(x)}') + '. Determine the possible values of ' + t('a') + '.', vals,
       { v: 'a', wrongs: wrongR.length ? [{ vals: wrongR, code: cp + 'rpt-neg', hint: 'Solve ' + t('f(a)=' + nn) + ': the reciprocal of ' + t('\\frac{1}{' + nn + '}') + ' is ' + t(nn) + '.' }] : [] },
       t('\\frac{1}{f(a)}=\\frac{1}{' + nn + '}') + ', so ' + t('f(a)=' + nn) + ': ' + t(tx(quad(1, s.b, -nn)).replace(/x/g, 'a') + '=0') + ', ' + t('(a' + sgT(-vals[0]) + ')(a' + sgT(-vals[1]) + ')=0') + ', ' + t('a=' + vals[0]) + ' or ' + t('a=' + vals[1]) + '.',

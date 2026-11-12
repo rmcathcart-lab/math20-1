@@ -1,5 +1,5 @@
 /* Math 20-1 · Unit 7 · Lesson 2 — Graphing Absolute Value Functions of Linear Functions: styles used only on this page
- * (prefix u7l2-). Colours (Unit 7): y = f(x) blue; y = |f(x)| red; the flap orange; invariant points amber; a second line purple. */
+ * (prefix u7l2-). Colours (as in Lesson 3): y = f(x) blue; y = |f(x)| purple; the part below the axis red; invariant points amber. */
 
 .u7l2 .pl .katex { font-size: 1.06em; }
 .u7l2 .ans .katex { font-size: 1.03em; }
@@ -7,7 +7,7 @@
 .u7l2 h2 .katex, .u7l2 h3 .katex { font-size: .95em; }
 .u7l2-p { font-size: 19px; line-height: 1.5; margin: 12px 0; }
 .u7l2-cf { color: #1f5bd6; }
-.u7l2-ca { color: #c93a33; }
+.u7l2-ca { color: #7b4fc4; }
 .u7l2-cv { color: #a86a08; }
 .u7l2-code { font-family: ui-monospace, Menlo, monospace; font-size: 18px; background: #fff; border: 1.5px solid var(--line); border-radius: 6px; padding: 0 6px; white-space: nowrap; }
 .u7l2-pcol { display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
@@ -30,7 +30,7 @@
 .u7l2-tab td { min-width: 50px; height: 46px; padding: 4px 6px; }
 
 .u7l2-neg { background: #fdeceb; }
-.u7l2-pos { background: #eaf6ef; }
+.u7l2-pos { background: #f1ecfa; }
 .u7l2-ctab { width: 100%; }
 .u7l2-ctab td { width: 38%; height: 52px; color: var(--red); font-size: 18px; }
 .u7l2-ctab th:first-child { text-align: left; }
@@ -78,7 +78,7 @@
 .u7l2-cmp th, .u7l2-cmp td { border: 1.5px solid #ddd6c6; padding: 6px 8px; text-align: center; height: 50px; }
 .u7l2-cmp th { background: #faf7f0; font: 700 16px var(--round); white-space: nowrap; }
 .u7l2-cmp td:nth-child(2) { color: #1f5bd6; }
-.u7l2-cmp .u7l2-c2 { color: #c93a33; }
+.u7l2-cmp .u7l2-c2 { color: #7b4fc4; }
 .u7l2-cmp .u7l2-chg { background: #fdf3e2; }
 
 /* ---------------- true or false ---------------- */
@@ -88,4 +88,4 @@
 /* ---------------- ride ---------------- */
 .u7l2-scene { border-radius: 12px; }
 .u7l2-km { font: 700 13px var(--round); fill: #6b7280; }
-.u7l2-blab { width: 80px; text-align: center; color: #c93a33; font-size: 18px; font-weight: 700; }
+.u7l2-blab { width: 80px; text-align: center; color: #7b4fc4; font-size: 18px; font-weight: 700; }

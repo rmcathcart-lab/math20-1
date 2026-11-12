@@ -74,7 +74,7 @@ const howmany = {
     const nlDots = [0, 1].map(() => svgEl('circle', { r: 8, fill: OK, stroke: '#fff', 'stroke-width': 2, cy: NL.ay, cx: -50 }, nld));
     const setNL = (cc) => { nlDots[0].setAttribute('cx', cc >= -1e-9 ? NL.toPx(a - cc) : -50); nlDots[1].setAttribute('cx', cc >= -1e-9 ? NL.toPx(a + cc) : -50); };
     setNL(-1);
-    const dnote = hide(div(R, 'u7l4-dnote', n === 2 ? `The numbers <b>${c0}</b> units from <b>${a}</b>` : n === 1 ? `Distance <b>0</b> from <b>${a}</b>: only ${T(String(a))} itself` : `A distance can’t be ${T(String(c0))}`));
+    const dnote = hide(div(R, 'u7l4-dnote', n === 2 ? `The numbers <b>${c0}</b> units from ${T(String(a))}` : n === 1 ? `Distance <b>0</b> from ${T(String(a))}: only ${T(String(a))} itself` : `A distance can’t be ${T(String(c0))}`));
     const set = (cc) => {
       st.c = cc; L.set(cc); ll.gy = cc; ll._bkDraw();
       const k = Math.abs(cc) < 0.06 ? 1 : cc > 0 ? 2 : 0, ce = k === 1 ? 0 : cc;
@@ -171,7 +171,7 @@ const IS = {
   d: { label: '(d)', start: '-2|x-6|+1=1', iso: [['-2|x-6|=0', 'subtract 1'], ['|x-6|=0', 'divide by −2']], A: 'x-6', c: 0, br: [['x-6=0', 'x=6']] },
   e: { label: '(e)', start: '\\tfrac{1}{2}|x+3|=4', iso: [['|x+3|=8', 'multiply by 2']], A: 'x+3', c: 8, br: [['x+3=8', 'x=5'], ['x+3=-8', 'x=-11']] },
   f: { label: '(f)', start: '|x+2|+4=1', iso: [['|x+2|=-3', 'subtract 4']], A: 'x+2', c: -3, br: [],
-    wrong: ['x+2+4=1', 'x+2+4=-1'], wx: ['x=-5', 'x=-7'], chk: ['|-5+2|+4=7\\ne1', '|-7+2|+4=9\\ne1'] }
+    wrong: ['x+2+4=1', 'x+2+4=-1'], wx: ['x=-5', 'x=-7'], chk: ['\\lvert -5+2\\rvert +4=7\\ne1', '\\lvert -7+2\\rvert +4=9\\ne1'] }
 };
 const isolate = {
   title: 'Isolate, then split',
@@ -250,7 +250,7 @@ const CS = {
   e6: { label: 'Example 6(a)', eq: '|2x+3|=x+6', A: '2x+3', z: -1.5, zT: '-\\tfrac{3}{2}', zline: '2x+3=0\\ \\Rightarrow\\ x=-\\tfrac{3}{2}', min: -6, max: 5,
     c1: { dom: 'x\\ge-\\tfrac{3}{2}', rep: '|2x+3|=2x+3', lines: ['2x+3=x+6', 'x=3'], x: 3, ok: true, why: '3\\ge-\\tfrac{3}{2}?\\ \\text{Yes}' },
     c2: { dom: 'x<-\\tfrac{3}{2}', rep: '|2x+3|=-(2x+3)', lines: ['-(2x+3)=x+6', '-2x-3=x+6', '-3x=9', 'x=-3'], x: -3, ok: true, why: '-3<-\\tfrac{3}{2}?\\ \\text{Yes}' },
-    sol: 'x=-3\\ \\text{or}\\ x=3', chk: '|-3|=3=-3+6,\\ \\ |9|=9=3+6\\ \\checkmark' }
+    sol: 'x=-3\\ \\text{or}\\ x=3', chk: '\\lvert -3\\rvert =3=-3+6,\\ \\ |9|=9=3+6\\ \\checkmark' }
 };
 const cases = {
   title: 'Solving by cases',
@@ -306,19 +306,19 @@ const cases = {
 /* =============================== explainer: the verdict board (STAR) =============================== */
 const VD = {
   a: { label: 'Example 7(a)', eq: '|3x+1|=x-5', m: 1, A: (x) => 3 * x + 1, B: (x) => x - 5, AT: '3x+1', BT: 'x-5', win: [-6, 4, -10, 10], bl: [2, 'nw'],
-    rows: [{ lab: 'A=B', solve: ['3x+1=x-5', 'x=-3'], x: -3, L: '|3(-3)+1|=|-8|=8', R: '-3-5=-8', ok: false },
+    rows: [{ lab: 'A=B', solve: ['3x+1=x-5', 'x=-3'], x: -3, L: '|3(-3)+1|=\\lvert -8\\rvert =8', R: '-3-5=-8', ok: false },
       { lab: 'A=-B', solve: ['3x+1=-(x-5)', '4x=4', 'x=1'], x: 1, L: '|3(1)+1|=|4|=4', R: '1-5=-4', ok: false }],
     end: `Both are extraneous: <b>no solution</b>. The line ${T('y=x-5')} stays below the V.` },
   b: { label: '(b)', eq: '2|x-3|=x+3', m: 2, A: (x) => x - 3, B: (x) => x + 3, AT: 'x-3', BT: 'x+3', win: [-2, 11, -4, 14], bl: [5.5, 'nw'],
     rows: [{ lab: 'A=B', solve: ['2(x-3)=x+3', 'x=9'], x: 9, L: '2|9-3|=2|6|=12', R: '9+3=12', ok: true },
-      { lab: 'A=-B', solve: ['-2(x-3)=x+3', '-2x+6=x+3', 'x=1'], x: 1, L: '2|1-3|=2|-2|=4', R: '1+3=4', ok: true }],
+      { lab: 'A=-B', solve: ['-2(x-3)=x+3', '-2x+6=x+3', 'x=1'], x: 1, L: '2|1-3|=2\\lvert -2\\rvert =4', R: '1+3=4', ok: true }],
     end: `Both check: ${T('x=1')} or ${T('x=9')}.` },
   c: { label: '(c)', eq: '|x+5|-2x=1', iso: '|x+5|=2x+1', m: 1, A: (x) => x + 5, B: (x) => 2 * x + 1, AT: 'x+5', BT: '2x+1', win: [-7, 6, -6, 12], bl: [0.6, 'se'],
     rows: [{ lab: 'A=B', solve: ['x+5=2x+1', 'x=4'], x: 4, L: '|4+5|=|9|=9', R: '2(4)+1=9', ok: true },
-      { lab: 'A=-B', solve: ['-(x+5)=2x+1', '-3x=6', 'x=-2'], x: -2, L: '|-2+5|=|3|=3', R: '2(-2)+1=-3', ok: false }],
+      { lab: 'A=-B', solve: ['-(x+5)=2x+1', '-3x=6', 'x=-2'], x: -2, L: '\\lvert -2+5\\rvert =|3|=3', R: '2(-2)+1=-3', ok: false }],
     end: `${T('x=4')} (${T('x=-2')} is extraneous).` },
   e8c: { label: 'Example 8(c)', eq: '|x-2|=2x', m: 1, A: (x) => x - 2, B: (x) => 2 * x, AT: 'x-2', BT: '2x', win: [-4, 4, -6, 6], bl: [2.3, 'nw'],
-    rows: [{ lab: 'A=B', solve: ['x-2=2x', 'x=-2'], x: -2, L: '|-2-2|=|-4|=4', R: '2(-2)=-4', ok: false },
+    rows: [{ lab: 'A=B', solve: ['x-2=2x', 'x=-2'], x: -2, L: '\\lvert -2-2\\rvert =\\lvert -4\\rvert =4', R: '2(-2)=-4', ok: false },
       { lab: 'A=-B', solve: ['-(x-2)=2x', '2=3x', 'x=\\tfrac{2}{3}'], x: 2 / 3, xT: '\\tfrac{2}{3}', L: '\\left|\\tfrac{2}{3}-2\\right|=\\tfrac{4}{3}', R: '2\\left(\\tfrac{2}{3}\\right)=\\tfrac{4}{3}', ok: true }],
     end: `The number is ${T('\\tfrac{2}{3}')}.` }
 };
@@ -346,7 +346,7 @@ const verdict = {
       card.insertAdjacentHTML('beforeend', `<div class="u7l4-vlab">${T(r.lab)}</div>`);
       const sv = div(card, 'u7l4-vsol', r.solve.map((t) => T(t)).join(' &nbsp;→&nbsp; '));
       const ck = hide(div(card, 'u7l4-vck', `<div>Left side: ${T(r.L)}</div><div>Right side: ${T(r.R)}</div>`));
-      const sp = stampOn(card, r.ok ? 'keep ✓' : 'extraneous!', r.ok, BW - 150, 92);
+      const sp = stampOn(card, r.ok ? 'keep ✓' : 'extraneous!', r.ok, BW - 128, 92);
       const xv = r.x, yA = d.B(xv);
       const ghost = hide(G.point(xv, yA, { color: GR, r: 7.5, open: true }));
       const vline = hide(G.vline(xv, { color: r.ok ? OK : NO, width: 2.4 }));
@@ -358,7 +358,7 @@ const verdict = {
     const end = hide(div(B, 'u7l4-ansl u7l4-vend', d.end));
     const steps = [];
     if (d.iso) steps.push({ cap: `<b>Step 1: isolate the absolute value.</b> Add ${T('2x')} to both sides: ${T(d.iso)}.`, run: (c) => show(c, top) });
-    else steps.push({ cap: `${T(d.eq)}: the absolute value is already isolated. The V and the line are graphed on the right.`, run: (c) => show(c, top) });
+    else steps.push({ cap: `<b>Step 1:</b> in ${T(d.eq)} the absolute value is already isolated. The V and the line are graphed on the right.`, run: (c) => show(c, top) });
     rows.forEach((R, i) => steps.push({
       cap: `<b>Step 2:</b> solve ${T(R.r.lab)}: ${T(R.r.solve[R.r.solve.length - 1])}. On the graph it is where the line meets the dashed ${i ? 'reflected ' : ''}line ${T(`y=${i ? '-' : ''}${d.m === 1 ? '' : d.m}${i || d.m !== 1 ? `(${d.AT})` : d.AT}`)}.`,
       run: async (c) => { await show(c, R.card); R.gl.style.opacity = 1; await G.drawIn(R.gl, 600, c); if (!i) await show(c, ghostLab); R.ghost.style.opacity = 1; await pop(c, R.ghost); } }));
@@ -427,7 +427,7 @@ const target = {
         await tween(c, 2000, (t) => { const xa = NL.toPx(-3 + 7 * t), xb = NL.toPx(11 - 7 * t); runA.setAttribute('x', xa); runA.setAttribute('transform', `scale(-1 1) translate(${-2 * xa} 0)`); runB.setAttribute('x', xb); });
         mid.style.opacity = 1; await pop(c, mid); await show(c, ml); } },
       { cap: `… after running 7 each: half the distance between the solutions. Both solutions are <b>7 units from 4</b>.`, run: async (c) => { rn.style.opacity = 0.25; hops.push(await NL.hop(c, 4, -3, { label: '7', color: OR }), await NL.hop(c, 4, 11, { label: '7', color: OR })); await show(c, dl); } },
-      { cap: `“${T('x')} is 7 units from 4”: ${T('|x-4|=7')}. Check: ${T('|-3-4|=7')} ✓ and ${T('|11-4|=7')} ✓`, run: (c) => pop(c, eq) }
+      { cap: `“${T('x')} is 7 units from 4”: ${T('|x-4|=7')}. Check: ${T('\\lvert -3-4\\rvert =7')} ✓ and ${T('|11-4|=7')} ✓`, run: (c) => pop(c, eq) }
     ];
   }
 };
@@ -467,7 +467,7 @@ standup('u7l4', {
         a = a1; b = b1; m = m1; e = e1; x1 = u; x2 = w; break;
       }
       const AT = `${a}x${sgnT(b)}`, BT = `${m === 1 ? '' : m === -1 ? '-' : m}x${sgnT(e)}`, Bv = (x) => m * x + e;
-      const line = (x, k) => { const L = Math.abs(a * x + b), R = Bv(x); return `x=${x}:\\ \\ |${a * x + b}|=${L},\\ \\ ${k}=${R}\\ \\ ${L === R ? '\\checkmark' : '\\times\\ \\text{extraneous}'}`; };
+      const line = (x, k) => { const L = Math.abs(a * x + b), R = Bv(x); return `x=${x}:\\ \\ \\lvert ${a * x + b}\\rvert=${L},\\ \\ ${k}=${R}\\ \\ ${L === R ? '\\checkmark' : '\\times\\ \\text{extraneous}'}`; };
       const keep = [x1, x2].filter((x) => Bv(x) >= 0);
       return { q: `|${AT}|=${BT}`, a: [`${AT}=${BT}\\ \\Rightarrow\\ x=${x1}`, `${AT}=-(${BT})\\ \\Rightarrow\\ x=${x2}`, line(x1, '\\text{right}'), line(x2, '\\text{right}'),
         keep.length ? `x=${keep.join('\\ \\text{or}\\ x=')}` : '\\text{No solution}'] };

@@ -502,7 +502,7 @@ const forkDef = {
       in: { x: 320, y: 34, w: 250, h: 54, html: `<b>in</b>${T('x=\\ ?')}`, cls: 'bk-round' },
       test: { x: 320, y: 128, w: 250, h: 92, html: T(`${inside}\\ge0\\,?`), cls: 'bk-diamond' },
       yes: { x: 120, y: 236, w: 230, h: 72, html: `<b>keep it</b>${T(`|${inside}|=${inside}`)}`, color: 'green' },
-      no: { x: 520, y: 236, w: 236, h: 72, html: `<b>the opposite</b>${T(`|${inside}|=-(${inside})`)}`, color: 'red' }
+      no: { x: 520, y: 236, w: 236, h: 72, html: `<b>the opposite</b>${T(sh ? '|x-4|=-(x-4)' : '|x|=-x')}`, color: 'red' }
     }, edges: [{ from: 'in', to: 'test' }, { from: 'test', to: 'yes', label: 'yes', route: 'hv' }, { from: 'test', to: 'no', label: 'no', route: 'hv' }] });
     const inEl = F.node('in').querySelector('.bk-fc-in'), yesEl = F.node('yes').querySelector('.bk-fc-in'), noEl = F.node('no').querySelector('.bk-fc-in'), tEl = F.node('test').querySelector('.bk-fc-in');
     const out = div(stage, 'u7l1-fout', '<div class="u7l1-fout-h">results</div>', FW + 14, 8, W - FW - 22, FH - 14);

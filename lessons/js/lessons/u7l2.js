@@ -15,8 +15,8 @@
  *   unflap (Example 7(c) backwards: fold one arm of the V down at the vertex, then the other: the two lines),
  *   ride   (Example 8: the cyclist rides past the water station while p and d are traced on the graph; the line d = 2
  *           meets the V twice; domain and range).
- * Colours (Unit 7): y = f(x) blue; y = |f(x)| red (the booklet's answer colour); the flap orange (front) / red (back);
- * invariant points and vertices amber; a second line or a test line purple. */
+ * Colours (as in Lesson 3): y = f(x) blue; y = |f(x)| purple; the part below the axis (the flap) red, turning purple as it
+ * lands; invariant points and vertices amber; a second line or a test line orange. */
 import {
   h, tex, add, box, Graph, ValueTable, stamp, stampIn, checkCard, mountExplainers, pop, fadeIn, anim, sleep, tween, svgEl,
   pulse, linear, COLORS, texNum, drawIn
@@ -24,8 +24,8 @@ import {
 import { standup } from '../standup.js';
 
 const T = (s) => tex(s);
-const FC = COLORS.blue, AC = COLORS.red, VC = COLORS.amber, IX = COLORS.purple, OR = COLORS.orange, INK = COLORS.slate;
-const FLAP = { front: ['rgba(232,160,30,.30)', OR], back: ['rgba(201,58,51,.18)', AC] };
+const FC = COLORS.blue, AC = COLORS.purple, VC = COLORS.amber, IX = '#d9730d', NEG = COLORS.red, INK = COLORS.slate;
+const FLAP = { front: ['rgba(201,58,51,.22)', NEG], back: ['rgba(123,79,196,.18)', AC] };
 const U7 = { xmin: -6.5, xmax: 6.5, ymin: -6.5, ymax: 6.5, xlabels: 2, ylabels: 2 };
 const show = (c, el) => fadeIn(c, el, 320);
 const hide = (el) => { if (el) el.style.opacity = 0; if (el && el.label) el.label.style.opacity = 0; return el; };
@@ -90,10 +90,10 @@ const FIGS = {
   e2b: { w: 300, h: 300, win: U7, fs: 14, given: (G) => G.line([0, 6], [1, 4], { color: INK, width: 3 }), ans: (G) => vee(G, 3, 2).els },
   e2c: { w: 300, h: 300, win: U7, fs: 14, given: (G) => G.line([0, -2], [2, -1], { color: INK, width: 3 }), ans: (G) => vee(G, 4, 0.5).els },
   e3a: { w: 340, h: 340, win: U7, ans(G) {
-    return [G.line([0, 4], [1, 2], { color: FC, width: 3, dash: '9 7' }), ...vee(G, 2, 2).els, ...[[2, 0], [0, 4], [5, 6]].map(([x, y]) => G.point(x, y, { color: 'red', coords: true, pos: x === 0 ? 'w' : x === 5 ? 'w' : 'se' }))];
+    return [G.line([0, 4], [1, 2], { color: FC, width: 3, dash: '9 7' }), ...vee(G, 2, 2).els, ...[[2, 0], [0, 4], [5, 6]].map(([x, y]) => G.point(x, y, { color: 'purple', coords: true, pos: x === 0 ? 'w' : x === 5 ? 'w' : 'se' }))];
   } },
   e4a: { w: 340, h: 360, win: { xmin: -2.5, xmax: 6.5, ymin: -7.5, ymax: 7.5, ylabels: 2 }, ans: (G) => [G.line([0, -6], [1, -3], { color: FC, width: 3, dash: '9 7' }), ...vee(G, 2, 3).els] },
-  e4b: { w: 360, h: 300, win: { xmin: -10.5, xmax: 2.5, ymin: -3.5, ymax: 6.5, xlabels: 2 }, ans: (G) => [...vee(G, -4, 0.5).els, G.point(-4, 0, { color: 'red', coords: true, pos: 's' }), G.point(0, 2, { color: 'red', coords: true, pos: 'ne' })] },
+  e4b: { w: 360, h: 300, win: { xmin: -10.5, xmax: 2.5, ymin: -3.5, ymax: 6.5, xlabels: 2 }, ans: (G) => [...vee(G, -4, 0.5).els, G.point(-4, 0, { color: 'purple', coords: true, pos: 's' }), G.point(0, 2, { color: 'purple', coords: true, pos: 'ne' })] },
   e7: { w: 340, h: 340, win: U7, given(G) {
     vee(G, 2, 1.5, { color: INK }); [[2, 0], [0, 3], [4, 3]].forEach(([x, y]) => G.point(x, y, { color: INK, r: 6 }));
   }, ans: (G) => [G.line([0, -3], [2, 0], { color: FC, width: 3 }), G.line([0, 3], [2, 0], { color: IX, width: 3, dash: '9 7' })] },
@@ -236,7 +236,7 @@ const sketch = {
     const ring = glowRing(G.layers.top);
     if (v === 'e3a') {
       const pts = { v: [2, 0], y: [0, 4], o: [5, 6], m1: [4, 4], m2: [-1, 6] };
-      const el = {}; Object.entries(pts).forEach(([k, [x, y]]) => { el[k] = hide(G.point(x, y, { color: k === 'v' ? 'amber' : 'red', r: k === 'v' ? 8 : 7, coords: true, pos: k === 'v' ? 's' : k === 'm2' ? 'w' : k === 'y' ? 'w' : 'e' })); });
+      const el = {}; Object.entries(pts).forEach(([k, [x, y]]) => { el[k] = hide(G.point(x, y, { color: k === 'v' ? 'amber' : 'purple', r: k === 'v' ? 8 : 7, coords: true, pos: k === 'v' ? 's' : k === 'm2' ? 'w' : k === 'y' ? 'w' : 'e' })); });
       const axis = hide(G.vline(2, { color: VC, width: 2.5 }));
       const ghost = hide(G.line([0, 4], [1, 2], { color: FC, width: 3, dash: '9 7' }));
       const V = vee(G, 2, 2); V.els.forEach(hide);
@@ -281,7 +281,7 @@ const sketch = {
       ];
     }
     if (v === 'e4b') {
-      const vp = hide(G.point(-4, 0, { color: 'amber', r: 8, coords: true, pos: 's' })), yp = hide(G.point(0, 2, { color: 'red', r: 7, coords: true, pos: 'e' }));
+      const vp = hide(G.point(-4, 0, { color: 'amber', r: 8, coords: true, pos: 's' })), yp = hide(G.point(0, 2, { color: 'purple', r: 7, coords: true, pos: 'e' }));
       const V = vee(G, -4, 0.5); V.els.forEach(hide);
       const tri = (pts, cl) => hide(G.polyline(pts, { color: cl, width: 2.5, dash: '6 5' }));
       const t1 = tri([[-4, 0], [0, 0], [0, 2]], AC), t2 = tri([[-8, 2], [-8, 0], [-4, 0]], AC);
@@ -302,7 +302,7 @@ const sketch = {
     const lp = [0, -4], lq = [1, -2];
     const ln = G.line(lp, lq, { color: FC, width: 3, dash: '9 7' });
     const V = vee(G, 2, 2);
-    const vp = G.point(2, 0, { color: 'amber', r: 8 }), yp = G.point(0, 4, { color: 'red', r: 7 });
+    const vp = G.point(2, 0, { color: 'amber', r: 8 }), yp = G.point(0, 4, { color: 'purple', r: 7 });
     const sl = (n, lo, hi, st) => { const l = h('label', 'u7l2-sl no-ink', `<span class="u7l2-sll">${T(n)}</span><input type="range" min="${lo}" max="${hi}" step="${st}" aria-label="the value of ${n}"><span class="u7l2-slv"></span>`); l.setAttribute('data-tap', ''); P.appendChild(l); return l; };
     const eq = h('div', 'u7l2-eqbig'); P.appendChild(eq);
     const sa = sl('a', -3, 3, 0.5), sb = sl('b', -6, 6, 1);
@@ -399,9 +399,9 @@ const tf = {
     const lab2 = hide(G.label(d.win.xmin + 0.6, d.win.ymax - 2.2, `${T('y=' + d.r)}`, { cls: 'bk-ptlab', pos: 'se', color: IX }));
     const band = hide(G.shadeX(d.lo, d.hi, { band: true, color: 'amber', openA: d.openA, openB: d.openB }));
     const a = Math.max(d.lo, d.win.xmin), b = Math.min(d.hi, d.win.xmax);
-    const hl = hide(G.fn(d.g, { from: a, to: b, color: d.ok ? COLORS.green : AC, width: 7, arrows: false }));
+    const hl = hide(G.fn(d.g, { from: a, to: b, color: d.ok ? COLORS.green : NEG, width: 7, arrows: false }));
     const tl = hide(G.vline(d.t, { color: INK, width: 2 }));
-    const p1 = hide(G.point(d.t, d.f(d.t), { color: 'red', r: 7 })), p2 = hide(G.point(d.t, d.g(d.t), { color: 'purple', r: 7 }));
+    const p1 = hide(G.point(d.t, d.f(d.t), { color: 'purple', r: 7 })), p2 = hide(G.point(d.t, d.g(d.t), { color: IX, r: 7 }));
     const P = div(stage, 'u7l2-pn', '', PX, 0, PWd);
     const claim = h('div', 'u7l2-claim', `${T(`${d.l}=${d.r}`)}<i class="u7l2-if">if ${T(d.cond)}</i>`); P.appendChild(claim);
     const ck = checkCard(P, { at: `x=${d.t}`, left: { tex: d.l, sub: d.lsub, f: ({ x }) => d.f(x) }, right: { tex: d.r, sub: d.rsub, f: ({ x }) => d.g(x) }, values: { x: d.t }, hidden: true, width: PWd });
@@ -428,7 +428,7 @@ const unflap = {
     const xl = (3 - 6.5) / 1.5, xr = (6.5 + 3) / 1.5;
     const Lg = G.segment([2, 0], [xl, 6.5], { color: INK, width: 4.5 }), Rg = G.segment([2, 0], [xr, 6.5], { color: INK, width: 4.5 });
     [[2, 0], [0, 3], [4, 3]].forEach(([x, y]) => G.point(x, y, { color: INK, r: 6.5, coords: true, pos: x === 0 ? 'w' : x === 4 ? 'e' : 's' }));
-    const cols = (cl) => ({ front: ['rgba(58,66,84,.10)', INK], back: [cl === FC ? 'rgba(31,91,214,.13)' : 'rgba(123,79,196,.13)', cl], dotF: INK, dotB: cl });
+    const cols = (cl) => ({ front: ['rgba(58,66,84,.10)', INK], back: [cl === FC ? 'rgba(31,91,214,.13)' : 'rgba(217,115,13,.13)', cl], dotF: INK, dotB: cl });
     const FL1 = makeFlap(G, [[2, 0], [xl, 6.5], [xl, 0]], [[2, 0], [xl, 6.5]], [], cols(FC));
     const FL2 = makeFlap(G, [[2, 0], [xr, 6.5], [xr, 0]], [[2, 0], [xr, 6.5]], [], cols(IX));
     hide(FL1.g); hide(FL2.g);
@@ -495,7 +495,7 @@ const ride = {
     const ring = glowRing(G.layers.top);
     const vp = hide(G.point(20, 0, { color: 'amber', r: 8, label: T('(20,\\ 0)'), pos: 'se' }));
     const two = hide(G.hline(2, { color: IX, width: 2.5, dash: false }));
-    const q1 = hide(G.point(12, 2, { color: 'purple', r: 7, label: T('t=12'), pos: 'nw' })), q2 = hide(G.point(28, 2, { color: 'purple', r: 7, label: T('t=28'), pos: 'ne' }));
+    const q1 = hide(G.point(12, 2, { color: IX, r: 7, label: T('t=12'), pos: 'nw' })), q2 = hide(G.point(28, 2, { color: IX, r: 7, label: T('t=28'), pos: 'ne' }));
     const dom = hide(G.shadeX(0, 40)), ran = hide(G.shadeY(0, 5));
     const r = [row(rows, 'c', `${T('5-0.25t=0')}: ${T('t=20')} min`), row(rows, 'd', `${T('d=2')}: ${T('t=12')}, ${T('t=28')} min<br>${T('|5-3|=2')}, ${T('|5-7|=2')}`), row(rows, 'e', `${T('\\{t\\mid 0\\le t\\le40,\\ t\\in\\mathbb{R}\\}')}<br>${T('\\{d\\mid 0\\le d\\le5,\\ d\\in\\mathbb{R}\\}')}`)];
     return [

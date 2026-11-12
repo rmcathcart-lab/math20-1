@@ -129,7 +129,7 @@
   function opp5(r, kind) {
     var v = vOf(r), terms;
     if (kind === 'a') {
-      var s = pickWhere(function () { return { a: nz(r, 1, 9), p: r.int(1, 9), q: r.int(1, 9) }; }, function (z) { return z.p !== z.q && !(z.a === 2 && z.p === 7) && !(z.a === 5 && z.p === 6); });
+      var s = pickWhere(function () { return { a: r.int(1, 9), p: r.int(1, 9), q: r.int(1, 9) }; }, function (z) { return z.p !== z.q && !(z.a === 2 && z.p === 7) && !(z.a === 5 && z.p === 6); });
       terms = [T1(1, [C(s.p)], [A(1, -s.a, v)]), T1(1, [C(s.q)], [A(-1, s.a, v)], { ad: true })];
     } else if (kind === 'b') { // c v/(v − a) − d/(a − v) = (c v + d)/(v − a)
       var b = pickWhere(function () { return { a: r.int(1, 9), c: r.int(1, 4), d: r.int(1, 9) }; }, function (z) { return !(z.c === 1 && z.a === 6 && z.d === 6) && z.d !== z.c * z.a; });
@@ -184,7 +184,7 @@
   }
   function errWork(s) {
     var D = '(x-' + s.a + ')(x+' + s.a + ')', rt0 = tx(s.rest), restT = rt0.charAt(0) === '-' ? rt0 : '+' + rt0;
-    return t('\\frac{' + tx(L(1, s.p)) + '}{x-' + s.a + '}-\\frac{' + tx(L(1, s.q)) + '}{x+' + s.a + '}=\\frac{(' + tx(L(1, s.p)) + ')(x+' + s.a + ')-(' + tx(L(1, s.q)) + ')(x-' + s.a + ')}{' + D + '}=\\frac{' + tx(s.P1) + '-x^{2}' + restT + '}{' + D + '}=\\frac{' + tx(s.wrongN) + '}{' + D + '}');
+    return [t('\\frac{' + tx(L(1, s.p)) + '}{x-' + s.a + '}-\\frac{' + tx(L(1, s.q)) + '}{x+' + s.a + '}'), t('=\\frac{(' + tx(L(1, s.p)) + ')(x+' + s.a + ')-(' + tx(L(1, s.q)) + ')(x-' + s.a + ')}{' + D + '}'), t('=\\frac{' + tx(s.P1) + '-x^{2}' + restT + '}{' + D + '}'), t('=\\frac{' + tx(s.wrongN) + '}{' + D + '}')].join(' ');
   }
 
   /* ---------- 10: rectangle ---------- */
@@ -200,7 +200,7 @@
     // (1/v − 1/k)/(v − k) = (k − v)/(k v) ÷ (v − k) = −1/(k v);  flip: (1/k − 1/v)/(v − k) = 1/(k v)
     var T = canon([[C(flip ? 1 : -1)]], [[Mo(k, v, 1)]]), npv = npvOf([[Mo(1, v, 1)], [A(1, -k, v)]]);
     var top = flip ? '\\dfrac{1}{' + k + '}-\\dfrac{1}{' + v + '}' : '\\dfrac{1}{' + v + '}-\\dfrac{1}{' + k + '}', topS = flip ? '\\frac{' + v + '-' + k + '}{' + k + v + '}' : '\\frac{' + k + '-' + v + '}{' + k + v + '}';
-    var sol = 'The top: ' + t(topS) + (flip ? '' : t('=\\frac{-(' + v + '-' + k + ')}{' + k + v + '}')) + '. Divide by ' + t(v + '-' + k) + ' (multiply by ' + t('\\frac{1}{' + v + '-' + k + '}') + '): ' + t(cTex(T)) + '.<br>NPVs: ' + t(v + '\\ne 0') + ' (the small denominator) and ' + t(v + '\\ne ' + k) + ' (the divisor): ' + t(npvTex(npv)) + '.';
+    var sol = 'The top: ' + t(topS + (flip ? '' : '=\\frac{-(' + v + '-' + k + ')}{' + k + v + '}')) + '. Divide by ' + t(v + '-' + k) + ' (multiply by ' + t('\\frac{1}{' + v + '-' + k + '}') + '): ' + t(cTex(T)) + '.<br>NPVs: ' + t(v + '\\ne 0') + ' (the small denominator) and ' + t(v + '\\ne ' + k) + ' (the divisor): ' + t(npvTex(npv)) + '.';
     return simpPart(CP, 'Simplify the complex fraction. State the non-permissible values. ' + t('\\dfrac{' + top + '}{' + v + '-' + k + '}'), T, npv, { vars: [v], nw: [{ vals: npvOf([[Mo(1, v, 1)]]), code: CP + 'npv-missing', hint: 'The divisor ' + t(v + '-' + k) + ' cannot be ' + t(0) + ' either.' }] }, sol,
       ['Write the top as a single fraction. Watch for ' + t(k + '-' + v + '=-(' + v + '-' + k + ')') + '.', 'Dividing by ' + t(v + '-' + k) + ' is multiplying by its reciprocal.'], 'complex fraction: divide by a binomial');
   }
@@ -220,7 +220,7 @@
       { html: t('\\frac{' + k + 'x-' + (k * a + 2 * k * a) + '}{' + D + '}').replace('\\frac{1x', '\\frac{x'), why: 'The first fraction is missing the factor ' + t('x+' + a) + ', not ' + t('x-' + a) + '.', code: 'wrongfac' }, { html: t('\\frac{' + k + '}{x-' + a + '}'), why: 'Check which factor divides out: the numerator is ' + t(k + '(x-' + a + ')') + '.', code: 'cancel' }];
     opts[2].html = t('\\frac{' + tx(L(k, -k * a - 2 * k * a)) + '}{' + D + '}');
     return mcPart(r, 'For ' + t('x\\ne\\pm ' + a) + ', ' + t('\\frac{' + k + '}{x-' + a + '}-\\frac{' + 2 * k * a + '}{' + D + '}') + ' simplifies to', opts,
-      t('\\frac{' + k + '(x+' + a + ')-' + 2 * k * a + '}{(x-' + a + ')(x+' + a + ')}=\\frac{' + tx(L(k, -k * a)) + '}{(x-' + a + ')(x+' + a + ')}=\\frac{' + k + '(x-' + a + ')}{(x-' + a + ')(x+' + a + ')}=\\frac{' + k + '}{x+' + a + '}') + '.', H_FAC, 'MC: a difference that simplifies');
+      t('\\frac{' + coefT(k) + '(x+' + a + ')-' + 2 * k * a + '}{(x-' + a + ')(x+' + a + ')}=\\frac{' + tx(L(k, -k * a)) + '}{(x-' + a + ')(x+' + a + ')}' + (k === 1 ? '' : '=\\frac{' + k + '(x-' + a + ')}{(x-' + a + ')(x+' + a + ')}') + '=\\frac{' + k + '}{x+' + a + '}') + '.', H_FAC, 'MC: a difference that simplifies');
   }
   function mc14(r) {
     var s = pickWhere(function () { return { c: r.int(2, 6), a: r.int(2, 9) }; }, function (z) { return !(z.c === 2 && z.a === 5); });
@@ -268,11 +268,11 @@
     if (mode === 'tri') {
       D = '(x' + sg(s.b) + ')(x-' + s.a + ')(x' + sg(-s.b) + ')';
       prompt = 'When simplified, ' + t('\\frac{' + s.p + '}{' + tx(P.mul(L(1, -s.a), L(1, s.b))) + '}+\\frac{' + s.q + '}{x^{2}-' + s.b * s.b + '}') + ' can be written as ' + t('\\frac{Ax+B}{' + D + '}') + ', where ' + t('A') + ' and ' + t('B') + ' are integers. The value of ' + t('A-B') + ' is ______.';
-      sol = t('\\frac{' + s.p + '}{(x-' + s.a + ')(x' + sg(s.b) + ')}+\\frac{' + s.q + '}{(x' + sg(-s.b) + ')(x' + sg(s.b) + ')}=\\frac{' + s.p + '(x' + sg(-s.b) + ')+' + s.q + '(x-' + s.a + ')}{' + D + '}=\\frac{' + tx(L(s.A, s.B)) + '}{' + D + '}') + '. ' + t('A=' + s.A) + ', ' + t('B=' + s.B) + ', ' + t('A-B=' + s.ans) + '.';
+      sol = t('\\frac{' + s.p + '}{(x-' + s.a + ')(x' + sg(s.b) + ')}+\\frac{' + s.q + '}{(x' + sg(-s.b) + ')(x' + sg(s.b) + ')}=\\frac{' + coefT(s.p) + '(x' + sg(-s.b) + ')+' + coefT(s.q) + '(x-' + s.a + ')}{' + D + '}=\\frac{' + tx(L(s.A, s.B)) + '}{' + D + '}') + '. ' + t('A=' + s.A) + ', ' + t('B=' + s.B) + ', ' + t('A-B=' + s.ans) + '.';
     } else {
       D = '(x-' + s.a + ')(x' + sg(s.b) + ')';
       prompt = 'The expression ' + t('\\frac{' + s.p + '}{x-' + s.a + '}+\\frac{' + s.q + '}{x' + sg(s.b) + '}') + ' can be written as ' + t('\\frac{Ax+B}{' + D + '}') + '. The value of ' + t('A+B') + ' is ______.';
-      sol = t('\\frac{' + s.p + '(x' + sg(s.b) + ')+' + s.q + '(x-' + s.a + ')}{' + D + '}=\\frac{' + tx(L(s.A, s.B)) + '}{' + D + '}') + '. ' + t('A=' + s.A) + ', ' + t('B=' + s.B) + ', ' + t('A+B=' + s.ans) + '.';
+      sol = t('\\frac{' + coefT(s.p) + '(x' + sg(s.b) + ')+' + coefT(s.q) + '(x-' + s.a + ')}{' + D + '}=\\frac{' + tx(L(s.A, s.B)) + '}{' + D + '}') + '. ' + t('A=' + s.A) + ', ' + t('B=' + s.B) + ', ' + t('A+B=' + s.ans) + '.';
     }
     var alt = mode === 'tri' ? s.A + s.B : s.A - s.B;
     return KP.nr(prompt, s.ans, function (v) { if (v === alt && alt !== s.ans) return { code: 'value', hint: mode === 'tri' ? 'The question asks for ' + t('A-B') + '.' : 'The question asks for ' + t('A+B') + '.' }; return null; }, sol, ['Factor the denominators and use the LCD shown.', 'Expand the numerator: ' + t('A') + ' is the coefficient of ' + t('x') + ', ' + t('B') + ' the constant.'], mode === 'tri' ? 'NR: A − B' : 'NR: A + B');
@@ -345,7 +345,7 @@
         var Lq = ex.norm(s.p * (s.x0 + s.a) - s.p * (s.x0 - s.a), (s.x0 - s.a) * (s.x0 + s.a)), Rq = ex.norm(2 * s.a * s.p, s.x0 * s.x0 - s.a * s.a);
         var pp = s.p;
         var p = boxes('Test her claim with ' + t('x=' + s.x0) + ': work out each side.', [{ label: 'Left side:', check: K.value(Lq), key: rt(Lq), keys: 'u6knum' }, { label: 'Right side:', check: K.value(Rq), key: rt(Rq), keys: 'u6knum' }],
-          'Left: ' + t('\\frac{' + pp + '}{' + (s.x0 - s.a) + '}-\\frac{' + pp + '}{' + (s.x0 + s.a) + '}=' + rt(Lq)) + '. Right: ' + t('\\frac{' + 2 * s.a * pp + '}{' + (s.x0 * s.x0 - s.a * s.a) + '}=' + rt(Rq)) + '. Equal for ' + t('x=' + s.x0) + ' — but one value does not prove the claim.', ['Substitute ' + t('x=' + s.x0) + ' into each side separately.'], 'test a claim with a value');
+          'Left: ' + t('\\frac{' + pp + '}{' + (s.x0 - s.a) + '}-\\frac{' + pp + '}{' + (s.x0 + s.a) + '}=' + rt(Lq)) + '. Right: ' + t('\\frac{' + 2 * s.a * pp + '}{' + (s.x0 * s.x0 - s.a * s.a) + '}' + (Rq[1] !== s.x0 * s.x0 - s.a * s.a ? '=' + rt(Rq) : '')) + '. Equal for ' + t('x=' + s.x0) + ' — but one value does not prove the claim.', ['Substitute ' + t('x=' + s.x0) + ' into each side separately.'], 'test a claim with a value');
         p.bad = [[rt(ex.norm(pp, s.x0 - s.a)), rt(Rq)]];
         return p;
       } },

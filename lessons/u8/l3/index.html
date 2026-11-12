@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Problems Involving Systems · Math 20-1 8.3</title>
+<meta name="description" content="Math 20-1 Unit 8 Lesson 3: problems involving systems. Model a situation with a system (define the variables, one equation per condition, solve, check, answer); number and area problems; linear–quadratic models (a ball landing on a hillside, a plane and a radar's circular range); quadratic–quadratic models (two thrown balls, revenue and cost: break-even, the profit interval, the maximum profit); the discriminant for tangents and unknown constants; a model from two data points. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u8l3.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u8l3">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Cat, the Turtle and the Table">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="18s" begin="-2s" repeatCount="indefinite"/><text x="0" y="48" font-size="32" text-anchor="middle" transform="scale(-1 1)">🐢</text></g><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="18s" begin="0s" repeatCount="indefinite"/><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur=".6s" repeatCount="indefinite"/><text x="0" y="46" font-size="38" text-anchor="middle" transform="scale(-1 1)">🐈</text></g></g></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Cat, the Turtle and the Table</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">A cat sits on a table and a turtle sits on the floor. From the top of the turtle to the top of the cat is <b>170 cm</b>.</p><p class="vw-ctx">They swap places. Now, from the top of the cat to the top of the turtle is <b>130 cm</b>.</p><p class="vw-ask">How tall is the table?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="Two pictures of the same table: a cat on the table with a turtle on the floor, 170 cm from the top of the turtle to the top of the cat; then the turtle on the table with the cat on the floor, 130 cm between their tops"><rect x="0" y="0" width="330" height="250" rx="14" fill="#f4efe4"/><rect x="0" y="228" width="330" height="22" fill="#d8c3a0"/><rect x="0" y="228" width="330" height="3" fill="#b89a6e"/><line x1="165" y1="12" x2="165" y2="226" stroke="#cbbfa8" stroke-width="2" stroke-dasharray="6 6"/><rect x="8" y="108" width="92" height="9" rx="2" fill="#8a6d4b"/><rect x="14" y="117" width="7" height="111" fill="#6b5a45"/><rect x="87" y="117" width="7" height="111" fill="#6b5a45"/><g><animateTransform attributeName="transform" type="rotate" values="-4 52 106;4 52 106;-4 52 106" dur="2.4s" repeatCount="indefinite"/><text x="52" y="106" font-size="46" text-anchor="middle">🐈</text></g><g><animateTransform attributeName="transform" type="translate" values="0 0;6 0;0 0" dur="3s" repeatCount="indefinite"/><text x="140" y="226" font-size="30" text-anchor="middle">🐢</text></g><g stroke="#2b55a0" stroke-width="2" stroke-dasharray="4 4"><line x1="62" y1="68" x2="118" y2="68"/><line x1="104" y1="202" x2="130" y2="202"/></g><g stroke="#2b55a0" stroke-width="3" stroke-linecap="round" fill="none"><line x1="112" y1="72" x2="112" y2="198"/><path d="M106 79 L112 70 L118 79 M106 191 L112 200 L118 191"/></g><rect x="86" y="124" width="52" height="24" rx="8" fill="#fff" stroke="#2b55a0" stroke-width="2"/><text x="112" y="141" font-size="14" font-weight="800" fill="#2b55a0" text-anchor="middle">170 cm</text><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -6;0 0" dur="1.4s" repeatCount="indefinite"/><text x="54" y="184" font-size="34" font-weight="800" fill="#c93a33" text-anchor="middle">?</text></g><rect x="176" y="108" width="92" height="9" rx="2" fill="#8a6d4b"/><rect x="182" y="117" width="7" height="111" fill="#6b5a45"/><rect x="255" y="117" width="7" height="111" fill="#6b5a45"/><g><animateTransform attributeName="transform" type="translate" values="0 0;-5 0;0 0" dur="3.4s" repeatCount="indefinite"/><text x="220" y="106" font-size="30" text-anchor="middle">🐢</text></g><g><animateTransform attributeName="transform" type="rotate" values="4 304 226;-4 304 226;4 304 226" dur="2.2s" repeatCount="indefinite"/><text x="304" y="226" font-size="46" text-anchor="middle">🐈</text></g><g stroke="#c93a33" stroke-width="2" stroke-dasharray="4 4"><line x1="232" y1="84" x2="286" y2="84"/><line x1="272" y1="188" x2="292" y2="188"/></g><g stroke="#c93a33" stroke-width="3" stroke-linecap="round" fill="none"><line x1="278" y1="88" x2="278" y2="184"/><path d="M272 95 L278 86 L284 95 M272 177 L278 186 L284 177"/></g><rect x="252" y="124" width="52" height="24" rx="8" fill="#fff" stroke="#c93a33" stroke-width="2"/><text x="278" y="141" font-size="14" font-weight="800" fill="#c93a33" text-anchor="middle">130 cm</text></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Make a guess first. Then: how can you be sure?</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>150 cm.</b> Put the two pictures on top of each other: two tables, and the cat and the turtle <b>cancel out</b>.<br><span class="tex">(\text{table}+\text{cat}-\text{turtle})+(\text{table}+\text{turtle}-\text{cat})=170+130</span>, so <span class="tex">2\times\text{table}=300</span> and the table is <b>150 cm</b> tall.<br><span class="muted">You never find out how tall the cat or the turtle is: only that the cat is 20 cm taller. A 50 cm cat and a 30 cm turtle work, and so do a 40 cm cat and a 20 cm turtle.</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 8 Systems and Inequalities · Lesson 3</div>
+  <h1>Problems Involving Systems</h1>
+  <p class="lede">Many real problems have <b>two unknown quantities</b> linked by <b>two conditions</b>. Each condition becomes an equation, and together they form a <b>system</b>: a ball's path and a hillside, a plane's route and a radar's range, a company's revenue and its cost. The <b class="u8l3-cs">points where the graphs meet</b> answer the question.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>model a problem with a system: define the variables, write one equation per condition, solve, check, and answer in a sentence</li>
+      <li>solve <b>linear–quadratic</b> models (a path and a slope, a line and a circle) and <b>quadratic–quadratic</b> models (two thrown objects, revenue and cost)</li>
+      <li>interpret the solutions in context: break-even points, a profit interval, the greatest gap, and reject solutions that make no sense</li>
+      <li>use the discriminant to find when a line is <b>tangent</b> to a curve, and to find unknown constants</li>
+      <li>find the parameters of a model from two data points</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF6</b> Solve, algebraically and graphically, problems that involve systems of linear-quadratic and quadratic-quadratic equations in two variables.<br><span class="muted">Today: the five steps for modelling with a system, number and area problems, a hillside and a radar circle, two thrown balls, break-even and profit, tangents and unknown constants, and a model from data.</span></div>
+</section>
+
+<!-- ================= 1. Modelling with a system ================= -->
+<section class="card" data-ink="s1" data-section="1. Modelling with a System">
+  <div class="sec-h"><span class="badge">1</span><h2>Modelling with a System of Equations</h2></div>
+  <div class="def">Many problems have two unknown quantities linked by two conditions. Each condition gives one equation, and together the equations form a <b>system</b>. When one equation is linear and the other quadratic, it is a <b>linear–quadratic system</b>; when both are quadratic, it is a <b>quadratic–quadratic system</b>. Every solution <span class="tex">(x,\ y)</span> of the system must fit <b>both</b> conditions.</div>
+  <div class="def amber u8l3-key"><div class="u8l3-keyh">Key idea: solving a problem with a system</div>
+    <div class="u8l3-steps">
+      <div><b>1</b><span><b>Define the variables</b>, with units.</span></div>
+      <div><b>2</b><span>Write <b>one equation for each condition</b>.</span></div>
+      <div><b>3</b><span><b>Solve</b> by substitution or elimination (or graph both equations and use <b>intersect</b>).</span></div>
+      <div><b>4</b><span><b>Check</b> each solution in the <b>original</b> conditions and reject any that make no sense (a negative length, a time before the start, a count that is not a whole number).</span></div>
+      <div><b>5</b><span><b>Answer</b> the question in a sentence, with units.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Number problems</h3></div>
+  <p class="q">Write a system of equations and solve it.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) The difference of two numbers is 4. The larger number plus the square of the smaller number is 46. Determine the numbers.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Let <span class="tex">x</span> be the smaller number and <span class="tex">y</span> the larger.<br><span class="tex">y-x=4\Rightarrow y=x+4</span><br><span class="tex">y+x^2=46</span><br>Substitute: <span class="tex">x+4+x^2=46</span><br><span class="tex">x^2+x-42=0</span><br><span class="tex">(x+7)(x-6)=0</span>, so <span class="tex">x=-7</span> or <span class="tex">x=6</span>.<br><span class="tex">x=6</span>: <span class="tex">y=10</span>; &nbsp; <span class="tex">x=-7</span>: <span class="tex">y=-3</span>.<br>The numbers are <b>6 and 10</b>, or <b>−7 and −3</b>.<br>Check: <span class="tex">10+36=46</span> ✓; &nbsp; <span class="tex">-3+49=46</span> ✓</div></div></div>
+    <div class="part"><div class="pl">(b) Two positive integers have a sum of 15, and the sum of their squares is 117. Determine the integers.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+y=15</span> and <span class="tex">x^2+y^2=117</span><br><span class="tex">y=15-x</span>: &nbsp; <span class="tex">x^2+(15-x)^2=117</span><br><span class="tex">x^2+225-30x+x^2=117</span><br><span class="tex">2x^2-30x+108=0\Rightarrow x^2-15x+54=0</span><br><span class="tex">(x-6)(x-9)=0</span>, so <span class="tex">x=6</span> or <span class="tex">x=9</span>.<br><span class="tex">x=6</span>: <span class="tex">y=9</span>; &nbsp; <span class="tex">x=9</span>: <span class="tex">y=6</span> (the same pair).<br>The integers are <b>6 and 9</b>.<br>Check: <span class="tex">36+81=117</span> ✓</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s1b" data-section="1. The Dog Run">
+  <h3 class="sub">The five steps on an area problem</h3>
+  <p class="u8l3-p">A dog run is fenced on three sides against a garage wall. Change the width and both the shape and its area change: the area is a parabola, and the required area is a horizontal line.</p>
+  <div class="explainer" data-explainer="dogrun"></div>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>The dog run</h3></div>
+  <div class="u8l3-ex2">
+    <div>
+      <p class="q">A rectangular dog run is built against the wall of a garage, so fencing is needed on only three sides. The width <span class="tex">x</span> is measured out from the wall, and 20&nbsp;m of fencing is used.</p>
+      <div class="part"><div class="pl">(a) Show that the area is <span class="tex">A=20x-2x^2</span>.</div><div class="work" style="--h:80px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The side parallel to the wall is <span class="tex">20-2x</span>.<br><span class="tex">A=x(20-2x)=20x-2x^2</span></div></div></div>
+    </div>
+    <svg class="u8l3-run" viewBox="0 0 260 170" role="img" aria-label="A rectangle against a garage wall: two sides of length x out from the wall and a side of length 20 minus 2x parallel to it">
+      <rect x="6" y="10" width="248" height="16" fill="#c9c4bb"/>
+      <text x="130" y="22" font-size="13" fill="#3a4254" text-anchor="middle">garage wall</text>
+      <rect x="30" y="26" width="200" height="104" fill="#eef6e6"/>
+      <path d="M30 26 L30 130 L230 130 L230 26" fill="none" stroke="#8a5a2b" stroke-width="4" stroke-linejoin="round"/>
+      <text x="130" y="84" font-size="15" fill="#3a4254" text-anchor="middle">dog run</text>
+      <text x="14" y="84" font-size="17" font-style="italic" font-family="KaTeX_Math, serif" fill="#1c2230" text-anchor="middle">x</text>
+      <text x="246" y="84" font-size="17" font-style="italic" font-family="KaTeX_Math, serif" fill="#1c2230" text-anchor="middle">x</text>
+      <text x="130" y="152" font-size="16" font-family="KaTeX_Main, serif" fill="#1c2230" text-anchor="middle">20 − 2<tspan font-style="italic" font-family="KaTeX_Math, serif">x</tspan></text>
+    </svg>
+  </div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(b) The run must have an area of <span class="tex">48\text{ m}^2</span>. Solve the linear–quadratic system <span class="tex">y=20x-2x^2</span>, <span class="tex">y=48</span> to determine the possible dimensions.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">20x-2x^2=48\Rightarrow2x^2-20x+48=0\Rightarrow x^2-10x+24=0</span><br><span class="tex">(x-4)(x-6)=0</span>, so <span class="tex">x=4</span> or <span class="tex">x=6</span>.<br><span class="tex">x=4</span>: <b>4 m by <span class="tex">20-8=12</span> m</b>. &nbsp; <span class="tex">x=6</span>: <b>6 m by 8 m</b>. Both use 20 m and enclose <span class="tex">48\text{ m}^2</span>.<br>(Graphically: the line <span class="tex">y=48</span> meets the parabola at <span class="tex">(4,\ 48)</span> and <span class="tex">(6,\ 48)</span>.)</div></div></div>
+    <div class="part"><div class="pl">(c) Could the run have an area of <span class="tex">60\text{ m}^2</span>? Explain using the system <span class="tex">y=20x-2x^2</span>, <span class="tex">y=60</span>.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">20x-2x^2=60\Rightarrow x^2-10x+30=0</span>; &nbsp; <span class="tex">b^2-4ac=100-120=-20&lt;0</span>.<br><b>No</b> real solution: the line <span class="tex">y=60</span> misses the parabola. The largest area is at the vertex, <span class="tex">x=5</span>: <span class="tex">A=50\text{ m}^2</span>, so <span class="tex">60\text{ m}^2</span> is impossible.</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. Linear–quadratic models ================= -->
+<section class="card" data-ink="s2" data-section="2. Linear–Quadratic Models">
+  <div class="sec-h"><span class="badge">2</span><h2>Linear–Quadratic Models</h2></div>
+  <p class="u8l3-p">A straight path or edge (a hillside, a road, a ramp, a cost that grows at a constant rate) is modelled by a <b class="u8l3-cl">line</b>; a curved path (a thrown object, an arch) by a <b class="u8l3-cq">parabola</b>. Their <b class="u8l3-cs">points of intersection</b> are where the two meet. Substitution usually leads to a quadratic equation; factor it or use the quadratic formula.</p>
+  <div class="def">A <b>circle</b> centred at the origin with radius <span class="tex">r</span> has equation <span class="tex">x^2+y^2=r^2</span> (every point is <span class="tex">r</span> units from <span class="tex">(0,\ 0)</span>, by the distance formula). It is also quadratic, and it is solved with a line the same way.</div>
+  <div class="explainer" data-explainer="hill"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>A golf ball on a hillside</h3></div>
+  <div class="u8l3-ex3">
+    <p class="q">A golf ball is hit from a tee at the bottom of a hill. Its path is <span class="tex">y=-0.05x^2+2x</span> and the hillside is the line <span class="tex">y=0.5x</span>, where <span class="tex">x</span> is the horizontal distance from the tee and <span class="tex">y</span> is the height above the tee, both in metres.</p>
+    <div class="u8l3-fig"><div data-bk-graph='{"width":330,"height":230,"xmin":-2,"xmax":36,"ymin":-2,"ymax":24,"xstep":2,"ystep":2,"xlabels":10,"ylabels":10,"fontSize":14,"arrows":false,"fnArrows":false,"items":[{"fn":["0.5*x",{"from":0,"to":35,"color":"orange"}]},{"fn":["-0.05*x^2+2*x",{"from":0,"to":32,"color":"blue"}]}]}'></div></div>
+  </div>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Where does the ball land on the hill?</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-0.05x^2+2x=0.5x</span><br><span class="tex">-0.05x^2+1.5x=0</span><br><span class="tex">-0.05x(x-30)=0</span><br><span class="tex">x=0</span> (the tee) or <span class="tex">x=30</span><br><span class="tex">y=0.5(30)=15</span><br>It lands at <b><span class="tex">(30,\ 15)</span></b>.</div></div></div>
+    <div class="part"><div class="pl">(b) How far up the slope from the tee does it land, to the nearest tenth of a metre?</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Distance from <span class="tex">(0,\ 0)</span> to <span class="tex">(30,\ 15)</span>:<br><span class="tex">d=\sqrt{30^2+15^2}</span><br><span class="tex">=\sqrt{1125}</span><br><span class="tex">\approx33.5</span> m up the slope.</div></div></div>
+    <div class="part"><div class="pl">(c) What is the greatest vertical height of the ball above the hillside?</div><div class="work" style="--h:200px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Vertical gap <span class="tex">=(-0.05x^2+2x)-0.5x</span><br><span class="tex">=-0.05x^2+1.5x</span><br>Maximum at <span class="tex">x=-\dfrac{1.5}{2(-0.05)}=15</span>:<br><span class="tex">-0.05(225)+1.5(15)=11.25</span> m.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Check (a) by graphing.</b> Enter <span class="tex">Y_1=-0.05X^2+2X</span> and <span class="tex">Y_2=0.5X</span>, a window of <span class="tex">0\le X\le35</span>, <span class="tex">0\le Y\le25</span>, then <span class="keys"><kbd>2nd</kbd><kbd>TRACE</kbd></span> <b>5:intersect</b> with a guess near <span class="tex">30</span> (a guess near 0 finds the tee).</div>
+    <div class="u8l3-pcol"><button class="pill" data-keys="Y= CLEAR (−) .05 X x² + 2 X ▼ CLEAR .5 X WINDOW 0 ENTER 35 ENTER 5 ENTER 0 ENTER 25 ENTER 5 ENTER intersect ENTER ENTER 30 ENTER">Show intersect</button></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 3 · Questions 1–6</h2>
+  <p class="pr-t">Define the variables, write one equation per condition, solve, check, and answer in a sentence.</p>
+  <div class="pr-chips"><span><b>1–2</b>Number problems</span><span><b>3–4</b>Rectangles: a diagonal, a roped-off swimming area</span><span><b>5</b>A water balloon lands on a slope</span><span><b>6</b>A beam across an arch (calculator)</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 5.</span><a class="pill" href="../../../#/lesson/u8l3">Open the Practice site</a></div>
+</section>
+
+<section class="card" data-ink="s2b" data-section="2. The Radar">
+  <h3 class="sub">A line and a circle</h3>
+  <p class="u8l3-p">A radar station sees everything within its range: a circle. A plane on a straight route is a line. Substitute the line into the circle, and the solutions are where the plane enters and leaves the range.</p>
+  <div class="explainer" data-explainer="radar"></div>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>Radar range</h3></div>
+  <p class="q">A radar station at the origin detects aircraft within 10&nbsp;km, so its range is the circle <span class="tex">x^2+y^2=100</span> (units in kilometres). A plane flies along the line <span class="tex">y=x+2</span>.</p>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) Determine the points where the plane enters and leaves the radar range.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+(x+2)^2=100</span><br><span class="tex">2x^2+4x+4=100</span><br><span class="tex">x^2+2x-48=0</span><br><span class="tex">(x+8)(x-6)=0</span><br><span class="tex">x=-8</span>: <span class="tex">y=-6</span>; &nbsp; <span class="tex">x=6</span>: <span class="tex">y=8</span><br>Points <b><span class="tex">(-8,\ -6)</span></b> and <b><span class="tex">(6,\ 8)</span></b>.</div></div></div>
+    <div class="part"><div class="pl">(b) How far does the plane fly inside the range, to the nearest tenth of a kilometre?</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">d=\sqrt{(6-(-8))^2+(8-(-6))^2}</span><br><span class="tex">=\sqrt{196+196}</span><br><span class="tex">=\sqrt{392}\approx19.8</span> km</div></div></div>
+    <div class="part"><div class="pl">(c) Would a plane flying along <span class="tex">y=x+15</span> be detected? Explain.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+(x+15)^2=100</span><br><span class="tex">2x^2+30x+125=0</span><br><span class="tex">b^2-4ac=900-1000=-100&lt;0</span><br>No intersection, so the plane stays outside the range and is <b>not detected</b>.</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= 3. Quadratic–quadratic models ================= -->
+<section class="card" data-ink="s3" data-section="3. Quadratic–Quadratic Models">
+  <div class="sec-h"><span class="badge">3</span><h2>Quadratic–Quadratic Models</h2></div>
+  <p class="u8l3-p">Two objects moving under gravity, two curved paths, or a revenue and a cost that are both quadratic give a <b>quadratic–quadratic system</b>. Set the two expressions equal (or subtract the equations) and solve. If the squared terms are the same, they <b>cancel</b> and there is at most one solution.</p>
+  <div class="explainer" data-explainer="twoballs"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Two balls in the air</h3></div>
+  <p class="q">At the same moment, Ava throws a ball upward from a balcony and Ben throws one upward from the ground. After <span class="tex">t</span> seconds the heights, in metres, are</p>
+  <div class="u8l3-sys"><span>Ava: <span class="tex">h=-5t^2+10t+15</span></span><span>Ben: <span class="tex">h=-5t^2+20t</span></span></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) When are the two balls at the same height, and what is that height?</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-5t^2+10t+15=-5t^2+20t</span><br>The <span class="tex">-5t^2</span> terms cancel: <span class="tex">15=10t</span>, so <span class="tex">t=1.5</span> s.<br><span class="tex">h=-5(1.5)^2+20(1.5)=-11.25+30=18.75</span> m<br>(Check with Ava's: <span class="tex">-11.25+15+15=18.75</span> ✓)<br>After <b>1.5 s</b> both balls are <b>18.75 m</b> high.</div></div></div>
+    <div class="part"><div class="pl">(b) Which ball lands first, and how much sooner?</div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Ava: <span class="tex">-5t^2+10t+15=0\Rightarrow t^2-2t-3=0</span><br><span class="tex">(t-3)(t+1)=0</span>, <span class="tex">t=3</span> s (<span class="tex">-1</span> rejected).<br>Ben: <span class="tex">-5t(t-4)=0</span>, <span class="tex">t=4</span> s (<span class="tex">t=0</span> is the throw).<br><b>Ava's ball lands first, 1 s sooner.</b></div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<section class="card" data-ink="s3b" data-section="3. Revenue and Cost">
+  <h3 class="sub">Revenue, cost and profit</h3>
+  <p class="u8l3-p">A business <b>breaks even</b> when its revenue (the money that comes in) equals its cost (the money that goes out). Where the <b class="u8l3-cq">revenue</b> graph is above the <b class="u8l3-cl">cost</b> graph, the business makes a <b class="u8l3-cp">profit</b>: the vertical gap <span class="tex">P=R-C</span>.</p>
+  <div class="explainer" data-explainer="profit"></div>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Phone cases: break-even and profit</h3></div>
+  <p class="q">A company makes <span class="tex">x</span> hundred phone cases. Its revenue and its cost, both in hundreds of dollars, are</p>
+  <div class="u8l3-sys"><span><span class="tex">R=-2x^2+60x</span></span><span><span class="tex">C=x^2+6x+135</span></span></div>
+  <div class="parts c3">
+    <div class="part"><div class="pl">(a) The company <b>breaks even</b> when <span class="tex">R=C</span>. Determine the break-even quantities.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">-2x^2+60x=x^2+6x+135</span><br><span class="tex">0=3x^2-54x+135</span><br><span class="tex">0=x^2-18x+45</span><br><span class="tex">(x-3)(x-15)=0</span><br><span class="tex">x=3</span> or <span class="tex">x=15</span><br>It breaks even at <b>300</b> and at <b>1500</b> cases.</div></div></div>
+    <div class="part"><div class="pl">(b) For what quantities does the company make a profit?</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Profit means <span class="tex">R&gt;C</span>: the revenue parabola is above the cost parabola between the break-even points.<br>Test <span class="tex">x=9</span>: <span class="tex">R=378</span>, <span class="tex">C=270</span>, so <span class="tex">R&gt;C</span>.<br>A profit for <b>more than 300 and fewer than 1500</b> cases.</div></div></div>
+    <div class="part"><div class="pl">(c) Profit is <span class="tex">P=R-C</span>. Determine the greatest profit and the quantity that gives it.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">P=-3x^2+54x-135</span><br><span class="tex">x=-\dfrac{54}{2(-3)}=9</span><br><span class="tex">P=-243+486-135=108</span><br>The greatest profit is <b>$10&#8239;800</b>, from <b>900 cases</b>.</div></div></div>
+  </div>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Break-even on the calculator.</b> <span class="tex">Y_1=-2X^2+60X</span>, <span class="tex">Y_2=X^2+6X+135</span>, a window of <span class="tex">0\le X\le20</span>, <span class="tex">0\le Y\le500</span>, then <b>5:intersect</b> twice, with a guess near each crossing (<span class="tex">3</span>, then <span class="tex">15</span>).</div>
+    <div class="u8l3-pcol"><button class="pill" data-keys="Y= CLEAR (−) 2 X x² + 60 X ▼ CLEAR X x² + 6 X + 135 WINDOW 0 ENTER 20 ENTER 5 ENTER 0 ENTER 500 ENTER 100 ENTER intersect ENTER ENTER 3 ENTER">Show intersect</button></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u8l3"></section>
+
+<!-- ================= 4. The discriminant ================= -->
+<section class="card" data-ink="s4" data-section="4. Tangents and Unknown Constants">
+  <div class="sec-h"><span class="badge">4</span><h2>Using the Discriminant: Tangents and Unknown Constants</h2></div>
+  <p class="u8l3-p">Substituting one equation into the other gives a quadratic equation <span class="tex">ax^2+bx+c=0</span>. Its discriminant <span class="tex">b^2-4ac</span> counts the solutions of the system.</p>
+  <div class="def amber u8l3-key"><div class="u8l3-keyh">Key idea</div>
+    <div class="u8l3-disc">
+      <div class="u8l3-d2"><span class="tex">b^2-4ac&gt;0</span><span><b>two solutions</b><br>the graphs cross twice</span></div>
+      <div class="u8l3-d1"><span class="tex">b^2-4ac=0</span><span><b>one solution</b><br>the line is <b>tangent</b> to the parabola: it just touches it</span></div>
+      <div class="u8l3-d0"><span class="tex">b^2-4ac&lt;0</span><span><b>no solution</b><br>the graphs miss</span></div>
+    </div>
+  </div>
+  <p class="u8l3-p">When one equation contains an unknown constant such as <span class="tex">k</span>, write the discriminant in terms of <span class="tex">k</span> and use the condition you need.</p>
+  <div class="explainer" data-explainer="tangent"></div>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Tangent lines and unknown constants</h3></div>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Determine the values of <span class="tex">k</span> for which the line <span class="tex">y=kx-3</span> is tangent to the parabola <span class="tex">y=x^2+1</span>, and the point of tangency for each.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+1=kx-3\Rightarrow x^2-kx+4=0</span><br>Tangent: <span class="tex">b^2-4ac=0</span><br><span class="tex">(-k)^2-4(1)(4)=0\Rightarrow k^2=16\Rightarrow k=\pm4</span><br><span class="tex">k=4</span>: <span class="tex">x^2-4x+4=0\Rightarrow x=2</span>, <span class="tex">y=5</span>; point <b><span class="tex">(2,\ 5)</span></b>.<br><span class="tex">k=-4</span>: <span class="tex">x^2+4x+4=0\Rightarrow x=-2</span>, <span class="tex">y=5</span>; point <b><span class="tex">(-2,\ 5)</span></b>.</div></div></div>
+    <div class="part"><div class="pl">(b) For what values of <span class="tex">n</span> does the system <span class="tex">y=x^2-4x+7</span> and <span class="tex">y=2x+n</span> have two solutions?</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-4x+7=2x+n\Rightarrow x^2-6x+(7-n)=0</span><br>Two solutions: <span class="tex">b^2-4ac&gt;0</span>, with <span class="tex">a=1</span>, <span class="tex">b=-6</span>, <span class="tex">c=7-n</span><br><span class="tex">(-6)^2-4(1)(7-n)&gt;0</span><br><span class="tex">36-28+4n&gt;0</span><br><span class="tex">4n&gt;-8\Rightarrow n&gt;-2</span></div></div></div>
+  </div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 5. A model from data ================= -->
+<section class="card" data-ink="s5" data-section="5. Finding a Model from Data">
+  <div class="sec-h"><span class="badge">5</span><h2>Finding a Model from Data</h2></div>
+  <p class="u8l3-p">If a model has two unknown parameters, two known data points give two equations: a system. For <span class="tex">h=a(t-p)^2+q</span> with <span class="tex">a</span> known, <b>subtracting</b> the two equations eliminates <span class="tex">q</span> and leaves an equation in <span class="tex">p</span> only, because the <span class="tex">p^2</span> terms cancel.</p>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>A ball thrown from a roof</h3></div>
+  <p class="q">A ball is thrown upward from a roof. Its height in metres after <span class="tex">t</span> seconds is <span class="tex">h=-5(t-p)^2+q</span>. After 1&nbsp;s the ball is 30&nbsp;m above the ground, and after 4&nbsp;s it is 45&nbsp;m above the ground.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Write a system of two equations in <span class="tex">p</span> and <span class="tex">q</span>, and solve it.</div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">30=-5(1-p)^2+q</span> &nbsp; and &nbsp; <span class="tex">45=-5(4-p)^2+q</span><br>Subtract the first from the second:<br><span class="tex">15=-5(4-p)^2+5(1-p)^2</span><br><span class="tex">15=-5(16-8p+p^2)+5(1-2p+p^2)</span><br><span class="tex">15=-80+40p+5-10p=30p-75</span><br><span class="tex">p=3</span>; &nbsp; <span class="tex">q=30+5(1-3)^2=50</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) How high is the roof, what is the maximum height, and when does the ball hit the ground (to the nearest hundredth of a second)?</div><div class="work" style="--h:250px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">h=-5(t-3)^2+50</span><br>Roof: <span class="tex">t=0</span>, <span class="tex">h=-5(9)+50=5</span> m.<br>Maximum: <b>50 m</b>, after <b>3 s</b> (the vertex).<br>Ground: <span class="tex">-5(t-3)^2+50=0\Rightarrow(t-3)^2=10</span><br><span class="tex">t=3\pm\sqrt{10}</span>; <span class="tex">t=3+\sqrt{10}\approx6.16</span> s (<span class="tex">3-\sqrt{10}&lt;0</span> is rejected).</div></div></div>
+  </div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Five steps.</b> (1) Define the variables, with units. (2) One equation per condition. (3) Solve: substitution, elimination or <b>intersect</b>. (4) Check in the original conditions; reject what makes no sense. (5) Answer in a sentence, with units.</div>
+    <div><b>Linear–quadratic.</b> A line (a slope, a route, a constant cost) and a parabola or a circle <span class="tex">x^2+y^2=r^2</span>. Substitute the line into the curve; the solutions are where they <b>meet</b>. A vertical gap between two graphs is their difference.</div>
+    <div><b>Quadratic–quadratic.</b> Set the two expressions equal. Equal squared terms <b>cancel</b>. Break-even: <span class="tex">R=C</span>; profit between the break-even points; the greatest profit at the vertex of <span class="tex">P=R-C</span>.</div>
+    <div><b>The discriminant</b> of the combined equation counts the solutions: <span class="tex">&gt;0</span> two, <span class="tex">=0</span> one (<b>tangent</b>), <span class="tex">&lt;0</span> none. With an unknown constant, write <span class="tex">b^2-4ac</span> in terms of it. Two data points give two equations for two parameters.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u8l3">
+    <div><div class="kicker">Your turn</div><b>Assignment 3 · Questions 7–17</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l4/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 4 — Linear Inequalities in Two Variables</b><div class="muted">From equations to inequalities: graph a boundary line, then shade the half-plane of points that make the inequality true.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u8l3.js';
+  boot({ key: 'u8l3', homeHref: '../../', title: '8.3 Problems with Systems' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>

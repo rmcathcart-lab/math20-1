@@ -195,3 +195,6 @@ point with `rotate(θ cx cy)` set `style.transformBox = 'view-box'; style.transf
 - Never name a custom property `.slot` on a DOM element (`HTMLElement.slot` exists).
 - `COLORS.teal` is actually rose (#a33357); use your own hex for a real teal.
 - Calculator demos share Y= state across demos on a page: clear Y2… at the start of a demo that sets them.
+- Absolute values: KaTeX spaces `|-6|` as a subtraction ("| − 6|"). Write `\lvert -6\rvert` (or `\lvert…\rvert` always).
+- `anim()` commits its final keyframe, so a later `pulse`/`shake`/`pop` resets `transform`: place moving pieces with
+  left/top and animate transforms back to zero.

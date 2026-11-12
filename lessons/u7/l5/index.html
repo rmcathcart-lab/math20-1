@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Solving Absolute Value Equations (Quadratic) · Math 20-1 7.5</title>
+<meta name="description" content="Math 20-1 Unit 7 Lesson 5: solving |f(x)| = k for a quadratic f by two cases (isolate first, no-solution cases), the quadratic formula and how many solutions (0, 2, 3 or 4) from the reflected hump of the W, a variable on the other side and extraneous solutions, equations with two absolute values, and solving graphically. Write on it with an Apple Pencil.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="20-1 Lessons">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#7a1f3d">
+<link rel="manifest" href="../../manifest.webmanifest">
+<link rel="apple-touch-icon" href="../../assets/icon-180.png">
+<link rel="icon" href="../../assets/icon-192.png">
+<link rel="stylesheet" href="../../../assets/katex/katex.min.css">
+<link rel="stylesheet" href="../../css/site.css">
+<link rel="stylesheet" href="../../css/calc.css">
+<link rel="stylesheet" href="../../css/lessons/u7l5.css">
+<link rel="stylesheet" href="../../css/format.css">
+<script src="../../../js/ns.js"></script>
+<script src="../../../assets/katex/katex.min.js"></script>
+<script src="../../../js/calc84.js"></script>
+<script src="../../js/vendor/qrcode.js"></script>
+</head>
+<body>
+<main class="lesson screen u7l5">
+
+<!-- ================= warm-up: one clear question, first thing on the screen ================= -->
+<section class="card warm wf" data-ink="warmq" data-section="Warm-up: The Mountain Monk">
+  <div class="vw-strip"><svg viewBox="0 0 340 60" aria-hidden="true"><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="8s" begin="0s" repeatCount="indefinite"/><text x="0" y="34" font-size="28" text-anchor="middle" transform="scale(-1 1)">🕊️</text></g><g transform="translate(-40 0)"><animateTransform attributeName="transform" type="translate" values="-40 0;380 0" dur="11s" begin="4s" repeatCount="indefinite"/><text x="0" y="22" font-size="22" text-anchor="middle" transform="scale(-1 1)">🕊️</text></g><text x="300" y="44" font-size="30" text-anchor="middle">☀️<animate attributeName="opacity" values="1;0.15;1" dur="2.4s" begin="0s" repeatCount="indefinite"/></text></svg></div>
+  <div class="wf-head"><span class="badge warm-b">Warm-up</span><h2>The Mountain Monk</h2></div>
+  <div class="vw-seq has-art"><div class="vw-txt"><p class="vw-ctx">At sunrise a monk starts up the only path to a temple on top of a mountain. He walks at any speed he likes, stops to rest, and reaches the top at sunset. The next day he leaves at sunrise and walks back down the same path, arriving at the bottom at sunset.</p><p class="vw-ask">Is there a spot on the path that he passes at exactly the same time of day on both days?</p></div><div class="vw-art"><svg viewBox="0 0 330 250" role="img" aria-label="A monk walks up a zigzag path to a temple at the top of a mountain on day 1 and back down on day 2 while the sun crosses the sky."><rect x="0" y="0" width="330" height="250" rx="14" fill="#eef4fc"/><g><circle r="17" fill="#ffcf4a" stroke="#e0a11b" stroke-width="3"/><animateMotion path="M24 190 Q165 -60 306 190" dur="5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.12;.88;1" dur="5s" repeatCount="indefinite"/></g><polygon points="8,236 165,58 322,236" fill="#9cc49a" stroke="#4a4436" stroke-width="3" stroke-linejoin="round"/><polygon points="140,86 165,58 190,86 178,80 165,90 152,80" fill="#fff" stroke="#4a4436" stroke-width="2" stroke-linejoin="round"/><path d="M98 232 L214 206 L122 178 L200 150 L138 122 L186 98 L162 70" fill="none" stroke="#8a6a3a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 9"/><text x="165" y="60" font-size="30" text-anchor="middle">⛩️</text><line x1="6" y1="236" x2="324" y2="236" stroke="#4a4436" stroke-width="3"/><g><text x="0" y="-2" font-size="30" text-anchor="middle">🚶</text><animateMotion path="M98 232 L214 206 L122 178 L200 150 L138 122 L186 98 L162 70" dur="10s" repeatCount="indefinite" keyPoints="0;1;1;0;0" keyTimes="0;.46;.5;.96;1" calcMode="linear"/></g><rect x="12" y="12" width="104" height="34" rx="10" fill="#fff" stroke="#4a4436" stroke-width="2.5"/><text x="64" y="36" font-size="19" font-weight="800" fill="#2b55a0" text-anchor="middle">Day 1 ⬆<animate attributeName="opacity" values="1;0" keyTimes="0;.5" dur="10s" calcMode="discrete" repeatCount="indefinite"/></text><text x="64" y="36" font-size="19" font-weight="800" fill="#c93a33" text-anchor="middle" opacity="0">Day 2 ⬇<animate attributeName="opacity" values="0;1" keyTimes="0;.5" dur="10s" calcMode="discrete" repeatCount="indefinite"/></text></svg></div></div>
+  <div class="bk-wq vw-rev"><div class="q-line"><div class="q-num">?</div><div>Yes, no, or “it depends”? Convince your neighbour.</div><button class="pill small" type="button" data-bk-toggle>Reveal</button></div>
+    <div class="bk-ans"><b>Yes, always!</b> Picture both trips happening on the <b>same</b> day: one monk starts at the bottom and a second monk starts at the top, both at sunrise, on the same path. They <b>must meet</b> somewhere. The spot where they meet, at that moment, is the answer.<br><span class="muted">Nobody can say <i>where</i> the spot is (that depends on how he walks), only that it has to exist. Draw his height against the time of day for each trip: one graph goes up, the other comes down, so they must cross.</span></div></div>
+</section>
+
+<!-- ================= title ================= -->
+<section class="card hero" data-ink="hero" data-section="Start">
+  <div class="kicker">Math 20-1 · Unit 7 Absolute Value and Reciprocal Functions · Lesson 5</div>
+  <h1>Solving Absolute Value Equations (Quadratic)</h1>
+  <p class="lede">Solving equations with the absolute value of a quadratic expression, or with a variable on both sides, by cases, by factoring or the quadratic formula, and by graphing, and rejecting extraneous solutions.</p>
+  <div class="goals">
+    <div class="goals-h">I can…</div>
+    <ul>
+      <li>solve <span class="tex">|f(x)|=k</span> for a quadratic <span class="tex">f</span>: isolate, then solve <b>both</b> <span class="tex">f(x)=k</span> and <span class="tex">f(x)=-k</span></li>
+      <li>use the quadratic formula for a case that does not factor, and give exact and decimal answers</li>
+      <li>tell how many solutions there are (<span class="tex">0</span>, <span class="tex">2</span>, <span class="tex">3</span> or <span class="tex">4</span>) by comparing <span class="tex">k</span> with the top of the reflected hump</li>
+      <li>solve <span class="tex">|A|=B</span> when <span class="tex">B</span> contains <span class="tex">x</span>, and reject <b>extraneous</b> solutions</li>
+      <li>solve <span class="tex">|A|=|B|</span>, and <span class="tex">|A|+|B|=k</span> with subdomains</li>
+      <li>solve graphically and solve problems</li>
+    </ul>
+  </div>
+  <div class="outcome"><b>RF2</b> Graph and analyze absolute value functions (limited to linear and quadratic functions) to solve problems.<br><span class="muted">Today: the two cases for a quadratic inside the bars, how many solutions the W shape allows, extraneous solutions, two absolute values, and the graphing calculator.</span></div>
+</section>
+
+<!-- ================= 1. |quadratic| = constant ================= -->
+<section class="card" data-ink="s1" data-section="1. |Quadratic| = Constant">
+  <div class="sec-h"><span class="badge">1</span><h2>The Absolute Value of a Quadratic Equal to a Constant</h2></div>
+  <p class="u7l5-p">To solve <span class="tex">|A|=k</span> where <span class="tex">k&gt;0</span>, use the two cases from Lesson 4: the expression inside is either <span class="tex">k</span> or <span class="tex">-k</span>. When <span class="tex">A</span> is a quadratic expression, each case is a quadratic equation, so there can be up to <b>four</b> solutions.</p>
+  <div class="def amber u7l5-key"><div class="u7l5-keyh">To solve <span class="tex">|f(x)|=k</span></div>
+    <ol class="u7l5-ol">
+      <li><b>isolate</b> the absolute value;</li>
+      <li>if <span class="tex">k&lt;0</span> there is <b>no solution</b>, and if <span class="tex">k=0</span> solve <span class="tex">f(x)=0</span>;</li>
+      <li>if <span class="tex">k&gt;0</span> solve <b>both</b> <span class="tex">f(x)=k</span> and <span class="tex">f(x)=-k</span> (each in standard form: factor, or use the quadratic formula);</li>
+      <li>a case with no real roots gives nothing; collect every real root.</li>
+    </ol></div>
+  <p class="u7l5-p">Because the right side <span class="tex">k</span> is a positive constant, every root of the two cases is a solution (no root is extraneous). Checking one or two of them in the original equation is still a good habit.</p>
+  <div class="explainer" data-explainer="cases"></div>
+</section>
+
+<section class="card example" data-ink="ex1" data-section="Example 1">
+  <div class="ex-head"><span class="ex-tag">Example 1</span><h3>Read the W, then solve</h3></div>
+  <div class="u7l5-two">
+    <div class="u7l5-col">
+      <p class="q">The graph of <span class="tex">y=|x^2-2x-3|</span> is shown. The part of the parabola <span class="tex">y=x^2-2x-3</span> between its zeros has been reflected.</p>
+      <div class="part"><div class="pl">(a) Draw the line <span class="tex">y=5</span> on the grid and use the intersection points to estimate the solutions of <span class="tex">|x^2-2x-3|=5</span>.</div><div class="work" style="--h:60px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The line meets the graph twice, at about <span class="tex">x=-2</span> and <span class="tex">x=4</span>.</div></div></div>
+      <div class="part"><div class="pl">(b) Solve the equation algebraically.</div><div class="work" style="--h:230px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Case 1: <span class="tex">x^2-2x-3=5</span><br><span class="tex">x^2-2x-8=0\Rightarrow(x-4)(x+2)=0</span>, so <span class="tex">x=4</span> or <span class="tex">x=-2</span>.<br>Case 2: <span class="tex">x^2-2x-3=-5</span><br><span class="tex">x^2-2x+2=0</span>: <span class="tex">b^2-4ac=4-8=-4&lt;0</span>, no real roots. (The line <span class="tex">y=5</span> is above the reflected hump, which only reaches <span class="tex">y=4</span>.)<br>Solutions: <span class="tex">x=-2</span> or <span class="tex">x=4</span>. &nbsp;Check: <span class="tex">|16-8-3|=5\ \checkmark</span>, <span class="tex">|4+4-3|=5\ \checkmark</span></div></div></div>
+    </div>
+    <div class="part u7l5-gpart"><div class="pl">(a) the grid</div><div class="u7l5-fig" data-fig="ex1"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The line <span class="tex">y=5</span> meets the W at <span class="tex">(-2,\ 5)</span> and <span class="tex">(4,\ 5)</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex1-space"></div>
+  <button class="more" data-more="ex1-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex2" data-section="Example 2">
+  <div class="ex-head"><span class="ex-tag">Example 2</span><h3>Solve algebraically</h3></div>
+  <p class="q">Solve algebraically.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">|x^2-10|=6</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-10=6\Rightarrow x^2=16\Rightarrow x=\pm4</span><br><span class="tex">x^2-10=-6\Rightarrow x^2=4\Rightarrow x=\pm2</span><br>Four solutions: <span class="tex">x=-4,\ -2,\ 2,\ 4</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">|x^2+2x-4|=4</span></div><div class="work" style="--h:150px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+2x-4=4\Rightarrow x^2+2x-8=0\Rightarrow(x+4)(x-2)=0</span><br><span class="tex">x^2+2x-4=-4\Rightarrow x^2+2x=0\Rightarrow x(x+2)=0</span><br>Four solutions: <span class="tex">x=-4,\ -2,\ 0,\ 2</span>.</div></div></div>
+    <div class="part"><div class="pl">(c) <span class="tex">2|x^2-5x|-3=9</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Isolate: <span class="tex">2|x^2-5x|=12\Rightarrow|x^2-5x|=6</span><br><span class="tex">x^2-5x-6=0\Rightarrow(x-6)(x+1)=0\Rightarrow x=6,\ -1</span><br><span class="tex">x^2-5x+6=0\Rightarrow(x-2)(x-3)=0\Rightarrow x=2,\ 3</span><br>Solutions: <span class="tex">x=-1,\ 2,\ 3,\ 6</span>.</div></div></div>
+    <div class="part"><div class="pl">(d) <span class="tex">|x^2+4|=2</span></div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2+4=2\Rightarrow x^2=-2</span>: no real roots.<br><span class="tex">x^2+4=-2\Rightarrow x^2=-6</span>: no real roots.<br><b>No solution.</b> (In fact <span class="tex">x^2+4\ge4</span> for every <span class="tex">x</span>, so it can never equal <span class="tex">2</span>.)</div></div></div>
+  </div>
+  <div class="space" id="ex2-space"></div>
+  <button class="more" data-more="ex2-space">+ More space</button>
+</section>
+
+<!-- ================= 2. The quadratic formula; how many solutions? ================= -->
+<section class="card" data-ink="s2" data-section="2. How Many Solutions?">
+  <div class="sec-h"><span class="badge">2</span><h2>Using the Quadratic Formula; How Many Solutions?</h2></div>
+  <p class="u7l5-p">When a case does not factor, use the quadratic formula <span class="tex">x=\dfrac{-b\pm\sqrt{b^2-4ac}}{2a}</span>. Give exact answers in simplest radical form, then round if asked.</p>
+  <p class="u7l5-p">The graph tells how many solutions to expect. If the parabola <span class="tex">y=f(x)</span> opens up and its vertex <span class="tex">(p,\ q)</span> is below the <span class="tex">x</span>-axis, the graph of <span class="tex">y=|f(x)|</span> is a <b>W</b> shape whose middle hump has its top at <span class="tex">(p,\ |q|)</span>.</p>
+  <div class="def amber u7l5-key"><div class="u7l5-keyh">Number of solutions of <span class="tex">|f(x)|=k</span> <span class="u7l5-keys">(parabola crossing the <span class="tex">x</span>-axis, reflected hump of height <span class="tex">|q|</span>)</span></div>
+    <table class="u7l5-kt">
+      <tr><th><span class="tex">k</span></th><td><span class="tex">k&lt;0</span></td><td><span class="tex">k=0</span></td><td><span class="tex">0&lt;k&lt;|q|</span></td><td><span class="tex">k=|q|</span></td><td><span class="tex">k&gt;|q|</span></td></tr>
+      <tr><th>solutions</th><td><b>0</b></td><td><b>2</b> (the zeros)</td><td><b>4</b></td><td><b>3</b></td><td><b>2</b></td></tr>
+    </table>
+    <div class="u7l5-keyf">If the parabola does not cross the <span class="tex">x</span>-axis, the reflection changes nothing (or turns the whole graph over): there are <span class="tex">0</span>, <span class="tex">1</span> or <span class="tex">2</span> solutions.</div></div>
+  <div class="explainer" data-explainer="slide"></div>
+</section>
+
+<section class="card example" data-ink="ex3" data-section="Example 3">
+  <div class="ex-head"><span class="ex-tag">Example 3</span><h3>Four solutions, then three</h3></div>
+  <div class="u7l5-two">
+    <div class="u7l5-col">
+      <p class="q">Use the graph of <span class="tex">y=|x^2-2x-3|</span> from Example 1.</p>
+      <div class="part"><div class="pl">(a) Solve <span class="tex">|x^2-2x-3|=2</span>. Give exact answers and answers to the nearest hundredth.</div><div class="work" style="--h:220px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Case 1: <span class="tex">x^2-2x-3=2\Rightarrow x^2-2x-5=0</span><br><span class="tex">x=\frac{2\pm\sqrt{4+20}}{2}=\frac{2\pm2\sqrt6}{2}=1\pm\sqrt6</span><br>Case 2: <span class="tex">x^2-2x-3=-2\Rightarrow x^2-2x-1=0</span><br><span class="tex">x=\frac{2\pm\sqrt{4+4}}{2}=\frac{2\pm2\sqrt2}{2}=1\pm\sqrt2</span><br><span class="tex">x=1\pm\sqrt6</span> or <span class="tex">x=1\pm\sqrt2</span><br><span class="tex">x\approx-1.45,\ -0.41,\ 2.41,\ 3.45</span> (four, since <span class="tex">0&lt;2&lt;4</span>)</div></div></div>
+      <div class="part"><div class="pl">(b) Solve <span class="tex">|x^2-2x-3|=4</span> exactly. Why are there only three solutions?</div><div class="work" style="--h:180px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Case 1: <span class="tex">x^2-2x-7=0\Rightarrow x=\frac{2\pm\sqrt{32}}{2}=1\pm2\sqrt2</span><br>Case 2: <span class="tex">x^2-2x+1=0\Rightarrow(x-1)^2=0\Rightarrow x=1</span> (double root)<br>Solutions: <span class="tex">x=1-2\sqrt2,\ 1,\ 1+2\sqrt2</span>.<br>The line <span class="tex">y=4</span> just touches the top of the reflected hump at <span class="tex">(1,\ 4)</span>.</div></div></div>
+    </div>
+    <div class="part u7l5-gpart"><div class="pl">the graph</div><div class="u7l5-fig" data-fig="ex3"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The line <span class="tex">y=2</span> crosses the W four times; the line <span class="tex">y=4</span> touches the hump’s top and crosses the outer arms.</div></div></div>
+  </div>
+  <div class="space" id="ex3-space"></div>
+  <button class="more" data-more="ex3-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex4" data-section="Example 4">
+  <div class="ex-head"><span class="ex-tag">Example 4</span><h3>How many solutions?</h3></div>
+  <p class="q">Consider <span class="tex">|x^2-6x+5|=k</span>.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) In vertex form, <span class="tex">x^2-6x+5=(x-3)^2-4</span>. Without solving, state the number of solutions when <span class="tex">k=-2</span>, <span class="tex">k=0</span>, <span class="tex">k=2</span>, <span class="tex">k=4</span> and <span class="tex">k=7</span>.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The parabola has zeros <span class="tex">1</span> and <span class="tex">5</span> and vertex <span class="tex">(3,\ -4)</span>, so the reflected hump has its top at <span class="tex">(3,\ 4)</span>.<br><span class="tex">k=-2</span>: <b>0</b> &nbsp; <span class="tex">k=0</span>: <b>2</b> (<span class="tex">x=1,\ 5</span>) &nbsp; <span class="tex">k=2</span>: <b>4</b> &nbsp; <span class="tex">k=4</span>: <b>3</b> &nbsp; <span class="tex">k=7</span>: <b>2</b></div></div></div>
+    <div class="part"><div class="pl">(b) Solve the equation for <span class="tex">k=7</span> and confirm the number of solutions.</div><div class="work" style="--h:170px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-6x+5=7\Rightarrow x^2-6x-2=0</span><br><span class="tex">x=\frac{6\pm\sqrt{36+8}}{2}=\frac{6\pm2\sqrt{11}}{2}=3\pm\sqrt{11}</span><br><span class="tex">x^2-6x+5=-7\Rightarrow x^2-6x+12=0</span>: <span class="tex">b^2-4ac=36-48&lt;0</span>, no real roots.<br>Two solutions: <span class="tex">x=3\pm\sqrt{11}</span> (<span class="tex">\approx-0.32</span> and <span class="tex">6.32</span>).</div></div></div>
+  </div>
+  <div class="space" id="ex4-space"></div>
+  <button class="more" data-more="ex4-space">+ More space</button>
+</section>
+
+<!-- ================= practice break (one per lesson at most) ================= -->
+<section class="card practice" data-ink="p1" data-section="Practice: Questions 1–6">
+  <div class="pr-k">Your turn</div>
+  <h2>Assignment 5 · Questions 1–6</h2>
+  <p class="pr-t">Isolate the absolute value, then solve <b>both</b> <span class="tex">f(x)=k</span> and <span class="tex">f(x)=-k</span>. Compare <span class="tex">k</span> with the top of the hump to know how many solutions to expect.</p>
+  <div class="pr-chips n5"><span><b>1</b>Two cases: factor (or none)</span><span><b>2</b>Isolate first</span><span><b>3</b>The quadratic formula, exact and decimal</span><span><b>4</b>Read the W, then solve</span><span><b>5–6</b>How many solutions? The hump</span></div>
+  <div class="pr-foot"><span>We carry on when most of the class has reached Question 4.</span><a class="pill" href="../../../#/lesson/u7l5">Open the Practice site</a></div>
+</section>
+
+<!-- ================= 3. A variable on the other side ================= -->
+<section class="card" data-ink="s3" data-section="3. Extraneous Solutions">
+  <div class="sec-h"><span class="badge">3</span><h2>A Variable on the Other Side: Extraneous Solutions</h2></div>
+  <p class="u7l5-p">In <span class="tex">|A|=B</span> where <span class="tex">B</span> contains the variable (for example <span class="tex">|x^2-4|=3x</span>), the right side could be negative for some <span class="tex">x</span>, and an absolute value is never negative. Solving the two cases can then produce <b>extraneous solutions</b>: values that solve a case but not the original equation.</p>
+  <div class="def amber u7l5-key"><div class="u7l5-keyh">To solve <span class="tex">|A|=B</span> when <span class="tex">B</span> contains <span class="tex">x</span></div>
+    Solve <span class="tex">A=B</span> and <span class="tex">A=-B</span>, then <b>check every root in the original equation</b> (equivalently, keep only the roots that make <span class="tex">B\ge0</span>). Reject the others as extraneous.</div>
+  <p class="u7l5-p">The method from Lesson 4 also works: split the number line where the expression inside the absolute value is <span class="tex">0</span>, write <span class="tex">|A|</span> as <span class="tex">A</span> or <span class="tex">-A</span> on each part, solve, and keep only the roots that lie in their part. Either way, the check is required.</p>
+  <div class="explainer" data-explainer="sieve"></div>
+</section>
+
+<section class="card example" data-ink="ex5" data-section="Example 5">
+  <div class="ex-head"><span class="ex-tag">Example 5</span><h3>Solve and check</h3></div>
+  <p class="q">Solve and check.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">|x^2-4|=3x</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Case 1: <span class="tex">x^2-4=3x</span><br><span class="tex">x^2-3x-4=0\Rightarrow(x-4)(x+1)=0\Rightarrow x=4,\ -1</span><br>Case 2: <span class="tex">x^2-4=-3x</span><br><span class="tex">x^2+3x-4=0\Rightarrow(x+4)(x-1)=0\Rightarrow x=-4,\ 1</span><br>Check (the right side <span class="tex">3x</span> must be <span class="tex">\ge0</span>):<br><span class="tex">x=4</span>: <span class="tex">|12|=12\ \checkmark</span> &nbsp; <span class="tex">x=1</span>: <span class="tex">|-3|=3\ \checkmark</span><br><span class="tex">x=-1</span>: <span class="tex">|-3|=3\ne-3</span> (extraneous)<br><span class="tex">x=-4</span>: <span class="tex">|12|=12\ne-12</span> (extraneous)<br>Solutions: <span class="tex">x=1</span> or <span class="tex">x=4</span>.</div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">|2x+1|=x^2-2</span></div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Case 1: <span class="tex">2x+1=x^2-2</span><br><span class="tex">x^2-2x-3=0\Rightarrow(x-3)(x+1)=0\Rightarrow x=3,\ -1</span><br>Case 2: <span class="tex">-(2x+1)=x^2-2</span><br><span class="tex">x^2+2x-1=0\Rightarrow x=\frac{-2\pm\sqrt8}{2}=-1\pm\sqrt2</span><br>Check (the right side <span class="tex">x^2-2</span> must be <span class="tex">\ge0</span>):<br><span class="tex">x=3</span>: <span class="tex">|7|=7=9-2\ \checkmark</span><br><span class="tex">x=-1</span>: <span class="tex">x^2-2=-1&lt;0</span> (extraneous)<br><span class="tex">x=-1+\sqrt2\approx0.41</span>: <span class="tex">x^2-2\approx-1.83&lt;0</span> (extraneous)<br><span class="tex">x=-1-\sqrt2\approx-2.41</span>: <span class="tex">x^2-2=1+2\sqrt2&gt;0</span>, and <span class="tex">|2x+1|=|-1-2\sqrt2|=1+2\sqrt2\ \checkmark</span><br>Solutions: <span class="tex">x=3</span> or <span class="tex">x=-1-\sqrt2</span>.</div></div></div>
+  </div>
+  <div class="space" id="ex5-space"></div>
+  <button class="more" data-more="ex5-space">+ More space</button>
+</section>
+
+<!-- ================= Stand Up Break! (whiteboard stations; lessons/js/standup.js) ================= -->
+<section class="card standup" data-ink="standup" data-section="Stand Up Break!" data-standup="u7l5"></section>
+
+<!-- ================= 4. Two absolute values ================= -->
+<section class="card" data-ink="s4" data-section="4. Two Absolute Values">
+  <div class="sec-h"><span class="badge">4</span><h2>Equations with Two Absolute Values</h2></div>
+  <p class="u7l5-p">Two numbers have the same absolute value when they are equal or opposites.</p>
+  <div class="def amber u7l5-key"><span class="tex">|A|=|B|\iff A=B\ \text{ or }\ A=-B</span>. &nbsp;Both sides are never negative, so no root is extraneous.</div>
+  <p class="u7l5-p">For a sum or difference such as <span class="tex">|A|+|B|=k</span>, use <b>subdomains</b>: mark where each expression inside is <span class="tex">0</span> on a number line, write each absolute value without its bars on each interval (<span class="tex">A</span> if <span class="tex">A\ge0</span>, <span class="tex">-A</span> if <span class="tex">A&lt;0</span>), solve on each interval, and keep only roots that lie in that interval.</p>
+</section>
+
+<section class="card example" data-ink="ex6" data-section="Example 6">
+  <div class="ex-head"><span class="ex-tag">Example 6</span><h3>Equal or opposite</h3></div>
+  <p class="q">Solve.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) <span class="tex">|x+5|=|2x-1|</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x+5=2x-1\Rightarrow x=6</span><br><span class="tex">x+5=-(2x-1)\Rightarrow x+5=-2x+1</span><br><span class="tex">3x=-4\Rightarrow x=-\frac43</span><br>Solutions: <span class="tex">x=6</span> or <span class="tex">x=-\frac43</span>.<br>Check: <span class="tex">|11|=|11|\ \checkmark</span>; <span class="tex">\left|\frac{11}{3}\right|=\left|-\frac{11}{3}\right|\ \checkmark</span></div></div></div>
+    <div class="part"><div class="pl">(b) <span class="tex">|x^2-3|=|2x|</span></div><div class="work" style="--h:190px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">x^2-3=2x\Rightarrow x^2-2x-3=0\Rightarrow(x-3)(x+1)=0</span><br><span class="tex">x^2-3=-2x\Rightarrow x^2+2x-3=0\Rightarrow(x+3)(x-1)=0</span><br>Solutions: <span class="tex">x=-3,\ -1,\ 1,\ 3</span>.<br>Check <span class="tex">x=1</span>: <span class="tex">|-2|=|2|\ \checkmark</span></div></div></div>
+  </div>
+  <div class="space" id="ex6-space"></div>
+  <button class="more" data-more="ex6-space">+ More space</button>
+</section>
+
+<section class="card example" data-ink="ex7" data-section="Example 7">
+  <div class="ex-head"><span class="ex-tag">Example 7</span><h3>Subdomains</h3></div>
+  <div class="part"><div class="pl">Solve <span class="tex">|x-3|+|x+1|=6</span> using subdomains.</div>
+    <div class="u7l5-fig u7l5-nlfig" data-fig="ex7"></div>
+    <div class="work" style="--h:260px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">Zeros of the insides: <span class="tex">x=3</span> and <span class="tex">x=-1</span>.<br><span class="tex">x&lt;-1</span>: both insides are negative. <span class="tex">-(x-3)-(x+1)=6\Rightarrow-2x+2=6\Rightarrow x=-2</span>. <span class="tex">-2&lt;-1</span>, so it is in the subdomain <span class="tex">\checkmark</span><br><span class="tex">-1\le x&lt;3</span>: <span class="tex">x-3&lt;0</span>, <span class="tex">x+1\ge0</span>. <span class="tex">-(x-3)+(x+1)=6\Rightarrow4=6</span>: false, no solution here.<br><span class="tex">x\ge3</span>: both insides are <span class="tex">\ge0</span>. <span class="tex">(x-3)+(x+1)=6\Rightarrow2x-2=6\Rightarrow x=4</span>. <span class="tex">4\ge3\ \checkmark</span><br>Solutions: <span class="tex">x=-2</span> or <span class="tex">x=4</span>. &nbsp;Check: <span class="tex">|-5|+|-1|=6\ \checkmark</span>, <span class="tex">|1|+|5|=6\ \checkmark</span></div></div></div>
+  <div class="explainer u7l5-exin" data-explainer="tub"></div>
+  <div class="space" id="ex7-space"></div>
+  <button class="more" data-more="ex7-space">+ More space</button>
+</section>
+
+<!-- ================= 5. Graphically, and problems ================= -->
+<section class="card" data-ink="s5" data-section="5. Graphically, and Problems">
+  <div class="sec-h"><span class="badge">5</span><h2>Solving Graphically and Solving Problems</h2></div>
+  <p class="u7l5-p">A graphing calculator gives a quick check, or decimal answers when the algebra is messy.</p>
+  <div class="def amber u7l5-key">
+    <div><b>Intersection method:</b> graph <span class="tex">Y_1=</span> the left side (<span class="keys"><kbd>abs(</kbd></span> is in the <span class="keys"><kbd>MATH</kbd></span> menu under <b>NUM</b>) and <span class="tex">Y_2=</span> the right side; use <b>intersect</b> at each point where the graphs meet.</div>
+    <div class="u7l5-gap"><b>Zero method:</b> graph <span class="tex">Y_1=</span> (left side) <span class="tex">-</span> (right side) and use <b>zero</b> at each <span class="tex">x</span>-intercept.</div></div>
+  <p class="u7l5-p">Use a window that shows every intersection (the W shape and the whole line). In a word problem, an equation such as <span class="tex">|h-10|=3</span> means “<span class="tex">h</span> is exactly <span class="tex">3</span> away from <span class="tex">10</span>”, so <span class="tex">h=13</span> or <span class="tex">h=7</span>.</p>
+  <div class="tip calc-tip">
+    <div class="tip-ic"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><rect x="8" y="5.5" width="8" height="4" rx="1"/></svg></div>
+    <div><b>Example 8 on the calculator.</b> Intersection: <b class="u7l5-code">Y1 = abs(−X² + 8X − 10)</b>, <b class="u7l5-code">Y2 = 3</b>, window <span class="tex">0\le x\le8</span>, <span class="tex">0\le y\le12</span>, then <b>5:intersect</b>: <span class="keys"><kbd>ENTER</kbd></span> twice and a guess near each crossing. Zero: <b class="u7l5-code">Y1 = abs(−X² + 8X − 10) − 3</b>, then <b>2:zero</b> with a left bound, a right bound and a guess.</div>
+    <div class="u7l5-pcol"><button class="pill" data-keys="Y= CLEAR abs( (−) X x² + 8 X − 10 ) ▼ CLEAR 3 WINDOW 0 ENTER 8 ENTER 1 ENTER 0 ENTER 12 ENTER 1 ENTER GRAPH intersect ENTER ENTER 2 ENTER">Show intersect</button><button class="pill" data-keys="Y= CLEAR abs( (−) X x² + 8 X − 10 ) − 3 ▼ CLEAR WINDOW 0 ENTER 8 ENTER 1 ENTER (−) 4 ENTER 10 ENTER 1 ENTER GRAPH zero 5 ENTER 6 ENTER 5.5 ENTER">Show zero</button></div>
+  </div>
+</section>
+
+<section class="card example" data-ink="ex8" data-section="Example 8">
+  <div class="ex-head"><span class="ex-tag">Example 8</span><h3>The drone and the camera</h3></div>
+  <p class="q">A drone rises and then lands. Its height is <span class="tex">h=-t^2+8t</span> metres after <span class="tex">t</span> seconds, <span class="tex">0\le t\le8</span>. A camera on the ground records it only while it is within <span class="tex">3</span> m of a height of <span class="tex">10</span> m.</p>
+  <div class="parts c2">
+    <div class="part"><div class="pl">(a) Explain why the times when the drone is exactly <span class="tex">3</span> m from a height of <span class="tex">10</span> m are the solutions of <span class="tex">|-t^2+8t-10|=3</span>. Solve the equation exactly, then to the nearest hundredth of a second.</div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans">The distance between <span class="tex">h</span> and <span class="tex">10</span> is <span class="tex">|h-10|=|-t^2+8t-10|</span>.<br>Case 1: <span class="tex">-t^2+8t-10=3\Rightarrow t^2-8t+13=0</span><br><span class="tex">t=\frac{8\pm\sqrt{64-52}}{2}=\frac{8\pm2\sqrt3}{2}=4\pm\sqrt3</span><br>Case 2: <span class="tex">-t^2+8t-10=-3\Rightarrow t^2-8t+7=0</span><br><span class="tex">(t-1)(t-7)=0\Rightarrow t=1,\ 7</span><br><span class="tex">t=1,\ 4-\sqrt3,\ 4+\sqrt3,\ 7</span><br><span class="tex">t\approx1.00,\ 2.27,\ 5.73,\ 7.00</span> s (all in <span class="tex">0\le t\le8</span>)</div></div></div>
+    <div class="part"><div class="pl">(b) Check with a graphing calculator, then state the time intervals during which the camera records the drone.</div><div class="work" style="--h:300px"></div><div class="ansrow"><button class="reveal">Answer</button><div class="ans"><span class="tex">Y_1=</span> <code>abs(-X^2+8X-10)</code>, <span class="tex">Y_2=3</span>, window <span class="tex">0\le x\le8</span>, <span class="tex">0\le y\le12</span>: intersect gives <span class="tex">1</span>, <span class="tex">2.27</span>, <span class="tex">5.73</span>, <span class="tex">7</span>.<br>The drone reaches <span class="tex">7</span> m at <span class="tex">1</span> s, <span class="tex">13</span> m at <span class="tex">2.27</span> s (its maximum is <span class="tex">16</span> m at <span class="tex">4</span> s), falls back to <span class="tex">13</span> m at <span class="tex">5.73</span> s and to <span class="tex">7</span> m at <span class="tex">7</span> s.<br>The camera records from <span class="tex">1</span> s to about <span class="tex">2.27</span> s, and from about <span class="tex">5.73</span> s to <span class="tex">7</span> s (where <span class="tex">7\le h\le13</span>).</div></div></div>
+  </div>
+  <div class="explainer u7l5-exin" data-explainer="drone"></div>
+  <div class="space" id="ex8-space"></div>
+  <button class="more" data-more="ex8-space">+ More space</button>
+</section>
+
+<!-- ================= summary ================= -->
+<section class="card summary" data-ink="sum" data-section="Summary">
+  <div class="sec-h"><span class="badge">✓</span><h2>Key ideas</h2></div>
+  <div class="sum-grid">
+    <div><b>Two cases.</b> Isolate <span class="tex">|f(x)|=k</span>. If <span class="tex">k&lt;0</span>, no solution; if <span class="tex">k&gt;0</span>, solve <span class="tex">f(x)=k</span> <b>and</b> <span class="tex">f(x)=-k</span> by factoring or the quadratic formula. Up to four solutions.</div>
+    <div><b>Count with the W.</b> Compare <span class="tex">k</span> with the top of the reflected hump, <span class="tex">|q|</span>: below it <b>4</b>, touching it <b>3</b>, above it <b>2</b>; <span class="tex">k=0</span> gives the <b>2</b> zeros, <span class="tex">k&lt;0</span> gives <b>0</b>.</div>
+    <div><b>Variable on the right.</b> For <span class="tex">|A|=B</span>, solve <span class="tex">A=B</span> and <span class="tex">A=-B</span>, then check every root: one that makes <span class="tex">B&lt;0</span> is <b>extraneous</b>.</div>
+    <div><b>Two absolute values.</b> <span class="tex">|A|=|B|</span>: <span class="tex">A=B</span> or <span class="tex">A=-B</span>. <span class="tex">|A|+|B|=k</span>: subdomains, keeping roots in their own interval. On the calculator: <b>intersect</b> or <b>zero</b>.</div>
+  </div>
+  <a class="assign" href="../../../#/lesson/u7l5">
+    <div><div class="kicker">Your turn</div><b>Assignment 5 · Questions 7–17</b><div class="muted">Practice on the Math 20-1 Practice site</div></div><span class="arrow">→</span>
+  </a>
+  <a class="assign next-l" href="../l6/">
+    <div><div class="kicker">Next lesson</div><b>Lesson 6 — Reciprocal Functions of Linear Functions</b><div class="muted">Graphing <span class="tex">y=\frac{1}{f(x)}</span> from a line: invariant points, asymptotes and the shape of the two branches.</div></div><span class="arrow">→</span>
+  </a>
+  <div class="space" id="sum-space" style="min-height:120px"></div>
+</section>
+
+</main>
+
+<script type="module">
+  import { boot } from '../../js/ui.js';
+  import '../../js/lessons/u7l5.js';
+  boot({ key: 'u7l5', homeHref: '../../', title: '7.5 Absolute Value Equations: Quadratics' });
+</script>
+<script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('../../sw.js').catch(function () {});</script>
+</body>
+</html>
