@@ -45,12 +45,13 @@
  *             U.kRanges(cp, prompt, v, k0, twoAbove, sol, hints, text) — two boxes: the values of v for two solutions and
  *             for none (inequalities; the tangent value k0; twoAbove: two solutions when v > k0).
  *             U.tanPart(cp, prompt, v, vals, pts, wrongPts, sol, hints, text) — the values of v (e.g. m = ±4) and the
- *             points of tangency.  U.kPoint(cp, prompt, v, k0, pt, sol, hints, text, wr) — one constant and one point.
+ *             points of tangency (o2.ptsLabel relabels the points box).  U.kPoint(cp, prompt, v, k0, pt, sol, hints, text, wr) — one constant and one point.
  *             U.lineEqsPart(cp, prompt, lines [[m,k]…], …) — equations y = mx + k typed, any order.
  *             U.verifyGrid(r, prompt, rows [{ pt:[x,y], on1, on2 }], names, sol, hints, text) — is each point a solution?
  *             U.setCheck(cp, T, o) / U.setKey(T, v) / U.SET() — inequality sets (HW.u8assess).
  *             U.fig({ x, y, curves:[{ f, color, dash }], points, unit }) — a graph (HW.graph) in a figure.
- *   Keypads:  HW.u8assess's 'u8pairs' (pairs, no solution, infinitely many), 'u8tan' (m = …, ±, pairs), 'u8set'.
+ *   Keypads:  HW.u8assess's 'u8pairs' (pairs, no solution, infinitely many) and 'u8set'; here 'u8kval' (values of the letter
+ *             in vars[0]: "v =", ±, and pairs) and 'u8keq' (equations y = …, separated by commas).
  */
 (function (root) {
   'use strict';
@@ -128,6 +129,8 @@
   function coefT(c) { c = R(c); return c[0] === c[1] ? '' : c[0] === -c[1] ? '-' : qt(c); }
   function par(n) { return qv(n) < 0 ? '(' + qt(n) + ')' : qt(n); }
   function sg(n) { return qv(n) < 0 ? qt(n) : '+' + qt(n); }
+  function dtex(a, b, c, dec) { var f = dec ? function (x) { return String(qv(x)); } : qt; return (qv(b) < 0 ? '(' + f(b) + ')' : f(b)) + '^{2}-4(' + f(a) + ')(' + f(c) + ')'; }
+  U.dtex = dtex;
   U.M = M; U.quad = quad; U.lin = lin; U.tx = tx; U.sub = sub; U.coefT = coefT; U.par = par; U.sg = sg;
   /* a line y = mx + k shown as y = …, or in a standard form (mx − y = −k, x + y = k, y − mx = k) */
   U.lineShow = function (r, m, k, std) {
@@ -173,10 +176,11 @@
     if (o.kind === 'lin') return s + 'The ' + t('x^{2}') + '-terms cancel: ' + t(ET + '=0') + ', so ' + t('x=' + stex(o.xs[0])) + '.';
     if (o.kind === 'false') return s + 'Everything but the constant cancels: ' + t(o.c + '=0') + ' is false, so there is <b>no solution</b>.';
     if (o.kind === 'inf') return s + 'Everything cancels: ' + t('0=0') + ', so the equations describe the same graph: <b>infinitely many</b> solutions.';
-    var dT = t(par(o.b) + '^{2}-4(' + o.a + ')' + par(o.c) + '=' + o.D);
+    var dT = t(dtex(o.a, o.b, o.c) + '=' + o.D);
     if (o.kind === 'none') return s + 'The discriminant is ' + dT + ', which is negative: no real roots, so <b>no solution</b>.';
     if (o.kind === 'one') return s + 'Factor: ' + t(factorTex(o) + '=0') + ', so ' + t('x=' + stex(o.xs[0])) + ' (a double root' + (opt.what ? ': ' + opt.what : '') + ').';
     if (!irr(o.xs[0])) return s + 'Factor: ' + t(factorTex(o) + '=0') + ', so ' + t('x=' + stex(o.xs[0])) + ' or ' + t('x=' + stex(o.xs[1])) + '.';
+    if (o.sq.f === 1 && gcd(o.b, 2 * o.a) === 1) return s + 'It does not factor. ' + t('x=\\dfrac{' + (o.b ? -o.b : '') + '\\pm\\sqrt{' + o.D + '}}{' + 2 * o.a + '}') + '.';
     var nb = String(-o.b === 0 ? '' : -o.b), mid = o.sq.f > 1 ? '=\\dfrac{' + nb + '\\pm ' + o.sq.f + '\\sqrt{' + o.sq.n + '}}{' + 2 * o.a + '}' : '';
     return s + 'It does not factor. ' + t('x=\\dfrac{' + nb + '\\pm\\sqrt{' + o.D + '}}{' + 2 * o.a + '}' + mid + '=' + stex(o.xs[1], true)) + '.';
   };
@@ -185,6 +189,9 @@
   function ptT(p) { return '(' + p.xt + ',\\ ' + p.yt + ')'; }
   U.mkPt = mkPt; U.ptT = ptT;
   U.pt = function (x, y) { return mkPt(S(x), S(y)); };
+  /* rational coordinates with a terminating decimal written as decimals (contexts with decimal coefficients) */
+  function decT(z) { if (irr(z)) return stex(z); var q = z.r[1]; while (q % 2 === 0) q /= 2; while (q % 5 === 0) q /= 5; return q === 1 ? String(Number(qv(z.r).toFixed(6))) : qt(z.r); }
+  U.decPts = function (pts) { return pts.map(function (p) { var o = Object.assign({}, p); o.xt = decT(p.X); o.yt = decT(p.Y); return o; }); };
   /* linear–quadratic: Q = [a, b, c] (y = ax² + bx + c), L = [m, k] (y = mx + k) */
   U.lq = function (Q, L) {
     var E = [Q[0], qs(Q[1], L[0]), qs(Q[2], L[1])], o = U.roots(E);
@@ -315,7 +322,7 @@
     return part;
   };
   /* values of v (two) and the points of tangency */
-  U.tanPart = function (cp, prompt, v, vals, pts, wrongPts, sol, hints, text) {
+  U.tanPart = function (cp, prompt, v, vals, pts, wrongPts, sol, hints, text, o2) {
     var vChk = K.valueSet(vals, { v: v, diag: function (Ag) { if (Ag.length === 1 && vals.some(function (x) { return Math.abs(Ag[0] - x) < 1e-9; })) return { code: cp + 'tan-one', hint: 'There are two values: the equation you solved for ' + t(v) + ' has two roots.' }; return null; } });
     var pChk = A().pairsPart(cp, '', pts.map(function (p) { return { x: p.x, y: p.y, xt: p.xt, yt: p.yt }; }), { wrongs: wrongPts ? [{ pts: wrongPts, code: cp + 'tan-pts', hint: 'Pair each value with its own point: substitute each ' + t(v) + ' back and solve the perfect square.' }] : [] }, '', [], '').check;
     var chk = function (resp) {
@@ -328,7 +335,7 @@
       return wrong(b.code === 'value' ? cp + 'tan-pts' : b.code, '<b>Points:</b> ' + (b.hint || 'Substitute each value back to find its point of tangency.'));
     };
     var vk = vals.map(function (x) { return v + '=' + qt(x); }).join(',\\ '), pk = pts.map(ptT).join(',\\ ');
-    var part = { prompt: prompt, input: { type: 'fields', fields: [{ label: 'Values of ' + t(v) + ':', mode: 'math', keys: 'u8tan', vars: [v], name: 'Values', placeholder: 'e.g. ' + v + ' = 4, ' + v + ' = -4' }, { label: 'Points:', mode: 'math', keys: 'u8tan', name: 'Points', placeholder: 'e.g. (2, 7), (-2, 7)' }] },
+    var part = { prompt: prompt, input: { type: 'fields', fields: [{ label: 'Values of ' + t(v) + ':', mode: 'math', keys: 'u8kval', vars: [v], name: 'Values', placeholder: 'e.g. ' + v + ' = 4, ' + v + ' = -4' }, { label: (o2 && o2.ptsLabel) || 'Points:', mode: 'math', keys: 'u8kval', vars: [v], name: 'Points', placeholder: 'e.g. (2, 7), (-2, 7)' }] },
       check: chk, key: [vk, pk], answer: vals.map(function (x) { return t(v + '=' + qt(x)); }).join(' and ') + '; points ' + pts.map(function (p) { return t(ptT(p)); }).join(' and '), solution: sol, hints: hints || [], text: text };
     part.bad = [[v + '=' + qt(vals[1]), pk]];
     if (wrongPts) part.bad.push([vk, wrongPts.map(function (p) { return '(' + p[0] + ',\\ ' + p[1] + ')'; }).join(',\\ ')]);
@@ -367,7 +374,7 @@
   };
   U.lineEqsPart = function (cp, prompt, lines, o, sol, hints, text) {
     var key = lines.map(function (l) { return 'y=' + tx(lin(l)); }).join(',\\ ');
-    var part = KP.math(prompt, U.lineEqsCheck(cp, lines, o), key, sol, hints, text, { keys: 'u8ineq', vars: ['x', 'y'], placeholder: 'e.g. y = 6x - 4, y = -2x - 4' });
+    var part = KP.math(prompt, U.lineEqsCheck(cp, lines, o), key, sol, hints, text, { keys: 'u8keq', placeholder: 'e.g. y = 6x - 4, y = -2x - 4' });
     part.bad = ['y=' + tx(lin(lines[0]))];
     return part;
   };
@@ -384,6 +391,25 @@
     var bad = {}; Object.keys(want).forEach(function (k) { bad[k] = 'yes'; }); p.bad = [bad];
     return p;
   };
+  /* keypad: equations y = … (several, separated by commas) */
+  var W = HW.widgets;
+  if (W && W.KEYSETS) {
+    var dk = function (n) { return { label: String(n), tex: String(n), plain: String(n) }; };
+    var KY = { del: { label: '⌫', fn: 'del', title: 'Delete' }, clear: { label: 'clear', fn: 'clear' }, left: { label: '◀', fn: 'left', title: 'Move left' }, right: { label: '▶', fn: 'right', title: 'Move right (out of a box)' }, enter: { label: 'Check ↵', fn: 'enter', wide: true },
+      minus: { label: '−', tex: '-', plain: '-' }, plus: { label: '+', tex: '+', plain: '+' }, dot: { label: '.', tex: '.', plain: '.' }, comma: { label: ',', tex: ',', plain: ', ' }, eq: { label: '=', tex: '=', plain: ' = ' },
+      frac: { label: '<sup>a</sup>⁄<sub>b</sub>', tex: '\\frac{#@}{#?}', plain: '/', title: 'Fraction' }, sq: { label: '□²', tex: '^{2}', plain: '^2', title: 'Squared' }, par: { label: '( )', tex: '\\left(#0\\right)', plain: '(', title: 'Brackets' },
+      x: { label: '<i>x</i>', tex: 'x', plain: 'x' }, y: { label: '<i>y</i>', tex: 'y', plain: 'y' } };
+    W.KEYSETS.u8keq = function () {
+      return [[dk(7), dk(8), dk(9), KY.plus, KY.minus, KY.del], [dk(4), dk(5), dk(6), KY.frac, KY.par, KY.clear], [dk(1), dk(2), dk(3), KY.eq, KY.left, KY.right], [dk(0), KY.dot, KY.x, KY.y, KY.sq, KY.comma, KY.enter]];
+    };
+    /* values of one letter (v = …, ±) and ordered pairs */
+    W.KEYSETS.u8kval = function (opt) {
+      var v = (opt && opt.vars && opt.vars[0]) || 'm';
+      return [[dk(7), dk(8), dk(9), KY.par, KY.del], [dk(4), dk(5), dk(6), KY.frac, KY.clear], [dk(1), dk(2), dk(3), KY.minus, KY.left, KY.right], [dk(0), KY.dot, KY.comma, { label: '<i>' + v + '</i> =', tex: v + '=', plain: v + ' = ' }, { label: '±', tex: '\\pm ', plain: '±' }, KY.enter]];
+    };
+    if (W.KEYHELP) W.KEYHELP.u8kval = ['Values: e.g. ' + HW.k('m=4,\\ m=-4') + '. Points: press <b>( )</b> for each ordered pair, type ' + HW.k('x') + ' <b>,</b> ' + HW.k('y') + ' inside and press <b>▶</b> to step out.', 'Type e.g. <code>m = 4, m = -4</code> and <code>(2, 7), (-2, 7)</code>.'];
+    if (W.KEYHELP) W.KEYHELP.u8keq = ['Type each equation, e.g. ' + HW.k('y=6x-4') + ', with a comma between two equations. Use <b>□²</b> for a square.', 'Type e.g. <code>y = 6x - 4, y = -2x - 4</code>.'];
+  }
   U.fig = function (g) {
     var spec = { x: g.x || [-6, 6], y: g.y || [-6, 6], grid: g.grid == null ? 1 : g.grid, labels: g.labels || 2, max: g.max || 280, unit: g.unit, aria: g.aria || 'graph',
       fns: (g.curves || []).map(function (c) { return { f: c.f, dash: c.dash, color: c.color, from: c.from, to: c.to }; }), points: g.points || [] };
@@ -408,6 +434,8 @@
   var cnt = 0;
   function same(z, ref) { return Object.keys(ref).every(function (k) { return z[k] === ref[k]; }); }
   function excl(z, list) { return !list.some(function (ref) { return same(z, ref); }); }
+  function kLin(a, b, v) { return tx(P.add(P.mono(a, mon1(v || 'k')), P.num(b))); }
+  function mon1(v) { var o = {}; o[v] = 1; return o; }
   function prPairs(o) { return o.pts.map(function (p) { return t(ptT(p)); }).join(' and ') || 'no solution'; }
   /* integer-root linear–quadratic: y = a x² + bx + c and y = mx + k with Q − L = a(x − r1)(x − r2) */
   function lqInt(r, a, o) {
@@ -424,7 +452,7 @@
     var s = pickWhere(function () { var a = r.pick([1, -1]), h = r.int(-2, 2), q = a > 0 ? r.int(-5, -1) : r.int(1, 5), x1 = r.int(-3, 2), x2 = r.int(-1, 4); return { a: a, h: h, q: q, x1: x1, x2: x2 }; }, function (z) {
       if (z.x2 - z.x1 < 2) return false;
       var f = function (x) { return z.a * (x - z.h) * (x - z.h) + z.q; }, y1 = f(z.x1), y2 = f(z.x2), m = (y2 - y1) / (z.x2 - z.x1);
-      return Math.abs(y1) <= 7 && Math.abs(y2) <= 7 && m !== 0 && Math.abs(m) <= 3 && !(z.a === -1 && z.h === 1 && z.q === 4 && z.x1 === -1 && z.x2 === 2) && !(z.a === 1 && z.h === 1 && z.q === -4);
+      return Math.abs(y1) <= 7 && Math.abs(y2) <= 7 && m !== 0 && m % 1 === 0 && Math.abs(m) <= 3 && !(z.a === -1 && z.h === 1 && z.q === 4 && z.x1 === -1 && z.x2 === 2) && !(z.a === 1 && z.h === 1 && z.q === -4);
     });
     var Q = [s.a, -2 * s.a * s.h, s.a * s.h * s.h + s.q], f = function (x) { return s.a * x * x + Q[1] * x + Q[2]; }, y1 = f(s.x1), y2 = f(s.x2), m = (y2 - y1) / (s.x2 - s.x1), L = [m, y1 - m * s.x1];
     var o = U.lq(Q, L), yr = U.yRange([y1, y2, s.q]);
@@ -437,7 +465,7 @@
   function q2Shared(r) {
     var s = pickWhere(function () { var a = r.pick([[1, 2], [1, 2], [-1, 2], [1, 1], [-1, 1]]), h = r.int(-2, 2), q = r.int(-3, 3), m = nz(r, 1, 3); return { a: a, h: h, q: q, m: m, s: r.pick([1, 2]), d: r.pick([1, 2]) }; }, function (z) {
       var av = qv(z.a), xt = z.h + z.m / (2 * av);
-      if (xt % 1 !== 0 || Math.abs(xt) > 4) return false;
+      if (xt % 1 !== 0 || xt === 0 || Math.abs(xt) > 4) return false;
       if ((av * z.s * z.s) % 1 !== 0 || Math.abs(av * z.s * z.s) < 1) return false;
       if (z.h === 0 && z.q === 0 && av === 0.5 && z.m === 2) return false;
       var f = function (x) { return av * (x - z.h) * (x - z.h) + z.q; }, kt = f(xt) - z.m * xt, k2 = kt + av * z.s * z.s;
@@ -451,7 +479,7 @@
     s.lines = { two: U.lq(Q, [s.m, k2]), one: U.lq(Q, [s.m, kt]), none: U.lq(Q, [s.m, k0]) };
     s.order = r.shuffle(['two', 'one', 'none']);
     var yv = [f(xt), f(-5), f(5)].filter(function (y) { return Math.abs(y) < 12; });
-    s.yr = U.yRange(yv.concat([kt]), -4, 4); if (s.yr[1] - s.yr[0] < 10) s.yr[1] = s.yr[0] + 10;
+    s.yr = U.yRange(yv.concat([kt], s.lines.two.pts.map(function (p) { return p.y; })), -4, 4); if (s.yr[1] - s.yr[0] < 10) s.yr[1] = s.yr[0] + 10;
     s.fig = U.fig({ x: [-5, 5], y: s.yr, unit: 18, curves: [{ f: f }], aria: 'the parabola' });
     return s;
   }
@@ -536,16 +564,16 @@
       { id: '4b', level: 'EMG', make: function (r) {
         // up: x² − y = d and px + y = e (y = x² − d, y = e − px); down: x² + y = d and px − y = e (y = d − x², y = px − e)
         var up = r.chance(0.5), z = pickWhere(function () { return { r1: r.int(-6, 5), r2: r.int(-5, 6), d: r.int(-6, 9) }; }, function (z) {
-          if (z.r1 >= z.r2) return false; var p = up ? -(z.r1 + z.r2) : z.r1 + z.r2; // up: x² + px − (d + e) = 0 ; down: x² + px − (d + e) = 0 with sum −p
-          var e = up ? -z.r1 * z.r2 - z.d : z.r1 * z.r2 * -1 - z.d; return p !== 0 && Math.abs(p) <= 6 && Math.abs(e) <= 15 && !(up && p === 2 && z.d === 3) && !(!up && p === 3 && z.d === 7);
+          if (z.r1 >= z.r2) return false; var p = -(z.r1 + z.r2), e = -z.r1 * z.r2 - z.d;
+          return p !== 0 && Math.abs(p) <= 6 && Math.abs(e) <= 15 && !(up && p === 2 && z.d === 3) && !(!up && p === 3 && z.d === 7);
         });
-        var p = up ? -(z.r1 + z.r2) : z.r1 + z.r2, e = -z.r1 * z.r2 - z.d, eqs, Q, L, sol;
+        // both: adding gives x² + px = d + e with roots r1, r2
+        var p = -(z.r1 + z.r2), e = -z.r1 * z.r2 - z.d, eqs, Q, L, sol;
         if (up) { Q = [1, 0, -z.d]; L = [-p, e]; eqs = t('x^{2}-y=' + z.d) + ' and ' + t(tx(lin([p, 0])) + '+y=' + e); }
         else { Q = [-1, 0, z.d]; L = [p, -e]; eqs = t('x^{2}+y=' + z.d) + ' and ' + t(tx(lin([p, 0])) + '-y=' + e); }
         var o = U.lq(Q, L);
-        sol = 'The ' + t('y') + '-terms are opposites, so add the equations: ' + t(tx(quad([1, p, 0])) + '=' + (z.d + e)) + ', so ' + t(tx(quad([1, p, -(z.d + e)])) + '=0') + '.<br>' + U.work(o) + '<br>' +
+        sol = 'The ' + t('y') + '-terms are opposites, so add the equations: ' + t(tx(quad([1, p, 0])) + '=' + (z.d + e)) + ', so ' + t(tx(quad([1, p, -(z.d + e)])) + '=0') + '.<br>' + U.work(U.roots([1, p, -(z.d + e)])) + '<br>' +
           'From ' + t('y=' + tx(o.Lp)) + ': ' + o.pts.map(function (q) { return t('x=' + q.xt) + ', ' + t('y=' + q.yt); }).join('; ') + '.<br>Solutions: ' + prPairs(o) + '.';
-        var wrongAdd = U.roots([1, -p, -(z.d + e)]);
         var wr = U.signWrongs(CP, o);
         return U.pairs(CP, 'Solve by elimination: ' + eqs + '.', o.pts, { wrongs: wr }, sol, ['The ' + t('y') + '-terms are opposites: add the equations to eliminate ' + t('y') + '.', 'Solve the quadratic that is left, then find each ' + t('y') + ' from the linear equation.'], 'elimination: add');
       } }] },
@@ -603,17 +631,17 @@
       { id: '7a', level: 'BEG', make: function (r) {
         var z = pickWhere(function () { return { a: r.pick([2, 3, 4, -2, -3]), h: nz(r, 1, 3), m: nz(r, 1, 6), k: r.int(-5, 5) }; }, function (z) { var b = z.m - 2 * z.a * z.h, c = z.k + z.a * z.h * z.h; return Math.abs(b) <= 14 && Math.abs(c) <= 20 && !(z.a === 3 && z.h === 1 && z.m === 5 && z.k === -1); });
         var o = U.lq([z.a, z.m - 2 * z.a * z.h, z.k + z.a * z.h * z.h], [z.m, z.k]), A0 = qv(o.A), B0 = qv(o.B), C0 = qv(o.C);
-        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp)) + ' and ' + t('y=' + tx(o.Lp)) + '.', 1, 'Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(par(B0) + '^{2}-4(' + A0 + ')' + par(C0) + '=' + (B0 * B0 - 4 * A0 * C0)) + '.');
+        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp)) + ' and ' + t('y=' + tx(o.Lp)) + '.', 1, 'Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(dtex(A0, B0, C0) + '=' + (B0 * B0 - 4 * A0 * C0)) + '.');
       } },
       { id: '7b', level: 'EMG', make: function (r) {
         var z = pickWhere(function () { return { a: r.pick([-2, -3, -1]), b: r.int(-4, 4), c: r.int(-4, 4), m: nz(r, 1, 3), k: r.int(-2, 8) }; }, function (z) { var B = z.b - z.m, C = z.c - z.k; return B * B - 4 * z.a * C < 0 && !(z.a === -2 && z.b === 1 && z.c === 1 && z.m === -1); });
         var o = U.lq([z.a, z.b, z.c], [z.m, z.k]), A0 = qv(o.A), B0 = qv(o.B), C0 = qv(o.C);
-        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp)) + ' and ' + t('y=' + tx(o.Lp)) + '.', 0, 'Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(par(B0) + '^{2}-4(' + A0 + ')' + par(C0) + '=' + (B0 * B0 - 4 * A0 * C0)) + '.');
+        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp)) + ' and ' + t('y=' + tx(o.Lp)) + '.', 0, 'Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(dtex(A0, B0, C0) + '=' + (B0 * B0 - 4 * A0 * C0)) + '.');
       } },
       { id: '7c', level: 'EMG', make: function (r) {
         var z = pickWhere(function () { return { a: r.pick([0.5, -0.5, 1.5, 0.25]), b: r.int(-3, 3), c: r.int(-5, 5), m: nz(r, 1, 3), k: r.int(-4, 4) }; }, function (z) { var B = z.b - z.m, C = z.c - z.k, D = B * B - 4 * z.a * C; return D > 0 && Math.abs(Math.sqrt(D) % 1) > 1e-9 && !(z.a === 0.5 && z.b === 0 && z.c === -2 && z.m === 1); });
         var o = U.lq([z.a, z.b, z.c], [z.m, z.k]), A0 = qv(o.A), B0 = qv(o.B), C0 = qv(o.C);
-        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp, true)) + ' and ' + t('y=' + tx(o.Lp)) + '.', 2, 'Substitute: ' + t(tx(o.E, true) + '=0') + '. Discriminant: ' + t(par(B0) + '^{2}-4(' + A0 + ')' + par(C0) + '=' + Math.round((B0 * B0 - 4 * A0 * C0) * 1000) / 1000) + '.');
+        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp, true)) + ' and ' + t('y=' + tx(o.Lp)) + '.', 2, 'Substitute: ' + t(tx(o.E, true) + '=0') + '. Discriminant: ' + t(dtex(A0, B0, C0, true) + '=' + Math.round((B0 * B0 - 4 * A0 * C0) * 1000) / 1000) + '.');
       } }] },
     { num: '8', section: 'Tangents and unknown constants', shared: function (r) {
       var z = pickWhere(function () { return { m: nz(r, 1, 6), b: r.int(-6, 6), c: r.int(-5, 9) }; }, function (z) { var d = z.b - z.m; return d % 2 === 0 && d !== 0 && Math.abs(d) <= 10 && !(z.m === 4 && z.b === 2 && z.c === 5) && !(z.m === 2 && z.b === -4 && z.c === 3) && Math.abs(z.c - d * d / 4) <= 20; });
@@ -622,13 +650,13 @@
     parts: [
       { id: '8a', level: 'PRG', make: function (r, z) {
         var d = z.b - z.m, cT = z.c ? '(' + z.c + '-k)' : '(-k)', p = z.o.pts[0];
-        var sol = 'Substitute: ' + t(tx(quad([1, d, 0])) + '+' + cT + '=0') + '.<br>Tangent: discriminant ' + t('0') + ': ' + t(par(d) + '^{2}-4(1)' + cT + '=0') + ', so ' + t(d * d + '-' + 4 * z.c + '+4k=0').replace('-' + -4 * z.c, '+' + -4 * z.c).replace('--', '+') + ' and ' + t('k=' + z.k0) + '.<br>' + t(tx(z.o.E) + '=' + factorTex(z.o) + '=0') + ': ' + t('x=' + p.xt) + ', ' + t('y=' + sub(tx(z.o.Lp), p.xt) + '=' + p.yt) + '. Point ' + t(ptT(p)) + '.';
+        var sol = 'Substitute: ' + t(tx(quad([1, d, 0])) + '+' + cT + '=0') + '.<br>Tangent: discriminant ' + t('0') + ': ' + t(par(d) + '^{2}-4(1)' + cT + '=0') + ', so ' + t(kLin(4, d * d - 4 * z.c) + '=0') + ' and ' + t('k=' + z.k0) + '.<br>' + t(tx(z.o.E) + '=' + factorTex(z.o) + '=0') + ': ' + t('x=' + p.xt) + ', ' + t('y=' + sub(tx(z.o.Lp), p.xt) + '=' + p.yt) + '. Point ' + t(ptT(p)) + '.';
         return U.kPoint(CP, 'Determine the value of ' + t('k') + ' for which the line is tangent to the parabola, and the point of tangency.', 'k', z.k0, p, sol,
           ['Substitute the line into the parabola. A tangent gives one solution: the discriminant is ' + t('0') + '.', 'Solve for ' + t('k') + ', then solve the system with that ' + t('k') + ' to find the point.'], 'tangent: find k');
       } },
       { id: '8b', level: 'ADV', make: function (r, z) {
         var d = z.b - z.m, cT = z.c ? '(' + z.c + '-k)' : '(-k)', Dc = d * d - 4 * z.c;
-        var sol = 'Discriminant: ' + t(par(d) + '^{2}-4(1)' + cT + '=' + (Dc ? Dc + '+4k' : '4k')) + '.<br>Two solutions: ' + t((Dc ? Dc + '+4k' : '4k') + '>0') + ', so ' + t('k>' + z.k0) + '. No solution: ' + t((Dc ? Dc + '+4k' : '4k') + '<0') + ', so ' + t('k<' + z.k0) + '.';
+        var sol = 'Discriminant: ' + t(par(d) + '^{2}-4(1)' + cT + '=' + kLin(4, Dc)) + '.<br>Two solutions: ' + t(kLin(4, Dc) + '>0') + ', so ' + t('k>' + z.k0) + '. No solution: ' + t(kLin(4, Dc) + '<0') + ', so ' + t('k<' + z.k0) + '.';
         return U.kRanges(CP, 'For which values of ' + t('k') + ' does the system have two solutions? no solution? Write an inequality for each.', 'k', z.k0, true, sol,
           ['Write the discriminant of the equation after substituting; it contains ' + t('k') + '.', 'Two solutions: discriminant ' + t('>0') + '. None: ' + t('<0') + '. Solve each for ' + t('k') + '.'], 'values of k: two / none');
       } }] },
@@ -685,6 +713,7 @@
       });
       var a = [1, z.d], m = (z.r1 + z.r2) / z.d, k = -z.r1 * z.r2 / z.d, o = U.lq([a, 0, 0], [m, k]);
       var what = { dish: ['A cross-section of a satellite dish follows', 'a straight support rod follows', 'decimetres', 'rod meets the dish'], arch: ['A designer’s curved rail follows', 'a straight brace follows', 'metres', 'brace meets the rail'], ramp: ['The side view of a skateboard bowl follows', 'a straight railing follows', 'metres', 'railing meets the bowl'] }[z.ctx];
+      o.pts = U.decPts(o.pts);
       var sol = t(tx(o.Qp, true) + '=' + tx(o.Lp, true)) + '. ' + U.work(o) + '<br>' + o.pts.map(function (p) { return t('x=' + p.xt) + ': ' + t('y=' + p.yt); }).join('; ') + '. The ' + what[3] + ' at ' + prPairs(o) + '.';
       return U.pairs(CP, what[0] + ' ' + t('y=' + tx(o.Qp, true)) + ' and ' + what[1] + ' ' + t('y=' + tx(o.Lp, true)) + ', both in ' + what[2] + '. Determine the points where the ' + what[3] + '.', o.pts, { wrongs: U.signWrongs(CP, o) }, sol,
         ['Set the two expressions for ' + t('y') + ' equal; multiply by ' + t(z.d) + ' to clear the decimal.', 'Factor, then find each ' + t('y') + '.'], 'context: two curves meet');
@@ -712,7 +741,7 @@
       var want = r.pick([1, 1, 2, 0]), z = pickWhere(function () { var m = r.pick([2, 3, -2, 4, -3]), k = nz(r, 1, 6), c = r.int(-6, 6), h = r.int(-3, 3); var b = want === 1 ? m - 2 * h : r.int(-3, 3), cc = want === 1 ? k + h * h : c; return { m: m, k: k, b: b, c: cc }; },
         function (z) { var B = z.b - z.m, C = z.c - z.k, D = B * B - 4 * C; return (want === 1 ? D === 0 : want === 2 ? D > 0 : D < 0) && Math.abs(z.b) <= 6 && Math.abs(z.c) <= 12 && !(z.m === 2 && z.k === -3 && z.b === 0 && z.c === -2); });
       var o = U.lq([1, z.b, z.c], [z.m, z.k]), ls = U.lineShow(r, z.m, z.k, true), A0 = 1, B0 = qv(o.B), C0 = qv(o.C);
-      return U.countMC(r, 'How many solutions does the system ' + t(ls.tex) + ' and ' + t('y=' + tx(o.Qp)) + ' have?', want, t('y=' + tx(o.Lp)) + '. Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(par(B0) + '^{2}-4(' + A0 + ')' + par(C0) + '=' + (B0 * B0 - 4 * C0)) + '.');
+      return U.countMC(r, 'How many solutions does the system ' + t(ls.tex) + ' and ' + t('y=' + tx(o.Qp)) + ' have?', want, t('y=' + tx(o.Lp)) + '. Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(dtex(A0, B0, C0) + '=' + (B0 * B0 - 4 * C0)) + '.');
     } }] },
     { num: '16', parts: [{ id: '16', level: 'PRG', make: function (r) {
       var z = pickWhere(function () { return { m: nz(r, 1, 5), b: r.int(-5, 5), c: r.int(1, 12) }; }, function (z) { var d = z.b - z.m; var k = z.c - d * d / 4; return d % 2 === 0 && d !== 0 && k > 0 && k <= 99 && !(z.m === 3 && z.b === -1 && z.c === 7); });
@@ -736,7 +765,7 @@
         return lqParts(CP, o, t('y=' + tx(o.Qp)) + ', ' + t('y=' + tx(o.Lp)), U.lqSol(o), null, 'EP: solve');
       } },
       { id: 'eA1b', level: 'BEG', make: function (r) {
-        var z = pickWhere(function () { return { r1: r.int(-5, 4), r2: r.int(-4, 5), m: nz(r, 1, 3) }; }, function (z) { return z.r1 < z.r2 && z.r1 + z.r2 === -z.m * 0 + (z.r1 + z.r2) && -(z.r1 + z.r2) === z.m && z.r1 * z.r2 < 0 && !(z.m === 1 && z.r1 === -3 && z.r2 === 2); });
+        var z = pickWhere(function () { var r1 = r.int(-5, 4), r2 = r.int(-4, 5); return { r1: r1, r2: r2, m: -(r1 + r2) }; }, function (z) { return z.r1 < z.r2 && z.m !== 0 && Math.abs(z.m) <= 3 && z.r1 * z.r2 < 0 && !(z.m === 1 && z.r1 === -3 && z.r2 === 2); });
         var c = -z.r1 * z.r2, o = U.lq([-1, 0, c], [z.m, 0]);
         return lqParts(CP, o, t('y=' + tx(o.Qp)) + ', ' + t('y=' + tx(o.Lp)), U.lqSol(o), null, 'EP: solve, line through the origin');
       } },
@@ -750,9 +779,9 @@
         return lqParts(CP, o, t(ls.tex) + ', ' + t('y=' + tx(o.Qp)), U.lqSol(o, { pre: 'Write the line as ' + t('y=' + tx(o.Lp)) + '.<br>' }), null, 'EP: standard-form line');
       } }] },
     { num: 'A2', parts: [{ id: 'eA2', level: 'EMG', make: function (r) {
-      var z = pickWhere(function () { return { r1: r.int(-6, 5), r2: r.int(-5, 6), m: nz(r, 1, 4) }; }, function (z) { return z.r1 < z.r2 && -(z.r1 + z.r2) === z.m && z.r1 * z.r2 !== 0 && !(z.m === 3 && z.r1 === -4); });
+      var z = pickWhere(function () { var r1 = r.int(-6, 5), r2 = r.int(-5, 6); return { r1: r1, r2: r2, m: -(r1 + r2) }; }, function (z) { return z.r1 < z.r2 && z.m !== 0 && Math.abs(z.m) <= 4 && z.r1 * z.r2 !== 0 && !(z.m === 3 && z.r1 === -4); });
       var c = -z.r1 * z.r2, o = U.lq([-1, 0, c], [z.m, 0]);
-      var sol = 'Subtract the second equation from the first: ' + t('x^{2}' + sg(z.m) + 'x=' + c).replace('+1x', '+x').replace('-1x', '-x') + ', so ' + t(tx(quad([1, z.m, -c])) + '=0') + '.<br>' + U.work(o) + '<br>' + t('y=' + coefT(z.m) + 'x') + ': ' + prPairs(o) + '.';
+      var sol = 'Subtract the second equation from the first: ' + t('x^{2}' + sg(z.m) + 'x=' + c).replace('+1x', '+x').replace('-1x', '-x') + ', so ' + t(tx(quad([1, z.m, -c])) + '=0') + '.<br>' + U.work(U.roots([1, z.m, -c])) + '<br>' + t('y=' + coefT(z.m) + 'x') + ': ' + prPairs(o) + '.';
       return U.pairs(CP, 'Solve by elimination: ' + t('y+x^{2}=' + c) + ' and ' + t('y' + (z.m > 0 ? '-' + coefT(z.m) : '+' + coefT(-z.m)) + 'x=0') + '.', o.pts, { wrongs: U.signWrongs(CP, o) }, sol,
         ['Both equations have ' + t('+y') + ': subtract them to eliminate ' + t('y') + '.', 'Solve the quadratic left, then find each ' + t('y') + '.'], 'EP: elimination');
     } }] },
@@ -760,26 +789,26 @@
       var z = lqInt(r, 1, { lo: -4, hi: 4, ex: [{ b: -3, c: 0, m: -2, k: 2 }] }), o = U.lq([1, z.b, z.c], [z.m, z.k]), Qf = function (x) { return P.at(o.Qp, { x: x }); }, Lf = o.yOf;
       var xa = pickWhere(function () { return r.int(-3, 3); }, function (x) { return o.pts.every(function (p) { return p.x !== x; }) && Qf(x) !== Lf(x); });
       var rows = r.shuffle([{ pt: [o.pts[0].x, o.pts[0].y], on1: true, on2: true }, { pt: [o.pts[1].x, o.pts[1].y], on1: true, on2: true }, { pt: [xa, Qf(xa)], on1: true, on2: false }, { pt: [o.pts[0].y, o.pts[0].x], on1: false, on2: false }]);
-      if (o.pts[0].y === o.pts[0].x) rows = rows.filter(function (rw, i, arr) { return arr.findIndex(function (q) { return q.pt[0] === rw.pt[0] && q.pt[1] === rw.pt[1]; }) === i; });
+      rows = rows.filter(function (rw, i, arr) { for (var j = 0; j < i; j++) if (arr[j].pt[0] === rw.pt[0] && arr[j].pt[1] === rw.pt[1]) return false; return true; });
       var QT = tx(o.Qp), LT = tx(o.Lp);
       var sol = rows.map(function (rw) { var x = rw.pt[0], on1 = Qf(x) === rw.pt[1], on2 = Lf(x) === rw.pt[1]; rw.on1 = on1; rw.on2 = on2; return t('(' + x + ',\\ ' + rw.pt[1] + ')') + ': ' + t(sub(QT, x) + '=' + Qf(x)) + (on1 ? ' ✓' : ' ✗') + ', ' + t(sub(LT, x) + '=' + Lf(x)) + (on2 ? ' ✓' : ' ✗'); }).join('<br>') + '<br>(' + t(tx(o.E) + '=0') + ' has only the roots ' + t(o.pts[0].xt) + ' and ' + t(o.pts[1].xt) + ', so there are no others.)';
       return U.verifyGrid(CP, 'Which of these points are solutions of the system ' + t('y=' + QT) + ' and ' + t('y=' + LT) + '?', rows, ['the parabola', 'the line'], sol, ['Substitute each point into <b>both</b> equations.'], 'EP: verify');
     } }] },
     { num: 'A4', parts: [
       { id: 'eA4a', level: 'BEG', make: function (r) {
-        var z = pickWhere(function () { return { h: nz(r, 1, 3), m: nz(r, 1, 4), c: r.int(1, 8) }; }, function (z) { return z.m === 2 * z.h && !(z.h === 1 && z.c === 5); });
+        var z = pickWhere(function () { var h = nz(r, 1, 3); return { h: h, m: 2 * h, c: r.int(1, 8) }; }, function (z) { return !(z.h === 1 && z.c === 5); });
         var o = U.lq([1, 0, z.c], [z.m, z.c - z.h * z.h]);
-        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp)) + ', ' + t('y=' + tx(o.Lp)) + '.', 1, 'Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(par(o.b) + '^{2}-4(1)' + par(o.c) + '=0') + '.');
+        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp)) + ', ' + t('y=' + tx(o.Lp)) + '.', 1, 'Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(dtex(1, o.b, o.c) + '=0') + '.');
       } },
       { id: 'eA4b', level: 'BEG', make: function (r) {
         var z = pickWhere(function () { return { b: nz(r, 1, 4) * 2, k: r.int(-2, 8), c: r.int(-3, 3) }; }, function (z) { var D = z.b * z.b + 4 * (z.c - z.k); return D < 0 && !(z.b === 2 && z.k === 3 && z.c === 0); });
         var o = U.lq([-1, z.b, z.c], [0, z.k]);
-        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp)) + ', ' + t('y=' + z.k) + '.', 0, 'Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(par(qv(o.B)) + '^{2}-4(-1)' + par(qv(o.C)) + '=' + (qv(o.B) * qv(o.B) + 4 * qv(o.C))) + '.');
+        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp)) + ', ' + t('y=' + z.k) + '.', 0, 'Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(dtex(-1, qv(o.B), qv(o.C)) + '=' + (qv(o.B) * qv(o.B) + 4 * qv(o.C))) + '.');
       } },
       { id: 'eA4c', level: 'EMG', make: function (r) {
         var z = pickWhere(function () { return { a: r.pick([4, 3, 5]), b: r.int(-3, 3), m: nz(r, 1, 4), k: r.int(-3, 3) }; }, function (z) { var B = z.b - z.m, D = B * B + 4 * z.a * z.k; return D > 0 && !(z.a === 4 && z.b === -1 && z.m === 3); });
         var o = U.lq([z.a, z.b, 0], [z.m, z.k]), B0 = qv(o.B), C0 = qv(o.C);
-        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp)) + ', ' + t('y=' + tx(o.Lp)) + '.', 2, 'Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(par(B0) + '^{2}-4(' + z.a + ')' + par(C0) + '=' + (B0 * B0 - 4 * z.a * C0)) + '.');
+        return U.countMC(r, 'Without solving, determine the number of solutions of ' + t('y=' + tx(o.Qp)) + ', ' + t('y=' + tx(o.Lp)) + '.', 2, 'Substitute: ' + t(tx(o.E) + '=0') + '. Discriminant: ' + t(dtex(z.a, B0, C0) + '=' + (B0 * B0 - 4 * z.a * C0)) + '.');
       } }] },
     { num: 'B1', section: 'B. Applying', shared: function (r) {
       var z = pickWhere(function () { return { B: nz(r, 1, 4) * 2 - (r.chance(0.5) ? 1 : -1), C: r.int(-6, 4), m: nz(r, 1, 3), k: r.int(-4, 4) }; }, function (z) {
@@ -797,10 +826,10 @@
     { num: 'B2', parts: [{ id: 'eB2', level: 'PRG', make: function (r) {
       var z = pickWhere(function () { return { h: r.int(0, 4), n: r.pick([3, 5, 6, 7, 10, 11, 12, 14]), m: nz(r, 1, 2), k: r.int(-3, 3) }; }, function (z) {
         var xs = [z.h - Math.sqrt(z.n), z.h + Math.sqrt(z.n)];
-        return xs.every(function (x) { return [x, z.m * x + z.k].every(function (v) { var f = Math.abs(v * 10) % 1; return Math.abs(f - 0.5) > 0.06; }); }) && !(z.h === 2 && z.n === 10 && z.m === 1 && z.k === -1);
+        return (z.n - z.h * z.h) % 2 === 0 && xs.every(function (x) { return [x, z.m * x + z.k].every(function (v) { var f = Math.abs(v * 10) % 1; return Math.abs(f - 0.5) > 0.06; }); }) && !(z.h === 2 && z.n === 10 && z.m === 1 && z.k === -1);
       });
       // −0.5x² + bx + c = mx + k  <=>  x² − 2(b − m)x − 2(c − k) = 0, roots h ± √n: b − m = h, c − k = (n − h²)/2
-      if ((z.n - z.h * z.h) % 2) z.n += 0; var cc = (z.n - z.h * z.h) / 2;
+      var cc = (z.n - z.h * z.h) / 2;
       var Q = [[-1, 2], z.h + z.m, qa(cc, z.k)], o = U.lq(Q, [z.m, z.k]);
       var ys = o.pts.map(function (p) { return p.y; });
       return U.pairsRounded(CP, 'Use a graphing calculator to solve ' + t('y=' + tx(o.Qp, true)) + ' and ' + t('y=' + tx(o.Lp)) + ', to the nearest tenth.', o.pts, 1, {},
@@ -836,7 +865,7 @@
         'Substitute: ' + t(tx(quad([1, d, 0])) + '+(' + z.c + '+c)=0') + '. One solution: ' + t(par(d) + '^{2}-4(' + z.c + '+c)=0') + ', so ' + t(d * d + '=' + 4 * z.c + '+4c') + ' and ' + t('c=' + cc) + '.', ['Substitute; one solution means the discriminant is ' + t('0') + '.'], 'EP NR: one solution');
     } }] },
     { num: 'C1', section: 'C. Stretch', parts: [{ id: 'eC1', level: 'MAS', make: function (r) {
-      var z = pickWhere(function () { return { m: nz(r, 1, 3), q: r.int(-3, 4), u: r.int(1, 3) }; }, function (z) { return !(z.m === 1 && z.q === 2 && z.u === 1); });
+      var z = pickWhere(function () { return { m: nz(r, 1, 3), q: r.int(-3, 4), u: r.int(1, 3) }; }, function (z) { return z.q + z.u * z.u !== 0 && !(z.m === 1 && z.q === 2 && z.u === 1); });
       var c = z.q + z.u * z.u, b1 = z.m + 2 * z.u, b2 = z.m - 2 * z.u, p1 = U.pt(-z.u, -z.m * z.u + z.q), p2 = U.pt(z.u, z.m * z.u + z.q);
       // b1: x² + 2u x + u² -> x = −u ; b2: x = u
       var lt = tx(lin([z.m, z.q])), sol = 'Substitute: ' + t('x^{2}+bx+' + c + '=' + lt) + ', so ' + t('x^{2}+(b' + sg(-z.m) + ')x+' + (c - z.q) + '=0') + '.<br>Tangent: ' + t('(b' + sg(-z.m) + ')^{2}-4(' + (c - z.q) + ')=0') + ', so ' + t('b' + sg(-z.m) + '=\\pm ' + 2 * z.u) + ' and ' + t('b=' + b1) + ' or ' + t('b=' + b2) + '.<br>' +
@@ -853,7 +882,7 @@
       var eq = U.lineEqsPart(CP, '', lines, {}, '', [], '');
       var pChk = A().pairsPart(CP, '', [p1, p2].map(function (p) { return { x: p.x, y: p.y, xt: p.xt, yt: p.yt }; }), {}, '', [], '').check;
       var part = KP.fields('Two lines through the point ' + t('(0,\\ ' + q + ')') + ' are tangent to the parabola ' + t('y=' + tx(Q)) + '. Determine their equations and the points of tangency.',
-        [{ label: 'Equations:', mode: 'math', keys: 'u8ineq', vars: ['x', 'y'], name: 'Equations', placeholder: 'e.g. y = 6x - 4, y = -2x - 4' }, { label: 'Points:', mode: 'math', keys: 'u8pairs', name: 'Points', placeholder: 'e.g. (2, 8), (-2, 0)' }],
+        [{ label: 'Equations:', mode: 'math', keys: 'u8keq', name: 'Equations', placeholder: 'e.g. y = 6x - 4, y = -2x - 4' }, { label: 'Points:', mode: 'math', keys: 'u8pairs', name: 'Points', placeholder: 'e.g. (2, 8), (-2, 0)' }],
         [eq.check, pChk], [eq.key, ptT(p1) + ',\\ ' + ptT(p2)], t(eq.key) + '; points ' + t(ptT(p1)) + ' and ' + t(ptT(p2)), sol,
         ['Any line through ' + t('(0,\\ ' + q + ')') + ' is ' + t('y=mx' + sg(q)) + '. Substitute it into the parabola.', 'Tangent: set the discriminant to ' + t('0') + ' and solve for ' + t('m') + ' (two values).'], 'EP: tangents from a point');
       part.bad = [['y=' + tx(lin(lines[0])), ptT(p1) + ',\\ ' + ptT(p2)]];
@@ -862,7 +891,7 @@
     { num: 'C3', parts: [{ id: 'eC3', level: 'MAS', make: function (r) {
       var z = pickWhere(function () { return { rr: nz(r, 1, 3), b: r.int(-4, 4), c: r.int(-5, 5) }; }, function (z) { var m = z.b + 3 * z.rr; return m !== 0 && Math.abs(m) <= 12 && !(z.rr === 2 && z.b === 2 && z.c === -1); });
       var m = z.b + 3 * z.rr, kk = z.c + 2 * z.rr * z.rr, o = U.lq([1, z.b, kk], [m, z.c]);
-      var sol = 'Substitute: ' + t('x^{2}+' + (z.b - m === 0 ? '' : '(' + (z.b - m) + ')x') + '+(k' + sg(-z.c) + ')=0').replace('+(', '+(').replace('x^{2}+(', 'x^{2}+(') + '. Let the roots be ' + t('r') + ' and ' + t('2r') + ': their sum is ' + t('3r=' + (m - z.b)) + ', so ' + t('r=' + z.rr) + ' (substituting both roots and subtracting gives the same).<br>Then ' + t('(' + z.rr + ')^{2}' + sg(z.b - m) + '(' + z.rr + ')+k' + sg(-z.c) + '=0') + ', so ' + t('k=' + kk) + '.<br>' + t(tx(o.E) + '=0') + ': ' + t('x=' + o.pts[0].xt) + ' or ' + t('x=' + o.pts[1].xt) + '. Solutions ' + prPairs(o) + '.';
+      var kc = z.c ? '(k' + sg(-z.c) + ')' : 'k', sol = 'Substitute: ' + t(tx(quad([1, z.b - m, 0])) + '+' + kc + '=0') + '. Let the roots be ' + t('r') + ' and ' + t('2r') + ': their sum is ' + t('3r=' + (m - z.b)) + ', so ' + t('r=' + z.rr) + ' (substituting both roots and subtracting gives the same).<br>Then ' + t('(' + z.rr + ')^{2}' + sg(z.b - m) + '(' + z.rr + ')+' + kc + '=0') + ', so ' + t('k=' + kk) + '.<br>' + t(tx(o.E) + '=0') + ': ' + t('x=' + o.pts[0].xt) + ' or ' + t('x=' + o.pts[1].xt) + '. Solutions ' + prPairs(o) + '.';
       var kChk = K.number(kk, null), pChk = A().pairsPart(CP, '', o.pts.map(function (p) { return { x: p.x, y: p.y, xt: p.xt, yt: p.yt }; }), {}, '', [], '').check;
       var part = KP.fields('The system ' + t('y=x^{2}' + (z.b ? sg(z.b) + 'x' : '') + '+k').replace('+1x', '+x').replace('-1x', '-x') + ' and ' + t('y=' + tx(lin([m, z.c]))) + ' has two solutions, and the ' + t('x') + '-coordinate of one is twice the ' + t('x') + '-coordinate of the other. Determine ' + t('k') + ' and solve the system.',
         [{ label: t('k='), name: 'k' }, { label: 'Solutions:', mode: 'math', keys: 'u8pairs', name: 'Solutions', placeholder: 'e.g. (2, 15), (4, 31)' }], [kChk, pChk], [String(kk), o.pts.map(ptT).join(',\\ ')], t('k=' + kk) + '; solutions ' + prPairs(o), sol,

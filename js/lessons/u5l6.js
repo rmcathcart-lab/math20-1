@@ -210,7 +210,7 @@
 
     { num: '9', parts: [
       { id: '9', level: 'PRG', make: function (r) {
-        var o = pickWhere(function () { return { T: r.int(1, 6), C: r.int(1, 30), what: r.pick(['A model rocket', 'A flare', 'A water rocket']) }; }, function (o) { return !(o.T === 3 && o.C === 2) && !(o.T === 2 && o.C === 1); }), Q = CS(-5, 10 * o.T, o.C);
+        var o = pickWhere(function () { return { T: r.int(1, 6), C: r.int(1, 10), what: r.pick(['A model rocket', 'A flare', 'A water rocket']) }; }, function (o) { return !(o.T === 3 && o.C === 2) && !(o.T === 2 && o.C === 1); }), Q = CS(-5, 10 * o.T, o.C);
         return ctxFields(Q, { prompt: o.what + '’s height, in metres, ' + t('t') + ' seconds after launch is ' + t('h=' + polyTex([-5, Q.B, Q.C], 't')) + '. Complete the square to find its maximum height and when it occurs.', yLabel: 'Maximum height', yUnit: 'm', yWhat: 'maximum height', xLabel: 'At', xBefore: t('t='), xUnit: 's', xWhat: 'the time', v: 't', lhs: 'h', ans: 'Maximum height ' + t(Q.k) + ' m, at ' + t('t=' + Q.h) + ' s.', text: 'rocket: maximum by completing the square' });
       } }] },
 
@@ -229,9 +229,9 @@
         { id: '11a', level: 'EMG', make: function (r, o) {
           var Q = CS(o.A, o.A * o.m, o.C);
           return z().mc(r, 'Which step has the error?', [
-            { html: '<b>Step 3</b>: the ' + t(rT(-Q.s)) + ' leaving the brackets must be multiplied by ' + t(Q.A) + ', giving ' + t(rT(-Q.A * Q.s)) + '.', right: true },
             { html: '<b>Step 1</b>: ' + t(Q.A) + ' must be factored out of the constant ' + t(Q.C) + ' too.', why: 'Factor ' + t('a') + ' out of the ' + t('x^{2}') + '- and ' + t('x') + '-terms only: Step 1 is right.', code: LID + '-step' },
             { html: '<b>Step 2</b>: the number to add and subtract is ' + t(rT(Q.m * Q.m)) + ', the square of ' + t(rT(Q.m)) + '.', why: 'It is the square of <b>half</b> the ' + t('x') + '-coefficient, ' + t(rT(Q.s)) + ': Step 2 is right.', code: LID + '-step' },
+            { html: '<b>Step 3</b>: the ' + t(rT(-Q.s)) + ' leaving the brackets must be multiplied by ' + t(Q.A) + ', giving ' + t(rT(-Q.A * Q.s)) + '.', right: true },
             { html: '<b>Step 4</b>: the constants ' + t(rT(-Q.s)) + ' and ' + t(Q.C) + ' are combined wrongly.', why: t(rT(-Q.s) + sT(Q.C) + '=' + rT(Q.C - Q.s)) + ' is right — the error is in the number being combined.', code: LID + '-step' }],
             'Step 3: the ' + t(rT(-Q.s)) + ' is inside brackets multiplied by ' + t(Q.A) + ', so it leaves as ' + t(Q.A + '(' + rT(-Q.s) + ')=' + rT(-Q.A * Q.s)) + '.', ['Expand each step to check it still equals the original function.'], 'error analysis: which step', true);
         } },
@@ -318,8 +318,8 @@
       { id: 'eB2', level: 'PRG', make: function (r) { var Q = gen(r, [1], evens(-8, 8), [-9, 4], function (Q) { return Q.k < 0 && z().radParts(-Q.k).f !== 1; }); return zerosPart(Q); } }] },
     { num: 'B3', parts: [
       { id: 'eB3', level: 'PRG', make: function (r) {
-        var o = pickWhere(function () { return { T: r.pick([0.5, 1, 1.5, 2]), C: r.pick([3, 5, 7.5, 10]), who: r.pick(['A diver', 'A gymnast on a trampoline', 'A cliff diver']) }; }, function (o) { return !(o.T === 1 && o.C === 10); }), Q = CS(-5, 10 * o.T, o.C);
-        return ctxFields(Q, { prompt: o.who + ' jumps from a ' + vT(o.C) + ' m platform. The height above the water, in metres, after ' + t('t') + ' seconds is ' + t('h=' + z().polyTex([-5, Q.B, Q.C], 't', false)) + '. Complete the square to find the greatest height and when it is reached.', yLabel: 'Greatest height', yUnit: 'm', yWhat: 'greatest height', xLabel: 'At', xBefore: t('t='), xUnit: 's', xWhat: 'the time', v: 't', lhs: 'h', dec: true, ans: 'Greatest height ' + t(vT(Q.k)) + ' m, at ' + t('t=' + vT(Q.h)) + ' s.', text: 'diver: greatest height' });
+        var o = pickWhere(function () { return { T: r.pick([0.4, 0.5, 0.6, 0.8, 1]), C: r.pick([3, 5, 7.5, 10]), who: r.pick(['A diver', 'A platform diver', 'A cliff diver']) }; }, function (o) { return !(o.T === 1 && o.C === 10); }), Q = CS(-5, 10 * o.T, o.C);
+        return ctxFields(Q, { prompt: o.who + ' jumps from a ' + vT(o.C) + ' m platform. Their height above the water, in metres, after ' + t('t') + ' seconds is ' + t('h=' + z().polyTex([-5, Q.B, Q.C], 't', false)) + '. Complete the square to find the greatest height and when it is reached.', yLabel: 'Greatest height', yUnit: 'm', yWhat: 'greatest height', xLabel: 'At', xBefore: t('t='), xUnit: 's', xWhat: 'the time', v: 't', lhs: 'h', dec: true, ans: 'Greatest height ' + t(vT(Q.k)) + ' m, at ' + t('t=' + vT(Q.h)) + ' s.', text: 'diver: greatest height' });
       } }] },
     { num: 'B4', shared: function (r) { return pickWhere(function () { return { b: r.pick([2, 4, 6, 8, 10]), c: nz(r, -9, 9), name: r.pick(['A student', 'Morgan', 'Riley']) }; }, function (o) { return !(o.b === 4 && o.c === 3); }); },
       stem: function (o) { var hb = o.b / 2, s = hb * hb; return o.name + ' wrote ' + t('y=' + polyTex([-1, o.b, o.c]) + '=-(' + polyTex([1, o.b, s]) + '-' + s + ')' + sT(o.c) + '=-(x+' + hb + ')^{2}' + sT(s + o.c)) + '.'; },
@@ -330,7 +330,7 @@
             { html: 'The ' + t('-' + s) + ' should leave the brackets as ' + t('-' + s) + ', not ' + t('+' + s) + '.', why: 'Leaving brackets multiplied by ' + t('-1') + ', ' + t('-' + s) + ' becomes ' + t('+' + s) + ': that step is right.', code: LID + '-step' },
             { html: 'The number to add and subtract is ' + t(o.b * o.b) + ', not ' + t(s) + '.', why: 'It is the square of <b>half</b> the coefficient: ' + t(s) + ' is right.', code: LID + '-step' },
             { html: 'The ' + t('-1') + ' should not be factored out; complete the square on ' + t('-x^{2}+' + o.b + 'x') + ' directly.', why: 'The method needs ' + t('x^{2}') + ' with coefficient 1, so factoring out ' + t('-1') + ' is right.', code: LID + '-step' }],
-            'Factoring ' + t('-1') + ' out of ' + t('+' + o.b + 'x') + ' gives ' + t('-' + o.b + 'x') + ': ' + t('y=-(' + polyTex([1, -o.b, s]) + '-' + s + ')' + sT(o.c) + '=-(x-' + hb + ')^{2}' + sT(s + o.c)) + '.', ['Expand the brackets of the first step: do you get the original ' + t('x') + '-term back?'], 'error analysis: factoring out −1', true);
+            'Factoring ' + t('-1') + ' out of ' + t('+' + o.b + 'x') + ' gives ' + t('-' + o.b + 'x') + ': ' + t('y=-(' + polyTex([1, -o.b, s]) + '-' + s + ')' + sT(o.c) + '=-(x-' + hb + ')^{2}' + sT(s + o.c)) + '.', ['Expand the brackets of the first step: do you get the original ' + t('x') + '-term back?'], 'error analysis: factoring out −1');
         } },
         { id: 'eB4b', level: 'PRG', make: function (r, o) { return csPart('Give the correct vertex form.', CS(-1, o.b, o.c), { text: 'error analysis: correct vertex form' }); } }] },
     { num: 'B5', parts: [

@@ -382,9 +382,19 @@
     return kPart('Solve algebraically: ' + t(A(polyT(1, s.b, 0)) + '=' + s.k) + '.', 1, s.b, 0, s.k);
   }
   /* #1c: |x² + bx| = k, four solutions */
+  function fourInt(r, o) { // f(x) = x² + bx + c with |f| = k having four integer solutions: f − k = (x − p)(x − q), f + k = (x − u)(x − w)
+    o = o || {};
+    return pickWhere(function () { return { S: r.int(-7, 7), p: r.int(-8, 8), u: r.int(-8, 8) }; }, function (z) {
+      var q = z.S - z.p, w = z.S - z.u, d2 = z.u * w - z.p * q; if (d2 <= 0 || d2 % 2) return false;
+      z.k = d2 / 2; z.b = -z.S; z.c = z.p * q + z.k;
+      var all = uniqNums([z.p, q, z.u, w]); if (all.length !== 4 || z.k > 15 || Math.abs(z.c) > 20 || z.b === 0) return false;
+      if (o.c0 != null && (z.c === 0) !== o.c0) return false;
+      return (o.not || []).indexOf(z.b + ',' + z.c + ',' + z.k) < 0;
+    });
+  }
   function q1c(r) {
-    var s = pickWhere(function () { return { b: nz(r, 2, 11), k: r.int(2, 30) }; }, function (z) { var D2 = z.b * z.b - 4 * z.k; return isSq(z.b * z.b + 4 * z.k) && D2 > 0 && isSq(D2) && notEx(['5,6', '-5,6'])(z.b + ',' + z.k); });
-    return kPart('Solve algebraically: ' + t(A(polyT(1, s.b, 0)) + '=' + s.k) + '.', 1, s.b, 0, s.k);
+    var s = fourInt(r, { not: ['5,0,6', '-5,0,6', '2,-4,4'] });
+    return kPart('Solve algebraically: ' + t(A(polyT(1, s.b, s.c)) + '=' + s.k) + '.', 1, s.b, s.c, s.k);
   }
   /* #1d: |x² + bx + c| = 0 */
   function q1d(r) {
@@ -450,12 +460,12 @@
 
   /* #4: the graph of y = |f(x)|; f = (x − p)² − w², the line y = k with k = w² − m² */
   function q4Shared(r) {
-    return pickWhere(function () { return { p: r.int(-2, 2), w: r.int(2, 3), m: r.int(1, 2) }; }, function (z) { z.k = z.w * z.w - z.m * z.m; return z.m < z.w && !isSq(2 * z.w * z.w - z.m * z.m) && !(z.p === -1 && z.w === 2 && z.m === 1) && !(z.p === 1 && z.w === 2); });
+    return pickWhere(function () { return { p: r.int(-2, 2), w: r.int(2, 4), m: r.int(1, 3) }; }, function (z) { z.k = z.w * z.w - z.m * z.m; return z.m < z.w && !isSq(2 * z.w * z.w - z.m * z.m) && !(z.p === -1 && z.w === 2 && z.m === 1) && !(z.p === 1 && z.w === 2); });
   }
   function q4Info(s) { var b = -2 * s.p, c = s.p * s.p - s.w * s.w; return { b: b, c: c, inner: polyT(1, b, c), S: absK(1, b, c, s.k) }; }
   function q4Graph(s, line) {
     var I = q4Info(s), out = Math.sqrt(s.w * s.w + s.k) + 0.6, xr = [Math.floor(s.p - out) - 1, Math.ceil(s.p + out) + 1], top = Math.max(s.w * s.w, s.k) + 2;
-    return G({ x: xr, y: [-1, top], labels: 1, max: 300, fns: [crv(function (x) { return Math.abs(x * x + I.b * x + I.c); }, { from: s.p - out, to: s.p + out })], hline: line ? [s.k] : [], aria: 'the graph of y = |' + I.inner + '|, a W shape' });
+    return G({ x: xr, y: [-1, top], labels: 1, labelsY: top > 11 ? 2 : 1, max: 320, fns: [crv(function (x) { return Math.abs(x * x + I.b * x + I.c); }, { from: s.p - out, to: s.p + out })], hline: line ? [s.k] : [], aria: 'the graph of y = |' + I.inner + '|, a W shape' });
   }
   function q4stem(s) { var I = q4Info(s); return 'The graph of ' + t('y=' + A(I.inner)) + ' is shown.' + q4Graph(s); }
   function q4a(r, s) {
@@ -529,12 +539,13 @@
   }
 
   /* #7: |A| = B, extraneous roots */
-  function chkLine(L, R, x, v) { var l = L(rv(x)), rr = R(rv(x)); return t((v || 'x') + '=' + rt(x)) + ': ' + (Math.abs(l - rr) < 1e-9 ? 'left side ' + t(rt(toR(l) || l)) + ', right side ' + t(rt(toR(rr) || rr)) + ' ✓' : 'the right side is ' + t(rt(toR(rr) || dt(rr))) + ', negative, so it is extraneous'); }
+  function nT(v) { var f = toR(v); return f && f[1] <= 100 ? ex.texRat(f) : '\\approx ' + v.toFixed(2); }
+  function chkLine(L, R, x, v) { var l = L(rv(x)), rr = R(rv(x)); return t((v || 'x') + '=' + rt(x)) + ': ' + (Math.abs(l - rr) < 1e-9 ? 'left side ' + t(nT(l)) + ', right side ' + t(nT(rr)) + ' ✓' : 'the right side is ' + t(nT(rr)) + ', negative, so it is extraneous'); }
   function extrPart(prompt, vals, extr, sol, hints, text, wr) {
     return rootsPart(CP, prompt, vals, { extr: extr, rejValid: true, wrongs: (wr || []).concat([{ vals: [], code: CP + 'nosol-claim', hint: vals.length ? 'Check again: ' + t('x=' + rt(vals[0])) + ' makes both sides equal.' : '' }]) }, sol, hints || ['Solve ' + t('A=B') + ' and ' + t('A=-B') + ' (negate the whole right side).', 'Check every root in the original equation: the side without bars cannot be negative.'], text);
   }
   function q7a(r) {
-    var s = pickWhere(function () { return { m: r.int(1, 3), u: r.int(2, 9) }; }, function (z) { return z.u > z.m && !(z.m === 1 && z.u === 3) && !(z.m === 3 && z.u === 4) && z.u * (z.u - z.m) <= 40; });
+    var s = pickWhere(function () { return { m: r.int(1, 3), u: r.int(2, 9) }; }, function (z) { return z.u > z.m && !(z.m === 1 && z.u === 3) && !(z.m === 3 && z.u === 4) && z.u * (z.u - z.m) <= 66; });
     var n = s.u * (s.u - s.m), mx = s.m === 1 ? 'x' : s.m + 'x', inner = 'x^{2}-' + n;
     var c1 = solveQ(1, -s.m, -n), c2 = solveQ(1, s.m, -n), all = c1.roots.concat(c2.roots).map(function (x) { return x.v; });
     var vals = all.filter(function (x) { return x >= 0; }).sort(function (a, b) { return a - b; }), extr = all.filter(function (x) { return x < 0; });
@@ -543,12 +554,12 @@
       'Case 1: ' + t(inner + '=' + mx) + ', so ' + c1.text + '.<br>Case 2: ' + t(inner + '=-' + mx) + ', so ' + c2.text + '.<br>The right side ' + t(mx) + ' must be ' + t('\\ge 0') + ': check each root.<br>' + all.slice().sort(function (a, b) { return a - b; }).map(function (x) { return chkLine(L, R, x); }).join('<br>') + '<br>Solutions: ' + t(solsT(vals)) + '.', null, '|x² − n| = mx with extraneous roots');
   }
   function q7b(r) {
-    var s = pickWhere(function () { return { b: r.int(2, 5), u: r.int(1, 9) }; }, function (z) { z.w = 2 * z.b - z.u; z.d = z.u * z.w; return z.w > 0 && z.u < z.w && !isSq(z.d) && !(z.b === 2 && z.d === 3); });
-    var inner = polyT(1, -s.b, 0), rhs = linT(s.b, -s.d), L = function (x) { return Math.abs(x * x - s.b * x); }, R = function (x) { return s.b * x - s.d; };
-    var c1 = solveQ(1, -2 * s.b, s.d), c2 = solveQ(1, 0, -s.d), all = c1.roots.concat(c2.roots);
+    var s = pickWhere(function () { return { b: r.int(2, 7), u: r.int(1, 13), g: r.pick([1, 1, -1]) }; }, function (z) { z.w = 2 * z.b - z.u; z.d = z.u * z.w; return z.w > 0 && z.u < z.w && !isSq(z.d) && z.d <= 40 && !(z.b === 2 && z.d === 3); });
+    var gb = s.g * s.b, inner = polyT(1, -gb, 0), rhs = linT(gb, -s.d), L = function (x) { return Math.abs(x * x - gb * x); }, R = function (x) { return gb * x - s.d; };
+    var c1 = solveQ(1, -2 * gb, s.d), c2 = solveQ(1, 0, -s.d), all = c1.roots.concat(c2.roots);
     var vals = all.filter(function (x) { return R(x.v) >= -1e-9; }).sort(byVal), extr = all.filter(function (x) { return R(x.v) < -1e-9; });
     return extrPart('Solve and check: ' + t(A(inner) + '=' + rhs) + '. Reject any extraneous solutions. Give exact answers.', vals, extr,
-      'Case 1: ' + t(inner + '=' + rhs) + ', so ' + c1.text + '.<br>Case 2: ' + t(inner + '=-(' + rhs + ')') + ', so ' + c2.text + '.<br>Need ' + t(rhs + '\\ge 0') + ', that is ' + t('x\\ge ' + rt(toR([s.d, s.b]))) + '.<br>' + all.slice().sort(byVal).map(function (x) { return chkLine(L, R, x); }).join('<br>') + '<br>Solutions: ' + t(solsT(vals)) + '.', null, '|x² − bx| = bx − d with extraneous roots',
+      'Case 1: ' + t(inner + '=' + rhs) + ', so ' + c1.text + '.<br>Case 2: ' + t(inner + '=-(' + rhs + ')') + ', so ' + c2.text + '.<br>Need ' + t(rhs + '\\ge 0') + ', that is ' + t('x' + (s.g > 0 ? '\\ge ' : '\\le ') + rt(toR([s.d, gb]))) + '.<br>' + all.slice().sort(byVal).map(function (x) { return chkLine(L, R, x); }).join('<br>') + '<br>Solutions: ' + t(solsT(vals)) + '.', null, '|x² − bx| = bx − d with extraneous roots',
       [{ vals: c1.roots, code: CP + 'one-case', hint: 'Solve the second case too: ' + t(inner + '=-(' + rhs + ')') + '.' }]);
   }
   function q7c(r) {
@@ -574,7 +585,7 @@
 
   /* #8: a student's work on |x² − n| = x + d (did not check) */
   function q8Shared(r) {
-    return pickWhere(function () { return { u: r.int(2, 6), d: r.int(1, 4) }; }, function (z) {
+    return pickWhere(function () { return { u: r.int(2, 7), d: r.int(1, 6) }; }, function (z) {
       z.n = z.u * (z.u - 1) - z.d; if (z.n <= z.d || (z.u === 3 && z.d === 1)) return false;
       var c2 = qroots(1, 1, -(z.n - z.d)); if (c2.roots.length < 2) return false;
       var all = [z.u, 1 - z.u].concat(c2.roots.map(function (x) { return x.v; })); z.valid = all.filter(function (x) { return x + z.d >= -1e-9; }); z.extr = all.filter(function (x) { return x + z.d < -1e-9; });
@@ -611,7 +622,7 @@
     var lo = Math.floor(S.vals[0].v) - 2, hi = Math.ceil(S.vals[S.vals.length - 1].v) + 2;
     var plain = inner.replace(/\^\{2\}/g, '^2').replace(/x/g, 'X');
     var sol = '<code>Y1 = abs(' + plain + ')</code>, <code>Y2 = ' + s.k + '</code>; a window such as ' + t(lo + '\\le x\\le ' + hi) + ', ' + t('-2\\le y\\le ' + (s.k + 6)) + ' shows all four intersections; use <b>intersect</b> at each.<br>' + t(solsT(S.vals, 'x', 1)) + '.';
-    return rootsPart(CP, 'Use a graphing calculator to solve ' + t(A(inner) + '=' + s.k) + '. Give the solutions to the nearest tenth.', S.vals, { dp: 1, wrongs: kWrongs(S, inner, s.k) }, sol,
+    return rootsPart(CP, 'Use a graphing calculator to solve the equation. Give the solutions to the nearest tenth.', S.vals, { dp: 1, wrongs: kWrongs(S, inner, s.k) }, sol,
       ['Enter ' + t('Y_1') + ' = abs( … ) (MATH ▸ NUM) and ' + t('Y_2=' + s.k) + ', then use intersect at each crossing.', 'Make the window wide enough to show the whole W and the line: there are four crossings.'], 'solving |f(x)| = k with a graphing calculator');
   }
   function calcB(r, s, half, all) {
@@ -718,7 +729,7 @@
   }
   /* #16: NR largest solution to the hundredth */
   function q16(r) {
-    var s = pickWhere(function () { return { b: nz(r, 1, 6), c: r.int(-6, 6), k: r.int(2, 9) }; }, function (z) { var D1 = z.b * z.b - 4 * (z.c - z.k), D2 = z.b * z.b - 4 * (z.c + z.k); return D1 > 0 && !isSq(D1) && D2 < 0 && !(z.b === 3 && z.c === -2 && z.k === 5); });
+    var s = pickWhere(function () { return { b: nz(r, 1, 6), c: r.int(-6, 6), k: r.int(2, 9) }; }, function (z) { var D1 = z.b * z.b - 4 * (z.c - z.k), D2 = z.b * z.b - 4 * (z.c + z.k); return D1 > 0 && !isSq(D1) && D2 < 0 && (-z.b + Math.sqrt(D1)) / 2 > 0.005 && !(z.b === 3 && z.c === -2 && z.k === 5); });
     var S = absK(1, s.b, s.c, s.k, 'x', { dec: 2 }), big = S.vals[S.vals.length - 1];
     var p = KP.approx('The largest solution of ' + t(A(polyT(1, s.b, s.c)) + '=' + s.k) + ', to the nearest hundredth, is ____.', big.v, 2, { nr: true }, S.text + '<br>The largest solution is ' + t(big.tex + '\\approx ' + big.v.toFixed(2)) + '.', H_CASES, 'largest solution (NR)');
     p.bad = [S.vals[0].v.toFixed(2)];
@@ -754,7 +765,7 @@
     return twoPart('Solve ' + t(s.T.eq) + '.', s.T, '|quadratic| = |quadratic|');
   }
   function s17(r) {
-    var s = pickWhere(function () { return { c1: nz(r, 1, 6), b2: nz(r, 1, 6), c2: r.int(-6, 6) }; }, function (z) { var T = twoAbsCases(1, 0, z.c1, 1, z.b2, z.c2); z.T = T; return T.vals.length >= 2 && !Number.isInteger(T.vals[T.vals.length - 1].v) && !(z.c1 === -3 && z.b2 === -4 && z.c2 === 1); });
+    var s = pickWhere(function () { return { c1: nz(r, 1, 6), b2: nz(r, 1, 6), c2: r.int(-6, 6) }; }, function (z) { var T = twoAbsCases(1, 0, z.c1, 1, z.b2, z.c2); z.T = T; return T.vals.length >= 2 && !Number.isInteger(T.vals[T.vals.length - 1].v) && T.vals[T.vals.length - 1].v > 0.005 && T.vals[T.vals.length - 1].v < 9.99 && !(z.c1 === -3 && z.b2 === -4 && z.c2 === 1); });
     var big = s.T.vals[s.T.vals.length - 1];
     var p = KP.approx('The largest solution of ' + t(s.T.eq) + ', to the nearest hundredth, is ____.', big.v, 2, { nr: true }, s.T.text + '<br>Solutions ' + t(solsT(s.T.vals)) + '; the largest is ' + t(big.tex + '\\approx ' + big.v.toFixed(2)) + '.', H_TWO, 'largest solution of |A| = |B| (NR)');
     p.bad = [s.T.vals[0].v.toFixed(2)];
@@ -811,7 +822,7 @@
     return kPart('Solve algebraically: ' + t(A('x^{2}-' + s.n) + '=' + s.k) + '.', 1, 0, -s.n, s.k);
   }
   function epA1c(r) { // |x² + bx + c| = k with four integer solutions
-    var s = pickWhere(function () { return { r1: r.int(-5, 2), w: r.int(2, 7), k: r.int(1, 12) }; }, function (z) { var b = -(2 * z.r1 + z.w), c = z.r1 * (z.r1 + z.w); z.b = b; z.c = c; var D1 = b * b - 4 * (c - z.k), D2 = b * b - 4 * (c + z.k); return c !== 0 && isSq(D1) && D2 > 0 && isSq(D2) && !(b === -1 && c === -6 && z.k === 6) && !(b === -2 && c === -3); });
+    var s = fourInt(r, { c0: false, not: ['-1,-6,6', '2,-4,4'] });
     return kPart('Solve algebraically: ' + t(A(polyT(1, s.b, s.c)) + '=' + s.k) + '.', 1, s.b, s.c, s.k);
   }
   function epA1d(r) { var s = { a: r.pick([4, 9, 2, 3]), n: r.int(1, 25), k: -r.int(1, 9) }; if (s.a === 4 && s.n === 9 && s.k === -1) s.k = -2; return kPart('Solve algebraically: ' + t(A(polyT(s.a, 0, -s.n)) + '=' + s.k) + '.', s.a, 0, -s.n, s.k, { hints: ['Look at the right side first.', 'An absolute value cannot equal a negative number.'] }); }
@@ -920,7 +931,7 @@
     { num: '6', shared: q6Shared, stem: q6stem, parts: [Pt('6a', 'ADV', q6a), Pt('6b', 'MAS', q6b)] },
     { num: '7', stem: 'Solve and check. Reject any extraneous solutions.', parts: [Pt('7a', 'PRG', q7a), Pt('7b', 'MAS', q7b), Pt('7c', 'ADV', q7c), Pt('7d', 'PRG', q7d)] },
     { num: '8', shared: q8Shared, stem: q8stem, parts: [Pt('8a', 'PRG', q8a), Pt('8b', 'ADV', q8b)] },
-    { num: '11', shared: function (r) { return calcShared(r, true); }, parts: [Pt('11a', 'PRG', function (r, s) { return calcA(r, s, true); }), Pt('11b', 'ADV', function (r, s) { return calcB(r, s, true); })] },
+    { num: '11', shared: function (r) { return calcShared(r, true); }, stem: function (s) { return 'Consider ' + t(A(calcInner(s, true)) + '=' + s.k) + '.'; }, parts: [Pt('11a', 'PRG', function (r, s) { return calcA(r, s, true); }), Pt('11b', 'ADV', function (r, s) { return calcB(r, s, true); })] },
     { num: '12', shared: q12Shared, stem: q12stem, parts: [Pt('12a', 'ADV', q12a), Pt('12b', 'MAS', q12b), Pt('12c', 'PRG', q12c)] },
     { num: '13', parts: [Pt('13', 'PRG', mcCount)] },
     { num: '14', parts: [Pt('14', 'PRG', q14)] },
@@ -933,7 +944,7 @@
     { num: 'A3', parts: [Pt('A3', 'ADV', s9a, EXT)] },
     { num: 'B1', section: 'B. Applying', stem: 'Solve and check.', parts: [Pt('B1a', 'ADV', epB1a), Pt('B1b', 'ADV', epB1b)] },
     { num: 'B2', parts: [Pt('B2', 'PRG', epB2)] },
-    { num: 'B3', shared: function (r) { return calcShared(r, false); }, parts: [Pt('B3a', 'PRG', function (r, s) { return calcA(r, s, false); }), Pt('B3b', 'ADV', function (r, s) { return calcB(r, s, false, true); })] },
+    { num: 'B3', shared: function (r) { return calcShared(r, false); }, stem: function (s) { return 'Consider ' + t(A(calcInner(s, false)) + '=' + s.k) + '.'; }, parts: [Pt('B3a', 'PRG', function (r, s) { return calcA(r, s, false); }), Pt('B3b', 'ADV', function (r, s) { return calcB(r, s, false, true); })] },
     { num: 'B4', shared: epB4Shared, stem: epB4stem, parts: [Pt('B4a', 'ADV', epB4a), Pt('B4b', 'ADV', epB4b)] },
     { num: 'B5', parts: [Pt('B5', 'PRG', mcCount)] },
     { num: 'B6', parts: [Pt('B6', 'PRG', epB6)] },

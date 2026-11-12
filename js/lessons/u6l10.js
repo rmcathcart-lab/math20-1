@@ -95,7 +95,7 @@
       { html: nm + ' divided out the <b>terms</b> ' + t('x') + ' and ' + t(b) + '; only common <b>factors</b> can be divided out. The expression is already in simplest form.', right: true },
       { html: 'Nothing is wrong: ' + t(a + '\\div ' + b + '=' + k) + ', so the answer is right for every ' + t('x\\ne -' + b) + '.', why: 'Test it: at ' + t('x=' + x0) + ' the expression is ' + t(rt(val)) + ', not ' + t(k) + '.', code: CP + 'kim' },
       { html: 'The answer should be ' + t(k + 'x') + ': the ' + t('x') + ' terms stay.', why: 'Nothing divides out at all: ' + t('x+' + a) + ' and ' + t('x+' + b) + ' share no factor.', code: CP + 'kim' },
-      { html: 'The answer should be ' + t('\\frac{' + a + '}{' + b + '}') + ' only when ' + t('x=0') + ', so it is right for every ' + t('x') + '.', why: 'It is only equal at one value of ' + t('x') + '. Simplifying must give an expression equal for <b>every</b> permissible value.', code: CP + 'kim' }],
+      { html: 'The answer should be ' + t('\\frac{' + a + '}{' + b + '}') + ': the fraction must not be reduced to ' + t(k) + '.', why: t('\\frac{' + a + '}{' + b + '}=' + k) + ', so that is the same answer. The problem is that ' + t('x') + ' and ' + t(b) + ' are terms, not factors.', code: CP + 'kim' }],
       'Only common factors divide out; ' + t('x') + ' and ' + t(b) + ' are terms of the sum ' + t('x+' + b) + '. Test with ' + t('x=' + x0) + ': ' + t(df(x0 + a, x0 + b) + '=' + rt(val) + '\\ne ' + k) + '. The expression is already in simplest form (' + t('x\\ne -' + b) + ').',
       ['Substitute a value such as ' + t('x=' + x0) + ' into both sides.'], 'MC: dividing out terms');
   }
@@ -264,9 +264,10 @@
     });
     var a = vs[0], b = vs[1], c1 = s.p * s.L / s.m, c2 = s.q * s.L / s.n, op = s.sub ? '-' : '+';
     var terms = [U.T1(1, [U.C(s.p)], [U.Mo(s.m, a, 2, b, 1)]), U.T1(s.sub ? -1 : 1, [U.C(s.q)], [U.Mo(s.n, a, 1, b, 2)])];
-    var LT = s.L + a + '^{2}' + b + '^{2}', NT = c1 + b + op + c2 + a;
+    var cc = function (c, v) { return (c === 1 ? '' : c) + v; };
+    var LT = s.L + a + '^{2}' + b + '^{2}', NT = cc(c1, b) + op + cc(c2, a);
     var sol = 'NPVs: ' + t(a + '\\ne 0,\\ ' + b + '\\ne 0') + '. LCD ' + t(LT) + ': multiply the first by ' + t(df((s.L / s.m === 1 ? '' : s.L / s.m) + b, (s.L / s.m === 1 ? '' : s.L / s.m) + b)) + ' and the second by ' + t(df((s.L / s.n === 1 ? '' : s.L / s.n) + a, (s.L / s.n === 1 ? '' : s.L / s.n) + a)) + ':<br>' +
-      t(df(c1 + b, LT) + op + df(c2 + a, LT) + '=' + df(NT, LT)) + '.';
+      t(df(cc(c1, b), LT) + op + df(cc(c2, a), LT) + '=' + df(NT, LT)) + '.';
     return U.sumPart(CP, 'Simplify. State the non-permissible values.', terms, a, { vars: [a, b], sol: sol }, ['The LCD is the LCM of ' + t(s.m) + ' and ' + t(s.n) + ' times each letter to its highest power.', 'Multiply each numerator by what its denominator was multiplied by, then combine.'], 'two-variable monomial denominators');
   }
 
@@ -400,21 +401,21 @@
     { num: '12', outcome: AN5, parts: [{ id: '12', level: 'EMG', make: function (r) { return sumMC(r, false); } }] },
     { num: '13', outcome: AN5, parts: [{ id: '13', level: 'MAS', make: b('mixed3') }] },
     { num: '14', outcome: AN4, parts: [{ id: '14', level: 'ADV', make: abEquiv }] },
-    { num: '15', section: 'Equations and problems', outcome: AN6, stem: 'State the non-permissible values and solve.', parts: [
+    { num: '15', section: 'Equations and problems', outcome: AN6, parts: [
       { id: '15a', level: 'BEG', make: b('eqMono') },
       { id: '15b', level: 'PRG', make: crossLin },
       { id: '15c', level: 'PRG', make: b('eqBin') }] },
     { num: '16', outcome: AN6, parts: [{ id: '16', level: 'PRG', make: lcdMC }] },
-    { num: '17', outcome: AN6, stem: 'State the non-permissible values, solve and verify.', parts: [
+    { num: '17', outcome: AN6, parts: [
       { id: '17a', level: 'PRG', make: b('eqQuad') },
       { id: '17b', level: 'ADV', make: b('eqExtr') }] },
     { num: '18', outcome: AN6, parts: [{ id: '18', level: 'EMG', make: extrMC }] },
     { num: '19', outcome: AN6, parts: [{ id: '19', level: 'ADV', make: function (r) { return posRootNR(r, false); } }] },
     { num: '20', outcome: AN6, parts: [{ id: '20', level: 'PRG', make: p9('recipMinus', { diff: true }) }] },
     { num: '21', outcome: AN6, parts: [{ id: '21', level: 'PRG', make: p9('boatSame') }] },
-    { num: '22–23', outcome: AN6, shared: saraShared, parts: [
+    { num: '22', outcome: AN6, shared: saraShared, parts: [
       { id: '22', level: 'EMG', make: function (r, z) { return saraMC(r, z); } },
-      { id: '23', level: 'ADV', make: function (r, z) { return P9().fasterSolve(r, CP, z, { prompt: 'Solve the equation from the previous question to find ' + z.who + '’s speed and ' + z.her + ' driving time.' }); } }] },
+      { id: '23', level: 'ADV', make: function (r, z) { return P9().fasterSolve(r, CP, z, { prompt: '(Booklet Question 23) Solve the equation from part (a) to find ' + z.who + '’s speed and ' + z.her + ' driving time.' }); } }] },
     { num: '24', outcome: AN6, parts: [{ id: '24', level: 'PRG', make: p9('workOther', { min: true }) }] },
     { num: '25', outcome: AN6, parts: [{ id: '25', level: 'MAS', make: p9('workFaster', { nr: true }) }] },
     { num: '26', outcome: AN6, parts: [{ id: '26', level: 'EMG', make: p9('fracJobMC', { together: true }) }] },
@@ -436,7 +437,7 @@
     { num: '12', outcome: AN6, parts: [{ id: 'E12', level: 'PRG', make: p9('recipMinus', { pos: true }) }] },
     { num: '13', outcome: AN6, parts: [{ id: 'E13', level: 'PRG', make: p9('windSame', { nr: true }) }] },
     { num: '14', outcome: AN6, parts: [{ id: 'E14', level: 'ADV', make: function (r) { return posRootNR(r, true); } }] },
-    { num: '15', section: 'C. Written Response', outcome: AN5, stem: 'Simplify and state the non-permissible values.', parts: [
+    { num: '15', section: 'C. Written Response', outcome: AN5, parts: [
       { id: 'E15a', level: 'ADV', make: b('divRat', { mode: 'tri' }) },
       { id: 'E15b', level: 'ADV', make: b('addBin', { mode: 'tri' }) }] },
     { num: '16', outcome: AN6, parts: [{ id: 'E16', level: 'ADV', make: b('eqExtr') }] },

@@ -54,7 +54,7 @@
     var cands = (o.cands || []).filter(function (c) { return c && !z().eqFn(c[0], fn); });
     var chk = z().exprChk(fn, { v: v, vertex: o.vertex, cands: cands });
     if (o.wrap) chk = o.wrap(chk);
-    return { prompt: prompt, input: { type: 'math', keys: o.keys || 'u5k34', vars: [v], before: lhs ? t(lhs) : undefined, placeholder: o.placeholder }, check: chk, key: key, answer: t(lhs + key),
+    return { prompt: prompt, input: { type: 'math', keys: o.keys || 'u5k34', vars: [v], before: lhs ? t(lhs) : undefined, placeholder: o.placeholder || (o.vertex ? 'e.g. 2(' + v + ' - 3)^2 + 1' : undefined) }, check: chk, key: key, answer: t(lhs + key),
       solution: o.sol, hints: o.hints || [], text: o.text, bad: cands.filter(function (c) { return c[3]; }).map(function (c) { return c[3]; }).concat(o.bad || []), good: o.good, outcome: o.outcome };
   };
   P5.vfCands = function (a, p, q, o) {
@@ -118,7 +118,7 @@
   };
   /* the graph of a(x − p)² + q in a window that fits the marked points */
   P5.graphFig = function (a, p, q, marks) {
-    var pts = [[p, q]].concat(marks), W0 = z().win(pts, 1, 1);
+    var pts = [[p, q]].concat(marks), W0 = z().win(pts.concat(marks.map(function (m) { return [2 * p - m[0], m[1]]; })), 1, 1);
     var room = a > 0 ? W0.y[1] - q : q - W0.y[0], D = Math.sqrt(room / Math.abs(a));
     return z().fig({ x: W0.x, y: W0.y, l: 2, fns: [{ f: par(a, p, q), from: Math.max(W0.x[0], p - D), to: Math.min(W0.x[1], p + D) }], points: pts.map(function (P0) { return { x: P0[0], y: P0[1] }; }), max: 290, aria: 'graph of a parabola with marked points' });
   };

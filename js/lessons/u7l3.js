@@ -161,9 +161,9 @@
       if (T.length && matchVals(Aa, T, round)) return ok();
       if (!round && L.dec && T.length && Aa.length === T.length && T.every(function (b) { return Aa.some(function (a) { return Math.abs(a - b) < 0.006; }); })) return form(cp + 'exact', 'Those are rounded decimals. Give the <b>exact</b> values (fractions or radicals).');
       for (var i = 0; i < wrongs.length; i++) if (!wrongs[i].none && matchVals(Aa, wrongs[i].vals, round)) return wrong(wrongs[i].code, wrongs[i].hint);
-      if (!T.length) { if (extr.length && Aa.every(function (a) { return extr.some(function (e) { return closeTo(a, e, round); }); })) return wrong(cp + 'extr', extrHint + ' There is no solution.'); return wrong('value', 'Substitute your value into the original equation: it does not check.'); }
+      if (!T.length) { if (extr.length && Aa.every(function (a) { return extr.some(function (e) { return closeTo(a, e, round); }); })) return wrong(cp + (o.extrCode || 'extr'), extrHint + ' There is no solution.'); return wrong('value', 'Substitute your value into the original equation: it does not check.'); }
       var extra = Aa.filter(function (a) { return !T.some(function (b) { return closeTo(a, b, round); }); }), miss = T.filter(function (b) { return !Aa.some(function (a) { return closeTo(a, b, round); }); });
-      if (extra.length && !miss.length && extr.length && extra.every(function (a) { return extr.some(function (e) { return closeTo(a, e, round); }); })) return wrong(cp + 'extr', extrHint);
+      if (extra.length && !miss.length && extr.length && extra.every(function (a) { return extr.some(function (e) { return closeTo(a, e, round); }); })) return wrong(cp + (o.extrCode || 'extr'), extrHint);
       if (miss.length && !extra.length) return wrong(cp + (o.rejValid && extr.length ? 'rej-valid' : 'sol-missing'), o.rejValid && extr.length ? 'Check the value you rejected again: it makes both sides equal, so keep it.' : o.missHint || 'Correct so far, but there ' + (miss.length === 1 ? 'is another value' : 'are more values') + '. Solve <b>both</b> cases: the expression inside the bars equals the other side, or its opposite.');
       return wrong('value', null);
     };
@@ -645,7 +645,11 @@
         })] },
 
     { num: '13', parts: [Pt('13', 'PRG', function (r) {
-      var z = pickWhere(function () { var r1 = r.int(-4, 1), w = r.pick([4, 6]), x0 = r.int(-6, 6); return { r: r1, s: r1 + w, x0: x0, y0: -r.int(3, 12) }; }, function (z) { var m = z.r + z.s - z.x0; return (z.x0 < z.r || z.x0 > z.s) && z.x0 !== 0 && -z.x0 !== m && z.x0 !== -z.y0 && excl(z, [{ r: -1, s: 5, x0: -3, y0: -10 }]); });
+      var z = pickWhere(function () { var r1 = r.int(-4, 1), w = r.pick([4, 6]), x0 = r.int(-6, 6); return { r: r1, s: r1 + w, x0: x0, y0: -r.int(3, 12) }; }, function (z) {
+        if (z.x0 === z.r || z.x0 === z.s || z.x0 === 0 || z.x0 === -z.y0 || !excl(z, [{ r: -1, s: 5, x0: -3, y0: -10 }])) return false;
+        var a = z.y0 / ((z.x0 - z.r) * (z.x0 - z.s)), g = function (x) { return Math.abs(a * (x - z.r) * (x - z.s)); }, on = function (x, y) { return y >= 0 && Math.abs(g(x) - y) < 1e-9; };
+        return !on(-z.x0, z.y0) && !on(-z.y0, z.x0) && !on(-z.x0, -z.y0);
+      });
       var X = z.x0, Y = z.y0, ok0 = '(' + X + ',\\ ' + (-Y) + ')';
       return mcPart(r, 'The graph of ' + t('y=f(x)') + ', a parabola, passes through ' + t('(' + X + ',\\ ' + Y + ')') + ' and has ' + t('x') + '-intercepts ' + t(z.r) + ' and ' + t(z.s) + '. Which point must be on the graph of ' + t('y=|f(x)|') + '?', [
         { html: t(ok0), right: true }, { html: t('(' + (-X) + ',\\ ' + Y + ')'), why: 'Reflecting in the ' + t('x') + '-axis keeps the ' + t('x') + '-value and changes the sign of the ' + t('y') + '-value.' },
@@ -789,7 +793,7 @@
         { html: 'Yes: for example ' + t('f(x)=' + sq + '+1') + ' and ' + t('f(x)=' + sqn + '-1') + '.', why: 'Those never meet the axis: no invariant points.' }],
         'Yes, when the vertex is on the ' + t('x') + '-axis. ' + t('f(x)=' + sq) + ': nothing changes. ' + t('f(x)=' + sqn) + ': the whole parabola (except the vertex) is below the axis and is reflected, giving the same graph ' + t('y=' + sq) + '. The invariant point is ' + t('(' + h + ',\\ 0)') + ' in both.', ['Invariant points are the zeros of ' + t('f') + '. When does a quadratic have exactly one zero?'], 'exactly one invariant point');
     })] },
-    { num: 'C12', shared: function (r) { return pickWhere(function () { var r1 = r.int(-6, -1), s1 = r.int(1, 8); return { r: r1, s: s1, a: r.pick([-0.5, -1, -2, -0.25]) }; }, function (z) { var m = -z.a * z.r * z.s; return z.s - z.r >= 3 && Number.isInteger(m) && m >= 2 && m <= 24 && Number.isInteger(z.a * (z.r + z.s)) && excl(z, [{ r: -2, s: 6, a: -0.5 }]); }); },
+    { num: 'C12', shared: function (r) { return pickWhere(function () { var r1 = r.int(-6, -1), s1 = r.int(1, 8); return { r: r1, s: s1, a: r.pick([-0.5, -1, -2, -0.25]) }; }, function (z) { var m = z.a * z.r * z.s; return z.s - z.r >= 3 && Number.isInteger(m) && m >= 2 && m <= 24 && Number.isInteger(z.a * (z.r + z.s)) && excl(z, [{ r: -2, s: 6, a: -0.5 }]); }); },
       stem: function (o) { return t('f') + ' is a quadratic function that opens down. The graph of ' + t('y=|f(x)|') + ' has invariant points ' + t('(' + o.r + ',\\ 0)') + ' and ' + t('(' + o.s + ',\\ 0)') + ' and ' + t('y') + '-intercept ' + t(nt(o.a * o.r * o.s)) + '.'; },
       parts: [
         Pt('eC12a', 'MAS', function (r, o) {

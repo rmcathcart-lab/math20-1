@@ -98,12 +98,12 @@
     o = o || {};
     var T = rv(target), W = (wr || []).filter(function (w) { return Math.abs(rv(w.v) - T) > 1e-9 * Math.max(1, Math.abs(T)); });
     var diag = function (v) { for (var i = 0; i < W.length; i++) if (Math.abs(v - rv(W[i].v)) < 1e-9 * Math.max(1, Math.abs(v))) return { code: W[i].code, hint: W[i].hint }; return null; };
-    var keyTex = o.keyTex || (Array.isArray(target) ? rt(target) : Number.isInteger(T) ? String(T) : (o.box === 'number' ? dt(T) : rt(T)));
+    var keyTex = o.keyTex || (o.money ? T.toFixed(2) : Array.isArray(target) ? rt(target) : Number.isInteger(T) ? String(T) : (o.box === 'number' ? dt(T) : rt(T)));
     var part;
     if (o.box === 'number') {
       var nchk = K.number(T, diag, { nr: !!o.nr });
       var check = o.money ? function (resp) { return nchk(stripMoney(resp)); } : nchk;
-      part = { prompt: prompt, input: { type: 'number', nr: !!o.nr, before: o.before, after: o.after }, check: check, key: dt(T), answer: t((o.money ? '\\$' : '') + keyTex), solution: sol, hints: hints || [], text: text };
+      part = { prompt: prompt, input: { type: 'number', nr: !!o.nr, before: o.before, after: o.after }, check: check, key: o.money ? T.toFixed(2) : dt(T), answer: t((o.money ? '\\$' : '') + keyTex), solution: sol, hints: hints || [], text: text };
     } else {
       var base = K.value(Array.isArray(target) ? target : T, { diag: diag, only: o.only });
       var chk = function (resp) {
@@ -131,9 +131,9 @@
     var v = o.v === undefined ? 'x' : o.v, T = uniqNums(vals.map(rv));
     var W = (wr || []).filter(function (w) { return !sameSet(w.vals.map(rv), T); });
     var chk = K.valueSet(vals, { v: v || undefined, diag: function (Aa) { for (var i = 0; i < W.length; i++) if (sameSet(Aa, W[i].vals.map(rv))) return { code: W[i].code, hint: W[i].hint }; return null; } });
-    var keyTex = vals.map(function (x) { return (v ? v + '=' : '') + rt(x); }).join(',\\ ');
+    var fmt = o.dec ? dt : rt, keyTex = vals.map(function (x) { return (v ? v + '=' : '') + fmt(x); }).join(',\\ ');
     var part = KP.math(prompt, chk, keyTex, sol, hints, text, { keys: 'u7kvals', vars: [v || 'x'], placeholder: v ? 'e.g. ' + v + ' = 3, ' + v + ' = -5' : 'e.g. 3, -5' });
-    part.bad = W.map(function (w) { return w.vals.map(function (x) { return (v ? v + '=' : '') + rt(x); }).join(',\\ '); });
+    part.bad = W.map(function (w) { return w.vals.map(function (x) { return (v ? v + '=' : '') + fmt(x); }).join(',\\ '); });
     return part;
   };
   U.point = function (prompt, target, wr, sol, hints, text) {
@@ -173,6 +173,14 @@
     return part;
   };
   U.setChk = function (targetTex, o) { return K.set(targetTex, o || {}); };
+  /* an intercept typed as a number or as a point: axis 'y' → v or (0, v); axis 'x' → v or (v, 0). wr [{ v, code, hint }] */
+  U.icptChk = function (axis, v, wr) {
+    var T = rv(v), W = (wr || []).filter(function (w) { return Math.abs(rv(w.v) - T) > 1e-9; });
+    var asPt = function (c) { return axis === 'y' ? [[0, 1], toR(c)] : [toR(c), [0, 1]]; };
+    var pc = K.point(asPt(v), { wrong: W.map(function (w) { return { is: asPt(w.v), code: w.code, hint: w.hint }; }) });
+    var vc = K.value(T, { diag: function (x) { for (var i = 0; i < W.length; i++) if (Math.abs(x - rv(W[i].v)) < 1e-9 * Math.max(1, Math.abs(x))) return { code: W[i].code, hint: W[i].hint }; return null; } });
+    return function (resp) { return /\(/.test(String(resp || '')) && /,/.test(String(resp || '')) ? pc(resp) : vc(resp); };
+  };
   U.fields = function (prompt, fields, checkers, keys, answer, sol, hints, text, bad, combine) {
     var base = K.fields(checkers, { labels: fields.map(function (f) { return f.name || f.label; }) });
     return { prompt: prompt, input: { type: 'fields', fields: fields }, check: function (resp) { resp = resp || []; var c = combine ? combine(resp) : null; return c || base(resp); }, key: keys, answer: answer, solution: sol, hints: hints || [], text: text, bad: (bad || []).filter(function (b) { return b.join('|') !== keys.join('|'); }) };
@@ -224,7 +232,7 @@
 
   /* a typed |ax + b| (for "write y = |ax + b|"): bars needed, the same values everywhere (the opposite inside is the same function) */
   U.absLinChk = function (a, b, cp) {
-    var f = function (x) { return Math.abs(rv(a) * x + rv(b)); }, xs = [-3.7, -1.3, 0.4, 2.9, 5.6, 0];
+    var f = function (x) { return Math.abs(rv(a) * x + rv(b)); }, h0 = -rv(b) / rv(a), xs = [h0 - 3.3, h0 - 1.1, h0 - 0.4, h0 + 0.6, h0 + 2.2, h0 + 4.7, 0];
     return function (resp) {
       var s = String(resp == null ? '' : resp).replace(/^\s*y\s*=\s*/, '');
       var p = ex.parse(s);
@@ -881,7 +889,7 @@
       var ps = pickWhere(function () { return [0, r.int(2, 9) * 5, -r.int(1, 8) * 5, r.int(2, 12) * 5, 0]; }, function (L) { return L[1] !== 35 && Math.abs(L[2] - L[1]) > 10 && Math.abs(L[3] - L[2]) > 10; });
       var legs = []; for (var i = 1; i < ps.length; i++) legs.push(Math.abs(ps[i] - ps[i - 1]));
       var tot = legs.reduce(function (x, y) { return x + y; }, 0), naive = ps.reduce(function (x, y) { return x + Math.abs(y); }, 0);
-      var who = r.pick(['A delivery robot', 'A security guard', 'A toy train']);
+      var who = r.pick(['A delivery robot', 'A toy train', 'A robot vacuum']);
       return U.fields(who + ' moves along a straight path. Its positions (in metres, east of the start is positive) are ' + ps.map(function (p) { return t(p); }).join(', then ') + ' (back at the start). Determine its net change in position and the total distance it travels.',
         [{ label: 'Net change (m)', name: 'net change' }, { label: 'Total distance (m)', name: 'total distance' }], [K.number(0), K.number(tot, function (v) { if (v === naive && naive !== tot) return { code: CP + 'dist-sub', hint: 'The distance of each leg is the distance between two <b>positions</b>: ' + t('|' + ps[2] + '-' + ps[1] + '|') + ', not the position itself.' }; return null; })], ['0', String(tot)], t('0') + ' m; ' + t(tot) + ' m',
         'Net change: final position minus starting position, ' + t('0-0=0') + ' m.<br>Total distance: ' + t(legs.map(function (d, i) { return A(ps[i + 1] + '-' + pn(ps[i])); }).join('+') + '=' + legs.join('+') + '=' + tot) + ' m.',

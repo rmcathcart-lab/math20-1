@@ -244,7 +244,7 @@
       var d = r.pick([['Sara', 'she', 'her'], ['Devon', 'he', 'his'], ['Mrs. Patel', 'she', 'her'], ['Marc', 'he', 'his'], ['Leah', 'she', 'her']]);
       return { s: 5 * r.int(10, 20), k: 5 * r.int(1, 6), h: r.pick([0.5, 0.5, 1, 0.75]), who: d[0], she: d[1], her: d[2], verb: 'drives', kind: kind };
     }, function (z) {
-      z.D = z.h * z.s * (z.s + z.k) / z.k;
+      z.D = K.roundTo(z.h * z.s * (z.s + z.k) / z.k, 6);
       return nice(z.D) && z.D >= 20 && z.D <= 600 && nice(z.D / z.s, 4) && nice(z.D / (z.s + z.k), 4) && !(z.D === 60 && z.k === 5 && z.h === 1) && !(z.D === 150 && z.k === 25) && !(z.D === 280 && z.k === 10) && !(z.D === 160 && z.k === 20) && !(z.D === 180 && z.k === 15) && !(o.not && o.not(z));
     });
   };
@@ -264,7 +264,7 @@
     var b1 = { label: o.l1 || 'Time, actual:', name: o.n1 || 'Time (actual)', vars: ['s'], key: '\\frac{' + F(D) + '}{s}', check: exprCheck(function (e) { return D / e.s; }, ['s'], dl(f1)), after: 'h', badKeys: [F(D) + 's'] };
     var b2 = { label: o.l2 || 'Time, faster:', name: o.n2 || 'Time (faster)', vars: ['s'], key: '\\frac{' + F(D) + '}{s+' + k + '}', check: exprCheck(function (e) { return D / (e.s + k); }, ['s'], dl(f2).concat([{ f: function (e) { return D / (e.s - k); }, code: cp + 'sign', hint: 'The faster speed is ' + t('s+' + k) + '.' }])), after: 'h', badKeys: ['\\frac{' + F(D) + '}{s-' + k + '}'] };
     return exprFields(o.prompt || ('Complete the time column of the table, using ' + t('s') + ' for the actual speed (km/h).<br>' + t('\\begin{array}{|l|c|c|c|}\\hline & \\text{Distance (km)} & \\text{Speed (km/h)} & \\text{Time (h)}\\\\\\hline \\text{Actual} & ' + F(D) + ' & s & ?\\\\\\hline \\text{Faster} & ' + F(D) + ' & s+' + k + ' & ?\\\\\\hline\\end{array}')),
-      [b1, b2], 'Time ' + t('=\\frac{\\text{distance}}{\\text{speed}}') + ': actual ' + t('\\frac{' + F(D) + '}{s}') + ' h, faster ' + t('\\frac{' + F(D) + '}{s+' + k + '}') + ' h.', [H_D], 'times in a table');
+      [b1, b2], 'Time ' + t('=\\frac{\\text{distance}}{\\text{speed}}') + ': ' + (o.n1 || 'actual').toLowerCase() + ' ' + t('\\frac{' + F(D) + '}{s}') + ' h, ' + (o.n2 || 'faster').toLowerCase() + ' ' + t('\\frac{' + F(D) + '}{s+' + k + '}') + ' h.', [H_D], 'times in a table');
   };
   P9.fasterSolve = function (r, cp, z, o) {
     o = o || {};
@@ -279,7 +279,7 @@
   P9.slowerHome = function (r, cp) {
     var C = r.pick([['A family drives', 'to a lake', 'On the way home, in heavy traffic, they average'], ['A trucker drives', 'to a depot', 'On the way back, in a snowstorm, she averages'], ['Mr. Okafor drives', 'to a conference', 'On the way home, in construction zones, he averages']]);
     var z = pickWhere(function () { return { s: 5 * r.int(12, 22), k: 5 * r.int(1, 5), h: r.pick([0.5, 0.5, 1, 0.75]) }; }, function (z) {
-      z.D = z.h * z.s * (z.s - z.k) / z.k;
+      z.D = K.roundTo(z.h * z.s * (z.s - z.k) / z.k, 6);
       return nice(z.D) && z.D >= 60 && z.D <= 600 && nice(z.D / z.s, 4) && nice(z.D / (z.s - z.k), 4) && !(z.D === 225 && z.k === 15) && !(z.D === 540 && z.k === 30) && !(z.D === 280 && z.k === 10);
     });
     var D = z.D, s = z.s, k = z.k, h = rat(z.h), Cc = D * k / z.h, neg = -(s - k), T1 = D / s, T2 = D / (s - k);
@@ -401,7 +401,7 @@
       z.x = z.a * z.tt / (z.a - z.tt);
       return z.tt < z.a && nice(z.x) && z.x <= (u === 'min' ? 150 : 40) && z.x !== z.a && (!o.min || (!nice(z.tt) && nice(z.tt * 60) && z.tt > 1)) && !(z.a === 6 && z.tt === 4) && !(z.a === 3 && z.tt === 2) && !(z.a === 3 && Math.abs(z.tt - 1.2) < 1e-9);
     });
-    var tt = z.tt, a = z.a, x = z.x, tq = rat(tt), tT = o.min ? dec(tt) : String(tt);
+    var tt = z.tt, a = z.a, x = K.roundTo(z.x, 6), tq = rat(tt), tT = o.min ? dec(tt) : String(tt);
     var sol = (o.min ? hmT(tt) + ' ' + t('=' + dec(tt)) + ' h. ' : '') + 'The other alone: ' + t('x') + ' ' + u + ', ' + t('x\\ne 0') + '. ' + t('\\frac{' + tT + '}{' + a + '}+\\frac{' + tT + '}{x}=1') + '.<br>' +
       t('\\frac{' + tT + '}{x}=1-' + fr(tq[0], tq[1] * a) + '=' + fr(tq[1] * a - tq[0], tq[1] * a)) + ', so ' + t('x=' + F(x)) + ' ' + u + '.';
     var two = C.b.indexOf('second') >= 0 || C.b.indexOf('another') >= 0;
@@ -431,7 +431,7 @@
     var z = pickWhere(function () { return days ? { x: r.int(4, 40), h: r.int(2, 20) } : { x: r.int(2, 24), h: r.int(1, 16) }; }, function (z) {
       z.T = z.x * (z.x + z.h) / (2 * z.x + z.h);
       var bad = [[3, 3], [6, 6], [9, 9], [10, 5], [8, 4], [20, 10], [5, 2]];
-      return nice(z.T, days || o.nr ? 1 : 10) && z.T >= 1.5 && !bad.some(function (p) { return p[0] === z.x && p[1] === z.h; }) && z.x + z.h <= (days ? 60 : 36);
+      return nice(z.T, days || o.nr ? 2 : 10) && z.T >= 1.5 && !bad.some(function (p) { return p[0] === z.x && p[1] === z.h; }) && z.x + z.h <= (days ? 60 : 36);
     });
     var x = z.x, h = z.h, T = z.T, q = rat(T), a = q[0], qq = q[1], neg = -T * h / x, u = C.u, c1 = a * h / x, Tt = dec(T), g1 = gcd(qq, c1);
     var Tw = days ? n(T) + ' days' : nice(T, 2) ? n(T) + ' h' : hmT(T);
@@ -455,7 +455,7 @@
       z.t = z.b * (z.a - z.w) / (z.a + z.b);
       return z.w < z.a - 1 && z.a !== z.b && nice(z.t, 2) && z.t >= 1 && !(z.a === 9 && z.b === 6 && z.w === 4) && !(z.a === 10 && z.b === 15 && z.w === 5);
     });
-    var a = z.a, b = z.b, w = z.w, tt = z.t, L = lcm(a, b), ca = L / a, cb = L / b;
+    var a = z.a, b = z.b, w = z.w, tt = K.roundTo(z.t, 6), L = lcm(a, b), ca = L / a, cb = L / b;
     var sol = 'Together for ' + t('t') + ' more hours: ' + C[0] + ' works ' + t(w + '+t') + ' hours, ' + C[1] + ' ' + t('t') + ' hours. ' + t('\\frac{' + w + '+t}{' + a + '}+\\frac{t}{' + b + '}=1') + '.<br>' +
       'Multiply by ' + t(L) + ': ' + t((ca === 1 ? '' : ca) + '(' + w + '+t)+' + (cb === 1 ? '' : cb) + 't=' + L) + ', so ' + t(ca * w + '+' + (ca + cb) + 't=' + L) + ' and ' + t('t=' + dec(tt)) + ' h more (the job takes ' + dec(w + tt) + ' h in all).';
     var p = KP.number(C[0] + ' can ' + C[2] + ' in ' + n(a) + ' h and ' + C[1] + ' can do it in ' + n(b) + ' h. ' + C[0] + ' works alone for ' + n(w) + ' h and then ' + C[1] + ' joins. How much longer does the job take?', tt,
@@ -496,7 +496,7 @@
   P9.winsRow = function (r, cp, o) {
     o = o || {};
     if (o.mix) {
-      var m = pickWhere(function () { return { V: 5 * r.int(4, 16), p: 5 * r.int(2, 8), q: 5 * r.int(3, 12) }; }, function (z) { z.x = z.V * (z.q - z.p) / (100 - z.q); return z.q > z.p && z.q < 100 && nice(z.x, 2) && z.x > 0 && z.x <= 60 && nice(z.V * z.p / 100, 2) && !(z.V === 40 && z.p === 25 && z.q === 40); });
+      var m = pickWhere(function () { return { V: 5 * r.int(4, 16), p: 5 * r.int(2, 8), q: 5 * r.int(3, 12) }; }, function (z) { z.x = K.roundTo(z.V * (z.q - z.p) / (100 - z.q), 6); return z.q > z.p && z.q < 100 && nice(z.x, 2) && z.x > 0 && z.x <= 60 && nice(z.V * z.p / 100, 2) && !(z.V === 40 && z.p === 25 && z.q === 40); });
       var A0 = m.V * m.p / 100;
       return KP.number('A ' + n(m.V) + ' L tank of coolant is ' + n(m.p) + '% antifreeze. How many litres of pure antifreeze must be added to make the mixture ' + n(m.q) + '% antifreeze?', m.x,
         function (v) { var w1 = m.V * (m.q - m.p) / 100; if (Math.abs(v - w1) < 1e-9) return { code: cp + 'head', hint: 'Adding antifreeze also increases the total volume: ' + t('\\frac{' + dec(A0) + '+x}{' + m.V + '+x}=' + dec(m.q / 100)) + '.' }; return null; },
@@ -505,7 +505,7 @@
         ['Pure antifreeze adds to the antifreeze <b>and</b> to the total: ' + t('\\frac{\\text{antifreeze}+x}{\\text{total}+x}') + '.', 'Set it equal to the new percent as a decimal and solve.'], 'a mixture', { after: 'L' });
     }
     if (o.bat) {
-      var b = pickWhere(function () { return { h: r.int(8, 40), ab: r.int(30, 120), a: r.pick([0.3, 0.35, 0.4, 0.375, 0.45]) }; }, function (z) { z.x = (z.a * z.ab - z.h) / (1 - z.a); return nice(z.x) && z.x >= 2 && z.x <= 40 && z.h / z.ab < z.a - 0.03 && !(z.h === 18 && z.ab === 60); });
+      var b = pickWhere(function () { return { h: r.int(8, 40), ab: r.int(30, 120), a: r.pick([0.3, 0.35, 0.4, 0.375, 0.45]) }; }, function (z) { z.x = (z.a * z.ab - z.h) / (1 - z.a); if (!nice(z.x)) return false; z.x = Math.round(z.x); return z.x >= 2 && z.x <= 40 && z.h / z.ab < z.a - 0.03 && !(z.h === 18 && z.ab === 60); });
       var aT = b.a.toFixed(3).replace(/^0/, '');
       return KP.number('A baseball player has ' + n(b.h) + ' hits in ' + n(b.ab) + ' at-bats. How many hits in a row would raise her batting average (' + t('\\frac{\\text{hits}}{\\text{at-bats}}') + ') to ' + aT + '?', b.x, null,
         t('\\frac{' + b.h + '+x}{' + b.ab + '+x}=' + b.a) + ', ' + t('x\\ne -' + b.ab) + '. ' + t(b.h + '+x=' + dec(b.a * b.ab) + '+' + b.a + 'x') + ', so ' + t(dec(1 - b.a) + 'x=' + dec(b.a * b.ab - b.h)) + ' and ' + t('x=' + b.x) + ' hits. Check: ' + t('\\frac{' + (b.h + b.x) + '}{' + (b.ab + b.x) + '}=' + b.a) + ' ✓',
@@ -733,7 +733,7 @@
   /* a car makes a trip h hours faster than a bus (EP B1) */
   P9.busFaster = function (r, cp) {
     var C = r.pick([['A car', 'a bus', 'car', 'bus'], ['A train', 'a bus', 'train', 'bus'], ['A van', 'a truck', 'van', 'truck']]);
-    var z = pickWhere(function () { return { s: 5 * r.int(8, 18), k: 5 * r.int(2, 6), h: r.pick([1, 1, 0.5]) }; }, function (z) { z.D = z.h * z.s * (z.s + z.k) / z.k; return nice(z.D) && z.D <= 600 && z.D >= 60 && nice(z.D / z.s, 4) && !(z.D === 180 && z.k === 15); });
+    var z = pickWhere(function () { return { s: 5 * r.int(8, 18), k: 5 * r.int(2, 6), h: r.pick([1, 1, 0.5]) }; }, function (z) { z.D = K.roundTo(z.h * z.s * (z.s + z.k) / z.k, 6); return nice(z.D) && z.D <= 600 && z.D >= 60 && nice(z.D / z.s, 4) && !(z.D === 180 && z.k === 15); });
     var s = z.s, k = z.k, D = z.D, h = rat(z.h), Cc = D * k / z.h, neg = -(s + k);
     var sol = cap(C[3]) + ' ' + t('s') + ', ' + C[2] + ' ' + t('s+' + k) + ': ' + t('\\frac{' + F(D) + '}{s}-\\frac{' + F(D) + '}{s+' + k + '}=' + ex.texRat(h)) + ', ' + t('s\\ne 0,\\ -' + k) + '.<br>' +
       'Multiply by ' + t((h[1] === 1 ? '' : h[1]) + 's(s+' + k + ')') + ': ' + t(F(h[1] * D) + '(s+' + k + ')-' + F(h[1] * D) + 's=' + (h[0] === 1 ? '' : h[0]) + 's(s+' + k + ')') + ', so ' + t(pt([1, k, -Cc], 's') + '=0') + ', ' + t(facT('s', s, neg) + '=0') + '.<br>' +
