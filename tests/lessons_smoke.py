@@ -9,6 +9,7 @@ BASE = 'http://localhost:8831/'
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'lessons')
 IDS = sorted(('u%s/l%s' % m.groups() for m in (re.match(r'^u(\d+)/l(\d+)$', os.path.relpath(d, ROOT).replace(os.sep, '/')) for d, _, fs in os.walk(ROOT) if 'index.html' in fs) if m),
              key=lambda x: tuple(int(n) for n in re.findall(r'\d+', x)))
+IDS = [i for i in IDS if not i.endswith('/l0')]  # the day-one intro has no assignment (it is checked on its own)
 async def probe(ctx, url):
     page = await ctx.new_page(); errs, bad = [], []
     page.on('pageerror', lambda e: errs.append(str(e)))
