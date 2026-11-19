@@ -49,7 +49,7 @@
     pop.innerHTML = '<div class="oc-h"><b>' + code + '</b><span>' + o.strand + ' · Specific outcome ' + code.replace(/\D/g, '') + '</span>' +
       '<button type="button" class="oc-x" aria-label="Close">×</button></div>' +
       '<p class="oc-t">' + o.text + '</p>' + (o.list ? '<ul class="oc-l">' + o.list.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul>' : '') +
-      (o.after ? '<p class="oc-t">' + o.after + '</p>' : '') + (HW.GENERAL_OUTCOME[code.replace(/\d+$/, '')] ? '<div class="oc-src">General outcome: ' + HW.GENERAL_OUTCOME[code.replace(/\d+$/, '')] + '</div>' : '') + '<div class="oc-src">Alberta Education, Mathematics 20-1 Program of Studies</div>';
+      (o.after ? '<p class="oc-t">' + o.after + '</p>' : '') + (HW.GENERAL_OUTCOME[code.replace(/\d+$/, '')] ? (el && el.dataset && el.dataset.capnote ? '<p class="oc-cap">' + el.dataset.capnote + '</p>' : '') + '<div class="oc-src">General outcome: ' + HW.GENERAL_OUTCOME[code.replace(/\d+$/, '')] + '</div>' : '') + '<div class="oc-src">Alberta Education, Mathematics 20-1 Program of Studies</div>';
     document.body.appendChild(pop);
     pop.querySelector('.oc-x').addEventListener('click', close);
     var r = el.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight, vw = document.documentElement.clientWidth;
