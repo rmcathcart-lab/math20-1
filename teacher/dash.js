@@ -239,6 +239,26 @@
       if (verdict === 'wrong' || verdict === 'step') { r.errors++; if (a[10]) r.codes.push(a[10]); if (verdict === 'wrong' && a[12]) r.answers.push(a[12]); return; }
       if (verdict === 'correct') { r.correctAt = a[0]; r.correctIn = a[14]; r.answer = a[12]; var rv = (reveals[k] || []).filter(function (t) { return t <= a[0]; }).length; r.credit = rv ? 'shown' : r.errors ? 'hint' : 'first'; }
     });
+    /* Answers that never reached the Attempts sheet (Ryan, 2026-11-26). A student's page sends each answer without waiting
+       to hear that it arrived (it keeps check-ins light), so now and then one is lost on the way and the question showed
+       here as not started although the student's own page had it done. The student's saved work (the Progress sheet,
+       which the ledger already downloads) has every question they finished: one it says is done but that has no right
+       answer in the Attempts is filled in from it. When it was done comes from the saved work (the time it was answered;
+       the time that lesson was last saved, from an older backend), and in class or not from this class's block on the bell
+       schedule, the same rule the server uses. Marked rec.recovered: the grid and the answers window say so. */
+    (D.progress || []).forEach(function (p) {
+      var L = HW.lessons[p.lesson]; if (!L || !L.byId || !p.items) return;
+      Object.keys(p.items).forEach(function (id) {
+        var x = p.items[id], it = L.byId[id]; if (!it || !x || x[0] !== 'done') return;
+        var k = p.name + '|' + p.lesson + '|' + id, r = items[k];
+        if (r && r.correctAt) return;
+        if (!r) r = items[k] = { name: p.name, lesson: p.lesson, id: id, outcome: it.outcome, level: it.level, extra: it.extra ? 1 : 0, errors: 0, forms: 0, codes: [], answers: [], correctAt: 0, correctIn: 0, first: 0, attempts: 0 };
+        var at = Number(x[7]) || Number(p.updated) || Date.now();
+        r.correctAt = at; r.correctIn = inBlock(at) ? 1 : 0; r.recovered = 1;
+        r.credit = x[4] ? 'shown' : (x[1] === 'shown' || x[1] === 'hint' || x[1] === 'first') ? x[1] : (x[2] || x[5]) ? 'hint' : 'first';
+        r.errors = Math.max(r.errors, Number(x[2]) || 0); if (!r.attempts) r.attempts = 1; if (!r.firstAt) r.firstAt = at;
+      });
+    });
     var allow = st.rule === 'first' ? { first: 1 } : st.rule === 'any' ? { first: 1, hint: 1, shown: 1 } : { first: 1, hint: 1 };
     var stu = {};
     D.roster.forEach(function (s) { stu[s.name] = { name: s.name, roster: s, lessons: {}, outcomes: {}, levelAcc: {}, secs: 0, secsIn: 0, answers: 0, right: 0, leaves: 0, leavesIn: 0, reveals: 0 }; });
@@ -337,6 +357,18 @@
     });
     body.appendChild(el('p', 'small muted', '“Left the page” means the student switched tabs or windows while a question was open — the question got new numbers. Times count only while the page is open, focused and in use.'));
   }
+  /* in class at this moment? This class's block on the bell schedule, school days only, 2 minutes' grace either side —
+     the server's inPeriod_ (backend/Code.gs). No block set: everything counts as in class. */
+  function inBlock(ms) {
+    var c = st.D && st.D['class'], b = c && c.block, B = (st.D && st.D.bell) || st.bell; if (!b) return true; if (!B) return true;
+    var d = new Date(ms), dow = d.getDay(); if (dow === 0 || dow === 6) return false;
+    if ((st.noSchool || []).indexOf(localDay(ms)) >= 0) return false;
+    var day = dow === 5 ? B.fri : (dow === 1 || dow === 3) ? B.day1 : B.day2, row = (day || []).filter(function (x) { return x[0] === b; })[0];
+    if (!row) return false;
+    function m(t) { var a = String(t).split(':'); return Number(a[0]) * 60 + Number(a[1]); }
+    var now = d.getHours() * 60 + d.getMinutes();
+    return now >= m(row[1]) - 2 && now <= m(row[2]) + 2;
+  }
   function localDay(ms) { var d = new Date(ms); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
   function classTimeLine() { var c = st.D['class']; return c.block ? 'Class time: block ' + c.block + ' on the bell schedule' : 'No class time set (everything counts as in class) — set a block in Settings'; }
   function wrapTbl(t) { var w = el('div', 'tbl-wrap'); w.appendChild(t); return w; }
@@ -358,7 +390,7 @@
       var rec = r && r.items[it.id], cls = !rec ? 'new' : rec.correctAt ? 'c-' + rec.credit : rec.errors >= 3 ? 'stuck' : 'open';
       var home = rec && rec.correctAt && !rec.correctIn && st.scope === 'class'; // done outside class: shown, but not counted in the bars
       var b = el('div', 'ig ' + cls + (it.extra ? ' ex' : '') + (home ? ' home' : ''), esc(it.label.replace('Extra ', 'E')));
-      b.title = it.label + ' · ' + it.level + ' · ' + (!rec ? 'not started' : rec.correctAt ? ({ first: 'right first try', hint: 'right after ' + rec.errors + ' mistake(s)', shown: 'right after the answer was shown' }[rec.credit]) : rec.errors + ' wrong so far') + (home ? ' · done outside class (not counted while “In class only” is on)' : '') + (rec && name ? ' · click to see their answers' : '');
+      b.title = it.label + ' · ' + it.level + ' · ' + (!rec ? 'not started' : rec.correctAt ? ({ first: 'right first try', hint: 'right after ' + rec.errors + ' mistake(s)', shown: 'right after the answer was shown' }[rec.credit]) : rec.errors + ' wrong so far') + (home ? ' · done outside class (not counted while “In class only” is on)' : '') + (rec && rec.recovered ? ' · from their saved work (the answer itself didn’t reach the ledger)' : '') + (rec && name ? ' · click to see their answers' : '');
       if (rec && name) { b.classList.add('ig-click'); b.setAttribute('role', 'button'); b.tabIndex = 0; var open = function (e) { e.stopPropagation(); openAnswers(name, l.id, it.id); }; b.addEventListener('click', open); b.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(e); } }); }
       grid.appendChild(b);
     });
@@ -724,7 +756,9 @@
     top.appendChild(el('h3', '', esc(name) + ' · Lesson ' + esc(lesson.num) + ' ' + esc(it.label) + ' <span class="muted small">(' + esc(it.outcome) + ' ' + esc(LVN[it.level] || it.level) + (it.extra ? ' · extra' : '') + ')</span>'));
     var cl = el('button', 'btn btn-small btn-ghost tt-dclose', '×'); cl.type = 'button'; cl.title = 'Close (Esc)'; cl.setAttribute('aria-label', 'Close'); cl.addEventListener('click', closeAnswers);
     var nav = el('div', 'tt-dnav'); nav.appendChild(cl); top.appendChild(nav); box.appendChild(top);
-    if (!rows.length) { box.appendChild(el('p', 'muted', 'No answers checked on this question yet.')); return; }
+    var rec0 = st.derived && st.derived.items[name + '|' + lid + '|' + iid];
+    if (rec0 && rec0.recovered) box.appendChild(el('p', 'notice small', 'Done on the student’s page ' + esc(new Date(rec0.correctAt).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + (rec0.credit === 'first' ? ', right on the first try' : rec0.credit === 'shown' ? ', after the answer was shown' : ', after a hint') + '. Their right answer didn’t reach the ledger (lost on the way), so it comes from their saved work and can’t be shown here.'));
+    if (!rows.length) { if (!(rec0 && rec0.recovered)) box.appendChild(el('p', 'muted', 'No answers checked on this question yet.')); return; }
     var sel = null;
     groups.forEach(function (g, n) {
       var inst = rebuildInst(name, g.a), sec = el('section', 'av-ver');
