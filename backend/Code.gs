@@ -426,7 +426,7 @@ function dash_(klass) {
     live: live_(klass, roster.map(function (x) { return String(x.name); })), now: Date.now(), noSchool: noSchool_(), bell: bell_(), bellCustom: !!(cachedProp_('BELL').day1) };
 }
 function itemsOf_(state) { // compact per-item status for the dashboard: { id: [status, credit, wrong, secs, reveals] }
-  var out = {}; try { var s = JSON.parse(state || '{}'), it = s.items || {}; Object.keys(it).forEach(function (id) { var r = it[id]; out[id] = [r.s, r.credit || '', r.wrong || 0, r.secs || 0, r.reveals || 0, r.steps || 0, r.redo ? 1 : 0]; }); } catch (e) {}
+  var out = {}; try { var s = JSON.parse(state || '{}'), it = s.items || {}; Object.keys(it).forEach(function (id) { var r = it[id]; out[id] = [r.s, r.credit || '', r.wrong || 0, r.secs || 0, r.reveals || 0, r.steps || 0, r.redo ? 1 : 0, Number(r.done) || 0]; }); /* [7]: when it was answered right (2026-11-26: the ledger fills in a lost answer from it) */ } catch (e) {}
   return out;
 }
 function ms_(v) { return v instanceof Date ? v.getTime() : (v ? new Date(v).getTime() || 0 : 0); }
